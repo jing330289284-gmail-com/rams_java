@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jp.co.lyc.cms.mapper.GetSiteInfoMapper">
+
+	<insert id="siteInsert" parameterType="map">
+		insert into
+		employee_site_information(employeeNo,siteNo,customerNo,topCustomerNo,AdmissionStartDate,
+		location,siteManager,AdmissionEndDate,unitPrice,siteRoleCode,payOffRange,systemName,
+		developlanguage,updateTime,createTime,updateuser)
+		values(#{employeeNo},#{siteNo},#{customerNo},#{topCustomerNo},#{AdmissionStartDate},
+		#{location},#{siteManager},#{AdmissionEndDate},#{unitPrice},#{siteRoleCode},#{payOffRange},
+		#{systemName},#{developlanguage},now(),now(),"LYC001")
+	</insert>
+
+	<update id="siteUpdate" parameterType="map">
+		update account_information set
+		bankCode=#{bankCode},bankBranchCode=#{bankBranchCode},accountNo=#{accountNo},accountName=#{accountName},updateDate=now()
+		where employeeNo=#{employeeNo}
+
+	</update>
+	
+	<select id="getSiteInfo" parameterType="java.lang.String" resultType="jp.co.lyc.cms.model.SiteModel">
+	    SELECT
+		a.systemName,
+		a.location,
+		a.unitPrice,
+		a.AdmissionStartDate,
+		a.AdmissionEndDate,
+		b.siteRoleCodeName,
+		c.customerName,
+		d.topCustomerName,
+		a.developlanguage
+		FROM
+		rams.employee_site_information a
+		LEFT JOIN 	rams.site_role_master b ON a.siteNo = b.siteRoleCode
+		LEFT JOIN 	rams.customer_information c ON a.customerNo = c.customerNo
+		LEFT JOIN 	rams.top_customer d ON a.topCustomerNo = d.topCustomerNo
+		WHERE
+		1=1 
+		<if test="employeeNo!= null and employeeNo!= ''">
+		 AND a.employeeNo = #{employeeNo}
+		</if>
+
+	</select>
+
+
+</mapper>
