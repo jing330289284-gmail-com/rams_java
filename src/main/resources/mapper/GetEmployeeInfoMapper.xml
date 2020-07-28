@@ -5,141 +5,112 @@
 		type="jp.co.lyc.cms.model.EmployeeModel" />
 	<select id="getEmployeeInfo" parameterType="map"
 		resultMap="Employee">
-								select 
-					(@rowNo := @rowNo + 1) AS rowNo,
-					em.employeeNo,
-					em.employeeFristName,
-					emd.Furigana,
-					emd.age,
-					concat(emd.joinCompanyOfYear,emd.joinCompanyOfMonth) as yearMonthIn,
-					oi.AdmissionYearAndMonth,
-					emd.salary,
-					ci.customerName,
-					emd.phoneNo,
-					oi.nearestStation
-					from 
-					rams.employee as em
-					left join 
-					rams.employee_detail as emd on
-					emd.employeeNo=em.employeeNo 
-					left join 
-					rams.onsite_info as oi on em.employeeNo=oi.employeeNo
-					left join 
-					rams.employee_site_information as emsi on em.employeeNo=emsi.employeeNo
-					left join 
-					rams.customer_information as ci on emsi.customerNo=ci.customerNo
-					left join 
-					rams.nationality_master as nm on emd.nationalityCode=nm.nationalityCode
-					left join rams.into_company_master as incm on emd.ResidenceOfCode=incm.intoCompanyCode 
-					,(SELECT @rowNo :=
+		select
+		(@rowNo := @rowNo + 1) AS rowNo,
+		em.employeeNo,
+		em.employeeFristName,
+		emd.Furigana,
+		emd.alphabetOfName,
+		emd.age,
+		emd.joinCompanyOfYearandMonth,
+		emsi.AdmissionStartDate,
+		ei.salary,
+		ci.customerName,
+		emd.phoneNo,
+		adi.nearestStationOne,
+		TIMESTAMPDIFF(MONTH,now(),emd.PeriodOfStay)
+		from
+		rams.employee as em
+		left join
+		rams.employee_detail as emd on
+		emd.employeeNo=em.employeeNo
+		left join
+		rams.employee_site_information as emsi on em.employeeNo=emsi.employeeNo
+		left join
+		rams.address_information as adi on em.employeeNo= adi.employeeNo
+		left join
+		rams.expenses_information as ei on em.employeeNo=ei.employeeNo
+		left join
+		rams.customer_information as ci on emsi.customerNo=ci.customerNo
+		left join
+		rams.nationality_master as nm on emd.nationalityCode=nm.nationalityCode
+		left join
+		rams.into_company_master as incm on emd.ResidenceOfCode=incm.intoCompanyCode
+
+		,(SELECT @rowNo :=
 		0) AS rowNo
-					  where 1=1
-					  <if test="employeeNo!=null">
-					   AND em.employeeNo=#{employeeNo}
-					  </if>
-					  <if test="employeeFristName!=null">
-					   AND em.employeeFristName like concat('%',#{employeeFristName},'%')
-					  </if>
-					  <if test="emploryeeForm!=null">
-					   AND emd.emploryeeFormCode=#{emploryeeForm}
-					  </if>
-					  <if test="genderCode!=null">
-					   AND emd.genderCode=#{genderCode}
-					  </if>
-					  <if test="joinCompanyOfYear!=null">
-					   AND emd.joinCompanyOfYear=#{joinCompanyOfYear}
-					  </if>
-					  <if test="joinCompanyOfMonth!=null">
-					   AND emd.joinCompanyOfMonth=#{joinCompanyOfMonth}
-					  </if>
-					  <if test="ageFrom != null">
-					   AND emd.age &gt;= #{ageFrom}
-					  </if>
-					  <if test="ageTo != null">
-					   AND emd.age &lt;= #{ageTo}
-					  </if>
-					   <if test="statusOfResidence != null">
-					   AND emd.ResidenceOfCode=#{statusOfResidence}
-					  </if>
-					  <if test="birthplaceOfcontroy != null">
-					   AND nm.nationalityCode=#{birthplaceOfcontroy}
-					  </if>
-					  <if test="customerNo!= null">
-					   AND ci.customerNo=#{customerNo}
-					  </if>
-					  <if test="intoCompanyCode!= null">
-					   AND emd.intoCompanyCode=#{intoCompanyCode}
-					  </if>
-					  <if test="japanease!= null">
-					   AND emd.japaneaseCode=#{japanease}
-					  </if>
-					  <if test="developmentLanguageNo!= null">
-					   AND emd.developmentLanguageNo1=#{developmentLanguageNo}
-					  </if>
-					  <if test="salaryFrom!= null">
-					   AND emd.salary &gt;= #{salaryFrom}
-					   </if>
-					   <if test="salaryTo!= null">
-					   AND emd.salary &lt;= #{salaryTo}
-					   </if>
-					   <if test="unitPriceFrom != null">
-					   AND oi.unitPrice &gt;= #{unitPriceFrom}
-					   </if>
-					   <if test="unitPriceTo!= null">
-					   AND oi.unitPrice &lt;= #{unitPriceTo}
-					   </if>
-						 ORDER BY
-							em.employeeNo
-							<if test="sortToggleSalary != null">
-								,emd.salary
-							</if>
-							DESC 
-							
+		where 1=1
+		<if test="employeeNo!=null">
+			AND em.employeeNo=#{employeeNo}
+		</if>
+		<if test="employeeFristName!=null">
+			AND em.employeeFristName like concat('%',#{employeeFristName},'%')
+		</if>
+		<if test="emploryeeForm!=null">
+			AND emd.emploryeeFormCode=#{emploryeeForm}
+		</if>
+		<if test="genderCode!=null">
+			AND emd.genderCode=#{genderCode}
+		</if>
+		<if test="joinCompanyOfYearandMonth!=null">
+			AND emd.joinCompanyOfYearandMonth=#{joinCompanyOfYearandMonth}
+		</if>
+		<if test="ageFrom != null">
+			AND emd.age &gt;= #{ageFrom}
+		</if>
+		<if test="ageTo != null">
+			AND emd.age &lt;= #{ageTo}
+		</if>
+		<if test="statusOfResidence != null">
+			AND emd.ResidenceOfCode=#{statusOfResidence}
+		</if>
+		<if test="birthplaceOfcontroy != null">
+			AND nm.nationalityCode=#{birthplaceOfcontroy}
+		</if>
+		<if test="customer!= null">
+			AND ci.customerName=#{customer}
+		</if>
+		<if test="intoCompanyCode!= null">
+			AND emd.intoCompanyCode=#{intoCompanyCode}
+		</if>
+		<if test="japanease!= null">
+			AND emd.japaneaseCode=#{japanease}
+		</if>
+		<if test="salaryFrom!= null">
+			AND ei.salary &gt;= #{salaryFrom}
+		</if>
+		<if test="salaryTo!= null">
+			AND ei.salary &lt;= #{salaryTo}
+		</if>
+		<if test="developmentLanguageNo1!= null">
+			AND emd.developmentLanguageNo1=#{developmentLanguageNo1}
+		</if>
+		<if test="developmentLanguageNo2!= null">
+			AND emd.developmentLanguageNo2=#{developmentLanguageNo2}
+		</if>
+		<if test="developmentLanguageNo3!= null">
+			AND emd.developmentLanguageNo3=#{developmentLanguageNo3}
+		</if>
+		<if test="unitPriceFrom != null">
+			AND emsi.unitPrice &gt;= #{unitPriceFrom}
+		</if>
+		<if test="unitPriceTo!= null">
+			AND emsi.unitPrice &lt;= #{unitPriceTo}
+		</if>
+		<if test="kadou!=null">
+			<if test="kadou='0'">
+				AND emsi.AdmissionStartDate is not null AND emsi.AdmissionEndDate is
+				null
+			</if>
+			<if test="kadou='1'">
+				AND emsi.AdmissionStartDate is null AND emsi.AdmissionEndDate is not
+				null
+			</if>
+		</if>
+		ORDER BY
+		em.employeeNo
+		DESC
+
 	</select>
 
-	<select id="getStaffForms"
-		resultType="jp.co.lyc.cms.model.StaffModel">
-		SELECT staffFormCode,staffFormName FROM emploryee_form_master;
-	</select>
-	<!-- �����Y�� -->
-	<select id="getVisa" resultType="jp.co.lyc.cms.model.VisaModel">
-		SELECT visaCode,visaName FROM
-		visa_master;
-	</select>
-	<!--���� -->
-	<select id="getNationalitys"
-		resultType="jp.co.lyc.cms.model.NationalityModel">
-		SELECT nationalityCode,nationalityName FROM
-		nationality_master;
-	</select>
-	<!--���͘�-->
-	<select id="getCustomer"
-		resultType="jp.co.lyc.cms.model.CustomerModel">
-		SELECT customerRankingCode,customerRankingName FROM
-		customer_ranking_master;
-	</select>
-	
-	<!--���g�N�e-->
-	<select id="getTechnologyType" parameterType="map"
-		resultType="jp.co.lyc.cms.model.TechnologyTypeModel">
-		SELECT technologytypeCode,technologytypeName FROM
-		technology_Type_Master where 1=1 
-		 <if test="developmentLanguageNo!= null">
-		AND technologytypeName like concat('%',#{developmentLanguageNo},'%'); 
-		</if>
-	</select>
-	
-	<!--�ձ��Z��٥�-->
-	<select id="getJapaneseLevel"
-		resultType="jp.co.lyc.cms.model.JapaneseLevelModel">
-		SELECT japaneseLevelCode,japaneseLevelName FROM
-		japanese_Level_master;
-	</select>
-	
-	<!--��������-->
-	<select id="getIntoCompany"
-		resultType="jp.co.lyc.cms.model.IntoCompanyModel">
-		SELECT intoCompanyCode,intoCompanyName FROM
-		into_company_master;
-	</select>
 </mapper>

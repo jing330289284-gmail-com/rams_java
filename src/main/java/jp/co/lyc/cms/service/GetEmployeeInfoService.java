@@ -7,14 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import jp.co.lyc.cms.mapper.GetEmployeeInfoMapper;
-import jp.co.lyc.cms.model.CustomerModel;
 import jp.co.lyc.cms.model.EmployeeModel;
-import jp.co.lyc.cms.model.IntoCompanyModel;
-import jp.co.lyc.cms.model.JapaneseLevelModel;
-import jp.co.lyc.cms.model.NationalityModel;
-import jp.co.lyc.cms.model.StaffModel;
-import jp.co.lyc.cms.model.TechnologyTypeModel;
-import jp.co.lyc.cms.model.VisaModel;
+import jp.co.lyc.cms.model.ModelClass;
 
 @Component
 public class GetEmployeeInfoService {
@@ -23,7 +17,7 @@ public class GetEmployeeInfoService {
 	GetEmployeeInfoMapper getEmployeeInfoMapper;
 
 	/**
-	 * …ÁÜT«ÈàÛ§Ú»°µ√
+	 * Á§æÂì°ÊÉÖÂ†±„ÇíÂèñÂæó
 	 * 
 	 * @param sendMap
 	 * @return
@@ -33,80 +27,6 @@ public class GetEmployeeInfoService {
 		return employeeList;
 	}
 
-	/**
-	 * π˙ºÆ§Ú»°µ√
-	 * 
-	 * @return
-	 */
-	public List<NationalityModel> getNationalitys() {
-		List<NationalityModel> nationalitysList = getEmployeeInfoMapper.getNationalitys();
-		return nationalitysList;
-	}
-
-
-
-	/**
-	 * …ÁÜT–Œ Ω§Ú»°µ√
-	 * 
-	 * @return
-	 */
-	public List<StaffModel> getStaffForms() {
-		List<StaffModel> emploryeeFormsList = getEmployeeInfoMapper.getStaffForms();
-		return emploryeeFormsList;
-	}
-
-	/**
-	 * ‘⁄¡ÙŸY∏Ò§Ú»°µ√
-	 * 
-	 * @return
-	 */
-	public List<VisaModel> getVisa() {
-		List<VisaModel> visaList = getEmployeeInfoMapper.getVisa();
-		return visaList;
-	}
-
 	
-	/**
-	 * ºº–g∑NÑe§Ú»°µ√
-	 * @param sendMap 
-	 * 
-	 * @return
-	 */
-	public List<TechnologyTypeModel> getTechnologyType(Map<String, String> sendMap) {
-		List<TechnologyTypeModel> technologyTypeList = getEmployeeInfoMapper.getTechnologyType(sendMap);
-		return technologyTypeList;
-	}
-	
-	/**
-	 * §™øÕòî§Ú»°µ√
-	 * 
-	 * @return
-	 */
-	public List<CustomerModel> getCustomer() {
-		List<CustomerModel> customeList = getEmployeeInfoMapper.getCustomer();
-		return customeList;
-	}
-	
-	
-	/**
-	 * »’±æ’Z•Ï•Ÿ•Î§Ú»°µ√
-	 * 
-	 * @return
-	 */
-	public List<JapaneseLevelModel> getJapaneseLevel() {
-		List<JapaneseLevelModel> japaneseLevelList = getEmployeeInfoMapper.getJapaneseLevel();
-		return japaneseLevelList;
-	}
-	
-	
-	/**
-	 * »Î…Á«¯∑÷§Ú»°µ√
-	 * 
-	 * @return
-	 */
-	public List<IntoCompanyModel> getIntoCompany() {
-		List<IntoCompanyModel> intoCompanyList = getEmployeeInfoMapper.getIntoCompany();
-		return intoCompanyList;
-	}
 
 }

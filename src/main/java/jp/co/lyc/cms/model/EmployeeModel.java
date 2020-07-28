@@ -9,13 +9,12 @@ public class EmployeeModel implements Serializable {
 	 */
 	private static final long serialVersionUID = -2028159323401651353L;
 	int rowNo;
-	String employeeNo;//Éç†T·¬ºÅ
-	String employeeFristName;//Éç†TÃûÇ°
-	String employeeLastName;//¥«¥¿¥«¥Ê
-	String emploryeeForm;//Éç†TĞÎÊ½
-	String joinCompanyOfYear;//ÈëÉçÄê
-	String joinCompanyOfMonth;//ÈëÉçÔÂ
-	String nearestStation;//¼Ä¤êñk
+	String employeeNo;// ç¤¾å“¡ç•ªå·
+	String employeeFristName;// ç¤¾å“¡åå‰
+	String furigana;// ã‚«ã‚¿ã‚«ãƒŠ
+	String emploryeeForm;// ç¤¾å“¡å½¢å¼
+	String joinCompanyOfYearandMonth;
+	String nearestStation;// å¯„ã‚Šé§…
 	String customer;//
 	String intoCompanyCode;
 	String birthplaceOfcontroy;
@@ -23,54 +22,29 @@ public class EmployeeModel implements Serializable {
 	String employeeName;
 	String authorityNo;
 	String authorityProperty;
-	String genderCode;//ĞÔ„e
-	String age;//Äêıh
-	String ageFrom;//é_Ê¼Äêıh
-	String ageTo;//½KÁËÄêıh
-	String salary;//½oÁÏ
-	String salaryFrom;//é_Ê¼½oÁÏ
-	String salaryTo;//½KÁË½oÁÏ
-	String unitPriceFrom;//…gı¹ ‡ìé_Ê¼
-	String unitPriceTo;//…gı¹ ‡ì½KÁË
+	String genderCode;// æ€§åˆ¥
+	String age;// å¹´é½¢
+	String ageFrom;// é–‹å§‹å¹´é½¢
+	String ageTo;// çµ‚äº†å¹´é½¢
+	String salary;// çµ¦æ–™
+	String salaryFrom;// é–‹å§‹çµ¦æ–™
+	String salaryTo;// çµ‚äº†çµ¦æ–™
+	String unitPriceFrom;// å˜ä¾¡ç¯„å›²é–‹å§‹
+	String unitPriceTo;// å˜ä¾¡ç¯„å›²çµ‚äº†
 	String birthPlace;
 	String statusOfResidence;
 	String rookieDivision;
-	String japanease;//ÈÕ±¾ÕZ¥ì¥Ù¥ë
-	String developmentLanguageNo;//¼¼Ğg
-	String phoneNo;//ëŠÔ’·¬ºÅ
-	String sortToggleSalary;//½oÁÏ¥½©`¥È
-
-	public String getSalary() {
-		return salary;
-	}
-
-	public void setSalary(String salary) {
-		this.salary = salary;
-	}
-
-	public String getEmploryeeForm() {
-		return emploryeeForm;
-	}
-
-	public void setEmploryeeForm(String emploryeeForm) {
-		this.emploryeeForm = emploryeeForm;
-	}
-
-	public String getAgeFrom() {
-		return ageFrom;
-	}
-
-	public void setAgeFrom(String ageFrom) {
-		this.ageFrom = ageFrom;
-	}
-
-	public String getAgeTo() {
-		return ageTo;
-	}
-
-	public void setAgeTo(String ageTo) {
-		this.ageTo = ageTo;
-	}
+	String japanease;// æ—¥æœ¬èªãƒ¬ãƒ™ãƒ«
+	String developmentLanguageNo;// æŠ€è¡“
+	String phoneNo;// é›»è©±ç•ªå·
+	String sortToggleSalary;// çµ¦æ–™ã‚½ãƒ¼ãƒˆ
+	String developmentLanguageNo1;// é–‹ç™ºè¨€èª1
+	String developmentLanguageNo2;// é–‹ç™ºè¨€èª2
+	String developmentLanguageNo3;// é–‹ç™ºè¨€èª3
+	String siteRoleCode;//
+	String kadou;//
+	String alphabetOfName;// ãƒ­ãƒ¼ãƒåå‰
+	String visaPeriod;// ãƒ“ã‚¶æœŸé–“
 
 	public int getRowNo() {
 		return rowNo;
@@ -96,28 +70,28 @@ public class EmployeeModel implements Serializable {
 		this.employeeFristName = employeeFristName;
 	}
 
-	public String getEmployeeLastName() {
-		return employeeLastName;
+	public String getFurigana() {
+		return furigana;
 	}
 
-	public void setEmployeeLastName(String employeeLastName) {
-		this.employeeLastName = employeeLastName;
+	public void setFurigana(String furigana) {
+		this.furigana = furigana;
 	}
 
-	public String getJoinCompanyOfYear() {
-		return joinCompanyOfYear;
+	public String getEmploryeeForm() {
+		return emploryeeForm;
 	}
 
-	public void setJoinCompanyOfYear(String joinCompanyOfYear) {
-		this.joinCompanyOfYear = joinCompanyOfYear;
+	public void setEmploryeeForm(String emploryeeForm) {
+		this.emploryeeForm = emploryeeForm;
 	}
 
-	public String getJoinCompanyOfMonth() {
-		return joinCompanyOfMonth;
+	public String getJoinCompanyOfYearandMonth() {
+		return joinCompanyOfYearandMonth;
 	}
 
-	public void setJoinCompanyOfMonth(String joinCompanyOfMonth) {
-		this.joinCompanyOfMonth = joinCompanyOfMonth;
+	public void setJoinCompanyOfYearandMonth(String joinCompanyOfYearandMonth) {
+		this.joinCompanyOfYearandMonth = joinCompanyOfYearandMonth;
 	}
 
 	public String getNearestStation() {
@@ -135,7 +109,6 @@ public class EmployeeModel implements Serializable {
 	public void setCustomer(String customer) {
 		this.customer = customer;
 	}
-
 
 	public String getIntoCompanyCode() {
 		return intoCompanyCode;
@@ -201,12 +174,28 @@ public class EmployeeModel implements Serializable {
 		this.age = age;
 	}
 
-	public String getBirthPlace() {
-		return birthPlace;
+	public String getAgeFrom() {
+		return ageFrom;
 	}
 
-	public void setBirthPlace(String birthPlace) {
-		this.birthPlace = birthPlace;
+	public void setAgeFrom(String ageFrom) {
+		this.ageFrom = ageFrom;
+	}
+
+	public String getAgeTo() {
+		return ageTo;
+	}
+
+	public void setAgeTo(String ageTo) {
+		this.ageTo = ageTo;
+	}
+
+	public String getSalary() {
+		return salary;
+	}
+
+	public void setSalary(String salary) {
+		this.salary = salary;
 	}
 
 	public String getSalaryFrom() {
@@ -239,6 +228,14 @@ public class EmployeeModel implements Serializable {
 
 	public void setUnitPriceTo(String unitPriceTo) {
 		this.unitPriceTo = unitPriceTo;
+	}
+
+	public String getBirthPlace() {
+		return birthPlace;
+	}
+
+	public void setBirthPlace(String birthPlace) {
+		this.birthPlace = birthPlace;
 	}
 
 	public String getStatusOfResidence() {
@@ -287,6 +284,62 @@ public class EmployeeModel implements Serializable {
 
 	public void setSortToggleSalary(String sortToggleSalary) {
 		this.sortToggleSalary = sortToggleSalary;
+	}
+
+	public String getDevelopmentLanguageNo1() {
+		return developmentLanguageNo1;
+	}
+
+	public void setDevelopmentLanguageNo1(String developmentLanguageNo1) {
+		this.developmentLanguageNo1 = developmentLanguageNo1;
+	}
+
+	public String getDevelopmentLanguageNo2() {
+		return developmentLanguageNo2;
+	}
+
+	public void setDevelopmentLanguageNo2(String developmentLanguageNo2) {
+		this.developmentLanguageNo2 = developmentLanguageNo2;
+	}
+
+	public String getDevelopmentLanguageNo3() {
+		return developmentLanguageNo3;
+	}
+
+	public void setDevelopmentLanguageNo3(String developmentLanguageNo3) {
+		this.developmentLanguageNo3 = developmentLanguageNo3;
+	}
+
+	public String getSiteRoleCode() {
+		return siteRoleCode;
+	}
+
+	public void setSiteRoleCode(String siteRoleCode) {
+		this.siteRoleCode = siteRoleCode;
+	}
+
+	public String getKadou() {
+		return kadou;
+	}
+
+	public void setKadou(String kadou) {
+		this.kadou = kadou;
+	}
+
+	public String getAlphabetOfName() {
+		return alphabetOfName;
+	}
+
+	public void setAlphabetOfName(String alphabetOfName) {
+		this.alphabetOfName = alphabetOfName;
+	}
+
+	public String getVisaPeriod() {
+		return visaPeriod;
+	}
+
+	public void setVisaPeriod(String visaPeriod) {
+		this.visaPeriod = visaPeriod;
 	}
 
 }
