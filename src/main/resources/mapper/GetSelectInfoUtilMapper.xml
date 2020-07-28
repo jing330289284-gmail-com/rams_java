@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jp.co.lyc.cms.mapper.GetSelectInfoUtilMapper">
+	<!-- 社員形式コード -->
+	<select id="getStaffForms"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT emploryeeFormCode code,emploryeeFormName name FROM
+		emploryee_form_master;
+	</select>
+	<!-- 在留資格 -->
+	<select id="getVisa" resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT visaCode code,visaName
+		name FROM visa_master;
+	</select>
+	<!--国籍 -->
+	<select id="getNationalitys"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT nationalityCode code,nationalityName name FROM
+		nationality_master;
+	</select>
+	<!--お客様 -->
+	<select id="getCustomer"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT customerRankingCode code,customerRankingName name
+		FROM customer_ranking_master;
+	</select>
+
+	<!-- 開発言語 -->
+	<select id="getTechnologyType" parameterType="map"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT technologytypeCode code,technologytypeName name FROM
+		technology_type_Master where 1=1
+		<if test="developmentLanguageNo1!= null">
+			AND technologytypeName like
+			concat('%',#{developmentLanguageNo1},'%');
+		</if>
+		<if test="developmentLanguageNo2!= null">
+			AND technologytypeName like
+			concat('%',#{developmentLanguageNo2},'%');
+		</if>
+		<if test="developmentLanguageNo3!= null">
+			AND technologytypeName like
+			concat('%',#{developmentLanguageNo3},'%');
+		</if>
+	</select>
+
+	<!--日本語レベル -->
+	<select id="getJapaneseLevel"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT japaneseLevelCode code,japaneseLevelName name FROM
+		japanese_Level_master;
+	</select>
+
+	<!--入社区分 -->
+	<select id="getIntoCompany"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT intoCompanyCode code,intoCompanyName name FROM
+		into_company_master;
+	</select>
+	<!-- 役割 -->
+	<select id="getSiteMaster"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT siteRoleCode code,siteRoleCodeName name FROM
+		site_role_master;
+	</select>
+</mapper>
