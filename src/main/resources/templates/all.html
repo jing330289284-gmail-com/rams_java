@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link >
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<!--     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<!--addSatrt  -->
+    <!--图标样式-->
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
+	<!--主要样式tree-->
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/style.css" />
+<!--addEnd  -->
+    <script>
+    	function praseStrEmpty(str){
+    		if(!str || str=="undefined" || str=="null"){
+    			return "";
+    		}
+    		return str;
+    	}
+    
+		$(function(){ 
+			var toggler = document.getElementsByClassName("caret");
+			var i;
+		
+			for (i = 0; i < toggler.length; i++) {
+			  toggler[i].addEventListener("click", function() {
+			    this.parentElement.querySelector(".nested").classList.toggle("active");
+			    this.classList.toggle("caret-down");
+			  });
+			}
+		});
+		//
+	    function getEmployeeInfo(){
+	        var uploadURL ="/getEmployeeInfo";
+	        var emp={};
+	        emp["employeeNo"] = $("#employeeNo").val();
+	        emp["employeeFristName"] = $("#employeeFristName").val();
+	        emp["employeeLastName"] = $("#employeeLastName").val();
+	        emp["emploryeeForm"] = $("#emploryeeForm").val();
+	        emp["joinCompanyOfYear"] = $("#joinCompanyOfYear").val();
+	        emp["joinCompanyOfMonth"] = $("#joinCompanyOfMonth").val();
+	        emp["nearestStation"] = $("#nearestStation").val();
+	        emp["customer"] = $("#customer").val();
+	        emp["authorityCode"] = $("#authorityCode").val();
+	        emp["birthplaceOfcontroy"] = $("#birthplaceOfcontroy").val();
+	        emp["authorityNo"] = $("#authorityNo").val();
+	        emp["authorityProperty"] = $("#authorityProperty").val();
+	        emp["genderCode"] = $("#genderCode").val();
+	        emp["ageFrom"] = $("#ageFrom").val();
+	        emp["ageTo"] = $("#ageTo").val();
+	        emp["salaryFrom"] = $("#salaryFrom").val();
+	        emp["salaryTo"] = $("#salaryTo").val();
+	        emp["unitPriceFrom"] = $("#unitPriceFrom").val();
+	        emp["unitPriceTo"] = $("#unitPriceTo").val();
+	        emp["birthPlace"] = $("#birthPlace").val();
+	        emp["statusOfResidence"] = $("#statusOfResidence").val();
+	        emp["rookieDivision"] = $("#rookieDivision").val();
+	        emp["japanease"] = $("#japanease").val();
+	        $.ajax({
+	            url: uploadURL,
+	            type: "POST",
+	            contentType:'application/json',
+	            processData: false,
+	            cache: false,
+	            data: JSON.stringify(emp),
+	            timeout: 30000,
+	            beforeSend: function(xhr, settings) {
+	              //送信前の処理
+	            },
+	            complete: function(xhr, textStatus) {
+	              //通信完了
+	            },
+	            success: function(result, textStatus, xhr) {
+	              //ajax通信が成功した
+	              var arr = result.employeeList;
+	              $('#employeeList').empty();
+	              for(var i = 0;i<result.employeeList.length;i++){
+	            	  var rowNo = praseStrEmpty(arr[i].rowNo.substring(0, arr[i].rowNo.indexOf(".")));
+	            	  var employeeNo = praseStrEmpty(arr[i].employeeNo);
+	            	  var age = praseStrEmpty(arr[i].age);
+	            	  var employeeFristName = praseStrEmpty(arr[i].employeeFristName);
+	            	  var employeeLastName = praseStrEmpty(arr[i].employeeLastName);
+	            	  var joinCompanyOfYear = praseStrEmpty(arr[i].joinCompanyOfYear);
+	            	  var joinCompanyOfMonth = praseStrEmpty(arr[i].joinCompanyOfMonth);
+	            	  var salary = praseStrEmpty(arr[i].salary);
+	            	  var phoneNo = praseStrEmpty(arr[i].phoneNo);
+	            	  var customer = praseStrEmpty(arr[i].customer);
+	            	  var nearestStation = praseStrEmpty(arr[i].nearestStation);
+	            	  $('#employeeList').prepend("<tr><td>"+rowNo+"</td><td>"+employeeNo+"</td><td>"+employeeFristName+employeeLastName+"</td><td>"+rowNo+"</td><td>"+age+"</td><td>"+joinCompanyOfYear+joinCompanyOfMonth+"</td><td>"+salary+"</td><td>"+customer+"</td><td>"+phoneNo+"</td><td>"+nearestStation+"</td></tr>");
+	              }
+	              alert(result);
+	              
+	            },
+	            error: function(xhr, textStatus, error) {
+	              //ajax通信が失敗した
+	              alert("aaaaaaaaaaaaaa");
+	            }
+	          });
+	      }		
+    </script>
+    <style type="text/css">
+	   /* Remove default bullets */
+	    ul, #myUL {
+	      list-style-type: none;
+	    }
+	
+	    /* Remove margins and padding from the parent ul */
+	    #myUL {
+	      margin: 0;
+	      padding: 0;
+	    }
+	
+	    /* Style the caret/arrow */
+	    .caret {
+	      cursor: pointer;
+	      user-select: none; /* Prevent text selection */
+	    }
+	
+	    /* Create the caret/arrow with a unicode, and style it */
+	    .caret::before {
+	      content: "\25B6";
+	      color: black;
+	      display: inline-block;
+	      margin-right: 6px;
+	    }
+	
+	    /* Rotate the caret/arrow icon when clicked on (using JavaScript) */
+	    .caret-down::before {
+	      transform: rotate(90deg);
+	    }
+	
+	    /* Hide the nested list */
+	    .nested {
+	      display: none;
+	    }
+	
+	    /* Show the nested list when the user clicks on the caret/arrow (with JavaScript) */
+	    .active {
+	      display: block;
+	    }    
+    </style>
+    <title>abc</title>
+</head>
+<body style="overflow-x:hidden">
+<div th:replace="/head :: .head"></div>
+
+<div>
+	<div class = "row">
+
+		<div th:replace="/side :: #leftside"></div>
+		<div class = "col-10">
+			<div class="tab-content" id="v-pills-tabContent">
+			<!--               <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab"> -->
+			<div class="tab-pane fade" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+				<div th:replace="/main :: #main"></div>
+			</div>
+			<div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+				<div th:replace="/mainSearch :: #mainSearch"></div>
+			</div>
+				<div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">CCC</div>
+				<div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">DDD</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+	
+</html>

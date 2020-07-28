@@ -1,0 +1,1121 @@
+2020-07-02 13:31:02,384 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on LAPTOP-A94PII7T with PID 14536 (E:\LYC_CMS\target\classes started by Vin.Young in E:\LYC_CMS)
+2020-07-02 13:31:02,389 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2020-07-02 13:31:03,377 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2020-07-02 13:31:03,390 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2020-07-02 13:31:03,397 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2020-07-02 13:31:03,398 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2020-07-02 13:31:03,529 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2020-07-02 13:31:03,530 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 1107 ms
+2020-07-02 13:31:03,994 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2020-07-02 13:31:04,048 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2020-07-02 13:31:04,198 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2020-07-02 13:31:04,221 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2020-07-02 13:31:04,223 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 2.468 seconds (JVM running for 4.282)
+2020-07-02 13:31:43,549 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-07-02 13:31:43,549 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2020-07-02 13:31:43,556 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 7 ms
+2020-07-02 13:31:43,684 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-07-02 13:31:43,705 [http-nio-8080-exec-2] INFO  com.zaxxer.hikari.HikariDataSource 110 - HikariPool-1 - Starting...
+2020-07-02 13:31:44,594 [http-nio-8080-exec-2] INFO  com.zaxxer.hikari.HikariDataSource 123 - HikariPool-1 - Start completed.
+2020-07-02 13:31:44,602 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-07-02 13:31:44,625 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-07-02 13:31:44,666 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-07-02 13:31:44,674 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-07-02 13:31:44,674 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-07-02 13:31:44,674 [http-nio-8080-exec-2] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-07-02 13:31:44,676 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-07-02 13:55:11,358 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-07-02 13:55:11,361 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-07-02 13:55:11,361 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 2(String), LYC001(String)
+2020-07-02 13:55:11,362 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 0
+2020-07-02 13:55:15,763 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-07-02 13:55:15,764 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-07-02 13:55:15,765 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-07-02 13:55:15,767 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-07-02 13:55:15,767 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-07-02 13:55:15,767 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-07-02 13:55:15,768 [http-nio-8080-exec-5] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-07-02 13:55:15,768 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-07-02 13:56:23,710 [http-nio-8080-exec-8] INFO  j.c.l.c.c.GetEmployeeInfoController 38 - GetEmployeeInfoController.getEmployeeInfo:検索開始
+2020-07-02 13:56:23,728 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - ==>  Preparing: SELECT (@rowNo := @rowNo + 1) AS rowNo, a.employeeNo, a.employeeFristName, a.employeeLastName, c.joinCompanyOfYear, c.joinCompanyOfMonth, c.salary, e.nearestStation, d.Customer, c.phoneNo, a.authorityCode, b.authorityProperty, c.genderCode, c.age, c.BirthplaceOfcontroy FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo LEFT JOIN onsite_info d ON a.employeeNo = d.employeeNo LEFT JOIN address_information e ON a.employeeNo = e.employeeNo,(SELECT @rowNo := 0) AS rowNo WHERE 1=1 ORDER BY a.employeeNo DESC 
+2020-07-02 13:56:23,728 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - ==> Parameters: 
+2020-07-02 13:56:23,737 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - <==      Total: 4
+2020-07-02 13:56:23,738 [http-nio-8080-exec-8] INFO  j.c.l.c.c.GetEmployeeInfoController 157 - GetEmployeeInfoController.getEmployeeInfo:検索結束
+2020-07-02 13:57:34,572 [http-nio-8080-exec-1] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 13:57:34,574 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 13:57:34,574 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 13:57:34,582 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 13:57:38,495 [http-nio-8080-exec-2] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 13:57:38,496 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 13:57:38,496 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 13:57:38,500 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:03:42,467 [http-nio-8080-exec-4] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:03:42,469 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:03:42,470 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:03:42,473 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:04:54,226 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-07-02 14:04:54,226 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-07-02 14:04:54,227 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-07-02 14:04:54,229 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-07-02 14:04:54,230 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-07-02 14:04:54,231 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-07-02 14:04:54,231 [http-nio-8080-exec-7] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-07-02 14:04:54,231 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-07-02 14:04:54,340 [http-nio-8080-exec-8] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:04:54,341 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:04:54,341 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:04:54,343 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:06:15,492 [http-nio-8080-exec-10] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-07-02 14:06:15,493 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-07-02 14:06:15,494 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-07-02 14:06:15,495 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-07-02 14:06:15,496 [http-nio-8080-exec-10] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-07-02 14:06:15,496 [http-nio-8080-exec-10] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-07-02 14:06:15,496 [http-nio-8080-exec-10] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-07-02 14:06:15,496 [http-nio-8080-exec-10] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-07-02 14:06:15,600 [http-nio-8080-exec-1] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:06:15,601 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:06:15,601 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:06:15,603 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:07:03,634 [http-nio-8080-exec-2] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:07:03,635 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:07:03,635 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:07:03,637 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:21:58,654 [http-nio-8080-exec-4] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:21:58,655 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:21:58,656 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:21:58,658 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:22:34,938 [http-nio-8080-exec-5] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:22:34,939 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:22:34,940 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:22:34,942 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:24:53,890 [http-nio-8080-exec-7] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:24:53,892 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:24:53,892 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:24:53,894 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:25:12,629 [http-nio-8080-exec-8] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:25:12,630 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:25:12,631 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:25:12,634 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:25:24,164 [http-nio-8080-exec-9] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:25:24,165 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:25:24,166 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:25:24,167 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:25:34,280 [http-nio-8080-exec-10] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:25:34,281 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:25:34,282 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:25:34,283 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:25:45,516 [http-nio-8080-exec-1] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:25:45,517 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:25:45,517 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:25:45,518 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:25:59,045 [http-nio-8080-exec-2] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:25:59,046 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:25:59,047 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:25:59,049 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:26:05,341 [http-nio-8080-exec-3] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:26:05,341 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:26:05,342 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:26:05,343 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:26:22,495 [http-nio-8080-exec-4] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:26:22,496 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:26:22,497 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:26:22,500 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:26:33,406 [http-nio-8080-exec-5] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:26:33,407 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:26:33,407 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:26:33,408 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:27:55,845 [http-nio-8080-exec-8] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:27:55,846 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:27:55,846 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:27:55,847 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:30:18,290 [http-nio-8080-exec-10] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:30:18,291 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:30:18,292 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:30:18,293 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:31:20,640 [http-nio-8080-exec-2] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:31:20,641 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:31:20,642 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:31:20,643 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:32:26,837 [http-nio-8080-exec-4] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:32:26,839 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:32:26,839 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:32:26,841 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:33:05,607 [http-nio-8080-exec-5] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:33:05,609 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:33:05,609 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:33:05,610 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:35:18,303 [http-nio-8080-exec-7] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:35:18,304 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:35:18,304 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:35:18,305 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:35:30,639 [http-nio-8080-exec-8] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:35:30,640 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:35:30,640 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:35:30,642 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:35:38,539 [http-nio-8080-exec-9] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:35:38,540 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:35:38,541 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:35:38,542 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:37:01,099 [http-nio-8080-exec-1] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:37:01,100 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:37:01,100 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:37:01,101 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:38:23,474 [http-nio-8080-exec-3] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:38:23,475 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:38:23,475 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:38:23,477 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:39:12,482 [http-nio-8080-exec-4] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:39:12,483 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:39:12,484 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:39:12,485 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:40:40,926 [http-nio-8080-exec-6] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:40:40,927 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:40:40,927 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:40:40,928 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:41:44,662 [http-nio-8080-exec-8] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:41:44,663 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:41:44,664 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:41:44,665 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:43:12,611 [http-nio-8080-exec-10] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:43:12,612 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:43:12,613 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:43:12,614 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:43:32,762 [http-nio-8080-exec-1] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:43:32,763 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:43:32,763 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:43:32,764 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:43:56,949 [http-nio-8080-exec-2] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:43:56,950 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:43:56,950 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:43:56,951 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:44:10,712 [http-nio-8080-exec-3] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:44:10,713 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:44:10,714 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:44:10,715 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:45:42,620 [http-nio-8080-exec-5] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:45:42,620 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:45:42,621 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:45:42,622 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:46:29,509 [http-nio-8080-exec-6] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:46:29,510 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:46:29,510 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:46:29,511 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:47:01,380 [http-nio-8080-exec-7] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:47:01,381 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:47:01,382 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:47:01,383 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:49:26,146 [http-nio-8080-exec-9] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:49:26,147 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:49:26,147 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:49:26,149 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:49:30,239 [http-nio-8080-exec-10] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:49:30,239 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:49:30,240 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:49:30,241 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:49:39,021 [http-nio-8080-exec-1] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:49:39,021 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:49:39,022 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:49:39,023 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:49:41,741 [http-nio-8080-exec-2] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:49:41,741 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:49:41,742 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:49:41,743 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:49:52,131 [http-nio-8080-exec-3] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:49:52,132 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:49:52,132 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:49:52,134 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:50:00,582 [http-nio-8080-exec-4] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:50:00,582 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:50:00,583 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:50:00,584 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:50:04,364 [http-nio-8080-exec-5] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:50:04,365 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:50:04,365 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:50:04,366 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:50:25,295 [http-nio-8080-exec-6] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:50:25,296 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:50:25,296 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:50:25,297 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:50:46,663 [http-nio-8080-exec-7] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:50:46,664 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:50:46,664 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:50:46,666 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:51:19,863 [http-nio-8080-exec-8] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:51:19,864 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:51:19,864 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:51:19,865 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:51:25,615 [http-nio-8080-exec-9] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:51:25,616 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:51:25,616 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:51:25,618 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:51:31,456 [http-nio-8080-exec-10] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:51:31,457 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:51:31,457 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:51:31,458 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:51:54,100 [http-nio-8080-exec-1] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:51:54,101 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:51:54,101 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:51:54,103 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:52:00,635 [http-nio-8080-exec-2] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:52:00,635 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:52:00,636 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:52:00,637 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:52:05,910 [http-nio-8080-exec-3] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:52:05,911 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:52:05,911 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:52:05,912 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:52:10,833 [http-nio-8080-exec-4] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:52:10,834 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:52:10,834 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:52:10,836 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:52:34,540 [http-nio-8080-exec-5] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:52:34,541 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:52:34,541 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:52:34,542 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:52:42,892 [http-nio-8080-exec-6] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:52:42,892 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:52:42,893 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:52:42,894 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:52:46,601 [http-nio-8080-exec-7] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:52:46,602 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:52:46,602 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:52:46,603 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:54:26,344 [http-nio-8080-exec-9] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:54:26,345 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:54:26,346 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:54:26,347 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:54:39,082 [http-nio-8080-exec-10] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:54:39,083 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:54:39,084 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:54:39,085 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:55:11,086 [http-nio-8080-exec-1] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:55:11,087 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:55:11,087 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:55:11,089 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:56:40,132 [http-nio-8080-exec-3] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:56:40,133 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:56:40,133 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:56:40,135 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:57:22,122 [http-nio-8080-exec-4] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:57:22,122 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:57:22,123 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:57:22,124 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:57:36,689 [http-nio-8080-exec-5] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:57:36,689 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:57:36,690 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:57:36,691 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:58:01,345 [http-nio-8080-exec-7] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:58:01,346 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:58:01,346 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:58:01,347 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:58:09,440 [http-nio-8080-exec-8] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:58:09,441 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:58:09,441 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:58:09,442 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:58:11,002 [http-nio-8080-exec-9] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:58:11,003 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:58:11,003 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:58:11,004 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:58:18,595 [http-nio-8080-exec-10] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:58:18,596 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:58:18,596 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:58:18,597 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:58:51,270 [http-nio-8080-exec-1] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:58:51,271 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:58:51,271 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:58:51,272 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:59:18,070 [http-nio-8080-exec-2] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:59:18,071 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:59:18,071 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:59:18,072 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 14:59:42,018 [http-nio-8080-exec-3] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 14:59:42,020 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 14:59:42,021 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 14:59:42,023 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:00:58,346 [http-nio-8080-exec-5] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:00:58,347 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:00:58,347 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:00:58,349 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:02:03,781 [http-nio-8080-exec-7] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:02:03,783 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:02:03,784 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:02:03,785 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:02:13,017 [http-nio-8080-exec-8] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:02:13,018 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:02:13,018 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:02:13,019 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:02:26,703 [http-nio-8080-exec-9] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:02:26,703 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:02:26,704 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:02:26,704 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:02:32,716 [http-nio-8080-exec-10] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:02:32,717 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:02:32,717 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:02:32,718 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:02:38,707 [http-nio-8080-exec-1] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:02:38,708 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:02:38,708 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:02:38,709 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:02:50,265 [http-nio-8080-exec-2] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:02:50,266 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:02:50,266 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:02:50,267 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:02:58,100 [http-nio-8080-exec-3] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:02:58,101 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:02:58,101 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:02:58,103 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:03:03,567 [http-nio-8080-exec-4] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:03:03,568 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:03:03,568 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:03:03,569 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:03:17,049 [http-nio-8080-exec-5] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:03:17,050 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:03:17,050 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:03:17,051 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:03:24,947 [http-nio-8080-exec-6] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:03:24,948 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:03:24,948 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:03:24,949 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:05:27,302 [http-nio-8080-exec-8] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:05:27,303 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:05:27,303 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:05:27,304 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:05:32,806 [http-nio-8080-exec-9] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:05:32,807 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:05:32,807 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:05:32,808 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:06:10,576 [http-nio-8080-exec-10] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:06:10,577 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:06:10,577 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:06:10,578 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:06:54,096 [http-nio-8080-exec-1] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:06:54,097 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:06:54,097 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:06:54,099 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:07:17,973 [http-nio-8080-exec-2] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:07:17,974 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:07:17,974 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:07:17,976 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:07:47,613 [http-nio-8080-exec-3] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:07:47,614 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:07:47,615 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:07:47,615 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:08:02,947 [http-nio-8080-exec-4] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:08:02,947 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:08:02,948 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:08:02,949 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:08:15,328 [http-nio-8080-exec-5] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:08:15,329 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:08:15,329 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:08:15,330 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:13:17,309 [http-nio-8080-exec-7] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:13:17,310 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:13:17,310 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:13:17,312 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:13:37,369 [http-nio-8080-exec-8] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:13:37,370 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:13:37,370 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:13:37,371 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:13:54,321 [http-nio-8080-exec-9] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:13:54,322 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:13:54,323 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:13:54,324 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:14:16,480 [http-nio-8080-exec-10] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:14:16,481 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:14:16,482 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:14:16,483 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:14:39,557 [http-nio-8080-exec-1] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:14:39,557 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:14:39,558 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:14:39,559 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:14:54,619 [http-nio-8080-exec-2] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:14:54,620 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:14:54,620 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:14:54,621 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:15:07,086 [http-nio-8080-exec-3] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:15:07,087 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:15:07,088 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:15:07,089 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:15:28,631 [http-nio-8080-exec-4] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:15:28,632 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:15:28,632 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:15:28,633 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:15:42,647 [http-nio-8080-exec-5] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:15:42,647 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:15:42,648 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:15:42,649 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:15:47,910 [http-nio-8080-exec-6] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:15:47,910 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:15:47,911 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:15:47,912 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:16:31,749 [http-nio-8080-exec-7] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:16:31,750 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:16:31,750 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:16:31,751 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:19:16,873 [http-nio-8080-exec-9] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:19:16,874 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:19:16,875 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:19:16,876 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:19:47,042 [http-nio-8080-exec-10] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:19:47,042 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:19:47,043 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:19:47,044 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:20:07,126 [http-nio-8080-exec-1] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:20:07,126 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:20:07,127 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:20:07,127 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:20:32,939 [http-nio-8080-exec-2] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:20:32,940 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:20:32,940 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:20:32,941 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:21:02,973 [http-nio-8080-exec-3] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:21:02,974 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:21:02,975 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:21:02,976 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:21:10,562 [http-nio-8080-exec-4] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:21:10,563 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:21:10,563 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:21:10,564 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:21:26,711 [http-nio-8080-exec-5] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:21:26,712 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:21:26,712 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:21:26,713 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:21:42,501 [http-nio-8080-exec-6] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:21:42,502 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:21:42,502 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:21:42,503 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:21:46,682 [http-nio-8080-exec-7] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:21:46,682 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:21:46,683 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:21:46,684 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:24:37,017 [http-nio-8080-exec-9] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:24:37,018 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:24:37,018 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:24:37,019 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:25:27,639 [http-nio-8080-exec-10] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:25:27,640 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:25:27,640 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:25:27,641 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:25:58,262 [http-nio-8080-exec-1] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:25:58,263 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:25:58,263 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:25:58,264 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:26:21,465 [http-nio-8080-exec-2] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:26:21,466 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:26:21,467 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:26:21,468 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:26:30,349 [http-nio-8080-exec-3] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:26:30,350 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:26:30,351 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:26:30,352 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:26:33,569 [http-nio-8080-exec-4] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:26:33,569 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:26:33,570 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:26:33,571 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:27:04,257 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:27:04,257 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC002(String)
+2020-07-02 15:27:04,258 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:27:04,258 [http-nio-8080-exec-6] INFO  j.c.l.c.controller.SubCostController 81 - GetEmployeeInfoController.getEmployeeInfo:アープデート開始
+2020-07-02 15:27:04,258 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:27:04,259 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC002(String)
+2020-07-02 15:27:04,259 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:27:04,261 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.updateCost 143 - ==>  Preparing: UPDATE expenses_information SET BonusFlag = ?, InsuranceFee = ?, SocialInsuranceFlag = ?, remark = ?, NextBonusMonth = ?, NextRaiseMonth = ?, updateTime = NOW() WHERE employeeNo = ? 
+2020-07-02 15:27:04,261 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.updateCost 143 - ==> Parameters: 0(String), 1000(String), 0(String), remarks(String), 8(String), 08(String), LYC002(String)
+2020-07-02 15:27:04,267 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.updateCost 143 - <==    Updates: 1
+2020-07-02 15:28:04,599 [http-nio-8080-exec-9] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:28:04,600 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:28:04,601 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:28:04,602 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:32:52,828 [http-nio-8080-exec-1] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:32:52,830 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:32:52,830 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:32:52,831 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:33:46,050 [http-nio-8080-exec-2] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:33:46,051 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:33:46,051 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:33:46,053 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:37:18,597 [http-nio-8080-exec-4] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:37:18,598 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:37:18,599 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:37:18,600 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:37:34,326 [http-nio-8080-exec-5] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:37:34,327 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:37:34,328 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:37:34,329 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:38:49,796 [http-nio-8080-exec-7] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:38:49,797 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:38:49,797 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:38:49,799 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:41:01,681 [http-nio-8080-exec-9] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:41:01,682 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:41:01,682 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:41:01,683 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:43:52,720 [http-nio-8080-exec-1] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:43:52,720 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:43:52,721 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:43:52,722 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:44:12,601 [http-nio-8080-exec-2] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:44:12,602 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:44:12,602 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:44:12,603 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:44:25,799 [http-nio-8080-exec-3] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:44:25,800 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:44:25,800 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:44:25,801 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:46:54,684 [http-nio-8080-exec-5] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:46:54,684 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:46:54,685 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:46:54,686 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:47:46,150 [http-nio-8080-exec-6] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:47:46,150 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:47:46,151 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:47:46,152 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:47:49,750 [http-nio-8080-exec-7] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:47:49,750 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:47:49,751 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:47:49,752 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:49:56,518 [http-nio-8080-exec-9] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:49:56,519 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:49:56,519 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:49:56,521 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:50:25,444 [http-nio-8080-exec-10] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:50:25,445 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:50:25,446 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:50:25,447 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:50:36,232 [http-nio-8080-exec-1] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:50:36,233 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:50:36,233 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:50:36,234 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:50:59,975 [http-nio-8080-exec-2] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:50:59,976 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:50:59,976 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:50:59,977 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:51:54,591 [http-nio-8080-exec-3] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:51:54,592 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:51:54,592 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:51:54,593 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:52:08,171 [http-nio-8080-exec-4] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:52:08,172 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:52:08,172 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:52:08,174 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:52:25,694 [http-nio-8080-exec-5] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:52:25,694 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:52:25,695 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:52:25,695 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:59:05,430 [http-nio-8080-exec-8] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:59:05,431 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:59:05,432 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:59:05,433 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:59:21,861 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:59:21,862 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:59:21,863 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:59:21,863 [http-nio-8080-exec-10] INFO  j.c.l.c.controller.SubCostController 81 - GetEmployeeInfoController.getEmployeeInfo:アープデート開始
+2020-07-02 15:59:21,863 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:59:21,864 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:59:21,864 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 15:59:21,865 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.updateCost 143 - ==>  Preparing: UPDATE expenses_information SET remark = ?, updateTime = NOW() WHERE employeeNo = ? 
+2020-07-02 15:59:21,865 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.updateCost 143 - ==> Parameters: remarksabc(String), LYC001(String)
+2020-07-02 15:59:21,869 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.updateCost 143 - <==    Updates: 1
+2020-07-02 15:59:31,132 [http-nio-8080-exec-1] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 15:59:31,132 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 15:59:31,133 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 15:59:31,134 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:00:09,280 [http-nio-8080-exec-2] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:00:09,282 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:00:09,283 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:00:09,284 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:00:13,951 [http-nio-8080-exec-3] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:00:13,952 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:00:13,952 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:00:13,953 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:00:22,339 [http-nio-8080-exec-4] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:00:22,339 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:00:22,340 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:00:22,341 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:00:25,348 [http-nio-8080-exec-5] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:00:25,349 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:00:25,349 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:00:25,350 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:01:08,763 [http-nio-8080-exec-6] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:01:08,764 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:01:08,764 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:01:08,766 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:01:14,264 [http-nio-8080-exec-7] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:01:14,266 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:01:14,267 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:01:14,268 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:03:27,520 [http-nio-8080-exec-9] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:03:27,521 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:03:27,521 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:03:27,522 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:03:47,411 [http-nio-8080-exec-10] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:03:47,412 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:03:47,412 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:03:47,413 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:03:57,061 [http-nio-8080-exec-1] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:03:57,062 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:03:57,062 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:03:57,063 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:04:17,929 [http-nio-8080-exec-2] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:04:17,929 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:04:17,930 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:04:17,931 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:04:25,598 [http-nio-8080-exec-3] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:04:25,598 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:04:25,599 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:04:25,600 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:04:30,523 [http-nio-8080-exec-4] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:04:30,524 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:04:30,525 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:04:30,525 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:06:44,503 [http-nio-8080-exec-6] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:06:44,504 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:06:44,504 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:06:44,505 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:06:59,608 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-07-02 16:06:59,609 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-07-02 16:06:59,609 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-07-02 16:06:59,611 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-07-02 16:06:59,611 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-07-02 16:06:59,611 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-07-02 16:06:59,611 [http-nio-8080-exec-8] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-07-02 16:06:59,612 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-07-02 16:06:59,731 [http-nio-8080-exec-10] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:06:59,731 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:06:59,731 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:06:59,732 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:08:43,786 [http-nio-8080-exec-2] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:08:43,787 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:08:43,787 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:08:43,788 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:09:19,042 [http-nio-8080-exec-3] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:09:19,043 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:09:19,044 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:09:19,045 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:09:19,250 [http-nio-8080-exec-4] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:09:19,250 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:09:19,251 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:09:19,252 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:09:28,740 [http-nio-8080-exec-5] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:09:28,740 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:09:28,741 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:09:28,742 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:09:28,861 [http-nio-8080-exec-6] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:09:28,862 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:09:28,862 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:09:28,863 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:09:57,410 [http-nio-8080-exec-7] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:09:57,411 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:09:57,412 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:09:57,413 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:09:57,554 [http-nio-8080-exec-8] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:09:57,554 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:09:57,555 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:09:57,556 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:10:16,812 [http-nio-8080-exec-9] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:10:16,813 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:10:16,813 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:10:16,814 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:10:17,081 [http-nio-8080-exec-10] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:10:17,081 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:10:17,082 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:10:17,083 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:10:27,050 [http-nio-8080-exec-1] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:10:27,051 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:10:27,051 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:10:27,052 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:10:27,231 [http-nio-8080-exec-2] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:10:27,232 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:10:27,232 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:10:27,233 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:10:29,690 [http-nio-8080-exec-3] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:10:29,691 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:10:29,691 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:10:29,692 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:10:29,926 [http-nio-8080-exec-4] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:10:29,927 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:10:29,927 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:10:29,928 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:11:42,622 [http-nio-8080-exec-6] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:11:42,623 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:11:42,624 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:11:42,624 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:11:42,746 [http-nio-8080-exec-7] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:11:42,746 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:11:42,746 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:11:42,748 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:11:50,207 [http-nio-8080-exec-8] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:11:50,207 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:11:50,208 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:11:50,209 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:11:50,316 [http-nio-8080-exec-9] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:11:50,317 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:11:50,317 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:11:50,318 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:13:21,421 [http-nio-8080-exec-1] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:13:21,422 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:13:21,422 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:13:21,423 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:13:21,498 [http-nio-8080-exec-2] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:13:21,498 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:13:21,499 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:13:21,500 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:16:30,392 [http-nio-8080-exec-4] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:16:30,393 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:16:30,393 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:16:30,394 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:16:30,476 [http-nio-8080-exec-5] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:16:30,476 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:16:30,476 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:16:30,477 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:18:29,186 [http-nio-8080-exec-7] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:18:29,187 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:18:29,188 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:18:29,189 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:18:40,724 [http-nio-8080-exec-8] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:18:40,725 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:18:40,725 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:18:40,726 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:18:57,627 [http-nio-8080-exec-9] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:18:57,627 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:18:57,628 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:18:57,629 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:19:55,193 [http-nio-8080-exec-10] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:19:55,193 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:19:55,194 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:19:55,195 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:20:10,925 [http-nio-8080-exec-1] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:20:10,926 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:20:10,927 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:20:10,929 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:20:20,494 [http-nio-8080-exec-2] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:20:20,495 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:20:20,495 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:20:20,496 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:20:31,328 [http-nio-8080-exec-3] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:20:31,329 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:20:31,329 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:20:31,330 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:20:56,454 [http-nio-8080-exec-4] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:20:56,455 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:20:56,455 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:20:56,456 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:21:07,836 [http-nio-8080-exec-5] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:21:07,837 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:21:07,837 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:21:07,838 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:21:13,924 [http-nio-8080-exec-6] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:21:13,925 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:21:13,925 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:21:13,926 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:21:24,556 [http-nio-8080-exec-7] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:21:24,557 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:21:24,557 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:21:24,558 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:21:46,015 [http-nio-8080-exec-8] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:21:46,016 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:21:46,016 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:21:46,017 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:25:37,415 [http-nio-8080-exec-10] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:25:37,416 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:25:37,417 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:25:37,418 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:29:14,160 [http-nio-8080-exec-2] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:29:14,162 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:29:14,162 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:29:14,164 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:29:32,299 [http-nio-8080-exec-3] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:29:32,300 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:29:32,300 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:29:32,301 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:30:02,944 [http-nio-8080-exec-4] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:30:02,946 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:30:02,947 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:30:02,948 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:33:24,314 [http-nio-8080-exec-6] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:33:24,316 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:33:24,316 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:33:24,317 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:33:51,659 [http-nio-8080-exec-7] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:33:51,660 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:33:51,660 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:33:51,661 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:34:06,847 [http-nio-8080-exec-8] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:34:06,848 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:34:06,848 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:34:06,849 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:34:31,087 [http-nio-8080-exec-9] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:34:31,088 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:34:31,088 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:34:31,089 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:34:54,307 [http-nio-8080-exec-10] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:34:54,307 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:34:54,308 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:34:54,309 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:35:37,377 [http-nio-8080-exec-1] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:35:37,378 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:35:37,378 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:35:37,379 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:35:51,003 [http-nio-8080-exec-2] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:35:51,004 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:35:51,004 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:35:51,005 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:35:57,198 [http-nio-8080-exec-3] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:35:57,198 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:35:57,199 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:35:57,200 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:36:36,047 [http-nio-8080-exec-4] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:36:36,047 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:36:36,048 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:36:36,048 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:37:33,759 [http-nio-8080-exec-6] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:37:33,760 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:37:33,760 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:37:33,761 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:37:44,843 [http-nio-8080-exec-7] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:37:44,844 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:37:44,845 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:37:44,846 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:38:57,338 [http-nio-8080-exec-9] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:38:57,339 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:38:57,339 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:38:57,340 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:40:08,947 [http-nio-8080-exec-1] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:40:08,948 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:40:08,948 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:40:08,949 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:40:17,410 [http-nio-8080-exec-2] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:40:17,410 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:40:17,411 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:40:17,412 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:42:01,493 [http-nio-8080-exec-4] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:42:01,493 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:42:01,494 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:42:01,495 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:42:23,142 [http-nio-8080-exec-6] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:42:23,143 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:42:23,143 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: (String)
+2020-07-02 16:42:23,144 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 0
+2020-07-02 16:43:30,089 [http-nio-8080-exec-8] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:43:30,090 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:43:30,090 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:43:30,091 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 16:45:27,646 [http-nio-8080-exec-10] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 16:45:27,647 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 16:45:27,648 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 16:45:27,649 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 17:19:57,054 [http-nio-8080-exec-3] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 17:19:57,057 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 17:19:57,058 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 17:19:57,059 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 17:20:06,265 [http-nio-8080-exec-4] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 17:20:06,265 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 17:20:06,265 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 17:20:06,266 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 17:24:12,583 [http-nio-8080-exec-6] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 17:24:12,584 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 17:24:12,584 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 17:24:12,585 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 17:24:40,820 [http-nio-8080-exec-8] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 17:24:40,822 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 17:24:40,822 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 17:24:40,823 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 17:24:52,524 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on LAPTOP-A94PII7T with PID 9456 (E:\LYC_CMS\target\classes started by Vin.Young in E:\LYC_CMS)
+2020-07-02 17:24:52,527 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2020-07-02 17:24:53,497 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2020-07-02 17:24:53,509 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2020-07-02 17:24:53,515 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2020-07-02 17:24:53,515 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2020-07-02 17:24:53,597 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2020-07-02 17:24:53,598 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 1039 ms
+2020-07-02 17:24:54,092 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2020-07-02 17:24:54,150 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2020-07-02 17:24:54,301 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2020-07-02 17:24:54,321 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2020-07-02 17:24:54,324 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 2.256 seconds (JVM running for 3.489)
+2020-07-02 17:24:57,727 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-07-02 17:24:57,728 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2020-07-02 17:24:57,733 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 5 ms
+2020-07-02 17:24:57,790 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource 110 - HikariPool-1 - Starting...
+2020-07-02 17:24:58,692 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource 123 - HikariPool-1 - Start completed.
+2020-07-02 17:24:58,698 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-02 17:24:58,717 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-02 17:24:58,738 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-02 17:25:14,221 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-02 17:25:14,227 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-02 17:25:14,274 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-02 17:25:22,504 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-02 17:25:22,519 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-02 17:25:22,637 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-02 17:26:36,108 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-02 17:26:36,115 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-02 17:26:36,200 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-02 17:27:07,963 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-02 17:27:07,995 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-02 17:27:08,224 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-02 17:27:14,265 [http-nio-8080-exec-6] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 17:27:14,342 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 17:27:14,349 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 17:27:14,557 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 17:27:29,131 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-02 17:27:29,132 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-02 17:27:29,133 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-02 17:27:54,349 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-02 17:27:54,350 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-02 17:27:54,353 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-02 17:27:54,556 [http-nio-8080-exec-9] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 17:27:54,557 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 17:27:54,558 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 17:27:54,560 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 17:27:58,776 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-02 17:27:58,777 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-02 17:27:58,778 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-02 17:28:14,876 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-02 17:28:14,876 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-02 17:28:14,878 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-02 17:28:15,021 [http-nio-8080-exec-3] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 17:28:15,023 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 17:28:15,024 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 17:28:15,027 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 17:28:23,668 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-02 17:28:23,669 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-02 17:28:23,670 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-02 17:28:23,818 [http-nio-8080-exec-5] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 17:28:23,818 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 17:28:23,819 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 17:28:23,821 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 17:37:23,264 [http-nio-8080-exec-7] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 17:37:23,266 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 17:37:23,267 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 17:37:23,269 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 17:41:52,895 [http-nio-8080-exec-9] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 17:41:52,896 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 17:41:52,897 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 17:41:52,901 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 17:41:52,936 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-02 17:41:52,937 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-02 17:41:52,938 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-02 17:42:51,305 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-02 17:42:51,306 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-02 17:42:51,308 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-02 17:42:51,497 [http-nio-8080-exec-2] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 17:42:51,498 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 17:42:51,498 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 17:42:51,500 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 17:43:20,076 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-02 17:43:20,077 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-02 17:43:20,080 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-02 17:43:20,237 [http-nio-8080-exec-4] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 17:43:20,237 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 17:43:20,238 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 17:43:20,241 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 17:43:53,786 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-02 17:43:53,787 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-02 17:43:53,788 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-02 17:43:54,027 [http-nio-8080-exec-6] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 17:43:54,027 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 17:43:54,028 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 17:43:54,030 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 17:44:24,805 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-02 17:44:24,806 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-02 17:44:24,807 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-02 17:44:25,112 [http-nio-8080-exec-8] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 17:44:25,112 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 17:44:25,113 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 17:44:25,115 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 17:44:39,351 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-02 17:44:39,352 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-02 17:44:39,353 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-02 17:44:39,489 [http-nio-8080-exec-10] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 17:44:39,489 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 17:44:39,490 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 17:44:39,492 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 17:46:24,891 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-02 17:46:24,892 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-02 17:46:24,893 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-02 17:46:25,103 [http-nio-8080-exec-3] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 17:46:25,104 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 17:46:25,104 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 17:46:25,106 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 17:46:33,879 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-02 17:46:33,879 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-02 17:46:33,880 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-02 17:46:34,105 [http-nio-8080-exec-5] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 17:46:34,109 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 17:46:34,110 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 17:46:34,112 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 17:46:51,189 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-02 17:46:51,189 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-02 17:46:51,191 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-02 17:46:51,352 [http-nio-8080-exec-7] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 17:46:51,353 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 17:46:51,354 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 17:46:51,356 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 17:47:01,596 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-02 17:47:01,597 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-02 17:47:01,598 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-02 17:47:01,803 [http-nio-8080-exec-9] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 17:47:01,803 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 17:47:01,804 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 17:47:01,805 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 17:47:08,167 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-02 17:47:08,168 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-02 17:47:08,169 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-02 17:47:08,285 [http-nio-8080-exec-1] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 17:47:08,286 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 17:47:08,287 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 17:47:08,290 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 17:48:04,316 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-02 17:48:04,317 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-02 17:48:04,318 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-02 17:48:04,452 [http-nio-8080-exec-3] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 17:48:04,453 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 17:48:04,453 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 17:48:04,455 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 17:53:41,214 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-02 17:53:41,214 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-02 17:53:41,216 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-02 17:53:41,426 [http-nio-8080-exec-7] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 17:53:41,427 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 17:53:41,427 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 17:53:41,429 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 17:54:03,304 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-02 17:54:03,304 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-02 17:54:03,305 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-02 17:54:03,474 [http-nio-8080-exec-9] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 17:54:03,474 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 17:54:03,475 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 17:54:03,477 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 17:55:13,223 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-02 17:55:13,223 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-02 17:55:13,225 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-02 17:55:13,398 [http-nio-8080-exec-2] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 17:55:13,399 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 17:55:13,400 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 17:55:13,401 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 17:59:05,776 [http-nio-8080-exec-4] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 17:59:05,776 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-02 17:59:05,777 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-02 17:59:05,779 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-02 17:59:05,782 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 17:59:05,784 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 17:59:05,786 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-02 17:59:05,866 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-02 17:59:05,867 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-02 17:59:05,868 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-02 18:00:04,931 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-07-02 18:00:04,932 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-07-02 18:00:04,933 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-07-02 18:00:04,934 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-07-02 18:00:04,938 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-07-02 18:00:04,939 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-07-02 18:00:04,939 [http-nio-8080-exec-8] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-07-02 18:00:04,939 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-07-02 18:00:05,032 [http-nio-8080-exec-9] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-07-02 18:00:05,032 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-02 18:00:05,033 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-02 18:00:05,033 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-02 18:00:05,033 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-02 18:00:05,033 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-02 18:00:05,035 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jp.co.lyc.cms.mapper.TopCustomerInfoMapper">
+    <resultMap id="TopCustomerNoSaiBan" type="java.lang.String"/>
+    <resultMap id="TopCustomerInfo" type="jp.co.lyc.cms.model.TopCustomerInfoModel"/>
+    <select id="TopCustomerNoSaiBan" resultMap="TopCustomerNoSaiBan">
+        SELECT 
+        	MAX(TopCustomerNo) AS TopCustomerNoSaiBan
+        FROM 
+        	top_customer
+    </select>
+    <select id="selectTopCustomerInfo" resultMap="TopCustomerInfo" parameterType="String">
+        SELECT 
+        	*
+        FROM 
+        	top_customer
+        WHERE
+        	TopCustomerNo = #{topCustomerNo}
+    </select>
+    <insert id="insertTopCustomerInfo" parameterType="String">
+		INSERT INTO top_customer 
+		VALUE(
+		#{topCustomerNo},
+		#{topCustomerName},
+		#{url},
+		#{remark},
+		NOW(),
+		NOW(),
+		#{updateUser})
+    </insert>
+    <update id="updateTopCustomerInfo" parameterType="String">
+		UPDATE customer_information
+		SET 
+		<if test="TopCustomerName != null">
+			TopCustomerName = #{topCustomerName},
+		</if>
+		<if test="url != null">
+			url = #{url},
+		</if>	
+		<if test="remark != null">
+			remark = #{remark},
+		</if>			
+		updateTime = NOW(),
+		updateUser = #{updateUser}
+		WHERE 
+			TopCustomerNo = #{topCustomerNo}
+    </update> 
+</mapper>

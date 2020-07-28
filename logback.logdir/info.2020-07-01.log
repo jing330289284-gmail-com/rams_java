@@ -1,0 +1,161 @@
+2020-07-01 13:56:43,944 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on LAPTOP-A94PII7T with PID 14276 (E:\LYC_CMS\target\classes started by Vin.Young in E:\LYC_CMS)
+2020-07-01 13:56:43,949 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2020-07-01 13:56:45,531 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2020-07-01 13:56:45,545 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2020-07-01 13:56:45,552 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2020-07-01 13:56:45,552 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2020-07-01 13:56:45,641 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2020-07-01 13:56:45,641 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 1647 ms
+2020-07-01 13:56:46,233 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2020-07-01 13:56:46,291 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2020-07-01 13:56:46,455 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2020-07-01 13:56:46,483 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2020-07-01 13:56:46,487 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 3.206 seconds (JVM running for 4.92)
+2020-07-01 13:56:52,606 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-07-01 13:56:52,606 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2020-07-01 13:56:52,612 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 6 ms
+2020-07-01 13:56:52,732 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-07-01 13:56:52,752 [http-nio-8080-exec-2] INFO  com.zaxxer.hikari.HikariDataSource 110 - HikariPool-1 - Starting...
+2020-07-01 13:56:53,684 [http-nio-8080-exec-2] INFO  com.zaxxer.hikari.HikariDataSource 123 - HikariPool-1 - Start completed.
+2020-07-01 13:56:53,692 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-07-01 13:56:53,714 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-07-01 13:56:53,752 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-07-01 13:56:53,759 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-07-01 13:56:53,759 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-07-01 13:56:53,760 [http-nio-8080-exec-2] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-07-01 13:56:53,762 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-07-01 13:57:21,270 [http-nio-8080-exec-4] INFO  j.c.l.c.c.GetEmployeeInfoController 38 - GetEmployeeInfoController.getEmployeeInfo:検索開始
+2020-07-01 13:57:21,289 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - ==>  Preparing: SELECT (@rowNo := @rowNo + 1) AS rowNo, a.employeeNo, a.employeeFristName, a.employeeLastName, c.joinCompanyOfYear, c.joinCompanyOfMonth, c.salary, e.nearestStation, d.Customer, c.phoneNo, a.authorityCode, b.authorityProperty, c.genderCode, c.age, c.BirthplaceOfcontroy FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo LEFT JOIN onsite_info d ON a.employeeNo = d.employeeNo LEFT JOIN address_information e ON a.employeeNo = e.employeeNo,(SELECT @rowNo := 0) AS rowNo WHERE 1=1 ORDER BY a.employeeNo DESC 
+2020-07-01 13:57:21,289 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - ==> Parameters: 
+2020-07-01 13:57:21,299 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - <==      Total: 4
+2020-07-01 13:57:21,299 [http-nio-8080-exec-4] INFO  j.c.l.c.c.GetEmployeeInfoController 157 - GetEmployeeInfoController.getEmployeeInfo:検索結束
+2020-07-01 13:58:49,632 [http-nio-8080-exec-6] INFO  j.c.l.c.c.GetEmployeeInfoController 38 - GetEmployeeInfoController.getEmployeeInfo:検索開始
+2020-07-01 13:58:49,633 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - ==>  Preparing: SELECT (@rowNo := @rowNo + 1) AS rowNo, a.employeeNo, a.employeeFristName, a.employeeLastName, c.joinCompanyOfYear, c.joinCompanyOfMonth, c.salary, e.nearestStation, d.Customer, c.phoneNo, a.authorityCode, b.authorityProperty, c.genderCode, c.age, c.BirthplaceOfcontroy FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo LEFT JOIN onsite_info d ON a.employeeNo = d.employeeNo LEFT JOIN address_information e ON a.employeeNo = e.employeeNo,(SELECT @rowNo := 0) AS rowNo WHERE 1=1 AND a.employeeNo = ? ORDER BY a.employeeNo DESC 
+2020-07-01 13:58:49,633 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - ==> Parameters: LYC001(String)
+2020-07-01 13:58:49,635 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - <==      Total: 1
+2020-07-01 13:58:49,635 [http-nio-8080-exec-6] INFO  j.c.l.c.c.GetEmployeeInfoController 157 - GetEmployeeInfoController.getEmployeeInfo:検索結束
+2020-07-01 14:32:08,036 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-07-01 14:32:08,038 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-07-01 14:32:08,039 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-07-01 14:32:08,041 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-07-01 14:32:08,041 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-07-01 14:32:08,041 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-07-01 14:32:08,042 [http-nio-8080-exec-9] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-07-01 14:32:08,042 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-07-01 14:57:13,141 [http-nio-8080-exec-2] INFO  j.c.l.c.c.GetEmployeeInfoController 38 - GetEmployeeInfoController.getEmployeeInfo:検索開始
+2020-07-01 14:57:13,142 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - ==>  Preparing: SELECT (@rowNo := @rowNo + 1) AS rowNo, a.employeeNo, a.employeeFristName, a.employeeLastName, c.joinCompanyOfYear, c.joinCompanyOfMonth, c.salary, e.nearestStation, d.Customer, c.phoneNo, a.authorityCode, b.authorityProperty, c.genderCode, c.age, c.BirthplaceOfcontroy FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo LEFT JOIN onsite_info d ON a.employeeNo = d.employeeNo LEFT JOIN address_information e ON a.employeeNo = e.employeeNo,(SELECT @rowNo := 0) AS rowNo WHERE 1=1 ORDER BY a.employeeNo DESC 
+2020-07-01 14:57:13,143 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - ==> Parameters: 
+2020-07-01 14:57:13,146 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - <==      Total: 4
+2020-07-01 14:57:13,146 [http-nio-8080-exec-2] INFO  j.c.l.c.c.GetEmployeeInfoController 157 - GetEmployeeInfoController.getEmployeeInfo:検索結束
+2020-07-01 15:00:21,037 [http-nio-8080-exec-4] INFO  j.c.l.c.c.GetEmployeeInfoController 38 - GetEmployeeInfoController.getEmployeeInfo:検索開始
+2020-07-01 15:00:21,039 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - ==>  Preparing: SELECT (@rowNo := @rowNo + 1) AS rowNo, a.employeeNo, a.employeeFristName, a.employeeLastName, c.joinCompanyOfYear, c.joinCompanyOfMonth, c.salary, e.nearestStation, d.Customer, c.phoneNo, a.authorityCode, b.authorityProperty, c.genderCode, c.age, c.BirthplaceOfcontroy FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo LEFT JOIN onsite_info d ON a.employeeNo = d.employeeNo LEFT JOIN address_information e ON a.employeeNo = e.employeeNo,(SELECT @rowNo := 0) AS rowNo WHERE 1=1 ORDER BY a.employeeNo DESC 
+2020-07-01 15:00:21,040 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - ==> Parameters: 
+2020-07-01 15:00:21,043 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - <==      Total: 4
+2020-07-01 15:00:21,044 [http-nio-8080-exec-4] INFO  j.c.l.c.c.GetEmployeeInfoController 157 - GetEmployeeInfoController.getEmployeeInfo:検索結束
+2020-07-01 15:04:52,416 [http-nio-8080-exec-6] INFO  j.c.l.c.c.GetEmployeeInfoController 38 - GetEmployeeInfoController.getEmployeeInfo:検索開始
+2020-07-01 15:04:52,417 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - ==>  Preparing: SELECT (@rowNo := @rowNo + 1) AS rowNo, a.employeeNo, a.employeeFristName, a.employeeLastName, c.joinCompanyOfYear, c.joinCompanyOfMonth, c.salary, e.nearestStation, d.Customer, c.phoneNo, a.authorityCode, b.authorityProperty, c.genderCode, c.age, c.BirthplaceOfcontroy FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo LEFT JOIN onsite_info d ON a.employeeNo = d.employeeNo LEFT JOIN address_information e ON a.employeeNo = e.employeeNo,(SELECT @rowNo := 0) AS rowNo WHERE 1=1 ORDER BY a.employeeNo DESC 
+2020-07-01 15:04:52,417 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - ==> Parameters: 
+2020-07-01 15:04:52,420 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - <==      Total: 4
+2020-07-01 15:04:52,420 [http-nio-8080-exec-6] INFO  j.c.l.c.c.GetEmployeeInfoController 157 - GetEmployeeInfoController.getEmployeeInfo:検索結束
+2020-07-01 15:08:31,170 [http-nio-8080-exec-8] INFO  j.c.l.c.c.GetEmployeeInfoController 38 - GetEmployeeInfoController.getEmployeeInfo:検索開始
+2020-07-01 15:08:31,171 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - ==>  Preparing: SELECT (@rowNo := @rowNo + 1) AS rowNo, a.employeeNo, a.employeeFristName, a.employeeLastName, c.joinCompanyOfYear, c.joinCompanyOfMonth, c.salary, e.nearestStation, d.Customer, c.phoneNo, a.authorityCode, b.authorityProperty, c.genderCode, c.age, c.BirthplaceOfcontroy FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo LEFT JOIN onsite_info d ON a.employeeNo = d.employeeNo LEFT JOIN address_information e ON a.employeeNo = e.employeeNo,(SELECT @rowNo := 0) AS rowNo WHERE 1=1 ORDER BY a.employeeNo DESC 
+2020-07-01 15:08:31,171 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - ==> Parameters: 
+2020-07-01 15:08:31,174 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - <==      Total: 4
+2020-07-01 15:08:31,174 [http-nio-8080-exec-8] INFO  j.c.l.c.c.GetEmployeeInfoController 157 - GetEmployeeInfoController.getEmployeeInfo:検索結束
+2020-07-01 15:20:30,433 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-07-01 15:20:30,434 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-07-01 15:20:30,435 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-07-01 15:20:30,436 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-07-01 15:20:30,436 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-07-01 15:20:30,436 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-07-01 15:20:30,436 [http-nio-8080-exec-1] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-07-01 15:20:30,437 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-07-01 15:29:07,268 [http-nio-8080-exec-4] INFO  j.c.l.c.c.GetEmployeeInfoController 38 - GetEmployeeInfoController.getEmployeeInfo:検索開始
+2020-07-01 15:29:07,271 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - ==>  Preparing: SELECT (@rowNo := @rowNo + 1) AS rowNo, a.employeeNo, a.employeeFristName, a.employeeLastName, c.joinCompanyOfYear, c.joinCompanyOfMonth, c.salary, e.nearestStation, d.Customer, c.phoneNo, a.authorityCode, b.authorityProperty, c.genderCode, c.age, c.BirthplaceOfcontroy FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo LEFT JOIN onsite_info d ON a.employeeNo = d.employeeNo LEFT JOIN address_information e ON a.employeeNo = e.employeeNo,(SELECT @rowNo := 0) AS rowNo WHERE 1=1 ORDER BY a.employeeNo DESC 
+2020-07-01 15:29:07,271 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - ==> Parameters: 
+2020-07-01 15:29:07,273 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - <==      Total: 4
+2020-07-01 15:29:07,274 [http-nio-8080-exec-4] INFO  j.c.l.c.c.GetEmployeeInfoController 157 - GetEmployeeInfoController.getEmployeeInfo:検索結束
+2020-07-01 15:55:07,417 [http-nio-8080-exec-6] INFO  j.c.l.c.c.GetEmployeeInfoController 38 - GetEmployeeInfoController.getEmployeeInfo:検索開始
+2020-07-01 15:55:07,419 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - ==>  Preparing: SELECT (@rowNo := @rowNo + 1) AS rowNo, a.employeeNo, a.employeeFristName, a.employeeLastName, c.joinCompanyOfYear, c.joinCompanyOfMonth, c.salary, e.nearestStation, d.Customer, c.phoneNo, a.authorityCode, b.authorityProperty, c.genderCode, c.age, c.BirthplaceOfcontroy FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo LEFT JOIN onsite_info d ON a.employeeNo = d.employeeNo LEFT JOIN address_information e ON a.employeeNo = e.employeeNo,(SELECT @rowNo := 0) AS rowNo WHERE 1=1 ORDER BY a.employeeNo DESC 
+2020-07-01 15:55:07,419 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - ==> Parameters: 
+2020-07-01 15:55:07,421 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - <==      Total: 4
+2020-07-01 15:55:07,422 [http-nio-8080-exec-6] INFO  j.c.l.c.c.GetEmployeeInfoController 157 - GetEmployeeInfoController.getEmployeeInfo:検索結束
+2020-07-01 16:07:21,381 [http-nio-8080-exec-9] INFO  j.c.l.c.c.GetEmployeeInfoController 38 - GetEmployeeInfoController.getEmployeeInfo:検索開始
+2020-07-01 16:07:21,383 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - ==>  Preparing: SELECT (@rowNo := @rowNo + 1) AS rowNo, a.employeeNo, a.employeeFristName, a.employeeLastName, c.joinCompanyOfYear, c.joinCompanyOfMonth, c.salary, e.nearestStation, d.Customer, c.phoneNo, a.authorityCode, b.authorityProperty, c.genderCode, c.age, c.BirthplaceOfcontroy FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo LEFT JOIN onsite_info d ON a.employeeNo = d.employeeNo LEFT JOIN address_information e ON a.employeeNo = e.employeeNo,(SELECT @rowNo := 0) AS rowNo WHERE 1=1 ORDER BY a.employeeNo DESC 
+2020-07-01 16:07:21,383 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - ==> Parameters: 
+2020-07-01 16:07:21,386 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - <==      Total: 4
+2020-07-01 16:07:21,387 [http-nio-8080-exec-9] INFO  j.c.l.c.c.GetEmployeeInfoController 157 - GetEmployeeInfoController.getEmployeeInfo:検索結束
+2020-07-01 16:07:22,673 [http-nio-8080-exec-10] INFO  j.c.l.c.c.GetEmployeeInfoController 38 - GetEmployeeInfoController.getEmployeeInfo:検索開始
+2020-07-01 16:07:22,674 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - ==>  Preparing: SELECT (@rowNo := @rowNo + 1) AS rowNo, a.employeeNo, a.employeeFristName, a.employeeLastName, c.joinCompanyOfYear, c.joinCompanyOfMonth, c.salary, e.nearestStation, d.Customer, c.phoneNo, a.authorityCode, b.authorityProperty, c.genderCode, c.age, c.BirthplaceOfcontroy FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo LEFT JOIN onsite_info d ON a.employeeNo = d.employeeNo LEFT JOIN address_information e ON a.employeeNo = e.employeeNo,(SELECT @rowNo := 0) AS rowNo WHERE 1=1 ORDER BY a.employeeNo DESC 
+2020-07-01 16:07:22,674 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - ==> Parameters: 
+2020-07-01 16:07:22,676 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - <==      Total: 4
+2020-07-01 16:07:22,676 [http-nio-8080-exec-10] INFO  j.c.l.c.c.GetEmployeeInfoController 157 - GetEmployeeInfoController.getEmployeeInfo:検索結束
+2020-07-01 16:26:28,372 [http-nio-8080-exec-2] INFO  j.c.l.c.c.GetEmployeeInfoController 38 - GetEmployeeInfoController.getEmployeeInfo:検索開始
+2020-07-01 16:26:28,375 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - ==>  Preparing: SELECT (@rowNo := @rowNo + 1) AS rowNo, a.employeeNo, a.employeeFristName, a.employeeLastName, c.joinCompanyOfYear, c.joinCompanyOfMonth, c.salary, e.nearestStation, d.Customer, c.phoneNo, a.authorityCode, b.authorityProperty, c.genderCode, c.age, c.BirthplaceOfcontroy FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo LEFT JOIN onsite_info d ON a.employeeNo = d.employeeNo LEFT JOIN address_information e ON a.employeeNo = e.employeeNo,(SELECT @rowNo := 0) AS rowNo WHERE 1=1 ORDER BY a.employeeNo DESC 
+2020-07-01 16:26:28,375 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - ==> Parameters: 
+2020-07-01 16:26:28,377 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - <==      Total: 4
+2020-07-01 16:26:28,378 [http-nio-8080-exec-2] INFO  j.c.l.c.c.GetEmployeeInfoController 157 - GetEmployeeInfoController.getEmployeeInfo:検索結束
+2020-07-01 17:25:33,568 [http-nio-8080-exec-5] INFO  j.c.l.c.c.GetEmployeeInfoController 38 - GetEmployeeInfoController.getEmployeeInfo:検索開始
+2020-07-01 17:25:33,571 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - ==>  Preparing: SELECT (@rowNo := @rowNo + 1) AS rowNo, a.employeeNo, a.employeeFristName, a.employeeLastName, c.joinCompanyOfYear, c.joinCompanyOfMonth, c.salary, e.nearestStation, d.Customer, c.phoneNo, a.authorityCode, b.authorityProperty, c.genderCode, c.age, c.BirthplaceOfcontroy FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo LEFT JOIN onsite_info d ON a.employeeNo = d.employeeNo LEFT JOIN address_information e ON a.employeeNo = e.employeeNo,(SELECT @rowNo := 0) AS rowNo WHERE 1=1 ORDER BY a.employeeNo DESC 
+2020-07-01 17:25:33,572 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - ==> Parameters: 
+2020-07-01 17:25:33,574 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - <==      Total: 4
+2020-07-01 17:25:33,574 [http-nio-8080-exec-5] INFO  j.c.l.c.c.GetEmployeeInfoController 157 - GetEmployeeInfoController.getEmployeeInfo:検索結束
+2020-07-01 18:26:16,724 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-07-01 18:26:16,725 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-07-01 18:26:16,726 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-07-01 18:26:16,728 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-07-01 18:26:16,729 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-07-01 18:26:16,729 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-07-01 18:26:16,729 [http-nio-8080-exec-8] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-07-01 18:26:16,730 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-07-01 21:15:36,432 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-07-01 21:15:36,434 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-07-01 21:15:36,435 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-07-01 21:15:36,436 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-07-01 21:15:36,437 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-07-01 21:15:36,437 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-07-01 21:15:36,437 [http-nio-8080-exec-1] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-07-01 21:15:36,438 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-07-01 21:17:00,153 [http-nio-8080-exec-4] INFO  j.c.l.c.c.GetEmployeeInfoController 38 - GetEmployeeInfoController.getEmployeeInfo:検索開始
+2020-07-01 21:17:00,154 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - ==>  Preparing: SELECT (@rowNo := @rowNo + 1) AS rowNo, a.employeeNo, a.employeeFristName, a.employeeLastName, c.joinCompanyOfYear, c.joinCompanyOfMonth, c.salary, e.nearestStation, d.Customer, c.phoneNo, a.authorityCode, b.authorityProperty, c.genderCode, c.age, c.BirthplaceOfcontroy FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo LEFT JOIN onsite_info d ON a.employeeNo = d.employeeNo LEFT JOIN address_information e ON a.employeeNo = e.employeeNo,(SELECT @rowNo := 0) AS rowNo WHERE 1=1 ORDER BY a.employeeNo DESC 
+2020-07-01 21:17:00,154 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - ==> Parameters: 
+2020-07-01 21:17:00,156 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - <==      Total: 4
+2020-07-01 21:17:00,157 [http-nio-8080-exec-4] INFO  j.c.l.c.c.GetEmployeeInfoController 157 - GetEmployeeInfoController.getEmployeeInfo:検索結束
+2020-07-01 21:17:33,455 [http-nio-8080-exec-5] INFO  j.c.l.c.c.GetEmployeeInfoController 38 - GetEmployeeInfoController.getEmployeeInfo:検索開始
+2020-07-01 21:17:33,456 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - ==>  Preparing: SELECT (@rowNo := @rowNo + 1) AS rowNo, a.employeeNo, a.employeeFristName, a.employeeLastName, c.joinCompanyOfYear, c.joinCompanyOfMonth, c.salary, e.nearestStation, d.Customer, c.phoneNo, a.authorityCode, b.authorityProperty, c.genderCode, c.age, c.BirthplaceOfcontroy FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo LEFT JOIN onsite_info d ON a.employeeNo = d.employeeNo LEFT JOIN address_information e ON a.employeeNo = e.employeeNo,(SELECT @rowNo := 0) AS rowNo WHERE 1=1 ORDER BY a.employeeNo DESC 
+2020-07-01 21:17:33,456 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - ==> Parameters: 
+2020-07-01 21:17:33,458 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - <==      Total: 4
+2020-07-01 21:17:33,458 [http-nio-8080-exec-5] INFO  j.c.l.c.c.GetEmployeeInfoController 157 - GetEmployeeInfoController.getEmployeeInfo:検索結束
+2020-07-01 21:17:59,444 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-07-01 21:17:59,445 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-07-01 21:17:59,446 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 2(String), LYC001(String)
+2020-07-01 21:17:59,447 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 0
+2020-07-01 21:18:02,631 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-07-01 21:18:02,632 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-07-01 21:18:02,633 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-07-01 21:18:02,633 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-07-01 21:18:02,634 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-07-01 21:18:02,634 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-07-01 21:18:02,634 [http-nio-8080-exec-8] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-07-01 21:18:02,635 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-07-01 21:18:19,384 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-07-01 21:18:19,385 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-07-01 21:18:19,386 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-07-01 21:18:19,387 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-07-01 21:18:19,389 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-07-01 21:18:19,390 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-07-01 21:18:19,390 [http-nio-8080-exec-9] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-07-01 21:18:19,394 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-07-01 21:20:12,007 [http-nio-8080-exec-2] INFO  j.c.l.c.c.GetEmployeeInfoController 38 - GetEmployeeInfoController.getEmployeeInfo:検索開始
+2020-07-01 21:20:12,008 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - ==>  Preparing: SELECT (@rowNo := @rowNo + 1) AS rowNo, a.employeeNo, a.employeeFristName, a.employeeLastName, c.joinCompanyOfYear, c.joinCompanyOfMonth, c.salary, e.nearestStation, d.Customer, c.phoneNo, a.authorityCode, b.authorityProperty, c.genderCode, c.age, c.BirthplaceOfcontroy FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo LEFT JOIN onsite_info d ON a.employeeNo = d.employeeNo LEFT JOIN address_information e ON a.employeeNo = e.employeeNo,(SELECT @rowNo := 0) AS rowNo WHERE 1=1 ORDER BY a.employeeNo DESC 
+2020-07-01 21:20:12,008 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - ==> Parameters: 
+2020-07-01 21:20:12,010 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - <==      Total: 4
+2020-07-01 21:20:12,010 [http-nio-8080-exec-2] INFO  j.c.l.c.c.GetEmployeeInfoController 157 - GetEmployeeInfoController.getEmployeeInfo:検索結束
+2020-07-01 21:41:23,786 [http-nio-8080-exec-4] INFO  j.c.l.c.c.GetEmployeeInfoController 38 - GetEmployeeInfoController.getEmployeeInfo:検索開始
+2020-07-01 21:41:23,789 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - ==>  Preparing: SELECT (@rowNo := @rowNo + 1) AS rowNo, a.employeeNo, a.employeeFristName, a.employeeLastName, c.joinCompanyOfYear, c.joinCompanyOfMonth, c.salary, e.nearestStation, d.Customer, c.phoneNo, a.authorityCode, b.authorityProperty, c.genderCode, c.age, c.BirthplaceOfcontroy FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo LEFT JOIN onsite_info d ON a.employeeNo = d.employeeNo LEFT JOIN address_information e ON a.employeeNo = e.employeeNo,(SELECT @rowNo := 0) AS rowNo WHERE 1=1 ORDER BY a.employeeNo DESC 
+2020-07-01 21:41:23,789 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - ==> Parameters: 
+2020-07-01 21:41:23,792 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - <==      Total: 4
+2020-07-01 21:41:23,792 [http-nio-8080-exec-4] INFO  j.c.l.c.c.GetEmployeeInfoController 157 - GetEmployeeInfoController.getEmployeeInfo:検索結束
+2020-07-01 21:41:38,591 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-01 21:41:38,591 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-01 21:41:38,600 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1

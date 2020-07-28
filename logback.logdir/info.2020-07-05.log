@@ -1,0 +1,711 @@
+2020-07-05 13:58:10,381 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on LAPTOP-A94PII7T with PID 14672 (E:\LYC_CMS\target\classes started by Vin.Young in E:\LYC_CMS)
+2020-07-05 13:58:10,386 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2020-07-05 13:58:11,407 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2020-07-05 13:58:11,420 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2020-07-05 13:58:11,426 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2020-07-05 13:58:11,426 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2020-07-05 13:58:11,508 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2020-07-05 13:58:11,509 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 1086 ms
+2020-07-05 13:58:12,027 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2020-07-05 13:58:12,118 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2020-07-05 13:58:12,314 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2020-07-05 13:58:12,345 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2020-07-05 13:58:12,351 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 2.446 seconds (JVM running for 3.84)
+2020-07-05 13:58:16,825 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-07-05 13:58:16,825 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2020-07-05 13:58:16,831 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 6 ms
+2020-07-05 13:58:16,948 [http-nio-8080-exec-3] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-07-05 13:58:16,968 [http-nio-8080-exec-3] INFO  com.zaxxer.hikari.HikariDataSource 110 - HikariPool-1 - Starting...
+2020-07-05 13:58:17,092 [http-nio-8080-exec-3] INFO  com.zaxxer.hikari.HikariDataSource 123 - HikariPool-1 - Start completed.
+2020-07-05 13:58:17,099 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-07-05 13:58:17,121 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-07-05 13:58:17,144 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-07-05 13:58:17,152 [http-nio-8080-exec-3] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-07-05 13:58:17,153 [http-nio-8080-exec-3] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-07-05 13:58:17,153 [http-nio-8080-exec-3] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-07-05 13:58:17,155 [http-nio-8080-exec-3] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-07-05 13:58:17,325 [http-nio-8080-exec-5] INFO  j.c.l.c.c.BankInfoController 34 - BankInfoController.getBankInfo:検索開始
+2020-07-05 13:58:17,326 [http-nio-8080-exec-5] INFO  j.c.l.c.c.BankInfoController 121 - BankInfoController.selectBankInfo:查询開始
+2020-07-05 13:58:17,327 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==>  Preparing: SELECT ACI.* , BBM.bankBranchName FROM account_information AS ACI LEFT JOIN bank_barnch_master as BBM ON ACI.bankCode = BBM.bankCode AND ACI.bankBranchCode = BBM.bankBranchCode WHERE employeeNo=? 
+2020-07-05 13:58:17,327 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==> Parameters: LYC001(String)
+2020-07-05 13:58:17,330 [http-nio-8080-exec-4] INFO  j.c.l.c.controller.SubCostController 52 - LoginController.login:查询开始
+2020-07-05 13:58:17,330 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - <==      Total: 1
+2020-07-05 13:58:17,331 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-05 13:58:17,331 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-05 13:58:17,331 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-05 13:58:17,332 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-05 13:58:17,335 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-05 13:58:17,336 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-05 14:11:39,851 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-07-05 14:11:39,854 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-07-05 14:11:39,855 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-07-05 14:11:39,858 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-07-05 14:11:39,859 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-07-05 14:11:39,859 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-07-05 14:11:39,859 [http-nio-8080-exec-8] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-07-05 14:11:39,860 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-07-05 14:11:40,000 [http-nio-8080-exec-2] INFO  j.c.l.c.controller.SubCostController 52 - LoginController.login:查询开始
+2020-07-05 14:11:40,000 [http-nio-8080-exec-6] INFO  j.c.l.c.c.BankInfoController 34 - BankInfoController.getBankInfo:検索開始
+2020-07-05 14:11:40,001 [http-nio-8080-exec-6] INFO  j.c.l.c.c.BankInfoController 121 - BankInfoController.selectBankInfo:查询開始
+2020-07-05 14:11:40,001 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-05 14:11:40,001 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: (String)
+2020-07-05 14:11:40,002 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==>  Preparing: SELECT ACI.* , BBM.bankBranchName FROM account_information AS ACI LEFT JOIN bank_barnch_master as BBM ON ACI.bankCode = BBM.bankCode AND ACI.bankBranchCode = BBM.bankBranchCode WHERE employeeNo=? 
+2020-07-05 14:11:40,002 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==> Parameters: (String)
+2020-07-05 14:11:40,003 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 0
+2020-07-05 14:11:40,004 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - <==      Total: 0
+2020-07-05 14:11:40,004 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-05 14:11:40,005 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-05 14:11:40,008 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-05 14:12:06,887 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-07-05 14:12:06,888 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-07-05 14:12:06,888 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-07-05 14:12:06,889 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-07-05 14:12:06,890 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-07-05 14:12:06,890 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-07-05 14:12:06,890 [http-nio-8080-exec-5] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-07-05 14:12:06,890 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-07-05 14:12:06,997 [http-nio-8080-exec-4] INFO  j.c.l.c.controller.SubCostController 52 - LoginController.login:查询开始
+2020-07-05 14:12:06,997 [http-nio-8080-exec-7] INFO  j.c.l.c.c.BankInfoController 34 - BankInfoController.getBankInfo:検索開始
+2020-07-05 14:12:06,998 [http-nio-8080-exec-7] INFO  j.c.l.c.c.BankInfoController 121 - BankInfoController.selectBankInfo:查询開始
+2020-07-05 14:12:06,998 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-05 14:12:06,999 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==>  Preparing: SELECT ACI.* , BBM.bankBranchName FROM account_information AS ACI LEFT JOIN bank_barnch_master as BBM ON ACI.bankCode = BBM.bankCode AND ACI.bankBranchCode = BBM.bankBranchCode WHERE employeeNo=? 
+2020-07-05 14:12:06,999 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==> Parameters: LYC001(String)
+2020-07-05 14:12:06,999 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-05 14:12:07,001 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - <==      Total: 1
+2020-07-05 14:12:07,001 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-05 14:12:07,002 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-05 14:12:07,002 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-05 14:12:07,004 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-05 14:12:27,838 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-07-05 14:12:27,838 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-07-05 14:12:27,839 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-07-05 14:12:27,840 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-07-05 14:12:27,840 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-07-05 14:12:27,840 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-07-05 14:12:27,841 [http-nio-8080-exec-1] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-07-05 14:12:27,841 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-07-05 14:12:27,977 [http-nio-8080-exec-6] INFO  j.c.l.c.controller.SubCostController 52 - LoginController.login:查询开始
+2020-07-05 14:12:27,977 [http-nio-8080-exec-5] INFO  j.c.l.c.c.BankInfoController 34 - BankInfoController.getBankInfo:検索開始
+2020-07-05 14:12:27,978 [http-nio-8080-exec-5] INFO  j.c.l.c.c.BankInfoController 121 - BankInfoController.selectBankInfo:查询開始
+2020-07-05 14:12:27,982 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-05 14:12:27,982 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==>  Preparing: SELECT ACI.* , BBM.bankBranchName FROM account_information AS ACI LEFT JOIN bank_barnch_master as BBM ON ACI.bankCode = BBM.bankCode AND ACI.bankBranchCode = BBM.bankBranchCode WHERE employeeNo=? 
+2020-07-05 14:12:27,982 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: (String)
+2020-07-05 14:12:27,983 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==> Parameters: (String)
+2020-07-05 14:12:27,984 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 0
+2020-07-05 14:12:27,984 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - <==      Total: 0
+2020-07-05 14:12:27,985 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-05 14:12:27,986 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-05 14:12:27,988 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-05 14:13:19,601 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-07-05 14:13:19,602 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-07-05 14:13:19,602 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-07-05 14:13:19,604 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-07-05 14:13:19,604 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-07-05 14:13:19,605 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-07-05 14:13:19,605 [http-nio-8080-exec-4] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-07-05 14:13:19,605 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-07-05 14:13:19,713 [http-nio-8080-exec-7] INFO  j.c.l.c.controller.SubCostController 52 - LoginController.login:查询开始
+2020-07-05 14:13:19,714 [http-nio-8080-exec-9] INFO  j.c.l.c.c.BankInfoController 34 - BankInfoController.getBankInfo:検索開始
+2020-07-05 14:13:19,714 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-05 14:13:19,715 [http-nio-8080-exec-9] INFO  j.c.l.c.c.BankInfoController 121 - BankInfoController.selectBankInfo:查询開始
+2020-07-05 14:13:19,715 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: (String)
+2020-07-05 14:13:19,715 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==>  Preparing: SELECT ACI.* , BBM.bankBranchName FROM account_information AS ACI LEFT JOIN bank_barnch_master as BBM ON ACI.bankCode = BBM.bankCode AND ACI.bankBranchCode = BBM.bankBranchCode WHERE employeeNo=? 
+2020-07-05 14:13:19,715 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==> Parameters: (String)
+2020-07-05 14:13:19,715 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 0
+2020-07-05 14:13:19,716 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - <==      Total: 0
+2020-07-05 14:13:19,717 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-05 14:13:19,718 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-05 14:13:19,719 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-05 14:13:50,900 [http-nio-8080-exec-10] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-07-05 14:13:50,901 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-07-05 14:13:50,901 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-07-05 14:13:50,902 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-07-05 14:13:50,903 [http-nio-8080-exec-10] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-07-05 14:13:50,903 [http-nio-8080-exec-10] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-07-05 14:13:50,903 [http-nio-8080-exec-10] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-07-05 14:13:50,904 [http-nio-8080-exec-10] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-07-05 14:13:57,246 [http-nio-8080-exec-8] INFO  j.c.l.c.controller.SubCostController 52 - LoginController.login:查询开始
+2020-07-05 14:13:57,246 [http-nio-8080-exec-1] INFO  j.c.l.c.c.BankInfoController 34 - BankInfoController.getBankInfo:検索開始
+2020-07-05 14:13:57,246 [http-nio-8080-exec-1] INFO  j.c.l.c.c.BankInfoController 121 - BankInfoController.selectBankInfo:查询開始
+2020-07-05 14:13:57,247 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-05 14:13:57,247 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==>  Preparing: SELECT ACI.* , BBM.bankBranchName FROM account_information AS ACI LEFT JOIN bank_barnch_master as BBM ON ACI.bankCode = BBM.bankCode AND ACI.bankBranchCode = BBM.bankBranchCode WHERE employeeNo=? 
+2020-07-05 14:13:57,247 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: (String)
+2020-07-05 14:13:57,247 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==> Parameters: (String)
+2020-07-05 14:13:57,248 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 0
+2020-07-05 14:13:57,248 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - <==      Total: 0
+2020-07-05 14:13:57,249 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-05 14:13:57,249 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-05 14:13:57,251 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-05 14:17:46,029 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-07-05 14:17:46,030 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-07-05 14:17:46,030 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-07-05 14:17:46,032 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-07-05 14:17:46,032 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-07-05 14:17:46,032 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-07-05 14:17:46,032 [http-nio-8080-exec-2] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-07-05 14:17:46,033 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-07-05 14:17:55,533 [http-nio-8080-exec-6] INFO  j.c.l.c.controller.SubCostController 52 - LoginController.login:查询开始
+2020-07-05 14:17:55,533 [http-nio-8080-exec-5] INFO  j.c.l.c.c.BankInfoController 34 - BankInfoController.getBankInfo:検索開始
+2020-07-05 14:17:55,533 [http-nio-8080-exec-5] INFO  j.c.l.c.c.BankInfoController 121 - BankInfoController.selectBankInfo:查询開始
+2020-07-05 14:17:55,534 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-05 14:17:55,534 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: (String)
+2020-07-05 14:17:55,534 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==>  Preparing: SELECT ACI.* , BBM.bankBranchName FROM account_information AS ACI LEFT JOIN bank_barnch_master as BBM ON ACI.bankCode = BBM.bankCode AND ACI.bankBranchCode = BBM.bankBranchCode WHERE employeeNo=? 
+2020-07-05 14:17:55,534 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==> Parameters: (String)
+2020-07-05 14:17:55,535 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 0
+2020-07-05 14:17:55,535 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - <==      Total: 0
+2020-07-05 14:17:55,536 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-05 14:17:55,537 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-05 14:17:55,537 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-05 14:20:02,572 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-07-05 14:20:02,573 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-07-05 14:20:02,573 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-07-05 14:20:02,574 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-07-05 14:20:02,575 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-07-05 14:20:02,575 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-07-05 14:20:02,575 [http-nio-8080-exec-7] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-07-05 14:20:02,575 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-07-05 14:20:05,693 [http-nio-8080-exec-10] INFO  j.c.l.c.c.BankInfoController 34 - BankInfoController.getBankInfo:検索開始
+2020-07-05 14:20:05,693 [http-nio-8080-exec-9] INFO  j.c.l.c.controller.SubCostController 52 - LoginController.login:查询开始
+2020-07-05 14:20:05,693 [http-nio-8080-exec-10] INFO  j.c.l.c.c.BankInfoController 121 - BankInfoController.selectBankInfo:查询開始
+2020-07-05 14:20:05,694 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==>  Preparing: SELECT ACI.* , BBM.bankBranchName FROM account_information AS ACI LEFT JOIN bank_barnch_master as BBM ON ACI.bankCode = BBM.bankCode AND ACI.bankBranchCode = BBM.bankBranchCode WHERE employeeNo=? 
+2020-07-05 14:20:05,694 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-05 14:20:05,694 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: (String)
+2020-07-05 14:20:05,694 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==> Parameters: (String)
+2020-07-05 14:20:05,695 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - <==      Total: 0
+2020-07-05 14:20:05,695 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 0
+2020-07-05 14:20:05,696 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-05 14:20:05,696 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-05 14:20:05,697 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-05 14:20:42,305 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-07-05 14:20:42,306 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-07-05 14:20:42,306 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-07-05 14:20:42,307 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-07-05 14:20:42,308 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-07-05 14:20:42,308 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-07-05 14:20:42,308 [http-nio-8080-exec-8] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-07-05 14:20:42,308 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-07-05 14:20:47,291 [http-nio-8080-exec-1] INFO  j.c.l.c.controller.SubCostController 52 - LoginController.login:查询开始
+2020-07-05 14:20:47,292 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-05 14:20:47,292 [http-nio-8080-exec-3] INFO  j.c.l.c.c.BankInfoController 34 - BankInfoController.getBankInfo:検索開始
+2020-07-05 14:20:47,292 [http-nio-8080-exec-3] INFO  j.c.l.c.c.BankInfoController 121 - BankInfoController.selectBankInfo:查询開始
+2020-07-05 14:20:47,292 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-05 14:20:47,293 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==>  Preparing: SELECT ACI.* , BBM.bankBranchName FROM account_information AS ACI LEFT JOIN bank_barnch_master as BBM ON ACI.bankCode = BBM.bankCode AND ACI.bankBranchCode = BBM.bankBranchCode WHERE employeeNo=? 
+2020-07-05 14:20:47,294 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==> Parameters: LYC001(String)
+2020-07-05 14:20:47,294 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-05 14:20:47,295 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - <==      Total: 1
+2020-07-05 14:20:47,296 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-05 14:20:47,297 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-05 14:20:47,298 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-05 14:21:01,665 [http-nio-8080-exec-2] INFO  j.c.l.c.controller.SubCostController 52 - LoginController.login:查询开始
+2020-07-05 14:21:01,665 [http-nio-8080-exec-6] INFO  j.c.l.c.c.BankInfoController 34 - BankInfoController.getBankInfo:検索開始
+2020-07-05 14:21:01,665 [http-nio-8080-exec-6] INFO  j.c.l.c.c.BankInfoController 121 - BankInfoController.selectBankInfo:查询開始
+2020-07-05 14:21:01,665 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-05 14:21:01,666 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==>  Preparing: SELECT ACI.* , BBM.bankBranchName FROM account_information AS ACI LEFT JOIN bank_barnch_master as BBM ON ACI.bankCode = BBM.bankCode AND ACI.bankBranchCode = BBM.bankBranchCode WHERE employeeNo=? 
+2020-07-05 14:21:01,666 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-05 14:21:01,666 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==> Parameters: LYC001(String)
+2020-07-05 14:21:01,667 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - <==      Total: 1
+2020-07-05 14:21:01,667 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-05 14:21:01,668 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-05 14:21:01,668 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-05 14:21:01,669 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-05 14:21:28,329 [http-nio-8080-exec-5] INFO  j.c.l.c.controller.SubCostController 52 - LoginController.login:查询开始
+2020-07-05 14:21:28,329 [http-nio-8080-exec-4] INFO  j.c.l.c.c.BankInfoController 34 - BankInfoController.getBankInfo:検索開始
+2020-07-05 14:21:28,330 [http-nio-8080-exec-4] INFO  j.c.l.c.c.BankInfoController 121 - BankInfoController.selectBankInfo:查询開始
+2020-07-05 14:21:28,330 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-05 14:21:28,330 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==>  Preparing: SELECT ACI.* , BBM.bankBranchName FROM account_information AS ACI LEFT JOIN bank_barnch_master as BBM ON ACI.bankCode = BBM.bankCode AND ACI.bankBranchCode = BBM.bankBranchCode WHERE employeeNo=? 
+2020-07-05 14:21:28,330 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-05 14:21:28,331 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==> Parameters: LYC001(String)
+2020-07-05 14:21:28,332 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - <==      Total: 1
+2020-07-05 14:21:28,332 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-05 14:21:28,333 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-05 14:21:28,334 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-05 14:21:28,335 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-05 14:21:36,079 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-07-05 14:21:36,080 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-07-05 14:21:36,080 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-07-05 14:21:36,081 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-07-05 14:21:36,081 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-07-05 14:21:36,081 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-07-05 14:21:36,082 [http-nio-8080-exec-7] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-07-05 14:21:36,082 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-07-05 14:21:37,875 [http-nio-8080-exec-9] INFO  j.c.l.c.controller.SubCostController 52 - LoginController.login:查询开始
+2020-07-05 14:21:37,875 [http-nio-8080-exec-10] INFO  j.c.l.c.c.BankInfoController 34 - BankInfoController.getBankInfo:検索開始
+2020-07-05 14:21:37,875 [http-nio-8080-exec-10] INFO  j.c.l.c.c.BankInfoController 121 - BankInfoController.selectBankInfo:查询開始
+2020-07-05 14:21:37,875 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-05 14:21:37,876 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==>  Preparing: SELECT ACI.* , BBM.bankBranchName FROM account_information AS ACI LEFT JOIN bank_barnch_master as BBM ON ACI.bankCode = BBM.bankCode AND ACI.bankBranchCode = BBM.bankBranchCode WHERE employeeNo=? 
+2020-07-05 14:21:37,876 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-05 14:21:37,876 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==> Parameters: LYC001(String)
+2020-07-05 14:21:37,877 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-05 14:21:37,877 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - <==      Total: 1
+2020-07-05 14:21:37,878 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-05 14:21:37,878 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-05 14:21:37,879 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-05 14:21:43,944 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-07-05 14:21:43,945 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-07-05 14:21:43,946 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-07-05 14:21:43,946 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-07-05 14:21:43,947 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-07-05 14:21:43,947 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-07-05 14:21:43,947 [http-nio-8080-exec-8] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-07-05 14:21:43,947 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-07-05 14:21:45,794 [http-nio-8080-exec-3] INFO  j.c.l.c.c.BankInfoController 34 - BankInfoController.getBankInfo:検索開始
+2020-07-05 14:21:45,794 [http-nio-8080-exec-1] INFO  j.c.l.c.controller.SubCostController 52 - LoginController.login:查询开始
+2020-07-05 14:21:45,794 [http-nio-8080-exec-3] INFO  j.c.l.c.c.BankInfoController 121 - BankInfoController.selectBankInfo:查询開始
+2020-07-05 14:21:45,795 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-05 14:21:45,795 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==>  Preparing: SELECT ACI.* , BBM.bankBranchName FROM account_information AS ACI LEFT JOIN bank_barnch_master as BBM ON ACI.bankCode = BBM.bankCode AND ACI.bankBranchCode = BBM.bankBranchCode WHERE employeeNo=? 
+2020-07-05 14:21:45,795 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==> Parameters: undefined(String)
+2020-07-05 14:21:45,795 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: undefined(String)
+2020-07-05 14:21:45,796 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - <==      Total: 0
+2020-07-05 14:21:45,796 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 0
+2020-07-05 14:21:45,797 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-05 14:21:45,797 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-05 14:21:45,798 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-05 14:22:29,631 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-07-05 14:22:29,631 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-07-05 14:22:29,632 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-07-05 14:22:29,633 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-07-05 14:22:29,633 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-07-05 14:22:29,633 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-07-05 14:22:29,633 [http-nio-8080-exec-2] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-07-05 14:22:29,634 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-07-05 14:22:30,976 [http-nio-8080-exec-6] INFO  j.c.l.c.controller.SubCostController 52 - LoginController.login:查询开始
+2020-07-05 14:22:30,976 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-05 14:22:30,976 [http-nio-8080-exec-5] INFO  j.c.l.c.c.BankInfoController 34 - BankInfoController.getBankInfo:検索開始
+2020-07-05 14:22:30,977 [http-nio-8080-exec-5] INFO  j.c.l.c.c.BankInfoController 121 - BankInfoController.selectBankInfo:查询開始
+2020-07-05 14:22:30,977 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-05 14:22:30,977 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==>  Preparing: SELECT ACI.* , BBM.bankBranchName FROM account_information AS ACI LEFT JOIN bank_barnch_master as BBM ON ACI.bankCode = BBM.bankCode AND ACI.bankBranchCode = BBM.bankBranchCode WHERE employeeNo=? 
+2020-07-05 14:22:30,978 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==> Parameters: LYC001(String)
+2020-07-05 14:22:30,978 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-05 14:22:30,979 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - <==      Total: 1
+2020-07-05 14:22:30,980 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-05 14:22:30,980 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-05 14:22:30,981 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-05 14:22:35,694 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-07-05 14:22:35,694 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-07-05 14:22:35,695 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-07-05 14:22:35,696 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-07-05 14:22:35,696 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-07-05 14:22:35,697 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-07-05 14:22:35,697 [http-nio-8080-exec-4] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-07-05 14:22:35,697 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-07-05 14:22:37,042 [http-nio-8080-exec-9] INFO  j.c.l.c.c.BankInfoController 34 - BankInfoController.getBankInfo:検索開始
+2020-07-05 14:22:37,042 [http-nio-8080-exec-7] INFO  j.c.l.c.controller.SubCostController 52 - LoginController.login:查询开始
+2020-07-05 14:22:37,042 [http-nio-8080-exec-9] INFO  j.c.l.c.c.BankInfoController 121 - BankInfoController.selectBankInfo:查询開始
+2020-07-05 14:22:37,043 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==>  Preparing: SELECT ACI.* , BBM.bankBranchName FROM account_information AS ACI LEFT JOIN bank_barnch_master as BBM ON ACI.bankCode = BBM.bankCode AND ACI.bankBranchCode = BBM.bankBranchCode WHERE employeeNo=? 
+2020-07-05 14:22:37,043 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-05 14:22:37,044 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==> Parameters: LYC001(String)
+2020-07-05 14:22:37,043 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-05 14:22:37,044 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - <==      Total: 1
+2020-07-05 14:22:37,045 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-05 14:22:37,045 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-05 14:22:37,045 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-05 14:22:37,046 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-05 14:23:00,847 [http-nio-8080-exec-10] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-07-05 14:23:00,848 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-07-05 14:23:00,848 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-07-05 14:23:00,849 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-07-05 14:23:00,850 [http-nio-8080-exec-10] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-07-05 14:23:00,850 [http-nio-8080-exec-10] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-07-05 14:23:00,850 [http-nio-8080-exec-10] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-07-05 14:23:00,851 [http-nio-8080-exec-10] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-07-05 14:23:02,489 [http-nio-8080-exec-1] INFO  j.c.l.c.c.BankInfoController 34 - BankInfoController.getBankInfo:検索開始
+2020-07-05 14:23:02,489 [http-nio-8080-exec-8] INFO  j.c.l.c.controller.SubCostController 52 - LoginController.login:查询开始
+2020-07-05 14:23:02,490 [http-nio-8080-exec-1] INFO  j.c.l.c.c.BankInfoController 121 - BankInfoController.selectBankInfo:查询開始
+2020-07-05 14:23:02,490 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-05 14:23:02,490 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==>  Preparing: SELECT ACI.* , BBM.bankBranchName FROM account_information AS ACI LEFT JOIN bank_barnch_master as BBM ON ACI.bankCode = BBM.bankCode AND ACI.bankBranchCode = BBM.bankBranchCode WHERE employeeNo=? 
+2020-07-05 14:23:02,491 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==> Parameters: LYC001(String)
+2020-07-05 14:23:02,491 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-05 14:23:02,492 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - <==      Total: 1
+2020-07-05 14:23:02,505 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-05 14:23:02,506 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-05 14:23:02,506 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-05 14:23:02,507 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-05 14:23:06,401 [http-nio-8080-exec-3] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-07-05 14:23:06,402 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-07-05 14:23:06,402 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-07-05 14:23:06,403 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-07-05 14:23:06,403 [http-nio-8080-exec-3] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-07-05 14:23:06,403 [http-nio-8080-exec-3] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-07-05 14:23:06,404 [http-nio-8080-exec-3] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-07-05 14:23:06,404 [http-nio-8080-exec-3] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-07-05 14:23:07,674 [http-nio-8080-exec-2] INFO  j.c.l.c.controller.SubCostController 52 - LoginController.login:查询开始
+2020-07-05 14:23:07,674 [http-nio-8080-exec-6] INFO  j.c.l.c.c.BankInfoController 34 - BankInfoController.getBankInfo:検索開始
+2020-07-05 14:23:07,674 [http-nio-8080-exec-6] INFO  j.c.l.c.c.BankInfoController 121 - BankInfoController.selectBankInfo:查询開始
+2020-07-05 14:23:07,675 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-05 14:23:07,675 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==>  Preparing: SELECT ACI.* , BBM.bankBranchName FROM account_information AS ACI LEFT JOIN bank_barnch_master as BBM ON ACI.bankCode = BBM.bankCode AND ACI.bankBranchCode = BBM.bankBranchCode WHERE employeeNo=? 
+2020-07-05 14:23:07,675 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-05 14:23:07,675 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==> Parameters: LYC001(String)
+2020-07-05 14:23:07,676 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-05 14:23:07,676 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - <==      Total: 1
+2020-07-05 14:23:07,677 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-05 14:23:07,677 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-05 14:23:07,678 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-05 17:08:43,369 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-07-05 17:08:43,371 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-07-05 17:08:43,371 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-07-05 17:08:43,373 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-07-05 17:08:43,373 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-07-05 17:08:43,374 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-07-05 17:08:43,374 [http-nio-8080-exec-9] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-07-05 17:08:43,374 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-07-05 17:08:45,849 [http-nio-8080-exec-1] INFO  j.c.l.c.controller.SubCostController 52 - LoginController.login:查询开始
+2020-07-05 17:08:45,849 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-05 17:08:45,850 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-05 17:08:45,850 [http-nio-8080-exec-3] INFO  j.c.l.c.c.BankInfoController 34 - BankInfoController.getBankInfo:検索開始
+2020-07-05 17:08:45,850 [http-nio-8080-exec-3] INFO  j.c.l.c.c.BankInfoController 121 - BankInfoController.selectBankInfo:查询開始
+2020-07-05 17:08:45,852 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==>  Preparing: SELECT ACI.* , BBM.bankBranchName FROM account_information AS ACI LEFT JOIN bank_barnch_master as BBM ON ACI.bankCode = BBM.bankCode AND ACI.bankBranchCode = BBM.bankBranchCode WHERE employeeNo=? 
+2020-07-05 17:08:45,852 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-05 17:08:45,852 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==> Parameters: LYC001(String)
+2020-07-05 17:08:45,853 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - <==      Total: 1
+2020-07-05 17:08:45,854 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-05 17:08:45,854 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-05 17:08:45,855 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-05 17:08:59,222 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-07-05 17:08:59,223 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-07-05 17:08:59,223 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-07-05 17:08:59,224 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-07-05 17:08:59,224 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-07-05 17:08:59,224 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-07-05 17:08:59,224 [http-nio-8080-exec-2] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-07-05 17:08:59,225 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-07-05 17:08:59,338 [http-nio-8080-exec-5] INFO  j.c.l.c.c.BankInfoController 34 - BankInfoController.getBankInfo:検索開始
+2020-07-05 17:08:59,338 [http-nio-8080-exec-6] INFO  j.c.l.c.controller.SubCostController 52 - LoginController.login:查询开始
+2020-07-05 17:08:59,338 [http-nio-8080-exec-5] INFO  j.c.l.c.c.BankInfoController 121 - BankInfoController.selectBankInfo:查询開始
+2020-07-05 17:08:59,339 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-05 17:08:59,339 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-05 17:08:59,339 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==>  Preparing: SELECT ACI.* , BBM.bankBranchName FROM account_information AS ACI LEFT JOIN bank_barnch_master as BBM ON ACI.bankCode = BBM.bankCode AND ACI.bankBranchCode = BBM.bankBranchCode WHERE employeeNo=? 
+2020-07-05 17:08:59,339 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==> Parameters: LYC001(String)
+2020-07-05 17:08:59,340 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-05 17:08:59,340 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - <==      Total: 1
+2020-07-05 17:08:59,340 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-05 17:08:59,341 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-05 17:08:59,342 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-05 17:09:04,215 [http-nio-8080-exec-4] INFO  j.c.l.c.c.BankInfoController 34 - BankInfoController.getBankInfo:検索開始
+2020-07-05 17:09:04,215 [http-nio-8080-exec-4] INFO  j.c.l.c.c.BankInfoController 121 - BankInfoController.selectBankInfo:查询開始
+2020-07-05 17:09:04,216 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==>  Preparing: SELECT ACI.* , BBM.bankBranchName FROM account_information AS ACI LEFT JOIN bank_barnch_master as BBM ON ACI.bankCode = BBM.bankCode AND ACI.bankBranchCode = BBM.bankBranchCode WHERE employeeNo=? 
+2020-07-05 17:09:04,216 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==> Parameters: LYC001(String)
+2020-07-05 17:09:04,217 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - <==      Total: 1
+2020-07-05 17:09:04,217 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-05 17:09:04,218 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-05 17:09:04,219 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-05 17:09:10,482 [http-nio-8080-exec-9] INFO  j.c.l.c.c.BankInfoController 62 - BankInfoController.toroku:登录開始
+2020-07-05 17:09:10,483 [http-nio-8080-exec-9] INFO  j.c.l.c.c.BankInfoController 94 - BankInfoController.toroku:登录開始
+2020-07-05 17:09:10,483 [http-nio-8080-exec-9] INFO  j.c.l.c.c.BankInfoController 121 - BankInfoController.selectBankInfo:查询開始
+2020-07-05 17:09:10,483 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==>  Preparing: SELECT ACI.* , BBM.bankBranchName FROM account_information AS ACI LEFT JOIN bank_barnch_master as BBM ON ACI.bankCode = BBM.bankCode AND ACI.bankBranchCode = BBM.bankBranchCode WHERE employeeNo=? 
+2020-07-05 17:09:10,484 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==> Parameters: LYC001(String)
+2020-07-05 17:09:10,484 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - <==      Total: 1
+2020-07-05 17:09:10,502 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.updateAccount 143 - ==>  Preparing: UPDATE account_information SET updateDate = NOW() WHERE employeeNo = ? 
+2020-07-05 17:09:10,503 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.updateAccount 143 - ==> Parameters: LYC001(String)
+2020-07-05 17:09:10,509 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.updateAccount 143 - <==    Updates: 1
+2020-07-05 17:09:25,166 [http-nio-8080-exec-8] INFO  j.c.l.c.c.BankInfoController 49 - BankInfoController.getBankBranchInfo:検索開始
+2020-07-05 17:09:25,167 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.getBankBranchInfo 143 - ==>  Preparing: SELECT BBM.bankBranchName, BBM.bankBranchCode FROM bank_barnch_master AS BBM LEFT JOIN bank_master AS BM ON BM.bankCode = BBM.bankCode WHERE BBM.bankCode = ? AND BBM.bankBranchName = ? 
+2020-07-05 17:09:25,167 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.getBankBranchInfo 143 - ==> Parameters: 1(String), 高田馬場(String)
+2020-07-05 17:09:25,170 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.getBankBranchInfo 143 - <==      Total: 1
+2020-07-05 17:09:33,800 [http-nio-8080-exec-1] INFO  j.c.l.c.c.BankInfoController 62 - BankInfoController.toroku:登录開始
+2020-07-05 17:09:33,800 [http-nio-8080-exec-1] INFO  j.c.l.c.c.BankInfoController 94 - BankInfoController.toroku:登录開始
+2020-07-05 17:09:33,800 [http-nio-8080-exec-1] INFO  j.c.l.c.c.BankInfoController 121 - BankInfoController.selectBankInfo:查询開始
+2020-07-05 17:09:33,801 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==>  Preparing: SELECT ACI.* , BBM.bankBranchName FROM account_information AS ACI LEFT JOIN bank_barnch_master as BBM ON ACI.bankCode = BBM.bankCode AND ACI.bankBranchCode = BBM.bankBranchCode WHERE employeeNo=? 
+2020-07-05 17:09:33,801 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==> Parameters: LYC001(String)
+2020-07-05 17:09:33,802 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - <==      Total: 1
+2020-07-05 17:09:33,803 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.updateAccount 143 - ==>  Preparing: UPDATE account_information SET accountNo = ?, updateDate = NOW() WHERE employeeNo = ? 
+2020-07-05 17:09:33,803 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.updateAccount 143 - ==> Parameters: 123231(String), LYC001(String)
+2020-07-05 17:09:33,808 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.updateAccount 143 - <==    Updates: 1
+2020-07-05 17:09:40,586 [http-nio-8080-exec-3] INFO  j.c.l.c.c.BankInfoController 62 - BankInfoController.toroku:登录開始
+2020-07-05 17:09:40,586 [http-nio-8080-exec-3] INFO  j.c.l.c.c.BankInfoController 94 - BankInfoController.toroku:登录開始
+2020-07-05 17:09:40,586 [http-nio-8080-exec-3] INFO  j.c.l.c.c.BankInfoController 121 - BankInfoController.selectBankInfo:查询開始
+2020-07-05 17:09:40,587 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==>  Preparing: SELECT ACI.* , BBM.bankBranchName FROM account_information AS ACI LEFT JOIN bank_barnch_master as BBM ON ACI.bankCode = BBM.bankCode AND ACI.bankBranchCode = BBM.bankBranchCode WHERE employeeNo=? 
+2020-07-05 17:09:40,587 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==> Parameters: LYC001(String)
+2020-07-05 17:09:40,588 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - <==      Total: 1
+2020-07-05 17:09:40,588 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.updateAccount 143 - ==>  Preparing: UPDATE account_information SET updateDate = NOW() WHERE employeeNo = ? 
+2020-07-05 17:09:40,589 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.updateAccount 143 - ==> Parameters: LYC001(String)
+2020-07-05 17:09:40,594 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.updateAccount 143 - <==    Updates: 1
+2020-07-05 17:14:12,586 [http-nio-8080-exec-5] INFO  j.c.l.c.c.BankInfoController 34 - BankInfoController.getBankInfo:検索開始
+2020-07-05 17:14:12,586 [http-nio-8080-exec-5] INFO  j.c.l.c.c.BankInfoController 121 - BankInfoController.selectBankInfo:查询開始
+2020-07-05 17:14:12,587 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==>  Preparing: SELECT ACI.* , BBM.bankBranchName FROM account_information AS ACI LEFT JOIN bank_barnch_master as BBM ON ACI.bankCode = BBM.bankCode AND ACI.bankBranchCode = BBM.bankBranchCode WHERE employeeNo=? 
+2020-07-05 17:14:12,587 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==> Parameters: LYC001(String)
+2020-07-05 17:14:12,589 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - <==      Total: 1
+2020-07-05 17:14:12,589 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-05 17:14:12,589 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-05 17:14:12,590 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-05 17:14:26,519 [http-nio-8080-exec-4] INFO  j.c.l.c.c.BankInfoController 62 - BankInfoController.toroku:登录開始
+2020-07-05 17:14:26,519 [http-nio-8080-exec-4] INFO  j.c.l.c.c.BankInfoController 94 - BankInfoController.toroku:登录開始
+2020-07-05 17:14:26,519 [http-nio-8080-exec-4] INFO  j.c.l.c.c.BankInfoController 121 - BankInfoController.selectBankInfo:查询開始
+2020-07-05 17:14:26,520 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==>  Preparing: SELECT ACI.* , BBM.bankBranchName FROM account_information AS ACI LEFT JOIN bank_barnch_master as BBM ON ACI.bankCode = BBM.bankCode AND ACI.bankBranchCode = BBM.bankBranchCode WHERE employeeNo=? 
+2020-07-05 17:14:26,520 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==> Parameters: LYC001(String)
+2020-07-05 17:14:26,521 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - <==      Total: 1
+2020-07-05 17:14:26,521 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.updateAccount 143 - ==>  Preparing: UPDATE account_information SET updateDate = NOW() WHERE employeeNo = ? 
+2020-07-05 17:14:26,521 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.updateAccount 143 - ==> Parameters: LYC001(String)
+2020-07-05 17:14:26,526 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.updateAccount 143 - <==    Updates: 1
+2020-07-05 17:14:53,111 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on LAPTOP-A94PII7T with PID 14208 (E:\LYC_CMS\target\classes started by Vin.Young in E:\LYC_CMS)
+2020-07-05 17:14:53,116 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2020-07-05 17:14:54,074 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2020-07-05 17:14:54,086 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2020-07-05 17:14:54,092 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2020-07-05 17:14:54,092 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2020-07-05 17:14:54,172 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2020-07-05 17:14:54,172 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 1025 ms
+2020-07-05 17:14:54,617 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2020-07-05 17:14:54,673 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2020-07-05 17:14:54,824 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2020-07-05 17:14:54,845 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2020-07-05 17:14:54,848 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 2.186 seconds (JVM running for 3.425)
+2020-07-05 17:15:40,531 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-07-05 17:15:40,531 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2020-07-05 17:15:40,538 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 7 ms
+2020-07-05 17:15:40,643 [http-nio-8080-exec-1] INFO  j.c.l.c.c.BankInfoController 34 - BankInfoController.getBankInfo:検索開始
+2020-07-05 17:15:40,644 [http-nio-8080-exec-1] INFO  j.c.l.c.c.BankInfoController 121 - BankInfoController.selectBankInfo:查询開始
+2020-07-05 17:15:40,675 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource 110 - HikariPool-1 - Starting...
+2020-07-05 17:15:40,796 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource 123 - HikariPool-1 - Start completed.
+2020-07-05 17:15:40,803 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==>  Preparing: SELECT ACI.* , BBM.bankBranchName FROM account_information AS ACI LEFT JOIN bank_barnch_master as BBM ON ACI.bankCode = BBM.bankCode AND ACI.bankBranchCode = BBM.bankBranchCode WHERE employeeNo=? 
+2020-07-05 17:15:40,823 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==> Parameters: LYC001(String)
+2020-07-05 17:15:40,848 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - <==      Total: 1
+2020-07-05 17:15:40,852 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-05 17:15:40,853 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-05 17:15:40,855 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-05 17:15:54,860 [http-nio-8080-exec-2] INFO  j.c.l.c.c.BankInfoController 62 - BankInfoController.toroku:登录開始
+2020-07-05 17:15:54,861 [http-nio-8080-exec-2] INFO  j.c.l.c.c.BankInfoController 94 - BankInfoController.toroku:登录開始
+2020-07-05 17:15:54,861 [http-nio-8080-exec-2] INFO  j.c.l.c.c.BankInfoController 121 - BankInfoController.selectBankInfo:查询開始
+2020-07-05 17:15:54,862 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==>  Preparing: SELECT ACI.* , BBM.bankBranchName FROM account_information AS ACI LEFT JOIN bank_barnch_master as BBM ON ACI.bankCode = BBM.bankCode AND ACI.bankBranchCode = BBM.bankBranchCode WHERE employeeNo=? 
+2020-07-05 17:15:54,863 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==> Parameters: LYC001(String)
+2020-07-05 17:15:54,864 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - <==      Total: 1
+2020-07-05 17:15:54,882 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.updateAccount 143 - ==>  Preparing: UPDATE account_information SET accountName = ?, updateDate = NOW() WHERE employeeNo = ? 
+2020-07-05 17:15:54,883 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.updateAccount 143 - ==> Parameters: カタカナ(String), LYC001(String)
+2020-07-05 17:15:54,888 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.updateAccount 143 - <==    Updates: 1
+2020-07-05 17:16:35,677 [http-nio-8080-exec-3] INFO  j.c.l.c.c.BankInfoController 34 - BankInfoController.getBankInfo:検索開始
+2020-07-05 17:16:35,678 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-05 17:16:35,679 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-05 17:16:35,680 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-05 17:16:49,175 [http-nio-8080-exec-4] INFO  j.c.l.c.c.BankInfoController 49 - BankInfoController.getBankBranchInfo:検索開始
+2020-07-05 17:16:49,176 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.getBankBranchInfo 143 - ==>  Preparing: SELECT BBM.bankBranchName, BBM.bankBranchCode FROM bank_barnch_master AS BBM LEFT JOIN bank_master AS BM ON BM.bankCode = BBM.bankCode WHERE BBM.bankCode = ? AND BBM.bankBranchCode = ? 
+2020-07-05 17:16:49,177 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.getBankBranchInfo 143 - ==> Parameters: 1(String), 053(String)
+2020-07-05 17:16:49,179 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.getBankBranchInfo 143 - <==      Total: 1
+2020-07-05 17:17:06,878 [http-nio-8080-exec-5] INFO  j.c.l.c.c.BankInfoController 62 - BankInfoController.toroku:登录開始
+2020-07-05 17:17:06,879 [http-nio-8080-exec-5] INFO  j.c.l.c.c.BankInfoController 73 - BankInfoController.toroku:登录開始
+2020-07-05 17:17:06,880 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.insertAccount 143 - ==>  Preparing: INSERT INTO account_information VALUE( ?, ?, ?, ?, ?, NOW(), NOW()) 
+2020-07-05 17:17:06,880 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.insertAccount 143 - ==> Parameters: LYC006(String), 1(String), 053(String), 5555555(String), フリガナ(String)
+2020-07-05 17:17:06,884 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.insertAccount 143 - <==    Updates: 1
+2020-07-05 17:20:36,025 [http-nio-8080-exec-7] INFO  j.c.l.c.c.BankInfoController 34 - BankInfoController.getBankInfo:検索開始
+2020-07-05 17:20:36,026 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-05 17:20:36,026 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-05 17:20:36,028 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-05 17:20:48,334 [http-nio-8080-exec-8] INFO  j.c.l.c.c.BankInfoController 34 - BankInfoController.getBankInfo:検索開始
+2020-07-05 17:20:48,335 [http-nio-8080-exec-8] INFO  j.c.l.c.c.BankInfoController 121 - BankInfoController.selectBankInfo:查询開始
+2020-07-05 17:20:48,340 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==>  Preparing: SELECT ACI.* , BBM.bankBranchName FROM account_information AS ACI LEFT JOIN bank_barnch_master as BBM ON ACI.bankCode = BBM.bankCode AND ACI.bankBranchCode = BBM.bankBranchCode WHERE employeeNo=? 
+2020-07-05 17:20:48,343 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==> Parameters: LYC001(String)
+2020-07-05 17:20:48,346 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - <==      Total: 1
+2020-07-05 17:20:48,347 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-05 17:20:48,348 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-05 17:20:48,349 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-05 17:20:54,626 [http-nio-8080-exec-10] INFO  j.c.l.c.c.BankInfoController 62 - BankInfoController.toroku:登录開始
+2020-07-05 17:20:54,626 [http-nio-8080-exec-10] INFO  j.c.l.c.c.BankInfoController 94 - BankInfoController.toroku:登录開始
+2020-07-05 17:20:54,626 [http-nio-8080-exec-10] INFO  j.c.l.c.c.BankInfoController 121 - BankInfoController.selectBankInfo:查询開始
+2020-07-05 17:20:54,627 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==>  Preparing: SELECT ACI.* , BBM.bankBranchName FROM account_information AS ACI LEFT JOIN bank_barnch_master as BBM ON ACI.bankCode = BBM.bankCode AND ACI.bankBranchCode = BBM.bankBranchCode WHERE employeeNo=? 
+2020-07-05 17:20:54,628 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==> Parameters: LYC001(String)
+2020-07-05 17:20:54,629 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - <==      Total: 1
+2020-07-05 17:20:54,630 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.updateAccount 143 - ==>  Preparing: UPDATE account_information SET accountName = ?, updateDate = NOW() WHERE employeeNo = ? 
+2020-07-05 17:20:54,630 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.updateAccount 143 - ==> Parameters: １２３(String), LYC001(String)
+2020-07-05 17:20:54,635 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.updateAccount 143 - <==    Updates: 1
+2020-07-05 17:21:21,701 [http-nio-8080-exec-9] INFO  j.c.l.c.c.BankInfoController 62 - BankInfoController.toroku:登录開始
+2020-07-05 17:21:21,702 [http-nio-8080-exec-9] INFO  j.c.l.c.c.BankInfoController 94 - BankInfoController.toroku:登录開始
+2020-07-05 17:21:21,702 [http-nio-8080-exec-9] INFO  j.c.l.c.c.BankInfoController 121 - BankInfoController.selectBankInfo:查询開始
+2020-07-05 17:21:21,703 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==>  Preparing: SELECT ACI.* , BBM.bankBranchName FROM account_information AS ACI LEFT JOIN bank_barnch_master as BBM ON ACI.bankCode = BBM.bankCode AND ACI.bankBranchCode = BBM.bankBranchCode WHERE employeeNo=? 
+2020-07-05 17:21:21,704 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==> Parameters: LYC001(String)
+2020-07-05 17:21:21,705 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - <==      Total: 1
+2020-07-05 17:21:21,706 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.updateAccount 143 - ==>  Preparing: UPDATE account_information SET updateDate = NOW() WHERE employeeNo = ? 
+2020-07-05 17:21:21,706 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.updateAccount 143 - ==> Parameters: LYC001(String)
+2020-07-05 17:21:21,712 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.updateAccount 143 - <==    Updates: 1
+2020-07-05 17:21:39,476 [http-nio-8080-exec-1] INFO  j.c.l.c.c.BankInfoController 34 - BankInfoController.getBankInfo:検索開始
+2020-07-05 17:21:39,476 [http-nio-8080-exec-1] INFO  j.c.l.c.c.BankInfoController 121 - BankInfoController.selectBankInfo:查询開始
+2020-07-05 17:21:39,477 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==>  Preparing: SELECT ACI.* , BBM.bankBranchName FROM account_information AS ACI LEFT JOIN bank_barnch_master as BBM ON ACI.bankCode = BBM.bankCode AND ACI.bankBranchCode = BBM.bankBranchCode WHERE employeeNo=? 
+2020-07-05 17:21:39,478 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==> Parameters: LYC001(String)
+2020-07-05 17:21:39,479 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - <==      Total: 1
+2020-07-05 17:21:39,480 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-05 17:21:39,481 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-05 17:21:39,482 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-05 17:21:48,910 [http-nio-8080-exec-2] INFO  j.c.l.c.c.BankInfoController 34 - BankInfoController.getBankInfo:検索開始
+2020-07-05 17:21:48,911 [http-nio-8080-exec-2] INFO  j.c.l.c.c.BankInfoController 121 - BankInfoController.selectBankInfo:查询開始
+2020-07-05 17:21:48,911 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==>  Preparing: SELECT ACI.* , BBM.bankBranchName FROM account_information AS ACI LEFT JOIN bank_barnch_master as BBM ON ACI.bankCode = BBM.bankCode AND ACI.bankBranchCode = BBM.bankBranchCode WHERE employeeNo=? 
+2020-07-05 17:21:48,912 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==> Parameters: LYC001(String)
+2020-07-05 17:21:48,914 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - <==      Total: 1
+2020-07-05 17:21:48,915 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-05 17:21:48,915 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-05 17:21:48,917 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-05 17:22:44,247 [http-nio-8080-exec-3] INFO  j.c.l.c.c.BankInfoController 34 - BankInfoController.getBankInfo:検索開始
+2020-07-05 17:22:44,248 [http-nio-8080-exec-3] INFO  j.c.l.c.c.BankInfoController 121 - BankInfoController.selectBankInfo:查询開始
+2020-07-05 17:22:44,249 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==>  Preparing: SELECT ACI.* , BBM.bankBranchName FROM account_information AS ACI LEFT JOIN bank_barnch_master as BBM ON ACI.bankCode = BBM.bankCode AND ACI.bankBranchCode = BBM.bankBranchCode WHERE employeeNo=? 
+2020-07-05 17:22:44,249 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==> Parameters: LYC001(String)
+2020-07-05 17:22:44,252 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - <==      Total: 1
+2020-07-05 17:22:44,253 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-05 17:22:44,253 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-05 17:22:44,255 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-05 17:23:41,497 [http-nio-8080-exec-4] INFO  j.c.l.c.c.BankInfoController 62 - BankInfoController.toroku:登录開始
+2020-07-05 17:23:41,498 [http-nio-8080-exec-4] INFO  j.c.l.c.c.BankInfoController 94 - BankInfoController.toroku:登录開始
+2020-07-05 17:23:41,498 [http-nio-8080-exec-4] INFO  j.c.l.c.c.BankInfoController 121 - BankInfoController.selectBankInfo:查询開始
+2020-07-05 17:23:41,499 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==>  Preparing: SELECT ACI.* , BBM.bankBranchName FROM account_information AS ACI LEFT JOIN bank_barnch_master as BBM ON ACI.bankCode = BBM.bankCode AND ACI.bankBranchCode = BBM.bankBranchCode WHERE employeeNo=? 
+2020-07-05 17:23:41,499 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==> Parameters: LYC001(String)
+2020-07-05 17:23:41,500 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - <==      Total: 1
+2020-07-05 17:23:41,501 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.updateAccount 143 - ==>  Preparing: UPDATE account_information SET accountName = ?, updateDate = NOW() WHERE employeeNo = ? 
+2020-07-05 17:23:41,501 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.updateAccount 143 - ==> Parameters: カタカナ(String), LYC001(String)
+2020-07-05 17:23:41,506 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.updateAccount 143 - <==    Updates: 1
+2020-07-05 17:23:44,833 [http-nio-8080-exec-5] INFO  j.c.l.c.c.BankInfoController 34 - BankInfoController.getBankInfo:検索開始
+2020-07-05 17:23:44,833 [http-nio-8080-exec-5] INFO  j.c.l.c.c.BankInfoController 121 - BankInfoController.selectBankInfo:查询開始
+2020-07-05 17:23:44,834 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==>  Preparing: SELECT ACI.* , BBM.bankBranchName FROM account_information AS ACI LEFT JOIN bank_barnch_master as BBM ON ACI.bankCode = BBM.bankCode AND ACI.bankBranchCode = BBM.bankBranchCode WHERE employeeNo=? 
+2020-07-05 17:23:44,835 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==> Parameters: LYC001(String)
+2020-07-05 17:23:44,836 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - <==      Total: 1
+2020-07-05 17:23:44,837 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-05 17:23:44,838 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-05 17:23:44,839 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-05 17:23:46,220 [http-nio-8080-exec-6] INFO  j.c.l.c.c.BankInfoController 62 - BankInfoController.toroku:登录開始
+2020-07-05 17:23:46,220 [http-nio-8080-exec-6] INFO  j.c.l.c.c.BankInfoController 94 - BankInfoController.toroku:登录開始
+2020-07-05 17:23:46,221 [http-nio-8080-exec-6] INFO  j.c.l.c.c.BankInfoController 121 - BankInfoController.selectBankInfo:查询開始
+2020-07-05 17:23:46,221 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==>  Preparing: SELECT ACI.* , BBM.bankBranchName FROM account_information AS ACI LEFT JOIN bank_barnch_master as BBM ON ACI.bankCode = BBM.bankCode AND ACI.bankBranchCode = BBM.bankBranchCode WHERE employeeNo=? 
+2020-07-05 17:23:46,221 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==> Parameters: LYC001(String)
+2020-07-05 17:23:46,223 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - <==      Total: 1
+2020-07-05 17:23:46,224 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.updateAccount 143 - ==>  Preparing: UPDATE account_information SET updateDate = NOW() WHERE employeeNo = ? 
+2020-07-05 17:23:46,224 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.updateAccount 143 - ==> Parameters: LYC001(String)
+2020-07-05 17:23:46,229 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.updateAccount 143 - <==    Updates: 1
+2020-07-05 17:27:36,120 [http-nio-8080-exec-8] INFO  j.c.l.c.c.BankInfoController 62 - BankInfoController.toroku:登录開始
+2020-07-05 17:27:36,120 [http-nio-8080-exec-8] INFO  j.c.l.c.c.BankInfoController 94 - BankInfoController.toroku:登录開始
+2020-07-05 17:27:36,121 [http-nio-8080-exec-8] INFO  j.c.l.c.c.BankInfoController 121 - BankInfoController.selectBankInfo:查询開始
+2020-07-05 17:27:36,121 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==>  Preparing: SELECT ACI.* , BBM.bankBranchName FROM account_information AS ACI LEFT JOIN bank_barnch_master as BBM ON ACI.bankCode = BBM.bankCode AND ACI.bankBranchCode = BBM.bankBranchCode WHERE employeeNo=? 
+2020-07-05 17:27:36,122 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==> Parameters: LYC001(String)
+2020-07-05 17:27:36,124 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - <==      Total: 1
+2020-07-05 17:27:36,124 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.updateAccount 143 - ==>  Preparing: UPDATE account_information SET updateDate = NOW() WHERE employeeNo = ? 
+2020-07-05 17:27:36,125 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.updateAccount 143 - ==> Parameters: LYC001(String)
+2020-07-05 17:27:36,130 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.updateAccount 143 - <==    Updates: 1
+2020-07-05 17:29:31,816 [http-nio-8080-exec-9] INFO  j.c.l.c.c.BankInfoController 34 - BankInfoController.getBankInfo:検索開始
+2020-07-05 17:29:31,817 [http-nio-8080-exec-9] INFO  j.c.l.c.c.BankInfoController 121 - BankInfoController.selectBankInfo:查询開始
+2020-07-05 17:29:31,818 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==>  Preparing: SELECT ACI.* , BBM.bankBranchName FROM account_information AS ACI LEFT JOIN bank_barnch_master as BBM ON ACI.bankCode = BBM.bankCode AND ACI.bankBranchCode = BBM.bankBranchCode WHERE employeeNo=? 
+2020-07-05 17:29:31,818 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==> Parameters: LYC001(String)
+2020-07-05 17:29:31,819 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - <==      Total: 1
+2020-07-05 17:29:31,820 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-05 17:29:31,821 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-05 17:29:31,821 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-05 17:29:46,108 [http-nio-8080-exec-2] INFO  j.c.l.c.controller.SubCostController 52 - LoginController.login:查询开始
+2020-07-05 17:29:46,110 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-05 17:29:46,110 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: (String)
+2020-07-05 17:29:46,112 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 0
+2020-07-05 17:30:05,744 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-05 17:30:05,744 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: (String)
+2020-07-05 17:30:05,745 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 0
+2020-07-05 17:30:48,316 [http-nio-8080-exec-5] INFO  j.c.l.c.controller.SubCostController 52 - LoginController.login:查询开始
+2020-07-05 17:30:48,330 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-05 17:30:48,330 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-05 17:30:48,332 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-05 17:31:30,756 [http-nio-8080-exec-6] INFO  j.c.l.c.controller.SubCostController 52 - LoginController.login:查询开始
+2020-07-05 17:31:30,757 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-05 17:31:30,757 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-05 17:31:30,759 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-05 17:33:11,801 [http-nio-8080-exec-8] INFO  j.c.l.c.c.BankInfoController 34 - BankInfoController.getBankInfo:検索開始
+2020-07-05 17:33:11,801 [http-nio-8080-exec-8] INFO  j.c.l.c.c.BankInfoController 121 - BankInfoController.selectBankInfo:查询開始
+2020-07-05 17:33:11,802 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==>  Preparing: SELECT ACI.* , BBM.bankBranchName FROM account_information AS ACI LEFT JOIN bank_barnch_master as BBM ON ACI.bankCode = BBM.bankCode AND ACI.bankBranchCode = BBM.bankBranchCode WHERE employeeNo=? 
+2020-07-05 17:33:11,802 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==> Parameters: LYC001(String)
+2020-07-05 17:33:11,803 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - <==      Total: 1
+2020-07-05 17:33:11,804 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-05 17:33:11,804 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-05 17:33:11,805 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-05 17:34:34,482 [http-nio-8080-exec-9] INFO  j.c.l.c.c.BankInfoController 34 - BankInfoController.getBankInfo:検索開始
+2020-07-05 17:34:34,482 [http-nio-8080-exec-9] INFO  j.c.l.c.c.BankInfoController 121 - BankInfoController.selectBankInfo:查询開始
+2020-07-05 17:34:34,483 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==>  Preparing: SELECT ACI.* , BBM.bankBranchName FROM account_information AS ACI LEFT JOIN bank_barnch_master as BBM ON ACI.bankCode = BBM.bankCode AND ACI.bankBranchCode = BBM.bankBranchCode WHERE employeeNo=? 
+2020-07-05 17:34:34,484 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==> Parameters: LYC001(String)
+2020-07-05 17:34:34,485 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - <==      Total: 1
+2020-07-05 17:34:34,486 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-05 17:34:34,487 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-05 17:34:34,488 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-05 17:35:02,976 [http-nio-8080-exec-1] INFO  j.c.l.c.c.BankInfoController 34 - BankInfoController.getBankInfo:検索開始
+2020-07-05 17:35:02,977 [http-nio-8080-exec-1] INFO  j.c.l.c.c.BankInfoController 121 - BankInfoController.selectBankInfo:查询開始
+2020-07-05 17:35:02,977 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==>  Preparing: SELECT ACI.* , BBM.bankBranchName FROM account_information AS ACI LEFT JOIN bank_barnch_master as BBM ON ACI.bankCode = BBM.bankCode AND ACI.bankBranchCode = BBM.bankBranchCode WHERE employeeNo=? 
+2020-07-05 17:35:02,978 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==> Parameters: LYC001(String)
+2020-07-05 17:35:02,979 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - <==      Total: 1
+2020-07-05 17:35:02,980 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-05 17:35:02,981 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-05 17:35:02,982 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-05 17:35:03,156 [http-nio-8080-exec-2] INFO  j.c.l.c.controller.SubCostController 52 - LoginController.login:查询开始
+2020-07-05 17:35:03,157 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-05 17:35:03,157 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-05 17:35:03,158 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-05 17:35:29,539 [http-nio-8080-exec-3] INFO  j.c.l.c.c.BankInfoController 34 - BankInfoController.getBankInfo:検索開始
+2020-07-05 17:35:29,539 [http-nio-8080-exec-3] INFO  j.c.l.c.c.BankInfoController 121 - BankInfoController.selectBankInfo:查询開始
+2020-07-05 17:35:29,540 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==>  Preparing: SELECT ACI.* , BBM.bankBranchName FROM account_information AS ACI LEFT JOIN bank_barnch_master as BBM ON ACI.bankCode = BBM.bankCode AND ACI.bankBranchCode = BBM.bankBranchCode WHERE employeeNo=? 
+2020-07-05 17:35:29,540 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==> Parameters: LYC001(String)
+2020-07-05 17:35:29,541 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - <==      Total: 1
+2020-07-05 17:35:29,542 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-05 17:35:29,542 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-05 17:35:29,543 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-05 17:36:18,454 [http-nio-8080-exec-4] INFO  j.c.l.c.controller.SubCostController 52 - LoginController.login:查询开始
+2020-07-05 17:36:18,455 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-05 17:36:18,456 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-05 17:36:18,457 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-05 17:36:18,590 [http-nio-8080-exec-5] INFO  j.c.l.c.c.BankInfoController 34 - BankInfoController.getBankInfo:検索開始
+2020-07-05 17:36:18,591 [http-nio-8080-exec-5] INFO  j.c.l.c.c.BankInfoController 121 - BankInfoController.selectBankInfo:查询開始
+2020-07-05 17:36:18,591 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==>  Preparing: SELECT ACI.* , BBM.bankBranchName FROM account_information AS ACI LEFT JOIN bank_barnch_master as BBM ON ACI.bankCode = BBM.bankCode AND ACI.bankBranchCode = BBM.bankBranchCode WHERE employeeNo=? 
+2020-07-05 17:36:18,591 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==> Parameters: LYC001(String)
+2020-07-05 17:36:18,592 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - <==      Total: 1
+2020-07-05 17:36:18,593 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-05 17:36:18,593 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-05 17:36:18,594 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-05 17:37:19,695 [http-nio-8080-exec-7] INFO  j.c.l.c.controller.SubCostController 52 - LoginController.login:查询开始
+2020-07-05 17:37:19,696 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-05 17:37:19,696 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-05 17:37:19,698 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-05 17:37:51,195 [http-nio-8080-exec-8] INFO  j.c.l.c.c.BankInfoController 34 - BankInfoController.getBankInfo:検索開始
+2020-07-05 17:37:51,196 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-05 17:37:51,197 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-05 17:37:51,198 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-05 17:38:42,365 [http-nio-8080-exec-10] INFO  j.c.l.c.c.BankInfoController 34 - BankInfoController.getBankInfo:検索開始
+2020-07-05 17:38:42,366 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-05 17:38:42,366 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-05 17:38:42,367 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-05 17:38:49,802 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-05 17:38:49,802 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-05 17:38:49,803 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-05 17:39:05,887 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-05 17:39:05,887 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-05 17:39:05,888 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-05 17:39:16,067 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-05 17:39:16,067 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-05 17:39:16,069 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-05 17:40:11,676 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-07-05 17:40:11,677 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-07-05 17:40:11,678 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-07-05 17:41:16,258 [http-nio-8080-exec-6] INFO  j.c.l.c.c.BankInfoController 34 - BankInfoController.getBankInfo:検索開始
+2020-07-05 17:41:16,259 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-05 17:41:16,259 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-05 17:41:16,260 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-05 17:41:18,954 [http-nio-8080-exec-8] INFO  j.c.l.c.c.BankInfoController 62 - BankInfoController.toroku:登录開始
+2020-07-05 17:41:18,954 [http-nio-8080-exec-8] INFO  j.c.l.c.c.BankInfoController 73 - BankInfoController.toroku:登录開始
+2020-07-05 17:41:18,954 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.insertAccount 143 - ==>  Preparing: INSERT INTO account_information VALUE( ?, ?, ?, ?, ?, NOW(), NOW()) 
+2020-07-05 17:41:18,955 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.insertAccount 143 - ==> Parameters: LYC001(String), null, null, null, null
+2020-07-05 17:42:58,114 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on LAPTOP-A94PII7T with PID 19288 (E:\LYC_CMS\target\classes started by Vin.Young in E:\LYC_CMS)
+2020-07-05 17:42:58,118 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2020-07-05 17:42:59,071 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2020-07-05 17:42:59,082 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2020-07-05 17:42:59,088 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2020-07-05 17:42:59,088 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2020-07-05 17:42:59,176 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2020-07-05 17:42:59,176 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 1026 ms
+2020-07-05 17:42:59,618 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2020-07-05 17:42:59,677 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2020-07-05 17:42:59,826 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2020-07-05 17:42:59,847 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2020-07-05 17:42:59,852 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 2.198 seconds (JVM running for 3.473)
+2020-07-05 17:43:35,987 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-07-05 17:43:35,987 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2020-07-05 17:43:35,993 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 6 ms
+2020-07-05 17:43:36,087 [http-nio-8080-exec-1] INFO  j.c.l.c.c.BankInfoController 62 - BankInfoController.toroku:登录開始
+2020-07-05 17:43:36,087 [http-nio-8080-exec-1] INFO  j.c.l.c.c.BankInfoController 123 - BankInfoController.selectBankInfo:查询開始
+2020-07-05 17:43:36,105 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource 110 - HikariPool-1 - Starting...
+2020-07-05 17:43:36,235 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource 123 - HikariPool-1 - Start completed.
+2020-07-05 17:43:36,243 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==>  Preparing: SELECT ACI.* , BBM.bankBranchName FROM account_information AS ACI LEFT JOIN bank_barnch_master as BBM ON ACI.bankCode = BBM.bankCode AND ACI.bankBranchCode = BBM.bankBranchCode WHERE employeeNo=? 
+2020-07-05 17:43:36,262 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==> Parameters: LYC001(String)
+2020-07-05 17:43:36,287 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - <==      Total: 1
+2020-07-05 17:43:39,836 [http-nio-8080-exec-2] INFO  j.c.l.c.c.BankInfoController 62 - BankInfoController.toroku:登录開始
+2020-07-05 17:43:39,837 [http-nio-8080-exec-2] INFO  j.c.l.c.c.BankInfoController 123 - BankInfoController.selectBankInfo:查询開始
+2020-07-05 17:43:39,838 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==>  Preparing: SELECT ACI.* , BBM.bankBranchName FROM account_information AS ACI LEFT JOIN bank_barnch_master as BBM ON ACI.bankCode = BBM.bankCode AND ACI.bankBranchCode = BBM.bankBranchCode WHERE employeeNo=? 
+2020-07-05 17:43:39,839 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==> Parameters: LYC001(String)
+2020-07-05 17:43:39,840 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - <==      Total: 1
+2020-07-05 17:50:57,746 [http-nio-8080-exec-4] INFO  j.c.l.c.c.BankInfoController 62 - BankInfoController.toroku:登录開始
+2020-07-05 17:50:57,747 [http-nio-8080-exec-4] INFO  j.c.l.c.c.BankInfoController 126 - BankInfoController.selectBankInfo:查询開始
+2020-07-05 17:50:57,748 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==>  Preparing: SELECT ACI.* , BBM.bankBranchName FROM account_information AS ACI LEFT JOIN bank_barnch_master as BBM ON ACI.bankCode = BBM.bankCode AND ACI.bankBranchCode = BBM.bankBranchCode WHERE employeeNo=? 
+2020-07-05 17:50:57,748 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - ==> Parameters: LYC001(String)
+2020-07-05 17:50:57,750 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.selectAccountInfo 143 - <==      Total: 1

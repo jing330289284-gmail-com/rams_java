@@ -1,0 +1,41 @@
+2020-06-13 11:56:59,591 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on LAPTOP-A94PII7T with PID 15100 (E:\LYC_CMS\target\classes started by Vin.Young in E:\LYC_CMS)
+2020-06-13 11:56:59,595 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2020-06-13 11:57:00,423 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2020-06-13 11:57:00,432 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2020-06-13 11:57:00,437 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2020-06-13 11:57:00,437 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2020-06-13 11:57:00,510 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2020-06-13 11:57:00,510 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 887 ms
+2020-06-13 11:57:00,912 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2020-06-13 11:57:00,952 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2020-06-13 11:57:01,068 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2020-06-13 11:57:01,086 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2020-06-13 11:57:01,089 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 1.791 seconds (JVM running for 2.796)
+2020-06-13 11:57:05,936 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-06-13 11:57:05,936 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2020-06-13 11:57:05,940 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 4 ms
+2020-06-13 11:57:11,950 [http-nio-8080-exec-6] INFO  o.a.tomcat.util.http.parser.Cookie 173 - A cookie header was received [:0.08111583423951929:=http:] that contained an invalid cookie. That cookie will be ignored.
+ Note: further occurrences of this error will be logged at DEBUG level.
+2020-06-13 11:57:11,983 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 56 - LoginController.login:登録開始
+2020-06-13 11:57:11,994 [http-nio-8080-exec-6] INFO  com.zaxxer.hikari.HikariDataSource 110 - HikariPool-1 - Starting...
+2020-06-13 11:57:12,920 [http-nio-8080-exec-6] INFO  com.zaxxer.hikari.HikariDataSource 123 - HikariPool-1 - Start completed.
+2020-06-13 11:57:12,973 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 88 - loginController.login:登録開始
+2020-06-13 11:57:12,974 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 91 - 日志输出 info
+2020-06-13 11:57:12,974 [http-nio-8080-exec-6] WARN  j.c.l.cms.controller.LoginController 92 - 日志输出 warn
+2020-06-13 11:57:12,976 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 95 - loginController.login:登録結束
+2020-06-13 11:57:16,281 [http-nio-8080-exec-8] INFO  j.c.l.c.controller.SubCostController 30 - LoginController.login:诸费用画面跳转开始
+2020-06-13 11:57:16,326 [http-nio-8080-exec-10] INFO  j.c.l.c.controller.SubCostController 39 - LoginController.login:查询开始
+2020-06-13 12:03:55,800 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 56 - LoginController.login:登録開始
+2020-06-13 12:03:55,803 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 88 - loginController.login:登録開始
+2020-06-13 12:03:55,803 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 91 - 日志输出 info
+2020-06-13 12:03:55,803 [http-nio-8080-exec-7] WARN  j.c.l.cms.controller.LoginController 92 - 日志输出 warn
+2020-06-13 12:03:55,804 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 95 - loginController.login:登録結束
+2020-06-13 12:07:41,305 [http-nio-8080-exec-2] INFO  j.c.l.c.controller.SubCostController 30 - LoginController.login:诸费用画面跳转开始
+2020-06-13 12:07:41,358 [http-nio-8080-exec-4] INFO  j.c.l.c.controller.SubCostController 39 - LoginController.login:查询开始
+2020-06-13 14:22:07,051 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 56 - LoginController.login:登録開始
+2020-06-13 14:22:07,056 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 88 - loginController.login:登録開始
+2020-06-13 14:22:07,057 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 91 - 日志输出 info
+2020-06-13 14:22:07,057 [http-nio-8080-exec-5] WARN  j.c.l.cms.controller.LoginController 92 - 日志输出 warn
+2020-06-13 14:22:07,057 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 95 - loginController.login:登録結束
+2020-06-13 14:22:09,882 [http-nio-8080-exec-1] INFO  j.c.l.c.controller.SubCostController 30 - LoginController.login:诸费用画面跳转开始
+2020-06-13 14:22:09,923 [http-nio-8080-exec-4] INFO  j.c.l.c.controller.SubCostController 39 - LoginController.login:查询开始

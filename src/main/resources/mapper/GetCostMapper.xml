@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jp.co.lyc.cms.mapper.GetCostMapper">
+    <resultMap id="Cost" type="jp.co.lyc.cms.model.CostModel"/>
+    <resultMap id="MapResult" type="map"/>
+    <select id="selectCost" parameterType="String" resultMap="Cost">
+        SELECT * FROM expenses_information
+        WHERE employeeNo=#{employeeNo}
+    </select>
+    
+    <select id="checkKado" parameterType="String" resultMap="MapResult">
+        SELECT
+			AdmissionStartDate,
+			AdmissionEndDate,
+			siteRoleCode,
+			RelatedEmployees 
+		FROM
+			employee_site_information 
+		WHERE
+			employeeNo = #{employeeNo} 
+			AND AdmissionStartDate IS NULL 
+			AND AdmissionEndDate IS NULL
+    </select>
+    
+	<insert id="insertCost" parameterType="String">
+		INSERT INTO expenses_information 
+		VALUE(
+		#{employeeNo},
+		#{SocialInsuranceFlag},
+		#{BonusFlag},
+		#{salary},
+		#{WaitingCost},
+		#{welfarePensionAmount},
+		#{healthInsuranceAmount},
+		#{InsuranceFeeAmount},
+		#{lastTimeBonusAmount},
+		#{TransportationExpenses},
+		#{scheduleOfBonusAmount},
+		#{NextBonusMonth},
+		#{NextRaiseMonth},
+		#{monthOfCompanyPay},
+		#{otherAllowance},
+		#{otherAllowanceAmount},
+		#{remark},
+		#{leaderAllowanceAmount},
+		#{totalAmount},
+		NOW(),
+		NOW(),
+		#{updateUser})
+    </insert>
+    
+    <update id="updateCost" parameterType="String">
+		UPDATE expenses_information
+		SET 
+		<if test="welfarePensionAmount != null">
+			welfarePensionAmount = #{welfarePensionAmount},
+		</if>
+		<if test="scheduleOfBonusAmount != null">
+			scheduleOfBonusAmount = #{scheduleOfBonusAmount},
+		</if>
+		<if test="healthInsuranceAmount != null">
+			healthInsuranceAmount = #{healthInsuranceAmount},
+		</if>
+		<if test="InsuranceFeeAmount != null">
+			InsuranceFeeAmount = #{InsuranceFeeAmount},
+		</if>
+		<if test="lastTimeBonusAmount != null">
+			lastTimeBonusAmount = #{lastTimeBonusAmount},
+		</if>
+		<if test="leaderAllowanceAmount != null">
+			leaderAllowanceAmount = #{leaderAllowanceAmount},
+		</if>
+		<if test="totalAmount != null">
+			totalAmount = #{totalAmount},
+		</if>
+		<if test="BonusFlag != null">
+			bonusFlag = #{BonusFlag},
+		</if>
+		<if test="SocialInsuranceFlag != null">
+			SocialInsuranceFlag = #{SocialInsuranceFlag},
+		</if>
+		<if test="TransportationExpenses != null">
+			TransportationExpenses = #{TransportationExpenses},
+		</if>
+		<if test="monthOfCompanyPay != null">
+			monthOfCompanyPay = #{monthOfCompanyPay},
+		</if>
+		<if test="otherAllowance != null">
+			otherAllowance = #{otherAllowance},
+		</if>
+		<if test="otherAllowanceAmount != null">
+			otherAllowanceAmount = #{otherAllowanceAmount},
+		</if>
+		<if test="remark != null">
+			remark = #{remark},
+		</if>
+		<if test="salary != null">
+			salary = #{salary},
+		</if>
+		<if test="WaitingCost != null">
+			WaitingCost = #{WaitingCost},
+		</if>
+		<if test="NextBonusMonth != null">
+			NextBonusMonth = #{NextBonusMonth},
+		</if>
+		<if test="NextRaiseMonth != null">
+			NextRaiseMonth = #{NextRaiseMonth},
+		</if>
+		updateTime = NOW(),
+		updateUser = #{updateUser}
+		WHERE 
+			employeeNo = #{employeeNo}
+    </update>
+</mapper>

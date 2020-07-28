@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jp.co.lyc.cms.mapper.CustomerInfoSearchMapper">
+    <resultMap id="customerInfo" type="jp.co.lyc.cms.model.CustomerInfoModel"/>
+    <select id="SelectCustomerInfo" parameterType="String" resultMap="customerInfo">
+		SELECT
+			CONCAT(( @rowNo := @rowNo + 1 )) AS rowNo,
+			ci.customerNo,
+			ci.customerName,
+			crm.customerRankingName,
+			ci.headOffice,
+			cnm.companyNatureName,
+			<choose>
+		        <when test="topCustomerName != null">
+		            topNo.topCustomerName,
+		        </when>
+		        <otherwise>
+		            tc.topCustomerName,
+		        </otherwise>
+	        </choose>
+			esi.employeeNo,
+			CONCAT( e.employeeFristName ,e.employeeLastName ) AS employeeName,
+			esi.location,
+			esi.siteManager,
+			esi.unitPrice 
+		FROM
+			customer_information AS ci
+			LEFT JOIN employee_site_information AS esi ON ci.customerNo = esi.customerNo 
+			AND ci.topCustomerNo = esi.topCustomerNo
+			AND esi.AdmissionStartDate IS NOT NULL
+			AND esi.AdmissionEndDate IS NOT NULL
+			LEFT JOIN employee AS e ON esi.employeeNo = e.employeeNo
+			LEFT JOIN customer_ranking_master AS crm ON ci.customerRankingCode = crm.customerRankingCode
+			LEFT JOIN company_nature_master AS cnm ON ci.companyNatureCode = cnm.companyNatureCode	
+		<choose>
+	        <when test="topCustomerName != null">
+	            LEFT JOIN 
+					( SELECT topCustomerNo,topCustomerName FROM top_customer WHERE topCustomerName LIKE concat('%',#{topCustomerName},'%') ) AS topNo ON ci.topCustomerNo = topNo.topCustomerNo
+	        </when>
+	        <otherwise>
+	            LEFT JOIN
+				 	top_customer AS tc ON ci.topCustomerNo = tc.topCustomerNo
+	        </otherwise>
+        </choose>
+			,( SELECT @rowNo := 0 ) AS rowNo 
+		WHERE 1=1
+		<if test="customerNo != null">
+			AND ci.customerNo=#{customerNo}
+		</if>
+		<if test="customerName != null">
+			AND ci.customerName like concat('%',#{customerName},'%')
+		</if>
+		<if test="customerRankingCode != null">
+			AND ci.customerRankingCode=#{customerRankingCode}
+		</if>
+		<if test="companyNatureCode != null">
+			AND ci.companyNatureCode=#{companyNatureCode}
+		</if>
+		<if test="topCustomerName != null">
+			AND ci.topCustomerNo = topNo.topCustomerNo
+		</if>
+		 ORDER BY
+			ci.customerNo
+    </select>
+    <delete id="delect" parameterType="String">
+	    DELETE 
+	    FROM 
+	    	customer_information 
+	    WHERE 
+	    	customerNo = #{customerNo};
+    </delete>
+</mapper>

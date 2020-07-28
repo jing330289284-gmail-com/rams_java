@@ -1,0 +1,20 @@
+2020-06-11 22:31:36,914 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on LAPTOP-A94PII7T with PID 14520 (E:\LYC_CMS\target\classes started by Vin.Young in E:\LYC_CMS)
+2020-06-11 22:31:36,918 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2020-06-11 22:31:37,879 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2020-06-11 22:31:37,890 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2020-06-11 22:31:37,897 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2020-06-11 22:31:37,898 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2020-06-11 22:31:37,965 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2020-06-11 22:31:37,966 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 1013 ms
+2020-06-11 22:31:38,345 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2020-06-11 22:31:38,389 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2020-06-11 22:31:38,525 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2020-06-11 22:31:38,546 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2020-06-11 22:31:38,548 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 2.015 seconds (JVM running for 3.089)
+2020-06-11 22:31:49,921 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-06-11 22:31:49,922 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2020-06-11 22:31:49,927 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 5 ms
+2020-06-11 22:31:54,615 [http-nio-8080-exec-5] INFO  o.a.tomcat.util.http.parser.Cookie 173 - A cookie header was received [:0.5119591338959621:=http:] that contained an invalid cookie. That cookie will be ignored.
+ Note: further occurrences of this error will be logged at DEBUG level.
+2020-06-11 22:37:02,923 [RMI TCP Connection(2)-127.0.0.1] INFO  o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin 159 - Application shutdown requested.
+2020-06-11 22:37:02,925 [RMI TCP Connection(2)-127.0.0.1] INFO  o.s.s.c.ThreadPoolTaskExecutor 208 - Shutting down ExecutorService 'applicationTaskExecutor'

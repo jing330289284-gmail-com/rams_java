@@ -1,0 +1,1204 @@
+2020-06-28 13:37:28,417 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on LAPTOP-A94PII7T with PID 8472 (E:\LYC_CMS\target\classes started by Vin.Young in E:\LYC_CMS)
+2020-06-28 13:37:28,424 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2020-06-28 13:37:29,497 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2020-06-28 13:37:29,509 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2020-06-28 13:37:29,516 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2020-06-28 13:37:29,516 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2020-06-28 13:37:29,617 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2020-06-28 13:37:29,617 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 1151 ms
+2020-06-28 13:37:30,168 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2020-06-28 13:37:30,235 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2020-06-28 13:37:30,393 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2020-06-28 13:37:30,417 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2020-06-28 13:37:30,421 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 2.522 seconds (JVM running for 4.395)
+2020-06-28 13:38:06,632 [http-nio-8080-exec-2] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-06-28 13:38:06,632 [http-nio-8080-exec-2] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2020-06-28 13:38:06,639 [http-nio-8080-exec-2] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 6 ms
+2020-06-28 13:39:09,151 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on LAPTOP-A94PII7T with PID 12752 (E:\LYC_CMS\target\classes started by Vin.Young in E:\LYC_CMS)
+2020-06-28 13:39:09,157 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2020-06-28 13:39:10,198 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2020-06-28 13:39:10,210 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2020-06-28 13:39:10,216 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2020-06-28 13:39:10,216 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2020-06-28 13:39:10,306 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2020-06-28 13:39:10,306 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 1114 ms
+2020-06-28 13:39:10,842 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2020-06-28 13:39:10,905 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2020-06-28 13:39:11,066 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2020-06-28 13:39:11,089 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2020-06-28 13:39:11,092 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 2.458 seconds (JVM running for 3.847)
+2020-06-28 13:39:20,037 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-06-28 13:39:20,037 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2020-06-28 13:39:20,043 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 5 ms
+2020-06-28 13:40:34,915 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on LAPTOP-A94PII7T with PID 9128 (E:\LYC_CMS\target\classes started by Vin.Young in E:\LYC_CMS)
+2020-06-28 13:40:34,920 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2020-06-28 13:40:35,966 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2020-06-28 13:40:35,978 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2020-06-28 13:40:35,985 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2020-06-28 13:40:35,985 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2020-06-28 13:40:36,068 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2020-06-28 13:40:36,069 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 1108 ms
+2020-06-28 13:40:36,579 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2020-06-28 13:40:36,638 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2020-06-28 13:40:36,792 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2020-06-28 13:40:36,819 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2020-06-28 13:40:36,822 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 2.411 seconds (JVM running for 3.711)
+2020-06-28 13:40:39,687 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-06-28 13:40:39,688 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2020-06-28 13:40:39,693 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 5 ms
+2020-06-28 13:44:10,026 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on LAPTOP-A94PII7T with PID 11972 (E:\LYC_CMS\target\classes started by Vin.Young in E:\LYC_CMS)
+2020-06-28 13:44:10,031 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2020-06-28 13:44:11,055 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2020-06-28 13:44:11,066 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2020-06-28 13:44:11,073 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2020-06-28 13:44:11,073 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2020-06-28 13:44:11,172 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2020-06-28 13:44:11,172 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 1107 ms
+2020-06-28 13:44:11,745 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2020-06-28 13:44:11,804 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2020-06-28 13:44:11,973 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2020-06-28 13:44:11,993 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2020-06-28 13:44:11,996 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 2.461 seconds (JVM running for 3.767)
+2020-06-28 13:44:36,525 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-06-28 13:44:36,526 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2020-06-28 13:44:36,532 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 6 ms
+2020-06-28 14:03:08,600 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on LAPTOP-A94PII7T with PID 14204 (E:\LYC_CMS\target\classes started by Vin.Young in E:\LYC_CMS)
+2020-06-28 14:03:08,604 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2020-06-28 14:03:09,596 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2020-06-28 14:03:09,608 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2020-06-28 14:03:09,613 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2020-06-28 14:03:09,613 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2020-06-28 14:03:09,693 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2020-06-28 14:03:09,693 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 1059 ms
+2020-06-28 14:03:10,169 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2020-06-28 14:03:10,223 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2020-06-28 14:03:10,371 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2020-06-28 14:03:10,392 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2020-06-28 14:03:10,395 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 2.262 seconds (JVM running for 3.504)
+2020-06-28 14:03:15,105 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-06-28 14:03:15,105 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2020-06-28 14:03:15,111 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 6 ms
+2020-06-28 14:05:45,209 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on LAPTOP-A94PII7T with PID 15076 (E:\LYC_CMS\target\classes started by Vin.Young in E:\LYC_CMS)
+2020-06-28 14:05:45,213 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2020-06-28 14:05:46,153 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2020-06-28 14:05:46,164 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2020-06-28 14:05:46,169 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2020-06-28 14:05:46,170 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2020-06-28 14:05:46,250 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2020-06-28 14:05:46,250 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 1006 ms
+2020-06-28 14:05:46,745 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2020-06-28 14:05:46,799 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2020-06-28 14:05:46,942 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2020-06-28 14:05:46,963 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2020-06-28 14:05:46,967 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 2.207 seconds (JVM running for 3.467)
+2020-06-28 14:06:05,222 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-06-28 14:06:05,222 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2020-06-28 14:06:05,228 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 6 ms
+2020-06-28 14:07:15,101 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on LAPTOP-A94PII7T with PID 15440 (E:\LYC_CMS\target\classes started by Vin.Young in E:\LYC_CMS)
+2020-06-28 14:07:15,105 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2020-06-28 14:07:16,060 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2020-06-28 14:07:16,071 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2020-06-28 14:07:16,077 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2020-06-28 14:07:16,077 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2020-06-28 14:07:16,156 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2020-06-28 14:07:16,156 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 1019 ms
+2020-06-28 14:07:16,631 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2020-06-28 14:07:16,684 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2020-06-28 14:07:16,832 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2020-06-28 14:07:16,854 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2020-06-28 14:07:16,858 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 2.207 seconds (JVM running for 3.45)
+2020-06-28 14:07:20,372 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-06-28 14:07:20,373 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2020-06-28 14:07:20,379 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 6 ms
+2020-06-28 14:08:06,393 [http-nio-8080-exec-2] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver 198 - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
+2020-06-28 14:08:55,359 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on LAPTOP-A94PII7T with PID 7732 (E:\LYC_CMS\target\classes started by Vin.Young in E:\LYC_CMS)
+2020-06-28 14:08:55,361 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2020-06-28 14:08:56,098 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2020-06-28 14:08:56,106 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2020-06-28 14:08:56,111 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2020-06-28 14:08:56,111 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2020-06-28 14:08:56,173 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2020-06-28 14:08:56,173 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 785 ms
+2020-06-28 14:08:56,540 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2020-06-28 14:08:56,578 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2020-06-28 14:08:56,694 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2020-06-28 14:08:56,709 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2020-06-28 14:08:56,711 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 1.669 seconds (JVM running for 2.677)
+2020-06-28 14:09:00,494 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-06-28 14:09:00,494 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2020-06-28 14:09:00,500 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 6 ms
+2020-06-28 14:09:00,513 [http-nio-8080-exec-1] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver 198 - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
+2020-06-28 14:09:41,176 [RMI TCP Connection(2)-127.0.0.1] INFO  o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin 159 - Application shutdown requested.
+2020-06-28 14:09:41,178 [RMI TCP Connection(2)-127.0.0.1] INFO  o.s.s.c.ThreadPoolTaskExecutor 208 - Shutting down ExecutorService 'applicationTaskExecutor'
+2020-06-28 14:09:44,301 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on LAPTOP-A94PII7T with PID 16092 (E:\LYC_CMS\target\classes started by Vin.Young in E:\LYC_CMS)
+2020-06-28 14:09:44,305 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2020-06-28 14:09:45,330 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2020-06-28 14:09:45,341 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2020-06-28 14:09:45,347 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2020-06-28 14:09:45,347 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2020-06-28 14:09:45,429 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2020-06-28 14:09:45,429 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 1092 ms
+2020-06-28 14:09:45,898 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2020-06-28 14:09:45,953 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2020-06-28 14:09:46,104 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2020-06-28 14:09:46,135 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2020-06-28 14:09:46,141 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 2.331 seconds (JVM running for 3.618)
+2020-06-28 14:09:50,646 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-06-28 14:09:50,646 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2020-06-28 14:09:50,654 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 7 ms
+2020-06-28 14:09:50,670 [http-nio-8080-exec-1] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver 198 - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
+2020-06-28 14:10:13,648 [http-nio-8080-exec-3] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver 198 - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
+2020-06-28 14:10:31,805 [http-nio-8080-exec-5] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver 198 - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
+2020-06-28 14:11:25,554 [http-nio-8080-exec-8] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver 198 - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
+2020-06-28 14:11:55,478 [http-nio-8080-exec-2] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver 198 - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
+2020-06-28 14:12:02,168 [http-nio-8080-exec-3] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver 198 - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
+2020-06-28 14:12:44,292 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on LAPTOP-A94PII7T with PID 5748 (E:\LYC_CMS\target\classes started by Vin.Young in E:\LYC_CMS)
+2020-06-28 14:12:44,296 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2020-06-28 14:12:45,245 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2020-06-28 14:12:45,257 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2020-06-28 14:12:45,263 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2020-06-28 14:12:45,263 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2020-06-28 14:12:45,347 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2020-06-28 14:12:45,348 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 1017 ms
+2020-06-28 14:12:45,814 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2020-06-28 14:12:45,867 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2020-06-28 14:12:46,011 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2020-06-28 14:12:46,033 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2020-06-28 14:12:46,037 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 2.191 seconds (JVM running for 3.472)
+2020-06-28 14:12:58,041 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-06-28 14:12:58,042 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2020-06-28 14:12:58,047 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 5 ms
+2020-06-28 14:13:03,633 [http-nio-8080-exec-2] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver 198 - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
+2020-06-28 14:13:13,122 [http-nio-8080-exec-3] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver 198 - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
+2020-06-28 14:14:59,726 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on LAPTOP-A94PII7T with PID 12840 (E:\LYC_CMS\target\classes started by Vin.Young in E:\LYC_CMS)
+2020-06-28 14:14:59,730 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2020-06-28 14:15:00,689 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2020-06-28 14:15:00,700 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2020-06-28 14:15:00,706 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2020-06-28 14:15:00,706 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2020-06-28 14:15:00,786 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2020-06-28 14:15:00,786 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 1024 ms
+2020-06-28 14:15:01,259 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2020-06-28 14:15:01,314 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2020-06-28 14:15:01,461 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2020-06-28 14:15:01,485 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2020-06-28 14:15:01,489 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 2.206 seconds (JVM running for 3.477)
+2020-06-28 14:15:05,133 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-06-28 14:15:05,134 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2020-06-28 14:15:05,139 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 5 ms
+2020-06-28 14:15:05,157 [http-nio-8080-exec-1] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver 198 - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
+2020-06-28 14:15:25,881 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on LAPTOP-A94PII7T with PID 4632 (E:\LYC_CMS\target\classes started by Vin.Young in E:\LYC_CMS)
+2020-06-28 14:15:25,885 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2020-06-28 14:15:26,828 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2020-06-28 14:15:26,840 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2020-06-28 14:15:26,845 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2020-06-28 14:15:26,846 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2020-06-28 14:15:26,924 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2020-06-28 14:15:26,924 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 1007 ms
+2020-06-28 14:15:27,391 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2020-06-28 14:15:27,444 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2020-06-28 14:15:27,596 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2020-06-28 14:15:27,619 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2020-06-28 14:15:27,622 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 2.198 seconds (JVM running for 3.451)
+2020-06-28 14:15:55,305 [http-nio-8080-exec-2] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-06-28 14:15:55,305 [http-nio-8080-exec-2] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2020-06-28 14:15:55,315 [http-nio-8080-exec-2] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 10 ms
+2020-06-28 14:15:55,329 [http-nio-8080-exec-2] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver 198 - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
+2020-06-28 14:16:42,669 [http-nio-8080-exec-4] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver 198 - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
+2020-06-28 14:18:05,831 [http-nio-8080-exec-1] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver 198 - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
+2020-06-28 14:19:41,118 [http-nio-8080-exec-2] INFO  o.a.tomcat.util.http.parser.Cookie 173 - A cookie header was received [:0.16385178453786842:=http:] that contained an invalid cookie. That cookie will be ignored.
+ Note: further occurrences of this error will be logged at DEBUG level.
+2020-06-28 14:19:56,136 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 60 - LoginController.login:登録開始
+2020-06-28 14:19:57,404 [http-nio-8080-exec-2] INFO  com.zaxxer.hikari.HikariDataSource 110 - HikariPool-1 - Starting...
+2020-06-28 14:20:05,626 [http-nio-8080-exec-2] INFO  com.zaxxer.hikari.HikariDataSource 123 - HikariPool-1 - Start completed.
+2020-06-28 14:20:05,705 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 14:20:06,098 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 14:20:06,440 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 14:20:06,513 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 93 - loginController.login:登録開始
+2020-06-28 14:20:06,513 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 96 - 日志输出 info
+2020-06-28 14:20:06,514 [http-nio-8080-exec-2] WARN  j.c.l.cms.controller.LoginController 97 - 日志输出 warn
+2020-06-28 14:20:06,515 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 100 - loginController.login:登録結束
+2020-06-28 14:21:18,191 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on LAPTOP-A94PII7T with PID 10552 (E:\LYC_CMS\target\classes started by Vin.Young in E:\LYC_CMS)
+2020-06-28 14:21:18,195 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2020-06-28 14:21:19,162 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2020-06-28 14:21:19,174 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2020-06-28 14:21:19,179 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2020-06-28 14:21:19,180 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2020-06-28 14:21:19,258 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2020-06-28 14:21:19,258 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 1027 ms
+2020-06-28 14:21:19,727 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2020-06-28 14:21:19,780 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2020-06-28 14:21:19,933 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2020-06-28 14:21:19,953 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2020-06-28 14:21:19,956 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 2.22 seconds (JVM running for 3.457)
+2020-06-28 14:21:37,684 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on LAPTOP-A94PII7T with PID 15700 (E:\LYC_CMS\target\classes started by Vin.Young in E:\LYC_CMS)
+2020-06-28 14:21:37,689 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2020-06-28 14:21:38,643 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2020-06-28 14:21:38,654 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2020-06-28 14:21:38,660 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2020-06-28 14:21:38,660 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2020-06-28 14:21:38,751 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2020-06-28 14:21:38,751 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 1032 ms
+2020-06-28 14:21:39,234 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2020-06-28 14:21:39,287 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2020-06-28 14:21:39,434 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2020-06-28 14:21:39,454 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2020-06-28 14:21:39,458 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 2.229 seconds (JVM running for 3.471)
+2020-06-28 14:21:48,665 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-06-28 14:21:48,666 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2020-06-28 14:21:48,676 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 10 ms
+2020-06-28 14:21:52,262 [http-nio-8080-exec-5] INFO  o.a.tomcat.util.http.parser.Cookie 173 - A cookie header was received [:0.10521177884807731:=http:] that contained an invalid cookie. That cookie will be ignored.
+ Note: further occurrences of this error will be logged at DEBUG level.
+2020-06-28 14:21:57,164 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 60 - LoginController.login:登録開始
+2020-06-28 14:21:57,183 [http-nio-8080-exec-5] INFO  com.zaxxer.hikari.HikariDataSource 110 - HikariPool-1 - Starting...
+2020-06-28 14:21:58,089 [http-nio-8080-exec-5] INFO  com.zaxxer.hikari.HikariDataSource 123 - HikariPool-1 - Start completed.
+2020-06-28 14:21:58,096 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 14:21:58,136 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 14:21:58,171 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 14:21:58,188 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 93 - loginController.login:登録開始
+2020-06-28 14:21:58,189 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 96 - 日志输出 info
+2020-06-28 14:21:58,189 [http-nio-8080-exec-5] WARN  j.c.l.cms.controller.LoginController 97 - 日志输出 warn
+2020-06-28 14:21:58,190 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 100 - loginController.login:登録結束
+2020-06-28 14:22:15,141 [http-nio-8080-exec-9] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-06-28 14:22:15,143 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-06-28 14:22:15,144 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-06-28 14:22:15,152 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-06-28 14:22:55,429 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-06-28 14:22:55,430 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-06-28 14:22:55,432 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-06-28 14:22:56,258 [http-nio-8080-exec-2] INFO  j.c.l.c.controller.SubCostController 79 - GetEmployeeInfoController.getEmployeeInfo:アープデート開始
+2020-06-28 14:22:56,259 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-06-28 14:22:56,259 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-06-28 14:22:56,261 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-06-28 14:22:56,277 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.updateCost 143 - ==>  Preparing: UPDATE expenses_information SET InsuranceFee = ?, updateTime = NOW() WHERE employeeNo = ? 
+2020-06-28 14:22:56,278 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.updateCost 143 - ==> Parameters: 1000(String), LYC001(String)
+2020-06-28 14:22:56,284 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.updateCost 143 - <==    Updates: 1
+2020-06-28 14:23:59,956 [http-nio-8080-exec-7] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-06-28 14:23:59,957 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-06-28 14:23:59,958 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-06-28 14:23:59,960 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-06-28 14:24:20,930 [http-nio-8080-exec-9] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-06-28 14:24:20,930 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-06-28 14:24:20,931 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-06-28 14:24:20,933 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-06-28 14:24:45,910 [http-nio-8080-exec-10] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-06-28 14:24:45,911 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-06-28 14:24:45,912 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-06-28 14:24:45,914 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-06-28 14:27:34,897 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on LAPTOP-A94PII7T with PID 16372 (E:\LYC_CMS\target\classes started by Vin.Young in E:\LYC_CMS)
+2020-06-28 14:27:34,901 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2020-06-28 14:27:35,842 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2020-06-28 14:27:35,854 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2020-06-28 14:27:35,859 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2020-06-28 14:27:35,860 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2020-06-28 14:27:35,938 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2020-06-28 14:27:35,939 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 1007 ms
+2020-06-28 14:27:36,425 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2020-06-28 14:27:36,483 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2020-06-28 14:27:36,629 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2020-06-28 14:27:36,651 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2020-06-28 14:27:36,654 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 2.214 seconds (JVM running for 3.473)
+2020-06-28 14:39:08,385 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-06-28 14:39:08,385 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2020-06-28 14:39:08,394 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 9 ms
+2020-06-28 14:39:28,054 [http-nio-8080-exec-1] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-06-28 14:39:28,082 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource 110 - HikariPool-1 - Starting...
+2020-06-28 14:39:28,767 [http-nio-8080-exec-2] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-06-28 14:39:28,923 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource 123 - HikariPool-1 - Start completed.
+2020-06-28 14:39:28,934 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-06-28 14:39:28,937 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-06-28 14:39:28,957 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-06-28 14:39:28,957 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-06-28 14:39:28,986 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-06-28 14:39:28,986 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-06-28 14:41:19,313 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on LAPTOP-A94PII7T with PID 17692 (E:\LYC_CMS\target\classes started by Vin.Young in E:\LYC_CMS)
+2020-06-28 14:41:19,316 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2020-06-28 14:41:20,392 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2020-06-28 14:41:20,404 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2020-06-28 14:41:20,410 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2020-06-28 14:41:20,411 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2020-06-28 14:41:20,495 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2020-06-28 14:41:20,495 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 1134 ms
+2020-06-28 14:41:20,986 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2020-06-28 14:41:21,041 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2020-06-28 14:41:21,199 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2020-06-28 14:41:21,223 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2020-06-28 14:41:21,227 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 2.45 seconds (JVM running for 3.76)
+2020-06-28 14:43:51,319 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-06-28 14:43:51,319 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2020-06-28 14:43:51,326 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 7 ms
+2020-06-28 14:43:59,437 [http-nio-8080-exec-1] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-06-28 14:43:59,467 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource 110 - HikariPool-1 - Starting...
+2020-06-28 14:44:00,316 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource 123 - HikariPool-1 - Start completed.
+2020-06-28 14:44:00,323 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-06-28 14:44:00,343 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-06-28 14:44:00,365 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-06-28 14:54:21,448 [http-nio-8080-exec-3] INFO  j.c.l.cms.controller.LoginController 61 - LoginController.login:登録開始
+2020-06-28 14:54:35,192 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 14:54:35,200 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), employeeNo=LYC001&password=1(String)
+2020-06-28 14:54:35,259 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 0
+2020-06-28 14:55:55,825 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 61 - LoginController.login:登録開始
+2020-06-28 14:55:55,826 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 14:55:55,827 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), employeeNo=LYC001&password=1(String)
+2020-06-28 14:55:55,828 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 0
+2020-06-28 14:56:07,899 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on LAPTOP-A94PII7T with PID 1236 (E:\LYC_CMS\target\classes started by Vin.Young in E:\LYC_CMS)
+2020-06-28 14:56:07,905 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2020-06-28 14:56:08,915 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2020-06-28 14:56:08,927 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2020-06-28 14:56:08,933 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2020-06-28 14:56:08,934 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2020-06-28 14:56:09,018 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2020-06-28 14:56:09,019 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 1078 ms
+2020-06-28 14:56:09,506 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2020-06-28 14:56:09,563 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2020-06-28 14:56:09,722 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2020-06-28 14:56:09,743 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2020-06-28 14:56:09,747 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 2.361 seconds (JVM running for 3.66)
+2020-06-28 14:56:11,503 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-06-28 14:56:11,503 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2020-06-28 14:56:11,509 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 5 ms
+2020-06-28 14:56:18,342 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 61 - LoginController.login:登録開始
+2020-06-28 14:56:18,361 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource 110 - HikariPool-1 - Starting...
+2020-06-28 14:56:19,274 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource 123 - HikariPool-1 - Start completed.
+2020-06-28 14:56:19,282 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 14:56:19,302 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 14:56:19,324 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 14:56:19,333 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 94 - loginController.login:登録開始
+2020-06-28 14:56:19,333 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 97 - 日志输出 info
+2020-06-28 14:56:19,333 [http-nio-8080-exec-1] WARN  j.c.l.cms.controller.LoginController 98 - 日志输出 warn
+2020-06-28 14:56:19,334 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 101 - loginController.login:登録結束
+2020-06-28 15:10:40,088 [http-nio-8080-exec-4] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver 198 - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
+2020-06-28 15:10:50,901 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 61 - LoginController.login:登録開始
+2020-06-28 15:10:50,903 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 15:10:50,904 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 15:10:50,906 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 15:10:50,907 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 94 - loginController.login:登録開始
+2020-06-28 15:10:50,907 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 97 - 日志输出 info
+2020-06-28 15:10:50,908 [http-nio-8080-exec-5] WARN  j.c.l.cms.controller.LoginController 98 - 日志输出 warn
+2020-06-28 15:10:50,908 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 101 - loginController.login:登録結束
+2020-06-28 15:10:54,815 [http-nio-8080-exec-6] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver 198 - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
+2020-06-28 15:10:56,122 [http-nio-8080-exec-7] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver 198 - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
+2020-06-28 15:11:11,101 [http-nio-8080-exec-9] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver 198 - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
+2020-06-28 15:11:31,614 [http-nio-8080-exec-10] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver 198 - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
+2020-06-28 15:12:01,501 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 61 - LoginController.login:登録開始
+2020-06-28 15:12:01,503 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 15:12:01,503 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 15:12:01,505 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 15:12:01,505 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 94 - loginController.login:登録開始
+2020-06-28 15:12:01,505 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 97 - 日志输出 info
+2020-06-28 15:12:01,506 [http-nio-8080-exec-2] WARN  j.c.l.cms.controller.LoginController 98 - 日志输出 warn
+2020-06-28 15:12:01,506 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 101 - loginController.login:登録結束
+2020-06-28 15:19:04,056 [http-nio-8080-exec-6] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver 198 - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
+2020-06-28 15:19:22,007 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 61 - LoginController.login:登録開始
+2020-06-28 15:19:22,009 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 15:19:22,010 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 15:19:22,012 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 15:19:22,012 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 94 - loginController.login:登録開始
+2020-06-28 15:19:22,012 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 97 - 日志输出 info
+2020-06-28 15:19:22,013 [http-nio-8080-exec-7] WARN  j.c.l.cms.controller.LoginController 98 - 日志输出 warn
+2020-06-28 15:19:22,013 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 101 - loginController.login:登録結束
+2020-06-28 15:19:23,981 [http-nio-8080-exec-8] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver 198 - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
+2020-06-28 15:19:39,504 [http-nio-8080-exec-10] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver 198 - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
+2020-06-28 15:19:39,510 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 61 - LoginController.login:登録開始
+2020-06-28 15:19:39,511 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 15:19:39,512 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 15:19:39,514 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 15:19:39,515 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 94 - loginController.login:登録開始
+2020-06-28 15:19:39,515 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 97 - 日志输出 info
+2020-06-28 15:19:39,516 [http-nio-8080-exec-1] WARN  j.c.l.cms.controller.LoginController 98 - 日志输出 warn
+2020-06-28 15:19:39,516 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 101 - loginController.login:登録結束
+2020-06-28 15:20:32,844 [http-nio-8080-exec-3] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver 198 - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
+2020-06-28 15:20:32,847 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 61 - LoginController.login:登録開始
+2020-06-28 15:20:32,848 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 15:20:32,849 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 15:20:32,851 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 15:20:32,852 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 94 - loginController.login:登録開始
+2020-06-28 15:20:32,852 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 97 - 日志输出 info
+2020-06-28 15:20:32,852 [http-nio-8080-exec-4] WARN  j.c.l.cms.controller.LoginController 98 - 日志输出 warn
+2020-06-28 15:20:32,853 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 101 - loginController.login:登録結束
+2020-06-28 15:21:04,253 [http-nio-8080-exec-6] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver 198 - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
+2020-06-28 15:21:04,257 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 61 - LoginController.login:登録開始
+2020-06-28 15:21:04,258 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 15:21:04,259 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 15:21:04,261 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 15:21:04,261 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 94 - loginController.login:登録開始
+2020-06-28 15:21:04,261 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 97 - 日志输出 info
+2020-06-28 15:21:04,261 [http-nio-8080-exec-7] WARN  j.c.l.cms.controller.LoginController 98 - 日志输出 warn
+2020-06-28 15:21:04,262 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 101 - loginController.login:登録結束
+2020-06-28 15:22:10,810 [http-nio-8080-exec-1] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver 198 - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
+2020-06-28 15:22:10,822 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 61 - LoginController.login:登録開始
+2020-06-28 15:22:10,823 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 15:22:10,825 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 15:22:10,828 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 15:22:10,829 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 94 - loginController.login:登録開始
+2020-06-28 15:22:10,829 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 97 - 日志输出 info
+2020-06-28 15:22:10,829 [http-nio-8080-exec-2] WARN  j.c.l.cms.controller.LoginController 98 - 日志输出 warn
+2020-06-28 15:22:10,830 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 101 - loginController.login:登録結束
+2020-06-28 15:25:08,444 [http-nio-8080-exec-7] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-06-28 15:25:08,445 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-06-28 15:25:08,446 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-06-28 15:25:08,448 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-06-28 15:25:20,063 [http-nio-8080-exec-8] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-06-28 15:25:20,064 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-06-28 15:25:20,064 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-06-28 15:25:20,067 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-06-28 15:26:11,326 [http-nio-8080-exec-10] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver 198 - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
+2020-06-28 15:26:11,331 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 61 - LoginController.login:登録開始
+2020-06-28 15:26:11,334 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 15:26:11,334 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 15:26:11,336 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 15:26:11,336 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 94 - loginController.login:登録開始
+2020-06-28 15:26:11,337 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 97 - 日志输出 info
+2020-06-28 15:26:11,337 [http-nio-8080-exec-9] WARN  j.c.l.cms.controller.LoginController 98 - 日志输出 warn
+2020-06-28 15:26:11,337 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 101 - loginController.login:登録結束
+2020-06-28 15:26:48,057 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 61 - LoginController.login:登録開始
+2020-06-28 15:26:48,059 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 15:26:48,060 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: null, null
+2020-06-28 15:26:48,062 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 0
+2020-06-28 15:26:48,063 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 61 - LoginController.login:登録開始
+2020-06-28 15:26:48,064 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 15:26:48,064 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 15:26:48,066 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 15:26:48,066 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 94 - loginController.login:登録開始
+2020-06-28 15:26:48,067 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 97 - 日志输出 info
+2020-06-28 15:26:48,067 [http-nio-8080-exec-5] WARN  j.c.l.cms.controller.LoginController 98 - 日志输出 warn
+2020-06-28 15:26:48,067 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 101 - loginController.login:登録結束
+2020-06-28 15:28:21,267 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 61 - LoginController.login:登録開始
+2020-06-28 15:28:21,268 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 15:28:21,269 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: null, null
+2020-06-28 15:28:21,270 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 0
+2020-06-28 15:28:21,272 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 61 - LoginController.login:登録開始
+2020-06-28 15:28:21,274 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 15:28:21,275 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 15:28:21,277 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 15:28:21,278 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 94 - loginController.login:登録開始
+2020-06-28 15:28:21,278 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 97 - 日志输出 info
+2020-06-28 15:28:21,278 [http-nio-8080-exec-7] WARN  j.c.l.cms.controller.LoginController 98 - 日志输出 warn
+2020-06-28 15:28:21,278 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 101 - loginController.login:登録結束
+2020-06-28 15:28:36,933 [http-nio-8080-exec-10] INFO  j.c.l.cms.controller.LoginController 61 - LoginController.login:登録開始
+2020-06-28 15:28:36,934 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 15:28:36,935 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: null, null
+2020-06-28 15:28:36,937 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 0
+2020-06-28 15:28:50,004 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 61 - LoginController.login:登録開始
+2020-06-28 15:28:50,005 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 15:28:50,006 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: null, null
+2020-06-28 15:28:50,007 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 0
+2020-06-28 15:29:20,671 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 61 - LoginController.login:登録開始
+2020-06-28 15:29:20,672 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 15:29:20,673 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: null, null
+2020-06-28 15:29:20,674 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 0
+2020-06-28 15:30:11,781 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 61 - LoginController.login:登録開始
+2020-06-28 15:30:11,782 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 15:30:11,783 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: null, null
+2020-06-28 15:30:11,784 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 0
+2020-06-28 15:30:27,509 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 61 - LoginController.login:登録開始
+2020-06-28 15:30:27,510 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 15:30:27,511 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: null, null
+2020-06-28 15:30:27,511 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 0
+2020-06-28 15:37:24,157 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on LAPTOP-A94PII7T with PID 16536 (E:\LYC_CMS\target\classes started by Vin.Young in E:\LYC_CMS)
+2020-06-28 15:37:24,161 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2020-06-28 15:37:25,110 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2020-06-28 15:37:25,121 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2020-06-28 15:37:25,127 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2020-06-28 15:37:25,127 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2020-06-28 15:37:25,207 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2020-06-28 15:37:25,207 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 1009 ms
+2020-06-28 15:37:25,664 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2020-06-28 15:37:25,719 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2020-06-28 15:37:25,870 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2020-06-28 15:37:25,894 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2020-06-28 15:37:25,897 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 2.192 seconds (JVM running for 3.4)
+2020-06-28 15:37:40,711 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on LAPTOP-A94PII7T with PID 10524 (E:\LYC_CMS\target\classes started by Vin.Young in E:\LYC_CMS)
+2020-06-28 15:37:40,739 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2020-06-28 15:37:41,687 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2020-06-28 15:37:41,699 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2020-06-28 15:37:41,704 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2020-06-28 15:37:41,704 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2020-06-28 15:37:41,791 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2020-06-28 15:37:41,792 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 1021 ms
+2020-06-28 15:37:42,309 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2020-06-28 15:37:42,372 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2020-06-28 15:37:42,532 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2020-06-28 15:37:42,556 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2020-06-28 15:37:42,559 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 2.282 seconds (JVM running for 3.535)
+2020-06-28 15:37:48,576 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-06-28 15:37:48,576 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2020-06-28 15:37:48,582 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 6 ms
+2020-06-28 15:37:56,184 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 15:37:59,218 [http-nio-8080-exec-2] INFO  com.zaxxer.hikari.HikariDataSource 110 - HikariPool-1 - Starting...
+2020-06-28 15:38:07,259 [http-nio-8080-exec-2] INFO  com.zaxxer.hikari.HikariDataSource 123 - HikariPool-1 - Start completed.
+2020-06-28 15:38:07,339 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 15:38:07,753 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 15:38:08,040 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 15:38:15,431 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 15:38:15,791 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 15:38:15,792 [http-nio-8080-exec-2] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 15:38:15,792 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 15:40:40,953 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 15:40:40,956 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 15:40:40,956 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 15:40:40,958 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 15:40:40,958 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 15:40:40,959 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 15:40:40,959 [http-nio-8080-exec-4] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 15:40:40,959 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 15:42:12,998 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 15:42:12,999 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 15:42:13,000 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 15:42:13,001 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 15:42:13,001 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 15:42:13,001 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 15:42:13,002 [http-nio-8080-exec-6] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 15:42:13,002 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 15:42:34,201 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 15:42:34,202 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 15:42:34,203 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 2(String), LYC001(String)
+2020-06-28 15:42:34,204 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 0
+2020-06-28 15:43:55,912 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 15:43:55,914 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 15:43:55,914 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 15:43:55,916 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 15:43:55,917 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 15:43:55,917 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 15:43:55,917 [http-nio-8080-exec-9] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 15:43:55,917 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 15:44:08,265 [http-nio-8080-exec-10] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 15:44:08,267 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 15:44:08,268 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 15:44:08,271 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 15:44:08,272 [http-nio-8080-exec-10] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 15:44:08,272 [http-nio-8080-exec-10] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 15:44:08,272 [http-nio-8080-exec-10] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 15:44:08,273 [http-nio-8080-exec-10] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 15:45:13,387 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 15:45:13,388 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 15:45:13,389 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 15:45:13,390 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 15:45:13,391 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 15:45:13,391 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 15:45:13,391 [http-nio-8080-exec-2] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 15:45:13,391 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 15:45:22,657 [http-nio-8080-exec-3] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 15:45:22,657 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 15:45:22,658 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 15:45:22,660 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 15:45:22,660 [http-nio-8080-exec-3] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 15:45:22,661 [http-nio-8080-exec-3] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 15:45:22,661 [http-nio-8080-exec-3] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 15:45:22,661 [http-nio-8080-exec-3] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 15:47:53,557 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 15:47:53,558 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 15:47:53,559 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 15:47:53,560 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 15:47:53,561 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 15:47:53,561 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 15:47:53,561 [http-nio-8080-exec-5] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 15:47:53,562 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 15:48:20,899 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 15:48:20,900 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 15:48:20,900 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 15:48:20,902 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 15:48:20,902 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 15:48:20,902 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 15:48:20,902 [http-nio-8080-exec-6] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 15:48:20,903 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 15:48:36,421 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 15:48:36,422 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 15:48:36,422 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 15:48:36,423 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 15:48:36,424 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 15:48:36,424 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 15:48:36,424 [http-nio-8080-exec-7] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 15:48:36,425 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 15:48:46,952 [http-nio-8080-exec-8] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-06-28 15:48:46,953 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-06-28 15:48:46,953 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-06-28 15:48:46,957 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-06-28 15:48:53,787 [http-nio-8080-exec-9] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-06-28 15:48:53,788 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-06-28 15:48:53,788 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-06-28 15:48:53,790 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-06-28 15:51:27,956 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 15:51:27,957 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 15:51:27,957 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 15:51:27,958 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 15:51:27,959 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 15:51:27,959 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 15:51:27,960 [http-nio-8080-exec-2] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 15:51:27,960 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 15:51:33,227 [http-nio-8080-exec-3] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 15:51:33,228 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 15:51:33,229 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 15:51:33,230 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 15:51:33,230 [http-nio-8080-exec-3] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 15:51:33,230 [http-nio-8080-exec-3] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 15:51:33,230 [http-nio-8080-exec-3] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 15:51:33,231 [http-nio-8080-exec-3] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 15:53:40,154 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 15:53:40,155 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 15:53:40,156 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 15:53:40,157 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 15:53:40,158 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 15:53:40,158 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 15:53:40,158 [http-nio-8080-exec-5] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 15:53:40,159 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 15:58:45,062 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 15:58:45,063 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 15:58:45,064 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 15:58:45,065 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 15:58:45,066 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 15:58:45,066 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 15:58:45,066 [http-nio-8080-exec-7] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 15:58:45,066 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 15:58:49,629 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 15:58:49,630 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 15:58:49,630 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 15:58:49,631 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 15:58:49,631 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 15:58:49,631 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 15:58:49,631 [http-nio-8080-exec-8] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 15:58:49,632 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 15:58:50,636 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 15:58:50,636 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 15:58:50,637 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 15:58:50,638 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 15:58:50,639 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 15:58:50,639 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 15:58:50,639 [http-nio-8080-exec-9] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 15:58:50,639 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 15:58:50,817 [http-nio-8080-exec-10] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 15:58:50,817 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 15:58:50,817 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 15:58:50,818 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 15:58:50,819 [http-nio-8080-exec-10] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 15:58:50,819 [http-nio-8080-exec-10] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 15:58:50,819 [http-nio-8080-exec-10] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 15:58:50,820 [http-nio-8080-exec-10] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 15:58:50,980 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 15:58:50,980 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 15:58:50,981 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 15:58:50,982 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 15:58:50,982 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 15:58:50,982 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 15:58:50,982 [http-nio-8080-exec-1] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 15:58:50,983 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 15:58:51,174 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 15:58:51,174 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 15:58:51,174 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 15:58:51,175 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 15:58:51,176 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 15:58:51,176 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 15:58:51,176 [http-nio-8080-exec-2] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 15:58:51,176 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 15:58:51,354 [http-nio-8080-exec-3] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 15:58:51,354 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 15:58:51,355 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 15:58:51,356 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 15:58:51,356 [http-nio-8080-exec-3] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 15:58:51,356 [http-nio-8080-exec-3] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 15:58:51,357 [http-nio-8080-exec-3] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 15:58:51,357 [http-nio-8080-exec-3] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 15:58:51,527 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 15:58:51,528 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 15:58:51,528 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 15:58:51,529 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 15:58:51,529 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 15:58:51,530 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 15:58:51,530 [http-nio-8080-exec-4] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 15:58:51,530 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 15:58:51,694 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 15:58:51,694 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 15:58:51,694 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 15:58:51,695 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 15:58:51,696 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 15:58:51,696 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 15:58:51,696 [http-nio-8080-exec-5] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 15:58:51,696 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 15:58:51,888 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 15:58:51,889 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 15:58:51,889 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 15:58:51,891 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 15:58:51,893 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 15:58:51,893 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 15:58:51,893 [http-nio-8080-exec-6] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 15:58:51,893 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 15:58:52,071 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 15:58:52,071 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 15:58:52,071 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 15:58:52,072 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 15:58:52,073 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 15:58:52,073 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 15:58:52,073 [http-nio-8080-exec-7] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 15:58:52,073 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 15:58:57,209 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 15:58:57,210 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 15:58:57,210 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 15:58:57,211 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 15:58:57,211 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 15:58:57,212 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 15:58:57,212 [http-nio-8080-exec-8] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 15:58:57,212 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 15:59:16,283 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 15:59:16,284 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 15:59:16,284 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 15:59:16,286 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 15:59:16,286 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 15:59:16,287 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 15:59:16,287 [http-nio-8080-exec-9] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 15:59:16,287 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 15:59:26,083 [http-nio-8080-exec-10] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 15:59:26,084 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 15:59:26,084 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 15:59:26,085 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 15:59:26,086 [http-nio-8080-exec-10] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 15:59:26,086 [http-nio-8080-exec-10] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 15:59:26,086 [http-nio-8080-exec-10] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 15:59:26,086 [http-nio-8080-exec-10] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 15:59:49,006 [http-nio-8080-exec-2] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-06-28 15:59:49,007 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-06-28 15:59:49,008 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-06-28 15:59:49,009 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-06-28 16:03:34,995 [http-nio-8080-exec-5] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-06-28 16:03:34,996 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-06-28 16:03:34,996 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-06-28 16:03:34,998 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-06-28 16:04:09,570 [http-nio-8080-exec-6] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-06-28 16:04:09,571 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-06-28 16:04:09,571 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-06-28 16:04:09,573 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-06-28 16:12:41,763 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 16:12:41,765 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 16:12:41,766 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 16:12:41,768 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 16:12:41,768 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 16:12:41,769 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 16:12:41,769 [http-nio-8080-exec-8] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 16:12:41,769 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 16:12:58,639 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 16:12:58,639 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 16:12:58,640 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 16:12:58,641 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 16:12:58,642 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 16:12:58,642 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 16:12:58,642 [http-nio-8080-exec-9] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 16:12:58,643 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 16:12:58,680 [http-nio-8080-exec-10] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-06-28 16:12:58,680 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-06-28 16:12:58,681 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-06-28 16:12:58,683 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-06-28 16:13:09,728 [http-nio-8080-exec-1] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-06-28 16:13:09,729 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-06-28 16:13:09,730 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-06-28 16:13:09,731 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-06-28 16:14:33,751 [http-nio-8080-exec-3] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 16:14:33,751 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 16:14:33,752 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 16:14:33,753 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 16:14:33,753 [http-nio-8080-exec-3] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 16:14:33,753 [http-nio-8080-exec-3] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 16:14:33,753 [http-nio-8080-exec-3] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 16:14:33,754 [http-nio-8080-exec-3] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 16:14:33,780 [http-nio-8080-exec-4] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-06-28 16:14:33,781 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-06-28 16:14:33,781 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-06-28 16:14:33,783 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-06-28 16:14:38,755 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 16:14:38,756 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 16:14:38,756 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 2(String), LYC001(String)
+2020-06-28 16:14:38,757 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 0
+2020-06-28 16:14:49,043 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 16:14:49,044 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 16:14:49,044 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 16:14:49,045 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 16:14:49,046 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 16:14:49,046 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 16:14:49,046 [http-nio-8080-exec-6] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 16:14:49,046 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 16:14:49,082 [http-nio-8080-exec-7] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-06-28 16:14:49,083 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-06-28 16:14:49,083 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-06-28 16:14:49,085 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-06-28 16:15:10,011 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 16:15:10,012 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 16:15:10,013 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 16:15:10,014 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 16:15:10,015 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 16:15:10,015 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 16:15:10,015 [http-nio-8080-exec-8] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 16:15:10,015 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 16:15:10,053 [http-nio-8080-exec-9] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-06-28 16:15:10,053 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-06-28 16:15:10,053 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-06-28 16:15:10,054 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-06-28 16:43:09,928 [http-nio-8080-exec-2] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-06-28 16:43:09,929 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-06-28 16:43:09,930 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-06-28 16:43:09,932 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-06-28 16:43:41,793 [http-nio-8080-exec-3] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-06-28 16:43:41,795 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-06-28 16:43:41,796 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-06-28 16:43:41,797 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-06-28 16:44:56,278 [http-nio-8080-exec-5] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-06-28 16:44:56,279 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-06-28 16:44:56,280 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-06-28 16:44:56,281 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-06-28 16:45:05,242 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 16:45:05,243 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 16:45:05,243 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 16:45:05,245 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 16:45:05,246 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 16:45:05,246 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 16:45:05,246 [http-nio-8080-exec-7] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 16:45:05,246 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 16:46:46,868 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 16:46:46,869 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 16:46:46,870 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 16:46:46,871 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 16:46:46,872 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 16:46:46,872 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 16:46:46,872 [http-nio-8080-exec-9] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 16:46:46,872 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 16:49:47,552 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 16:49:47,553 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 16:49:47,553 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 16:49:47,554 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 16:49:47,555 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 16:49:47,555 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 16:49:47,555 [http-nio-8080-exec-1] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 16:49:47,556 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 16:51:07,568 [http-nio-8080-exec-3] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 16:51:07,569 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 16:51:07,570 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 16:51:07,572 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 16:51:07,572 [http-nio-8080-exec-3] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 16:51:07,572 [http-nio-8080-exec-3] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 16:51:07,572 [http-nio-8080-exec-3] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 16:51:07,573 [http-nio-8080-exec-3] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 16:51:20,701 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 16:51:20,701 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 16:51:20,702 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 16:51:20,703 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 16:51:20,703 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 16:51:20,704 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 16:51:20,704 [http-nio-8080-exec-4] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 16:51:20,704 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 16:52:09,017 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 16:52:09,018 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 16:52:09,019 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 16:52:09,020 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 16:52:09,020 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 16:52:09,021 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 16:52:09,021 [http-nio-8080-exec-5] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 16:52:09,021 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 16:53:15,789 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 16:53:15,790 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 16:53:15,791 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 16:53:15,792 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 16:53:15,792 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 16:53:15,792 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 16:53:15,793 [http-nio-8080-exec-7] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 16:53:15,793 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 16:53:59,876 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 16:53:59,877 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 16:53:59,878 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 16:53:59,879 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 16:53:59,880 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 16:53:59,880 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 16:53:59,880 [http-nio-8080-exec-8] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 16:53:59,881 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 16:54:10,215 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 16:54:10,216 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 16:54:10,216 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 16:54:10,217 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 16:54:10,218 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 16:54:10,218 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 16:54:10,218 [http-nio-8080-exec-9] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 16:54:10,218 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 16:54:16,388 [http-nio-8080-exec-10] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 16:54:16,389 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 16:54:16,389 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 16:54:16,390 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 16:54:16,390 [http-nio-8080-exec-10] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 16:54:16,391 [http-nio-8080-exec-10] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 16:54:16,391 [http-nio-8080-exec-10] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 16:54:16,391 [http-nio-8080-exec-10] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 16:54:32,324 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 16:54:32,325 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 16:54:32,326 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 16:54:32,327 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 16:54:32,327 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 16:54:32,328 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 16:54:32,328 [http-nio-8080-exec-1] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 16:54:32,328 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 16:54:59,487 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 16:54:59,488 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 16:54:59,488 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 16:54:59,489 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 16:54:59,490 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 16:54:59,490 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 16:54:59,491 [http-nio-8080-exec-2] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 16:54:59,491 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 16:55:07,034 [http-nio-8080-exec-3] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 16:55:07,035 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 16:55:07,035 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 16:55:07,036 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 16:55:07,036 [http-nio-8080-exec-3] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 16:55:07,037 [http-nio-8080-exec-3] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 16:55:07,037 [http-nio-8080-exec-3] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 16:55:07,037 [http-nio-8080-exec-3] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 16:55:47,233 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 16:55:47,234 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 16:55:47,235 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 16:55:47,236 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 16:55:47,236 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 16:55:47,237 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 16:55:47,237 [http-nio-8080-exec-4] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 16:55:47,237 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 16:55:47,263 [http-nio-8080-exec-5] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-06-28 16:55:47,263 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-06-28 16:55:47,264 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-06-28 16:55:47,265 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-06-28 16:55:58,922 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 16:55:58,923 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 16:55:58,923 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 16:55:58,924 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 16:55:58,924 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 16:55:58,924 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 16:55:58,925 [http-nio-8080-exec-6] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 16:55:58,925 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 16:55:58,949 [http-nio-8080-exec-7] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-06-28 16:55:58,949 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-06-28 16:55:58,950 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-06-28 16:55:58,951 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-06-28 16:56:05,470 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 16:56:05,471 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 16:56:05,471 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 2(String), LYC001(String)
+2020-06-28 16:56:05,472 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 0
+2020-06-28 16:56:11,457 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 16:56:11,458 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 16:56:11,458 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 16:56:11,459 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 16:56:11,459 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 16:56:11,460 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 16:56:11,460 [http-nio-8080-exec-9] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 16:56:11,460 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 16:56:16,444 [http-nio-8080-exec-10] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-06-28 16:56:16,445 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-06-28 16:56:16,445 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-06-28 16:56:16,448 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-06-28 16:56:57,065 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 16:56:57,066 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 16:56:57,066 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 16:56:57,068 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 16:56:57,069 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 16:56:57,069 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 16:56:57,069 [http-nio-8080-exec-1] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 16:56:57,069 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 16:57:03,586 [http-nio-8080-exec-2] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-06-28 16:57:03,587 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-06-28 16:57:03,588 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-06-28 16:57:03,589 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-06-28 16:57:14,447 [http-nio-8080-exec-3] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 16:57:14,447 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 16:57:14,448 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 16:57:14,449 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 16:57:14,449 [http-nio-8080-exec-3] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 16:57:14,449 [http-nio-8080-exec-3] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 16:57:14,449 [http-nio-8080-exec-3] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 16:57:14,450 [http-nio-8080-exec-3] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 16:57:18,488 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 16:57:18,489 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 16:57:18,489 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 16:57:18,490 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 16:57:18,491 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 16:57:18,491 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 16:57:18,491 [http-nio-8080-exec-4] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 16:57:18,491 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 16:58:10,544 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 16:58:10,544 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 16:58:10,545 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 16:58:10,546 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 16:58:10,546 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 16:58:10,546 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 16:58:10,546 [http-nio-8080-exec-5] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 16:58:10,546 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 16:58:50,916 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 16:58:50,917 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 16:58:50,918 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 16:58:50,919 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 16:58:50,919 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 16:58:50,920 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 16:58:50,920 [http-nio-8080-exec-6] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 16:58:50,920 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 17:00:17,806 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 17:00:17,807 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 17:00:17,807 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 17:00:17,809 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 17:00:17,809 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 17:00:17,810 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 17:00:17,810 [http-nio-8080-exec-8] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 17:00:17,810 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 17:06:02,511 [http-nio-8080-exec-10] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 17:06:02,513 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 17:06:02,513 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 17:06:02,515 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 17:06:02,515 [http-nio-8080-exec-10] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 17:06:02,516 [http-nio-8080-exec-10] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 17:06:02,516 [http-nio-8080-exec-10] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 17:06:02,516 [http-nio-8080-exec-10] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 17:06:15,997 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 17:06:15,998 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 17:06:15,998 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 17:06:15,999 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 17:06:16,000 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 17:06:16,000 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 17:06:16,000 [http-nio-8080-exec-1] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 17:06:16,000 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 17:12:34,425 [http-nio-8080-exec-3] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 17:12:34,428 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 17:12:34,428 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 17:12:34,430 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 17:12:34,430 [http-nio-8080-exec-3] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 17:12:34,431 [http-nio-8080-exec-3] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 17:12:34,431 [http-nio-8080-exec-3] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 17:12:34,431 [http-nio-8080-exec-3] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 17:15:12,376 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 17:15:12,377 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 17:15:12,378 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 17:15:12,379 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 17:15:12,379 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 17:15:12,380 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 17:15:12,380 [http-nio-8080-exec-6] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 17:15:12,380 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 17:15:25,403 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 17:15:25,404 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 17:15:25,404 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 17:15:25,405 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 17:15:25,406 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 17:15:25,406 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 17:15:25,406 [http-nio-8080-exec-7] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 17:15:25,406 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 17:16:15,918 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 17:16:15,918 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 17:16:15,919 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 17:16:15,920 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 17:16:15,920 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 17:16:15,920 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 17:16:15,921 [http-nio-8080-exec-8] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 17:16:15,921 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 17:17:25,155 [http-nio-8080-exec-10] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 17:17:25,155 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 17:17:25,156 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 17:17:25,157 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 17:17:25,158 [http-nio-8080-exec-10] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 17:17:25,158 [http-nio-8080-exec-10] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 17:17:25,158 [http-nio-8080-exec-10] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 17:17:25,159 [http-nio-8080-exec-10] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 17:23:02,595 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 17:23:02,596 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 17:23:02,596 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 17:23:02,597 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 17:23:02,597 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 17:23:02,598 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 17:23:02,598 [http-nio-8080-exec-2] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 17:23:02,598 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 17:23:03,931 [http-nio-8080-exec-4] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-06-28 17:23:03,932 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-06-28 17:23:03,933 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-06-28 17:23:03,934 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-06-28 17:24:04,097 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 17:24:04,098 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 17:24:04,098 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC003(String)
+2020-06-28 17:24:04,100 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 17:24:04,100 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 17:24:04,100 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 17:24:04,100 [http-nio-8080-exec-6] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 17:24:04,100 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 17:24:05,542 [http-nio-8080-exec-7] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-06-28 17:24:05,543 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-06-28 17:24:05,543 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC003(String)
+2020-06-28 17:24:05,544 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 0
+2020-06-28 17:26:32,394 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 17:26:32,395 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 17:26:32,395 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC003(String)
+2020-06-28 17:26:32,396 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 17:26:32,397 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 17:26:32,397 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 17:26:32,397 [http-nio-8080-exec-9] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 17:26:32,397 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 17:26:39,769 [http-nio-8080-exec-10] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-06-28 17:26:39,770 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-06-28 17:26:39,770 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC003(String)
+2020-06-28 17:26:39,771 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 0
+2020-06-28 17:27:52,554 [http-nio-8080-exec-2] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-06-28 17:27:52,555 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-06-28 17:27:52,555 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC003(String)
+2020-06-28 17:27:52,557 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 0
+2020-06-28 17:46:45,735 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 17:46:45,737 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 17:46:45,737 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 2(String), LYC001(String)
+2020-06-28 17:46:45,739 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 0
+2020-06-28 17:46:51,755 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 17:46:51,756 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 17:46:51,757 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 2(String), LYC001(String)
+2020-06-28 17:46:51,757 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 0
+2020-06-28 17:46:54,556 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 17:46:54,556 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 17:46:54,557 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-06-28 17:46:54,558 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 17:46:54,559 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 17:46:54,559 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 17:46:54,559 [http-nio-8080-exec-7] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 17:46:54,559 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 17:46:54,586 [http-nio-8080-exec-8] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-06-28 17:46:54,587 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-06-28 17:46:54,587 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
+2020-06-28 17:46:54,588 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-06-28 17:47:04,971 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 17:47:04,971 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 17:47:04,972 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC002(String)
+2020-06-28 17:47:04,973 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 17:47:04,973 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 17:47:04,973 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 17:47:04,973 [http-nio-8080-exec-9] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 17:47:04,974 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 17:47:04,990 [http-nio-8080-exec-10] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-06-28 17:47:04,991 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-06-28 17:47:04,991 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC002(String)
+2020-06-28 17:47:04,992 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
+2020-06-28 17:47:13,359 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 17:47:13,359 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 17:47:13,359 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC003(String)
+2020-06-28 17:47:13,360 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 17:47:13,360 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 17:47:13,361 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 17:47:13,361 [http-nio-8080-exec-1] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 17:47:13,361 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 17:47:13,378 [http-nio-8080-exec-2] INFO  j.c.l.c.controller.SubCostController 51 - LoginController.login:查询开始
+2020-06-28 17:47:13,378 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-06-28 17:47:13,379 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC003(String)
+2020-06-28 17:47:13,379 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 0
+2020-06-28 17:47:21,468 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-06-28 17:47:21,469 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC003(String)
+2020-06-28 17:47:21,469 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 0
+2020-06-28 17:48:14,287 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-06-28 17:48:14,294 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC003(String)
+2020-06-28 17:48:14,411 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 0
+2020-06-28 17:49:05,732 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-06-28 17:49:05,733 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-06-28 17:49:05,733 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC003(String)
+2020-06-28 17:49:05,735 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-06-28 17:49:05,735 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-06-28 17:49:05,736 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-06-28 17:49:05,736 [http-nio-8080-exec-6] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-06-28 17:49:05,737 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-06-28 17:49:53,606 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-06-28 17:49:53,606 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC003(String)
+2020-06-28 17:49:53,607 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 0
+2020-06-28 17:49:53,607 [http-nio-8080-exec-7] INFO  j.c.l.c.controller.SubCostController 128 - GetEmployeeInfoController.getEmployeeInfo:インサート開始
+2020-06-28 17:49:53,608 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.insertCost 143 - ==>  Preparing: INSERT INTO expenses_information VALUE( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW()) 
+2020-06-28 17:49:53,608 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.insertCost 143 - ==> Parameters: LYC003(String), 1(String), 500000(String), 300000(String), null, 0(String), 800000(String), 12000(String), 08(String), 12(String), 测试3(String)
+2020-06-28 17:49:53,613 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.GetCostMapper.insertCost 143 - <==    Updates: 1
+2020-06-28 17:50:10,494 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
+2020-06-28 17:50:10,495 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC003(String)
+2020-06-28 17:50:10,496 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1

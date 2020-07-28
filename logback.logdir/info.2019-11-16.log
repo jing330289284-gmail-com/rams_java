@@ -1,0 +1,34 @@
+2019-11-16 09:42:31,096 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on DESKTOP-GD7FF1R with PID 10176 (C:\E\workspacer\LYC_CMS\target\classes started by admin in C:\E\workspacer\LYC_CMS)
+2019-11-16 09:42:31,108 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2019-11-16 09:42:34,759 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2019-11-16 09:42:34,788 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2019-11-16 09:42:34,813 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2019-11-16 09:42:34,814 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2019-11-16 09:42:35,103 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2019-11-16 09:42:35,104 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 3901 ms
+2019-11-16 09:42:36,442 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2019-11-16 09:42:36,659 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2019-11-16 09:42:37,206 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2019-11-16 09:42:37,280 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2019-11-16 09:42:37,285 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 7.567 seconds (JVM running for 21.276)
+2019-11-16 09:42:51,660 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-11-16 09:42:51,661 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2019-11-16 09:42:51,676 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 15 ms
+2019-11-16 09:43:11,284 [http-nio-8080-exec-8] INFO  o.a.tomcat.util.http.parser.Cookie 173 - A cookie header was received [:0.5821793152673651:=http:] that contained an invalid cookie. That cookie will be ignored.
+ Note: further occurrences of this error will be logged at DEBUG level.
+2019-11-16 09:43:11,404 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 56 - LoginController.login:登録開始
+2019-11-16 09:43:11,447 [http-nio-8080-exec-8] INFO  com.zaxxer.hikari.HikariDataSource 110 - HikariPool-1 - Starting...
+2019-11-16 09:43:12,212 [http-nio-8080-exec-8] INFO  com.zaxxer.hikari.HikariDataSource 123 - HikariPool-1 - Start completed.
+2019-11-16 09:51:52,523 [http-nio-8080-exec-3] INFO  j.c.l.cms.controller.LoginController 56 - LoginController.login:登録開始
+2019-11-16 09:51:55,509 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 56 - LoginController.login:登録開始
+2019-11-16 09:53:04,973 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 56 - LoginController.login:登録開始
+2019-11-16 09:53:06,563 [http-nio-8080-exec-10] INFO  j.c.l.cms.controller.LoginController 56 - LoginController.login:登録開始
+2019-11-16 09:53:07,824 [http-nio-8080-exec-3] INFO  j.c.l.cms.controller.LoginController 56 - LoginController.login:登録開始
+2019-11-16 09:53:08,826 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 56 - LoginController.login:登録開始
+2019-11-16 09:53:10,328 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 56 - LoginController.login:登録開始
+2019-11-16 09:53:11,220 [http-nio-8080-exec-10] INFO  j.c.l.cms.controller.LoginController 56 - LoginController.login:登録開始
+2019-11-16 09:54:14,926 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 56 - LoginController.login:登録開始
+2019-11-16 09:54:16,388 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 56 - LoginController.login:登録開始
+2019-11-16 09:54:33,399 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 56 - LoginController.login:登録開始
+2019-11-16 09:58:41,550 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 56 - LoginController.login:登録開始
+2019-11-16 11:08:31,557 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool 766 - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=35m45s792ms704µs732ns).

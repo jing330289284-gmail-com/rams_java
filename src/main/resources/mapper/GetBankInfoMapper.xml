@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jp.co.lyc.cms.mapper.GetBankInfoMapper">
+    <resultMap id="BankInfo" type="java.lang.String"/>
+    <resultMap id="BankBranchInfo" type="map"/>
+    <resultMap id="AccountInfo" type="jp.co.lyc.cms.model.BankInfoModel"/>
+    <select id="selectBankInfo" resultMap="BankInfo">
+        SELECT bankName FROM bank_master
+    </select>
+    <select id="selectAccountInfo" parameterType="String" resultMap="AccountInfo">
+        SELECT 
+        	ACI.* ,
+        	BBM.bankBranchName
+        FROM 
+        	account_information AS ACI
+        LEFT JOIN
+        	bank_barnch_master as BBM
+        ON  
+        	ACI.bankCode = BBM.bankCode
+        AND 
+        	ACI.bankBranchCode = BBM.bankBranchCode
+        WHERE 
+        	employeeOrCustomerNo=#{employeeOrCustomerNo}
+        	AND accountBelongsStatus=#{accountBelongsStatus}
+    </select>
+    <select id="getBankBranchInfo" resultMap="BankBranchInfo" parameterType="map">
+        SELECT 
+			BBM.bankBranchName,
+			BBM.bankBranchCode
+        FROM 
+        	bank_branch_master AS BBM
+        LEFT JOIN
+        	bank_master AS BM
+        ON  
+        	BM.bankCode = BBM.bankCode
+        WHERE 
+        	BBM.bankCode = #{bankCode}
+	        <if test="bankBranchCode != null">
+				AND BBM.bankBranchCode = #{bankBranchCode}
+			</if>
+			<if test="bankBranchName != null">
+				AND BBM.bankBranchName = #{bankBranchName}
+			</if>
+    </select>
+    <insert id="insertAccount" parameterType="String">
+		INSERT INTO account_information 
+		VALUE(
+		#{employeeOrCustomerNo},
+		#{accountBelongsStatus},
+		#{bankCode},
+		#{bankBranchCode},
+		#{accountNo},
+		#{accountName},
+		#{accountTypeStatus},
+		NOW(),
+		NOW(),
+		#{updateUser})
+    </insert>
+    <update id="updateAccount" parameterType="String">
+		UPDATE account_information
+		SET 
+		<if test="bankCode != null">
+			bankCode = #{bankCode},
+		</if>
+		<if test="bankBranchCode != null">
+			bankBranchCode = #{bankBranchCode},
+		</if>
+		<if test="accountNo != null">
+			accountNo = #{accountNo},
+		</if>
+		<if test="accountName != null">
+			accountName = #{accountName},
+		</if>	
+			accountTypeStatus = #{accountTypeStatus},
+			updateTime = NOW(),
+			updateUser = #{updateUser}
+		WHERE 
+			employeeOrCustomerNo = #{employeeOrCustomerNo}
+			AND accountBelongsStatus = #{accountBelongsStatus}
+    </update>
+</mapper>

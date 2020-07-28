@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../public/bootstrap/js/jquery-3.3.1.slim.min.js"></script>
+<script>
+    function getEmployeeName(){
+        var uploadURL ="/getEmployeeName"; //Upload URL
+        var emp={};
+        emp["employeeNo"] = $("#employeeNo").val();
+          $.ajax({
+            url: uploadURL,
+            type: "POST",
+            contentType:'application/json',
+            processData: false,
+            cache: false,
+            data: JSON.stringify(emp),
+            timeout: 30000,
+            beforeSend: function(xhr, settings) {
+              //送信前の処理
+            },
+            complete: function(xhr, textStatus) {
+              //通信完了
+            },
+            success: function(result, textStatus, xhr) {
+              //ajax通信が成功した
+              alert(result);
+            },
+            error: function(xhr, textStatus, error) {
+              //ajax通信が失敗した
+              alert("aaaaaaaaaaaaaa");
+            }
+          });
+      }
+  </script>
+</head>
+<body>
+<label>Login Success</label>
+<br/>
+<label>EmployeeNo</label>
+<input type="text" id="employeeNo"/>
+<button onclick="getEmployeeName()">Name</button>
+</body>
+</html>

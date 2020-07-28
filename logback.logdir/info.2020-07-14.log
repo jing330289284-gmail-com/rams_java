@@ -1,0 +1,473 @@
+2020-07-14 19:01:31,655 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on LAPTOP-A94PII7T with PID 15488 (E:\LYC_CMS\target\classes started by Vin.Young in E:\LYC_CMS)
+2020-07-14 19:01:31,662 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2020-07-14 19:01:32,728 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2020-07-14 19:01:32,741 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2020-07-14 19:01:32,747 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2020-07-14 19:01:32,748 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2020-07-14 19:01:32,833 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2020-07-14 19:01:32,833 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 1130 ms
+2020-07-14 19:01:33,235 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext 557 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'bankInfoController': Unsatisfied dependency expressed through field 'bankInfoSer'; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'getBankInfoService': Unsatisfied dependency expressed through field 'bankMapper'; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'getBankInfoMapper' defined in file [E:\LYC_CMS\target\classes\jp\co\lyc\cms\mapper\GetBankInfoMapper.class]: Unsatisfied dependency expressed through bean property 'sqlSessionFactory'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in class path resource [org/mybatis/spring/boot/autoconfigure/MybatisAutoConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [E:\LYC_CMS\target\classes\mapper\GetEmployeeInfoMapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error creating document instance.  Cause: org.xml.sax.SAXParseException; lineNumber: 99; columnNumber: 6; Invalid byte 2 of 2-byte UTF-8 sequence.
+2020-07-14 19:01:33,239 [main] INFO  o.a.catalina.core.StandardService 173 - Stopping service [Tomcat]
+2020-07-14 19:01:33,252 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener 136 - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2020-07-14 19:03:51,284 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on LAPTOP-A94PII7T with PID 9308 (E:\LYC_CMS\target\classes started by Vin.Young in E:\LYC_CMS)
+2020-07-14 19:03:51,288 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2020-07-14 19:03:52,324 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2020-07-14 19:03:52,337 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2020-07-14 19:03:52,343 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2020-07-14 19:03:52,343 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2020-07-14 19:03:52,432 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2020-07-14 19:03:52,433 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 1106 ms
+2020-07-14 19:04:09,108 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2020-07-14 19:04:14,632 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2020-07-14 19:04:30,668 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2020-07-14 19:04:31,261 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2020-07-14 19:04:31,359 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 40.541 seconds (JVM running for 41.863)
+2020-07-14 19:04:48,737 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-07-14 19:04:48,742 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2020-07-14 19:04:49,232 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 485 ms
+2020-07-14 19:04:57,035 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-07-14 19:04:58,278 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource 110 - HikariPool-1 - Starting...
+2020-07-14 19:05:05,410 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource 123 - HikariPool-1 - Start completed.
+2020-07-14 19:05:07,257 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityNo LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-07-14 19:05:11,453 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-07-14 19:05:13,549 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-07-14 19:05:14,068 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 77 - loginController.login:登録開始
+2020-07-14 19:05:14,072 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 80 - 日志输出 info
+2020-07-14 19:05:14,077 [http-nio-8080-exec-1] WARN  j.c.l.cms.controller.LoginController 81 - 日志输出 warn
+2020-07-14 19:05:14,085 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録結束
+2020-07-14 19:22:38,537 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on LAPTOP-A94PII7T with PID 10388 (E:\LYC_CMS\target\classes started by Vin.Young in E:\LYC_CMS)
+2020-07-14 19:22:38,541 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2020-07-14 19:22:39,513 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2020-07-14 19:22:39,525 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2020-07-14 19:22:39,532 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2020-07-14 19:22:39,532 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2020-07-14 19:22:39,620 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2020-07-14 19:22:39,620 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 1047 ms
+2020-07-14 19:22:57,411 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2020-07-14 19:23:03,205 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2020-07-14 19:23:20,014 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2020-07-14 19:23:20,610 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2020-07-14 19:23:20,707 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 42.619 seconds (JVM running for 43.896)
+2020-07-14 19:23:35,248 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-07-14 19:23:35,253 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2020-07-14 19:23:35,762 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 505 ms
+2020-07-14 19:23:43,276 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-07-14 19:23:44,496 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource 110 - HikariPool-1 - Starting...
+2020-07-14 19:23:54,144 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource 123 - HikariPool-1 - Start completed.
+2020-07-14 19:23:54,941 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.employeeFristName, a.employeeLastName, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityCode LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-07-14 19:23:58,063 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-07-14 19:24:00,670 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-07-14 19:30:48,596 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on LAPTOP-A94PII7T with PID 12820 (E:\LYC_CMS\target\classes started by Vin.Young in E:\LYC_CMS)
+2020-07-14 19:30:48,601 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2020-07-14 19:30:49,581 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2020-07-14 19:30:49,593 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2020-07-14 19:30:49,599 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2020-07-14 19:30:49,599 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2020-07-14 19:30:49,684 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2020-07-14 19:30:49,684 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 1051 ms
+2020-07-14 19:31:06,429 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2020-07-14 19:31:12,082 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2020-07-14 19:31:28,429 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2020-07-14 19:31:29,037 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2020-07-14 19:31:29,132 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 40.986 seconds (JVM running for 42.256)
+2020-07-14 19:31:44,621 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-07-14 19:31:44,626 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2020-07-14 19:31:45,128 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 498 ms
+2020-07-14 19:31:52,013 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-07-14 19:31:53,184 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource 110 - HikariPool-1 - Starting...
+2020-07-14 19:32:02,385 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource 123 - HikariPool-1 - Start completed.
+2020-07-14 19:32:03,206 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.employeeFristName, a.employeeLastName, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityCode LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-07-14 19:32:06,335 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-07-14 19:32:08,871 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-07-14 19:32:26,540 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.getVisa 143 - ==>  Preparing: SELECT visaCode,visaName FROM visa_master; 
+2020-07-14 19:32:26,544 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.getNationalitys 143 - ==>  Preparing: SELECT nationalityCode,nationalityName FROM nationality_master; 
+2020-07-14 19:32:26,558 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.getJapaneseLevel 143 - ==>  Preparing: SELECT japaneseLevelCode,japaneseLevelName FROM japanese_Level_master; 
+2020-07-14 19:32:26,558 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.getCustomer 143 - ==>  Preparing: SELECT customerRankingCode,customerRankingName FROM customer_ranking_master; 
+2020-07-14 19:32:26,573 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.getIntoCompany 143 - ==>  Preparing: SELECT intoCompanyCode,intoCompanyName FROM into_company_master; 
+2020-07-14 19:32:26,655 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.getVisa 143 - ==> Parameters: 
+2020-07-14 19:32:26,663 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.getNationalitys 143 - ==> Parameters: 
+2020-07-14 19:32:26,682 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.getCustomer 143 - ==> Parameters: 
+2020-07-14 19:32:26,678 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.getJapaneseLevel 143 - ==> Parameters: 
+2020-07-14 19:32:26,693 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.getIntoCompany 143 - ==> Parameters: 
+2020-07-14 19:32:27,036 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.getCustomer 143 - <==      Total: 0
+2020-07-14 19:32:28,118 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.getVisa 143 - <==      Total: 9
+2020-07-14 19:32:28,131 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.getJapaneseLevel 143 - <==      Total: 6
+2020-07-14 19:32:28,136 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.getIntoCompany 143 - <==      Total: 5
+2020-07-14 19:32:28,155 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.getNationalitys 143 - <==      Total: 5
+2020-07-14 19:32:33,030 [http-nio-8080-exec-4] INFO  j.c.l.c.c.GetEmployeeInfoController 49 - GetEmployeeInfoController.getEmployeeInfo:検索開始
+2020-07-14 19:32:40,259 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - ==>  Preparing: select (@rowNo := @rowNo + 1) AS rowNo, em.employeeNo, em.employeeFristName, emd.Furigana, emd.age, concat(emd.joinCompanyOfYear,emd.joinCompanyOfMonth) as yearMonthIn, oi.AdmissionYearAndMonth, emd.salary, ci.customerName, emd.phoneNo, oi.nearestStation from rams.employee as em left join rams.employee_detail as emd on emd.employeeNo=em.employeeNo left join rams.onsite_info as oi on em.employeeNo=oi.employeeNo left join rams.employee_site_information as emsi on em.employeeNo=emsi.employeeNo left join rams.customer_information as ci on emsi.customerNo=ci.customerNo left join rams.nationality_master as nm on emd.nationalityCode=nm.nationalityCode left join rams.into_company_master as incm on emd.ResidenceOfCode=incm.intoCompanyCode ,(SELECT @rowNo := 0) AS rowNo where 1=1 ORDER BY em.employeeNo ,emd.salary DESC 
+2020-07-14 19:32:40,272 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - ==> Parameters: 
+2020-07-14 19:32:44,842 [http-nio-8080-exec-4] INFO  j.c.l.c.c.GetEmployeeInfoController 57 - GetEmployeeInfoController.getEmployeeInfo:検索結束
+2020-07-14 19:32:52,318 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.getTechnologyType 143 - ==>  Preparing: SELECT japaneseLevelCode,japaneseLevelName FROM technology_Type_Master where 1=1 AND japaneseLevelName like concat('%',?,'%'); 
+2020-07-14 19:32:52,328 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.getTechnologyType 143 - ==> Parameters: c(String)
+2020-07-14 19:37:07,985 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.getNationalitys 143 - ==>  Preparing: SELECT nationalityCode,nationalityName FROM nationality_master; 
+2020-07-14 19:37:07,986 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.getVisa 143 - ==>  Preparing: SELECT visaCode,visaName FROM visa_master; 
+2020-07-14 19:37:08,017 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.getIntoCompany 143 - ==>  Preparing: SELECT intoCompanyCode,intoCompanyName FROM into_company_master; 
+2020-07-14 19:37:08,022 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.getJapaneseLevel 143 - ==>  Preparing: SELECT japaneseLevelCode,japaneseLevelName FROM japanese_Level_master; 
+2020-07-14 19:37:08,032 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.getNationalitys 143 - ==> Parameters: 
+2020-07-14 19:37:08,017 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.G.getCustomer 143 - ==>  Preparing: SELECT customerRankingCode,customerRankingName FROM customer_ranking_master; 
+2020-07-14 19:37:08,047 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.getVisa 143 - ==> Parameters: 
+2020-07-14 19:37:08,099 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.getIntoCompany 143 - ==> Parameters: 
+2020-07-14 19:37:08,107 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.getJapaneseLevel 143 - ==> Parameters: 
+2020-07-14 19:37:08,119 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.G.getCustomer 143 - ==> Parameters: 
+2020-07-14 19:37:08,380 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.getNationalitys 143 - <==      Total: 5
+2020-07-14 19:37:08,424 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.G.getCustomer 143 - <==      Total: 0
+2020-07-14 19:37:08,601 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.getIntoCompany 143 - <==      Total: 5
+2020-07-14 19:37:08,637 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.getJapaneseLevel 143 - <==      Total: 6
+2020-07-14 19:37:09,122 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.getVisa 143 - <==      Total: 9
+2020-07-14 19:38:12,025 [http-nio-8080-exec-7] INFO  j.c.l.c.c.CustomerInfoController 29 - CustomerInfoController.onloadPage:页面加载開始
+2020-07-14 19:38:12,249 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
+2020-07-14 19:38:12,258 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
+2020-07-14 19:38:12,465 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 0
+2020-07-14 19:38:12,489 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
+2020-07-14 19:38:12,498 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
+2020-07-14 19:38:12,740 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
+2020-07-14 19:38:12,751 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==>  Preparing: SELECT MAX(customerNo) AS saibanCustomerNo FROM customer_information 
+2020-07-14 19:38:12,776 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==> Parameters: 
+2020-07-14 19:38:13,050 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - <==      Total: 1
+2020-07-14 19:38:28,344 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-07-14 19:38:28,564 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.employeeFristName, a.employeeLastName, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityCode LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-07-14 19:38:28,578 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-07-14 19:38:28,824 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-07-14 19:38:34,907 [http-nio-8080-exec-8] INFO  j.c.l.c.c.CustomerInfoController 29 - CustomerInfoController.onloadPage:页面加载開始
+2020-07-14 19:38:35,131 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
+2020-07-14 19:38:35,140 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
+2020-07-14 19:38:35,390 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 0
+2020-07-14 19:38:35,438 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
+2020-07-14 19:38:35,446 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
+2020-07-14 19:38:35,687 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
+2020-07-14 19:38:35,699 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==>  Preparing: SELECT MAX(customerNo) AS saibanCustomerNo FROM customer_information 
+2020-07-14 19:38:35,709 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==> Parameters: 
+2020-07-14 19:38:35,934 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - <==      Total: 1
+2020-07-14 19:40:03,849 [http-nio-8080-exec-10] INFO  j.c.l.c.c.CustomerInfoController 29 - CustomerInfoController.onloadPage:页面加载開始
+2020-07-14 19:40:04,082 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
+2020-07-14 19:40:04,090 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
+2020-07-14 19:40:04,320 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
+2020-07-14 19:40:04,331 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
+2020-07-14 19:40:04,339 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
+2020-07-14 19:40:04,586 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
+2020-07-14 19:40:04,600 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==>  Preparing: SELECT MAX(customerNo) AS saibanCustomerNo FROM customer_information 
+2020-07-14 19:40:04,609 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==> Parameters: 
+2020-07-14 19:40:04,825 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - <==      Total: 1
+2020-07-14 19:40:41,818 [http-nio-8080-exec-6] INFO  j.c.l.c.c.CustomerInfoController 29 - CustomerInfoController.onloadPage:页面加载開始
+2020-07-14 19:40:42,033 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
+2020-07-14 19:40:42,041 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
+2020-07-14 19:40:42,273 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
+2020-07-14 19:40:42,286 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
+2020-07-14 19:40:42,295 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
+2020-07-14 19:40:42,527 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
+2020-07-14 19:40:42,539 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==>  Preparing: SELECT MAX(customerNo) AS saibanCustomerNo FROM customer_information 
+2020-07-14 19:40:42,548 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==> Parameters: 
+2020-07-14 19:40:42,772 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - <==      Total: 1
+2020-07-14 19:41:14,101 [http-nio-8080-exec-2] INFO  j.c.l.c.c.CustomerInfoController 29 - CustomerInfoController.onloadPage:页面加载開始
+2020-07-14 19:41:14,321 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
+2020-07-14 19:41:14,329 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
+2020-07-14 19:41:14,564 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
+2020-07-14 19:41:14,575 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
+2020-07-14 19:41:14,584 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
+2020-07-14 19:41:14,815 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
+2020-07-14 19:41:14,827 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==>  Preparing: SELECT MAX(customerNo) AS saibanCustomerNo FROM customer_information 
+2020-07-14 19:41:14,836 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==> Parameters: 
+2020-07-14 19:41:15,061 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - <==      Total: 1
+2020-07-14 19:42:21,269 [http-nio-8080-exec-9] INFO  j.c.l.c.c.CustomerInfoController 29 - CustomerInfoController.onloadPage:页面加载開始
+2020-07-14 19:42:21,473 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
+2020-07-14 19:42:21,484 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
+2020-07-14 19:42:21,716 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
+2020-07-14 19:42:21,727 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
+2020-07-14 19:42:21,735 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
+2020-07-14 19:42:21,968 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
+2020-07-14 19:42:21,978 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==>  Preparing: SELECT MAX(customerNo) AS saibanCustomerNo FROM customer_information 
+2020-07-14 19:42:21,986 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==> Parameters: 
+2020-07-14 19:42:22,213 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - <==      Total: 1
+2020-07-14 19:42:32,778 [http-nio-8080-exec-3] INFO  j.c.l.c.c.BankInfoController 33 - BankInfoController.getBankInfo:検索開始
+2020-07-14 19:42:32,991 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-14 19:42:32,998 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-14 19:42:33,202 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 0
+2020-07-14 19:44:22,522 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on LAPTOP-A94PII7T with PID 15180 (E:\LYC_CMS\target\classes started by Vin.Young in E:\LYC_CMS)
+2020-07-14 19:44:22,526 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2020-07-14 19:44:23,541 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2020-07-14 19:44:23,553 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2020-07-14 19:44:23,559 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2020-07-14 19:44:23,560 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2020-07-14 19:44:23,646 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2020-07-14 19:44:23,646 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 1086 ms
+2020-07-14 19:44:40,787 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2020-07-14 19:44:46,633 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2020-07-14 19:45:03,053 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2020-07-14 19:45:03,674 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2020-07-14 19:45:03,794 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 41.743 seconds (JVM running for 43.069)
+2020-07-14 19:49:47,730 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-07-14 19:49:47,736 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2020-07-14 19:49:48,281 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 540 ms
+2020-07-14 19:49:59,662 [http-nio-8080-exec-1] INFO  j.c.l.c.c.BankInfoController 33 - BankInfoController.getBankInfo:検索開始
+2020-07-14 19:49:59,663 [http-nio-8080-exec-3] INFO  j.c.l.c.c.BankInfoController 33 - BankInfoController.getBankInfo:検索開始
+2020-07-14 19:49:59,662 [http-nio-8080-exec-2] INFO  j.c.l.c.c.CustomerInfoController 29 - CustomerInfoController.onloadPage:页面加载開始
+2020-07-14 19:49:59,662 [http-nio-8080-exec-4] INFO  j.c.l.c.c.TopCustomerInfoController 29 - TopCustomerInfoController.onloadPage:页面加载開始
+2020-07-14 19:50:01,315 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource 110 - HikariPool-1 - Starting...
+2020-07-14 19:50:10,940 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource 123 - HikariPool-1 - Start completed.
+2020-07-14 19:50:11,698 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
+2020-07-14 19:50:13,346 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-14 19:50:14,781 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
+2020-07-14 19:50:14,781 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-14 19:50:15,701 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.T.TopCustomerNoSaiBan 143 - ==>  Preparing: SELECT MAX(TopCustomerNo) AS TopCustomerNoSaiBan FROM top_customer 
+2020-07-14 19:50:15,749 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.T.TopCustomerNoSaiBan 143 - ==> Parameters: 
+2020-07-14 19:50:18,070 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-14 19:50:18,089 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
+2020-07-14 19:50:18,107 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.T.TopCustomerNoSaiBan 143 - <==      Total: 1
+2020-07-14 19:50:18,149 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-14 19:50:18,155 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-14 19:50:18,648 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-14 19:50:19,075 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
+2020-07-14 19:50:19,136 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
+2020-07-14 19:50:19,474 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
+2020-07-14 19:50:19,524 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==>  Preparing: SELECT MAX(customerNo) AS saibanCustomerNo FROM customer_information 
+2020-07-14 19:50:19,562 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==> Parameters: 
+2020-07-14 19:50:19,822 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - <==      Total: 1
+2020-07-14 19:50:41,564 [http-nio-8080-exec-5] INFO  j.c.l.c.c.BankInfoController 33 - BankInfoController.getBankInfo:検索開始
+2020-07-14 19:50:41,772 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-14 19:50:41,780 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-14 19:50:41,997 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-14 19:50:44,886 [http-nio-8080-exec-6] INFO  j.c.l.c.c.TopCustomerInfoController 29 - TopCustomerInfoController.onloadPage:页面加载開始
+2020-07-14 19:50:45,096 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.T.TopCustomerNoSaiBan 143 - ==>  Preparing: SELECT MAX(TopCustomerNo) AS TopCustomerNoSaiBan FROM top_customer 
+2020-07-14 19:50:45,104 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.T.TopCustomerNoSaiBan 143 - ==> Parameters: 
+2020-07-14 19:50:45,315 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.T.TopCustomerNoSaiBan 143 - <==      Total: 1
+2020-07-14 19:51:28,417 [http-nio-8080-exec-9] INFO  j.c.l.c.c.CustomerInfoController 29 - CustomerInfoController.onloadPage:页面加载開始
+2020-07-14 19:51:28,623 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
+2020-07-14 19:51:28,632 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
+2020-07-14 19:51:28,873 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
+2020-07-14 19:51:28,885 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
+2020-07-14 19:51:28,895 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
+2020-07-14 19:51:29,138 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
+2020-07-14 19:51:29,149 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==>  Preparing: SELECT MAX(customerNo) AS saibanCustomerNo FROM customer_information 
+2020-07-14 19:51:29,156 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==> Parameters: 
+2020-07-14 19:51:29,377 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - <==      Total: 1
+2020-07-14 20:38:07,468 [http-nio-8080-exec-4] INFO  j.c.l.c.c.BankInfoController 33 - BankInfoController.getBankInfo:検索開始
+2020-07-14 20:38:07,696 [http-nio-8080-exec-4] WARN  com.zaxxer.hikari.pool.PoolBase 176 - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@49890f83 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2020-07-14 20:38:07,746 [http-nio-8080-exec-4] WARN  com.zaxxer.hikari.pool.PoolBase 176 - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@caeb1f7 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2020-07-14 20:38:07,797 [http-nio-8080-exec-4] WARN  com.zaxxer.hikari.pool.PoolBase 176 - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@13fa7791 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2020-07-14 20:38:07,846 [http-nio-8080-exec-4] WARN  com.zaxxer.hikari.pool.PoolBase 176 - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@128e977a (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2020-07-14 20:38:07,891 [http-nio-8080-exec-4] WARN  com.zaxxer.hikari.pool.PoolBase 176 - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@1d26c7bc (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2020-07-14 20:38:08,019 [http-nio-8080-exec-4] WARN  com.zaxxer.hikari.pool.PoolBase 176 - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@64fefce6 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2020-07-14 20:38:08,057 [http-nio-8080-exec-4] WARN  com.zaxxer.hikari.pool.PoolBase 176 - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@24784917 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2020-07-14 20:38:08,113 [http-nio-8080-exec-4] WARN  com.zaxxer.hikari.pool.PoolBase 176 - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@42ab2fa5 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2020-07-14 20:38:08,165 [http-nio-8080-exec-4] WARN  com.zaxxer.hikari.pool.PoolBase 176 - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@691b1b6b (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2020-07-14 20:38:08,216 [http-nio-8080-exec-4] WARN  com.zaxxer.hikari.pool.PoolBase 176 - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@7a91d362 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2020-07-14 20:38:10,092 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-14 20:38:10,118 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-14 20:38:10,358 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-14 20:38:19,333 [http-nio-8080-exec-3] INFO  j.c.l.c.c.BankInfoController 33 - BankInfoController.getBankInfo:検索開始
+2020-07-14 20:38:19,538 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-14 20:38:19,547 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-14 20:38:19,780 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-14 20:38:22,810 [http-nio-8080-exec-2] INFO  j.c.l.c.c.TopCustomerInfoController 29 - TopCustomerInfoController.onloadPage:页面加载開始
+2020-07-14 20:38:23,025 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.T.TopCustomerNoSaiBan 143 - ==>  Preparing: SELECT MAX(TopCustomerNo) AS TopCustomerNoSaiBan FROM top_customer 
+2020-07-14 20:38:23,033 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.T.TopCustomerNoSaiBan 143 - ==> Parameters: 
+2020-07-14 20:38:23,263 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.T.TopCustomerNoSaiBan 143 - <==      Total: 1
+2020-07-14 20:44:12,811 [http-nio-8080-exec-5] INFO  j.c.l.c.c.BankInfoController 33 - BankInfoController.getBankInfo:検索開始
+2020-07-14 20:44:13,047 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-14 20:44:13,054 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-14 20:44:13,309 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-14 20:44:15,584 [http-nio-8080-exec-6] INFO  j.c.l.c.c.TopCustomerInfoController 29 - TopCustomerInfoController.onloadPage:页面加载開始
+2020-07-14 20:44:15,782 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.T.TopCustomerNoSaiBan 143 - ==>  Preparing: SELECT MAX(TopCustomerNo) AS TopCustomerNoSaiBan FROM top_customer 
+2020-07-14 20:44:15,797 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.T.TopCustomerNoSaiBan 143 - ==> Parameters: 
+2020-07-14 20:44:16,025 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.T.TopCustomerNoSaiBan 143 - <==      Total: 1
+2020-07-14 20:55:56,718 [http-nio-8080-exec-8] INFO  j.c.l.c.c.TopCustomerInfoController 29 - TopCustomerInfoController.onloadPage:页面加载開始
+2020-07-14 20:55:56,772 [http-nio-8080-exec-8] WARN  com.zaxxer.hikari.pool.PoolBase 176 - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@4ca05caa (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2020-07-14 20:55:56,823 [http-nio-8080-exec-8] WARN  com.zaxxer.hikari.pool.PoolBase 176 - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@465837da (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2020-07-14 20:55:56,872 [http-nio-8080-exec-8] WARN  com.zaxxer.hikari.pool.PoolBase 176 - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@35ab175 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2020-07-14 20:55:56,905 [http-nio-8080-exec-8] WARN  com.zaxxer.hikari.pool.PoolBase 176 - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@4dd1f8b8 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2020-07-14 20:55:56,941 [http-nio-8080-exec-8] WARN  com.zaxxer.hikari.pool.PoolBase 176 - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@32139787 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2020-07-14 20:55:57,021 [http-nio-8080-exec-8] WARN  com.zaxxer.hikari.pool.PoolBase 176 - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@2e764e94 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2020-07-14 20:55:57,056 [http-nio-8080-exec-8] WARN  com.zaxxer.hikari.pool.PoolBase 176 - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@673bd1fe (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2020-07-14 20:55:57,096 [http-nio-8080-exec-8] WARN  com.zaxxer.hikari.pool.PoolBase 176 - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@5d54d613 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2020-07-14 20:55:57,132 [http-nio-8080-exec-8] WARN  com.zaxxer.hikari.pool.PoolBase 176 - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@413c93cb (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2020-07-14 20:55:57,167 [http-nio-8080-exec-8] WARN  com.zaxxer.hikari.pool.PoolBase 176 - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@5da27796 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2020-07-14 20:55:59,004 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.T.TopCustomerNoSaiBan 143 - ==>  Preparing: SELECT MAX(TopCustomerNo) AS TopCustomerNoSaiBan FROM top_customer 
+2020-07-14 20:55:59,073 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.T.TopCustomerNoSaiBan 143 - ==> Parameters: 
+2020-07-14 20:55:59,337 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.T.TopCustomerNoSaiBan 143 - <==      Total: 1
+2020-07-14 20:56:05,067 [http-nio-8080-exec-9] INFO  j.c.l.c.c.BankInfoController 33 - BankInfoController.getBankInfo:検索開始
+2020-07-14 20:56:05,275 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-14 20:56:05,286 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-14 20:56:05,524 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-14 20:56:08,198 [http-nio-8080-exec-10] INFO  j.c.l.c.c.BankInfoController 33 - BankInfoController.getBankInfo:検索開始
+2020-07-14 20:56:08,415 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-14 20:56:08,423 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-14 20:56:08,635 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-14 20:56:12,278 [http-nio-8080-exec-4] INFO  j.c.l.c.c.BankInfoController 33 - BankInfoController.getBankInfo:検索開始
+2020-07-14 20:56:12,480 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
+2020-07-14 20:56:12,489 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
+2020-07-14 20:56:12,702 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
+2020-07-14 20:56:16,282 [http-nio-8080-exec-3] INFO  j.c.l.c.c.TopCustomerInfoController 29 - TopCustomerInfoController.onloadPage:页面加载開始
+2020-07-14 20:56:16,483 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.T.TopCustomerNoSaiBan 143 - ==>  Preparing: SELECT MAX(TopCustomerNo) AS TopCustomerNoSaiBan FROM top_customer 
+2020-07-14 20:56:16,491 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.T.TopCustomerNoSaiBan 143 - ==> Parameters: 
+2020-07-14 20:56:16,703 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.T.TopCustomerNoSaiBan 143 - <==      Total: 1
+2020-07-14 20:56:30,776 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.getIntoCompany 143 - ==>  Preparing: SELECT intoCompanyCode,intoCompanyName FROM into_company_master; 
+2020-07-14 20:56:30,778 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.getCustomer 143 - ==>  Preparing: SELECT customerRankingCode,customerRankingName FROM customer_ranking_master; 
+2020-07-14 20:56:30,826 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.getIntoCompany 143 - ==> Parameters: 
+2020-07-14 20:56:30,840 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.getCustomer 143 - ==> Parameters: 
+2020-07-14 20:56:30,893 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.G.getJapaneseLevel 143 - ==>  Preparing: SELECT japaneseLevelCode,japaneseLevelName FROM japanese_Level_master; 
+2020-07-14 20:56:30,894 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.getNationalitys 143 - ==>  Preparing: SELECT nationalityCode,nationalityName FROM nationality_master; 
+2020-07-14 20:56:30,914 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.getVisa 143 - ==>  Preparing: SELECT visaCode,visaName FROM visa_master; 
+2020-07-14 20:56:30,968 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.G.getJapaneseLevel 143 - ==> Parameters: 
+2020-07-14 20:56:30,977 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.getNationalitys 143 - ==> Parameters: 
+2020-07-14 20:56:30,992 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.getVisa 143 - ==> Parameters: 
+2020-07-14 20:56:31,761 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.getIntoCompany 143 - <==      Total: 5
+2020-07-14 20:56:31,764 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.getNationalitys 143 - <==      Total: 5
+2020-07-14 20:56:31,772 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.getCustomer 143 - <==      Total: 5
+2020-07-14 20:56:31,793 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.G.getJapaneseLevel 143 - <==      Total: 6
+2020-07-14 20:56:31,852 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.getVisa 143 - <==      Total: 9
+2020-07-14 20:56:35,291 [http-nio-8080-exec-5] INFO  j.c.l.c.c.GetEmployeeInfoController 49 - GetEmployeeInfoController.getEmployeeInfo:検索開始
+2020-07-14 20:56:43,582 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - ==>  Preparing: select (@rowNo := @rowNo + 1) AS rowNo, em.employeeNo, em.employeeFristName, emd.Furigana, emd.age, concat(emd.joinCompanyOfYear,emd.joinCompanyOfMonth) as yearMonthIn, oi.AdmissionYearAndMonth, emd.salary, ci.customerName, emd.phoneNo, oi.nearestStation from rams.employee as em left join rams.employee_detail as emd on emd.employeeNo=em.employeeNo left join rams.onsite_info as oi on em.employeeNo=oi.employeeNo left join rams.employee_site_information as emsi on em.employeeNo=emsi.employeeNo left join rams.customer_information as ci on emsi.customerNo=ci.customerNo left join rams.nationality_master as nm on emd.nationalityCode=nm.nationalityCode left join rams.into_company_master as incm on emd.ResidenceOfCode=incm.intoCompanyCode ,(SELECT @rowNo := 0) AS rowNo where 1=1 ORDER BY em.employeeNo ,emd.salary DESC 
+2020-07-14 20:56:43,592 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - ==> Parameters: 
+2020-07-14 20:56:47,925 [http-nio-8080-exec-5] INFO  j.c.l.c.c.GetEmployeeInfoController 57 - GetEmployeeInfoController.getEmployeeInfo:検索結束
+2020-07-14 20:56:50,815 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.getTechnologyType 143 - ==>  Preparing: SELECT japaneseLevelCode,japaneseLevelName FROM technology_Type_Master where 1=1 AND japaneseLevelName like concat('%',?,'%'); 
+2020-07-14 20:56:50,825 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.getTechnologyType 143 - ==> Parameters: c(String)
+2020-07-14 20:56:51,964 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.getTechnologyType 143 - ==>  Preparing: SELECT japaneseLevelCode,japaneseLevelName FROM technology_Type_Master where 1=1 AND japaneseLevelName like concat('%',?,'%'); 
+2020-07-14 20:56:52,004 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.getTechnologyType 143 - ==> Parameters: c(String)
+2020-07-14 21:10:47,034 [http-nio-8080-exec-8] WARN  com.zaxxer.hikari.pool.PoolBase 176 - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@30e6ee79 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2020-07-14 21:10:47,042 [http-nio-8080-exec-2] WARN  com.zaxxer.hikari.pool.PoolBase 176 - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@1ffe772e (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2020-07-14 21:10:47,061 [http-nio-8080-exec-1] WARN  com.zaxxer.hikari.pool.PoolBase 176 - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@7d3f9653 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2020-07-14 21:10:47,073 [http-nio-8080-exec-10] WARN  com.zaxxer.hikari.pool.PoolBase 176 - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@74d10bdc (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2020-07-14 21:10:47,099 [http-nio-8080-exec-5] WARN  com.zaxxer.hikari.pool.PoolBase 176 - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@708ece7f (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2020-07-14 21:10:47,256 [http-nio-8080-exec-8] WARN  com.zaxxer.hikari.pool.PoolBase 176 - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@2a512a8 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2020-07-14 21:10:47,267 [http-nio-8080-exec-2] WARN  com.zaxxer.hikari.pool.PoolBase 176 - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@34bd1438 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2020-07-14 21:10:47,306 [http-nio-8080-exec-1] WARN  com.zaxxer.hikari.pool.PoolBase 176 - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@7c6c7203 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2020-07-14 21:10:47,318 [http-nio-8080-exec-10] WARN  com.zaxxer.hikari.pool.PoolBase 176 - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@17e2bcbc (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2020-07-14 21:10:47,350 [http-nio-8080-exec-5] WARN  com.zaxxer.hikari.pool.PoolBase 176 - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@12705366 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2020-07-14 21:10:49,627 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.getCustomer 143 - ==>  Preparing: SELECT customerRankingCode,customerRankingName FROM customer_ranking_master; 
+2020-07-14 21:10:49,651 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.getCustomer 143 - ==> Parameters: 
+2020-07-14 21:10:49,906 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.getCustomer 143 - <==      Total: 5
+2020-07-14 21:10:49,921 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.getNationalitys 143 - ==>  Preparing: SELECT nationalityCode,nationalityName FROM nationality_master; 
+2020-07-14 21:10:49,956 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.getNationalitys 143 - ==> Parameters: 
+2020-07-14 21:10:50,199 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.getNationalitys 143 - <==      Total: 5
+2020-07-14 21:10:50,211 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.getVisa 143 - ==>  Preparing: SELECT visaCode,visaName FROM visa_master; 
+2020-07-14 21:10:50,241 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.getVisa 143 - ==> Parameters: 
+2020-07-14 21:10:50,605 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.getVisa 143 - <==      Total: 9
+2020-07-14 21:10:50,620 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.getIntoCompany 143 - ==>  Preparing: SELECT intoCompanyCode,intoCompanyName FROM into_company_master; 
+2020-07-14 21:10:50,652 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.getIntoCompany 143 - ==> Parameters: 
+2020-07-14 21:10:50,913 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.getIntoCompany 143 - <==      Total: 5
+2020-07-14 21:10:50,926 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.getJapaneseLevel 143 - ==>  Preparing: SELECT japaneseLevelCode,japaneseLevelName FROM japanese_Level_master; 
+2020-07-14 21:10:50,954 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.getJapaneseLevel 143 - ==> Parameters: 
+2020-07-14 21:10:51,207 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.getJapaneseLevel 143 - <==      Total: 6
+2020-07-14 21:30:36,114 [http-nio-8080-exec-2] INFO  j.c.l.c.c.CustomerInfoController 29 - CustomerInfoController.onloadPage:页面加载開始
+2020-07-14 21:30:36,162 [http-nio-8080-exec-2] WARN  com.zaxxer.hikari.pool.PoolBase 176 - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@617fc233 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2020-07-14 21:30:36,220 [http-nio-8080-exec-2] WARN  com.zaxxer.hikari.pool.PoolBase 176 - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@51144773 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2020-07-14 21:30:36,279 [http-nio-8080-exec-2] WARN  com.zaxxer.hikari.pool.PoolBase 176 - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@42e80253 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2020-07-14 21:30:36,321 [http-nio-8080-exec-2] WARN  com.zaxxer.hikari.pool.PoolBase 176 - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@5d193e67 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2020-07-14 21:30:36,369 [http-nio-8080-exec-2] WARN  com.zaxxer.hikari.pool.PoolBase 176 - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@749526d7 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2020-07-14 21:30:36,417 [http-nio-8080-exec-2] WARN  com.zaxxer.hikari.pool.PoolBase 176 - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@749d8e9 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2020-07-14 21:30:36,458 [http-nio-8080-exec-2] WARN  com.zaxxer.hikari.pool.PoolBase 176 - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@5b1a8c9 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2020-07-14 21:30:36,498 [http-nio-8080-exec-2] WARN  com.zaxxer.hikari.pool.PoolBase 176 - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@114f541e (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2020-07-14 21:30:36,536 [http-nio-8080-exec-2] WARN  com.zaxxer.hikari.pool.PoolBase 176 - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@4c317b7e (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2020-07-14 21:30:36,576 [http-nio-8080-exec-2] WARN  com.zaxxer.hikari.pool.PoolBase 176 - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@5766c81 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2020-07-14 21:30:38,488 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
+2020-07-14 21:30:38,514 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
+2020-07-14 21:30:38,775 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
+2020-07-14 21:30:38,785 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
+2020-07-14 21:30:38,793 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
+2020-07-14 21:30:39,015 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
+2020-07-14 21:30:39,025 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==>  Preparing: SELECT MAX(customerNo) AS saibanCustomerNo FROM customer_information 
+2020-07-14 21:30:39,034 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==> Parameters: 
+2020-07-14 21:30:39,266 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - <==      Total: 1
+2020-07-14 21:35:19,835 [http-nio-8080-exec-10] INFO  j.c.l.c.c.CustomerInfoController 29 - CustomerInfoController.onloadPage:页面加载開始
+2020-07-14 21:35:20,055 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
+2020-07-14 21:35:20,064 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
+2020-07-14 21:35:20,288 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
+2020-07-14 21:35:20,299 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
+2020-07-14 21:35:20,307 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
+2020-07-14 21:35:20,560 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
+2020-07-14 21:35:20,571 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==>  Preparing: SELECT MAX(customerNo) AS saibanCustomerNo FROM customer_information 
+2020-07-14 21:35:20,579 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==> Parameters: 
+2020-07-14 21:35:20,805 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - <==      Total: 1
+2020-07-14 21:35:42,925 [http-nio-8080-exec-5] INFO  j.c.l.c.c.CustomerInfoController 29 - CustomerInfoController.onloadPage:页面加载開始
+2020-07-14 21:35:43,144 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
+2020-07-14 21:35:43,153 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
+2020-07-14 21:35:43,379 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
+2020-07-14 21:35:43,392 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
+2020-07-14 21:35:43,401 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
+2020-07-14 21:35:43,629 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
+2020-07-14 21:35:43,642 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==>  Preparing: SELECT MAX(customerNo) AS saibanCustomerNo FROM customer_information 
+2020-07-14 21:35:43,652 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==> Parameters: 
+2020-07-14 21:35:43,864 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - <==      Total: 1
+2020-07-14 21:36:03,209 [http-nio-8080-exec-6] INFO  j.c.l.c.c.CustomerInfoController 29 - CustomerInfoController.onloadPage:页面加载開始
+2020-07-14 21:36:03,426 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
+2020-07-14 21:36:03,437 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
+2020-07-14 21:36:03,689 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
+2020-07-14 21:36:03,704 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
+2020-07-14 21:36:03,713 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
+2020-07-14 21:36:03,942 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
+2020-07-14 21:36:03,953 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==>  Preparing: SELECT MAX(customerNo) AS saibanCustomerNo FROM customer_information 
+2020-07-14 21:36:03,964 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==> Parameters: 
+2020-07-14 21:36:04,178 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - <==      Total: 1
+2020-07-14 22:23:41,494 [http-nio-8080-exec-9] INFO  j.c.l.c.c.CustomerInfoController 29 - CustomerInfoController.onloadPage:页面加载開始
+2020-07-14 22:23:41,554 [http-nio-8080-exec-9] WARN  com.zaxxer.hikari.pool.PoolBase 176 - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@2956400c (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2020-07-14 22:23:41,602 [http-nio-8080-exec-9] WARN  com.zaxxer.hikari.pool.PoolBase 176 - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@443bae0f (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2020-07-14 22:23:41,654 [http-nio-8080-exec-9] WARN  com.zaxxer.hikari.pool.PoolBase 176 - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@4444f997 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2020-07-14 22:23:41,688 [http-nio-8080-exec-9] WARN  com.zaxxer.hikari.pool.PoolBase 176 - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@5f899733 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2020-07-14 22:23:41,729 [http-nio-8080-exec-9] WARN  com.zaxxer.hikari.pool.PoolBase 176 - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@770e5fe1 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2020-07-14 22:23:41,772 [http-nio-8080-exec-9] WARN  com.zaxxer.hikari.pool.PoolBase 176 - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@6edcccd9 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2020-07-14 22:23:41,822 [http-nio-8080-exec-9] WARN  com.zaxxer.hikari.pool.PoolBase 176 - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@db718d4 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2020-07-14 22:23:41,870 [http-nio-8080-exec-9] WARN  com.zaxxer.hikari.pool.PoolBase 176 - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@1e94265e (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2020-07-14 22:23:41,912 [http-nio-8080-exec-9] WARN  com.zaxxer.hikari.pool.PoolBase 176 - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@1b60833a (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2020-07-14 22:23:41,962 [http-nio-8080-exec-9] WARN  com.zaxxer.hikari.pool.PoolBase 176 - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@13d23e8b (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2020-07-14 22:23:43,867 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
+2020-07-14 22:23:43,901 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
+2020-07-14 22:23:44,161 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
+2020-07-14 22:23:44,185 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
+2020-07-14 22:23:44,195 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
+2020-07-14 22:23:44,452 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
+2020-07-14 22:23:44,462 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==>  Preparing: SELECT MAX(customerNo) AS saibanCustomerNo FROM customer_information 
+2020-07-14 22:23:44,470 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==> Parameters: 
+2020-07-14 22:23:44,684 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - <==      Total: 1
+2020-07-14 22:28:24,345 [http-nio-8080-exec-7] INFO  j.c.l.c.c.CustomerInfoController 29 - CustomerInfoController.onloadPage:页面加载開始
+2020-07-14 22:28:24,544 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
+2020-07-14 22:28:24,552 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
+2020-07-14 22:28:24,790 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
+2020-07-14 22:28:24,802 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
+2020-07-14 22:28:24,812 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
+2020-07-14 22:28:25,067 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
+2020-07-14 22:28:25,081 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==>  Preparing: SELECT MAX(customerNo) AS saibanCustomerNo FROM customer_information 
+2020-07-14 22:28:25,091 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==> Parameters: 
+2020-07-14 22:28:25,317 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - <==      Total: 1
+2020-07-14 22:28:31,341 [http-nio-8080-exec-8] INFO  j.c.l.c.c.CustomerInfoController 29 - CustomerInfoController.onloadPage:页面加载開始
+2020-07-14 22:28:31,578 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
+2020-07-14 22:28:31,585 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
+2020-07-14 22:28:31,821 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
+2020-07-14 22:28:31,832 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
+2020-07-14 22:28:31,839 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
+2020-07-14 22:28:32,071 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
+2020-07-14 22:28:32,082 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==>  Preparing: SELECT MAX(customerNo) AS saibanCustomerNo FROM customer_information 
+2020-07-14 22:28:32,090 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==> Parameters: 
+2020-07-14 22:28:32,303 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - <==      Total: 1
+2020-07-14 22:28:55,404 [http-nio-8080-exec-2] INFO  j.c.l.c.c.CustomerInfoController 29 - CustomerInfoController.onloadPage:页面加载開始
+2020-07-14 22:28:55,603 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
+2020-07-14 22:28:55,612 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
+2020-07-14 22:28:55,836 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
+2020-07-14 22:28:55,847 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
+2020-07-14 22:28:55,855 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
+2020-07-14 22:28:56,092 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
+2020-07-14 22:28:56,111 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==>  Preparing: SELECT MAX(customerNo) AS saibanCustomerNo FROM customer_information 
+2020-07-14 22:28:56,119 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==> Parameters: 
+2020-07-14 22:28:56,321 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - <==      Total: 1
+2020-07-14 22:29:22,960 [http-nio-8080-exec-1] INFO  j.c.l.c.c.CustomerInfoController 29 - CustomerInfoController.onloadPage:页面加载開始
+2020-07-14 22:29:23,178 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
+2020-07-14 22:29:23,187 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
+2020-07-14 22:29:23,422 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
+2020-07-14 22:29:23,434 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
+2020-07-14 22:29:23,442 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
+2020-07-14 22:29:23,680 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
+2020-07-14 22:29:23,693 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==>  Preparing: SELECT MAX(customerNo) AS saibanCustomerNo FROM customer_information 
+2020-07-14 22:29:23,702 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==> Parameters: 
+2020-07-14 22:29:23,918 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - <==      Total: 1
+2020-07-14 22:31:33,018 [http-nio-8080-exec-5] INFO  j.c.l.c.c.CustomerInfoController 29 - CustomerInfoController.onloadPage:页面加载開始
+2020-07-14 22:31:33,250 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
+2020-07-14 22:31:33,259 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
+2020-07-14 22:31:33,518 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
+2020-07-14 22:31:33,532 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
+2020-07-14 22:31:33,540 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
+2020-07-14 22:31:33,780 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
+2020-07-14 22:31:33,791 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==>  Preparing: SELECT MAX(customerNo) AS saibanCustomerNo FROM customer_information 
+2020-07-14 22:31:33,799 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==> Parameters: 
+2020-07-14 22:31:34,020 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - <==      Total: 1

@@ -1,0 +1,41 @@
+2020-07-07 18:30:17,686 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on LAPTOP-A94PII7T with PID 14740 (E:\LYC_CMS\target\classes started by Vin.Young in E:\LYC_CMS)
+2020-07-07 18:30:17,694 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2020-07-07 18:30:18,744 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2020-07-07 18:30:18,756 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2020-07-07 18:30:18,762 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2020-07-07 18:30:18,762 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2020-07-07 18:30:18,847 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2020-07-07 18:30:18,847 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 1117 ms
+2020-07-07 18:30:19,115 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext 557 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'bankInfoController': Unsatisfied dependency expressed through field 'bankInfoSer'; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'getBankInfoService': Unsatisfied dependency expressed through field 'bankMapper'; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'getBankInfoMapper' defined in file [E:\LYC_CMS\target\classes\jp\co\lyc\cms\mapper\GetBankInfoMapper.class]: Unsatisfied dependency expressed through bean property 'sqlSessionFactory'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in class path resource [org/mybatis/spring/boot/autoconfigure/MybatisAutoConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception; nested exception is org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [E:\LYC_CMS\target\classes\mapper\CustomerInfoMapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. The XML location is 'file [E:\LYC_CMS\target\classes\mapper\CustomerInfoMapper.xml]'. Cause: java.lang.IllegalArgumentException: Mapped Statements collection already contains value for jp.co.lyc.cms.mapper.CustomerInfoMapper.selectCompanyNature. please check file [E:\LYC_CMS\target\classes\mapper\CustomerInfoMapper.xml] and file [E:\LYC_CMS\target\classes\mapper\CustomerInfoMapper.xml]
+2020-07-07 18:30:19,117 [main] INFO  o.a.catalina.core.StandardService 173 - Stopping service [Tomcat]
+2020-07-07 18:30:19,128 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener 136 - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2020-07-07 18:30:57,480 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on LAPTOP-A94PII7T with PID 18948 (E:\LYC_CMS\target\classes started by Vin.Young in E:\LYC_CMS)
+2020-07-07 18:30:57,485 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2020-07-07 18:30:58,497 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2020-07-07 18:30:58,510 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2020-07-07 18:30:58,516 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2020-07-07 18:30:58,516 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2020-07-07 18:30:58,600 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2020-07-07 18:30:58,601 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 1084 ms
+2020-07-07 18:30:59,083 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2020-07-07 18:30:59,140 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2020-07-07 18:30:59,298 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2020-07-07 18:30:59,321 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2020-07-07 18:30:59,325 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 2.428 seconds (JVM running for 3.699)
+2020-07-07 18:31:07,224 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-07-07 18:31:07,225 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2020-07-07 18:31:07,232 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 7 ms
+2020-07-07 18:31:07,382 [http-nio-8080-exec-2] INFO  j.c.l.c.c.CustomerInfoController 31 - CustomerInfoController.onloadPage:页面加载開始
+2020-07-07 18:31:07,420 [http-nio-8080-exec-2] INFO  com.zaxxer.hikari.HikariDataSource 110 - HikariPool-1 - Starting...
+2020-07-07 18:31:07,553 [http-nio-8080-exec-2] INFO  com.zaxxer.hikari.HikariDataSource 123 - HikariPool-1 - Start completed.
+2020-07-07 18:31:07,563 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - ==>  Preparing: SELECT top_customer, customerName FROM top_customer 
+2020-07-07 18:31:07,585 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - ==> Parameters: 
+2020-07-07 18:31:07,609 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - <==      Total: 1
+2020-07-07 18:31:07,613 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
+2020-07-07 18:31:07,614 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
+2020-07-07 18:31:07,615 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
+2020-07-07 18:31:07,615 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
+2020-07-07 18:31:07,616 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
+2020-07-07 18:31:07,617 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4

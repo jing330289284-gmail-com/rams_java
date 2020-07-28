@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="../public/bootstrap/js/jquery3.4.1.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    <link type="text/css" rel="stylesheet" href="bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="qunit-1.11.0.css">
+    <link type="text/css" rel="stylesheet" href="bootstrapv3.css">
+	<script type="text/javascript" src="../public/bootstrap/js/jquery-2.1.4.js"></script>
+	<script type="text/javascript" src="../public/bootstrap/js/bootstrap-paginator.js"></script>
+	<script type="text/javascript" src="../public/bootstrap/js/qunit-1.11.0.js"></script>
+	<script type="text/javascript" src="../public/bootstrap/js/bootstrapv3.js"></script>
+	<script type="text/javascript" src="../public/bootstrap/js/jquery-1.9.1.min.js"></script>
+    <title>test</title>
+  </head>
+  <body>
+      <div class="container" id="mainSearch">
+        <form class="form-horizontal" action="index.html" method="post">
+          <div class="form-group row">
+            <div class="col-12 col-sm-12 col-xl-12">
+<!--                 <div class="form-group row">                                                   -->
+				<div class="container-fluid">
+					<div class="row">
+						<div class="row col-xs-3 col-sm-2">
+							<label for="employeeNo" class="col-6 col-sm-6 col-md-5 col-lg-5 control-label col-form-label">社員番号</label>
+							<div class="col-8 col-sm-6 col-md-7 col-lg-7">
+							  <input type="text" class="form-control" id="employeeNo" placeholder="社員番号">
+							</div>				  
+						</div>
+						<div class="row col-xs-3 col-sm-4">
+							<label for="employeeFristName" class="col-6 col-sm-6 col-md-5 col-lg-2 control-label col-form-label">社員名</label>
+							<div class="col-8 col-sm-6 col-md-7 col-lg-5">
+							  <input type="text" class="form-control" id="employeeFristName" placeholder="社員名1">
+							</div>				  
+							<div class="col-8 col-sm-6 col-md-7 col-lg-5">
+							  <input type="text" class="form-control" id="employeeLastName" placeholder="社員名2">
+							</div>				  
+						</div>
+						<div class="row col-xs-3 col-sm-3">
+							<label for="emploryeeForm" class="col-6 col-sm-6 col-md-5 col-lg-5 control-label col-form-label">社員形式</label>
+							<div class="col-8 col-sm-6 col-md-7 col-lg-7">
+							  <input type="text" class="form-control" id="emploryeeForm" placeholder="社員形式" autocomplete="off">
+							</div> 				  
+						</div>
+						<div class="row col-xs-3 col-sm-3">
+							<label for="genderCode" class="col-6 col-sm-6 col-md-5 col-lg-5 control-label col-form-label">性別</label>
+							<div class="col-8 col-sm-6 col-md-7 col-lg-7">
+							  <input type="text" class="form-control" id="genderCode" placeholder="性別">
+							</div>				  
+						</div>
+					</div><br>
+					<div class="row">
+						<div class="row col-xs-3 col-sm-3">
+							<label for="joinCompanyOfYear" class="col-6 col-sm-6 col-md-5 col-lg-4 control-label col-form-label">入社年月</label>
+							<div class="col-8 col-sm-6 col-md-7 col-lg-4">
+							  <input type="text" class="form-control" id="joinCompanyOfYear" placeholder="入社年">
+							</div>				  
+							<div class="col-8 col-sm-6 col-md-7 col-lg-4">
+							  <input type="text" class="form-control" id="joinCompanyOfMonth" placeholder="入社月">
+							</div>				  
+						</div>
+						<div class="row col-xs-3 col-sm-3">
+							<label for="ageFrom" class="col-6 col-sm-6 col-md-5 col-lg-3 control-label col-form-label">年齢</label>
+							<div class="col-8 col-sm-6 col-md-7 col-lg-4">
+							  <input type="text" class="form-control" id="ageFrom" placeholder="年齢">
+							</div>				  
+							<div class="col-8 col-sm-6 col-md-7 col-lg-1">
+							  <span>～</span>
+							</div>				  
+							<div class="col-8 col-sm-6 col-md-7 col-lg-4">
+							  <input type="text" class="form-control" id="ageTo" placeholder="年齢">
+							</div>				  
+						</div>
+						<div class="row col-xs-3 col-sm-3">
+							<label for="statusOfResidence" class="col-6 col-sm-6 col-md-5 col-lg-5 control-label col-form-label">在留資格</label>
+							<div class="col-8 col-sm-6 col-md-7 col-lg-7">
+							  <input type="text" class="form-control" id="statusOfResidence" placeholder="在留資格">
+							</div> 				  
+						</div>
+						<div class="row col-xs-3 col-sm-3">
+							<label for="birthplaceOfcontroy" class="col-6 col-sm-6 col-md-5 col-lg-5 control-label col-form-label">国籍</label>
+							<div class="col-8 col-sm-6 col-md-7 col-lg-7">
+							  <input type="text" class="form-control" id="birthplaceOfcontroy" placeholder="国籍">
+							</div>				  
+						</div>
+					</div><br>                  
+					<div class="row">
+						<div class="row col-xs-3 col-sm-3">
+							<label for="inputPassword2" class="col-6 col-sm-6 col-md-5 col-lg-5 control-label col-form-label">お客様先</label>
+							<div class="col-8 col-sm-6 col-md-7 col-lg-7">
+							  <input type="text" class="form-control" id="salary" placeholder="お客様先">
+							</div>				  
+						</div>
+						<div class="row col-xs-3 col-sm-3">
+							<label for="rookieDivision" class="col-6 col-sm-6 col-md-5 col-lg-5 control-label col-form-label">新人区分</label>
+							<div class="col-8 col-sm-6 col-md-7 col-lg-7">
+							  <input type="text" class="form-control" id="rookieDivision" placeholder="新人区分">
+							</div>				  
+						</div>
+						<div class="row col-xs-3 col-sm-3">
+							<label for="japanease" class="col-6 col-sm-6 col-md-5 col-lg-5 control-label col-form-label">日本語</label>
+							<div class="col-8 col-sm-6 col-md-7 col-lg-7">
+							  <input type="text" class="form-control" id="japanease" placeholder="日本語">
+							</div> 				  
+						</div>
+						<div class="row col-xs-3 col-sm-3">
+							<label for="developmentLanguageNo" class="col-6 col-sm-6 col-md-5 col-lg-5 control-label col-form-label">技術</label>
+							<div class="col-8 col-sm-6 col-md-7 col-lg-7">
+							  <input type="text" class="form-control" id="developmentLanguageNo" placeholder="技術">
+							</div> 				  
+						</div>
+					</div><br>                  
+					<div class="row">
+						<div class="row col-xs-3 col-sm-5">
+							<label for="salaryFrom" class="col-6 col-sm-6 col-md-5 col-lg-2 control-label col-form-label">給料範囲</label>
+							<div class="col-8 col-sm-6 col-md-7 col-lg-3">
+							  <input type="text" class="form-control" id="salaryFrom" placeholder="給料範囲">
+							</div>
+							<label for="salaryTo" class="col-6 col-sm-6 col-md-5 col-lg-2 control-label col-form-label">円～</label>
+							<div class="col-8 col-sm-6 col-md-7 col-lg-3">
+							  <input type="text" class="form-control" id="salaryTo" placeholder="給料範囲">
+							</div>
+							<label for="salaryTo" class="col-6 col-sm-6 col-md-5 col-lg-2 control-label col-form-label">円</label>
+						</div>
+						<div class="row col-xs-3 col-sm-5">
+							 <label for="unitPriceFrom" class="col-6 col-sm-6 col-md-5 col-lg-2 control-label col-form-label">単価範囲</label>
+							 <div class="col-8 col-sm-6 col-md-7 col-lg-3">
+							   <input type="text" class="form-control" id="unitPriceFrom" placeholder="単価範囲">
+							 </div>
+							 <label for="unitPriceTo" class="col-6 col-sm-6 col-md-5 col-lg-2 control-label col-form-label">円～</label>				  
+							 <div class="col-8 col-sm-6 col-md-7 col-lg-3">
+							   <input type="text" class="form-control" id="unitPriceTo" placeholder="単価範囲">
+							 </div>
+							 <label for="unitPriceTo" class="col-6 col-sm-6 col-md-5 col-lg-2 control-label col-form-label">円</label>				  
+						</div>
+						<div class="row col-xs-3 col-sm-2">
+							 <label for="inputPassword2" class="col-6 col-sm-6 col-md-5 col-lg-5 control-label col-form-label">在籍</label>
+							 <div class="col-8 col-sm-6 col-md-7 col-lg-7">
+							   <input type="text" class="form-control" id="inputPassword2" placeholder="在籍">
+							 </div> 				  
+						</div>
+					</div>                  
+                </div>
+            </div>
+          </div>
+          <div class="row">
+			<div class="col-4">
+				<button type="button" class="btn btn-outline-primary" id="search" onclick="getEmployeeInfo()" style="float:right; margin-right : 4em;">検索</button>
+			</div>
+			<div class="col-4">
+				<button type="button" class="btn btn-outline-primary" id="search1" onclick="getEmployeeInfo1()" style="float:right; margin-right : 4em;">其它</button>
+			</div>
+		  </div>
+		    <div class="table-responsive">
+		      <table class="table">
+		        <thead>
+		          <tr>
+		            <th>番号</th>
+		            <th>社員番号</th>
+		            <th>社員名</th>
+		            <th>カタカナ</th>
+		            <th>年齢</th>
+		            <th>入社年月</th>
+		            <th>給料(円)</th>
+		            <th>お客様</th>
+		            <th>電話番号</th>
+		            <th>寄り駅</th>
+		          </tr>
+		        </thead>
+		        <tbody id="employeeList">
+<!-- 		          <div id="Paginator" style="text-align: center"> <ul id="pageLimit"></ul> </div> -->
+<!-- 		          <div> -->
+<!-- 				    <ul id="bp-3-element-sm-test" class="pagination pagination-sm"><li><a title="Go to first page">&lt;&lt;</a></li><li><a title="Go to previous page">&lt;</a></li><li><a title="Go to page 1">1</a></li><li><a title="Go to page 2">2</a></li><li class="active"><a title="Current page is 3">3</a></li><li><a title="Go to page 4">4</a></li><li><a title="Go to page 5">5</a></li><li><a title="Go to next page">&gt;</a></li><li><a title="Go to last page">&gt;&gt;</a></li></ul> -->
+<!-- 				  </div> -->
+		        </tbody>
+		      </table>
+		    </div>
+        </form>
+      </div>
+      <script type="text/javascript">
+	      $('#pageLimit').bootstrapPaginator({    
+	    	    currentPage: 1,    
+	    	    totalPages: 10,    
+	    	    size:"normal",    
+	    	    bootstrapMajorVersion: 3,    
+	    	    alignment:"right",    
+	    	    numberOfPages:5,    
+	    	    itemTexts: function (type, page, current) {        
+	    	        switch (type) {            
+	    	        case "first": return "首页";            
+	    	        case "prev": return "上一页";            
+	    	        case "next": return "下一页";            
+	    	        case "last": return "末页";            
+	    	        case "page": return page;
+	    	        }
+	    	    }
+	    	});
+      </script>
+  </body>
+</html>

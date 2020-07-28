@@ -1,0 +1,691 @@
+2019-09-26 09:41:01,622 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on DESKTOP-GD7FF1R with PID 15980 (C:\E\workspacer\LYC_CMS\target\classes started by admin in C:\E\workspacer\LYC_CMS)
+2019-09-26 09:41:01,650 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2019-09-26 09:41:05,783 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2019-09-26 09:41:05,826 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2019-09-26 09:41:05,972 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2019-09-26 09:41:05,975 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2019-09-26 09:41:07,661 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2019-09-26 09:41:07,663 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 5861 ms
+2019-09-26 09:41:10,038 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2019-09-26 09:41:10,408 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2019-09-26 09:41:11,606 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2019-09-26 09:41:11,729 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2019-09-26 09:41:11,782 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 11.45 seconds (JVM running for 34.352)
+2019-09-26 09:42:56,845 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-09-26 09:42:56,848 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2019-09-26 09:42:56,870 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 21 ms
+2019-09-26 09:43:05,332 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 56 - LoginController.login:登録開始
+2019-09-26 09:43:05,420 [http-nio-8080-exec-8] INFO  com.zaxxer.hikari.HikariDataSource 110 - HikariPool-1 - Starting...
+2019-09-26 09:43:06,303 [http-nio-8080-exec-8] INFO  com.zaxxer.hikari.HikariDataSource 123 - HikariPool-1 - Start completed.
+2019-09-26 09:43:06,441 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録開始
+2019-09-26 09:43:06,442 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 87 - 日志输出 info
+2019-09-26 09:43:06,442 [http-nio-8080-exec-8] WARN  j.c.l.cms.controller.LoginController 88 - 日志输出 warn
+2019-09-26 09:43:06,443 [http-nio-8080-exec-8] ERROR j.c.l.cms.controller.LoginController 89 - 日志输出 error
+2019-09-26 09:43:06,471 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 91 - loginController.login:登録結束
+2019-09-26 13:34:44,117 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool 766 - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=3m8s26ms814µs927ns).
+2019-09-26 13:35:36,864 [http-nio-8080-exec-7] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver 198 - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
+2019-09-26 13:35:37,219 [http-nio-8080-exec-7] ERROR org.thymeleaf.TemplateEngine 1136 - [THYMELEAF][http-nio-8080-exec-7] Exception processing template "error": Error resolving template [error], template might not exist or might not be accessible by any of the configured Template Resolvers
+org.thymeleaf.exceptions.TemplateInputException: Error resolving template [error], template might not exist or might not be accessible by any of the configured Template Resolvers
+	at org.thymeleaf.engine.TemplateManager.resolveTemplate(TemplateManager.java:869)
+	at org.thymeleaf.engine.TemplateManager.parseAndProcess(TemplateManager.java:607)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1098)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1072)
+	at org.thymeleaf.spring5.view.ThymeleafView.renderFragment(ThymeleafView.java:362)
+	at org.thymeleaf.spring5.view.ThymeleafView.render(ThymeleafView.java:189)
+	at org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1371)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1117)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1056)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:942)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1005)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:897)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:634)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:882)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.ApplicationDispatcher.invoke(ApplicationDispatcher.java:712)
+	at org.apache.catalina.core.ApplicationDispatcher.processRequest(ApplicationDispatcher.java:461)
+	at org.apache.catalina.core.ApplicationDispatcher.doForward(ApplicationDispatcher.java:384)
+	at org.apache.catalina.core.ApplicationDispatcher.forward(ApplicationDispatcher.java:312)
+	at org.apache.catalina.core.StandardHostValve.custom(StandardHostValve.java:394)
+	at org.apache.catalina.core.StandardHostValve.status(StandardHostValve.java:253)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:175)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:853)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1587)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+2019-09-26 13:35:37,238 [http-nio-8080-exec-7] ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] 175 - Servlet.service() for servlet [dispatcherServlet] threw exception
+org.thymeleaf.exceptions.TemplateInputException: Error resolving template [error], template might not exist or might not be accessible by any of the configured Template Resolvers
+	at org.thymeleaf.engine.TemplateManager.resolveTemplate(TemplateManager.java:869)
+	at org.thymeleaf.engine.TemplateManager.parseAndProcess(TemplateManager.java:607)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1098)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1072)
+	at org.thymeleaf.spring5.view.ThymeleafView.renderFragment(ThymeleafView.java:362)
+	at org.thymeleaf.spring5.view.ThymeleafView.render(ThymeleafView.java:189)
+	at org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1371)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1117)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1056)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:942)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1005)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:897)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:634)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:882)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.ApplicationDispatcher.invoke(ApplicationDispatcher.java:712)
+	at org.apache.catalina.core.ApplicationDispatcher.processRequest(ApplicationDispatcher.java:461)
+	at org.apache.catalina.core.ApplicationDispatcher.doForward(ApplicationDispatcher.java:384)
+	at org.apache.catalina.core.ApplicationDispatcher.forward(ApplicationDispatcher.java:312)
+	at org.apache.catalina.core.StandardHostValve.custom(StandardHostValve.java:394)
+	at org.apache.catalina.core.StandardHostValve.status(StandardHostValve.java:253)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:175)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:853)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1587)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+2019-09-26 13:35:37,266 [http-nio-8080-exec-7] ERROR o.a.c.c.C.[Tomcat].[localhost] 175 - Exception Processing ErrorPage[errorCode=0, location=/error]
+org.springframework.web.util.NestedServletException: Request processing failed; nested exception is org.thymeleaf.exceptions.TemplateInputException: Error resolving template [error], template might not exist or might not be accessible by any of the configured Template Resolvers
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1013)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:897)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:634)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:882)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.ApplicationDispatcher.invoke(ApplicationDispatcher.java:712)
+	at org.apache.catalina.core.ApplicationDispatcher.processRequest(ApplicationDispatcher.java:461)
+	at org.apache.catalina.core.ApplicationDispatcher.doForward(ApplicationDispatcher.java:384)
+	at org.apache.catalina.core.ApplicationDispatcher.forward(ApplicationDispatcher.java:312)
+	at org.apache.catalina.core.StandardHostValve.custom(StandardHostValve.java:394)
+	at org.apache.catalina.core.StandardHostValve.status(StandardHostValve.java:253)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:175)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:853)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1587)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.thymeleaf.exceptions.TemplateInputException: Error resolving template [error], template might not exist or might not be accessible by any of the configured Template Resolvers
+	at org.thymeleaf.engine.TemplateManager.resolveTemplate(TemplateManager.java:869)
+	at org.thymeleaf.engine.TemplateManager.parseAndProcess(TemplateManager.java:607)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1098)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1072)
+	at org.thymeleaf.spring5.view.ThymeleafView.renderFragment(ThymeleafView.java:362)
+	at org.thymeleaf.spring5.view.ThymeleafView.render(ThymeleafView.java:189)
+	at org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1371)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1117)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1056)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:942)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1005)
+	... 25 common frames omitted
+2019-09-26 13:55:20,913 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on DESKTOP-GD7FF1R with PID 13204 (C:\E\workspacer\LYC_CMS\target\classes started by admin in C:\E\workspacer\LYC_CMS)
+2019-09-26 13:55:20,926 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2019-09-26 13:55:24,082 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2019-09-26 13:55:24,120 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2019-09-26 13:55:24,162 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2019-09-26 13:55:24,163 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2019-09-26 13:55:24,412 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2019-09-26 13:55:24,414 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 3339 ms
+2019-09-26 13:55:25,473 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2019-09-26 13:55:25,698 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2019-09-26 13:55:26,170 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2019-09-26 13:55:26,290 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2019-09-26 13:55:26,299 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 7.475 seconds (JVM running for 27.945)
+2019-09-26 13:55:26,651 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-09-26 13:55:26,660 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2019-09-26 13:55:26,662 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 1 ms
+2019-09-26 13:55:34,848 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 56 - LoginController.login:登録開始
+2019-09-26 13:55:34,928 [http-nio-8080-exec-9] INFO  com.zaxxer.hikari.HikariDataSource 110 - HikariPool-1 - Starting...
+2019-09-26 13:55:35,921 [http-nio-8080-exec-9] INFO  com.zaxxer.hikari.HikariDataSource 123 - HikariPool-1 - Start completed.
+2019-09-26 13:55:36,039 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録開始
+2019-09-26 13:55:36,040 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 87 - 日志输出 info
+2019-09-26 13:55:36,041 [http-nio-8080-exec-9] WARN  j.c.l.cms.controller.LoginController 88 - 日志输出 warn
+2019-09-26 13:55:36,042 [http-nio-8080-exec-9] ERROR j.c.l.cms.controller.LoginController 89 - 日志输出 error
+2019-09-26 13:55:36,045 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 91 - loginController.login:登録結束
+2019-09-26 14:04:29,381 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on DESKTOP-GD7FF1R with PID 15628 (C:\E\workspacer\LYC_CMS\target\classes started by admin in C:\E\workspacer\LYC_CMS)
+2019-09-26 14:04:29,396 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2019-09-26 14:04:32,756 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2019-09-26 14:04:32,819 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2019-09-26 14:04:32,928 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2019-09-26 14:04:32,928 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2019-09-26 14:04:34,522 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2019-09-26 14:04:34,531 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 5041 ms
+2019-09-26 14:04:35,627 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2019-09-26 14:04:35,831 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2019-09-26 14:04:36,409 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2019-09-26 14:04:36,454 [main] ERROR o.apache.catalina.util.LifecycleBase 175 - Failed to start component [Connector[HTTP/1.1-8080]]
+org.apache.catalina.LifecycleException: Protocol handler start failed
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1008)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
+	at org.apache.catalina.core.StandardService.addConnector(StandardService.java:227)
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.addPreviouslyRemovedConnectors(TomcatWebServer.java:263)
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.start(TomcatWebServer.java:195)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.startWebServer(ServletWebServerApplicationContext.java:297)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.finishRefresh(ServletWebServerApplicationContext.java:163)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:552)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:141)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:743)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:390)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:312)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1214)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1203)
+	at jp.co.lyc.cms.ApplicationMain.main(ApplicationMain.java:14)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.boot.maven.AbstractRunMojo$LaunchRunner.run(AbstractRunMojo.java:543)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.net.BindException: Address already in use: bind
+	at sun.nio.ch.Net.bind0(Native Method)
+	at sun.nio.ch.Net.bind(Net.java:433)
+	at sun.nio.ch.Net.bind(Net.java:425)
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223)
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74)
+	at org.apache.tomcat.util.net.NioEndpoint.initServerSocket(NioEndpoint.java:230)
+	at org.apache.tomcat.util.net.NioEndpoint.bind(NioEndpoint.java:213)
+	at org.apache.tomcat.util.net.AbstractEndpoint.bindWithCleanup(AbstractEndpoint.java:1124)
+	at org.apache.tomcat.util.net.AbstractEndpoint.start(AbstractEndpoint.java:1210)
+	at org.apache.coyote.AbstractProtocol.start(AbstractProtocol.java:585)
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1005)
+	... 20 common frames omitted
+2019-09-26 14:04:36,474 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Pausing ProtocolHandler ["http-nio-8080"]
+2019-09-26 14:04:36,475 [main] INFO  o.a.catalina.core.StandardService 173 - Stopping service [Tomcat]
+2019-09-26 14:04:36,487 [main] INFO  o.apache.catalina.util.LifecycleBase 173 - The stop() method was called on component [StandardServer[-1]] after stop() had already been called. The second call will be ignored.
+2019-09-26 14:04:36,488 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Stopping ProtocolHandler ["http-nio-8080"]
+2019-09-26 14:04:36,489 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Destroying ProtocolHandler ["http-nio-8080"]
+2019-09-26 14:04:36,495 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener 136 - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2019-09-26 14:04:36,500 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter 40 - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+The Tomcat connector configured to listen on port 8080 failed to start. The port may already be in use or the connector may be misconfigured.
+
+Action:
+
+Verify the connector's configuration, identify and stop any process that's listening on port 8080, or configure this application to listen on another port.
+
+2019-09-26 14:04:36,504 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 208 - Shutting down ExecutorService 'applicationTaskExecutor'
+2019-09-26 14:06:05,086 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on DESKTOP-GD7FF1R with PID 11660 (C:\E\workspacer\LYC_CMS\target\classes started by admin in C:\E\workspacer\LYC_CMS)
+2019-09-26 14:06:05,102 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2019-09-26 14:06:08,070 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2019-09-26 14:06:08,100 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2019-09-26 14:06:08,132 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2019-09-26 14:06:08,132 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2019-09-26 14:06:08,397 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2019-09-26 14:06:08,397 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 3202 ms
+2019-09-26 14:06:09,475 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2019-09-26 14:06:09,655 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2019-09-26 14:06:10,077 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2019-09-26 14:06:10,140 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2019-09-26 14:06:10,155 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 6.351 seconds (JVM running for 15.773)
+2019-09-26 14:06:28,988 [http-nio-8080-exec-3] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-09-26 14:06:28,992 [http-nio-8080-exec-3] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2019-09-26 14:06:29,014 [http-nio-8080-exec-3] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 21 ms
+2019-09-26 14:06:29,197 [http-nio-8080-exec-3] INFO  j.c.l.cms.controller.LoginController 56 - LoginController.login:登録開始
+2019-09-26 14:06:29,265 [http-nio-8080-exec-3] INFO  com.zaxxer.hikari.HikariDataSource 110 - HikariPool-1 - Starting...
+2019-09-26 14:06:30,002 [http-nio-8080-exec-3] INFO  com.zaxxer.hikari.HikariDataSource 123 - HikariPool-1 - Start completed.
+2019-09-26 14:06:30,112 [http-nio-8080-exec-3] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録開始
+2019-09-26 14:06:30,114 [http-nio-8080-exec-3] INFO  j.c.l.cms.controller.LoginController 87 - 日志输出 info
+2019-09-26 14:06:30,115 [http-nio-8080-exec-3] WARN  j.c.l.cms.controller.LoginController 88 - 日志输出 warn
+2019-09-26 14:06:30,117 [http-nio-8080-exec-3] ERROR j.c.l.cms.controller.LoginController 89 - 日志输出 error
+2019-09-26 14:06:30,118 [http-nio-8080-exec-3] INFO  j.c.l.cms.controller.LoginController 91 - loginController.login:登録結束
+2019-09-26 14:09:36,832 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on DESKTOP-GD7FF1R with PID 12872 (C:\E\workspacer\LYC_CMS\target\classes started by admin in C:\E\workspacer\LYC_CMS)
+2019-09-26 14:09:36,847 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2019-09-26 14:09:39,518 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2019-09-26 14:09:39,549 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2019-09-26 14:09:39,580 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2019-09-26 14:09:39,580 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2019-09-26 14:09:39,846 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2019-09-26 14:09:39,846 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 2936 ms
+2019-09-26 14:09:40,877 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2019-09-26 14:09:41,063 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2019-09-26 14:09:41,501 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2019-09-26 14:09:41,532 [main] ERROR o.apache.catalina.util.LifecycleBase 175 - Failed to start component [Connector[HTTP/1.1-8080]]
+org.apache.catalina.LifecycleException: Protocol handler start failed
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1008)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
+	at org.apache.catalina.core.StandardService.addConnector(StandardService.java:227)
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.addPreviouslyRemovedConnectors(TomcatWebServer.java:263)
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.start(TomcatWebServer.java:195)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.startWebServer(ServletWebServerApplicationContext.java:297)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.finishRefresh(ServletWebServerApplicationContext.java:163)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:552)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:141)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:743)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:390)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:312)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1214)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1203)
+	at jp.co.lyc.cms.ApplicationMain.main(ApplicationMain.java:14)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.boot.maven.AbstractRunMojo$LaunchRunner.run(AbstractRunMojo.java:543)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.net.BindException: Address already in use: bind
+	at sun.nio.ch.Net.bind0(Native Method)
+	at sun.nio.ch.Net.bind(Net.java:433)
+	at sun.nio.ch.Net.bind(Net.java:425)
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223)
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74)
+	at org.apache.tomcat.util.net.NioEndpoint.initServerSocket(NioEndpoint.java:230)
+	at org.apache.tomcat.util.net.NioEndpoint.bind(NioEndpoint.java:213)
+	at org.apache.tomcat.util.net.AbstractEndpoint.bindWithCleanup(AbstractEndpoint.java:1124)
+	at org.apache.tomcat.util.net.AbstractEndpoint.start(AbstractEndpoint.java:1210)
+	at org.apache.coyote.AbstractProtocol.start(AbstractProtocol.java:585)
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1005)
+	... 20 common frames omitted
+2019-09-26 14:09:41,547 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Pausing ProtocolHandler ["http-nio-8080"]
+2019-09-26 14:09:41,547 [main] INFO  o.a.catalina.core.StandardService 173 - Stopping service [Tomcat]
+2019-09-26 14:09:41,579 [main] INFO  o.apache.catalina.util.LifecycleBase 173 - The stop() method was called on component [StandardServer[-1]] after stop() had already been called. The second call will be ignored.
+2019-09-26 14:09:41,579 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Stopping ProtocolHandler ["http-nio-8080"]
+2019-09-26 14:09:41,579 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Destroying ProtocolHandler ["http-nio-8080"]
+2019-09-26 14:09:41,579 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener 136 - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2019-09-26 14:09:41,579 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter 40 - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+The Tomcat connector configured to listen on port 8080 failed to start. The port may already be in use or the connector may be misconfigured.
+
+Action:
+
+Verify the connector's configuration, identify and stop any process that's listening on port 8080, or configure this application to listen on another port.
+
+2019-09-26 14:09:41,594 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 208 - Shutting down ExecutorService 'applicationTaskExecutor'
+2019-09-26 14:10:29,954 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on DESKTOP-GD7FF1R with PID 6692 (C:\E\workspacer\LYC_CMS\target\classes started by admin in C:\E\workspacer\LYC_CMS)
+2019-09-26 14:10:29,954 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2019-09-26 14:10:32,767 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2019-09-26 14:10:32,790 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2019-09-26 14:10:32,822 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2019-09-26 14:10:32,822 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2019-09-26 14:10:33,103 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2019-09-26 14:10:33,103 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 3008 ms
+2019-09-26 14:10:34,150 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2019-09-26 14:10:34,347 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2019-09-26 14:10:34,784 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2019-09-26 14:10:34,862 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2019-09-26 14:10:34,862 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 6.294 seconds (JVM running for 15.351)
+2019-09-26 14:10:51,705 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-09-26 14:10:51,707 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2019-09-26 14:10:51,727 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 19 ms
+2019-09-26 14:10:51,935 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 56 - LoginController.login:登録開始
+2019-09-26 14:10:51,999 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource 110 - HikariPool-1 - Starting...
+2019-09-26 14:10:52,862 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource 123 - HikariPool-1 - Start completed.
+2019-09-26 14:10:53,042 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録開始
+2019-09-26 14:10:53,053 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 87 - 日志输出 info
+2019-09-26 14:10:53,055 [http-nio-8080-exec-1] WARN  j.c.l.cms.controller.LoginController 88 - 日志输出 warn
+2019-09-26 14:10:53,056 [http-nio-8080-exec-1] ERROR j.c.l.cms.controller.LoginController 89 - 日志输出 error
+2019-09-26 14:10:53,058 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 91 - loginController.login:登録結束
+2019-09-26 14:18:57,877 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on DESKTOP-GD7FF1R with PID 6916 (C:\E\workspacer\LYC_CMS\target\classes started by admin in C:\E\workspacer\LYC_CMS)
+2019-09-26 14:18:57,892 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2019-09-26 14:19:00,967 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2019-09-26 14:19:00,991 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2019-09-26 14:19:01,023 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2019-09-26 14:19:01,023 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2019-09-26 14:19:02,476 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2019-09-26 14:19:02,484 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 4467 ms
+2019-09-26 14:19:03,470 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2019-09-26 14:19:03,658 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2019-09-26 14:19:04,067 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2019-09-26 14:19:04,130 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2019-09-26 14:19:04,130 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 7.372 seconds (JVM running for 45.236)
+2019-09-26 14:19:13,393 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-09-26 14:19:13,401 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2019-09-26 14:19:13,426 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 24 ms
+2019-09-26 14:19:22,744 [http-nio-8080-exec-10] INFO  j.c.l.cms.controller.LoginController 56 - LoginController.login:登録開始
+2019-09-26 14:19:22,800 [http-nio-8080-exec-10] INFO  com.zaxxer.hikari.HikariDataSource 110 - HikariPool-1 - Starting...
+2019-09-26 14:19:23,519 [http-nio-8080-exec-10] INFO  com.zaxxer.hikari.HikariDataSource 123 - HikariPool-1 - Start completed.
+2019-09-26 14:19:23,608 [http-nio-8080-exec-10] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録開始
+2019-09-26 14:19:23,610 [http-nio-8080-exec-10] INFO  j.c.l.cms.controller.LoginController 87 - 日志输出 info
+2019-09-26 14:19:23,611 [http-nio-8080-exec-10] WARN  j.c.l.cms.controller.LoginController 88 - 日志输出 warn
+2019-09-26 14:19:23,611 [http-nio-8080-exec-10] ERROR j.c.l.cms.controller.LoginController 89 - 日志输出 error
+2019-09-26 14:19:23,612 [http-nio-8080-exec-10] INFO  j.c.l.cms.controller.LoginController 91 - loginController.login:登録結束
+2019-09-26 14:26:40,399 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on DESKTOP-GD7FF1R with PID 10360 (C:\E\workspacer\LYC_CMS\target\classes started by admin in C:\E\workspacer\LYC_CMS)
+2019-09-26 14:26:40,415 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2019-09-26 14:26:43,422 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2019-09-26 14:26:43,440 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2019-09-26 14:26:43,455 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2019-09-26 14:26:43,455 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2019-09-26 14:26:43,737 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2019-09-26 14:26:43,737 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 3182 ms
+2019-09-26 14:26:44,721 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2019-09-26 14:26:44,892 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2019-09-26 14:26:45,415 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2019-09-26 14:26:45,475 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2019-09-26 14:26:45,481 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 6.348 seconds (JVM running for 15.475)
+2019-09-26 14:27:02,886 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-09-26 14:27:02,888 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2019-09-26 14:27:02,909 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 21 ms
+2019-09-26 14:27:08,480 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 56 - LoginController.login:登録開始
+2019-09-26 14:27:08,534 [http-nio-8080-exec-5] INFO  com.zaxxer.hikari.HikariDataSource 110 - HikariPool-1 - Starting...
+2019-09-26 14:27:09,273 [http-nio-8080-exec-5] INFO  com.zaxxer.hikari.HikariDataSource 123 - HikariPool-1 - Start completed.
+2019-09-26 14:27:09,404 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録開始
+2019-09-26 14:27:09,405 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 87 - 日志输出 info
+2019-09-26 14:27:09,406 [http-nio-8080-exec-5] WARN  j.c.l.cms.controller.LoginController 88 - 日志输出 warn
+2019-09-26 14:27:09,408 [http-nio-8080-exec-5] ERROR j.c.l.cms.controller.LoginController 89 - 日志输出 error
+2019-09-26 14:27:09,409 [http-nio-8080-exec-5] INFO  j.c.l.cms.controller.LoginController 91 - loginController.login:登録結束
+2019-09-26 14:31:34,038 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on DESKTOP-GD7FF1R with PID 7148 (C:\E\workspacer\LYC_CMS\target\classes started by admin in C:\E\workspacer\LYC_CMS)
+2019-09-26 14:31:34,060 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2019-09-26 14:31:37,166 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2019-09-26 14:31:37,193 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2019-09-26 14:31:37,224 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2019-09-26 14:31:37,224 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2019-09-26 14:31:38,521 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2019-09-26 14:31:38,521 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 4324 ms
+2019-09-26 14:31:39,747 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2019-09-26 14:31:40,090 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2019-09-26 14:31:40,937 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2019-09-26 14:31:41,072 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2019-09-26 14:31:41,083 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 8.297 seconds (JVM running for 21.248)
+2019-09-26 14:31:45,404 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-09-26 14:31:45,406 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2019-09-26 14:31:45,428 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 21 ms
+2019-09-26 14:31:52,393 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 56 - LoginController.login:登録開始
+2019-09-26 14:31:52,444 [http-nio-8080-exec-9] INFO  com.zaxxer.hikari.HikariDataSource 110 - HikariPool-1 - Starting...
+2019-09-26 14:31:53,151 [http-nio-8080-exec-9] INFO  com.zaxxer.hikari.HikariDataSource 123 - HikariPool-1 - Start completed.
+2019-09-26 14:31:53,251 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録開始
+2019-09-26 14:31:53,251 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 87 - 日志输出 info
+2019-09-26 14:31:53,252 [http-nio-8080-exec-9] WARN  j.c.l.cms.controller.LoginController 88 - 日志输出 warn
+2019-09-26 14:31:53,253 [http-nio-8080-exec-9] ERROR j.c.l.cms.controller.LoginController 89 - 日志输出 error
+2019-09-26 14:31:53,255 [http-nio-8080-exec-9] INFO  j.c.l.cms.controller.LoginController 91 - loginController.login:登録結束
+2019-09-26 15:07:35,421 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on DESKTOP-GD7FF1R with PID 7112 (C:\E\workspacer\LYC_CMS\target\classes started by admin in C:\E\workspacer\LYC_CMS)
+2019-09-26 15:07:35,421 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2019-09-26 15:07:38,186 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2019-09-26 15:07:38,215 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2019-09-26 15:07:38,247 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2019-09-26 15:07:38,247 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2019-09-26 15:07:38,528 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2019-09-26 15:07:38,528 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 2998 ms
+2019-09-26 15:07:39,622 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2019-09-26 15:07:39,801 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2019-09-26 15:07:40,208 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2019-09-26 15:07:40,286 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2019-09-26 15:07:40,286 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 6.053 seconds (JVM running for 19.085)
+2019-09-26 15:07:52,882 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-09-26 15:07:52,884 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2019-09-26 15:07:52,901 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 16 ms
+2019-09-26 15:08:00,099 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 56 - LoginController.login:登録開始
+2019-09-26 15:08:00,161 [http-nio-8080-exec-4] INFO  com.zaxxer.hikari.HikariDataSource 110 - HikariPool-1 - Starting...
+2019-09-26 15:08:01,083 [http-nio-8080-exec-4] INFO  com.zaxxer.hikari.HikariDataSource 123 - HikariPool-1 - Start completed.
+2019-09-26 15:08:01,174 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録開始
+2019-09-26 15:08:01,174 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 87 - 日志输出 info
+2019-09-26 15:08:01,175 [http-nio-8080-exec-4] WARN  j.c.l.cms.controller.LoginController 88 - 日志输出 warn
+2019-09-26 15:08:01,175 [http-nio-8080-exec-4] ERROR j.c.l.cms.controller.LoginController 89 - 日志输出 error
+2019-09-26 15:08:01,176 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 91 - loginController.login:登録結束
+2019-09-26 15:10:02,222 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on DESKTOP-GD7FF1R with PID 12320 (C:\E\workspacer\LYC_CMS\target\classes started by admin in C:\E\workspacer\LYC_CMS)
+2019-09-26 15:10:02,222 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2019-09-26 15:10:05,177 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2019-09-26 15:10:05,210 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2019-09-26 15:10:05,240 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2019-09-26 15:10:05,242 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2019-09-26 15:10:05,569 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2019-09-26 15:10:05,570 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 3254 ms
+2019-09-26 15:10:06,861 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2019-09-26 15:10:07,042 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2019-09-26 15:10:07,541 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2019-09-26 15:10:07,583 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2019-09-26 15:10:07,599 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 6.498 seconds (JVM running for 16.032)
+2019-09-26 15:10:08,378 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-09-26 15:10:08,380 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2019-09-26 15:10:08,399 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 18 ms
+2019-09-26 15:10:13,189 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 56 - LoginController.login:登録開始
+2019-09-26 15:10:13,250 [http-nio-8080-exec-6] INFO  com.zaxxer.hikari.HikariDataSource 110 - HikariPool-1 - Starting...
+2019-09-26 15:10:13,950 [http-nio-8080-exec-6] INFO  com.zaxxer.hikari.HikariDataSource 123 - HikariPool-1 - Start completed.
+2019-09-26 15:10:14,040 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録開始
+2019-09-26 15:10:14,040 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 87 - 日志输出 info
+2019-09-26 15:10:14,041 [http-nio-8080-exec-6] WARN  j.c.l.cms.controller.LoginController 88 - 日志输出 warn
+2019-09-26 15:10:14,041 [http-nio-8080-exec-6] ERROR j.c.l.cms.controller.LoginController 89 - 日志输出 error
+2019-09-26 15:10:14,042 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 91 - loginController.login:登録結束
+2019-09-26 15:15:20,024 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on DESKTOP-GD7FF1R with PID 15168 (C:\E\workspacer\LYC_CMS\target\classes started by admin in C:\E\workspacer\LYC_CMS)
+2019-09-26 15:15:20,035 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2019-09-26 15:15:22,930 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2019-09-26 15:15:22,959 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2019-09-26 15:15:22,974 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2019-09-26 15:15:22,990 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2019-09-26 15:15:23,240 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2019-09-26 15:15:23,240 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 3058 ms
+2019-09-26 15:15:24,393 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2019-09-26 15:15:24,600 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2019-09-26 15:15:25,094 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2019-09-26 15:15:25,150 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2019-09-26 15:15:25,166 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 6.491 seconds (JVM running for 15.891)
+2019-09-26 15:15:25,897 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-09-26 15:15:25,901 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2019-09-26 15:15:25,923 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 22 ms
+2019-09-26 15:15:31,117 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 56 - LoginController.login:登録開始
+2019-09-26 15:15:31,176 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource 110 - HikariPool-1 - Starting...
+2019-09-26 15:15:31,876 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource 123 - HikariPool-1 - Start completed.
+2019-09-26 15:15:31,962 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録開始
+2019-09-26 15:15:31,963 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 87 - 日志输出 info
+2019-09-26 15:15:31,963 [http-nio-8080-exec-1] WARN  j.c.l.cms.controller.LoginController 88 - 日志输出 warn
+2019-09-26 15:15:31,964 [http-nio-8080-exec-1] ERROR j.c.l.cms.controller.LoginController 89 - 日志输出 error
+2019-09-26 15:15:31,964 [http-nio-8080-exec-1] INFO  j.c.l.cms.controller.LoginController 91 - loginController.login:登録結束
+2019-09-26 15:20:09,201 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on DESKTOP-GD7FF1R with PID 1440 (C:\E\workspacer\LYC_CMS\target\classes started by admin in C:\E\workspacer\LYC_CMS)
+2019-09-26 15:20:09,210 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2019-09-26 15:20:12,267 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2019-09-26 15:20:12,291 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2019-09-26 15:20:12,322 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2019-09-26 15:20:12,322 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2019-09-26 15:20:12,587 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2019-09-26 15:20:12,587 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 3224 ms
+2019-09-26 15:20:13,619 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2019-09-26 15:20:13,784 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2019-09-26 15:20:14,238 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2019-09-26 15:20:14,284 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2019-09-26 15:20:14,300 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 6.386 seconds (JVM running for 15.498)
+2019-09-26 15:20:32,132 [http-nio-8080-exec-2] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-09-26 15:20:32,139 [http-nio-8080-exec-2] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2019-09-26 15:20:32,159 [http-nio-8080-exec-2] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 19 ms
+2019-09-26 15:20:39,355 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 56 - LoginController.login:登録開始
+2019-09-26 15:20:39,420 [http-nio-8080-exec-7] INFO  com.zaxxer.hikari.HikariDataSource 110 - HikariPool-1 - Starting...
+2019-09-26 15:20:40,119 [http-nio-8080-exec-7] INFO  com.zaxxer.hikari.HikariDataSource 123 - HikariPool-1 - Start completed.
+2019-09-26 15:20:40,251 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録開始
+2019-09-26 15:20:40,253 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 87 - 日志输出 info
+2019-09-26 15:20:40,255 [http-nio-8080-exec-7] WARN  j.c.l.cms.controller.LoginController 88 - 日志输出 warn
+2019-09-26 15:20:40,257 [http-nio-8080-exec-7] ERROR j.c.l.cms.controller.LoginController 89 - 日志输出 error
+2019-09-26 15:20:40,258 [http-nio-8080-exec-7] INFO  j.c.l.cms.controller.LoginController 91 - loginController.login:登録結束
+2019-09-26 15:26:11,282 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on DESKTOP-GD7FF1R with PID 13960 (C:\E\workspacer\LYC_CMS\target\classes started by admin in C:\E\workspacer\LYC_CMS)
+2019-09-26 15:26:11,298 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2019-09-26 15:26:14,324 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2019-09-26 15:26:14,351 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2019-09-26 15:26:14,382 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2019-09-26 15:26:14,382 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2019-09-26 15:26:14,681 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2019-09-26 15:26:14,681 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 3254 ms
+2019-09-26 15:26:15,786 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2019-09-26 15:26:15,945 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2019-09-26 15:26:16,330 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2019-09-26 15:26:16,409 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2019-09-26 15:26:16,409 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 6.488 seconds (JVM running for 15.544)
+2019-09-26 15:26:48,894 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-09-26 15:26:48,898 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2019-09-26 15:26:48,920 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 21 ms
+2019-09-26 15:26:54,887 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 56 - LoginController.login:登録開始
+2019-09-26 15:26:54,952 [http-nio-8080-exec-4] INFO  com.zaxxer.hikari.HikariDataSource 110 - HikariPool-1 - Starting...
+2019-09-26 15:26:55,917 [http-nio-8080-exec-4] INFO  com.zaxxer.hikari.HikariDataSource 123 - HikariPool-1 - Start completed.
+2019-09-26 15:26:56,046 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録開始
+2019-09-26 15:26:56,048 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 87 - 日志输出 info
+2019-09-26 15:26:56,049 [http-nio-8080-exec-4] WARN  j.c.l.cms.controller.LoginController 88 - 日志输出 warn
+2019-09-26 15:26:56,050 [http-nio-8080-exec-4] ERROR j.c.l.cms.controller.LoginController 89 - 日志输出 error
+2019-09-26 15:26:56,051 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 91 - loginController.login:登録結束
+2019-09-26 15:27:49,695 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on DESKTOP-GD7FF1R with PID 16356 (C:\E\workspacer\LYC_CMS\target\classes started by admin in C:\E\workspacer\LYC_CMS)
+2019-09-26 15:27:49,711 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2019-09-26 15:27:53,122 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2019-09-26 15:27:53,154 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2019-09-26 15:27:53,186 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2019-09-26 15:27:53,186 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2019-09-26 15:27:53,451 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2019-09-26 15:27:53,451 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 3631 ms
+2019-09-26 15:27:55,393 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2019-09-26 15:27:55,572 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2019-09-26 15:27:56,012 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2019-09-26 15:27:56,076 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2019-09-26 15:27:56,082 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 7.587 seconds (JVM running for 16.895)
+2019-09-26 15:28:20,606 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-09-26 15:28:20,614 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2019-09-26 15:28:20,615 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 1 ms
+2019-09-26 15:28:32,200 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 56 - LoginController.login:登録開始
+2019-09-26 15:28:32,244 [http-nio-8080-exec-6] INFO  com.zaxxer.hikari.HikariDataSource 110 - HikariPool-1 - Starting...
+2019-09-26 15:28:32,892 [http-nio-8080-exec-6] INFO  com.zaxxer.hikari.HikariDataSource 123 - HikariPool-1 - Start completed.
+2019-09-26 15:28:32,998 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録開始
+2019-09-26 15:28:32,999 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 87 - 日志输出 info
+2019-09-26 15:28:33,000 [http-nio-8080-exec-6] WARN  j.c.l.cms.controller.LoginController 88 - 日志输出 warn
+2019-09-26 15:28:33,002 [http-nio-8080-exec-6] ERROR j.c.l.cms.controller.LoginController 89 - 日志输出 error
+2019-09-26 15:28:33,006 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 91 - loginController.login:登録結束
+2019-09-26 15:31:00,271 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on DESKTOP-GD7FF1R with PID 10444 (C:\E\workspacer\LYC_CMS\target\classes started by admin in C:\E\workspacer\LYC_CMS)
+2019-09-26 15:31:00,271 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2019-09-26 15:31:03,099 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2019-09-26 15:31:03,129 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2019-09-26 15:31:03,160 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2019-09-26 15:31:03,160 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2019-09-26 15:31:03,442 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2019-09-26 15:31:03,442 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 3078 ms
+2019-09-26 15:31:04,473 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2019-09-26 15:31:04,653 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2019-09-26 15:31:05,091 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2019-09-26 15:31:05,153 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2019-09-26 15:31:05,169 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 6.097 seconds (JVM running for 15.372)
+2019-09-26 15:31:14,628 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-09-26 15:31:14,633 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2019-09-26 15:31:14,654 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 21 ms
+2019-09-26 15:31:20,212 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 56 - LoginController.login:登録開始
+2019-09-26 15:31:20,270 [http-nio-8080-exec-4] INFO  com.zaxxer.hikari.HikariDataSource 110 - HikariPool-1 - Starting...
+2019-09-26 15:31:21,008 [http-nio-8080-exec-4] INFO  com.zaxxer.hikari.HikariDataSource 123 - HikariPool-1 - Start completed.
+2019-09-26 15:31:21,102 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録開始
+2019-09-26 15:31:21,102 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 87 - 日志输出 info
+2019-09-26 15:31:21,103 [http-nio-8080-exec-4] WARN  j.c.l.cms.controller.LoginController 88 - 日志输出 warn
+2019-09-26 15:31:21,103 [http-nio-8080-exec-4] ERROR j.c.l.cms.controller.LoginController 89 - 日志输出 error
+2019-09-26 15:31:21,104 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 91 - loginController.login:登録結束
+2019-09-26 15:50:51,116 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on DESKTOP-GD7FF1R with PID 1380 (C:\E\workspacer\LYC_CMS\target\classes started by admin in C:\E\workspacer\LYC_CMS)
+2019-09-26 15:50:51,116 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2019-09-26 15:50:53,945 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2019-09-26 15:50:53,978 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2019-09-26 15:50:54,009 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2019-09-26 15:50:54,009 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2019-09-26 15:50:54,306 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2019-09-26 15:50:54,306 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 3096 ms
+2019-09-26 15:50:55,384 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2019-09-26 15:50:55,577 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2019-09-26 15:50:56,093 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2019-09-26 15:50:56,171 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2019-09-26 15:50:56,171 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 6.215 seconds (JVM running for 19.755)
+2019-09-26 15:51:06,124 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-09-26 15:51:06,128 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2019-09-26 15:51:06,129 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 1 ms
+2019-09-26 15:51:13,333 [http-nio-8080-exec-10] INFO  j.c.l.cms.controller.LoginController 56 - LoginController.login:登録開始
+2019-09-26 15:51:13,383 [http-nio-8080-exec-10] INFO  com.zaxxer.hikari.HikariDataSource 110 - HikariPool-1 - Starting...
+2019-09-26 15:51:14,324 [http-nio-8080-exec-10] INFO  com.zaxxer.hikari.HikariDataSource 123 - HikariPool-1 - Start completed.
+2019-09-26 15:51:14,422 [http-nio-8080-exec-10] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録開始
+2019-09-26 15:51:14,423 [http-nio-8080-exec-10] INFO  j.c.l.cms.controller.LoginController 87 - 日志输出 info
+2019-09-26 15:51:14,423 [http-nio-8080-exec-10] WARN  j.c.l.cms.controller.LoginController 88 - 日志输出 warn
+2019-09-26 15:51:14,424 [http-nio-8080-exec-10] ERROR j.c.l.cms.controller.LoginController 89 - 日志输出 error
+2019-09-26 15:51:14,425 [http-nio-8080-exec-10] INFO  j.c.l.cms.controller.LoginController 91 - loginController.login:登録結束
+2019-09-26 16:49:47,445 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on DESKTOP-GD7FF1R with PID 9852 (C:\E\workspacer\LYC_CMS\target\classes started by admin in C:\E\workspacer\LYC_CMS)
+2019-09-26 16:49:47,453 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2019-09-26 16:49:50,765 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2019-09-26 16:49:50,794 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2019-09-26 16:49:50,820 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2019-09-26 16:49:50,827 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2019-09-26 16:49:51,111 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2019-09-26 16:49:51,113 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 3549 ms
+2019-09-26 16:49:52,386 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2019-09-26 16:49:52,603 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2019-09-26 16:49:53,120 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2019-09-26 16:49:53,211 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2019-09-26 16:49:53,219 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 6.953 seconds (JVM running for 20.577)
+2019-09-26 16:50:06,266 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-09-26 16:50:06,268 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2019-09-26 16:50:06,283 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 15 ms
+2019-09-26 16:50:12,344 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 56 - LoginController.login:登録開始
+2019-09-26 16:50:12,422 [http-nio-8080-exec-8] INFO  com.zaxxer.hikari.HikariDataSource 110 - HikariPool-1 - Starting...
+2019-09-26 16:50:13,166 [http-nio-8080-exec-8] INFO  com.zaxxer.hikari.HikariDataSource 123 - HikariPool-1 - Start completed.
+2019-09-26 16:50:13,260 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録開始
+2019-09-26 16:50:13,260 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 87 - 日志输出 info
+2019-09-26 16:50:13,261 [http-nio-8080-exec-8] WARN  j.c.l.cms.controller.LoginController 88 - 日志输出 warn
+2019-09-26 16:50:13,261 [http-nio-8080-exec-8] ERROR j.c.l.cms.controller.LoginController 89 - 日志输出 error
+2019-09-26 16:50:13,262 [http-nio-8080-exec-8] INFO  j.c.l.cms.controller.LoginController 91 - loginController.login:登録結束
+2019-09-26 17:37:40,454 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on DESKTOP-GD7FF1R with PID 7256 (C:\E\workspacer\LYC_CMS\target\classes started by admin in C:\E\workspacer\LYC_CMS)
+2019-09-26 17:37:40,470 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2019-09-26 17:37:43,501 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2019-09-26 17:37:43,525 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2019-09-26 17:37:43,571 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2019-09-26 17:37:43,571 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2019-09-26 17:37:43,853 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2019-09-26 17:37:43,853 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 3055 ms
+2019-09-26 17:37:44,868 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2019-09-26 17:37:45,038 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2019-09-26 17:37:45,491 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2019-09-26 17:37:45,569 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2019-09-26 17:37:45,569 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 6.866 seconds (JVM running for 34.903)
+2019-09-26 17:37:51,413 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-09-26 17:37:51,416 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2019-09-26 17:37:51,435 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 19 ms
+2019-09-26 17:37:56,585 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 56 - LoginController.login:登録開始
+2019-09-26 17:37:56,667 [http-nio-8080-exec-6] INFO  com.zaxxer.hikari.HikariDataSource 110 - HikariPool-1 - Starting...
+2019-09-26 17:37:57,521 [http-nio-8080-exec-6] INFO  com.zaxxer.hikari.HikariDataSource 123 - HikariPool-1 - Start completed.
+2019-09-26 17:37:57,626 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録開始
+2019-09-26 17:37:57,627 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 87 - 日志输出 info
+2019-09-26 17:37:57,628 [http-nio-8080-exec-6] WARN  j.c.l.cms.controller.LoginController 88 - 日志输出 warn
+2019-09-26 17:37:57,629 [http-nio-8080-exec-6] ERROR j.c.l.cms.controller.LoginController 89 - 日志输出 error
+2019-09-26 17:37:57,631 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 91 - loginController.login:登録結束
+2019-09-26 18:23:01,733 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on DESKTOP-GD7FF1R with PID 15908 (C:\E\workspacer\LYC_CMS\target\classes started by admin in C:\E\workspacer\LYC_CMS)
+2019-09-26 18:23:01,749 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2019-09-26 18:23:05,155 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2019-09-26 18:23:05,177 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2019-09-26 18:23:05,208 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2019-09-26 18:23:05,208 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2019-09-26 18:23:05,458 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2019-09-26 18:23:05,458 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 3569 ms
+2019-09-26 18:23:06,646 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2019-09-26 18:23:06,826 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
+2019-09-26 18:23:07,295 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2019-09-26 18:23:07,373 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2019-09-26 18:23:07,388 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 6.92 seconds (JVM running for 20.067)
+2019-09-26 18:23:21,078 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-09-26 18:23:21,091 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2019-09-26 18:23:21,092 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 1 ms
+2019-09-26 18:23:29,370 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 56 - LoginController.login:登録開始
+2019-09-26 18:23:29,440 [http-nio-8080-exec-6] INFO  com.zaxxer.hikari.HikariDataSource 110 - HikariPool-1 - Starting...
+2019-09-26 18:23:30,285 [http-nio-8080-exec-6] INFO  com.zaxxer.hikari.HikariDataSource 123 - HikariPool-1 - Start completed.
+2019-09-26 18:23:30,386 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 84 - loginController.login:登録開始
+2019-09-26 18:23:30,387 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 87 - 日志输出 info
+2019-09-26 18:23:30,388 [http-nio-8080-exec-6] WARN  j.c.l.cms.controller.LoginController 88 - 日志输出 warn
+2019-09-26 18:23:30,389 [http-nio-8080-exec-6] ERROR j.c.l.cms.controller.LoginController 89 - 日志输出 error
+2019-09-26 18:23:30,391 [http-nio-8080-exec-6] INFO  j.c.l.cms.controller.LoginController 91 - loginController.login:登録結束
