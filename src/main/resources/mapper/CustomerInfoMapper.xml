@@ -5,6 +5,7 @@
     <resultMap id="customerNoSaiBan" type="java.lang.String"/>
      <resultMap id="topCustomer" type="jp.co.lyc.cms.model.TopCustomerInfoModel"/>
     <resultMap id="CustomerInfo" type="jp.co.lyc.cms.model.CustomerInfoModel"/>
+    <resultMap id="CustomerDepartmentInfo" type="jp.co.lyc.cms.model.CustomerDepartmentInfoModel"/>
     <select id="selectCustomerRanking" resultMap="SelectCustomerInfo">
         SELECT 
         	CAST(customerRankingCode AS char)
@@ -118,4 +119,51 @@
 		WHERE 
 			customerNo = #{customerNo}
     </update>   
+    <select id="selectCustomerDepartmentInfo" resultMap="CustomerDepartmentInfo" parameterType="String">
+		SELECT
+			customerDepartmentName,
+			position,
+			responsiblePerson,
+			mail 
+		FROM
+			customer_department_information 
+		WHERE
+			CustomerNo = #{customerNo}
+    </select>
+    <insert id="insertCustomerDepartment" parameterType="String">
+		INSERT INTO customer_information 
+		VALUE(
+		#{customerNo},
+		#{customerDepartmentCode},
+		#{customerDepartmentName},
+		#{position},
+		#{responsiblePerson},
+		#{mail},
+		NOW(),
+		NOW(),
+		#{updateUser})
+    </insert>
+    <update id="updateCustomerDepartment" parameterType="String">
+		UPDATE customer_information
+		SET 
+		<if test="customerDepartmentCode != null">
+			customerDepartmentCode = #{customerDepartmentCode},
+		</if>
+		<if test="customerDepartmentName != null">
+			customerDepartmentName = #{customerDepartmentName},
+		</if>
+		<if test="position != null">
+			position = #{position},
+		</if>
+		<if test="responsiblePerson != null">
+			responsiblePerson = #{responsiblePerson},
+		</if>
+		<if test="mail != null">
+			mail = #{mail},
+		</if>			
+		updateTime = NOW(),
+		updateUser = #{updateUser}
+		WHERE 
+			customerNo = #{customerNo}
+    </update>
 </mapper>
