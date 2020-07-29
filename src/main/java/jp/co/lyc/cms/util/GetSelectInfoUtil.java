@@ -104,15 +104,188 @@ public class GetSelectInfoUtil {
 	public List<ModelClass> getGender() {
 		Properties properties = getProperties.getProperties();
 		String gender = properties.getProperty("gender");
-		JSONObject genderJson = JSONObject.fromObject(gender);
+		List<ModelClass> list=getStatus(gender);	
+		return list;
+	}
+	
+	
+	
+	/**
+	 * 上場
+	 * 
+	 * @return
+	 */
+
+	@RequestMapping(value = "/getListedCompany", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getListedCompany() {
+		Properties properties = getProperties.getProperties();
+		String listedCompany = properties.getProperty("listedCompany");
+		List<ModelClass> list=getStatus(listedCompany);	
+		return list;
+	}
+	
+	
+	/**
+	 * 住宅
+	 * 
+	 * @return
+	 */
+
+	@RequestMapping(value = "/getHousing", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getHousing() {
+		Properties properties = getProperties.getProperties();
+		String Housing = properties.getProperty("Housing");
+		List<ModelClass> list=getStatus(Housing);	
+		return list;
+	}
+	
+	/**
+	 * 社員
+	 * 
+	 * @return
+	 */
+
+	@RequestMapping(value = "/getEmployee", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getEmployee() {
+		Properties properties = getProperties.getProperties();
+		String employee = properties.getProperty("employee");
+		List<ModelClass> list=getStatus(employee);	
+		return list;
+	}
+	
+	/**
+	 * 役割
+	 * 
+	 * @return
+	 */
+
+	@RequestMapping(value = "/getRole", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getRole() {
+		Properties properties = getProperties.getProperties();
+		String role = properties.getProperty("role");
+		List<ModelClass> list=getStatus(role);	
+		return list;
+	}
+	
+	/**
+	 * 新人
+	 * 
+	 * @return
+	 */
+
+	@RequestMapping(value = "/getNewMember", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getNewMember() {
+		Properties properties = getProperties.getProperties();
+		String newMember = properties.getProperty("newMember");
+		List<ModelClass> list=getStatus(newMember);	
+		return list;
+	}
+	
+	/**
+	 * 口座種類
+	 * 
+	 * @return
+	 */
+
+	@RequestMapping(value = "/getAccountType", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getAccountType() {
+		Properties properties = getProperties.getProperties();
+		String accountType = properties.getProperty("accountType");
+		List<ModelClass> list=getStatus(accountType);	
+		return list;
+	}
+	
+	/**
+	 * 口座所属
+	 * 
+	 * @return
+	 */
+
+	@RequestMapping(value = "/getAccountBelongs", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getAccountBelongs() {
+		Properties properties = getProperties.getProperties();
+		String accountBelongs = properties.getProperty("accountBelongs");
+		List<ModelClass> list=getStatus(accountBelongs);	
+		return list;
+	}
+	
+	/**
+	 * 資格
+	 * 
+	 * @return
+	 */
+
+	@RequestMapping(value = "/getQualificationType", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getQualificationType() {
+		Properties properties = getProperties.getProperties();
+		String qualificationType = properties.getProperty("qualificationType");
+		List<ModelClass> list=getStatus(qualificationType);	
+		return list;
+	}
+	
+	/**
+	 * 資格
+	 * 
+	 * @return
+	 */
+
+	@RequestMapping(value = "/getBonus", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getBonus() {
+		Properties properties = getProperties.getProperties();
+		String Bonus = properties.getProperty("Bonus");
+		List<ModelClass> list=getStatus(Bonus);	
+		return list;
+	}
+	
+	/**
+	 * ボーナス
+	 * 
+	 * @return
+	 */
+
+	@RequestMapping(value = "/getInsurance", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getInsurance() {
+		Properties properties = getProperties.getProperties();
+		String Insurance = properties.getProperty("Insurance");
+		List<ModelClass> list=getStatus(Insurance);	
+		return list;
+	}
+	
+	/**
+	 * 社会保険
+	 * 
+	 * @return
+	 */
+
+	@RequestMapping(value = "/getInsuranceStatus", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getInsuranceStatus() {
+		Properties properties = getProperties.getProperties();
+		String InsuranceStatus = properties.getProperty("InsuranceStatus");
+		List<ModelClass> list=getStatus(InsuranceStatus);	
+		return list;
+	}
+	
+	public List<ModelClass> getStatus(String string){
+		JSONObject sJson = JSONObject.fromObject(string);
 		@SuppressWarnings("unchecked")
-		Map<String, String> map = (Map<String, String>) genderJson;
+		Map<String, String> map = (Map<String, String>) sJson;
 		List<ModelClass> list = new ArrayList<ModelClass>();
 		for (Entry<String, String> entry : map.entrySet()) {
-			ModelClass intoCompanyModel = new ModelClass();
-			intoCompanyModel.setCode(entry.getKey());
-			intoCompanyModel.setName(entry.getValue());
-			list.add(intoCompanyModel);
+			ModelClass statusModel = new ModelClass();
+			statusModel.setCode(entry.getKey());
+			statusModel.setName(entry.getValue());
+			list.add(statusModel);
 		}
 		return list;
 	}

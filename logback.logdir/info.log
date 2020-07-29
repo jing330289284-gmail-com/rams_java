@@ -1,0 +1,16 @@
+2020-07-29 12:54:01,045 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on DESKTOP-EUL54JR with PID 17576 (D:\workpace\git\rams_java\target\classes started by 張 in D:\workpace\git\rams_java)
+2020-07-29 12:54:01,054 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2020-07-29 12:54:06,558 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2020-07-29 12:54:06,583 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2020-07-29 12:54:06,600 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2020-07-29 12:54:06,600 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2020-07-29 12:54:06,936 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2020-07-29 12:54:06,937 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 5725 ms
+2020-07-29 12:54:08,065 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2020-07-29 12:54:08,313 [main] WARN  o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration 106 - Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2020-07-29 12:54:08,627 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2020-07-29 12:54:08,681 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2020-07-29 12:54:08,686 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 8.633 seconds (JVM running for 9.352)
+2020-07-29 12:56:08,142 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-07-29 12:56:08,143 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2020-07-29 12:56:08,164 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 21 ms
