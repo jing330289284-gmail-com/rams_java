@@ -20,7 +20,7 @@ import jp.co.lyc.cms.model.SiteModel;
 import jp.co.lyc.cms.service.GetSiteInfoService;
 
 @Controller
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://127.0.0.1:3000")
 public class SiteInfoController {
 	private String dateToString(String date) {
 		String[] a = date.split("/");

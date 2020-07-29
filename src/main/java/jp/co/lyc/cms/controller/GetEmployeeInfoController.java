@@ -19,7 +19,7 @@ import jp.co.lyc.cms.model.EmployeeModel;
 import jp.co.lyc.cms.service.GetEmployeeInfoService;
 
 @Controller
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://127.0.0.1:3000")
 public class GetEmployeeInfoController {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
