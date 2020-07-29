@@ -1,16 +1,65 @@
-2020-07-29 12:54:01,045 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on DESKTOP-EUL54JR with PID 17576 (D:\workpace\git\rams_java\target\classes started by 張 in D:\workpace\git\rams_java)
-2020-07-29 12:54:01,054 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
-2020-07-29 12:54:06,558 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
-2020-07-29 12:54:06,583 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
-2020-07-29 12:54:06,600 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
-2020-07-29 12:54:06,600 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
-2020-07-29 12:54:06,936 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
-2020-07-29 12:54:06,937 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 5725 ms
-2020-07-29 12:54:08,065 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
-2020-07-29 12:54:08,313 [main] WARN  o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration 106 - Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
-2020-07-29 12:54:08,627 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
-2020-07-29 12:54:08,681 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
-2020-07-29 12:54:08,686 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 8.633 seconds (JVM running for 9.352)
-2020-07-29 12:56:08,142 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2020-07-29 12:56:08,143 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
-2020-07-29 12:56:08,164 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 21 ms
+2020-07-30 00:11:01,847 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on jingdadeMacBook-Air.local with PID 43351 (/Users/jingda/git/rams_java/target/classes started by jingda in /Users/jingda/git/rams_java)
+2020-07-30 00:11:01,861 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2020-07-30 00:11:05,357 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2020-07-30 00:11:05,391 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2020-07-30 00:11:05,418 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2020-07-30 00:11:05,421 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2020-07-30 00:11:05,648 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2020-07-30 00:11:05,649 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 3653 ms
+2020-07-30 00:11:07,149 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2020-07-30 00:11:07,517 [main] WARN  o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration 106 - Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2020-07-30 00:11:07,895 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2020-07-30 00:11:08,037 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2020-07-30 00:11:08,044 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 7.781 seconds (JVM running for 8.97)
+2020-07-30 00:14:36,011 [http-nio-8080-exec-2] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-07-30 00:14:36,014 [http-nio-8080-exec-2] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2020-07-30 00:14:36,032 [http-nio-8080-exec-2] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 18 ms
+2020-07-30 00:14:36,251 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource 110 - HikariPool-1 - Starting...
+2020-07-30 00:14:39,550 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource 123 - HikariPool-1 - Start completed.
+2020-07-30 00:14:39,571 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.getSiteMaster 143 - ==>  Preparing: SELECT siteRoleCode code,siteRoleCodeName name FROM site_role_master; 
+2020-07-30 00:14:39,641 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.getSiteMaster 143 - ==> Parameters: 
+2020-07-30 00:14:39,858 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.getSiteMaster 143 - <==      Total: 6
+2020-07-30 00:14:39,868 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.getSiteInfo 143 - ==>  Preparing: SELECT a.systemName, a.location, a.unitPrice, a.AdmissionStartDate, a.AdmissionEndDate, b.siteRoleCodeName, c.customerName, d.topCustomerName, a.developlanguage FROM rams.employee_site_information a LEFT JOIN rams.site_role_master b ON a.siteNo = b.siteRoleCode LEFT JOIN rams.customer_information c ON a.customerNo = c.customerNo LEFT JOIN rams.top_customer d ON a.topCustomerNo = d.topCustomerNo WHERE 1=1 AND a.employeeNo = ? 
+2020-07-30 00:14:39,870 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.getSiteInfo 143 - ==> Parameters: LYC001(String)
+2020-07-30 00:14:40,039 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.getSiteInfo 143 - <==      Total: 3
+2020-07-30 00:14:40,040 [http-nio-8080-exec-3] INFO  j.c.l.c.c.SiteInfoController 157 - GetEmployeeInfoController.getEmployeeInfo:検索結束
+2020-07-30 00:14:40,040 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.getPayMaster 143 - ==>  Preparing: SELECT payOffRangeCode code,payOffRangeName name FROM payOff_Range_master; 
+2020-07-30 00:14:40,041 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.getPayMaster 143 - ==> Parameters: 
+2020-07-30 00:20:04,282 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on jingdadeMacBook-Air.local with PID 43401 (/Users/jingda/git/rams_java/target/classes started by jingda in /Users/jingda/git/rams_java)
+2020-07-30 00:20:04,298 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2020-07-30 00:20:06,757 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2020-07-30 00:20:06,784 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2020-07-30 00:20:06,806 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2020-07-30 00:20:06,807 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2020-07-30 00:20:07,135 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2020-07-30 00:20:07,136 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 2755 ms
+2020-07-30 00:20:08,398 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2020-07-30 00:20:08,681 [main] WARN  o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration 106 - Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2020-07-30 00:20:09,030 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2020-07-30 00:20:09,123 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2020-07-30 00:20:09,130 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 6.039 seconds (JVM running for 6.587)
+2020-07-30 00:20:20,898 [http-nio-8080-exec-2] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-07-30 00:20:20,899 [http-nio-8080-exec-2] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2020-07-30 00:20:20,915 [http-nio-8080-exec-2] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 15 ms
+2020-07-30 00:20:21,080 [http-nio-8080-exec-3] INFO  com.zaxxer.hikari.HikariDataSource 110 - HikariPool-1 - Starting...
+2020-07-30 00:20:24,280 [http-nio-8080-exec-3] INFO  com.zaxxer.hikari.HikariDataSource 123 - HikariPool-1 - Start completed.
+2020-07-30 00:20:24,297 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.getSiteMaster 143 - ==>  Preparing: SELECT siteRoleCode code,siteRoleCodeName name FROM site_role_master; 
+2020-07-30 00:20:24,349 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.getSiteMaster 143 - ==> Parameters: 
+2020-07-30 00:20:24,557 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.getSiteMaster 143 - <==      Total: 6
+2020-07-30 00:20:24,568 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.getPayMaster 143 - ==>  Preparing: SELECT payOffRangeCode code,payOffRangeName name FROM rams.payoff_Range_master; 
+2020-07-30 00:20:24,569 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.getPayMaster 143 - ==> Parameters: 
+2020-07-30 00:20:24,737 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.getPayMaster 143 - <==      Total: 10
+2020-07-30 00:20:24,739 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.getSiteInfo 143 - ==>  Preparing: SELECT a.systemName, a.location, a.unitPrice, a.AdmissionStartDate, a.AdmissionEndDate, b.siteRoleCodeName, c.customerName, d.topCustomerName, a.developlanguage FROM rams.employee_site_information a LEFT JOIN rams.site_role_master b ON a.siteNo = b.siteRoleCode LEFT JOIN rams.customer_information c ON a.customerNo = c.customerNo LEFT JOIN rams.top_customer d ON a.topCustomerNo = d.topCustomerNo WHERE 1=1 AND a.employeeNo = ? 
+2020-07-30 00:20:24,741 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.getSiteInfo 143 - ==> Parameters: LYC001(String)
+2020-07-30 00:20:24,917 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.getSiteInfo 143 - <==      Total: 3
+2020-07-30 00:20:24,918 [http-nio-8080-exec-2] INFO  j.c.l.c.c.SiteInfoController 157 - GetEmployeeInfoController.getEmployeeInfo:検索結束
+2020-07-30 00:21:30,376 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.G.getPayMaster 143 - ==>  Preparing: SELECT payOffRangeCode code,payOffRangeName name FROM rams.payoff_Range_master; 
+2020-07-30 00:21:30,378 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.G.getPayMaster 143 - ==> Parameters: 
+2020-07-30 00:21:30,399 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.getSiteMaster 143 - ==>  Preparing: SELECT siteRoleCode code,siteRoleCodeName name FROM site_role_master; 
+2020-07-30 00:21:30,401 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.getSiteInfo 143 - ==>  Preparing: SELECT a.systemName, a.location, a.unitPrice, a.AdmissionStartDate, a.AdmissionEndDate, b.siteRoleCodeName, c.customerName, d.topCustomerName, a.developlanguage FROM rams.employee_site_information a LEFT JOIN rams.site_role_master b ON a.siteNo = b.siteRoleCode LEFT JOIN rams.customer_information c ON a.customerNo = c.customerNo LEFT JOIN rams.top_customer d ON a.topCustomerNo = d.topCustomerNo WHERE 1=1 AND a.employeeNo = ? 
+2020-07-30 00:21:30,401 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.getSiteMaster 143 - ==> Parameters: 
+2020-07-30 00:21:30,403 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.getSiteInfo 143 - ==> Parameters: LYC001(String)
+2020-07-30 00:21:30,557 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.G.getPayMaster 143 - <==      Total: 10
+2020-07-30 00:21:30,592 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.getSiteMaster 143 - <==      Total: 6
+2020-07-30 00:21:30,593 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.getSiteInfo 143 - <==      Total: 3
+2020-07-30 00:21:30,594 [http-nio-8080-exec-9] INFO  j.c.l.c.c.SiteInfoController 157 - GetEmployeeInfoController.getEmployeeInfo:検索結束
