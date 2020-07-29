@@ -21,7 +21,7 @@ import jp.co.lyc.cms.service.GetSelectInfoUtilService;
 import net.sf.json.JSONObject;
 
 @Controller
-@CrossOrigin(origins = "http://127.0.0.1:3000")
+@CrossOrigin(origins = "http://localhost:3000")
 public class GetSelectInfoUtil {
 
 	@Autowired
