@@ -18,7 +18,7 @@
 		ci.customerName,
 		emd.phoneNo,
 		adi.nearestStationOne,
-		TIMESTAMPDIFF(MONTH,now(),emd.PeriodOfStay)
+		TIMESTAMPDIFF(MONTH,now(),emd.PeriodOfStay)as visaTime
 		from
 		rams.employee as em
 		left join
@@ -32,10 +32,6 @@
 		rams.expenses_information as ei on em.employeeNo=ei.employeeNo
 		left join
 		rams.customer_information as ci on emsi.customerNo=ci.customerNo
-		left join
-		rams.nationality_master as nm on emd.nationalityCode=nm.nationalityCode
-		left join
-		rams.into_company_master as incm on emd.ResidenceOfCode=incm.intoCompanyCode
 
 		,(SELECT @rowNo :=
 		0) AS rowNo
@@ -65,7 +61,7 @@
 			AND emd.ResidenceOfCode=#{statusOfResidence}
 		</if>
 		<if test="birthplaceOfcontroy != null">
-			AND nm.nationalityCode=#{birthplaceOfcontroy}
+			AND emd.nationalityCode=#{birthplaceOfcontroy}
 		</if>
 		<if test="customer!= null">
 			AND ci.customerName=#{customer}
