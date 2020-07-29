@@ -1,247 +1,186 @@
-2020-07-28 13:56:29,656 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on LAPTOP-A94PII7T with PID 22704 (E:\LYC_CMS\target\classes started by Vin.Young in E:\LYC_CMS)
-2020-07-28 13:56:29,662 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
-2020-07-28 13:56:31,180 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
-2020-07-28 13:56:31,196 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
-2020-07-28 13:56:31,206 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
-2020-07-28 13:56:31,207 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
-2020-07-28 13:56:31,324 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
-2020-07-28 13:56:31,325 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 1621 ms
-2020-07-28 13:56:31,995 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
-2020-07-28 13:56:32,084 [main] INFO  o.s.b.a.w.s.WelcomePageHandlerMapping 58 - Adding welcome page template: index
-2020-07-28 13:56:32,298 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
-2020-07-28 13:56:32,327 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
-2020-07-28 13:56:32,331 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 3.257 seconds (JVM running for 5.288)
-2020-07-28 13:56:54,373 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2020-07-28 13:56:54,374 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
-2020-07-28 13:56:54,381 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 7 ms
-2020-07-28 13:56:54,504 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
-2020-07-28 13:56:54,521 [http-nio-8080-exec-2] INFO  com.zaxxer.hikari.HikariDataSource 110 - HikariPool-1 - Starting...
-2020-07-28 13:56:56,858 [http-nio-8080-exec-2] INFO  com.zaxxer.hikari.HikariDataSource 123 - HikariPool-1 - Start completed.
-2020-07-28 13:56:56,865 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.employeeFristName, a.employeeLastName, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityCode LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
-2020-07-28 13:56:56,887 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
-2020-07-28 13:56:57,075 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
-2020-07-28 13:57:08,310 [http-nio-8080-exec-4] INFO  j.c.l.c.controller.SubCostController 35 - LoginController.login:查询开始
-2020-07-28 13:57:08,478 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==>  Preparing: SELECT * FROM expenses_information WHERE employeeNo=? 
-2020-07-28 13:57:08,478 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - ==> Parameters: LYC001(String)
-2020-07-28 13:57:08,647 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.selectCost 143 - <==      Total: 1
-2020-07-28 13:57:08,648 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.checkKado 143 - ==>  Preparing: SELECT AdmissionStartDate, AdmissionEndDate, siteRoleCode, RelatedEmployees FROM employee_site_information WHERE employeeNo = ? AND AdmissionStartDate IS NULL AND AdmissionEndDate IS NULL 
-2020-07-28 13:57:08,649 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.checkKado 143 - ==> Parameters: LYC001(String)
-2020-07-28 13:57:08,824 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.GetCostMapper.checkKado 143 - <==      Total: 1
-2020-07-28 14:02:59,608 [http-nio-8080-exec-7] INFO  j.c.l.c.c.CustomerInfoController 35 - CustomerInfoController.onloadPage:页面加载開始
-2020-07-28 14:02:59,793 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
-2020-07-28 14:02:59,794 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
-2020-07-28 14:02:59,966 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
-2020-07-28 14:02:59,966 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
-2020-07-28 14:02:59,967 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
-2020-07-28 14:03:00,136 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
-2020-07-28 14:03:00,136 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==>  Preparing: SELECT MAX(customerNo) AS saibanCustomerNo FROM customer_information 
-2020-07-28 14:03:00,137 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==> Parameters: 
-2020-07-28 14:03:00,305 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - <==      Total: 1
-2020-07-28 14:03:51,778 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - ==>  Preparing: SELECT topCustomerName FROM top_customer WHERE topCustomerName LIKE concat('%',?,'%') 
-2020-07-28 14:03:51,778 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - ==>  Preparing: SELECT topCustomerName FROM top_customer WHERE topCustomerName LIKE concat('%',?,'%') 
-2020-07-28 14:03:51,779 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - ==> Parameters: f(String)
-2020-07-28 14:03:51,779 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - ==> Parameters: fu(String)
-2020-07-28 14:03:51,946 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - <==      Total: 0
-2020-07-28 14:03:51,946 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - <==      Total: 0
-2020-07-28 14:03:52,203 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - ==>  Preparing: SELECT topCustomerName FROM top_customer WHERE topCustomerName LIKE concat('%',?,'%') 
-2020-07-28 14:03:52,203 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - ==> Parameters: 富(String)
-2020-07-28 14:03:52,371 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - <==      Total: 2
-2020-07-28 14:03:55,477 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - ==>  Preparing: SELECT topCustomerName FROM top_customer WHERE topCustomerName LIKE concat('%',?,'%') 
-2020-07-28 14:03:55,477 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - ==> Parameters: b(String)
-2020-07-28 14:03:55,598 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - ==>  Preparing: SELECT topCustomerName FROM top_customer WHERE topCustomerName LIKE concat('%',?,'%') 
-2020-07-28 14:03:55,599 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - ==> Parameters: be(String)
-2020-07-28 14:03:55,643 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - <==      Total: 0
-2020-07-28 14:03:55,765 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - <==      Total: 0
-2020-07-28 14:03:55,909 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - ==>  Preparing: SELECT topCustomerName FROM top_customer WHERE topCustomerName LIKE concat('%',?,'%') 
-2020-07-28 14:03:55,910 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - ==> Parameters: b(String)
-2020-07-28 14:03:56,076 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - <==      Total: 0
-2020-07-28 14:03:58,037 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - ==>  Preparing: SELECT topCustomerName FROM top_customer WHERE topCustomerName LIKE concat('%',?,'%') 
-2020-07-28 14:03:58,037 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - ==> Parameters: ｂ(String)
-2020-07-28 14:03:58,149 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - ==>  Preparing: SELECT topCustomerName FROM top_customer WHERE topCustomerName LIKE concat('%',?,'%') 
-2020-07-28 14:03:58,150 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - ==> Parameters: べ(String)
-2020-07-28 14:03:58,204 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - <==      Total: 0
-2020-07-28 14:03:58,317 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - <==      Total: 0
-2020-07-28 14:03:59,892 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - ==>  Preparing: SELECT topCustomerName FROM top_customer WHERE topCustomerName LIKE concat('%',?,'%') 
-2020-07-28 14:03:59,892 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - ==> Parameters: ベ(String)
-2020-07-28 14:04:00,059 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - <==      Total: 1
-2020-07-28 14:04:00,082 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - ==>  Preparing: SELECT topCustomerName FROM top_customer WHERE topCustomerName LIKE concat('%',?,'%') 
-2020-07-28 14:04:00,083 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - ==> Parameters: べ(String)
-2020-07-28 14:04:00,249 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - <==      Total: 0
-2020-07-28 14:04:03,364 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - ==>  Preparing: SELECT topCustomerName FROM top_customer WHERE topCustomerName LIKE concat('%',?,'%') 
-2020-07-28 14:04:03,365 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - ==> Parameters: ｂ(String)
-2020-07-28 14:04:03,522 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - ==>  Preparing: SELECT topCustomerName FROM top_customer WHERE topCustomerName LIKE concat('%',?,'%') 
-2020-07-28 14:04:03,522 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - ==> Parameters: べ(String)
-2020-07-28 14:04:03,531 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - <==      Total: 0
-2020-07-28 14:04:03,688 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - <==      Total: 0
-2020-07-28 14:04:05,119 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - ==>  Preparing: SELECT topCustomerName FROM top_customer WHERE topCustomerName LIKE concat('%',?,'%') 
-2020-07-28 14:04:05,119 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - ==> Parameters: ベ(String)
-2020-07-28 14:04:05,286 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - <==      Total: 1
-2020-07-28 14:04:20,019 [http-nio-8080-exec-4] INFO  j.c.l.c.c.BankInfoController 33 - BankInfoController.getBankInfo:検索開始
-2020-07-28 14:04:20,189 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
-2020-07-28 14:04:20,189 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
-2020-07-28 14:04:20,406 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
-2020-07-28 14:04:45,593 [http-nio-8080-exec-5] INFO  j.c.l.c.c.BankInfoController 33 - BankInfoController.getBankInfo:検索開始
-2020-07-28 14:04:45,759 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
-2020-07-28 14:04:45,759 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
-2020-07-28 14:04:45,945 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
-2020-07-28 14:05:04,334 [http-nio-8080-exec-7] INFO  j.c.l.c.c.BankInfoController 33 - BankInfoController.getBankInfo:検索開始
-2020-07-28 14:05:04,504 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
-2020-07-28 14:05:04,504 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
-2020-07-28 14:05:04,687 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
-2020-07-28 14:05:30,244 [http-nio-8080-exec-9] INFO  j.c.l.c.c.TopCustomerInfoController 29 - TopCustomerInfoController.onloadPage:页面加载開始
-2020-07-28 14:05:30,416 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.T.TopCustomerNoSaiBan 143 - ==>  Preparing: SELECT MAX(TopCustomerNo) AS TopCustomerNoSaiBan FROM top_customer 
-2020-07-28 14:05:30,417 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.T.TopCustomerNoSaiBan 143 - ==> Parameters: 
-2020-07-28 14:05:30,612 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.T.TopCustomerNoSaiBan 143 - <==      Total: 1
-2020-07-28 14:05:32,879 [http-nio-8080-exec-1] INFO  j.c.l.c.c.CustomerInfoController 35 - CustomerInfoController.onloadPage:页面加载開始
-2020-07-28 14:05:33,045 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
-2020-07-28 14:05:33,046 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
-2020-07-28 14:05:33,212 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
-2020-07-28 14:05:33,213 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
-2020-07-28 14:05:33,213 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
-2020-07-28 14:05:33,381 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
-2020-07-28 14:05:35,704 [http-nio-8080-exec-2] INFO  j.c.l.c.c.CustomerInfoSearchController 30 - CustomerInfoController.onloadPage:查询開始
-2020-07-28 14:05:35,890 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.SelectCustomerInfo 143 - ==>  Preparing: SELECT CONCAT(( @rowNo := @rowNo + 1 )) AS rowNo, ci.customerNo, ci.customerName, crm.customerRankingName, ci.headOffice, cnm.companyNatureName, tc.topCustomerName, esi.employeeNo, CONCAT( e.employeeFristName ,e.employeeLastName ) AS employeeName, esi.location, esi.siteManager, esi.unitPrice FROM customer_information AS ci LEFT JOIN employee_site_information AS esi ON ci.customerNo = esi.customerNo AND ci.topCustomerNo = esi.topCustomerNo AND esi.AdmissionStartDate IS NOT NULL AND esi.AdmissionEndDate IS NOT NULL LEFT JOIN employee AS e ON esi.employeeNo = e.employeeNo LEFT JOIN customer_ranking_master AS crm ON ci.customerRankingCode = crm.customerRankingCode LEFT JOIN company_nature_master AS cnm ON ci.companyNatureCode = cnm.companyNatureCode LEFT JOIN top_customer AS tc ON ci.topCustomerNo = tc.topCustomerNo ,( SELECT @rowNo := 0 ) AS rowNo WHERE 1=1 ORDER BY ci.customerNo 
-2020-07-28 14:05:35,891 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.SelectCustomerInfo 143 - ==> Parameters: 
-2020-07-28 14:05:36,060 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.SelectCustomerInfo 143 - <==      Total: 7
-2020-07-28 14:07:39,086 [http-nio-8080-exec-4] INFO  j.c.l.c.c.CustomerInfoController 35 - CustomerInfoController.onloadPage:页面加载開始
-2020-07-28 14:07:39,252 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
-2020-07-28 14:07:39,253 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
-2020-07-28 14:07:39,419 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
-2020-07-28 14:07:39,420 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
-2020-07-28 14:07:39,420 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
-2020-07-28 14:07:39,588 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
-2020-07-28 14:07:39,589 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==>  Preparing: SELECT MAX(customerNo) AS saibanCustomerNo FROM customer_information 
-2020-07-28 14:07:39,589 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==> Parameters: 
-2020-07-28 14:07:39,756 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - <==      Total: 1
-2020-07-28 14:07:57,786 [http-nio-8080-exec-5] INFO  j.c.l.c.c.CustomerInfoController 35 - CustomerInfoController.onloadPage:页面加载開始
-2020-07-28 14:07:57,953 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
-2020-07-28 14:07:57,953 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
-2020-07-28 14:07:58,122 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
-2020-07-28 14:07:58,123 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
-2020-07-28 14:07:58,124 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
-2020-07-28 14:07:58,290 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
-2020-07-28 14:07:58,501 [http-nio-8080-exec-6] INFO  j.c.l.c.c.CustomerInfoSearchController 30 - CustomerInfoController.onloadPage:查询開始
-2020-07-28 14:07:58,502 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.SelectCustomerInfo 143 - ==>  Preparing: SELECT CONCAT(( @rowNo := @rowNo + 1 )) AS rowNo, ci.customerNo, ci.customerName, crm.customerRankingName, ci.headOffice, cnm.companyNatureName, tc.topCustomerName, esi.employeeNo, CONCAT( e.employeeFristName ,e.employeeLastName ) AS employeeName, esi.location, esi.siteManager, esi.unitPrice FROM customer_information AS ci LEFT JOIN employee_site_information AS esi ON ci.customerNo = esi.customerNo AND ci.topCustomerNo = esi.topCustomerNo AND esi.AdmissionStartDate IS NOT NULL AND esi.AdmissionEndDate IS NOT NULL LEFT JOIN employee AS e ON esi.employeeNo = e.employeeNo LEFT JOIN customer_ranking_master AS crm ON ci.customerRankingCode = crm.customerRankingCode LEFT JOIN company_nature_master AS cnm ON ci.companyNatureCode = cnm.companyNatureCode LEFT JOIN top_customer AS tc ON ci.topCustomerNo = tc.topCustomerNo ,( SELECT @rowNo := 0 ) AS rowNo WHERE 1=1 ORDER BY ci.customerNo 
-2020-07-28 14:07:58,502 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.SelectCustomerInfo 143 - ==> Parameters: 
-2020-07-28 14:07:58,672 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.SelectCustomerInfo 143 - <==      Total: 7
-2020-07-28 14:36:34,345 [http-nio-8080-exec-9] INFO  j.c.l.c.c.CustomerInfoController 35 - CustomerInfoController.onloadPage:页面加载開始
-2020-07-28 14:36:34,512 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
-2020-07-28 14:36:34,512 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
-2020-07-28 14:36:34,679 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
-2020-07-28 14:36:34,680 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
-2020-07-28 14:36:34,681 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
-2020-07-28 14:36:34,848 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
-2020-07-28 14:36:39,389 [http-nio-8080-exec-1] INFO  j.c.l.c.c.CustomerInfoController 35 - CustomerInfoController.onloadPage:页面加载開始
-2020-07-28 14:36:39,554 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
-2020-07-28 14:36:39,554 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
-2020-07-28 14:36:39,719 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
-2020-07-28 14:36:39,720 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
-2020-07-28 14:36:39,720 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
-2020-07-28 14:36:39,886 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
-2020-07-28 14:36:39,887 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==>  Preparing: SELECT MAX(customerNo) AS saibanCustomerNo FROM customer_information 
-2020-07-28 14:36:39,887 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==> Parameters: 
-2020-07-28 14:36:40,054 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - <==      Total: 1
-2020-07-28 14:36:42,783 [http-nio-8080-exec-2] INFO  j.c.l.c.c.BankInfoController 33 - BankInfoController.getBankInfo:検索開始
-2020-07-28 14:36:42,948 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
-2020-07-28 14:36:42,949 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
-2020-07-28 14:36:43,118 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
-2020-07-28 14:38:07,617 [http-nio-8080-exec-4] INFO  j.c.l.c.c.BankInfoController 33 - BankInfoController.getBankInfo:検索開始
-2020-07-28 14:38:07,794 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
-2020-07-28 14:38:07,794 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
-2020-07-28 14:38:07,977 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
-2020-07-28 14:38:13,010 [http-nio-8080-exec-5] INFO  j.c.l.c.c.BankInfoController 33 - BankInfoController.getBankInfo:検索開始
-2020-07-28 14:38:13,174 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
-2020-07-28 14:38:13,175 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
-2020-07-28 14:38:13,383 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
-2020-07-28 14:38:25,572 [http-nio-8080-exec-6] INFO  j.c.l.c.c.BankInfoController 33 - BankInfoController.getBankInfo:検索開始
-2020-07-28 14:38:25,746 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
-2020-07-28 14:38:25,746 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
-2020-07-28 14:38:25,915 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
-2020-07-28 14:40:02,342 [http-nio-8080-exec-8] INFO  j.c.l.c.c.CustomerInfoController 35 - CustomerInfoController.onloadPage:页面加载開始
-2020-07-28 14:40:02,508 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
-2020-07-28 14:40:02,509 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
-2020-07-28 14:40:02,675 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
-2020-07-28 14:40:02,675 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
-2020-07-28 14:40:02,676 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
-2020-07-28 14:40:02,845 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
-2020-07-28 14:40:02,846 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==>  Preparing: SELECT MAX(customerNo) AS saibanCustomerNo FROM customer_information 
-2020-07-28 14:40:02,846 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==> Parameters: 
-2020-07-28 14:40:03,012 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - <==      Total: 1
-2020-07-28 14:40:04,367 [http-nio-8080-exec-9] INFO  j.c.l.c.c.BankInfoController 33 - BankInfoController.getBankInfo:検索開始
-2020-07-28 14:40:04,534 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==>  Preparing: SELECT bankName FROM bank_master 
-2020-07-28 14:40:04,535 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.selectBankInfo 143 - ==> Parameters: 
-2020-07-28 14:40:04,701 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.selectBankInfo 143 - <==      Total: 4
-2020-07-28 14:40:33,787 [http-nio-8080-exec-10] INFO  j.c.l.c.c.TopCustomerInfoController 29 - TopCustomerInfoController.onloadPage:页面加载開始
-2020-07-28 14:40:33,953 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.T.TopCustomerNoSaiBan 143 - ==>  Preparing: SELECT MAX(TopCustomerNo) AS TopCustomerNoSaiBan FROM top_customer 
-2020-07-28 14:40:33,954 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.T.TopCustomerNoSaiBan 143 - ==> Parameters: 
-2020-07-28 14:40:34,119 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.T.TopCustomerNoSaiBan 143 - <==      Total: 1
-2020-07-28 14:41:22,113 [http-nio-8080-exec-2] INFO  j.c.l.c.c.CustomerInfoController 35 - CustomerInfoController.onloadPage:页面加载開始
-2020-07-28 14:41:22,281 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
-2020-07-28 14:41:22,281 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
-2020-07-28 14:41:22,448 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
-2020-07-28 14:41:22,448 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
-2020-07-28 14:41:22,449 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
-2020-07-28 14:41:22,614 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
-2020-07-28 14:41:22,614 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==>  Preparing: SELECT MAX(customerNo) AS saibanCustomerNo FROM customer_information 
-2020-07-28 14:41:22,615 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==> Parameters: 
-2020-07-28 14:41:22,781 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - <==      Total: 1
-2020-07-28 14:41:58,917 [http-nio-8080-exec-3] INFO  j.c.l.c.c.CustomerInfoController 35 - CustomerInfoController.onloadPage:页面加载開始
-2020-07-28 14:41:59,081 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
-2020-07-28 14:41:59,083 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
-2020-07-28 14:41:59,250 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
-2020-07-28 14:41:59,250 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
-2020-07-28 14:41:59,251 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
-2020-07-28 14:41:59,416 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
-2020-07-28 14:41:59,417 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==>  Preparing: SELECT MAX(customerNo) AS saibanCustomerNo FROM customer_information 
-2020-07-28 14:41:59,417 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==> Parameters: 
-2020-07-28 14:41:59,587 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - <==      Total: 1
-2020-07-28 14:42:11,535 [http-nio-8080-exec-4] INFO  j.c.l.c.c.CustomerInfoController 35 - CustomerInfoController.onloadPage:页面加载開始
-2020-07-28 14:42:11,702 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
-2020-07-28 14:42:11,702 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
-2020-07-28 14:42:11,871 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
-2020-07-28 14:42:11,872 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
-2020-07-28 14:42:11,872 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
-2020-07-28 14:42:12,038 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
-2020-07-28 14:42:12,039 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==>  Preparing: SELECT MAX(customerNo) AS saibanCustomerNo FROM customer_information 
-2020-07-28 14:42:12,039 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==> Parameters: 
-2020-07-28 14:42:12,204 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - <==      Total: 1
-2020-07-28 14:44:09,634 [http-nio-8080-exec-6] INFO  j.c.l.c.c.CustomerInfoController 35 - CustomerInfoController.onloadPage:页面加载開始
-2020-07-28 14:44:09,802 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
-2020-07-28 14:44:09,802 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
-2020-07-28 14:44:09,968 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
-2020-07-28 14:44:09,969 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
-2020-07-28 14:44:09,970 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
-2020-07-28 14:44:10,137 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
-2020-07-28 14:44:10,138 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==>  Preparing: SELECT MAX(customerNo) AS saibanCustomerNo FROM customer_information 
-2020-07-28 14:44:10,138 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==> Parameters: 
-2020-07-28 14:44:10,303 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - <==      Total: 1
-2020-07-28 14:44:39,653 [http-nio-8080-exec-7] INFO  j.c.l.c.c.CustomerInfoController 35 - CustomerInfoController.onloadPage:页面加载開始
-2020-07-28 14:44:39,818 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
-2020-07-28 14:44:39,819 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
-2020-07-28 14:44:39,985 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
-2020-07-28 14:44:39,986 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
-2020-07-28 14:44:39,987 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
-2020-07-28 14:44:40,153 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
-2020-07-28 14:44:40,154 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==>  Preparing: SELECT MAX(customerNo) AS saibanCustomerNo FROM customer_information 
-2020-07-28 14:44:40,154 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==> Parameters: 
-2020-07-28 14:44:40,319 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - <==      Total: 1
-2020-07-28 14:44:53,990 [http-nio-8080-exec-8] INFO  j.c.l.c.c.CustomerInfoController 35 - CustomerInfoController.onloadPage:页面加载開始
-2020-07-28 14:44:54,162 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
-2020-07-28 14:44:54,162 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
-2020-07-28 14:44:54,330 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
-2020-07-28 14:44:54,330 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
-2020-07-28 14:44:54,331 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
-2020-07-28 14:44:54,497 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
-2020-07-28 14:44:54,498 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==>  Preparing: SELECT MAX(customerNo) AS saibanCustomerNo FROM customer_information 
-2020-07-28 14:44:54,498 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==> Parameters: 
-2020-07-28 14:44:54,665 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - <==      Total: 1
-2020-07-28 14:48:09,598 [http-nio-8080-exec-1] INFO  j.c.l.c.c.CustomerInfoController 35 - CustomerInfoController.onloadPage:页面加载開始
-2020-07-28 14:48:09,765 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
-2020-07-28 14:48:09,765 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
-2020-07-28 14:48:09,936 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
-2020-07-28 14:48:09,937 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
-2020-07-28 14:48:09,937 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
-2020-07-28 14:48:10,109 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
-2020-07-28 14:48:10,110 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==>  Preparing: SELECT MAX(customerNo) AS saibanCustomerNo FROM customer_information 
-2020-07-28 14:48:10,110 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==> Parameters: 
-2020-07-28 14:48:10,281 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - <==      Total: 1
+2020-07-29 00:46:10,907 [http-nio-8080-exec-1] INFO  j.c.l.c.c.GetEmployeeInfoController 34 - GetEmployeeInfoController.getEmployeeInfo:検索開始
+2020-07-29 00:46:11,268 [http-nio-8080-exec-1] INFO  j.c.l.c.c.GetEmployeeInfoController 42 - GetEmployeeInfoController.getEmployeeInfo:検索結束
+2020-07-29 02:04:40,998 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool 766 - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=43m38s787ms8µs600ns).
+2020-07-29 05:07:11,377 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool 766 - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=3h30s377ms589µs600ns).
+2020-07-29 11:16:19,904 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool 766 - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=6h9m25s530ms398µs300ns).
+2020-07-29 11:44:35,294 [http-nio-8080-exec-9] INFO  j.c.l.c.c.SiteInfoController 157 - GetEmployeeInfoController.getEmployeeInfo:検索結束
+2020-07-29 15:51:50,501 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool 766 - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2h10m29s91ms736µs300ns).
+2020-07-29 16:32:14,095 [http-nio-8080-exec-4] INFO  j.c.l.c.c.CustomerInfoController 35 - CustomerInfoController.onloadPage:页面加载開始
+2020-07-29 16:34:10,611 [http-nio-8080-exec-1] INFO  j.c.l.c.c.GetEmployeeInfoController 34 - GetEmployeeInfoController.getEmployeeInfo:検索開始
+2020-07-29 16:34:10,968 [http-nio-8080-exec-1] INFO  j.c.l.c.c.GetEmployeeInfoController 42 - GetEmployeeInfoController.getEmployeeInfo:検索結束
+2020-07-29 16:35:00,015 [http-nio-8080-exec-7] INFO  j.c.l.c.c.SiteInfoController 157 - GetEmployeeInfoController.getEmployeeInfo:検索結束
+2020-07-29 16:35:02,597 [http-nio-8080-exec-8] INFO  j.c.l.c.c.SiteInfoController 157 - GetEmployeeInfoController.getEmployeeInfo:検索結束
+2020-07-29 16:35:07,072 [http-nio-8080-exec-4] INFO  j.c.l.c.c.SiteInfoController 157 - GetEmployeeInfoController.getEmployeeInfo:検索結束
+2020-07-29 17:26:25,867 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool 766 - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=8m3s956ms272µs400ns).
+2020-07-29 18:07:17,068 [http-nio-8080-exec-8] INFO  j.c.l.c.c.SiteInfoController 157 - GetEmployeeInfoController.getEmployeeInfo:検索結束
+2020-07-29 18:08:00,768 [http-nio-8080-exec-7] INFO  j.c.l.c.c.SiteInfoController 157 - GetEmployeeInfoController.getEmployeeInfo:検索結束
+2020-07-29 18:08:23,687 [http-nio-8080-exec-10] INFO  j.c.l.c.c.SiteInfoController 157 - GetEmployeeInfoController.getEmployeeInfo:検索結束
+2020-07-29 18:08:39,286 [http-nio-8080-exec-3] INFO  j.c.l.c.c.SiteInfoController 157 - GetEmployeeInfoController.getEmployeeInfo:検索結束
+2020-07-29 18:28:20,015 [http-nio-8080-exec-1] INFO  j.c.l.c.c.SiteInfoController 157 - GetEmployeeInfoController.getEmployeeInfo:検索結束
+2020-07-29 18:28:24,589 [http-nio-8080-exec-2] INFO  j.c.l.c.c.SiteInfoController 157 - GetEmployeeInfoController.getEmployeeInfo:検索結束
+2020-07-29 18:28:25,048 [http-nio-8080-exec-9] INFO  j.c.l.c.c.SiteInfoController 157 - GetEmployeeInfoController.getEmployeeInfo:検索結束
+2020-07-29 18:28:25,690 [http-nio-8080-exec-4] INFO  j.c.l.c.c.SiteInfoController 157 - GetEmployeeInfoController.getEmployeeInfo:検索結束
+2020-07-29 18:28:37,247 [http-nio-8080-exec-8] INFO  j.c.l.c.c.CustomerInfoController 35 - CustomerInfoController.onloadPage:页面加载開始
+2020-07-29 18:28:37,977 [http-nio-8080-exec-10] INFO  j.c.l.c.c.TopCustomerInfoController 29 - TopCustomerInfoController.onloadPage:页面加载開始
+2020-07-29 18:28:39,632 [http-nio-8080-exec-3] INFO  j.c.l.c.c.CustomerInfoController 35 - CustomerInfoController.onloadPage:页面加载開始
+2020-07-29 18:37:36,138 [http-nio-8080-exec-4] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-07-29 20:31:13,066 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool 766 - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=8m15s118ms121µs200ns).
+2020-07-29 20:49:43,075 [http-nio-8080-exec-5] INFO  j.c.l.c.c.GetEmployeeInfoController 34 - GetEmployeeInfoController.getEmployeeInfo:検索開始
+2020-07-29 20:49:43,478 [http-nio-8080-exec-5] INFO  j.c.l.c.c.GetEmployeeInfoController 42 - GetEmployeeInfoController.getEmployeeInfo:検索結束
+2020-07-29 20:51:26,843 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on DESKTOP-O8FO0B5 with PID 13412 (E:\eclipse\workspace\rams_java\target\classes started by liulintao in E:\eclipse\workspace\rams_java)
+2020-07-29 20:51:26,879 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2020-07-29 20:51:36,128 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2020-07-29 20:51:36,179 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2020-07-29 20:51:36,215 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2020-07-29 20:51:36,220 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2020-07-29 20:51:37,155 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2020-07-29 20:51:37,160 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 9962 ms
+2020-07-29 20:51:40,678 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2020-07-29 20:51:41,320 [main] WARN  o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration 106 - Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2020-07-29 20:51:42,095 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2020-07-29 20:51:42,345 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2020-07-29 20:51:42,357 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 18.803 seconds (JVM running for 21.165)
+2020-07-29 20:52:41,117 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-07-29 20:52:41,118 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2020-07-29 20:52:41,144 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 25 ms
+2020-07-29 20:52:42,030 [http-nio-8080-exec-2] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-07-29 20:52:42,145 [http-nio-8080-exec-2] INFO  com.zaxxer.hikari.HikariDataSource 110 - HikariPool-1 - Starting...
+2020-07-29 20:52:43,200 [http-nio-8080-exec-3] INFO  j.c.l.cms.controller.LoginController 44 - LoginController.login:登録開始
+2020-07-29 20:52:46,213 [http-nio-8080-exec-2] INFO  com.zaxxer.hikari.HikariDataSource 123 - HikariPool-1 - Start completed.
+2020-07-29 20:52:46,239 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.employeeFristName, a.employeeLastName, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityCode LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-07-29 20:52:46,299 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-07-29 20:52:46,536 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-07-29 20:52:46,543 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==>  Preparing: SELECT a.employeeNo, a.employeeFristName, a.employeeLastName, a.authorityCode, b.authorityProperty FROM employee a LEFT JOIN authority_master b ON a.authorityCode = b.authorityCode LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo WHERE a. PASSWORD = ? AND a.employeeNo = ? 
+2020-07-29 20:52:46,544 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - ==> Parameters: 1(String), LYC001(String)
+2020-07-29 20:52:46,722 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.E.getEmployeeModel 143 - <==      Total: 1
+2020-07-29 20:52:52,993 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.getJapaneseLevel 143 - ==>  Preparing: SELECT japaneseLevelCode code,japaneseLevelName name FROM japanese_Level_master; 
+2020-07-29 20:52:52,995 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.getJapaneseLevel 143 - ==> Parameters: 
+2020-07-29 20:52:53,121 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.getNationalitys 143 - ==>  Preparing: SELECT nationalityCode code,nationalityName name FROM nationality_master; 
+2020-07-29 20:52:53,122 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.getNationalitys 143 - ==> Parameters: 
+2020-07-29 20:52:53,128 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.getStaffForms 143 - ==>  Preparing: SELECT emploryeeFormCode code,emploryeeFormName name FROM emploryee_form_master; 
+2020-07-29 20:52:53,129 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.getStaffForms 143 - ==> Parameters: 
+2020-07-29 20:52:53,168 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.G.getIntoCompany 143 - ==>  Preparing: SELECT intoCompanyCode code,intoCompanyName name FROM into_company_master; 
+2020-07-29 20:52:53,169 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.G.getIntoCompany 143 - ==> Parameters: 
+2020-07-29 20:52:53,175 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.getJapaneseLevel 143 - <==      Total: 7
+2020-07-29 20:52:53,190 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.getVisa 143 - ==>  Preparing: SELECT visaCode code,visaName name FROM visa_master; 
+2020-07-29 20:52:53,199 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.getVisa 143 - ==> Parameters: 
+2020-07-29 20:52:53,298 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.getNationalitys 143 - <==      Total: 5
+2020-07-29 20:52:53,308 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.getStaffForms 143 - <==      Total: 5
+2020-07-29 20:52:53,312 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.getSiteMaster 143 - ==>  Preparing: SELECT siteRoleCode code,siteRoleCodeName name FROM site_role_master; 
+2020-07-29 20:52:53,313 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.getSiteMaster 143 - ==> Parameters: 
+2020-07-29 20:52:53,343 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.G.getIntoCompany 143 - <==      Total: 5
+2020-07-29 20:52:53,376 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.getVisa 143 - <==      Total: 9
+2020-07-29 20:52:53,488 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.getSiteMaster 143 - <==      Total: 6
+2020-07-29 20:53:05,952 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.getTechnologyType 143 - ==>  Preparing: SELECT technologytypeCode code,technologytypeName name FROM technology_type_Master where 1=1 AND technologytypeName like concat('%',?,'%'); 
+2020-07-29 20:53:05,956 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.getTechnologyType 143 - ==> Parameters: j(String)
+2020-07-29 20:53:06,043 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.getTechnologyType 143 - ==>  Preparing: SELECT technologytypeCode code,technologytypeName name FROM technology_type_Master where 1=1 AND technologytypeName like concat('%',?,'%'); 
+2020-07-29 20:53:06,043 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.getTechnologyType 143 - ==> Parameters: j'a(String)
+2020-07-29 20:53:06,124 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.getTechnologyType 143 - <==      Total: 2
+2020-07-29 20:53:06,217 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.getTechnologyType 143 - <==      Total: 0
+2020-07-29 20:53:06,623 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.getTechnologyType 143 - ==>  Preparing: SELECT technologytypeCode code,technologytypeName name FROM technology_type_Master where 1=1 AND technologytypeName like concat('%',?,'%'); 
+2020-07-29 20:53:06,624 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.getTechnologyType 143 - ==> Parameters: ja(String)
+2020-07-29 20:53:06,795 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.getTechnologyType 143 - <==      Total: 2
+2020-07-29 20:53:46,346 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.getTechnologyType 143 - ==>  Preparing: SELECT technologytypeCode code,technologytypeName name FROM technology_type_Master where 1=1 AND technologytypeName like concat('%',?,'%'); 
+2020-07-29 20:53:46,347 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.getTechnologyType 143 - ==> Parameters: ja(String)
+2020-07-29 20:53:46,522 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.getTechnologyType 143 - <==      Total: 2
+2020-07-29 20:53:52,595 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.getTechnologyType 143 - ==>  Preparing: SELECT technologytypeCode code,technologytypeName name FROM technology_type_Master where 1=1 AND technologytypeName like concat('%',?,'%'); 
+2020-07-29 20:53:52,597 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.getTechnologyType 143 - ==> Parameters: Java(String)
+2020-07-29 20:53:52,768 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.getTechnologyType 143 - <==      Total: 2
+2020-07-29 20:53:53,845 [http-nio-8080-exec-10] INFO  j.c.l.c.c.GetEmployeeInfoController 34 - GetEmployeeInfoController.getEmployeeInfo:検索開始
+2020-07-29 20:53:54,023 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - ==>  Preparing: select (@rowNo := @rowNo + 1) AS rowNo, em.employeeNo, em.employeeFristName, emd.Furigana, emd.alphabetOfName, emd.age, emd.joinCompanyOfYearandMonth, emsi.AdmissionStartDate, ei.salary, ci.customerName, emd.phoneNo, adi.nearestStationOne, TIMESTAMPDIFF(MONTH,now(),emd.PeriodOfStay) from rams.employee as em left join rams.employee_detail as emd on emd.employeeNo=em.employeeNo left join rams.employee_site_information as emsi on em.employeeNo=emsi.employeeNo left join rams.address_information as adi on em.employeeNo= adi.employeeNo left join rams.expenses_information as ei on em.employeeNo=ei.employeeNo left join rams.customer_information as ci on emsi.customerNo=ci.customerNo left join rams.nationality_master as nm on emd.nationalityCode=nm.nationalityCode left join rams.into_company_master as incm on emd.ResidenceOfCode=incm.intoCompanyCode ,(SELECT @rowNo := 0) AS rowNo where 1=1 ORDER BY em.employeeNo DESC 
+2020-07-29 20:53:54,024 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - ==> Parameters: 
+2020-07-29 20:53:54,196 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - <==      Total: 5
+2020-07-29 20:53:54,196 [http-nio-8080-exec-10] INFO  j.c.l.c.c.GetEmployeeInfoController 42 - GetEmployeeInfoController.getEmployeeInfo:検索結束
+2020-07-29 20:58:02,124 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.getNationalitys 143 - ==>  Preparing: SELECT nationalityCode code,nationalityName name FROM nationality_master; 
+2020-07-29 20:58:02,124 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.getVisa 143 - ==>  Preparing: SELECT visaCode code,visaName name FROM visa_master; 
+2020-07-29 20:58:02,124 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.getStaffForms 143 - ==>  Preparing: SELECT emploryeeFormCode code,emploryeeFormName name FROM emploryee_form_master; 
+2020-07-29 20:58:02,127 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.getNationalitys 143 - ==> Parameters: 
+2020-07-29 20:58:02,127 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.getIntoCompany 143 - ==>  Preparing: SELECT intoCompanyCode code,intoCompanyName name FROM into_company_master; 
+2020-07-29 20:58:02,128 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.getStaffForms 143 - ==> Parameters: 
+2020-07-29 20:58:02,128 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.getVisa 143 - ==> Parameters: 
+2020-07-29 20:58:02,128 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.getIntoCompany 143 - ==> Parameters: 
+2020-07-29 20:58:02,133 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.getJapaneseLevel 143 - ==>  Preparing: SELECT japaneseLevelCode code,japaneseLevelName name FROM japanese_Level_master; 
+2020-07-29 20:58:02,134 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.getJapaneseLevel 143 - ==> Parameters: 
+2020-07-29 20:58:02,145 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.getSiteMaster 143 - ==>  Preparing: SELECT siteRoleCode code,siteRoleCodeName name FROM site_role_master; 
+2020-07-29 20:58:02,146 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.getSiteMaster 143 - ==> Parameters: 
+2020-07-29 20:58:02,303 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.getStaffForms 143 - <==      Total: 5
+2020-07-29 20:58:02,305 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.getNationalitys 143 - <==      Total: 5
+2020-07-29 20:58:02,320 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.getSiteMaster 143 - <==      Total: 6
+2020-07-29 20:58:02,323 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.getJapaneseLevel 143 - <==      Total: 7
+2020-07-29 20:58:02,340 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.getVisa 143 - <==      Total: 9
+2020-07-29 20:58:02,344 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.getIntoCompany 143 - <==      Total: 5
+2020-07-29 20:58:04,448 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.getTechnologyType 143 - ==>  Preparing: SELECT technologytypeCode code,technologytypeName name FROM technology_type_Master where 1=1 AND technologytypeName like concat('%',?,'%'); 
+2020-07-29 20:58:04,448 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.getTechnologyType 143 - ==> Parameters: j(String)
+2020-07-29 20:58:04,608 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.getTechnologyType 143 - ==>  Preparing: SELECT technologytypeCode code,technologytypeName name FROM technology_type_Master where 1=1 AND technologytypeName like concat('%',?,'%'); 
+2020-07-29 20:58:04,608 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.getTechnologyType 143 - ==> Parameters: j'a(String)
+2020-07-29 20:58:04,618 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.getTechnologyType 143 - <==      Total: 2
+2020-07-29 20:58:04,739 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.getTechnologyType 143 - ==>  Preparing: SELECT technologytypeCode code,technologytypeName name FROM technology_type_Master where 1=1 AND technologytypeName like concat('%',?,'%'); 
+2020-07-29 20:58:04,740 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.getTechnologyType 143 - ==> Parameters: ja(String)
+2020-07-29 20:58:04,783 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.getTechnologyType 143 - <==      Total: 0
+2020-07-29 20:58:04,912 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.getTechnologyType 143 - <==      Total: 2
+2020-07-29 20:58:13,788 [http-nio-8080-exec-7] INFO  j.c.l.c.c.GetEmployeeInfoController 34 - GetEmployeeInfoController.getEmployeeInfo:検索開始
+2020-07-29 20:58:13,963 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - ==>  Preparing: select (@rowNo := @rowNo + 1) AS rowNo, em.employeeNo, em.employeeFristName, emd.Furigana, emd.alphabetOfName, emd.age, emd.joinCompanyOfYearandMonth, emsi.AdmissionStartDate, ei.salary, ci.customerName, emd.phoneNo, adi.nearestStationOne, TIMESTAMPDIFF(MONTH,now(),emd.PeriodOfStay) from rams.employee as em left join rams.employee_detail as emd on emd.employeeNo=em.employeeNo left join rams.employee_site_information as emsi on em.employeeNo=emsi.employeeNo left join rams.address_information as adi on em.employeeNo= adi.employeeNo left join rams.expenses_information as ei on em.employeeNo=ei.employeeNo left join rams.customer_information as ci on emsi.customerNo=ci.customerNo left join rams.nationality_master as nm on emd.nationalityCode=nm.nationalityCode left join rams.into_company_master as incm on emd.ResidenceOfCode=incm.intoCompanyCode ,(SELECT @rowNo := 0) AS rowNo where 1=1 ORDER BY em.employeeNo DESC 
+2020-07-29 20:58:13,964 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - ==> Parameters: 
+2020-07-29 20:58:14,142 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - <==      Total: 5
+2020-07-29 20:58:14,143 [http-nio-8080-exec-7] INFO  j.c.l.c.c.GetEmployeeInfoController 42 - GetEmployeeInfoController.getEmployeeInfo:検索結束
+2020-07-29 20:58:41,909 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.getNationalitys 143 - ==>  Preparing: SELECT nationalityCode code,nationalityName name FROM nationality_master; 
+2020-07-29 20:58:41,910 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.getNationalitys 143 - ==> Parameters: 
+2020-07-29 20:58:41,911 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.getVisa 143 - ==>  Preparing: SELECT visaCode code,visaName name FROM visa_master; 
+2020-07-29 20:58:41,912 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.getVisa 143 - ==> Parameters: 
+2020-07-29 20:58:41,912 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.getStaffForms 143 - ==>  Preparing: SELECT emploryeeFormCode code,emploryeeFormName name FROM emploryee_form_master; 
+2020-07-29 20:58:41,913 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.getStaffForms 143 - ==> Parameters: 
+2020-07-29 20:58:41,917 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.getJapaneseLevel 143 - ==>  Preparing: SELECT japaneseLevelCode code,japaneseLevelName name FROM japanese_Level_master; 
+2020-07-29 20:58:41,918 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.getIntoCompany 143 - ==>  Preparing: SELECT intoCompanyCode code,intoCompanyName name FROM into_company_master; 
+2020-07-29 20:58:41,919 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.getJapaneseLevel 143 - ==> Parameters: 
+2020-07-29 20:58:41,919 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.getIntoCompany 143 - ==> Parameters: 
+2020-07-29 20:58:41,931 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.getSiteMaster 143 - ==>  Preparing: SELECT siteRoleCode code,siteRoleCodeName name FROM site_role_master; 
+2020-07-29 20:58:41,932 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.getSiteMaster 143 - ==> Parameters: 
+2020-07-29 20:58:42,086 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.getNationalitys 143 - <==      Total: 5
+2020-07-29 20:58:42,091 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.G.getStaffForms 143 - <==      Total: 5
+2020-07-29 20:58:42,091 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.getVisa 143 - <==      Total: 9
+2020-07-29 20:58:42,095 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.G.getIntoCompany 143 - <==      Total: 5
+2020-07-29 20:58:42,105 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.getJapaneseLevel 143 - <==      Total: 7
+2020-07-29 20:58:42,111 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.getSiteMaster 143 - <==      Total: 6
+2020-07-29 20:58:49,893 [http-nio-8080-exec-10] INFO  j.c.l.c.c.GetEmployeeInfoController 34 - GetEmployeeInfoController.getEmployeeInfo:検索開始
+2020-07-29 20:58:50,069 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - ==>  Preparing: select (@rowNo := @rowNo + 1) AS rowNo, em.employeeNo, em.employeeFristName, emd.Furigana, emd.alphabetOfName, emd.age, emd.joinCompanyOfYearandMonth, emsi.AdmissionStartDate, ei.salary, ci.customerName, emd.phoneNo, adi.nearestStationOne, TIMESTAMPDIFF(MONTH,now(),emd.PeriodOfStay) from rams.employee as em left join rams.employee_detail as emd on emd.employeeNo=em.employeeNo left join rams.employee_site_information as emsi on em.employeeNo=emsi.employeeNo left join rams.address_information as adi on em.employeeNo= adi.employeeNo left join rams.expenses_information as ei on em.employeeNo=ei.employeeNo left join rams.customer_information as ci on emsi.customerNo=ci.customerNo left join rams.nationality_master as nm on emd.nationalityCode=nm.nationalityCode left join rams.into_company_master as incm on emd.ResidenceOfCode=incm.intoCompanyCode ,(SELECT @rowNo := 0) AS rowNo where 1=1 ORDER BY em.employeeNo DESC 
+2020-07-29 20:58:50,071 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - ==> Parameters: 
+2020-07-29 20:58:50,249 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - <==      Total: 5
+2020-07-29 20:58:50,250 [http-nio-8080-exec-10] INFO  j.c.l.c.c.GetEmployeeInfoController 42 - GetEmployeeInfoController.getEmployeeInfo:検索結束
+2020-07-29 20:58:51,668 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.getTechnologyType 143 - ==>  Preparing: SELECT technologytypeCode code,technologytypeName name FROM technology_type_Master where 1=1 AND technologytypeName like concat('%',?,'%'); 
+2020-07-29 20:58:51,670 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.getTechnologyType 143 - ==> Parameters: j(String)
+2020-07-29 20:58:51,795 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.getTechnologyType 143 - ==>  Preparing: SELECT technologytypeCode code,technologytypeName name FROM technology_type_Master where 1=1 AND technologytypeName like concat('%',?,'%'); 
+2020-07-29 20:58:51,795 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.getTechnologyType 143 - ==> Parameters: j'a(String)
+2020-07-29 20:58:51,836 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.getTechnologyType 143 - <==      Total: 2
+2020-07-29 20:58:51,968 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.getTechnologyType 143 - <==      Total: 0
+2020-07-29 20:58:52,603 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.G.getTechnologyType 143 - ==>  Preparing: SELECT technologytypeCode code,technologytypeName name FROM technology_type_Master where 1=1 AND technologytypeName like concat('%',?,'%'); 
+2020-07-29 20:58:52,604 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.G.getTechnologyType 143 - ==> Parameters: ja(String)
+2020-07-29 20:58:52,779 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.G.getTechnologyType 143 - <==      Total: 2
+2020-07-29 20:59:01,259 [http-nio-8080-exec-8] INFO  j.c.l.c.c.GetEmployeeInfoController 34 - GetEmployeeInfoController.getEmployeeInfo:検索開始
+2020-07-29 20:59:01,432 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - ==>  Preparing: select (@rowNo := @rowNo + 1) AS rowNo, em.employeeNo, em.employeeFristName, emd.Furigana, emd.alphabetOfName, emd.age, emd.joinCompanyOfYearandMonth, emsi.AdmissionStartDate, ei.salary, ci.customerName, emd.phoneNo, adi.nearestStationOne, TIMESTAMPDIFF(MONTH,now(),emd.PeriodOfStay) from rams.employee as em left join rams.employee_detail as emd on emd.employeeNo=em.employeeNo left join rams.employee_site_information as emsi on em.employeeNo=emsi.employeeNo left join rams.address_information as adi on em.employeeNo= adi.employeeNo left join rams.expenses_information as ei on em.employeeNo=ei.employeeNo left join rams.customer_information as ci on emsi.customerNo=ci.customerNo left join rams.nationality_master as nm on emd.nationalityCode=nm.nationalityCode left join rams.into_company_master as incm on emd.ResidenceOfCode=incm.intoCompanyCode ,(SELECT @rowNo := 0) AS rowNo where 1=1 ORDER BY em.employeeNo DESC 
+2020-07-29 20:59:01,433 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - ==> Parameters: 
+2020-07-29 20:59:01,612 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.getEmployeeInfo 143 - <==      Total: 5
+2020-07-29 20:59:01,613 [http-nio-8080-exec-8] INFO  j.c.l.c.c.GetEmployeeInfoController 42 - GetEmployeeInfoController.getEmployeeInfo:検索結束
+2020-07-29 21:14:32,730 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.getIntoCompany 143 - ==>  Preparing: SELECT intoCompanyCode code,intoCompanyName name FROM into_company_master; 
+2020-07-29 21:14:32,730 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.G.getStaffForms 143 - ==>  Preparing: SELECT emploryeeFormCode code,emploryeeFormName name FROM emploryee_form_master; 
+2020-07-29 21:14:32,731 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.G.getStaffForms 143 - ==> Parameters: 
+2020-07-29 21:14:32,731 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.getIntoCompany 143 - ==> Parameters: 
+2020-07-29 21:14:32,907 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.G.getStaffForms 143 - <==      Total: 5
+2020-07-29 21:14:32,909 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.G.getIntoCompany 143 - <==      Total: 5
+2020-07-29 21:16:19,710 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.getIntoCompany 143 - ==>  Preparing: SELECT intoCompanyCode code,intoCompanyName name FROM into_company_master; 
+2020-07-29 21:16:19,710 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.getStaffForms 143 - ==>  Preparing: SELECT emploryeeFormCode code,emploryeeFormName name FROM emploryee_form_master; 
+2020-07-29 21:16:19,711 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.getIntoCompany 143 - ==> Parameters: 
+2020-07-29 21:16:19,711 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.getStaffForms 143 - ==> Parameters: 
+2020-07-29 21:16:19,888 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.G.getStaffForms 143 - <==      Total: 5
+2020-07-29 21:16:19,888 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.G.getIntoCompany 143 - <==      Total: 5
+2020-07-29 21:22:08,992 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.getStaffForms 143 - ==>  Preparing: SELECT emploryeeFormCode code,emploryeeFormName name FROM emploryee_form_master; 
+2020-07-29 21:22:08,993 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.getIntoCompany 143 - ==>  Preparing: SELECT intoCompanyCode code,intoCompanyName name FROM into_company_master; 
+2020-07-29 21:22:08,993 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.getStaffForms 143 - ==> Parameters: 
+2020-07-29 21:22:08,994 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.getIntoCompany 143 - ==> Parameters: 
+2020-07-29 21:22:09,169 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.G.getStaffForms 143 - <==      Total: 5
+2020-07-29 21:22:09,171 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.G.getIntoCompany 143 - <==      Total: 5
+2020-07-29 21:25:04,912 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.getIntoCompany 143 - ==>  Preparing: SELECT intoCompanyCode code,intoCompanyName name FROM into_company_master; 
+2020-07-29 21:25:04,912 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.getStaffForms 143 - ==>  Preparing: SELECT emploryeeFormCode code,emploryeeFormName name FROM emploryee_form_master; 
+2020-07-29 21:25:04,913 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.getStaffForms 143 - ==> Parameters: 
+2020-07-29 21:25:04,913 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.getIntoCompany 143 - ==> Parameters: 
+2020-07-29 21:25:05,090 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.G.getIntoCompany 143 - <==      Total: 5
+2020-07-29 21:25:05,096 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.G.getStaffForms 143 - <==      Total: 5
