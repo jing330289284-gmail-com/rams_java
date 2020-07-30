@@ -1,0 +1,306 @@
+2020-07-31 00:03:01,592 [http-nio-8080-exec-7] INFO  j.c.l.c.c.CustomerInfoController 35 - CustomerInfoController.onloadPage:页面加载開始
+2020-07-31 00:03:01,810 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
+2020-07-31 00:03:01,810 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
+2020-07-31 00:03:02,016 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
+2020-07-31 00:03:02,016 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
+2020-07-31 00:03:02,019 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
+2020-07-31 00:03:02,220 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
+2020-07-31 00:03:09,713 [http-nio-8080-exec-8] INFO  j.c.l.c.c.CustomerInfoController 35 - CustomerInfoController.onloadPage:页面加载開始
+2020-07-31 00:03:09,910 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
+2020-07-31 00:03:09,910 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
+2020-07-31 00:03:10,110 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
+2020-07-31 00:03:10,111 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
+2020-07-31 00:03:10,111 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
+2020-07-31 00:03:10,315 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
+2020-07-31 00:03:15,408 [http-nio-8080-exec-9] INFO  j.c.l.c.c.CustomerInfoController 35 - CustomerInfoController.onloadPage:页面加载開始
+2020-07-31 00:03:15,620 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
+2020-07-31 00:03:15,620 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
+2020-07-31 00:03:15,825 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
+2020-07-31 00:03:15,825 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
+2020-07-31 00:03:15,826 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
+2020-07-31 00:03:16,030 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
+2020-07-31 00:03:21,601 [http-nio-8080-exec-10] INFO  j.c.l.c.c.CustomerInfoController 35 - CustomerInfoController.onloadPage:页面加载開始
+2020-07-31 00:03:21,800 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
+2020-07-31 00:03:21,800 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
+2020-07-31 00:03:22,005 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
+2020-07-31 00:03:22,006 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
+2020-07-31 00:03:22,006 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
+2020-07-31 00:03:22,210 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
+2020-07-31 00:03:30,965 [http-nio-8080-exec-1] INFO  j.c.l.c.c.CustomerInfoController 35 - CustomerInfoController.onloadPage:页面加载開始
+2020-07-31 00:03:31,169 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
+2020-07-31 00:03:31,170 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
+2020-07-31 00:03:31,385 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
+2020-07-31 00:03:31,386 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
+2020-07-31 00:03:31,386 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
+2020-07-31 00:03:31,594 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
+2020-07-31 00:03:34,929 [http-nio-8080-exec-2] INFO  j.c.l.c.c.CustomerInfoController 35 - CustomerInfoController.onloadPage:页面加载開始
+2020-07-31 00:03:35,125 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
+2020-07-31 00:03:35,125 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
+2020-07-31 00:03:35,335 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
+2020-07-31 00:03:35,337 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
+2020-07-31 00:03:35,337 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
+2020-07-31 00:03:35,546 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
+2020-07-31 00:03:35,734 [http-nio-8080-exec-4] INFO  j.c.l.c.c.CustomerInfoSearchController 34 - CustomerInfoController.onloadPage:查询開始
+2020-07-31 00:03:35,750 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.SelectCustomerInfo 143 - ==>  Preparing: SELECT CONCAT(( @rowNo := @rowNo + 1 )) AS rowNo, ci.customerNo, ci.customerName, crm.customerRankingName, ci.headOffice, cnm.companyNatureName, tc.topCustomerName, esi.employeeNo, CONCAT( e.employeeFristName ,e.employeeLastName ) AS employeeName, esi.location, esi.siteManager, esi.unitPrice FROM customer_information AS ci LEFT JOIN employee_site_information AS esi ON ci.customerNo = esi.customerNo AND ci.topCustomerNo = esi.topCustomerNo AND esi.AdmissionStartDate IS NOT NULL AND esi.AdmissionEndDate IS NOT NULL LEFT JOIN employee AS e ON esi.employeeNo = e.employeeNo LEFT JOIN customer_ranking_master AS crm ON ci.customerRankingCode = crm.customerRankingCode LEFT JOIN company_nature_master AS cnm ON ci.companyNatureCode = cnm.companyNatureCode LEFT JOIN top_customer AS tc ON ci.topCustomerNo = tc.topCustomerNo ,( SELECT @rowNo := 0 ) AS rowNo WHERE 1=1 ORDER BY ci.customerNo 
+2020-07-31 00:03:35,751 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.SelectCustomerInfo 143 - ==> Parameters: 
+2020-07-31 00:03:35,967 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.SelectCustomerInfo 143 - <==      Total: 7
+2020-07-31 00:08:07,205 [http-nio-8080-exec-6] INFO  j.c.l.c.c.CustomerInfoController 35 - CustomerInfoController.onloadPage:页面加载開始
+2020-07-31 00:08:07,401 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
+2020-07-31 00:08:07,402 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
+2020-07-31 00:08:07,606 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
+2020-07-31 00:08:07,607 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
+2020-07-31 00:08:07,607 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
+2020-07-31 00:08:07,817 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
+2020-07-31 00:58:11,805 [http-nio-8080-exec-9] INFO  j.c.l.c.c.CustomerInfoController 35 - CustomerInfoController.onloadPage:页面加载開始
+2020-07-31 00:58:12,017 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
+2020-07-31 00:58:12,017 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
+2020-07-31 00:58:12,221 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
+2020-07-31 00:58:12,222 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
+2020-07-31 00:58:12,222 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
+2020-07-31 00:58:12,427 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
+2020-07-31 00:59:09,620 [http-nio-8080-exec-10] INFO  j.c.l.c.c.CustomerInfoController 35 - CustomerInfoController.onloadPage:页面加载開始
+2020-07-31 00:59:09,827 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
+2020-07-31 00:59:09,828 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
+2020-07-31 00:59:10,032 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
+2020-07-31 00:59:10,033 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
+2020-07-31 00:59:10,033 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
+2020-07-31 00:59:10,237 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
+2020-07-31 00:59:38,013 [http-nio-8080-exec-1] INFO  j.c.l.c.c.CustomerInfoController 35 - CustomerInfoController.onloadPage:页面加载開始
+2020-07-31 00:59:38,226 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
+2020-07-31 00:59:38,226 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
+2020-07-31 00:59:38,428 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
+2020-07-31 00:59:38,429 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
+2020-07-31 00:59:38,429 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
+2020-07-31 00:59:38,632 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
+2020-07-31 00:59:38,632 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==>  Preparing: SELECT MAX(customerNo) AS saibanCustomerNo FROM customer_information 
+2020-07-31 00:59:38,633 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==> Parameters: 
+2020-07-31 00:59:38,837 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - <==      Total: 1
+2020-07-31 00:59:56,121 [http-nio-8080-exec-2] INFO  j.c.l.c.c.CustomerInfoController 35 - CustomerInfoController.onloadPage:页面加载開始
+2020-07-31 00:59:56,326 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
+2020-07-31 00:59:56,327 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
+2020-07-31 00:59:56,527 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
+2020-07-31 00:59:56,528 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
+2020-07-31 00:59:56,528 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
+2020-07-31 00:59:56,732 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
+2020-07-31 00:59:56,733 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==>  Preparing: SELECT MAX(customerNo) AS saibanCustomerNo FROM customer_information 
+2020-07-31 00:59:56,733 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==> Parameters: 
+2020-07-31 00:59:56,937 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - <==      Total: 1
+2020-07-31 01:01:03,879 [http-nio-8080-exec-4] INFO  j.c.l.c.c.CustomerInfoController 35 - CustomerInfoController.onloadPage:页面加载開始
+2020-07-31 01:01:04,080 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
+2020-07-31 01:01:04,080 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
+2020-07-31 01:01:04,283 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
+2020-07-31 01:01:04,283 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
+2020-07-31 01:01:04,284 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
+2020-07-31 01:01:04,488 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
+2020-07-31 01:01:04,489 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==>  Preparing: SELECT MAX(customerNo) AS saibanCustomerNo FROM customer_information 
+2020-07-31 01:01:04,489 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==> Parameters: 
+2020-07-31 01:01:04,693 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - <==      Total: 1
+2020-07-31 01:03:13,390 [http-nio-8080-exec-6] INFO  j.c.l.c.c.CustomerInfoController 35 - CustomerInfoController.onloadPage:页面加载開始
+2020-07-31 01:03:13,608 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
+2020-07-31 01:03:13,608 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
+2020-07-31 01:03:13,813 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
+2020-07-31 01:03:13,815 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
+2020-07-31 01:03:13,815 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
+2020-07-31 01:03:14,018 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
+2020-07-31 01:03:14,019 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==>  Preparing: SELECT MAX(customerNo) AS saibanCustomerNo FROM customer_information 
+2020-07-31 01:03:14,019 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==> Parameters: 
+2020-07-31 01:03:14,224 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - <==      Total: 1
+2020-07-31 01:03:15,453 [http-nio-8080-exec-7] INFO  j.c.l.c.c.CustomerInfoController 35 - CustomerInfoController.onloadPage:页面加载開始
+2020-07-31 01:03:15,648 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
+2020-07-31 01:03:15,648 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
+2020-07-31 01:03:15,863 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
+2020-07-31 01:03:15,863 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
+2020-07-31 01:03:15,864 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
+2020-07-31 01:03:16,068 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
+2020-07-31 01:03:16,069 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==>  Preparing: SELECT MAX(customerNo) AS saibanCustomerNo FROM customer_information 
+2020-07-31 01:03:16,069 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - ==> Parameters: 
+2020-07-31 01:03:16,273 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.customerNoSaiBan 143 - <==      Total: 1
+2020-07-31 01:03:23,453 [http-nio-8080-exec-8] INFO  j.c.l.c.c.CustomerInfoController 35 - CustomerInfoController.onloadPage:页面加载開始
+2020-07-31 01:03:23,668 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
+2020-07-31 01:03:23,669 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
+2020-07-31 01:03:23,873 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
+2020-07-31 01:03:23,874 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
+2020-07-31 01:03:23,874 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
+2020-07-31 01:03:24,078 [http-nio-8080-exec-8] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
+2020-07-31 01:03:24,294 [http-nio-8080-exec-10] INFO  j.c.l.c.c.CustomerInfoSearchController 34 - CustomerInfoController.onloadPage:查询開始
+2020-07-31 01:03:24,295 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.C.SelectCustomerInfo 143 - ==>  Preparing: SELECT CONCAT(( @rowNo := @rowNo + 1 )) AS rowNo, ci.customerNo, ci.customerName, crm.customerRankingName, ci.headOffice, cnm.companyNatureName, tc.topCustomerName, esi.employeeNo, CONCAT( e.employeeFristName ,e.employeeLastName ) AS employeeName, esi.location, esi.siteManager, esi.unitPrice FROM customer_information AS ci LEFT JOIN employee_site_information AS esi ON ci.customerNo = esi.customerNo AND ci.topCustomerNo = esi.topCustomerNo AND esi.AdmissionStartDate IS NOT NULL AND esi.AdmissionEndDate IS NOT NULL LEFT JOIN employee AS e ON esi.employeeNo = e.employeeNo LEFT JOIN customer_ranking_master AS crm ON ci.customerRankingCode = crm.customerRankingCode LEFT JOIN company_nature_master AS cnm ON ci.companyNatureCode = cnm.companyNatureCode LEFT JOIN top_customer AS tc ON ci.topCustomerNo = tc.topCustomerNo ,( SELECT @rowNo := 0 ) AS rowNo WHERE 1=1 ORDER BY ci.customerNo 
+2020-07-31 01:03:24,295 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.C.SelectCustomerInfo 143 - ==> Parameters: 
+2020-07-31 01:03:24,506 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.C.SelectCustomerInfo 143 - <==      Total: 7
+2020-07-31 01:03:26,052 [http-nio-8080-exec-1] INFO  j.c.l.c.c.CustomerInfoController 35 - CustomerInfoController.onloadPage:页面加载開始
+2020-07-31 01:03:26,258 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
+2020-07-31 01:03:26,259 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
+2020-07-31 01:03:26,473 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
+2020-07-31 01:03:26,473 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
+2020-07-31 01:03:26,473 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
+2020-07-31 01:03:26,674 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
+2020-07-31 01:03:26,674 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCustomerInfo 143 - ==>  Preparing: SELECT ci.*, tc.topCustomerName FROM customer_information AS ci LEFT JOIN top_customer AS tc ON ci.topCustomerNo = tc.topCustomerNo WHERE customerNo = ? 
+2020-07-31 01:03:26,675 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCustomerInfo 143 - ==> Parameters: C001(String)
+2020-07-31 01:03:26,884 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCustomerInfo 143 - <==      Total: 1
+2020-07-31 01:03:26,892 [http-nio-8080-exec-2] INFO  j.c.l.c.c.CustomerInfoController 35 - CustomerInfoController.onloadPage:页面加载開始
+2020-07-31 01:03:26,892 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
+2020-07-31 01:03:26,892 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
+2020-07-31 01:03:27,093 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
+2020-07-31 01:03:27,094 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
+2020-07-31 01:03:27,094 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
+2020-07-31 01:03:27,298 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
+2020-07-31 01:03:27,298 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCustomerInfo 143 - ==>  Preparing: SELECT ci.*, tc.topCustomerName FROM customer_information AS ci LEFT JOIN top_customer AS tc ON ci.topCustomerNo = tc.topCustomerNo WHERE customerNo = ? 
+2020-07-31 01:03:27,299 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCustomerInfo 143 - ==> Parameters: C001(String)
+2020-07-31 01:03:27,509 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectCustomerInfo 143 - <==      Total: 1
+2020-07-31 01:05:48,567 [http-nio-8080-exec-4] INFO  j.c.l.c.c.CustomerInfoController 35 - CustomerInfoController.onloadPage:页面加载開始
+2020-07-31 01:05:48,779 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
+2020-07-31 01:05:48,779 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
+2020-07-31 01:05:48,984 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
+2020-07-31 01:05:48,985 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
+2020-07-31 01:05:48,985 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
+2020-07-31 01:05:49,189 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
+2020-07-31 01:05:49,189 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectCustomerInfo 143 - ==>  Preparing: SELECT ci.*, tc.topCustomerName FROM customer_information AS ci LEFT JOIN top_customer AS tc ON ci.topCustomerNo = tc.topCustomerNo WHERE customerNo = ? 
+2020-07-31 01:05:49,190 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectCustomerInfo 143 - ==> Parameters: C001(String)
+2020-07-31 01:05:49,401 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectCustomerInfo 143 - <==      Total: 1
+2020-07-31 01:05:56,388 [http-nio-8080-exec-5] INFO  j.c.l.c.c.CustomerInfoController 35 - CustomerInfoController.onloadPage:页面加载開始
+2020-07-31 01:05:56,599 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
+2020-07-31 01:05:56,599 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
+2020-07-31 01:05:56,812 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
+2020-07-31 01:05:56,813 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
+2020-07-31 01:05:56,813 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
+2020-07-31 01:05:57,017 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
+2020-07-31 01:05:57,110 [http-nio-8080-exec-6] INFO  j.c.l.c.c.CustomerInfoSearchController 34 - CustomerInfoController.onloadPage:查询開始
+2020-07-31 01:05:57,110 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.SelectCustomerInfo 143 - ==>  Preparing: SELECT CONCAT(( @rowNo := @rowNo + 1 )) AS rowNo, ci.customerNo, ci.customerName, crm.customerRankingName, ci.headOffice, cnm.companyNatureName, tc.topCustomerName, esi.employeeNo, CONCAT( e.employeeFristName ,e.employeeLastName ) AS employeeName, esi.location, esi.siteManager, esi.unitPrice FROM customer_information AS ci LEFT JOIN employee_site_information AS esi ON ci.customerNo = esi.customerNo AND ci.topCustomerNo = esi.topCustomerNo AND esi.AdmissionStartDate IS NOT NULL AND esi.AdmissionEndDate IS NOT NULL LEFT JOIN employee AS e ON esi.employeeNo = e.employeeNo LEFT JOIN customer_ranking_master AS crm ON ci.customerRankingCode = crm.customerRankingCode LEFT JOIN company_nature_master AS cnm ON ci.companyNatureCode = cnm.companyNatureCode LEFT JOIN top_customer AS tc ON ci.topCustomerNo = tc.topCustomerNo ,( SELECT @rowNo := 0 ) AS rowNo WHERE 1=1 ORDER BY ci.customerNo 
+2020-07-31 01:05:57,111 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.SelectCustomerInfo 143 - ==> Parameters: 
+2020-07-31 01:05:57,319 [http-nio-8080-exec-6] DEBUG j.c.l.c.m.C.SelectCustomerInfo 143 - <==      Total: 7
+2020-07-31 01:06:00,273 [http-nio-8080-exec-7] INFO  j.c.l.c.c.CustomerInfoController 35 - CustomerInfoController.onloadPage:页面加载開始
+2020-07-31 01:06:00,479 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
+2020-07-31 01:06:00,479 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
+2020-07-31 01:06:00,683 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
+2020-07-31 01:06:00,684 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
+2020-07-31 01:06:00,684 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
+2020-07-31 01:06:00,902 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
+2020-07-31 01:06:00,902 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.selectCustomerInfo 143 - ==>  Preparing: SELECT ci.*, tc.topCustomerName FROM customer_information AS ci LEFT JOIN top_customer AS tc ON ci.topCustomerNo = tc.topCustomerNo WHERE customerNo = ? 
+2020-07-31 01:06:00,903 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.selectCustomerInfo 143 - ==> Parameters: C012(String)
+2020-07-31 01:06:01,109 [http-nio-8080-exec-7] DEBUG j.c.l.c.m.C.selectCustomerInfo 143 - <==      Total: 1
+2020-07-31 01:06:05,718 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - ==>  Preparing: SELECT topCustomerName FROM top_customer WHERE topCustomerName LIKE concat('%',?,'%') 
+2020-07-31 01:06:05,718 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - ==> Parameters: 富士通(String)
+2020-07-31 01:06:05,924 [http-nio-8080-exec-9] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - <==      Total: 1
+2020-07-31 01:06:06,721 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - ==>  Preparing: SELECT topCustomerName FROM top_customer WHERE topCustomerName LIKE concat('%',?,'%') 
+2020-07-31 01:06:06,722 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - ==> Parameters: 富士通(String)
+2020-07-31 01:06:06,923 [http-nio-8080-exec-10] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - <==      Total: 1
+2020-07-31 01:06:07,082 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - ==>  Preparing: SELECT topCustomerName FROM top_customer WHERE topCustomerName LIKE concat('%',?,'%') 
+2020-07-31 01:06:07,082 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - ==> Parameters: 富士通(String)
+2020-07-31 01:06:07,294 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - <==      Total: 1
+2020-07-31 01:06:07,579 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - ==>  Preparing: SELECT topCustomerName FROM top_customer WHERE topCustomerName LIKE concat('%',?,'%') 
+2020-07-31 01:06:07,579 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - ==> Parameters: 富士通(String)
+2020-07-31 01:06:07,784 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - <==      Total: 1
+2020-07-31 01:06:26,838 [http-nio-8080-exec-3] INFO  j.c.l.c.c.CustomerInfoController 35 - CustomerInfoController.onloadPage:页面加载開始
+2020-07-31 01:06:27,039 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
+2020-07-31 01:06:27,039 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
+2020-07-31 01:06:27,239 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
+2020-07-31 01:06:27,239 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
+2020-07-31 01:06:27,239 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
+2020-07-31 01:06:27,463 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
+2020-07-31 01:06:27,464 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.C.selectCustomerInfo 143 - ==>  Preparing: SELECT ci.*, tc.topCustomerName FROM customer_information AS ci LEFT JOIN top_customer AS tc ON ci.topCustomerNo = tc.topCustomerNo WHERE customerNo = ? 
+2020-07-31 01:06:27,465 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.C.selectCustomerInfo 143 - ==> Parameters: C012(String)
+2020-07-31 01:06:27,675 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.C.selectCustomerInfo 143 - <==      Total: 1
+2020-07-31 01:07:13,611 [http-nio-8080-exec-4] INFO  j.c.l.c.c.CustomerInfoController 35 - CustomerInfoController.onloadPage:页面加载開始
+2020-07-31 01:07:13,820 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
+2020-07-31 01:07:13,821 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
+2020-07-31 01:07:14,024 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
+2020-07-31 01:07:14,025 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
+2020-07-31 01:07:14,025 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
+2020-07-31 01:07:14,231 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
+2020-07-31 01:07:14,232 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectCustomerInfo 143 - ==>  Preparing: SELECT ci.*, tc.topCustomerName FROM customer_information AS ci LEFT JOIN top_customer AS tc ON ci.topCustomerNo = tc.topCustomerNo WHERE customerNo = ? 
+2020-07-31 01:07:14,232 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectCustomerInfo 143 - ==> Parameters: C012(String)
+2020-07-31 01:07:14,439 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectCustomerInfo 143 - <==      Total: 1
+2020-07-31 01:11:28,470 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on LAPTOP-A94PII7T with PID 19560 (E:\LYC_CMS\target\classes started by Vin.Young in E:\LYC_CMS)
+2020-07-31 01:11:28,474 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2020-07-31 01:11:29,450 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2020-07-31 01:11:29,461 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2020-07-31 01:11:29,467 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2020-07-31 01:11:29,467 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2020-07-31 01:11:29,550 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2020-07-31 01:11:29,550 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 1044 ms
+2020-07-31 01:11:30,051 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2020-07-31 01:11:30,269 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2020-07-31 01:11:30,290 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2020-07-31 01:11:30,293 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 2.269 seconds (JVM running for 3.515)
+2020-07-31 01:11:33,639 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-07-31 01:11:33,640 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2020-07-31 01:11:33,645 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 5 ms
+2020-07-31 01:11:33,731 [http-nio-8080-exec-1] INFO  j.c.l.c.c.CustomerInfoController 37 - CustomerInfoController.onloadPage:页面加载開始
+2020-07-31 01:11:33,747 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource 110 - HikariPool-1 - Starting...
+2020-07-31 01:11:37,562 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource 123 - HikariPool-1 - Start completed.
+2020-07-31 01:11:37,570 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
+2020-07-31 01:11:37,591 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
+2020-07-31 01:11:37,818 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
+2020-07-31 01:11:37,821 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
+2020-07-31 01:11:37,822 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
+2020-07-31 01:11:38,044 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
+2020-07-31 01:11:38,045 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCustomerInfo 143 - ==>  Preparing: SELECT ci.*, tc.topCustomerName FROM customer_information AS ci LEFT JOIN top_customer AS tc ON ci.topCustomerNo = tc.topCustomerNo WHERE customerNo = ? 
+2020-07-31 01:11:38,046 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCustomerInfo 143 - ==> Parameters: C012(String)
+2020-07-31 01:11:38,253 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCustomerInfo 143 - <==      Total: 1
+2020-07-31 01:11:38,254 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCustomerDepartmentInfo 143 - ==>  Preparing: SELECT customerDepartmentName, position, responsiblePerson, mail FROM customer_department_information WHERE CustomerNo = ? 
+2020-07-31 01:11:38,254 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCustomerDepartmentInfo 143 - ==> Parameters: C012(String)
+2020-07-31 01:11:38,455 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCustomerDepartmentInfo 143 - <==      Total: 0
+2020-07-31 01:13:44,870 [http-nio-8080-exec-3] INFO  j.c.l.c.c.CustomerInfoController 37 - CustomerInfoController.onloadPage:页面加载開始
+2020-07-31 01:13:45,072 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
+2020-07-31 01:13:45,073 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
+2020-07-31 01:13:45,285 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
+2020-07-31 01:13:45,286 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
+2020-07-31 01:13:45,286 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
+2020-07-31 01:13:45,496 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
+2020-07-31 01:13:45,497 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.C.selectCustomerInfo 143 - ==>  Preparing: SELECT ci.*, tc.topCustomerName FROM customer_information AS ci LEFT JOIN top_customer AS tc ON ci.topCustomerNo = tc.topCustomerNo WHERE customerNo = ? 
+2020-07-31 01:13:45,497 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.C.selectCustomerInfo 143 - ==> Parameters: C012(String)
+2020-07-31 01:13:45,720 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.C.selectCustomerInfo 143 - <==      Total: 1
+2020-07-31 01:13:45,720 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.C.selectCustomerDepartmentInfo 143 - ==>  Preparing: SELECT customerDepartmentName, position, responsiblePerson, mail FROM customer_department_information WHERE CustomerNo = ? 
+2020-07-31 01:13:45,721 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.C.selectCustomerDepartmentInfo 143 - ==> Parameters: C012(String)
+2020-07-31 01:13:45,931 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.C.selectCustomerDepartmentInfo 143 - <==      Total: 1
+2020-07-31 01:17:04,785 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on LAPTOP-A94PII7T with PID 1284 (E:\LYC_CMS\target\classes started by Vin.Young in E:\LYC_CMS)
+2020-07-31 01:17:04,789 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2020-07-31 01:17:05,848 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2020-07-31 01:17:05,859 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2020-07-31 01:17:05,865 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2020-07-31 01:17:05,865 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2020-07-31 01:17:05,945 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2020-07-31 01:17:05,945 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 1125 ms
+2020-07-31 01:17:06,439 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2020-07-31 01:17:06,663 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2020-07-31 01:17:06,687 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2020-07-31 01:17:06,691 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 2.413 seconds (JVM running for 3.715)
+2020-07-31 01:18:18,990 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-07-31 01:18:18,990 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 524 - Initializing Servlet 'dispatcherServlet'
+2020-07-31 01:18:18,996 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet 546 - Completed initialization in 6 ms
+2020-07-31 01:18:19,083 [http-nio-8080-exec-1] INFO  j.c.l.c.c.CustomerInfoController 37 - CustomerInfoController.onloadPage:页面加载開始
+2020-07-31 01:18:19,102 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource 110 - HikariPool-1 - Starting...
+2020-07-31 01:18:22,925 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource 123 - HikariPool-1 - Start completed.
+2020-07-31 01:18:22,931 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
+2020-07-31 01:18:22,950 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
+2020-07-31 01:18:23,178 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
+2020-07-31 01:18:23,181 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
+2020-07-31 01:18:23,182 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
+2020-07-31 01:18:23,401 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
+2020-07-31 01:18:23,403 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCustomerInfo 143 - ==>  Preparing: SELECT ci.*, tc.topCustomerName FROM customer_information AS ci LEFT JOIN top_customer AS tc ON ci.topCustomerNo = tc.topCustomerNo WHERE customerNo = ? 
+2020-07-31 01:18:23,403 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCustomerInfo 143 - ==> Parameters: C012(String)
+2020-07-31 01:18:23,616 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCustomerInfo 143 - <==      Total: 1
+2020-07-31 01:18:23,617 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCustomerDepartmentInfo 143 - ==>  Preparing: SELECT CONCAT(( @rowNo := @rowNo + 1 )) AS rowNo, customerDepartmentName, position, responsiblePerson, mail FROM customer_department_information, ( SELECT @rowNo := 0 ) AS rowNo WHERE CustomerNo = ? 
+2020-07-31 01:18:23,617 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCustomerDepartmentInfo 143 - ==> Parameters: C012(String)
+2020-07-31 01:18:23,823 [http-nio-8080-exec-1] DEBUG j.c.l.c.m.C.selectCustomerDepartmentInfo 143 - <==      Total: 1
+2020-07-31 01:18:34,617 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - ==>  Preparing: SELECT topCustomerName FROM top_customer WHERE topCustomerName LIKE concat('%',?,'%') 
+2020-07-31 01:18:34,618 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - ==> Parameters: 富士通(String)
+2020-07-31 01:18:34,828 [http-nio-8080-exec-2] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - <==      Total: 1
+2020-07-31 01:18:37,172 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - ==>  Preparing: SELECT topCustomerName FROM top_customer WHERE topCustomerName LIKE concat('%',?,'%') 
+2020-07-31 01:18:37,172 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - ==> Parameters: 富士通(String)
+2020-07-31 01:18:37,377 [http-nio-8080-exec-3] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - <==      Total: 1
+2020-07-31 01:19:07,783 [http-nio-8080-exec-4] INFO  j.c.l.c.c.CustomerInfoController 37 - CustomerInfoController.onloadPage:页面加载開始
+2020-07-31 01:19:08,003 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==>  Preparing: SELECT CAST(customerRankingCode AS char) AS customerRankingCode, customerRankingName FROM customer_ranking_master 
+2020-07-31 01:19:08,004 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - ==> Parameters: 
+2020-07-31 01:19:08,213 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectCustomerRanking 143 - <==      Total: 5
+2020-07-31 01:19:08,214 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==>  Preparing: SELECT CAST(companyNatureCode AS char) AS companyNatureCode, companyNatureName FROM company_nature_master 
+2020-07-31 01:19:08,214 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - ==> Parameters: 
+2020-07-31 01:19:08,423 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectCompanyNature 143 - <==      Total: 4
+2020-07-31 01:19:08,424 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectCustomerInfo 143 - ==>  Preparing: SELECT ci.*, tc.topCustomerName FROM customer_information AS ci LEFT JOIN top_customer AS tc ON ci.topCustomerNo = tc.topCustomerNo WHERE customerNo = ? 
+2020-07-31 01:19:08,425 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectCustomerInfo 143 - ==> Parameters: C012(String)
+2020-07-31 01:19:08,639 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectCustomerInfo 143 - <==      Total: 1
+2020-07-31 01:19:08,639 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectCustomerDepartmentInfo 143 - ==>  Preparing: SELECT CONCAT(( @rowNo := @rowNo + 1 )) AS rowNo, customerDepartmentName, position, responsiblePerson, mail FROM customer_department_information, ( SELECT @rowNo := 0 ) AS rowNo WHERE CustomerNo = ? 
+2020-07-31 01:19:08,640 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectCustomerDepartmentInfo 143 - ==> Parameters: C012(String)
+2020-07-31 01:19:08,848 [http-nio-8080-exec-4] DEBUG j.c.l.c.m.C.selectCustomerDepartmentInfo 143 - <==      Total: 1
+2020-07-31 01:19:10,192 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - ==>  Preparing: SELECT topCustomerName FROM top_customer WHERE topCustomerName LIKE concat('%',?,'%') 
+2020-07-31 01:19:10,193 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - ==> Parameters: 富士通(String)
+2020-07-31 01:19:10,387 [http-nio-8080-exec-5] DEBUG j.c.l.c.m.C.selectTopCustomer 143 - <==      Total: 1

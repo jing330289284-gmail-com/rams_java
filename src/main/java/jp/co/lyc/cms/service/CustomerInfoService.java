@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import jp.co.lyc.cms.model.TopCustomerInfoModel;
 import jp.co.lyc.cms.mapper.CustomerInfoMapper;
+import jp.co.lyc.cms.model.CustomerDepartmentInfoModel;
 import jp.co.lyc.cms.model.CustomerInfoModel;
 
 @Component
@@ -41,7 +42,16 @@ public class CustomerInfoService {
 		return result;
 	}
 	/**
-	 * 查询客户信息
+	 * 部門情報検索
+	 * @param customerNo
+	 * @return
+	 */
+	public ArrayList<CustomerDepartmentInfoModel> selectCustomerDepartmentInfo(String customerNo) {
+		ArrayList<CustomerDepartmentInfoModel> resultList = customerInfoMapper.selectCustomerDepartmentInfo(customerNo);
+		return resultList;
+	}
+	/**
+	 * お客様情報検索
 	 * @param customerNo
 	 * @return
 	 */

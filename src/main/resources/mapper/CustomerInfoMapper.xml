@@ -121,12 +121,14 @@
     </update>   
     <select id="selectCustomerDepartmentInfo" resultMap="CustomerDepartmentInfo" parameterType="String">
 		SELECT
+			CONCAT(( @rowNo := @rowNo + 1 )) AS rowNo,
 			customerDepartmentName,
 			position,
 			responsiblePerson,
 			mail 
 		FROM
-			customer_department_information 
+			customer_department_information,
+			( SELECT @rowNo := 0 ) AS rowNo 
 		WHERE
 			CustomerNo = #{customerNo}
     </select>

@@ -23,7 +23,11 @@ public class CustomerInfoSearchController {
 	
 	@Autowired
 	CustomerInfoSearchService customerInfoSearchService;
-	
+	/**
+	 * データの検索
+	 * @param customerInfoMod
+	 * @return
+	 */
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	@ResponseBody
 	public ArrayList<CustomerInfoModel> seach(@RequestBody CustomerInfoModel customerInfoMod) {
@@ -114,7 +118,7 @@ public class CustomerInfoSearchController {
 		return resultList;
 	}
 	/**
-	 * 删除函数
+	 * 削除ボタン
 	 * @param customerNo
 	 * @return
 	 */
@@ -124,7 +128,7 @@ public class CustomerInfoSearchController {
 		return customerInfoSearchService.delect(customerInfoMod.getCustomerNo());
 	}
 	/**
-	 * 处理前数据查询
+	 * データの検索
 	 * @param customerInfoMod
 	 * @return
 	 */
@@ -151,7 +155,11 @@ public class CustomerInfoSearchController {
 		}
 		return customerInfoSearchService.SelectCustomerInfo(sendMap);
 	}
-	// 判断字符串是否为null或空
+	/**
+	 * nullと空の判断
+	 * @param aString
+	 * @return
+	 */
 	public boolean isNullOrEmpty(String aString) {
 		boolean result = true;
 		if (aString == null || aString.isEmpty()) {

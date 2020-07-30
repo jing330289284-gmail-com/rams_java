@@ -23,6 +23,12 @@ public class TopCustomerInfoController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	TopCustomerInfoService topCustomerInfoService;
+	
+	/**
+	 * 画面の初期化
+	 * @param topCustomerMod
+	 * @return
+	 */
 	@RequestMapping(value = "/onloadPage", method = RequestMethod.POST)
 	@ResponseBody
 	public HashMap<String,Object> onloadPage(@RequestBody TopCustomerInfoModel topCustomerMod) {
@@ -36,6 +42,11 @@ public class TopCustomerInfoController {
 		}
 		return resultMap;
 	}
+	/**
+	 * 登録ボタン
+	 * @param topCustomerMod
+	 * @return
+	 */
 	@RequestMapping(value = "/toroku", method = RequestMethod.POST)
 	@ResponseBody
 	public boolean toroku(@RequestBody TopCustomerInfoModel topCustomerMod) {
@@ -49,7 +60,11 @@ public class TopCustomerInfoController {
 		}
 		return result;
 	}
-	//插入数据
+	/**
+	 * インサート
+	 * @param topCustomerMod
+	 * @return
+	 */
 	public boolean insert(TopCustomerInfoModel topCustomerMod) {
 		logger.info("BankInfoController.toroku:" + "登录開始");
 		boolean result = true;
@@ -63,7 +78,11 @@ public class TopCustomerInfoController {
 		return result;	
 	}
 	
-	//更新数据
+	/**
+	 * アップデート
+	 * @param topCustomerMod
+	 * @return
+	 */
 	public boolean update(TopCustomerInfoModel topCustomerMod) {
 		logger.info("BankInfoController.toroku:" + "登录開始");
 		boolean result = true;
@@ -84,7 +103,11 @@ public class TopCustomerInfoController {
 		result  = topCustomerInfoService.updateTopCustomerInfo(sendMap);
 		return result;	
 	}
-	// 判断字符串是否为null或空
+	/**
+	 * nullと空の判断
+	 * @param aString
+	 * @return
+	 */
 	public boolean isNullOrEmpty(String aString) {
 		boolean result = true;
 		if (aString == null || aString.isEmpty()) {

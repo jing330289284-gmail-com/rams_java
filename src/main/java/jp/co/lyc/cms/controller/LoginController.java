@@ -37,7 +37,12 @@ public class LoginController extends BaseController {
 	GetEmployeeInfoService es;
 	@Autowired
 	LoginService loginservice;
-
+	/**
+	 * ログインボタン
+	 * @param loginModel
+	 * @param employeeModel
+	 * @return
+	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@ResponseBody
 	public HashMap<String, EmployeeModel> login(@RequestBody LoginModel loginModel, EmployeeModel employeeModel) {
