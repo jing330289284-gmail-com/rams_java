@@ -385,7 +385,7 @@ public class GetUtilClass {
 
 	}
 
-	/**
+	/**　暂时不能用
 	 * 採番
 	 * 
 	 * @return
