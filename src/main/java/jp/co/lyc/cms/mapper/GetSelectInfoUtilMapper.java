@@ -99,9 +99,31 @@ public interface GetSelectInfoUtilMapper {
 
 	/**
 	 * 採番
-	 * @param sendMap 
+	 * 
+	 * @param sendMap
 	 * 
 	 * 
 	 */
 	public String getNO(Map<String, String> sendMap);
+
+	/**
+	 * 精算時間 を取得
+	 * 
+	 */
+	public List<ModelClass> getPayMaster();
+
+	/**
+	 * トップお客様 を取得
+	 * 
+	 * 
+	 */
+	public List<ModelClass> getTopCustomer();
+
+	/**
+	 * お客様 を取得
+	 * 
+	 * 
+	 */
+	public List<ModelClass> getCustomerMaster();
+
 }

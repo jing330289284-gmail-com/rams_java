@@ -384,6 +384,41 @@ public class GetUtilClass {
 		return sendMap;
 
 	}
+		/**
+	 * 精算時間を取得
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getPayMaster", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getPayMaster() {
+		List<ModelClass> list = getSelectInfoUtilService.getPayMaster();
+		return list;
+	}
+
+	/**
+	 * トップお客様を取得
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getTopCustomer", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getTopCustomer() {
+		List<ModelClass> list = getSelectInfoUtilService.getTopCustomer();
+		return list;
+	}
+	
+	/**
+	 * お客様を取得
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getCustomerMaster", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getCustomerMaster() {
+		List<ModelClass> list = getSelectInfoUtilService.getCustomerMaster();
+		return list;
+	}
 
 	/**
 	 * 採番
