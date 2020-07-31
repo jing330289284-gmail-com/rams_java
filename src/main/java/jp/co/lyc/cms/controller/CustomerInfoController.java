@@ -41,17 +41,31 @@ public class CustomerInfoController {
 		selectModel.setCustomerRanking(customerInfoSer.selectCustomerRanking());
 		//会社性質内容
 		selectModel.setCompanyNature(customerInfoSer.selectCompanyNature());
+		//職位
+		selectModel.setPosition(customerInfoSer.selectPosition());
 		//选择框内容
 		resultMap.put("selectModel", selectModel);
+		HashMap<String, String> sendMap = new HashMap<>();
 		if(customerInfoMod.getShoriKbn() != null) {
 			if (customerInfoMod.getShoriKbn().equals("shusei") || customerInfoMod.getShoriKbn().equals("sansho")) {
 				customerInfoMod = customerInfoSer.selectCustomerInfo(customerInfoMod.getCustomerNo());	
-				ArrayList<CustomerDepartmentInfoModel> customerDepartmentInfoList = customerInfoSer.selectCustomerDepartmentInfo(customerInfoMod.getCustomerNo());
+				sendMap.put("customerNo", customerInfoMod.getCustomerNo());
+				ArrayList<CustomerDepartmentInfoModel> customerDepartmentInfoList = customerInfoSer.selectCustomerDepartmentInfo(sendMap);
 				resultMap.put("customerInfoMod", customerInfoMod);
 				resultMap.put("customerDepartmentInfoList", customerDepartmentInfoList);
 			}else if(customerInfoMod.getShoriKbn().equals("tsuika")){
 				String saiban = customerInfoSer.customerNoSaiBan();
-				ArrayList<CustomerDepartmentInfoModel> customerDepartmentInfoList = customerInfoSer.selectCustomerDepartmentInfo(saiban);
+				int num = Integer.parseInt(saiban.substring(1),10);
+				num += 1;
+				if(num < 10) {
+					saiban = "C00" + Integer.toString(num);
+				}else if(num >=10 && num < 100) {
+					saiban = "C0" + Integer.toString(num);
+				}else if(num >= 100) {
+					saiban = "C" + Integer.toString(num);
+				}
+				sendMap.put("customerNo", saiban);
+				ArrayList<CustomerDepartmentInfoModel> customerDepartmentInfoList = customerInfoSer.selectCustomerDepartmentInfo(sendMap);
 				resultMap.put("customerNoSaiBan",saiban);
 				resultMap.put("customerDepartmentInfoList", customerDepartmentInfoList);
 			}
@@ -68,6 +82,16 @@ public class CustomerInfoController {
 	public ArrayList<TopCustomerInfoModel> selectTopCustomer(@RequestBody CustomerInfoModel customerInfoMod) {
 		//上位客户信息
 		return customerInfoSer.selectTopCustomer(customerInfoMod.getTopCustomerName());
+	}
+	/**
+	 * 部門連想
+	 * @param customerDepartmentInfoModel
+	 * @return
+	 */
+	@RequestMapping(value = "/selectDepartmentMaster", method = RequestMethod.POST)
+	@ResponseBody
+	public ArrayList<CustomerDepartmentInfoModel> selectDepartmentMaster(@RequestBody CustomerDepartmentInfoModel customerDepartmentInfoModel){
+		return customerInfoSer.selectDepartmentMaster(customerDepartmentInfoModel.getCustomerDepartmentName());
 	}
 	/**
 	 * 登录按钮
@@ -184,10 +208,57 @@ public class CustomerInfoController {
 	 * @param customerInfoModel
 	 * @return
 	 */
-	public ArrayList<CustomerDepartmentInfoModel> getCustomerDepartmentInfo(@RequestBody CustomerInfoModel customerInfoModel) {
+	public ArrayList<CustomerDepartmentInfoModel> getCustomerDepartmentInfo( String customerNo) {
 		logger.info("BankInfoController.toroku:" + "部門情報検索開始");
-		ArrayList<CustomerDepartmentInfoModel> customerDepartmentInfoList = customerInfoSer.selectCustomerDepartmentInfo(customerInfoModel.getCustomerNo());
+		HashMap<String, String> sendMap = new HashMap<>();
+		sendMap.put("customerNo", customerNo);
+		ArrayList<CustomerDepartmentInfoModel> customerDepartmentInfoList = customerInfoSer.selectCustomerDepartmentInfo(sendMap);
 		return customerDepartmentInfoList;
+	}
+	/**
+	 * 部門登録
+	 * @param customerDepartmentInfoModel
+	 * @return
+	 */
+	@RequestMapping(value = "/meisaiToroku", method = RequestMethod.POST)
+	@ResponseBody
+	public ArrayList<CustomerDepartmentInfoModel> meisaiToroku(@RequestBody CustomerDepartmentInfoModel customerDepartmentInfoModel) {
+		logger.info("BankInfoController.toroku:" + "明細登録開始");
+		HashMap<String, String> sendMap = new HashMap<>();
+		ArrayList<CustomerDepartmentInfoModel> resultList = new ArrayList<>();
+		sendMap.put("customerNo", customerDepartmentInfoModel.getCustomerNo());	
+		String resultCode = "0";//処理結果
+		String customerDepartmentCode = 
+				customerInfoSer.selectDepartmentCode(customerDepartmentInfoModel.getCustomerDepartmentName());
+		//resultCode : 2(部門が部門マスタに存在しない)
+		if(isNullOrEmpty(customerDepartmentCode)) {
+			resultList = 
+					getCustomerDepartmentInfo(customerDepartmentInfoModel.getCustomerNo());
+			if(resultList.get(0) == null) {
+				resultList.add(new CustomerDepartmentInfoModel());
+			}
+			resultList.get(0).setResultCode("2");
+			return resultList;
+		}
+		sendMap.put("customerDepartmentCode", customerDepartmentCode);
+		sendMap.put("customerNo", customerDepartmentInfoModel.getCustomerNo());
+		sendMap.put("customerDepartmentName", customerDepartmentInfoModel.getCustomerDepartmentName());
+		sendMap.put("position", customerDepartmentInfoModel.getPosition());
+		sendMap.put("responsiblePerson", customerDepartmentInfoModel.getResponsiblePerson());
+		sendMap.put("mail", customerDepartmentInfoModel.getMail());
+		sendMap.put("updateuser", customerDepartmentInfoModel.getUpdateuser());
+		//resultCode : 0(処理成功)1（処理失敗）
+		if(customerInfoSer.selectCustomerDepartmentInfo(sendMap).size() != 0 ) {
+			resultCode = (customerInfoSer.updateCustomerDepartment(sendMap) ? "0" : "1");	
+		}else {
+			resultCode = (customerInfoSer.insertCustomerDepartment(sendMap) ? "0" : "1");
+		}
+		resultList = getCustomerDepartmentInfo(customerDepartmentInfoModel.getCustomerNo());
+		if(resultList.get(0) == null) {
+			resultList.add(new CustomerDepartmentInfoModel());
+		}
+		resultList.get(0).setResultCode(resultCode);
+		return resultList;
 	}
 	/**
 	 * 判断字符串是否为null或空

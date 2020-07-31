@@ -21,7 +21,12 @@ public interface CustomerInfoMapper {
 	 */
 	public ArrayList<HashMap<String, String>> selectCompanyNature();
 	/**
-	 * 上位お客様
+	 * 職位
+	 * @return
+	 */
+	public ArrayList<HashMap<String, String>> selectPosition();
+	/**
+	 * 上位お客様連想
 	 * @return
 	 */
 	public ArrayList<TopCustomerInfoModel> selectTopCustomer(String topCustpmerName);
@@ -46,11 +51,22 @@ public interface CustomerInfoMapper {
 	 */
 	public void insertCustomerInfo(HashMap<String, String> sendMap);
 	/**
+	 * 部門連想
+	 * @return
+	 */
+	public ArrayList<CustomerDepartmentInfoModel> selectDepartmentMaster(String customerDepartmentName);
+	/**
+	 * 部門番号の検索
+	 * @param customerDepartmentName
+	 * @return
+	 */
+	public String selectDepartmentCode(String customerDepartmentName);
+	/**
 	 * 部門情報検索
 	 * @param customerNo
 	 * @return
 	 */
-	public ArrayList<CustomerDepartmentInfoModel> selectCustomerDepartmentInfo(String customerNo);
+	public ArrayList<CustomerDepartmentInfoModel> selectCustomerDepartmentInfo(HashMap<String, String> sendMapd);
 	/**
 	 * アップデート
 	 * @return

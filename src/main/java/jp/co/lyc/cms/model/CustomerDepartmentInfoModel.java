@@ -10,7 +10,21 @@ public class CustomerDepartmentInfoModel {
 	String mail;//メール
 	String updateuser;//更新者
 	String rowNo;//行番号
+	String shoriKbn;//処理区分
+	String resultCode;//処理結果
 	
+	public String getResultCode() {
+		return resultCode;
+	}
+	public void setResultCode(String resultCode) {
+		this.resultCode = resultCode;
+	}
+	public String getShoriKbn() {
+		return shoriKbn;
+	}
+	public void setShoriKbn(String shoriKbn) {
+		this.shoriKbn = shoriKbn;
+	}
 	public String getRowNo() {
 		return rowNo;
 	}

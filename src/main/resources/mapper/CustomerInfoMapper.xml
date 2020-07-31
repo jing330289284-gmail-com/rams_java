@@ -3,7 +3,8 @@
 <mapper namespace="jp.co.lyc.cms.mapper.CustomerInfoMapper">
     <resultMap id="SelectCustomerInfo" type="map"/>
     <resultMap id="customerNoSaiBan" type="java.lang.String"/>
-     <resultMap id="topCustomer" type="jp.co.lyc.cms.model.TopCustomerInfoModel"/>
+    <resultMap id="topCustomer" type="jp.co.lyc.cms.model.TopCustomerInfoModel"/>
+    <resultMap id="CustomerDepartmentMaster" type="jp.co.lyc.cms.model.CustomerDepartmentInfoModel"/>
     <resultMap id="CustomerInfo" type="jp.co.lyc.cms.model.CustomerInfoModel"/>
     <resultMap id="CustomerDepartmentInfo" type="jp.co.lyc.cms.model.CustomerDepartmentInfoModel"/>
     <select id="selectCustomerRanking" resultMap="SelectCustomerInfo">
@@ -21,6 +22,15 @@
         	companyNatureName
         FROM 
         	company_nature_master
+    </select>
+    <!-- 職位 -->
+    <select id="selectPosition" resultMap="SelectCustomerInfo">
+        SELECT 
+        	CAST(positionCode AS char)
+					AS positionCode,
+        	positionName
+        FROM 
+        	position_master
     </select>
     <select id="customerNoSaiBan" resultMap="customerNoSaiBan">
         SELECT 
@@ -118,8 +128,10 @@
 		updateUser = #{updateUser}
 		WHERE 
 			customerNo = #{customerNo}
-    </update>   
-    <select id="selectCustomerDepartmentInfo" resultMap="CustomerDepartmentInfo" parameterType="String">
+		AND customerDepartmentCode = #{customerDepartmentCode}
+    </update> 
+    <!-- 部門検索 -->  
+    <select id="selectCustomerDepartmentInfo" resultMap="CustomerDepartmentInfo" parameterType="map">
 		SELECT
 			CONCAT(( @rowNo := @rowNo + 1 )) AS rowNo,
 			customerDepartmentName,
@@ -130,10 +142,29 @@
 			customer_department_information,
 			( SELECT @rowNo := 0 ) AS rowNo 
 		WHERE
-			CustomerNo = #{customerNo}
+			customerNo = #{customerNo}
+			<if test="customerDepartmentCode != NULL">
+			AND customerDepartmentCode = #{customerDepartmentCode}
+			</if>
+    </select>
+    <select id="selectDepartmentMaster" resultMap="CustomerDepartmentMaster" parameterType="String">
+		SELECT
+			customerDepartmentName
+		FROM
+			customer_department_master 
+		WHERE
+			customerDepartmentName LIKE concat('%',#{customerDepartmentName},'%')
+    </select>
+    <select id="selectDepartmentCode" resultMap="customerNoSaiBan" parameterType="String">
+		SELECT
+			customerDepartmentCode
+		FROM
+			customer_department_master 
+		WHERE
+			customerDepartmentName = #{customerDepartmentName}
     </select>
     <insert id="insertCustomerDepartment" parameterType="String">
-		INSERT INTO customer_information 
+		INSERT INTO customer_department_information 
 		VALUE(
 		#{customerNo},
 		#{customerDepartmentCode},
@@ -146,7 +177,7 @@
 		#{updateUser})
     </insert>
     <update id="updateCustomerDepartment" parameterType="String">
-		UPDATE customer_information
+		UPDATE customer_department_information
 		SET 
 		<if test="customerDepartmentCode != null">
 			customerDepartmentCode = #{customerDepartmentCode},
