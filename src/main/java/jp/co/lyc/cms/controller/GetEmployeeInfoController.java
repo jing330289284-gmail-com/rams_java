@@ -68,6 +68,8 @@ public class GetEmployeeInfoController {
 		String developmentLanguageNo2 = emp.getDevelopmentLanguageNo2();// 開発言語2
 		String developmentLanguageNo3 = emp.getDevelopmentLanguageNo3();// 開発言語3
 		String kadou = emp.getKadou();// 稼働
+		String joinCompanyOfYearFrom =emp.getJoinCompanyOfYearFrom();//入社年月元
+		String joinCompanyOfYearTo = emp.getJoinCompanyOfYearTo();//入社年月先
 		
 		if (statusOfResidence != null && statusOfResidence.length() != 0) {
 			sendMap.put("statusOfResidence", statusOfResidence);
@@ -123,6 +125,13 @@ public class GetEmployeeInfoController {
 		if (developmentLanguageNo3 != null && developmentLanguageNo3.length() != 0) {
 			sendMap.put("developmentLanguageNo3", developmentLanguageNo3);
 		}
+		if (joinCompanyOfYearFrom != null && joinCompanyOfYearFrom.length() != 0) {
+			sendMap.put("joinCompanyOfYearFrom", joinCompanyOfYearFrom);
+		}
+		if (joinCompanyOfYearTo != null && joinCompanyOfYearTo.length() != 0) {
+			sendMap.put("joinCompanyOfYearTo", joinCompanyOfYearTo);
+		}
+		
 		return sendMap;
 
 	}

@@ -4,44 +4,48 @@
     <resultMap id="BankInfo" type="java.lang.String"/>
     <resultMap id="BankBranchInfo" type="map"/>
     <resultMap id="AccountInfo" type="jp.co.lyc.cms.model.BankInfoModel"/>
+    <!-- 銀行名検索 -->
     <select id="selectBankInfo" resultMap="BankInfo">
-        SELECT bankName FROM bank_master
+        SELECT bankName FROM M001Bank
     </select>
+    <!-- 口座情報検索 -->
     <select id="selectAccountInfo" parameterType="String" resultMap="AccountInfo">
         SELECT 
         	ACI.* ,
-        	BBM.bankBranchName
+        	M002.bankBranchName
         FROM 
         	account_information AS ACI
         LEFT JOIN
-        	bank_barnch_master as BBM
+        	M002BankBranch as M002
         ON  
-        	ACI.bankCode = BBM.bankCode
+        	ACI.bankCode = M002.bankCode
         AND 
-        	ACI.bankBranchCode = BBM.bankBranchCode
+        	ACI.bankBranchCode = M002.bankBranchCode
         WHERE 
         	employeeOrCustomerNo=#{employeeOrCustomerNo}
         	AND accountBelongsStatus=#{accountBelongsStatus}
     </select>
+    <!-- 支店情報検索 -->
     <select id="getBankBranchInfo" resultMap="BankBranchInfo" parameterType="map">
         SELECT 
-			BBM.bankBranchName,
-			BBM.bankBranchCode
+			M002.bankBranchName,
+			M002.bankBranchCode
         FROM 
-        	bank_branch_master AS BBM
+        	M002BankBranch AS M002
         LEFT JOIN
-        	bank_master AS BM
+        	M001Bank AS M001
         ON  
-        	BM.bankCode = BBM.bankCode
+        	M001.bankCode = M002.bankCode
         WHERE 
-        	BBM.bankCode = #{bankCode}
+        	M002.bankCode = #{bankCode}
 	        <if test="bankBranchCode != null">
-				AND BBM.bankBranchCode = #{bankBranchCode}
+				AND M002.bankBranchCode = #{bankBranchCode}
 			</if>
 			<if test="bankBranchName != null">
-				AND BBM.bankBranchName = #{bankBranchName}
+				AND M002.bankBranchName = #{bankBranchName}
 			</if>
     </select>
+    <!-- 口座情報インサート -->
     <insert id="insertAccount" parameterType="String">
 		INSERT INTO account_information 
 		VALUE(
@@ -56,6 +60,7 @@
 		NOW(),
 		#{updateUser})
     </insert>
+    <!-- 口座情報アップデート -->
     <update id="updateAccount" parameterType="String">
 		UPDATE account_information
 		SET 

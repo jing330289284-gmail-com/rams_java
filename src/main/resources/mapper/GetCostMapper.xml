@@ -3,11 +3,12 @@
 <mapper namespace="jp.co.lyc.cms.mapper.GetCostMapper">
     <resultMap id="Cost" type="jp.co.lyc.cms.model.CostModel"/>
     <resultMap id="MapResult" type="map"/>
+    <!-- 諸費用検索 -->
     <select id="selectCost" parameterType="String" resultMap="Cost">
         SELECT * FROM expenses_information
         WHERE employeeNo=#{employeeNo}
     </select>
-    
+    <!-- 稼働の判断 -->
     <select id="checkKado" parameterType="String" resultMap="MapResult">
         SELECT
 			AdmissionStartDate,
@@ -21,7 +22,7 @@
 			AND AdmissionStartDate IS NULL 
 			AND AdmissionEndDate IS NULL
     </select>
-    
+    <!-- 諸費用情報インサート -->
 	<insert id="insertCost" parameterType="String">
 		INSERT INTO expenses_information 
 		VALUE(
@@ -48,7 +49,7 @@
 		NOW(),
 		#{updateUser})
     </insert>
-    
+    <!-- 諸費用情報アップデート -->
     <update id="updateCost" parameterType="String">
 		UPDATE expenses_information
 		SET 

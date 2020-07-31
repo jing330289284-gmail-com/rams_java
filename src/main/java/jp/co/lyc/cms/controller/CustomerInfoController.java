@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import jp.co.lyc.cms.model.CustomerDepartmentInfoModel;
 import jp.co.lyc.cms.model.CustomerInfoModel;
 import jp.co.lyc.cms.model.CustomerInfoSelectModel;
 import jp.co.lyc.cms.service.CustomerInfoService;
@@ -39,14 +41,36 @@ public class CustomerInfoController {
 		selectModel.setCustomerRanking(customerInfoSer.selectCustomerRanking());
 		//会社性質内容
 		selectModel.setCompanyNature(customerInfoSer.selectCompanyNature());
+		//職位
+		selectModel.setPosition(customerInfoSer.selectPosition());
 		//选择框内容
 		resultMap.put("selectModel", selectModel);
+		HashMap<String, String> sendMap = new HashMap<>();
 		if(customerInfoMod.getShoriKbn() != null) {
+			//修正と詳細の場合
 			if (customerInfoMod.getShoriKbn().equals("shusei") || customerInfoMod.getShoriKbn().equals("sansho")) {
 				customerInfoMod = customerInfoSer.selectCustomerInfo(customerInfoMod.getCustomerNo());	
+				sendMap.put("customerNo", customerInfoMod.getCustomerNo());
+				ArrayList<CustomerDepartmentInfoModel> customerDepartmentInfoList = customerInfoSer.selectCustomerDepartmentInfo(sendMap);
 				resultMap.put("customerInfoMod", customerInfoMod);
+				resultMap.put("customerDepartmentInfoList", customerDepartmentInfoList);
 			}else if(customerInfoMod.getShoriKbn().equals("tsuika")){
-				resultMap.put("customerNoSaiBan",customerInfoSer.customerNoSaiBan());
+				//追加の場合
+				String saiban = customerInfoSer.customerNoSaiBan();
+				int num = Integer.parseInt(saiban.substring(1),10);
+				num += 1;
+				if(num < 10) {
+					saiban = "C00" + Integer.toString(num);
+				}else if(num >=10 && num < 100) {
+					saiban = "C0" + Integer.toString(num);
+				}else if(num >= 100) {
+					saiban = "C" + Integer.toString(num);
+				}
+				sendMap.put("customerNo", saiban);
+				//部門のデータ
+				ArrayList<CustomerDepartmentInfoModel> customerDepartmentInfoList = customerInfoSer.selectCustomerDepartmentInfo(sendMap);
+				resultMap.put("customerNoSaiBan",saiban);
+				resultMap.put("customerDepartmentInfoList", customerDepartmentInfoList);
 			}
 		}
 		return resultMap;	
@@ -61,6 +85,16 @@ public class CustomerInfoController {
 	public ArrayList<TopCustomerInfoModel> selectTopCustomer(@RequestBody CustomerInfoModel customerInfoMod) {
 		//上位客户信息
 		return customerInfoSer.selectTopCustomer(customerInfoMod.getTopCustomerName());
+	}
+	/**
+	 * 部門連想
+	 * @param customerDepartmentInfoModel
+	 * @return
+	 */
+	@RequestMapping(value = "/selectDepartmentMaster", method = RequestMethod.POST)
+	@ResponseBody
+	public ArrayList<CustomerDepartmentInfoModel> selectDepartmentMaster(@RequestBody CustomerDepartmentInfoModel customerDepartmentInfoModel){
+		return customerInfoSer.selectDepartmentMaster(customerDepartmentInfoModel.getCustomerDepartmentName());
 	}
 	/**
 	 * 登录按钮
@@ -86,7 +120,7 @@ public class CustomerInfoController {
 				customerInfoMod.getShoriKbn().equals("sansho")) {
 			result = update(customerInfoMod);
 		}
-		return (result == true ? 0 : 1);
+		return (result == true ? 0 : 1);//result（0）成功（1）失敗
 	}
 
 	/**
@@ -171,6 +205,63 @@ public class CustomerInfoController {
 		sendMap.put("customerNo", customerInfoMod.getCustomerNo());	
 		result  = customerInfoSer.updateCustomerInfo(sendMap);
 		return result;	
+	}
+	/**
+	 * 部門情報検索
+	 * @param customerInfoModel
+	 * @return
+	 */
+	public ArrayList<CustomerDepartmentInfoModel> getCustomerDepartmentInfo( String customerNo) {
+		logger.info("BankInfoController.toroku:" + "部門情報検索開始");
+		HashMap<String, String> sendMap = new HashMap<>();
+		sendMap.put("customerNo", customerNo);
+		ArrayList<CustomerDepartmentInfoModel> customerDepartmentInfoList = customerInfoSer.selectCustomerDepartmentInfo(sendMap);
+		return customerDepartmentInfoList;
+	}
+	/**
+	 * 部門登録
+	 * @param customerDepartmentInfoModel
+	 * @return
+	 */
+	@RequestMapping(value = "/meisaiToroku", method = RequestMethod.POST)
+	@ResponseBody
+	public ArrayList<CustomerDepartmentInfoModel> meisaiToroku(@RequestBody CustomerDepartmentInfoModel customerDepartmentInfoModel) {
+		logger.info("BankInfoController.toroku:" + "明細登録開始");
+		HashMap<String, String> sendMap = new HashMap<>();
+		ArrayList<CustomerDepartmentInfoModel> resultList = new ArrayList<>();
+		sendMap.put("customerNo", customerDepartmentInfoModel.getCustomerNo());	
+		String resultCode = "0";//処理結果
+		String customerDepartmentCode = 
+				customerInfoSer.selectDepartmentCode(customerDepartmentInfoModel.getCustomerDepartmentName());
+		//resultCode : 2(部門が部門マスタに存在しない)
+		if(isNullOrEmpty(customerDepartmentCode)) {
+			resultList = 
+					getCustomerDepartmentInfo(customerDepartmentInfoModel.getCustomerNo());
+			if(resultList.get(0) == null) {
+				resultList.add(new CustomerDepartmentInfoModel());
+			}
+			resultList.get(0).setResultCode("2");
+			return resultList;
+		}
+		sendMap.put("customerDepartmentCode", customerDepartmentCode);
+		sendMap.put("customerNo", customerDepartmentInfoModel.getCustomerNo());
+		sendMap.put("customerDepartmentName", customerDepartmentInfoModel.getCustomerDepartmentName());
+		sendMap.put("position", customerDepartmentInfoModel.getPosition());
+		sendMap.put("responsiblePerson", customerDepartmentInfoModel.getResponsiblePerson());
+		sendMap.put("mail", customerDepartmentInfoModel.getMail());
+		sendMap.put("updateuser", customerDepartmentInfoModel.getUpdateuser());
+		//resultCode : 0(処理成功)1（処理失敗）
+		if(customerInfoSer.selectCustomerDepartmentInfo(sendMap).size() != 0 ) {
+			resultCode = (customerInfoSer.updateCustomerDepartment(sendMap) ? "0" : "1");	
+		}else {
+			resultCode = (customerInfoSer.insertCustomerDepartment(sendMap) ? "0" : "1");
+		}
+		resultList = getCustomerDepartmentInfo(customerDepartmentInfoModel.getCustomerNo());
+		if(resultList.get(0) == null) {
+			resultList.add(new CustomerDepartmentInfoModel());
+		}
+		resultList.get(0).setResultCode(resultCode);
+		return resultList;
 	}
 	/**
 	 * 判断字符串是否为null或空

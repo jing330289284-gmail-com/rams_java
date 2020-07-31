@@ -26,7 +26,11 @@ public class BankInfoController {
 	@Autowired
 	GetBankInfoService bankInfoSer;
 	
-	//页面加载
+	/**
+	 * 画面の初期化
+	 * @param onloadMol
+	 * @return
+	 */
 	@RequestMapping(value = "/getBankInfo", method = RequestMethod.POST)
 	@ResponseBody
 	public HashMap<String, Object> getBankInfo(@RequestBody BankInfoModel onloadMol) {
@@ -41,7 +45,11 @@ public class BankInfoController {
 		return resultMap;	
 	}
 	
-	//获取支店信息
+	/**
+	 * 支店の情報の取得
+	 * @param sendMap
+	 * @return
+	 */
 	@RequestMapping(value = "/getBankBranchInfo", method = RequestMethod.POST)
 	@ResponseBody
 	public HashMap<String, String> getBankBranchInfo(@RequestBody HashMap<String, String> sendMap) {
@@ -54,7 +62,11 @@ public class BankInfoController {
 		return resultMap;	
 	}
 	
-	//登录银行信息
+	/**
+	 * 登録ボタン
+	 * @param bankCol
+	 * @return
+	 */
 	@RequestMapping(value = "/toroku", method = RequestMethod.POST)
 	@ResponseBody
 	public boolean toroku(@RequestBody BankInfoModel bankCol) {
@@ -70,7 +82,11 @@ public class BankInfoController {
 		return result;	
 	}
 	
-	//插入数据
+	/**
+	 * インサート
+	 * @param bankCol
+	 * @return
+	 */
 	public boolean insert(BankInfoModel bankCol) {
 		logger.info("BankInfoController.toroku:" + "登录開始");
 		boolean result = true;
@@ -87,7 +103,11 @@ public class BankInfoController {
 		return result;	
 	}
 	
-	//更新数据
+	/**
+	 * アップデート
+	 * @param bankCol
+	 * @return
+	 */
 	public boolean update(BankInfoModel bankCol) {
 		logger.info("BankInfoController.toroku:" + "登录開始");
 		boolean result = true;
@@ -114,14 +134,23 @@ public class BankInfoController {
 		return result;	
 	}
 	
-	//查询数据
+	/**
+	 * データを取得
+	 * @param employeeOrCustomerNo
+	 * * @param accountBelongsStatus
+	 * @return
+	 */
 	public BankInfoModel selectAccountInfo(String employeeOrCustomerNo , String accountBelongsStatus) {
 		logger.info("BankInfoController.selectBankInfo:" + "查询開始");
 		BankInfoModel resultMod = bankInfoSer.selectAccountInfo(employeeOrCustomerNo , accountBelongsStatus);
 		return resultMod;	
 	}
 	
-	// 判断字符串是否为null或空
+	/**
+	 * nullと空の判断
+	 * @param aString
+	 * @return
+	 */
 	public boolean isNullOrEmpty(String aString) {
 		boolean result = true;
 		if (aString == null || aString.isEmpty()) {

@@ -21,7 +21,7 @@ public class EmployeeModel implements Serializable {
 	String password;
 	String employeeName;
 	String authorityNo;
-	String authorityProperty;
+	String authorityName;
 	String genderCode;// 性別
 	String age;// 年齢
 	String ageFrom;// 開始年齢
@@ -45,6 +45,8 @@ public class EmployeeModel implements Serializable {
 	String kadou;//
 	String alphabetOfName;// ローマ名前
 	String visaPeriod;// ビザ期間
+	String joinCompanyOfYearFrom;//入社年月元
+	String joinCompanyOfYearTo;//入社年月先
 
 	public int getRowNo() {
 		return rowNo;
@@ -68,6 +70,22 @@ public class EmployeeModel implements Serializable {
 
 	public void setEmployeeFristName(String employeeFristName) {
 		this.employeeFristName = employeeFristName;
+	}
+
+	public String getJoinCompanyOfYearFrom() {
+		return joinCompanyOfYearFrom;
+	}
+
+	public void setJoinCompanyOfYearFrom(String joinCompanyOfYearFrom) {
+		this.joinCompanyOfYearFrom = joinCompanyOfYearFrom;
+	}
+
+	public String getJoinCompanyOfYearTo() {
+		return joinCompanyOfYearTo;
+	}
+
+	public void setJoinCompanyOfYearTo(String joinCompanyOfYearTo) {
+		this.joinCompanyOfYearTo = joinCompanyOfYearTo;
 	}
 
 	public String getFurigana() {
@@ -150,12 +168,14 @@ public class EmployeeModel implements Serializable {
 		this.authorityNo = authorityNo;
 	}
 
-	public String getAuthorityProperty() {
-		return authorityProperty;
+
+
+	public String getAuthorityName() {
+		return authorityName;
 	}
 
-	public void setAuthorityProperty(String authorityProperty) {
-		this.authorityProperty = authorityProperty;
+	public void setAuthorityName(String authorityName) {
+		this.authorityName = authorityName;
 	}
 
 	public String getGenderCode() {

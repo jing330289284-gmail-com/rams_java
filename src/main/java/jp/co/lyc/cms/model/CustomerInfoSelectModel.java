@@ -5,8 +5,17 @@ import java.util.HashMap;
 
 public class CustomerInfoSelectModel {
 	
-	ArrayList<HashMap<String, String>> customerRanking;
-	ArrayList<HashMap<String, String>> companyNature;
+	ArrayList<HashMap<String, String>> customerRanking;//お客様ランキング選択肢
+	ArrayList<HashMap<String, String>> companyNature;//お客様性質選択肢
+	ArrayList<HashMap<String, String>> position;//職位選択肢
+
+	public ArrayList<HashMap<String, String>> getPosition() {
+		return position;
+	}
+
+	public void setPosition(ArrayList<HashMap<String, String>> position) {
+		this.position = position;
+	}
 
 	public ArrayList<HashMap<String, String>> getCustomerRanking() {
 		return customerRanking;

@@ -22,7 +22,7 @@ import net.sf.json.JSONObject;
 
 @Controller
 @CrossOrigin(origins = "http://127.0.0.1:3000")
-public class GetSelectInfoUtil {
+public class GetUtilClass {
 
 	@Autowired
 	GetProperties getProperties;
@@ -40,7 +40,6 @@ public class GetSelectInfoUtil {
 	public List<ModelClass> getNationalitys() {
 		List<ModelClass> list = getSelectInfoUtilService.getNationalitys();
 		return list;
-
 	}
 
 	/**
@@ -311,6 +310,81 @@ public class GetSelectInfoUtil {
 	}
 
 	/**
+	 * 職種を取得
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getOccupation", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getOccupation() {
+		List<ModelClass> list = getSelectInfoUtilService.getOccupation();
+		return list;
+	}
+
+	/**
+	 * 部署を取得
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getDepartment", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getDepartment() {
+		List<ModelClass> list = getSelectInfoUtilService.getDepartment();
+		return list;
+	}
+
+	/**
+	 * 権限を取得
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getAuthority", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getAuthority() {
+		List<ModelClass> list = getSelectInfoUtilService.getAuthority();
+		return list;
+	}
+
+	/**
+	 * 英語を取得
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getEnglishLevel", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getEnglishLevel() {
+		List<ModelClass> list = getSelectInfoUtilService.getEnglishLevel();
+		return list;
+	}
+
+	/**
+	 * 資格を取得
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getQualification", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getQualification() {
+		List<ModelClass> list = getSelectInfoUtilService.getQualification();
+		return list;
+	}
+
+	/**
+	 * 条件を取得
+	 * 
+	 * @param emp
+	 * @return
+	 */
+	public Map<String, String> getParam(EmployeeModel emp) {
+		Map<String, String> sendMap = new HashMap<String, String>();
+		String developmentLanguageNo1 = emp.getDevelopmentLanguageNo1();// 開発言語1
+		if (developmentLanguageNo1 != null && developmentLanguageNo1.length() != 0) {
+			sendMap.put("developmentLanguageNo1", developmentLanguageNo1);
+		}
+		return sendMap;
+
+	}
+		/**
 	 * 精算時間を取得
 	 * 
 	 * @return
@@ -345,20 +419,21 @@ public class GetSelectInfoUtil {
 		List<ModelClass> list = getSelectInfoUtilService.getCustomerMaster();
 		return list;
 	}
+
 	/**
-	 * 条件を取得
+	 * 採番
 	 * 
-	 * @param emp
 	 * @return
 	 */
-	public Map<String, String> getParam(EmployeeModel emp) {
+	@RequestMapping(value = "/getNO")
+	@ResponseBody
+	public String getNO(@RequestBody ModelClass mo) {
 		Map<String, String> sendMap = new HashMap<String, String>();
-		String developmentLanguageNo1 = emp.getDevelopmentLanguageNo1();// 開発言語1
-		if (developmentLanguageNo1 != null && developmentLanguageNo1.length() != 0) {
-			sendMap.put("developmentLanguageNo1", developmentLanguageNo1);
+		String type = mo.getName();// 採番種類
+		if (type != null && type.length() != 0) {
+			sendMap.put("type", type);
 		}
-		return sendMap;
-
+		String no = getSelectInfoUtilService.getNO(sendMap);
+		return no;
 	}
-
 }

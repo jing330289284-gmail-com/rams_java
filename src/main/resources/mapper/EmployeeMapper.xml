@@ -2,16 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="jp.co.lyc.cms.mapper.EmployeeMapper">
     <resultMap id="Employee" type="jp.co.lyc.cms.model.EmployeeModel"/>
+    <!-- ログイン -->
     <select id="getEmployeeModel" parameterType="map" resultMap="Employee">
 		SELECT
 			a.employeeNo,
 			a.employeeFristName,
 			a.employeeLastName,
 			a.authorityCode,
-			b.authorityProperty
+			b.authorityName
 		FROM
 			employee a
-			LEFT JOIN authority_master b ON a.authorityCode = b.authorityCode
+			LEFT JOIN M009Authority b ON a.authorityCode = b.authorityCode
 			LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo
 		WHERE
 			a. PASSWORD = #{password}

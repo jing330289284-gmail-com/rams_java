@@ -2,15 +2,35 @@ package jp.co.lyc.cms.model;
 
 public class CustomerDepartmentInfoModel {
 
-	String customerNo;
-	String customerDepartmentCode;
-	String customerDepartmentName;
-	String position;
-	String responsiblePerson;
-	String mail;
-	String updateuser;
+	String customerNo;//お客様番号
+	String customerDepartmentCode;//部門番号
+	String customerDepartmentName;//部門名称
+	String position;//職位
+	String responsiblePerson;//責任者
+	String mail;//メール
+	String updateuser;//更新者
+	String rowNo;//行番号
+	String shoriKbn;//処理区分
+	String resultCode;//処理結果
 	
-
+	public String getResultCode() {
+		return resultCode;
+	}
+	public void setResultCode(String resultCode) {
+		this.resultCode = resultCode;
+	}
+	public String getShoriKbn() {
+		return shoriKbn;
+	}
+	public void setShoriKbn(String shoriKbn) {
+		this.shoriKbn = shoriKbn;
+	}
+	public String getRowNo() {
+		return rowNo;
+	}
+	public void setRowNo(String rowNo) {
+		this.rowNo = rowNo;
+	}
 	public String getCustomerNo() {
 		return customerNo;
 	}

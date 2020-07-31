@@ -4,32 +4,26 @@
 	<!-- 社員形式コード -->
 	<select id="getStaffForms"
 		resultType="jp.co.lyc.cms.model.ModelClass">
-		SELECT emploryeeFormCode code,emploryeeFormName name FROM
-		emploryee_form_master;
+		SELECT employeeFormCode code,employeeFormName name FROM
+		M005EmployeeForm;
 	</select>
 	<!-- 在留資格 -->
 	<select id="getVisa" resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT visaCode code,visaName
-		name FROM visa_master;
+		name FROM M006Visa;
 	</select>
 	<!--国籍 -->
 	<select id="getNationalitys"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT nationalityCode code,nationalityName name FROM
-		nationality_master;
-	</select>
-	<!--お客様 -->
-	<select id="getCustomer"
-		resultType="jp.co.lyc.cms.model.ModelClass">
-		SELECT customerRankingCode code,customerRankingName name
-		FROM customer_ranking_master;
+		M003Nationality;
 	</select>
 
 	<!-- 開発言語 -->
 	<select id="getTechnologyType" parameterType="map"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT technologytypeCode code,technologytypeName name FROM
-		technology_type_Master where 1=1
+		M011TechnologyType where 1=1
 		<if test="developmentLanguageNo1!= null">
 			AND technologytypeName like
 			concat('%',#{developmentLanguageNo1},'%');
@@ -48,20 +42,200 @@
 	<select id="getJapaneseLevel"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT japaneseLevelCode code,japaneseLevelName name FROM
-		japanese_Level_master;
+		M010JapaneseLevel;
 	</select>
 
 	<!--入社区分 -->
 	<select id="getIntoCompany"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT intoCompanyCode code,intoCompanyName name FROM
-		into_company_master;
+		M004IntoCompany;
 	</select>
 	<!-- 役割 -->
 	<select id="getSiteMaster"
 		resultType="jp.co.lyc.cms.model.ModelClass">
-		SELECT siteRoleCode code,siteRoleCodeName name FROM
-		site_role_master;
+		SELECT siteRoleCode code,siteRoleName name FROM
+		M012SiteRole;
+	</select>
+	<!-- 職種 -->
+	<select id="getOccupation"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT occupationCode code,occupationName name FROM
+		M014Occupation;
+	</select>
+	<!-- 部署 -->
+	<select id="getDepartment"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT DepartmentCode code,DepartmentName name FROM
+		M017Department;
+	</select>
+	<!-- 権限 -->
+	<select id="getAuthority"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT authorityCode code,authorityName name FROM
+		M009Authority;
+	</select>
+	<!-- 英語 -->
+	<select id="getEnglishLevel"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT englishLevelCode code,englishLevelName name FROM
+		M015EnglishLevel;
+	</select>
+	<!-- 資格 -->
+	<select id="getQualification"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT qualificationCode code,qualificationName name FROM
+		M016Qualification;
+	</select>
+	
+	<!-- 精算時間 -->
+	<select id="getPayMaster"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT payOffRangeCode code,payOffRangeName name FROM
+		rams.payoff_Range_master;
+	</select>
+	<!-- トップお客様 -->
+	<select id="getTopCustomer"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT topCustomerNo code,if(topCustomerAbbreviation is
+		null,topCustomerName,topCustomerAbbreviation) name FROM
+		rams.top_customer;
+	</select>
+	<!-- お客様 -->
+	<select id="getCustomerMaster"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT customerNo code,if(customerAbbreviation is
+		null,customerName,customerAbbreviation) name FROM
+		rams.customer_information;
+	</select>
+
+	<!-- 採番 -->
+	<select id="getNO" resultType="String">
+		<!-- 社員番号採番 -->
+		<if test="type='LYC'">
+			SELECT
+			(CASE
+			WHEN
+			(CONVERT(SUBSTRING(a.employeeNo, 4) ,
+			SIGNED) + 1) &lt;10
+			THEN
+			CONCAT('LYC00',
+			(CONVERT(
+			SUBSTRING(a.employeeNo, 4) , SIGNED) + 1))
+			WHEN
+			(CONVERT(
+			SUBSTRING(a.employeeNo, 4) , SIGNED) + 1 &gt;=10)
+			AND (CONVERT(
+			SUBSTRING(a.employeeNo, 4) , SIGNED) + 1 &lt;100)
+			THEN
+			CONCAT('LYC0',
+			(CONVERT( SUBSTRING(a.employeeNo, 4) , SIGNED) + 1))
+			ELSE
+			CONCAT('LYC',
+			(CONVERT( SUBSTRING(a.employeeNo, 4) , SIGNED) + 1))
+			END) AS employeeNo
+			FROM
+			employee a
+			WHERE
+			employeeNo = (SELECT
+			MAX(employeeNo)
+			FROM
+			employee);
+		</if>
+		<if test="type='LYC'">
+			SELECT
+			(CASE
+			WHEN
+			(CONVERT(SUBSTRING(a.employeeNo, 4) ,
+			SIGNED) + 1) &lt;10
+			THEN
+			CONCAT('LYC00',
+			(CONVERT(
+			SUBSTRING(a.employeeNo, 4) , SIGNED) + 1))
+			WHEN
+			(CONVERT(
+			SUBSTRING(a.employeeNo, 4) , SIGNED) + 1 &gt;=10)
+			AND (CONVERT(
+			SUBSTRING(a.employeeNo, 4) , SIGNED) + 1 &lt;100)
+			THEN
+			CONCAT('LYC0',
+			(CONVERT( SUBSTRING(a.employeeNo, 4) , SIGNED) + 1))
+			ELSE
+			CONCAT('LYC',
+			(CONVERT( SUBSTRING(a.employeeNo, 4) , SIGNED) + 1))
+			END) AS employeeNo
+			FROM
+			employee a
+			WHERE
+			employeeNo = (SELECT
+			MAX(employeeNo)
+			FROM
+			employee);
+		</if>
+		<if test="type='LYC'">
+			SELECT
+			(CASE
+			WHEN
+			(CONVERT(SUBSTRING(a.employeeNo, 4) ,
+			SIGNED) + 1) &lt;10
+			THEN
+			CONCAT('LYC00',
+			(CONVERT(
+			SUBSTRING(a.employeeNo, 4) , SIGNED) + 1))
+			WHEN
+			(CONVERT(
+			SUBSTRING(a.employeeNo, 4) , SIGNED) + 1 &gt;=10)
+			AND (CONVERT(
+			SUBSTRING(a.employeeNo, 4) , SIGNED) + 1 &lt;100)
+			THEN
+			CONCAT('LYC0',
+			(CONVERT( SUBSTRING(a.employeeNo, 4) , SIGNED) + 1))
+			ELSE
+			CONCAT('LYC',
+			(CONVERT( SUBSTRING(a.employeeNo, 4) , SIGNED) + 1))
+			END) AS employeeNo
+			FROM
+			employee a
+			WHERE
+			employeeNo = (SELECT
+			MAX(employeeNo)
+			FROM
+			employee);
+		</if>
+		
+		
+		
+		<if test="type='LYC'">
+			SELECT
+			(CASE
+			WHEN
+			(CONVERT(SUBSTRING(a.employeeNo, 4) ,
+			SIGNED) + 1) &lt;10
+			THEN
+			CONCAT('LYC00',
+			(CONVERT(
+			SUBSTRING(a.employeeNo, 4) , SIGNED) + 1))
+			WHEN
+			(CONVERT(
+			SUBSTRING(a.employeeNo, 4) , SIGNED) + 1 &gt;=10)
+			AND (CONVERT(
+			SUBSTRING(a.employeeNo, 4) , SIGNED) + 1 &lt;100)
+			THEN
+			CONCAT('LYC0',
+			(CONVERT( SUBSTRING(a.employeeNo, 4) , SIGNED) + 1))
+			ELSE
+			CONCAT('LYC',
+			(CONVERT( SUBSTRING(a.employeeNo, 4) , SIGNED) + 1))
+			END) AS employeeNo
+			FROM
+			employee a
+			WHERE
+			employeeNo = (SELECT
+			MAX(employeeNo)
+			FROM
+			employee);
+		</if>
+
 	</select>
 	<!-- 精算時間 -->
 	<select id="getPayMaster"

@@ -87,6 +87,66 @@ public class GetSelectInfoUtilService {
 	}
 
 	/**
+	 * 職種を取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getOccupation() {
+		List<ModelClass> list = getSelectInfoUtilMapper.getOccupation();
+		return list;
+	}
+
+	/**
+	 * 部署を取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getDepartment() {
+		List<ModelClass> list = getSelectInfoUtilMapper.getDepartment();
+		return list;
+	}
+
+	/**
+	 * 権限を取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getAuthority() {
+		List<ModelClass> list = getSelectInfoUtilMapper.getAuthority();
+		return list;
+	}
+
+	/**
+	 * 英語を取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getEnglishLevel() {
+		List<ModelClass> list = getSelectInfoUtilMapper.getEnglishLevel();
+		return list;
+	}
+
+	/**
+	 * 資格を取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getQualification() {
+		List<ModelClass> list = getSelectInfoUtilMapper.getQualification();
+		return list;
+	}
+
+	/**
+	 * 採番
+	 * @param sendMap 
+	 * 
+	 * @return
+	 */
+	public String getNO(Map<String, String> sendMap) {
+		String no = getSelectInfoUtilMapper.getNO(sendMap);
+		return no;
+	}
+		/**
 	 * 精算時間 を取得
 	 * 
 	 * @return

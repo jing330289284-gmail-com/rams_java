@@ -1,7 +1,6 @@
 package jp.co.lyc.cms.util;
 
 import java.io.IOException;
-
 import java.util.Properties;
 
 import org.springframework.core.io.ClassPathResource;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class GetProperties {
-
 	/**
 	 * xmlを読み
 	 * 
@@ -26,7 +24,7 @@ public class GetProperties {
 			e.printStackTrace();
 		}
 		return props;
-
 	}
 
+	
 }

@@ -21,13 +21,19 @@ public class technologyTypeMasterController {
 	@Autowired
 	technologyTypeMasterService technologyTypeMasterService;
 	
-	//页面加载
+	/**
+	 * 画面の初期化
+	 * @return
+	 */
 	@RequestMapping(value = "/onloadPage", method = RequestMethod.POST)
 	@ResponseBody
 	public String onloadPage() {
 		return technologyTypeMasterService.getTechnologyCodeSaiban();
 	}
-	//页面加载
+	/**
+	 * 登録ボタン
+	 * @return
+	 */
 	@RequestMapping(value = "/toroku", method = RequestMethod.POST)
 	@ResponseBody
 	public boolean toroku(@RequestBody TechnologyTypeModel technologyTypeMod) {
@@ -37,6 +43,10 @@ public class technologyTypeMasterController {
 		}
 		return false;
 	}
+	/**
+	 * インサート
+	 * @return
+	 */
 	public boolean insert(TechnologyTypeModel technologyTypeMod) {
 		HashMap<String, String> sendMap = new HashMap<>();
 		sendMap.put("technologytypeCode", technologyTypeMod.getTechnologytypeCode());
@@ -45,11 +55,18 @@ public class technologyTypeMasterController {
 		return technologyTypeMasterService.insertTechnologyTypeMaster(sendMap);
 		
 	}
+	/**
+	 * あるかどうかのチェック
+	 * @return
+	 */
 	public boolean checkHave(String technologytypeName) {
 		return technologyTypeMasterService.checkHave(technologytypeName);
 		
 	}
-	// 判断字符串是否为null或空
+	/**
+	 * nullと空の判断
+	 * @return
+	 */
 	public boolean isNullOrEmpty(String aString) {
 		boolean result = true;
 		if (aString == null || aString.isEmpty()) {

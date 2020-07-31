@@ -14,12 +14,30 @@ public class GetCostService {
 	@Autowired
 	GetCostMapper getCostMapper;
 
+	/**
+	 * 画面データの検索
+	 * @param sendMap
+	 * @return
+	 */
+	
 	public CostModel getEmployeeInfo(Map<String, String> sendMap) {
 		return getCostMapper.selectCost(sendMap);
 	}
+	
+	/**
+	 * 稼働の判断
+	 * @param employeeNo
+	 * @return
+	 */
+	
 	public HashMap<String,String> checkKado(String employeeNo) {
 		return getCostMapper.checkKado(employeeNo);
 	}
+	
+	/**
+	 * インサート
+	 * @param sendMap
+	 */
 	
 	public boolean insert(Map<String, Object> sendMap) {
 		try {
@@ -31,6 +49,12 @@ public class GetCostService {
 		}
 		return true;
 	}
+	
+	/**
+	 * アップデート
+	 * @param sendMap
+	 */
+	
 	public boolean update(Map<String, Object> sendMap) {
 		try {
 			getCostMapper.updateCost(sendMap);

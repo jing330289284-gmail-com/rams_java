@@ -30,7 +30,6 @@ public interface GetSelectInfoUtilMapper {
 	 */
 	public List<ModelClass> getVisa();
 
-
 	/**
 	 * 技術種別を取得
 	 * 
@@ -53,29 +52,78 @@ public interface GetSelectInfoUtilMapper {
 	 * 
 	 */
 	public List<ModelClass> getIntoCompany();
-	
+
 	/**
 	 * 役割 を取得
 	 * 
 	 * 
 	 */
 	public List<ModelClass> getSiteMaster();
+
 	/**
-	 * 精算時間 を取得
+	 * 職種を取得
 	 * 
 	 * 
 	 */
+
+	public List<ModelClass> getOccupation();
+
+	/**
+	 * 部署を取得
+	 * 
+	 * 
+	 */
+	public List<ModelClass> getDepartment();
+
+	/**
+	 * 権限を取得
+	 * 
+	 * 
+	 */
+
+	public List<ModelClass> getAuthority();
+
+	/**
+	 * 英語を取得
+	 * 
+	 * 
+	 */
+	public List<ModelClass> getEnglishLevel();
+
+	/**
+	 * 資格を取得
+	 * 
+	 * 
+	 */
+	public List<ModelClass> getQualification();
+
+	/**
+	 * 採番
+	 * 
+	 * @param sendMap
+	 * 
+	 * 
+	 */
+	public String getNO(Map<String, String> sendMap);
+
+	/**
+	 * 精算時間 を取得
+	 * 
+	 */
 	public List<ModelClass> getPayMaster();
+
 	/**
 	 * トップお客様 を取得
 	 * 
 	 * 
 	 */
 	public List<ModelClass> getTopCustomer();
+
 	/**
 	 * お客様 を取得
 	 * 
 	 * 
 	 */
 	public List<ModelClass> getCustomerMaster();
+
 }

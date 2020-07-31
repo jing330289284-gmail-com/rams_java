@@ -4,36 +4,43 @@ import java.util.ArrayList;
 
 public class CustomerInfoModel {
 
-	String customerNo;
-	String customerName;
-	String headOffice;
-	String establishmentDate;
-	String businessStartDate;
-	String customerRankingCode;
-	String listedCompany;
-	String companyNatureCode;
-	String url;
-	String remark;
-	String updateUser;
-	String shoriKbn;
-	String topCustomerNo;
-	String employeeName;
-	ArrayList<String> employeeNameList;
-	String siteLocation;
-	String siteManager;
-	String unitPrice;
-	String customerRankingName;
-	String companyNatureName;
-	String topCustomerName;
-	String location;
-	String rowNo;
-	String PurchasingManagers;
-	String PurchasingManagersOfmail;
-	String customerAbbreviation;
-	ArrayList<String> locationList;
-	ArrayList<String> siteManagerList;
-	ArrayList<String> unitPriceList;
+	String customerNo;//お客様番号
+	String customerName;//お客様名
+	String headOffice;//本社
+	String establishmentDate;//設立年月
+	String businessStartDate;//取引開始日
+	String customerRankingCode;//お客様ランキングコード
+	String listedCompany;//上場会社フラグ
+	String companyNatureCode;//会社性質コード
+	String url;//URL
+	String remark;//備考
+	String updateUser;//更新者
+	String shoriKbn;//処理区分
+	String topCustomerNo;//上位客様番号
+	String employeeName;//社員番号（要員）
+	ArrayList<String> employeeNameList;//
+	String siteLocation;//現場場所
+	String siteManager;//現場責任者
+	String unitPrice;//単価
+	String customerRankingName;//お客様ランキング名前
+	String companyNatureName;//会社性質名前
+	String topCustomerName;//上位お客様名前
+	String location;//現場場所
+	String rowNo;//行番号
+	String PurchasingManagers;//購買担当
+	String PurchasingManagersOfmail;//メール
+	String customerAbbreviation;//お客様略称
+	ArrayList<String> locationList;//同社の現場場所リスト
+	ArrayList<String> siteManagerList;//同社の現場責任者リスト
+	ArrayList<String> unitPriceList;//単価リスト
+	String representative;//代表取締役
 	
+	public String getRepresentative() {
+		return representative;
+	}
+	public void setRepresentative(String representative) {
+		this.representative = representative;
+	}
 	public String getPurchasingManagersOfmail() {
 		return PurchasingManagersOfmail;
 	}
