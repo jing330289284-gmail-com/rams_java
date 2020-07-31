@@ -13,6 +13,13 @@ public class LoginService{
 
 	@Autowired
 	EmployeeMapper employeeMapper;
+	
+	/**
+	 * ログイン
+	 * @param sendMap
+	 * @return
+	 */
+	
 	public EmployeeModel getEmployeeModel(Map<String, String> sendMap) {
 		// TODO Auto-generated method stub
 		EmployeeModel employeeModel = employeeMapper.getEmployeeModel(sendMap);

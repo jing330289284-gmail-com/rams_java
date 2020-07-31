@@ -24,13 +24,39 @@ public class CustomerInfoService {
 		ArrayList<HashMap<String, String>> resultList = customerInfoMapper.selectCustomerRanking();
 		return resultList;
 	}
+	public ArrayList<HashMap<String, String>> selectCompanyNature() {
+		ArrayList<HashMap<String, String>> resultList = customerInfoMapper.selectCompanyNature();
+		return resultList;
+	}
+	public ArrayList<HashMap<String, String>> selectPosition() {
+		ArrayList<HashMap<String, String>> resultList = customerInfoMapper.selectPosition();
+		return resultList;
+	}
+	/**
+	 * 上位お客様連想
+	 * @param topCustpmerName
+	 * @return
+	 */
 	public ArrayList<TopCustomerInfoModel> selectTopCustomer(String topCustpmerName) {
 		ArrayList<TopCustomerInfoModel> resultList = customerInfoMapper.selectTopCustomer(topCustpmerName);
 		return resultList;
 	}
-	public ArrayList<HashMap<String, String>> selectCompanyNature() {
-		ArrayList<HashMap<String, String>> resultList = customerInfoMapper.selectCompanyNature();
+	/**
+	 * 部門連想
+	 * @param customerDepartmentName
+	 * @return
+	 */
+	public ArrayList<CustomerDepartmentInfoModel> selectDepartmentMaster(String customerDepartmentName) {
+		ArrayList<CustomerDepartmentInfoModel> resultList = customerInfoMapper.selectDepartmentMaster(customerDepartmentName);
 		return resultList;
+	}
+	/**
+	 * 部門番号検索
+	 * @param customerDepartmentName
+	 * @return
+	 */
+	public String selectDepartmentCode(String customerDepartmentName) {
+		return customerInfoMapper.selectDepartmentCode(customerDepartmentName);
 	}
 	/**
 	 * 上位客户是否存在
@@ -46,8 +72,8 @@ public class CustomerInfoService {
 	 * @param customerNo
 	 * @return
 	 */
-	public ArrayList<CustomerDepartmentInfoModel> selectCustomerDepartmentInfo(String customerNo) {
-		ArrayList<CustomerDepartmentInfoModel> resultList = customerInfoMapper.selectCustomerDepartmentInfo(customerNo);
+	public ArrayList<CustomerDepartmentInfoModel> selectCustomerDepartmentInfo(HashMap<String, String> sendMapd) {
+		ArrayList<CustomerDepartmentInfoModel> resultList = customerInfoMapper.selectCustomerDepartmentInfo(sendMapd);
 		return resultList;
 	}
 	/**

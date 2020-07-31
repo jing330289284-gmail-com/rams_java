@@ -3,31 +3,42 @@
 <mapper namespace="jp.co.lyc.cms.mapper.CustomerInfoMapper">
     <resultMap id="SelectCustomerInfo" type="map"/>
     <resultMap id="customerNoSaiBan" type="java.lang.String"/>
-     <resultMap id="topCustomer" type="jp.co.lyc.cms.model.TopCustomerInfoModel"/>
+    <resultMap id="topCustomer" type="jp.co.lyc.cms.model.TopCustomerInfoModel"/>
+    <resultMap id="CustomerDepartmentMaster" type="jp.co.lyc.cms.model.CustomerDepartmentInfoModel"/>
     <resultMap id="CustomerInfo" type="jp.co.lyc.cms.model.CustomerInfoModel"/>
     <resultMap id="CustomerDepartmentInfo" type="jp.co.lyc.cms.model.CustomerDepartmentInfoModel"/>
+    <!-- お客様ランキング選択肢 -->
     <select id="selectCustomerRanking" resultMap="SelectCustomerInfo">
         SELECT 
-        	CAST(customerRankingCode AS char)
-        		AS customerRankingCode,
+			customerRankingCode,
         	customerRankingName
         FROM 
-        	customer_ranking_master
+        	M008CustomerRanking
     </select>
+    <!-- 会社性質選択肢 -->
     <select id="selectCompanyNature" resultMap="SelectCustomerInfo">
         SELECT 
-        	CAST(companyNatureCode AS char)
-					AS companyNatureCode,
+			companyNatureCode,
         	companyNatureName
         FROM 
-        	company_nature_master
+        	M007CompanyNature
     </select>
+    <!-- 職位選択肢 -->
+    <select id="selectPosition" resultMap="SelectCustomerInfo">
+        SELECT 
+			positionCode,
+        	positionName
+        FROM 
+        	M019Position
+    </select>
+    <!-- お客様番号採番 -->
     <select id="customerNoSaiBan" resultMap="customerNoSaiBan">
         SELECT 
         	MAX(customerNo) AS saibanCustomerNo
         FROM 
         	customer_information
     </select>
+    <!-- 上位お客様連想 -->
     <select id="selectTopCustomer" resultMap="topCustomer" parameterType="String">
         SELECT 
         	topCustomerName
@@ -36,6 +47,7 @@
         WHERE
         	topCustomerName LIKE concat('%',#{topCustpmerName},'%')
     </select>
+    <!-- 上位お客様存在チェック -->
     <select id="checkTopCustomer" resultMap="customerNoSaiBan" parameterType="String">
         SELECT 
         	topCustomerNo
@@ -44,6 +56,7 @@
         WHERE
         	topCustomerName = #{topCustomerName}
     </select>
+    <!-- お客様情報検索 -->
     <select id="selectCustomerInfo" resultMap="CustomerInfo" parameterType="String">
 		SELECT
 			ci.*,
@@ -54,6 +67,7 @@
 		WHERE
 			customerNo = #{customerNo}
     </select>
+    <!-- お客様情報インサート -->
     <insert id="insertCustomerInfo" parameterType="String">
 		INSERT INTO customer_information 
 		VALUE(
@@ -75,6 +89,7 @@
 		NOW(),
 		#{updateUser})
     </insert>
+    <!-- お客様情報アップデート -->
     <update id="updateCustomerInfo" parameterType="String">
 		UPDATE customer_information
 		SET 
@@ -118,8 +133,10 @@
 		updateUser = #{updateUser}
 		WHERE 
 			customerNo = #{customerNo}
-    </update>   
-    <select id="selectCustomerDepartmentInfo" resultMap="CustomerDepartmentInfo" parameterType="String">
+		AND customerDepartmentCode = #{customerDepartmentCode}
+    </update> 
+    <!-- 部門検索 -->  
+    <select id="selectCustomerDepartmentInfo" resultMap="CustomerDepartmentInfo" parameterType="map">
 		SELECT
 			CONCAT(( @rowNo := @rowNo + 1 )) AS rowNo,
 			customerDepartmentName,
@@ -127,13 +144,35 @@
 			responsiblePerson,
 			mail 
 		FROM
-			customer_department_information,
+			M018CustomerDepartment,
 			( SELECT @rowNo := 0 ) AS rowNo 
 		WHERE
-			CustomerNo = #{customerNo}
+			customerNo = #{customerNo}
+			<if test="customerDepartmentCode != NULL">
+			AND customerDepartmentCode = #{customerDepartmentCode}
+			</if>
     </select>
+    <!-- 部門名前連想 -->
+    <select id="selectDepartmentMaster" resultMap="CustomerDepartmentMaster" parameterType="String">
+		SELECT
+			customerDepartmentName
+		FROM
+			customer_department_master 
+		WHERE
+			customerDepartmentName LIKE concat('%',#{customerDepartmentName},'%')
+    </select>
+    <!-- 部門コード存在チェック -->
+    <select id="selectDepartmentCode" resultMap="customerNoSaiBan" parameterType="String">
+		SELECT
+			customerDepartmentCode
+		FROM
+			customer_department_master 
+		WHERE
+			customerDepartmentName = #{customerDepartmentName}
+    </select>
+    <!-- 部門情報インサート -->
     <insert id="insertCustomerDepartment" parameterType="String">
-		INSERT INTO customer_information 
+		INSERT INTO M018CustomerDepartment 
 		VALUE(
 		#{customerNo},
 		#{customerDepartmentCode},
@@ -145,8 +184,9 @@
 		NOW(),
 		#{updateUser})
     </insert>
+    <!-- 部門情報アップデート -->
     <update id="updateCustomerDepartment" parameterType="String">
-		UPDATE customer_information
+		UPDATE M018CustomerDepartment
 		SET 
 		<if test="customerDepartmentCode != null">
 			customerDepartmentCode = #{customerDepartmentCode},

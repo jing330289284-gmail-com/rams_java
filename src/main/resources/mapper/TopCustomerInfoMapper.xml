@@ -3,12 +3,14 @@
 <mapper namespace="jp.co.lyc.cms.mapper.TopCustomerInfoMapper">
     <resultMap id="TopCustomerNoSaiBan" type="java.lang.String"/>
     <resultMap id="TopCustomerInfo" type="jp.co.lyc.cms.model.TopCustomerInfoModel"/>
+    <!-- 上位お客様番号採番 -->
     <select id="TopCustomerNoSaiBan" resultMap="TopCustomerNoSaiBan">
         SELECT 
         	MAX(TopCustomerNo) AS TopCustomerNoSaiBan
         FROM 
         	top_customer
     </select>
+    <!-- 上位お客様情報検索 -->
     <select id="selectTopCustomerInfo" resultMap="TopCustomerInfo" parameterType="String">
         SELECT 
         	*
@@ -17,6 +19,7 @@
         WHERE
         	TopCustomerNo = #{topCustomerNo}
     </select>
+    <!-- 上位お客様情報インサート -->
     <insert id="insertTopCustomerInfo" parameterType="String">
 		INSERT INTO top_customer 
 		VALUE(
@@ -28,6 +31,7 @@
 		NOW(),
 		#{updateUser})
     </insert>
+    <!-- 上位お客様情報アップデート -->
     <update id="updateTopCustomerInfo" parameterType="String">
 		UPDATE customer_information
 		SET 

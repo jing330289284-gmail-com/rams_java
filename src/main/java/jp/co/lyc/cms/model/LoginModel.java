@@ -2,8 +2,9 @@ package jp.co.lyc.cms.model;
 
 public class LoginModel {
 	
-	public String employeeNo;
-	public String password;
+	public String employeeNo;//社員番号
+	public String password;//パスワード
+	
 	public String getEmployeeNo() {
 		return employeeNo;
 	}

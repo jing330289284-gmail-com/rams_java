@@ -6,8 +6,8 @@ public class TechnologyTypeModel implements Serializable {
 
 	private static final long serialVersionUID = -2028159323401651353L;
 
-	String technologytypeCode;//コード
-	String technologytypeName;//名前
+	String technologytypeCode;//言語コード
+	String technologytypeName;//言語名前
 	String updateUser;//ログインの社員
 	public String getTechnologytypeCode() {
 		return technologytypeCode;

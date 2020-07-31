@@ -2,14 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="jp.co.lyc.cms.mapper.CustomerInfoSearchMapper">
     <resultMap id="customerInfo" type="jp.co.lyc.cms.model.CustomerInfoModel"/>
+    <!-- お客様情報検索 -->
     <select id="SelectCustomerInfo" parameterType="String" resultMap="customerInfo">
 		SELECT
 			CONCAT(( @rowNo := @rowNo + 1 )) AS rowNo,
 			ci.customerNo,
 			ci.customerName,
-			crm.customerRankingName,
+			M008.customerRankingName,
 			ci.headOffice,
-			cnm.companyNatureName,
+			M007.companyNatureName,
 			<choose>
 		        <when test="topCustomerName != null">
 		            topNo.topCustomerName,
@@ -30,8 +31,8 @@
 			AND esi.AdmissionStartDate IS NOT NULL
 			AND esi.AdmissionEndDate IS NOT NULL
 			LEFT JOIN employee AS e ON esi.employeeNo = e.employeeNo
-			LEFT JOIN customer_ranking_master AS crm ON ci.customerRankingCode = crm.customerRankingCode
-			LEFT JOIN company_nature_master AS cnm ON ci.companyNatureCode = cnm.companyNatureCode	
+			LEFT JOIN M008CustomerRanking AS M008 ON ci.customerRankingCode = M008.customerRankingCode
+			LEFT JOIN M007CompanyNature AS M007 ON ci.companyNatureCode = M007.companyNatureCode	
 		<choose>
 	        <when test="topCustomerName != null">
 	            LEFT JOIN 
@@ -62,6 +63,7 @@
 		 ORDER BY
 			ci.customerNo
     </select>
+    <!-- お客様情報削除 -->
     <delete id="delect" parameterType="String">
 	    DELETE 
 	    FROM 

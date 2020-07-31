@@ -9,9 +9,11 @@ import jp.co.lyc.cms.model.EmployeeModel;
 @Mapper
 public interface EmployeeMapper {
 
-//	public EmployeeModel selectByNo(String no);
-	
-//	public void addEmployee(EmployeeModel emp);
+	/**
+	 * ログイン
+	 * @param sendMap
+	 * @return
+	 */
 	
 	public EmployeeModel getEmployeeModel(Map<String, String> sendMap);
 }
