@@ -56,8 +56,6 @@ public class GetSelectInfoUtilService {
 		return list;
 	}
 
-
-
 	/**
 	 * 日本語レベルを取得
 	 * 
@@ -77,7 +75,7 @@ public class GetSelectInfoUtilService {
 		List<ModelClass> list = getSelectInfoUtilMapper.getIntoCompany();
 		return list;
 	}
-	
+
 	/**
 	 * 役割 を取得
 	 * 
@@ -88,4 +86,63 @@ public class GetSelectInfoUtilService {
 		return list;
 	}
 
+	/**
+	 * 職種を取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getOccupation() {
+		List<ModelClass> list = getSelectInfoUtilMapper.getOccupation();
+		return list;
+	}
+
+	/**
+	 * 部署を取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getDepartment() {
+		List<ModelClass> list = getSelectInfoUtilMapper.getDepartment();
+		return list;
+	}
+
+	/**
+	 * 権限を取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getAuthority() {
+		List<ModelClass> list = getSelectInfoUtilMapper.getAuthority();
+		return list;
+	}
+
+	/**
+	 * 英語を取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getEnglishLevel() {
+		List<ModelClass> list = getSelectInfoUtilMapper.getEnglishLevel();
+		return list;
+	}
+
+	/**
+	 * 資格を取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getQualification() {
+		List<ModelClass> list = getSelectInfoUtilMapper.getQualification();
+		return list;
+	}
+
+	/**
+	 * 採番
+	 * 
+	 * @return
+	 */
+	public String getNO() {
+		String no = getSelectInfoUtilMapper.getNO();
+		return no;
+	}
 }

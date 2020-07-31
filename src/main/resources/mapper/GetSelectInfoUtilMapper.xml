@@ -63,4 +63,40 @@
 		SELECT siteRoleCode code,siteRoleCodeName name FROM
 		site_role_master;
 	</select>
+	<!-- 職種 -->
+	<select id="getOccupation"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT occupationCode code,occupationName name FROM
+		occupation_master;
+	</select>
+	<!-- 部署 -->
+	<select id="getDepartment"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT DepartmentCode code,DepartmentName name FROM
+		department_master;
+	</select>
+	<!-- 権限 -->
+	<select id="getAuthority"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT authorityCode code,authorityProperty name FROM
+		authority_master;
+	</select>
+	<!-- 英語 -->
+	<select id="getEnglishLevel"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT englishLevelCode code,englishLevelName name FROM
+		english_Level_master;
+	</select>
+	<!-- 資格 -->
+	<select id="getQualification"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT qualificationCode code,qualificationName name FROM
+		qualification_master;
+	</select>
+
+	<!-- 採番 -->
+	<select id="getNO"
+		resultType="String">
+        select employeeNo from employee where employeeNo=(select max(employeeNo) from employee) 
+	</select>
 </mapper>
