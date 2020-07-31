@@ -56,8 +56,6 @@ public class GetSelectInfoUtilService {
 		return list;
 	}
 
-
-
 	/**
 	 * 日本語レベルを取得
 	 * 
@@ -77,7 +75,7 @@ public class GetSelectInfoUtilService {
 		List<ModelClass> list = getSelectInfoUtilMapper.getIntoCompany();
 		return list;
 	}
-	
+
 	/**
 	 * 役割 を取得
 	 * 
@@ -88,4 +86,33 @@ public class GetSelectInfoUtilService {
 		return list;
 	}
 
+	/**
+	 * 精算時間 を取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getPayMaster() {
+		List<ModelClass> list = getSelectInfoUtilMapper.getPayMaster();
+		return list;
+	}
+
+	/**
+	 * トップお客様 を取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getTopCustomer() {
+		List<ModelClass> list = getSelectInfoUtilMapper.getTopCustomer();
+		return list;
+	}
+	
+	/**
+	 * お客様 を取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getCustomerMaster() {
+		List<ModelClass> list = getSelectInfoUtilMapper.getCustomerMaster();
+		return list;
+	}
 }

@@ -60,4 +60,22 @@ public interface GetSelectInfoUtilMapper {
 	 * 
 	 */
 	public List<ModelClass> getSiteMaster();
+	/**
+	 * 精算時間 を取得
+	 * 
+	 * 
+	 */
+	public List<ModelClass> getPayMaster();
+	/**
+	 * トップお客様 を取得
+	 * 
+	 * 
+	 */
+	public List<ModelClass> getTopCustomer();
+	/**
+	 * お客様 を取得
+	 * 
+	 * 
+	 */
+	public List<ModelClass> getCustomerMaster();
 }

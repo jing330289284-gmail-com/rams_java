@@ -77,10 +77,10 @@ public class SiteInfoController {
 			String siteNo = siteModel.getSiteNo();
 			String customerNo = siteModel.getCustomerNo();
 			String topCustomerNo = siteModel.getTopCustomerNo();
-			String AdmissionStartDate = siteModel.getAdmissionStartDate();
+			String admissionStartDate = siteModel.getAdmissionStartDate();
 			String location = siteModel.getLocation();
 			String siteManager = siteModel.getSiteManager();
-			String AdmissionEndDate = siteModel.getAdmissionEndDate();
+			String admissionEndDate = siteModel.getAdmissionEndDate();
 			String unitPrice = siteModel.getUnitPrice();
 			String siteRoleCode = siteModel.getSiteRoleCode();
 			String payOffRange = siteModel.getTime_1() + siteModel.getTime_2();
@@ -102,8 +102,8 @@ public class SiteInfoController {
 			if (topCustomerNo != null && topCustomerNo.length() != 0) {
 				sendMap.put("topCustomerNo", topCustomerNo);
 			}
-			if (AdmissionStartDate != null && AdmissionStartDate.length() != 0) {
-				sendMap.put("AdmissionStartDate", dateToString(AdmissionStartDate));
+			if (admissionStartDate != null && admissionStartDate.length() != 0) {
+				sendMap.put("admissionStartDate", dateToString(admissionStartDate));
 			}
 			if (location != null && location.length() != 0) {
 				sendMap.put("location", location);
@@ -111,8 +111,8 @@ public class SiteInfoController {
 			if (siteManager != null && siteManager.length() != 0) {
 				sendMap.put("siteManager", siteManager);
 			}
-			if (AdmissionEndDate != null && AdmissionEndDate.length() != 0) {
-				sendMap.put("AdmissionEndDate", dateToString(AdmissionEndDate));
+			if (admissionEndDate != null && admissionEndDate.length() != 0) {
+				sendMap.put("admissionEndDate", dateToString(admissionEndDate));
 			}
 			if (unitPrice != null && unitPrice.length() != 0) {
 				sendMap.put("unitPrice", unitPrice);

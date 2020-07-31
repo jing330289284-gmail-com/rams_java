@@ -19,8 +19,8 @@ public class SiteModel implements Serializable {
 	String developlanguage;
 	String siteRoleCode;
 	String siteManager;
-	String AdmissionStartDate;
-	String AdmissionEndDate;
+	String admissionStartDate;
+	String admissionEndDate;
 	String siteNo;
 	String payOffRange;
 	String workDate;
@@ -95,16 +95,16 @@ public class SiteModel implements Serializable {
 		this.siteManager = siteManager;
 	}
 	public String getAdmissionStartDate() {
-		return AdmissionStartDate;
+		return admissionStartDate;
 	}
 	public void setAdmissionStartDate(String admissionStartDate) {
-		AdmissionStartDate = admissionStartDate;
+		this.admissionStartDate = admissionStartDate;
 	}
 	public String getAdmissionEndDate() {
-		return AdmissionEndDate;
+		return admissionEndDate;
 	}
 	public void setAdmissionEndDate(String admissionEndDate) {
-		AdmissionEndDate = admissionEndDate;
+		this.admissionEndDate = admissionEndDate;
 	}
 	public String getSiteNo() {
 		return siteNo;

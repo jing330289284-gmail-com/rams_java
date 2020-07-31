@@ -67,7 +67,6 @@ public class GetSelectInfoUtil {
 		return list;
 	}
 
-
 	/**
 	 * 開発言語を取得
 	 * 
@@ -104,12 +103,10 @@ public class GetSelectInfoUtil {
 	public List<ModelClass> getGender() {
 		Properties properties = getProperties.getProperties();
 		String gender = properties.getProperty("gender");
-		List<ModelClass> list=getStatus(gender);	
+		List<ModelClass> list = getStatus(gender);
 		return list;
 	}
-	
-	
-	
+
 	/**
 	 * 上場
 	 * 
@@ -121,11 +118,10 @@ public class GetSelectInfoUtil {
 	public List<ModelClass> getListedCompany() {
 		Properties properties = getProperties.getProperties();
 		String listedCompany = properties.getProperty("listedCompany");
-		List<ModelClass> list=getStatus(listedCompany);	
+		List<ModelClass> list = getStatus(listedCompany);
 		return list;
 	}
-	
-	
+
 	/**
 	 * 住宅
 	 * 
@@ -137,10 +133,10 @@ public class GetSelectInfoUtil {
 	public List<ModelClass> getHousing() {
 		Properties properties = getProperties.getProperties();
 		String Housing = properties.getProperty("Housing");
-		List<ModelClass> list=getStatus(Housing);	
+		List<ModelClass> list = getStatus(Housing);
 		return list;
 	}
-	
+
 	/**
 	 * 社員
 	 * 
@@ -152,10 +148,10 @@ public class GetSelectInfoUtil {
 	public List<ModelClass> getEmployee() {
 		Properties properties = getProperties.getProperties();
 		String employee = properties.getProperty("employee");
-		List<ModelClass> list=getStatus(employee);	
+		List<ModelClass> list = getStatus(employee);
 		return list;
 	}
-	
+
 	/**
 	 * 役割
 	 * 
@@ -167,10 +163,10 @@ public class GetSelectInfoUtil {
 	public List<ModelClass> getRole() {
 		Properties properties = getProperties.getProperties();
 		String role = properties.getProperty("role");
-		List<ModelClass> list=getStatus(role);	
+		List<ModelClass> list = getStatus(role);
 		return list;
 	}
-	
+
 	/**
 	 * 新人
 	 * 
@@ -182,10 +178,10 @@ public class GetSelectInfoUtil {
 	public List<ModelClass> getNewMember() {
 		Properties properties = getProperties.getProperties();
 		String newMember = properties.getProperty("newMember");
-		List<ModelClass> list=getStatus(newMember);	
+		List<ModelClass> list = getStatus(newMember);
 		return list;
 	}
-	
+
 	/**
 	 * 口座種類
 	 * 
@@ -197,10 +193,10 @@ public class GetSelectInfoUtil {
 	public List<ModelClass> getAccountType() {
 		Properties properties = getProperties.getProperties();
 		String accountType = properties.getProperty("accountType");
-		List<ModelClass> list=getStatus(accountType);	
+		List<ModelClass> list = getStatus(accountType);
 		return list;
 	}
-	
+
 	/**
 	 * 口座所属
 	 * 
@@ -212,10 +208,10 @@ public class GetSelectInfoUtil {
 	public List<ModelClass> getAccountBelongs() {
 		Properties properties = getProperties.getProperties();
 		String accountBelongs = properties.getProperty("accountBelongs");
-		List<ModelClass> list=getStatus(accountBelongs);	
+		List<ModelClass> list = getStatus(accountBelongs);
 		return list;
 	}
-	
+
 	/**
 	 * 資格
 	 * 
@@ -227,10 +223,10 @@ public class GetSelectInfoUtil {
 	public List<ModelClass> getQualificationType() {
 		Properties properties = getProperties.getProperties();
 		String qualificationType = properties.getProperty("qualificationType");
-		List<ModelClass> list=getStatus(qualificationType);	
+		List<ModelClass> list = getStatus(qualificationType);
 		return list;
 	}
-	
+
 	/**
 	 * 資格
 	 * 
@@ -242,10 +238,10 @@ public class GetSelectInfoUtil {
 	public List<ModelClass> getBonus() {
 		Properties properties = getProperties.getProperties();
 		String Bonus = properties.getProperty("Bonus");
-		List<ModelClass> list=getStatus(Bonus);	
+		List<ModelClass> list = getStatus(Bonus);
 		return list;
 	}
-	
+
 	/**
 	 * ボーナス
 	 * 
@@ -257,10 +253,10 @@ public class GetSelectInfoUtil {
 	public List<ModelClass> getInsurance() {
 		Properties properties = getProperties.getProperties();
 		String Insurance = properties.getProperty("Insurance");
-		List<ModelClass> list=getStatus(Insurance);	
+		List<ModelClass> list = getStatus(Insurance);
 		return list;
 	}
-	
+
 	/**
 	 * 社会保険
 	 * 
@@ -272,11 +268,11 @@ public class GetSelectInfoUtil {
 	public List<ModelClass> getInsuranceStatus() {
 		Properties properties = getProperties.getProperties();
 		String InsuranceStatus = properties.getProperty("InsuranceStatus");
-		List<ModelClass> list=getStatus(InsuranceStatus);	
+		List<ModelClass> list = getStatus(InsuranceStatus);
 		return list;
 	}
-	
-	public List<ModelClass> getStatus(String string){
+
+	public List<ModelClass> getStatus(String string) {
 		JSONObject sJson = JSONObject.fromObject(string);
 		@SuppressWarnings("unchecked")
 		Map<String, String> map = (Map<String, String>) sJson;
@@ -301,7 +297,7 @@ public class GetSelectInfoUtil {
 		List<ModelClass> list = getSelectInfoUtilService.getIntoCompany();
 		return list;
 	}
-	
+
 	/**
 	 * 役割を取得
 	 * 
@@ -314,6 +310,41 @@ public class GetSelectInfoUtil {
 		return list;
 	}
 
+	/**
+	 * 精算時間を取得
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getPayMaster", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getPayMaster() {
+		List<ModelClass> list = getSelectInfoUtilService.getPayMaster();
+		return list;
+	}
+
+	/**
+	 * トップお客様を取得
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getTopCustomer", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getTopCustomer() {
+		List<ModelClass> list = getSelectInfoUtilService.getTopCustomer();
+		return list;
+	}
+	
+	/**
+	 * お客様を取得
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getCustomerMaster", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getCustomerMaster() {
+		List<ModelClass> list = getSelectInfoUtilService.getCustomerMaster();
+		return list;
+	}
 	/**
 	 * 条件を取得
 	 * 

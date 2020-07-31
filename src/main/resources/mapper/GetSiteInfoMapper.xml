@@ -4,41 +4,51 @@
 
 	<insert id="siteInsert" parameterType="map">
 		insert into
-		employee_site_information(employeeNo,siteNo,customerNo,topCustomerNo,AdmissionStartDate,
-		location,siteManager,AdmissionEndDate,unitPrice,siteRoleCode,payOffRange,systemName,
+		employee_site_information(employeeNo,siteNo,customerNo,topCustomerNo,admissionStartDate,
+		location,siteManager,admissionEndDate,unitPrice,siteRoleCode,payOffRange,systemName,
 		developlanguage,updateTime,createTime,updateuser)
-		values(#{employeeNo},#{siteNo},#{customerNo},#{topCustomerNo},#{AdmissionStartDate},
-		#{location},#{siteManager},#{AdmissionEndDate},#{unitPrice},#{siteRoleCode},#{payOffRange},
+		values(#{employeeNo},#{siteNo},#{customerNo},#{topCustomerNo},#{admissionStartDate},
+		#{location},#{siteManager},#{admissionEndDate},#{unitPrice},#{siteRoleCode},#{payOffRange},
 		#{systemName},#{developlanguage},now(),now(),"LYC001")
 	</insert>
 
 	<update id="siteUpdate" parameterType="map">
-		update account_information set
+		update account_information
+		set
 		bankCode=#{bankCode},bankBranchCode=#{bankBranchCode},accountNo=#{accountNo},accountName=#{accountName},updateDate=now()
 		where employeeNo=#{employeeNo}
 
 	</update>
-	
-	<select id="getSiteInfo" parameterType="java.lang.String" resultType="jp.co.lyc.cms.model.SiteModel">
-	    SELECT
+
+	<select id="getSiteInfo" parameterType="java.lang.String"
+		resultType="jp.co.lyc.cms.model.SiteModel">
+		SELECT
 		a.systemName,
 		a.location,
 		a.unitPrice,
-		a.AdmissionStartDate,
-		a.AdmissionEndDate,
+		a.admissionStartDate,
+		a.admissionEndDate,
 		b.siteRoleCodeName,
-		c.customerName,
-		d.topCustomerName,
+		if(c.customerAbbreviation is
+		null,c.customerName,c.customerAbbreviation) as customerName,
+		if(d.topCustomerAbbreviation is
+		null,d.topCustomerName,d.topCustomerAbbreviation) as topCustomerName,
 		a.developlanguage
 		FROM
 		rams.employee_site_information a
-		LEFT JOIN 	rams.site_role_master b ON a.siteNo = b.siteRoleCode
-		LEFT JOIN 	rams.customer_information c ON a.customerNo = c.customerNo
-		LEFT JOIN 	rams.top_customer d ON a.topCustomerNo = d.topCustomerNo
+		LEFT JOIN
+		rams.site_role_master b
+		ON a.siteNo = b.siteRoleCode
+		LEFT JOIN
+		rams.customer_information c ON
+		a.customerNo = c.customerNo
+		LEFT JOIN
+		rams.top_customer d ON
+		a.topCustomerNo = d.topCustomerNo
 		WHERE
-		1=1 
+		1=1
 		<if test="employeeNo!= null and employeeNo!= ''">
-		 AND a.employeeNo = #{employeeNo}
+			AND a.employeeNo = #{employeeNo}
 		</if>
 
 	</select>
