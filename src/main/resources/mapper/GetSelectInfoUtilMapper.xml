@@ -181,6 +181,9 @@
 			FROM
 			employee);
 		</if>
+		
+		
+		
 		<if test="type='LYC'">
 			SELECT
 			(CASE
