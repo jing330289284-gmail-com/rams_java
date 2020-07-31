@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import jp.co.lyc.cms.model.CustomerDepartmentInfoModel;
 import jp.co.lyc.cms.model.CustomerInfoModel;
 import jp.co.lyc.cms.model.CustomerInfoSelectModel;
 import jp.co.lyc.cms.service.CustomerInfoService;
@@ -44,9 +46,14 @@ public class CustomerInfoController {
 		if(customerInfoMod.getShoriKbn() != null) {
 			if (customerInfoMod.getShoriKbn().equals("shusei") || customerInfoMod.getShoriKbn().equals("sansho")) {
 				customerInfoMod = customerInfoSer.selectCustomerInfo(customerInfoMod.getCustomerNo());	
+				ArrayList<CustomerDepartmentInfoModel> customerDepartmentInfoList = customerInfoSer.selectCustomerDepartmentInfo(customerInfoMod.getCustomerNo());
 				resultMap.put("customerInfoMod", customerInfoMod);
+				resultMap.put("customerDepartmentInfoList", customerDepartmentInfoList);
 			}else if(customerInfoMod.getShoriKbn().equals("tsuika")){
-				resultMap.put("customerNoSaiBan",customerInfoSer.customerNoSaiBan());
+				String saiban = customerInfoSer.customerNoSaiBan();
+				ArrayList<CustomerDepartmentInfoModel> customerDepartmentInfoList = customerInfoSer.selectCustomerDepartmentInfo(saiban);
+				resultMap.put("customerNoSaiBan",saiban);
+				resultMap.put("customerDepartmentInfoList", customerDepartmentInfoList);
 			}
 		}
 		return resultMap;	
@@ -171,6 +178,16 @@ public class CustomerInfoController {
 		sendMap.put("customerNo", customerInfoMod.getCustomerNo());	
 		result  = customerInfoSer.updateCustomerInfo(sendMap);
 		return result;	
+	}
+	/**
+	 * 部門情報検索
+	 * @param customerInfoModel
+	 * @return
+	 */
+	public ArrayList<CustomerDepartmentInfoModel> getCustomerDepartmentInfo(@RequestBody CustomerInfoModel customerInfoModel) {
+		logger.info("BankInfoController.toroku:" + "部門情報検索開始");
+		ArrayList<CustomerDepartmentInfoModel> customerDepartmentInfoList = customerInfoSer.selectCustomerDepartmentInfo(customerInfoModel.getCustomerNo());
+		return customerDepartmentInfoList;
 	}
 	/**
 	 * 判断字符串是否为null或空

@@ -6,28 +6,28 @@ public class CostModel implements Serializable {
 
 	private static final long serialVersionUID = -2028159323401651353L;
 	
-	public String employeeNo;
-	public String shoriKbn;
-	public int BonusFlag;
-	public int SocialInsuranceFlag;
-	public String TransportationExpenses;
-	public String remark;
-	public String salary;
-	public String WaitingCost;
-	public String NextBonusMonth;
-	public String NextRaiseMonth;
-	public String updateUser;
-	public String otherAllowance;
-	public String otherAllowanceAmount;
-	public String monthOfCompanyPay;
-	public String welfarePensionAmount;
-	public String healthInsuranceAmount;
-	public String InsuranceFeeAmount;
-	public String lastTimeBonusAmount;
-	public String scheduleOfBonusAmount;
-	public String leaderAllowanceAmount;
-	public String totalAmount;
-	public String siteRoleCode;
+	public String employeeNo;//社員番号
+	public String shoriKbn;//処理区分
+	public int BonusFlag;//ボーナスフラグ
+	public int SocialInsuranceFlag;//社会保険フラグ
+	public String TransportationExpenses;//交通費
+	public String remark;//備考
+	public String salary;//給料
+	public String WaitingCost;//非稼働費用
+	public String NextBonusMonth;//次ボーナス月
+	public String NextRaiseMonth;//次回昇給月
+	public String updateUser;//更新者
+	public String otherAllowance;//他の手当
+	public String otherAllowanceAmount;//他の手当
+	public String monthOfCompanyPay;//月に会社負担額
+	public String welfarePensionAmount;//厚生年金料
+	public String healthInsuranceAmount;//健康保険料
+	public String InsuranceFeeAmount;//保険料総額
+	public String lastTimeBonusAmount;//前回ボーナス金額
+	public String scheduleOfBonusAmount;//ボーナス予定金額
+	public String leaderAllowanceAmount;//リーダー手当
+	public String totalAmount;//総額
+	public String siteRoleCode;//役割コード
 	
 	public String getSiteRoleCode() {
 		return siteRoleCode;

@@ -4,17 +4,17 @@ import java.util.ArrayList;
 
 public class BankInfoModel {
 	
-	String employeeOrCustomerNo;
-	String accountBelongsStatus;
-	String bankCode;
-	String bankBranchCode;
+	String employeeOrCustomerNo;//社員番号かお客様番号
+	String accountBelongsStatus;//ステータス
+	String bankCode;//銀行コード
+	String bankBranchCode;//支店コード
 	String bankBranchName;
-	String accountNo;
-	String accountName;
-	String accountTypeStatus;
-	String shoriKbn;
-	ArrayList<String> bankName;
-	String updateUser;
+	String accountNo;//口座番号
+	String accountName;//口座名義人
+	String accountTypeStatus;//口座種類ステータス
+	String shoriKbn;//処理区分
+	ArrayList<String> bankName;//銀行名
+	String updateUser;//更新者
 	
 	
 	public String getEmployeeOrCustomerNo() {

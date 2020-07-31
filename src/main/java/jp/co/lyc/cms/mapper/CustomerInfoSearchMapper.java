@@ -9,6 +9,15 @@ import jp.co.lyc.cms.model.CustomerInfoModel;
 
 @Mapper
 public interface CustomerInfoSearchMapper {
+	/**
+	 * 検索
+	 * @param sendMap
+	 * @return
+	 */
 	public ArrayList<CustomerInfoModel> SelectCustomerInfo(HashMap<String, String> sendMap);
+	/**
+	 * 削除ボタン
+	 * @param customerNo
+	 */
 	public void delect(String customerNo);
 }

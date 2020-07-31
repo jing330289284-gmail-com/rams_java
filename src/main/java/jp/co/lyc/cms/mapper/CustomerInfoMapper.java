@@ -5,26 +5,65 @@ import java.util.HashMap;
 import jp.co.lyc.cms.model.CustomerInfoModel;
 import jp.co.lyc.cms.model.TopCustomerInfoModel;
 import org.apache.ibatis.annotations.Mapper;
+import jp.co.lyc.cms.model.CustomerDepartmentInfoModel;
 
 @Mapper
 public interface CustomerInfoMapper {
 
-	//画面下拉框
+	/**
+	 * お客様ランキング
+	 * @return
+	 */
 	public ArrayList<HashMap<String, String>> selectCustomerRanking();
+	/**
+	 * お客様性質
+	 * @return
+	 */
 	public ArrayList<HashMap<String, String>> selectCompanyNature();
+	/**
+	 * 上位お客様
+	 * @return
+	 */
 	public ArrayList<TopCustomerInfoModel> selectTopCustomer(String topCustpmerName);
-	//上位客户是否存在
+	/**
+	 * 上位お客様存在チェック
+	 * @return
+	 */
 	public String checkTopCustomer(String topCustpmerName);
-	//查询客户信息
+	/**
+	 * お客様情報検索
+	 * @return
+	 */
 	public CustomerInfoModel selectCustomerInfo(String customerNo);
-	//客户番号采番
+	/**
+	 * 採番
+	 * @return
+	 */
 	public String customerNoSaiBan();
-	//客户信息插入
+	/**
+	 * インサート
+	 * @return
+	 */
 	public void insertCustomerInfo(HashMap<String, String> sendMap);
-	//客户信息更新
+	/**
+	 * 部門情報検索
+	 * @param customerNo
+	 * @return
+	 */
+	public ArrayList<CustomerDepartmentInfoModel> selectCustomerDepartmentInfo(String customerNo);
+	/**
+	 * アップデート
+	 * @return
+	 */
 	public void updateCustomerInfo(HashMap<String, String> sendMap);
-	//插入部门信息
+	/**
+	 * 部門インサート
+	 * @return
+	 */
 	public void insertCustomerDepartment(HashMap<String, String> sendMap);
-	//更新部门信息
+	/**
+	 * 部門アップデート
+	 * @return
+	 */
 	public void updateCustomerDepartment(HashMap<String, String> sendMap);
 }
