@@ -47,6 +47,7 @@ public class CustomerInfoController {
 		resultMap.put("selectModel", selectModel);
 		HashMap<String, String> sendMap = new HashMap<>();
 		if(customerInfoMod.getShoriKbn() != null) {
+			//修正と詳細の場合
 			if (customerInfoMod.getShoriKbn().equals("shusei") || customerInfoMod.getShoriKbn().equals("sansho")) {
 				customerInfoMod = customerInfoSer.selectCustomerInfo(customerInfoMod.getCustomerNo());	
 				sendMap.put("customerNo", customerInfoMod.getCustomerNo());
@@ -54,6 +55,7 @@ public class CustomerInfoController {
 				resultMap.put("customerInfoMod", customerInfoMod);
 				resultMap.put("customerDepartmentInfoList", customerDepartmentInfoList);
 			}else if(customerInfoMod.getShoriKbn().equals("tsuika")){
+				//追加の場合
 				String saiban = customerInfoSer.customerNoSaiBan();
 				int num = Integer.parseInt(saiban.substring(1),10);
 				num += 1;
@@ -65,6 +67,7 @@ public class CustomerInfoController {
 					saiban = "C" + Integer.toString(num);
 				}
 				sendMap.put("customerNo", saiban);
+				//部門のデータ
 				ArrayList<CustomerDepartmentInfoModel> customerDepartmentInfoList = customerInfoSer.selectCustomerDepartmentInfo(sendMap);
 				resultMap.put("customerNoSaiBan",saiban);
 				resultMap.put("customerDepartmentInfoList", customerDepartmentInfoList);
@@ -117,7 +120,7 @@ public class CustomerInfoController {
 				customerInfoMod.getShoriKbn().equals("sansho")) {
 			result = update(customerInfoMod);
 		}
-		return (result == true ? 0 : 1);
+		return (result == true ? 0 : 1);//result（0）成功（1）失敗
 	}
 
 	/**

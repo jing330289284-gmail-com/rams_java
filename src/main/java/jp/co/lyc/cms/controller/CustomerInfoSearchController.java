@@ -37,9 +37,9 @@ public class CustomerInfoSearchController {
 		databeseList = SelectCustomerInfo(customerInfoMod);
 		int rowNo = 1;
 		for(int i = 0 ; i < databeseList.size() ; i++) {
-			if(i != 0) {
+			if(i != 0) {//第二からのデータ
 				if(!databeseList.get(i).getCustomerNo().equals(databeseList.get(i-1).getCustomerNo())) {
-					//如果客户番号不同，则全部数据写入结果数组
+					//前後お客様番号が違い場合、データをリストに入る
 					databeseList.get(i).setRowNo(Integer.toString(rowNo));
 					if(databeseList.get(i).getEmployeeName() != null) {
 						ArrayList<String> employeeNameList = new ArrayList<>();
@@ -65,7 +65,7 @@ public class CustomerInfoSearchController {
 					rowNo ++;
 				}else if(databeseList.get(i).getCustomerNo().equals(databeseList.get(i-1).getCustomerNo()) && 
 						databeseList.get(i).getCustomerName().equals(databeseList.get(i-1).getCustomerName())) {
-					//与上一条客户番号相同的数据进行去头操作
+					//前後のお客様番号が同じの場合、データを整備する
 					CustomerInfoModel dataChange = resultList.get(rowNo-2);
 					ArrayList<String> employeeNameList = (dataChange.getEmployeeNameList() == null ? new ArrayList<>() :
 						dataChange.getEmployeeNameList());
@@ -89,7 +89,7 @@ public class CustomerInfoSearchController {
 					
 					resultList.set((rowNo - 2), dataChange);
 				}
-			}else {
+			}else {//第一のデータ
 				databeseList.get(i).setRowNo(Integer.toString(rowNo));
 				if(databeseList.get(i).getEmployeeName() != null) {
 					ArrayList<String> employeeNameList = new ArrayList<>();
