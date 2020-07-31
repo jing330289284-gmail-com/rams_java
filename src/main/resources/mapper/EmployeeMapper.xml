@@ -8,10 +8,10 @@
 			a.employeeFristName,
 			a.employeeLastName,
 			a.authorityCode,
-			b.authorityProperty
+			b.authorityName
 		FROM
 			employee a
-			LEFT JOIN authority_master b ON a.authorityCode = b.authorityCode
+			LEFT JOIN M009Authority b ON a.authorityCode = b.authorityCode
 			LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo
 		WHERE
 			a. PASSWORD = #{password}

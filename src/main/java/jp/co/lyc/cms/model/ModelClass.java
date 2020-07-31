@@ -8,7 +8,7 @@ public class ModelClass implements Serializable {
 
 	String code;
 	String name;
-
+	String no;
 	public String getCode() {
 		return code;
 	}
@@ -23,6 +23,14 @@ public class ModelClass implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getNo() {
+		return no;
+	}
+
+	public void setNo(String no) {
+		this.no = no;
 	}
 
 }

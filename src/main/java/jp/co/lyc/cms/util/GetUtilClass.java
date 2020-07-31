@@ -385,15 +385,20 @@ public class GetUtilClass {
 
 	}
 
-	/**　
+	/**
 	 * 採番
 	 * 
 	 * @return
 	 */
 	@RequestMapping(value = "/getNO")
 	@ResponseBody
-	public String getNO() {
-		String no = getSelectInfoUtilService.getNO();
+	public String getNO(@RequestBody ModelClass mo) {
+		Map<String, String> sendMap = new HashMap<String, String>();
+		String type = mo.getName();// 採番種類
+		if (type != null && type.length() != 0) {
+			sendMap.put("type", type);
+		}
+		String no = getSelectInfoUtilService.getNO(sendMap);
 		return no;
 	}
 }

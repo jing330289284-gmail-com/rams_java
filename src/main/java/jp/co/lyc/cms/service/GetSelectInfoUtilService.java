@@ -138,11 +138,12 @@ public class GetSelectInfoUtilService {
 
 	/**
 	 * 採番
+	 * @param sendMap 
 	 * 
 	 * @return
 	 */
-	public String getNO() {
-		String no = getSelectInfoUtilMapper.getNO();
+	public String getNO(Map<String, String> sendMap) {
+		String no = getSelectInfoUtilMapper.getNO(sendMap);
 		return no;
 	}
 }
