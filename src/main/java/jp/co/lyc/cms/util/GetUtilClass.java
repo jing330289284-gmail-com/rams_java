@@ -385,12 +385,12 @@ public class GetUtilClass {
 
 	}
 
-	/**　暂时不能用？？
+	/**　
 	 * 採番
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/getNO", method = RequestMethod.POST)
+	@RequestMapping(value = "/getNO")
 	@ResponseBody
 	public String getNO() {
 		String no = getSelectInfoUtilService.getNO();
