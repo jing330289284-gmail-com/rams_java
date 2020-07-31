@@ -16,9 +16,21 @@ public class CustomerInfoSearchService {
 	@Autowired
 	CustomerInfoSearchMapper customerInfoSearchMapper;
 	
+	/**
+	 * 検索
+	 * @param sendMap
+	 * @return
+	 */
+	
 	public ArrayList<CustomerInfoModel> SelectCustomerInfo(HashMap<String, String> sendMap) {
 		return customerInfoSearchMapper.SelectCustomerInfo(sendMap);
 	}
+	
+	/**
+	 * 削除ボタン
+	 * @param customerNo
+	 */
+	
 	public boolean delect(String customerNo) {
 		boolean result = true;
 		try {

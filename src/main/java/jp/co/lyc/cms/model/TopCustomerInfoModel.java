@@ -2,13 +2,12 @@ package jp.co.lyc.cms.model;
 
 public class TopCustomerInfoModel {
 
-	String topCustomerNo;
-	String topCustomerName;
-	String url;
-	String remark;
-	String updateUser;
-	String shoriKbn;
-	
+	String topCustomerNo;//上位お客様番号
+	String topCustomerName;//上位お客様名前
+	String url;//URL
+	String remark;//備考
+	String updateUser;//更新者
+	String shoriKbn;//処理区分
 	
 	public String getShoriKbn() {
 		return shoriKbn;
