@@ -1,5 +1,6 @@
 package jp.co.lyc.cms.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -103,4 +104,46 @@ public interface GetSelectInfoUtilMapper {
 	 * 
 	 */
 	public String getNO();
+	
+	/**
+	 * お客様ランキング
+	 * @return
+	 */
+	public List<ModelClass> selectCustomerRanking();
+	
+	/**
+	 * お客様性質
+	 * @return
+	 */
+	public List<ModelClass> selectCompanyNature();
+	
+	/**
+	 * 職位
+	 * @return
+	 */
+	public List<ModelClass> selectPosition();
+	
+	/**
+	 * 上位お客様連想
+	 * @return
+	 */
+	public List<ModelClass> selectTopCustomer();
+	
+	/**
+	 * 部門名前連想
+	 * @return
+	 */
+	public List<ModelClass> selectDepartmentMaster();
+	
+	/**
+	 * 銀行名検索
+	 * @return
+	 */
+	public List<ModelClass> selectBankInfo();
+	
+	/**
+	 * 支店情報検索
+	 * @return
+	 */
+	public List<ModelClass> getBankBranchInfo(HashMap<String, String> sendMap);
 }
