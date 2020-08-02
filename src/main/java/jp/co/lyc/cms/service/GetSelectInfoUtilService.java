@@ -138,11 +138,41 @@ public class GetSelectInfoUtilService {
 
 	/**
 	 * 採番
+	 * @param sendMap 
 	 * 
 	 * @return
 	 */
-	public String getNO() {
-		String no = getSelectInfoUtilMapper.getNO();
+	public String getNO(Map<String, String> sendMap) {
+		String no = getSelectInfoUtilMapper.getNO(sendMap);
 		return no;
+	}
+		/**
+	 * 精算時間 を取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getPayMaster() {
+		List<ModelClass> list = getSelectInfoUtilMapper.getPayMaster();
+		return list;
+	}
+
+	/**
+	 * トップお客様 を取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getTopCustomer() {
+		List<ModelClass> list = getSelectInfoUtilMapper.getTopCustomer();
+		return list;
+	}
+	
+	/**
+	 * お客様 を取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getCustomerMaster() {
+		List<ModelClass> list = getSelectInfoUtilMapper.getCustomerMaster();
+		return list;
 	}
 }

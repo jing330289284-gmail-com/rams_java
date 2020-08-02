@@ -384,16 +384,56 @@ public class GetUtilClass {
 		return sendMap;
 
 	}
+		/**
+	 * 精算時間を取得
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getPayMaster", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getPayMaster() {
+		List<ModelClass> list = getSelectInfoUtilService.getPayMaster();
+		return list;
+	}
 
-	/**　
+	/**
+	 * トップお客様を取得
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getTopCustomer", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getTopCustomer() {
+		List<ModelClass> list = getSelectInfoUtilService.getTopCustomer();
+		return list;
+	}
+	
+	/**
+	 * お客様を取得
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getCustomerMaster", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getCustomerMaster() {
+		List<ModelClass> list = getSelectInfoUtilService.getCustomerMaster();
+		return list;
+	}
+
+	/**
 	 * 採番
 	 * 
 	 * @return
 	 */
 	@RequestMapping(value = "/getNO")
 	@ResponseBody
-	public String getNO() {
-		String no = getSelectInfoUtilService.getNO();
+	public String getNO(@RequestBody ModelClass mo) {
+		Map<String, String> sendMap = new HashMap<String, String>();
+		String type = mo.getName();// 採番種類
+		if (type != null && type.length() != 0) {
+			sendMap.put("type", type);
+		}
+		String no = getSelectInfoUtilService.getNO(sendMap);
 		return no;
 	}
 }

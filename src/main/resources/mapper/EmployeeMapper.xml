@@ -9,7 +9,7 @@
 			a.employeeFristName,
 			a.employeeLastName,
 			a.authorityCode,
-			b.authorityProperty
+			b.authorityName
 		FROM
 			employee a
 			LEFT JOIN M009Authority b ON a.authorityCode = b.authorityCode
