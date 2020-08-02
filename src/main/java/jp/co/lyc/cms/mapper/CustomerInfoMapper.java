@@ -11,21 +11,6 @@ import jp.co.lyc.cms.model.CustomerDepartmentInfoModel;
 public interface CustomerInfoMapper {
 
 	/**
-	 * お客様ランキング
-	 * @return
-	 */
-	public ArrayList<HashMap<String, String>> selectCustomerRanking();
-	/**
-	 * お客様性質
-	 * @return
-	 */
-	public ArrayList<HashMap<String, String>> selectCompanyNature();
-	/**
-	 * 職位
-	 * @return
-	 */
-	public ArrayList<HashMap<String, String>> selectPosition();
-	/**
 	 * 上位お客様連想
 	 * @return
 	 */

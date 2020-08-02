@@ -1,30 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="jp.co.lyc.cms.mapper.GetBankInfoMapper">
-    <resultMap id="BankInfo" type="java.lang.String"/>
     <resultMap id="BankBranchInfo" type="map"/>
-    <resultMap id="AccountInfo" type="jp.co.lyc.cms.model.BankInfoModel"/>
-    <!-- 銀行名検索 -->
-    <select id="selectBankInfo" resultMap="BankInfo">
-        SELECT bankName FROM M001Bank
-    </select>
-    <!-- 口座情報検索 -->
-    <select id="selectAccountInfo" parameterType="String" resultMap="AccountInfo">
-        SELECT 
-        	ACI.* ,
-        	M002.bankBranchName
-        FROM 
-        	account_information AS ACI
-        LEFT JOIN
-        	M002BankBranch as M002
-        ON  
-        	ACI.bankCode = M002.bankCode
-        AND 
-        	ACI.bankBranchCode = M002.bankBranchCode
-        WHERE 
-        	employeeOrCustomerNo=#{employeeOrCustomerNo}
-        	AND accountBelongsStatus=#{accountBelongsStatus}
-    </select>
     <!-- 支店情報検索 -->
     <select id="getBankBranchInfo" resultMap="BankBranchInfo" parameterType="map">
         SELECT 
@@ -47,7 +24,7 @@
     </select>
     <!-- 口座情報インサート -->
     <insert id="insertAccount" parameterType="String">
-		INSERT INTO account_information 
+		INSERT INTO T004AccountInfo 
 		VALUE(
 		#{employeeOrCustomerNo},
 		#{accountBelongsStatus},
@@ -62,7 +39,7 @@
     </insert>
     <!-- 口座情報アップデート -->
     <update id="updateAccount" parameterType="String">
-		UPDATE account_information
+		UPDATE T004AccountInfo
 		SET 
 		<if test="bankCode != null">
 			bankCode = #{bankCode},

@@ -146,24 +146,24 @@
         	M019Position
 	</select>
 	<!-- 上位お客様連想 -->
-	<select id="selectTopCustomer" resultType="jp.co.lyc.cms.model.ModelClass">
+	<select id="selectTopCustomer" resultType="jp.co.lyc.cms.model.ModelClass" parameterType="String">
         SELECT 
-        	topCustomerName name，
+        	topCustomerName name,
         	topCustomerNo code
         FROM 
-        	top_customer
+        	T008TopCustomerInfo
         WHERE
-        	topCustomerName LIKE concat('%',#{topCustpmerName},'%')
+        	topCustomerName LIKE concat('%',#{name},'%')
 	</select>
 	<!-- 部門名前連想 -->
-	<select id="selectDepartmentMaster" resultType="jp.co.lyc.cms.model.ModelClass">
+	<select id="selectDepartmentMaster" resultType="jp.co.lyc.cms.model.ModelClass" parameterType="String">
 		SELECT
 			customerDepartmentName name,
 			customerDepartmentCode code
 		FROM
-			customer_department_master 
+			M018CustomerDepartment 
 		WHERE
-			customerDepartmentName LIKE concat('%',#{customerDepartmentName},'%')
+			customerDepartmentName LIKE concat('%',#{name},'%')
 	</select>
 	<!-- 銀行名検索 -->
 	<select id="selectBankInfo" resultType="jp.co.lyc.cms.model.ModelClass">

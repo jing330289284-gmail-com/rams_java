@@ -6,68 +6,68 @@
     <select id="SelectCustomerInfo" parameterType="String" resultMap="customerInfo">
 		SELECT
 			CONCAT(( @rowNo := @rowNo + 1 )) AS rowNo,
-			ci.customerNo,
-			ci.customerName,
+			T007.customerNo,
+			T007.customerName,
 			M008.customerRankingName,
-			ci.headOffice,
+			T007.headOffice,
 			M007.companyNatureName,
 			<choose>
 		        <when test="topCustomerName != null">
 		            topNo.topCustomerName,
 		        </when>
 		        <otherwise>
-		            tc.topCustomerName,
+		            T008.topCustomerName,
 		        </otherwise>
 	        </choose>
-			esi.employeeNo,
-			CONCAT( e.employeeFristName ,e.employeeLastName ) AS employeeName,
-			esi.location,
-			esi.siteManager,
-			esi.unitPrice 
+			T006.employeeNo,
+			CONCAT( T001.employeeFristName ,T001.employeeLastName ) AS employeeName,
+			T006.location,
+			T006.siteManager,
+			T006.unitPrice 
 		FROM
-			customer_information AS ci
-			LEFT JOIN employee_site_information AS esi ON ci.customerNo = esi.customerNo 
-			AND ci.topCustomerNo = esi.topCustomerNo
-			AND esi.AdmissionStartDate IS NOT NULL
-			AND esi.AdmissionEndDate IS NOT NULL
-			LEFT JOIN employee AS e ON esi.employeeNo = e.employeeNo
-			LEFT JOIN M008CustomerRanking AS M008 ON ci.customerRankingCode = M008.customerRankingCode
-			LEFT JOIN M007CompanyNature AS M007 ON ci.companyNatureCode = M007.companyNatureCode	
+			T007CustomerInfo AS T007
+			LEFT JOIN T006EmployeeSiteInfo AS T006 ON T007.customerNo = T006.customerNo 
+			AND T007.topCustomerNo = T006.topCustomerNo
+			AND T006.AdmissionStartDate IS NOT NULL
+			AND T006.AdmissionEndDate IS NOT NULL
+			LEFT JOIN T001Employee AS T001 ON T006.employeeNo = T001.employeeNo
+			LEFT JOIN M008CustomerRanking AS M008 ON T007.customerRankingCode = M008.customerRankingCode
+			LEFT JOIN M007CompanyNature AS M007 ON T007.companyNatureCode = M007.companyNatureCode	
 		<choose>
 	        <when test="topCustomerName != null">
 	            LEFT JOIN 
-					( SELECT topCustomerNo,topCustomerName FROM top_customer WHERE topCustomerName LIKE concat('%',#{topCustomerName},'%') ) AS topNo ON ci.topCustomerNo = topNo.topCustomerNo
+					( SELECT topCustomerNo,topCustomerName FROM T008TopCustomerInfo WHERE topCustomerName LIKE concat('%',#{topCustomerName},'%') ) AS topNo ON T007.topCustomerNo = topNo.topCustomerNo
 	        </when>
 	        <otherwise>
 	            LEFT JOIN
-				 	top_customer AS tc ON ci.topCustomerNo = tc.topCustomerNo
+				 	T008TopCustomerInfo AS T008 ON T007.topCustomerNo = T008.topCustomerNo
 	        </otherwise>
         </choose>
 			,( SELECT @rowNo := 0 ) AS rowNo 
 		WHERE 1=1
 		<if test="customerNo != null">
-			AND ci.customerNo=#{customerNo}
+			AND T007.customerNo=#{customerNo}
 		</if>
 		<if test="customerName != null">
-			AND ci.customerName like concat('%',#{customerName},'%')
+			AND T007.customerName like concat('%',#{customerName},'%')
 		</if>
 		<if test="customerRankingCode != null">
-			AND ci.customerRankingCode=#{customerRankingCode}
+			AND T007.customerRankingCode=#{customerRankingCode}
 		</if>
 		<if test="companyNatureCode != null">
-			AND ci.companyNatureCode=#{companyNatureCode}
+			AND T007.companyNatureCode=#{companyNatureCode}
 		</if>
 		<if test="topCustomerName != null">
-			AND ci.topCustomerNo = topNo.topCustomerNo
+			AND T007.topCustomerNo = topNo.topCustomerNo
 		</if>
 		 ORDER BY
-			ci.customerNo
+			T007.customerNo
     </select>
     <!-- お客様情報削除 -->
     <delete id="delect" parameterType="String">
 	    DELETE 
 	    FROM 
-	    	customer_information 
+	    	T007CustomerInfo 
 	    WHERE 
 	    	customerNo = #{customerNo};
     </delete>

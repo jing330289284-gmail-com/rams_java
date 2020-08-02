@@ -4,18 +4,18 @@
 	<!-- 言語番号の採番 -->
 	<select id="getTechnologyCodeSaiban" resultType="java.lang.String">
 	SELECT MAX(technologytypeCode) as technologytypeCodeSaiban FROM
-		technology_type_Master
+		M011TechnologyType
 	</select>
 	<!-- 言語の存在チェック -->
 	<select id="checkHave" parameterType="String" resultType="java.lang.String">
 	SELECT * FROM
-		technology_type_Master
+		M011TechnologyType
 	WHERE	
 		technologytypeName = #{technologytypeName}
 	</select>
 	<!-- 言語のインサート -->
 	<insert id="insertTechnologyTypeMaster" parameterType="String">
-	INSERT INTO technology_type_Master
+	INSERT INTO M011TechnologyType
 	VALUE(
 	#{technologytypeCode},
 	#{technologytypeName},

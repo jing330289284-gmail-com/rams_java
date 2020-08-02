@@ -127,13 +127,13 @@ public interface GetSelectInfoUtilMapper {
 	 * 上位お客様連想
 	 * @return
 	 */
-	public List<ModelClass> selectTopCustomer();
+	public List<ModelClass> selectTopCustomer(String name);
 	
 	/**
 	 * 部門名前連想
 	 * @return
 	 */
-	public List<ModelClass> selectDepartmentMaster();
+	public List<ModelClass> selectDepartmentMaster(String name);
 	
 	/**
 	 * 銀行名検索

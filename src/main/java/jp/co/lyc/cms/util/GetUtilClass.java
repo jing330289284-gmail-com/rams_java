@@ -134,8 +134,8 @@ public class GetUtilClass {
 	 */
 	@RequestMapping(value = "/selectTopCustomer", method = RequestMethod.POST)
 	@ResponseBody
-	public List<ModelClass> selectTopCustomer() {
-		List<ModelClass> list = getSelectInfoUtilService.selectTopCustomer();
+	public List<ModelClass> selectTopCustomer(@RequestBody ModelClass model) {
+		List<ModelClass> list = getSelectInfoUtilService.selectTopCustomer(model.getName());
 		return list;
 	}
 	
@@ -146,8 +146,8 @@ public class GetUtilClass {
 	 */
 	@RequestMapping(value = "/selectDepartmentMaster", method = RequestMethod.POST)
 	@ResponseBody
-	public List<ModelClass> selectDepartmentMaster() {
-		List<ModelClass> list = getSelectInfoUtilService.selectDepartmentMaster();
+	public List<ModelClass> selectDepartmentMaster(@RequestBody ModelClass model) {
+		List<ModelClass> list = getSelectInfoUtilService.selectDepartmentMaster(model.getName());
 		return list;
 	}
 	

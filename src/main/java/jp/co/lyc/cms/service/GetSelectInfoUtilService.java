@@ -175,16 +175,16 @@ public class GetSelectInfoUtilService {
 	 * 上位お客様連想
 	 * @return
 	 */
-	public List<ModelClass> selectTopCustomer() {
-		return getSelectInfoUtilMapper.selectTopCustomer();
+	public List<ModelClass> selectTopCustomer(String name) {
+		return getSelectInfoUtilMapper.selectTopCustomer(name);
 	}
 	
 	/**
 	 * 部門名前連想
 	 * @return
 	 */
-	public List<ModelClass> selectDepartmentMaster() {
-		return getSelectInfoUtilMapper.selectDepartmentMaster();
+	public List<ModelClass> selectDepartmentMaster(String name) {
+		return getSelectInfoUtilMapper.selectDepartmentMaster(name);
 	}
 	
 	/**

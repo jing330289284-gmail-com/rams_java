@@ -11,6 +11,7 @@ public class EmployeeModel implements Serializable {
 	int rowNo;
 	String employeeNo;// 社員番号
 	String employeeFristName;// 社員名前
+	String employeeLastName;
 	String furigana;// カタカナ
 	String emploryeeForm;// 社員形式
 	String joinCompanyOfYearandMonth;
@@ -47,6 +48,14 @@ public class EmployeeModel implements Serializable {
 	String visaPeriod;// ビザ期間
 	String joinCompanyOfYearFrom;//入社年月元
 	String joinCompanyOfYearTo;//入社年月先
+
+	public String getEmployeeLastName() {
+		return employeeLastName;
+	}
+
+	public void setEmployeeLastName(String employeeLastName) {
+		this.employeeLastName = employeeLastName;
+	}
 
 	public int getRowNo() {
 		return rowNo;
