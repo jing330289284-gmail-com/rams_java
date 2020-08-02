@@ -80,6 +80,18 @@ public class GetUtilClass {
 	}
 
 	/**
+	 * お客様ランキングを取得
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/selectCustomerRanking", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> selectCustomerRanking() {
+		List<ModelClass> list = getSelectInfoUtilService.selectCustomerRanking();
+		return list;
+	}
+	
+	/**
 	 * 日本語レベルを取得
 	 * 
 	 * @return
@@ -88,6 +100,78 @@ public class GetUtilClass {
 	@ResponseBody
 	public List<ModelClass> getJapaneseLevel() {
 		List<ModelClass> list = getSelectInfoUtilService.getJapaneseLevel();
+		return list;
+	}
+	
+	/**
+	 * お客様性質を取得
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/selectCompanyNature", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> selectCompanyNature() {
+		List<ModelClass> list = getSelectInfoUtilService.selectCompanyNature();
+		return list;
+	}
+	
+	/**
+	 * 職位を取得
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/selectPosition", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> selectPosition() {
+		List<ModelClass> list = getSelectInfoUtilService.selectPosition();
+		return list;
+	}
+	
+	/**
+	 * 上位お客様連想
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/selectTopCustomer", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> selectTopCustomer() {
+		List<ModelClass> list = getSelectInfoUtilService.selectTopCustomer();
+		return list;
+	}
+	
+	/**
+	 * 部門名前連想
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/selectDepartmentMaster", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> selectDepartmentMaster() {
+		List<ModelClass> list = getSelectInfoUtilService.selectDepartmentMaster();
+		return list;
+	}
+	
+	/**
+	 * 銀行名検索
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/selectBankInfo", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> selectBankInfo() {
+		List<ModelClass> list = getSelectInfoUtilService.selectBankInfo();
+		return list;
+	}
+	
+	/**
+	 * 支店情報検索
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getBankBranchInfo", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getBankBranchInfo(@RequestBody HashMap<String, String> sendMap) {
+		List<ModelClass> list = getSelectInfoUtilService.getBankBranchInfo(sendMap);
 		return list;
 	}
 
@@ -384,56 +468,16 @@ public class GetUtilClass {
 		return sendMap;
 
 	}
-		/**
-	 * 精算時間を取得
-	 * 
-	 * @return
-	 */
-	@RequestMapping(value = "/getPayMaster", method = RequestMethod.POST)
-	@ResponseBody
-	public List<ModelClass> getPayMaster() {
-		List<ModelClass> list = getSelectInfoUtilService.getPayMaster();
-		return list;
-	}
 
-	/**
-	 * トップお客様を取得
-	 * 
-	 * @return
-	 */
-	@RequestMapping(value = "/getTopCustomer", method = RequestMethod.POST)
-	@ResponseBody
-	public List<ModelClass> getTopCustomer() {
-		List<ModelClass> list = getSelectInfoUtilService.getTopCustomer();
-		return list;
-	}
-	
-	/**
-	 * お客様を取得
-	 * 
-	 * @return
-	 */
-	@RequestMapping(value = "/getCustomerMaster", method = RequestMethod.POST)
-	@ResponseBody
-	public List<ModelClass> getCustomerMaster() {
-		List<ModelClass> list = getSelectInfoUtilService.getCustomerMaster();
-		return list;
-	}
-
-	/**
+	/**　
 	 * 採番
 	 * 
 	 * @return
 	 */
 	@RequestMapping(value = "/getNO")
 	@ResponseBody
-	public String getNO(@RequestBody ModelClass mo) {
-		Map<String, String> sendMap = new HashMap<String, String>();
-		String type = mo.getName();// 採番種類
-		if (type != null && type.length() != 0) {
-			sendMap.put("type", type);
-		}
-		String no = getSelectInfoUtilService.getNO(sendMap);
+	public String getNO() {
+		String no = getSelectInfoUtilService.getNO();
 		return no;
 	}
 }
