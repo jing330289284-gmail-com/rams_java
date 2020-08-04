@@ -5,8 +5,8 @@
 		type="jp.co.lyc.cms.model.EmployeeModel" />
 	<select id="getEmployeeInfo" parameterType="map"
 		resultMap="Employee">
-		select
-		(@rowNo := @rowNo + 1) AS rowNo,
+		SELECT
+		(@rowNo:=@rowNo + 1) AS rowNo,
 		em.employeeNo,
 		em.employeeFristName,
 		emd.Furigana,
@@ -17,39 +17,40 @@
 		ei.salary,
 		ci.customerName,
 		emd.phoneNo,
-		adi.nearestStationOne,
-		TIMESTAMPDIFF(MONTH,now(),emd.PeriodOfStay)as visaTime
-		from
-		rams.employee as em
-		left join
-		rams.employee_detail as emd on
-		emd.employeeNo=em.employeeNo
-		left join
-		rams.employee_site_information as emsi on em.employeeNo=emsi.employeeNo
-		left join
-		rams.address_information as adi on em.employeeNo= adi.employeeNo
-		left join
-		rams.expenses_information as ei on em.employeeNo=ei.employeeNo
-		left join
-		rams.customer_information as ci on emsi.customerNo=ci.customerNo
-
-		,(SELECT @rowNo :=
-		0) AS rowNo
-		where 1=1
+		adi.nearestStation1,
+		TIMESTAMPDIFF(MONTH,
+		NOW(),
+		emd.PeriodOfStay) AS visaTime
+		FROM
+		rams.T001Employee AS em
+		LEFT JOIN
+		rams.T002EmployeeDetail AS emd ON emd.employeeNo = em.employeeNo
+		LEFT JOIN
+		rams.T006EmployeeSiteInfo AS emsi ON em.employeeNo = emsi.employeeNo
+		LEFT JOIN
+		rams.T003AddressInfo AS adi ON em.employeeNo = adi.employeeNo
+		LEFT JOIN
+		rams.T005ExpensesInfo AS ei ON em.employeeNo = ei.employeeNo
+		LEFT JOIN
+		rams.T007CustomerInfo AS ci ON emsi.customerNo = ci.customerNo,
+		(SELECT @rowNo:=0) AS rowNo
+		WHERE
+		1 = 1
 		<if test="employeeNo!=null">
 			AND em.employeeNo=#{employeeNo}
 		</if>
 		<if test="employeeFristName!=null">
-			AND em.employeeFristName like concat('%',#{employeeFristName},'%')
+			AND em.employeeFristName like
+			concat('%',#{employeeFristName},'%')
 		</if>
 		<if test="emploryeeForm!=null">
 			AND emd.emploryeeFormCode=#{emploryeeForm}
 		</if>
+		<if test="employeeStatus!=null">
+			AND emd.status=#{employeeStatus}
+		</if>
 		<if test="genderCode!=null">
 			AND emd.genderCode=#{genderCode}
-		</if>
-		<if test="joinCompanyOfYearandMonth!=null">
-			AND emd.joinCompanyOfYearandMonth=#{joinCompanyOfYearandMonth}
 		</if>
 		<if test="ageFrom != null">
 			AND emd.age &gt;= #{ageFrom}
@@ -79,27 +80,31 @@
 			AND ei.salary &lt;= #{salaryTo}
 		</if>
 		<if test="developmentLanguageNo1!= null">
-			AND emd.developmentLanguageNo1=#{developmentLanguageNo1}
+			AND emd.developmentLanguage1=#{developmentLanguageNo1}
 		</if>
 		<if test="developmentLanguageNo2!= null">
-			AND emd.developmentLanguageNo2=#{developmentLanguageNo2}
+			AND emd.developmentLanguage2=#{developmentLanguageNo2}
 		</if>
 		<if test="developmentLanguageNo3!= null">
-			AND emd.developmentLanguageNo3=#{developmentLanguageNo3}
+			AND emd.developmentLanguage3=#{developmentLanguageNo3}
 		</if>
-		<if test="unitPriceFrom != null">
-			AND emsi.unitPrice &gt;= #{unitPriceFrom}
+		<if test="joinCompanyOfYearFrom != null">
+			AND emd.joinCompanyOfYearandMonth &gt;=
+			#{joinCompanyOfYearFrom}
 		</if>
-		<if test="unitPriceTo!= null">
-			AND emsi.unitPrice &lt;= #{unitPriceTo}
+		<if test="joinCompanyOfYearTo!= null">
+			AND emd.joinCompanyOfYearandMonth &lt;=
+			#{joinCompanyOfYearTo}
 		</if>
 		<if test="kadou!=null">
 			<if test="kadou='0'">
-				AND emsi.AdmissionStartDate is not null AND emsi.AdmissionEndDate is
+				AND emsi.AdmissionStartDate is not null AND
+				emsi.AdmissionEndDate is
 				null
 			</if>
 			<if test="kadou='1'">
-				AND emsi.AdmissionStartDate is null AND emsi.AdmissionEndDate is not
+				AND emsi.AdmissionStartDate is null AND
+				emsi.AdmissionEndDate is not
 				null
 			</if>
 		</if>
