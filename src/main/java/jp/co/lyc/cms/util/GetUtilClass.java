@@ -80,14 +80,14 @@ public class GetUtilClass {
 	}
 
 	/**
-	 * お客様ランキングを取得
+	 * レベル
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/selectCustomerRanking", method = RequestMethod.POST)
+	@RequestMapping(value = "/getLevel", method = RequestMethod.POST)
 	@ResponseBody
-	public List<ModelClass> selectCustomerRanking() {
-		List<ModelClass> list = getSelectInfoUtilService.selectCustomerRanking();
+	public List<ModelClass> getLevel() {
+		List<ModelClass> list = getSelectInfoUtilService.getLevel();
 		return list;
 	}
 	

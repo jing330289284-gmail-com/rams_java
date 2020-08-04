@@ -4,12 +4,12 @@
 
 	<insert id="siteInsert" parameterType="map">
 		insert into
-		employee_site_information(employeeNo,siteNo,customerNo,topCustomerNo,admissionStartDate,
-		location,siteManager,admissionEndDate,unitPrice,siteRoleCode,payOffRange,systemName,
-		developlanguage,updateTime,createTime,updateuser)
-		values(#{employeeNo},#{siteNo},#{customerNo},#{topCustomerNo},#{admissionStartDate},
-		#{location},#{siteManager},#{admissionEndDate},#{unitPrice},#{siteRoleCode},#{payOffRange},
-		#{systemName},#{developlanguage},now(),now(),"LYC001")
+		T006EmployeeSiteInfo(employeeNo,siteNo,customerNo,topCustomerNo,admissionStartDate,admissionEndDate,
+		siteManager,systemName,developLanguage,location,unitPrice,siteRoleCode,payOffRange,relatedEmployees,
+		levelCode,updateTime,createTime,updateUser)
+		values(#{employeeNo},#{siteNo},#{customerNo},#{topCustomerNo},#{admissionStartDate},#{admissionEndDate},
+		#{siteManager},#{systemName},#{developLanguage},#{location},#{unitPrice},#{siteRoleCode},#{payOffRange},
+		#{relatedEmployees},#{levelCode},now(),now(),"LYC001")
 	</insert>
 
 	<update id="siteUpdate" parameterType="map">
@@ -28,22 +28,22 @@
 		a.unitPrice,
 		a.admissionStartDate,
 		a.admissionEndDate,
-		b.siteRoleCodeName,
+		b.siteRoleName,
 		if(c.customerAbbreviation is
 		null,c.customerName,c.customerAbbreviation) as customerName,
 		if(d.topCustomerAbbreviation is
 		null,d.topCustomerName,d.topCustomerAbbreviation) as topCustomerName,
-		a.developlanguage
+		a.developLanguage
 		FROM
-		rams.employee_site_information a
+		rams.T006EmployeeSiteInfo a
 		LEFT JOIN
-		rams.site_role_master b
-		ON a.siteNo = b.siteRoleCode
+		rams.M012SiteRole b
+		ON a.siteRoleCode = b.siteRoleCode
 		LEFT JOIN
-		rams.customer_information c ON
+		rams.T007CustomerInfo c ON
 		a.customerNo = c.customerNo
 		LEFT JOIN
-		rams.top_customer d ON
+		rams.T008TopCustomerInfo d ON
 		a.topCustomerNo = d.topCustomerNo
 		WHERE
 		1=1

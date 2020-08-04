@@ -149,11 +149,11 @@ public class GetSelectInfoUtilService {
 	}
 	
 	/**
-	 * お客様ランキング
+	 * レベル
 	 * @return
 	 */
-	public List<ModelClass> selectCustomerRanking() {
-		return getSelectInfoUtilMapper.selectCustomerRanking();
+	public List<ModelClass> getLevel() {
+		return getSelectInfoUtilMapper.getLevel();
 	}
 	
 	/**

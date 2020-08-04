@@ -16,7 +16,7 @@ public class SiteModel implements Serializable {
 	String unitPrice;
 	String time_1;
 	String time_2;
-	String developlanguage;
+	String developLanguage;
 	String siteRoleCode;
 	String siteManager;
 	String admissionStartDate;
@@ -26,7 +26,9 @@ public class SiteModel implements Serializable {
 	String workDate;
 	String customerName;
 	String topCustomerName;
-	String siteRoleCodeName;
+	String siteRoleName;
+	String relatedEmployees;
+	String levelCode;
 	
 	public String getEmployeeNo() {
 		return employeeNo;
@@ -76,11 +78,11 @@ public class SiteModel implements Serializable {
 	public void setTime_2(String time_2) {
 		this.time_2 = time_2;
 	}
-	public String getDeveloplanguage() {
-		return developlanguage;
+	public String getDevelopLanguage() {
+		return developLanguage;
 	}
-	public void setDeveloplanguage(String developlanguage) {
-		this.developlanguage = developlanguage;
+	public void setDevelopLanguage(String developLanguage) {
+		this.developLanguage = developLanguage;
 	}
 	public String getSiteRoleCode() {
 		return siteRoleCode;
@@ -139,11 +141,23 @@ public class SiteModel implements Serializable {
 	public void setTopCustomerName(String topCustomerName) {
 		this.topCustomerName = topCustomerName;
 	}
-	public String getSiteRoleCodeName() {
-		return siteRoleCodeName;
+	public String getSiteRoleName() {
+		return siteRoleName;
 	}
-	public void setSiteRoleCodeName(String siteRoleCodeName) {
-		this.siteRoleCodeName = siteRoleCodeName;
+	public void setSiteRoleName(String siteRoleName) {
+		this.siteRoleName = siteRoleName;
+	}
+	public String getRelatedEmployees() {
+		return relatedEmployees;
+	}
+	public void setRelatedEmployees(String relatedEmployees) {
+		this.relatedEmployees = relatedEmployees;
+	}
+	public String getLevelCode() {
+		return levelCode;
+	}
+	public void setLevelCode(String levelCode) {
+		this.levelCode = levelCode;
 	}
 	
 
