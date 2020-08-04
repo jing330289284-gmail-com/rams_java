@@ -107,10 +107,10 @@ public interface GetSelectInfoUtilMapper {
 	public String getNO(Map<String, String> sendMap);
 	
 	/**
-	 * お客様ランキング
+	 * レベル
 	 * @return
 	 */
-	public List<ModelClass> selectCustomerRanking();
+	public List<ModelClass> getLevel();
 	
 	/**
 	 * お客様性質

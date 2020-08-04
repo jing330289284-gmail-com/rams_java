@@ -85,7 +85,9 @@ public class SiteInfoController {
 			String siteRoleCode = siteModel.getSiteRoleCode();
 			String payOffRange = siteModel.getTime_1() + siteModel.getTime_2();
 			String systemName = siteModel.getSystemName();
-			String developlanguage = siteModel.getDeveloplanguage();
+			String developLanguage = siteModel.getDevelopLanguage();
+			String relatedEmployees = siteModel.getRelatedEmployees();
+			String levelCode = siteModel.getLevelCode();
 			if (employeeNo != null && employeeNo.length() != 0) {
 				sendMap.put("employeeNo", employeeNo);
 			} else {
@@ -126,10 +128,15 @@ public class SiteInfoController {
 			if (systemName != null && systemName.length() != 0) {
 				sendMap.put("systemName", systemName);
 			}
-			if (developlanguage != null && developlanguage.length() != 0) {
-				sendMap.put("developlanguage", developlanguage);
+			if (developLanguage != null && developLanguage.length() != 0) {
+				sendMap.put("developlanguage", developLanguage);
 			}
-
+			if (relatedEmployees != null && relatedEmployees.length() != 0) {
+				sendMap.put("relatedEmployees", relatedEmployees);
+			}
+			if (levelCode != null && levelCode.length() != 0) {
+				sendMap.put("levelCode", levelCode);
+			}
 			getSiteInfoService.insertSiteInfo(sendMap);
 
 			return "true";

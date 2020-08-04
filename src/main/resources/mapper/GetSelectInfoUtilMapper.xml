@@ -100,14 +100,14 @@
 		SELECT payOffRangeCode code,payOffRangeName name FROM
 		rams.payoff_Range_master;
 	</select>
-	<!-- お客様ランキン -->
-	<select id="selectCustomerRanking"
+	<!-- レベル -->
+	<select id="getLevel"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT
-		customerRankingCode code,
-		customerRankingName name
+		levelCode code,
+		levelName name
 		FROM
-		M008CustomerRanking
+		M008Level
 	</select>
 
 	<!-- 会社性質選択肢 -->
