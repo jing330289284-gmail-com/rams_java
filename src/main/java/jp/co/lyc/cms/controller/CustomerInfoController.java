@@ -238,7 +238,7 @@ public class CustomerInfoController {
 		sendMap.put("customerDepartmentName", customerDepartmentInfoModel.getCustomerDepartmentName());
 		sendMap.put("positionCode", customerDepartmentInfoModel.getPositionCode());
 		sendMap.put("responsiblePerson", customerDepartmentInfoModel.getResponsiblePerson());
-		sendMap.put("mail", customerDepartmentInfoModel.getMail());
+		sendMap.put("customerDepartmentMail", customerDepartmentInfoModel.getCustomerDepartmentMail());
 		sendMap.put("updateUser", customerDepartmentInfoModel.getUpdateUser());
 		//resultCode : 0(処理成功)1（処理失敗）
 		if(customerInfoSer.selectCustomerDepartmentInfo(sendMap).size() != 0 ) {

@@ -21,7 +21,7 @@ public class EmployeeModel implements Serializable {
 	String birthplaceOfcontroy;
 	String password;
 	String employeeName;
-	String authorityNo;
+	String authorityCode;
 	String authorityName;
 	String genderCode;// 性別
 	String age;// 年齢
@@ -169,15 +169,13 @@ public class EmployeeModel implements Serializable {
 		this.employeeName = employeeName;
 	}
 
-	public String getAuthorityNo() {
-		return authorityNo;
+	public String getAuthorityCode() {
+		return authorityCode;
 	}
 
-	public void setAuthorityNo(String authorityNo) {
-		this.authorityNo = authorityNo;
+	public void setAuthorityCode(String authorityCode) {
+		this.authorityCode = authorityCode;
 	}
-
-
 
 	public String getAuthorityName() {
 		return authorityName;

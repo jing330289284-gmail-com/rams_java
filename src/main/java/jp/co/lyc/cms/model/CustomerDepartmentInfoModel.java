@@ -8,7 +8,7 @@ public class CustomerDepartmentInfoModel {
 	String positionCode;//職位コード
 	String positionName;//職位
 	String responsiblePerson;//責任者
-	String mail;//メール
+	String customerDepartmentMail;//メール
 	String updateUser;//更新者
 	String rowNo;//行番号
 	String shoriKbn;//処理区分
@@ -68,11 +68,11 @@ public class CustomerDepartmentInfoModel {
 	public void setResponsiblePerson(String responsiblePerson) {
 		this.responsiblePerson = responsiblePerson;
 	}
-	public String getMail() {
-		return mail;
+	public String getCustomerDepartmentMail() {
+		return customerDepartmentMail;
 	}
-	public void setMail(String mail) {
-		this.mail = mail;
+	public void setCustomerDepartmentMail(String customerDepartmentMail) {
+		this.customerDepartmentMail = customerDepartmentMail;
 	}
 	public String getUpdateUser() {
 		return updateUser;

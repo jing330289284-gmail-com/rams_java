@@ -115,19 +115,20 @@
     <select id="selectCustomerDepartmentInfo" resultMap="CustomerDepartmentInfo" parameterType="map">
 		SELECT
 			CONCAT( ( @rowNo := @rowNo + 1 ) ) AS rowNo,
-			T009.customerDepartmentName,
+			M018.customerDepartmentName,
 			M019.positionCode,
-			M019.positionName, 
+			M019.positionName,
 			T009.responsiblePerson,
-			T009.mail 
+			T009.customerDepartmentMail 
 		FROM
 			T009CustomerDepartmentInfo AS T009
-			LEFT JOIN M019Position AS M019 ON T009.positionCode = M019.positionCode,
+			LEFT JOIN M019Position AS M019 ON T009.positionCode = M019.positionCode
+			LEFT JOIN M018CustomerDepartment AS M018 ON T009.customerDepartmentCode = M018.customerDepartmentCode,
 			( SELECT @rowNo := 0 ) AS rowNo 
 		WHERE
 			T009.customerNo = #{customerNo}
 		<if test="customerDepartmentCode != NULL">
-			AND customerDepartmentCode = #{customerDepartmentCode}
+			AND T009.customerDepartmentCode = #{customerDepartmentCode}
 		</if>
     </select>
     <!-- 部門名前連想 -->
