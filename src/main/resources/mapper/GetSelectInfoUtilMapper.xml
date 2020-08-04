@@ -222,24 +222,4 @@
 		${columnName} = (SELECT
 		MAX(${columnName}) FROM ${table}) LIMIT 1 OFFSET 0;
 	</select>
-	<!-- 精算時間 -->
-	<select id="getPayMaster"
-		resultType="jp.co.lyc.cms.model.ModelClass">
-		SELECT payOffRangeCode code,payOffRangeName name FROM
-		rams.payoff_Range_master;
-	</select>
-	<!-- トップお客様 -->
-	<select id="getTopCustomer"
-		resultType="jp.co.lyc.cms.model.ModelClass">
-		SELECT topCustomerNo code,if(topCustomerAbbreviation is
-		null,topCustomerName,topCustomerAbbreviation) name FROM
-		rams.top_customer;
-	</select>
-	<!-- お客様 -->
-	<select id="getCustomerMaster"
-		resultType="jp.co.lyc.cms.model.ModelClass">
-		SELECT customerNo code,if(customerAbbreviation is
-		null,customerName,customerAbbreviation) name FROM
-		rams.customer_information;
-	</select>
 </mapper>
