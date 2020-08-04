@@ -100,10 +100,11 @@ public interface GetSelectInfoUtilMapper {
 
 	/**
 	 * 採番
+	 * @param sendMap 
 	 * 
 	 * 
 	 */
-	public String getNO();
+	public String getNO(Map<String, String> sendMap);
 	
 	/**
 	 * お客様ランキング

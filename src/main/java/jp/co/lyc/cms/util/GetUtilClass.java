@@ -474,10 +474,26 @@ public class GetUtilClass {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/getNO")
+	@RequestMapping(value = "/getNO", method = RequestMethod.POST)
 	@ResponseBody
-	public String getNO() {
-		String no = getSelectInfoUtilService.getNO();
+	public String getNO(@RequestBody ModelClass mo) {
+		Map<String, String> sendMap = new HashMap<String, String>();
+		// sendMap.put("columnName", "customerNo");
+		// sendMap.put("typeName", "C");
+		// sendMap.put("table", "employee_site_information");
+		String columnName = mo.getColumnName();// 列名は採番番号名です
+		String typeName = mo.getTypeName();// 採番番号のタイプ
+		String table = mo.getName();// テーブル
+		if (columnName != null && columnName.length() != 0) {
+			sendMap.put("columnName", columnName);
+		}
+		if (typeName != null && typeName.length() != 0) {
+			sendMap.put("typeName", typeName);
+		}
+		if (table != null && table.length() != 0) {
+			sendMap.put("table", table);
+		}
+		String no = getSelectInfoUtilService.getNO(sendMap);
 		return no;
 	}
 }

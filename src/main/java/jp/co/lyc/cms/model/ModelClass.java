@@ -8,7 +8,8 @@ public class ModelClass implements Serializable {
 
 	String code;
 	String name;
-	String no;
+	String columnName;
+	String typeName;
 	public String getCode() {
 		return code;
 	}
@@ -25,12 +26,22 @@ public class ModelClass implements Serializable {
 		this.name = name;
 	}
 
-	public String getNo() {
-		return no;
+	public String getColumnName() {
+		return columnName;
 	}
 
-	public void setNo(String no) {
-		this.no = no;
+	public void setColumnName(String columnName) {
+		this.columnName = columnName;
 	}
+
+	public String getTypeName() {
+		return typeName;
+	}
+
+	public void setTypeName(String typeName) {
+		this.typeName = typeName;
+	}
+
+	
 
 }
