@@ -5,7 +5,7 @@
     <resultMap id="MapResult" type="map"/>
     <!-- 諸費用検索 -->
     <select id="selectCost" parameterType="String" resultMap="Cost">
-        SELECT * FROM expenses_information
+        SELECT * FROM T005ExpensesInfo
         WHERE employeeNo=#{employeeNo}
     </select>
     <!-- 稼働の判断 -->
@@ -16,7 +16,7 @@
 			siteRoleCode,
 			RelatedEmployees 
 		FROM
-			employee_site_information 
+			T006EmployeeSiteInfo 
 		WHERE
 			employeeNo = #{employeeNo} 
 			AND AdmissionStartDate IS NULL 
@@ -24,7 +24,7 @@
     </select>
     <!-- 諸費用情報インサート -->
 	<insert id="insertCost" parameterType="String">
-		INSERT INTO expenses_information 
+		INSERT INTO T005ExpensesInfo 
 		VALUE(
 		#{employeeNo},
 		#{SocialInsuranceFlag},
@@ -51,7 +51,7 @@
     </insert>
     <!-- 諸費用情報アップデート -->
     <update id="updateCost" parameterType="String">
-		UPDATE expenses_information
+		UPDATE T005ExpensesInfo
 		SET 
 		<if test="welfarePensionAmount != null">
 			welfarePensionAmount = #{welfarePensionAmount},

@@ -8,20 +8,20 @@
         SELECT 
         	MAX(TopCustomerNo) AS TopCustomerNoSaiBan
         FROM 
-        	top_customer
+        	T008TopCustomerInfo
     </select>
     <!-- 上位お客様情報検索 -->
     <select id="selectTopCustomerInfo" resultMap="TopCustomerInfo" parameterType="String">
         SELECT 
         	*
         FROM 
-        	top_customer
+        	T008TopCustomerInfo
         WHERE
         	TopCustomerNo = #{topCustomerNo}
     </select>
     <!-- 上位お客様情報インサート -->
     <insert id="insertTopCustomerInfo" parameterType="String">
-		INSERT INTO top_customer 
+		INSERT INTO T008TopCustomerInfo 
 		VALUE(
 		#{topCustomerNo},
 		#{topCustomerName},
@@ -33,7 +33,7 @@
     </insert>
     <!-- 上位お客様情報アップデート -->
     <update id="updateTopCustomerInfo" parameterType="String">
-		UPDATE customer_information
+		UPDATE T008TopCustomerInfo
 		SET 
 		<if test="TopCustomerName != null">
 			TopCustomerName = #{topCustomerName},

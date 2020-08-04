@@ -5,17 +5,17 @@
     <!-- ログイン -->
     <select id="getEmployeeModel" parameterType="map" resultMap="Employee">
 		SELECT
-			a.employeeNo,
-			a.employeeFristName,
-			a.employeeLastName,
-			a.authorityCode,
-			b.authorityName
+			T001.employeeNo,
+			T001.employeeFristName,
+			T001.employeeLastName,
+			T001.authorityCode,
+			M009.authorityName
 		FROM
-			employee a
-			LEFT JOIN M009Authority b ON a.authorityCode = b.authorityCode
-			LEFT JOIN employee_detail c ON a.employeeNo = c.employeeNo
+			T001Employee T001
+			LEFT JOIN M009Authority M009 ON T001.authorityCode = M009.authorityCode
+			LEFT JOIN T002EmployeeDetail T002 ON T001.employeeNo = T002.employeeNo
 		WHERE
-			a. PASSWORD = #{password}
-		AND a.employeeNo = #{employeeNo}
+			T001. PASSWORD = #{password}
+		AND T001.employeeNo = #{employeeNo}
     </select>
 </mapper>

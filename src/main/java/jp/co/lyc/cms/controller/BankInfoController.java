@@ -2,6 +2,7 @@ package jp.co.lyc.cms.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import jp.co.lyc.cms.model.BankInfoModel;
+import jp.co.lyc.cms.model.ModelClass;
 import jp.co.lyc.cms.service.GetBankInfoService;
+import jp.co.lyc.cms.service.GetSelectInfoUtilService;
 
 @Controller
 @CrossOrigin(origins = "http://127.0.0.1:3000")
@@ -23,8 +26,12 @@ public class BankInfoController {
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
+	//口座情報
 	@Autowired
 	GetBankInfoService bankInfoSer;
+	//選択肢service
+	@Autowired
+	GetSelectInfoUtilService selectutilSer;
 	
 	/**
 	 * 画面の初期化
@@ -40,25 +47,8 @@ public class BankInfoController {
 		if (onloadMol.getShoriKbn().equals("shusei") || onloadMol.getShoriKbn().equals("shosai")) {
 			accountInfoMod = selectAccountInfo(onloadMol.getEmployeeOrCustomerNo() , onloadMol.getAccountBelongsStatus());
 		}
-		accountInfoMod.setBankName(bankInfoSer.selectBankInfo());
+		resultMap.put("bankName", selectutilSer.selectBankInfo());
 		resultMap.put("accountInfoMod", accountInfoMod);
-		return resultMap;	
-	}
-	
-	/**
-	 * 支店の情報の取得
-	 * @param sendMap
-	 * @return
-	 */
-	@RequestMapping(value = "/getBankBranchInfo", method = RequestMethod.POST)
-	@ResponseBody
-	public HashMap<String, String> getBankBranchInfo(@RequestBody HashMap<String, String> sendMap) {
-		logger.info("BankInfoController.getBankBranchInfo:" + "検索開始");
-		ArrayList<HashMap<String, String>> resultList = bankInfoSer.getBankBranchInfo(sendMap);
-		HashMap<String, String> resultMap = null;
-		if(!resultList.isEmpty()) {
-			resultMap = resultList.get(0);
-		}
 		return resultMap;	
 	}
 	

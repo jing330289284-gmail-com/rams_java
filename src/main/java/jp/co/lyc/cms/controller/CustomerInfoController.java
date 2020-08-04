@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import jp.co.lyc.cms.model.CustomerDepartmentInfoModel;
 import jp.co.lyc.cms.model.CustomerInfoModel;
-import jp.co.lyc.cms.model.CustomerInfoSelectModel;
 import jp.co.lyc.cms.service.CustomerInfoService;
 import jp.co.lyc.cms.model.TopCustomerInfoModel;
 @Controller
@@ -36,15 +35,6 @@ public class CustomerInfoController {
 	public HashMap<String,Object> onloadPage(@RequestBody CustomerInfoModel customerInfoMod ) {
 		logger.info("CustomerInfoController.onloadPage:" + "页面加载開始");
 		HashMap<String,Object> resultMap = new HashMap<>();
-		CustomerInfoSelectModel selectModel = new CustomerInfoSelectModel();
-		//お客様ランキング内容
-		selectModel.setCustomerRanking(customerInfoSer.selectCustomerRanking());
-		//会社性質内容
-		selectModel.setCompanyNature(customerInfoSer.selectCompanyNature());
-		//職位
-		selectModel.setPosition(customerInfoSer.selectPosition());
-		//选择框内容
-		resultMap.put("selectModel", selectModel);
 		HashMap<String, String> sendMap = new HashMap<>();
 		if(customerInfoMod.getShoriKbn() != null) {
 			//修正と詳細の場合
@@ -246,10 +236,10 @@ public class CustomerInfoController {
 		sendMap.put("customerDepartmentCode", customerDepartmentCode);
 		sendMap.put("customerNo", customerDepartmentInfoModel.getCustomerNo());
 		sendMap.put("customerDepartmentName", customerDepartmentInfoModel.getCustomerDepartmentName());
-		sendMap.put("position", customerDepartmentInfoModel.getPosition());
+		sendMap.put("positionCode", customerDepartmentInfoModel.getPositionCode());
 		sendMap.put("responsiblePerson", customerDepartmentInfoModel.getResponsiblePerson());
 		sendMap.put("mail", customerDepartmentInfoModel.getMail());
-		sendMap.put("updateuser", customerDepartmentInfoModel.getUpdateuser());
+		sendMap.put("updateUser", customerDepartmentInfoModel.getUpdateUser());
 		//resultCode : 0(処理成功)1（処理失敗）
 		if(customerInfoSer.selectCustomerDepartmentInfo(sendMap).size() != 0 ) {
 			resultCode = (customerInfoSer.updateCustomerDepartment(sendMap) ? "0" : "1");	

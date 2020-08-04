@@ -13,27 +13,7 @@ public class GetBankInfoService {
 
 	@Autowired
 	GetBankInfoMapper bankMapper;
-	
-	/**
-	 * 銀行検索
-	 * @return
-	 */
-	
-	public ArrayList<String> selectBankInfo() {
-		ArrayList<String> resultList = bankMapper.selectBankInfo();
-		return resultList;
-	}
-	/**
-	 * 支店情報検索
-	 * @param sendMap
-	 * @return
-	 */
-	
-	public ArrayList<HashMap<String, String>> getBankBranchInfo(HashMap<String, String> sendMap) {
-		ArrayList<HashMap<String, String>> resultList = bankMapper.getBankBranchInfo(sendMap);
-		return resultList;
-	}
-	
+
 	/**
 	 * 口座情報の検索
 	 * @param employeeOrCustomerNo

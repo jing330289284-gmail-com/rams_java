@@ -16,22 +16,7 @@ public class CustomerInfoService {
 	//客户信息检索画面service
 	@Autowired
 	CustomerInfoMapper customerInfoMapper;
-	/**
-	 * 画面三个下拉框
-	 * @return
-	 */
-	public ArrayList<HashMap<String, String>> selectCustomerRanking() {
-		ArrayList<HashMap<String, String>> resultList = customerInfoMapper.selectCustomerRanking();
-		return resultList;
-	}
-	public ArrayList<HashMap<String, String>> selectCompanyNature() {
-		ArrayList<HashMap<String, String>> resultList = customerInfoMapper.selectCompanyNature();
-		return resultList;
-	}
-	public ArrayList<HashMap<String, String>> selectPosition() {
-		ArrayList<HashMap<String, String>> resultList = customerInfoMapper.selectPosition();
-		return resultList;
-	}
+
 	/**
 	 * 上位お客様連想
 	 * @param topCustpmerName

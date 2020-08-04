@@ -1,5 +1,6 @@
 package jp.co.lyc.cms.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -146,33 +147,60 @@ public class GetSelectInfoUtilService {
 		String no = getSelectInfoUtilMapper.getNO(sendMap);
 		return no;
 	}
-		/**
-	 * 精算時間 を取得
-	 * 
-	 * @return
-	 */
-	public List<ModelClass> getPayMaster() {
-		List<ModelClass> list = getSelectInfoUtilMapper.getPayMaster();
-		return list;
-	}
-
+	
 	/**
-	 * トップお客様 を取得
-	 * 
+	 * お客様ランキング
 	 * @return
 	 */
-	public List<ModelClass> getTopCustomer() {
-		List<ModelClass> list = getSelectInfoUtilMapper.getTopCustomer();
-		return list;
+	public List<ModelClass> selectCustomerRanking() {
+		return getSelectInfoUtilMapper.selectCustomerRanking();
 	}
 	
 	/**
-	 * お客様 を取得
-	 * 
+	 * お客様性質
 	 * @return
 	 */
-	public List<ModelClass> getCustomerMaster() {
-		List<ModelClass> list = getSelectInfoUtilMapper.getCustomerMaster();
-		return list;
+	public List<ModelClass> selectCompanyNature() {
+		return getSelectInfoUtilMapper.selectCompanyNature();
+	}
+	
+	/**
+	 * 職位
+	 * @return
+	 */
+	public List<ModelClass> selectPosition() {
+		return getSelectInfoUtilMapper.selectPosition();
+	}
+	
+	/**
+	 * 上位お客様連想
+	 * @return
+	 */
+	public List<ModelClass> selectTopCustomer(String name) {
+		return getSelectInfoUtilMapper.selectTopCustomer(name);
+	}
+	
+	/**
+	 * 部門名前連想
+	 * @return
+	 */
+	public List<ModelClass> selectDepartmentMaster(String name) {
+		return getSelectInfoUtilMapper.selectDepartmentMaster(name);
+	}
+	
+	/**
+	 * 銀行名検索
+	 * @return
+	 */
+	public List<ModelClass> selectBankInfo() {
+		return getSelectInfoUtilMapper.selectBankInfo();
+	}
+	
+	/**
+	 * 支店情報検索
+	 * @return
+	 */
+	public List<ModelClass> getBankBranchInfo(HashMap<String, String> sendMap) {
+		return getSelectInfoUtilMapper.getBankBranchInfo(sendMap);
 	}
 }

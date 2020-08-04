@@ -18,6 +18,12 @@
 		SELECT nationalityCode code,nationalityName name FROM
 		M003Nationality;
 	</select>
+	<!--お客様 -->
+	<select id="getCustomer"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT customerRankingCode code,customerRankingName name
+		FROM customer_ranking_master;
+	</select>
 
 	<!-- 開発言語 -->
 	<select id="getTechnologyType" parameterType="map"
@@ -87,12 +93,92 @@
 		SELECT qualificationCode code,qualificationName name FROM
 		M016Qualification;
 	</select>
-	
+
 	<!-- 精算時間 -->
 	<select id="getPayMaster"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT payOffRangeCode code,payOffRangeName name FROM
 		rams.payoff_Range_master;
+	</select>
+	<!-- お客様ランキン -->
+	<select id="selectCustomerRanking"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT
+		customerRankingCode code,
+		customerRankingName name
+		FROM
+		M008CustomerRanking
+	</select>
+
+	<!-- 会社性質選択肢 -->
+	<select id="selectCompanyNature"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT
+		companyNatureCode code,
+		companyNatureName name
+		FROM
+		M007CompanyNature
+	</select>
+	<!-- 職位選択肢 -->
+	<select id="selectPosition"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT
+		positionCode code,
+		positionName name
+		FROM
+		M019Position
+	</select>
+	<!-- 上位お客様連想 -->
+	<select id="selectTopCustomer"
+		resultType="jp.co.lyc.cms.model.ModelClass" parameterType="String">
+		SELECT
+		topCustomerName name,
+		topCustomerNo code
+		FROM
+		T008TopCustomerInfo
+		WHERE
+		topCustomerName LIKE concat('%',#{name},'%')
+	</select>
+	<!-- 部門名前連想 -->
+	<select id="selectDepartmentMaster"
+		resultType="jp.co.lyc.cms.model.ModelClass" parameterType="String">
+		SELECT
+		customerDepartmentName name,
+		customerDepartmentCode code
+		FROM
+		M018CustomerDepartment
+		WHERE
+		customerDepartmentName LIKE concat('%',#{name},'%')
+	</select>
+	<!-- 銀行名検索 -->
+	<select id="selectBankInfo"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT
+		bankName name,
+		bankCode code
+		FROM
+		M001Bank
+	</select>
+	<!-- 支店情報検索 -->
+	<select id="getBankBranchInfo"
+		resultType="jp.co.lyc.cms.model.ModelClass" parameterType="map">
+		SELECT
+		M002.bankBranchName name,
+		M002.bankBranchCode code
+		FROM
+		M002BankBranch AS M002
+		LEFT JOIN
+		M001Bank AS M001
+		ON
+		M001.bankCode = M002.bankCode
+		WHERE
+		M002.bankCode = #{bankCode}
+		<if test="bankBranchCode != null">
+			AND M002.bankBranchCode = #{bankBranchCode}
+		</if>
+		<if test="bankBranchName != null">
+			AND M002.bankBranchName = #{bankBranchName}
+		</if>
 	</select>
 	<!-- トップお客様 -->
 	<select id="getTopCustomer"
@@ -109,133 +195,32 @@
 		rams.customer_information;
 	</select>
 
-	<!-- 採番 -->
-	<select id="getNO" resultType="String">
-		<!-- 社員番号採番 -->
-		<if test="type='LYC'">
-			SELECT
-			(CASE
-			WHEN
-			(CONVERT(SUBSTRING(a.employeeNo, 4) ,
-			SIGNED) + 1) &lt;10
-			THEN
-			CONCAT('LYC00',
-			(CONVERT(
-			SUBSTRING(a.employeeNo, 4) , SIGNED) + 1))
-			WHEN
-			(CONVERT(
-			SUBSTRING(a.employeeNo, 4) , SIGNED) + 1 &gt;=10)
-			AND (CONVERT(
-			SUBSTRING(a.employeeNo, 4) , SIGNED) + 1 &lt;100)
-			THEN
-			CONCAT('LYC0',
-			(CONVERT( SUBSTRING(a.employeeNo, 4) , SIGNED) + 1))
-			ELSE
-			CONCAT('LYC',
-			(CONVERT( SUBSTRING(a.employeeNo, 4) , SIGNED) + 1))
-			END) AS employeeNo
-			FROM
-			employee a
-			WHERE
-			employeeNo = (SELECT
-			MAX(employeeNo)
-			FROM
-			employee);
-		</if>
-		<if test="type='LYC'">
-			SELECT
-			(CASE
-			WHEN
-			(CONVERT(SUBSTRING(a.employeeNo, 4) ,
-			SIGNED) + 1) &lt;10
-			THEN
-			CONCAT('LYC00',
-			(CONVERT(
-			SUBSTRING(a.employeeNo, 4) , SIGNED) + 1))
-			WHEN
-			(CONVERT(
-			SUBSTRING(a.employeeNo, 4) , SIGNED) + 1 &gt;=10)
-			AND (CONVERT(
-			SUBSTRING(a.employeeNo, 4) , SIGNED) + 1 &lt;100)
-			THEN
-			CONCAT('LYC0',
-			(CONVERT( SUBSTRING(a.employeeNo, 4) , SIGNED) + 1))
-			ELSE
-			CONCAT('LYC',
-			(CONVERT( SUBSTRING(a.employeeNo, 4) , SIGNED) + 1))
-			END) AS employeeNo
-			FROM
-			employee a
-			WHERE
-			employeeNo = (SELECT
-			MAX(employeeNo)
-			FROM
-			employee);
-		</if>
-		<if test="type='LYC'">
-			SELECT
-			(CASE
-			WHEN
-			(CONVERT(SUBSTRING(a.employeeNo, 4) ,
-			SIGNED) + 1) &lt;10
-			THEN
-			CONCAT('LYC00',
-			(CONVERT(
-			SUBSTRING(a.employeeNo, 4) , SIGNED) + 1))
-			WHEN
-			(CONVERT(
-			SUBSTRING(a.employeeNo, 4) , SIGNED) + 1 &gt;=10)
-			AND (CONVERT(
-			SUBSTRING(a.employeeNo, 4) , SIGNED) + 1 &lt;100)
-			THEN
-			CONCAT('LYC0',
-			(CONVERT( SUBSTRING(a.employeeNo, 4) , SIGNED) + 1))
-			ELSE
-			CONCAT('LYC',
-			(CONVERT( SUBSTRING(a.employeeNo, 4) , SIGNED) + 1))
-			END) AS employeeNo
-			FROM
-			employee a
-			WHERE
-			employeeNo = (SELECT
-			MAX(employeeNo)
-			FROM
-			employee);
-		</if>
-		
-		
-		
-		<if test="type='LYC'">
-			SELECT
-			(CASE
-			WHEN
-			(CONVERT(SUBSTRING(a.employeeNo, 4) ,
-			SIGNED) + 1) &lt;10
-			THEN
-			CONCAT('LYC00',
-			(CONVERT(
-			SUBSTRING(a.employeeNo, 4) , SIGNED) + 1))
-			WHEN
-			(CONVERT(
-			SUBSTRING(a.employeeNo, 4) , SIGNED) + 1 &gt;=10)
-			AND (CONVERT(
-			SUBSTRING(a.employeeNo, 4) , SIGNED) + 1 &lt;100)
-			THEN
-			CONCAT('LYC0',
-			(CONVERT( SUBSTRING(a.employeeNo, 4) , SIGNED) + 1))
-			ELSE
-			CONCAT('LYC',
-			(CONVERT( SUBSTRING(a.employeeNo, 4) , SIGNED) + 1))
-			END) AS employeeNo
-			FROM
-			employee a
-			WHERE
-			employeeNo = (SELECT
-			MAX(employeeNo)
-			FROM
-			employee);
-		</if>
-
+	<!--採番 -->
+	<select id="getNO" resultType="String" parameterType="map"
+		statementType="STATEMENT">
+		SELECT
+		(CASE
+		WHEN
+		(CONVERT(SUBSTRING(a.${columnName}, 4)
+		,SIGNED) + 1) &lt;10 THEN
+		CONCAT(CONCAT('${typeName}','00'),(CONVERT(SUBSTRING(a.${columnName},
+		4) , SIGNED) + 1))
+		WHEN
+		(CONVERT(SUBSTRING(a.${columnName}, 4) , SIGNED)
+		+ 1 &gt;=10) AND (CONVERT(SUBSTRING(a.${columnName}, 4)
+		, SIGNED) + 1
+		&lt;100)
+		THEN CONCAT(CONCAT('${typeName}','0'),(CONVERT(
+		SUBSTRING(a.${columnName},
+		4) , SIGNED) + 1))
+		ELSE
+		CONCAT('${typeName}',(CONVERT( SUBSTRING(a.${columnName}, 4) , SIGNED)
+		+ 1)) END) no
+		FROM
+		${table} a
+		WHERE
+		${columnName} = (SELECT
+		MAX(${columnName}) FROM ${table}) LIMIT 1 OFFSET 0;
 	</select>
 	<!-- 精算時間 -->
 	<select id="getPayMaster"
