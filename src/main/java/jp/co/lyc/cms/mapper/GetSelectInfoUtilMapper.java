@@ -147,4 +147,9 @@ public interface GetSelectInfoUtilMapper {
 	 * @return
 	 */
 	public List<ModelClass> getBankBranchInfo(HashMap<String, String> sendMap);
+	/**
+	 * 支払サイト検索
+	 * @return
+	 */
+	public List<ModelClass> getPaymentsite();
 }

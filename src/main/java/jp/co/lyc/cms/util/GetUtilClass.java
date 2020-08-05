@@ -174,6 +174,18 @@ public class GetUtilClass {
 		List<ModelClass> list = getSelectInfoUtilService.getBankBranchInfo(sendMap);
 		return list;
 	}
+	
+	/**
+	 * 支払サイト検索
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getPaymentsite", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getPaymentsite() {
+		List<ModelClass> list = getSelectInfoUtilService.getPaymentsite();
+		return list;
+	}
 
 	/**
 	 * 性別区別

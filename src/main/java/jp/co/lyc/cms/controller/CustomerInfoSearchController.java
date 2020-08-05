@@ -144,8 +144,8 @@ public class CustomerInfoSearchController {
 		if(!isNullOrEmpty(customerInfoMod.getHeadOffice())) {
 			sendMap.put("headOffice", customerInfoMod.getHeadOffice());
 		}
-		if(!isNullOrEmpty(customerInfoMod.getCustomerRankingCode())) {
-			sendMap.put("customerRankingCode", customerInfoMod.getCustomerRankingCode());
+		if(!isNullOrEmpty(customerInfoMod.getLevelCode())) {
+			sendMap.put("levelCode", customerInfoMod.getLevelCode());
 		}
 		if(!isNullOrEmpty(customerInfoMod.getCompanyNatureCode())) {
 			sendMap.put("companyNatureCode", customerInfoMod.getCompanyNatureCode());

@@ -51,16 +51,18 @@
 		#{customerName},
 		#{customerAbbreviation},
 		#{headOffice},
+		#{representative},
+		#{establishmentDate},
 		#{businessStartDate},
 		#{topCustomerNo},
-		#{establishmentDate},
-		#{customerRankingCode},
-		#{listedCompany},
+		#{levelCode},
+		#{listedCompanyFlag},
 		#{companyNatureCode},
 		#{url},
-		#{PurchasingManagers},
-		#{remark},
-		#{PurchasingManagersOfmail},
+		#{purchasingManagers},
+		#{purchasingManagersMail},
+		#{paymentsiteCode},
+		#{remark},		
 		NOW(),
 		NOW(),
 		#{updateUser})
@@ -77,6 +79,9 @@
 		</if>
 		<if test="headOffice != null">
 			headOffice = #{headOffice},
+		</if>
+		<if test="representative != null">
+			representative = #{representative},
 		</if>
 		<if test="businessStartDate != null">
 			businessStartDate = #{businessStartDate},
@@ -101,6 +106,9 @@
 		</if>
 		<if test="PurchasingManagersOfmail != null">
 			PurchasingManagersOfmail = #{PurchasingManagersOfmail},
+		</if>
+		<if test="paymentsiteCode != null">
+			paymentsiteCode = #{paymentsiteCode},
 		</if>
 		<if test="remark != null">
 			remark = #{remark},
@@ -156,10 +164,9 @@
 		VALUE(
 		#{customerNo},
 		#{customerDepartmentCode},
-		#{customerDepartmentName},
 		#{positionCode},
 		#{responsiblePerson},
-		#{mail},
+		#{customerDepartmentMail},
 		NOW(),
 		NOW(),
 		#{updateUser})
@@ -168,24 +175,30 @@
     <update id="updateCustomerDepartment" parameterType="String">
 		UPDATE T009CustomerDepartmentInfo
 		SET 
-		<if test="customerDepartmentCode != null">
-			customerDepartmentCode = #{customerDepartmentCode},
-		</if>
-		<if test="customerDepartmentName != null">
-			customerDepartmentName = #{customerDepartmentName},
-		</if>
 		<if test="positionCode != null">
 			positionCode = #{positionCode},
 		</if>
 		<if test="responsiblePerson != null">
 			responsiblePerson = #{responsiblePerson},
 		</if>
-		<if test="mail != null">
-			mail = #{mail},
+		<if test="customerDepartmentMail != null">
+			customerDepartmentMail = #{customerDepartmentMail},
 		</if>			
 		updateTime = NOW(),
 		updateUser = #{updateUser}
 		WHERE 
 			customerNo = #{customerNo}
+		AND 
+			customerDepartmentCode = #{customerDepartmentCode}
     </update>
+        <!-- 部門削除 -->
+    <delete id="customerDepartmentdelect" parameterType="String">
+	    DELETE 
+	    FROM 
+	    	T009CustomerDepartmentInfo 
+	    WHERE 
+	    	customerNo = #{customerNo}
+	    AND
+	    	customerDepartmentCode = #{customerDepartmentCode}
+    </delete>
 </mapper>

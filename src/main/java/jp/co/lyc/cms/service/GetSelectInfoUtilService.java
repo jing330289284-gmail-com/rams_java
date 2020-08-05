@@ -203,4 +203,12 @@ public class GetSelectInfoUtilService {
 	public List<ModelClass> getBankBranchInfo(HashMap<String, String> sendMap) {
 		return getSelectInfoUtilMapper.getBankBranchInfo(sendMap);
 	}
+	
+	/**
+	 * 支払サイト検索
+	 * @return
+	 */
+	public List<ModelClass> getPaymentsite() {
+		return getSelectInfoUtilMapper.getPaymentsite();
+	}
 }

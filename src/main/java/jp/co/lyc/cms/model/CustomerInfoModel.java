@@ -9,8 +9,8 @@ public class CustomerInfoModel {
 	String headOffice;//本社
 	String establishmentDate;//設立年月
 	String businessStartDate;//取引開始日
-	String customerRankingCode;//お客様ランキングコード
-	String listedCompany;//上場会社フラグ
+	String levelCode;//お客様ランキングコード
+	String listedCompanyFlag;//上場会社フラグ
 	String companyNatureCode;//会社性質コード
 	String url;//URL
 	String remark;//備考
@@ -27,31 +27,40 @@ public class CustomerInfoModel {
 	String topCustomerName;//上位お客様名前
 	String location;//現場場所
 	String rowNo;//行番号
-	String PurchasingManagers;//購買担当
-	String PurchasingManagersOfmail;//メール
+	String purchasingManagers;//購買担当
+	String purchasingManagersMail;//メール
 	String customerAbbreviation;//お客様略称
+	String paymentsiteCode;//支払サイト
 	ArrayList<String> locationList;//同社の現場場所リスト
 	ArrayList<String> siteManagerList;//同社の現場責任者リスト
 	ArrayList<String> unitPriceList;//単価リスト
 	String representative;//代表取締役
+	ArrayList<CustomerDepartmentInfoModel> customerDepartmentList; //部門リスト
+	String resultCode;
 	
+	public String getPaymentsiteCode() {
+		return paymentsiteCode;
+	}
+	public void setPaymentsiteCode(String paymentsiteCode) {
+		this.paymentsiteCode = paymentsiteCode;
+	}
+	public String getResultCode() {
+		return resultCode;
+	}
+	public void setResultCode(String resultCode) {
+		this.resultCode = resultCode;
+	}
+	public ArrayList<CustomerDepartmentInfoModel> getCustomerDepartmentList() {
+		return customerDepartmentList;
+	}
+	public void setCustomerDepartmentList(ArrayList<CustomerDepartmentInfoModel> customerDepartmentList) {
+		this.customerDepartmentList = customerDepartmentList;
+	}
 	public String getRepresentative() {
 		return representative;
 	}
 	public void setRepresentative(String representative) {
 		this.representative = representative;
-	}
-	public String getPurchasingManagersOfmail() {
-		return PurchasingManagersOfmail;
-	}
-	public void setPurchasingManagersOfmail(String purchasingManagersOfmail) {
-		PurchasingManagersOfmail = purchasingManagersOfmail;
-	}
-	public String getPurchasingManagers() {
-		return PurchasingManagers;
-	}
-	public void setPurchasingManagers(String purchasingManagers) {
-		PurchasingManagers = purchasingManagers;
 	}
 	public String getCustomerAbbreviation() {
 		return customerAbbreviation;
@@ -180,18 +189,6 @@ public class CustomerInfoModel {
 	public void setHeadOffice(String headOffice) {
 		this.headOffice = headOffice;
 	}
-	public String getCustomerRankingCode() {
-		return customerRankingCode;
-	}
-	public void setCustomerRankingCode(String customerRankingCode) {
-		this.customerRankingCode = customerRankingCode;
-	}
-	public String getListedCompany() {
-		return listedCompany;
-	}
-	public void setListedCompany(String listedCompany) {
-		this.listedCompany = listedCompany;
-	}
 	public String getCompanyNatureCode() {
 		return companyNatureCode;
 	}
@@ -217,6 +214,29 @@ public class CustomerInfoModel {
 	public void setUpdateUser(String updateUser) {
 		this.updateUser = updateUser;
 	}
-	
+	public String getLevelCode() {
+		return levelCode;
+	}
+	public void setLevelCode(String levelCode) {
+		this.levelCode = levelCode;
+	}
+	public String getListedCompanyFlag() {
+		return listedCompanyFlag;
+	}
+	public void setListedCompanyFlag(String listedCompanyFlag) {
+		this.listedCompanyFlag = listedCompanyFlag;
+	}
+	public String getPurchasingManagers() {
+		return purchasingManagers;
+	}
+	public void setPurchasingManagers(String purchasingManagers) {
+		this.purchasingManagers = purchasingManagers;
+	}
+	public String getPurchasingManagersMail() {
+		return purchasingManagersMail;
+	}
+	public void setPurchasingManagersMail(String purchasingManagersMail) {
+		this.purchasingManagersMail = purchasingManagersMail;
+	}
 	
 }

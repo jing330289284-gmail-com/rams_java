@@ -62,9 +62,16 @@ public interface CustomerInfoMapper {
 	 * @return
 	 */
 	public void insertCustomerDepartment(HashMap<String, String> sendMap);
+	
 	/**
 	 * 部門アップデート
 	 * @return
 	 */
 	public void updateCustomerDepartment(HashMap<String, String> sendMap);
+	
+	/**
+	 * 部門削除
+	 * @return
+	 */
+	public void customerDepartmentdelect(HashMap<String, String> sendMap);
 }

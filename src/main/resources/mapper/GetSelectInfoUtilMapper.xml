@@ -222,4 +222,13 @@
 		${columnName} = (SELECT
 		MAX(${columnName}) FROM ${table}) LIMIT 1 OFFSET 0;
 	</select>
+		<!-- 支払サイ選択肢 -->
+	<select id="getPaymentsite"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT
+			PaymentSiteCode CODE,
+			PaymentSiteName NAME 
+		FROM
+			M020PaymentSite
+	</select>
 </mapper>

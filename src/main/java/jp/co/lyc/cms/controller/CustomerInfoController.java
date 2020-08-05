@@ -89,28 +89,55 @@ public class CustomerInfoController {
 	/**
 	 * 登录按钮
 	 * @param customerInfoMod
-	 * @return
+	 * @return 0成功，1失败，2上位客户不存在，3明细登录失败，4部门在部门表中不存在
 	 */
 	@RequestMapping(value = "/toroku", method = RequestMethod.POST)
 	@ResponseBody
-	public int toroku(@RequestBody CustomerInfoModel customerInfoMod) {
+	public String toroku(@RequestBody CustomerInfoModel customerInfoMod) {
 		boolean result = true;
 		String topCustomerNo = "";
 		CustomerInfoModel checkMod = customerInfoSer.selectCustomerInfo(customerInfoMod.getCustomerNo());
-		topCustomerNo = customerInfoSer.checkTopCustomer(customerInfoMod.getTopCustomerName());
-		if(isNullOrEmpty(topCustomerNo)) {
-			return 2;
-		}else {
+		if(!customerInfoMod.getTopCustomerName().isEmpty()) {
+			topCustomerNo = customerInfoSer.checkTopCustomer(customerInfoMod.getTopCustomerName());
+			if(isNullOrEmpty(topCustomerNo)) {
+				return "2";//result（2）上位お客様名前がお客様情報テーブルに存じません
+			}else {
+				customerInfoMod.setTopCustomerNo(topCustomerNo);
+			}
 			customerInfoMod.setTopCustomerNo(topCustomerNo);
+		}else {
+			customerInfoMod.setTopCustomerNo("");
 		}
-		customerInfoMod.setTopCustomerNo(topCustomerNo);
 		if (checkMod == null && customerInfoMod.getShoriKbn().equals("tsuika")) {
 			result = insert(customerInfoMod);
-		} else if (checkMod != null && (customerInfoMod.getShoriKbn().equals("shusei"))||
-				customerInfoMod.getShoriKbn().equals("sansho")) {
+			if(result == false) {
+				return "1";
+			}
+			for(CustomerDepartmentInfoModel customerDepartmentInfoModel:customerInfoMod.getCustomerDepartmentList()) {
+				String meisaiResult = meisaiToroku(customerDepartmentInfoModel, customerInfoMod.getShoriKbn());
+				if(meisaiResult.equals("1")) {
+					return "3";
+				}else if(meisaiResult.equals("2")) {
+					return "4";
+				}
+			}
+			return "0";//result（0）成功（1）失敗
+		} else if (checkMod != null && (customerInfoMod.getShoriKbn().equals("shusei"))) {
 			result = update(customerInfoMod);
+			if(result == false) {
+				return "1";
+			}
+			for(CustomerDepartmentInfoModel customerDepartmentInfoModel:customerInfoMod.getCustomerDepartmentList()) {
+				String meisaiResult = meisaiToroku(customerDepartmentInfoModel, customerInfoMod.getShoriKbn());
+				if(meisaiResult.equals("1")) {
+					return "3";
+				}else if(meisaiResult.equals("2")) {
+					return "4";
+				}
+			}
+			return "0";//result（0）成功（1）失敗
 		}
-		return (result == true ? 0 : 1);//result（0）成功（1）失敗
+		return "0";
 	}
 
 	/**
@@ -124,17 +151,19 @@ public class CustomerInfoController {
 		HashMap<String, String> sendMap = new HashMap<>();
 		sendMap.put("customerName", customerInfoMod.getCustomerName());
 		sendMap.put("headOffice", customerInfoMod.getHeadOffice());
+		sendMap.put("representative", customerInfoMod.getRepresentative());
 		sendMap.put("customerAbbreviation", customerInfoMod.getCustomerAbbreviation());
 		sendMap.put("topCustomerNo", customerInfoMod.getTopCustomerNo());
 		sendMap.put("establishmentDate", customerInfoMod.getEstablishmentDate());
 		sendMap.put("businessStartDate", customerInfoMod.getBusinessStartDate());
-		sendMap.put("customerRankingCode", customerInfoMod.getCustomerRankingCode());
-		sendMap.put("listedCompany", customerInfoMod.getListedCompany());
+		sendMap.put("levelCode", customerInfoMod.getLevelCode());
+		sendMap.put("listedCompanyFlag", customerInfoMod.getListedCompanyFlag());
 		sendMap.put("companyNatureCode", customerInfoMod.getCompanyNatureCode());
 		sendMap.put("url", customerInfoMod.getUrl());
-		sendMap.put("PurchasingManagers", customerInfoMod.getPurchasingManagers());
+		sendMap.put("purchasingManagers", customerInfoMod.getPurchasingManagers());
 		sendMap.put("remark", customerInfoMod.getRemark());
-		sendMap.put("PurchasingManagersOfmail", customerInfoMod.getPurchasingManagersOfmail());
+		sendMap.put("purchasingManagersMail", customerInfoMod.getPurchasingManagersMail());
+		sendMap.put("paymentsiteCode", customerInfoMod.getPaymentsiteCode());
 		sendMap.put("updateUser", customerInfoMod.getUpdateUser());
 		sendMap.put("customerNo", customerInfoMod.getCustomerNo());	
 		result  = customerInfoSer.insertCustomerInfo(sendMap);
@@ -158,6 +187,9 @@ public class CustomerInfoController {
 		if(!checkMod.getHeadOffice().equals(customerInfoMod.getHeadOffice())) {
 			sendMap.put("headOffice", customerInfoMod.getHeadOffice());
 		}
+		if(!checkMod.getRepresentative().equals(customerInfoMod.getRepresentative())) {
+			sendMap.put("representative", customerInfoMod.getRepresentative());
+		}
 		if(!checkMod.getCustomerAbbreviation().equals(customerInfoMod.getCustomerAbbreviation())) {
 			sendMap.put("customerAbbreviation", customerInfoMod.getCustomerAbbreviation());
 		}
@@ -170,14 +202,14 @@ public class CustomerInfoController {
 		if(!checkMod.getBusinessStartDate().equals(customerInfoMod.getBusinessStartDate())) {
 			sendMap.put("businessStartDate", customerInfoMod.getBusinessStartDate());
 		}
-		if(!checkMod.getCustomerRankingCode().equals(customerInfoMod.getCustomerRankingCode())) {
-			sendMap.put("customerRankingCode", customerInfoMod.getCustomerRankingCode());
+		if(!checkMod.getLevelCode().equals(customerInfoMod.getLevelCode())) {
+			sendMap.put("levelCode", customerInfoMod.getLevelCode());
 		}
-		if(!checkMod.getCustomerRankingCode().equals(customerInfoMod.getListedCompany())) {
-			sendMap.put("listedCompany", customerInfoMod.getListedCompany());
+		if(!checkMod.getListedCompanyFlag().equals(customerInfoMod.getListedCompanyFlag())) {
+			sendMap.put("listedCompanyFlag", customerInfoMod.getListedCompanyFlag());
 		}
 		if(!checkMod.getCompanyNatureCode().equals(customerInfoMod.getCompanyNatureCode())) {
-			sendMap.put("companyNatureCode", customerInfoMod.getCustomerRankingCode());
+			sendMap.put("companyNatureCode", customerInfoMod.getCompanyNatureCode());
 		}
 		if(!checkMod.getUrl().equals(customerInfoMod.getUrl())) {
 			sendMap.put("url", customerInfoMod.getUrl());
@@ -186,10 +218,13 @@ public class CustomerInfoController {
 			sendMap.put("remark", customerInfoMod.getRemark());
 		}
 		if(!checkMod.getPurchasingManagers().equals(customerInfoMod.getPurchasingManagers())) {
-			sendMap.put("PurchasingManagers", customerInfoMod.getPurchasingManagers());
+			sendMap.put("purchasingManagers", customerInfoMod.getPurchasingManagers());
 		}
-		if(!checkMod.getPurchasingManagersOfmail().equals(customerInfoMod.getPurchasingManagersOfmail())) {
-			sendMap.put("PurchasingManagersOfmail", customerInfoMod.getPurchasingManagersOfmail());
+		if(!checkMod.getPurchasingManagersMail().equals(customerInfoMod.getPurchasingManagersMail())) {
+			sendMap.put("purchasingManagersMail", customerInfoMod.getPurchasingManagersMail());
+		}
+		if(!checkMod.getPaymentsiteCode().equals(customerInfoMod.getPaymentsiteCode())) {
+			sendMap.put("paymentsiteCode", customerInfoMod.getPaymentsiteCode());
 		}
 		sendMap.put("updateUser", customerInfoMod.getUpdateUser());
 		sendMap.put("customerNo", customerInfoMod.getCustomerNo());	
@@ -213,46 +248,50 @@ public class CustomerInfoController {
 	 * @param customerDepartmentInfoModel
 	 * @return
 	 */
-	@RequestMapping(value = "/meisaiToroku", method = RequestMethod.POST)
-	@ResponseBody
-	public ArrayList<CustomerDepartmentInfoModel> meisaiToroku(@RequestBody CustomerDepartmentInfoModel customerDepartmentInfoModel) {
+	public String meisaiToroku(CustomerDepartmentInfoModel customerDepartmentInfoModel , String shoriKbn) {
 		logger.info("BankInfoController.toroku:" + "明細登録開始");
 		HashMap<String, String> sendMap = new HashMap<>();
-		ArrayList<CustomerDepartmentInfoModel> resultList = new ArrayList<>();
 		sendMap.put("customerNo", customerDepartmentInfoModel.getCustomerNo());	
 		String resultCode = "0";//処理結果
 		String customerDepartmentCode = 
 				customerInfoSer.selectDepartmentCode(customerDepartmentInfoModel.getCustomerDepartmentName());
 		//resultCode : 2(部門が部門マスタに存在しない)
 		if(isNullOrEmpty(customerDepartmentCode)) {
-			resultList = 
-					getCustomerDepartmentInfo(customerDepartmentInfoModel.getCustomerNo());
-			if(resultList.get(0) == null) {
-				resultList.add(new CustomerDepartmentInfoModel());
-			}
-			resultList.get(0).setResultCode("2");
-			return resultList;
+			return resultCode = "2";
 		}
 		sendMap.put("customerDepartmentCode", customerDepartmentCode);
 		sendMap.put("customerNo", customerDepartmentInfoModel.getCustomerNo());
-		sendMap.put("customerDepartmentName", customerDepartmentInfoModel.getCustomerDepartmentName());
 		sendMap.put("positionCode", customerDepartmentInfoModel.getPositionCode());
 		sendMap.put("responsiblePerson", customerDepartmentInfoModel.getResponsiblePerson());
 		sendMap.put("customerDepartmentMail", customerDepartmentInfoModel.getCustomerDepartmentMail());
 		sendMap.put("updateUser", customerDepartmentInfoModel.getUpdateUser());
 		//resultCode : 0(処理成功)1（処理失敗）
-		if(customerInfoSer.selectCustomerDepartmentInfo(sendMap).size() != 0 ) {
-			resultCode = (customerInfoSer.updateCustomerDepartment(sendMap) ? "0" : "1");	
-		}else {
+		if(shoriKbn.equals("shusei")) {
+			if(customerInfoSer.selectCustomerDepartmentInfo(sendMap).size() != 0 ) {
+				resultCode = (customerInfoSer.updateCustomerDepartment(sendMap) ? "0" : "1");	
+			}else {
+				resultCode = (customerInfoSer.insertCustomerDepartment(sendMap) ? "0" : "1");
+			}
+		}else if(shoriKbn.equals("tsuika") && 
+				customerInfoSer.selectCustomerDepartmentInfo(sendMap).size() != 0) {
 			resultCode = (customerInfoSer.insertCustomerDepartment(sendMap) ? "0" : "1");
 		}
-		resultList = getCustomerDepartmentInfo(customerDepartmentInfoModel.getCustomerNo());
-		if(resultList.get(0) == null) {
-			resultList.add(new CustomerDepartmentInfoModel());
-		}
-		resultList.get(0).setResultCode(resultCode);
-		return resultList;
+		return resultCode;
 	}
+	
+	/**
+	 * 部門削除
+	 * @return
+	 */
+	@RequestMapping(value = "/customerDepartmentdelect", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean customerDepartmentdelect(@RequestBody CustomerDepartmentInfoModel customerDepartmentInfoModel) {
+		HashMap<String, String> sendMap = new HashMap<>();
+		sendMap.put("customerNo", customerDepartmentInfoModel.getCustomerNo());
+		sendMap.put("customerDepartmentCode", customerDepartmentInfoModel.getCustomerDepartmentCode());
+		return customerInfoSer.customerDepartmentdelect(sendMap);
+	}
+	
 	/**
 	 * 判断字符串是否为null或空
 	 * @param aString
