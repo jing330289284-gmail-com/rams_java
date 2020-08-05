@@ -111,7 +111,7 @@
 	</select>
 
 	<!-- 会社性質選択肢 -->
-	<select id="selectCompanyNature"
+	<select id="getCompanyNature"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT
 		companyNatureCode code,
@@ -120,7 +120,7 @@
 		M007CompanyNature
 	</select>
 	<!-- 職位選択肢 -->
-	<select id="selectPosition"
+	<select id="getPosition"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT
 		positionCode code,
@@ -129,7 +129,7 @@
 		M019Position
 	</select>
 	<!-- 上位お客様連想 -->
-	<select id="selectTopCustomer"
+	<select id="getTopCustomerDrop"
 		resultType="jp.co.lyc.cms.model.ModelClass" parameterType="String">
 		SELECT
 		topCustomerName name,
@@ -140,7 +140,7 @@
 		topCustomerName LIKE concat('%',#{name},'%')
 	</select>
 	<!-- 部門名前連想 -->
-	<select id="selectDepartmentMaster"
+	<select id="getDepartmentMaster"
 		resultType="jp.co.lyc.cms.model.ModelClass" parameterType="String">
 		SELECT
 		customerDepartmentName name,
@@ -151,7 +151,7 @@
 		customerDepartmentName LIKE concat('%',#{name},'%')
 	</select>
 	<!-- 銀行名検索 -->
-	<select id="selectBankInfo"
+	<select id="getBankInfo"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT
 		bankName name,

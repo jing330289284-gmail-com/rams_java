@@ -108,10 +108,10 @@ public class GetUtilClass {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/selectCompanyNature", method = RequestMethod.POST)
+	@RequestMapping(value = "/getCompanyNature", method = RequestMethod.POST)
 	@ResponseBody
-	public List<ModelClass> selectCompanyNature() {
-		List<ModelClass> list = getSelectInfoUtilService.selectCompanyNature();
+	public List<ModelClass> getCompanyNature() {
+		List<ModelClass> list = getSelectInfoUtilService.getCompanyNature();
 		return list;
 	}
 	
@@ -120,10 +120,10 @@ public class GetUtilClass {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/selectPosition", method = RequestMethod.POST)
+	@RequestMapping(value = "/getPosition", method = RequestMethod.POST)
 	@ResponseBody
-	public List<ModelClass> selectPosition() {
-		List<ModelClass> list = getSelectInfoUtilService.selectPosition();
+	public List<ModelClass> getPosition() {
+		List<ModelClass> list = getSelectInfoUtilService.getPosition();
 		return list;
 	}
 	
@@ -132,10 +132,10 @@ public class GetUtilClass {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/selectTopCustomer", method = RequestMethod.POST)
+	@RequestMapping(value = "/getTopCustomerDrop", method = RequestMethod.POST)
 	@ResponseBody
-	public List<ModelClass> selectTopCustomer(@RequestBody ModelClass model) {
-		List<ModelClass> list = getSelectInfoUtilService.selectTopCustomer(model.getName());
+	public List<ModelClass> getTopCustomerDrop(@RequestBody ModelClass model) {
+		List<ModelClass> list = getSelectInfoUtilService.getTopCustomerDrop(model.getName());
 		return list;
 	}
 	
@@ -144,10 +144,10 @@ public class GetUtilClass {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/selectDepartmentMaster", method = RequestMethod.POST)
+	@RequestMapping(value = "/getDepartmentMaster", method = RequestMethod.POST)
 	@ResponseBody
-	public List<ModelClass> selectDepartmentMaster(@RequestBody ModelClass model) {
-		List<ModelClass> list = getSelectInfoUtilService.selectDepartmentMaster(model.getName());
+	public List<ModelClass> getDepartmentMaster(@RequestBody ModelClass model) {
+		List<ModelClass> list = getSelectInfoUtilService.getDepartmentMaster(model.getName());
 		return list;
 	}
 	
@@ -156,10 +156,10 @@ public class GetUtilClass {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/selectBankInfo", method = RequestMethod.POST)
+	@RequestMapping(value = "/getBankInfo", method = RequestMethod.POST)
 	@ResponseBody
-	public List<ModelClass> selectBankInfo() {
-		List<ModelClass> list = getSelectInfoUtilService.selectBankInfo();
+	public List<ModelClass> getBankInfo() {
+		List<ModelClass> list = getSelectInfoUtilService.getBankInfo();
 		return list;
 	}
 	

@@ -47,7 +47,7 @@ public class BankInfoController {
 		if (onloadMol.getShoriKbn().equals("shusei") || onloadMol.getShoriKbn().equals("shosai")) {
 			accountInfoMod = selectAccountInfo(onloadMol.getEmployeeOrCustomerNo() , onloadMol.getAccountBelongsStatus());
 		}
-		resultMap.put("bankName", selectutilSer.selectBankInfo());
+		resultMap.put("bankName", selectutilSer.getBankInfo());
 		resultMap.put("accountInfoMod", accountInfoMod);
 		return resultMap;	
 	}

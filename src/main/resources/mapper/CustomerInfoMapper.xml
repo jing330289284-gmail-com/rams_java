@@ -116,6 +116,7 @@
 		SELECT
 			CONCAT( ( @rowNo := @rowNo + 1 ) ) AS rowNo,
 			M018.customerDepartmentName,
+			M018.customerDepartmentCode,
 			M019.positionCode,
 			M019.positionName,
 			T009.responsiblePerson,
