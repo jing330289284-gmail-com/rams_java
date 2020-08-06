@@ -114,7 +114,7 @@ public class CustomerInfoController {
 				return "1";
 			}
 			for(CustomerDepartmentInfoModel customerDepartmentInfoModel:customerInfoMod.getCustomerDepartmentList()) {
-				String meisaiResult = meisaiToroku(customerDepartmentInfoModel, customerInfoMod.getShoriKbn());
+				String meisaiResult = meisaiToroku(customerDepartmentInfoModel , customerInfoMod, customerInfoMod.getShoriKbn());
 				if(meisaiResult.equals("1")) {
 					return "3";
 				}else if(meisaiResult.equals("2")) {
@@ -128,7 +128,7 @@ public class CustomerInfoController {
 				return "1";
 			}
 			for(CustomerDepartmentInfoModel customerDepartmentInfoModel:customerInfoMod.getCustomerDepartmentList()) {
-				String meisaiResult = meisaiToroku(customerDepartmentInfoModel, customerInfoMod.getShoriKbn());
+				String meisaiResult = meisaiToroku(customerDepartmentInfoModel,customerInfoMod ,  customerInfoMod.getShoriKbn());
 				if(meisaiResult.equals("1")) {
 					return "3";
 				}else if(meisaiResult.equals("2")) {
@@ -248,10 +248,10 @@ public class CustomerInfoController {
 	 * @param customerDepartmentInfoModel
 	 * @return
 	 */
-	public String meisaiToroku(CustomerDepartmentInfoModel customerDepartmentInfoModel , String shoriKbn) {
+	public String meisaiToroku(CustomerDepartmentInfoModel customerDepartmentInfoModel , CustomerInfoModel customerInfoModel , String shoriKbn) {
 		logger.info("BankInfoController.toroku:" + "明細登録開始");
 		HashMap<String, String> sendMap = new HashMap<>();
-		sendMap.put("customerNo", customerDepartmentInfoModel.getCustomerNo());	
+		sendMap.put("customerNo", customerInfoModel.getCustomerNo());	
 		String resultCode = "0";//処理結果
 		String customerDepartmentCode = 
 				customerInfoSer.selectDepartmentCode(customerDepartmentInfoModel.getCustomerDepartmentName());
@@ -260,11 +260,11 @@ public class CustomerInfoController {
 			return resultCode = "2";
 		}
 		sendMap.put("customerDepartmentCode", customerDepartmentCode);
-		sendMap.put("customerNo", customerDepartmentInfoModel.getCustomerNo());
+		sendMap.put("customerNo", customerInfoModel.getCustomerNo());
 		sendMap.put("positionCode", customerDepartmentInfoModel.getPositionCode());
 		sendMap.put("responsiblePerson", customerDepartmentInfoModel.getResponsiblePerson());
 		sendMap.put("customerDepartmentMail", customerDepartmentInfoModel.getCustomerDepartmentMail());
-		sendMap.put("updateUser", customerDepartmentInfoModel.getUpdateUser());
+		sendMap.put("updateUser", customerInfoModel.getUpdateUser());
 		//resultCode : 0(処理成功)1（処理失敗）
 		if(shoriKbn.equals("shusei")) {
 			if(customerInfoSer.selectCustomerDepartmentInfo(sendMap).size() != 0 ) {
@@ -272,8 +272,7 @@ public class CustomerInfoController {
 			}else {
 				resultCode = (customerInfoSer.insertCustomerDepartment(sendMap) ? "0" : "1");
 			}
-		}else if(shoriKbn.equals("tsuika") && 
-				customerInfoSer.selectCustomerDepartmentInfo(sendMap).size() != 0) {
+		}else if(shoriKbn.equals("tsuika")) {
 			resultCode = (customerInfoSer.insertCustomerDepartment(sendMap) ? "0" : "1");
 		}
 		return resultCode;

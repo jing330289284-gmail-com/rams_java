@@ -16,8 +16,14 @@ public interface CustomerInfoSearchMapper {
 	 */
 	public ArrayList<CustomerInfoModel> SelectCustomerInfo(HashMap<String, String> sendMap);
 	/**
-	 * 削除ボタン
+	 * お客様情報削除
 	 * @param customerNo
 	 */
-	public void delect(String customerNo);
+	public void delectCustomerInfo(String customerNo);
+	
+	/**
+	 * お客様の部門削除
+	 * @param customerNo
+	 */
+	public void delectCustomerDepartmentInfo(String customerNo);
 }

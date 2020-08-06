@@ -60,14 +60,28 @@
 		<if test="topCustomerName != null">
 			AND T007.topCustomerNo = topNo.topCustomerNo
 		</if>
+		<if test="businessStartDate != null">
+			AND T007.businessStartDate >= #{businessStartDate}
+		</if>
+		<if test="paymentsiteCode != null">
+			AND T007.paymentsiteCode = #{paymentsiteCode}
+		</if>
 		 ORDER BY
 			T007.customerNo
     </select>
     <!-- お客様情報削除 -->
-    <delete id="delect" parameterType="String">
+    <delete id="delectCustomerInfo" parameterType="String">
 	    DELETE 
 	    FROM 
 	    	T007CustomerInfo 
+	    WHERE 
+	    	customerNo = #{customerNo};
+    </delete>
+       <!-- お客様の部門削除 -->
+    <delete id="delectCustomerDepartmentInfo" parameterType="String">
+	    DELETE 
+	    FROM 
+	    	T009CustomerDepartmentInfo 
 	    WHERE 
 	    	customerNo = #{customerNo};
     </delete>

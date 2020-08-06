@@ -124,8 +124,9 @@ public class CustomerInfoSearchController {
 	 */
 	@RequestMapping(value = "/delect", method = RequestMethod.POST)
 	@ResponseBody
-	public boolean delect( @RequestBody CustomerInfoModel customerInfoMod) {
-		return customerInfoSearchService.delect(customerInfoMod.getCustomerNo());
+	public boolean delect( @RequestBody CustomerInfoModel customerInfoMod) {	
+		return customerInfoSearchService.delectCustomerInfo(customerInfoMod.getCustomerNo()) && 
+				customerInfoSearchService.delectCustomerDepartmentInfo(customerInfoMod.getCustomerNo());
 	}
 	/**
 	 * データの検索
@@ -143,6 +144,12 @@ public class CustomerInfoSearchController {
 		}
 		if(!isNullOrEmpty(customerInfoMod.getHeadOffice())) {
 			sendMap.put("headOffice", customerInfoMod.getHeadOffice());
+		}
+		if(!isNullOrEmpty(customerInfoMod.getPaymentsiteCode())) {
+			sendMap.put("paymentsiteCode", customerInfoMod.getPaymentsiteCode());
+		}
+		if(!isNullOrEmpty(customerInfoMod.getBusinessStartDate())) {
+			sendMap.put("businessStartDate", customerInfoMod.getBusinessStartDate());
 		}
 		if(!isNullOrEmpty(customerInfoMod.getLevelCode())) {
 			sendMap.put("levelCode", customerInfoMod.getLevelCode());

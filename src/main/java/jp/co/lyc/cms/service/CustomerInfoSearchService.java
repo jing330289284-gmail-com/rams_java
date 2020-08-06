@@ -27,14 +27,31 @@ public class CustomerInfoSearchService {
 	}
 	
 	/**
-	 * 削除ボタン
+	 * お客様情報削除
 	 * @param customerNo
 	 */
 	
-	public boolean delect(String customerNo) {
+	public boolean delectCustomerInfo(String customerNo) {
 		boolean result = true;
 		try {
-			customerInfoSearchMapper.delect(customerNo);
+			customerInfoSearchMapper.delectCustomerInfo(customerNo);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return result = false;
+		}
+		return result;
+	}
+	
+	/**
+	 * お客様の部門削除
+	 * @param customerNo
+	 */
+	
+	public boolean delectCustomerDepartmentInfo(String customerNo) {
+		boolean result = true;
+		try {
+			customerInfoSearchMapper.delectCustomerDepartmentInfo(customerNo);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
