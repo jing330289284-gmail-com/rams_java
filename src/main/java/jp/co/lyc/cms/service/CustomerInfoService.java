@@ -5,6 +5,8 @@ import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
 import jp.co.lyc.cms.model.TopCustomerInfoModel;
 import jp.co.lyc.cms.mapper.CustomerInfoMapper;
 import jp.co.lyc.cms.model.CustomerDepartmentInfoModel;
@@ -135,6 +137,23 @@ public class CustomerInfoService {
 		boolean result = true;
 		try {
 			customerInfoMapper.updateCustomerDepartment(sendMap);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return result = false;
+		}
+		return result;
+	}
+	
+	/**
+	 * 部門削除
+	 * @param customerNo
+	 */
+	
+	public boolean customerDepartmentdelect(HashMap<String, String> sendMap) {
+		boolean result = true;
+		try {
+			customerInfoMapper.customerDepartmentdelect(sendMap);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

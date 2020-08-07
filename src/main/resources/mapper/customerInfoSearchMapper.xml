@@ -8,7 +8,7 @@
 			CONCAT(( @rowNo := @rowNo + 1 )) AS rowNo,
 			T007.customerNo,
 			T007.customerName,
-			M008.customerRankingName,
+			M008.levelName,
 			T007.headOffice,
 			M007.companyNatureName,
 			<choose>
@@ -31,7 +31,7 @@
 			AND T006.AdmissionStartDate IS NOT NULL
 			AND T006.AdmissionEndDate IS NOT NULL
 			LEFT JOIN T001Employee AS T001 ON T006.employeeNo = T001.employeeNo
-			LEFT JOIN M008CustomerRanking AS M008 ON T007.customerRankingCode = M008.customerRankingCode
+			LEFT JOIN M008Level AS M008 ON T007.levelCode = M008.levelCode
 			LEFT JOIN M007CompanyNature AS M007 ON T007.companyNatureCode = M007.companyNatureCode	
 		<choose>
 	        <when test="topCustomerName != null">
@@ -51,8 +51,8 @@
 		<if test="customerName != null">
 			AND T007.customerName like concat('%',#{customerName},'%')
 		</if>
-		<if test="customerRankingCode != null">
-			AND T007.customerRankingCode=#{customerRankingCode}
+		<if test="levelCode != null">
+			AND T007.levelCode=#{levelCode}
 		</if>
 		<if test="companyNatureCode != null">
 			AND T007.companyNatureCode=#{companyNatureCode}
@@ -60,14 +60,28 @@
 		<if test="topCustomerName != null">
 			AND T007.topCustomerNo = topNo.topCustomerNo
 		</if>
+		<if test="businessStartDate != null">
+			AND T007.businessStartDate >= #{businessStartDate}
+		</if>
+		<if test="paymentsiteCode != null">
+			AND T007.paymentsiteCode = #{paymentsiteCode}
+		</if>
 		 ORDER BY
 			T007.customerNo
     </select>
     <!-- お客様情報削除 -->
-    <delete id="delect" parameterType="String">
+    <delete id="delectCustomerInfo" parameterType="String">
 	    DELETE 
 	    FROM 
 	    	T007CustomerInfo 
+	    WHERE 
+	    	customerNo = #{customerNo};
+    </delete>
+       <!-- お客様の部門削除 -->
+    <delete id="delectCustomerDepartmentInfo" parameterType="String">
+	    DELETE 
+	    FROM 
+	    	T009CustomerDepartmentInfo 
 	    WHERE 
 	    	customerNo = #{customerNo};
     </delete>

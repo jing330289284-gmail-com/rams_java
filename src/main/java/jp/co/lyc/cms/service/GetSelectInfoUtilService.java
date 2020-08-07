@@ -160,40 +160,40 @@ public class GetSelectInfoUtilService {
 	 * お客様性質
 	 * @return
 	 */
-	public List<ModelClass> selectCompanyNature() {
-		return getSelectInfoUtilMapper.selectCompanyNature();
+	public List<ModelClass> getCompanyNature() {
+		return getSelectInfoUtilMapper.getCompanyNature();
 	}
 	
 	/**
 	 * 職位
 	 * @return
 	 */
-	public List<ModelClass> selectPosition() {
-		return getSelectInfoUtilMapper.selectPosition();
+	public List<ModelClass> getPosition() {
+		return getSelectInfoUtilMapper.getPosition();
 	}
 	
 	/**
 	 * 上位お客様連想
 	 * @return
 	 */
-	public List<ModelClass> selectTopCustomer(String name) {
-		return getSelectInfoUtilMapper.selectTopCustomer(name);
+	public List<ModelClass> getTopCustomerDrop(String name) {
+		return getSelectInfoUtilMapper.getTopCustomerDrop(name);
 	}
 	
 	/**
 	 * 部門名前連想
 	 * @return
 	 */
-	public List<ModelClass> selectDepartmentMaster(String name) {
-		return getSelectInfoUtilMapper.selectDepartmentMaster(name);
+	public List<ModelClass> getDepartmentMaster(String name) {
+		return getSelectInfoUtilMapper.getDepartmentMaster(name);
 	}
 	
 	/**
 	 * 銀行名検索
 	 * @return
 	 */
-	public List<ModelClass> selectBankInfo() {
-		return getSelectInfoUtilMapper.selectBankInfo();
+	public List<ModelClass> getBankInfo() {
+		return getSelectInfoUtilMapper.getBankInfo();
 	}
 	
 	/**
@@ -202,5 +202,13 @@ public class GetSelectInfoUtilService {
 	 */
 	public List<ModelClass> getBankBranchInfo(HashMap<String, String> sendMap) {
 		return getSelectInfoUtilMapper.getBankBranchInfo(sendMap);
+	}
+	
+	/**
+	 * 支払サイト検索
+	 * @return
+	 */
+	public List<ModelClass> getPaymentsite() {
+		return getSelectInfoUtilMapper.getPaymentsite();
 	}
 }

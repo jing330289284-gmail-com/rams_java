@@ -116,35 +116,40 @@ public interface GetSelectInfoUtilMapper {
 	 * お客様性質
 	 * @return
 	 */
-	public List<ModelClass> selectCompanyNature();
+	public List<ModelClass> getCompanyNature();
 	
 	/**
 	 * 職位
 	 * @return
 	 */
-	public List<ModelClass> selectPosition();
+	public List<ModelClass> getPosition();
 	
 	/**
 	 * 上位お客様連想
 	 * @return
 	 */
-	public List<ModelClass> selectTopCustomer(String name);
+	public List<ModelClass> getTopCustomerDrop(String name);
 	
 	/**
 	 * 部門名前連想
 	 * @return
 	 */
-	public List<ModelClass> selectDepartmentMaster(String name);
+	public List<ModelClass> getDepartmentMaster(String name);
 	
 	/**
 	 * 銀行名検索
 	 * @return
 	 */
-	public List<ModelClass> selectBankInfo();
+	public List<ModelClass> getBankInfo();
 	
 	/**
 	 * 支店情報検索
 	 * @return
 	 */
 	public List<ModelClass> getBankBranchInfo(HashMap<String, String> sendMap);
+	/**
+	 * 支払サイト検索
+	 * @return
+	 */
+	public List<ModelClass> getPaymentsite();
 }
