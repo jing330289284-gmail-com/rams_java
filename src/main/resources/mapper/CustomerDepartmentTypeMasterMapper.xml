@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jp.co.lyc.cms.mapper.CustomerDepartmentTypeMasterMapper">
+	<!-- 言語の存在チェック -->
+	<select id="checkHave" parameterType="String" resultType="jp.co.lyc.cms.model.CustomerDepartmentTypeMasterModel">
+	SELECT * FROM
+		M018CustomerDepartment
+	WHERE	
+		customerDepartmentName = #{customerDepartmenttypeName}
+	</select>
+	<!-- 言語のインサート -->
+	<insert id="insertCustomerDepartmentTypeMaster" parameterType="String" useGeneratedKeys="true" keyProperty="customerDepartmentCode">
+	INSERT INTO M018CustomerDepartment
+	(customerDepartmentName,
+	remark,
+	updateTime,
+	createTime,
+	updateUser)
+	VALUE(
+	#{customerDepartmenttypeName},
+	#{customerDepartmenttypeRemark},
+	NOW(),
+	NOW(),
+	#{updateUser}
+	)
+	</insert>
+</mapper>
