@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jp.co.lyc.cms.mapper.EmployeeInfoMapper">
+	<resultMap id="Employee"
+		type="jp.co.lyc.cms.model.EmployeeModel" />
+	<select id="getEmployeeInfo" parameterType="map"
+		resultMap="Employee">
+		SELECT
+		(@rowNo:=@rowNo + 1) AS rowNo,
+		T001.employeeNo,
+		CONCAT(T001.employeeFristName,' ',T001.employeeLastName)as
+		employeeFristName ,
+		T002.Furigana,
+		T002.alphabetName,
+		T002.age,
+		T002.intoCompanyYearAndMonth,
+		T006.AdmissionStartDate,
+		T005.salary,
+		T007.customerName,
+		T002.phoneNo,
+		T003.nearestStation1,
+		TIMESTAMPDIFF(MONTH,
+		NOW(),
+		T002.stayPeriod) AS stayPeriod
+		FROM
+		T001Employee AS T001
+		LEFT JOIN
+		T002EmployeeDetail AS T002 ON T002.employeeNo = T001.employeeNo
+		LEFT JOIN
+		T006EmployeeSiteInfo AS T006 ON T001.employeeNo = T006.employeeNo
+		LEFT
+		JOIN
+		T003AddressInfo AS T003 ON T001.employeeNo = T003.employeeNo
+		LEFT JOIN
+		T005ExpensesInfo AS T005 ON T001.employeeNo = T005.employeeNo
+		LEFT JOIN
+		T007CustomerInfo AS T007 ON T006.customerNo = T007.customerNo,
+		(SELECT
+		@rowNo:=0) AS rowNo
+		WHERE
+		1 = 1
+		<if test="employeeNo!=null">
+			AND T001.employeeNo=#{employeeNo}
+		</if>
+		<if test="employeeFristName!=null">
+			AND T001.employeeFristName like
+			concat('%',#{employeeFristName},'%')
+		</if>
+		<if test="employeeFormCode!=null">
+			AND T002.employeeFormCode=#{employeeFormCode}
+		</if>
+		<if test="employeeStatus!=null">
+			AND T002.status=#{employeeStatus}
+		</if>
+		<if test="genderStatus!=null">
+			AND T002.genderStatus=#{genderStatus}
+		</if>
+		<if test="ageFrom != null">
+			AND T002.age &gt;= #{ageFrom}
+		</if>
+		<if test="ageTo != null">
+			AND T002.age &lt;= #{ageTo}
+		</if>
+		<if test="residenceCode != null">
+			AND T002.residenceCode=#{residenceCode}
+		</if>
+		<if test="nationalityCode != null">
+			AND T002.nationalityCode=#{nationalityCode}
+		</if>
+		<if test="customer!= null">
+			AND T007.customerName=#{customer}
+		</if>
+		<if test="intoCompanyCode!= null">
+			AND T002.intoCompanyCode=#{intoCompanyCode}
+		</if>
+		<if test="japaneaseLevelCode!=  null">
+			AND T002.japaneseLevelCode=#{japaneaseLevelCode}
+		</if>
+		<if test="developLanguage1 != null">
+			AND T002.developLanguage1=#{developLanguage1}
+		</if>
+		<if test="developLanguage2 != null">
+			AND T002.developLanguage2=#{developLanguage2}
+		</if>
+		<if test="developLanguage3!= null">
+			AND T002.developLanguage3=#{developLanguage3}
+		</if>
+		<if test="intoCompanyYearAndMonthFrom != null">
+			AND T002.intoCompanyYearAndMonth
+			&gt;=#{intoCompanyYearAndMonthFrom}
+		</if>
+		<if test="intoCompanyYearAndMonthTo!= null">
+			AND T002.intoCompanyYearAndMonth
+			&lt;=#{intoCompanyYearAndMonthTo}
+		</if>
+		<if test="kadou!=null">
+			<if test="kadou='0'">
+				AND T006.AdmissionStartDate is not null AND
+				T006.AdmissionEndDate is
+				null
+			</if>
+			<if test="kadou='1'">
+				AND T006.AdmissionStartDate is null AND
+				T006.AdmissionEndDate is not
+				null
+			</if>
+		</if>
+		ORDER BY
+		T001.employeeNo
+		DESC
+	</select>
+
+	<!-- 社員情報を追加 -->
+	<insert id="addEmployeeInfo" parameterType="String">
+		INSERT INTO
+		T001Employee (employeeNo, employeeFristName, employeeLastName,
+		password,
+		authorityCode, updateTime, createTime, updateUser
+		)
+		VALUES(
+		#{employeeNo},
+		#{employeeFristName},
+		#{employeeLastName},
+		#{password},
+		#{authorityCode},
+		NOW(),
+		NOW(),
+		#{updateUser}
+		)
+	</insert>
+
+	<!-- 社員情報詳細を追加 -->
+	<insert id="addEmployeeInfoDetail" parameterType="String">
+		INSERT INTO
+		T002EmployeeDetail (employeeNo,
+		genderStatus,
+		age,
+		japaneseCalendar,
+		alphabetName,
+		furigana,
+		nationalityCode,
+		birthplace,
+		intoCompanyCode,
+		intoCompanyYearAndMonth,
+		employeeStatus,
+		retirementYearAndMonth,
+		myNumber,
+		occupationCode,
+		employeeFormCode,
+		comeToJapanYearAndMonth,
+		graduationUniversity,
+		graduationYearAndMonth,
+		major,
+		residenceCode,
+		residenceCardNo,
+		stayPeriod,
+		japaneseLevelCode,
+		englishLevelCode,
+		developLanguage1,
+		developLanguage2,
+		developLanguage3,
+		developLanguage4,
+		developLanguage5,
+		certification1,
+		certification2,
+		resumeInfo1,
+		resumeRemark1,
+		resumeInfo2,
+		resumeRemark2,
+		residentCardInfo,
+		passportInfo,
+		companyMail,
+		phoneNo,
+		employmentInsuranceNo,
+		departmentCode,
+		updateTime,
+		createTime,
+		updateUser)
+		VALUES(
+		#{employeeNo},
+		#{genderStatus},
+		#{age},
+		#{japaneseCalendar},
+		#{alphabetName},
+		#{furigana},
+		#{nationalityCode},
+		#{birthplace},
+		#{intoCompanyCode},
+		#{intoCompanyYearAndMonth},
+		#{employeeStatus},
+		#{retirementYearAndMonth},
+		#{myNumber},
+		#{occupationCode},
+		#{employeeFormCode},
+		#{comeToJapanYearAndMonth},
+		#{graduationUniversity},
+		#{graduationYearAndMonth},
+		#{major},
+		#{residenceCode},
+		#{residenceCardNo},
+		#{stayPeriod},
+		#{japaneseLevelCode},
+		#{englishLevelCode},
+		#{developLanguage1},
+		#{developLanguage2},
+		#{developLanguage3},
+		#{developLanguage4},
+		#{developLanguage5},
+		#{certification1},
+		#{certification2},
+		#{resumeInfo1},
+		#{resumeRemark1},
+		#{resumeInfo2},
+		#{resumeRemark2},
+		#{residentCardInfo},
+		#{passportInfo},
+		#{companyMail},
+		#{phoneNo},
+		#{employmentInsuranceNo},
+		#{departmentCode},
+		NOW(),
+		NOW(),
+		#{updateUser}
+		)
+	</insert>
+
+	<!-- 社員情報を削除 -->
+	<delete id="deleteEmployeeInfo" parameterType="String">
+		DELETE
+		FROM
+		T001Employee
+		WHERE
+		employeeNo = #{employeeNo};
+	</delete>
+	<!-- 社員情報詳細を削除 -->
+	<delete id="deleteEmployeeInfoDetail" parameterType="String">
+		DELETE
+		FROM
+		T002EmployeeDetail
+		WHERE
+		employeeNo = #{employeeNo};
+	</delete>
+
+	<!-- 現場情報を削除 -->
+	<delete id="deleteEmployeeSiteInfo" parameterType="String">
+		DELETE
+		FROM
+		T006EmployeeSiteInfo
+		WHERE
+		employeeNo = #{employeeNo};
+	</delete>
+
+	<!-- 住所情報を削除 -->
+	<delete id="deleteAddressInfo" parameterType="String">
+		DELETE
+		FROM
+		T003AddressInfo
+		WHERE
+		employeeNo = #{employeeNo};
+	</delete>
+
+	<!-- 諸費用を削除 -->
+	<delete id="deleteExpensesInfo" parameterType="String">
+		DELETE
+		FROM
+		T005ExpensesInfo
+		WHERE
+		employeeNo = #{employeeNo};
+	</delete>
+</mapper>

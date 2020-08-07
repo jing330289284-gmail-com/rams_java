@@ -23,7 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import jp.co.lyc.cms.common.BaseController;
 import jp.co.lyc.cms.model.EmployeeModel;
 import jp.co.lyc.cms.model.LoginModel;
-import jp.co.lyc.cms.service.GetEmployeeInfoService;
+import jp.co.lyc.cms.service.EmployeeInfoService;
 import jp.co.lyc.cms.service.LoginService;
 import net.sf.json.JSONObject;
 
@@ -34,7 +34,7 @@ public class LoginController extends BaseController {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
-	GetEmployeeInfoService es;
+	EmployeeInfoService es;
 	@Autowired
 	LoginService loginservice;
 	/**
