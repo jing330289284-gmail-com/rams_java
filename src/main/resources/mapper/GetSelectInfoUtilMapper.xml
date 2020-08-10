@@ -199,20 +199,12 @@
 	<select id="getNO" resultType="String" parameterType="map"
 		statementType="STATEMENT">
 		SELECT
-		(CASE
+		(CASE WHEN (CONVERT(SUBSTRING(a.${columnName}, 4),SIGNED) + 1) &lt;10 
+		THEN
+		CONCAT(CONCAT('${typeName}','00'),(CONVERT(SUBSTRING(a.${columnName},4) , SIGNED) + 1))
 		WHEN
-		(CONVERT(SUBSTRING(a.${columnName}, 4)
-		,SIGNED) + 1) &lt;10 THEN
-		CONCAT(CONCAT('${typeName}','00'),(CONVERT(SUBSTRING(a.${columnName},
-		4) , SIGNED) + 1))
-		WHEN
-		(CONVERT(SUBSTRING(a.${columnName}, 4) , SIGNED)
-		+ 1 &gt;=10) AND (CONVERT(SUBSTRING(a.${columnName}, 4)
-		, SIGNED) + 1
-		&lt;100)
-		THEN CONCAT(CONCAT('${typeName}','0'),(CONVERT(
-		SUBSTRING(a.${columnName},
-		4) , SIGNED) + 1))
+		(CONVERT(SUBSTRING(a.${columnName}, 4) , SIGNED)+ 1 &gt;=10) AND (CONVERT(SUBSTRING(a.${columnName}, 4)
+		, SIGNED) + 1&lt;100)THEN CONCAT(CONCAT('${typeName}','0'),(CONVERT(SUBSTRING(a.${columnName},4) , SIGNED) + 1))
 		ELSE
 		CONCAT('${typeName}',(CONVERT( SUBSTRING(a.${columnName}, 4) , SIGNED)
 		+ 1)) END) no

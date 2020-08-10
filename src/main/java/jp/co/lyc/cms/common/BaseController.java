@@ -7,8 +7,6 @@ import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import com.mysql.cj.util.StringUtils;
-
 import jp.co.lyc.cms.model.EmployeeModel;
 import jp.co.lyc.cms.model.sessionEmployeeModel;
 

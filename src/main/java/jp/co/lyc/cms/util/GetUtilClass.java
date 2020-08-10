@@ -90,7 +90,7 @@ public class GetUtilClass {
 		List<ModelClass> list = getSelectInfoUtilService.getLevel();
 		return list;
 	}
-	
+
 	/**
 	 * 日本語レベルを取得
 	 * 
@@ -102,7 +102,7 @@ public class GetUtilClass {
 		List<ModelClass> list = getSelectInfoUtilService.getJapaneseLevel();
 		return list;
 	}
-	
+
 	/**
 	 * お客様性質を取得
 	 * 
@@ -114,7 +114,7 @@ public class GetUtilClass {
 		List<ModelClass> list = getSelectInfoUtilService.getCompanyNature();
 		return list;
 	}
-	
+
 	/**
 	 * 職位を取得
 	 * 
@@ -126,7 +126,7 @@ public class GetUtilClass {
 		List<ModelClass> list = getSelectInfoUtilService.getPosition();
 		return list;
 	}
-	
+
 	/**
 	 * 上位お客様連想
 	 * 
@@ -138,7 +138,7 @@ public class GetUtilClass {
 		List<ModelClass> list = getSelectInfoUtilService.getTopCustomerDrop(model.getName());
 		return list;
 	}
-	
+
 	/**
 	 * 部門名前連想
 	 * 
@@ -150,7 +150,7 @@ public class GetUtilClass {
 		List<ModelClass> list = getSelectInfoUtilService.getDepartmentMaster(model.getName());
 		return list;
 	}
-	
+
 	/**
 	 * 銀行名検索
 	 * 
@@ -162,7 +162,7 @@ public class GetUtilClass {
 		List<ModelClass> list = getSelectInfoUtilService.getBankInfo();
 		return list;
 	}
-	
+
 	/**
 	 * 支店情報検索
 	 * 
@@ -473,7 +473,7 @@ public class GetUtilClass {
 	 */
 	public Map<String, String> getParam(EmployeeModel emp) {
 		Map<String, String> sendMap = new HashMap<String, String>();
-		String developmentLanguageNo1 = emp.getDevelopmentLanguageNo1();// 開発言語1
+		String developmentLanguageNo1 = emp.getDevelopLanguage1();//　開発言語1
 		if (developmentLanguageNo1 != null && developmentLanguageNo1.length() != 0) {
 			sendMap.put("developmentLanguageNo1", developmentLanguageNo1);
 		}
@@ -508,7 +508,7 @@ public class GetUtilClass {
 		return getSelectInfoUtilService.resetPassword(sendMap);
 	}
 
-	/**　
+	/**
 	 * 採番
 	 * 
 	 * @return
