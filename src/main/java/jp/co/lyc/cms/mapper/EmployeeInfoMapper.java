@@ -24,14 +24,14 @@ public interface EmployeeInfoMapper {
 	 * @param sendMap
 	 */
 
-	public void addEmployeeInfo(Map<String, String> sendMap);
+	public void insertEmployeeInfo(Map<String, String> sendMap);
 
 	/**
 	 * 社員情報詳細を追加
 	 * 
 	 */
 
-	public void addEmployeeInfoDetail(Map<String, String> sendMap);
+	public void insertEmployeeInfoDetail(Map<String, String> sendMap);
 
 	/**
 	 * 社員情報を削除
@@ -62,10 +62,24 @@ public interface EmployeeInfoMapper {
 	 * 
 	 */
 	public void deleteExpensesInfo(Map<String, String> sendMap);
-	
+
 	/**
 	 * EmployeeNoによると、社員情報を取得
 	 */
 	public EmployeeModel getEmployeeByEmployeeNo(Map<String, String> sendMap);
+
+	/**
+	 * 社員情報を修正
+	 * 
+	 * @param emp
+	 */
+	public void updateEmployeeInfo(Map<String, String> sendMap);
+
+	/**
+	 * 社員情報詳細を修正
+	 * 
+	 * @param emp
+	 */
+	public void updateEmployeeInfoDetail(Map<String, String> sendMap);
 
 }

@@ -58,14 +58,14 @@ public class EmployeeInfoController {
 	 * @return boolean
 	 */
 
-	@RequestMapping(value = "/addEmployeeInfo", method = RequestMethod.POST)
+	@RequestMapping(value = "/insertEmployee", method = RequestMethod.POST)
 	@ResponseBody
-	public boolean addEmployeeInfo(@RequestBody EmployeeModel emp) throws Exception {
-		logger.info("GetEmployeeInfoController.addEmployeeInfo:" + "追加開始");
+	public boolean insertEmployee(@RequestBody EmployeeModel emp) throws Exception {
+		logger.info("GetEmployeeInfoController.insertEmployee:" + "追加開始");
 		Map<String, String> sendMap = getParam(emp);
 		boolean result = true;
-		result = ēmployeeInfoService.addEmployeeInfo(sendMap);
-		logger.info("GetEmployeeInfoController.addEmployeeInfo:" + "追加結束");
+		result = ēmployeeInfoService.insertEmployee(sendMap);
+		logger.info("GetEmployeeInfoController.insertEmployee:" + "追加結束");
 		return result;
 	}
 
@@ -104,6 +104,24 @@ public class EmployeeInfoController {
 	}
 
 	/**
+	 * 社員情報を修正
+	 * 
+	 * @param emp
+	 * @return boolean
+	 */
+
+	@RequestMapping(value = "/updateEmployee", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean updateEmployee(@RequestBody EmployeeModel emp) throws Exception {
+		logger.info("GetEmployeeInfoController.updateEmployee:" + "修正開始");
+		Map<String, String> sendMap = getParam(emp);
+		boolean result = true;
+		result = ēmployeeInfoService.updateEmployee(sendMap);
+		logger.info("GetEmployeeInfoController.updateEmployee:" + "修正結束");
+		return result;
+	}
+
+	/**
 	 * 条件を取得
 	 * 
 	 * @param emp
@@ -114,7 +132,7 @@ public class EmployeeInfoController {
 		String employeeNo = emp.getEmployeeNo();// 社員番号
 		String employeeFristName = emp.getEmployeeFristName();// 社員氏
 		String employeeLastName = emp.getEmployeeLastName();// 社員名
-		String furigana = emp.getFurigana1() +"　"+ emp.getFurigana2();// カタカナ
+		String furigana = emp.getFurigana1() + "　" + emp.getFurigana2();// カタカナ
 		String alphabetName = emp.getAlphabetName();// ローマ字
 		String age = emp.getAge();// 年齢
 		String genderStatus = emp.getGenderStatus();// 性別ステータス

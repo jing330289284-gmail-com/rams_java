@@ -97,7 +97,7 @@
 	</select>
 
 	<!-- 社員情報を追加 -->
-	<insert id="addEmployeeInfo" parameterType="String">
+	<insert id="insertEmployeeInfo" parameterType="String">
 		INSERT INTO
 		T001Employee (
 		employeeNo,
@@ -122,7 +122,7 @@
 	</insert>
 
 	<!-- 社員情報詳細を追加 -->
-	<insert id="addEmployeeInfoDetail" parameterType="String">
+	<insert id="insertEmployeeInfoDetail" parameterType="String">
 		INSERT INTO
 		T002EmployeeDetail (
 		employeeNo,
@@ -170,7 +170,6 @@
 		createTime,
 		updateUser,
 		picInfo
-
 		)
 		VALUES(
 		#{employeeNo},
@@ -276,6 +275,87 @@
 		1 = 1
 		AND T001.employeeNo=#{employeeNo}
 	</select>
+	<!-- 社員情報を修正 -->
+	<update id="updateEmployeeInfo" parameterType="String">
+		UPDATE
+		T001Employee
+		SET
+		employeeFristName =#{employeeFristName},
+		employeeLastName =#{employeeLastName},
+		password=#{password},
+		authorityCode =#{authorityCode},
+		updateTime = NOW(),
+		updateUser =
+		#{updateUser}
+		WHERE
+		employeeNo = #{employeeNo}
+	</update>
+	<!-- 社員情報詳細を修正 -->
+	<update id="updateEmployeeInfoDetail" parameterType="String">
+		UPDATE
+		T002EmployeeDetail
+		SET
+		genderStatus=#{genderStatus},
+		age=#{age},
+		japaneseCalendar=#{japaneseCalendar},
+		furigana=#{furigana},
+		nationalityCode=#{nationalityCode},
+		birthplace=#{birthplace},
+		intoCompanyCode=#{intoCompanyCode},
+		intoCompanyYearAndMonth=
+		#{intoCompanyYearAndMonth},
+		employeeStatus=#{employeeStatus},
+		retirementYearAndMonth=#{retirementYearAndMonth},
+		myNumber=
+		#{myNumber},
+		occupationCode=#{occupationCode},
+		comeToJapanYearAndMonth=#{comeToJapanYearAndMonth},
+		graduationUniversity=#{graduationUniversity},
+		graduationYearAndMonth
+		=#{graduationYearAndMonth},
+		major=#{major},
+		residenceCode=
+		#{residenceCode},
+		residenceCardNo=#{residenceCardNo},
+		stayPeriod=
+		#{stayPeriod},
+		japaneseLevelCode=#{japaneseLevelCode},
+		englishLevelCode=#{englishLevelCode},
+		developLanguage1=
+		#{developLanguage1},
+		developLanguage2=#{developLanguage2},
+		developLanguage3=#{developLanguage3},
+		developLanguage4=
+		#{developLanguage4},
+		developLanguage5=#{developLanguage5},
+		japaneseCalendar=#{japaneseCalendar},
+		certification1=
+		#{certification1},
+		certification2=#{certification2},
+		resumeInfo1=
+		#{resumeInfo1},
+		resumeRemark1=#{resumeRemark1},
+		resumeInfo2=
+		#{resumeInfo2},
+		resumeRemark2=#{resumeRemark2},
+		residentCardInfo=
+		#{residentCardInfo},
+		passportInfo=#{passportInfo},
+		companyMail=
+		#{companyMail},
+		phoneNo=#{phoneNo},
+		employmentInsuranceNo=
+		#{employmentInsuranceNo},
+		updateTime=NOW(),
+		updateUser=
+		#{updateUser}
+		WHERE
+		employeeNo=
+		#{employeeNo}
+	</update>
+
+
+
 	<sql id="T001">
 		T001.employeeNo,
 		T001.employeeFristName,
@@ -293,8 +373,8 @@
 		T002.japaneseCalendar,
 		T002.alphabetName,
 		T002.furigana,
-		SUBSTRING_INDEX(T002.furigana, '　',1) furigana1,
-		SUBSTRING_INDEX(T002.furigana, '　',-1) furigana2,
+		SUBSTRING_INDEX(T002.furigana, ' ',1) furigana1,
+		SUBSTRING_INDEX(T002.furigana, ' ',-1) furigana2,
 		T002.nationalityCode,
 		T002.birthplace,
 		T002.intoCompanyCode,

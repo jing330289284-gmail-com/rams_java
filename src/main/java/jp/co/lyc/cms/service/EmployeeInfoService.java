@@ -35,11 +35,11 @@ public class EmployeeInfoService {
 	 * @return boolean
 	 */
 	@Transactional(rollbackFor = Exception.class)
-	public boolean addEmployeeInfo(Map<String, String> sendMap) {
+	public boolean insertEmployee(Map<String, String> sendMap) {
 		boolean result = true;
 		try {
-			employeeInfoMapper.addEmployeeInfo(sendMap);
-			employeeInfoMapper.addEmployeeInfoDetail(sendMap);
+			employeeInfoMapper.insertEmployeeInfo(sendMap);
+			employeeInfoMapper.insertEmployeeInfoDetail(sendMap);
 		} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			e.printStackTrace();
@@ -80,6 +80,27 @@ public class EmployeeInfoService {
 	public EmployeeModel getEmployeeByEmployeeNo(Map<String, String> sendMap) {
 		EmployeeModel model = employeeInfoMapper.getEmployeeByEmployeeNo(sendMap);
 		return model;
+	}
+
+	/**
+	 * 社員情報を修正
+	 * 
+	 * @param emp
+	 * @return boolean
+	 */
+	@Transactional(rollbackFor = Exception.class)
+
+	public boolean updateEmployee(Map<String, String> sendMap) {
+		boolean result = true;
+		try {
+			employeeInfoMapper.updateEmployeeInfo(sendMap);
+			employeeInfoMapper.updateEmployeeInfoDetail(sendMap);
+		} catch (Exception e) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			e.printStackTrace();
+			return result = false;
+		}
+		return result;
 	}
 
 }
