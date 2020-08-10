@@ -7,7 +7,7 @@ public class CostModel implements Serializable {
 	private static final long serialVersionUID = -2028159323401651353L;
 	
 	public String employeeNo;//社員番号
-	public String shoriKbn;//処理区分
+	public String actionType;//処理区分
 	public int BonusFlag;//ボーナスフラグ
 	public int SocialInsuranceFlag;//社会保険フラグ
 	public String TransportationExpenses;//交通費
@@ -126,11 +126,12 @@ public class CostModel implements Serializable {
 	public void setEmployeeNo(String employeeNo) {
 		this.employeeNo = employeeNo;
 	}
-	public String getShoriKbn() {
-		return shoriKbn;
+	
+	public String getActionType() {
+		return actionType;
 	}
-	public void setShoriKbn(String shoriKbn) {
-		this.shoriKbn = shoriKbn;
+	public void setActionType(String actionType) {
+		this.actionType = actionType;
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;

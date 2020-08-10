@@ -2,6 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="jp.co.lyc.cms.mapper.GetBankInfoMapper">
     <resultMap id="BankBranchInfo" type="map"/>
+    <resultMap id="AccountInfo" type="jp.co.lyc.cms.model.BankInfoModel"/>
+    <select id="selectAccountInfo" parameterType="String" resultMap="AccountInfo">
+	SELECT
+		ACI.employeeOrCustomerNo,
+		ACI.bankCode,
+		ACI.bankBranchCode,
+		ACI.accountTypeStatus,
+		ACI.accountNo,
+		ACI.accountName,
+		ACI.accountBelongsStatus,
+		M002.bankBranchName 
+	FROM
+		account_information AS ACI
+		LEFT JOIN M002BankBranch AS M002 ON ACI.bankCode = M002.bankCode 
+		AND ACI.bankBranchCode = M002.bankBranchCode 
+	WHERE
+		employeeOrCustomerNo = #{employeeOrCustomerNo}
+		AND accountBelongsStatus = #{accountBelongsStatus}
+    </select>
     <!-- 支店情報検索 -->
     <select id="getBankBranchInfo" resultMap="BankBranchInfo" parameterType="map">
         SELECT 
@@ -24,7 +43,18 @@
     </select>
     <!-- 口座情報インサート -->
     <insert id="insertAccount" parameterType="String">
-		INSERT INTO T004AccountInfo 
+		INSERT INTO T004AccountInfo(
+		employeeOrCustomerNo,
+		accountBelongsStatus,
+		bankCode,
+		bankBranchCode,
+		accountNo,
+		accountName,
+		accountTypeStatus,
+		updateTime,
+		createTime,
+		updateUser
+		) 
 		VALUE(
 		#{employeeOrCustomerNo},
 		#{accountBelongsStatus},

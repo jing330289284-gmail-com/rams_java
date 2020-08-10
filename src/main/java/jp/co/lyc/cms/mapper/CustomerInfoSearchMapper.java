@@ -19,11 +19,11 @@ public interface CustomerInfoSearchMapper {
 	 * お客様情報削除
 	 * @param customerNo
 	 */
-	public void delectCustomerInfo(String customerNo);
+	public void deleteCustomerInfo(String customerNo);
 	
 	/**
 	 * お客様の部門削除
 	 * @param customerNo
 	 */
-	public void delectCustomerDepartmentInfo(String customerNo);
+	public void deleteCustomerDepartmentInfo(String customerNo);
 }

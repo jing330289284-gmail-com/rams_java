@@ -122,11 +122,11 @@ public class CustomerInfoSearchController {
 	 * @param customerNo
 	 * @return
 	 */
-	@RequestMapping(value = "/delect", method = RequestMethod.POST)
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	@ResponseBody
 	public boolean delect( @RequestBody CustomerInfoModel customerInfoMod) {	
-		return customerInfoSearchService.delectCustomerInfo(customerInfoMod.getCustomerNo()) && 
-				customerInfoSearchService.delectCustomerDepartmentInfo(customerInfoMod.getCustomerNo());
+		return customerInfoSearchService.deleteCustomerInfo(customerInfoMod.getCustomerNo()) && 
+				customerInfoSearchService.deleteCustomerDepartmentInfo(customerInfoMod.getCustomerNo());
 	}
 	/**
 	 * データの検索

@@ -12,16 +12,28 @@
     </select>
     <!-- 上位お客様情報検索 -->
     <select id="selectTopCustomerInfo" resultMap="TopCustomerInfo" parameterType="String">
-        SELECT 
-        	*
-        FROM 
-        	T008TopCustomerInfo
-        WHERE
-        	TopCustomerNo = #{topCustomerNo}
+	SELECT
+		topCustomerNo,
+		topCustomerName,
+		topCustomerAbbreviation,
+		url,
+		remark 
+	FROM
+		T008TopCustomerInfo 
+	WHERE
+		TopCustomerNo = #{topCustomerNo}
     </select>
     <!-- 上位お客様情報インサート -->
     <insert id="insertTopCustomerInfo" parameterType="String">
-		INSERT INTO T008TopCustomerInfo 
+		INSERT INTO T008TopCustomerInfo(
+		topCustomerNo,
+		topCustomerName,
+		url,
+		remark,
+		updateTime,
+		createTime,
+		updateUser
+		) 
 		VALUE(
 		#{topCustomerNo},
 		#{topCustomerName},

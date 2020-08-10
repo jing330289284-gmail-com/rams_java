@@ -222,7 +222,7 @@
 		${columnName} = (SELECT
 		MAX(${columnName}) FROM ${table}) LIMIT 1 OFFSET 0;
 	</select>
-		<!-- 支払サイ選択肢 -->
+		<!-- 支払サイト選択肢 -->
 	<select id="getPaymentsite"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT
@@ -231,4 +231,23 @@
 		FROM
 			M020PaymentSite
 	</select>
+		<!-- パスワードの取得 -->
+	<select id="getPassword"
+		resultType="String">
+		SELECT
+			password
+		FROM
+			T001Employee
+		WHERE
+			employeeNo = #{employeeNo}
+	</select>
+	<!-- パスワードリセット -->
+    <update id="resetPassword" parameterType="String">
+    UPDATE T001Employee 
+	SET 
+		`password` = MD5(#{password}),
+		updateTime = NOW()
+	WHERE
+		employeeNo = #{employeeNo}
+    </update>
 </mapper>

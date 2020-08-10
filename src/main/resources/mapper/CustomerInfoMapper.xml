@@ -35,7 +35,22 @@
     <!-- お客様情報検索 -->
     <select id="selectCustomerInfo" resultMap="CustomerInfo" parameterType="String">
 		SELECT
-			T007.*,
+			T007.topCustomerNo,
+			T007.url,
+			T007.representative,
+			T007.remark,
+			T007.purchasingManagersMail,
+			T007.purchasingManagers,
+			T007.paymentsiteCode,
+			T007.listedCompanyFlag,
+			T007.levelCode,
+			T007.headOffice,
+			T007.establishmentDate,
+			T007.customerNo,
+			T007.customerName,
+			T007.customerAbbreviation,
+			T007.companyNatureCode,
+			T007.businessStartDate,
 			T008.topCustomerName 
 		FROM
 			T007CustomerInfo AS T007
@@ -45,7 +60,27 @@
     </select>
     <!-- お客様情報インサート -->
     <insert id="insertCustomerInfo" parameterType="String">
-		INSERT INTO T007CustomerInfo 
+		INSERT INTO T007CustomerInfo(
+		customerNo,
+		customerName,
+		customerAbbreviation,
+		headOffice,
+		representative,
+		establishmentDate,
+		businessStartDate,
+		topCustomerNo,
+		levelCode,
+		listedCompanyFlag,
+		companyNatureCode,
+		url,
+		purchasingManagers,
+		purchasingManagersMail,
+		paymentsiteCode,
+		remark,
+		updateTime,
+		createTime,
+		updateUser
+		) 
 		VALUE(
 		#{customerNo},
 		#{customerName},
@@ -159,7 +194,16 @@
     </select>
     <!-- 部門情報インサート -->
     <insert id="insertCustomerDepartment" parameterType="String">
-		INSERT INTO T009CustomerDepartmentInfo 
+		INSERT INTO T009CustomerDepartmentInfo(
+		customerNo,
+		customerDepartmentCode,
+		positionCode,
+		responsiblePerson,
+		customerDepartmentMail,
+		updateTime,
+		createTime,
+		updateUser
+		) 
 		VALUE(
 		#{customerNo},
 		#{customerDepartmentCode},
@@ -191,7 +235,7 @@
 			customerDepartmentCode = #{customerDepartmentCode}
     </update>
         <!-- 部門削除 -->
-    <delete id="customerDepartmentdelect" parameterType="String">
+    <delete id="customerDepartmentdelete" parameterType="String">
 	    DELETE 
 	    FROM 
 	    	T009CustomerDepartmentInfo 

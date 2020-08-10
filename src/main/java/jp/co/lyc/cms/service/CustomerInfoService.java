@@ -150,10 +150,10 @@ public class CustomerInfoService {
 	 * @param customerNo
 	 */
 	
-	public boolean customerDepartmentdelect(HashMap<String, String> sendMap) {
+	public boolean customerDepartmentdelete(HashMap<String, String> sendMap) {
 		boolean result = true;
 		try {
-			customerInfoMapper.customerDepartmentdelect(sendMap);
+			customerInfoMapper.customerDepartmentdelete(sendMap);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

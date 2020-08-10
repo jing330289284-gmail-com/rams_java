@@ -478,7 +478,34 @@ public class GetUtilClass {
 			sendMap.put("developmentLanguageNo1", developmentLanguageNo1);
 		}
 		return sendMap;
-
+	}
+	
+	/**
+	 * パスワードを取得
+	 * 
+	 * @param emp
+	 * @return
+	 */
+	@RequestMapping(value = "/getPassword", method = RequestMethod.POST)
+	@ResponseBody
+	public String getPassword(@RequestBody EmployeeModel emp) {
+		return getSelectInfoUtilService.getPassword(emp.getEmployeeNo());
+	}
+	
+	/**
+	 * パスワードリセット
+	 * 
+	 * @param emp
+	 * @return
+	 */
+	@RequestMapping(value = "/resetPassword", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean resetPassword(@RequestBody EmployeeModel emp) {
+		HashMap<String, String> sendMap = new HashMap<>();
+		sendMap.put("employeeNo", emp.getEmployeeNo());
+		sendMap.put("password", emp.getPassword());
+		sendMap.put("oldPassword", emp.getOldPassword());
+		return getSelectInfoUtilService.resetPassword(sendMap);
 	}
 
 	/**　

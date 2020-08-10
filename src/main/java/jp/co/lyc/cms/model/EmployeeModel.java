@@ -20,6 +20,7 @@ public class EmployeeModel implements Serializable {
 	String intoCompanyCode;
 	String birthplaceOfcontroy;
 	String password;
+	String oldPassword;//古いパスワード
 	String employeeName;
 	String authorityCode;
 	String authorityName;
@@ -48,6 +49,14 @@ public class EmployeeModel implements Serializable {
 	String visaPeriod;// ビザ期間
 	String joinCompanyOfYearFrom;//入社年月元
 	String joinCompanyOfYearTo;//入社年月先
+
+	public String getOldPassword() {
+		return oldPassword;
+	}
+
+	public void setOldPassword(String oldPassword) {
+		this.oldPassword = oldPassword;
+	}
 
 	public String getEmployeeLastName() {
 		return employeeLastName;

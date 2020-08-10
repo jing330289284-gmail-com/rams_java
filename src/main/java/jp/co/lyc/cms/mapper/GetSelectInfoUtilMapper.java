@@ -152,4 +152,16 @@ public interface GetSelectInfoUtilMapper {
 	 * @return
 	 */
 	public List<ModelClass> getPaymentsite();
+	
+	/**
+	 * パスワード取得
+	 * @return
+	 */
+	public String getPassword(String employeeNo);
+	
+	/**
+	 * パスワードリセット
+	 * @return
+	 */
+	public void resetPassword(HashMap<String, String> sendMap);
 }

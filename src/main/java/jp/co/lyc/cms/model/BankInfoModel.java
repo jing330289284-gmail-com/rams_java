@@ -12,7 +12,7 @@ public class BankInfoModel {
 	String accountNo;//口座番号
 	String accountName;//口座名義人
 	String accountTypeStatus;//口座種類ステータス
-	String shoriKbn;//処理区分
+	String actionType;//処理区分
 	ArrayList<String> bankName;//銀行名
 	String updateUser;//更新者
 	
@@ -41,9 +41,6 @@ public class BankInfoModel {
 	public String getUpdateUser() {
 		return updateUser;
 	}
-	public void setUpdateuser(String updateUser) {
-		this.updateUser = updateUser;
-	}
 	public String getBankBranchName() {
 		return bankBranchName;
 	}
@@ -56,11 +53,12 @@ public class BankInfoModel {
 	public void setBankName(ArrayList<String> bankName) {
 		this.bankName = bankName;
 	}
-	public String getShoriKbn() {
-		return shoriKbn;
+	
+	public String getActionType() {
+		return actionType;
 	}
-	public void setShoriKbn(String shoriKbn) {
-		this.shoriKbn = shoriKbn;
+	public void setActionType(String actionType) {
+		this.actionType = actionType;
 	}
 	public String getBankCode() {
 		return bankCode;
