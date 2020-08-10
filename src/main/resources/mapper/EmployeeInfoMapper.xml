@@ -22,21 +22,7 @@
 		TIMESTAMPDIFF(MONTH,
 		NOW(),
 		T002.stayPeriod) AS stayPeriod
-		FROM
-		T001Employee AS T001
-		LEFT JOIN
-		T002EmployeeDetail AS T002 ON T002.employeeNo = T001.employeeNo
-		LEFT JOIN
-		T006EmployeeSiteInfo AS T006 ON T001.employeeNo = T006.employeeNo
-		LEFT
-		JOIN
-		T003AddressInfo AS T003 ON T001.employeeNo = T003.employeeNo
-		LEFT JOIN
-		T005ExpensesInfo AS T005 ON T001.employeeNo = T005.employeeNo
-		LEFT JOIN
-		T007CustomerInfo AS T007 ON T006.customerNo = T007.customerNo,
-		(SELECT
-		@rowNo:=0) AS rowNo
+		<include refid="tableJoin" />
 		WHERE
 		1 = 1
 		<if test="employeeNo!=null">
@@ -113,9 +99,15 @@
 	<!-- 社員情報を追加 -->
 	<insert id="addEmployeeInfo" parameterType="String">
 		INSERT INTO
-		T001Employee (employeeNo, employeeFristName, employeeLastName,
+		T001Employee (
+		employeeNo,
+		employeeFristName,
+		employeeLastName,
 		password,
-		authorityCode, updateTime, createTime, updateUser
+		authorityCode,
+		updateTime,
+		createTime,
+		updateUser
 		)
 		VALUES(
 		#{employeeNo},
@@ -132,7 +124,8 @@
 	<!-- 社員情報詳細を追加 -->
 	<insert id="addEmployeeInfoDetail" parameterType="String">
 		INSERT INTO
-		T002EmployeeDetail (employeeNo,
+		T002EmployeeDetail (
+		employeeNo,
 		genderStatus,
 		age,
 		japaneseCalendar,
@@ -175,7 +168,10 @@
 		departmentCode,
 		updateTime,
 		createTime,
-		updateUser)
+		updateUser,
+		picInfo
+
+		)
 		VALUES(
 		#{employeeNo},
 		#{genderStatus},
@@ -220,7 +216,9 @@
 		#{departmentCode},
 		NOW(),
 		NOW(),
-		#{updateUser}
+		#{updateUser},
+		#{picInfo}
+
 		)
 	</insert>
 
@@ -267,4 +265,103 @@
 		WHERE
 		employeeNo = #{employeeNo};
 	</delete>
+
+	<select id="getEmployeeByEmployeeNo" parameterType="map"
+		resultMap="Employee">
+		SELECT
+		<include refid="T001" />
+		<include refid="T002" />
+		<include refid="tableJoin" />
+		WHERE
+		1 = 1
+		AND T001.employeeNo=#{employeeNo}
+	</select>
+	<sql id="T001">
+		T001.employeeNo,
+		T001.employeeFristName,
+		T001.employeeLastName,
+		T001.password,
+		T001.authorityCode,
+		T001.updateTime,
+		T001.createTime,
+		T001.updateUser,
+	</sql>
+	<sql id="T002">
+		T002.employeeNo,
+		T002.genderStatus,
+		T002.age,
+		T002.japaneseCalendar,
+		T002.alphabetName,
+		T002.furigana,
+		SUBSTRING_INDEX(T002.furigana, '　',1) furigana1,
+		SUBSTRING_INDEX(T002.furigana, '　',-1) furigana2,
+		T002.nationalityCode,
+		T002.birthplace,
+		T002.intoCompanyCode,
+		T002.intoCompanyYearAndMonth,
+		T002.employeeStatus,
+		T002.retirementYearAndMonth,
+		T002.myNumber,
+		T002.occupationCode,
+		T002.employeeFormCode,
+		T002.comeToJapanYearAndMonth,
+		T002.graduationUniversity,
+		T002.graduationYearAndMonth,
+		T002.major,
+		T002.residenceCode,
+		T002.residenceCardNo,
+		T002.stayPeriod,
+		T002.japaneseLevelCode,
+		T002.englishLevelCode,
+		T002.developLanguage1,
+		T002.developLanguage2,
+		T002.developLanguage3,
+		T002.developLanguage4,
+		T002.developLanguage5,
+		T002.certification1,
+		T002.certification2,
+		T002.resumeInfo1,
+		T002.resumeRemark1,
+		T002.resumeInfo2,
+		T002.resumeRemark2,
+		T002.residentCardInfo,
+		T002.passportInfo,
+		T002.companyMail,
+		T002.phoneNo,
+		T002.employmentInsuranceNo,
+		T002.departmentCode,
+		T002.updateTime,
+		T002.createTime,
+		T002.updateUser
+	</sql>
+	<sql id="tableJoin">
+		FROM
+		T001Employee AS T001
+		LEFT JOIN
+		T002EmployeeDetail AS T002
+		ON
+		T002.employeeNo =
+		T001.employeeNo
+		LEFT JOIN
+		T006EmployeeSiteInfo AS
+		T006
+		ON T001.employeeNo
+		= T006.employeeNo
+		LEFT
+		JOIN
+		T003AddressInfo AS T003
+		ON
+		T001.employeeNo =
+		T003.employeeNo
+		LEFT JOIN
+		T005ExpensesInfo AS T005 ON
+		T001.employeeNo =
+		T005.employeeNo
+		LEFT JOIN
+		T007CustomerInfo AS T007 ON
+		T006.customerNo =
+		T007.customerNo,
+		(SELECT
+		@rowNo:=0) AS rowNo
+	</sql>
 </mapper>

@@ -87,6 +87,23 @@ public class EmployeeInfoController {
 	}
 
 	/**
+	 * EmployeeNoによると、社員情報を取得
+	 * 
+	 * @param emp
+	 * @return EmployeeModel
+	 */
+	@RequestMapping(value = "/getEmployeeByEmployeeNo", method = RequestMethod.POST)
+	@ResponseBody
+	public EmployeeModel getEmployeeByEmployeeNo(@RequestBody EmployeeModel emp) throws Exception {
+		logger.info("GetEmployeeInfoController.addEmployeeInfo:" + "EmployeeNoによると、社員情報を取得開始");
+		Map<String, String> sendMap = getParam(emp);
+		EmployeeModel model;
+		model = ēmployeeInfoService.getEmployeeByEmployeeNo(sendMap);
+		logger.info("GetEmployeeInfoController.addEmployeeInfo:" + "EmployeeNoによると、社員情報を取得結束");
+		return model;
+	}
+
+	/**
 	 * 条件を取得
 	 * 
 	 * @param emp
@@ -97,7 +114,7 @@ public class EmployeeInfoController {
 		String employeeNo = emp.getEmployeeNo();// 社員番号
 		String employeeFristName = emp.getEmployeeFristName();// 社員氏
 		String employeeLastName = emp.getEmployeeLastName();// 社員名
-		String furigana = emp.getFurigana();// カタカナ
+		String furigana = emp.getFurigana1() +"　"+ emp.getFurigana2();// カタカナ
 		String alphabetName = emp.getAlphabetName();// ローマ字
 		String age = emp.getAge();// 年齢
 		String genderStatus = emp.getGenderStatus();// 性別ステータス
@@ -147,6 +164,8 @@ public class EmployeeInfoController {
 		String authorityCode = emp.getAuthorityCode();// 権限
 		String updateUser = emp.getUpdateUser();// 権限
 		String employeeStatus = emp.getEmployeeStatus();// 権限
+
+		String picInfo = emp.getPicInfo();// 写真
 
 		sendMap.put("password", "password");// TODO
 		if (employeeNo != null && employeeNo.length() != 0) {
@@ -312,6 +331,9 @@ public class EmployeeInfoController {
 		}
 		if (employeeStatus != null && employeeStatus.length() != 0) {
 			sendMap.put("employeeStatus", employeeStatus);
+		}
+		if (picInfo != null && picInfo.length() != 0) {
+			sendMap.put("picInfo", picInfo);
 		}
 		return sendMap;
 

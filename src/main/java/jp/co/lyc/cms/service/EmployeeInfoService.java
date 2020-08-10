@@ -71,4 +71,15 @@ public class EmployeeInfoService {
 		return result;
 	}
 
+	/**
+	 * EmployeeNoによると、社員情報を取得
+	 * 
+	 * @param emp
+	 * @return EmployeeModel
+	 */
+	public EmployeeModel getEmployeeByEmployeeNo(Map<String, String> sendMap) {
+		EmployeeModel model = employeeInfoMapper.getEmployeeByEmployeeNo(sendMap);
+		return model;
+	}
+
 }

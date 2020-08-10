@@ -36,36 +36,36 @@ public interface EmployeeInfoMapper {
 	/**
 	 * 社員情報を削除
 	 * 
-	 * @param emp
 	 */
 	public void deleteEmployeeInfo(Map<String, String> sendMap);
 
 	/**
 	 * 社員情報詳細を削除
 	 * 
-	 * @param emp
 	 */
 	public void deleteEmployeeInfoDetail(Map<String, String> sendMap);
 
 	/**
 	 * 現場情報を削除
 	 * 
-	 * @param emp
 	 */
 	public void deleteEmployeeSiteInfo(Map<String, String> sendMap);
 
 	/**
 	 * 住所情報を削除
 	 * 
-	 * @param emp
 	 */
 	public void deleteAddressInfo(Map<String, String> sendMap);
 
 	/**
 	 * 諸費用を削除
 	 * 
-	 * @param emp
 	 */
 	public void deleteExpensesInfo(Map<String, String> sendMap);
+	
+	/**
+	 * EmployeeNoによると、社員情報を取得
+	 */
+	public EmployeeModel getEmployeeByEmployeeNo(Map<String, String> sendMap);
 
 }

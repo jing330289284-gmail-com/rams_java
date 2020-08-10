@@ -75,6 +75,10 @@ public class EmployeeModel implements Serializable {
 	String visaPeriod;// ビザ期間
 	String intoCompanyYearAndMonthFrom;// 入社年月元
 	String intoCompanyYearAndMonthTo;// 入社年月先
+	String picInfo;// 写真
+
+	String furigana1;// カタカナ1
+	String furigana2;// カタカナ2
 
 	public int getRowNo() {
 		return rowNo;
@@ -602,6 +606,30 @@ public class EmployeeModel implements Serializable {
 
 	public void setIntoCompanyYearAndMonthTo(String intoCompanyYearAndMonthTo) {
 		this.intoCompanyYearAndMonthTo = intoCompanyYearAndMonthTo;
+	}
+
+	public String getPicInfo() {
+		return picInfo;
+	}
+
+	public void setPicInfo(String picInfo) {
+		this.picInfo = picInfo;
+	}
+
+	public String getFurigana1() {
+		return furigana1;
+	}
+
+	public void setFurigana1(String furigana1) {
+		this.furigana1 = furigana1;
+	}
+
+	public String getFurigana2() {
+		return furigana2;
+	}
+
+	public void setFurigana2(String furigana2) {
+		this.furigana2 = furigana2;
 	}
 
 }
