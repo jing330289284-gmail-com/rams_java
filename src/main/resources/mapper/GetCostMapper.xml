@@ -5,8 +5,33 @@
     <resultMap id="MapResult" type="map"/>
     <!-- 諸費用検索 -->
     <select id="selectCost" parameterType="String" resultMap="Cost">
-        SELECT * FROM T005ExpensesInfo
-        WHERE employeeNo=#{employeeNo}
+        SELECT
+			employeeNo,
+			reflectYearAndMonth,
+			SocialInsuranceFlag,
+			salary,
+			waitingCost,
+			welfarePensionAmount,
+			healthInsuranceAmount,
+			insuranceFeeAmount,
+			lastTimeBonusAmount,
+			scheduleOfBonusAmount,
+			transportationExpenses,
+			bonusFlag,
+			nextBonusMonth,
+			monthOfCompanyPay,
+			nextRaiseMonth,
+			otherAllowance,
+			otherAllowanceAmount,
+			leaderAllowanceAmount,
+			totalAmount,
+			remark,
+			employeeFormCode,
+			housingAllowance 
+		FROM
+			T005ExpensesInfo 
+		WHERE
+			employeeNo = #{employeeNo}
     </select>
     <!-- 稼働の判断 -->
     <select id="checkKado" parameterType="String" resultMap="MapResult">
@@ -24,7 +49,30 @@
     </select>
     <!-- 諸費用情報インサート -->
 	<insert id="insertCost" parameterType="String">
-		INSERT INTO T005ExpensesInfo 
+		INSERT INTO T005ExpensesInfo(
+		employeeNo,
+		SocialInsuranceFlag,
+		BonusFlag,
+		salary,
+		WaitingCost,
+		welfarePensionAmount,
+		healthInsuranceAmount,
+		InsuranceFeeAmount,
+		lastTimeBonusAmount,
+		TransportationExpenses,
+		scheduleOfBonusAmount,
+		NextBonusMonth,
+		NextRaiseMonth,
+		monthOfCompanyPay,
+		otherAllowance,
+		otherAllowanceAmount,
+		remark,
+		leaderAllowanceAmount,
+		totalAmount,
+		updateTime,
+		createTime,
+		updateUser 
+		)  
 		VALUE(
 		#{employeeNo},
 		#{SocialInsuranceFlag},

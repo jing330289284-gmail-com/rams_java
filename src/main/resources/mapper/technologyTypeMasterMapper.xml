@@ -8,14 +8,23 @@
 	</select>
 	<!-- 言語の存在チェック -->
 	<select id="checkHave" parameterType="String" resultType="java.lang.String">
-	SELECT * FROM
-		M011TechnologyType
-	WHERE	
+	SELECT
+		technologyTypeCode,
+		technologyTypeName 
+	FROM
+		M011TechnologyType 
+	WHERE
 		technologytypeName = #{technologytypeName}
 	</select>
 	<!-- 言語のインサート -->
 	<insert id="insertTechnologyTypeMaster" parameterType="String">
-	INSERT INTO M011TechnologyType
+	INSERT INTO M011TechnologyType(
+	technologytypeCode,
+	technologytypeName,
+	updateTime,
+	createTime
+	updateUser
+	)
 	VALUE(
 	#{technologytypeCode},
 	#{technologytypeName},

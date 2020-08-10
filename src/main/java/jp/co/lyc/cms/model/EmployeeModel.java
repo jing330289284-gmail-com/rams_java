@@ -55,8 +55,9 @@ public class EmployeeModel implements Serializable {
 	String phoneNo;// 携帯電話
 	String employmentInsuranceNo;// 雇用保険番号
 	String departmentCode;// 部署コード
-
 	String nearestStation;// 寄り駅
+	String birthplaceOfcontroy;
+	String oldPassword;//古いパスワード
 	String customer;// お客様
 	String employeeName;
 	String authorityName;
@@ -73,6 +74,16 @@ public class EmployeeModel implements Serializable {
 	String siteRoleCode;// 役割コード
 	String kadou;//
 	String visaPeriod;// ビザ期間
+	String joinCompanyOfYearFrom;//入社年月元
+	String joinCompanyOfYearTo;//入社年月先
+
+	public String getOldPassword() {
+		return oldPassword;
+	}
+
+	public void setOldPassword(String oldPassword) {
+		this.oldPassword = oldPassword;
+	}
 	String intoCompanyYearAndMonthFrom;// 入社年月元
 	String intoCompanyYearAndMonthTo;// 入社年月先
 	String picInfo;// 写真

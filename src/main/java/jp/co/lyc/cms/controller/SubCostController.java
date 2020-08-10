@@ -34,9 +34,9 @@ public class SubCostController extends BaseController {
 	public Map<String,Object> selectCost(@RequestBody CostModel costModel, Model model) {
 		logger.info("LoginController.login:" + "查询开始");
 		Map<String, Object> resultMap = new HashMap<String, Object>();
-		if (costModel.shoriKbn.equals("tsuika")) {
+		if (costModel.actionType.equals("addTo")) {
 
-		} else if (costModel.shoriKbn.equals("shusei")||costModel.shoriKbn.equals("shosai")) {
+		} else if (costModel.actionType.equals("update")||costModel.actionType.equals("shosai")) {
 			resultMap.put("dataList" , selectData(costModel.employeeNo));
 		} 
 		resultMap.put("checkKadoMap", GCS.checkKado(costModel.employeeNo));
@@ -51,9 +51,9 @@ public class SubCostController extends BaseController {
 		Map<String, ArrayList<CostModel>> checkMap = new HashMap<String, ArrayList<CostModel>>();
 		checkMap = selectData(costModel.employeeNo);
 		ArrayList<CostModel> checkList = checkMap.get("dataList");
-		if (checkList.get(0) == null && costModel.shoriKbn.equals("tsuika")) {
+		if (checkList.get(0) == null && costModel.actionType.equals("addTo")) {
 			result = insertData(costModel, model);
-		} else if (checkList.get(0) != null && costModel.shoriKbn.equals("shusei")) {
+		} else if (checkList.get(0) != null && costModel.actionType.equals("update")) {
 			result = updataData(costModel, model);
 		}
 		return result;

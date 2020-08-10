@@ -31,10 +31,10 @@ public class CustomerInfoSearchService {
 	 * @param customerNo
 	 */
 	
-	public boolean delectCustomerInfo(String customerNo) {
+	public boolean deleteCustomerInfo(String customerNo) {
 		boolean result = true;
 		try {
-			customerInfoSearchMapper.delectCustomerInfo(customerNo);
+			customerInfoSearchMapper.deleteCustomerInfo(customerNo);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -48,10 +48,10 @@ public class CustomerInfoSearchService {
 	 * @param customerNo
 	 */
 	
-	public boolean delectCustomerDepartmentInfo(String customerNo) {
+	public boolean deleteCustomerDepartmentInfo(String customerNo) {
 		boolean result = true;
 		try {
-			customerInfoSearchMapper.delectCustomerDepartmentInfo(customerNo);
+			customerInfoSearchMapper.deleteCustomerDepartmentInfo(customerNo);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

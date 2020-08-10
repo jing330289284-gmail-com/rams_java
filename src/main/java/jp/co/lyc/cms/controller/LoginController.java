@@ -49,13 +49,9 @@ public class LoginController extends BaseController {
 		logger.info("LoginController.login:" + "登録開始");
 		Map<String, String> sendMap = new HashMap<String, String>();
 		HashMap<String, EmployeeModel> resultMap = new HashMap<String, EmployeeModel>();
-		try {
-			sendMap.put("employeeNo", loginModel.employeeNo);
-			sendMap.put("password", loginModel.password);
-			employeeModel = loginservice.getEmployeeModel(sendMap);
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
+		sendMap.put("employeeNo", loginModel.employeeNo);
+		sendMap.put("password", loginModel.password);
+		employeeModel = loginservice.getEmployeeModel(sendMap);
 		resultMap.put("employeeModel", employeeModel);
 		return resultMap;
 	}

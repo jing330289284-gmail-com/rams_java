@@ -6,6 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,9 +24,15 @@ import jp.co.lyc.cms.model.TopCustomerInfoModel;
 public class CustomerInfoController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
+	//お客様情報service
 	@Autowired
 	CustomerInfoService customerInfoSer;
-	
+	//口座情報service
+	@Autowired
+	BankInfoController bankInfoController;
+	//上位お客様情報service
+	@Autowired
+	TopCustomerInfoController topCustomerInfoController;
 	/**
 	 * 页面加载
 	 * @param customerInfoMod
@@ -36,15 +44,16 @@ public class CustomerInfoController {
 		logger.info("CustomerInfoController.onloadPage:" + "页面加载開始");
 		HashMap<String,Object> resultMap = new HashMap<>();
 		HashMap<String, String> sendMap = new HashMap<>();
-		if(customerInfoMod.getShoriKbn() != null) {
+		if(customerInfoMod.getActionType() != null) {
 			//修正と詳細の場合
-			if (customerInfoMod.getShoriKbn().equals("shusei") || customerInfoMod.getShoriKbn().equals("sansho")) {
+			if (customerInfoMod.getActionType().equals("update") || customerInfoMod.getActionType().equals("sansho")) {
 				customerInfoMod = customerInfoSer.selectCustomerInfo(customerInfoMod.getCustomerNo());	
 				sendMap.put("customerNo", customerInfoMod.getCustomerNo());
-				ArrayList<CustomerDepartmentInfoModel> customerDepartmentInfoList = customerInfoSer.selectCustomerDepartmentInfo(sendMap);
+				ArrayList<CustomerDepartmentInfoModel> customerDepartmentInfoList = 
+						customerInfoSer.selectCustomerDepartmentInfo(sendMap);
 				resultMap.put("customerInfoMod", customerInfoMod);
 				resultMap.put("customerDepartmentInfoList", customerDepartmentInfoList);
-			}else if(customerInfoMod.getShoriKbn().equals("tsuika")){
+			}else if(customerInfoMod.getActionType().equals("addTo")){
 				//追加の場合
 				String saiban = customerInfoSer.customerNoSaiBan();
 				int num = Integer.parseInt(saiban.substring(1),10);
@@ -58,7 +67,8 @@ public class CustomerInfoController {
 				}
 				sendMap.put("customerNo", saiban);
 				//部門のデータ
-				ArrayList<CustomerDepartmentInfoModel> customerDepartmentInfoList = customerInfoSer.selectCustomerDepartmentInfo(sendMap);
+				ArrayList<CustomerDepartmentInfoModel> customerDepartmentInfoList = 
+						customerInfoSer.selectCustomerDepartmentInfo(sendMap);
 				resultMap.put("customerNoSaiBan",saiban);
 				resultMap.put("customerDepartmentInfoList", customerDepartmentInfoList);
 			}
@@ -83,7 +93,8 @@ public class CustomerInfoController {
 	 */
 	@RequestMapping(value = "/selectDepartmentMaster", method = RequestMethod.POST)
 	@ResponseBody
-	public ArrayList<CustomerDepartmentInfoModel> selectDepartmentMaster(@RequestBody CustomerDepartmentInfoModel customerDepartmentInfoModel){
+	public ArrayList<CustomerDepartmentInfoModel> selectDepartmentMaster(@RequestBody 
+			CustomerDepartmentInfoModel customerDepartmentInfoModel){
 		return customerInfoSer.selectDepartmentMaster(customerDepartmentInfoModel.getCustomerDepartmentName());
 	}
 	/**
@@ -93,6 +104,7 @@ public class CustomerInfoController {
 	 */
 	@RequestMapping(value = "/toroku", method = RequestMethod.POST)
 	@ResponseBody
+	@Transactional(rollbackFor = Exception.class)
 	public String toroku(@RequestBody CustomerInfoModel customerInfoMod) {
 		boolean result = true;
 		String topCustomerNo = "";
@@ -108,38 +120,95 @@ public class CustomerInfoController {
 		}else {
 			customerInfoMod.setTopCustomerNo("");
 		}
-		if (checkMod == null && customerInfoMod.getShoriKbn().equals("tsuika")) {
-			result = insert(customerInfoMod);
-			if(result == false) {
+		for(CustomerDepartmentInfoModel customerDepartmentInfoModel:
+			customerInfoMod.getCustomerDepartmentList()) {
+			String customerDepartmentCode = 
+					customerInfoSer.selectDepartmentCode(customerDepartmentInfoModel.getCustomerDepartmentName());
+			if(isNullOrEmpty(customerDepartmentCode)) {
+				return "4";
+			}
+		}
+		if (checkMod == null && customerInfoMod.getActionType().equals("addTo")) {//追加の場合
+			try {
+				result = insert(customerInfoMod);
+				if(result == false) {
+					return "1";
+				}
+				customerInfoMod.getAccountInfo().setUpdateUser(customerInfoMod.getUpdateUser());
+				customerInfoMod.getTopCustomerInfo().setUpdateUser(customerInfoMod.getUpdateUser());
+				bankInfoController.insert(customerInfoMod.getAccountInfo());
+				topCustomerInfoController.insert(customerInfoMod.getTopCustomerInfo());
+				for(CustomerDepartmentInfoModel customerDepartmentInfoModel:
+					customerInfoMod.getCustomerDepartmentList()) {
+					customerDepartmentInfoModel.setShoriKbn(customerInfoMod.getActionType());
+					customerDepartmentInfoModel.setCustomerNo(customerInfoMod.getCustomerNo());
+					String meisaiResult = 
+							meisaiToroku(customerDepartmentInfoModel);
+					if(meisaiResult.equals("1")) {
+						return "3";
+					}else if(meisaiResult.equals("2")) {
+						return "4";
+					}
+				}
+				return "0";//result（0）成功（1）失敗
+			} catch (Exception e) {
+				TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+				e.printStackTrace();
+				return "1";
+				// TODO: handle exception
+			}
+		} else if (checkMod != null && (customerInfoMod.getActionType().equals("update"))) {//修正の場合
+			try {
+				result = update(customerInfoMod);
+				if(result == false) {
+					return "1";
+				}
+				customerInfoMod.getAccountInfo().setUpdateUser(customerInfoMod.getUpdateUser());
+				customerInfoMod.getTopCustomerInfo().setUpdateUser(customerInfoMod.getUpdateUser());
+				bankInfoController.update(customerInfoMod.getAccountInfo());
+				topCustomerInfoController.update(customerInfoMod.getTopCustomerInfo());
+				for(CustomerDepartmentInfoModel customerDepartmentInfoModel:
+					customerInfoMod.getCustomerDepartmentList()) {
+					customerDepartmentInfoModel.setShoriKbn(customerInfoMod.getActionType());
+					customerDepartmentInfoModel.setCustomerNo(customerInfoMod.getCustomerNo());
+					String meisaiResult = 
+							meisaiToroku(customerDepartmentInfoModel);
+					if(meisaiResult.equals("1")) {
+						return "3";
+					}else if(meisaiResult.equals("2")) {
+						return "4";
+					}
+				}
+				return "0";//result（0）成功（1）失敗
+			} catch (Exception e) {
+				// TODO: handle exception
+				TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+				e.printStackTrace();
 				return "1";
 			}
-			for(CustomerDepartmentInfoModel customerDepartmentInfoModel:customerInfoMod.getCustomerDepartmentList()) {
-				String meisaiResult = meisaiToroku(customerDepartmentInfoModel , customerInfoMod, customerInfoMod.getShoriKbn());
-				if(meisaiResult.equals("1")) {
-					return "3";
-				}else if(meisaiResult.equals("2")) {
-					return "4";
-				}
-			}
-			return "0";//result（0）成功（1）失敗
-		} else if (checkMod != null && (customerInfoMod.getShoriKbn().equals("shusei"))) {
-			result = update(customerInfoMod);
-			if(result == false) {
-				return "1";
-			}
-			for(CustomerDepartmentInfoModel customerDepartmentInfoModel:customerInfoMod.getCustomerDepartmentList()) {
-				String meisaiResult = meisaiToroku(customerDepartmentInfoModel,customerInfoMod ,  customerInfoMod.getShoriKbn());
-				if(meisaiResult.equals("1")) {
-					return "3";
-				}else if(meisaiResult.equals("2")) {
-					return "4";
-				}
-			}
-			return "0";//result（0）成功（1）失敗
+			
 		}
 		return "0";
 	}
 
+	/**
+	 * 明細更新按钮
+	 * @param customerDepartmentInfoModel
+	 * @return 0成功，1失败，2部门在部门表中不存在
+	 */
+	@RequestMapping(value = "/meisaiUpdate", method = RequestMethod.POST)
+	@ResponseBody
+	@Transactional(rollbackFor = Exception.class)
+	public String meisaiUpdate(@RequestBody CustomerDepartmentInfoModel customerDepartmentInfoModel) {
+		try {
+			return meisaiToroku(customerDepartmentInfoModel);
+		} catch (Exception e) {
+			// TODO: handle exception
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			e.printStackTrace();
+			return "1";
+		}
+	}
 	/**
 	 * 插入数据
 	 * @param customerInfoMod
@@ -240,7 +309,8 @@ public class CustomerInfoController {
 		logger.info("BankInfoController.toroku:" + "部門情報検索開始");
 		HashMap<String, String> sendMap = new HashMap<>();
 		sendMap.put("customerNo", customerNo);
-		ArrayList<CustomerDepartmentInfoModel> customerDepartmentInfoList = customerInfoSer.selectCustomerDepartmentInfo(sendMap);
+		ArrayList<CustomerDepartmentInfoModel> customerDepartmentInfoList = 
+				customerInfoSer.selectCustomerDepartmentInfo(sendMap);
 		return customerDepartmentInfoList;
 	}
 	/**
@@ -248,10 +318,11 @@ public class CustomerInfoController {
 	 * @param customerDepartmentInfoModel
 	 * @return
 	 */
-	public String meisaiToroku(CustomerDepartmentInfoModel customerDepartmentInfoModel , CustomerInfoModel customerInfoModel , String shoriKbn) {
+	@Transactional(rollbackFor = Exception.class)
+	public String meisaiToroku(CustomerDepartmentInfoModel customerDepartmentInfoModel) {
 		logger.info("BankInfoController.toroku:" + "明細登録開始");
 		HashMap<String, String> sendMap = new HashMap<>();
-		sendMap.put("customerNo", customerInfoModel.getCustomerNo());	
+		sendMap.put("customerNo", customerDepartmentInfoModel.getCustomerNo());	
 		String resultCode = "0";//処理結果
 		String customerDepartmentCode = 
 				customerInfoSer.selectDepartmentCode(customerDepartmentInfoModel.getCustomerDepartmentName());
@@ -260,20 +331,41 @@ public class CustomerInfoController {
 			return resultCode = "2";
 		}
 		sendMap.put("customerDepartmentCode", customerDepartmentCode);
-		sendMap.put("customerNo", customerInfoModel.getCustomerNo());
+		sendMap.put("customerNo", customerDepartmentInfoModel.getCustomerNo());
 		sendMap.put("positionCode", customerDepartmentInfoModel.getPositionCode());
 		sendMap.put("responsiblePerson", customerDepartmentInfoModel.getResponsiblePerson());
 		sendMap.put("customerDepartmentMail", customerDepartmentInfoModel.getCustomerDepartmentMail());
-		sendMap.put("updateUser", customerInfoModel.getUpdateUser());
+		sendMap.put("updateUser", customerDepartmentInfoModel.getUpdateUser());
 		//resultCode : 0(処理成功)1（処理失敗）
-		if(shoriKbn.equals("shusei")) {
+		if(customerDepartmentInfoModel.getShoriKbn().equals("update")) {
 			if(customerInfoSer.selectCustomerDepartmentInfo(sendMap).size() != 0 ) {
-				resultCode = (customerInfoSer.updateCustomerDepartment(sendMap) ? "0" : "1");	
+				try {
+					resultCode = (customerInfoSer.updateCustomerDepartment(sendMap) ? "0" : "1");	
+				} catch (Exception e) {
+					// TODO: handle exception
+					TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+					e.printStackTrace();
+					resultCode = "1";
+				}
 			}else {
-				resultCode = (customerInfoSer.insertCustomerDepartment(sendMap) ? "0" : "1");
+				try {
+					resultCode = (customerInfoSer.insertCustomerDepartment(sendMap) ? "0" : "1");
+				} catch (Exception e) {
+					// TODO: handle exception
+					TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+					e.printStackTrace();
+					resultCode = "1";
+				}
 			}
-		}else if(shoriKbn.equals("tsuika")) {
-			resultCode = (customerInfoSer.insertCustomerDepartment(sendMap) ? "0" : "1");
+		}else if(customerDepartmentInfoModel.getShoriKbn().equals("addTo")) {
+			try {
+				resultCode = (customerInfoSer.insertCustomerDepartment(sendMap) ? "0" : "1");
+			} catch (Exception e) {
+				// TODO: handle exception
+				TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+				e.printStackTrace();
+				resultCode = "1";
+			}
 		}
 		return resultCode;
 	}
@@ -282,13 +374,13 @@ public class CustomerInfoController {
 	 * 部門削除
 	 * @return
 	 */
-	@RequestMapping(value = "/customerDepartmentdelect", method = RequestMethod.POST)
+	@RequestMapping(value = "/customerDepartmentdelete", method = RequestMethod.POST)
 	@ResponseBody
-	public boolean customerDepartmentdelect(@RequestBody CustomerDepartmentInfoModel customerDepartmentInfoModel) {
+	public boolean customerDepartmentdelete(@RequestBody CustomerDepartmentInfoModel customerDepartmentInfoModel) {
 		HashMap<String, String> sendMap = new HashMap<>();
 		sendMap.put("customerNo", customerDepartmentInfoModel.getCustomerNo());
 		sendMap.put("customerDepartmentCode", customerDepartmentInfoModel.getCustomerDepartmentCode());
-		return customerInfoSer.customerDepartmentdelect(sendMap);
+		return customerInfoSer.customerDepartmentdelete(sendMap);
 	}
 	
 	/**

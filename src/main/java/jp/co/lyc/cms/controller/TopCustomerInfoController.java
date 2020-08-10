@@ -34,7 +34,7 @@ public class TopCustomerInfoController {
 	public HashMap<String,Object> onloadPage(@RequestBody TopCustomerInfoModel topCustomerMod) {
 		logger.info("TopCustomerInfoController.onloadPage:" + "页面加载開始");
 		HashMap<String,Object> resultMap = new HashMap<>();
-		if (topCustomerMod.getShoriKbn().equals("shusei") || topCustomerMod.getShoriKbn().equals("sansho")) {
+		if (topCustomerMod.getActionType().equals("update") || topCustomerMod.getActionType().equals("sansho")) {
 			topCustomerMod = topCustomerInfoService.selectTopCustomerInfo(topCustomerMod.getTopCustomerNo());	
 			resultMap.put("topCustomerMod", topCustomerMod);
 		}else {
@@ -52,10 +52,10 @@ public class TopCustomerInfoController {
 	public boolean toroku(@RequestBody TopCustomerInfoModel topCustomerMod) {
 		boolean result = true;
 		TopCustomerInfoModel checkMod = topCustomerInfoService.selectTopCustomerInfo(topCustomerMod.getTopCustomerNo());
-		if (checkMod == null && topCustomerMod.getShoriKbn().equals("tsuika")) {
+		if (checkMod == null && topCustomerMod.getActionType().equals("addTo")) {
 			result = insert(topCustomerMod);
-		} else if (checkMod != null && (topCustomerMod.getShoriKbn().equals("shusei"))||
-				topCustomerMod.getShoriKbn().equals("sansho")) {
+		} else if (checkMod != null && (topCustomerMod.getActionType().equals("update"))||
+				topCustomerMod.getActionType().equals("sansho")) {
 			result = update(topCustomerMod);
 		}
 		return result;

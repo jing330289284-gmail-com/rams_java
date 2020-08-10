@@ -1,9 +1,6 @@
 package jp.co.lyc.cms.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import jp.co.lyc.cms.model.BankInfoModel;
-import jp.co.lyc.cms.model.ModelClass;
 import jp.co.lyc.cms.service.GetBankInfoService;
 import jp.co.lyc.cms.service.GetSelectInfoUtilService;
 
@@ -44,8 +39,8 @@ public class BankInfoController {
 		logger.info("BankInfoController.getBankInfo:" + "検索開始");
 		HashMap<String, Object> resultMap = new HashMap<>();
 		BankInfoModel accountInfoMod = new BankInfoModel();
-		if (onloadMol.getShoriKbn().equals("shusei") || onloadMol.getShoriKbn().equals("shosai")) {
-			accountInfoMod = selectAccountInfo(onloadMol.getEmployeeOrCustomerNo() , onloadMol.getAccountBelongsStatus());
+		if (onloadMol.getActionType().equals("update") || onloadMol.getActionType().equals("shosai")) {
+			accountInfoMod = getBankBranchInfo(onloadMol.getEmployeeOrCustomerNo() , onloadMol.getAccountBelongsStatus());
 		}
 		resultMap.put("bankName", selectutilSer.getBankInfo());
 		resultMap.put("accountInfoMod", accountInfoMod);
@@ -62,11 +57,11 @@ public class BankInfoController {
 	public boolean toroku(@RequestBody BankInfoModel bankCol) {
 		logger.info("BankInfoController.toroku:" + "登录開始");
 		BankInfoModel checkMod = new BankInfoModel();
-		checkMod = selectAccountInfo(bankCol.getEmployeeOrCustomerNo() , bankCol.getAccountBelongsStatus());
+		checkMod = getBankBranchInfo(bankCol.getEmployeeOrCustomerNo() , bankCol.getAccountBelongsStatus());
 		boolean result = true;
-		if(checkMod == null && bankCol.getShoriKbn().equals("tsuika")) {
+		if(checkMod == null && bankCol.getActionType().equals("addTo")) {
 			result = insert(bankCol);
-		}else if(bankCol.getShoriKbn().equals("shusei")) {
+		}else if(bankCol.getActionType().equals("update")) {
 			result = update(bankCol);
 		}
 		return result;	
@@ -102,7 +97,7 @@ public class BankInfoController {
 		logger.info("BankInfoController.toroku:" + "登录開始");
 		boolean result = true;
 		BankInfoModel checkMod = new BankInfoModel();
-		checkMod = selectAccountInfo(bankCol.getEmployeeOrCustomerNo() , bankCol.getAccountBelongsStatus());
+		checkMod = getBankBranchInfo(bankCol.getEmployeeOrCustomerNo() , bankCol.getAccountBelongsStatus());
 		HashMap<String, String> sendMap = new HashMap<>();
 		sendMap.put("accountBelongsStatus", bankCol.getAccountBelongsStatus());
 		if(!checkMod.getBankCode().equals(bankCol.getBankCode())) {
@@ -130,7 +125,7 @@ public class BankInfoController {
 	 * * @param accountBelongsStatus
 	 * @return
 	 */
-	public BankInfoModel selectAccountInfo(String employeeOrCustomerNo , String accountBelongsStatus) {
+	public BankInfoModel getBankBranchInfo(String employeeOrCustomerNo , String accountBelongsStatus) {
 		logger.info("BankInfoController.selectBankInfo:" + "查询開始");
 		BankInfoModel resultMod = bankInfoSer.selectAccountInfo(employeeOrCustomerNo , accountBelongsStatus);
 		return resultMod;	

@@ -73,5 +73,5 @@ public interface CustomerInfoMapper {
 	 * 部門削除
 	 * @return
 	 */
-	public void customerDepartmentdelect(HashMap<String, String> sendMap);
+	public void customerDepartmentdelete(HashMap<String, String> sendMap);
 }

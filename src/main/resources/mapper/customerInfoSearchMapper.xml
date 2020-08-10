@@ -70,7 +70,7 @@
 			T007.customerNo
     </select>
     <!-- お客様情報削除 -->
-    <delete id="delectCustomerInfo" parameterType="String">
+    <delete id="deleteCustomerInfo" parameterType="String">
 	    DELETE 
 	    FROM 
 	    	T007CustomerInfo 
@@ -78,7 +78,7 @@
 	    	customerNo = #{customerNo};
     </delete>
        <!-- お客様の部門削除 -->
-    <delete id="delectCustomerDepartmentInfo" parameterType="String">
+    <delete id="deleteCustomerDepartmentInfo" parameterType="String">
 	    DELETE 
 	    FROM 
 	    	T009CustomerDepartmentInfo 
