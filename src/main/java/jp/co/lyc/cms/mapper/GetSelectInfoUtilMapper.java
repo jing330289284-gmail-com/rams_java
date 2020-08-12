@@ -18,6 +18,13 @@ public interface GetSelectInfoUtilMapper {
 	public List<ModelClass> getNationalitys();
 
 	/**
+	 * お客様を取得
+	 * 
+	 * 
+	 */
+	public List<ModelClass> getCustomer();
+
+	/**
 	 * 社員形式を取得
 	 * 
 	 * 
@@ -100,67 +107,79 @@ public interface GetSelectInfoUtilMapper {
 
 	/**
 	 * 採番
-	 * @param sendMap 
+	 * 
+	 * @param sendMap
 	 * 
 	 * 
 	 */
 	public String getNO(Map<String, String> sendMap);
-	
+
 	/**
 	 * レベル
+	 * 
 	 * @return
 	 */
 	public List<ModelClass> getLevel();
-	
+
 	/**
 	 * お客様性質
+	 * 
 	 * @return
 	 */
 	public List<ModelClass> getCompanyNature();
-	
+
 	/**
 	 * 職位
+	 * 
 	 * @return
 	 */
 	public List<ModelClass> getPosition();
-	
+
 	/**
 	 * 上位お客様連想
+	 * 
 	 * @return
 	 */
 	public List<ModelClass> getTopCustomerDrop(String name);
-	
+
 	/**
 	 * 部門名前連想
+	 * 
 	 * @return
 	 */
 	public List<ModelClass> getDepartmentMaster(String name);
-	
+
 	/**
 	 * 銀行名検索
+	 * 
 	 * @return
 	 */
 	public List<ModelClass> getBankInfo();
-	
+
 	/**
 	 * 支店情報検索
+	 * 
 	 * @return
 	 */
 	public List<ModelClass> getBankBranchInfo(HashMap<String, String> sendMap);
+
 	/**
 	 * 支払サイト検索
+	 * 
 	 * @return
 	 */
 	public List<ModelClass> getPaymentsite();
-	
+
 	/**
 	 * パスワード取得
+	 * 
 	 * @return
 	 */
 	public String getPassword(String employeeNo);
-	
+
 	/**
 	 * パスワードリセット
+	 * 
 	 * @return
 	 */
 	public void resetPassword(HashMap<String, String> sendMap);

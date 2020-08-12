@@ -70,6 +70,16 @@ public class GetSelectInfoUtilService {
 	}
 
 	/**
+	 * お客様を取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getCustomer() {
+		List<ModelClass> list = getSelectInfoUtilMapper.getCustomer();
+		return list;
+	}
+
+	/**
 	 * 入社区分を取得
 	 * 
 	 * @return
@@ -141,7 +151,8 @@ public class GetSelectInfoUtilService {
 
 	/**
 	 * 採番
-	 * @param sendMap 
+	 * 
+	 * @param sendMap
 	 * 
 	 * @return
 	 */
@@ -149,119 +160,130 @@ public class GetSelectInfoUtilService {
 		String no = getSelectInfoUtilMapper.getNO(sendMap);
 		return no;
 	}
-	
+
 	/**
 	 * レベル
+	 * 
 	 * @return
 	 */
 	public List<ModelClass> getLevel() {
 		return getSelectInfoUtilMapper.getLevel();
 	}
-	
+
 	/**
 	 * お客様性質
+	 * 
 	 * @return
 	 */
 	public List<ModelClass> getCompanyNature() {
 		return getSelectInfoUtilMapper.getCompanyNature();
 	}
-	
+
 	/**
 	 * 職位
+	 * 
 	 * @return
 	 */
 	public List<ModelClass> getPosition() {
 		return getSelectInfoUtilMapper.getPosition();
 	}
-	
+
 	/**
 	 * 上位お客様連想
+	 * 
 	 * @return
 	 */
 	public List<ModelClass> getTopCustomerDrop(String name) {
 		return getSelectInfoUtilMapper.getTopCustomerDrop(name);
 	}
-	
+
 	/**
 	 * 部門名前連想
+	 * 
 	 * @return
 	 */
 	public List<ModelClass> getDepartmentMaster(String name) {
 		return getSelectInfoUtilMapper.getDepartmentMaster(name);
 	}
-	
+
 	/**
 	 * 銀行名検索
+	 * 
 	 * @return
 	 */
 	public List<ModelClass> getBankInfo() {
 		return getSelectInfoUtilMapper.getBankInfo();
 	}
-	
+
 	/**
 	 * 支店情報検索
+	 * 
 	 * @return
 	 */
 	public List<ModelClass> getBankBranchInfo(HashMap<String, String> sendMap) {
 		return getSelectInfoUtilMapper.getBankBranchInfo(sendMap);
 	}
-	
+
 	/**
 	 * 支払サイト検索
+	 * 
 	 * @return
 	 */
 	public List<ModelClass> getPaymentsite() {
 		return getSelectInfoUtilMapper.getPaymentsite();
 	}
-	
+
 	/**
 	 * パスワード取得
+	 * 
 	 * @return
 	 */
 	public String getPassword(String employeeNo) {
 		return getSelectInfoUtilMapper.getPassword(employeeNo);
 	}
-	
+
 	/**
 	 * パスワードリセット
+	 * 
 	 * @return
 	 */
 	public boolean resetPassword(HashMap<String, String> sendMap) {
-			String oldPassword = getPassword(sendMap.get("employeeNo"));
-			if(md5Password(sendMap.get("oldPassword")).equals(oldPassword)) {
-				getSelectInfoUtilMapper.resetPassword(sendMap);
-				return true;
-			}else {
-				return false;
-			}
+		String oldPassword = getPassword(sendMap.get("employeeNo"));
+		if (md5Password(sendMap.get("oldPassword")).equals(oldPassword)) {
+			getSelectInfoUtilMapper.resetPassword(sendMap);
+			return true;
+		} else {
+			return false;
+		}
 	}
-	
+
 	/**
 	 * MD5暗号化
+	 * 
 	 * @param password
 	 * @return
 	 */
 	public static String md5Password(String password) {
-        try {
-            // 得到一个信息摘要器
-            MessageDigest digest = MessageDigest.getInstance("md5");
-            byte[] result = digest.digest(password.getBytes());
-            StringBuffer buffer = new StringBuffer();
-            // 把每一个byte 做一个与运算 0xff;
-            for (byte b : result) {
-                // 与运算
-                int number = b & 0xff;// 加盐
-                String str = Integer.toHexString(number);
-                if (str.length() == 1) {
-                    buffer.append("0");
-                }
-                buffer.append(str);
-            }
-            // 标准的md5加密后的结果
-            return buffer.toString();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-            return "";
-        }
-    }
+		try {
+			// 得到一个信息摘要器
+			MessageDigest digest = MessageDigest.getInstance("md5");
+			byte[] result = digest.digest(password.getBytes());
+			StringBuffer buffer = new StringBuffer();
+			// 把每一个byte 做一个与运算 0xff;
+			for (byte b : result) {
+				// 与运算
+				int number = b & 0xff;// 加盐
+				String str = Integer.toHexString(number);
+				if (str.length() == 1) {
+					buffer.append("0");
+				}
+				buffer.append(str);
+			}
+			// 标准的md5加密后的结果
+			return buffer.toString();
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+			return "";
+		}
+	}
 }

@@ -10,6 +10,8 @@ public class ModelClass implements Serializable {
 	String name;
 	String columnName;
 	String typeName;
+	String value;
+	String label;
 	public String getCode() {
 		return code;
 	}

@@ -21,8 +21,8 @@
 	<!--お客様 -->
 	<select id="getCustomer"
 		resultType="jp.co.lyc.cms.model.ModelClass">
-		SELECT customerRankingCode code,customerRankingName name
-		FROM customer_ranking_master;
+		SELECT customerNo value,customerName label
+		FROM T007CustomerInfo;
 	</select>
 
 	<!-- 開発言語 -->

@@ -263,21 +263,6 @@ public class GetUtilClass {
 	}
 
 	/**
-	 * 役割
-	 * 
-	 * @return
-	 */
-
-	@RequestMapping(value = "/getRole", method = RequestMethod.POST)
-	@ResponseBody
-	public List<ModelClass> getRole() {
-		Properties properties = getProperties.getProperties();
-		String role = properties.getProperty("role");
-		List<ModelClass> list = getStatus(role);
-		return list;
-	}
-
-	/**
 	 * 新人
 	 * 
 	 * @return
@@ -405,6 +390,17 @@ public class GetUtilClass {
 		return list;
 	}
 
+	/**
+	 * お客様を取得
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getCustomer", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getCustomer() {
+		List<ModelClass> list = getSelectInfoUtilService.getCustomer();
+		return list;
+	}
 	/**
 	 * 職種を取得
 	 * 
