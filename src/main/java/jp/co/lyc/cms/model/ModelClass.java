@@ -10,6 +10,8 @@ public class ModelClass implements Serializable {
 	String name;
 	String columnName;
 	String typeName;
+	String value;
+	String label;
 	public String getCode() {
 		return code;
 	}
@@ -40,6 +42,22 @@ public class ModelClass implements Serializable {
 
 	public void setTypeName(String typeName) {
 		this.typeName = typeName;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+
+	public String getLabel() {
+		return label;
+	}
+
+	public void setLabel(String label) {
+		this.label = label;
 	}
 
 	

@@ -61,6 +61,17 @@ public class SiteInfoController {
 		return period;
 	}
 
+	private String toRelatedEmployees(String related1Employees, String related2Employees, String related3Employees) {
+		String relatedEmployees = related1Employees;
+		if (related2Employees != null && related2Employees.length() != 0) {
+			relatedEmployees = relatedEmployees + "," + related2Employees;
+		}
+		if (related3Employees != null && related3Employees.length() != 0) {
+			relatedEmployees = relatedEmployees + "," + related3Employees;
+		}
+		return relatedEmployees;
+	}
+
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
@@ -74,7 +85,6 @@ public class SiteInfoController {
 //		String emplyeeNo = request.getSession().getAttribute("emplyeeNo").toString();
 		try {
 			String employeeNo = siteModel.getEmployeeNo();
-			String siteNo = siteModel.getSiteNo();
 			String customerNo = siteModel.getCustomerNo();
 			String topCustomerNo = siteModel.getTopCustomerNo();
 			String admissionStartDate = siteModel.getAdmissionStartDate();
@@ -83,20 +93,19 @@ public class SiteInfoController {
 			String admissionEndDate = siteModel.getAdmissionEndDate();
 			String unitPrice = siteModel.getUnitPrice();
 			String siteRoleCode = siteModel.getSiteRoleCode();
-			String payOffRange = siteModel.getTime_1() + siteModel.getTime_2();
+			String payOffRange1 = siteModel.getPayOffRange1();
+			String payOffRange2 = siteModel.getPayOffRange2();
 			String systemName = siteModel.getSystemName();
-			String developLanguage = siteModel.getDevelopLanguage();
-			String relatedEmployees = siteModel.getRelatedEmployees();
+			String developLanguageCode = siteModel.getDevelopLanguageCode();
+			String relatedEmployees = toRelatedEmployees(siteModel.getRelated1Employees(),
+					siteModel.getRelated2Employees(), siteModel.getRelated3Employees());
 			String levelCode = siteModel.getLevelCode();
+			String updateUser = siteModel.getUpdateUser();
+
 			if (employeeNo != null && employeeNo.length() != 0) {
 				sendMap.put("employeeNo", employeeNo);
 			} else {
 				sendMap.put("employeeNo", "LYC001");
-			}
-			if (siteNo != null && siteNo.length() != 0) {
-				sendMap.put("siteNo", siteNo);
-			} else {
-				sendMap.put("siteNo", "10");
 			}
 			if (customerNo != null && customerNo.length() != 0) {
 				sendMap.put("customerNo", customerNo);
@@ -122,20 +131,26 @@ public class SiteInfoController {
 			if (siteRoleCode != null && siteRoleCode.length() != 0) {
 				sendMap.put("siteRoleCode", siteRoleCode);
 			}
-			if (payOffRange != null && payOffRange.length() != 0) {
-				sendMap.put("payOffRange", payOffRange);
+			if (payOffRange1 != null && payOffRange1.length() != 0) {
+				sendMap.put("payOffRange1", payOffRange1);
+			}
+			if (payOffRange2 != null && payOffRange2.length() != 0) {
+				sendMap.put("payOffRange2", payOffRange2);
 			}
 			if (systemName != null && systemName.length() != 0) {
 				sendMap.put("systemName", systemName);
 			}
-			if (developLanguage != null && developLanguage.length() != 0) {
-				sendMap.put("developlanguage", developLanguage);
+			if (developLanguageCode != null && developLanguageCode.length() != 0) {
+				sendMap.put("developLanguageCode", developLanguageCode);
 			}
 			if (relatedEmployees != null && relatedEmployees.length() != 0) {
 				sendMap.put("relatedEmployees", relatedEmployees);
 			}
 			if (levelCode != null && levelCode.length() != 0) {
 				sendMap.put("levelCode", levelCode);
+			}
+			if (updateUser != null && updateUser.length() != 0) {
+				sendMap.put("updateUser", updateUser);
 			}
 			getSiteInfoService.insertSiteInfo(sendMap);
 

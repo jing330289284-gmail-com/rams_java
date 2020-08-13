@@ -21,8 +21,29 @@
 	<!--お客様 -->
 	<select id="getCustomer"
 		resultType="jp.co.lyc.cms.model.ModelClass">
-		SELECT customerRankingCode code,customerRankingName name
-		FROM customer_ranking_master;
+		SELECT customerNo value,if(customerAbbreviation is
+		null or
+		trim(customerAbbreviation)='',customerName,customerAbbreviation) label
+		FROM
+		rams.T007CustomerInfo;
+	</select>
+	<!--トップお客様 -->
+	<select id="getTopCustomer"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT topCustomerNo value,if(topCustomerAbbreviation is
+		null or
+		trim(topCustomerAbbreviation)='',topCustomerName,topCustomerAbbreviation)
+		label
+		FROM
+		rams.T008TopCustomerInfo;
+	</select>
+
+	<!--開発言語 -->
+	<select id="getDevelopLanguage"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT developLanguageCode value,developLanguageName label
+		FROM
+		rams.M011DevelopLanguage;
 	</select>
 
 	<!-- 開発言語 -->
@@ -148,7 +169,8 @@
 		FROM
 		M018CustomerDepartment
 		WHERE
-		customerDepartmentName LIKE concat('%',#{name},'%')
+		customerDepartmentName LIKE
+		concat('%',#{name},'%')
 	</select>
 	<!-- 銀行名検索 -->
 	<select id="getBankInfo"
@@ -170,7 +192,8 @@
 		LEFT JOIN
 		M001Bank AS M001
 		ON
-		M001.bankCode = M002.bankCode
+		M001.bankCode =
+		M002.bankCode
 		WHERE
 		M002.bankCode = #{bankCode}
 		<if test="bankBranchCode != null">
@@ -180,66 +203,60 @@
 			AND M002.bankBranchName = #{bankBranchName}
 		</if>
 	</select>
-	<!-- トップお客様 -->
-	<select id="getTopCustomer"
-		resultType="jp.co.lyc.cms.model.ModelClass">
-		SELECT topCustomerNo code,if(topCustomerAbbreviation is
-		null,topCustomerName,topCustomerAbbreviation) name FROM
-		rams.top_customer;
-	</select>
-	<!-- お客様 -->
-	<select id="getCustomerMaster"
-		resultType="jp.co.lyc.cms.model.ModelClass">
-		SELECT customerNo code,if(customerAbbreviation is
-		null,customerName,customerAbbreviation) name FROM
-		rams.customer_information;
-	</select>
 
 	<!--採番 -->
 	<select id="getNO" resultType="String" parameterType="map"
 		statementType="STATEMENT">
 		SELECT
-		(CASE WHEN (CONVERT(SUBSTRING(a.${columnName}, 4),SIGNED) + 1) &lt;10 
+		(CASE WHEN (CONVERT(SUBSTRING(a.${columnName},
+		4),SIGNED) + 1) &lt;10
 		THEN
-		CONCAT(CONCAT('${typeName}','00'),(CONVERT(SUBSTRING(a.${columnName},4) , SIGNED) + 1))
+		CONCAT(CONCAT('${typeName}','00'),(CONVERT(SUBSTRING(a.${columnName},4)
+		, SIGNED) + 1))
 		WHEN
-		(CONVERT(SUBSTRING(a.${columnName}, 4) , SIGNED)+ 1 &gt;=10) AND (CONVERT(SUBSTRING(a.${columnName}, 4)
-		, SIGNED) + 1&lt;100)THEN CONCAT(CONCAT('${typeName}','0'),(CONVERT(SUBSTRING(a.${columnName},4) , SIGNED) + 1))
+		(CONVERT(SUBSTRING(a.${columnName}, 4) , SIGNED)+ 1
+		&gt;=10) AND (CONVERT(SUBSTRING(a.${columnName}, 4)
+		, SIGNED) +
+		1&lt;100)THEN
+		CONCAT(CONCAT('${typeName}','0'),(CONVERT(SUBSTRING(a.${columnName},4)
+		, SIGNED) + 1))
 		ELSE
-		CONCAT('${typeName}',(CONVERT( SUBSTRING(a.${columnName}, 4) , SIGNED)
+		CONCAT('${typeName}',(CONVERT(
+		SUBSTRING(a.${columnName}, 4) , SIGNED)
 		+ 1)) END) no
 		FROM
 		${table} a
 		WHERE
 		${columnName} = (SELECT
-		MAX(${columnName}) FROM ${table}) LIMIT 1 OFFSET 0;
+		MAX(${columnName}) FROM ${table}) LIMIT 1
+		OFFSET 0;
 	</select>
-		<!-- 支払サイト選択肢 -->
+	<!-- 支払サイト選択肢 -->
 	<select id="getPaymentsite"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT
-			PaymentSiteCode CODE,
-			PaymentSiteName NAME 
+		PaymentSiteCode CODE,
+		PaymentSiteName NAME
 		FROM
-			M020PaymentSite
+		M020PaymentSite
 	</select>
-		<!-- パスワードの取得 -->
-	<select id="getPassword"
-		resultType="String">
+	<!-- パスワードの取得 -->
+	<select id="getPassword" resultType="String">
 		SELECT
-			password
+		password
 		FROM
-			T001Employee
+		T001Employee
 		WHERE
-			employeeNo = #{employeeNo}
+		employeeNo = #{employeeNo}
 	</select>
 	<!-- パスワードリセット -->
-    <update id="resetPassword" parameterType="String">
-    UPDATE T001Employee 
-	SET 
+	<update id="resetPassword" parameterType="String">
+		UPDATE T001Employee
+		SET
 		`password` = MD5(#{password}),
 		updateTime = NOW()
-	WHERE
-		employeeNo = #{employeeNo}
-    </update>
+		WHERE
+		employeeNo =
+		#{employeeNo}
+	</update>
 </mapper>
