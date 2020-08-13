@@ -20,7 +20,6 @@ public class SiteModel implements Serializable {
 	String siteManager;
 	String admissionStartDate;
 	String admissionEndDate;
-	String siteNo;
 	String payOffRange1;
 	String payOffRange2;
 	String workDate;
@@ -98,12 +97,6 @@ public class SiteModel implements Serializable {
 	}
 	public void setAdmissionEndDate(String admissionEndDate) {
 		this.admissionEndDate = admissionEndDate;
-	}
-	public String getSiteNo() {
-		return siteNo;
-	}
-	public void setSiteNo(String siteNo) {
-		this.siteNo = siteNo;
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
