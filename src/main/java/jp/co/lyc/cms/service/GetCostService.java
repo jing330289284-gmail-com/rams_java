@@ -20,7 +20,7 @@ public class GetCostService {
 	 * @return
 	 */
 	
-	public CostModel getEmployeeInfo(Map<String, String> sendMap) {
+	public ArrayList<CostModel> getEmployeeInfo(Map<String, String> sendMap) {
 		return getCostMapper.selectCost(sendMap);
 	}
 	
