@@ -367,6 +367,22 @@ public class GetUtilClass {
 		return list;
 	}
 
+	
+	/**
+	 * 住宅ステータス
+	 * 
+	 * @return
+	 */
+
+	@RequestMapping(value = "/getHousingStatus", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getHousingStatus() {
+		Properties properties = getProperties.getProperties();
+		String HousingStatus = properties.getProperty("housingStatus");
+		List<ModelClass> list = getStatus(HousingStatus);
+		return list;
+	}
+	
 	public List<ModelClass> getStatus(String string) {
 		JSONObject sJson = JSONObject.fromObject(string);
 		@SuppressWarnings("unchecked")
