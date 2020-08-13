@@ -1,5 +1,6 @@
 package jp.co.lyc.cms.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import jp.co.lyc.cms.mapper.EmployeeInfoMapper;
+import jp.co.lyc.cms.mapper.GetBankInfoMapper;
 import jp.co.lyc.cms.model.EmployeeModel;
 
 @Component
@@ -16,6 +18,10 @@ public class EmployeeInfoService {
 
 	@Autowired
 	EmployeeInfoMapper employeeInfoMapper;
+	
+
+	@Autowired
+	GetBankInfoMapper bankMapper;
 
 	/**
 	 * 社員情報を取得
@@ -34,14 +40,12 @@ public class EmployeeInfoService {
 	 * @param sendMap
 	 * @return boolean
 	 */
-	@Transactional(rollbackFor = Exception.class)
-	public boolean insertEmployee(Map<String, String> sendMap) {
+	public boolean insertEmployee(HashMap<String, String> sendMap) {
 		boolean result = true;
 		try {
 			employeeInfoMapper.insertEmployeeInfo(sendMap);
 			employeeInfoMapper.insertEmployeeInfoDetail(sendMap);
 		} catch (Exception e) {
-			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			e.printStackTrace();
 			return result = false;
 		}

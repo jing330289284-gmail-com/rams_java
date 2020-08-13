@@ -9,12 +9,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import jp.co.lyc.cms.model.BankInfoModel;
 import jp.co.lyc.cms.model.EmployeeModel;
 import jp.co.lyc.cms.service.EmployeeInfoService;
 
@@ -26,7 +29,10 @@ public class EmployeeInfoController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
-	EmployeeInfoService ēmployeeInfoService;
+	EmployeeInfoService employeeInfoService;
+
+	@Autowired
+	BankInfoController bankInfoController;
 
 	/**
 	 * データを取得
@@ -43,7 +49,7 @@ public class EmployeeInfoController {
 		List<EmployeeModel> employeeList = new ArrayList<EmployeeModel>();
 		try {
 			Map<String, String> sendMap = getParam(emp);
-			employeeList = ēmployeeInfoService.getEmployeeInfo(sendMap);
+			employeeList = employeeInfoService.getEmployeeInfo(sendMap);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -57,14 +63,22 @@ public class EmployeeInfoController {
 	 * @param emp
 	 * @return boolean
 	 */
-
+	@Transactional(rollbackFor = Exception.class)
 	@RequestMapping(value = "/insertEmployee", method = RequestMethod.POST)
 	@ResponseBody
 	public boolean insertEmployee(@RequestBody EmployeeModel emp) throws Exception {
 		logger.info("GetEmployeeInfoController.insertEmployee:" + "追加開始");
 		Map<String, String> sendMap = getParam(emp);
 		boolean result = true;
-		result = ēmployeeInfoService.insertEmployee(sendMap);
+		try {
+			 employeeInfoService.insertEmployee((HashMap<String, String>) sendMap);
+			// bankInfoController.insert(emp.getAccountInfo());
+		} catch (Exception e) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			e.printStackTrace();
+			return result = false;
+		}
+
 		logger.info("GetEmployeeInfoController.insertEmployee:" + "追加結束");
 		return result;
 	}
@@ -81,7 +95,7 @@ public class EmployeeInfoController {
 		logger.info("GetEmployeeInfoController.addEmployeeInfo:" + "削除開始");
 		Map<String, String> sendMap = getParam(emp);
 		boolean result = true;
-		result = ēmployeeInfoService.deleteEmployeeInfo(sendMap);
+		result = employeeInfoService.deleteEmployeeInfo(sendMap);
 		logger.info("GetEmployeeInfoController.addEmployeeInfo:" + "削除結束");
 		return result;
 	}
@@ -98,7 +112,7 @@ public class EmployeeInfoController {
 		logger.info("GetEmployeeInfoController.addEmployeeInfo:" + "EmployeeNoによると、社員情報を取得開始");
 		Map<String, String> sendMap = getParam(emp);
 		EmployeeModel model;
-		model = ēmployeeInfoService.getEmployeeByEmployeeNo(sendMap);
+		model = employeeInfoService.getEmployeeByEmployeeNo(sendMap);
 		logger.info("GetEmployeeInfoController.addEmployeeInfo:" + "EmployeeNoによると、社員情報を取得結束");
 		return model;
 	}
@@ -116,7 +130,7 @@ public class EmployeeInfoController {
 		logger.info("GetEmployeeInfoController.updateEmployee:" + "修正開始");
 		Map<String, String> sendMap = getParam(emp);
 		boolean result = true;
-		result = ēmployeeInfoService.updateEmployee(sendMap);
+		result = employeeInfoService.updateEmployee(sendMap);
 		logger.info("GetEmployeeInfoController.updateEmployee:" + "修正結束");
 		return result;
 	}
@@ -132,9 +146,10 @@ public class EmployeeInfoController {
 		String employeeNo = emp.getEmployeeNo();// 社員番号
 		String employeeFristName = emp.getEmployeeFristName();// 社員氏
 		String employeeLastName = emp.getEmployeeLastName();// 社員名
-		String furigana = emp.getFurigana1() + "　" + emp.getFurigana2();// カタカナ
+		String furigana = emp.getFurigana1() + " " + emp.getFurigana2();// カタカナ
 		String alphabetName = emp.getAlphabetName();// ローマ字
-		String age = emp.getAge();// 年齢
+		String birthday = emp.getBirthday();// 年齢
+
 		String genderStatus = emp.getGenderStatus();// 性別ステータス
 		String intoCompanyCode = emp.getIntoCompanyCode();// 入社区分
 		String employeeFormCode = emp.getEmployeeFormCode();// 社員形式
@@ -180,12 +195,14 @@ public class EmployeeInfoController {
 		String intoCompanyYearAndMonthFrom = emp.getIntoCompanyYearAndMonthFrom();// 入社年月元
 		String intoCompanyYearAndMonthTo = emp.getIntoCompanyYearAndMonthTo();// 入社年月先
 		String authorityCode = emp.getAuthorityCode();// 権限
-		String updateUser = emp.getUpdateUser();// 権限
-		String employeeStatus = emp.getEmployeeStatus();// 権限
-
+		String updateUser = emp.getUpdateUser();// 更新ユーザー
+		String employeeStatus = emp.getEmployeeStatus();// 社員ステータス
 		String picInfo = emp.getPicInfo();// 写真
 
 		sendMap.put("password", "password");// TODO
+
+		String yearsOfExperience = emp.getYearsOfExperience();// 口座情報
+
 		if (employeeNo != null && employeeNo.length() != 0) {
 			sendMap.put("employeeNo", employeeNo);
 		}
@@ -201,8 +218,8 @@ public class EmployeeInfoController {
 		if (alphabetName != null && alphabetName.length() != 0) {
 			sendMap.put("alphabetName", alphabetName);
 		}
-		if (age != null && age.length() != 0) {
-			sendMap.put("age", age);
+		if (birthday != null && birthday.length() != 0) {
+			sendMap.put("age", birthday);
 		}
 		if (japaneseCalendar != null && japaneseCalendar.length() != 0) {
 			sendMap.put("japaneseCalendar", japaneseCalendar);
@@ -352,6 +369,9 @@ public class EmployeeInfoController {
 		}
 		if (picInfo != null && picInfo.length() != 0) {
 			sendMap.put("picInfo", picInfo);
+		}
+		if (yearsOfExperience != null && yearsOfExperience.length() != 0) {
+			sendMap.put("yearsOfExperience", yearsOfExperience);
 		}
 		return sendMap;
 
