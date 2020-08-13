@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jp.co.lyc.cms.mapper.SalesSituationMapper">
+    <resultMap id="SalesSituation" type="jp.co.lyc.cms.model.SalesSituationModel"/>
+    <!-- 初期表示 -->
+    <select id="getSalesSituationModel" parameterType="String" resultType="jp.co.lyc.cms.model.SalesSituationModel">
+    SELECT 
+    T001.employeeNo,
+    CONCAT(T001.employeeFristName,
+            T001.employeeLastName) AS 'employeeName',
+    T003.nearestStation1 AS 'nearestStation',
+    CONCAT_WS(',',
+            T002.developLanguage1,
+            T002.developLanguage2,
+            T002.developLanguage3,
+            T002.developLanguage4,
+            T002.developLanguage5) AS 'developLanguage',
+    T006.siteRoleCode,
+    T006.unitPrice,
+    T006.admissionEndDate,
+    1 as 'salesProgressCode'
+FROM
+    T001Employee T001
+        LEFT JOIN
+    T003AddressInfo T003 ON T001.employeeNo = T003.employeeNo
+        LEFT JOIN
+    T002EmployeeDetail T002 ON T001.employeeNo = T002.employeeNo
+        LEFT JOIN
+    T006EmployeeSiteInfo T006 ON T001.employeeNo = T006.employeeNo
+WHERE
+    LEFT(T006.admissionEndDate, 6) = #{sysDate}
+    </select>
+</mapper>
