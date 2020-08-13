@@ -25,6 +25,20 @@ public interface GetSelectInfoUtilMapper {
 	public List<ModelClass> getCustomer();
 
 	/**
+	 * トップお客様を取得
+	 * 
+	 * 
+	 */
+	public List<ModelClass> getTopCustomer();
+
+	/**
+	 * 開発言語を取得
+	 * 
+	 * 
+	 */
+	public List<ModelClass> getDevelopLanguage();
+
+	/**
 	 * 社員形式を取得
 	 * 
 	 * 

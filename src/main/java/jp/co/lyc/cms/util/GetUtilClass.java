@@ -402,6 +402,28 @@ public class GetUtilClass {
 		return list;
 	}
 	/**
+	 * トップお客様を取得
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getTopCustomer", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getTopCustomer() {
+		List<ModelClass> list = getSelectInfoUtilService.getTopCustomer();
+		return list;
+	}
+	/**
+	 * 開発言語を取得
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getDevelopLanguage", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getDevelopLanguage() {
+		List<ModelClass> list = getSelectInfoUtilService.getDevelopLanguage();
+		return list;
+	}
+	/**
 	 * 職種を取得
 	 * 
 	 * @return

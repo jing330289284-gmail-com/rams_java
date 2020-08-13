@@ -80,6 +80,26 @@ public class GetSelectInfoUtilService {
 	}
 
 	/**
+	 * トップお客様を取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getTopCustomer() {
+		List<ModelClass> list = getSelectInfoUtilMapper.getTopCustomer();
+		return list;
+	}
+
+	/**
+	 * 開発言語を取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getDevelopLanguage() {
+		List<ModelClass> list = getSelectInfoUtilMapper.getDevelopLanguage();
+		return list;
+	}
+
+	/**
 	 * 入社区分を取得
 	 * 
 	 * @return
