@@ -61,6 +61,17 @@ public class SiteInfoController {
 		return period;
 	}
 
+	private String toRelatedEmployees(String related1Employees, String related2Employees, String related3Employees) {
+		String relatedEmployees = related1Employees;
+		if (related2Employees != null && related2Employees.length() != 0) {
+			relatedEmployees = relatedEmployees + "," + related2Employees;
+		}
+		if (related3Employees != null && related3Employees.length() != 0) {
+			relatedEmployees = relatedEmployees + "," + related3Employees;
+		}
+		return relatedEmployees;
+	}
+
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
@@ -86,7 +97,8 @@ public class SiteInfoController {
 			String payOffRange2 = siteModel.getPayOffRange2();
 			String systemName = siteModel.getSystemName();
 			String developLanguageCode = siteModel.getDevelopLanguageCode();
-			String relatedEmployees = siteModel.getRelatedEmployees();
+			String relatedEmployees = toRelatedEmployees(siteModel.getRelated1Employees(),
+					siteModel.getRelated2Employees(), siteModel.getRelated3Employees());
 			String levelCode = siteModel.getLevelCode();
 			String updateUser = siteModel.getUpdateUser();
 

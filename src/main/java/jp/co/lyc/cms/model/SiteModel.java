@@ -27,7 +27,9 @@ public class SiteModel implements Serializable {
 	String customerName;
 	String topCustomerName;
 	String siteRoleName;
-	String relatedEmployees;
+	String related1Employees;
+	String related2Employees;
+	String related3Employees;
 	String levelCode;
 	String updateUser;
 	
@@ -130,12 +132,6 @@ public class SiteModel implements Serializable {
 	public void setSiteRoleName(String siteRoleName) {
 		this.siteRoleName = siteRoleName;
 	}
-	public String getRelatedEmployees() {
-		return relatedEmployees;
-	}
-	public void setRelatedEmployees(String relatedEmployees) {
-		this.relatedEmployees = relatedEmployees;
-	}
 	public String getLevelCode() {
 		return levelCode;
 	}
@@ -165,6 +161,24 @@ public class SiteModel implements Serializable {
 	}
 	public void setUpdateUser(String updateUser) {
 		this.updateUser = updateUser;
+	}
+	public String getRelated1Employees() {
+		return related1Employees;
+	}
+	public void setRelated1Employees(String related1Employees) {
+		this.related1Employees = related1Employees;
+	}
+	public String getRelated2Employees() {
+		return related2Employees;
+	}
+	public void setRelated2Employees(String related2Employees) {
+		this.related2Employees = related2Employees;
+	}
+	public String getRelated3Employees() {
+		return related3Employees;
+	}
+	public void setRelated3Employees(String related3Employees) {
+		this.related3Employees = related3Employees;
 	}
 	
 
