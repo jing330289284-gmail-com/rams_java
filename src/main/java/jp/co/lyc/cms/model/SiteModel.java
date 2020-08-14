@@ -13,22 +13,24 @@ public class SiteModel implements Serializable {
 	String location;
 	String customerNo;
 	String topCustomerNo;
+	String developLanguageCode;
 	String unitPrice;
-	String time_1;
-	String time_2;
 	String developLanguage;
 	String siteRoleCode;
 	String siteManager;
 	String admissionStartDate;
 	String admissionEndDate;
-	String siteNo;
-	String payOffRange;
+	String payOffRange1;
+	String payOffRange2;
 	String workDate;
 	String customerName;
 	String topCustomerName;
 	String siteRoleName;
-	String relatedEmployees;
+	String related1Employees;
+	String related2Employees;
+	String related3Employees;
 	String levelCode;
+	String updateUser;
 	
 	public String getEmployeeNo() {
 		return employeeNo;
@@ -66,18 +68,6 @@ public class SiteModel implements Serializable {
 	public void setUnitPrice(String unitPrice) {
 		this.unitPrice = unitPrice;
 	}
-	public String getTime_1() {
-		return time_1;
-	}
-	public void setTime_1(String time_1) {
-		this.time_1 = time_1;
-	}
-	public String getTime_2() {
-		return time_2;
-	}
-	public void setTime_2(String time_2) {
-		this.time_2 = time_2;
-	}
 	public String getDevelopLanguage() {
 		return developLanguage;
 	}
@@ -108,18 +98,6 @@ public class SiteModel implements Serializable {
 	public void setAdmissionEndDate(String admissionEndDate) {
 		this.admissionEndDate = admissionEndDate;
 	}
-	public String getSiteNo() {
-		return siteNo;
-	}
-	public void setSiteNo(String siteNo) {
-		this.siteNo = siteNo;
-	}
-	public String getPayOffRange() {
-		return payOffRange;
-	}
-	public void setPayOffRange(String payOffRange) {
-		this.payOffRange = payOffRange;
-	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -147,17 +125,53 @@ public class SiteModel implements Serializable {
 	public void setSiteRoleName(String siteRoleName) {
 		this.siteRoleName = siteRoleName;
 	}
-	public String getRelatedEmployees() {
-		return relatedEmployees;
-	}
-	public void setRelatedEmployees(String relatedEmployees) {
-		this.relatedEmployees = relatedEmployees;
-	}
 	public String getLevelCode() {
 		return levelCode;
 	}
 	public void setLevelCode(String levelCode) {
 		this.levelCode = levelCode;
+	}
+	public String getPayOffRange1() {
+		return payOffRange1;
+	}
+	public void setPayOffRange1(String payOffRange1) {
+		this.payOffRange1 = payOffRange1;
+	}
+	public String getPayOffRange2() {
+		return payOffRange2;
+	}
+	public void setPayOffRange2(String payOffRange2) {
+		this.payOffRange2 = payOffRange2;
+	}
+	public String getDevelopLanguageCode() {
+		return developLanguageCode;
+	}
+	public void setDevelopLanguageCode(String developLanguageCode) {
+		this.developLanguageCode = developLanguageCode;
+	}
+	public String getUpdateUser() {
+		return updateUser;
+	}
+	public void setUpdateUser(String updateUser) {
+		this.updateUser = updateUser;
+	}
+	public String getRelated1Employees() {
+		return related1Employees;
+	}
+	public void setRelated1Employees(String related1Employees) {
+		this.related1Employees = related1Employees;
+	}
+	public String getRelated2Employees() {
+		return related2Employees;
+	}
+	public void setRelated2Employees(String related2Employees) {
+		this.related2Employees = related2Employees;
+	}
+	public String getRelated3Employees() {
+		return related3Employees;
+	}
+	public void setRelated3Employees(String related3Employees) {
+		this.related3Employees = related3Employees;
 	}
 	
 

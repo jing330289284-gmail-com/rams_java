@@ -46,14 +46,14 @@ public class CustomerInfoController {
 		HashMap<String, String> sendMap = new HashMap<>();
 		if(customerInfoMod.getActionType() != null) {
 			//修正と詳細の場合
-			if (customerInfoMod.getActionType().equals("update") || customerInfoMod.getActionType().equals("sansho")) {
+			if (customerInfoMod.getActionType().equals("update") || customerInfoMod.getActionType().equals("detail")) {
 				customerInfoMod = customerInfoSer.selectCustomerInfo(customerInfoMod.getCustomerNo());	
 				sendMap.put("customerNo", customerInfoMod.getCustomerNo());
 				ArrayList<CustomerDepartmentInfoModel> customerDepartmentInfoList = 
 						customerInfoSer.selectCustomerDepartmentInfo(sendMap);
 				resultMap.put("customerInfoMod", customerInfoMod);
 				resultMap.put("customerDepartmentInfoList", customerDepartmentInfoList);
-			}else if(customerInfoMod.getActionType().equals("addTo")){
+			}else if(customerInfoMod.getActionType().equals("insert")){
 				//追加の場合
 				String saiban = customerInfoSer.customerNoSaiBan();
 				int num = Integer.parseInt(saiban.substring(1),10);
@@ -128,7 +128,7 @@ public class CustomerInfoController {
 				return "4";
 			}
 		}
-		if (checkMod == null && customerInfoMod.getActionType().equals("addTo")) {//追加の場合
+		if (checkMod == null && customerInfoMod.getActionType().equals("insert")) {//追加の場合
 			try {
 				result = insert(customerInfoMod);
 				if(result == false) {
@@ -357,7 +357,7 @@ public class CustomerInfoController {
 					resultCode = "1";
 				}
 			}
-		}else if(customerDepartmentInfoModel.getShoriKbn().equals("addTo")) {
+		}else if(customerDepartmentInfoModel.getShoriKbn().equals("insert")) {
 			try {
 				resultCode = (customerInfoSer.insertCustomerDepartment(sendMap) ? "0" : "1");
 			} catch (Exception e) {

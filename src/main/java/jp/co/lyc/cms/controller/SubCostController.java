@@ -29,55 +29,59 @@ public class SubCostController extends BaseController {
 	GetCostService GCS;
 
 	// 画面の初期化の場合、データの取得
-	@RequestMapping(value = "/loadCost", method = RequestMethod.POST)
+	@RequestMapping(value = "/onload", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String,Object> selectCost(@RequestBody CostModel costModel, Model model) {
+	public Map<String,Object> onload(@RequestBody CostModel costModel, Model model) {
 		logger.info("LoginController.login:" + "查询开始");
 		Map<String, Object> resultMap = new HashMap<String, Object>();
-		if (costModel.actionType.equals("addTo")) {
-
-		} else if (costModel.actionType.equals("update")||costModel.actionType.equals("shosai")) {
-			resultMap.put("dataList" , selectData(costModel.employeeNo));
-		} 
+		ArrayList<CostModel> subCostList = selectData(costModel.getEmployeeNo(),null);
+		if(subCostList.size() > 1) {//テーブルの年月
+			for(int i = 0 ; i < subCostList.size() ; i++) {
+				String yearAndMonthFirst = subCostList.get(i).getReflectYearAndMonth();
+				yearAndMonthFirst = yearAndMonthFirst.substring(0,4) + "." + yearAndMonthFirst.substring(4);
+				String yearAndMonthSecond = "";
+				if(i != subCostList.size() - 1) {
+					yearAndMonthSecond = subCostList.get(i+1).getReflectYearAndMonth();
+					int year = Integer.parseInt(yearAndMonthSecond.substring(0,4));
+					int month = Integer.parseInt(yearAndMonthSecond.substring(4));
+					if(month == 1) {
+						year -= 1;
+						month = 12;
+					}else {
+						month -= 1;
+					}
+					yearAndMonthSecond = Integer.toString(year) + "." + Integer.toString(month);
+				}
+				subCostList.get(i).setDatePeriod(yearAndMonthSecond + "-" + yearAndMonthSecond);
+			}
+		}
+		resultMap.put("subCostList" , subCostList);
 		resultMap.put("checkKadoMap", GCS.checkKado(costModel.employeeNo));
 		return resultMap;
 	}
 
-//	
-	@RequestMapping(value = "/toroku", method = RequestMethod.POST)
-	@ResponseBody
-	public boolean toroku(@RequestBody CostModel costModel, Model model) {
-		boolean result = true;
-		Map<String, ArrayList<CostModel>> checkMap = new HashMap<String, ArrayList<CostModel>>();
-		checkMap = selectData(costModel.employeeNo);
-		ArrayList<CostModel> checkList = checkMap.get("dataList");
-		if (checkList.get(0) == null && costModel.actionType.equals("addTo")) {
-			result = insertData(costModel, model);
-		} else if (checkList.get(0) != null && costModel.actionType.equals("update")) {
-			result = updataData(costModel, model);
-		}
-		return result;
-	}
-
 	// 更新方法
-	public boolean updataData(CostModel COmodel, Model model) {
+	public boolean updata(CostModel COmodel, Model model) {
 		logger.info("GetEmployeeInfoController.getEmployeeInfo:" + "アープデート開始");
 		Map<String, Object> sendMap = new HashMap<String, Object>();
-		Map<String, ArrayList<CostModel>> checkMap = new HashMap<String, ArrayList<CostModel>>();
-		checkMap = selectData(COmodel.employeeNo);
-		ArrayList<CostModel> checkList = checkMap.get("dataList");
-		if (!isNullOrEmpty(COmodel.salary) && !COmodel.salary.equals(checkList.get(0).salary)) {
+		ArrayList<CostModel> checkList = new ArrayList<>();
+		checkList = selectData(COmodel.employeeNo ,COmodel.getReflectYearAndMonth());
+		sendMap.put("SocialInsuranceFlag", Integer.toString(COmodel.SocialInsuranceFlag));
+		sendMap.put("bonusFlag", Integer.toString(COmodel.bonusFlag));
+		if (!COmodel.salary.equals(checkList.get(0).salary)) {
 			sendMap.put("salary", COmodel.salary);
 		}
-		sendMap.put("SocialInsuranceFlag", Integer.toString(COmodel.SocialInsuranceFlag));
+		if (!COmodel.waitingCost.equals(checkList.get(0).waitingCost)) {
+			sendMap.put("waitingCost", COmodel.waitingCost);
+		}
 		if (!COmodel.welfarePensionAmount.equals(checkList.get(0).welfarePensionAmount)) {
 			sendMap.put("welfarePensionAmount", COmodel.welfarePensionAmount);
 		}
 		if (!COmodel.healthInsuranceAmount.equals(checkList.get(0).healthInsuranceAmount)) {
 			sendMap.put("healthInsuranceAmount", COmodel.healthInsuranceAmount);
 		}
-		if (!COmodel.InsuranceFeeAmount.equals(checkList.get(0).InsuranceFeeAmount)) {
-			sendMap.put("InsuranceFeeAmount", COmodel.InsuranceFeeAmount);
+		if (!COmodel.insuranceFeeAmount.equals(checkList.get(0).insuranceFeeAmount)) {
+			sendMap.put("insuranceFeeAmount", COmodel.insuranceFeeAmount);
 		}
 		if (!COmodel.lastTimeBonusAmount.equals(checkList.get(0).lastTimeBonusAmount)) {
 			sendMap.put("lastTimeBonusAmount", COmodel.lastTimeBonusAmount);
@@ -85,24 +89,17 @@ public class SubCostController extends BaseController {
 		if (!COmodel.scheduleOfBonusAmount.equals(checkList.get(0).scheduleOfBonusAmount)) {
 			sendMap.put("scheduleOfBonusAmount", COmodel.scheduleOfBonusAmount);
 		}
-		if (!COmodel.leaderAllowanceAmount.equals(checkList.get(0).leaderAllowanceAmount)) {
-			sendMap.put("leaderAllowanceAmount", COmodel.leaderAllowanceAmount);
+		if (!COmodel.transportationExpenses.equals(checkList.get(0).transportationExpenses)) {
+			sendMap.put("transportationExpenses", COmodel.transportationExpenses);
 		}
-		if (!COmodel.totalAmount.equals(checkList.get(0).totalAmount)) {
-			sendMap.put("totalAmount", COmodel.totalAmount);
+		if (!COmodel.nextBonusMonth.equals(checkList.get(0).nextBonusMonth)) {
+			sendMap.put("nextBonusMonth", COmodel.nextBonusMonth);
 		}
-		if (!COmodel.WaitingCost.equals(checkList.get(0).WaitingCost)) {
-			sendMap.put("WaitingCost", COmodel.WaitingCost);
-		}
-		sendMap.put("BonusFlag", Integer.toString(COmodel.BonusFlag));
-		if (!COmodel.TransportationExpenses.equals(checkList.get(0).TransportationExpenses)) {
-			sendMap.put("TransportationExpenses", COmodel.TransportationExpenses);
-		}
-		if (!COmodel.NextBonusMonth.equals(checkList.get(0).NextBonusMonth)) {
-			sendMap.put("NextBonusMonth", COmodel.NextBonusMonth);
-		}
-		if (!COmodel.NextRaiseMonth.equals(checkList.get(0).NextRaiseMonth)) {
-			sendMap.put("NextRaiseMonth", COmodel.NextRaiseMonth);
+//		if (!COmodel.monthOfCompanyPay.equals(checkList.get(0).monthOfCompanyPay)) {
+//			sendMap.put("monthOfCompanyPay", COmodel.monthOfCompanyPay);
+//		}
+		if (!COmodel.nextRaiseMonth.equals(checkList.get(0).nextRaiseMonth)) {
+			sendMap.put("nextRaiseMonth", COmodel.nextRaiseMonth);
 		}
 		if (!COmodel.otherAllowance.equals(checkList.get(0).otherAllowance)) {
 			sendMap.put("otherAllowance", COmodel.otherAllowance);
@@ -110,54 +107,69 @@ public class SubCostController extends BaseController {
 		if (!COmodel.otherAllowanceAmount.equals(checkList.get(0).otherAllowanceAmount)) {
 			sendMap.put("otherAllowanceAmount", COmodel.otherAllowanceAmount);
 		}
+		if (!COmodel.leaderAllowanceAmount.equals(checkList.get(0).leaderAllowanceAmount)) {
+			sendMap.put("leaderAllowanceAmount", COmodel.leaderAllowanceAmount);
+		}
+		if (!COmodel.totalAmount.equals(checkList.get(0).totalAmount)) {
+			sendMap.put("totalAmount", COmodel.totalAmount);
+		}
 		if (!COmodel.remark.equals(checkList.get(0).remark)) {
 			sendMap.put("remark", COmodel.remark);
 		}
+		if (!COmodel.employeeFormCode.equals(checkList.get(0).employeeFormCode)) {
+			sendMap.put("employeeFormCode", COmodel.employeeFormCode);
+		}
+		if (!COmodel.housingAllowance.equals(checkList.get(0).housingAllowance)) {
+			sendMap.put("housingAllowance", COmodel.housingAllowance);
+		}
+		if (!COmodel.housingStatus.equals(checkList.get(0).housingStatus)) {
+			sendMap.put("housingStatus", COmodel.housingStatus);
+		}
 		sendMap.put("employeeNo", COmodel.employeeNo);
+		sendMap.put("reflectYearAndMonth", COmodel.reflectYearAndMonth);
 		sendMap.put("updateUser", COmodel.updateUser);
 		boolean result = GCS.update(sendMap);
 		return result;
 	}
 
 	// 插入方法
-	public boolean insertData(CostModel COmodel, Model model) {
+	public boolean insert(CostModel COmodel, Model model) {
 		logger.info("GetEmployeeInfoController.getEmployeeInfo:" + "インサート開始");
 		Map<String, Object> sendMap = new HashMap<String, Object>();
 		sendMap.put("employeeNo", COmodel.employeeNo);
-		if (!isNullOrEmpty(COmodel.salary)) {
-			sendMap.put("salary", COmodel.salary);
-		}
-		sendMap.put("SocialInsuranceFlag", Integer.toString(COmodel.SocialInsuranceFlag));
+		sendMap.put("reflectYearAndMonth", COmodel.reflectYearAndMonth);
+		sendMap.put("salary", COmodel.salary);
+		sendMap.put("waitingCost", COmodel.waitingCost);
 		sendMap.put("welfarePensionAmount", COmodel.welfarePensionAmount);
 		sendMap.put("healthInsuranceAmount", COmodel.healthInsuranceAmount);
-		sendMap.put("InsuranceFeeAmount", COmodel.InsuranceFeeAmount);
+		sendMap.put("insuranceFeeAmount", COmodel.insuranceFeeAmount);
 		sendMap.put("lastTimeBonusAmount", COmodel.lastTimeBonusAmount);
 		sendMap.put("scheduleOfBonusAmount", COmodel.scheduleOfBonusAmount);
-		sendMap.put("leaderAllowanceAmount", COmodel.leaderAllowanceAmount);
-		sendMap.put("totalAmount", COmodel.totalAmount);
-		sendMap.put("WaitingCost", COmodel.WaitingCost);
-		sendMap.put("BonusFlag", Integer.toString(COmodel.BonusFlag));
-		sendMap.put("scheduleOfBonusAmount", COmodel.scheduleOfBonusAmount);
-		sendMap.put("TransportationExpenses", COmodel.TransportationExpenses);
-		sendMap.put("NextBonusMonth", COmodel.NextBonusMonth);
-		sendMap.put("NextRaiseMonth", COmodel.NextRaiseMonth);
+		sendMap.put("transportationExpenses", COmodel.transportationExpenses);
+		sendMap.put("nextBonusMonth", COmodel.nextBonusMonth);
+//		sendMap.put("monthOfCompanyPay", COmodel.monthOfCompanyPay);
+		sendMap.put("nextRaiseMonth", COmodel.nextRaiseMonth);
 		sendMap.put("otherAllowance", COmodel.otherAllowance);
 		sendMap.put("otherAllowanceAmount", COmodel.otherAllowanceAmount);
+		sendMap.put("leaderAllowanceAmount", COmodel.leaderAllowanceAmount);
+		sendMap.put("totalAmount", COmodel.totalAmount);
 		sendMap.put("remark", COmodel.remark);
+		sendMap.put("employeeFormCode", COmodel.employeeFormCode);
+		sendMap.put("housingStatus", COmodel.housingStatus);
+		sendMap.put("housingAllowance", COmodel.housingAllowance);
 		sendMap.put("updateUser", COmodel.updateUser);
 		boolean result = GCS.insert(sendMap);
 		return result;
 	}
 
 	// 查询方法
-	public Map<String, ArrayList<CostModel>> selectData(String employeeNo) {
+	public ArrayList<CostModel> selectData(String employeeNo , String reflectYearAndMonth) {
 		Map<String, String> sendMap = new HashMap<String, String>();
-		ArrayList<CostModel> dataList = new ArrayList<CostModel>();
-		Map<String, ArrayList<CostModel>> resultMap = new HashMap<String, ArrayList<CostModel>>();
 		sendMap.put("employeeNo", employeeNo);
-		dataList.add(GCS.getEmployeeInfo(sendMap));
-		resultMap.put("dataList", dataList);
-		return resultMap;
+		if(!isNullOrEmpty(reflectYearAndMonth)) {
+			sendMap.put("employeeNo", reflectYearAndMonth);
+		}
+		return GCS.getEmployeeInfo(sendMap);
 
 	}
 

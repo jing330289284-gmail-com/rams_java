@@ -8,27 +8,51 @@ public class CostModel implements Serializable {
 	
 	public String employeeNo;//社員番号
 	public String actionType;//処理区分
-	public int BonusFlag;//ボーナスフラグ
+	public int bonusFlag;//ボーナスフラグ
 	public int SocialInsuranceFlag;//社会保険フラグ
-	public String TransportationExpenses;//交通費
+	public String transportationExpenses;//交通費
 	public String remark;//備考
 	public String salary;//給料
-	public String WaitingCost;//非稼働費用
-	public String NextBonusMonth;//次ボーナス月
-	public String NextRaiseMonth;//次回昇給月
+	public String waitingCost;//非稼働費用
+	public String nextBonusMonth;//次ボーナス月
+	public String nextRaiseMonth;//次回昇給月
 	public String updateUser;//更新者
 	public String otherAllowance;//他の手当
 	public String otherAllowanceAmount;//他の手当
 	public String monthOfCompanyPay;//月に会社負担額
 	public String welfarePensionAmount;//厚生年金料
 	public String healthInsuranceAmount;//健康保険料
-	public String InsuranceFeeAmount;//保険料総額
+	public String insuranceFeeAmount;//保険料総額
 	public String lastTimeBonusAmount;//前回ボーナス金額
 	public String scheduleOfBonusAmount;//ボーナス予定金額
 	public String leaderAllowanceAmount;//リーダー手当
 	public String totalAmount;//総額
 	public String siteRoleCode;//役割コード
+	public String reflectYearAndMonth;//反映年月
+	public String employeeFormCode;//社員形式
+	public String employeeFormName;//社員形式名前
+	public String housingAllowance;//住宅手当
+	public String datePeriod;//時間段
+	public String housingStatus;//住宅ステータス
 	
+	public String getHousingStatus() {
+		return housingStatus;
+	}
+	public void setHousingStatus(String housingStatus) {
+		this.housingStatus = housingStatus;
+	}
+	public String getEmployeeFormName() {
+		return employeeFormName;
+	}
+	public void setEmployeeFormName(String employeeFormName) {
+		this.employeeFormName = employeeFormName;
+	}
+	public String getDatePeriod() {
+		return datePeriod;
+	}
+	public void setDatePeriod(String datePeriod) {
+		this.datePeriod = datePeriod;
+	}
 	public String getSiteRoleCode() {
 		return siteRoleCode;
 	}
@@ -46,12 +70,6 @@ public class CostModel implements Serializable {
 	}
 	public void setHealthInsuranceAmount(String healthInsuranceAmount) {
 		this.healthInsuranceAmount = healthInsuranceAmount;
-	}
-	public String getInsuranceFeeAmount() {
-		return InsuranceFeeAmount;
-	}
-	public void setInsuranceFeeAmount(String insuranceFeeAmount) {
-		InsuranceFeeAmount = insuranceFeeAmount;
 	}
 	public String getLastTimeBonusAmount() {
 		return lastTimeBonusAmount;
@@ -101,19 +119,6 @@ public class CostModel implements Serializable {
 	public void setUpdateUser(String updateUser) {
 		this.updateUser = updateUser;
 	}
-	
-	public String getNextBonusMonth() {
-		return NextBonusMonth;
-	}
-	public void setNextBonusMonth(String nextBonusMonth) {
-		NextBonusMonth = nextBonusMonth;
-	}
-	public String getNextRaiseMonth() {
-		return NextRaiseMonth;
-	}
-	public void setNextRaiseMonth(String nextRaiseMonth) {
-		NextRaiseMonth = nextRaiseMonth;
-	}
 	public int getSocialInsuranceFlag() {
 		return SocialInsuranceFlag;
 	}
@@ -136,18 +141,6 @@ public class CostModel implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	public int getBonusFlag() {
-		return BonusFlag;
-	}
-	public void setBonusFlag(int bonusFlag) {
-		BonusFlag = bonusFlag;
-	}
-	public String getTransportationExpenses() {
-		return TransportationExpenses;
-	}
-	public void setTransportationExpenses(String transportationExpenses) {
-		TransportationExpenses = transportationExpenses;
-	}
 	public String getRemark() {
 		return remark;
 	}
@@ -160,12 +153,59 @@ public class CostModel implements Serializable {
 	public void setSalary(String salary) {
 		this.salary = salary;
 	}
+	public int getBonusFlag() {
+		return bonusFlag;
+	}
+	public void setBonusFlag(int bonusFlag) {
+		this.bonusFlag = bonusFlag;
+	}
+	public String getTransportationExpenses() {
+		return transportationExpenses;
+	}
+	public void setTransportationExpenses(String transportationExpenses) {
+		this.transportationExpenses = transportationExpenses;
+	}
 	public String getWaitingCost() {
-		return WaitingCost;
+		return waitingCost;
 	}
 	public void setWaitingCost(String waitingCost) {
-		WaitingCost = waitingCost;
+		this.waitingCost = waitingCost;
 	}
-	
+	public String getNextBonusMonth() {
+		return nextBonusMonth;
+	}
+	public void setNextBonusMonth(String nextBonusMonth) {
+		this.nextBonusMonth = nextBonusMonth;
+	}
+	public String getNextRaiseMonth() {
+		return nextRaiseMonth;
+	}
+	public void setNextRaiseMonth(String nextRaiseMonth) {
+		this.nextRaiseMonth = nextRaiseMonth;
+	}
+	public String getInsuranceFeeAmount() {
+		return insuranceFeeAmount;
+	}
+	public void setInsuranceFeeAmount(String insuranceFeeAmount) {
+		this.insuranceFeeAmount = insuranceFeeAmount;
+	}
+	public String getReflectYearAndMonth() {
+		return reflectYearAndMonth;
+	}
+	public void setReflectYearAndMonth(String reflectYearAndMonth) {
+		this.reflectYearAndMonth = reflectYearAndMonth;
+	}
+	public String getEmployeeFormCode() {
+		return employeeFormCode;
+	}
+	public void setEmployeeFormCode(String employeeFormCode) {
+		this.employeeFormCode = employeeFormCode;
+	}
+	public String getHousingAllowance() {
+		return housingAllowance;
+	}
+	public void setHousingAllowance(String housingAllowance) {
+		this.housingAllowance = housingAllowance;
+	}
 	
 }

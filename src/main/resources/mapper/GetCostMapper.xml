@@ -6,32 +6,41 @@
     <!-- 諸費用検索 -->
     <select id="selectCost" parameterType="String" resultMap="Cost">
         SELECT
-			employeeNo,
-			reflectYearAndMonth,
-			SocialInsuranceFlag,
-			salary,
-			waitingCost,
-			welfarePensionAmount,
-			healthInsuranceAmount,
-			insuranceFeeAmount,
-			lastTimeBonusAmount,
-			scheduleOfBonusAmount,
-			transportationExpenses,
-			bonusFlag,
-			nextBonusMonth,
-			monthOfCompanyPay,
-			nextRaiseMonth,
-			otherAllowance,
-			otherAllowanceAmount,
-			leaderAllowanceAmount,
-			totalAmount,
-			remark,
-			employeeFormCode,
-			housingAllowance 
+			T005.employeeNo,
+			T005.reflectYearAndMonth,
+			T005.SocialInsuranceFlag,
+			T005.salary,
+			T005.waitingCost,
+			T005.welfarePensionAmount,
+			T005.healthInsuranceAmount,
+			T005.insuranceFeeAmount,
+			T005.lastTimeBonusAmount,
+			T005.scheduleOfBonusAmount,
+			T005.transportationExpenses,
+			T005.bonusFlag,
+			T005.nextBonusMonth,
+			T005.monthOfCompanyPay,
+			T005.nextRaiseMonth,
+			T005.otherAllowance,
+			T005.otherAllowanceAmount,
+			T005.leaderAllowanceAmount,
+			T005.totalAmount,
+			T005.housingStatus,
+			T005.remark,
+			T005.employeeFormCode,
+			T005.housingAllowance,
+			M005.employeeFormName
 		FROM
-			T005ExpensesInfo 
+			T005ExpensesInfo AS T005
+		LEFT JOIN 
+			M005EmployeeForm AS M005
+		ON
+			T005.employeeFormCode = M005.employeeFormCode
 		WHERE
 			employeeNo = #{employeeNo}
+		<if test="reflectYearAndMonth != null">
+			reflectYearAndMonth = #{reflectYearAndMonth},
+		</if>
     </select>
     <!-- 稼働の判断 -->
     <select id="checkKado" parameterType="String" resultMap="MapResult">
@@ -51,48 +60,56 @@
 	<insert id="insertCost" parameterType="String">
 		INSERT INTO T005ExpensesInfo(
 		employeeNo,
+		reflectYearAndMonth,
 		SocialInsuranceFlag,
-		BonusFlag,
 		salary,
-		WaitingCost,
+		waitingCost,
 		welfarePensionAmount,
 		healthInsuranceAmount,
-		InsuranceFeeAmount,
+		insuranceFeeAmount,
 		lastTimeBonusAmount,
-		TransportationExpenses,
 		scheduleOfBonusAmount,
-		NextBonusMonth,
-		NextRaiseMonth,
+		transportationExpenses,
+		bonusFlag,
+		nextBonusMonth,
 		monthOfCompanyPay,
+		nextRaiseMonth,
 		otherAllowance,
 		otherAllowanceAmount,
-		remark,
 		leaderAllowanceAmount,
 		totalAmount,
+		housingStatus,
+		remark,
+		employeeFormCode,
+		housingAllowance,
 		updateTime,
 		createTime,
 		updateUser 
 		)  
 		VALUE(
 		#{employeeNo},
+		#{reflectYearAndMonth},
 		#{SocialInsuranceFlag},
-		#{BonusFlag},
 		#{salary},
-		#{WaitingCost},
+		#{waitingCost},
 		#{welfarePensionAmount},
 		#{healthInsuranceAmount},
-		#{InsuranceFeeAmount},
+		#{insuranceFeeAmount},
 		#{lastTimeBonusAmount},
-		#{TransportationExpenses},
 		#{scheduleOfBonusAmount},
-		#{NextBonusMonth},
-		#{NextRaiseMonth},
+		#{transportationExpenses},
+		#{bonusFlag},
+		#{nextBonusMonth},
 		#{monthOfCompanyPay},
+		#{nextRaiseMonth},
 		#{otherAllowance},
 		#{otherAllowanceAmount},
-		#{remark},
 		#{leaderAllowanceAmount},
 		#{totalAmount},
+		#{housingStatus},
+		#{remark},
+		#{employeeFormCode},
+		#{housingAllowance},
 		NOW(),
 		NOW(),
 		#{updateUser})
@@ -101,38 +118,44 @@
     <update id="updateCost" parameterType="String">
 		UPDATE T005ExpensesInfo
 		SET 
+		<if test="SocialInsuranceFlag != null">
+			SocialInsuranceFlag = #{SocialInsuranceFlag},
+		</if>
+		<if test="salary != null">
+			salary = #{salary},
+		</if>
+		<if test="waitingCost != null">
+			waitingCost = #{waitingCost},
+		</if>
 		<if test="welfarePensionAmount != null">
 			welfarePensionAmount = #{welfarePensionAmount},
-		</if>
-		<if test="scheduleOfBonusAmount != null">
-			scheduleOfBonusAmount = #{scheduleOfBonusAmount},
 		</if>
 		<if test="healthInsuranceAmount != null">
 			healthInsuranceAmount = #{healthInsuranceAmount},
 		</if>
-		<if test="InsuranceFeeAmount != null">
-			InsuranceFeeAmount = #{InsuranceFeeAmount},
+		<if test="insuranceFeeAmount != null">
+			insuranceFeeAmount = #{insuranceFeeAmount},
 		</if>
 		<if test="lastTimeBonusAmount != null">
 			lastTimeBonusAmount = #{lastTimeBonusAmount},
 		</if>
-		<if test="leaderAllowanceAmount != null">
-			leaderAllowanceAmount = #{leaderAllowanceAmount},
+		<if test="scheduleOfBonusAmount != null">
+			scheduleOfBonusAmount = #{scheduleOfBonusAmount},
 		</if>
-		<if test="totalAmount != null">
-			totalAmount = #{totalAmount},
+		<if test="transportationExpenses != null">
+			transportationExpenses = #{transportationExpenses},
 		</if>
-		<if test="BonusFlag != null">
-			bonusFlag = #{BonusFlag},
+		<if test="bonusFlag != null">
+			bonusFlag = #{bonusFlag},
 		</if>
-		<if test="SocialInsuranceFlag != null">
-			SocialInsuranceFlag = #{SocialInsuranceFlag},
-		</if>
-		<if test="TransportationExpenses != null">
-			TransportationExpenses = #{TransportationExpenses},
+		<if test="nextBonusMonth != null">
+			nextBonusMonth = #{nextBonusMonth},
 		</if>
 		<if test="monthOfCompanyPay != null">
 			monthOfCompanyPay = #{monthOfCompanyPay},
+		</if>
+		<if test="nextRaiseMonth != null">
+			nextRaiseMonth = #{nextRaiseMonth},
 		</if>
 		<if test="otherAllowance != null">
 			otherAllowance = #{otherAllowance},
@@ -140,24 +163,29 @@
 		<if test="otherAllowanceAmount != null">
 			otherAllowanceAmount = #{otherAllowanceAmount},
 		</if>
+		<if test="leaderAllowanceAmount != null">
+			leaderAllowanceAmount = #{leaderAllowanceAmount},
+		</if>
+		<if test="totalAmount != null">
+			totalAmount = #{totalAmount},
+		</if>
+		<if test="housingStatus != null">
+			housingStatus = #{housingStatus},
+		</if>
 		<if test="remark != null">
 			remark = #{remark},
 		</if>
-		<if test="salary != null">
-			salary = #{salary},
+		<if test="employeeFormCode != null">
+			employeeFormCode = #{employeeFormCode},
 		</if>
-		<if test="WaitingCost != null">
-			WaitingCost = #{WaitingCost},
-		</if>
-		<if test="NextBonusMonth != null">
-			NextBonusMonth = #{NextBonusMonth},
-		</if>
-		<if test="NextRaiseMonth != null">
-			NextRaiseMonth = #{NextRaiseMonth},
+		<if test="housingAllowance != null">
+			housingAllowance = #{housingAllowance},
 		</if>
 		updateTime = NOW(),
 		updateUser = #{updateUser}
 		WHERE 
 			employeeNo = #{employeeNo}
+		AND
+			reflectYearAndMonth = #{reflectYearAndMonth}
     </update>
 </mapper>

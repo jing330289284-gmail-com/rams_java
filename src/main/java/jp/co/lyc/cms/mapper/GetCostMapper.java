@@ -1,5 +1,6 @@
 package jp.co.lyc.cms.mapper;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,7 +16,7 @@ public interface GetCostMapper {
 	 * @param sendMap
 	 * @return
 	 */
-	public CostModel selectCost(Map<String, String> sendMap);
+	public ArrayList<CostModel> selectCost(Map<String, String> sendMap);
 	/**
 	 * インサート
 	 * @param sendMap
