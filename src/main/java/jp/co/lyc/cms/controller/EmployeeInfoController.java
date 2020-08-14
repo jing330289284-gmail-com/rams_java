@@ -146,10 +146,9 @@ public class EmployeeInfoController {
 		String employeeNo = emp.getEmployeeNo();// 社員番号
 		String employeeFristName = emp.getEmployeeFristName();// 社員氏
 		String employeeLastName = emp.getEmployeeLastName();// 社員名
-		String furigana = emp.getFurigana1() + " " + emp.getFurigana2();// カタカナ
+		String furigana = (emp.getFurigana1()!=null?emp.getFurigana1():"" )+ " " + (emp.getFurigana2()!=null?emp.getFurigana2():"" );//　カタカナ
 		String alphabetName = emp.getAlphabetName();// ローマ字
 		String birthday = emp.getBirthday();// 年齢
-
 		String genderStatus = emp.getGenderStatus();// 性別ステータス
 		String intoCompanyCode = emp.getIntoCompanyCode();// 入社区分
 		String employeeFormCode = emp.getEmployeeFormCode();// 社員形式
@@ -219,7 +218,7 @@ public class EmployeeInfoController {
 			sendMap.put("alphabetName", alphabetName);
 		}
 		if (birthday != null && birthday.length() != 0) {
-			sendMap.put("age", birthday);
+			sendMap.put("birthday", birthday);
 		}
 		if (japaneseCalendar != null && japaneseCalendar.length() != 0) {
 			sendMap.put("japaneseCalendar", japaneseCalendar);

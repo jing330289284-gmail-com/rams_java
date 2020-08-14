@@ -41,12 +41,12 @@
 		<if test="genderStatus!=null">
 			AND T002.genderStatus=#{genderStatus}
 		</if>
-	<!-- 	<if test="ageFrom != null">
+		<if test="ageFrom != null">
 			AND T002.age &gt;= #{ageFrom}
 		</if>
 		<if test="ageTo != null">
 			AND T002.age &lt;= #{ageTo}
-		</if> -->
+		</if>
 		<if test="residenceCode != null">
 			AND T002.residenceCode=#{residenceCode}
 		</if>
@@ -297,7 +297,7 @@
 		T002EmployeeDetail
 		SET
 		genderStatus=#{genderStatus},
-		birthday=#{age},
+		birthday=#{birthday},
 		japaneseCalendar=#{japaneseCalendar},
 		furigana=#{furigana},
 		nationalityCode=#{nationalityCode},
@@ -436,8 +436,10 @@
 		T003.employeeNo
 		LEFT JOIN
 		T005ExpensesInfo AS T005 ON
-		T001.employeeNo =
-		T005.employeeNo
+		T001.employeeNo =T005.employeeNo
+		and
+		reflectYearAndMonth = (SELECT
+		MAX(reflectYearAndMonth) FROM T005ExpensesInfo)
 		LEFT JOIN
 		T007CustomerInfo AS T007 ON
 		T006.customerNo =
