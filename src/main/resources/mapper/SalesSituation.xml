@@ -18,7 +18,19 @@
     T006.siteRoleCode,
     T006.unitPrice,
     T006.admissionEndDate,
-    1 as 'salesProgressCode'
+    1 as 'salesProgressCode',
+    T010.salesYearAndMonth,
+    T010.interviewDate1,
+    T010.interviewLocation1,
+    T010.interviewCustomer1,
+    T010.interviewDate2,
+    T010.interviewLocation2,
+    T010.interviewCustomer2,
+    T010.hopeLowestPrice,
+    T010.hopeHighestPrice,
+    T010.salesProgressCode,
+    T010.remark,
+    T010.salesStaff
 FROM
     T001Employee T001
         LEFT JOIN
@@ -27,6 +39,8 @@ FROM
     T002EmployeeDetail T002 ON T001.employeeNo = T002.employeeNo
         LEFT JOIN
     T006EmployeeSiteInfo T006 ON T001.employeeNo = T006.employeeNo
+            LEFT JOIN
+    T010SalesSituation T010 ON T001.employeeNo = T010.employeeNo
 WHERE
     LEFT(T006.admissionEndDate, 6) = #{sysDate}
     </select>
