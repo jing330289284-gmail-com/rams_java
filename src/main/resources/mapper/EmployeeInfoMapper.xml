@@ -12,7 +12,7 @@
 		employeeFristName ,
 		T002.Furigana,
 		T002.alphabetName,
-		T002.age,
+		T002.birthday,
 		T002.intoCompanyYearAndMonth,
 		T006.AdmissionStartDate,
 		T005.salary,
@@ -41,12 +41,12 @@
 		<if test="genderStatus!=null">
 			AND T002.genderStatus=#{genderStatus}
 		</if>
-		<if test="ageFrom != null">
+	<!-- 	<if test="ageFrom != null">
 			AND T002.age &gt;= #{ageFrom}
 		</if>
 		<if test="ageTo != null">
 			AND T002.age &lt;= #{ageTo}
-		</if>
+		</if> -->
 		<if test="residenceCode != null">
 			AND T002.residenceCode=#{residenceCode}
 		</if>
@@ -127,7 +127,7 @@
 		T002EmployeeDetail (
 		employeeNo,
 		genderStatus,
-		age,
+		birthday,
 		japaneseCalendar,
 		alphabetName,
 		furigana,
@@ -169,7 +169,8 @@
 		updateTime,
 		createTime,
 		updateUser,
-		picInfo
+		picInfo,
+		yearsOfExperience
 		)
 		VALUES(
 		#{employeeNo},
@@ -216,8 +217,8 @@
 		NOW(),
 		NOW(),
 		#{updateUser},
-		#{picInfo}
-
+		#{picInfo},
+		#{yearsOfExperience}
 		)
 	</insert>
 
@@ -296,7 +297,7 @@
 		T002EmployeeDetail
 		SET
 		genderStatus=#{genderStatus},
-		age=#{age},
+		birthday=#{age},
 		japaneseCalendar=#{japaneseCalendar},
 		furigana=#{furigana},
 		nationalityCode=#{nationalityCode},
@@ -369,7 +370,7 @@
 	<sql id="T002">
 		T002.employeeNo,
 		T002.genderStatus,
-		T002.age,
+		T002.birthday,
 		T002.japaneseCalendar,
 		T002.alphabetName,
 		T002.furigana,

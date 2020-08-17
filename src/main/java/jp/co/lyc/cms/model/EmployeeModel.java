@@ -16,7 +16,7 @@ public class EmployeeModel implements Serializable {
 	String password;// パースワード
 	String authorityCode;// 権限コード
 	String genderStatus;// 性別ステータス
-	String age;// 年齢
+	String birthday;// 年齢
 	String japaneseCalendar;// 和暦
 	String alphabetName;// ローマ字
 	String furigana;// カタカナ
@@ -56,7 +56,6 @@ public class EmployeeModel implements Serializable {
 	String employmentInsuranceNo;// 雇用保険番号
 	String departmentCode;// 部署コード
 	String nearestStation;// 寄り駅
-	String birthplaceOfcontroy;
 	String oldPassword;//古いパスワード
 	String customer;// お客様
 	String employeeName;
@@ -74,8 +73,8 @@ public class EmployeeModel implements Serializable {
 	String siteRoleCode;// 役割コード
 	String kadou;//
 	String visaPeriod;// ビザ期間
-	String joinCompanyOfYearFrom;//入社年月元
-	String joinCompanyOfYearTo;//入社年月先
+	BankInfoModel accountInfo;//口座情報
+	String yearsOfExperience; //経験年数
 
 	public String getOldPassword() {
 		return oldPassword;
@@ -155,12 +154,14 @@ public class EmployeeModel implements Serializable {
 		this.genderStatus = genderStatus;
 	}
 
-	public String getAge() {
-		return age;
+
+
+	public String getBirthday() {
+		return birthday;
 	}
 
-	public void setAge(String age) {
-		this.age = age;
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
 	}
 
 	public String getJapaneseCalendar() {
@@ -641,6 +642,22 @@ public class EmployeeModel implements Serializable {
 
 	public void setFurigana2(String furigana2) {
 		this.furigana2 = furigana2;
+	}
+
+	public BankInfoModel getAccountInfo() {
+		return accountInfo;
+	}
+
+	public void setAccountInfo(BankInfoModel accountInfo) {
+		this.accountInfo = accountInfo;
+	}
+
+	public String getYearsOfExperience() {
+		return yearsOfExperience;
+	}
+
+	public void setYearsOfExperience(String yearsOfExperience) {
+		this.yearsOfExperience = yearsOfExperience;
 	}
 
 }

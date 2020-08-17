@@ -174,7 +174,7 @@ public class GetUtilClass {
 		List<ModelClass> list = getSelectInfoUtilService.getBankBranchInfo(sendMap);
 		return list;
 	}
-	
+
 	/**
 	 * 支払サイト検索
 	 * 
@@ -227,8 +227,23 @@ public class GetUtilClass {
 	@ResponseBody
 	public List<ModelClass> getHousing() {
 		Properties properties = getProperties.getProperties();
-		String Housing = properties.getProperty("Housing");
-		List<ModelClass> list = getStatus(Housing);
+		String housing = properties.getProperty("housing");
+		List<ModelClass> list = getStatus(housing);
+		return list;
+	}
+
+	/**
+	 * 精算時間
+	 * 
+	 * @return
+	 */
+
+	@RequestMapping(value = "/getPayOffRange", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getPayOffRange() {
+		Properties properties = getProperties.getProperties();
+		String payOffRange = properties.getProperty("payOffRange");
+		List<ModelClass> list = getStatus(payOffRange);
 		return list;
 	}
 
@@ -244,21 +259,6 @@ public class GetUtilClass {
 		Properties properties = getProperties.getProperties();
 		String employee = properties.getProperty("employee");
 		List<ModelClass> list = getStatus(employee);
-		return list;
-	}
-
-	/**
-	 * 役割
-	 * 
-	 * @return
-	 */
-
-	@RequestMapping(value = "/getRole", method = RequestMethod.POST)
-	@ResponseBody
-	public List<ModelClass> getRole() {
-		Properties properties = getProperties.getProperties();
-		String role = properties.getProperty("role");
-		List<ModelClass> list = getStatus(role);
 		return list;
 	}
 
@@ -323,7 +323,7 @@ public class GetUtilClass {
 	}
 
 	/**
-	 * 資格
+	 * ボーナス
 	 * 
 	 * @return
 	 */
@@ -332,23 +332,8 @@ public class GetUtilClass {
 	@ResponseBody
 	public List<ModelClass> getBonus() {
 		Properties properties = getProperties.getProperties();
-		String Bonus = properties.getProperty("Bonus");
-		List<ModelClass> list = getStatus(Bonus);
-		return list;
-	}
-
-	/**
-	 * ボーナス
-	 * 
-	 * @return
-	 */
-
-	@RequestMapping(value = "/getInsurance", method = RequestMethod.POST)
-	@ResponseBody
-	public List<ModelClass> getInsurance() {
-		Properties properties = getProperties.getProperties();
-		String Insurance = properties.getProperty("Insurance");
-		List<ModelClass> list = getStatus(Insurance);
+		String bonus = properties.getProperty("bonus");
+		List<ModelClass> list = getStatus(bonus);
 		return list;
 	}
 
@@ -358,15 +343,31 @@ public class GetUtilClass {
 	 * @return
 	 */
 
-	@RequestMapping(value = "/getInsuranceStatus", method = RequestMethod.POST)
+	@RequestMapping(value = "/getInsurance", method = RequestMethod.POST)
 	@ResponseBody
-	public List<ModelClass> getInsuranceStatus() {
+	public List<ModelClass> getInsurance() {
 		Properties properties = getProperties.getProperties();
-		String InsuranceStatus = properties.getProperty("InsuranceStatus");
-		List<ModelClass> list = getStatus(InsuranceStatus);
+		String insurance = properties.getProperty("insurance");
+		List<ModelClass> list = getStatus(insurance);
 		return list;
 	}
 
+	
+	/**
+	 * 住宅ステータス
+	 * 
+	 * @return
+	 */
+
+	@RequestMapping(value = "/getHousingStatus", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getHousingStatus() {
+		Properties properties = getProperties.getProperties();
+		String HousingStatus = properties.getProperty("housingStatus");
+		List<ModelClass> list = getStatus(HousingStatus);
+		return list;
+	}
+	
 	public List<ModelClass> getStatus(String string) {
 		JSONObject sJson = JSONObject.fromObject(string);
 		@SuppressWarnings("unchecked")
@@ -405,6 +406,39 @@ public class GetUtilClass {
 		return list;
 	}
 
+	/**
+	 * お客様を取得
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getCustomer", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getCustomer() {
+		List<ModelClass> list = getSelectInfoUtilService.getCustomer();
+		return list;
+	}
+	/**
+	 * トップお客様を取得
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getTopCustomer", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getTopCustomer() {
+		List<ModelClass> list = getSelectInfoUtilService.getTopCustomer();
+		return list;
+	}
+	/**
+	 * 開発言語を取得
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getDevelopLanguage", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getDevelopLanguage() {
+		List<ModelClass> list = getSelectInfoUtilService.getDevelopLanguage();
+		return list;
+	}
 	/**
 	 * 職種を取得
 	 * 
@@ -473,13 +507,13 @@ public class GetUtilClass {
 	 */
 	public Map<String, String> getParam(EmployeeModel emp) {
 		Map<String, String> sendMap = new HashMap<String, String>();
-		String developmentLanguageNo1 = emp.getDevelopLanguage1();//　開発言語1
+		String developmentLanguageNo1 = emp.getDevelopLanguage1();// 開発言語1
 		if (developmentLanguageNo1 != null && developmentLanguageNo1.length() != 0) {
 			sendMap.put("developmentLanguageNo1", developmentLanguageNo1);
 		}
 		return sendMap;
 	}
-	
+
 	/**
 	 * パスワードを取得
 	 * 
@@ -491,7 +525,7 @@ public class GetUtilClass {
 	public String getPassword(@RequestBody EmployeeModel emp) {
 		return getSelectInfoUtilService.getPassword(emp.getEmployeeNo());
 	}
-	
+
 	/**
 	 * パスワードリセット
 	 * 

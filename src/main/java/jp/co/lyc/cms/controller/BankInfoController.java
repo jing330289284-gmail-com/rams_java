@@ -39,7 +39,7 @@ public class BankInfoController {
 		logger.info("BankInfoController.getBankInfo:" + "検索開始");
 		HashMap<String, Object> resultMap = new HashMap<>();
 		BankInfoModel accountInfoMod = new BankInfoModel();
-		if (onloadMol.getActionType().equals("update") || onloadMol.getActionType().equals("shosai")) {
+		if (onloadMol.getActionType().equals("update") || onloadMol.getActionType().equals("detail")) {
 			accountInfoMod = getBankBranchInfo(onloadMol.getEmployeeOrCustomerNo() , onloadMol.getAccountBelongsStatus());
 		}
 		resultMap.put("bankName", selectutilSer.getBankInfo());
@@ -59,7 +59,7 @@ public class BankInfoController {
 		BankInfoModel checkMod = new BankInfoModel();
 		checkMod = getBankBranchInfo(bankCol.getEmployeeOrCustomerNo() , bankCol.getAccountBelongsStatus());
 		boolean result = true;
-		if(checkMod == null && bankCol.getActionType().equals("addTo")) {
+		if(checkMod == null && bankCol.getActionType().equals("insert")) {
 			result = insert(bankCol);
 		}else if(bankCol.getActionType().equals("update")) {
 			result = update(bankCol);
