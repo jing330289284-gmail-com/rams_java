@@ -107,19 +107,7 @@ public class CustomerInfoController {
 	@Transactional(rollbackFor = Exception.class)
 	public String toroku(@RequestBody CustomerInfoModel customerInfoMod) {
 		boolean result = true;
-		String topCustomerNo = "";
 		CustomerInfoModel checkMod = customerInfoSer.selectCustomerInfo(customerInfoMod.getCustomerNo());
-		if(!customerInfoMod.getTopCustomerName().isEmpty()) {
-			topCustomerNo = customerInfoSer.checkTopCustomer(customerInfoMod.getTopCustomerName());
-			if(isNullOrEmpty(topCustomerNo)) {
-				return "2";//result（2）上位お客様名前がお客様情報テーブルに存じません
-			}else {
-				customerInfoMod.setTopCustomerNo(topCustomerNo);
-			}
-			customerInfoMod.setTopCustomerNo(topCustomerNo);
-		}else {
-			customerInfoMod.setTopCustomerNo("");
-		}
 		for(CustomerDepartmentInfoModel customerDepartmentInfoModel:
 			customerInfoMod.getCustomerDepartmentList()) {
 			String customerDepartmentCode = 
@@ -134,10 +122,14 @@ public class CustomerInfoController {
 				if(result == false) {
 					return "1";
 				}
-				customerInfoMod.getAccountInfo().setUpdateUser(customerInfoMod.getUpdateUser());
-				customerInfoMod.getTopCustomerInfo().setUpdateUser(customerInfoMod.getUpdateUser());
-				bankInfoController.insert(customerInfoMod.getAccountInfo());
-				topCustomerInfoController.insert(customerInfoMod.getTopCustomerInfo());
+				if(customerInfoMod.getAccountInfo() != null) {
+					customerInfoMod.getAccountInfo().setUpdateUser(customerInfoMod.getUpdateUser());
+					bankInfoController.insert(customerInfoMod.getAccountInfo());
+				}
+				if(customerInfoMod.getTopCustomerInfo() != null) {
+					customerInfoMod.getTopCustomerInfo().setUpdateUser(customerInfoMod.getUpdateUser());
+					topCustomerInfoController.insert(customerInfoMod.getTopCustomerInfo());
+				}
 				for(CustomerDepartmentInfoModel customerDepartmentInfoModel:
 					customerInfoMod.getCustomerDepartmentList()) {
 					customerDepartmentInfoModel.setShoriKbn(customerInfoMod.getActionType());
@@ -163,10 +155,10 @@ public class CustomerInfoController {
 				if(result == false) {
 					return "1";
 				}
-				customerInfoMod.getAccountInfo().setUpdateUser(customerInfoMod.getUpdateUser());
-				customerInfoMod.getTopCustomerInfo().setUpdateUser(customerInfoMod.getUpdateUser());
-				bankInfoController.update(customerInfoMod.getAccountInfo());
-				topCustomerInfoController.update(customerInfoMod.getTopCustomerInfo());
+				if(customerInfoMod.getAccountInfo() != null) {
+					customerInfoMod.getAccountInfo().setUpdateUser(customerInfoMod.getUpdateUser());
+					bankInfoController.update(customerInfoMod.getAccountInfo());
+				}
 				for(CustomerDepartmentInfoModel customerDepartmentInfoModel:
 					customerInfoMod.getCustomerDepartmentList()) {
 					customerDepartmentInfoModel.setShoriKbn(customerInfoMod.getActionType());
