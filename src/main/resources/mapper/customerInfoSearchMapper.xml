@@ -9,7 +9,7 @@
 			T007.customerNo,
 			T007.customerName,
 			M008.levelName,
-			T007.headOffice,
+			T007.stationCode,
 			M007.companyNatureName,
 			<choose>
 		        <when test="topCustomerName != null">
@@ -21,7 +21,7 @@
 	        </choose>
 			T006.employeeNo,
 			CONCAT( T001.employeeFristName ,T001.employeeLastName ) AS employeeName,
-			T006.location,
+			T006.stationCode,
 			T006.siteManager,
 			T006.unitPrice 
 		FROM
