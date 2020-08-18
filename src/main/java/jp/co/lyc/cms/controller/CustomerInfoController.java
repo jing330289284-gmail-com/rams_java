@@ -211,7 +211,7 @@ public class CustomerInfoController {
 		boolean result = true;
 		HashMap<String, String> sendMap = new HashMap<>();
 		sendMap.put("customerName", customerInfoMod.getCustomerName());
-		sendMap.put("headOffice", customerInfoMod.getHeadOffice());
+		sendMap.put("stationCode", customerInfoMod.getStationCode());
 		sendMap.put("representative", customerInfoMod.getRepresentative());
 		sendMap.put("customerAbbreviation", customerInfoMod.getCustomerAbbreviation());
 		sendMap.put("topCustomerNo", customerInfoMod.getTopCustomerNo());
@@ -245,8 +245,8 @@ public class CustomerInfoController {
 		if(!checkMod.getCustomerName().equals(customerInfoMod.getCustomerName())) {
 			sendMap.put("customerName", customerInfoMod.getCustomerName());
 		}
-		if(!checkMod.getHeadOffice().equals(customerInfoMod.getHeadOffice())) {
-			sendMap.put("headOffice", customerInfoMod.getHeadOffice());
+		if(!checkMod.getStationCode().equals(customerInfoMod.getStationCode())) {
+			sendMap.put("stationCode", customerInfoMod.getStationCode());
 		}
 		if(!checkMod.getRepresentative().equals(customerInfoMod.getRepresentative())) {
 			sendMap.put("representative", customerInfoMod.getRepresentative());

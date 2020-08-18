@@ -6,7 +6,7 @@ public class CustomerInfoModel {
 
 	String customerNo;//お客様番号
 	String customerName;//お客様名
-	String headOffice;//本社
+	String stationCode;//本社
 	String establishmentDate;//設立年月
 	String businessStartDate;//取引開始日
 	String levelCode;//お客様ランキングコード
@@ -198,11 +198,12 @@ public class CustomerInfoModel {
 	public void setCustomerName(String customerName) {
 		this.customerName = customerName;
 	}
-	public String getHeadOffice() {
-		return headOffice;
+	
+	public String getStationCode() {
+		return stationCode;
 	}
-	public void setHeadOffice(String headOffice) {
-		this.headOffice = headOffice;
+	public void setStationCode(String stationCode) {
+		this.stationCode = stationCode;
 	}
 	public String getCompanyNatureCode() {
 		return companyNatureCode;

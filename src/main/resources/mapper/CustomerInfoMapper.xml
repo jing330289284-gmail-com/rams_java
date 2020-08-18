@@ -44,7 +44,7 @@
 			T007.paymentsiteCode,
 			T007.listedCompanyFlag,
 			T007.levelCode,
-			T007.headOffice,
+			T007.stationCode,
 			T007.establishmentDate,
 			T007.customerNo,
 			T007.customerName,
@@ -64,7 +64,7 @@
 		customerNo,
 		customerName,
 		customerAbbreviation,
-		headOffice,
+		stationCode,
 		representative,
 		establishmentDate,
 		businessStartDate,
@@ -85,7 +85,7 @@
 		#{customerNo},
 		#{customerName},
 		#{customerAbbreviation},
-		#{headOffice},
+		#{stationCode},
 		#{representative},
 		#{establishmentDate},
 		#{businessStartDate},
@@ -112,8 +112,8 @@
 		<if test="customerAbbreviation != null">
 			customerAbbreviation = #{customerAbbreviation},
 		</if>
-		<if test="headOffice != null">
-			headOffice = #{headOffice},
+		<if test="stationCode != null">
+			stationCode = #{stationCode},
 		</if>
 		<if test="representative != null">
 			representative = #{representative},
