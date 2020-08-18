@@ -29,7 +29,9 @@ public class SiteModel implements Serializable {
 	String related1Employees;
 	String related2Employees;
 	String related3Employees;
+	String related4Employees;
 	String levelCode;
+	String remark;
 	String updateUser;
 	
 	public String getEmployeeNo() {
@@ -67,12 +69,6 @@ public class SiteModel implements Serializable {
 	}
 	public void setUnitPrice(String unitPrice) {
 		this.unitPrice = unitPrice;
-	}
-	public String getdevelopLanguageName() {
-		return developLanguageName;
-	}
-	public void setdevelopLanguageName(String developLanguageName) {
-		this.developLanguageName = developLanguageName;
 	}
 	public String getSiteRoleCode() {
 		return siteRoleCode;
@@ -172,6 +168,24 @@ public class SiteModel implements Serializable {
 	}
 	public void setRelated3Employees(String related3Employees) {
 		this.related3Employees = related3Employees;
+	}
+	public String getDevelopLanguageName() {
+		return developLanguageName;
+	}
+	public void setDevelopLanguageName(String developLanguageName) {
+		this.developLanguageName = developLanguageName;
+	}
+	public String getRelated4Employees() {
+		return related4Employees;
+	}
+	public void setRelated4Employees(String related4Employees) {
+		this.related4Employees = related4Employees;
+	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 	
 
