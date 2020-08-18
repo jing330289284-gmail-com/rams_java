@@ -17,6 +17,10 @@ public class SalesSituationService {
 	public List<SalesSituationModel> getSalesSituationModel(String sysDate){
 		return salesSituationMapper.getSalesSituationModel(sysDate);
 	}
+	
+	public int insertSalesSituation(SalesSituationModel model){
+		return salesSituationMapper.insertSalesSituation(model);
+	}
 
 
 }

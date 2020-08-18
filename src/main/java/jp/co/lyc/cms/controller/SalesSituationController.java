@@ -49,6 +49,21 @@ public class SalesSituationController {
 		logger.info("getSalesSituation" + "検索結束");
 		return salesSituationList;
 	}
+	
+	@RequestMapping(value = "/updateSalesSituation", method = RequestMethod.POST)
+	@ResponseBody
+	public int updateSalesSituation(@RequestBody SalesSituationModel model) {
+
+		logger.info("updateSalesSituation:" + "検索開始");
+		int index = 0;
+		try {
+			index = salesSituationService.insertSalesSituation(model);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		logger.info("updateSalesSituation" + "検索結束");
+		return index;
+	}
 
 
 
