@@ -428,18 +428,24 @@
 		T006
 		ON T001.employeeNo
 		= T006.employeeNo
+		AND admissionStartDate = (SELECT
+		MAX(admissionStartDate)
+		FROM
+		T006EmployeeSiteInfo)
 		LEFT
 		JOIN
 		T003AddressInfo AS T003
 		ON
 		T001.employeeNo =
 		T003.employeeNo
-		LEFT JOIN
+		LEFT
+		JOIN
 		T005ExpensesInfo AS T005 ON
 		T001.employeeNo =T005.employeeNo
 		and
 		reflectYearAndMonth = (SELECT
-		MAX(reflectYearAndMonth) FROM T005ExpensesInfo)
+		MAX(reflectYearAndMonth) FROM
+		T005ExpensesInfo)
 		LEFT JOIN
 		T007CustomerInfo AS T007 ON
 		T006.customerNo =

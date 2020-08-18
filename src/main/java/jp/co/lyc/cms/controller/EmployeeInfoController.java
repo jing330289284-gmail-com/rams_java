@@ -1,9 +1,14 @@
 package jp.co.lyc.cms.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,12 +17,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import jp.co.lyc.cms.model.BankInfoModel;
 import jp.co.lyc.cms.model.EmployeeModel;
 import jp.co.lyc.cms.service.EmployeeInfoService;
 
@@ -71,7 +79,7 @@ public class EmployeeInfoController {
 		Map<String, String> sendMap = getParam(emp);
 		boolean result = true;
 		try {
-			 employeeInfoService.insertEmployee((HashMap<String, String>) sendMap);
+			employeeInfoService.insertEmployee((HashMap<String, String>) sendMap);
 			// bankInfoController.insert(emp.getAccountInfo());
 		} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -146,7 +154,8 @@ public class EmployeeInfoController {
 		String employeeNo = emp.getEmployeeNo();// 社員番号
 		String employeeFristName = emp.getEmployeeFristName();// 社員氏
 		String employeeLastName = emp.getEmployeeLastName();// 社員名
-		String furigana = (emp.getFurigana1()!=null?emp.getFurigana1():"" )+ " " + (emp.getFurigana2()!=null?emp.getFurigana2():"" );//　カタカナ
+		String furigana = (emp.getFurigana1() != null ? emp.getFurigana1() : "") + " "
+				+ (emp.getFurigana2() != null ? emp.getFurigana2() : "");// カタカナ
 		String alphabetName = emp.getAlphabetName();// ローマ字
 		String birthday = emp.getBirthday();// 年齢
 		String genderStatus = emp.getGenderStatus();// 性別ステータス
@@ -373,7 +382,103 @@ public class EmployeeInfoController {
 			sendMap.put("yearsOfExperience", yearsOfExperience);
 		}
 		return sendMap;
-
 	}
 
+	/**
+	 *
+	 * @param file     文件
+	 * @param path     文件存放路径
+	 * @param fileName 原文件名
+	 * @return
+	 */
+	/*
+	 * public static boolean upload(MultipartFile file, String path, String
+	 * fileName) {
+	 * 
+	 * // 生成新的文件名 String realPath = path + "/" + getFileName(fileName);
+	 * 
+	 * // 使用原文件名 // String realPath = path + "/" + fileName;
+	 * 
+	 * File dest = new File(realPath);
+	 * 
+	 * // 判断文件父目录是否存在 if (!dest.getParentFile().exists()) {
+	 * dest.getParentFile().mkdir(); }
+	 * 
+	 * try { // 保存文件 file.transferTo(dest); return true; } catch
+	 * (IllegalStateException e) { e.printStackTrace(); return false; } catch
+	 * (IOException e) { e.printStackTrace(); return false; }
+	 * 
+	 * }
+	 */
+
+	/**
+	 * 获取文件后缀
+	 * 
+	 * @param fileName
+	 * @return
+	 */
+	public static String getSuffix(String fileName) {
+		return fileName.substring(fileName.lastIndexOf("."));
+	}
+
+	/**
+	 * 生成新的文件名
+	 * 
+	 * @param fileOriginName 源文件名
+	 * @return
+	 */
+	public static String getUUID() {
+		return UUID.randomUUID().toString().replace("-", "");
+	}
+
+	/**
+	 * 生成新的文件名
+	 * 
+	 * @param fileOriginName 源文件名
+	 * @return
+	 */
+	public static String getFileName(String fileOriginName) {
+		return getUUID() + getSuffix(fileOriginName);
+	}
+
+	/**
+	 * 上传图片文件
+	 *
+	 * @param file
+	 * @return
+	 */
+	public String imgUpload(@RequestParam("img") MultipartFile file1,HttpServletRequest request) {
+		
+        MultipartFile file = ((MultipartHttpServletRequest) request).getFile("file");
+		String response = " ";
+		if (file.isEmpty()) {
+			return "文件为空";
+		}
+		try {
+			// 1.定义上传的文件
+			String localPath = "path";
+			// 2.获得文件名字
+			String fileName = file.getOriginalFilename();
+			// 3.上传
+
+			// 3.1 生成新的文件名
+			String realPath = localPath + "/" + getFileName(fileName);
+			// 3.2 保存文件
+			File dest = new File(realPath);
+			// 判断文件目目录是否存在,不存在则新建
+			if (!dest.getParentFile().exists()) {
+				dest.getParentFile().mkdir();
+			}
+			file.transferTo(dest);
+
+			// 保存路径到数据库
+			//articlePictureService.save(entity);
+			response = "上传成功";
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			response = "服务器出现错误，上传失败";
+		}
+		return response;
+	}
 }
