@@ -213,8 +213,8 @@ public class GetSelectInfoUtilService {
 	 * 
 	 * @return
 	 */
-	public List<ModelClass> getTopCustomerDrop(String name) {
-		return getSelectInfoUtilMapper.getTopCustomerDrop(name);
+	public List<ModelClass> getTopCustomerDrop() {
+		return getSelectInfoUtilMapper.getTopCustomerDrop();
 	}
 
 	/**
@@ -222,8 +222,8 @@ public class GetSelectInfoUtilService {
 	 * 
 	 * @return
 	 */
-	public List<ModelClass> getDepartmentMaster(String name) {
-		return getSelectInfoUtilMapper.getDepartmentMaster(name);
+	public List<ModelClass> getDepartmentMasterDrop() {
+		return getSelectInfoUtilMapper.getDepartmentMasterDrop();
 	}
 
 	/**

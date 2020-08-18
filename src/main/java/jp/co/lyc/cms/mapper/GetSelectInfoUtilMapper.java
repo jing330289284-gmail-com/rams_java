@@ -154,14 +154,14 @@ public interface GetSelectInfoUtilMapper {
 	 * 
 	 * @return
 	 */
-	public List<ModelClass> getTopCustomerDrop(String name);
+	public List<ModelClass> getTopCustomerDrop();
 
 	/**
 	 * 部門名前連想
 	 * 
 	 * @return
 	 */
-	public List<ModelClass> getDepartmentMaster(String name);
+	public List<ModelClass> getDepartmentMasterDrop();
 
 	/**
 	 * 銀行名検索

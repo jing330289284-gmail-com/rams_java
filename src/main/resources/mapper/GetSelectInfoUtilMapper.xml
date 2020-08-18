@@ -151,26 +151,21 @@
 	</select>
 	<!-- 上位お客様連想 -->
 	<select id="getTopCustomerDrop"
-		resultType="jp.co.lyc.cms.model.ModelClass" parameterType="String">
+		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT
-		topCustomerName name,
-		topCustomerNo code
+		topCustomerName label,
+		topCustomerNo value
 		FROM
 		T008TopCustomerInfo
-		WHERE
-		topCustomerName LIKE concat('%',#{name},'%')
 	</select>
 	<!-- 部門名前連想 -->
-	<select id="getDepartmentMaster"
-		resultType="jp.co.lyc.cms.model.ModelClass" parameterType="String">
+	<select id="getDepartmentMasterDrop"
+		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT
-		customerDepartmentName name,
-		customerDepartmentCode code
+		customerDepartmentName label,
+		customerDepartmentCode value
 		FROM
 		M018CustomerDepartment
-		WHERE
-		customerDepartmentName LIKE
-		concat('%',#{name},'%')
 	</select>
 	<!-- 銀行名検索 -->
 	<select id="getBankInfo"

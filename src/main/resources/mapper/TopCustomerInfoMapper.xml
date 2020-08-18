@@ -28,6 +28,7 @@
 		INSERT INTO T008TopCustomerInfo(
 		topCustomerNo,
 		topCustomerName,
+		topCustomerAbbreviation,
 		url,
 		remark,
 		updateTime,
@@ -37,6 +38,7 @@
 		VALUE(
 		#{topCustomerNo},
 		#{topCustomerName},
+		#{topCustomerAbbreviation},
 		#{url},
 		#{remark},
 		NOW(),
@@ -47,8 +49,11 @@
     <update id="updateTopCustomerInfo" parameterType="String">
 		UPDATE T008TopCustomerInfo
 		SET 
-		<if test="TopCustomerName != null">
-			TopCustomerName = #{topCustomerName},
+		<if test="topCustomerName != null">
+			topCustomerName = #{topCustomerName},
+		</if>
+		<if test="topCustomerAbbreviation != null">
+			topCustomerAbbreviation = #{topCustomerAbbreviation},
 		</if>
 		<if test="url != null">
 			url = #{url},
@@ -59,6 +64,6 @@
 		updateTime = NOW(),
 		updateUser = #{updateUser}
 		WHERE 
-			TopCustomerNo = #{topCustomerNo}
+			topCustomerNo = #{topCustomerNo}
     </update> 
 </mapper>

@@ -34,12 +34,8 @@ public class TopCustomerInfoController {
 	public HashMap<String,Object> onloadPage(@RequestBody TopCustomerInfoModel topCustomerMod) {
 		logger.info("TopCustomerInfoController.onloadPage:" + "页面加载開始");
 		HashMap<String,Object> resultMap = new HashMap<>();
-		if (topCustomerMod.getActionType().equals("update") || topCustomerMod.getActionType().equals("detail")) {
-			topCustomerMod = topCustomerInfoService.selectTopCustomerInfo(topCustomerMod.getTopCustomerNo());	
-			resultMap.put("topCustomerMod", topCustomerMod);
-		}else {
-			resultMap.put("TopCustomerNoSaiBan", topCustomerInfoService.TopCustomerNoSaiBan());
-		}
+		topCustomerMod = topCustomerInfoService.selectTopCustomerInfo(topCustomerMod.getTopCustomerNo());	
+		resultMap.put("topCustomerMod", topCustomerMod);
 		return resultMap;
 	}
 	/**
@@ -54,8 +50,7 @@ public class TopCustomerInfoController {
 		TopCustomerInfoModel checkMod = topCustomerInfoService.selectTopCustomerInfo(topCustomerMod.getTopCustomerNo());
 		if (checkMod == null && topCustomerMod.getActionType().equals("insert")) {
 			result = insert(topCustomerMod);
-		} else if (checkMod != null && (topCustomerMod.getActionType().equals("update"))||
-				topCustomerMod.getActionType().equals("detail")) {
+		} else if (checkMod != null && (topCustomerMod.getActionType().equals("update"))) {
 			result = update(topCustomerMod);
 		}
 		return result;
@@ -71,6 +66,7 @@ public class TopCustomerInfoController {
 		HashMap<String, String> sendMap = new HashMap<>();
 		sendMap.put("topCustomerName", topCustomerMod.getTopCustomerName());
 		sendMap.put("url", topCustomerMod.getUrl());
+		sendMap.put("topCustomerAbbreviation", topCustomerMod.getTopCustomerAbbreviation());
 		sendMap.put("remark", topCustomerMod.getRemark());
 		sendMap.put("updateUser", topCustomerMod.getUpdateUser());
 		sendMap.put("topCustomerNo", topCustomerMod.getTopCustomerNo());	
@@ -97,6 +93,9 @@ public class TopCustomerInfoController {
 		}
 		if(!checkMod.getRemark().equals(topCustomerMod.getRemark())) {
 			sendMap.put("remark", topCustomerMod.getRemark());
+		}
+		if(!checkMod.getTopCustomerAbbreviation().equals(topCustomerMod.getTopCustomerAbbreviation())) {
+			sendMap.put("topCustomerAbbreviation", topCustomerMod.getTopCustomerAbbreviation());
 		}
 		sendMap.put("updateUser", topCustomerMod.getUpdateUser());
 		sendMap.put("topCustomerNo", topCustomerMod.getTopCustomerNo());	

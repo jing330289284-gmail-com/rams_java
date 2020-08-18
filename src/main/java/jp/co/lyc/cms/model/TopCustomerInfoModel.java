@@ -8,8 +8,14 @@ public class TopCustomerInfoModel {
 	String remark;//備考
 	String updateUser;//更新者
 	String actionType;//処理区分
+	String topCustomerAbbreviation;//お客様略称
 	
-	
+	public String getTopCustomerAbbreviation() {
+		return topCustomerAbbreviation;
+	}
+	public void setTopCustomerAbbreviation(String topCustomerAbbreviation) {
+		this.topCustomerAbbreviation = topCustomerAbbreviation;
+	}
 	public String getActionType() {
 		return actionType;
 	}
