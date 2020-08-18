@@ -8,7 +8,7 @@ SELECT
     T001.employeeNo,
     CONCAT(T001.employeeFristName,
             T001.employeeLastName) AS 'employeeName',
-    T003.stationCode1 AS 'nearestStation',
+    M013.stationName AS 'nearestStation',
     CONCAT_WS(',',
             T002.developLanguage1,
             T002.developLanguage2,
@@ -35,6 +35,8 @@ FROM
     T001Employee T001
         LEFT JOIN
     T003AddressInfo T003 ON T001.employeeNo = T003.employeeNo
+        LEFT JOIN
+    M013Station M013 ON M013.stationCode = T003.stationCode1
         LEFT JOIN
     T002EmployeeDetail T002 ON T001.employeeNo = T002.employeeNo
         LEFT JOIN
