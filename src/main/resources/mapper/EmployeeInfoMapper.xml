@@ -18,7 +18,7 @@
 		T005.salary,
 		T007.customerName,
 		T002.phoneNo,
-		T003.nearestStation1,
+		T003.stationCode1,
 		TIMESTAMPDIFF(MONTH,
 		NOW(),
 		T002.stayPeriod) AS stayPeriod
