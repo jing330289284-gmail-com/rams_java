@@ -61,13 +61,17 @@ public class SiteInfoController {
 		return period;
 	}
 
-	private String toRelatedEmployees(String related1Employees, String related2Employees, String related3Employees) {
+	private String toRelatedEmployees(String related1Employees, String related2Employees, String related3Employees,
+			String related4Employees) {
 		String relatedEmployees = related1Employees;
 		if (related2Employees != null && related2Employees.length() != 0) {
 			relatedEmployees = relatedEmployees + "," + related2Employees;
 		}
 		if (related3Employees != null && related3Employees.length() != 0) {
 			relatedEmployees = relatedEmployees + "," + related3Employees;
+		}
+		if (related4Employees != null && related4Employees.length() != 0) {
+			relatedEmployees = relatedEmployees + "," + related4Employees;
 		}
 		return relatedEmployees;
 	}
@@ -98,8 +102,10 @@ public class SiteInfoController {
 			String systemName = siteModel.getSystemName();
 			String developLanguageCode = siteModel.getDevelopLanguageCode();
 			String relatedEmployees = toRelatedEmployees(siteModel.getRelated1Employees(),
-					siteModel.getRelated2Employees(), siteModel.getRelated3Employees());
+					siteModel.getRelated2Employees(), siteModel.getRelated3Employees(),
+					siteModel.getRelated4Employees());
 			String levelCode = siteModel.getLevelCode();
+			String remark = siteModel.getRemark();
 			String updateUser = siteModel.getUpdateUser();
 
 			if (employeeNo != null && employeeNo.length() != 0) {
@@ -148,6 +154,9 @@ public class SiteInfoController {
 			}
 			if (levelCode != null && levelCode.length() != 0) {
 				sendMap.put("levelCode", levelCode);
+			}
+			if (remark != null && remark.length() != 0) {
+				sendMap.put("remark", remark);
 			}
 			if (updateUser != null && updateUser.length() != 0) {
 				sendMap.put("updateUser", updateUser);
