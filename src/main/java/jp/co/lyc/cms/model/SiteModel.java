@@ -15,7 +15,7 @@ public class SiteModel implements Serializable {
 	String topCustomerNo;
 	String developLanguageCode;
 	String unitPrice;
-	String developLanguage;
+	String developLanguageName;
 	String siteRoleCode;
 	String siteManager;
 	String admissionStartDate;
@@ -68,11 +68,11 @@ public class SiteModel implements Serializable {
 	public void setUnitPrice(String unitPrice) {
 		this.unitPrice = unitPrice;
 	}
-	public String getDevelopLanguage() {
-		return developLanguage;
+	public String getdevelopLanguageName() {
+		return developLanguageName;
 	}
-	public void setDevelopLanguage(String developLanguage) {
-		this.developLanguage = developLanguage;
+	public void setdevelopLanguageName(String developLanguageName) {
+		this.developLanguageName = developLanguageName;
 	}
 	public String getSiteRoleCode() {
 		return siteRoleCode;

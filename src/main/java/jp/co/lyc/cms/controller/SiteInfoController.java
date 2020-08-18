@@ -24,16 +24,16 @@ import jp.co.lyc.cms.service.GetSiteInfoService;
 public class SiteInfoController {
 	private String dateToString(String date) {
 		String[] a = date.split("/");
-		String b = a[1];
+		String b = a[0];
+		if (a[1].length() == 1) {
+			b = b + "0" + a[1];
+		} else {
+			b = b + a[1];
+		}
 		if (a[2].length() == 1) {
 			b = b + "0" + a[2];
 		} else {
 			b = b + a[2];
-		}
-		if (a[3].length() == 1) {
-			b = b + "0" + a[3];
-		} else {
-			b = b + a[3];
 		}
 		return b;
 	}
