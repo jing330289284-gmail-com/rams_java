@@ -1,6 +1,7 @@
 package jp.co.lyc.cms.controller;
 
 import java.util.HashMap;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +11,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import jp.co.lyc.cms.model.BankInfoModel;
 import jp.co.lyc.cms.service.GetBankInfoService;
-import jp.co.lyc.cms.service.GetSelectInfoUtilService;
+import jp.co.lyc.cms.service.UtilsService;
 
 @Controller
 @CrossOrigin(origins = "http://127.0.0.1:3000")
@@ -26,7 +28,7 @@ public class BankInfoController {
 	GetBankInfoService bankInfoSer;
 	//選択肢service
 	@Autowired
-	GetSelectInfoUtilService selectutilSer;
+	UtilsService selectutilSer;
 	
 	/**
 	 * 画面の初期化
