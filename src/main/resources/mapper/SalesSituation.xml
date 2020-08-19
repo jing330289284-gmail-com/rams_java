@@ -45,6 +45,7 @@ FROM
     T010SalesSituation T010 ON T001.employeeNo = T010.employeeNo
 WHERE
     LEFT(T006.admissionEndDate, 6) = #{sysDate}
+    order by T001.employeeNo
     </select>
     
     <!-- 営業情報を更新 -->
