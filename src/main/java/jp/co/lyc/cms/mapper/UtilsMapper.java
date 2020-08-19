@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
 import jp.co.lyc.cms.model.ModelClass;
 
 @Mapper
-public interface GetSelectInfoUtilMapper {
+public interface UtilsMapper {
 	/**
 	 * 国籍を取得
 	 * 

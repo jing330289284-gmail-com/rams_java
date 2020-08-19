@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="jp.co.lyc.cms.mapper.GetSelectInfoUtilMapper">
+<mapper namespace="jp.co.lyc.cms.mapper.UtilsMapper">
 	<!-- 社員形式コード -->
 	<select id="getStaffForms"
 		resultType="jp.co.lyc.cms.model.ModelClass">
@@ -50,7 +50,7 @@
 	<select id="getTechnologyType" parameterType="map"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT technologytypeCode code,technologytypeName name FROM
-		M011TechnologyType where 1=1
+		M011DevelopLanguage where 1=1
 		<if test="developmentLanguageNo1!= null">
 			AND technologytypeName like
 			concat('%',#{developmentLanguageNo1},'%');

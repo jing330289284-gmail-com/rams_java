@@ -1,5 +1,6 @@
 package jp.co.lyc.cms.util;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -8,6 +9,9 @@ import java.util.Map.Entry;
 import java.util.Properties;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,18 +21,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import jp.co.lyc.cms.model.EmployeeModel;
 import jp.co.lyc.cms.model.ModelClass;
-import jp.co.lyc.cms.service.GetSelectInfoUtilService;
+import jp.co.lyc.cms.service.UtilsService;
 import net.sf.json.JSONObject;
 
 @Controller
 @CrossOrigin(origins = "http://127.0.0.1:3000")
-public class GetUtilClass {
+public class UtilsController {
 
 	@Autowired
-	GetProperties getProperties;
-
-	@Autowired
-	GetSelectInfoUtilService getSelectInfoUtilService;
+	UtilsService utilsService;
 
 	/**
 	 * 国籍を取得
@@ -38,7 +39,7 @@ public class GetUtilClass {
 	@RequestMapping(value = "/getNationalitys", method = RequestMethod.POST)
 	@ResponseBody
 	public List<ModelClass> getNationalitys() {
-		List<ModelClass> list = getSelectInfoUtilService.getNationalitys();
+		List<ModelClass> list = utilsService.getNationalitys();
 		return list;
 	}
 
@@ -50,7 +51,7 @@ public class GetUtilClass {
 	@RequestMapping(value = "/getStaffForms", method = RequestMethod.POST)
 	@ResponseBody
 	public List<ModelClass> getStaffForms() {
-		List<ModelClass> list = getSelectInfoUtilService.getStaffForms();
+		List<ModelClass> list = utilsService.getStaffForms();
 		return list;
 	}
 
@@ -62,7 +63,7 @@ public class GetUtilClass {
 	@RequestMapping(value = "/getVisa", method = RequestMethod.POST)
 	@ResponseBody
 	public List<ModelClass> getVisa() {
-		List<ModelClass> list = getSelectInfoUtilService.getVisa();
+		List<ModelClass> list = utilsService.getVisa();
 		return list;
 	}
 
@@ -75,7 +76,7 @@ public class GetUtilClass {
 	@ResponseBody
 	public List<ModelClass> getTechnologyType(@RequestBody EmployeeModel emp) {
 		Map<String, String> sendMap = getParam(emp);
-		List<ModelClass> list = getSelectInfoUtilService.getTechnologyType(sendMap);
+		List<ModelClass> list = utilsService.getTechnologyType(sendMap);
 		return list;
 	}
 
@@ -87,7 +88,7 @@ public class GetUtilClass {
 	@RequestMapping(value = "/getLevel", method = RequestMethod.POST)
 	@ResponseBody
 	public List<ModelClass> getLevel() {
-		List<ModelClass> list = getSelectInfoUtilService.getLevel();
+		List<ModelClass> list = utilsService.getLevel();
 		return list;
 	}
 
@@ -99,7 +100,7 @@ public class GetUtilClass {
 	@RequestMapping(value = "/getJapaneseLevel", method = RequestMethod.POST)
 	@ResponseBody
 	public List<ModelClass> getJapaneseLevel() {
-		List<ModelClass> list = getSelectInfoUtilService.getJapaneseLevel();
+		List<ModelClass> list = utilsService.getJapaneseLevel();
 		return list;
 	}
 
@@ -111,7 +112,7 @@ public class GetUtilClass {
 	@RequestMapping(value = "/getCompanyNature", method = RequestMethod.POST)
 	@ResponseBody
 	public List<ModelClass> getCompanyNature() {
-		List<ModelClass> list = getSelectInfoUtilService.getCompanyNature();
+		List<ModelClass> list = utilsService.getCompanyNature();
 		return list;
 	}
 
@@ -123,7 +124,7 @@ public class GetUtilClass {
 	@RequestMapping(value = "/getPosition", method = RequestMethod.POST)
 	@ResponseBody
 	public List<ModelClass> getPosition() {
-		List<ModelClass> list = getSelectInfoUtilService.getPosition();
+		List<ModelClass> list = utilsService.getPosition();
 		return list;
 	}
 
@@ -135,7 +136,7 @@ public class GetUtilClass {
 	@RequestMapping(value = "/getTopCustomerDrop", method = RequestMethod.POST)
 	@ResponseBody
 	public List<ModelClass> getTopCustomerDrop() {
-		List<ModelClass> list = getSelectInfoUtilService.getTopCustomerDrop();
+		List<ModelClass> list = utilsService.getTopCustomerDrop();
 		return list;
 	}
 
@@ -147,7 +148,7 @@ public class GetUtilClass {
 	@RequestMapping(value = "/getDepartmentMasterDrop", method = RequestMethod.POST)
 	@ResponseBody
 	public List<ModelClass> getDepartmentMasterDrop() {
-		List<ModelClass> list = getSelectInfoUtilService.getDepartmentMasterDrop();
+		List<ModelClass> list = utilsService.getDepartmentMasterDrop();
 		return list;
 	}
 
@@ -159,7 +160,7 @@ public class GetUtilClass {
 	@RequestMapping(value = "/getBankInfo", method = RequestMethod.POST)
 	@ResponseBody
 	public List<ModelClass> getBankInfo() {
-		List<ModelClass> list = getSelectInfoUtilService.getBankInfo();
+		List<ModelClass> list = utilsService.getBankInfo();
 		return list;
 	}
 
@@ -171,7 +172,7 @@ public class GetUtilClass {
 	@RequestMapping(value = "/getBankBranchInfo", method = RequestMethod.POST)
 	@ResponseBody
 	public List<ModelClass> getBankBranchInfo(@RequestBody HashMap<String, String> sendMap) {
-		List<ModelClass> list = getSelectInfoUtilService.getBankBranchInfo(sendMap);
+		List<ModelClass> list = utilsService.getBankBranchInfo(sendMap);
 		return list;
 	}
 
@@ -183,7 +184,7 @@ public class GetUtilClass {
 	@RequestMapping(value = "/getPaymentsite", method = RequestMethod.POST)
 	@ResponseBody
 	public List<ModelClass> getPaymentsite() {
-		List<ModelClass> list = getSelectInfoUtilService.getPaymentsite();
+		List<ModelClass> list = utilsService.getPaymentsite();
 		return list;
 	}
 
@@ -196,7 +197,7 @@ public class GetUtilClass {
 	@RequestMapping(value = "/getGender", method = RequestMethod.POST)
 	@ResponseBody
 	public List<ModelClass> getGender() {
-		Properties properties = getProperties.getProperties();
+		Properties properties = getProperties();
 		String gender = properties.getProperty("gender");
 		List<ModelClass> list = getStatus(gender);
 		return list;
@@ -211,7 +212,7 @@ public class GetUtilClass {
 	@RequestMapping(value = "/getListedCompany", method = RequestMethod.POST)
 	@ResponseBody
 	public List<ModelClass> getListedCompany() {
-		Properties properties = getProperties.getProperties();
+		Properties properties = getProperties();
 		String listedCompany = properties.getProperty("listedCompany");
 		List<ModelClass> list = getStatus(listedCompany);
 		return list;
@@ -226,7 +227,7 @@ public class GetUtilClass {
 	@RequestMapping(value = "/getHousing", method = RequestMethod.POST)
 	@ResponseBody
 	public List<ModelClass> getHousing() {
-		Properties properties = getProperties.getProperties();
+		Properties properties = getProperties();
 		String housing = properties.getProperty("housing");
 		List<ModelClass> list = getStatus(housing);
 		return list;
@@ -241,7 +242,7 @@ public class GetUtilClass {
 	@RequestMapping(value = "/getPayOffRange", method = RequestMethod.POST)
 	@ResponseBody
 	public List<ModelClass> getPayOffRange() {
-		Properties properties = getProperties.getProperties();
+		Properties properties = getProperties();
 		String payOffRange = properties.getProperty("payOffRange");
 		List<ModelClass> list = getStatus(payOffRange);
 		return list;
@@ -256,7 +257,7 @@ public class GetUtilClass {
 	@RequestMapping(value = "/getMaster", method = RequestMethod.POST)
 	@ResponseBody
 	public List<ModelClass> getMaster() {
-		Properties properties = getProperties.getProperties();
+		Properties properties = getProperties();
 		String master = properties.getProperty("master");
 		List<ModelClass> list = getStatus(master);
 		return list;
@@ -271,7 +272,7 @@ public class GetUtilClass {
 	@RequestMapping(value = "/getEmployee", method = RequestMethod.POST)
 	@ResponseBody
 	public List<ModelClass> getEmployee() {
-		Properties properties = getProperties.getProperties();
+		Properties properties = getProperties();
 		String employee = properties.getProperty("employee");
 		List<ModelClass> list = getStatus(employee);
 		return list;
@@ -286,7 +287,7 @@ public class GetUtilClass {
 	@RequestMapping(value = "/getNewMember", method = RequestMethod.POST)
 	@ResponseBody
 	public List<ModelClass> getNewMember() {
-		Properties properties = getProperties.getProperties();
+		Properties properties = getProperties();
 		String newMember = properties.getProperty("newMember");
 		List<ModelClass> list = getStatus(newMember);
 		return list;
@@ -301,7 +302,7 @@ public class GetUtilClass {
 	@RequestMapping(value = "/getAccountType", method = RequestMethod.POST)
 	@ResponseBody
 	public List<ModelClass> getAccountType() {
-		Properties properties = getProperties.getProperties();
+		Properties properties = getProperties();
 		String accountType = properties.getProperty("accountType");
 		List<ModelClass> list = getStatus(accountType);
 		return list;
@@ -316,7 +317,7 @@ public class GetUtilClass {
 	@RequestMapping(value = "/getAccountBelongs", method = RequestMethod.POST)
 	@ResponseBody
 	public List<ModelClass> getAccountBelongs() {
-		Properties properties = getProperties.getProperties();
+		Properties properties = getProperties();
 		String accountBelongs = properties.getProperty("accountBelongs");
 		List<ModelClass> list = getStatus(accountBelongs);
 		return list;
@@ -331,7 +332,7 @@ public class GetUtilClass {
 	@RequestMapping(value = "/getQualificationType", method = RequestMethod.POST)
 	@ResponseBody
 	public List<ModelClass> getQualificationType() {
-		Properties properties = getProperties.getProperties();
+		Properties properties = getProperties();
 		String qualificationType = properties.getProperty("qualificationType");
 		List<ModelClass> list = getStatus(qualificationType);
 		return list;
@@ -346,7 +347,7 @@ public class GetUtilClass {
 	@RequestMapping(value = "/getBonus", method = RequestMethod.POST)
 	@ResponseBody
 	public List<ModelClass> getBonus() {
-		Properties properties = getProperties.getProperties();
+		Properties properties = getProperties();
 		String bonus = properties.getProperty("bonus");
 		List<ModelClass> list = getStatus(bonus);
 		return list;
@@ -361,7 +362,7 @@ public class GetUtilClass {
 	@RequestMapping(value = "/getInsurance", method = RequestMethod.POST)
 	@ResponseBody
 	public List<ModelClass> getInsurance() {
-		Properties properties = getProperties.getProperties();
+		Properties properties = getProperties();
 		String insurance = properties.getProperty("insurance");
 		List<ModelClass> list = getStatus(insurance);
 		return list;
@@ -376,7 +377,7 @@ public class GetUtilClass {
 	@RequestMapping(value = "/getHousingStatus", method = RequestMethod.POST)
 	@ResponseBody
 	public List<ModelClass> getHousingStatus() {
-		Properties properties = getProperties.getProperties();
+		Properties properties = getProperties();
 		String HousingStatus = properties.getProperty("housingStatus");
 		List<ModelClass> list = getStatus(HousingStatus);
 		return list;
@@ -404,7 +405,7 @@ public class GetUtilClass {
 	@RequestMapping(value = "/getIntoCompany", method = RequestMethod.POST)
 	@ResponseBody
 	public List<ModelClass> getIntoCompany() {
-		List<ModelClass> list = getSelectInfoUtilService.getIntoCompany();
+		List<ModelClass> list = utilsService.getIntoCompany();
 		return list;
 	}
 
@@ -416,7 +417,7 @@ public class GetUtilClass {
 	@RequestMapping(value = "/getSiteMaster", method = RequestMethod.POST)
 	@ResponseBody
 	public List<ModelClass> getSiteMaster() {
-		List<ModelClass> list = getSelectInfoUtilService.getSiteMaster();
+		List<ModelClass> list = utilsService.getSiteMaster();
 		return list;
 	}
 
@@ -428,7 +429,7 @@ public class GetUtilClass {
 	@RequestMapping(value = "/getCustomer", method = RequestMethod.POST)
 	@ResponseBody
 	public List<ModelClass> getCustomer() {
-		List<ModelClass> list = getSelectInfoUtilService.getCustomer();
+		List<ModelClass> list = utilsService.getCustomer();
 		return list;
 	}
 
@@ -440,7 +441,7 @@ public class GetUtilClass {
 	@RequestMapping(value = "/getTopCustomer", method = RequestMethod.POST)
 	@ResponseBody
 	public List<ModelClass> getTopCustomer() {
-		List<ModelClass> list = getSelectInfoUtilService.getTopCustomer();
+		List<ModelClass> list = utilsService.getTopCustomer();
 		return list;
 	}
 
@@ -452,7 +453,7 @@ public class GetUtilClass {
 	@RequestMapping(value = "/getDevelopLanguage", method = RequestMethod.POST)
 	@ResponseBody
 	public List<ModelClass> getDevelopLanguage() {
-		List<ModelClass> list = getSelectInfoUtilService.getDevelopLanguage();
+		List<ModelClass> list = utilsService.getDevelopLanguage();
 		return list;
 	}
 
@@ -464,7 +465,7 @@ public class GetUtilClass {
 	@RequestMapping(value = "/getOccupation", method = RequestMethod.POST)
 	@ResponseBody
 	public List<ModelClass> getOccupation() {
-		List<ModelClass> list = getSelectInfoUtilService.getOccupation();
+		List<ModelClass> list = utilsService.getOccupation();
 		return list;
 	}
 
@@ -476,7 +477,7 @@ public class GetUtilClass {
 	@RequestMapping(value = "/getDepartment", method = RequestMethod.POST)
 	@ResponseBody
 	public List<ModelClass> getDepartment() {
-		List<ModelClass> list = getSelectInfoUtilService.getDepartment();
+		List<ModelClass> list = utilsService.getDepartment();
 		return list;
 	}
 
@@ -488,7 +489,7 @@ public class GetUtilClass {
 	@RequestMapping(value = "/getAuthority", method = RequestMethod.POST)
 	@ResponseBody
 	public List<ModelClass> getAuthority() {
-		List<ModelClass> list = getSelectInfoUtilService.getAuthority();
+		List<ModelClass> list = utilsService.getAuthority();
 		return list;
 	}
 
@@ -500,7 +501,7 @@ public class GetUtilClass {
 	@RequestMapping(value = "/getEnglishLevel", method = RequestMethod.POST)
 	@ResponseBody
 	public List<ModelClass> getEnglishLevel() {
-		List<ModelClass> list = getSelectInfoUtilService.getEnglishLevel();
+		List<ModelClass> list = utilsService.getEnglishLevel();
 		return list;
 	}
 
@@ -512,7 +513,7 @@ public class GetUtilClass {
 	@RequestMapping(value = "/getQualification", method = RequestMethod.POST)
 	@ResponseBody
 	public List<ModelClass> getQualification() {
-		List<ModelClass> list = getSelectInfoUtilService.getQualification();
+		List<ModelClass> list = utilsService.getQualification();
 		return list;
 	}
 
@@ -540,7 +541,7 @@ public class GetUtilClass {
 	@RequestMapping(value = "/getPassword", method = RequestMethod.POST)
 	@ResponseBody
 	public String getPassword(@RequestBody EmployeeModel emp) {
-		return getSelectInfoUtilService.getPassword(emp.getEmployeeNo());
+		return utilsService.getPassword(emp.getEmployeeNo());
 	}
 
 	/**
@@ -556,7 +557,7 @@ public class GetUtilClass {
 		sendMap.put("employeeNo", emp.getEmployeeNo());
 		sendMap.put("password", emp.getPassword());
 		sendMap.put("oldPassword", emp.getOldPassword());
-		return getSelectInfoUtilService.resetPassword(sendMap);
+		return utilsService.resetPassword(sendMap);
 	}
 
 	/**
@@ -583,7 +584,24 @@ public class GetUtilClass {
 		if (table != null && table.length() != 0) {
 			sendMap.put("table", table);
 		}
-		String no = getSelectInfoUtilService.getNO(sendMap);
+		String no = utilsService.getNO(sendMap);
 		return no;
 	}
+
+	/**
+	 * xmlを読み
+	 * 
+	 * @return
+	 */
+	public Properties getProperties() {
+		Resource resource = new ClassPathResource("system.properties");
+		Properties props = null;
+		try {
+			props = PropertiesLoaderUtils.loadProperties(resource);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return props;
+	}
+
 }
