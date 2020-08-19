@@ -1,32 +1,24 @@
 package jp.co.lyc.cms.controller;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import jp.co.lyc.cms.model.BankInfoModel;
+import jp.co.lyc.cms.model.CostModel;
 import jp.co.lyc.cms.model.EmployeeModel;
+import jp.co.lyc.cms.model.SiteModel;
 import jp.co.lyc.cms.service.EmployeeInfoService;
 
 @Controller
@@ -56,7 +48,7 @@ public class EmployeeInfoController {
 		logger.info("GetEmployeeInfoController.getEmployeeInfo:" + "検索開始");
 		List<EmployeeModel> employeeList = new ArrayList<EmployeeModel>();
 		try {
-			Map<String, String> sendMap = getParam(emp);
+			Map<String, Object> sendMap = getParam(emp);
 			employeeList = employeeInfoService.getEmployeeInfo(sendMap);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -71,22 +63,17 @@ public class EmployeeInfoController {
 	 * @param emp
 	 * @return boolean
 	 */
-	@Transactional(rollbackFor = Exception.class)
 	@RequestMapping(value = "/insertEmployee", method = RequestMethod.POST)
 	@ResponseBody
 	public boolean insertEmployee(@RequestBody EmployeeModel emp) throws Exception {
 		logger.info("GetEmployeeInfoController.insertEmployee:" + "追加開始");
-		Map<String, String> sendMap = getParam(emp);
+		Map<String, Object> sendMap = getParam(emp);
 		boolean result = true;
 		try {
-			employeeInfoService.insertEmployee((HashMap<String, String>) sendMap);
-			// bankInfoController.insert(emp.getAccountInfo());
+			employeeInfoService.insertEmployee((HashMap<String, Object>) sendMap);
 		} catch (Exception e) {
-			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-			e.printStackTrace();
 			return result = false;
 		}
-
 		logger.info("GetEmployeeInfoController.insertEmployee:" + "追加結束");
 		return result;
 	}
@@ -101,7 +88,7 @@ public class EmployeeInfoController {
 	@ResponseBody
 	public boolean deleteEmployeeInfo(@RequestBody EmployeeModel emp) throws Exception {
 		logger.info("GetEmployeeInfoController.addEmployeeInfo:" + "削除開始");
-		Map<String, String> sendMap = getParam(emp);
+		Map<String, Object> sendMap = getParam(emp);
 		boolean result = true;
 		result = employeeInfoService.deleteEmployeeInfo(sendMap);
 		logger.info("GetEmployeeInfoController.addEmployeeInfo:" + "削除結束");
@@ -118,7 +105,7 @@ public class EmployeeInfoController {
 	@ResponseBody
 	public EmployeeModel getEmployeeByEmployeeNo(@RequestBody EmployeeModel emp) throws Exception {
 		logger.info("GetEmployeeInfoController.addEmployeeInfo:" + "EmployeeNoによると、社員情報を取得開始");
-		Map<String, String> sendMap = getParam(emp);
+		Map<String, Object> sendMap = getParam(emp);
 		EmployeeModel model;
 		model = employeeInfoService.getEmployeeByEmployeeNo(sendMap);
 		logger.info("GetEmployeeInfoController.addEmployeeInfo:" + "EmployeeNoによると、社員情報を取得結束");
@@ -136,7 +123,7 @@ public class EmployeeInfoController {
 	@ResponseBody
 	public boolean updateEmployee(@RequestBody EmployeeModel emp) throws Exception {
 		logger.info("GetEmployeeInfoController.updateEmployee:" + "修正開始");
-		Map<String, String> sendMap = getParam(emp);
+		Map<String, Object> sendMap = getParam(emp);
 		boolean result = true;
 		result = employeeInfoService.updateEmployee(sendMap);
 		logger.info("GetEmployeeInfoController.updateEmployee:" + "修正結束");
@@ -149,8 +136,8 @@ public class EmployeeInfoController {
 	 * @param emp
 	 * @return
 	 */
-	public Map<String, String> getParam(EmployeeModel emp) {
-		Map<String, String> sendMap = new HashMap<String, String>();
+	public Map<String, Object> getParam(EmployeeModel emp) {
+		Map<String, Object> sendMap = new HashMap<String, Object>();
 		String employeeNo = emp.getEmployeeNo();// 社員番号
 		String employeeFristName = emp.getEmployeeFristName();// 社員氏
 		String employeeLastName = emp.getEmployeeLastName();// 社員名
@@ -209,7 +196,13 @@ public class EmployeeInfoController {
 
 		sendMap.put("password", "password");// TODO
 
-		String yearsOfExperience = emp.getYearsOfExperience();// 口座情報
+		String yearsOfExperience = emp.getYearsOfExperience();// 経験年数
+		
+		BankInfoModel bankInfoModel = emp.getAccountInfo();// 口座情報
+		
+		CostModel costModel = emp.getCostModel();// 諸費用
+		
+		SiteModel siteModel = emp.getSiteModel();// 現場情報
 
 		if (employeeNo != null && employeeNo.length() != 0) {
 			sendMap.put("employeeNo", employeeNo);
@@ -381,104 +374,11 @@ public class EmployeeInfoController {
 		if (yearsOfExperience != null && yearsOfExperience.length() != 0) {
 			sendMap.put("yearsOfExperience", yearsOfExperience);
 		}
+		sendMap.put("bankInfoModel", bankInfoModel);
+		sendMap.put("costModel", costModel);
+		sendMap.put("siteModel", siteModel);
+
 		return sendMap;
 	}
 
-	/**
-	 *
-	 * @param file     文件
-	 * @param path     文件存放路径
-	 * @param fileName 原文件名
-	 * @return
-	 */
-	/*
-	 * public static boolean upload(MultipartFile file, String path, String
-	 * fileName) {
-	 * 
-	 * // 生成新的文件名 String realPath = path + "/" + getFileName(fileName);
-	 * 
-	 * // 使用原文件名 // String realPath = path + "/" + fileName;
-	 * 
-	 * File dest = new File(realPath);
-	 * 
-	 * // 判断文件父目录是否存在 if (!dest.getParentFile().exists()) {
-	 * dest.getParentFile().mkdir(); }
-	 * 
-	 * try { // 保存文件 file.transferTo(dest); return true; } catch
-	 * (IllegalStateException e) { e.printStackTrace(); return false; } catch
-	 * (IOException e) { e.printStackTrace(); return false; }
-	 * 
-	 * }
-	 */
-
-	/**
-	 * 获取文件后缀
-	 * 
-	 * @param fileName
-	 * @return
-	 */
-	public static String getSuffix(String fileName) {
-		return fileName.substring(fileName.lastIndexOf("."));
-	}
-
-	/**
-	 * 生成新的文件名
-	 * 
-	 * @param fileOriginName 源文件名
-	 * @return
-	 */
-	public static String getUUID() {
-		return UUID.randomUUID().toString().replace("-", "");
-	}
-
-	/**
-	 * 生成新的文件名
-	 * 
-	 * @param fileOriginName 源文件名
-	 * @return
-	 */
-	public static String getFileName(String fileOriginName) {
-		return getUUID() + getSuffix(fileOriginName);
-	}
-
-	/**
-	 * 上传图片文件
-	 *
-	 * @param file
-	 * @return
-	 */
-	public String imgUpload(@RequestParam("img") MultipartFile file1,HttpServletRequest request) {
-		
-        MultipartFile file = ((MultipartHttpServletRequest) request).getFile("file");
-		String response = " ";
-		if (file.isEmpty()) {
-			return "文件为空";
-		}
-		try {
-			// 1.定义上传的文件
-			String localPath = "path";
-			// 2.获得文件名字
-			String fileName = file.getOriginalFilename();
-			// 3.上传
-
-			// 3.1 生成新的文件名
-			String realPath = localPath + "/" + getFileName(fileName);
-			// 3.2 保存文件
-			File dest = new File(realPath);
-			// 判断文件目目录是否存在,不存在则新建
-			if (!dest.getParentFile().exists()) {
-				dest.getParentFile().mkdir();
-			}
-			file.transferTo(dest);
-
-			// 保存路径到数据库
-			//articlePictureService.save(entity);
-			response = "上传成功";
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			response = "服务器出现错误，上传失败";
-		}
-		return response;
-	}
 }

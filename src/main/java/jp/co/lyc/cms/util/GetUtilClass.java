@@ -248,6 +248,21 @@ public class GetUtilClass {
 	}
 
 	/**
+	 * マスターを取得
+	 * 
+	 * @return
+	 */
+
+	@RequestMapping(value = "/getMaster", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getMaster() {
+		Properties properties = getProperties.getProperties();
+		String master = properties.getProperty("master");
+		List<ModelClass> list = getStatus(master);
+		return list;
+	}
+
+	/**
 	 * 社員
 	 * 
 	 * @return
@@ -352,7 +367,6 @@ public class GetUtilClass {
 		return list;
 	}
 
-	
 	/**
 	 * 住宅ステータス
 	 * 
@@ -367,7 +381,7 @@ public class GetUtilClass {
 		List<ModelClass> list = getStatus(HousingStatus);
 		return list;
 	}
-	
+
 	public List<ModelClass> getStatus(String string) {
 		JSONObject sJson = JSONObject.fromObject(string);
 		@SuppressWarnings("unchecked")
@@ -417,6 +431,7 @@ public class GetUtilClass {
 		List<ModelClass> list = getSelectInfoUtilService.getCustomer();
 		return list;
 	}
+
 	/**
 	 * トップお客様を取得
 	 * 
@@ -428,6 +443,7 @@ public class GetUtilClass {
 		List<ModelClass> list = getSelectInfoUtilService.getTopCustomer();
 		return list;
 	}
+
 	/**
 	 * 開発言語を取得
 	 * 
@@ -439,6 +455,7 @@ public class GetUtilClass {
 		List<ModelClass> list = getSelectInfoUtilService.getDevelopLanguage();
 		return list;
 	}
+
 	/**
 	 * 職種を取得
 	 * 
