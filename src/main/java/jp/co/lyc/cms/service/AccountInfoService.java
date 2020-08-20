@@ -4,14 +4,14 @@ import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import jp.co.lyc.cms.mapper.GetBankInfoMapper;
-import jp.co.lyc.cms.model.BankInfoModel;
+import jp.co.lyc.cms.mapper.AccountInfoMapper;
+import jp.co.lyc.cms.model.AccountInfoModel;
 
 @Component
-public class GetBankInfoService {
+public class AccountInfoService {
 
 	@Autowired
-	GetBankInfoMapper bankMapper;
+	AccountInfoMapper bankMapper;
 
 	/**
 	 * 口座情報の検索
@@ -20,8 +20,8 @@ public class GetBankInfoService {
 	 * @return
 	 */
 	
-	public BankInfoModel selectAccountInfo(String employeeNo , String accountBelongsStatus) {
-		BankInfoModel resultMod = bankMapper.selectAccountInfo(employeeNo , accountBelongsStatus);
+	public AccountInfoModel selectAccountInfo(String employeeNo , String accountBelongsStatus) {
+		AccountInfoModel resultMod = bankMapper.selectAccountInfo(employeeNo , accountBelongsStatus);
 		return resultMod;
 	}
 	

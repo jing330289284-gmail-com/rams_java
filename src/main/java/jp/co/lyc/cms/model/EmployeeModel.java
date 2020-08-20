@@ -73,10 +73,10 @@ public class EmployeeModel implements Serializable {
 	String siteRoleCode;// 役割コード
 	String kadou;//
 	String visaPeriod;// ビザ期間
-	BankInfoModel accountInfo;//口座情報
+	AccountInfoModel accountInfo;//口座情報
 	String yearsOfExperience; //  経験年数
 	
-	CostModel costModel;//諸費用
+	CostInfoModel costModel;//諸費用
 	
 	SiteModel siteModel;//現場情報
 
@@ -650,11 +650,11 @@ public class EmployeeModel implements Serializable {
 		this.furigana2 = furigana2;
 	}
 
-	public BankInfoModel getAccountInfo() {
+	public AccountInfoModel getAccountInfo() {
 		return accountInfo;
 	}
 
-	public void setAccountInfo(BankInfoModel accountInfo) {
+	public void setAccountInfo(AccountInfoModel accountInfo) {
 		this.accountInfo = accountInfo;
 	}
 
@@ -666,11 +666,11 @@ public class EmployeeModel implements Serializable {
 		this.yearsOfExperience = yearsOfExperience;
 	}
 
-	public CostModel getCostModel() {
+	public CostInfoModel getCostModel() {
 		return costModel;
 	}
 
-	public void setCostModel(CostModel costModel) {
+	public void setCostModel(CostInfoModel costModel) {
 		this.costModel = costModel;
 	}
 

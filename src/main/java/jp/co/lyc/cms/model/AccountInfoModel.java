@@ -2,7 +2,7 @@ package jp.co.lyc.cms.model;
 
 import java.util.ArrayList;
 
-public class BankInfoModel {
+public class AccountInfoModel {
 	
 	String employeeOrCustomerNo;//社員番号かお客様番号
 	String accountBelongsStatus;//ステータス

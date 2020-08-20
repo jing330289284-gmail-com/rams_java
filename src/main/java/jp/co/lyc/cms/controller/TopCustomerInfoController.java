@@ -32,10 +32,11 @@ public class TopCustomerInfoController {
 	@RequestMapping(value = "/onloadPage", method = RequestMethod.POST)
 	@ResponseBody
 	public HashMap<String,Object> onloadPage(@RequestBody TopCustomerInfoModel topCustomerMod) {
-		logger.info("TopCustomerInfoController.onloadPage:" + "页面加载開始");
+		logger.info("TopCustomerInfoController.onloadPage:" + "初期化開始");
 		HashMap<String,Object> resultMap = new HashMap<>();
 		topCustomerMod = topCustomerInfoService.selectTopCustomerInfo(topCustomerMod.getTopCustomerNo());	
 		resultMap.put("topCustomerMod", topCustomerMod);
+		logger.info("TopCustomerInfoController.onloadPage:" + "初期化終了");
 		return resultMap;
 	}
 	/**
@@ -46,6 +47,7 @@ public class TopCustomerInfoController {
 	@RequestMapping(value = "/toroku", method = RequestMethod.POST)
 	@ResponseBody
 	public boolean toroku(@RequestBody TopCustomerInfoModel topCustomerMod) {
+		logger.info("TopCustomerInfoController.onloadPage:" + "登録開始");
 		boolean result = true;
 		TopCustomerInfoModel checkMod = topCustomerInfoService.selectTopCustomerInfo(topCustomerMod.getTopCustomerNo());
 		if (checkMod == null && topCustomerMod.getActionType().equals("insert")) {
@@ -53,6 +55,7 @@ public class TopCustomerInfoController {
 		} else if (checkMod != null && (topCustomerMod.getActionType().equals("update"))) {
 			result = update(topCustomerMod);
 		}
+		logger.info("TopCustomerInfoController.onloadPage:" + "登録終了");
 		return result;
 	}
 	/**
@@ -61,7 +64,7 @@ public class TopCustomerInfoController {
 	 * @return
 	 */
 	public boolean insert(TopCustomerInfoModel topCustomerMod) {
-		logger.info("BankInfoController.toroku:" + "登录開始");
+		logger.info("BankInfoController.toroku:" + "インサート開始");
 		boolean result = true;
 		HashMap<String, String> sendMap = new HashMap<>();
 		sendMap.put("topCustomerName", topCustomerMod.getTopCustomerName());
@@ -71,6 +74,7 @@ public class TopCustomerInfoController {
 		sendMap.put("updateUser", topCustomerMod.getUpdateUser());
 		sendMap.put("topCustomerNo", topCustomerMod.getTopCustomerNo());	
 		result  = topCustomerInfoService.insertTopCustomerInfo(sendMap);
+		logger.info("BankInfoController.toroku:" + "インサート終了");
 		return result;	
 	}
 	
@@ -80,7 +84,7 @@ public class TopCustomerInfoController {
 	 * @return
 	 */
 	public boolean update(TopCustomerInfoModel topCustomerMod) {
-		logger.info("BankInfoController.toroku:" + "登录開始");
+		logger.info("BankInfoController.toroku:" + "アップデート開始");
 		boolean result = true;
 		TopCustomerInfoModel checkMod = new TopCustomerInfoModel();
 		checkMod = topCustomerInfoService.selectTopCustomerInfo(topCustomerMod.getTopCustomerNo());
@@ -100,6 +104,7 @@ public class TopCustomerInfoController {
 		sendMap.put("updateUser", topCustomerMod.getUpdateUser());
 		sendMap.put("topCustomerNo", topCustomerMod.getTopCustomerNo());	
 		result  = topCustomerInfoService.updateTopCustomerInfo(sendMap);
+		logger.info("BankInfoController.toroku:" + "アップデート終了");
 		return result;	
 	}
 	/**
