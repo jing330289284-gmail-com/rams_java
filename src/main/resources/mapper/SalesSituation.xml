@@ -18,7 +18,7 @@ SELECT
     T006.siteRoleCode,
     T006.unitPrice,
     T006.admissionEndDate,
-    1 AS 'salesProgressCode',
+    0 AS 'salesProgressCode',
     T010.salesYearAndMonth,
     T010.interviewDate1,
     T010.stationCode1,
