@@ -259,7 +259,16 @@ public class UtilsController {
 	public List<ModelClass> getMaster() {
 		Properties properties = getProperties();
 		String master = properties.getProperty("master");
-		List<ModelClass> list = getStatus(master);
+		JSONObject sJson = JSONObject.fromObject(master);
+		@SuppressWarnings("unchecked")
+		Map<String, String> map = (Map<String, String>) sJson;
+		List<ModelClass> list = new ArrayList<ModelClass>();
+		for (Entry<String, String> entry : map.entrySet()) {
+			ModelClass statusModel = new ModelClass();
+			statusModel.setValue(entry.getKey());
+			statusModel.setLabel(entry.getValue());
+			list.add(statusModel);
+		}
 		return list;
 	}
 
