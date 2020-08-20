@@ -456,4 +456,31 @@
 		(SELECT
 		@rowNo:=0) AS rowNo
 	</sql>
+	
+		<!-- 社員情報を追加 -->
+	<insert id="insertAddressInfo" parameterType="String">
+		INSERT INTO
+		T003AddressInfo (
+		employeeNo,
+		postcode,
+		firstHalfAddress,
+		lastHalfAddress,
+		stationCode1,
+		stationCode2,
+		housingStatus,
+		updateTime,
+		createTime,
+		updateUser
+		)
+		VALUES(
+		#{employeeNo},
+		#{postcode1},
+		#{firstHalfAddress},
+		#{lastHalfAddress},
+		0,0,0,
+		NOW(),
+		NOW(),
+		#{updateUser}
+		)
+	</insert>
 </mapper>

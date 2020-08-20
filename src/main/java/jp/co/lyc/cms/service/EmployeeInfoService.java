@@ -56,6 +56,7 @@ public class EmployeeInfoService {
 		try {
 			employeeInfoMapper.insertEmployeeInfo(sendMap);
 			employeeInfoMapper.insertEmployeeInfoDetail(sendMap);
+			employeeInfoMapper.insertAddressInfo(sendMap);
 			if (sendMap.get("bankInfoModel") != null) {// 口座情報
 				bankMapper.insertAccount(getParamBankInfoModel(sendMap));
 			}
