@@ -349,7 +349,9 @@
 		#{employmentInsuranceNo},
 		updateTime=NOW(),
 		updateUser=
-		#{updateUser}
+		#{updateUser},
+		employeeFormCode=
+		#{employeeFormCode}
 		WHERE
 		employeeNo=
 		#{employeeNo}

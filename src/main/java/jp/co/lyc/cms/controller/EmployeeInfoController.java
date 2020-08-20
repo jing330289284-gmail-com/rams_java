@@ -194,15 +194,15 @@ public class EmployeeInfoController {
 		String employeeStatus = emp.getEmployeeStatus();// 社員ステータス
 		String picInfo = emp.getPicInfo();// 写真
 
-		sendMap.put("password", "password");// TODO
-
 		String yearsOfExperience = emp.getYearsOfExperience();// 経験年数
-		
+
 		BankInfoModel bankInfoModel = emp.getAccountInfo();// 口座情報
-		
+
 		CostModel costModel = emp.getCostModel();// 諸費用
-		
+
 		SiteModel siteModel = emp.getSiteModel();// 現場情報
+
+		String password = emp.getPassword();// パスワード
 
 		if (employeeNo != null && employeeNo.length() != 0) {
 			sendMap.put("employeeNo", employeeNo);
@@ -378,6 +378,9 @@ public class EmployeeInfoController {
 		sendMap.put("costModel", costModel);
 		sendMap.put("siteModel", siteModel);
 
+		if (password != null && password.length() != 0) {
+			sendMap.put("password", password);
+		}
 		return sendMap;
 	}
 
