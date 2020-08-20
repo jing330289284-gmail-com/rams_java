@@ -118,6 +118,9 @@
     <update id="updateCost" parameterType="String">
 		UPDATE T005ExpensesInfo
 		SET 
+		<if test="reflectYearAndMonth != null">
+			reflectYearAndMonth = #{reflectYearAndMonth},
+		</if>
 		<if test="SocialInsuranceFlag != null">
 			SocialInsuranceFlag = #{SocialInsuranceFlag},
 		</if>
@@ -186,6 +189,6 @@
 		WHERE 
 			employeeNo = #{employeeNo}
 		AND
-			reflectYearAndMonth = #{reflectYearAndMonth}
+			reflectYearAndMonth = #{updatedReflectYearAndMonth}
     </update>
 </mapper>

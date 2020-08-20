@@ -34,7 +34,14 @@ public class CostInfoModel implements Serializable {
 	public String housingAllowance;//住宅手当
 	public String datePeriod;//時間段
 	public String housingStatus;//住宅ステータス
+	public String updatedReflectYearAndMonth;//更新された反映年月
 	
+	public String getUpdatedReflectYearAndMonth() {
+		return updatedReflectYearAndMonth;
+	}
+	public void setUpdatedReflectYearAndMonth(String updatedReflectYearAndMonth) {
+		this.updatedReflectYearAndMonth = updatedReflectYearAndMonth;
+	}
 	public String getHousingStatus() {
 		return housingStatus;
 	}

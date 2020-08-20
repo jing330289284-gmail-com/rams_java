@@ -52,8 +52,12 @@ public class CostInfoController extends BaseController {
 					}
 					yearAndMonthSecond = Integer.toString(year) + "." + Integer.toString(month);
 				}
-				subCostList.get(i).setDatePeriod(yearAndMonthSecond + "-" + yearAndMonthSecond);
+				subCostList.get(i).setDatePeriod(yearAndMonthFirst + "-" + yearAndMonthSecond);
 			}
+		}else if(subCostList.size() == 1){
+			String yearAndMonthFirst = subCostList.get(0).getReflectYearAndMonth();
+			yearAndMonthFirst = yearAndMonthFirst.substring(0,4) + "." + yearAndMonthFirst.substring(4);
+			subCostList.get(0).setDatePeriod(yearAndMonthFirst + "-");
 		}
 		resultMap.put("subCostList" , subCostList);
 		resultMap.put("checkKadoMap", GCS.checkKado(costModel.employeeNo));
@@ -127,6 +131,7 @@ public class CostInfoController extends BaseController {
 			sendMap.put("housingStatus", COmodel.housingStatus);
 		}
 		sendMap.put("employeeNo", COmodel.employeeNo);
+		sendMap.put("updatedReflectYearAndMonth", COmodel.updatedReflectYearAndMonth);
 		sendMap.put("reflectYearAndMonth", COmodel.reflectYearAndMonth);
 		sendMap.put("updateUser", COmodel.updateUser);
 		boolean result = GCS.update(sendMap);
