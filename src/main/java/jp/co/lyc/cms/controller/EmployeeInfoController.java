@@ -165,6 +165,10 @@ public class EmployeeInfoController {
 		String englishLevelCode = emp.getEnglishLevelCode();// 英語
 		String certification1 = emp.getCertification1();// 資格1
 		String certification2 = emp.getCertification2();// 資格2
+		String postcode1=emp.getPostcode1();//郵便番号1
+		String postcode2=emp.getPostcode2();//郵便番号1
+		String firstHalfAddress=emp.getFirstHalfAddress();//
+		String lastHalfAddress=emp.getLastHalfAddress();//
 		String developLanguage1 = emp.getDevelopLanguage1();// 技術语言1
 		String developLanguage2 = emp.getDevelopLanguage2();// 技術语言2
 		String developLanguage3 = emp.getDevelopLanguage3();// 技術语言3
@@ -333,6 +337,18 @@ public class EmployeeInfoController {
 		}
 		if (certification2 != null && certification2.length() != 0) {
 			sendMap.put("certification2", certification2);
+		}
+		if (postcode1 != null && postcode1.length() != 0) {	
+			sendMap.put("postcode1", postcode1);
+		}
+		if (postcode2 != null && postcode2.length() != 0) {	
+			sendMap.put("postcode2", postcode2);
+		}
+		if (firstHalfAddress != null && firstHalfAddress.length() != 0) {	
+			sendMap.put("firstHalfAddress", firstHalfAddress);
+		}
+		if (lastHalfAddress != null && lastHalfAddress.length() != 0) {	
+			sendMap.put("lastHalfAddress", lastHalfAddress);
 		}
 		if (developLanguage4 != null && developLanguage4.length() != 0) {
 			sendMap.put("developLanguage4", developLanguage4);
