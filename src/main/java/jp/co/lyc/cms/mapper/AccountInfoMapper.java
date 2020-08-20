@@ -1,11 +1,11 @@
 package jp.co.lyc.cms.mapper;
 
 import java.util.HashMap;
-import jp.co.lyc.cms.model.BankInfoModel;
+import jp.co.lyc.cms.model.AccountInfoModel;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface GetBankInfoMapper {
+public interface AccountInfoMapper {
 
 	/**
 	 * 口座情報の検索
@@ -13,7 +13,7 @@ public interface GetBankInfoMapper {
 	 * @param accountBelongsStatus
 	 * @return
 	 */
-	public BankInfoModel selectAccountInfo(String employeeOrCustomerNo , String accountBelongsStatus);
+	public AccountInfoModel selectAccountInfo(String employeeOrCustomerNo , String accountBelongsStatus);
 	/**
 	 * インサート
 	 * @param sendMap

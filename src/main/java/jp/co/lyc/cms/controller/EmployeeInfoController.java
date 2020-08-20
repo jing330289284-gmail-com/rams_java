@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import jp.co.lyc.cms.model.BankInfoModel;
-import jp.co.lyc.cms.model.CostModel;
+import jp.co.lyc.cms.model.AccountInfoModel;
+import jp.co.lyc.cms.model.CostInfoModel;
 import jp.co.lyc.cms.model.EmployeeModel;
 import jp.co.lyc.cms.model.SiteModel;
 import jp.co.lyc.cms.service.EmployeeInfoService;
@@ -32,7 +32,7 @@ public class EmployeeInfoController {
 	EmployeeInfoService employeeInfoService;
 
 	@Autowired
-	BankInfoController bankInfoController;
+	AccountInfoController accountInfoController;
 
 	/**
 	 * データを取得
@@ -195,11 +195,11 @@ public class EmployeeInfoController {
 		String picInfo = emp.getPicInfo();// 写真
 
 		String yearsOfExperience = emp.getYearsOfExperience();// 経験年数
-
-		BankInfoModel bankInfoModel = emp.getAccountInfo();// 口座情報
-
-		CostModel costModel = emp.getCostModel();// 諸費用
-
+		
+		AccountInfoModel accountInfoModel = emp.getAccountInfo();// 口座情報
+		
+		CostInfoModel costModel = emp.getCostModel();// 諸費用
+		
 		SiteModel siteModel = emp.getSiteModel();// 現場情報
 
 		String password = emp.getPassword();// パスワード
@@ -374,7 +374,7 @@ public class EmployeeInfoController {
 		if (yearsOfExperience != null && yearsOfExperience.length() != 0) {
 			sendMap.put("yearsOfExperience", yearsOfExperience);
 		}
-		sendMap.put("bankInfoModel", bankInfoModel);
+		sendMap.put("bankInfoModel", accountInfoModel);
 		sendMap.put("costModel", costModel);
 		sendMap.put("siteModel", siteModel);
 

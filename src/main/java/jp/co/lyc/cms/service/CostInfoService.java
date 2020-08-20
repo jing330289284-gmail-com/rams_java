@@ -5,14 +5,14 @@ import java.util.HashMap;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import jp.co.lyc.cms.mapper.GetCostMapper;
-import jp.co.lyc.cms.model.CostModel;
+import jp.co.lyc.cms.mapper.CostInfoMapper;
+import jp.co.lyc.cms.model.CostInfoModel;
 
 @Component
-public class GetCostService {
+public class CostInfoService {
 
 	@Autowired
-	GetCostMapper getCostMapper;
+	CostInfoMapper getCostMapper;
 
 	/**
 	 * 画面データの検索
@@ -20,7 +20,7 @@ public class GetCostService {
 	 * @return
 	 */
 	
-	public ArrayList<CostModel> getEmployeeInfo(Map<String, String> sendMap) {
+	public ArrayList<CostInfoModel> getEmployeeInfo(Map<String, String> sendMap) {
 		return getCostMapper.selectCost(sendMap);
 	}
 	
