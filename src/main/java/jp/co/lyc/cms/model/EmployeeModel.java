@@ -74,7 +74,13 @@ public class EmployeeModel implements Serializable {
 	String kadou;//
 	String visaPeriod;// ビザ期間
 	BankInfoModel accountInfo;//口座情報
-	String yearsOfExperience; //経験年数
+	String yearsOfExperience; //  経験年数
+	
+	CostModel costModel;//諸費用
+	
+	SiteModel siteModel;//現場情報
+
+	
 
 	public String getOldPassword() {
 		return oldPassword;
@@ -658,6 +664,22 @@ public class EmployeeModel implements Serializable {
 
 	public void setYearsOfExperience(String yearsOfExperience) {
 		this.yearsOfExperience = yearsOfExperience;
+	}
+
+	public CostModel getCostModel() {
+		return costModel;
+	}
+
+	public void setCostModel(CostModel costModel) {
+		this.costModel = costModel;
+	}
+
+	public SiteModel getSiteModel() {
+		return siteModel;
+	}
+
+	public void setSiteModel(SiteModel siteModel) {
+		this.siteModel = siteModel;
 	}
 
 }

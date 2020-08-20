@@ -9,13 +9,13 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import jp.co.lyc.cms.mapper.GetSelectInfoUtilMapper;
+import jp.co.lyc.cms.mapper.UtilsMapper;
 import jp.co.lyc.cms.model.ModelClass;
 
 @Component
-public class GetSelectInfoUtilService {
+public class UtilsService {
 	@Autowired
-	GetSelectInfoUtilMapper getSelectInfoUtilMapper;
+	UtilsMapper utilsMapper;
 
 	/**
 	 * 国籍を取得
@@ -23,7 +23,7 @@ public class GetSelectInfoUtilService {
 	 * @return
 	 */
 	public List<ModelClass> getNationalitys() {
-		List<ModelClass> list = getSelectInfoUtilMapper.getNationalitys();
+		List<ModelClass> list = utilsMapper.getNationalitys();
 		return list;
 	}
 
@@ -33,7 +33,7 @@ public class GetSelectInfoUtilService {
 	 * @return
 	 */
 	public List<ModelClass> getStaffForms() {
-		List<ModelClass> list = getSelectInfoUtilMapper.getStaffForms();
+		List<ModelClass> list = utilsMapper.getStaffForms();
 		return list;
 	}
 
@@ -43,7 +43,7 @@ public class GetSelectInfoUtilService {
 	 * @return
 	 */
 	public List<ModelClass> getVisa() {
-		List<ModelClass> list = getSelectInfoUtilMapper.getVisa();
+		List<ModelClass> list = utilsMapper.getVisa();
 		return list;
 	}
 
@@ -55,7 +55,7 @@ public class GetSelectInfoUtilService {
 	 * @return
 	 */
 	public List<ModelClass> getTechnologyType(Map<String, String> sendMap) {
-		List<ModelClass> list = getSelectInfoUtilMapper.getTechnologyType(sendMap);
+		List<ModelClass> list = utilsMapper.getTechnologyType(sendMap);
 		return list;
 	}
 
@@ -65,7 +65,7 @@ public class GetSelectInfoUtilService {
 	 * @return
 	 */
 	public List<ModelClass> getJapaneseLevel() {
-		List<ModelClass> list = getSelectInfoUtilMapper.getJapaneseLevel();
+		List<ModelClass> list = utilsMapper.getJapaneseLevel();
 		return list;
 	}
 
@@ -75,7 +75,7 @@ public class GetSelectInfoUtilService {
 	 * @return
 	 */
 	public List<ModelClass> getCustomer() {
-		List<ModelClass> list = getSelectInfoUtilMapper.getCustomer();
+		List<ModelClass> list = utilsMapper.getCustomer();
 		return list;
 	}
 
@@ -85,7 +85,7 @@ public class GetSelectInfoUtilService {
 	 * @return
 	 */
 	public List<ModelClass> getTopCustomer() {
-		List<ModelClass> list = getSelectInfoUtilMapper.getTopCustomer();
+		List<ModelClass> list = utilsMapper.getTopCustomer();
 		return list;
 	}
 
@@ -95,7 +95,7 @@ public class GetSelectInfoUtilService {
 	 * @return
 	 */
 	public List<ModelClass> getDevelopLanguage() {
-		List<ModelClass> list = getSelectInfoUtilMapper.getDevelopLanguage();
+		List<ModelClass> list = utilsMapper.getDevelopLanguage();
 		return list;
 	}
 
@@ -105,7 +105,7 @@ public class GetSelectInfoUtilService {
 	 * @return
 	 */
 	public List<ModelClass> getIntoCompany() {
-		List<ModelClass> list = getSelectInfoUtilMapper.getIntoCompany();
+		List<ModelClass> list = utilsMapper.getIntoCompany();
 		return list;
 	}
 
@@ -115,7 +115,7 @@ public class GetSelectInfoUtilService {
 	 * @return
 	 */
 	public List<ModelClass> getSiteMaster() {
-		List<ModelClass> list = getSelectInfoUtilMapper.getSiteMaster();
+		List<ModelClass> list = utilsMapper.getSiteMaster();
 		return list;
 	}
 
@@ -125,7 +125,7 @@ public class GetSelectInfoUtilService {
 	 * @return
 	 */
 	public List<ModelClass> getOccupation() {
-		List<ModelClass> list = getSelectInfoUtilMapper.getOccupation();
+		List<ModelClass> list = utilsMapper.getOccupation();
 		return list;
 	}
 
@@ -135,7 +135,7 @@ public class GetSelectInfoUtilService {
 	 * @return
 	 */
 	public List<ModelClass> getDepartment() {
-		List<ModelClass> list = getSelectInfoUtilMapper.getDepartment();
+		List<ModelClass> list = utilsMapper.getDepartment();
 		return list;
 	}
 
@@ -145,7 +145,7 @@ public class GetSelectInfoUtilService {
 	 * @return
 	 */
 	public List<ModelClass> getAuthority() {
-		List<ModelClass> list = getSelectInfoUtilMapper.getAuthority();
+		List<ModelClass> list = utilsMapper.getAuthority();
 		return list;
 	}
 
@@ -155,7 +155,7 @@ public class GetSelectInfoUtilService {
 	 * @return
 	 */
 	public List<ModelClass> getEnglishLevel() {
-		List<ModelClass> list = getSelectInfoUtilMapper.getEnglishLevel();
+		List<ModelClass> list = utilsMapper.getEnglishLevel();
 		return list;
 	}
 
@@ -165,7 +165,7 @@ public class GetSelectInfoUtilService {
 	 * @return
 	 */
 	public List<ModelClass> getQualification() {
-		List<ModelClass> list = getSelectInfoUtilMapper.getQualification();
+		List<ModelClass> list = utilsMapper.getQualification();
 		return list;
 	}
 
@@ -177,7 +177,7 @@ public class GetSelectInfoUtilService {
 	 * @return
 	 */
 	public String getNO(Map<String, String> sendMap) {
-		String no = getSelectInfoUtilMapper.getNO(sendMap);
+		String no = utilsMapper.getNO(sendMap);
 		return no;
 	}
 
@@ -187,7 +187,7 @@ public class GetSelectInfoUtilService {
 	 * @return
 	 */
 	public List<ModelClass> getLevel() {
-		return getSelectInfoUtilMapper.getLevel();
+		return utilsMapper.getLevel();
 	}
 
 	/**
@@ -196,7 +196,7 @@ public class GetSelectInfoUtilService {
 	 * @return
 	 */
 	public List<ModelClass> getCompanyNature() {
-		return getSelectInfoUtilMapper.getCompanyNature();
+		return utilsMapper.getCompanyNature();
 	}
 
 	/**
@@ -205,7 +205,7 @@ public class GetSelectInfoUtilService {
 	 * @return
 	 */
 	public List<ModelClass> getPosition() {
-		return getSelectInfoUtilMapper.getPosition();
+		return utilsMapper.getPosition();
 	}
 
 	/**
@@ -214,7 +214,7 @@ public class GetSelectInfoUtilService {
 	 * @return
 	 */
 	public List<ModelClass> getTopCustomerDrop() {
-		return getSelectInfoUtilMapper.getTopCustomerDrop();
+		return utilsMapper.getTopCustomerDrop();
 	}
 
 	/**
@@ -223,7 +223,7 @@ public class GetSelectInfoUtilService {
 	 * @return
 	 */
 	public List<ModelClass> getDepartmentMasterDrop() {
-		return getSelectInfoUtilMapper.getDepartmentMasterDrop();
+		return utilsMapper.getDepartmentMasterDrop();
 	}
 
 	/**
@@ -232,7 +232,7 @@ public class GetSelectInfoUtilService {
 	 * @return
 	 */
 	public List<ModelClass> getBankInfo() {
-		return getSelectInfoUtilMapper.getBankInfo();
+		return utilsMapper.getBankInfo();
 	}
 
 	/**
@@ -241,7 +241,7 @@ public class GetSelectInfoUtilService {
 	 * @return
 	 */
 	public List<ModelClass> getBankBranchInfo(HashMap<String, String> sendMap) {
-		return getSelectInfoUtilMapper.getBankBranchInfo(sendMap);
+		return utilsMapper.getBankBranchInfo(sendMap);
 	}
 
 	/**
@@ -250,7 +250,7 @@ public class GetSelectInfoUtilService {
 	 * @return
 	 */
 	public List<ModelClass> getPaymentsite() {
-		return getSelectInfoUtilMapper.getPaymentsite();
+		return utilsMapper.getPaymentsite();
 	}
 
 	/**
@@ -259,7 +259,7 @@ public class GetSelectInfoUtilService {
 	 * @return
 	 */
 	public String getPassword(String employeeNo) {
-		return getSelectInfoUtilMapper.getPassword(employeeNo);
+		return utilsMapper.getPassword(employeeNo);
 	}
 
 	/**
@@ -270,7 +270,7 @@ public class GetSelectInfoUtilService {
 	public boolean resetPassword(HashMap<String, String> sendMap) {
 		String oldPassword = getPassword(sendMap.get("employeeNo"));
 		if (md5Password(sendMap.get("oldPassword")).equals(oldPassword)) {
-			getSelectInfoUtilMapper.resetPassword(sendMap);
+			utilsMapper.resetPassword(sendMap);
 			return true;
 		} else {
 			return false;

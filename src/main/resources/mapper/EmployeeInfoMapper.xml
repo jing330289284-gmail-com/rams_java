@@ -175,7 +175,7 @@
 		VALUES(
 		#{employeeNo},
 		#{genderStatus},
-		#{age},
+		#{birthday},
 		#{japaneseCalendar},
 		#{alphabetName},
 		#{furigana},
@@ -413,7 +413,8 @@
 		T002.departmentCode,
 		T002.updateTime,
 		T002.createTime,
-		T002.updateUser
+		T002.updateUser,
+		T002.yearsOfExperience
 	</sql>
 	<sql id="tableJoin">
 		FROM
