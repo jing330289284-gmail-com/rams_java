@@ -3,6 +3,8 @@
 <mapper namespace="jp.co.lyc.cms.mapper.EmployeeInfoMapper">
 	<resultMap id="Employee"
 		type="jp.co.lyc.cms.model.EmployeeModel" />
+	<resultMap id="Employee" 
+		type="jp.co.lyc.cms.model.EmployeeModel"/>
 	<select id="getEmployeeInfo" parameterType="map"
 		resultMap="Employee">
 		SELECT
@@ -483,4 +485,21 @@
 		#{updateUser}
 		)
 	</insert>
+	
+    <!-- ログイン -->
+    <select id="getEmployeeModel" parameterType="map" resultMap="Employee">
+		SELECT
+			T001.employeeNo,
+			T001.employeeFristName,
+			T001.employeeLastName,
+			T001.authorityCode,
+			M009.authorityName
+		FROM
+			T001Employee T001
+			LEFT JOIN M009Authority M009 ON T001.authorityCode = M009.authorityCode
+			LEFT JOIN T002EmployeeDetail T002 ON T001.employeeNo = T002.employeeNo
+		WHERE
+			T001. PASSWORD = MD5(#{password})
+		AND T001.employeeNo = #{employeeNo}
+    </select>
 </mapper>
