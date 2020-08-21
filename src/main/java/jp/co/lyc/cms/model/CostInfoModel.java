@@ -2,7 +2,7 @@ package jp.co.lyc.cms.model;
 
 import java.io.Serializable;
 
-public class CostModel implements Serializable {
+public class CostInfoModel implements Serializable {
 
 	private static final long serialVersionUID = -2028159323401651353L;
 	

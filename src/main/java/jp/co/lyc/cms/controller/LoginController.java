@@ -46,13 +46,14 @@ public class LoginController extends BaseController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@ResponseBody
 	public HashMap<String, EmployeeModel> login(@RequestBody LoginModel loginModel, EmployeeModel employeeModel) {
-		logger.info("LoginController.login:" + "登録開始");
+		logger.info("LoginController.login:" + "ログイン開始");
 		Map<String, String> sendMap = new HashMap<String, String>();
 		HashMap<String, EmployeeModel> resultMap = new HashMap<String, EmployeeModel>();
 		sendMap.put("employeeNo", loginModel.employeeNo);
 		sendMap.put("password", loginModel.password);
 		employeeModel = loginservice.getEmployeeModel(sendMap);
 		resultMap.put("employeeModel", employeeModel);
+		logger.info("LoginController.login:" + "ログイン終了");
 		return resultMap;
 	}
 }

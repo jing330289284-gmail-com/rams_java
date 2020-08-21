@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="jp.co.lyc.cms.mapper.GetCostMapper">
-    <resultMap id="Cost" type="jp.co.lyc.cms.model.CostModel"/>
+<mapper namespace="jp.co.lyc.cms.mapper.CostInfoMapper">
+    <resultMap id="Cost" type="jp.co.lyc.cms.model.CostInfoModel"/>
     <resultMap id="MapResult" type="map"/>
     <!-- 諸費用検索 -->
     <select id="selectCost" parameterType="String" resultMap="Cost">
@@ -188,4 +188,12 @@
 		AND
 			reflectYearAndMonth = #{reflectYearAndMonth}
     </update>
+    <!--　　諸費用を削除 -->
+	<delete id="deleteCostInfo" parameterType="String">
+		DELETE
+		FROM
+		T005ExpensesInfo
+		WHERE
+		employeeNo = #{employeeNo};
+	</delete>
 </mapper>

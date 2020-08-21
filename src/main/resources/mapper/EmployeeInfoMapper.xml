@@ -239,14 +239,7 @@
 		employeeNo = #{employeeNo};
 	</delete>
 
-	<!-- 現場情報を削除 -->
-	<delete id="deleteEmployeeSiteInfo" parameterType="String">
-		DELETE
-		FROM
-		T006EmployeeSiteInfo
-		WHERE
-		employeeNo = #{employeeNo};
-	</delete>
+
 
 	<!-- 住所情報を削除 -->
 	<delete id="deleteAddressInfo" parameterType="String">
@@ -257,14 +250,7 @@
 		employeeNo = #{employeeNo};
 	</delete>
 
-	<!-- 諸費用を削除 -->
-	<delete id="deleteExpensesInfo" parameterType="String">
-		DELETE
-		FROM
-		T005ExpensesInfo
-		WHERE
-		employeeNo = #{employeeNo};
-	</delete>
+
 
 	<select id="getEmployeeByEmployeeNo" parameterType="map"
 		resultMap="Employee">
@@ -349,7 +335,9 @@
 		#{employmentInsuranceNo},
 		updateTime=NOW(),
 		updateUser=
-		#{updateUser}
+		#{updateUser},
+		employeeFormCode=
+		#{employeeFormCode}
 		WHERE
 		employeeNo=
 		#{employeeNo}
@@ -454,4 +442,31 @@
 		(SELECT
 		@rowNo:=0) AS rowNo
 	</sql>
+	
+		<!-- 社員情報を追加 -->
+	<insert id="insertAddressInfo" parameterType="String">
+		INSERT INTO
+		T003AddressInfo (
+		employeeNo,
+		postcode,
+		firstHalfAddress,
+		lastHalfAddress,
+		stationCode1,
+		stationCode2,
+		housingStatus,
+		updateTime,
+		createTime,
+		updateUser
+		)
+		VALUES(
+		#{employeeNo},
+		#{postcode1},
+		#{firstHalfAddress},
+		#{lastHalfAddress},
+		0,0,0,
+		NOW(),
+		NOW(),
+		#{updateUser}
+		)
+	</insert>
 </mapper>

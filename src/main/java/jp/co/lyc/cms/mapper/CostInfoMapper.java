@@ -6,17 +6,17 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import jp.co.lyc.cms.model.CostModel;
+import jp.co.lyc.cms.model.CostInfoModel;
 
 @Mapper
-public interface GetCostMapper {
+public interface CostInfoMapper {
 
 	/**
 	 * 画面データの検索
 	 * @param sendMap
 	 * @return
 	 */
-	public ArrayList<CostModel> selectCost(Map<String, String> sendMap);
+	public ArrayList<CostInfoModel> selectCost(Map<String, String> sendMap);
 	/**
 	 * インサート
 	 * @param sendMap
@@ -33,4 +33,10 @@ public interface GetCostMapper {
 	 * @return
 	 */
 	public HashMap<String, String> checkKado(String employeeNo);
+	
+	/**
+	 * 諸費用を削除
+	 * 
+	 */
+	public void deleteCostInfo(Map<String, Object> sendMap);
 }

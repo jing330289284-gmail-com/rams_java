@@ -9,12 +9,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
+import jp.co.lyc.cms.mapper.AccountInfoMapper;
+import jp.co.lyc.cms.mapper.CostInfoMapper;
 import jp.co.lyc.cms.mapper.EmployeeInfoMapper;
-import jp.co.lyc.cms.mapper.GetBankInfoMapper;
-import jp.co.lyc.cms.mapper.GetCostMapper;
 import jp.co.lyc.cms.mapper.GetSiteInfoMapper;
-import jp.co.lyc.cms.model.BankInfoModel;
-import jp.co.lyc.cms.model.CostModel;
+import jp.co.lyc.cms.model.AccountInfoModel;
+import jp.co.lyc.cms.model.CostInfoModel;
 import jp.co.lyc.cms.model.EmployeeModel;
 import jp.co.lyc.cms.model.SiteModel;
 
@@ -25,11 +25,11 @@ public class EmployeeInfoService {
 	EmployeeInfoMapper employeeInfoMapper;
 
 	@Autowired
-	GetBankInfoMapper bankMapper;
+	AccountInfoMapper accountInfoMapper;
 
 	@Autowired
-	GetCostMapper costMapper;
-
+	CostInfoMapper costInfoMapper;
+	
 	@Autowired
 	GetSiteInfoMapper siteInfoMapper;
 
@@ -56,14 +56,12 @@ public class EmployeeInfoService {
 		try {
 			employeeInfoMapper.insertEmployeeInfo(sendMap);
 			employeeInfoMapper.insertEmployeeInfoDetail(sendMap);
+			employeeInfoMapper.insertAddressInfo(sendMap);
 			if (sendMap.get("bankInfoModel") != null) {// 口座情報
-				bankMapper.insertAccount(getParamBankInfoModel(sendMap));
+				accountInfoMapper.insertAccount(getParamBankInfoModel(sendMap));
 			}
 			if (sendMap.get("costModel") != null) {// 諸費用
-				costMapper.insertCost(getParamCostModel(sendMap));
-			}
-			if (sendMap.get("siteModel") != null) {// 現場情報
-				siteInfoMapper.siteInsert(getParamSiteModel(sendMap));
+				costInfoMapper.insertCost(getParamCostModel(sendMap));
 			}
 		} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -85,9 +83,9 @@ public class EmployeeInfoService {
 		try {
 			employeeInfoMapper.deleteEmployeeInfo(sendMap);
 			employeeInfoMapper.deleteEmployeeInfoDetail(sendMap);
-			employeeInfoMapper.deleteEmployeeSiteInfo(sendMap);
+			siteInfoMapper.deleteEmployeeSiteInfo(sendMap);
 			employeeInfoMapper.deleteAddressInfo(sendMap);
-			employeeInfoMapper.deleteExpensesInfo(sendMap);
+			costInfoMapper.deleteCostInfo(sendMap);
 		} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			e.printStackTrace();
@@ -119,6 +117,12 @@ public class EmployeeInfoService {
 		try {
 			employeeInfoMapper.updateEmployeeInfo(sendMap);
 			employeeInfoMapper.updateEmployeeInfoDetail(sendMap);
+			if (sendMap.get("bankInfoModel") != null) {// 口座情報
+				accountInfoMapper.updateAccount(getParamBankInfoModel(sendMap));
+			}
+			if (sendMap.get("costModel") != null) {// 諸費用
+				costInfoMapper.updateCost(getParamCostModel(sendMap));
+			}
 		} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			e.printStackTrace();
@@ -130,13 +134,13 @@ public class EmployeeInfoService {
 	// 口座情報のパラメータをセットします。
 	public HashMap<String, String> getParamBankInfoModel(Map<String, Object> sendMap) {
 		HashMap<String, String> bankInfoModelSendMap = new HashMap<String, String>();
-		BankInfoModel bankInfoModel = (BankInfoModel) sendMap.get("bankInfoModel");
-		bankInfoModelSendMap.put("accountBelongsStatus", bankInfoModel.getAccountBelongsStatus());
-		bankInfoModelSendMap.put("bankCode", bankInfoModel.getBankCode());
-		bankInfoModelSendMap.put("accountName", bankInfoModel.getAccountName());
-		bankInfoModelSendMap.put("accountNo", bankInfoModel.getAccountNo());
-		bankInfoModelSendMap.put("bankBranchCode", bankInfoModel.getBankBranchCode());
-		bankInfoModelSendMap.put("accountTypeStatus", bankInfoModel.getAccountTypeStatus());
+		AccountInfoModel accountInfoModel = (AccountInfoModel) sendMap.get("bankInfoModel");
+		bankInfoModelSendMap.put("accountBelongsStatus", accountInfoModel.getAccountBelongsStatus());
+		bankInfoModelSendMap.put("bankCode", accountInfoModel.getBankCode());
+		bankInfoModelSendMap.put("accountName", accountInfoModel.getAccountName());
+		bankInfoModelSendMap.put("accountNo", accountInfoModel.getAccountNo());
+		bankInfoModelSendMap.put("bankBranchCode", accountInfoModel.getBankBranchCode());
+		bankInfoModelSendMap.put("accountTypeStatus", accountInfoModel.getAccountTypeStatus());
 		bankInfoModelSendMap.put("updateUser", sendMap.get("updateUser").toString());
 		bankInfoModelSendMap.put("employeeOrCustomerNo", sendMap.get("employeeNo").toString());
 		return bankInfoModelSendMap;
@@ -145,7 +149,7 @@ public class EmployeeInfoService {
 	// 諸費用のパラメータをセットします。
 	public Map<String, Object> getParamCostModel(Map<String, Object> sendMap) {
 		Map<String, Object> costModelSendMap = new HashMap<String, Object>();
-		CostModel costModel = (CostModel) sendMap.get("costModel");
+		CostInfoModel costModel = (CostInfoModel) sendMap.get("costModel");
 		sendMap.put("employeeNo", costModel.getEmployeeNo());
 		sendMap.put("reflectYearAndMonth", costModel.getReflectYearAndMonth());
 		sendMap.put("salary", costModel.getSalary());

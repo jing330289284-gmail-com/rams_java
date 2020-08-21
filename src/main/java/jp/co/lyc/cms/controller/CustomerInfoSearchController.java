@@ -31,7 +31,7 @@ public class CustomerInfoSearchController {
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	@ResponseBody
 	public ArrayList<CustomerInfoModel> seach(@RequestBody CustomerInfoModel customerInfoMod) {
-		logger.info("CustomerInfoController.onloadPage:" + "查询開始");
+		logger.info("CustomerInfoController.onloadPage:" + "検索開始");
 		ArrayList<CustomerInfoModel> resultList = new ArrayList<>();
 		ArrayList<CustomerInfoModel> databeseList = new ArrayList<>();
 		databeseList = SelectCustomerInfo(customerInfoMod);
@@ -115,6 +115,7 @@ public class CustomerInfoSearchController {
 				rowNo ++;
 			}
 		}
+		logger.info("CustomerInfoController.onloadPage:" + "検索終了");
 		return resultList;
 	}
 	/**
@@ -125,6 +126,7 @@ public class CustomerInfoSearchController {
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	@ResponseBody
 	public boolean delect( @RequestBody CustomerInfoModel customerInfoMod) {	
+		logger.info("CustomerInfoController.onloadPage:" + "削除ボタン");
 		return customerInfoSearchService.deleteCustomerInfo(customerInfoMod.getCustomerNo()) && 
 				customerInfoSearchService.deleteCustomerDepartmentInfo(customerInfoMod.getCustomerNo());
 	}
@@ -134,7 +136,7 @@ public class CustomerInfoSearchController {
 	 * @return
 	 */
 	public ArrayList<CustomerInfoModel> SelectCustomerInfo(CustomerInfoModel customerInfoMod) {
-		
+		logger.info("CustomerInfoController.onloadPage:" + "検索開始");
 		HashMap<String, String> sendMap = new HashMap<>();
 		if(!isNullOrEmpty(customerInfoMod.getCustomerNo())) {
 			sendMap.put("customerNo", customerInfoMod.getCustomerNo());
@@ -160,6 +162,7 @@ public class CustomerInfoSearchController {
 		if(!isNullOrEmpty(customerInfoMod.getTopCustomerName())) {
 			sendMap.put("topCustomerName", customerInfoMod.getTopCustomerName());
 		}
+		logger.info("CustomerInfoController.onloadPage:" + "検索終了");
 		return customerInfoSearchService.SelectCustomerInfo(sendMap);
 	}
 	/**

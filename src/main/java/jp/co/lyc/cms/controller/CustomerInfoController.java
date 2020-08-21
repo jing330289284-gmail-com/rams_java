@@ -29,7 +29,7 @@ public class CustomerInfoController {
 	CustomerInfoService customerInfoSer;
 	//口座情報service
 	@Autowired
-	BankInfoController bankInfoController;
+	AccountInfoController accountInfoController;
 	//上位お客様情報service
 	@Autowired
 	TopCustomerInfoController topCustomerInfoController;
@@ -41,7 +41,7 @@ public class CustomerInfoController {
 	@RequestMapping(value = "/onloadPage", method = RequestMethod.POST)
 	@ResponseBody
 	public HashMap<String,Object> onloadPage(@RequestBody CustomerInfoModel customerInfoMod ) {
-		logger.info("CustomerInfoController.onloadPage:" + "页面加载開始");
+		logger.info("CustomerInfoController.onloadPage:" + "初期化開始");
 		HashMap<String,Object> resultMap = new HashMap<>();
 		HashMap<String, String> sendMap = new HashMap<>();
 		if(customerInfoMod.getActionType() != null) {
@@ -73,17 +73,18 @@ public class CustomerInfoController {
 				resultMap.put("customerDepartmentInfoList", customerDepartmentInfoList);
 			}
 		}
+		logger.info("CustomerInfoController.onloadPage:" + "初期化終了");
 		return resultMap;	
 	}
 	/**
-	 * 上位客户联想查询
+	 * 上位お客様連想
 	 * @param customerInfoMod
 	 * @return
 	 */
 	@RequestMapping(value = "/getTopCustomer", method = RequestMethod.POST)
 	@ResponseBody
 	public ArrayList<TopCustomerInfoModel> selectTopCustomer(@RequestBody CustomerInfoModel customerInfoMod) {
-		//上位客户信息
+		logger.info("CustomerInfoController.onloadPage:" + "上位お客様連想");
 		return customerInfoSer.selectTopCustomer(customerInfoMod.getTopCustomerName());
 	}
 	/**
@@ -95,6 +96,7 @@ public class CustomerInfoController {
 	@ResponseBody
 	public ArrayList<CustomerDepartmentInfoModel> selectDepartmentMaster(@RequestBody 
 			CustomerDepartmentInfoModel customerDepartmentInfoModel){
+		logger.info("CustomerInfoController.onloadPage:" + "部門連想");
 		return customerInfoSer.selectDepartmentMaster(customerDepartmentInfoModel.getCustomerDepartmentName());
 	}
 	/**
@@ -106,6 +108,7 @@ public class CustomerInfoController {
 	@ResponseBody
 	@Transactional(rollbackFor = Exception.class)
 	public String toroku(@RequestBody CustomerInfoModel customerInfoMod) {
+		logger.info("CustomerInfoController.onloadPage:" + "登録開始");
 		boolean result = true;
 		CustomerInfoModel checkMod = customerInfoSer.selectCustomerInfo(customerInfoMod.getCustomerNo());
 		for(CustomerDepartmentInfoModel customerDepartmentInfoModel:
@@ -120,11 +123,12 @@ public class CustomerInfoController {
 			try {
 				result = insert(customerInfoMod);
 				if(result == false) {
+					logger.info("CustomerInfoController.onloadPage:" + "登録終了");
 					return "1";
 				}
 				if(customerInfoMod.getAccountInfo() != null) {
 					customerInfoMod.getAccountInfo().setUpdateUser(customerInfoMod.getUpdateUser());
-					bankInfoController.insert(customerInfoMod.getAccountInfo());
+					accountInfoController.insert(customerInfoMod.getAccountInfo());
 				}
 				if(customerInfoMod.getTopCustomerInfo() != null) {
 					customerInfoMod.getTopCustomerInfo().setUpdateUser(customerInfoMod.getUpdateUser());
@@ -137,8 +141,10 @@ public class CustomerInfoController {
 					String meisaiResult = 
 							meisaiToroku(customerDepartmentInfoModel);
 					if(meisaiResult.equals("1")) {
+						logger.info("CustomerInfoController.onloadPage:" + "登録終了");
 						return "3";
 					}else if(meisaiResult.equals("2")) {
+						logger.info("CustomerInfoController.onloadPage:" + "登録終了");
 						return "4";
 					}
 				}
@@ -146,6 +152,7 @@ public class CustomerInfoController {
 			} catch (Exception e) {
 				TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 				e.printStackTrace();
+				logger.info("CustomerInfoController.onloadPage:" + "登録終了");
 				return "1";
 				// TODO: handle exception
 			}
@@ -153,11 +160,12 @@ public class CustomerInfoController {
 			try {
 				result = update(customerInfoMod);
 				if(result == false) {
+					logger.info("CustomerInfoController.onloadPage:" + "登録終了");
 					return "1";
 				}
 				if(customerInfoMod.getAccountInfo() != null) {
 					customerInfoMod.getAccountInfo().setUpdateUser(customerInfoMod.getUpdateUser());
-					bankInfoController.update(customerInfoMod.getAccountInfo());
+					accountInfoController.update(customerInfoMod.getAccountInfo());
 				}
 				for(CustomerDepartmentInfoModel customerDepartmentInfoModel:
 					customerInfoMod.getCustomerDepartmentList()) {
@@ -166,8 +174,10 @@ public class CustomerInfoController {
 					String meisaiResult = 
 							meisaiToroku(customerDepartmentInfoModel);
 					if(meisaiResult.equals("1")) {
+						logger.info("CustomerInfoController.onloadPage:" + "登録終了");
 						return "3";
 					}else if(meisaiResult.equals("2")) {
+						logger.info("CustomerInfoController.onloadPage:" + "登録終了");
 						return "4";
 					}
 				}
@@ -176,15 +186,17 @@ public class CustomerInfoController {
 				// TODO: handle exception
 				TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 				e.printStackTrace();
+				logger.info("CustomerInfoController.onloadPage:" + "登録終了");
 				return "1";
 			}
 			
 		}
+		logger.info("CustomerInfoController.onloadPage:" + "登録終了");
 		return "0";
 	}
 
 	/**
-	 * 明細更新按钮
+	 * 明細更新ボタン
 	 * @param customerDepartmentInfoModel
 	 * @return 0成功，1失败，2部门在部门表中不存在
 	 */
@@ -192,12 +204,15 @@ public class CustomerInfoController {
 	@ResponseBody
 	@Transactional(rollbackFor = Exception.class)
 	public String meisaiUpdate(@RequestBody CustomerDepartmentInfoModel customerDepartmentInfoModel) {
+		logger.info("CustomerInfoController.onloadPage:" + "明細更新開始");
 		try {
+			logger.info("CustomerInfoController.onloadPage:" + "明細更新終了");
 			return meisaiToroku(customerDepartmentInfoModel);
 		} catch (Exception e) {
 			// TODO: handle exception
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			e.printStackTrace();
+			logger.info("CustomerInfoController.onloadPage:" + "明細更新終了");
 			return "1";
 		}
 	}
@@ -207,7 +222,7 @@ public class CustomerInfoController {
 	 * @return
 	 */
 	public boolean insert(CustomerInfoModel customerInfoMod) {
-		logger.info("BankInfoController.toroku:" + "登录開始");
+		logger.info("BankInfoController.toroku:" + "インサート開始");
 		boolean result = true;
 		HashMap<String, String> sendMap = new HashMap<>();
 		sendMap.put("customerName", customerInfoMod.getCustomerName());
@@ -228,6 +243,7 @@ public class CustomerInfoController {
 		sendMap.put("updateUser", customerInfoMod.getUpdateUser());
 		sendMap.put("customerNo", customerInfoMod.getCustomerNo());	
 		result  = customerInfoSer.insertCustomerInfo(sendMap);
+		logger.info("BankInfoController.toroku:" + "インサート終了");
 		return result;	
 	}
 	
@@ -237,7 +253,7 @@ public class CustomerInfoController {
 	 * @return
 	 */
 	public boolean update(CustomerInfoModel customerInfoMod) {
-		logger.info("BankInfoController.toroku:" + "登录開始");
+		logger.info("BankInfoController.toroku:" + "アップデート開始");
 		boolean result = true;
 		CustomerInfoModel checkMod = new CustomerInfoModel();
 		checkMod = customerInfoSer.selectCustomerInfo(customerInfoMod.getCustomerNo());
@@ -290,6 +306,7 @@ public class CustomerInfoController {
 		sendMap.put("updateUser", customerInfoMod.getUpdateUser());
 		sendMap.put("customerNo", customerInfoMod.getCustomerNo());	
 		result  = customerInfoSer.updateCustomerInfo(sendMap);
+		logger.info("BankInfoController.toroku:" + "アップデート終了");
 		return result;	
 	}
 	/**
@@ -303,6 +320,7 @@ public class CustomerInfoController {
 		sendMap.put("customerNo", customerNo);
 		ArrayList<CustomerDepartmentInfoModel> customerDepartmentInfoList = 
 				customerInfoSer.selectCustomerDepartmentInfo(sendMap);
+		logger.info("BankInfoController.toroku:" + "部門情報検索終了");
 		return customerDepartmentInfoList;
 	}
 	/**
@@ -320,6 +338,7 @@ public class CustomerInfoController {
 				customerInfoSer.selectDepartmentCode(customerDepartmentInfoModel.getCustomerDepartmentName());
 		//resultCode : 2(部門が部門マスタに存在しない)
 		if(isNullOrEmpty(customerDepartmentCode)) {
+			logger.info("BankInfoController.toroku:" + "明細登録終了");
 			return resultCode = "2";
 		}
 		sendMap.put("customerDepartmentCode", customerDepartmentCode);
@@ -359,6 +378,7 @@ public class CustomerInfoController {
 				resultCode = "1";
 			}
 		}
+		logger.info("BankInfoController.toroku:" + "明細登録終了");
 		return resultCode;
 	}
 	
@@ -369,9 +389,11 @@ public class CustomerInfoController {
 	@RequestMapping(value = "/customerDepartmentdelete", method = RequestMethod.POST)
 	@ResponseBody
 	public boolean customerDepartmentdelete(@RequestBody CustomerDepartmentInfoModel customerDepartmentInfoModel) {
+		logger.info("BankInfoController.toroku:" + "部門削除開始");
 		HashMap<String, String> sendMap = new HashMap<>();
 		sendMap.put("customerNo", customerDepartmentInfoModel.getCustomerNo());
 		sendMap.put("customerDepartmentCode", customerDepartmentInfoModel.getCustomerDepartmentCode());
+		logger.info("BankInfoController.toroku:" + "部門削除終了");
 		return customerInfoSer.customerDepartmentdelete(sendMap);
 	}
 	

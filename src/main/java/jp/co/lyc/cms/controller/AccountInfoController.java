@@ -12,20 +12,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import jp.co.lyc.cms.model.BankInfoModel;
-import jp.co.lyc.cms.service.GetBankInfoService;
+import jp.co.lyc.cms.model.AccountInfoModel;
+import jp.co.lyc.cms.service.AccountInfoService;
 import jp.co.lyc.cms.service.UtilsService;
 
 @Controller
 @CrossOrigin(origins = "http://127.0.0.1:3000")
 @RequestMapping(value = "/bankInfo")
-public class BankInfoController {
+public class AccountInfoController {
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	//口座情報
 	@Autowired
-	GetBankInfoService bankInfoSer;
+	AccountInfoService bankInfoSer;
 	//選択肢service
 	@Autowired
 	UtilsService selectutilSer;
@@ -35,17 +35,18 @@ public class BankInfoController {
 	 * @param onloadMol
 	 * @return
 	 */
-	@RequestMapping(value = "/getBankInfo", method = RequestMethod.POST)
+	@RequestMapping(value = "/onloadPage", method = RequestMethod.POST)
 	@ResponseBody
-	public HashMap<String, Object> getBankInfo(@RequestBody BankInfoModel onloadMol) {
-		logger.info("BankInfoController.getBankInfo:" + "検索開始");
+	public HashMap<String, Object> onloadPage(@RequestBody AccountInfoModel onloadMol) {
+		logger.info("BankInfoController.getBankInfo:" + "初期化開始");
 		HashMap<String, Object> resultMap = new HashMap<>();
-		BankInfoModel accountInfoMod = new BankInfoModel();
+		AccountInfoModel accountInfoMod = new AccountInfoModel();
 		if (onloadMol.getActionType().equals("update") || onloadMol.getActionType().equals("detail")) {
 			accountInfoMod = getBankBranchInfo(onloadMol.getEmployeeOrCustomerNo() , onloadMol.getAccountBelongsStatus());
 		}
 		resultMap.put("bankName", selectutilSer.getBankInfo());
 		resultMap.put("accountInfoMod", accountInfoMod);
+		logger.info("BankInfoController.getBankInfo:" + "初期化終了");
 		return resultMap;	
 	}
 	
@@ -56,9 +57,9 @@ public class BankInfoController {
 	 */
 	@RequestMapping(value = "/toroku", method = RequestMethod.POST)
 	@ResponseBody
-	public boolean toroku(@RequestBody BankInfoModel bankCol) {
+	public boolean toroku(@RequestBody AccountInfoModel bankCol) {
 		logger.info("BankInfoController.toroku:" + "登录開始");
-		BankInfoModel checkMod = new BankInfoModel();
+		AccountInfoModel checkMod = new AccountInfoModel();
 		checkMod = getBankBranchInfo(bankCol.getEmployeeOrCustomerNo() , bankCol.getAccountBelongsStatus());
 		boolean result = true;
 		if(checkMod == null && bankCol.getActionType().equals("insert")) {
@@ -66,6 +67,7 @@ public class BankInfoController {
 		}else if(bankCol.getActionType().equals("update")) {
 			result = update(bankCol);
 		}
+		logger.info("BankInfoController.toroku:" + "登录終了");
 		return result;	
 	}
 	
@@ -74,8 +76,8 @@ public class BankInfoController {
 	 * @param bankCol
 	 * @return
 	 */
-	public boolean insert(BankInfoModel bankCol) {
-		logger.info("BankInfoController.toroku:" + "登录開始");
+	public boolean insert(AccountInfoModel bankCol) {
+		logger.info("BankInfoController.toroku:" + "インサート開始");
 		boolean result = true;
 		HashMap<String, String> sendMap = new HashMap<>();
 		sendMap.put("accountBelongsStatus", bankCol.getAccountBelongsStatus());
@@ -87,6 +89,7 @@ public class BankInfoController {
 		sendMap.put("updateUser", bankCol.getUpdateUser());
 		sendMap.put("employeeOrCustomerNo", bankCol.getEmployeeOrCustomerNo());	
 		result  = bankInfoSer.insertAccount(sendMap);
+		logger.info("BankInfoController.toroku:" + "インサート終了");
 		return result;	
 	}
 	
@@ -95,10 +98,10 @@ public class BankInfoController {
 	 * @param bankCol
 	 * @return
 	 */
-	public boolean update(BankInfoModel bankCol) {
-		logger.info("BankInfoController.toroku:" + "登录開始");
+	public boolean update(AccountInfoModel bankCol) {
+		logger.info("BankInfoController.toroku:" + "アップデート開始");
 		boolean result = true;
-		BankInfoModel checkMod = new BankInfoModel();
+		AccountInfoModel checkMod = new AccountInfoModel();
 		checkMod = getBankBranchInfo(bankCol.getEmployeeOrCustomerNo() , bankCol.getAccountBelongsStatus());
 		HashMap<String, String> sendMap = new HashMap<>();
 		sendMap.put("accountBelongsStatus", bankCol.getAccountBelongsStatus());
@@ -118,6 +121,7 @@ public class BankInfoController {
 		sendMap.put("updateUser", bankCol.getUpdateUser());
 		sendMap.put("employeeOrCustomerNo", bankCol.getEmployeeOrCustomerNo());	
 		result  = bankInfoSer.updateAccount(sendMap);
+		logger.info("BankInfoController.toroku:" + "アップデート終了");
 		return result;	
 	}
 	
@@ -127,9 +131,10 @@ public class BankInfoController {
 	 * * @param accountBelongsStatus
 	 * @return
 	 */
-	public BankInfoModel getBankBranchInfo(String employeeOrCustomerNo , String accountBelongsStatus) {
-		logger.info("BankInfoController.selectBankInfo:" + "查询開始");
-		BankInfoModel resultMod = bankInfoSer.selectAccountInfo(employeeOrCustomerNo , accountBelongsStatus);
+	public AccountInfoModel getBankBranchInfo(String employeeOrCustomerNo , String accountBelongsStatus) {
+		logger.info("BankInfoController.selectBankInfo:" + "検索開始");
+		AccountInfoModel resultMod = bankInfoSer.selectAccountInfo(employeeOrCustomerNo , accountBelongsStatus);
+		logger.info("BankInfoController.toroku:" + "検索終了");
 		return resultMod;	
 	}
 	

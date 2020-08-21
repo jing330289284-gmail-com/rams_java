@@ -37,13 +37,13 @@ public class CustomerInfoModel {
 	String representative;//代表取締役
 	ArrayList<CustomerDepartmentInfoModel> customerDepartmentList; //部門リスト
 	String resultCode;
-	BankInfoModel accountInfo;
+	AccountInfoModel accountInfo;
 	TopCustomerInfoModel topCustomerInfo;
 	
-	public BankInfoModel getAccountInfo() {
+	public AccountInfoModel getAccountInfo() {
 		return accountInfo;
 	}
-	public void setAccountInfo(BankInfoModel accountInfo) {
+	public void setAccountInfo(AccountInfoModel accountInfo) {
 		this.accountInfo = accountInfo;
 	}
 	public TopCustomerInfoModel getTopCustomerInfo() {

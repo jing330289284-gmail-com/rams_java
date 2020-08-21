@@ -15,26 +15,26 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import jp.co.lyc.cms.common.BaseController;
-import jp.co.lyc.cms.model.CostModel;
-import jp.co.lyc.cms.service.GetCostService;
+import jp.co.lyc.cms.model.CostInfoModel;
+import jp.co.lyc.cms.service.CostInfoService;
 
 @Controller
 @CrossOrigin(origins = "http://127.0.0.1:3000")
 @RequestMapping(value = "/subCost")
-public class SubCostController extends BaseController {
+public class CostInfoController extends BaseController {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
-	GetCostService GCS;
+	CostInfoService GCS;
 
 	// 画面の初期化の場合、データの取得
 	@RequestMapping(value = "/onload", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String,Object> onload(@RequestBody CostModel costModel, Model model) {
-		logger.info("LoginController.login:" + "查询开始");
+	public Map<String,Object> onload(@RequestBody CostInfoModel costModel, Model model) {
+		logger.info("LoginController.login:" + "初期化開始");
 		Map<String, Object> resultMap = new HashMap<String, Object>();
-		ArrayList<CostModel> subCostList = selectData(costModel.getEmployeeNo(),null);
+		ArrayList<CostInfoModel> subCostList = selectData(costModel.getEmployeeNo(),null);
 		if(subCostList.size() > 1) {//テーブルの年月
 			for(int i = 0 ; i < subCostList.size() ; i++) {
 				String yearAndMonthFirst = subCostList.get(i).getReflectYearAndMonth();
@@ -57,14 +57,15 @@ public class SubCostController extends BaseController {
 		}
 		resultMap.put("subCostList" , subCostList);
 		resultMap.put("checkKadoMap", GCS.checkKado(costModel.employeeNo));
+		logger.info("LoginController.login:" + "初期化終了");
 		return resultMap;
 	}
 
 	// 更新方法
-	public boolean updata(CostModel COmodel, Model model) {
+	public boolean update(CostInfoModel COmodel, Model model) {
 		logger.info("GetEmployeeInfoController.getEmployeeInfo:" + "アープデート開始");
 		Map<String, Object> sendMap = new HashMap<String, Object>();
-		ArrayList<CostModel> checkList = new ArrayList<>();
+		ArrayList<CostInfoModel> checkList = new ArrayList<>();
 		checkList = selectData(COmodel.employeeNo ,COmodel.getReflectYearAndMonth());
 		sendMap.put("SocialInsuranceFlag", Integer.toString(COmodel.SocialInsuranceFlag));
 		sendMap.put("bonusFlag", Integer.toString(COmodel.bonusFlag));
@@ -129,11 +130,12 @@ public class SubCostController extends BaseController {
 		sendMap.put("reflectYearAndMonth", COmodel.reflectYearAndMonth);
 		sendMap.put("updateUser", COmodel.updateUser);
 		boolean result = GCS.update(sendMap);
+		logger.info("LoginController.login:" + "アープデート終了");
 		return result;
 	}
 
 	// 插入方法
-	public boolean insert(CostModel COmodel, Model model) {
+	public boolean insert(CostInfoModel COmodel, Model model) {
 		logger.info("GetEmployeeInfoController.getEmployeeInfo:" + "インサート開始");
 		Map<String, Object> sendMap = new HashMap<String, Object>();
 		sendMap.put("employeeNo", COmodel.employeeNo);
@@ -159,11 +161,12 @@ public class SubCostController extends BaseController {
 		sendMap.put("housingAllowance", COmodel.housingAllowance);
 		sendMap.put("updateUser", COmodel.updateUser);
 		boolean result = GCS.insert(sendMap);
+		logger.info("LoginController.login:" + "インサート終了");
 		return result;
 	}
 
 	// 查询方法
-	public ArrayList<CostModel> selectData(String employeeNo , String reflectYearAndMonth) {
+	public ArrayList<CostInfoModel> selectData(String employeeNo , String reflectYearAndMonth) {
 		Map<String, String> sendMap = new HashMap<String, String>();
 		sendMap.put("employeeNo", employeeNo);
 		if(!isNullOrEmpty(reflectYearAndMonth)) {

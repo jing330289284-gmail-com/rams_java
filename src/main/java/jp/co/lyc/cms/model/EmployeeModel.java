@@ -73,14 +73,17 @@ public class EmployeeModel implements Serializable {
 	String siteRoleCode;// 役割コード
 	String kadou;//
 	String visaPeriod;// ビザ期間
-	BankInfoModel accountInfo;//口座情報
+	AccountInfoModel accountInfo;//口座情報
 	String yearsOfExperience; //  経験年数
 	
-	CostModel costModel;//諸費用
+	CostInfoModel costModel;//諸費用
 	
 	SiteModel siteModel;//現場情報
 
-	
+	String postcode1;
+	String postcode2;
+	String firstHalfAddress;
+	String lastHalfAddress;
 
 	public String getOldPassword() {
 		return oldPassword;
@@ -650,11 +653,11 @@ public class EmployeeModel implements Serializable {
 		this.furigana2 = furigana2;
 	}
 
-	public BankInfoModel getAccountInfo() {
+	public AccountInfoModel getAccountInfo() {
 		return accountInfo;
 	}
 
-	public void setAccountInfo(BankInfoModel accountInfo) {
+	public void setAccountInfo(AccountInfoModel accountInfo) {
 		this.accountInfo = accountInfo;
 	}
 
@@ -666,11 +669,11 @@ public class EmployeeModel implements Serializable {
 		this.yearsOfExperience = yearsOfExperience;
 	}
 
-	public CostModel getCostModel() {
+	public CostInfoModel getCostModel() {
 		return costModel;
 	}
 
-	public void setCostModel(CostModel costModel) {
+	public void setCostModel(CostInfoModel costModel) {
 		this.costModel = costModel;
 	}
 
@@ -680,6 +683,38 @@ public class EmployeeModel implements Serializable {
 
 	public void setSiteModel(SiteModel siteModel) {
 		this.siteModel = siteModel;
+	}
+
+	public String getPostcode1() {
+		return postcode1;
+	}
+
+	public void setPostcode1(String postcode1) {
+		this.postcode1 = postcode1;
+	}
+
+	public String getPostcode2() {
+		return postcode2;
+	}
+
+	public void setPostcode2(String postcode2) {
+		this.postcode2 = postcode2;
+	}
+
+	public String getFirstHalfAddress() {
+		return firstHalfAddress;
+	}
+
+	public void setFirstHalfAddress(String firstHalfAddress) {
+		this.firstHalfAddress = firstHalfAddress;
+	}
+
+	public String getLastHalfAddress() {
+		return lastHalfAddress;
+	}
+
+	public void setLastHalfAddress(String lastHalfAddress) {
+		this.lastHalfAddress = lastHalfAddress;
 	}
 
 }
