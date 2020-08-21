@@ -1,5 +1,6 @@
 package jp.co.lyc.cms.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,6 +33,12 @@ public interface EmployeeInfoMapper {
 	 */
 
 	public void insertEmployeeInfoDetail(Map<String, Object> sendMap);
+	/**
+	 * アドレスを追加
+	 * 
+	 * @param emp
+	 */
+	public void insertAddressInfo(Map<String, Object> sendMap);
 
 	/**
 	 * 社員情報を削除
@@ -45,7 +52,11 @@ public interface EmployeeInfoMapper {
 	 */
 	public void deleteEmployeeInfoDetail(Map<String, Object> sendMap);
 
-
+	/**
+	 * 現場情報を削除
+	 * 
+	 */
+	public void deleteEmployeeSiteInfo(Map<String, Object> sendMap);
 
 	/**
 	 * 住所情報を削除
@@ -53,7 +64,11 @@ public interface EmployeeInfoMapper {
 	 */
 	public void deleteAddressInfo(Map<String, Object> sendMap);
 
-
+	/**
+	 * 諸費用を削除
+	 * 
+	 */
+	public void deleteExpensesInfo(Map<String, Object> sendMap);
 
 	/**
 	 * EmployeeNoによると、社員情報を取得
@@ -78,6 +93,7 @@ public interface EmployeeInfoMapper {
 	 * 
 	 * @param emp
 	 */
-	public void insertAddressInfo(Map<String, Object> sendMap);
+	public void updateAddressInfo(Map<String, Object> sendMap);
+
 
 }

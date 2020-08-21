@@ -80,10 +80,9 @@ public class EmployeeModel implements Serializable {
 	
 	SiteModel siteModel;//現場情報
 
-	String postcode1;
-	String postcode2;
-	String firstHalfAddress;
-	String lastHalfAddress;
+	String postcode;//郵便番号
+	String firstHalfAddress;//住所前半
+	String lastHalfAddress;//住所後半
 
 	public String getOldPassword() {
 		return oldPassword;
@@ -685,22 +684,13 @@ public class EmployeeModel implements Serializable {
 		this.siteModel = siteModel;
 	}
 
-	public String getPostcode1() {
-		return postcode1;
+	public String getPostcode() {
+		return postcode;
 	}
 
-	public void setPostcode1(String postcode1) {
-		this.postcode1 = postcode1;
+	public void setPostcode(String postcode) {
+		this.postcode = postcode;
 	}
-
-	public String getPostcode2() {
-		return postcode2;
-	}
-
-	public void setPostcode2(String postcode2) {
-		this.postcode2 = postcode2;
-	}
-
 	public String getFirstHalfAddress() {
 		return firstHalfAddress;
 	}
