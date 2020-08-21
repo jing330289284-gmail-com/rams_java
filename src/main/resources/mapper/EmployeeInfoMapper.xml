@@ -3,8 +3,6 @@
 <mapper namespace="jp.co.lyc.cms.mapper.EmployeeInfoMapper">
 	<resultMap id="Employee"
 		type="jp.co.lyc.cms.model.EmployeeModel" />
-	<resultMap id="Employee" 
-		type="jp.co.lyc.cms.model.EmployeeModel"/>
 	<select id="getEmployeeInfo" parameterType="map"
 		resultMap="Employee">
 		SELECT

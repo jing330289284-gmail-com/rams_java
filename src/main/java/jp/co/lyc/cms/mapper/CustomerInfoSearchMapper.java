@@ -26,4 +26,25 @@ public interface CustomerInfoSearchMapper {
 	 * @param customerNo
 	 */
 	public void deleteCustomerDepartmentInfo(String customerNo);
+	
+	/**
+	 * 現場にお客様を使用確認
+	 * @param customerNo
+	 * @return
+	 */
+	public ArrayList<String> checkCustomerInSiteInfo(String customerNo);
+	
+	/**
+	 * お客様の上位お客様番号検索
+	 * @param customerNo
+	 * @return
+	 */
+	public String getTopCustomerNoInCustomerInfo(String customerNo);
+	
+	/**
+	 * お客様テーブルの上位お客様番号同じのお客様チェック
+	 * @param customerNo
+	 * @return
+	 */
+	public ArrayList<String> getCustomerNoWithSameTop(String topCustomerNo);
 }

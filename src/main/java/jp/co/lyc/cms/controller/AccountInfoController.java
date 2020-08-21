@@ -126,6 +126,24 @@ public class AccountInfoController {
 	}
 	
 	/**
+	 * インサートとアップデートの値を設定
+	 * @param bankCol
+	 * @return
+	 */
+	public HashMap<String, String> setSendMap(AccountInfoModel bankCol) {
+		HashMap<String, String> sendMap = new HashMap<>();
+		sendMap.put("accountBelongsStatus", bankCol.getAccountBelongsStatus());
+		sendMap.put("bankCode", bankCol.getBankCode());
+		sendMap.put("accountName", bankCol.getAccountName());
+		sendMap.put("accountNo", bankCol.getAccountNo());
+		sendMap.put("bankBranchCode", bankCol.getBankBranchCode());
+		sendMap.put("accountTypeStatus", bankCol.getAccountTypeStatus());
+		sendMap.put("updateUser", bankCol.getUpdateUser());
+		sendMap.put("employeeOrCustomerNo", bankCol.getEmployeeOrCustomerNo());	
+		return sendMap;
+	}
+	
+	/**
 	 * データを取得
 	 * @param employeeOrCustomerNo
 	 * * @param accountBelongsStatus

@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="jp.co.lyc.cms.mapper.CustomerInfoSearchMapper">
     <resultMap id="customerInfo" type="jp.co.lyc.cms.model.CustomerInfoModel"/>
+    <resultMap id="stringResult" type="String"/>
     <!-- お客様情報検索 -->
     <select id="SelectCustomerInfo" parameterType="String" resultMap="customerInfo">
 		SELECT
@@ -77,7 +78,7 @@
 	    WHERE 
 	    	customerNo = #{customerNo};
     </delete>
-       <!-- お客様の部門削除 -->
+    <!-- お客様の部門削除 -->
     <delete id="deleteCustomerDepartmentInfo" parameterType="String">
 	    DELETE 
 	    FROM 
@@ -85,4 +86,34 @@
 	    WHERE 
 	    	customerNo = #{customerNo};
     </delete>
+    
+    <!-- お客様情報検索 -->
+    <select id="checkCustomerInSiteInfo" parameterType="String" resultMap="stringResult">
+		SELECT
+			customerNo 
+		FROM
+			T006EmployeeSiteInfo 
+		WHERE
+			customerNo = #{customerNo}
+    </select>
+    
+    <!-- お客様の上位お客様番号検索 -->
+    <select id="getTopCustomerNoInCustomerInfo" parameterType="String" resultMap="stringResult">
+	SELECT
+		topCustomerNo 
+	FROM
+		T007CustomerInfo 
+	WHERE
+		customerNo = #{customerNo}
+    </select>
+    
+    <!-- お客様テーブルの上位お客様番号同じのお客様チェック -->
+    <select id="getCustomerNoWithSameTop" parameterType="String" resultMap="stringResult">
+	SELECT
+		customerNo 
+	FROM
+		T007CustomerInfo 
+	WHERE
+		topCustomerNo = #{topCustomerNo}
+    </select>
 </mapper>

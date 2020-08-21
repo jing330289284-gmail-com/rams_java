@@ -66,4 +66,12 @@
 		WHERE 
 			topCustomerNo = #{topCustomerNo}
     </update> 
+    <!-- お客様の部門削除 -->
+    <delete id="deleteTopCustomerInfo" parameterType="String">
+	    DELETE 
+	    FROM 
+	    	T008TopCustomerInfo 
+	    WHERE 
+	    	topCustomerNo = #{topCustomerNo};
+    </delete>
 </mapper>

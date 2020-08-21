@@ -27,6 +27,36 @@ public class CustomerInfoSearchService {
 	}
 	
 	/**
+	 * 現場にお客様を使用確認
+	 * @param customerNo
+	 * @return
+	 */
+	
+	public ArrayList<String> checkCustomerInSiteInfo(String customerNo) {
+		return customerInfoSearchMapper.checkCustomerInSiteInfo(customerNo);
+	}
+	
+	/**
+	 * お客様の上位お客様番号検索
+	 * @param customerNo
+	 * @return
+	 */
+	
+	public ArrayList<String> getCustomerNoWithSameTop(String topCustomerNo) {
+		return customerInfoSearchMapper.getCustomerNoWithSameTop(topCustomerNo);
+	}
+	
+	/**
+	 * お客様の上位お客様番号検索
+	 * @param customerNo
+	 * @return
+	 */
+	
+	public String getTopCustomerNoInCustomerInfo(String customerNo) {
+		return customerInfoSearchMapper.getTopCustomerNoInCustomerInfo(customerNo);
+	}
+
+	/**
 	 * お客様情報削除
 	 * @param customerNo
 	 */
