@@ -32,6 +32,14 @@ public class SalesSituationModel implements Serializable {
 	String developLanguage; 
 	String siteRoleCode;
 	String unitPrice;
+	String salesPriorityStatus;
+	
+	public String getSalesPriorityStatus() {
+		return salesPriorityStatus;
+	}
+	public void setSalesPriorityStatus(String salesPriorityStatus) {
+		this.salesPriorityStatus = salesPriorityStatus;
+	}
 	
 	public String getEmployeeName() {
 		return employeeName;
