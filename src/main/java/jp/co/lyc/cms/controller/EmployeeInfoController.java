@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import jp.co.lyc.cms.model.AccountInfoModel;
 import jp.co.lyc.cms.model.CostInfoModel;
 import jp.co.lyc.cms.model.EmployeeModel;
-import jp.co.lyc.cms.model.SiteModel;
 import jp.co.lyc.cms.service.EmployeeInfoService;
 
 @Controller
@@ -204,7 +203,6 @@ public class EmployeeInfoController {
 		
 		CostInfoModel costModel = emp.getCostModel();// 諸費用
 		
-		SiteModel siteModel = emp.getSiteModel();// 現場情報
 
 		String password = emp.getPassword();// パスワード
 
@@ -392,7 +390,6 @@ public class EmployeeInfoController {
 		}
 		sendMap.put("bankInfoModel", accountInfoModel);
 		sendMap.put("costModel", costModel);
-		sendMap.put("siteModel", siteModel);
 
 		if (password != null && password.length() != 0) {
 			sendMap.put("password", password);

@@ -15,4 +15,10 @@ public interface GetSiteInfoMapper {
 	public void siteInsert(Map<String, String> sendMap);
 
 	public List<SiteModel> getSiteInfo(@Param("employeeNo")String employeeNo);
+	
+	/**
+	 * 現場情報を削除
+	 * 
+	 */
+	public void deleteEmployeeSiteInfo(Map<String, Object> sendMap);
 }
