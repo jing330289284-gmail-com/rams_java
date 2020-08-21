@@ -9,6 +9,14 @@ import jp.co.lyc.cms.model.EmployeeModel;
 
 @Mapper
 public interface EmployeeInfoMapper {
+	
+	/**
+	 * ログイン
+	 * @param sendMap
+	 * @return
+	 */
+	
+	public EmployeeModel getEmployeeModel(Map<String, String> sendMap);
 
 	/**
 	 * 社員情報を取得

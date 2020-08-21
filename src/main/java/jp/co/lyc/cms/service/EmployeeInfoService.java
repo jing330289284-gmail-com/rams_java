@@ -32,6 +32,18 @@ public class EmployeeInfoService {
 	
 	@Autowired
 	GetSiteInfoMapper siteInfoMapper;
+	
+	/**
+	 * ログイン
+	 * @param sendMap
+	 * @return
+	 */
+	
+	public EmployeeModel getEmployeeModel(Map<String, String> sendMap) {
+		// TODO Auto-generated method stub
+		EmployeeModel employeeModel = employeeInfoMapper.getEmployeeModel(sendMap);
+		return employeeModel;
+	}
 
 	/**
 	 * 社員情報を取得

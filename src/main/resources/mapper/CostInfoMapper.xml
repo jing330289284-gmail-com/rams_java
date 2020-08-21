@@ -118,6 +118,9 @@
     <update id="updateCost" parameterType="String">
 		UPDATE T005ExpensesInfo
 		SET 
+		<if test="reflectYearAndMonth != null">
+			reflectYearAndMonth = #{reflectYearAndMonth},
+		</if>
 		<if test="SocialInsuranceFlag != null">
 			SocialInsuranceFlag = #{SocialInsuranceFlag},
 		</if>
@@ -186,7 +189,7 @@
 		WHERE 
 			employeeNo = #{employeeNo}
 		AND
-			reflectYearAndMonth = #{reflectYearAndMonth}
+			reflectYearAndMonth = #{updatedReflectYearAndMonth}
     </update>
     <!--　　諸費用を削除 -->
 	<delete id="deleteCostInfo" parameterType="String">
