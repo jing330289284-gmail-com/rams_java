@@ -49,18 +49,18 @@
 	<!-- 開発言語 -->
 	<select id="getTechnologyType" parameterType="map"
 		resultType="jp.co.lyc.cms.model.ModelClass">
-		SELECT technologytypeCode code,technologytypeName name FROM
+		SELECT developLanguageCode code,developLanguageName name FROM
 		M011DevelopLanguage where 1=1
 		<if test="developmentLanguageNo1!= null">
-			AND technologytypeName like
+			AND developLanguageName like
 			concat('%',#{developmentLanguageNo1},'%');
 		</if>
 		<if test="developmentLanguageNo2!= null">
-			AND technologytypeName like
+			AND developLanguageName like
 			concat('%',#{developmentLanguageNo2},'%');
 		</if>
 		<if test="developmentLanguageNo3!= null">
-			AND technologytypeName like
+			AND developLanguageName like
 			concat('%',#{developmentLanguageNo3},'%');
 		</if>
 	</select>
