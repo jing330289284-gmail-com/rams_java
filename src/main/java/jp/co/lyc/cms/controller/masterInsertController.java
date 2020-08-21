@@ -20,42 +20,51 @@ public class masterInsertController {
 
 	@Autowired
 	masterInsertService masterInsertService;
-	
+
 	/**
 	 * 登録ボタン
+	 * 
 	 * @return
 	 */
 	@RequestMapping(value = "/toroku", method = RequestMethod.POST)
 	@ResponseBody
 	public boolean toroku(@RequestBody masterModel masterModel) {
 		boolean result = checkHave(masterModel);
-		if(result) {
+		if (result) {
 			return insert(masterModel);
 		}
 		return false;
 	}
+
 	/**
 	 * インサート
+	 * 
 	 * @return
 	 */
 	public boolean insert(masterModel masterModel) {
 		HashMap<String, String> sendMap = new HashMap<>();
 		sendMap.put("master", masterModel.getMaster());
 		sendMap.put("data", masterModel.getData());
+		sendMap.put("columnName", masterModel.getMaster().substring(4) + "name");
 		sendMap.put("updateUser", masterModel.getUpdateUser());
 		return masterInsertService.insertMaster(sendMap);
-		
+
 	}
+
 	/**
 	 * あるかどうかのチェック
+	 * 
 	 * @return
 	 */
 	public boolean checkHave(masterModel masterModel) {
+		masterModel.setColumnName(masterModel.getMaster().substring(4) + "name");
 		return masterInsertService.checkHave(masterModel);
-		
+
 	}
+
 	/**
 	 * nullと空の判断
+	 * 
 	 * @return
 	 */
 	public boolean isNullOrEmpty(String aString) {

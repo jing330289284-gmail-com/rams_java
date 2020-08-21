@@ -4,31 +4,10 @@
 	<!-- 言語の存在チェック -->
 	<select id="checkHave" parameterType="map"
 		resultType="java.lang.String">
-			SELECT * FROM
-		<if test="master=='M001Bank'">
-			M001Bank
-			WHERE
-			bankName = #{data}
-		</if>
-
+		SELECT * FROM ${master} WHERE ${columnName} = #{data}
 	</select>
 	<!-- 言語のインサート -->
 	<insert id="insertMaster" parameterType="map">
-		<if test="master=='M001Bank'">
-			INSERT INTO
-			M001Bank(
-			bankName,
-			updateTime,
-			createTime,
-			updateUser
-			)
-			VALUE(
-			#{data},
-			NOW(),
-			NOW(),
-			#{updateUser}
-			)
-		</if>
-
+		INSERT INTO ${master} (${columnName},updateTime,createTime,updateUser) VALUE(#{data},NOW(),NOW(),#{updateUser})
 	</insert>
 </mapper>
