@@ -64,6 +64,13 @@
 		</if>
 
 	</select>
-
+	<!--　　現場情報を削除 -->
+	<delete id="deleteEmployeeSiteInfo" parameterType="String">
+		DELETE
+		FROM
+		T006EmployeeSiteInfo
+		WHERE
+		employeeNo = #{employeeNo};
+	</delete>
 
 </mapper>

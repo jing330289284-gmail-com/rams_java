@@ -12,6 +12,7 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import jp.co.lyc.cms.mapper.AccountInfoMapper;
 import jp.co.lyc.cms.mapper.CostInfoMapper;
 import jp.co.lyc.cms.mapper.EmployeeInfoMapper;
+import jp.co.lyc.cms.mapper.GetSiteInfoMapper;
 import jp.co.lyc.cms.model.AccountInfoModel;
 import jp.co.lyc.cms.model.CostInfoModel;
 import jp.co.lyc.cms.model.EmployeeModel;
@@ -28,6 +29,9 @@ public class EmployeeInfoService {
 
 	@Autowired
 	CostInfoMapper costInfoMapper;
+	
+	@Autowired
+	GetSiteInfoMapper siteInfoMapper;
 
 	/**
 	 * 社員情報を取得
@@ -79,9 +83,9 @@ public class EmployeeInfoService {
 		try {
 			employeeInfoMapper.deleteEmployeeInfo(sendMap);
 			employeeInfoMapper.deleteEmployeeInfoDetail(sendMap);
-			employeeInfoMapper.deleteEmployeeSiteInfo(sendMap);
+			siteInfoMapper.deleteEmployeeSiteInfo(sendMap);
 			employeeInfoMapper.deleteAddressInfo(sendMap);
-			employeeInfoMapper.deleteExpensesInfo(sendMap);
+			costInfoMapper.deleteCostInfo(sendMap);
 		} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			e.printStackTrace();

@@ -33,4 +33,10 @@ public interface CostInfoMapper {
 	 * @return
 	 */
 	public HashMap<String, String> checkKado(String employeeNo);
+	
+	/**
+	 * 諸費用を削除
+	 * 
+	 */
+	public void deleteCostInfo(Map<String, Object> sendMap);
 }

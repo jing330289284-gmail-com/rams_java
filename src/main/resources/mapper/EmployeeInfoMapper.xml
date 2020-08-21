@@ -239,14 +239,7 @@
 		employeeNo = #{employeeNo};
 	</delete>
 
-	<!-- 現場情報を削除 -->
-	<delete id="deleteEmployeeSiteInfo" parameterType="String">
-		DELETE
-		FROM
-		T006EmployeeSiteInfo
-		WHERE
-		employeeNo = #{employeeNo};
-	</delete>
+
 
 	<!-- 住所情報を削除 -->
 	<delete id="deleteAddressInfo" parameterType="String">
@@ -257,14 +250,7 @@
 		employeeNo = #{employeeNo};
 	</delete>
 
-	<!-- 諸費用を削除 -->
-	<delete id="deleteExpensesInfo" parameterType="String">
-		DELETE
-		FROM
-		T005ExpensesInfo
-		WHERE
-		employeeNo = #{employeeNo};
-	</delete>
+
 
 	<select id="getEmployeeByEmployeeNo" parameterType="map"
 		resultMap="Employee">

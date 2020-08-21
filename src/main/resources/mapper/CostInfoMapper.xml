@@ -188,4 +188,12 @@
 		AND
 			reflectYearAndMonth = #{reflectYearAndMonth}
     </update>
+    <!--　　諸費用を削除 -->
+	<delete id="deleteCostInfo" parameterType="String">
+		DELETE
+		FROM
+		T005ExpensesInfo
+		WHERE
+		employeeNo = #{employeeNo};
+	</delete>
 </mapper>
