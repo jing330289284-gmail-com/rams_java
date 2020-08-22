@@ -18,7 +18,7 @@ SELECT
     T006.siteRoleCode,
     T006.unitPrice,
     T006.admissionEndDate,
-    1 AS 'salesProgressCode',
+    if(ISNULL(T010.salesProgressCode),0,T010.salesProgressCode) AS 'salesProgressCode',
     T010.salesYearAndMonth,
     T010.interviewDate1,
     T010.stationCode1,
@@ -30,7 +30,8 @@ SELECT
     T010.hopeHighestPrice,
     T010.salesProgressCode,
     T010.remark,
-    T010.salesStaff
+    T010.salesStaff,
+    T010.salesPriorityStatus
 FROM
     T001Employee T001
         LEFT JOIN
@@ -61,6 +62,7 @@ WHERE
 		interviewCustomer2,
 		hopeLowestPrice,
 		hopeHighestPrice,
+		salesPriorityStatus,
 		salesProgressCode,
 		remark,
 		salesStaff,
@@ -79,6 +81,7 @@ WHERE
 		#{interviewCustomer2},
 		#{hopeLowestPrice},
 		#{hopeHighestPrice},
+		#{salesPriorityStatus},
 		#{salesProgressCode},
 		#{remark},
 		#{salesStaff},
@@ -94,6 +97,7 @@ WHERE
 			interviewCustomer2=#{interviewCustomer2},
 			hopeLowestPrice=#{hopeLowestPrice},
 			hopeHighestPrice=#{hopeHighestPrice},
+			salesPriorityStatus=#{salesPriorityStatus},
 			salesProgressCode=#{salesProgressCode},
 			remark=#{remark},
 			salesStaff=#{salesStaff},
