@@ -19,6 +19,9 @@
 		T005.salary,
 		T007.customerName,
 		T002.phoneNo,
+		T003.postcode,
+		T003.firstHalfAddress,
+		T003.lastHalfAddress,
 		T003.stationCode1,
 		TIMESTAMPDIFF(MONTH,
 		NOW(),
@@ -171,7 +174,8 @@
 		createTime,
 		updateUser,
 		picInfo,
-		yearsOfExperience
+		yearsOfExperience,
+		siteRoleCode
 		)
 		VALUES(
 		#{employeeNo},
@@ -219,10 +223,38 @@
 		NOW(),
 		#{updateUser},
 		#{picInfo},
-		#{yearsOfExperience}
+		#{yearsOfExperience},
+		#{siteRoleCode}
 		)
 	</insert>
-
+		<!-- 社員情報を追加 -->
+	<insert id="insertAddressInfo" parameterType="String">
+		INSERT INTO
+		T003AddressInfo (
+		employeeNo,
+		postcode,
+		firstHalfAddress,
+		lastHalfAddress,
+		stationCode1,
+		stationCode2,
+		housingStatus,
+		updateTime,
+		createTime,
+		updateUser
+		)
+		VALUES(
+		#{employeeNo},
+		#{postcode},
+		#{firstHalfAddress},
+		#{lastHalfAddress},
+		(SELECT coalesce(stationCode,-1)  from M013Station where stationName=#{nearestStation} ),
+		null,
+		null,
+		NOW(),
+		NOW(),
+		#{updateUser}
+		)
+	</insert>
 	<!-- 社員情報を削除 -->
 	<delete id="deleteEmployeeInfo" parameterType="String">
 		DELETE
@@ -240,7 +272,14 @@
 		employeeNo = #{employeeNo};
 	</delete>
 
-
+	<!-- 現場情報を削除 -->
+	<delete id="deleteEmployeeSiteInfo" parameterType="String">
+		DELETE
+		FROM
+		T006EmployeeSiteInfo
+		WHERE
+		employeeNo = #{employeeNo};
+	</delete>
 
 	<!-- 住所情報を削除 -->
 	<delete id="deleteAddressInfo" parameterType="String">
@@ -251,8 +290,15 @@
 		employeeNo = #{employeeNo};
 	</delete>
 
-
-
+	<!-- 諸費用を削除 -->
+	<delete id="deleteExpensesInfo" parameterType="String">
+		DELETE
+		FROM
+		T005ExpensesInfo
+		WHERE
+		employeeNo = #{employeeNo};
+	</delete>
+	<!-- 諸費用を削除 -->
 	<select id="getEmployeeByEmployeeNo" parameterType="map"
 		resultMap="Employee">
 		SELECT
@@ -336,16 +382,25 @@
 		#{employmentInsuranceNo},
 		updateTime=NOW(),
 		updateUser=
-		#{updateUser},
-		employeeFormCode=
-		#{employeeFormCode}
+		#{updateUser}
 		WHERE
 		employeeNo=
 		#{employeeNo}
 	</update>
-
-
-
+	<!-- アドレスを修正 -->
+	<update id="updateAddressInfo" parameterType="String">
+		UPDATE
+		T003AddressInfo
+		SET
+		postcode=#{postcode},
+		firstHalfAddress=#{firstHalfAddress},
+		lastHalfAddress=#{lastHalfAddress},
+		stationCode1=(SELECT coalesce(stationCode,-1)  from M013Station where stationName=#{nearestStation} ),
+		updateTime=NOW(),
+		updateUser=#{updateUser}
+		WHERE 
+		employeeNo=#{employeeNo}
+	</update>
 	<sql id="T001">
 		T001.employeeNo,
 		T001.employeeFristName,
@@ -444,7 +499,7 @@
 		@rowNo:=0) AS rowNo
 	</sql>
 	
-		<!-- 社員情報を追加 -->
+	<!-- 住所情報を追加 -->
 	<insert id="insertAddressInfo" parameterType="String">
 		INSERT INTO
 		T003AddressInfo (
@@ -487,4 +542,5 @@
 			T001. PASSWORD = MD5(#{password})
 		AND T001.employeeNo = #{employeeNo}
     </select>
+
 </mapper>

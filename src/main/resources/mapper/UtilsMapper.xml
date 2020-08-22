@@ -27,6 +27,12 @@
 		FROM
 		rams.T007CustomerInfo;
 	</select>
+		<!--駅 -->
+	<select id="getStation"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT stationCode code,stationName name FROM
+		M013Station;
+	</select>
 	<!--トップお客様 -->
 	<select id="getTopCustomer"
 		resultType="jp.co.lyc.cms.model.ModelClass">

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import jp.co.lyc.cms.model.AccountInfoModel;
 import jp.co.lyc.cms.model.CostInfoModel;
 import jp.co.lyc.cms.model.EmployeeModel;
+import jp.co.lyc.cms.model.SiteModel;
 import jp.co.lyc.cms.service.EmployeeInfoService;
 
 @Controller
@@ -164,8 +165,7 @@ public class EmployeeInfoController {
 		String englishLevelCode = emp.getEnglishLevelCode();// 英語
 		String certification1 = emp.getCertification1();// 資格1
 		String certification2 = emp.getCertification2();// 資格2
-		String postcode1=emp.getPostcode1();//郵便番号1
-		String postcode2=emp.getPostcode2();//郵便番号1
+		String postcode=emp.getPostcode();//郵便番号
 		String firstHalfAddress=emp.getFirstHalfAddress();//
 		String lastHalfAddress=emp.getLastHalfAddress();//
 		String developLanguage1 = emp.getDevelopLanguage1();// 技術语言1
@@ -196,13 +196,14 @@ public class EmployeeInfoController {
 		String updateUser = emp.getUpdateUser();// 更新ユーザー
 		String employeeStatus = emp.getEmployeeStatus();// 社員ステータス
 		String picInfo = emp.getPicInfo();// 写真
-
+		String siteRoleCode =emp.getSiteRoleCode();// 役割コード
 		String yearsOfExperience = emp.getYearsOfExperience();// 経験年数
 		
 		AccountInfoModel accountInfoModel = emp.getAccountInfo();// 口座情報
 		
 		CostInfoModel costModel = emp.getCostModel();// 諸費用
 		
+		SiteModel siteModel = emp.getSiteModel();// 現場情報
 
 		String password = emp.getPassword();// パスワード
 
@@ -336,11 +337,8 @@ public class EmployeeInfoController {
 		if (certification2 != null && certification2.length() != 0) {
 			sendMap.put("certification2", certification2);
 		}
-		if (postcode1 != null && postcode1.length() != 0) {	
-			sendMap.put("postcode1", postcode1);
-		}
-		if (postcode2 != null && postcode2.length() != 0) {	
-			sendMap.put("postcode2", postcode2);
+		if (postcode != null && postcode.length() != 0) {	
+			sendMap.put("postcode", postcode);
 		}
 		if (firstHalfAddress != null && firstHalfAddress.length() != 0) {	
 			sendMap.put("firstHalfAddress", firstHalfAddress);
@@ -390,9 +388,13 @@ public class EmployeeInfoController {
 		}
 		sendMap.put("bankInfoModel", accountInfoModel);
 		sendMap.put("costModel", costModel);
+		sendMap.put("siteModel", siteModel);
 
 		if (password != null && password.length() != 0) {
 			sendMap.put("password", password);
+		}
+		if (siteRoleCode != null && siteRoleCode.length() != 0) {
+			sendMap.put("siteRoleCode", siteRoleCode);
 		}
 		return sendMap;
 	}

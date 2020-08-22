@@ -9,9 +9,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
+import jp.co.lyc.cms.mapper.EmployeeInfoMapper;
 import jp.co.lyc.cms.mapper.AccountInfoMapper;
 import jp.co.lyc.cms.mapper.CostInfoMapper;
-import jp.co.lyc.cms.mapper.EmployeeInfoMapper;
 import jp.co.lyc.cms.mapper.GetSiteInfoMapper;
 import jp.co.lyc.cms.model.AccountInfoModel;
 import jp.co.lyc.cms.model.CostInfoModel;
@@ -25,11 +25,11 @@ public class EmployeeInfoService {
 	EmployeeInfoMapper employeeInfoMapper;
 
 	@Autowired
-	AccountInfoMapper accountInfoMapper;
+	AccountInfoMapper bankMapper;
 
 	@Autowired
-	CostInfoMapper costInfoMapper;
-	
+	CostInfoMapper costMapper;
+
 	@Autowired
 	GetSiteInfoMapper siteInfoMapper;
 	
@@ -70,10 +70,13 @@ public class EmployeeInfoService {
 			employeeInfoMapper.insertEmployeeInfoDetail(sendMap);
 			employeeInfoMapper.insertAddressInfo(sendMap);
 			if (sendMap.get("bankInfoModel") != null) {// 口座情報
-				accountInfoMapper.insertAccount(getParamBankInfoModel(sendMap));
+				bankMapper.insertAccount(getParamBankInfoModel(sendMap));
 			}
 			if (sendMap.get("costModel") != null) {// 諸費用
-				costInfoMapper.insertCost(getParamCostModel(sendMap));
+				costMapper.insertCost(getParamCostModel(sendMap));
+			}
+			if (sendMap.get("siteModel") != null) {// 現場情報
+				siteInfoMapper.siteInsert(getParamSiteModel(sendMap));
 			}
 		} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -95,9 +98,9 @@ public class EmployeeInfoService {
 		try {
 			employeeInfoMapper.deleteEmployeeInfo(sendMap);
 			employeeInfoMapper.deleteEmployeeInfoDetail(sendMap);
-			siteInfoMapper.deleteEmployeeSiteInfo(sendMap);
+			employeeInfoMapper.deleteEmployeeSiteInfo(sendMap);
 			employeeInfoMapper.deleteAddressInfo(sendMap);
-			costInfoMapper.deleteCostInfo(sendMap);
+			employeeInfoMapper.deleteExpensesInfo(sendMap);
 		} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			e.printStackTrace();
@@ -129,12 +132,7 @@ public class EmployeeInfoService {
 		try {
 			employeeInfoMapper.updateEmployeeInfo(sendMap);
 			employeeInfoMapper.updateEmployeeInfoDetail(sendMap);
-			if (sendMap.get("bankInfoModel") != null) {// 口座情報
-				accountInfoMapper.updateAccount(getParamBankInfoModel(sendMap));
-			}
-			if (sendMap.get("costModel") != null) {// 諸費用
-				costInfoMapper.updateCost(getParamCostModel(sendMap));
-			}
+			employeeInfoMapper.updateAddressInfo(sendMap);
 		} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			e.printStackTrace();
