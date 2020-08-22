@@ -28,4 +28,10 @@ public interface TopCustomerInfoMapper {
 	 * @return
 	 */
 	public TopCustomerInfoModel selectTopCustomerInfo(String TopCustomerNo);
+	
+	/**
+	 * 上位お客様削除
+	 * @param customerNo
+	 */
+	public void deleteTopCustomerInfo(String topCustomerNo);
 }

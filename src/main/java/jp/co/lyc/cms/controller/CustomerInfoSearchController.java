@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import jp.co.lyc.cms.model.CustomerInfoModel;
 import jp.co.lyc.cms.service.CustomerInfoSearchService;
+import jp.co.lyc.cms.service.TopCustomerInfoService;
 
 @Controller
 @CrossOrigin(origins = "http://127.0.0.1:3000")
@@ -23,6 +24,8 @@ public class CustomerInfoSearchController {
 	
 	@Autowired
 	CustomerInfoSearchService customerInfoSearchService;
+	@Autowired
+	TopCustomerInfoService topCustomerInfoService;
 	/**
 	 * データの検索
 	 * @param customerInfoMod
@@ -125,10 +128,26 @@ public class CustomerInfoSearchController {
 	 */
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	@ResponseBody
-	public boolean delect( @RequestBody CustomerInfoModel customerInfoMod) {	
+	public String delect( @RequestBody CustomerInfoModel customerInfoMod) {	
 		logger.info("CustomerInfoController.onloadPage:" + "削除ボタン");
-		return customerInfoSearchService.deleteCustomerInfo(customerInfoMod.getCustomerNo()) && 
-				customerInfoSearchService.deleteCustomerDepartmentInfo(customerInfoMod.getCustomerNo());
+		if(customerInfoSearchService.checkCustomerInSiteInfo(customerInfoMod.getCustomerNo()).size() > 0) {
+			return "2";//2:お客様が現場に使っている
+		}else {
+			String topCustomerNo = customerInfoSearchService.getTopCustomerNoInCustomerInfo(customerInfoMod.getCustomerNo());
+			if(customerInfoSearchService.getCustomerNoWithSameTop(topCustomerNo).size() > 0) {
+				if(customerInfoSearchService.deleteCustomerInfo(customerInfoMod.getCustomerNo()) && 
+						customerInfoSearchService.deleteCustomerDepartmentInfo(customerInfoMod.getCustomerNo())) {
+					return "3";//3:上位お客様の下位お客様が複数あるので
+				}else {
+					return "4";//4:上位お客様の下位お客様が複数あるの場合でも、お客様の削除が失敗し
+				}
+			}else {
+				//0:成功した、1:削除失敗した
+				return ((customerInfoSearchService.deleteCustomerInfo(customerInfoMod.getCustomerNo()) && 
+							customerInfoSearchService.deleteCustomerDepartmentInfo(customerInfoMod.getCustomerNo()) &&
+								topCustomerInfoService.deleteTopCustomerInfo(topCustomerNo)) ? "0" : "1");
+			}
+		}
 	}
 	/**
 	 * データの検索

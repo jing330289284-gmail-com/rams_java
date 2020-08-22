@@ -67,4 +67,22 @@ public class TopCustomerInfoService {
 		}
 		return result;
 	}
+	
+	
+	/**
+	 * お客様の部門削除
+	 * @param customerNo
+	 */
+	
+	public boolean deleteTopCustomerInfo(String topCustomerNo) {
+		boolean result = true;
+		try {
+			topCustomerInfoMapper.deleteTopCustomerInfo(topCustomerNo);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return result = false;
+		}
+		return result;
+	}
 }
