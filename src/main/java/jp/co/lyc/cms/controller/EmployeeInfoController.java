@@ -31,9 +31,6 @@ public class EmployeeInfoController {
 	@Autowired
 	EmployeeInfoService employeeInfoService;
 
-	@Autowired
-	AccountInfoController accountInfoController;
-
 	/**
 	 * データを取得
 	 * 
