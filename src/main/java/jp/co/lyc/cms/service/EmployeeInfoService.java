@@ -130,6 +130,7 @@ public class EmployeeInfoService {
 		try {
 			employeeInfoMapper.updateEmployeeInfo(sendMap);
 			employeeInfoMapper.updateEmployeeInfoDetail(sendMap);
+			employeeInfoMapper.updateAddressInfo(sendMap);
 			if (sendMap.get("bankInfoModel") != null) {// 口座情報
 				accountInfoMapper.updateAccount(getParamBankInfoModel(sendMap));
 			}
