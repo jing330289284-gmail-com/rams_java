@@ -260,4 +260,15 @@
 		employeeNo =
 		#{employeeNo}
 	</update>
+	<!--営業担当 -->
+	<select id="getSalesPerson"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+	SELECT 
+	    employeeNo code,
+	    CONCAT(employeeFristName, employeeLastName) name
+	FROM
+	    T001Employee
+	WHERE
+    	authorityCode = 1;
+	</select>
 </mapper>

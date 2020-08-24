@@ -391,6 +391,62 @@ public class UtilsController {
 		List<ModelClass> list = getStatus(HousingStatus);
 		return list;
 	}
+	
+	/**
+	 * 営業ステータス
+	 * 
+	 * @return
+	 */
+
+	@RequestMapping(value = "/getSalesStatus", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getSalesStatus() {
+		Properties properties = getProperties();
+		String salesProgressCode = properties.getProperty("salesProgressCode");
+		List<ModelClass> list = getStatus(salesProgressCode);
+		return list;
+	}
+	
+	/**
+	 * 営業優先度
+	 * 
+	 * @return
+	 */
+
+	@RequestMapping(value = "/getSalesPriorityStatus", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getSalesPriorityStatus() {
+		Properties properties = getProperties();
+		String salesPriorityStatus = properties.getProperty("salesPriorityStatus");
+		List<ModelClass> list = getStatus(salesPriorityStatus);
+		return list;
+	}
+	
+	/**
+	 * 営業担当選ぶ
+	 * 
+	 * @return
+	 */
+
+	@RequestMapping(value = "/getSalesPerson", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getSalesPerson() {
+		List<ModelClass> list = utilsService.getSalesPerson();
+		return list;
+	}
+	
+	/**
+	 * 場所取る
+	 * 
+	 * @return
+	 */
+
+	@RequestMapping(value = "/getStation", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getstation() {
+		List<ModelClass> list = utilsService.getStation();
+		return list;
+	}
 
 	public List<ModelClass> getStatus(String string) {
 		JSONObject sJson = JSONObject.fromObject(string);

@@ -15,6 +15,7 @@ SELECT
             T002.developLanguage3,
             T002.developLanguage4,
             T002.developLanguage5) AS 'developLanguage',
+    '' as costumer,
     T006.siteRoleCode,
     T006.unitPrice,
     T006.admissionEndDate,

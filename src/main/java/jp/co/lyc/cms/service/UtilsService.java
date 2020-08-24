@@ -306,4 +306,22 @@ public class UtilsService {
 			return "";
 		}
 	}
+	
+	/**
+	 * 営業担当
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getSalesPerson() {
+		return utilsMapper.getSalesPerson();
+	}
+	
+	/**
+	 * 場所
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getStation() {
+		return utilsMapper.getStation();
+	}
 }

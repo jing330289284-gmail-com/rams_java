@@ -33,6 +33,15 @@ public class SalesSituationModel implements Serializable {
 	String siteRoleCode;
 	String unitPrice;
 	String salesPriorityStatus;
+	String costumer;
+	
+	public String getCostumer() {
+		return costumer;
+	}
+	public void setCostumer(String costumer) {
+		this.costumer = costumer;
+	}
+	
 	
 	public String getSalesPriorityStatus() {
 		return salesPriorityStatus;
