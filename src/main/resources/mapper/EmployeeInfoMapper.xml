@@ -259,7 +259,7 @@
 		SELECT
 		<include refid="T001" />
 		<include refid="T002" />
-		<!--<include refid="T003" />-->
+		<include refid="T003" />
 		<include refid="tableJoin" />
 		WHERE
 		1 = 1
@@ -336,6 +336,8 @@
 		phoneNo=#{phoneNo},
 		employmentInsuranceNo=
 		#{employmentInsuranceNo},
+		siteRoleCode=
+		#{siteRoleCode},
 		updateTime=NOW(),
 		updateUser=
 		#{updateUser}
@@ -413,10 +415,11 @@
 		T002.phoneNo,
 		T002.employmentInsuranceNo,
 		T002.departmentCode,
+		T002.siteRoleCode,
 		T002.updateTime,
 		T002.createTime,
 		T002.updateUser,
-		T002.yearsOfExperience
+		T002.yearsOfExperience,
 	</sql>
 	<sql id="T003">
 		T003.employeeNo,
@@ -425,7 +428,7 @@
 		T003.lastHalfAddress,
 		T003.stationCode1,
 		T003.stationCode2,
-		T003.housingStatus
+		T003.housingStatus,
 		T003.createTime,
 		T003.updateUser
 	</sql>
@@ -453,6 +456,11 @@
 		ON
 		T001.employeeNo =
 		T003.employeeNo
+		LEFT
+		JOIN
+		rams.M013Station AS M013 ON
+		T003.stationCode1 =
+		M013.stationCode
 		LEFT
 		JOIN
 		T005ExpensesInfo AS T005 ON
