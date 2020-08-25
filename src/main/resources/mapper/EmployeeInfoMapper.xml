@@ -45,10 +45,10 @@
 			AND T002.genderStatus=#{genderStatus}
 		</if>
 		<if test="ageFrom != null">
-			AND T002.age &gt;= #{ageFrom}
+			AND T002.birthday &gt;= #{ageFrom}
 		</if>
 		<if test="ageTo != null">
-			AND T002.age &lt;= #{ageTo}
+			AND T002.birthday &lt;= #{ageTo}
 		</if>
 		<if test="residenceCode != null">
 			AND T002.residenceCode=#{residenceCode}
