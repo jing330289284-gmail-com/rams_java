@@ -7,23 +7,26 @@
 		SELECT employeeFormCode code,employeeFormName name FROM
 		M005EmployeeForm;
 	</select>
+	
 	<!-- 在留資格 -->
 	<select id="getVisa" resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT visaCode code,visaName
 		name FROM M006Visa;
 	</select>
+	
 	<!--国籍 -->
 	<select id="getNationalitys"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT nationalityCode code,nationalityName name FROM
 		M003Nationality;
 	</select>
+	
 	<!--お客様 -->
 	<select id="getCustomer"
 		resultType="jp.co.lyc.cms.model.ModelClass">
-		SELECT customerNo value,if(customerAbbreviation is
+		SELECT customerNo code,if(customerAbbreviation is
 		null or
-		trim(customerAbbreviation)='',customerName,customerAbbreviation) label
+		trim(customerAbbreviation)='',customerName,customerAbbreviation) name
 		FROM
 		rams.T007CustomerInfo;
 	</select>
@@ -33,13 +36,14 @@
 		SELECT stationCode code,stationName name FROM
 		rams.M013Station;
 	</select>
+	
 	<!--トップお客様 -->
 	<select id="getTopCustomer"
 		resultType="jp.co.lyc.cms.model.ModelClass">
-		SELECT topCustomerNo value,if(topCustomerAbbreviation is
+		SELECT topCustomerNo code,if(topCustomerAbbreviation is
 		null or
 		trim(topCustomerAbbreviation)='',topCustomerName,topCustomerAbbreviation)
-		label
+		name
 		FROM
 		rams.T008TopCustomerInfo;
 	</select>
@@ -47,28 +51,9 @@
 	<!--開発言語 -->
 	<select id="getDevelopLanguage"
 		resultType="jp.co.lyc.cms.model.ModelClass">
-		SELECT developLanguageCode value,developLanguageName label
+		SELECT developLanguageCode code,developLanguageName name
 		FROM
 		rams.M011DevelopLanguage;
-	</select>
-
-	<!-- 開発言語 -->
-	<select id="getTechnologyType" parameterType="map"
-		resultType="jp.co.lyc.cms.model.ModelClass">
-		SELECT developLanguageCode code,developLanguageName name FROM
-		M011DevelopLanguage where 1=1
-		<if test="developmentLanguageNo1!= null">
-			AND developLanguageName like
-			concat('%',#{developmentLanguageNo1},'%');
-		</if>
-		<if test="developmentLanguageNo2!= null">
-			AND developLanguageName like
-			concat('%',#{developmentLanguageNo2},'%');
-		</if>
-		<if test="developmentLanguageNo3!= null">
-			AND developLanguageName like
-			concat('%',#{developmentLanguageNo3},'%');
-		</if>
 	</select>
 
 	<!--日本語レベル -->
@@ -84,36 +69,42 @@
 		SELECT intoCompanyCode code,intoCompanyName name FROM
 		M004IntoCompany;
 	</select>
+	
 	<!-- 役割 -->
 	<select id="getSiteMaster"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT siteRoleCode code,siteRoleName name FROM
 		M012SiteRole;
 	</select>
+	
 	<!-- 職種 -->
 	<select id="getOccupation"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT occupationCode code,occupationName name FROM
 		M014Occupation;
 	</select>
+	
 	<!-- 部署 -->
 	<select id="getDepartment"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT DepartmentCode code,DepartmentName name FROM
 		M017Department;
 	</select>
+	
 	<!-- 権限 -->
 	<select id="getAuthority"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT authorityCode code,authorityName name FROM
 		M009Authority;
 	</select>
+	
 	<!-- 英語 -->
 	<select id="getEnglishLevel"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT englishLevelCode code,englishLevelName name FROM
 		M015EnglishLevel;
 	</select>
+	
 	<!-- 資格 -->
 	<select id="getQualification"
 		resultType="jp.co.lyc.cms.model.ModelClass">
@@ -121,12 +112,6 @@
 		M016Qualification;
 	</select>
 
-	<!-- 精算時間 -->
-	<select id="getPayMaster"
-		resultType="jp.co.lyc.cms.model.ModelClass">
-		SELECT payOffRangeCode code,payOffRangeName name FROM
-		rams.payoff_Range_master;
-	</select>
 	<!-- レベル -->
 	<select id="getLevel"
 		resultType="jp.co.lyc.cms.model.ModelClass">
@@ -146,6 +131,7 @@
 		FROM
 		M007CompanyNature
 	</select>
+	
 	<!-- 職位選択肢 -->
 	<select id="getPosition"
 		resultType="jp.co.lyc.cms.model.ModelClass">
@@ -155,24 +141,17 @@
 		FROM
 		M019Position
 	</select>
-	<!-- 上位お客様連想 -->
-	<select id="getTopCustomerDrop"
-		resultType="jp.co.lyc.cms.model.ModelClass">
-		SELECT
-		topCustomerName label,
-		topCustomerNo value
-		FROM
-		T008TopCustomerInfo
-	</select>
+
 	<!-- 部門名前連想 -->
 	<select id="getDepartmentMasterDrop"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT
-		customerDepartmentName label,
-		customerDepartmentCode value
+		customerDepartmentCode code
+		customerDepartmentName name,
 		FROM
 		M018CustomerDepartment
 	</select>
+	
 	<!-- 銀行名検索 -->
 	<select id="getBankInfo"
 		resultType="jp.co.lyc.cms.model.ModelClass">
@@ -182,6 +161,7 @@
 		FROM
 		M001Bank
 	</select>
+	
 	<!-- 支店情報検索 -->
 	<select id="getBankBranchInfo"
 		resultType="jp.co.lyc.cms.model.ModelClass" parameterType="map">
@@ -232,6 +212,7 @@
 		MAX(${columnName}) FROM ${table}) LIMIT 1
 		OFFSET 0;
 	</select>
+	
 	<!-- 支払サイト選択肢 -->
 	<select id="getPaymentsite"
 		resultType="jp.co.lyc.cms.model.ModelClass">
@@ -241,6 +222,7 @@
 		FROM
 		M020PaymentSite
 	</select>
+	
 	<!-- パスワードの取得 -->
 	<select id="getPassword" resultType="String">
 		SELECT
@@ -250,6 +232,7 @@
 		WHERE
 		employeeNo = #{employeeNo}
 	</select>
+	
 	<!-- パスワードリセット -->
 	<update id="resetPassword" parameterType="String">
 		UPDATE T001Employee
