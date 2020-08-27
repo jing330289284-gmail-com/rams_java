@@ -1,23 +1,37 @@
 package jp.co.lyc.cms.util;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.ClassUtils;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import jp.co.lyc.cms.model.EmployeeModel;
 import jp.co.lyc.cms.model.ModelClass;
@@ -391,7 +405,7 @@ public class UtilsController {
 		List<ModelClass> list = getStatus(HousingStatus);
 		return list;
 	}
-	
+
 	/**
 	 * 営業ステータス
 	 * 
@@ -406,7 +420,7 @@ public class UtilsController {
 		List<ModelClass> list = getStatus(salesProgressCode);
 		return list;
 	}
-	
+
 	/**
 	 * 営業優先度
 	 * 
@@ -421,7 +435,7 @@ public class UtilsController {
 		List<ModelClass> list = getStatus(salesPriorityStatus);
 		return list;
 	}
-	
+
 	/**
 	 * 営業担当選ぶ
 	 * 
@@ -434,7 +448,7 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getSalesPerson();
 		return list;
 	}
-	
+
 	/**
 	 * 場所取る
 	 * 
@@ -669,4 +683,77 @@ public class UtilsController {
 		return props;
 	}
 
+	public final static String UPLOAD_PATH_PREFIX = "/file/";
+
+	public Map<String, Object> upload(MultipartFile uploadFile, Map<String, Object> sendMap,String key, String Info) {
+		if (uploadFile.isEmpty()) {
+			return sendMap;
+		}
+		String realPath = new String("src/main/resources/" + UPLOAD_PATH_PREFIX + "/" + sendMap.get("employeeNo")+"_"+sendMap.get("employeeFristName")+sendMap.get("employeeLastName"));
+		File file = new File(realPath);
+		if (!file.isDirectory()) {
+			file.mkdirs();
+		}
+		String newName = sendMap.get("employeeFristName").toString()+sendMap.get("employeeLastName").toString()+"_"+Info;
+		try {
+			File newFile = new File(file.getAbsolutePath() + File.separator + newName);
+			uploadFile.transferTo(newFile);
+			//String absolutePath = newFile.getAbsolutePath();
+			sendMap.put(key, realPath);
+			return sendMap;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return sendMap;
+
+	}
+
+	@RequestMapping(value = "/download", method = RequestMethod.POST)
+	@ResponseBody
+	public void downloadTemplateFile(@RequestBody ModelClass model, HttpServletResponse response) throws IOException {
+		// TODO
+		String filePath = "resumefile/" + model.getName();
+		Resource resource = new ClassPathResource(filePath);// 用来读取resources下的文件
+		InputStream is = null;
+		BufferedInputStream bis = null;
+		OutputStream os = null;
+		try {
+			File file = resource.getFile();
+			if (!file.exists()) {
+				return;
+			}
+			is = new FileInputStream(file);
+			os = response.getOutputStream();
+			bis = new BufferedInputStream(is);
+			// 设置响应头信息
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("application/octet-stream; charset=UTF-8");
+			StringBuffer contentDisposition = new StringBuffer("attachment; filename=\"");
+			String fileName = new String(file.getName().getBytes(), "utf-8");
+			contentDisposition.append(fileName).append("\"");
+			response.setHeader("Content-disposition", contentDisposition.toString());
+			// 边读边写
+			byte[] buffer = new byte[500];
+			int i;
+			while ((i = bis.read(buffer)) != -1) {
+				os.write(buffer, 0, i);
+			}
+			os.flush();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (os != null)
+					os.close();
+				if (bis != null)
+					bis.close();
+				if (is != null)
+					is.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }

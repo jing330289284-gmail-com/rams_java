@@ -13,13 +13,20 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.TypeReference;
 
 import jp.co.lyc.cms.model.AccountInfoModel;
 import jp.co.lyc.cms.model.CostInfoModel;
 import jp.co.lyc.cms.model.EmployeeModel;
 import jp.co.lyc.cms.model.SiteModel;
 import jp.co.lyc.cms.service.EmployeeInfoService;
+import jp.co.lyc.cms.util.UtilsController;
 
 @Controller
 @CrossOrigin(origins = "http://127.0.0.1:3000")
@@ -30,6 +37,9 @@ public class EmployeeInfoController {
 
 	@Autowired
 	EmployeeInfoService employeeInfoService;
+
+	@Autowired
+	UtilsController utilsController;
 
 	/**
 	 * データを取得
@@ -62,11 +72,22 @@ public class EmployeeInfoController {
 	 */
 	@RequestMapping(value = "/insertEmployee", method = RequestMethod.POST)
 	@ResponseBody
-	public boolean insertEmployee(@RequestBody EmployeeModel emp) throws Exception {
+	public boolean insertEmployee(@RequestParam(value = "emp", required = false) String JSONEmp,
+			@RequestParam(value = "resumeInfo1", required = false) MultipartFile resumeInfo1,
+			@RequestParam(value = "resumeInfo2", required = false) MultipartFile resumeInfo2,
+			@RequestParam(value = "residentCardInfo", required = false) MultipartFile residentCardInfo,
+			@RequestParam(value = "passportInfo", required = false) MultipartFile passportInfo) throws Exception {
 		logger.info("GetEmployeeInfoController.insertEmployee:" + "追加開始");
+		JSONObject jsonObject = JSON.parseObject(JSONEmp);
+		EmployeeModel emp = JSON.parseObject(jsonObject.toJSONString(), new TypeReference<EmployeeModel>() {
+		});
 		Map<String, Object> sendMap = getParam(emp);
 		boolean result = true;
 		try {
+			sendMap = utilsController.upload(resumeInfo1, sendMap, "resumeInfo1", "履歴書1");
+			sendMap = utilsController.upload(resumeInfo2, sendMap, "resumeInfo2", "履歴書2");
+			sendMap = utilsController.upload(residentCardInfo, sendMap, "residentCardInfo", "在留カード");
+			sendMap = utilsController.upload(passportInfo, sendMap, "passportInfo", "パスポート");
 			employeeInfoService.insertEmployee((HashMap<String, Object>) sendMap);
 		} catch (Exception e) {
 			return result = false;
@@ -85,6 +106,7 @@ public class EmployeeInfoController {
 	@ResponseBody
 	public boolean deleteEmployeeInfo(@RequestBody EmployeeModel emp) throws Exception {
 		logger.info("GetEmployeeInfoController.addEmployeeInfo:" + "削除開始");
+
 		Map<String, Object> sendMap = getParam(emp);
 		boolean result = true;
 		result = employeeInfoService.deleteEmployeeInfo(sendMap);
@@ -162,9 +184,9 @@ public class EmployeeInfoController {
 		String englishLevelCode = emp.getEnglishLevelCode();// 英語
 		String certification1 = emp.getCertification1();// 資格1
 		String certification2 = emp.getCertification2();// 資格2
-		String postcode=emp.getPostcode();//郵便番号
-		String firstHalfAddress=emp.getFirstHalfAddress();//
-		String lastHalfAddress=emp.getLastHalfAddress();//
+		String postcode = emp.getPostcode();// 郵便番号
+		String firstHalfAddress = emp.getFirstHalfAddress();//
+		String lastHalfAddress = emp.getLastHalfAddress();//
 		String developLanguage1 = emp.getDevelopLanguage1();// 技術语言1
 		String developLanguage2 = emp.getDevelopLanguage2();// 技術语言2
 		String developLanguage3 = emp.getDevelopLanguage3();// 技術语言3
@@ -176,7 +198,7 @@ public class EmployeeInfoController {
 		String employmentInsuranceNo = emp.getEmploymentInsuranceNo();// 雇用保険番号
 		String myNumber = emp.getMyNumber();// マイナンバー
 		String residentCardInfo = emp.getResidentCardInfo();// 在留カードインフォ
-		String resumeInfo1 = emp.getResumeInfo1();// 履歴書
+		// String resumeInfo1 = emp.getResumeInfo1();// 履歴書
 		String resumeRemark1 = emp.getResumeRemark1();// 備考１
 		String resumeInfo2 = emp.getResumeInfo2();// 履歴書２
 		String resumeRemark2 = emp.getResumeRemark2();// 備考２
@@ -193,13 +215,13 @@ public class EmployeeInfoController {
 		String updateUser = emp.getUpdateUser();// 更新ユーザー
 		String employeeStatus = emp.getEmployeeStatus();// 社員ステータス
 		String picInfo = emp.getPicInfo();// 写真
-		String siteRoleCode =emp.getSiteRoleCode();// 役割コード
+		String siteRoleCode = emp.getSiteRoleCode();// 役割コード
 		String yearsOfExperience = emp.getYearsOfExperience();// 経験年数
-		
+
 		AccountInfoModel accountInfoModel = emp.getAccountInfo();// 口座情報
-		
+
 		CostInfoModel costModel = emp.getCostModel();// 諸費用
-		
+
 		SiteModel siteModel = emp.getSiteModel();// 現場情報
 
 		String password = emp.getPassword();// パスワード
@@ -278,9 +300,10 @@ public class EmployeeInfoController {
 		if (residentCardInfo != null && residentCardInfo.length() != 0) {
 			sendMap.put("residentCardInfo", residentCardInfo);
 		}
-		if (resumeInfo1 != null && resumeInfo1.length() != 0) {
-			sendMap.put("resumeInfo1", resumeInfo1);
-		}
+		/*
+		 * if (resumeInfo1 != null && resumeInfo1.length() != 0) {
+		 * sendMap.put("resumeInfo1", resumeInfo1); }
+		 */
 		if (resumeInfo2 != null && resumeInfo2.length() != 0) {
 			sendMap.put("resumeInfo2", resumeInfo2);
 		}
@@ -334,13 +357,13 @@ public class EmployeeInfoController {
 		if (certification2 != null && certification2.length() != 0) {
 			sendMap.put("certification2", certification2);
 		}
-		if (postcode != null && postcode.length() != 0) {	
+		if (postcode != null && postcode.length() != 0) {
 			sendMap.put("postcode", postcode);
 		}
-		if (firstHalfAddress != null && firstHalfAddress.length() != 0) {	
+		if (firstHalfAddress != null && firstHalfAddress.length() != 0) {
 			sendMap.put("firstHalfAddress", firstHalfAddress);
 		}
-		if (lastHalfAddress != null && lastHalfAddress.length() != 0) {	
+		if (lastHalfAddress != null && lastHalfAddress.length() != 0) {
 			sendMap.put("lastHalfAddress", lastHalfAddress);
 		}
 		if (developLanguage4 != null && developLanguage4.length() != 0) {
