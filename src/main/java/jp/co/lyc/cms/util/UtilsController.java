@@ -685,20 +685,22 @@ public class UtilsController {
 
 	public final static String UPLOAD_PATH_PREFIX = "/file/";
 
-	public Map<String, Object> upload(MultipartFile uploadFile, Map<String, Object> sendMap,String key, String Info) {
-		if (uploadFile.isEmpty()) {
+	public Map<String, Object> upload(MultipartFile uploadFile, Map<String, Object> sendMap, String key, String Info) {
+		if (uploadFile == null) {
 			return sendMap;
 		}
-		String realPath = new String("src/main/resources/" + UPLOAD_PATH_PREFIX + "/" + sendMap.get("employeeNo")+"_"+sendMap.get("employeeFristName")+sendMap.get("employeeLastName"));
+		String realPath = new String("src/main/resources/" + UPLOAD_PATH_PREFIX + "/" + sendMap.get("employeeNo") + "_"
+				+ sendMap.get("employeeFristName") + sendMap.get("employeeLastName"));
 		File file = new File(realPath);
 		if (!file.isDirectory()) {
 			file.mkdirs();
 		}
-		String newName = sendMap.get("employeeFristName").toString()+sendMap.get("employeeLastName").toString()+"_"+Info;
+		String newName = sendMap.get("employeeFristName").toString() + sendMap.get("employeeLastName").toString() + "_"
+				+ Info;
 		try {
 			File newFile = new File(file.getAbsolutePath() + File.separator + newName);
 			uploadFile.transferTo(newFile);
-			//String absolutePath = newFile.getAbsolutePath();
+			// String absolutePath = newFile.getAbsolutePath();
 			sendMap.put(key, realPath);
 			return sendMap;
 		} catch (Exception e) {
