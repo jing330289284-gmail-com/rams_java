@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jp.co.lyc.cms.mapper.DutyRegistrationMapper">
+    <resultMap id="DutyRegistration" type="jp.co.lyc.cms.model.DutyRegistrationModel"/>
+    <insert id="insertDutyRegistration" parameterType="String">
+		INSERT INTO breakTime(
+			employeeNo,
+			yearMonth,
+			lunchBreakStartTime,
+			lunchBreakFinshTime,
+			lunchBreakTime,
+			nightBreakStartTime,
+			nightBreakfinshTime,
+			nightBreakTime,
+			totalBreakTime
+		) 
+		VALUE(
+			#{employeeNo},
+			#{breakTimeYearMonth},
+			#{breakTimeDayStart},
+			#{breakTimeDayEnd},
+			#{breakTimeDaybreakTimeHour},
+			#{breakTimeNightStart},
+			#{breakTimeNightEnd},
+			#{breakTimeNightbreakTimeHour},
+			#{breakTimeSumHour}
+		)
+    </insert>
+    <select id="selectDutyRegistration" resultMap="DutyRegistration" parameterType="String">
+		SELECT
+			employeeNo,
+			yearMonth,
+			lunchBreakStartTime,
+			lunchBreakFinshTime,
+			lunchBreakTime,
+			nightBreakStartTime,
+			nightBreakfinshTime,
+			nightBreakTime,
+			totalBreakTime
+		FROM
+			breakTime 
+		WHERE
+			employeeNo = #{employeeNo}
+			and yearMonth = #{breakTimeYearMonth}
+    </select>
+	<update id="updateDutyRegistration" parameterType="String">
+		UPDATE breakTime
+		SET 
+			employeeNo = #{employeeNo},
+			yearMonth = #{breakTimeYearMonth},
+			lunchBreakStartTime = #{breakTimeDayStart},
+			lunchBreakFinshTime = #{breakTimeDayEnd},
+			lunchBreakTime = #{breakTimeDaybreakTimeHour},
+			nightBreakStartTime = #{breakTimeNightStart},
+			nightBreakfinshTime = #{breakTimeNightEnd},
+			nightBreakTime = #{breakTimeNightbreakTimeHour},
+			totalBreakTime = #{breakTimeSumHour}			
+		WHERE 
+			employeeNo = #{employeeNo}
+			and yearMonth = #{breakTimeYearMonth}
+    </update> 
+</mapper>
