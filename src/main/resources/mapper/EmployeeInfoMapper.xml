@@ -476,7 +476,6 @@
 		(SELECT
 		@rowNo:=0) AS rowNo
 	</sql>
-
 	<!-- 住所情報を追加 -->
 	<insert id="insertAddressInfo" parameterType="String">
 		INSERT INTO
