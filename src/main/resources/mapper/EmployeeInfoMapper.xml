@@ -336,8 +336,6 @@
 		phoneNo=#{phoneNo},
 		employmentInsuranceNo=
 		#{employmentInsuranceNo},
-		siteRoleCode=
-		#{siteRoleCode},
 		updateTime=NOW(),
 		updateUser=
 		#{updateUser}
@@ -415,7 +413,6 @@
 		T002.phoneNo,
 		T002.employmentInsuranceNo,
 		T002.departmentCode,
-		T002.siteRoleCode,
 		T002.updateTime,
 		T002.createTime,
 		T002.updateUser,
@@ -476,7 +473,6 @@
 		(SELECT
 		@rowNo:=0) AS rowNo
 	</sql>
-
 	<!-- 住所情報を追加 -->
 	<insert id="insertAddressInfo" parameterType="String">
 		INSERT INTO
