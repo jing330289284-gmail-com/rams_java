@@ -36,7 +36,7 @@ public class LoginController extends BaseController {
 	@RequestMapping(value = "/init", method = RequestMethod.POST)
 	@ResponseBody
 	public boolean init() {
-		if(utilsCheckMethod.isNullOrEmpty((String)getRequest().getSession().getAttribute("employeeNo"))) {
+		if(utilsCheckMethod.isNullOrEmpty((String)getSession().getAttribute("employeeNo"))) {
 			return false;
 		}else{
 			return true;
