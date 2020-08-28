@@ -142,13 +142,22 @@
 		FROM
 		M019Position
 	</select>
+	<!-- 上位お客様連想 -->
+	<select id="getTopCustomerDrop"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT
+		topCustomerName label,
+		topCustomerNo value
+		FROM
+		T008TopCustomerInfo
+	</select>
 
 	<!-- 部門名前連想 -->
 	<select id="getDepartmentMasterDrop"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT
-		customerDepartmentCode code
-		customerDepartmentName name,
+		customerDepartmentCode code,
+		customerDepartmentName name
 		FROM
 		M018CustomerDepartment
 	</select>

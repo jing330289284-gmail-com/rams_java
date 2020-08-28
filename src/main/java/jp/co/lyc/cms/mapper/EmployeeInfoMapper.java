@@ -93,5 +93,10 @@ public interface EmployeeInfoMapper {
 	 * @param emp
 	 */
 	public void updateAddressInfo(Map<String, Object> sendMap);
-
+	/**
+	 * ログイン認証番号の電話番号存在チェック
+	 * @param employeeNo
+	 * @return
+	 */
+	public String getEmployeePhoneNo(String employeeNo);
 }

@@ -3,6 +3,8 @@
 <mapper namespace="jp.co.lyc.cms.mapper.EmployeeInfoMapper">
 	<resultMap id="Employee"
 		type="jp.co.lyc.cms.model.EmployeeModel" />
+	<resultMap id="stringResult"
+		type="String" />
 	<select id="getEmployeeInfo" parameterType="map"
 		resultMap="Employee">
 		SELECT
@@ -523,5 +525,14 @@
 		T001. PASSWORD = MD5(#{password})
 		AND T001.employeeNo = #{employeeNo}
 	</select>
-
+	<!-- ログイン認証番号の電話番号存在チェック -->
+	<select id="getEmployeePhoneNo" parameterType="String"
+		resultMap="stringResult">
+		SELECT
+			phoneNo 
+		FROM
+			T002EmployeeDetail 
+		WHERE
+			employeeNo = #{employeeNo}
+	</select>
 </mapper>

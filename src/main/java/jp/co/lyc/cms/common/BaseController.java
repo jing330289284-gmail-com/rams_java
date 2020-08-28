@@ -16,6 +16,7 @@ public class BaseController {
 		HttpSession session = null;
 		try {
 			session = getRequest().getSession();
+			session.setMaxInactiveInterval(60*60);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -28,16 +29,16 @@ public class BaseController {
 				.getRequest();
 		return request;
 	}
-	
-	public void setloginSession(EmployeeModel employeeModel) {
-		getSession().setAttribute("loginEmp", this.empToSession(employeeModel));
-	}
-	
-	private sessionEmployeeModel empToSession(EmployeeModel employeeModel) {
-		// 
-		sessionEmployeeModel sessionEmpModel = new sessionEmployeeModel();
-		sessionEmpModel.setSessionPassword(employeeModel.getPassword());
-		sessionEmpModel.setSessionAuthority(null);
-		return sessionEmpModel;
-	}
+//	
+//	public void setloginSession(EmployeeModel employeeModel) {
+//		getSession().setAttribute("loginEmp", this.empToSession(employeeModel));
+//	}
+//	
+//	private sessionEmployeeModel empToSession(EmployeeModel employeeModel) {
+//		// 
+//		sessionEmployeeModel sessionEmpModel = new sessionEmployeeModel();
+//		sessionEmpModel.setSessionPassword(employeeModel.getPassword());
+//		sessionEmpModel.setSessionAuthority(null);
+//		return sessionEmpModel;
+//	}
 }

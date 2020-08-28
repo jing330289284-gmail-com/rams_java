@@ -211,5 +211,14 @@ public class EmployeeInfoService {
 		sendMap.put("updateUser", siteModel.getUpdateUser());
 		return costModelSendMap;
 	}
-
+	
+	/**
+	 * ログイン認証番号の電話番号存在チェック
+	 * @param employeeNo
+	 * @return
+	 */
+	
+	public String getEmployeePhoneNo(String employeeNo) {
+		return employeeInfoMapper.getEmployeePhoneNo(employeeNo);
+	}
 }
