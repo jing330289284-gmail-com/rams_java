@@ -13,10 +13,10 @@ public class SalesSituationModel implements Serializable {
 	String employeeNo;
 	String salesYearAndMonth;
 	String interviewDate1;
-	String interviewLocation1;
+	String stationCode1;
 	String interviewCustomer1;
 	String interviewDate2;
-	String interviewLocation2;
+	String stationCode2;
 	String interviewCustomer2;
 	String hopeLowestPrice;
 	String hopeHighestPrice;
@@ -33,6 +33,15 @@ public class SalesSituationModel implements Serializable {
 	String siteRoleCode;
 	String unitPrice;
 	String salesPriorityStatus;
+	String costumer;
+	
+	public String getCostumer() {
+		return costumer;
+	}
+	public void setCostumer(String costumer) {
+		this.costumer = costumer;
+	}
+	
 	
 	public String getSalesPriorityStatus() {
 		return salesPriorityStatus;
@@ -89,11 +98,11 @@ public class SalesSituationModel implements Serializable {
 	public void setInterviewDate1(String interviewDate1) {
 		this.interviewDate1 = interviewDate1;
 	}
-	public String getInterviewLocation1() {
-		return interviewLocation1;
+	public String getStationCode1() {
+		return stationCode1;
 	}
-	public void setInterviewLocation1(String interviewLocation1) {
-		this.interviewLocation1 = interviewLocation1;
+	public void setStationCode1(String stationCode1) {
+		this.stationCode1 = stationCode1;
 	}
 	public String getInterviewCustomer1() {
 		return interviewCustomer1;
@@ -107,11 +116,11 @@ public class SalesSituationModel implements Serializable {
 	public void setInterviewDate2(String interviewDate2) {
 		this.interviewDate2 = interviewDate2;
 	}
-	public String getInterviewLocation2() {
-		return interviewLocation2;
+	public String getStationCode2() {
+		return stationCode2;
 	}
-	public void setInterviewLocation2(String interviewLocation2) {
-		this.interviewLocation2 = interviewLocation2;
+	public void setStationCode2(String stationCode2) {
+		this.stationCode2 = stationCode2;
 	}
 	public String getInterviewCustomer2() {
 		return interviewCustomer2;

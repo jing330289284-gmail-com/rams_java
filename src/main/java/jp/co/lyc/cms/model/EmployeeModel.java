@@ -83,6 +83,10 @@ public class EmployeeModel implements Serializable {
 	String postcode;//郵便番号
 	String firstHalfAddress;//住所前半
 	String lastHalfAddress;//住所後半
+	String stationCode1;//
+	String stationCode2;//
+	String stationName;//
+	String housingStatus;//
 
 	public String getOldPassword() {
 		return oldPassword;
@@ -705,6 +709,38 @@ public class EmployeeModel implements Serializable {
 
 	public void setLastHalfAddress(String lastHalfAddress) {
 		this.lastHalfAddress = lastHalfAddress;
+	}
+
+	public String getStationCode1() {
+		return stationCode1;
+	}
+
+	public void setStationCode1(String stationCode1) {
+		this.stationCode1 = stationCode1;
+	}
+
+	public String getStationCode2() {
+		return stationCode2;
+	}
+
+	public void setStationCode2(String stationCode2) {
+		this.stationCode2 = stationCode2;
+	}
+
+	public String getHousingStatus() {
+		return housingStatus;
+	}
+
+	public void setHousingStatus(String housingStatus) {
+		this.housingStatus = housingStatus;
+	}
+
+	public String getStationName() {
+		return stationName;
+	}
+
+	public void setStationName(String stationName) {
+		this.stationName = stationName;
 	}
 
 }

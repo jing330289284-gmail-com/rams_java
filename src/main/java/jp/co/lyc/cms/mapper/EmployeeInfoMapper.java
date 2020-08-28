@@ -82,10 +82,16 @@ public interface EmployeeInfoMapper {
 	 */
 	public void updateEmployeeInfoDetail(Map<String, Object> sendMap);
 	/**
-	 * アドレスを修正
+	 * アドレスを追加
 	 * 
 	 * @param emp
 	 */
 	public void insertAddressInfo(Map<String, Object> sendMap);
+	/**
+	 * アドレスを修正
+	 * 
+	 * @param emp
+	 */
+	public void updateAddressInfo(Map<String, Object> sendMap);
 
 }

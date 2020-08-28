@@ -197,4 +197,18 @@ public interface UtilsMapper {
 	 * @return
 	 */
 	public void resetPassword(HashMap<String, String> sendMap);
+	
+	/**
+	 * 営業担当検索
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getSalesPerson();
+	
+	/**
+	 * 場所
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getStation();
 }

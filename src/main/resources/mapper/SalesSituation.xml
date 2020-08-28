@@ -15,10 +15,11 @@ SELECT
             T002.developLanguage3,
             T002.developLanguage4,
             T002.developLanguage5) AS 'developLanguage',
+    '' as costumer,
     T006.siteRoleCode,
     T006.unitPrice,
     T006.admissionEndDate,
-    if(ISNULL(T010.salesProgressCode),0,T010.salesProgressCode) AS 'salesProgressCode',
+    if(ISNULL(T010.salesProgressCode),'',T010.salesProgressCode) AS 'salesProgressCode',
     T010.salesYearAndMonth,
     T010.interviewDate1,
     T010.stationCode1,
@@ -30,7 +31,7 @@ SELECT
     T010.hopeHighestPrice,
     T010.salesProgressCode,
     T010.remark,
-    T010.salesStaff,
+    if(ISNULL(T010.salesStaff),'',T010.salesStaff) AS 'salesStaff',
     T010.salesPriorityStatus
 FROM
     T001Employee T001
@@ -74,10 +75,10 @@ WHERE
 		#{employeeNo},
 		#{salesYearAndMonth},
 		#{interviewDate1},
-		#{interviewLocation1},
+		#{stationCode1},
 		#{interviewCustomer1},
 		#{interviewDate2},
-		#{interviewLocation2},
+		#{stationCode2},
 		#{interviewCustomer2},
 		#{hopeLowestPrice},
 		#{hopeHighestPrice},
@@ -90,10 +91,10 @@ WHERE
 		#{updateUser})
 		ON DUPLICATE KEY UPDATE 
 			interviewDate1=#{interviewDate1},
-			stationCode1=#{interviewLocation1},
+			stationCode1=#{stationCode1},
 			interviewCustomer1=#{interviewCustomer1},
 			interviewDate2=#{interviewDate2},
-			stationCode2=#{interviewLocation2},
+			stationCode2=#{stationCode2},
 			interviewCustomer2=#{interviewCustomer2},
 			hopeLowestPrice=#{hopeLowestPrice},
 			hopeHighestPrice=#{hopeHighestPrice},

@@ -45,10 +45,10 @@
 			AND T002.genderStatus=#{genderStatus}
 		</if>
 		<if test="ageFrom != null">
-			AND T002.age &gt;= #{ageFrom}
+			AND T002.birthday &lt;= #{ageFrom}+9999
 		</if>
 		<if test="ageTo != null">
-			AND T002.age &lt;= #{ageTo}
+			AND T002.birthday &gt;= #{ageTo}
 		</if>
 		<if test="residenceCode != null">
 			AND T002.residenceCode=#{residenceCode}
@@ -226,7 +226,7 @@
 		#{siteRoleCode}
 		)
 	</insert>
-	
+
 	<!-- 社員情報を削除 -->
 	<delete id="deleteEmployeeInfo" parameterType="String">
 		DELETE
@@ -253,12 +253,13 @@
 		employeeNo = #{employeeNo};
 	</delete>
 
-	<!--  -->
+	<!-- -->
 	<select id="getEmployeeByEmployeeNo" parameterType="map"
 		resultMap="Employee">
 		SELECT
 		<include refid="T001" />
 		<include refid="T002" />
+		<include refid="T003" />
 		<include refid="tableJoin" />
 		WHERE
 		1 = 1
@@ -335,6 +336,8 @@
 		phoneNo=#{phoneNo},
 		employmentInsuranceNo=
 		#{employmentInsuranceNo},
+		siteRoleCode=
+		#{siteRoleCode},
 		updateTime=NOW(),
 		updateUser=
 		#{updateUser}
@@ -350,10 +353,12 @@
 		postcode=#{postcode},
 		firstHalfAddress=#{firstHalfAddress},
 		lastHalfAddress=#{lastHalfAddress},
-		stationCode1=(SELECT coalesce(stationCode,-1)  from M013Station where stationName=#{nearestStation} ),
+		stationCode1=(SELECT
+		coalesce(stationCode,-1) from M013Station where
+		stationName=#{nearestStation} ),
 		updateTime=NOW(),
 		updateUser=#{updateUser}
-		WHERE 
+		WHERE
 		employeeNo=#{employeeNo}
 	</update>
 	<sql id="T001">
@@ -410,10 +415,22 @@
 		T002.phoneNo,
 		T002.employmentInsuranceNo,
 		T002.departmentCode,
+		T002.siteRoleCode,
 		T002.updateTime,
 		T002.createTime,
 		T002.updateUser,
-		T002.yearsOfExperience
+		T002.yearsOfExperience,
+	</sql>
+	<sql id="T003">
+		T003.employeeNo,
+		T003.postcode,
+		T003.firstHalfAddress,
+		T003.lastHalfAddress,
+		T003.stationCode1,
+		T003.stationCode2,
+		T003.housingStatus,
+		T003.createTime,
+		T003.updateUser
 	</sql>
 	<sql id="tableJoin">
 		FROM
@@ -428,7 +445,8 @@
 		T006
 		ON T001.employeeNo
 		= T006.employeeNo
-		AND admissionStartDate = (SELECT
+		AND admissionStartDate =
+		(SELECT
 		MAX(admissionStartDate)
 		FROM
 		T006EmployeeSiteInfo)
@@ -438,6 +456,11 @@
 		ON
 		T001.employeeNo =
 		T003.employeeNo
+		LEFT
+		JOIN
+		rams.M013Station AS M013 ON
+		T003.stationCode1 =
+		M013.stationCode
 		LEFT
 		JOIN
 		T005ExpensesInfo AS T005 ON
@@ -453,7 +476,6 @@
 		(SELECT
 		@rowNo:=0) AS rowNo
 	</sql>
-
 	<!-- 住所情報を追加 -->
 	<insert id="insertAddressInfo" parameterType="String">
 		INSERT INTO
@@ -474,7 +496,9 @@
 		#{postcode},
 		#{firstHalfAddress},
 		#{lastHalfAddress},
-		(SELECT coalesce(stationCode,-1)  from M013Station where stationName=#{nearestStation} ),
+		(SELECT
+		coalesce(stationCode,-1) from M013Station where
+		stationName=#{nearestStation} ),
 		null,
 		null,
 		NOW(),
@@ -482,21 +506,22 @@
 		#{updateUser}
 		)
 	</insert>
-    <!-- ログイン -->
-    <select id="getEmployeeModel" parameterType="map" resultMap="Employee">
+	<!-- ログイン -->
+	<select id="getEmployeeModel" parameterType="map"
+		resultMap="Employee">
 		SELECT
-			T001.employeeNo,
-			T001.employeeFristName,
-			T001.employeeLastName,
-			T001.authorityCode,
-			M009.authorityName
+		T001.employeeNo,
+		T001.employeeFristName,
+		T001.employeeLastName,
+		T001.authorityCode,
+		M009.authorityName
 		FROM
-			T001Employee T001
-			LEFT JOIN M009Authority M009 ON T001.authorityCode = M009.authorityCode
-			LEFT JOIN T002EmployeeDetail T002 ON T001.employeeNo = T002.employeeNo
+		T001Employee T001
+		LEFT JOIN M009Authority M009 ON T001.authorityCode = M009.authorityCode
+		LEFT JOIN T002EmployeeDetail T002 ON T001.employeeNo = T002.employeeNo
 		WHERE
-			T001. PASSWORD = MD5(#{password})
+		T001. PASSWORD = MD5(#{password})
 		AND T001.employeeNo = #{employeeNo}
-    </select>
+	</select>
 
 </mapper>
