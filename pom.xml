@@ -55,6 +55,11 @@
         	<version>2.4</version>
         	<classifier>jdk15</classifier>
         </dependency>
+        <dependency>
+		    <groupId>com.amazonaws</groupId>
+		    <artifactId>aws-java-sdk-sns</artifactId>
+		    <version>1.11.229</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>CMS</finalName>
