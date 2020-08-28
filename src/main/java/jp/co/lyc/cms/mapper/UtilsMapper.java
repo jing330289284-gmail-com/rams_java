@@ -211,4 +211,11 @@ public interface UtilsMapper {
 	 * @return
 	 */
 	public List<ModelClass> getStation();
+	
+	/**
+	 * 営業状況取得
+	 * 
+	 * @return
+	 */	
+	public List<ModelClass> getSalesProgress();
 }

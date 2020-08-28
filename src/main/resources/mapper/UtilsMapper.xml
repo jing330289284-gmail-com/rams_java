@@ -264,4 +264,13 @@
 	WHERE
     	authorityCode = 1;
 	</select>
+		<!-- 営業状況取得 -->
+	<select id="getSalesProgress"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT
+		salesProgressName name,
+		salesProgressCode code
+		FROM
+		M021SalesProgress
+	</select>
 </mapper>
