@@ -16,7 +16,7 @@ import jp.co.lyc.cms.service.masterInsertService;
 @Controller
 @CrossOrigin(origins = "http://127.0.0.1:3000")
 @RequestMapping(value = "/masterInsert")
-public class masterInsertController {
+public class MasterInsertController {
 
 	@Autowired
 	masterInsertService masterInsertService;

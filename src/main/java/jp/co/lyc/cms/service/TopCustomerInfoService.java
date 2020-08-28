@@ -35,39 +35,20 @@ public class TopCustomerInfoService {
 	}
 	
 	/**
-	 * インサート
-	 * @param sendMap
+	 * インサートとアップデートの値を設定
+	 * @param topCustomerMod
+	 * @return
 	 */
-	
-	public boolean insertTopCustomerInfo(HashMap<String, String> sendMap) {
-		boolean result = true;
-		try {
-			topCustomerInfoMapper.insertTopCustomerInfo(sendMap);
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-			return result = false;
-		}
-		return result;
+	public HashMap<String, String> setSendMap(TopCustomerInfoModel topCustomerMod) {
+		HashMap<String, String> sendMap = new HashMap<>();
+		sendMap.put("topCustomerName", topCustomerMod.getTopCustomerName());
+		sendMap.put("url", topCustomerMod.getUrl());
+		sendMap.put("topCustomerAbbreviation", topCustomerMod.getTopCustomerAbbreviation());
+		sendMap.put("remark", topCustomerMod.getRemark());
+		sendMap.put("updateUser", topCustomerMod.getUpdateUser());
+		sendMap.put("topCustomerNo", topCustomerMod.getTopCustomerNo());	
+		return sendMap;	
 	}
-	
-	/**
-	 * アップデート
-	 * @param sendMap
-	 */
-	
-	public boolean updateTopCustomerInfo(HashMap<String, String> sendMap) {
-		boolean result = true;
-		try {
-			topCustomerInfoMapper.updateTopCustomerInfo(sendMap);
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-			return result = false;
-		}
-		return result;
-	}
-	
 	
 	/**
 	 * お客様の部門削除

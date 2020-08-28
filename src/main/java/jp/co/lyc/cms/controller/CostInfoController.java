@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import jp.co.lyc.cms.common.BaseController;
 import jp.co.lyc.cms.model.CostInfoModel;
 import jp.co.lyc.cms.service.CostInfoService;
+import jp.co.lyc.cms.util.UtilsCheckMethod;
 
 @Controller
 @CrossOrigin(origins = "http://127.0.0.1:3000")
@@ -27,11 +28,12 @@ public class CostInfoController extends BaseController {
 
 	@Autowired
 	CostInfoService GCS;
-
+	@Autowired
+	UtilsCheckMethod utilsCheckMethod;
 	// 画面の初期化の場合、データの取得
-	@RequestMapping(value = "/onload", method = RequestMethod.POST)
+	@RequestMapping(value = "/init", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String,Object> onload(@RequestBody CostInfoModel costModel, Model model) {
+	public Map<String,Object> init(@RequestBody CostInfoModel costModel, Model model) {
 		logger.info("LoginController.login:" + "初期化開始");
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		ArrayList<CostInfoModel> subCostList = selectData(costModel.getEmployeeNo(),null);
@@ -64,131 +66,15 @@ public class CostInfoController extends BaseController {
 		logger.info("LoginController.login:" + "初期化終了");
 		return resultMap;
 	}
-
-	// 更新方法
-	public boolean update(CostInfoModel COmodel, Model model) {
-		logger.info("GetEmployeeInfoController.getEmployeeInfo:" + "アープデート開始");
-		Map<String, Object> sendMap = new HashMap<String, Object>();
-		ArrayList<CostInfoModel> checkList = new ArrayList<>();
-		checkList = selectData(COmodel.employeeNo ,COmodel.getReflectYearAndMonth());
-		sendMap.put("SocialInsuranceFlag", Integer.toString(COmodel.SocialInsuranceFlag));
-		sendMap.put("bonusFlag", Integer.toString(COmodel.bonusFlag));
-		if (!COmodel.salary.equals(checkList.get(0).salary)) {
-			sendMap.put("salary", COmodel.salary);
-		}
-		if (!COmodel.waitingCost.equals(checkList.get(0).waitingCost)) {
-			sendMap.put("waitingCost", COmodel.waitingCost);
-		}
-		if (!COmodel.welfarePensionAmount.equals(checkList.get(0).welfarePensionAmount)) {
-			sendMap.put("welfarePensionAmount", COmodel.welfarePensionAmount);
-		}
-		if (!COmodel.healthInsuranceAmount.equals(checkList.get(0).healthInsuranceAmount)) {
-			sendMap.put("healthInsuranceAmount", COmodel.healthInsuranceAmount);
-		}
-		if (!COmodel.insuranceFeeAmount.equals(checkList.get(0).insuranceFeeAmount)) {
-			sendMap.put("insuranceFeeAmount", COmodel.insuranceFeeAmount);
-		}
-		if (!COmodel.lastTimeBonusAmount.equals(checkList.get(0).lastTimeBonusAmount)) {
-			sendMap.put("lastTimeBonusAmount", COmodel.lastTimeBonusAmount);
-		}
-		if (!COmodel.scheduleOfBonusAmount.equals(checkList.get(0).scheduleOfBonusAmount)) {
-			sendMap.put("scheduleOfBonusAmount", COmodel.scheduleOfBonusAmount);
-		}
-		if (!COmodel.transportationExpenses.equals(checkList.get(0).transportationExpenses)) {
-			sendMap.put("transportationExpenses", COmodel.transportationExpenses);
-		}
-		if (!COmodel.nextBonusMonth.equals(checkList.get(0).nextBonusMonth)) {
-			sendMap.put("nextBonusMonth", COmodel.nextBonusMonth);
-		}
-//		if (!COmodel.monthOfCompanyPay.equals(checkList.get(0).monthOfCompanyPay)) {
-//			sendMap.put("monthOfCompanyPay", COmodel.monthOfCompanyPay);
-//		}
-		if (!COmodel.nextRaiseMonth.equals(checkList.get(0).nextRaiseMonth)) {
-			sendMap.put("nextRaiseMonth", COmodel.nextRaiseMonth);
-		}
-		if (!COmodel.otherAllowance.equals(checkList.get(0).otherAllowance)) {
-			sendMap.put("otherAllowance", COmodel.otherAllowance);
-		}
-		if (!COmodel.otherAllowanceAmount.equals(checkList.get(0).otherAllowanceAmount)) {
-			sendMap.put("otherAllowanceAmount", COmodel.otherAllowanceAmount);
-		}
-		if (!COmodel.leaderAllowanceAmount.equals(checkList.get(0).leaderAllowanceAmount)) {
-			sendMap.put("leaderAllowanceAmount", COmodel.leaderAllowanceAmount);
-		}
-		if (!COmodel.totalAmount.equals(checkList.get(0).totalAmount)) {
-			sendMap.put("totalAmount", COmodel.totalAmount);
-		}
-		if (!COmodel.remark.equals(checkList.get(0).remark)) {
-			sendMap.put("remark", COmodel.remark);
-		}
-		if (!COmodel.employeeFormCode.equals(checkList.get(0).employeeFormCode)) {
-			sendMap.put("employeeFormCode", COmodel.employeeFormCode);
-		}
-		if (!COmodel.housingAllowance.equals(checkList.get(0).housingAllowance)) {
-			sendMap.put("housingAllowance", COmodel.housingAllowance);
-		}
-		if (!COmodel.housingStatus.equals(checkList.get(0).housingStatus)) {
-			sendMap.put("housingStatus", COmodel.housingStatus);
-		}
-		sendMap.put("employeeNo", COmodel.employeeNo);
-		sendMap.put("updatedReflectYearAndMonth", COmodel.updatedReflectYearAndMonth);
-		sendMap.put("reflectYearAndMonth", COmodel.reflectYearAndMonth);
-		sendMap.put("updateUser", COmodel.updateUser);
-		boolean result = GCS.update(sendMap);
-		logger.info("LoginController.login:" + "アープデート終了");
-		return result;
-	}
-
-	// 插入方法
-	public boolean insert(CostInfoModel COmodel, Model model) {
-		logger.info("GetEmployeeInfoController.getEmployeeInfo:" + "インサート開始");
-		Map<String, Object> sendMap = new HashMap<String, Object>();
-		sendMap.put("employeeNo", COmodel.employeeNo);
-		sendMap.put("reflectYearAndMonth", COmodel.reflectYearAndMonth);
-		sendMap.put("salary", COmodel.salary);
-		sendMap.put("waitingCost", COmodel.waitingCost);
-		sendMap.put("welfarePensionAmount", COmodel.welfarePensionAmount);
-		sendMap.put("healthInsuranceAmount", COmodel.healthInsuranceAmount);
-		sendMap.put("insuranceFeeAmount", COmodel.insuranceFeeAmount);
-		sendMap.put("lastTimeBonusAmount", COmodel.lastTimeBonusAmount);
-		sendMap.put("scheduleOfBonusAmount", COmodel.scheduleOfBonusAmount);
-		sendMap.put("transportationExpenses", COmodel.transportationExpenses);
-		sendMap.put("nextBonusMonth", COmodel.nextBonusMonth);
-//		sendMap.put("monthOfCompanyPay", COmodel.monthOfCompanyPay);
-		sendMap.put("nextRaiseMonth", COmodel.nextRaiseMonth);
-		sendMap.put("otherAllowance", COmodel.otherAllowance);
-		sendMap.put("otherAllowanceAmount", COmodel.otherAllowanceAmount);
-		sendMap.put("leaderAllowanceAmount", COmodel.leaderAllowanceAmount);
-		sendMap.put("totalAmount", COmodel.totalAmount);
-		sendMap.put("remark", COmodel.remark);
-		sendMap.put("employeeFormCode", COmodel.employeeFormCode);
-		sendMap.put("housingStatus", COmodel.housingStatus);
-		sendMap.put("housingAllowance", COmodel.housingAllowance);
-		sendMap.put("updateUser", COmodel.updateUser);
-		boolean result = GCS.insert(sendMap);
-		logger.info("LoginController.login:" + "インサート終了");
-		return result;
-	}
-
+	
 	// 查询方法
 	public ArrayList<CostInfoModel> selectData(String employeeNo , String reflectYearAndMonth) {
 		Map<String, String> sendMap = new HashMap<String, String>();
 		sendMap.put("employeeNo", employeeNo);
-		if(!isNullOrEmpty(reflectYearAndMonth)) {
-			sendMap.put("employeeNo", reflectYearAndMonth);
+		if(!utilsCheckMethod.isNullOrEmpty(reflectYearAndMonth)) {
+			sendMap.put("reflectYearAndMonth", reflectYearAndMonth);
 		}
 		return GCS.getEmployeeInfo(sendMap);
 
 	}
-
-	// 判断字符串是否为null或空
-	public boolean isNullOrEmpty(String aString) {
-		boolean result = true;
-		if (aString == null || aString.isEmpty()) {
-			return result;
-		} else {
-			return result = false;
-		}
-	}
-
 }

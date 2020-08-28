@@ -26,36 +26,20 @@ public class AccountInfoService {
 	}
 	
 	/**
-	 * インサート
-	 * @param sendMap
+	 * インサートとアップデートの値を設定
+	 * @param bankCol
+	 * @return
 	 */
-	
-	public boolean insertAccount(HashMap<String, String> sendMap) {
-		boolean result = true;
-		try {
-			bankMapper.insertAccount(sendMap);
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-			return result = false;
-		}
-		return result;
-	}
-	
-	/**
-	 * アップデート
-	 * @param sendMap
-	 */
-	
-	public boolean updateAccount(HashMap<String, String> sendMap) {
-		boolean result = true;
-		try {
-			bankMapper.updateAccount(sendMap);
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-			return result = false;
-		}
-		return result;
+	public HashMap<String, String> setSendMap(AccountInfoModel bankCol) {
+		HashMap<String, String> sendMap = new HashMap<>();
+		sendMap.put("accountBelongsStatus", bankCol.getAccountBelongsStatus());
+		sendMap.put("bankCode", bankCol.getBankCode());
+		sendMap.put("accountName", bankCol.getAccountName());
+		sendMap.put("accountNo", bankCol.getAccountNo());
+		sendMap.put("bankBranchCode", bankCol.getBankBranchCode());
+		sendMap.put("accountTypeStatus", bankCol.getAccountTypeStatus());
+		sendMap.put("updateUser", bankCol.getUpdateUser());
+		sendMap.put("employeeOrCustomerNo", bankCol.getEmployeeOrCustomerNo());	
+		return sendMap;
 	}
 }

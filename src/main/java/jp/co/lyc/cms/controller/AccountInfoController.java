@@ -35,9 +35,9 @@ public class AccountInfoController {
 	 * @param onloadMol
 	 * @return
 	 */
-	@RequestMapping(value = "/onloadPage", method = RequestMethod.POST)
+	@RequestMapping(value = "/init", method = RequestMethod.POST)
 	@ResponseBody
-	public HashMap<String, Object> onloadPage(@RequestBody AccountInfoModel onloadMol) {
+	public HashMap<String, Object> init(@RequestBody AccountInfoModel onloadMol) {
 		logger.info("BankInfoController.getBankInfo:" + "初期化開始");
 		HashMap<String, Object> resultMap = new HashMap<>();
 		AccountInfoModel accountInfoMod = new AccountInfoModel();
@@ -51,99 +51,6 @@ public class AccountInfoController {
 	}
 	
 	/**
-	 * 登録ボタン
-	 * @param bankCol
-	 * @return
-	 */
-	@RequestMapping(value = "/toroku", method = RequestMethod.POST)
-	@ResponseBody
-	public boolean toroku(@RequestBody AccountInfoModel bankCol) {
-		logger.info("BankInfoController.toroku:" + "登录開始");
-		AccountInfoModel checkMod = new AccountInfoModel();
-		checkMod = getBankBranchInfo(bankCol.getEmployeeOrCustomerNo() , bankCol.getAccountBelongsStatus());
-		boolean result = true;
-		if(checkMod == null && bankCol.getActionType().equals("insert")) {
-			result = insert(bankCol);
-		}else if(bankCol.getActionType().equals("update")) {
-			result = update(bankCol);
-		}
-		logger.info("BankInfoController.toroku:" + "登录終了");
-		return result;	
-	}
-	
-	/**
-	 * インサート
-	 * @param bankCol
-	 * @return
-	 */
-	public boolean insert(AccountInfoModel bankCol) {
-		logger.info("BankInfoController.toroku:" + "インサート開始");
-		boolean result = true;
-		HashMap<String, String> sendMap = new HashMap<>();
-		sendMap.put("accountBelongsStatus", bankCol.getAccountBelongsStatus());
-		sendMap.put("bankCode", bankCol.getBankCode());
-		sendMap.put("accountName", bankCol.getAccountName());
-		sendMap.put("accountNo", bankCol.getAccountNo());
-		sendMap.put("bankBranchCode", bankCol.getBankBranchCode());
-		sendMap.put("accountTypeStatus", bankCol.getAccountTypeStatus());
-		sendMap.put("updateUser", bankCol.getUpdateUser());
-		sendMap.put("employeeOrCustomerNo", bankCol.getEmployeeOrCustomerNo());	
-		result  = bankInfoSer.insertAccount(sendMap);
-		logger.info("BankInfoController.toroku:" + "インサート終了");
-		return result;	
-	}
-	
-	/**
-	 * アップデート
-	 * @param bankCol
-	 * @return
-	 */
-	public boolean update(AccountInfoModel bankCol) {
-		logger.info("BankInfoController.toroku:" + "アップデート開始");
-		boolean result = true;
-		AccountInfoModel checkMod = new AccountInfoModel();
-		checkMod = getBankBranchInfo(bankCol.getEmployeeOrCustomerNo() , bankCol.getAccountBelongsStatus());
-		HashMap<String, String> sendMap = new HashMap<>();
-		sendMap.put("accountBelongsStatus", bankCol.getAccountBelongsStatus());
-		if(!checkMod.getBankCode().equals(bankCol.getBankCode())) {
-			sendMap.put("bankCode", bankCol.getBankCode());
-		}
-		if(!checkMod.getAccountName().equals(bankCol.getAccountName())) {
-			sendMap.put("accountName", bankCol.getAccountName());
-		}
-		if(!checkMod.getAccountNo().equals(bankCol.getAccountNo())) {
-			sendMap.put("accountNo", bankCol.getAccountNo());
-		}
-		if(!checkMod.getBankBranchCode().equals(bankCol.getBankBranchCode())) {
-			sendMap.put("bankBranchCode", bankCol.getBankBranchCode());
-		}
-		sendMap.put("accountTypeStatus", bankCol.getAccountTypeStatus());
-		sendMap.put("updateUser", bankCol.getUpdateUser());
-		sendMap.put("employeeOrCustomerNo", bankCol.getEmployeeOrCustomerNo());	
-		result  = bankInfoSer.updateAccount(sendMap);
-		logger.info("BankInfoController.toroku:" + "アップデート終了");
-		return result;	
-	}
-	
-	/**
-	 * インサートとアップデートの値を設定
-	 * @param bankCol
-	 * @return
-	 */
-	public HashMap<String, String> setSendMap(AccountInfoModel bankCol) {
-		HashMap<String, String> sendMap = new HashMap<>();
-		sendMap.put("accountBelongsStatus", bankCol.getAccountBelongsStatus());
-		sendMap.put("bankCode", bankCol.getBankCode());
-		sendMap.put("accountName", bankCol.getAccountName());
-		sendMap.put("accountNo", bankCol.getAccountNo());
-		sendMap.put("bankBranchCode", bankCol.getBankBranchCode());
-		sendMap.put("accountTypeStatus", bankCol.getAccountTypeStatus());
-		sendMap.put("updateUser", bankCol.getUpdateUser());
-		sendMap.put("employeeOrCustomerNo", bankCol.getEmployeeOrCustomerNo());	
-		return sendMap;
-	}
-	
-	/**
 	 * データを取得
 	 * @param employeeOrCustomerNo
 	 * * @param accountBelongsStatus
@@ -154,19 +61,5 @@ public class AccountInfoController {
 		AccountInfoModel resultMod = bankInfoSer.selectAccountInfo(employeeOrCustomerNo , accountBelongsStatus);
 		logger.info("BankInfoController.toroku:" + "検索終了");
 		return resultMod;	
-	}
-	
-	/**
-	 * nullと空の判断
-	 * @param aString
-	 * @return
-	 */
-	public boolean isNullOrEmpty(String aString) {
-		boolean result = true;
-		if (aString == null || aString.isEmpty()) {
-			return result;
-		} else {
-			return result = false;
-		}
 	}
 }

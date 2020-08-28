@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import jp.co.lyc.cms.model.CustomerInfoModel;
+import jp.co.lyc.cms.mapper.TopCustomerInfoMapper;
 import jp.co.lyc.cms.model.TopCustomerInfoModel;
 import jp.co.lyc.cms.service.TopCustomerInfoService;
 
@@ -23,15 +22,16 @@ public class TopCustomerInfoController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	TopCustomerInfoService topCustomerInfoService;
-	
+	@Autowired
+	TopCustomerInfoMapper topCustomerInfoMapper;
 	/**
 	 * 画面の初期化
 	 * @param topCustomerMod
 	 * @return
 	 */
-	@RequestMapping(value = "/onloadPage", method = RequestMethod.POST)
+	@RequestMapping(value = "/init", method = RequestMethod.POST)
 	@ResponseBody
-	public HashMap<String,Object> onloadPage(@RequestBody TopCustomerInfoModel topCustomerMod) {
+	public HashMap<String,Object> init(@RequestBody TopCustomerInfoModel topCustomerMod) {
 		logger.info("TopCustomerInfoController.onloadPage:" + "初期化開始");
 		HashMap<String,Object> resultMap = new HashMap<>();
 		topCustomerMod = topCustomerInfoService.selectTopCustomerInfo(topCustomerMod.getTopCustomerNo());	
@@ -51,73 +51,11 @@ public class TopCustomerInfoController {
 		boolean result = true;
 		TopCustomerInfoModel checkMod = topCustomerInfoService.selectTopCustomerInfo(topCustomerMod.getTopCustomerNo());
 		if (checkMod == null && topCustomerMod.getActionType().equals("insert")) {
-			result = insert(topCustomerMod);
+			topCustomerInfoMapper.insertTopCustomerInfo(topCustomerInfoService.setSendMap(topCustomerMod));
 		} else if (checkMod != null && (topCustomerMod.getActionType().equals("update"))) {
-			result = update(topCustomerMod);
+			topCustomerInfoMapper.updateTopCustomerInfo(topCustomerInfoService.setSendMap(topCustomerMod));
 		}
 		logger.info("TopCustomerInfoController.onloadPage:" + "登録終了");
 		return result;
-	}
-	/**
-	 * インサート
-	 * @param topCustomerMod
-	 * @return
-	 */
-	public boolean insert(TopCustomerInfoModel topCustomerMod) {
-		logger.info("BankInfoController.toroku:" + "インサート開始");
-		boolean result = true;
-		HashMap<String, String> sendMap = new HashMap<>();
-		sendMap.put("topCustomerName", topCustomerMod.getTopCustomerName());
-		sendMap.put("url", topCustomerMod.getUrl());
-		sendMap.put("topCustomerAbbreviation", topCustomerMod.getTopCustomerAbbreviation());
-		sendMap.put("remark", topCustomerMod.getRemark());
-		sendMap.put("updateUser", topCustomerMod.getUpdateUser());
-		sendMap.put("topCustomerNo", topCustomerMod.getTopCustomerNo());	
-		result  = topCustomerInfoService.insertTopCustomerInfo(sendMap);
-		logger.info("BankInfoController.toroku:" + "インサート終了");
-		return result;	
-	}
-	
-	/**
-	 * アップデート
-	 * @param topCustomerMod
-	 * @return
-	 */
-	public boolean update(TopCustomerInfoModel topCustomerMod) {
-		logger.info("BankInfoController.toroku:" + "アップデート開始");
-		boolean result = true;
-		TopCustomerInfoModel checkMod = new TopCustomerInfoModel();
-		checkMod = topCustomerInfoService.selectTopCustomerInfo(topCustomerMod.getTopCustomerNo());
-		HashMap<String, String> sendMap = new HashMap<>();
-		if(!checkMod.getTopCustomerName().equals(topCustomerMod.getTopCustomerName())) {
-			sendMap.put("topCustomerName", topCustomerMod.getTopCustomerName());
-		}
-		if(!checkMod.getUrl().equals(topCustomerMod.getUrl())) {
-			sendMap.put("url", topCustomerMod.getUrl());
-		}
-		if(!checkMod.getRemark().equals(topCustomerMod.getRemark())) {
-			sendMap.put("remark", topCustomerMod.getRemark());
-		}
-		if(!checkMod.getTopCustomerAbbreviation().equals(topCustomerMod.getTopCustomerAbbreviation())) {
-			sendMap.put("topCustomerAbbreviation", topCustomerMod.getTopCustomerAbbreviation());
-		}
-		sendMap.put("updateUser", topCustomerMod.getUpdateUser());
-		sendMap.put("topCustomerNo", topCustomerMod.getTopCustomerNo());	
-		result  = topCustomerInfoService.updateTopCustomerInfo(sendMap);
-		logger.info("BankInfoController.toroku:" + "アップデート終了");
-		return result;	
-	}
-	/**
-	 * nullと空の判断
-	 * @param aString
-	 * @return
-	 */
-	public boolean isNullOrEmpty(String aString) {
-		boolean result = true;
-		if (aString == null || aString.isEmpty()) {
-			return result;
-		} else {
-			return result = false;
-		}
 	}
 }
