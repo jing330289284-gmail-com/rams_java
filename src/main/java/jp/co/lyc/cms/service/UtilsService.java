@@ -100,6 +100,15 @@ public class UtilsService {
 	}
 
 	/**
+	 * 営業状況取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getSalesProgress() {
+		List<ModelClass> list = utilsMapper.getSalesProgress();
+		return list;
+	}
+	/**
 	 * 入社区分を取得
 	 * 
 	 * @return
@@ -108,7 +117,6 @@ public class UtilsService {
 		List<ModelClass> list = utilsMapper.getIntoCompany();
 		return list;
 	}
-
 	/**
 	 * 役割 を取得
 	 * 

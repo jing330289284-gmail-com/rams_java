@@ -439,7 +439,17 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getSalesPerson();
 		return list;
 	}
-
+	/**
+	 *  営業状況取得
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getSalesProgress", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getSalesProgress() {
+		List<ModelClass> list = utilsService.getSalesProgress();
+		return list;
+	}
 	/**
 	 * 場所取る
 	 * 

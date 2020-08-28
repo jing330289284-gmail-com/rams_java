@@ -56,10 +56,15 @@
         	<classifier>jdk15</classifier>
         </dependency>
         <dependency>
-    <groupId>com.alibaba</groupId>
-    <artifactId>fastjson</artifactId>
-    <version>1.2.47</version>
-</dependency>
+		    <groupId>com.amazonaws</groupId>
+		    <artifactId>aws-java-sdk-sns</artifactId>
+		    <version>1.11.229</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.alibaba</groupId>
+		    <artifactId>fastjson</artifactId>
+		    <version>1.2.47</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>CMS</finalName>
