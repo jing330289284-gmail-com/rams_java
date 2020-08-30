@@ -5,14 +5,14 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import jp.co.lyc.cms.mapper.masterInsertMapper;
+import jp.co.lyc.cms.mapper.MasterInsertMapper;
 import jp.co.lyc.cms.model.masterModel;
 
 @Component
 public class MasterInsertService {
 
 	@Autowired
-	masterInsertMapper masterInsertMapper;
+	MasterInsertMapper masterInsertMapper;
 
 	/**
 	 * 有無判断

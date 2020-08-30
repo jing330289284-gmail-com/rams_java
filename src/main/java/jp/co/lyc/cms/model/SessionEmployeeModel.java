@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class sessionEmployeeModel implements Serializable {
+public class SessionEmployeeModel implements Serializable {
 
 	private static final long serialVersionUID = -7670202209084458561L;
 	String sessionEmpid;

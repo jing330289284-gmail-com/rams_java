@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import jp.co.lyc.cms.model.masterModel;
 
 @Mapper
-public interface masterInsertMapper {
+public interface MasterInsertMapper {
 
 	/**
 	 * 有無判断

@@ -8,7 +8,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import jp.co.lyc.cms.model.EmployeeModel;
-import jp.co.lyc.cms.model.sessionEmployeeModel;
+import jp.co.lyc.cms.model.SessionEmployeeModel;
 
 public class BaseController {
 
