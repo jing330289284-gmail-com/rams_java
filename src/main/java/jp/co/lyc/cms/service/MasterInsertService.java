@@ -9,7 +9,7 @@ import jp.co.lyc.cms.mapper.masterInsertMapper;
 import jp.co.lyc.cms.model.masterModel;
 
 @Component
-public class masterInsertService {
+public class MasterInsertService {
 
 	@Autowired
 	masterInsertMapper masterInsertMapper;

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import jp.co.lyc.cms.model.masterModel;
-import jp.co.lyc.cms.service.masterInsertService;
+import jp.co.lyc.cms.service.MasterInsertService;
 
 @Controller
 @CrossOrigin(origins = "http://127.0.0.1:3000")
@@ -19,7 +19,7 @@ import jp.co.lyc.cms.service.masterInsertService;
 public class MasterInsertController {
 
 	@Autowired
-	masterInsertService masterInsertService;
+	MasterInsertService masterInsertService;
 
 	/**
 	 * 登録ボタン
