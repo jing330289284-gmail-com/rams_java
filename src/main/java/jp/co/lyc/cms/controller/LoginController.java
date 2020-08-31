@@ -51,8 +51,8 @@ public class LoginController extends BaseController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@ResponseBody
 	public HashMap<String, EmployeeModel> login(@RequestBody LoginModel loginModel, EmployeeModel employeeModel ) {
-		HttpSession loginSession = getSession();
 		logger.info("LoginController.login:" + "ログイン開始");
+		HttpSession loginSession = getSession();
 		Map<String, String> sendMap = new HashMap<String, String>();
 		HashMap<String, EmployeeModel> resultMap = new HashMap<String, EmployeeModel>();
 		sendMap.put("employeeNo", loginModel.employeeNo);
@@ -80,18 +80,25 @@ public class LoginController extends BaseController {
 	@ResponseBody
 	public boolean sendVerificationCode(@RequestBody LoginModel loginModel) {
 		//发送短信
-		String phoneNoInDB = es.getEmployeePhoneNo(loginModel.getEmployeeNo());
-		if(!loginModel.getPhoneNo().equals(phoneNoInDB)) {
+		HttpSession loginSession = getSession();
+		Map<String, String> sendMap = new HashMap<String, String>();
+		HashMap<String, EmployeeModel> resultMap = new HashMap<String, EmployeeModel>();
+		sendMap.put("employeeNo", loginModel.employeeNo);
+		sendMap.put("password", loginModel.password);
+		EmployeeModel employeeModel = es.getEmployeeModel(sendMap);
+		String phoneNoInDB = "";
+		if(employeeModel != null) {
+			phoneNoInDB = es.getEmployeePhoneNo(loginModel.getEmployeeNo());
+		}else {
 			return false;
 		}
-		HttpSession loginSession = getSession();
         AmazonSNSClient snsClient = new AmazonSNSClient();
         String message = "";//短信内容
         double a = Math.random()*10000;
         int verificationCode = (int) a;
         message = "認証番号は：" + Integer.toString(verificationCode);
         System.out.println("验证码是：" + message);
-        String phoneNumber = "+81" + loginModel.getPhoneNo();//目标电话号码
+        String phoneNumber = "+81" + phoneNoInDB;//目标电话号码
         Map<String, MessageAttributeValue> smsAttributes = 
                 new HashMap<String, MessageAttributeValue>();
         sendSMSMessage(snsClient, message, phoneNumber, smsAttributes);
