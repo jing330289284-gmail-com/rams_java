@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jp.co.lyc.cms.mapper.MasterUpdateMapper">
+	<!-- データの存在チェック -->
+	<select id="checkHave" parameterType="map"
+		resultType="java.lang.String">
+		SELECT * FROM ${master} WHERE ${columnName} = #{data}
+	</select>
+	
+	<!-- 明細取得 -->
+	<select id="getMasterInfo" parameterType="map"
+		resultType="jp.co.lyc.cms.model.MasterModel">
+		SELECT ${columnCode} code,${columnName} data FROM ${master}
+	</select>
+	
+	<!-- 修正 -->
+	<insert id="updateMaster" parameterType="map">
+		UPDATE ${master} SET
+		${columnName} = #{data},
+		updateTime = NOW(),
+		updateUser = #{updateUser}
+		WHERE ${columnCode} = #{code}
+	</insert>
+</mapper>

@@ -2,13 +2,15 @@ package jp.co.lyc.cms.model;
 
 import java.io.Serializable;
 
-public class masterModel implements Serializable {
+public class MasterModel implements Serializable {
 
 	private static final long serialVersionUID = -2028159323401651353L;
 
 	String master;// マスターテーブル名
 	String data;// データ
-	String columnName;// 列名
+	String code;// 番号
+	String columnCode;// code名
+	String columnName;// name名
 	String updateUser;// ログインの社員
 
 	public String getUpdateUser() {
@@ -41,6 +43,22 @@ public class masterModel implements Serializable {
 
 	public void setColumnName(String columnName) {
 		this.columnName = columnName;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getColumnCode() {
+		return columnCode;
+	}
+
+	public void setColumnCode(String columnCode) {
+		this.columnCode = columnCode;
 	}
 
 }

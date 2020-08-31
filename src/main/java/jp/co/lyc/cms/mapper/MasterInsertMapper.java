@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import jp.co.lyc.cms.model.masterModel;
+import jp.co.lyc.cms.model.MasterModel;
 
 @Mapper
 public interface MasterInsertMapper {
@@ -14,7 +14,7 @@ public interface MasterInsertMapper {
 	 * @param data
 	 * @return
 	 */
-	public String checkHave(masterModel masterModel);
+	public String checkHave(MasterModel masterModel);
 	/**
 	 * インサート
 	 * @param sendMap
