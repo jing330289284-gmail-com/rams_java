@@ -219,7 +219,7 @@
 		${table} a
 		WHERE
 		${columnName} = (SELECT
-		MAX(${columnName}) FROM ${table}) LIMIT 1
+		MAX(${columnName}) FROM ${table} where ${columnName} like '${typeName}%') LIMIT 1
 		OFFSET 0;
 	</select>
 	
