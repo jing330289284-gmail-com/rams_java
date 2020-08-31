@@ -65,7 +65,30 @@ public class SalesSituationController {
 		return index;
 	}
 
+	/**
+	 * データを取得
+	 * 
+	 * @param emp
+	 * @return List
+	 */
 
+	@RequestMapping(value = "/updateEmployeeSiteInfo", method = RequestMethod.POST)
+	@ResponseBody
+	public int updateEmployeeSiteInfo(@RequestBody SalesSituationModel model) {
+
+
+		logger.info("updateSalesSituation:" + "検索開始");
+		int index = 0;
+		int index1 = 0;
+		try {
+			index = salesSituationService.updateEmployeeSiteInfo(model);
+			index1 = salesSituationService.updateSalesSituation(model);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		logger.info("updateSalesSituation" + "検索結束");
+		return index+index1;
+	}
 
 
 }

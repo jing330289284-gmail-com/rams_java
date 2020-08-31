@@ -22,5 +22,12 @@ public class SalesSituationService {
 		return salesSituationMapper.insertSalesSituation(model);
 	}
 
+	public int updateEmployeeSiteInfo(SalesSituationModel model) {
+		return salesSituationMapper.updateEmployeeSiteInfo(model);
+	}
+
+	public int updateSalesSituation(SalesSituationModel model){
+		return salesSituationMapper.updateSalesSituation(model);
+	}
 
 }

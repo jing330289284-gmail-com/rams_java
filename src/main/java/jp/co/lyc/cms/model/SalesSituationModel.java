@@ -33,13 +33,50 @@ public class SalesSituationModel implements Serializable {
 	String siteRoleCode;
 	String unitPrice;
 	String salesPriorityStatus;
-	String costumer;
+	String customer;
+	String admissionStartDate;
+	String customerNo;
+	String admissionEndDate;
+	String resumeInfo1;// 履歴書情報1
+	String resumeInfo2;// 履歴書情報2
 	
-	public String getCostumer() {
-		return costumer;
+	public String getResumeInfo1() {
+		return resumeInfo1;
 	}
-	public void setCostumer(String costumer) {
-		this.costumer = costumer;
+	public void setResumeInfo1(String resumeInfo1) {
+		this.resumeInfo1 = resumeInfo1;
+	}
+	public String getResumeInfo2() {
+		return resumeInfo2;
+	}
+	public void setResumeInfo2(String resumeInfo2) {
+		this.resumeInfo2 = resumeInfo2;
+	}
+	public String getAdmissionEndDate() {
+		return admissionEndDate;
+	}
+	public void setAdmissionEndDate(String admissionEndDate) {
+		this.admissionEndDate = admissionEndDate;
+	}
+	public String getCustomerNo() {
+		return customerNo;
+	}
+	public void setCustomerNo(String customerNo) {
+		this.customerNo = customerNo;
+	}
+	
+	public String getAdmissionStartDate() {
+		return admissionStartDate;
+	}
+	public void setAdmissionStartDate(String admissionStartDate) {
+		this.admissionStartDate = admissionStartDate;
+	}
+	
+	public String getCustomer() {
+		return customer;
+	}
+	public void setCustomer(String customer) {
+		this.customer = customer;
 	}
 	
 	
