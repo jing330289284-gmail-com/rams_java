@@ -4,16 +4,21 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import jp.co.lyc.cms.common.BaseController;
 import jp.co.lyc.cms.model.EmployeeModel;
+import jp.co.lyc.cms.util.UtilsCheckMethod;
 @Controller
 @RequestMapping(value = "/subMenu")
 public class SubMenuController extends BaseController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
+	@Autowired
+	UtilsCheckMethod utilsCheckMethod;
 	/**
 	 * 画面初期化
 	 * @return
@@ -22,7 +27,7 @@ public class SubMenuController extends BaseController {
 	@ResponseBody
 	public EmployeeModel init() {
 		logger.info("LoginController.login:" + "サブメニュー画面の初期化開始");
-		if(null == getRequest().getSession(false)) {
+		if(utilsCheckMethod.isNullOrEmpty((String)getSession().getAttribute("employeeNo"))) {
 			logger.info("LoginController.login:" + "サブメニュー画面の初期化終了");
 			return null;
 		}else{
