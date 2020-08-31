@@ -2,6 +2,8 @@ package jp.co.lyc.cms.controller;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -82,7 +84,6 @@ public class LoginController extends BaseController {
 		//发送短信
 		HttpSession loginSession = getSession();
 		Map<String, String> sendMap = new HashMap<String, String>();
-		HashMap<String, EmployeeModel> resultMap = new HashMap<String, EmployeeModel>();
 		sendMap.put("employeeNo", loginModel.employeeNo);
 		sendMap.put("password", loginModel.password);
 		EmployeeModel employeeModel = es.getEmployeeModel(sendMap);
@@ -95,14 +96,20 @@ public class LoginController extends BaseController {
         AmazonSNSClient snsClient = new AmazonSNSClient();
         String message = "";//短信内容
         double a = Math.random()*10000;
-        int verificationCode = (int) a;
-        message = "認証番号は：" + Integer.toString(verificationCode);
+        String str="0123456789";
+		StringBuilder sb=new StringBuilder(4);
+		for(int i=0;i<4;i++){
+			char ch=str.charAt(new Random().nextInt(str.length()));
+			sb.append(ch);
+			}
+        String verificationCode = sb.toString();
+        message = "認証番号は：" + verificationCode;
         System.out.println("验证码是：" + message);
         String phoneNumber = "+81" + phoneNoInDB;//目标电话号码
         Map<String, MessageAttributeValue> smsAttributes = 
                 new HashMap<String, MessageAttributeValue>();
         sendSMSMessage(snsClient, message, phoneNumber, smsAttributes);
-        loginSession.setAttribute("verificationCode", Integer.toString(verificationCode));
+        loginSession.setAttribute("verificationCode", verificationCode);
         return true;
 	}
 	/**
