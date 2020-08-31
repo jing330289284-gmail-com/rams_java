@@ -691,8 +691,10 @@ public class UtilsController {
 		if (!file.isDirectory()) {
 			file.mkdirs();
 		}
+		String fileName= uploadFile.getOriginalFilename();
+		String suffix = fileName.substring(fileName.lastIndexOf(".") + 1);
 		String newName = sendMap.get("employeeFristName").toString() + sendMap.get("employeeLastName").toString() + "_"
-				+ Info;
+				+ Info+"."+suffix;
 		try {
 			File newFile = new File(file.getAbsolutePath() + File.separator + newName);
 			uploadFile.transferTo(newFile);
