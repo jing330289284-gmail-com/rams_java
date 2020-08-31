@@ -42,7 +42,8 @@ public class CustomerInfoService {
 	 * @return
 	 */
 	public ArrayList<TopCustomerInfoModel> selectTopCustomer(String topCustpmerName) {
-		ArrayList<TopCustomerInfoModel> resultList = customerInfoMapper.selectTopCustomer(topCustpmerName);
+		ArrayList<TopCustomerInfoModel> resultList = 
+				customerInfoMapper.selectTopCustomer(topCustpmerName);
 		return resultList;
 	}
 	/**
@@ -51,7 +52,8 @@ public class CustomerInfoService {
 	 * @return
 	 */
 	public ArrayList<CustomerDepartmentInfoModel> selectDepartmentMaster(String customerDepartmentName) {
-		ArrayList<CustomerDepartmentInfoModel> resultList = customerInfoMapper.selectDepartmentMaster(customerDepartmentName);
+		ArrayList<CustomerDepartmentInfoModel> resultList = 
+				customerInfoMapper.selectDepartmentMaster(customerDepartmentName);
 		return resultList;
 	}
 	/**
@@ -77,7 +79,8 @@ public class CustomerInfoService {
 	 * @return
 	 */
 	public ArrayList<CustomerDepartmentInfoModel> selectCustomerDepartmentInfo(HashMap<String, String> sendMapd) {
-		ArrayList<CustomerDepartmentInfoModel> resultList = customerInfoMapper.selectCustomerDepartmentInfo(sendMapd);
+		ArrayList<CustomerDepartmentInfoModel> resultList = 
+				customerInfoMapper.selectCustomerDepartmentInfo(sendMapd);
 		return resultList;
 	}
 	/**
@@ -105,7 +108,6 @@ public class CustomerInfoService {
 	@Transactional(rollbackFor = Exception.class)
 	public String CustomerInfoToDB(CustomerInfoModel customerInfoMod) {
 		logger.info("CustomerInfoController.onloadPage:" + "登録開始");
-		boolean result = true;
 		CustomerInfoModel checkMod = selectCustomerInfo(customerInfoMod.getCustomerNo());
 		for(CustomerDepartmentInfoModel customerDepartmentInfoModel:
 			customerInfoMod.getCustomerDepartmentList()) {
