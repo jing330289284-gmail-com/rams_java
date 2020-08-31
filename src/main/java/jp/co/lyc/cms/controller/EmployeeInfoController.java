@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,17 +23,17 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 
+import jp.co.lyc.cms.common.BaseController;
 import jp.co.lyc.cms.model.AccountInfoModel;
 import jp.co.lyc.cms.model.CostInfoModel;
 import jp.co.lyc.cms.model.EmployeeModel;
-import jp.co.lyc.cms.model.SiteModel;
 import jp.co.lyc.cms.service.EmployeeInfoService;
 import jp.co.lyc.cms.util.UtilsController;
 
 @Controller
 @CrossOrigin(origins = "http://127.0.0.1:3000")
 @RequestMapping(value = "/employee")
-public class EmployeeInfoController {
+public class EmployeeInfoController extends BaseController {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -88,6 +90,7 @@ public class EmployeeInfoController {
 			sendMap = utilsController.upload(resumeInfo2, sendMap, "resumeInfo2", "履歴書2");
 			sendMap = utilsController.upload(residentCardInfo, sendMap, "residentCardInfo", "在留カード");
 			sendMap = utilsController.upload(passportInfo, sendMap, "passportInfo", "パスポート");
+			// sendMap = utilsController.upload(picInfo, sendMap, "picInfo", "写真");
 			employeeInfoService.insertEmployee((HashMap<String, Object>) sendMap);
 		} catch (Exception e) {
 			return result = false;
@@ -140,10 +143,22 @@ public class EmployeeInfoController {
 
 	@RequestMapping(value = "/updateEmployee", method = RequestMethod.POST)
 	@ResponseBody
-	public boolean updateEmployee(@RequestBody EmployeeModel emp) throws Exception {
+	public boolean updateEmployee(@RequestParam(value = "emp", required = false) String JSONEmp,
+			@RequestParam(value = "resumeInfo1", required = false) MultipartFile resumeInfo1,
+			@RequestParam(value = "resumeInfo2", required = false) MultipartFile resumeInfo2,
+			@RequestParam(value = "residentCardInfo", required = false) MultipartFile residentCardInfo,
+			@RequestParam(value = "passportInfo", required = false) MultipartFile passportInfo) throws Exception {
 		logger.info("GetEmployeeInfoController.updateEmployee:" + "修正開始");
+
+		JSONObject jsonObject = JSON.parseObject(JSONEmp);
+		EmployeeModel emp = JSON.parseObject(jsonObject.toJSONString(), new TypeReference<EmployeeModel>() {
+		});
 		Map<String, Object> sendMap = getParam(emp);
 		boolean result = true;
+		sendMap = utilsController.upload(resumeInfo1, sendMap, "resumeInfo1", "履歴書1");
+		sendMap = utilsController.upload(resumeInfo2, sendMap, "resumeInfo2", "履歴書2");
+		sendMap = utilsController.upload(residentCardInfo, sendMap, "residentCardInfo", "在留カード");
+		sendMap = utilsController.upload(passportInfo, sendMap, "passportInfo", "パスポート");
 		result = employeeInfoService.updateEmployee(sendMap);
 		logger.info("GetEmployeeInfoController.updateEmployee:" + "修正結束");
 		return result;
@@ -156,6 +171,7 @@ public class EmployeeInfoController {
 	 * @return
 	 */
 	public Map<String, Object> getParam(EmployeeModel emp) {
+		HttpSession loginSession = getSession();
 		Map<String, Object> sendMap = new HashMap<String, Object>();
 		String employeeNo = emp.getEmployeeNo();// 社員番号
 		String employeeFristName = emp.getEmployeeFristName();// 社員氏
@@ -197,10 +213,7 @@ public class EmployeeInfoController {
 		String stayPeriod = emp.getStayPeriod();// 在留期間
 		String employmentInsuranceNo = emp.getEmploymentInsuranceNo();// 雇用保険番号
 		String myNumber = emp.getMyNumber();// マイナンバー
-		String residentCardInfo = emp.getResidentCardInfo();// 在留カードインフォ
-		// String resumeInfo1 = emp.getResumeInfo1();// 履歴書
 		String resumeRemark1 = emp.getResumeRemark1();// 備考１
-		String resumeInfo2 = emp.getResumeInfo2();// 履歴書２
 		String resumeRemark2 = emp.getResumeRemark2();// 備考２
 		String passportNo = emp.getPassportNo();// パスポート
 		String ageFrom = emp.getAgeFrom();// 開始年齢
@@ -212,17 +225,13 @@ public class EmployeeInfoController {
 		String intoCompanyYearAndMonthFrom = emp.getIntoCompanyYearAndMonthFrom();// 入社年月元
 		String intoCompanyYearAndMonthTo = emp.getIntoCompanyYearAndMonthTo();// 入社年月先
 		String authorityCode = emp.getAuthorityCode();// 権限
-		String updateUser = emp.getUpdateUser();// 更新ユーザー
 		String employeeStatus = emp.getEmployeeStatus();// 社員ステータス
-		String picInfo = emp.getPicInfo();// 写真
-		String siteRoleCode = emp.getSiteRoleCode();// 役割コード
+		// String picInfo = emp.getPicInfo();// 写真
 		String yearsOfExperience = emp.getYearsOfExperience();// 経験年数
 
 		AccountInfoModel accountInfoModel = emp.getAccountInfo();// 口座情報
 
 		CostInfoModel costModel = emp.getCostModel();// 諸費用
-
-		SiteModel siteModel = emp.getSiteModel();// 現場情報
 
 		String password = emp.getPassword();// パスワード
 
@@ -296,16 +305,6 @@ public class EmployeeInfoController {
 		}
 		if (myNumber != null && myNumber.length() != 0) {
 			sendMap.put("myNumber", myNumber);
-		}
-		if (residentCardInfo != null && residentCardInfo.length() != 0) {
-			sendMap.put("residentCardInfo", residentCardInfo);
-		}
-		/*
-		 * if (resumeInfo1 != null && resumeInfo1.length() != 0) {
-		 * sendMap.put("resumeInfo1", resumeInfo1); }
-		 */
-		if (resumeInfo2 != null && resumeInfo2.length() != 0) {
-			sendMap.put("resumeInfo2", resumeInfo2);
 		}
 		if (resumeRemark2 != null && resumeRemark2.length() != 0) {
 			sendMap.put("resumeRemark2", resumeRemark2);
@@ -394,27 +393,18 @@ public class EmployeeInfoController {
 		if (authorityCode != null && authorityCode.length() != 0) {
 			sendMap.put("authorityCode", authorityCode);
 		}
-		if (updateUser != null && updateUser.length() != 0) {
-			sendMap.put("updateUser", updateUser);
-		}
+		sendMap.put("updateUser", loginSession.getAttribute("employeeName"));
 		if (employeeStatus != null && employeeStatus.length() != 0) {
 			sendMap.put("employeeStatus", employeeStatus);
-		}
-		if (picInfo != null && picInfo.length() != 0) {
-			sendMap.put("picInfo", picInfo);
 		}
 		if (yearsOfExperience != null && yearsOfExperience.length() != 0) {
 			sendMap.put("yearsOfExperience", yearsOfExperience);
 		}
 		sendMap.put("bankInfoModel", accountInfoModel);
 		sendMap.put("costModel", costModel);
-		sendMap.put("siteModel", siteModel);
 
 		if (password != null && password.length() != 0) {
 			sendMap.put("password", password);
-		}
-		if (siteRoleCode != null && siteRoleCode.length() != 0) {
-			sendMap.put("siteRoleCode", siteRoleCode);
 		}
 		return sendMap;
 	}

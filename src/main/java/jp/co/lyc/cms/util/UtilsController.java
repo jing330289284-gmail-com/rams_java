@@ -7,15 +7,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -24,8 +21,6 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.ClassUtils;
-import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -701,8 +696,7 @@ public class UtilsController {
 		try {
 			File newFile = new File(file.getAbsolutePath() + File.separator + newName);
 			uploadFile.transferTo(newFile);
-			// String absolutePath = newFile.getAbsolutePath();
-			sendMap.put(key, realPath);
+			sendMap.put(key, realPath+ "/"+newName);
 			return sendMap;
 		} catch (Exception e) {
 			e.printStackTrace();
