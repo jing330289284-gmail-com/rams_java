@@ -685,7 +685,7 @@ public class UtilsController {
 		if (uploadFile == null) {
 			return sendMap;
 		}
-		String realPath = new String("src/main/resources/" + UPLOAD_PATH_PREFIX + "/" + sendMap.get("employeeNo") + "_"
+		String realPath = new String("src/main/resources" + UPLOAD_PATH_PREFIX + sendMap.get("employeeNo") + "_"
 				+ sendMap.get("employeeFristName") + sendMap.get("employeeLastName"));
 		File file = new File(realPath);
 		if (!file.isDirectory()) {
@@ -711,7 +711,7 @@ public class UtilsController {
 	@ResponseBody
 	public void downloadTemplateFile(@RequestBody ModelClass model, HttpServletResponse response) throws IOException {
 		// TODO
-		String filePath = "resumefile/" + model.getName();
+		String filePath = model.getName();
 		Resource resource = new ClassPathResource(filePath);// 用来读取resources下的文件
 		InputStream is = null;
 		BufferedInputStream bis = null;
