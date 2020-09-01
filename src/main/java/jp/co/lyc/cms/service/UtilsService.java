@@ -217,15 +217,6 @@ public class UtilsService {
 	}
 
 	/**
-	 * 上位お客様連想
-	 * 
-	 * @return
-	 */
-	public List<ModelClass> getTopCustomerDrop() {
-		return utilsMapper.getTopCustomerDrop();
-	}
-
-	/**
 	 * 部門名前連想
 	 * 
 	 * @return

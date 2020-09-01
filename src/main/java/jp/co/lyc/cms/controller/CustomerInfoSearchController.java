@@ -178,8 +178,8 @@ public class CustomerInfoSearchController {
 		if(!isNullOrEmpty(customerInfoMod.getCompanyNatureCode())) {
 			sendMap.put("companyNatureCode", customerInfoMod.getCompanyNatureCode());
 		}
-		if(!isNullOrEmpty(customerInfoMod.getTopCustomerName())) {
-			sendMap.put("topCustomerName", customerInfoMod.getTopCustomerName());
+		if(!isNullOrEmpty(customerInfoMod.getTopCustomerNo())) {
+			sendMap.put("topCustomerNo", customerInfoMod.getTopCustomerNo());
 		}
 		logger.info("CustomerInfoController.onloadPage:" + "検索終了");
 		return customerInfoSearchService.SelectCustomerInfo(sendMap);

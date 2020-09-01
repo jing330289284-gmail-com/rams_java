@@ -138,18 +138,6 @@ public class UtilsController {
 	}
 
 	/**
-	 * 上位お客様連想
-	 * 
-	 * @return
-	 */
-	@RequestMapping(value = "/getTopCustomerDrop", method = RequestMethod.POST)
-	@ResponseBody
-	public List<ModelClass> getTopCustomerDrop() {
-		List<ModelClass> list = utilsService.getTopCustomerDrop();
-		return list;
-	}
-
-	/**
 	 * 部門名前連想
 	 * 
 	 * @return

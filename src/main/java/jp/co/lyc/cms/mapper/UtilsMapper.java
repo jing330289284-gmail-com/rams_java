@@ -150,13 +150,6 @@ public interface UtilsMapper {
 	public List<ModelClass> getPosition();
 
 	/**
-	 * 上位お客様連想
-	 * 
-	 * @return
-	 */
-	public List<ModelClass> getTopCustomerDrop();
-
-	/**
 	 * 部門名前連想
 	 * 
 	 * @return
