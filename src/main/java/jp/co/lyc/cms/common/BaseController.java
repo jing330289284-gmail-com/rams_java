@@ -26,16 +26,4 @@ public class BaseController {
 				.getRequest();
 		return request;
 	}
-//	
-//	public void setloginSession(EmployeeModel employeeModel) {
-//		getSession().setAttribute("loginEmp", this.empToSession(employeeModel));
-//	}
-//	
-//	private sessionEmployeeModel empToSession(EmployeeModel employeeModel) {
-//		// 
-//		sessionEmployeeModel sessionEmpModel = new sessionEmployeeModel();
-//		sessionEmpModel.setSessionPassword(employeeModel.getPassword());
-//		sessionEmpModel.setSessionAuthority(null);
-//		return sessionEmpModel;
-//	}
 }

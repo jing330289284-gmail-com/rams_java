@@ -108,7 +108,7 @@ public class LoginController extends BaseController {
         String phoneNumber = "+81" + phoneNoInDB;//目标电话号码
         Map<String, MessageAttributeValue> smsAttributes = 
                 new HashMap<String, MessageAttributeValue>();
-        sendSMSMessage(snsClient, message, phoneNumber, smsAttributes);
+//        sendSMSMessage(snsClient, message, phoneNumber, smsAttributes);
         loginSession.setAttribute("verificationCode", verificationCode);
         return true;
 	}
