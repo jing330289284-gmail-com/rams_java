@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import jp.co.lyc.cms.mapper.MasterInsertMapper;
-import jp.co.lyc.cms.model.masterModel;
+import jp.co.lyc.cms.model.MasterModel;
 
 @Component
 public class MasterInsertService {
@@ -21,7 +21,7 @@ public class MasterInsertService {
 	 * @return
 	 */
 
-	public boolean checkHave(masterModel masterModel) {
+	public boolean checkHave(MasterModel masterModel) {
 		if (masterInsertMapper.checkHave(masterModel) == null) {
 			return true;
 		}
