@@ -108,6 +108,7 @@ public class UtilsService {
 		List<ModelClass> list = utilsMapper.getSalesProgress();
 		return list;
 	}
+
 	/**
 	 * 入社区分を取得
 	 * 
@@ -117,6 +118,7 @@ public class UtilsService {
 		List<ModelClass> list = utilsMapper.getIntoCompany();
 		return list;
 	}
+
 	/**
 	 * 役割 を取得
 	 * 
@@ -314,7 +316,7 @@ public class UtilsService {
 			return "";
 		}
 	}
-	
+
 	/**
 	 * 営業担当
 	 * 
@@ -323,7 +325,7 @@ public class UtilsService {
 	public List<ModelClass> getSalesPerson() {
 		return utilsMapper.getSalesPerson();
 	}
-	
+
 	/**
 	 * 場所
 	 * 
@@ -331,5 +333,14 @@ public class UtilsService {
 	 */
 	public List<ModelClass> getStation() {
 		return utilsMapper.getStation();
+	}
+
+	/**
+	 * 業種
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getTypeOfIndustry() {
+		return utilsMapper.getTypeOfIndustry();
 	}
 }

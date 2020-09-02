@@ -434,8 +434,9 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getSalesPerson();
 		return list;
 	}
+
 	/**
-	 *  営業状況取得
+	 * 営業状況取得
 	 * 
 	 * @return
 	 */
@@ -445,6 +446,7 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getSalesProgress();
 		return list;
 	}
+
 	/**
 	 * 場所取る
 	 * 
@@ -455,6 +457,19 @@ public class UtilsController {
 	@ResponseBody
 	public List<ModelClass> getstation() {
 		List<ModelClass> list = utilsService.getStation();
+		return list;
+	}
+
+	/**
+	 * 業種を取る
+	 * 
+	 * @return
+	 */
+
+	@RequestMapping(value = "/getTypeOfIndustry", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getTypeOfIndustry() {
+		List<ModelClass> list = utilsService.getTypeOfIndustry();
 		return list;
 	}
 
@@ -691,14 +706,14 @@ public class UtilsController {
 		if (!file.isDirectory()) {
 			file.mkdirs();
 		}
-		String fileName= uploadFile.getOriginalFilename();
+		String fileName = uploadFile.getOriginalFilename();
 		String suffix = fileName.substring(fileName.lastIndexOf(".") + 1);
 		String newName = sendMap.get("employeeFristName").toString() + sendMap.get("employeeLastName").toString() + "_"
-				+ Info+"."+suffix;
+				+ Info + "." + suffix;
 		try {
 			File newFile = new File(file.getAbsolutePath() + File.separator + newName);
 			uploadFile.transferTo(newFile);
-			sendMap.put(key, realPath+ "/"+newName);
+			sendMap.put(key, realPath + "/" + newName);
 			return sendMap;
 		} catch (Exception e) {
 			e.printStackTrace();

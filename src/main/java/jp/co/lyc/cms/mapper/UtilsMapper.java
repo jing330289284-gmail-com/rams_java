@@ -213,6 +213,13 @@ public interface UtilsMapper {
 	public List<ModelClass> getStation();
 	
 	/**
+	 * 業種
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getTypeOfIndustry();
+	
+	/**
 	 * 営業状況取得
 	 * 
 	 * @return
