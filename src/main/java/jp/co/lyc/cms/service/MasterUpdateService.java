@@ -21,7 +21,7 @@ public class MasterUpdateService {
 	 * @param sendMap
 	 */
 
-	public boolean updateMaster(HashMap<String, String> sendMap) {
+	public boolean updateMaster(HashMap<String, Object> sendMap) {
 		try {
 			masterUpdateMapper.updateMaster(sendMap);
 		} catch (Exception e) {
@@ -32,6 +32,22 @@ public class MasterUpdateService {
 		return true;
 	}
 
+	/**
+	 * 削除
+	 * 
+	 * @param sendMap
+	 */
+
+	public boolean deleteMaster(HashMap<String, Object> sendMap) {
+		try {
+			masterUpdateMapper.deleteMaster(sendMap);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
 	/**
 	 * 明細取得
 	 * 
