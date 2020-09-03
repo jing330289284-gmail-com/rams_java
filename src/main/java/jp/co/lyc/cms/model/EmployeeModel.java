@@ -77,7 +77,7 @@ public class EmployeeModel implements Serializable {
 	String yearsOfExperience; //  経験年数
 	
 	CostInfoModel costModel;//諸費用
-	
+	PbInfoModel pbModel;//PB情報
 	SiteModel siteModel;//現場情報
 
 	String postcode;//郵便番号
@@ -741,6 +741,14 @@ public class EmployeeModel implements Serializable {
 
 	public void setStationName(String stationName) {
 		this.stationName = stationName;
+	}
+
+	public PbInfoModel getPbModel() {
+		return pbModel;
+	}
+
+	public void setPbModel(PbInfoModel pbModel) {
+		this.pbModel = pbModel;
 	}
 
 }
