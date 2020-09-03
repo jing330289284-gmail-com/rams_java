@@ -1,13 +1,12 @@
 package jp.co.lyc.cms.model;
 
-import java.io.Serializable;
+import jp.co.lyc.cms.common.BaseController;
 
-public class BpInfoModel implements Serializable {
+public class BpInfoModel  extends BaseController {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -2028159323401651353L;
 	public String bpEmployeeNo;//社員番号
 	public String actionType;//処理区分
 	public String bpBelongCustomerCode;//BP所属
@@ -61,7 +60,7 @@ public class BpInfoModel implements Serializable {
 		this.bpOtherCompanyAdmissionEndDate = bpOtherCompanyAdmissionEndDate;
 	}
 	public String getUpdateUser() {
-		return updateUser;
+		return getSession().getAttribute("employeeName").toString();
 	}
 	public void setUpdateUser(String updateUser) {
 		this.updateUser = updateUser;
