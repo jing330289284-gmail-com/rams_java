@@ -2,7 +2,7 @@ package jp.co.lyc.cms.model;
 
 import java.io.Serializable;
 
-public class PbInfoModel implements Serializable {
+public class BpInfoModel implements Serializable {
 
 	/**
 	 * 

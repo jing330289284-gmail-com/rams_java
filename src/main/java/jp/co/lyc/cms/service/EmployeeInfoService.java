@@ -10,13 +10,13 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import jp.co.lyc.cms.mapper.AccountInfoMapper;
+import jp.co.lyc.cms.mapper.BpInfoMapper;
 import jp.co.lyc.cms.mapper.CostInfoMapper;
-import jp.co.lyc.cms.mapper.PbInfoMapper;
 import jp.co.lyc.cms.mapper.EmployeeInfoMapper;
 import jp.co.lyc.cms.mapper.GetSiteInfoMapper;
 import jp.co.lyc.cms.model.AccountInfoModel;
+import jp.co.lyc.cms.model.BpInfoModel;
 import jp.co.lyc.cms.model.CostInfoModel;
-import jp.co.lyc.cms.model.PbInfoModel;
 import jp.co.lyc.cms.model.EmployeeModel;
 import jp.co.lyc.cms.model.SiteModel;
 
@@ -33,7 +33,7 @@ public class EmployeeInfoService {
 	CostInfoMapper costInfoMapper;
 
 	@Autowired
-	PbInfoMapper pbInfoMapper;
+	BpInfoMapper bpInfoMapper;
 	
 	@Autowired
 	GetSiteInfoMapper siteInfoMapper;
@@ -75,9 +75,9 @@ public class EmployeeInfoService {
 			employeeInfoMapper.insertEmployeeInfo(sendMap);
 			employeeInfoMapper.insertEmployeeInfoDetail(sendMap);
 			employeeInfoMapper.insertAddressInfo(sendMap);
-			// PB情報
-			if(sendMap.get("pbInfoModel") != null) {
-				pbInfoMapper.insertPb(getParamPbModel(sendMap));
+		
+			if(sendMap.get("pbInfoModel") != null) {// BP情報
+				bpInfoMapper.insertBp(getParamBpModel(sendMap));
 			}
 			if (sendMap.get("bankInfoModel") != null) {// 口座情報
 				accountInfoMapper.insertAccount(getParamBankInfoModel(sendMap));
@@ -108,7 +108,7 @@ public class EmployeeInfoService {
 			siteInfoMapper.deleteEmployeeSiteInfo(sendMap);
 			employeeInfoMapper.deleteAddressInfo(sendMap);
 			costInfoMapper.deleteCostInfo(sendMap);
-			pbInfoMapper.deletePbInfo(sendMap);
+			bpInfoMapper.deleteBpInfo(sendMap);
 		} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			e.printStackTrace();
@@ -148,8 +148,8 @@ public class EmployeeInfoService {
 			if (sendMap.get("costModel") != null) {// 諸費用
 				costInfoMapper.updateCost(getParamCostModel(sendMap));
 			}
-			if(sendMap.get("pbModel") != null) {
-				pbInfoMapper.updatePb(getParamPbModel(sendMap));
+			if(sendMap.get("pbInfoModel") != null) {
+				bpInfoMapper.updateBp(getParamBpModel(sendMap));
 			}
 		} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -202,9 +202,10 @@ public class EmployeeInfoService {
 		sendMap.put("updateUser", costModel.getUpdateUser());
 		return costModelSendMap;
 	}
-	private Map<String, Object> getParamPbModel(Map<String, Object> sendMap) {
+	
+	private Map<String, Object> getParamBpModel(Map<String, Object> sendMap) {
 		Map<String, Object> pbModelSendMap = new HashMap<String, Object>();
-		PbInfoModel pbModel = (PbInfoModel) sendMap.get("pbModel");
+		BpInfoModel pbModel = (BpInfoModel) sendMap.get("bpInfoModel");
 		sendMap.put("bpEmployeeNo", pbModel.getBpEmployeeNo());
 		sendMap.put("actionType", pbModel.getActionType());
 		sendMap.put("bpBelongCustomerCode", pbModel.getBpBelongCustomerCode());
