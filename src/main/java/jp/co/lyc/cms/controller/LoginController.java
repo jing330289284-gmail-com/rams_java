@@ -16,6 +16,7 @@ import com.amazonaws.services.sns.AmazonSNSClient;
 import com.amazonaws.services.sns.model.MessageAttributeValue;
 import com.amazonaws.services.sns.model.PublishRequest;
 import com.amazonaws.services.sns.model.PublishResult;
+
 import jp.co.lyc.cms.common.BaseController;
 import jp.co.lyc.cms.model.EmployeeModel;
 import jp.co.lyc.cms.model.LoginModel;
