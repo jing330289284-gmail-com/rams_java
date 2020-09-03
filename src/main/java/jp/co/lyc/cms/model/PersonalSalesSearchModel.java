@@ -13,7 +13,7 @@ public class PersonalSalesSearchModel implements Serializable  {
 	String fiscalYear;//年度
 	String startYearAndMonth;//開始年月
 	String endYearAndMonth;//終了年月
-	String reflectYearAndMonth;//年月
+	String admissionStartDate;//年月
 	String employeeFormName;//社員形式
 	String customerName;//所属客様
 	String unitPrice;//単価
@@ -59,12 +59,6 @@ public class PersonalSalesSearchModel implements Serializable  {
 	}
 	public void setEndYearAndMonth(String endYearAndMonth) {
 		this.endYearAndMonth = endYearAndMonth;
-	}
-	public String getReflectYearAndMonth() {
-		return reflectYearAndMonth;
-	}
-	public void setReflectYearAndMonth(String reflectYearAndMonth) {
-		this.reflectYearAndMonth = reflectYearAndMonth;
 	}
 	public String getEmployeeFormName() {
 		return employeeFormName;
@@ -126,8 +120,11 @@ public class PersonalSalesSearchModel implements Serializable  {
 	public void setGrosProfits(String grosProfits) {
 		this.grosProfits = grosProfits;
 	}
-	
-
-	
+	public String getAdmissionStartDate() {
+		return admissionStartDate;
+	}
+	public void setAdmissionStartDate(String admissionStartDate) {
+		this.admissionStartDate = admissionStartDate;
+	}
 
 }

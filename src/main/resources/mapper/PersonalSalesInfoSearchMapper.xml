@@ -3,34 +3,59 @@
 <mapper namespace="jp.co.lyc.cms.mapper.PersonalSalesSearchMapper">
 	<resultMap id="detailsInfo"
 		type="jp.co.lyc.cms.model.PersonalSalesSearchModel" />
+
 		
 	<select id="getEmployeeSalesInfo" parameterType="map"
 		resultMap="detailsInfo">
-		SELECT 
+		SELECT distinct
 		T005.reflectYearAndMonth,
+		T006.admissionStartDate,
 		M005.employeeFormName,
 		T007.customerName,
 		T006.unitPrice,
 		T005.salary,
 		T005.transportationExpenses,
 		T005.SocialInsuranceFlag,
-		<if test="SocialInsuranceFlag == '1'">
 		T005.insuranceFeeAmount,
-		</if>
 		T005.bonusFlag,
-		<if test="bonusFlag =='1'">
 		T005.scheduleOfBonusAmount,
-		</if>
 		T005.leaderAllowanceAmount,
 		T005.otherAllowanceAmount
 		FROM
 		T001Employee As T001
 		Left JOIN 
 		T005ExpensesInfo As T005 ON T001.employeeNo = T005.employeeNo
+		<if test = "fiscalYear != 0  &amp;&amp;fiscalYear != null &amp;&amp; startYearAndMonth != null &amp;&amp; endYearAndMonth != null">
+		 AND left(reflectYearAndMonth,4) =#{fiscalYear}
+		</if>
+		<if test = "fiscalYear == 0 || fiscalYear == null &amp;&amp; startYearAndMonth != null &amp;&amp; endYearAndMonth != null">
+		 AND reflectYearAndMonth between #{startYearAndMonth} and #{endYearAndMonth}
+		</if>
+		<if test = "fiscalYear != 0  &amp;&amp;fiscalYear != null &amp;&amp; startYearAndMonth == null &amp;&amp; endYearAndMonth == null">
+		 AND left(reflectYearAndMonth,4) =#{fiscalYear}
+		 </if>
 		LEFT JOIN 
 		M005EmployeeForm As M005 ON T005.employeeFormCode = M005.employeeFormCode
+				<if test = "fiscalYear != 0  &amp;&amp;fiscalYear != null &amp;&amp; startYearAndMonth != null &amp;&amp; endYearAndMonth != null">
+		AND	left(admissionStartDate,4) =#{fiscalYear}
+		</if>
+		<if test = "fiscalYear == 0 || fiscalYear == null &amp;&amp; startYearAndMonth != null &amp;&amp; endYearAndMonth != null">
+		AND	left(admissionStartDate,6) between #{startYearAndMonth} and #{endYearAndMonth}
+		</if>
+		<if test = "fiscalYear != 0  &amp;&amp;fiscalYear != null &amp;&amp; startYearAndMonth == null &amp;&amp; endYearAndMonth == null">
+		AND	left(admissionStartDate,4) =#{fiscalYear}
+		</if>
 		LEFT JOIN 
-		T006EmployeeSiteInfo As T006 ON T005.employeeNo = T006.employeeNo
+		T006EmployeeSiteInfo As T006 ON T005.employeeNo = T006.employeeNo	
+		<if test = "fiscalYear != 0  &amp;&amp;fiscalYear != null &amp;&amp; startYearAndMonth != null &amp;&amp; endYearAndMonth != null">
+		AND	left(admissionStartDate,4) =#{fiscalYear}
+		</if>
+		<if test = "fiscalYear == 0 || fiscalYear == null &amp;&amp; startYearAndMonth != null &amp;&amp; endYearAndMonth != null">
+		AND	left(admissionStartDate,6) between #{startYearAndMonth} and #{endYearAndMonth}
+		</if>
+		<if test = "fiscalYear != 0  &amp;&amp;fiscalYear != null &amp;&amp; startYearAndMonth == null &amp;&amp; endYearAndMonth == null">
+		AND	left(admissionStartDate,4) =#{fiscalYear}
+		</if>
 		LEFT JOIN 
 		T007CustomerInfo As T007 ON T006.customerNo  =T007.customerNo
 		WHERE
@@ -40,19 +65,14 @@
 		<if test = "employeeNo != null">
 		AND T005.employeeNo=#{employeeNo}
 		</if>
-		<if test = "fiscalYear != null &amp;&amp; startYearAndMonth != null &amp;&amp; endYearAndMonth != null">
+		<if test = "fiscalYear != 0  &amp;&amp;fiscalYear != null &amp;&amp; startYearAndMonth != null &amp;&amp; endYearAndMonth != null">
 		AND left(reflectYearAndMonth,4) =#{fiscalYear}
 		</if>
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	</select>
+		<if test = "fiscalYear == 0 || fiscalYear == null &amp;&amp; startYearAndMonth != null &amp;&amp; endYearAndMonth != null">
+		AND reflectYearAndMonth between #{startYearAndMonth} and #{endYearAndMonth}
+		</if>
+		<if test = "fiscalYear != 0  &amp;&amp;fiscalYear != null &amp;&amp; startYearAndMonth == null &amp;&amp; endYearAndMonth == null">
+		AND left(reflectYearAndMonth,4) =#{fiscalYear}
+		</if>
+		</select>
 </mapper>
