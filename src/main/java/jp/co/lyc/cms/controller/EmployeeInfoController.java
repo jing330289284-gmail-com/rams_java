@@ -27,6 +27,7 @@ import jp.co.lyc.cms.common.BaseController;
 import jp.co.lyc.cms.model.AccountInfoModel;
 import jp.co.lyc.cms.model.CostInfoModel;
 import jp.co.lyc.cms.model.EmployeeModel;
+import jp.co.lyc.cms.model.BpInfoModel;
 import jp.co.lyc.cms.service.EmployeeInfoService;
 import jp.co.lyc.cms.util.UtilsController;
 
@@ -232,7 +233,7 @@ public class EmployeeInfoController extends BaseController {
 		AccountInfoModel accountInfoModel = emp.getAccountInfo();// 口座情報
 
 		CostInfoModel costModel = emp.getCostModel();// 諸費用
-
+		BpInfoModel bpInfoModel = emp.getBpInfoModel();// bp情報
 		String password = emp.getPassword();// パスワード
 
 		if (employeeNo != null && employeeNo.length() != 0) {
@@ -402,7 +403,7 @@ public class EmployeeInfoController extends BaseController {
 		}
 		sendMap.put("bankInfoModel", accountInfoModel);
 		sendMap.put("costModel", costModel);
-
+		sendMap.put("bpInfoModel", bpInfoModel);
 		if (password != null && password.length() != 0) {
 			sendMap.put("password", password);
 		}
