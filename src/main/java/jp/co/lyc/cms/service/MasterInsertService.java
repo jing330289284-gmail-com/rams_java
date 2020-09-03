@@ -34,7 +34,7 @@ public class MasterInsertService {
 	 * @param sendMap
 	 */
 
-	public boolean insertMaster(HashMap<String, String> sendMap) {
+	public boolean insertMaster(HashMap<String, Object> sendMap) {
 		try {
 			masterInsertMapper.insertMaster(sendMap);
 		} catch (Exception e) {

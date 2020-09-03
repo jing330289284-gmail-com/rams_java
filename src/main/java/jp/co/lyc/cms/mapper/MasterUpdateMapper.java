@@ -12,7 +12,14 @@ public interface MasterUpdateMapper {
 	 * 
 	 * @param sendMap
 	 */
-	public void updateMaster(HashMap<String, String> sendMap);
+	public void updateMaster(HashMap<String, Object> sendMap);
+	
+	/**
+	 * 削除
+	 * 
+	 * @param sendMap
+	 */
+	public void deleteMaster(HashMap<String, Object> sendMap);
 
 	/**
 	 * 検索

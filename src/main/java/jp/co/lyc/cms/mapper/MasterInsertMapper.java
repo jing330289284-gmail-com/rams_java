@@ -19,5 +19,5 @@ public interface MasterInsertMapper {
 	 * インサート
 	 * @param sendMap
 	 */
-	public void insertMaster(HashMap<String, String> sendMap);
+	public void insertMaster(HashMap<String, Object> sendMap);
 }

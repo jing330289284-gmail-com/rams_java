@@ -7,20 +7,20 @@
 		SELECT employeeFormCode code,employeeFormName name FROM
 		M005EmployeeForm;
 	</select>
-	
+
 	<!-- 在留資格 -->
 	<select id="getVisa" resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT visaCode code,visaName
 		name FROM M006Visa;
 	</select>
-	
+
 	<!--国籍 -->
 	<select id="getNationalitys"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT nationalityCode code,nationalityName name FROM
 		M003Nationality;
 	</select>
-	
+
 	<!--お客様 -->
 	<select id="getCustomer"
 		resultType="jp.co.lyc.cms.model.ModelClass">
@@ -37,7 +37,14 @@
 		SELECT stationCode code,stationName name FROM
 		rams.M013Station;
 	</select>
-	
+
+	<!--業種 -->
+	<select id="getTypeOfIndustry"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT typeOfIndustryCode code,typeOfIndustryName name FROM
+		rams.M022TypeOfIndustry;
+	</select>
+
 	<!--トップお客様 -->
 	<select id="getTopCustomer"
 		resultType="jp.co.lyc.cms.model.ModelClass">
@@ -70,42 +77,42 @@
 		SELECT intoCompanyCode code,intoCompanyName name FROM
 		M004IntoCompany;
 	</select>
-	
+
 	<!-- 役割 -->
 	<select id="getSiteMaster"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT siteRoleCode code,siteRoleName name FROM
 		M012SiteRole;
 	</select>
-	
+
 	<!-- 職種 -->
 	<select id="getOccupation"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT occupationCode code,occupationName name FROM
 		M014Occupation;
 	</select>
-	
+
 	<!-- 部署 -->
 	<select id="getDepartment"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT DepartmentCode code,DepartmentName name FROM
 		M017Department;
 	</select>
-	
+
 	<!-- 権限 -->
 	<select id="getAuthority"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT authorityCode code,authorityName name FROM
 		M009Authority;
 	</select>
-	
+
 	<!-- 英語 -->
 	<select id="getEnglishLevel"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT englishLevelCode code,englishLevelName name FROM
 		M015EnglishLevel;
 	</select>
-	
+
 	<!-- 資格 -->
 	<select id="getQualification"
 		resultType="jp.co.lyc.cms.model.ModelClass">
@@ -132,7 +139,7 @@
 		FROM
 		M007CompanyNature
 	</select>
-	
+
 	<!-- 職位選択肢 -->
 	<select id="getPosition"
 		resultType="jp.co.lyc.cms.model.ModelClass">
@@ -157,11 +164,12 @@
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT
 		customerDepartmentCode code,
-		customerDepartmentName name
+		customerDepartmentName
+		name
 		FROM
 		M018CustomerDepartment
 	</select>
-	
+
 	<!-- 銀行名検索 -->
 	<select id="getBankInfo"
 		resultType="jp.co.lyc.cms.model.ModelClass">
@@ -171,7 +179,7 @@
 		FROM
 		M001Bank
 	</select>
-	
+
 	<!-- 支店情報検索 -->
 	<select id="getBankBranchInfo"
 		resultType="jp.co.lyc.cms.model.ModelClass" parameterType="map">
@@ -219,10 +227,11 @@
 		${table} a
 		WHERE
 		${columnName} = (SELECT
-		MAX(${columnName}) FROM ${table} where ${columnName} like '${typeName}%') LIMIT 1
+		MAX(${columnName}) FROM ${table} where
+		${columnName} like '${typeName}%') LIMIT 1
 		OFFSET 0;
 	</select>
-	
+
 	<!-- 支払サイト選択肢 -->
 	<select id="getPaymentsite"
 		resultType="jp.co.lyc.cms.model.ModelClass">
@@ -232,7 +241,7 @@
 		FROM
 		M020PaymentSite
 	</select>
-	
+
 	<!-- パスワードの取得 -->
 	<select id="getPassword" resultType="String">
 		SELECT
@@ -242,7 +251,7 @@
 		WHERE
 		employeeNo = #{employeeNo}
 	</select>
-	
+
 	<!-- パスワードリセット -->
 	<update id="resetPassword" parameterType="String">
 		UPDATE T001Employee
@@ -256,15 +265,15 @@
 	<!--営業担当 -->
 	<select id="getSalesPerson"
 		resultType="jp.co.lyc.cms.model.ModelClass">
-	SELECT 
-	    employeeNo code,
-	    CONCAT(employeeFristName, employeeLastName) name
-	FROM
-	    T001Employee
-	WHERE
-    	authorityCode = 1;
+		SELECT
+		employeeNo code,
+		CONCAT(employeeFristName, employeeLastName) name
+		FROM
+		T001Employee
+		WHERE
+		authorityCode = 1;
 	</select>
-		<!-- 営業状況取得 -->
+	<!-- 営業状況取得 -->
 	<select id="getSalesProgress"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT
