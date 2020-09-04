@@ -43,7 +43,7 @@ public class EmployeeModel implements Serializable {
 	String developLanguage3;// 技術语言3
 	String developLanguage4;// 技術语言4
 	String developLanguage5;// 技術语言5
-	String certification1;// 資格1
+	String certification1;//　　資格1
 	String certification2;// 資格2
 	String resumeInfo1;// 履歴書情報1
 	String resumeRemark1;// 履歴書備考1
