@@ -26,7 +26,10 @@
 		T003.stationCode1,
 		TIMESTAMPDIFF(MONTH,
 		NOW(),
-		T002.stayPeriod) AS stayPeriod
+		T002.stayPeriod) AS stayPeriod,
+		T002.resumeInfo1,
+		T002.resumeInfo2,
+		T002.residentCardInfo
 		<include refid="tableJoin" />
 		WHERE
 		1 = 1
