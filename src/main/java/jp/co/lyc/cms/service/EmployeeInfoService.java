@@ -76,7 +76,7 @@ public class EmployeeInfoService {
 			employeeInfoMapper.insertEmployeeInfoDetail(sendMap);
 			employeeInfoMapper.insertAddressInfo(sendMap);
 		
-			if(sendMap.get("pbInfoModel") != null) {// BP情報
+			if(sendMap.get("bpInfoModel") != null) {// BP情報
 				bpInfoMapper.insertBp(getParamBpModel(sendMap));
 			}
 			if (sendMap.get("bankInfoModel") != null) {// 口座情報
@@ -148,7 +148,7 @@ public class EmployeeInfoService {
 			if (sendMap.get("costModel") != null) {// 諸費用
 				costInfoMapper.updateCost(getParamCostModel(sendMap));
 			}
-			if(sendMap.get("pbInfoModel") != null) {
+			if(sendMap.get("bpInfoModel") != null) {
 				bpInfoMapper.updateBp(getParamBpModel(sendMap));
 			}
 		} catch (Exception e) {
@@ -206,14 +206,14 @@ public class EmployeeInfoService {
 	private Map<String, Object> getParamBpModel(Map<String, Object> sendMap) {
 		Map<String, Object> pbModelSendMap = new HashMap<String, Object>();
 		BpInfoModel pbModel = (BpInfoModel) sendMap.get("bpInfoModel");
-		sendMap.put("bpEmployeeNo", pbModel.getBpEmployeeNo());
-		sendMap.put("actionType", pbModel.getActionType());
-		sendMap.put("bpBelongCustomerCode", pbModel.getBpBelongCustomerCode());
-		sendMap.put("bpUnitPrice", pbModel.getBpUnitPrice());
-		sendMap.put("bpSalesProgressCode", pbModel.getBpSalesProgressCode());
-		sendMap.put("bpRemark", pbModel.getBpRemark());
-		sendMap.put("bpOtherCompanyAdmissionEndDate", pbModel.getBpOtherCompanyAdmissionEndDate());
-		sendMap.put("updateUser", pbModel.getUpdateUser());
+		pbModelSendMap.put("bpEmployeeNo", pbModel.getBpEmployeeNo());
+		pbModelSendMap.put("actionType", pbModel.getActionType());
+		pbModelSendMap.put("bpBelongCustomerCode", pbModel.getBpBelongCustomerCode());
+		pbModelSendMap.put("bpUnitPrice", pbModel.getBpUnitPrice());
+		pbModelSendMap.put("bpSalesProgressCode", pbModel.getBpSalesProgressCode());
+		pbModelSendMap.put("bpRemark", pbModel.getBpRemark());
+		pbModelSendMap.put("bpOtherCompanyAdmissionEndDate", pbModel.getBpOtherCompanyAdmissionEndDate());
+		pbModelSendMap.put("updateUser", pbModel.getUpdateUser());
 		return pbModelSendMap;
 	}
 
