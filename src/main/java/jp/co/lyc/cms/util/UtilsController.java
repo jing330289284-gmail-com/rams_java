@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +15,14 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
 
+import javax.mail.Address;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.NoSuchProviderException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +37,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.sun.mail.util.MailSSLSocketFactory;
+
+import jp.co.lyc.cms.model.EmailModel;
 import jp.co.lyc.cms.model.EmployeeModel;
 import jp.co.lyc.cms.model.ModelClass;
 import jp.co.lyc.cms.service.UtilsService;
@@ -770,4 +782,62 @@ public class UtilsController {
 			}
 		}
 	}
+	/**
+	 * メールを発送する
+	 * @param emailMod
+	 */
+	public void EmailSend(EmailModel emailMod){
+    	Session session = null;
+		try {
+			//创建一个资源文件 
+			Properties properties = new Properties();
+			//显示日志	
+			properties.setProperty("mail.debug","true");
+			//	邮箱类别
+			properties.setProperty("mail.host","smtp.lolipop.jp");
+			//设定验证开启
+			properties.setProperty("mail.smtp.auth","true");
+			//发送 接受方式 
+			properties.setProperty("mail.transpot.prococol","smtp");
+			//设置请求服务器端口号
+			properties.put("mail.smtp.port",587);
+			//设置ssl加密服务开启
+			properties.setProperty("mail.smtp.ssl.enable","smtp");
+			//创建加密证书
+			MailSSLSocketFactory sf = new MailSSLSocketFactory();
+			//properties 底层调用的的是put方法
+			properties.put("Mail.smtp.ssl.socketFactory", sf);
+			//获取具有以上属性的邮件session --->连接池
+			session = Session.getInstance(properties);
+			//创建获取连接
+			Transport transport  = session.getTransport();
+			//进行连接
+			transport.connect(emailMod.getUserName(), emailMod.getPassword());
+			//创建一个信息
+			Message message  = new MimeMessage(session);
+			//设定发送方
+			message.setFrom(new InternetAddress(emailMod.getUserName()));
+			//设置主题内容
+			message.setSubject(emailMod.getSubject());
+			message.setContent(emailMod.getContext(), "text/html;charset=utf-8");;
+			String[] addresss = emailMod.getToAddress().split(",");
+			int len = addresss.length;
+			Address [] adds = new Address[len];
+			for (int i = 0; i < len; i++) {
+				adds[i] = new InternetAddress(addresss[i]);
+			}
+			
+			//发送邮件
+			transport.sendMessage(message, adds);
+		} catch (GeneralSecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchProviderException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
 }
