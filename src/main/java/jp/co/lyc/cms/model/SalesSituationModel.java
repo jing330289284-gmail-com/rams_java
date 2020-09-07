@@ -39,7 +39,14 @@ public class SalesSituationModel implements Serializable {
 	String admissionEndDate;
 	String resumeInfo1;// 履歴書情報1
 	String resumeInfo2;// 履歴書情報2
+	String rowNo;// 
 	
+	public String getRowNo() {
+		return rowNo;
+	}
+	public void setRowNo(String rowNo) {
+		this.rowNo = rowNo;
+	}
 	public String getResumeInfo1() {
 		return resumeInfo1;
 	}

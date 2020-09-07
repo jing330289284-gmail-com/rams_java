@@ -5,7 +5,8 @@
     <!-- 初期表示 -->
     <select id="getSalesSituationModel" parameterType="String" resultType="jp.co.lyc.cms.model.SalesSituationModel">
 SELECT 
-    *
+(@rowNo:=@rowNo + 1) AS rowNo,
+    temp.*
 FROM
     ((SELECT 
     T001.employeeNo,
@@ -225,7 +226,7 @@ FROM
     M012SiteRole M012 ON T002.siteRoleCode = M012.siteRoleCode
 WHERE
     T010.salesProgressCode IN (3 , 5) and  T010.salesYearAndMonth = #{sysDate}
-ORDER BY T010.employeeNo)) temp
+ORDER BY T010.employeeNo)) temp,(select @rowno:=0) as rowNo 
 ORDER BY employeeNo	
 
     </select>
