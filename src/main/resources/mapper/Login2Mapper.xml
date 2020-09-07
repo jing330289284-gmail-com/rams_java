@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jp.co.lyc.cms.mapper.Login2Mapper">
+	<resultMap id="Employee"
+		type="jp.co.lyc.cms.model.EmployeeModel" />
+	<resultMap id="stringResult"
+		type="String" />
+	<!-- ログイン -->
+	<select id="getEmployeeModel" parameterType="map"
+		resultMap="Employee">
+		SELECT
+		T001.employeeNo,
+		T001.employeeFristName,
+		T001.employeeLastName,
+		T001.authorityCode,
+		M009.authorityName
+		FROM
+		T001Employee T001
+		LEFT JOIN M009Authority M009 ON T001.authorityCode = M009.authorityCode
+		LEFT JOIN T002EmployeeDetail T002 ON T001.employeeNo = T002.employeeNo
+		WHERE
+		T001. PASSWORD = MD5(#{password})
+		AND T001.employeeNo = #{employeeNo}
+	</select>
+	<!-- ログイン社員番号のメールを取得 -->
+	<select id="getEmployeeCompanyMail" parameterType="String"
+		resultMap="stringResult">
+		SELECT
+			companyMail
+		FROM
+			T002EmployeeDetail 
+		WHERE
+			employeeNo = #{employeeNo}
+	</select>
+	
+	<!-- パスワードリセットURLをインサート -->
+	<insert id="insert" parameterType="String">
+	INSERT INTO T012passwordrest ( passwordResetId, idCreateTime, IdForEmployeeNo ) 
+	VALUE
+		( #{passwordResetId},
+		NOW( ),
+		#{IdForEmployeeNo})
+	</insert>
+</mapper>

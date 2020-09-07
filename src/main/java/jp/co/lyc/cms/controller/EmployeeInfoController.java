@@ -11,6 +11,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.DataBinder;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +33,7 @@ import jp.co.lyc.cms.model.EmployeeModel;
 import jp.co.lyc.cms.model.BpInfoModel;
 import jp.co.lyc.cms.service.EmployeeInfoService;
 import jp.co.lyc.cms.util.UtilsController;
+import jp.co.lyc.cms.validation.EmployeeInfoValidation;
 
 @Controller
 @CrossOrigin(origins = "http://127.0.0.1:3000")
@@ -50,12 +54,27 @@ public class EmployeeInfoController extends BaseController {
 	 * @param emp
 	 * @return List
 	 */
+    String  errorsMessage = "";;
 
 	@RequestMapping(value = "/getEmployeeInfo", method = RequestMethod.POST)
 	@ResponseBody
-	public List<EmployeeModel> getEmployeeInfo(@RequestBody EmployeeModel emp) {
-
+	public Map<String, Object> getEmployeeInfo(@RequestBody EmployeeModel emp) {
+		errorsMessage ="";;
 		logger.info("GetEmployeeInfoController.getEmployeeInfo:" + "検索開始");
+		DataBinder binder = new DataBinder(emp);
+		binder.setValidator(new EmployeeInfoValidation());
+		binder.validate();
+		BindingResult results = binder.getBindingResult();
+		Map<String, Object> result = new HashMap<>();
+		if (results.hasErrors()) {
+			results.getAllErrors().forEach(o -> {
+				FieldError error = (FieldError) o;
+			    errorsMessage+=error.getDefaultMessage();//エラーメッセージ
+			});
+			result.put("errorsMessage", errorsMessage);// エラーメッセージ
+			return result;
+		}
+
 		List<EmployeeModel> employeeList = new ArrayList<EmployeeModel>();
 		try {
 			Map<String, Object> sendMap = getParam(emp);
@@ -63,8 +82,9 @@ public class EmployeeInfoController extends BaseController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		result.put("data", employeeList);
 		logger.info("GetEmployeeInfoController.getEmployeeInfo:" + "検索結束");
-		return employeeList;
+		return result;
 	}
 
 	/**
@@ -113,7 +133,11 @@ public class EmployeeInfoController extends BaseController {
 
 		Map<String, Object> sendMap = getParam(emp);
 		boolean result = true;
-		result = employeeInfoService.deleteEmployeeInfo(sendMap);
+	    result = employeeInfoService.deleteEmployeeInfo(sendMap);
+		if (result) {
+			// 自分のファイルを削除
+			//utilsController.deleteDir(emp.getResidentCardInfo());
+		}
 		logger.info("GetEmployeeInfoController.addEmployeeInfo:" + "削除結束");
 		return result;
 	}
