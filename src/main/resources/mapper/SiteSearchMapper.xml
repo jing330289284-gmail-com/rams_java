@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jp.co.lyc.cms.mapper.SiteSearchMapper">
+	<select id="getSiteInfo" parameterType="map"
+		resultType="jp.co.lyc.cms.model.SiteSearchModel">
+		SELECT
+		a.systemName,
+		a.unitPrice,
+		a.admissionStartDate,
+		a.admissionEndDate,
+		b.siteRoleName,
+
+		if(c.customerAbbreviation is null or
+		trim(c.customerAbbreviation)='',c.customerName,c.customerAbbreviation)
+		as customerName,
+
+		CONCAT(g.employeeFristName,g.employeeLastName)as
+		employeeName ,
+
+		e.developLanguageName,
+		f.stationName as station,
+		h.bpBelongCustomerCode,
+
+		(select if(customerAbbreviation is null or
+		trim(customerAbbreviation)='',customerName,customerAbbreviation) from
+		T007CustomerInfo where customerNo=h.bpBelongCustomerCode) as
+		employeeFrom
+
+		FROM
+		rams.T006EmployeeSiteInfo a
+		LEFT JOIN
+		rams.M012SiteRole
+		b ON
+		a.siteRoleCode = b.siteRoleCode
+		LEFT JOIN
+		rams.T007CustomerInfo c ON
+		a.customerNo = c.customerNo
+		LEFT JOIN
+		rams.T002EmployeeDetail d ON
+		a.employeeNo = d.employeeNo
+		LEFT JOIN
+		rams.M011DevelopLanguage e ON
+		a.developLanguageCode =
+		e.developLanguageCode
+		LEFT JOIN
+		rams.M013Station
+		f ON
+		a.stationCode =
+		f.stationCode
+		LEFT JOIN
+		rams.T001Employee g ON
+		a.employeeNo =
+		g.employeeNo
+		LEFT JOIN
+		rams.T011BpInfoSupplement h ON
+		a.employeeNo =
+		h.bpEmployeeNo
+		WHERE
+		1=1
+		<if test="employeeName!= null and employeeName!= ''">
+			AND CONCAT(g.employeeFristName,g.employeeLastName) =
+			#{employeeName}
+		</if>
+		<if test="siteRoleCode!= null and siteRoleCode!= ''">
+			AND a.siteRoleCode = #{siteRoleCode}
+		</if>
+		<if test="customerNo!= null and customerNo!= ''">
+			AND a.customerNo = #{customerNo}
+		</if>
+		<if test="topCustomerNo!= null and topCustomerNo!= ''">
+			AND a.topCustomerNo = #{topCustomerNo}
+		</if>
+		<if test="bpCustomerNo!= null and bpCustomerNo!= ''">
+			AND h.bpBelongCustomerCode = #{bpCustomerNo}
+		</if>
+		<if test="typeOfIndustryCode!= null and typeOfIndustryCode!= ''">
+			AND a.typeOfIndustryCode = #{typeOfIndustryCode}
+		</if>
+		<if test="payOffRange1!= null and payOffRange1!= ''">
+			<if test="payOffRange1 =='0'.toString()">
+				AND a.payOffRange1 = #{payOffRange1}
+			</if>
+			<if test="payOffRange1 !='0'">
+				AND a.payOffRange1 &gt;= #{payOffRange1}
+			</if>
+		</if>
+		<if test="payOffRange2!= null and payOffRange2!= ''">
+			<if test="payOffRange2 =='0'.toString()">
+				AND a.payOffRange2 = #{payOffRange2}
+			</if>
+			<if test="payOffRange2 !='0'">
+				AND a.payOffRange2 &lt;= #{payOffRange2}
+			</if>
+		</if>
+		<if test="unitPrice1!= null and unitPrice1!= ''">
+			AND a.unitPrice &gt;= #{unitPrice1}
+		</if>
+		<if test="unitPrice2!= null and unitPrice2!= ''">
+			AND a.unitPrice &lt;= #{unitPrice2}
+		</if>
+		<if test="developLanguageCode!= null and developLanguageCode!= ''">
+			AND a.developLanguageCode = #{developLanguageCode}
+		</if>
+		<if test="admissionStartDate!= null and admissionStartDate!= ''">
+			AND a.admissionStartDate &gt;= #{admissionStartDate}
+		</if>
+		<if test="admissionEndDate!= null and admissionEndDate!= ''">
+			AND a.admissionEndDate &lt;= #{admissionEndDate}
+		</if>
+		<if
+			test="dataAcquisitionPeriod!= null and dataAcquisitionPeriod!= ''">
+			AND a.admissionStartDate = #{dataAcquisitionPeriod}
+		</if>
+		<if test="employeeStatus!= null and employeeStatus!= ''">
+			AND d.employeeStatus = #{employeeStatus}
+		</if>
+		<if test="employeeForm!= null and employeeForm!= ''">
+			<if test="employeeForm ='0'">
+				AND d.employeeFormCode &lt;&gt; '3'
+			</if>
+			<if test="employeeForm ='1'">
+				AND d.employeeFormCode = '3'
+			</if>
+		</if>
+	</select>
+
+</mapper>
