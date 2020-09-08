@@ -29,6 +29,7 @@ public class MasterUpdateController extends BaseController {
 
 	@RequestMapping(value = "/getMasterInfo", method = RequestMethod.POST)
 	@ResponseBody
+	// master信息查询
 	public List<MasterModel> getMasterInfo(@RequestBody Map master) {
 		List<MasterModel> masterList = new ArrayList<MasterModel>();
 
@@ -75,7 +76,7 @@ public class MasterUpdateController extends BaseController {
 	}
 
 	/**
-	 * インサート
+	 * アップデート
 	 * 
 	 * @return
 	 */

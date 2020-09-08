@@ -23,7 +23,8 @@ import jp.co.lyc.cms.service.SiteSearchService;
 @CrossOrigin(origins = "http://127.0.0.1:3000")
 public class SiteSearchController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
-    //去“/”
+
+	// 去“/”
 	private String dateToString(String date) {
 		String[] a = date.split("/");
 		String b = a[0] + a[1] + a[2];
@@ -111,10 +112,12 @@ public class SiteSearchController {
 
 	@RequestMapping(value = "/getSiteSearchInfo", method = RequestMethod.POST)
 	@ResponseBody
+	// 现场信息查询
 	public List<SiteSearchModel> getSiteSearchInfo(@RequestBody SiteSearchModel siteSearchModel) {
 		List<SiteSearchModel> siteList = new ArrayList<SiteSearchModel>();
 		Map<String, Object> sendMap = new HashMap<String, Object>();
 		try {
+			// 取得前端送过来的值
 			String employeeName = siteSearchModel.getEmployeeName();
 			String employeeStatus = siteSearchModel.getEmployeeStatus();
 			String employeeForm = siteSearchModel.getEmployeeForm();
@@ -132,6 +135,7 @@ public class SiteSearchController {
 			String admissionStartDate = siteSearchModel.getAdmissionStartDate();
 			String admissionEndDate = siteSearchModel.getAdmissionEndDate();
 			String dataAcquisitionPeriod = siteSearchModel.getDataAcquisitionPeriod();
+			// 存入map 传入后台查询用
 			if (employeeName != null && employeeName.length() != 0) {
 				sendMap.put("employeeName", employeeName);
 			}
@@ -185,14 +189,18 @@ public class SiteSearchController {
 			}
 			siteList = SiteSearchService.getSiteInfo(sendMap);
 			for (int a = 0; a < siteList.size(); a++) {
-				siteList.get(a).setRowNo((a+1)+"");
+				// 行番号设定
+				siteList.get(a).setRowNo((a + 1) + "");
+				// 勤務期間设定
 				siteList.get(a).setWorkDate(
 						dateToPeriod(siteList.get(a).getAdmissionStartDate(), siteList.get(a).getAdmissionEndDate()));
+				// 社员形式设定
 				if (siteList.get(a).getEmployeeFrom() != null && siteList.get(a).getEmployeeFrom().length() != 0) {
-					siteList.get(a).setEmployeeFrom("BP(" + siteList.get(a).getEmployeeFrom()+")");
+					siteList.get(a).setEmployeeFrom("BP(" + siteList.get(a).getEmployeeFrom() + ")");
 				} else {
 					siteList.get(a).setEmployeeFrom("社員");
 				}
+				// 勤務時間设定
 				siteList.get(a).setWorkTime(
 						timeCalculate(siteList.get(a).getAdmissionStartDate(), siteList.get(a).getAdmissionEndDate()));
 			}
