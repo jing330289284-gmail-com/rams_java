@@ -21,7 +21,6 @@ import jp.co.lyc.cms.common.BaseController;
 import jp.co.lyc.cms.model.CustomerDepartmentInfoModel;
 import jp.co.lyc.cms.model.CustomerInfoModel;
 import jp.co.lyc.cms.service.CustomerInfoService;
-import jp.co.lyc.cms.util.UtilsCheckMethod;
 import jp.co.lyc.cms.model.TopCustomerInfoModel;
 @Controller
 @CrossOrigin(origins = "http://127.0.0.1:3000")
@@ -38,8 +37,6 @@ public class CustomerInfoController extends BaseController{
 	//上位お客様情報service
 	@Autowired
 	TopCustomerInfoController topCustomerInfoController;
-	@Autowired
-	UtilsCheckMethod utilsCheckMethod;
 	/**
 	 * 页面加载
 	 * @param customerInfoMod

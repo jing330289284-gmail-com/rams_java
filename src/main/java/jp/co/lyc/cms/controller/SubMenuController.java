@@ -17,8 +17,6 @@ import jp.co.lyc.cms.util.UtilsCheckMethod;
 public class SubMenuController extends BaseController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	@Autowired
-	UtilsCheckMethod utilsCheckMethod;
 	/**
 	 * 画面初期化
 	 * @return
@@ -27,7 +25,7 @@ public class SubMenuController extends BaseController {
 	@ResponseBody
 	public EmployeeModel init() {
 		logger.info("LoginController.login:" + "サブメニュー画面の初期化開始");
-		if(utilsCheckMethod.isNullOrEmpty((String)getSession().getAttribute("employeeNo"))) {
+		if(UtilsCheckMethod.isNullOrEmpty((String)getSession().getAttribute("employeeNo"))) {
 			logger.info("LoginController.login:" + "サブメニュー画面の初期化終了");
 			return null;
 		}else{

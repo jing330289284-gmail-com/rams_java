@@ -528,7 +528,7 @@
 		T001. PASSWORD = MD5(#{password})
 		AND T001.employeeNo = #{employeeNo}
 	</select>
-	<!-- ログイン認証番号の電話番号存在チェック -->
+	<!-- ログイン社員番号の電話番号を取得 -->
 	<select id="getEmployeePhoneNo" parameterType="String"
 		resultMap="stringResult">
 		SELECT

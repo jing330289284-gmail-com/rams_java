@@ -11,14 +11,14 @@ public abstract class StatusCodeToMsgMap {
 
     static {
 
-        statusCodeToMsg.put("MSG001", "[0]入力してください　");
-        statusCodeToMsg.put("MSG002", "ユーザー名またはパースワード入力が間違いました。");
+        statusCodeToMsg.put("MSG001", "[0]入力してください；");
+        statusCodeToMsg.put("MSG002", "ユーザー名またはパースワード入力が間違いました；");
         statusCodeToMsg.put("MSG003", "[0]が入力間違いました");
-        statusCodeToMsg.put("MSG004", "データ存在してないです、検索条件を確認してください");
-        statusCodeToMsg.put("MSG005", "[0]を確認してください");
-        statusCodeToMsg.put("MSG006", "削除できない、[0]を確認してください");
+        statusCodeToMsg.put("MSG004", "データ存在してないです、検索条件を確認してください；");
+        statusCodeToMsg.put("MSG005", "[0]を確認してください；");
+        statusCodeToMsg.put("MSG006", "削除できない、[0]を確認してください；");
+        statusCodeToMsg.put("MSG007", "開始年齢が終了年齢より大きい；");
     }
-
 
     public static String getErrMsgbyCode(String ecode) {
         if (!StringUtils.hasText(ecode)) {
@@ -27,5 +27,13 @@ public abstract class StatusCodeToMsgMap {
 
         return statusCodeToMsg.get(ecode);
     }
+    
+    public static String getErrMsgbyCodeReplace(String ecode,String replaceName) {
+        if (!StringUtils.hasText(ecode)) {
+            return "";
+        }
+        return statusCodeToMsg.get(ecode).replace("[0]", replaceName);
+    }
+
 
 }

@@ -15,13 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import jp.co.lyc.cms.common.BaseController;
 import jp.co.lyc.cms.model.SalesSituationModel;
 import jp.co.lyc.cms.service.SalesSituationService;
 
 @Controller
 @CrossOrigin(origins = "http://127.0.0.1:3000")
 @RequestMapping(value = "/salesSituation")
-public class SalesSituationController {
+public class SalesSituationController  extends BaseController {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -54,6 +55,7 @@ public class SalesSituationController {
 	@ResponseBody
 	public int updateSalesSituation(@RequestBody SalesSituationModel model) {
 
+		model.setUpdateUser(getSession().getAttribute("employeeName").toString());
 		logger.info("updateSalesSituation:" + "検索開始");
 		int index = 0;
 		try {
@@ -77,6 +79,7 @@ public class SalesSituationController {
 	public int updateEmployeeSiteInfo(@RequestBody SalesSituationModel model) {
 
 
+		model.setUpdateUser(getSession().getAttribute("employeeName").toString());
 		logger.info("updateSalesSituation:" + "検索開始");
 		int index = 0;
 		int index1 = 0;
