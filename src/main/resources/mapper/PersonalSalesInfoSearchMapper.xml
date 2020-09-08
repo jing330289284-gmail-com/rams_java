@@ -20,42 +20,20 @@
 		T005.bonusFlag,
 		T005.scheduleOfBonusAmount,
 		T005.leaderAllowanceAmount,
-		T005.otherAllowanceAmount
+		T005.otherAllowanceAmount,
+		(T006.unitPrice*10000 - T005.salary - T005.transportationExpenses - T005.insuranceFeeAmount - T005.scheduleOfBonusAmount - T005.leaderAllowanceAmount - T005.otherAllowanceAmount)
+		As grosProfits,
+		(T005.salary + T005.transportationExpenses + T005.insuranceFeeAmount + T005.scheduleOfBonusAmount + T005.leaderAllowanceAmount + T005.otherAllowanceAmount) As paymentTotal
 		FROM
 		T001Employee As T001
 		Left JOIN 
 		T005ExpensesInfo As T005 ON T001.employeeNo = T005.employeeNo
-		<if test = "fiscalYear != 0  &amp;&amp;fiscalYear != null &amp;&amp; startYearAndMonth != null &amp;&amp; endYearAndMonth != null">
-		 AND left(reflectYearAndMonth,4) =#{fiscalYear}
-		</if>
-		<if test = "fiscalYear == 0 || fiscalYear == null &amp;&amp; startYearAndMonth != null &amp;&amp; endYearAndMonth != null">
-		 AND reflectYearAndMonth between #{startYearAndMonth} and #{endYearAndMonth}
-		</if>
-		<if test = "fiscalYear != 0  &amp;&amp;fiscalYear != null &amp;&amp; startYearAndMonth == null &amp;&amp; endYearAndMonth == null">
-		 AND left(reflectYearAndMonth,4) =#{fiscalYear}
-		 </if>
+		AND reflectYearAndMonth &lt;= #{getYandM}
 		LEFT JOIN 
 		M005EmployeeForm As M005 ON T005.employeeFormCode = M005.employeeFormCode
-				<if test = "fiscalYear != 0  &amp;&amp;fiscalYear != null &amp;&amp; startYearAndMonth != null &amp;&amp; endYearAndMonth != null">
-		AND	left(admissionStartDate,4) =#{fiscalYear}
-		</if>
-		<if test = "fiscalYear == 0 || fiscalYear == null &amp;&amp; startYearAndMonth != null &amp;&amp; endYearAndMonth != null">
-		AND	left(admissionStartDate,6) between #{startYearAndMonth} and #{endYearAndMonth}
-		</if>
-		<if test = "fiscalYear != 0  &amp;&amp;fiscalYear != null &amp;&amp; startYearAndMonth == null &amp;&amp; endYearAndMonth == null">
-		AND	left(admissionStartDate,4) =#{fiscalYear}
-		</if>
 		LEFT JOIN 
 		T006EmployeeSiteInfo As T006 ON T005.employeeNo = T006.employeeNo	
-		<if test = "fiscalYear != 0  &amp;&amp;fiscalYear != null &amp;&amp; startYearAndMonth != null &amp;&amp; endYearAndMonth != null">
-		AND	left(admissionStartDate,4) =#{fiscalYear}
-		</if>
-		<if test = "fiscalYear == 0 || fiscalYear == null &amp;&amp; startYearAndMonth != null &amp;&amp; endYearAndMonth != null">
-		AND	left(admissionStartDate,6) between #{startYearAndMonth} and #{endYearAndMonth}
-		</if>
-		<if test = "fiscalYear != 0  &amp;&amp;fiscalYear != null &amp;&amp; startYearAndMonth == null &amp;&amp; endYearAndMonth == null">
-		AND	left(admissionStartDate,4) =#{fiscalYear}
-		</if>
+		AND #{getYandM} between left(admissionStartDate,6) and left(admissionEndDate,6)
 		LEFT JOIN 
 		T007CustomerInfo As T007 ON T006.customerNo  =T007.customerNo
 		WHERE
@@ -65,14 +43,7 @@
 		<if test = "employeeNo != null">
 		AND T005.employeeNo=#{employeeNo}
 		</if>
-		<if test = "fiscalYear != 0  &amp;&amp;fiscalYear != null &amp;&amp; startYearAndMonth != null &amp;&amp; endYearAndMonth != null">
-		AND left(reflectYearAndMonth,4) =#{fiscalYear}
-		</if>
-		<if test = "fiscalYear == 0 || fiscalYear == null &amp;&amp; startYearAndMonth != null &amp;&amp; endYearAndMonth != null">
-		AND reflectYearAndMonth between #{startYearAndMonth} and #{endYearAndMonth}
-		</if>
-		<if test = "fiscalYear != 0  &amp;&amp;fiscalYear != null &amp;&amp; startYearAndMonth == null &amp;&amp; endYearAndMonth == null">
-		AND left(reflectYearAndMonth,4) =#{fiscalYear}
-		</if>
+		ORDER BY ABS(#{getYandM} - reflectYearAndMonth) ASC
+		limit 1
 		</select>
 </mapper>

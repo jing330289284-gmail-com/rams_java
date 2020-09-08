@@ -7,6 +7,8 @@ public class PersonalSalesSearchModel implements Serializable  {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	String onlyYandM;
+	int workMonthCount;
 	String employeeFirstName;//社員名
 	String employeeLastName;
 	String employeeNo;//社員番号
@@ -24,6 +26,7 @@ public class PersonalSalesSearchModel implements Serializable  {
 	String leaderAllowanceAmount;//リーダー手当
 	String otherAllowanceAmount;//他の手当
 	String grosProfits;//粗利
+	String paymentTotal;
 	public String getEmployeeFirstName() {
 		return employeeFirstName;
 	}
@@ -126,5 +129,23 @@ public class PersonalSalesSearchModel implements Serializable  {
 	public void setAdmissionStartDate(String admissionStartDate) {
 		this.admissionStartDate = admissionStartDate;
 	}
-
+	public String getOnlyYandM() {
+		return onlyYandM;
+	}
+	public void setOnlyYandM(String onlyYandM) {
+		this.onlyYandM = onlyYandM;
+	}
+	public int getWorkMonthCount() {
+		return workMonthCount;
+	}
+	public void setWorkMonthCount(int workMonthCount) {
+		this.workMonthCount = workMonthCount;
+	}
+	public String getPaymentTotal() {
+		return paymentTotal;
+	}
+	public void setPaymentTotal(String paymentTotal) {
+		this.paymentTotal = paymentTotal;
+	}
+	
 }
