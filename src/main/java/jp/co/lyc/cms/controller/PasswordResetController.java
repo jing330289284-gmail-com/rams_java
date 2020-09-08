@@ -14,15 +14,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import jp.co.lyc.cms.common.BaseController;
 import jp.co.lyc.cms.model.PasswordResetModel;
 import jp.co.lyc.cms.service.PasswordResetService;
-import jp.co.lyc.cms.util.UtilsCheckMethod;
 
 @Controller
 @RequestMapping(value = "/passwordReset")
 public class PasswordResetController extends BaseController{
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	@Autowired
-	UtilsCheckMethod utilsCheckMethod;
 	@Autowired
 	PasswordResetService passwordResetService;
 	

@@ -30,13 +30,11 @@ public class LoginController extends BaseController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	EmployeeInfoService es;
-	@Autowired
-	UtilsCheckMethod utilsCheckMethod;
 	
 	@RequestMapping(value = "/init", method = RequestMethod.POST)
 	@ResponseBody
 	public boolean init() {
-		if(utilsCheckMethod.isNullOrEmpty((String)getSession().getAttribute("employeeNo"))) {
+		if(UtilsCheckMethod.isNullOrEmpty((String)getSession().getAttribute("employeeNo"))) {
 			return false;
 		}else{
 			return true;
