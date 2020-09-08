@@ -5,6 +5,7 @@ import org.springframework.validation.Validator;
 
 import jp.co.lyc.cms.model.EmployeeModel;
 import jp.co.lyc.cms.util.StatusCodeToMsgMap;
+import jp.co.lyc.cms.util.UtilsCheckMethod;
 
 public class EmployeeInfoValidation implements Validator {
 
@@ -20,36 +21,24 @@ public class EmployeeInfoValidation implements Validator {
 		StackTraceElement elements[] = Thread.currentThread().getStackTrace();
 		for (int i = 0; i < elements.length; i++) {
 			StackTraceElement stackTraceElement = elements[i];
-			String className = stackTraceElement.getClassName();
 			String methodName = stackTraceElement.getMethodName();
-			String fileName = stackTraceElement.getFileName();
-			int lineNumber = stackTraceElement.getLineNumber();
-//			if(methodName.equals("getEmployeeInfo")) {
-//				System.out.print("这是getEmployeeInfo方法  "+ methodName);
-//			}
-//			if(methodName.equals("deleteEmployeeInfo")) {
-//				System.out.print("这是deleteEmployeeInfo方法  "+ methodName);
-//			}
-			 System.out.println("StackTraceElement数组下标 i="+i+",fileName="
-	                    +fileName+",className="+className+",methodName="+methodName+",lineNumber="+lineNumber);
-		}
-		if (!isNullOrEmpty(p.getAgeFrom()) && !isNullOrEmpty(p.getAgeTo())) {
-			
-		}
-		if (!isNullOrEmpty(p.getAgeFrom()) && !isNullOrEmpty(p.getAgeTo())) {
-			if (Integer.parseInt(p.getAgeFrom()) < Integer.parseInt(p.getAgeTo())) {
-				errors.rejectValue("ageFrom", "", StatusCodeToMsgMap.getErrMsgbyCode("MSG007"));
-			}
+			if (methodName.equals("getEmployeeInfo")) {
+				if (!UtilsCheckMethod.isNullOrEmpty(p.getAgeFrom()) && !UtilsCheckMethod.isNullOrEmpty(p.getAgeTo())) {
+					if (Integer.parseInt(p.getAgeFrom()) < Integer.parseInt(p.getAgeTo())) {
+						errors.rejectValue("ageFrom", "", StatusCodeToMsgMap.getErrMsgbyCode("MSG007"));
+					}
+				}
+			} else if (methodName.equals("insertEmployee")||methodName.equals("updateEmployee")) {
+				if (UtilsCheckMethod.isNullOrEmpty(p.getEmployeeFristName())) {
+					errors.rejectValue("employeeFristName", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001","社員名"));
+				}
+				if (UtilsCheckMethod.isNullOrEmpty(p.getEmployeeLastName())) {
+					errors.rejectValue("employeeLastName", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001","社員氏"));
+				}
+			} 
 		}
 
 	}
 
-	public boolean isNullOrEmpty(String aString) {
-		boolean result = true;
-		if (aString == null || aString.isEmpty()) {
-			return result;
-		} else {
-			return result = false;
-		}
-	}
+	
 }

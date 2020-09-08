@@ -54,13 +54,13 @@ public class EmployeeInfoController extends BaseController {
 	 * @param emp
 	 * @return List
 	 */
-    String  errorsMessage = "";;
+	String errorsMessage = "";;
 
 	@RequestMapping(value = "/getEmployeeInfo", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> getEmployeeInfo(@RequestBody EmployeeModel emp) {
-		errorsMessage ="";;
 		logger.info("GetEmployeeInfoController.getEmployeeInfo:" + "検索開始");
+		errorsMessage = "";
 		DataBinder binder = new DataBinder(emp);
 		binder.setValidator(new EmployeeInfoValidation());
 		binder.validate();
@@ -69,7 +69,7 @@ public class EmployeeInfoController extends BaseController {
 		if (results.hasErrors()) {
 			results.getAllErrors().forEach(o -> {
 				FieldError error = (FieldError) o;
-			    errorsMessage+=error.getDefaultMessage();//エラーメッセージ
+				errorsMessage += error.getDefaultMessage();// エラーメッセージ
 			});
 			result.put("errorsMessage", errorsMessage);// エラーメッセージ
 			return result;
@@ -95,16 +95,31 @@ public class EmployeeInfoController extends BaseController {
 	 */
 	@RequestMapping(value = "/insertEmployee", method = RequestMethod.POST)
 	@ResponseBody
-	public boolean insertEmployee(@RequestParam(value = "emp", required = false) String JSONEmp,
+	public Map<String, Object> insertEmployee(@RequestParam(value = "emp", required = false) String JSONEmp,
 			@RequestParam(value = "resumeInfo1", required = false) MultipartFile resumeInfo1,
 			@RequestParam(value = "resumeInfo2", required = false) MultipartFile resumeInfo2,
 			@RequestParam(value = "residentCardInfo", required = false) MultipartFile residentCardInfo,
 			@RequestParam(value = "passportInfo", required = false) MultipartFile passportInfo) throws Exception {
 		logger.info("GetEmployeeInfoController.insertEmployee:" + "追加開始");
+		errorsMessage = "";
 		JSONObject jsonObject = JSON.parseObject(JSONEmp);
 		EmployeeModel emp = JSON.parseObject(jsonObject.toJSONString(), new TypeReference<EmployeeModel>() {
 		});
-		Map<String, Object> sendMap = getParam(emp);
+		DataBinder binder = new DataBinder(emp);
+		binder.setValidator(new EmployeeInfoValidation());
+		binder.validate();
+		BindingResult results = binder.getBindingResult();
+		Map<String, Object> resultMap = new HashMap<>();// 繰り返し
+		if (results.hasErrors()) {
+			results.getAllErrors().forEach(o -> {
+				FieldError error = (FieldError) o;
+				errorsMessage += error.getDefaultMessage();// エラーメッセージ
+			});
+			resultMap.put("errorsMessage", errorsMessage);// エラーメッセージ
+			return resultMap;
+		}
+
+		Map<String, Object> sendMap = getParam(emp);// パラメータ
 		boolean result = true;
 		try {
 			sendMap = utilsController.upload(resumeInfo1, sendMap, "resumeInfo1", "履歴書1");
@@ -114,10 +129,12 @@ public class EmployeeInfoController extends BaseController {
 			// sendMap = utilsController.upload(picInfo, sendMap, "picInfo", "写真");
 			employeeInfoService.insertEmployee((HashMap<String, Object>) sendMap);
 		} catch (Exception e) {
-			return result = false;
+			resultMap.put("result", false);
+			return resultMap;
 		}
+		resultMap.put("result", result);
 		logger.info("GetEmployeeInfoController.insertEmployee:" + "追加結束");
-		return result;
+		return resultMap;
 	}
 
 	/**
@@ -133,10 +150,10 @@ public class EmployeeInfoController extends BaseController {
 
 		Map<String, Object> sendMap = getParam(emp);
 		boolean result = true;
-	    result = employeeInfoService.deleteEmployeeInfo(sendMap);
+		result = employeeInfoService.deleteEmployeeInfo(sendMap);
 		if (result) {
 			// 自分のファイルを削除
-			//utilsController.deleteDir(emp.getResidentCardInfo());
+			// utilsController.deleteDir(emp.getResidentCardInfo());
 		}
 		logger.info("GetEmployeeInfoController.addEmployeeInfo:" + "削除結束");
 		return result;
@@ -168,7 +185,7 @@ public class EmployeeInfoController extends BaseController {
 
 	@RequestMapping(value = "/updateEmployee", method = RequestMethod.POST)
 	@ResponseBody
-	public boolean updateEmployee(@RequestParam(value = "emp", required = false) String JSONEmp,
+	public Map<String, Object> updateEmployee(@RequestParam(value = "emp", required = false) String JSONEmp,
 			@RequestParam(value = "resumeInfo1", required = false) MultipartFile resumeInfo1,
 			@RequestParam(value = "resumeInfo2", required = false) MultipartFile resumeInfo2,
 			@RequestParam(value = "residentCardInfo", required = false) MultipartFile residentCardInfo,
@@ -178,15 +195,35 @@ public class EmployeeInfoController extends BaseController {
 		JSONObject jsonObject = JSON.parseObject(JSONEmp);
 		EmployeeModel emp = JSON.parseObject(jsonObject.toJSONString(), new TypeReference<EmployeeModel>() {
 		});
+		DataBinder binder = new DataBinder(emp);
+		binder.setValidator(new EmployeeInfoValidation());
+		binder.validate();
+		BindingResult results = binder.getBindingResult();
+		Map<String, Object> resultMap = new HashMap<>();// 繰り返し
+		if (results.hasErrors()) {
+			results.getAllErrors().forEach(o -> {
+				FieldError error = (FieldError) o;
+				errorsMessage += error.getDefaultMessage();// エラーメッセージ
+			});
+			resultMap.put("errorsMessage", errorsMessage);// エラーメッセージ
+			return resultMap;
+		}
+
 		Map<String, Object> sendMap = getParam(emp);
 		boolean result = true;
-		sendMap = utilsController.upload(resumeInfo1, sendMap, "resumeInfo1", "履歴書1");
-		sendMap = utilsController.upload(resumeInfo2, sendMap, "resumeInfo2", "履歴書2");
-		sendMap = utilsController.upload(residentCardInfo, sendMap, "residentCardInfo", "在留カード");
-		sendMap = utilsController.upload(passportInfo, sendMap, "passportInfo", "パスポート");
-		result = employeeInfoService.updateEmployee(sendMap);
+		try {
+			sendMap = utilsController.upload(resumeInfo1, sendMap, "resumeInfo1", "履歴書1");
+			sendMap = utilsController.upload(resumeInfo2, sendMap, "resumeInfo2", "履歴書2");
+			sendMap = utilsController.upload(residentCardInfo, sendMap, "residentCardInfo", "在留カード");
+			sendMap = utilsController.upload(passportInfo, sendMap, "passportInfo", "パスポート");
+			result = employeeInfoService.updateEmployee(sendMap);
+		} catch (Exception e) {
+			resultMap.put("result", false);
+			return resultMap;
+		}
+		resultMap.put("result", result);
 		logger.info("GetEmployeeInfoController.updateEmployee:" + "修正結束");
-		return result;
+		return resultMap;
 	}
 
 	/**

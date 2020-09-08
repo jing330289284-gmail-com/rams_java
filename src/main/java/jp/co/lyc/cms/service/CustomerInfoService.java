@@ -27,8 +27,6 @@ public class CustomerInfoService {
 	@Autowired
 	CustomerInfoMapper customerInfoMapper;
 	@Autowired
-	UtilsCheckMethod utilsCheckMethod;
-	@Autowired
 	AccountInfoService accountInfoService;
 	@Autowired
 	AccountInfoMapper accountInfoMapper;
@@ -113,7 +111,7 @@ public class CustomerInfoService {
 			customerInfoMod.getCustomerDepartmentList()) {
 			String customerDepartmentCode = 
 					selectDepartmentCode(customerDepartmentInfoModel.getCustomerDepartmentName());
-			if(utilsCheckMethod.isNullOrEmpty(customerDepartmentCode)) {
+			if(UtilsCheckMethod.isNullOrEmpty(customerDepartmentCode)) {
 				return "4";
 			}
 		}
@@ -202,7 +200,7 @@ public class CustomerInfoService {
 		String customerDepartmentCode = 
 				selectDepartmentCode(customerDepartmentInfoModel.getCustomerDepartmentName());
 		//resultCode : 2(部門が部門マスタに存在しない)
-		if(utilsCheckMethod.isNullOrEmpty(customerDepartmentCode)) {
+		if(UtilsCheckMethod.isNullOrEmpty(customerDepartmentCode)) {
 			logger.info("BankInfoController.toroku:" + "明細登録終了");
 			return resultCode = "2";
 		}

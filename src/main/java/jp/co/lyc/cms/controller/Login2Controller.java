@@ -33,15 +33,14 @@ public class Login2Controller extends BaseController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	Login2Service es;
-	@Autowired
-	UtilsCheckMethod utilsCheckMethod;
+
 	@Autowired
 	UtilsController utils;
 	
 	@RequestMapping(value = "/init", method = RequestMethod.POST)
 	@ResponseBody
 	public boolean init() {
-		if(utilsCheckMethod.isNullOrEmpty((String)getSession().getAttribute("employeeNo"))) {
+		if(UtilsCheckMethod.isNullOrEmpty((String)getSession().getAttribute("employeeNo"))) {
 			return false;
 		}else{
 			return true;
@@ -84,7 +83,7 @@ public class Login2Controller extends BaseController {
 		logger.info("LoginController.login:" + "メール発送開始");
 		EmailModel emailModel = new EmailModel();
 		String mail = es.getEmployeeCompanyMail(loginModel.getEmployeeNo());
-		if(utilsCheckMethod.isNullOrEmpty(mail)) {
+		if(UtilsCheckMethod.isNullOrEmpty(mail)) {
 			return false;
 		}
 		emailModel.setToAddress(mail);

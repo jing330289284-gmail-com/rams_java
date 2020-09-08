@@ -28,8 +28,7 @@ public class CostInfoController extends BaseController {
 
 	@Autowired
 	CostInfoService GCS;
-	@Autowired
-	UtilsCheckMethod utilsCheckMethod;
+	
 	// 画面の初期化の場合、データの取得
 	@RequestMapping(value = "/init", method = RequestMethod.POST)
 	@ResponseBody
@@ -71,7 +70,7 @@ public class CostInfoController extends BaseController {
 	public ArrayList<CostInfoModel> selectData(String employeeNo , String reflectYearAndMonth) {
 		Map<String, String> sendMap = new HashMap<String, String>();
 		sendMap.put("employeeNo", employeeNo);
-		if(!utilsCheckMethod.isNullOrEmpty(reflectYearAndMonth)) {
+		if(!UtilsCheckMethod.isNullOrEmpty(reflectYearAndMonth)) {
 			sendMap.put("reflectYearAndMonth", reflectYearAndMonth);
 		}
 		return GCS.getEmployeeInfo(sendMap);
