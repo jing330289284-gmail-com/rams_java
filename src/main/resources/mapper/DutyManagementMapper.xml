@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jp.co.lyc.cms.mapper.DutyManagementMapper">
+    <resultMap id="DutyManagement" type="jp.co.lyc.cms.model.DutyManagementModel"/>
+    <select id="selectDutyManagement" resultMap="DutyManagement" parameterType="String">
+		SELECT
+			t001.employeeNo,
+			t001.employeeFristName,
+			t001.employeeLastName,
+			t007.customerName,
+			m013.stationName,
+			t006.payOffRange1,
+			t006.payOffRange2,
+			wtt.sumWorkTime,
+			ewt.employeeWorkTimeHaveData,
+			wtt.attendanceRegisterFlag,
+			wtt.updateTime,
+			wtt.approvalStatus
+		FROM 
+			T001Employee as t001
+		left join
+			T006EmployeeSiteInfo as t006 on t001.employeeNo=t006.employeeNo
+		left join
+			T007CustomerInfo as t007 on t006.customerNo=t007.customerNo
+		left join
+			M013Station as m013 on t007.stationCode=m013.stationCode
+		left join
+			(SELECT employeeNo,yearAndMonth,IF(count(*)>0,1,0) as employeeWorkTimeHaveData FROM employeeWorkTime)ewt on t001.employeeNo=ewt.employeeNo
+		left join workTotalTime as wtt on t001.employeeNo=wtt.employeeNo and ewt.yearAndMonth=wtt.attendanceYearAndMonth 
+		WHERE
+		1=1
+
+    </select>
+	<update id="updateDutyManagement" parameterType="String">
+		UPDATE workTotalTime
+		SET 
+			approvalStatus = 1,
+		WHERE 
+			employeeNo = #{employeeNo}
+			and attendanceYearAndMonth = #{yearAndMonth}
+    </update> 
+</mapper>
