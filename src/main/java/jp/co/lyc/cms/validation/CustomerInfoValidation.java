@@ -25,7 +25,7 @@ public class CustomerInfoValidation implements Validator {
 			String methodName = stackTraceElement.getMethodName();
 			if (methodName.equals("toroku")) {
 				if (UtilsCheckMethod.isNullOrEmpty(p.getCustomerName())) {
-						errors.rejectValue("customerName", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001","社員名"));
+						errors.rejectValue("customerName", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001","お客様名"));
 				}
 			}
 		}

@@ -128,7 +128,7 @@ public class CustomerInfoSearchController {
 	 */
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	@ResponseBody
-	public String delect( @RequestBody CustomerInfoModel customerInfoMod) {	
+	public String delete( @RequestBody CustomerInfoModel customerInfoMod) {	
 		logger.info("CustomerInfoController.onloadPage:" + "削除ボタン");
 		if(customerInfoSearchService.checkCustomerInSiteInfo(customerInfoMod.getCustomerNo()).size() > 0) {
 			return "2";//2:お客様が現場に使っている
