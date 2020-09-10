@@ -19,6 +19,7 @@ public abstract class StatusCodeToMsgMap {
         statusCodeToMsg.put("MSG006", "削除できない、[0]を確認してください。");
         statusCodeToMsg.put("MSG007", "開始年齢が終了年齢より大きい。");
         statusCodeToMsg.put("MSG008", "登録データが存在していますので、もう一度確認してください。");
+        statusCodeToMsg.put("MSG009", "正しい[0]範囲を入力してください。");
     }
 
     public static String getErrMsgbyCode(String ecode) {
