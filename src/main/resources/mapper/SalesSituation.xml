@@ -50,7 +50,7 @@ FROM
         LEFT JOIN
     T003AddressInfo T003 ON T001.employeeNo = T003.employeeNo
         LEFT JOIN
-    M013Station M013 ON M013.stationCode = T003.stationCode1
+    M013Station M013 ON M013.stationCode = T003.stationCode
         LEFT JOIN
     T002EmployeeDetail T002 ON T001.employeeNo = T002.employeeNo
         LEFT JOIN
@@ -113,7 +113,7 @@ FROM
         LEFT JOIN
     T003AddressInfo T003 ON T001.employeeNo = T003.employeeNo
         LEFT JOIN
-    M013Station M013 ON M013.stationCode = T003.stationCode1
+    M013Station M013 ON M013.stationCode = T003.stationCode
         LEFT JOIN
     T002EmployeeDetail T002 ON T001.employeeNo = T002.employeeNo
         LEFT JOIN
@@ -168,7 +168,7 @@ FROM
         LEFT JOIN
     T003AddressInfo T003 ON T011.bpEmployeeNo = T003.employeeNo
         LEFT JOIN
-    M013Station M013 ON M013.stationCode = T003.stationCode1
+    M013Station M013 ON M013.stationCode = T003.stationCode
         LEFT JOIN
     T002EmployeeDetail T002 ON T011.bpEmployeeNo = T002.employeeNo
         LEFT JOIN
@@ -226,7 +226,7 @@ FROM
         LEFT JOIN
     T003AddressInfo T003 ON T010.employeeNo = T003.employeeNo
         LEFT JOIN
-    M013Station M013 ON M013.stationCode = T003.stationCode1
+    M013Station M013 ON M013.stationCode = T003.stationCode
         LEFT JOIN
     T002EmployeeDetail T002 ON T010.employeeNo = T002.employeeNo
         LEFT JOIN
