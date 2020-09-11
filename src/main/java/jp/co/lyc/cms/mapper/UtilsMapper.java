@@ -113,6 +113,14 @@ public interface UtilsMapper {
 	public List<ModelClass> getEnglishLevel();
 
 	/**
+	 * 社員氏名を取得する
+	 * 
+	 * 
+	 */
+	public List<ModelClass> getEmployeeName();
+	
+	
+	/**
 	 * 資格を取得
 	 * 
 	 * 

@@ -4,7 +4,7 @@
 	<resultMap id="detailsInfo"
 		type="jp.co.lyc.cms.model.PersonalSalesSearchModel" />
 
-		
+		<!-- 個人売上 -->
 	<select id="getEmployeeSalesInfo" parameterType="map"
 		resultMap="detailsInfo">
 		SELECT distinct
@@ -14,20 +14,20 @@
 		T007.customerName,
 		T006.unitPrice,
 		T005.salary,
-		T005.transportationExpenses,
+		T013.transportationExpenses,
 		T005.SocialInsuranceFlag,
 		T005.insuranceFeeAmount,
 		T005.bonusFlag,
 		T005.scheduleOfBonusAmount,
-		T005.leaderAllowanceAmount,
-		T005.otherAllowanceAmount,
-		(T006.unitPrice*10000 - T005.salary - T005.transportationExpenses - T005.insuranceFeeAmount - T005.scheduleOfBonusAmount - T005.leaderAllowanceAmount - T005.otherAllowanceAmount)
+		T013.leaderAllowanceAmount,
+		T013.otherAllowanceAmount,
+		(T006.unitPrice*10000 - T005.salary - T013.transportationExpenses - T005.insuranceFeeAmount - T005.scheduleOfBonusAmount - T013.leaderAllowanceAmount - T013.otherAllowanceAmount)
 		As grosProfits,
-		(T005.salary + T005.transportationExpenses + T005.insuranceFeeAmount + T005.scheduleOfBonusAmount + T005.leaderAllowanceAmount + T005.otherAllowanceAmount) As paymentTotal
+		(T005.salary + T013.transportationExpenses + T005.insuranceFeeAmount + T005.scheduleOfBonusAmount + T013.leaderAllowanceAmount + T013.otherAllowanceAmount) As paymentTotal
 		FROM
 		T001Employee As T001
 		Left JOIN 
-		T005ExpensesInfo As T005 ON T001.employeeNo = T005.employeeNo
+		T005WagesInfo As T005 ON T001.employeeNo = T005.employeeNo
 		AND reflectYearAndMonth &lt;= #{getYandM}
 		LEFT JOIN 
 		M005EmployeeForm As M005 ON T005.employeeFormCode = M005.employeeFormCode
@@ -36,10 +36,10 @@
 		AND #{getYandM} between left(admissionStartDate,6) and left(admissionEndDate,6)
 		LEFT JOIN 
 		T007CustomerInfo As T007 ON T006.customerNo  =T007.customerNo
+		LEFT JOIN
+		T013ExpensesInfo As T013 ON T005.employeeNo = T013.employeeNo and T005.reflectYearAndMonth = T013.ExpensesreflectYearAndMonth
 		WHERE
-		T001.employeeFristName = #{employeeFirstName}
-		AND 
-		T001.employeeLastName = #{employeeLastName}
+		CONCAT(T001.employeeFristName,T001.employeeLastName) = #{employeeName}
 		<if test = "employeeNo != null">
 		AND T005.employeeNo=#{employeeNo}
 		</if>

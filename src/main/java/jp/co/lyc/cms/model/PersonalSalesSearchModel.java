@@ -9,8 +9,7 @@ public class PersonalSalesSearchModel implements Serializable  {
 	private static final long serialVersionUID = 1L;
 	String onlyYandM;
 	int workMonthCount;
-	String employeeFirstName;//社員名
-	String employeeLastName;
+	String employeeName;//社員名
 	String employeeNo;//社員番号
 	String fiscalYear;//年度
 	String startYearAndMonth;//開始年月
@@ -27,17 +26,12 @@ public class PersonalSalesSearchModel implements Serializable  {
 	String otherAllowanceAmount;//他の手当
 	String grosProfits;//粗利
 	String paymentTotal;
-	public String getEmployeeFirstName() {
-		return employeeFirstName;
+
+	public String getEmployeeName() {
+		return employeeName;
 	}
-	public void setEmployeeFirstName(String employeeFirstName) {
-		this.employeeFirstName = employeeFirstName;
-	}
-	public String getEmployeeLastName() {
-		return employeeLastName;
-	}
-	public void setEmployeeLastName(String employeeLastName) {
-		this.employeeLastName = employeeLastName;
+	public void setEmployeeName(String employeeName) {
+		this.employeeName = employeeName;
 	}
 	public String getEmployeeNo() {
 		return employeeNo;
