@@ -8,7 +8,9 @@ import java.util.regex.Pattern;
  * @author Vin.Young
  *
  */
+
 public abstract class UtilsCheckMethod {
+
 	/**
 	 * 判断字符串是否为null或空
 	 * 
