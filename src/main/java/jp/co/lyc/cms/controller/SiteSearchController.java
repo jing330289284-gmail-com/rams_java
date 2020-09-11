@@ -121,6 +121,7 @@ public class SiteSearchController {
 	public Map<String, Object> getSiteSearchInfo(@RequestBody SiteSearchModel siteSearchModel) {
 		List<SiteSearchModel> siteList = new ArrayList<SiteSearchModel>();
 		Map<String, Object> sendMap = new HashMap<String, Object>();
+		errorsMessage = "";
 		DataBinder binder = new DataBinder(siteSearchModel);
 		binder.setValidator(new SiteSearchValidation());
 		binder.validate();
