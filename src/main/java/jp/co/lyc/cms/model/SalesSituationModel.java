@@ -40,7 +40,15 @@ public class SalesSituationModel implements Serializable {
 	String resumeInfo1;// 履歴書情報1
 	String resumeInfo2;// 履歴書情報2
 	String rowNo;// 
+	String nowCustomer;
 	
+	
+	public String getNowCustomer() {
+		return nowCustomer;
+	}
+	public void setNowCustomer(String nowCustomer) {
+		this.nowCustomer = nowCustomer;
+	}
 	public String getRowNo() {
 		return rowNo;
 	}
