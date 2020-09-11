@@ -35,8 +35,11 @@ public class EmployeeInfoValidation implements Validator {
 				if (UtilsCheckMethod.isNullOrEmpty(p.getEmployeeLastName())) {
 					errors.rejectValue("employeeLastName", "社員氏", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001","社員氏"));
 				}
-				if (UtilsCheckMethod.isNullOrEmpty(p.getPicInfo())) {
-					errors.rejectValue("picInfo", "電話番号", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001","電話番号"));
+				if (!UtilsCheckMethod.isNullOrEmpty(p.getPhoneNo())&&!UtilsCheckMethod.checkPhoneNo(p.getPhoneNo())) {
+					errors.rejectValue("phoneNo", "電話番号", StatusCodeToMsgMap.getErrMsgbyCode("MSG0012"));
+				}
+				if (!UtilsCheckMethod.isNullOrEmpty(p.getCompanyMail())&&!UtilsCheckMethod.checkMail(p.getCompanyMail())) {
+					errors.rejectValue("companyMail", "社内メール", StatusCodeToMsgMap.getErrMsgbyCode("MSG0011"));
 				}
 			} 
 		}
