@@ -25,7 +25,7 @@ public class EmployeeInfoValidation implements Validator {
 			if (methodName.equals("getEmployeeInfo")) {
 				if (!UtilsCheckMethod.isNullOrEmpty(p.getAgeFrom()) && !UtilsCheckMethod.isNullOrEmpty(p.getAgeTo())) {
 					if (Integer.parseInt(p.getAgeFrom()) < Integer.parseInt(p.getAgeTo())) {
-						errors.rejectValue("ageFrom", "", StatusCodeToMsgMap.getErrMsgbyCode("MSG007"));
+						errors.rejectValue("ageFrom", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG009","年齢"));
 					}
 				}
 			} else if (methodName.equals("insertEmployee")||methodName.equals("updateEmployee")) {
@@ -36,10 +36,13 @@ public class EmployeeInfoValidation implements Validator {
 					errors.rejectValue("employeeLastName", "社員氏", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001","社員氏"));
 				}
 				if (!UtilsCheckMethod.isNullOrEmpty(p.getPhoneNo())&&!UtilsCheckMethod.checkPhoneNo(p.getPhoneNo())) {
-					errors.rejectValue("phoneNo", "電話番号", StatusCodeToMsgMap.getErrMsgbyCode("MSG0012"));
+					errors.rejectValue("phoneNo", "電話番号", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG003","電話番号"));
 				}
 				if (!UtilsCheckMethod.isNullOrEmpty(p.getCompanyMail())&&!UtilsCheckMethod.checkMail(p.getCompanyMail())) {
-					errors.rejectValue("companyMail", "社内メール", StatusCodeToMsgMap.getErrMsgbyCode("MSG0011"));
+					errors.rejectValue("companyMail", "社内メール",StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG003","社内メール"));
+				}
+				if (!UtilsCheckMethod.isNullOrEmpty(p.getFurigana1()+p.getFurigana2())&&UtilsCheckMethod.checkKatakana(p.getFurigana1()+p.getFurigana2())) {
+					errors.rejectValue("furigana", "カタカナ", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG003","カタカナ"));
 				}
 			} 
 		}

@@ -142,8 +142,7 @@ public class PersonalSalesSearchController {
 
 	public Map<String, Object> getDetailParam(PersonalSalesSearchModel empInfo) {
 		Map<String, Object> sendMap = new HashMap<String, Object>();
-		String employeeFirstName = empInfo.getEmployeeFirstName();
-		String employeeLastName = empInfo.getEmployeeLastName();
+		String employeeName = empInfo.getEmployeeName();
 		String employeeNo = empInfo.getEmployeeNo();
 		String fiscalYear = empInfo.getFiscalYear();
 		String startYearAndMonth = empInfo.getStartYearAndMonth();
@@ -151,11 +150,8 @@ public class PersonalSalesSearchController {
 		if (employeeNo != null && employeeNo.length() != 0) {
 			sendMap.put("employeeNo", employeeNo);
 		}
-		if (employeeFirstName != null && employeeFirstName.length() != 0) {
-			sendMap.put("employeeFirstName", employeeFirstName);
-		}
-		if (employeeLastName != null && employeeLastName.length() != 0) {
-			sendMap.put("employeeLastName", employeeLastName);
+		if (employeeName != null && employeeName.length() != 0) {
+			sendMap.put("employeeName", employeeName);
 		}
 		if (fiscalYear != null && fiscalYear.length() != 0) {
 			sendMap.put("fiscalYear", fiscalYear);

@@ -48,8 +48,23 @@ public abstract class UtilsCheckMethod {
 	 * @return
 	 */
 	public static boolean checkMail(String mail) {
-		String mailFormat = "^[a-zA-Z0-9!#$%&'_`/=~\\*\\+\\-\\?\\^\\{\\|\\}]+(\\.[a-zA-Z0-9!#$%&'_`/=~\\*\\+\\-\\?\\^\\{\\|\\}]+)*+(.*)@[a-zA-Z0-9][a-zA-Z0-9\\-]*(\\.[a-zA-Z0-9\\-]+)+$";
-		if (mail.matches(mailFormat)) {
+		String format = "^[a-zA-Z0-9!#$%&'_`/=~\\*\\+\\-\\?\\^\\{\\|\\}]+(\\.[a-zA-Z0-9!#$%&'_`/=~\\*\\+\\-\\?\\^\\{\\|\\}]+)*+(.*)@[a-zA-Z0-9][a-zA-Z0-9\\-]*(\\.[a-zA-Z0-9\\-]+)+$";
+		if (mail.matches(format)) {
+			return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * カタカナをチェック
+	 * 
+	 * @param katakana
+	 * @return
+	 */
+	public static boolean checkKatakana(String katakana) {
+		String format = "^[ｦ-ﾟ]*$";
+		String format2 = "^[ァ-ヶー]*$";
+		if (katakana.matches(format)||katakana.matches(format2)) {
 			return true;
 		}
 		return false;

@@ -647,6 +647,17 @@ public class UtilsController {
 	}
 
 	/**
+	 * 社員氏名を取得する
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getEmployeeName", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getEmployeeName() {
+		List<ModelClass> list = utilsService.getEmployeeName();
+		return list;
+	}
+	/**
 	 * パスワードリセット
 	 * 
 	 * @param emp

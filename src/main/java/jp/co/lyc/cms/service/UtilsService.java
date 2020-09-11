@@ -201,6 +201,14 @@ public class UtilsService {
 	}
 
 	/**
+	 * 社員氏名取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getEmployeeName() {
+		return utilsMapper.getEmployeeName();
+	}
+	/**
 	 * お客様性質
 	 * 
 	 * @return

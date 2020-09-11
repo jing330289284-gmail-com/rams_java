@@ -22,6 +22,7 @@ FROM
             T002.developLanguage4,
             T002.developLanguage5) AS 'developLanguage',
     '' AS customer,
+    '' as nowCustomer,
     M012.siteRoleName AS siteRoleCode,
     '' AS 'unitPrice',
     '' AS 'admissionEndDate',
@@ -49,7 +50,7 @@ FROM
         LEFT JOIN
     T003AddressInfo T003 ON T001.employeeNo = T003.employeeNo
         LEFT JOIN
-    M013Station M013 ON M013.stationCode = T003.stationCode1
+    M013Station M013 ON M013.stationCode = T003.stationCode
         LEFT JOIN
     T002EmployeeDetail T002 ON T001.employeeNo = T002.employeeNo
         LEFT JOIN
@@ -61,10 +62,13 @@ FROM
 WHERE
     T002.intoCompanyYearAndMonth = #{sysDate}
         AND T002.intoCompanyCode = 1
-        AND T002.employeeNo NOT IN (SELECT 
+        AND T002.employeeNo NOT IN ((SELECT 
             employeeNo
         FROM
-            T006EmployeeSiteInfo)
+            T006EmployeeSiteInfo) union  (SELECT 
+            employeeNo
+        FROM
+            T010SalesSituation where salesProgressCode IN (3 , 5)))  
 ORDER BY T001.employeeNo) UNION ALL (SELECT 
     T001.employeeNo,
     T002.resumeInfo1,
@@ -79,6 +83,7 @@ ORDER BY T001.employeeNo) UNION ALL (SELECT
             T002.developLanguage4,
             T002.developLanguage5) AS 'developLanguage',
     '' AS customer,
+    T006.customerNo as nowCustomer,
     M012.siteRoleName AS siteRoleCode,
     T006.unitPrice,
     T006.admissionEndDate,
@@ -108,7 +113,7 @@ FROM
         LEFT JOIN
     T003AddressInfo T003 ON T001.employeeNo = T003.employeeNo
         LEFT JOIN
-    M013Station M013 ON M013.stationCode = T003.stationCode1
+    M013Station M013 ON M013.stationCode = T003.stationCode
         LEFT JOIN
     T002EmployeeDetail T002 ON T001.employeeNo = T002.employeeNo
         LEFT JOIN
@@ -133,6 +138,7 @@ ORDER BY T001.employeeNo) UNION ALL (SELECT
             T002.developLanguage4,
             T002.developLanguage5) AS 'developLanguage',
     '' AS customer,
+    '' as nowCustomer,
     M012.siteRoleName AS siteRoleCode,
     '' AS 'unitPrice',
     '' AS 'admissionEndDate',
@@ -162,17 +168,19 @@ FROM
         LEFT JOIN
     T003AddressInfo T003 ON T011.bpEmployeeNo = T003.employeeNo
         LEFT JOIN
-    M013Station M013 ON M013.stationCode = T003.stationCode1
+    M013Station M013 ON M013.stationCode = T003.stationCode
         LEFT JOIN
     T002EmployeeDetail T002 ON T011.bpEmployeeNo = T002.employeeNo
-        LEFT JOIN
-    T006EmployeeSiteInfo T006 ON T011.bpEmployeeNo = T006.employeeNo
         LEFT JOIN
     M012SiteRole M012 ON T002.siteRoleCode = M012.siteRoleCode
         LEFT JOIN
     T010SalesSituation T010 ON T011.bpEmployeeNo = T010.employeeNo
 WHERE
     T011.bpSalesProgressCode IN (1 , 2) and T011.bpOtherCompanyAdmissionEndDate = #{sysDate}
+    and T011.bpEmployeeNo  not in(SELECT 
+            employeeNo
+        FROM
+            rams.T006EmployeeSiteInfo)
 ORDER BY T011.bpEmployeeNo)union all(
 SELECT 
     T010.employeeNo AS employeeNo,
@@ -188,6 +196,7 @@ SELECT
             T002.developLanguage4,
             T002.developLanguage5) AS 'developLanguage',
     T006.customerNo AS customer,
+    T006.customerNo as nowCustomer,
     M012.siteRoleName AS siteRoleCode,
        T006.unitPrice,
     '' AS 'admissionEndDate',
@@ -217,7 +226,7 @@ FROM
         LEFT JOIN
     T003AddressInfo T003 ON T010.employeeNo = T003.employeeNo
         LEFT JOIN
-    M013Station M013 ON M013.stationCode = T003.stationCode1
+    M013Station M013 ON M013.stationCode = T003.stationCode
         LEFT JOIN
     T002EmployeeDetail T002 ON T010.employeeNo = T002.employeeNo
         LEFT JOIN

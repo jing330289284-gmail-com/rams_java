@@ -99,7 +99,8 @@ public class EmployeeInfoController extends BaseController {
 			@RequestParam(value = "resumeInfo1", required = false) MultipartFile resumeInfo1,
 			@RequestParam(value = "resumeInfo2", required = false) MultipartFile resumeInfo2,
 			@RequestParam(value = "residentCardInfo", required = false) MultipartFile residentCardInfo,
-			@RequestParam(value = "passportInfo", required = false) MultipartFile passportInfo) throws Exception {
+			@RequestParam(value = "passportInfo", required = false) MultipartFile passportInfo,
+			@RequestParam(value = "pictures", required = false) MultipartFile pictures) throws Exception {
 		logger.info("GetEmployeeInfoController.insertEmployee:" + "追加開始");
 		errorsMessage = "";
 		JSONObject jsonObject = JSON.parseObject(JSONEmp);
@@ -126,7 +127,7 @@ public class EmployeeInfoController extends BaseController {
 			sendMap = utilsController.upload(resumeInfo2, sendMap, "resumeInfo2", "履歴書2");
 			sendMap = utilsController.upload(residentCardInfo, sendMap, "residentCardInfo", "在留カード");
 			sendMap = utilsController.upload(passportInfo, sendMap, "passportInfo", "パスポート");
-			// sendMap = utilsController.upload(picInfo, sendMap, "picInfo", "写真");
+		    sendMap = utilsController.upload(pictures, sendMap, "picInfo", "写真");
 			employeeInfoService.insertEmployee((HashMap<String, Object>) sendMap);
 		} catch (Exception e) {
 			resultMap.put("result", false);
@@ -298,9 +299,9 @@ public class EmployeeInfoController extends BaseController {
 		String postcode = emp.getPostcode();// 郵便番号
 		String firstHalfAddress = emp.getFirstHalfAddress();//住所前半
 		String lastHalfAddress = emp.getLastHalfAddress();//住所後半
-		String stationCode1 = emp.getStationCode1();//　　最寄駅1
-		if (stationCode1 != null && stationCode1.length() != 0) {
-			sendMap.put("stationCode1", stationCode1);
+		String stationCode = emp.getStationCode();//　　最寄駅1
+		if (stationCode != null && stationCode.length() != 0) {
+			sendMap.put("stationCode", stationCode);
 		}
 		//　　住所情報終了
 
