@@ -1,0 +1,26 @@
+2020-09-11 09:47:09,537 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on DESKTOP-SPU4BNM with PID 11820 (C:\development\eclipse\202006\workspace\rams_java\target\classes started by LYC in C:\development\eclipse\202006\workspace\rams_java)
+2020-09-11 09:47:09,541 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2020-09-11 09:47:11,649 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2020-09-11 09:47:11,667 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2020-09-11 09:47:11,682 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2020-09-11 09:47:11,683 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2020-09-11 09:47:11,851 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2020-09-11 09:47:11,851 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 2220 ms
+2020-09-11 09:47:12,803 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2020-09-11 09:47:12,982 [main] WARN  o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration 106 - Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2020-09-11 09:47:13,178 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2020-09-11 09:47:13,210 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2020-09-11 09:47:13,213 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 4.292 seconds (JVM running for 4.711)
+2020-09-11 09:47:24,441 [main] INFO  jp.co.lyc.cms.ApplicationMain 50 - Starting ApplicationMain on DESKTOP-SPU4BNM with PID 13240 (C:\development\eclipse\202006\workspace\rams_java\target\classes started by LYC in C:\development\eclipse\202006\workspace\rams_java)
+2020-09-11 09:47:24,478 [main] INFO  jp.co.lyc.cms.ApplicationMain 647 - No active profile set, falling back to default profiles: default
+2020-09-11 09:47:26,159 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 90 - Tomcat initialized with port(s): 8080 (http)
+2020-09-11 09:47:26,175 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Initializing ProtocolHandler ["http-nio-8080"]
+2020-09-11 09:47:26,186 [main] INFO  o.a.catalina.core.StandardService 173 - Starting service [Tomcat]
+2020-09-11 09:47:26,186 [main] INFO  o.a.catalina.core.StandardEngine 173 - Starting Servlet engine: [Apache Tomcat/9.0.22]
+2020-09-11 09:47:26,371 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] 173 - Initializing Spring embedded WebApplicationContext
+2020-09-11 09:47:26,372 [main] INFO  o.s.web.context.ContextLoader 284 - Root WebApplicationContext: initialization completed in 1846 ms
+2020-09-11 09:47:27,275 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor 171 - Initializing ExecutorService 'applicationTaskExecutor'
+2020-09-11 09:47:27,459 [main] WARN  o.s.b.a.t.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration 106 - Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2020-09-11 09:47:27,661 [main] INFO  o.a.coyote.http11.Http11NioProtocol 173 - Starting ProtocolHandler ["http-nio-8080"]
+2020-09-11 09:47:27,691 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer 202 - Tomcat started on port(s): 8080 (http) with context path ''
+2020-09-11 09:47:27,694 [main] INFO  jp.co.lyc.cms.ApplicationMain 59 - Started ApplicationMain in 3.81 seconds (JVM running for 4.214)

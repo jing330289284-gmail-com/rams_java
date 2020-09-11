@@ -86,10 +86,11 @@ public class Login2Controller extends BaseController {
 		if(UtilsCheckMethod.isNullOrEmpty(mail)) {
 			return false;
 		}
+		//受信人のメール
 		emailModel.setToAddress(mail);
-		emailModel.setUserName("yanghf@lyc.co.jp");
-		emailModel.setPassword("Yanghongfei-2019");
-		emailModel.setFromAddress("yanghf@lyc.co.jp");
+		emailModel.setUserName("mail@lyc.co.jp");
+		emailModel.setPassword("Lyc2020-0908-");
+		emailModel.setFromAddress("mail@lyc.co.jp");
 		emailModel.setSubject("パスワードリセット");
 		UUID uuid = UUID.randomUUID();
 		String passwordResetId = uuid.toString();
@@ -97,8 +98,12 @@ public class Login2Controller extends BaseController {
 		sendMap.put("passwordResetId", passwordResetId);
 		sendMap.put("IdForEmployeeNo", loginModel.getEmployeeNo());
 		es.insert(sendMap);
-		String context = loginModel.getEmployeeNo() + "さんのパスワードリセットのURLは：　" + 
-				"http://127.0.0.1:3000/passwordReset?id=" + passwordResetId;
+		String context = loginModel.getEmployeeNo() + " さん、お疲れ様でした！\r\n" + 
+				"以下のリンクからパスワードの再設定を行って下さい。\r\n" +
+				"\r\n"+
+				"[パスワードを再設定する]\r\n" + 
+				"http://127.0.0.1:3000/passwordReset?id=" + passwordResetId + "\r\n" +
+				"※ご利用の方は上記URLを24時間内クリックしてお願いします。\r\n";
 		emailModel.setContext(context);
 		emailModel.setContextType("text/html;charset=utf-8");
 		utils.EmailSend(emailModel);

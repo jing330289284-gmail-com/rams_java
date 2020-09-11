@@ -6,7 +6,8 @@ public class CustomerInfoModel {
 
 	String customerNo;//お客様番号
 	String customerName;//お客様名
-	String stationCode;//本社
+	String stationCode;//本社場所コード
+	String stationName;//本社場所名前
 	String establishmentDate;//設立年月
 	String businessStartDate;//取引開始日
 	String levelCode;//お客様ランキングコード
@@ -40,6 +41,13 @@ public class CustomerInfoModel {
 	AccountInfoModel accountInfo;
 	TopCustomerInfoModel topCustomerInfo;
 	
+	
+	public String getStationName() {
+		return stationName;
+	}
+	public void setStationName(String stationName) {
+		this.stationName = stationName;
+	}
 	public AccountInfoModel getAccountInfo() {
 		return accountInfo;
 	}

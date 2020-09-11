@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import jp.co.lyc.cms.mapper.MasterInsertMapper;
 import jp.co.lyc.cms.model.MasterModel;
@@ -38,7 +39,7 @@ public class MasterInsertService {
 		try {
 			masterInsertMapper.insertMaster(sendMap);
 		} catch (Exception e) {
-			// TODO: handle exception
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			e.printStackTrace();
 			return false;
 		}
