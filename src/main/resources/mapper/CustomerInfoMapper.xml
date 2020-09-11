@@ -136,11 +136,11 @@
 		<if test="url != null">
 			url = #{url},
 		</if>	
-		<if test="PurchasingManagers != null">
+		<if test="purchasingManagers != null">
 			PurchasingManagers = #{PurchasingManagers},
 		</if>
-		<if test="PurchasingManagersOfmail != null">
-			PurchasingManagersOfmail = #{PurchasingManagersOfmail},
+		<if test="purchasingManagersMail != null">
+			PurchasingManagersMail = #{PurchasingManagersMail},
 		</if>
 		<if test="paymentsiteCode != null">
 			paymentsiteCode = #{paymentsiteCode},

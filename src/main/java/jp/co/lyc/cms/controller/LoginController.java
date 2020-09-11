@@ -8,6 +8,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.DataBinder;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,6 +25,8 @@ import jp.co.lyc.cms.model.EmployeeModel;
 import jp.co.lyc.cms.model.LoginModel;
 import jp.co.lyc.cms.service.EmployeeInfoService;
 import jp.co.lyc.cms.util.UtilsCheckMethod;
+import jp.co.lyc.cms.validation.CustomerInfoValidation;
+import jp.co.lyc.cms.validation.LoginValidation;
 
 @Controller
 @RequestMapping(value = "/login")
@@ -31,6 +36,7 @@ public class LoginController extends BaseController {
 	@Autowired
 	EmployeeInfoService es;
 	
+	String errorsMessage = "";
 	@RequestMapping(value = "/init", method = RequestMethod.POST)
 	@ResponseBody
 	public boolean init() {
@@ -48,7 +54,21 @@ public class LoginController extends BaseController {
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@ResponseBody
-	public HashMap<String, EmployeeModel> login(@RequestBody LoginModel loginModel, EmployeeModel employeeModel ) {
+	public Map<String, Object> login(@RequestBody LoginModel loginModel, EmployeeModel employeeModel ) {
+		errorsMessage = "";
+		DataBinder binder = new DataBinder(loginModel);
+		binder.setValidator(new LoginValidation());
+		binder.validate();
+		BindingResult results = binder.getBindingResult();
+		Map<String, Object> result = new HashMap<>();
+		if (results.hasErrors()) {
+			results.getAllErrors().forEach(o -> {
+				FieldError error = (FieldError) o;
+				errorsMessage += error.getDefaultMessage();// エラーメッセージ
+			});
+			result.put("errorsMessage", errorsMessage);// エラーメッセージ
+			return result;
+		}
 		logger.info("LoginController.login:" + "ログイン開始");
 		HttpSession loginSession = getSession();
 		Map<String, String> sendMap = new HashMap<String, String>();
@@ -57,9 +77,8 @@ public class LoginController extends BaseController {
 		sendMap.put("password", loginModel.password);
 		employeeModel = es.getEmployeeModel(sendMap);
 		if(!loginModel.getVerificationCode().equals( loginSession.getAttribute("verificationCode"))) {
-			employeeModel = null;
-			resultMap.put("employeeModel", employeeModel);
-			return resultMap;
+			errorsMessage += "入力した社員番号やパスワードや認証番号が間違いため、ログインできません";
+			return result;
 		}
 		resultMap.put("employeeModel", employeeModel);
 		if(employeeModel != null) {
@@ -72,12 +91,26 @@ public class LoginController extends BaseController {
 			loginSession.invalidate();//重置session
 		}
 		logger.info("LoginController.login:" + "ログイン終了");
-		return resultMap;
+		return result;
 	}
 	@RequestMapping(value = "/sendVerificationCode", method = RequestMethod.POST)
 	@ResponseBody
-	public boolean sendVerificationCode(@RequestBody LoginModel loginModel) {
+	public Map<String, Object> sendVerificationCode(@RequestBody LoginModel loginModel) {
 		//发送短信
+		errorsMessage = "";
+		DataBinder binder = new DataBinder(loginModel);
+		binder.setValidator(new LoginValidation());
+		binder.validate();
+		BindingResult results = binder.getBindingResult();
+		Map<String, Object> result = new HashMap<>();
+		if (results.hasErrors()) {
+			results.getAllErrors().forEach(o -> {
+				FieldError error = (FieldError) o;
+				errorsMessage += error.getDefaultMessage();// エラーメッセージ
+			});
+			result.put("errorsMessage", errorsMessage);// エラーメッセージ
+			return result;
+		}
 		HttpSession loginSession = getSession();
 		Map<String, String> sendMap = new HashMap<String, String>();
 		sendMap.put("employeeNo", loginModel.employeeNo);
@@ -87,11 +120,12 @@ public class LoginController extends BaseController {
 		if(employeeModel != null) {
 			phoneNoInDB = es.getEmployeePhoneNo(loginModel.getEmployeeNo());
 		}else {
-			return false;
+			errorsMessage += "ユーザー名またはパースワード入力が間違いました。";
+			result.put("errorsMessage", errorsMessage);
+			return result;
 		}
         AmazonSNSClient snsClient = new AmazonSNSClient();
         String message = "";//短信内容
-        double a = Math.random()*10000;
         String str="0123456789";
 		StringBuilder sb=new StringBuilder(4);
 		for(int i=0;i<4;i++){
@@ -106,7 +140,7 @@ public class LoginController extends BaseController {
                 new HashMap<String, MessageAttributeValue>();
 //        sendSMSMessage(snsClient, message, phoneNumber, smsAttributes);
         loginSession.setAttribute("verificationCode", verificationCode);
-        return true;
+        return result;
 	}
 	/**
 	 * 发送短信

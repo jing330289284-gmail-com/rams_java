@@ -2,6 +2,8 @@ package jp.co.lyc.cms.validation;
 
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
+
+import jp.co.lyc.cms.model.CustomerDepartmentInfoModel;
 import jp.co.lyc.cms.model.CustomerInfoModel;
 import jp.co.lyc.cms.util.StatusCodeToMsgMap;
 import jp.co.lyc.cms.util.UtilsCheckMethod;
@@ -26,6 +28,28 @@ public class CustomerInfoValidation implements Validator {
 			if (methodName.equals("toroku")) {
 				if (UtilsCheckMethod.isNullOrEmpty(p.getCustomerName())) {
 						errors.rejectValue("customerName", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001","お客様名"));
+				}
+				if(!UtilsCheckMethod.isNullOrEmpty(p.getPurchasingManagersMail())) {
+					if (UtilsCheckMethod.checkMail(p.getPurchasingManagersMail())) {
+						errors.rejectValue("purchasingManagersMail", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG0011","お客様メール"));
+					}
+				}
+				if(!UtilsCheckMethod.isNullOrEmpty(p.getUrl())) {
+					if (UtilsCheckMethod.checkUrl(p.getUrl())) {
+						errors.rejectValue("url", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG0011","お客様URL"));
+					}
+				}
+				for(CustomerDepartmentInfoModel a : p.getCustomerDepartmentList()) {
+					if(!UtilsCheckMethod.isNullOrEmpty(a.getCustomerDepartmentMail())) {
+						if(UtilsCheckMethod.checkMail(a.getCustomerDepartmentMail())) {
+							errors.rejectValue("customerDepartmentMail", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG0011","お客様部門メール"));
+						}
+					}
+				}
+				if(p.getTopCustomerInfo() != null && !UtilsCheckMethod.isNullOrEmpty(p.getTopCustomerInfo().getUrl())) {
+					if(UtilsCheckMethod.checkUrl(p.getTopCustomerInfo().getUrl())) {
+						errors.rejectValue("topCustomerInfo.url", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG0011","上位お客様のURL"));
+					}
 				}
 			}
 		}

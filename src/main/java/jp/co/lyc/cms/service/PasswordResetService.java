@@ -35,6 +35,15 @@ public class PasswordResetService {
 	};
 	
 	/**
+	 * パスワードリセットメールの再発信
+	 * @param passwordResetId
+	 * @return
+	 */
+	public void deleteAll(String IdForEmployeeNo) {
+		passwordResetMapper.deleteAll(IdForEmployeeNo);
+	};
+	
+	/**
 	 * パスワードリセット
 	 * @param passwordResetId
 	 * @return

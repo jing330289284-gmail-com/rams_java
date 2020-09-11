@@ -77,7 +77,7 @@ public abstract class UtilsCheckMethod {
 	 * @return
 	 */
 	public static boolean checkUrl(String URL) {
-		String URLFormat = "^[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
+		String URLFormat = "^((?!-)[A-Za-z0-9-]{1,63}(?<!-)\\\\.)+[A-Za-z]{2,6}$";
 		if (URL.matches(URLFormat)) {
 			return true;
 		}

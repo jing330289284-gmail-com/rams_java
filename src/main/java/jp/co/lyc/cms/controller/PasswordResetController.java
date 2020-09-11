@@ -59,7 +59,7 @@ public class PasswordResetController extends BaseController{
 		sendMap.put("password", pswMod.getPassword());
 		boolean result = passwordResetService.update(sendMap);
 		if(result) {
-			passwordResetService.delete(passwordResetId);
+			passwordResetService.deleteAll(pswModel.getIdForEmployeeNo());
 		}else {
 			return "1";//1は失敗
 		}
