@@ -14,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.DataBinder;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,15 +27,14 @@ import com.alibaba.fastjson.TypeReference;
 
 import jp.co.lyc.cms.common.BaseController;
 import jp.co.lyc.cms.model.AccountInfoModel;
+import jp.co.lyc.cms.model.BpInfoModel;
 import jp.co.lyc.cms.model.CostInfoModel;
 import jp.co.lyc.cms.model.EmployeeModel;
-import jp.co.lyc.cms.model.BpInfoModel;
 import jp.co.lyc.cms.service.EmployeeInfoService;
 import jp.co.lyc.cms.util.UtilsController;
 import jp.co.lyc.cms.validation.EmployeeInfoValidation;
 
 @Controller
-@CrossOrigin(origins = "http://127.0.0.1:3000")
 @RequestMapping(value = "/employee")
 public class EmployeeInfoController extends BaseController {
 
