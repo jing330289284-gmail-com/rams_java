@@ -201,7 +201,7 @@ public class UtilsService {
 	}
 
 	/**
-	 * 社員氏名
+	 * 社員氏名取得
 	 * 
 	 * @return
 	 */

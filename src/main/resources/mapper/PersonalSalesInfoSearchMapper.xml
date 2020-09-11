@@ -4,7 +4,7 @@
 	<resultMap id="detailsInfo"
 		type="jp.co.lyc.cms.model.PersonalSalesSearchModel" />
 
-		
+		<!-- 個人売上 -->
 	<select id="getEmployeeSalesInfo" parameterType="map"
 		resultMap="detailsInfo">
 		SELECT distinct
