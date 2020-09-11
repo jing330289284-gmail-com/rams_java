@@ -7,6 +7,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,17 +20,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import jp.co.lyc.cms.common.BaseController;
 import jp.co.lyc.cms.model.MasterModel;
 import jp.co.lyc.cms.service.MasterUpdateService;
+import jp.co.lyc.cms.util.StatusCodeToMsgMap;
 
 @Controller
 @CrossOrigin(origins = "http://127.0.0.1:3000")
 @RequestMapping(value = "/masterUpdate")
 public class MasterUpdateController extends BaseController {
 
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+
 	@Autowired
 	MasterUpdateService masterUpdateService;
 
 	@RequestMapping(value = "/getMasterInfo", method = RequestMethod.POST)
 	@ResponseBody
+	// master信息查询
 	public List<MasterModel> getMasterInfo(@RequestBody Map master) {
 		List<MasterModel> masterList = new ArrayList<MasterModel>();
 
@@ -51,12 +57,22 @@ public class MasterUpdateController extends BaseController {
 	 */
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ResponseBody
-	public boolean toroku(@RequestBody MasterModel masterModel) {
-		boolean result = checkHave(masterModel);
-		if (result) {
-			return update(masterModel);
+	public Map<String, Object> toroku(@RequestBody MasterModel masterModel) {
+		logger.info("MasterUpdateController.toroku:" + "追加開始");
+		// チェック
+		Map<String, Object> result = new HashMap<>();
+		if (checkHave(masterModel) == false) {
+			result.put("errorsMessage", StatusCodeToMsgMap.getErrMsgbyCode("MSG008"));// エラーメッセージ
+			return result;
 		}
-		return false;
+		// 修正处理
+		if (update(masterModel)) {
+			result.put("result", true);
+		} else {
+			result.put("result", false);
+		}
+		logger.info("MasterUpdateController.toroku:" + "追加結束");
+		return result;
 	}
 
 	/**
@@ -75,7 +91,7 @@ public class MasterUpdateController extends BaseController {
 	}
 
 	/**
-	 * インサート
+	 * アップデート
 	 * 
 	 * @return
 	 */

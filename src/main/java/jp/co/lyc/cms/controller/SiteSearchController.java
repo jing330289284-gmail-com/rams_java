@@ -10,6 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.DataBinder;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,12 +21,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import jp.co.lyc.cms.model.SiteSearchModel;
 import jp.co.lyc.cms.service.SiteSearchService;
+import jp.co.lyc.cms.validation.SiteSearchValidation;
 
 @Controller
 @CrossOrigin(origins = "http://127.0.0.1:3000")
 public class SiteSearchController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
-    //去“/”
+
+	// 日期 去“/”
 	private String dateToString(String date) {
 		String[] a = date.split("/");
 		String b = a[0] + a[1] + a[2];
@@ -108,13 +113,29 @@ public class SiteSearchController {
 
 	@Autowired
 	SiteSearchService SiteSearchService;
+	String errorsMessage = "";
 
 	@RequestMapping(value = "/getSiteSearchInfo", method = RequestMethod.POST)
 	@ResponseBody
-	public List<SiteSearchModel> getSiteSearchInfo(@RequestBody SiteSearchModel siteSearchModel) {
+	// 现场信息查询
+	public Map<String, Object> getSiteSearchInfo(@RequestBody SiteSearchModel siteSearchModel) {
 		List<SiteSearchModel> siteList = new ArrayList<SiteSearchModel>();
 		Map<String, Object> sendMap = new HashMap<String, Object>();
+		DataBinder binder = new DataBinder(siteSearchModel);
+		binder.setValidator(new SiteSearchValidation());
+		binder.validate();
+		BindingResult results = binder.getBindingResult();
+		Map<String, Object> result = new HashMap<>();
+		if (results.hasErrors()) {
+			results.getAllErrors().forEach(o -> {
+				FieldError error = (FieldError) o;
+				errorsMessage += error.getDefaultMessage();// エラーメッセージ
+			});
+			result.put("errorsMessage", errorsMessage);// エラーメッセージ
+			return result;
+		}
 		try {
+			// 取得前端送过来的值
 			String employeeName = siteSearchModel.getEmployeeName();
 			String employeeStatus = siteSearchModel.getEmployeeStatus();
 			String employeeForm = siteSearchModel.getEmployeeForm();
@@ -132,6 +153,7 @@ public class SiteSearchController {
 			String admissionStartDate = siteSearchModel.getAdmissionStartDate();
 			String admissionEndDate = siteSearchModel.getAdmissionEndDate();
 			String dataAcquisitionPeriod = siteSearchModel.getDataAcquisitionPeriod();
+			// 存入map 传入后台查询用
 			if (employeeName != null && employeeName.length() != 0) {
 				sendMap.put("employeeName", employeeName);
 			}
@@ -185,14 +207,18 @@ public class SiteSearchController {
 			}
 			siteList = SiteSearchService.getSiteInfo(sendMap);
 			for (int a = 0; a < siteList.size(); a++) {
-				siteList.get(a).setRowNo((a+1)+"");
+				// 行番号设定
+				siteList.get(a).setRowNo((a + 1) + "");
+				// 勤務期間设定
 				siteList.get(a).setWorkDate(
 						dateToPeriod(siteList.get(a).getAdmissionStartDate(), siteList.get(a).getAdmissionEndDate()));
+				// 社员形式设定
 				if (siteList.get(a).getEmployeeFrom() != null && siteList.get(a).getEmployeeFrom().length() != 0) {
-					siteList.get(a).setEmployeeFrom("BP(" + siteList.get(a).getEmployeeFrom()+")");
+					siteList.get(a).setEmployeeFrom("BP(" + siteList.get(a).getEmployeeFrom() + ")");
 				} else {
 					siteList.get(a).setEmployeeFrom("社員");
 				}
+				// 勤務時間设定
 				siteList.get(a).setWorkTime(
 						timeCalculate(siteList.get(a).getAdmissionStartDate(), siteList.get(a).getAdmissionEndDate()));
 			}
@@ -201,7 +227,8 @@ public class SiteSearchController {
 		}
 
 		logger.info("GetEmployeeInfoController.getEmployeeInfo:" + "検索結束");
-		return siteList;
+		result.put("data", siteList);
+		return result;
 	}
 
 }

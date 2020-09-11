@@ -358,9 +358,9 @@
 		postcode=#{postcode},
 		firstHalfAddress=#{firstHalfAddress},
 		lastHalfAddress=#{lastHalfAddress},
-		stationCode1=(SELECT
-		coalesce(stationCode,-1) from M013Station where
-		stationName=#{nearestStation} ),
+		stationCode1=#{stationCode1},
+		stationCode2=#{stationCode2},
+		housingStatus=#{housingStatus},
 		updateTime=NOW(),
 		updateUser=#{updateUser}
 		WHERE
@@ -468,12 +468,12 @@
 		M013.stationCode
 		LEFT
 		JOIN
-		T005ExpensesInfo AS T005 ON
+		T005WagesInfo AS T005 ON
 		T001.employeeNo =T005.employeeNo
 		and
 		reflectYearAndMonth = (SELECT
 		MAX(reflectYearAndMonth) FROM
-		T005ExpensesInfo)
+		T005WagesInfo)
 		LEFT JOIN
 		T007CustomerInfo AS T007 ON
 		T006.customerNo =
@@ -501,11 +501,9 @@
 		#{postcode},
 		#{firstHalfAddress},
 		#{lastHalfAddress},
-		(SELECT
-		coalesce(stationCode,-1) from M013Station where
-		stationName=#{nearestStation} ),
-		null,
-		null,
+		#{stationCode1},
+		#{stationCode2},
+		#{housingStatus},
 		NOW(),
 		NOW(),
 		#{updateUser}
