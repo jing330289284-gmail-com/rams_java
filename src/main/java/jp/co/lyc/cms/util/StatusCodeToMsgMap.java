@@ -10,7 +10,6 @@ public abstract class StatusCodeToMsgMap {
     private static Map<String, String> statusCodeToMsg = new HashMap<String, String>();
 
     static {
-
         statusCodeToMsg.put("MSG001", "[0]入力してください。");
         statusCodeToMsg.put("MSG002", "ユーザー名またはパースワード入力が間違いました。");
         statusCodeToMsg.put("MSG003", "[0]が入力間違いました。");
@@ -20,6 +19,7 @@ public abstract class StatusCodeToMsgMap {
         statusCodeToMsg.put("MSG007", "開始年齢が終了年齢より大きい。");
         statusCodeToMsg.put("MSG008", "登録データが存在していますので、もう一度確認してください。");
         statusCodeToMsg.put("MSG009", "正しい[0]範囲を入力してください。");
+        statusCodeToMsg.put("MSG0010", "単価エラー；");
     }
 
     public static String getErrMsgbyCode(String ecode) {

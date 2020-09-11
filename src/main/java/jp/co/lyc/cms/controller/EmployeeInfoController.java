@@ -109,7 +109,7 @@ public class EmployeeInfoController extends BaseController {
 		binder.setValidator(new EmployeeInfoValidation());
 		binder.validate();
 		BindingResult results = binder.getBindingResult();
-		Map<String, Object> resultMap = new HashMap<>();// 繰り返し
+		Map<String, Object> resultMap = new HashMap<>();// 戻す
 		if (results.hasErrors()) {
 			results.getAllErrors().forEach(o -> {
 				FieldError error = (FieldError) o;
@@ -262,9 +262,7 @@ public class EmployeeInfoController extends BaseController {
 		String englishLevelCode = emp.getEnglishLevelCode();// 英語
 		String certification1 = emp.getCertification1();// 資格1
 		String certification2 = emp.getCertification2();// 資格2
-		String postcode = emp.getPostcode();// 郵便番号
-		String firstHalfAddress = emp.getFirstHalfAddress();//
-		String lastHalfAddress = emp.getLastHalfAddress();//
+
 		String developLanguage1 = emp.getDevelopLanguage1();// 技術语言1
 		String developLanguage2 = emp.getDevelopLanguage2();// 技術语言2
 		String developLanguage3 = emp.getDevelopLanguage3();// 技術语言3
@@ -296,6 +294,15 @@ public class EmployeeInfoController extends BaseController {
 		CostInfoModel costModel = emp.getCostModel();// 諸費用
 		BpInfoModel bpInfoModel = emp.getBpInfoModel();// bp情報
 		String password = emp.getPassword();// パスワード
+		//　　住所情報開始
+		String postcode = emp.getPostcode();// 郵便番号
+		String firstHalfAddress = emp.getFirstHalfAddress();//住所前半
+		String lastHalfAddress = emp.getLastHalfAddress();//住所後半
+		String stationCode1 = emp.getStationCode1();//　　最寄駅1
+		if (stationCode1 != null && stationCode1.length() != 0) {
+			sendMap.put("stationCode1", stationCode1);
+		}
+		//　　住所情報終了
 
 		if (employeeNo != null && employeeNo.length() != 0) {
 			sendMap.put("employeeNo", employeeNo);
@@ -468,6 +475,7 @@ public class EmployeeInfoController extends BaseController {
 		if (password != null && password.length() != 0) {
 			sendMap.put("password", password);
 		}
+		
 		return sendMap;
 	}
 

@@ -11,7 +11,7 @@ public class CustomerDepartmentInfoModel {
 	String customerDepartmentMail;//メール
 	String updateUser;//更新者
 	String rowNo;//行番号
-	String shoriKbn;//処理区分
+	String actionType;//処理区分
 	String resultCode;//処理結果
 	
 	public String getPositionName() {
@@ -26,11 +26,11 @@ public class CustomerDepartmentInfoModel {
 	public void setResultCode(String resultCode) {
 		this.resultCode = resultCode;
 	}
-	public String getShoriKbn() {
-		return shoriKbn;
+	public String getActionType() {
+		return actionType;
 	}
-	public void setShoriKbn(String shoriKbn) {
-		this.shoriKbn = shoriKbn;
+	public void setActionType(String actionType) {
+		this.actionType = actionType;
 	}
 	public String getRowNo() {
 		return rowNo;

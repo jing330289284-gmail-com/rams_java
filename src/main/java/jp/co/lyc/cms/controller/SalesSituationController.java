@@ -9,6 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.DataBinder;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +21,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import jp.co.lyc.cms.common.BaseController;
 import jp.co.lyc.cms.model.SalesSituationModel;
 import jp.co.lyc.cms.service.SalesSituationService;
+import jp.co.lyc.cms.validation.EmployeeInfoValidation;
+import jp.co.lyc.cms.validation.SalesSituationValidation;
 
 @Controller
 @CrossOrigin(origins = "http://127.0.0.1:3000")
@@ -53,18 +58,33 @@ public class SalesSituationController  extends BaseController {
 	
 	@RequestMapping(value = "/updateSalesSituation", method = RequestMethod.POST)
 	@ResponseBody
-	public int updateSalesSituation(@RequestBody SalesSituationModel model) {
+	public Map<String, Object> updateSalesSituation(@RequestBody SalesSituationModel model) {
 
 		model.setUpdateUser(getSession().getAttribute("employeeName").toString());
 		logger.info("updateSalesSituation:" + "検索開始");
+		String[] errorsMessage = new String[]{""};
+		DataBinder binder = new DataBinder(model);
+		binder.setValidator(new SalesSituationValidation());
+		binder.validate();
+		BindingResult results = binder.getBindingResult();
+		Map<String, Object> result = new HashMap<>();
+		if (results.hasErrors()) {
+			results.getAllErrors().forEach((o) -> {
+				FieldError error = (FieldError) o;
+				errorsMessage[0] += error.getDefaultMessage();// エラーメッセージ
+			});
+			result.put("errorsMessage", errorsMessage[0]);// エラーメッセージ
+			return result;
+		}
 		int index = 0;
 		try {
 			index = salesSituationService.insertSalesSituation(model);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		result.put("updateREcords", index);
 		logger.info("updateSalesSituation" + "検索結束");
-		return index;
+		return result;
 	}
 
 	/**

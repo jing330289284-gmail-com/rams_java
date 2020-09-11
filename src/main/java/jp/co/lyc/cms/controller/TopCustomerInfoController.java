@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import jp.co.lyc.cms.common.BaseController;
 import jp.co.lyc.cms.mapper.TopCustomerInfoMapper;
 import jp.co.lyc.cms.model.TopCustomerInfoModel;
 import jp.co.lyc.cms.service.TopCustomerInfoService;
@@ -17,7 +19,7 @@ import jp.co.lyc.cms.service.TopCustomerInfoService;
 @Controller
 @CrossOrigin(origins = "http://127.0.0.1:3000")
 @RequestMapping(value = "/topCustomerInfo")
-public class TopCustomerInfoController {
+public class TopCustomerInfoController extends BaseController{
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
@@ -49,6 +51,7 @@ public class TopCustomerInfoController {
 	public boolean toroku(@RequestBody TopCustomerInfoModel topCustomerMod) {
 		logger.info("TopCustomerInfoController.onloadPage:" + "登録開始");
 		boolean result = true;
+		topCustomerMod.setUpdateUser((String)getSession().getAttribute("employeeNo"));
 		TopCustomerInfoModel checkMod = topCustomerInfoService.selectTopCustomerInfo(topCustomerMod.getTopCustomerNo());
 		if (checkMod == null && topCustomerMod.getActionType().equals("insert")) {
 			topCustomerInfoMapper.insertTopCustomerInfo(topCustomerInfoService.setSendMap(topCustomerMod));

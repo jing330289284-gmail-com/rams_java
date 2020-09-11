@@ -130,8 +130,9 @@ public class CustomerInfoService {
 				}
 				for(CustomerDepartmentInfoModel customerDepartmentInfoModel:
 					customerInfoMod.getCustomerDepartmentList()) {
-					customerDepartmentInfoModel.setShoriKbn(customerInfoMod.getActionType());
+					customerDepartmentInfoModel.setActionType(customerInfoMod.getActionType());
 					customerDepartmentInfoModel.setCustomerNo(customerInfoMod.getCustomerNo());
+					customerDepartmentInfoModel.setUpdateUser(customerInfoMod.getUpdateUser());
 					String meisaiResult = 
 							meisaiToroku(customerDepartmentInfoModel);
 					if(meisaiResult.equals("1")) {
@@ -160,8 +161,9 @@ public class CustomerInfoService {
 				}
 				for(CustomerDepartmentInfoModel customerDepartmentInfoModel:
 					customerInfoMod.getCustomerDepartmentList()) {
-					customerDepartmentInfoModel.setShoriKbn(customerInfoMod.getActionType());
+					customerDepartmentInfoModel.setActionType(customerInfoMod.getActionType());
 					customerDepartmentInfoModel.setCustomerNo(customerInfoMod.getCustomerNo());
+					customerDepartmentInfoModel.setUpdateUser(customerInfoMod.getUpdateUser());
 					String meisaiResult = 
 							meisaiToroku(customerDepartmentInfoModel);
 					if(meisaiResult.equals("1")) {
@@ -211,7 +213,7 @@ public class CustomerInfoService {
 		sendMap.put("customerDepartmentMail", customerDepartmentInfoModel.getCustomerDepartmentMail());
 		sendMap.put("updateUser", customerDepartmentInfoModel.getUpdateUser());
 		//resultCode : 0(処理成功)1（処理失敗）
-		if(customerDepartmentInfoModel.getShoriKbn().equals("update")) {
+		if(customerDepartmentInfoModel.getActionType().equals("update")) {
 			if(selectCustomerDepartmentInfo(sendMap).size() != 0 ) {
 				try {
 					resultCode = (updateCustomerDepartment(sendMap) ? "0" : "1");	
@@ -231,7 +233,7 @@ public class CustomerInfoService {
 					resultCode = "1";
 				}
 			}
-		}else if(customerDepartmentInfoModel.getShoriKbn().equals("insert")) {
+		}else if(customerDepartmentInfoModel.getActionType().equals("insert")) {
 			try {
 				resultCode = (insertCustomerDepartment(sendMap) ? "0" : "1");
 			} catch (Exception e) {

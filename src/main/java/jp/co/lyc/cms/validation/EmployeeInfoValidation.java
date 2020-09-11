@@ -30,10 +30,13 @@ public class EmployeeInfoValidation implements Validator {
 				}
 			} else if (methodName.equals("insertEmployee")||methodName.equals("updateEmployee")) {
 				if (UtilsCheckMethod.isNullOrEmpty(p.getEmployeeFristName())) {
-					errors.rejectValue("employeeFristName", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001","社員名"));
+					errors.rejectValue("employeeFristName", "社員名", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001","社員名"));
 				}
 				if (UtilsCheckMethod.isNullOrEmpty(p.getEmployeeLastName())) {
-					errors.rejectValue("employeeLastName", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001","社員氏"));
+					errors.rejectValue("employeeLastName", "社員氏", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001","社員氏"));
+				}
+				if (UtilsCheckMethod.isNullOrEmpty(p.getPicInfo())) {
+					errors.rejectValue("picInfo", "電話番号", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001","電話番号"));
 				}
 			} 
 		}

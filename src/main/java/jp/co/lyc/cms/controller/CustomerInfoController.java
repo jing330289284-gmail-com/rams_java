@@ -2,6 +2,7 @@ package jp.co.lyc.cms.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.DataBinder;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +25,8 @@ import jp.co.lyc.cms.common.BaseController;
 import jp.co.lyc.cms.model.CustomerDepartmentInfoModel;
 import jp.co.lyc.cms.model.CustomerInfoModel;
 import jp.co.lyc.cms.service.CustomerInfoService;
+import jp.co.lyc.cms.validation.CustomerInfoValidation;
+import jp.co.lyc.cms.validation.EmployeeInfoValidation;
 import jp.co.lyc.cms.model.TopCustomerInfoModel;
 @Controller
 @CrossOrigin(origins = "http://127.0.0.1:3000")
@@ -37,6 +43,8 @@ public class CustomerInfoController extends BaseController{
 	//上位お客様情報service
 	@Autowired
 	TopCustomerInfoController topCustomerInfoController;
+	
+	String errorsMessage = "";
 	/**
 	 * 页面加载
 	 * @param customerInfoMod
@@ -81,29 +89,6 @@ public class CustomerInfoController extends BaseController{
 		return resultMap;	
 	}
 	/**
-	 * 上位お客様連想
-	 * @param customerInfoMod
-	 * @return
-	 */
-	@RequestMapping(value = "/getTopCustomer", method = RequestMethod.POST)
-	@ResponseBody
-	public ArrayList<TopCustomerInfoModel> selectTopCustomer(@RequestBody CustomerInfoModel customerInfoMod) {
-		logger.info("CustomerInfoController.onloadPage:" + "上位お客様連想");
-		return customerInfoSer.selectTopCustomer(customerInfoMod.getTopCustomerName());
-	}
-	/**
-	 * 部門連想
-	 * @param customerDepartmentInfoModel
-	 * @return
-	 */
-	@RequestMapping(value = "/selectDepartmentMaster", method = RequestMethod.POST)
-	@ResponseBody
-	public ArrayList<CustomerDepartmentInfoModel> selectDepartmentMaster(@RequestBody 
-			CustomerDepartmentInfoModel customerDepartmentInfoModel){
-		logger.info("CustomerInfoController.onloadPage:" + "部門連想");
-		return customerInfoSer.selectDepartmentMaster(customerDepartmentInfoModel.getCustomerDepartmentName());
-	}
-	/**
 	 * 登录按钮
 	 * @param customerInfoMod
 	 * @return 0成功，1失败，2上位客户不存在，3明细登录失败，4部门在部门表中不存在
@@ -111,10 +96,25 @@ public class CustomerInfoController extends BaseController{
 	@RequestMapping(value = "/toroku", method = RequestMethod.POST)
 	@ResponseBody
 	@Transactional(rollbackFor = Exception.class)
-	public String toroku(@RequestBody CustomerInfoModel customerInfoMod) {
+	public Map<String, Object> toroku(@RequestBody CustomerInfoModel customerInfoMod) {
+		errorsMessage = "";
+		DataBinder binder = new DataBinder(customerInfoMod);
+		binder.setValidator(new CustomerInfoValidation());
+		binder.validate();
+		BindingResult results = binder.getBindingResult();
+		Map<String, Object> result = new HashMap<>();
+		if (results.hasErrors()) {
+			results.getAllErrors().forEach(o -> {
+				FieldError error = (FieldError) o;
+				errorsMessage += error.getDefaultMessage();// エラーメッセージ
+			});
+			result.put("errorsMessage", errorsMessage);// エラーメッセージ
+			return result;
+		}
 		HttpSession session = getSession();
 		customerInfoMod.setUpdateUser((String)session.getAttribute("employeeNo"));
-		return customerInfoSer.CustomerInfoToDB(customerInfoMod);
+		result.put("result", customerInfoSer.CustomerInfoToDB(customerInfoMod));
+		return result;
 	}
 
 	/**
@@ -127,6 +127,7 @@ public class CustomerInfoController extends BaseController{
 	@Transactional(rollbackFor = Exception.class)
 	public String meisaiUpdate(@RequestBody CustomerDepartmentInfoModel customerDepartmentInfoModel) {
 		logger.info("CustomerInfoController.onloadPage:" + "明細更新開始");
+		customerDepartmentInfoModel.setUpdateUser((String)getSession().getAttribute("employeeNo"));
 		try {
 			logger.info("CustomerInfoController.onloadPage:" + "明細更新終了");
 			return customerInfoSer.meisaiToroku(customerDepartmentInfoModel);
