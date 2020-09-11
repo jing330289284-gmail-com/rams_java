@@ -10,19 +10,18 @@ public abstract class StatusCodeToMsgMap {
     private static Map<String, String> statusCodeToMsg = new HashMap<String, String>();
 
     static {
-        statusCodeToMsg.put("MSG001", "[0]入力してください。");
-        statusCodeToMsg.put("MSG002", "ユーザー名またはパースワード入力が間違いました。");
-        statusCodeToMsg.put("MSG003", "[0]が入力間違いました。");
-        statusCodeToMsg.put("MSG004", "データ存在してないです、検索条件を確認してください。");
-        statusCodeToMsg.put("MSG005", "[0]を確認してください。");
-        statusCodeToMsg.put("MSG006", "削除できない、[0]を確認してください。");
-        statusCodeToMsg.put("MSG007", "開始年齢が終了年齢より大きい。");
-        statusCodeToMsg.put("MSG008", "登録データが存在していますので、もう一度確認してください。");
-        statusCodeToMsg.put("MSG009", "正しい[0]範囲を入力してください。");
-        statusCodeToMsg.put("MSG0010", "単価エラー；");
-        statusCodeToMsg.put("MSG0011", "メールのフォーマットが間違っています；");
-        statusCodeToMsg.put("MSG0012", "電話番号フォーマットが間違っています；");
-        statusCodeToMsg.put("MSG0013", "カタカナフォーマットが間違っています；");
+    	  statusCodeToMsg.put("MSG001", "[0]入力してください。");
+          statusCodeToMsg.put("MSG002", "ユーザー名またはパースワード入力が間違いました。");
+          statusCodeToMsg.put("MSG003", "[0]が間違っているので、もう一度確認してください");
+          statusCodeToMsg.put("MSG004", "データ存在してないです、検索条件を確認してください。");
+          statusCodeToMsg.put("MSG005", "[0]を確認してください。");
+          statusCodeToMsg.put("MSG006", "削除できない、[0]を確認してください。");
+          statusCodeToMsg.put("MSG007", "正しい[0]を入力してください");
+          statusCodeToMsg.put("MSG008", "登録データが存在していますので、もう一度確認してください。");
+          statusCodeToMsg.put("MSG009", "正しい[0]範囲を入力してください。");
+          statusCodeToMsg.put("MSG0010", "");
+          statusCodeToMsg.put("MSG0011", "");
+          statusCodeToMsg.put("MSG0012", "");
     }
 
     public static String getErrMsgbyCode(String ecode) {
