@@ -3,34 +3,37 @@
 <mapper namespace="jp.co.lyc.cms.mapper.PersonalSalesSearchMapper">
 	<resultMap id="detailsInfo"
 		type="jp.co.lyc.cms.model.PersonalSalesSearchModel" />
+
 		
 	<select id="getEmployeeSalesInfo" parameterType="map"
 		resultMap="detailsInfo">
-		SELECT 
+		SELECT distinct
 		T005.reflectYearAndMonth,
+		T006.admissionStartDate,
 		M005.employeeFormName,
 		T007.customerName,
 		T006.unitPrice,
 		T005.salary,
 		T005.transportationExpenses,
 		T005.SocialInsuranceFlag,
-		<if test="SocialInsuranceFlag == '1'">
 		T005.insuranceFeeAmount,
-		</if>
 		T005.bonusFlag,
-		<if test="bonusFlag =='1'">
 		T005.scheduleOfBonusAmount,
-		</if>
 		T005.leaderAllowanceAmount,
-		T005.otherAllowanceAmount
+		T005.otherAllowanceAmount,
+		(T006.unitPrice*10000 - T005.salary - T005.transportationExpenses - T005.insuranceFeeAmount - T005.scheduleOfBonusAmount - T005.leaderAllowanceAmount - T005.otherAllowanceAmount)
+		As grosProfits,
+		(T005.salary + T005.transportationExpenses + T005.insuranceFeeAmount + T005.scheduleOfBonusAmount + T005.leaderAllowanceAmount + T005.otherAllowanceAmount) As paymentTotal
 		FROM
 		T001Employee As T001
 		Left JOIN 
 		T005ExpensesInfo As T005 ON T001.employeeNo = T005.employeeNo
+		AND reflectYearAndMonth &lt;= #{getYandM}
 		LEFT JOIN 
 		M005EmployeeForm As M005 ON T005.employeeFormCode = M005.employeeFormCode
 		LEFT JOIN 
-		T006EmployeeSiteInfo As T006 ON T005.employeeNo = T006.employeeNo
+		T006EmployeeSiteInfo As T006 ON T005.employeeNo = T006.employeeNo	
+		AND #{getYandM} between left(admissionStartDate,6) and left(admissionEndDate,6)
 		LEFT JOIN 
 		T007CustomerInfo As T007 ON T006.customerNo  =T007.customerNo
 		WHERE
@@ -40,19 +43,7 @@
 		<if test = "employeeNo != null">
 		AND T005.employeeNo=#{employeeNo}
 		</if>
-		<if test = "fiscalYear != null &amp;&amp; startYearAndMonth != null &amp;&amp; endYearAndMonth != null">
-		AND left(reflectYearAndMonth,4) =#{fiscalYear}
-		</if>
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	</select>
+		ORDER BY ABS(#{getYandM} - reflectYearAndMonth) ASC
+		limit 1
+		</select>
 </mapper>

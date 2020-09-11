@@ -12,4 +12,5 @@ public interface PersonalSalesSearchMapper{
 
 	
 	public List<PersonalSalesSearchModel> getEmployeeSalesInfo(Map<String, Object> sendMap);
+
 }
