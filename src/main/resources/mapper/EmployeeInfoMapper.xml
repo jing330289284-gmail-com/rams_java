@@ -23,7 +23,7 @@
 		T003.postcode,
 		T003.firstHalfAddress,
 		T003.lastHalfAddress,
-		T003.stationCode1,
+		T003.stationCode,
 		TIMESTAMPDIFF(MONTH,
 		NOW(),
 		T002.stayPeriod) AS stayPeriod,
@@ -358,9 +358,7 @@
 		postcode=#{postcode},
 		firstHalfAddress=#{firstHalfAddress},
 		lastHalfAddress=#{lastHalfAddress},
-		stationCode1=#{stationCode1},
-		stationCode2=#{stationCode2},
-		housingStatus=#{housingStatus},
+		stationCode=#{stationCode},
 		updateTime=NOW(),
 		updateUser=#{updateUser}
 		WHERE
@@ -431,9 +429,7 @@
 		T003.postcode,
 		T003.firstHalfAddress,
 		T003.lastHalfAddress,
-		T003.stationCode1,
-		T003.stationCode2,
-		T003.housingStatus,
+		T003.stationCode,
 		T003.createTime,
 		T003.updateUser
 	</sql>
@@ -464,7 +460,7 @@
 		LEFT
 		JOIN
 		rams.M013Station AS M013 ON
-		T003.stationCode1 =
+		T003.stationCode =
 		M013.stationCode
 		LEFT
 		JOIN
@@ -489,9 +485,7 @@
 		postcode,
 		firstHalfAddress,
 		lastHalfAddress,
-		stationCode1,
-		stationCode2,
-		housingStatus,
+		stationCode,
 		updateTime,
 		createTime,
 		updateUser
@@ -501,9 +495,7 @@
 		#{postcode},
 		#{firstHalfAddress},
 		#{lastHalfAddress},
-		#{stationCode1},
-		#{stationCode2},
-		#{housingStatus},
+		#{stationCode},
 		NOW(),
 		NOW(),
 		#{updateUser}

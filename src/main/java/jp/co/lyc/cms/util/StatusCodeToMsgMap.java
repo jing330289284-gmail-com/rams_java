@@ -20,8 +20,9 @@ public abstract class StatusCodeToMsgMap {
         statusCodeToMsg.put("MSG008", "登録データが存在していますので、もう一度確認してください。");
         statusCodeToMsg.put("MSG009", "正しい[0]範囲を入力してください。");
         statusCodeToMsg.put("MSG0010", "単価エラー；");
-        statusCodeToMsg.put("MSG0011", "郵箱格式錯誤；");
-        statusCodeToMsg.put("MSG0012", "電話號碼格式錯誤；");
+        statusCodeToMsg.put("MSG0011", "メールのフォーマットが間違っています；");
+        statusCodeToMsg.put("MSG0012", "電話番号フォーマットが間違っています；");
+        statusCodeToMsg.put("MSG0013", "カタカナフォーマットが間違っています；");
     }
 
     public static String getErrMsgbyCode(String ecode) {
