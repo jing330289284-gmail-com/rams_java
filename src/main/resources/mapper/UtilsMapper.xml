@@ -7,6 +7,15 @@
 		SELECT employeeFormCode code,employeeFormName name FROM
 		M005EmployeeForm;
 	</select>
+	
+	<!-- EmployeeName -->
+	<select id ="getEmployeeName"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT CONCAT(employeeFristName,employeeLastName) As employeeName ,
+		employeeNo
+		FROM T001Employee
+	</select>
+	
 
 	<!-- 在留資格 -->
 	<select id="getVisa" resultType="jp.co.lyc.cms.model.ModelClass">
