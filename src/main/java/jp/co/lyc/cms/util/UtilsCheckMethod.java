@@ -54,4 +54,18 @@ public abstract class UtilsCheckMethod {
 		}
 		return false;
 	}
+	
+	/**
+	 * メールをチェック
+	 * 
+	 * @param URL
+	 * @return
+	 */
+	public static boolean checkUrl(String URL) {
+		String URLFormat = "^[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
+		if (URL.matches(URLFormat)) {
+			return true;
+		}
+		return false;
+	}
 }
