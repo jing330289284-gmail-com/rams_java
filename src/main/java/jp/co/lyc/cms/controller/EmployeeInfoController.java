@@ -261,7 +261,6 @@ public class EmployeeInfoController extends BaseController {
 		String englishLevelCode = emp.getEnglishLevelCode();// 英語
 		String certification1 = emp.getCertification1();// 資格1
 		String certification2 = emp.getCertification2();// 資格2
-
 		String developLanguage1 = emp.getDevelopLanguage1();// 技術语言1
 		String developLanguage2 = emp.getDevelopLanguage2();// 技術语言2
 		String developLanguage3 = emp.getDevelopLanguage3();// 技術语言3
