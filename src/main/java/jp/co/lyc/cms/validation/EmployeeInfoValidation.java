@@ -47,6 +47,9 @@ public class EmployeeInfoValidation implements Validator {
 				if (UtilsCheckMethod.isNullOrEmpty(p.getCompanyMail())) {
 					errors.rejectValue("companyMail", "社内メール",StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001","社内メール"));
 				}
+				if (!UtilsCheckMethod.isNullOrEmpty(p.getAlphabetName())&&!UtilsCheckMethod.alphabetFormat(p.getAlphabetName())) {
+					errors.rejectValue("alphabetName", "ローマ字",StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG003","ローマ字"));
+				}
 			} 
 		}
 
