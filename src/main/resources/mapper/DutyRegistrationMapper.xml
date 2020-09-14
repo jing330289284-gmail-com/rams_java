@@ -26,6 +26,44 @@
 			#{breakTimeSumHour}
 		)
     </insert>
+    <insert id="insertDuty" parameterType="String">
+		INSERT INTO `employeeWorkTime`( 
+		    `employeeNo`
+		    , `yearAndMonth`
+		    , `day`
+		    , `week`
+		    , `morningTime`
+		    , `afternoonTime`
+		    , `holidayFlag`
+		    , `workTime`
+		    , `confirmFlag`
+		    , `siteCustomer`
+		    , `customer`
+		    , `siteResponsiblePerson`
+		    , `systemName`
+		    , `createTime`
+		    , `updateTime`
+		    , `updateUser`
+		) 
+		VALUES ( 
+		      #{employeeNo}
+		    , #{yearAndMonth}
+		    , #{day}
+		    , #{week}
+		    , #{morningTime}
+		    , #{afternoonTime}
+		    , #{holidayFlag}
+		    , #{workTime}
+		    , #{confirmFlag}
+		    , #{siteCustomer}
+		    , #{customer}
+		    , #{siteResponsiblePerson}
+		    , #{systemName}
+		    , now()
+		    , now()
+		    , #{updateUser}
+		)
+    </insert>
     <select id="selectDutyRegistration" resultMap="DutyRegistration" parameterType="String">
 		SELECT
 			employeeNo,
