@@ -3,8 +3,7 @@
 <mapper namespace="jp.co.lyc.cms.mapper.EmployeeInfoMapper">
 	<resultMap id="Employee"
 		type="jp.co.lyc.cms.model.EmployeeModel" />
-	<resultMap id="stringResult"
-		type="String" />
+	<resultMap id="stringResult" type="String" />
 	<select id="getEmployeeInfo" parameterType="map"
 		resultMap="Employee">
 		SELECT
@@ -275,74 +274,77 @@
 		UPDATE
 		T001Employee
 		SET
-		employeeFristName =#{employeeFristName},
-		employeeLastName =#{employeeLastName},
-		password=#{password},
-		authorityCode =#{authorityCode},
+		<if test="employeeFristName!=  null">
+			employeeFristName =#{employeeFristName},
+		</if>
+		<if test="employeeLastName!=  null">
+			employeeLastName =#{employeeLastName},
+		</if>
+		<if test="password!=  null">
+			password=#{password},
+		</if>
+		<if test="employeeFristName!= null">
+			authorityCode =#{employeeFristName},
+		</if>
 		updateTime = NOW(),
 		updateUser =
 		#{updateUser}
 		WHERE
-		employeeNo = #{employeeNo}
+		employeeNo =
+		#{employeeNo}
 	</update>
 	<!-- 社員情報詳細を修正 -->
 	<update id="updateEmployeeInfoDetail" parameterType="String">
 		UPDATE
 		T002EmployeeDetail
 		SET
-		genderStatus=#{genderStatus},
-		birthday=#{birthday},
-		japaneseCalendar=#{japaneseCalendar},
-		furigana=#{furigana},
-		nationalityCode=#{nationalityCode},
-		birthplace=#{birthplace},
-		intoCompanyCode=#{intoCompanyCode},
-		intoCompanyYearAndMonth=
-		#{intoCompanyYearAndMonth},
-		employeeStatus=#{employeeStatus},
-		retirementYearAndMonth=#{retirementYearAndMonth},
-		myNumber=
-		#{myNumber},
-		occupationCode=#{occupationCode},
-		comeToJapanYearAndMonth=#{comeToJapanYearAndMonth},
-		graduationUniversity=#{graduationUniversity},
-		graduationYearAndMonth
-		=#{graduationYearAndMonth},
-		major=#{major},
-		residenceCode=
-		#{residenceCode},
-		residenceCardNo=#{residenceCardNo},
-		stayPeriod=
-		#{stayPeriod},
-		japaneseLevelCode=#{japaneseLevelCode},
-		englishLevelCode=#{englishLevelCode},
-		developLanguage1=
-		#{developLanguage1},
-		developLanguage2=#{developLanguage2},
-		developLanguage3=#{developLanguage3},
-		developLanguage4=
-		#{developLanguage4},
-		developLanguage5=#{developLanguage5},
-		japaneseCalendar=#{japaneseCalendar},
-		certification1=
-		#{certification1},
-		certification2=#{certification2},
-		resumeInfo1=
-		#{resumeInfo1},
-		resumeRemark1=#{resumeRemark1},
-		resumeInfo2=
-		#{resumeInfo2},
-		resumeRemark2=#{resumeRemark2},
-		residentCardInfo=
-		#{residentCardInfo},
-		passportInfo=#{passportInfo},
-		companyMail=
-		#{companyMail},
-		phoneNo=#{phoneNo},
-		employmentInsuranceNo=
-		#{employmentInsuranceNo},
-		siteRoleCode=
-		#{siteRoleCode},
+			genderStatus=#{genderStatus},
+			birthday=#{birthday},
+			japaneseCalendar=#{japaneseCalendar},
+			furigana=#{furigana},
+			nationalityCode=#{nationalityCode},
+			birthplace=#{birthplace},
+			intoCompanyCode=#{intoCompanyCode},
+			intoCompanyYearAndMonth=#{intoCompanyYearAndMonth},
+			employeeStatus=#{employeeStatus},
+			retirementYearAndMonth=#{retirementYearAndMonth},
+			myNumber=#{myNumber},
+			occupationCode=#{occupationCode},
+			comeToJapanYearAndMonth=#{comeToJapanYearAndMonth},
+			graduationUniversity=#{graduationUniversity},
+			graduationYearAndMonth=#{graduationYearAndMonth},
+			major=#{major},
+			residenceCode=#{residenceCode},
+			residenceCardNo=#{residenceCardNo},
+			stayPeriod=#{stayPeriod},
+			japaneseLevelCode=#{japaneseLevelCode},
+			englishLevelCode=#{englishLevelCode},
+			developLanguage1=#{developLanguage1},
+			developLanguage2=#{developLanguage2},
+			developLanguage3=#{developLanguage3},
+			developLanguage4=#{developLanguage4},
+			developLanguage5=#{developLanguage5},
+			japaneseCalendar=#{japaneseCalendar},
+			certification1=#{certification1},
+			certification2=#{certification2},
+		<if test="resumeInfo1!= null">
+			resumeInfo1=#{resumeInfo1},
+		</if>
+			resumeRemark1=#{resumeRemark1},
+		<if test="resumeInfo2!= null">
+			resumeInfo2=#{resumeInfo2},
+		</if>
+			resumeRemark2=#{resumeRemark2},
+		<if test="residentCardInfo!= null">
+			residentCardInfo=#{residentCardInfo},
+		</if>
+		<if test="passportInfo!= null">
+			passportInfo=#{passportInfo},
+		</if>
+			companyMail=#{companyMail},
+			phoneNo=#{phoneNo},
+			employmentInsuranceNo=#{employmentInsuranceNo},
+			siteRoleCode=#{siteRoleCode},
 		updateTime=NOW(),
 		updateUser=
 		#{updateUser}
@@ -512,20 +514,24 @@
 		M009.authorityName
 		FROM
 		T001Employee T001
-		LEFT JOIN M009Authority M009 ON T001.authorityCode = M009.authorityCode
-		LEFT JOIN T002EmployeeDetail T002 ON T001.employeeNo = T002.employeeNo
+		LEFT JOIN M009Authority M009 ON T001.authorityCode =
+		M009.authorityCode
+		LEFT JOIN T002EmployeeDetail T002 ON T001.employeeNo
+		= T002.employeeNo
 		WHERE
 		T001. PASSWORD = MD5(#{password})
-		AND T001.employeeNo = #{employeeNo}
+		AND
+		T001.employeeNo = #{employeeNo}
 	</select>
 	<!-- ログイン社員番号の電話番号を取得 -->
 	<select id="getEmployeePhoneNo" parameterType="String"
 		resultMap="stringResult">
 		SELECT
-			phoneNo 
+		phoneNo
 		FROM
-			T002EmployeeDetail 
+		T002EmployeeDetail
 		WHERE
-			employeeNo = #{employeeNo}
+		employeeNo =
+		#{employeeNo}
 	</select>
 </mapper>
