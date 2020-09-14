@@ -30,7 +30,7 @@ public class CustomerInfoValidation implements Validator {
 						errors.rejectValue("customerName", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001","お客様名"));
 				}
 				if(!UtilsCheckMethod.isNullOrEmpty(p.getPurchasingManagersMail())) {
-					if (UtilsCheckMethod.checkMail(p.getPurchasingManagersMail())) {
+					if (!UtilsCheckMethod.checkMail(p.getPurchasingManagersMail())) {
 						errors.rejectValue("purchasingManagersMail", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG0011","お客様メール"));
 					}
 				}
@@ -41,13 +41,13 @@ public class CustomerInfoValidation implements Validator {
 				}
 				for(CustomerDepartmentInfoModel a : p.getCustomerDepartmentList()) {
 					if(!UtilsCheckMethod.isNullOrEmpty(a.getCustomerDepartmentMail())) {
-						if(UtilsCheckMethod.checkMail(a.getCustomerDepartmentMail())) {
-							errors.rejectValue("customerDepartmentMail", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG0011","お客様部門メール"));
+						if(!UtilsCheckMethod.checkMail(a.getCustomerDepartmentMail())) {
+							errors.rejectValue("customerDepartmentList.CustomerDepartmentInfoModel.customerDepartmentMail", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG0011","お客様部門メール"));
 						}
 					}
 				}
 				if(p.getTopCustomerInfo() != null && !UtilsCheckMethod.isNullOrEmpty(p.getTopCustomerInfo().getUrl())) {
-					if(UtilsCheckMethod.checkUrl(p.getTopCustomerInfo().getUrl())) {
+					if(!UtilsCheckMethod.checkUrl(p.getTopCustomerInfo().getUrl())) {
 						errors.rejectValue("topCustomerInfo.url", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG0011","上位お客様のURL"));
 					}
 				}
