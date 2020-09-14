@@ -44,6 +44,9 @@ public class EmployeeInfoValidation implements Validator {
 				if (!UtilsCheckMethod.isNullOrEmpty(p.getFurigana1()+p.getFurigana2())&&UtilsCheckMethod.checkKatakana(p.getFurigana1()+p.getFurigana2())) {
 					errors.rejectValue("furigana", "カタカナ", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG003","カタカナ"));
 				}
+				if (UtilsCheckMethod.isNullOrEmpty(p.getCompanyMail())) {
+					errors.rejectValue("companyMail", "社内メール",StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001","社内メール"));
+				}
 			} 
 		}
 
