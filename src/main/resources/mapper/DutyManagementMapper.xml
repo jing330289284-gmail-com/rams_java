@@ -4,20 +4,21 @@
     <resultMap id="DutyManagement" type="jp.co.lyc.cms.model.DutyManagementModel"/>
     <select id="selectDutyManagement" resultMap="DutyManagement" parameterType="String">
 		SELECT
+			(@rowNo:=@rowNo + 1) AS rowNo,
 			t001.employeeNo,
-			t001.employeeFristName,
-			t001.employeeLastName,
+			concat_ws(t001.employeeFristName,t001.employeeLastName) as employeeName,
 			t007.customerName,
 			m013.stationName,
-			t006.payOffRange1,
-			t006.payOffRange2,
-			wtt.sumWorkTime,
-			ewt.employeeWorkTimeHaveData,
-			wtt.attendanceRegisterFlag,
-			wtt.updateTime,
+			concat_ws("-",t006.payOffRange1,t006.payOffRange2) as payOffRange,
+			wtt.sumWorkTime workTime,
+			if(wtt.sumWorkTime>t006.payOffRange2,t005.salary/t006.payOffRange2*(wtt.sumWorkTime-t006.payOffRange2),if(t006.payOffRange1>wtt.sumWorkTime,t005.salary/t006.payOffRange1*(wtt.sumWorkTime-t006.payOffRange1),0))overTimePay,
+			if(ewt.employeeWorkTimeHaveData=1,'　アップロード',if(wtt.attendanceRegisterFlag=1,'　時間登録',''))checkSection,
+			ewt.updateTime,
 			wtt.approvalStatus
 		FROM 
 			T001Employee as t001
+		left join
+			T005WagesInfo as t005 on t001.employeeNo=t005.employeeNo
 		left join
 			T006EmployeeSiteInfo as t006 on t001.employeeNo=t006.employeeNo
 		left join
@@ -25,11 +26,25 @@
 		left join
 			M013Station as m013 on t007.stationCode=m013.stationCode
 		left join
-			(SELECT employeeNo,yearAndMonth,IF(count(*)>0,1,0) as employeeWorkTimeHaveData FROM employeeWorkTime)ewt on t001.employeeNo=ewt.employeeNo
+			(SELECT employeeNo,updateTime,yearAndMonth,1 as employeeWorkTimeHaveData FROM employeeWorkTime group by employeeNo)ewt on t001.employeeNo=ewt.employeeNo
 		left join workTotalTime as wtt on t001.employeeNo=wtt.employeeNo and ewt.yearAndMonth=wtt.attendanceYearAndMonth 
+		,(SELECT   @rowNo:=0) AS rowNo
 		WHERE
-		1=1
-
+		ewt.yearAndMonth = #{yearAndMonth}
+		<if test="approvalStatus == 0">
+		</if>
+		<if test="approvalStatus == 1">
+			and wtt.approvalStatus!=1
+		</if>
+		<if test="approvalStatus == 2">
+			and wtt.approvalStatus==1
+		</if>
+		<if test="approvalStatus == 3">
+			and wtt.sumWorkTime>0
+		</if>
+		<if test="approvalStatus == 4">
+			and ewt.employeeWorkTimeHaveData==1
+		</if>
     </select>
 	<update id="updateDutyManagement" parameterType="String">
 		UPDATE workTotalTime
