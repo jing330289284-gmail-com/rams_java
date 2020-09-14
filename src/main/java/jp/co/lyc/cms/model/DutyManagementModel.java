@@ -5,17 +5,24 @@ import java.util.Map;
 
 public class DutyManagementModel {
 
-
+	int rowNo;
 	String employeeNo;
 	String employeeName;
 	String customerName;
 	String stationName;
 	String payOffRange;
 	Integer workTime;
-	String workTotalTimeHaveData;
-	String employeeWorkTimeHaveData;
-	Integer approvalStatus;
+	String  overTimePay;
+	String checkSection;
+	String updateTime;
 	String updateUser;
+	
+	public int getRowNo() {
+		return rowNo;
+	}
+	public void setRowNo(int rowNo) {
+		this.rowNo = rowNo;
+	}
 	public String getEmployeeNo() {
 		return employeeNo;
 	}
@@ -52,23 +59,17 @@ public class DutyManagementModel {
 	public void setWorkTime(Integer workTime) {
 		this.workTime = workTime;
 	}
-	public String getWorkTotalTimeHaveData() {
-		return workTotalTimeHaveData;
+	public String getOverTimePay() {
+		return overTimePay;
 	}
-	public void setWorkTotalTimeHaveData(String workTotalTimeHaveData) {
-		this.workTotalTimeHaveData = workTotalTimeHaveData;
+	public void setOverTimePay(String overTimePay) {
+		this.overTimePay = overTimePay;
 	}
-	public String getEmployeeWorkTimeHaveData() {
-		return employeeWorkTimeHaveData;
+	public String getCheckSection() {
+		return checkSection;
 	}
-	public void setEmployeeWorkTimeHaveData(String employeeWorkTimeHaveData) {
-		this.employeeWorkTimeHaveData = employeeWorkTimeHaveData;
-	}
-	public Integer getApprovalStatus() {
-		return approvalStatus;
-	}
-	public void setApprovalStatus(Integer approvalStatus) {
-		this.approvalStatus = approvalStatus;
+	public void setCheckSection(String checkSection) {
+		this.checkSection = checkSection;
 	}
 	public String getUpdateUser() {
 		return updateUser;
@@ -76,4 +77,11 @@ public class DutyManagementModel {
 	public void setUpdateUser(String updateUser) {
 		this.updateUser = updateUser;
 	}
+	public String getUpdateTime() {
+		return updateTime;
+	}
+	public void setUpdateTime(String updateTime) {
+		this.updateTime = updateTime;
+	}
+	
 }
