@@ -7,6 +7,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,7 +48,6 @@ import jp.co.lyc.cms.service.UtilsService;
 import net.sf.json.JSONObject;
 
 @Controller
-@CrossOrigin(origins = "http://127.0.0.1:3000")
 public class UtilsController {
 
 	@Autowired
@@ -467,7 +468,7 @@ public class UtilsController {
 
 	@RequestMapping(value = "/getStation", method = RequestMethod.POST)
 	@ResponseBody
-	public List<ModelClass> getstation() {
+	public List<ModelClass> getStation() {
 		List<ModelClass> list = utilsService.getStation();
 		return list;
 	}
