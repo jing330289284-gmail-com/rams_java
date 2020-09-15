@@ -274,6 +274,9 @@
 		UPDATE
 		T001Employee
 		SET
+		<if test="employeeNo!=  null">
+			employeeNo =#{employeeNo},
+		</if>
 		<if test="employeeFristName!=  null">
 			employeeFristName =#{employeeFristName},
 		</if>
@@ -298,53 +301,56 @@
 		UPDATE
 		T002EmployeeDetail
 		SET
-			genderStatus=#{genderStatus},
-			birthday=#{birthday},
-			japaneseCalendar=#{japaneseCalendar},
-			furigana=#{furigana},
-			nationalityCode=#{nationalityCode},
-			birthplace=#{birthplace},
-			intoCompanyCode=#{intoCompanyCode},
-			intoCompanyYearAndMonth=#{intoCompanyYearAndMonth},
-			employeeStatus=#{employeeStatus},
-			retirementYearAndMonth=#{retirementYearAndMonth},
-			myNumber=#{myNumber},
-			occupationCode=#{occupationCode},
-			comeToJapanYearAndMonth=#{comeToJapanYearAndMonth},
-			graduationUniversity=#{graduationUniversity},
-			graduationYearAndMonth=#{graduationYearAndMonth},
-			major=#{major},
-			residenceCode=#{residenceCode},
-			residenceCardNo=#{residenceCardNo},
-			stayPeriod=#{stayPeriod},
-			japaneseLevelCode=#{japaneseLevelCode},
-			englishLevelCode=#{englishLevelCode},
-			developLanguage1=#{developLanguage1},
-			developLanguage2=#{developLanguage2},
-			developLanguage3=#{developLanguage3},
-			developLanguage4=#{developLanguage4},
-			developLanguage5=#{developLanguage5},
-			japaneseCalendar=#{japaneseCalendar},
-			certification1=#{certification1},
-			certification2=#{certification2},
+		<if test="employeeNo!=  null">
+			employeeNo =#{employeeNo},
+		</if>
+		genderStatus=#{genderStatus},
+		birthday=#{birthday},
+		japaneseCalendar=#{japaneseCalendar},
+		furigana=#{furigana},
+		nationalityCode=#{nationalityCode},
+		birthplace=#{birthplace},
+		intoCompanyCode=#{intoCompanyCode},
+		intoCompanyYearAndMonth=#{intoCompanyYearAndMonth},
+		employeeStatus=#{employeeStatus},
+		retirementYearAndMonth=#{retirementYearAndMonth},
+		myNumber=#{myNumber},
+		occupationCode=#{occupationCode},
+		comeToJapanYearAndMonth=#{comeToJapanYearAndMonth},
+		graduationUniversity=#{graduationUniversity},
+		graduationYearAndMonth=#{graduationYearAndMonth},
+		major=#{major},
+		residenceCode=#{residenceCode},
+		residenceCardNo=#{residenceCardNo},
+		stayPeriod=#{stayPeriod},
+		japaneseLevelCode=#{japaneseLevelCode},
+		englishLevelCode=#{englishLevelCode},
+		developLanguage1=#{developLanguage1},
+		developLanguage2=#{developLanguage2},
+		developLanguage3=#{developLanguage3},
+		developLanguage4=#{developLanguage4},
+		developLanguage5=#{developLanguage5},
+		japaneseCalendar=#{japaneseCalendar},
+		certification1=#{certification1},
+		certification2=#{certification2},
 		<if test="resumeInfo1!= null">
 			resumeInfo1=#{resumeInfo1},
 		</if>
-			resumeRemark1=#{resumeRemark1},
+		resumeRemark1=#{resumeRemark1},
 		<if test="resumeInfo2!= null">
 			resumeInfo2=#{resumeInfo2},
 		</if>
-			resumeRemark2=#{resumeRemark2},
+		resumeRemark2=#{resumeRemark2},
 		<if test="residentCardInfo!= null">
 			residentCardInfo=#{residentCardInfo},
 		</if>
 		<if test="passportInfo!= null">
 			passportInfo=#{passportInfo},
 		</if>
-			companyMail=#{companyMail},
-			phoneNo=#{phoneNo},
-			employmentInsuranceNo=#{employmentInsuranceNo},
-			siteRoleCode=#{siteRoleCode},
+		companyMail=#{companyMail},
+		phoneNo=#{phoneNo},
+		employmentInsuranceNo=#{employmentInsuranceNo},
+		siteRoleCode=#{siteRoleCode},
 		updateTime=NOW(),
 		updateUser=
 		#{updateUser}
