@@ -32,13 +32,12 @@ public class DutyManagementController {
 	 */
 	@RequestMapping(value = "/selectDutyManagement", method = RequestMethod.POST)
 	@ResponseBody
-	public boolean breakTimeInsert(@RequestBody HashMap<String, String> dutyManagementModel) {
+	public List<DutyManagementModel> breakTimeInsert(@RequestBody HashMap<String, String> dutyManagementModel) {
 		logger.info("DutyManagementController.selectDutyManagement:" + "検索開始");
-		boolean result = false;
 		logger.info(dutyManagementModel.toString());
 		List<DutyManagementModel> checkMod = dutyManagementService.selectDutyManagement(dutyManagementModel);
 		logger.info("DutyManagementController.selectDutyManagement:" + "検索終了");
-		return result;
+		return checkMod;
 	}
 
 	/**
