@@ -14,7 +14,7 @@
 			concat("￥",FORMAT(if(wtt.sumWorkTime>t006.payOffRange2,t005.salary/t006.payOffRange2*(wtt.sumWorkTime-t006.payOffRange2),if(t006.payOffRange1>wtt.sumWorkTime,t005.salary/t006.payOffRange1*(wtt.sumWorkTime-t006.payOffRange1),0)),0))overTimePay, 
 			if(ewt.employeeWorkTimeHaveData=1,'　アップロード',if(wtt.attendanceRegisterFlag=1,'　時間登録',''))checkSection,
 			ewt.updateTime,
-			wtt.approvalStatus
+			if(wtt.approvalStatus=1,"〇","×")approvalStatus
 		FROM 
 			T001Employee as t001
 		left join
