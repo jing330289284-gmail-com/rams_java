@@ -37,13 +37,13 @@
 			and wtt.approvalStatus!=1
 		</if>
 		<if test="approvalStatus == 2">
-			and wtt.approvalStatus==1
+			and wtt.approvalStatus=1
 		</if>
 		<if test="approvalStatus == 3">
 			and wtt.sumWorkTime>0
 		</if>
 		<if test="approvalStatus == 4">
-			and ewt.employeeWorkTimeHaveData==1
+			and ewt.employeeWorkTimeHaveData=1
 		</if>
     </select>
 	<update id="updateDutyManagement" parameterType="String">
