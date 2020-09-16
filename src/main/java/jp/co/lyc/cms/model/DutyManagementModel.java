@@ -1,8 +1,5 @@
 package jp.co.lyc.cms.model;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class DutyManagementModel {
 
 	int rowNo;
@@ -16,6 +13,7 @@ public class DutyManagementModel {
 	String checkSection;
 	String updateTime;
 	String updateUser;
+	String approvalStatus;
 	
 	public int getRowNo() {
 		return rowNo;
@@ -82,6 +80,12 @@ public class DutyManagementModel {
 	}
 	public void setUpdateTime(String updateTime) {
 		this.updateTime = updateTime;
+	}
+	public String getApprovalStatus() {
+		return approvalStatus;
+	}
+	public void setApprovalStatus(String approvalStatus) {
+		this.approvalStatus = approvalStatus;
 	}
 	
 }
