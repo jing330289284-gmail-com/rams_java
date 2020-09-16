@@ -57,9 +57,8 @@
 		h.bpEmployeeNo
 		WHERE
 		1=1
-		<if test="employeeName!= null and employeeName!= ''">
-			AND CONCAT(g.employeeFristName,g.employeeLastName) =
-			#{employeeName}
+		<if test="employeeNo!= null and employeeNo!= ''">
+			AND a.employeeNo = #{employeeName}
 		</if>
 		<if test="siteRoleCode!= null and siteRoleCode!= ''">
 			AND a.siteRoleCode = #{siteRoleCode}

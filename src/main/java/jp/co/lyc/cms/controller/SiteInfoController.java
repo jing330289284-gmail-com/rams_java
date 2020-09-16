@@ -172,11 +172,11 @@ public class SiteInfoController {
 
 	@RequestMapping(value = "/getSiteInfo", method = RequestMethod.POST)
 	@ResponseBody
-	public List<SiteModel> getSiteInfo(@RequestBody Map employeeNo) {
+	public List<SiteModel> getSiteInfo(@RequestBody Map employeeName) {
 		List<SiteModel> siteList = new ArrayList<SiteModel>();
 
 		try {
-			siteList = getSiteInfoService.getSiteInfo(employeeNo.get("employeeNo").toString());
+			siteList = getSiteInfoService.getSiteInfo(employeeName.get("employeeName").toString());
 			for (int a = 0; a < siteList.size(); a++) {
 				siteList.get(a).setWorkDate(
 						dateToPeriod(siteList.get(a).getAdmissionStartDate(), siteList.get(a).getAdmissionEndDate()));
