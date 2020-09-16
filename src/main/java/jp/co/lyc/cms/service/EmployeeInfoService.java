@@ -11,7 +11,6 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import jp.co.lyc.cms.mapper.AccountInfoMapper;
 import jp.co.lyc.cms.mapper.BpInfoMapper;
-import jp.co.lyc.cms.mapper.CostInfoMapper;
 import jp.co.lyc.cms.mapper.EmployeeInfoMapper;
 import jp.co.lyc.cms.mapper.GetSiteInfoMapper;
 import jp.co.lyc.cms.model.AccountInfoModel;
@@ -28,9 +27,6 @@ public class EmployeeInfoService {
 
 	@Autowired
 	AccountInfoMapper accountInfoMapper;
-
-	@Autowired
-	CostInfoMapper costInfoMapper;
 
 	@Autowired
 	BpInfoMapper bpInfoMapper;
@@ -82,9 +78,6 @@ public class EmployeeInfoService {
 			if (sendMap.get("bankInfoModel") != null) {// 口座情報
 				accountInfoMapper.insertAccount(getParamBankInfoModel(sendMap));
 			}
-			if (sendMap.get("costModel") != null) {// 諸費用
-				costInfoMapper.insertCost(getParamCostModel(sendMap));
-			}
 		} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			e.printStackTrace();
@@ -107,7 +100,6 @@ public class EmployeeInfoService {
 			employeeInfoMapper.deleteEmployeeInfoDetail(sendMap);
 			siteInfoMapper.deleteEmployeeSiteInfo(sendMap);
 			employeeInfoMapper.deleteAddressInfo(sendMap);
-			costInfoMapper.deleteCostInfo(sendMap);
 			bpInfoMapper.deleteBpInfo(sendMap);
 		} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -144,9 +136,6 @@ public class EmployeeInfoService {
 		
 			if (sendMap.get("bankInfoModel") != null) {// 口座情報
 				accountInfoMapper.updateAccount(getParamBankInfoModel(sendMap));
-			}
-			if (sendMap.get("costModel") != null) {// 諸費用
-				costInfoMapper.updateCost(getParamCostModel(sendMap));
 			}
 			if(sendMap.get("bpInfoModel") != null) {
 				bpInfoMapper.updateBp(getParamBpModel(sendMap));

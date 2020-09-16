@@ -1,8 +1,8 @@
 package jp.co.lyc.cms.model;
 
-import java.io.Serializable;
+import jp.co.lyc.cms.common.BaseController;
 
-public class SiteModel implements Serializable {
+public class SiteModel extends BaseController {
 
 	/**
 	 * 
@@ -146,7 +146,7 @@ public class SiteModel implements Serializable {
 		this.developLanguageCode = developLanguageCode;
 	}
 	public String getUpdateUser() {
-		return updateUser;
+		return getSession().getAttribute("employeeName").toString();
 	}
 	public void setUpdateUser(String updateUser) {
 		this.updateUser = updateUser;
