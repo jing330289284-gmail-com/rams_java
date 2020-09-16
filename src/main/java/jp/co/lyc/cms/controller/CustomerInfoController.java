@@ -29,7 +29,6 @@ import jp.co.lyc.cms.validation.CustomerInfoValidation;
 import jp.co.lyc.cms.validation.EmployeeInfoValidation;
 import jp.co.lyc.cms.model.TopCustomerInfoModel;
 @Controller
-@CrossOrigin(origins = "http://127.0.0.1:3000")
 @RequestMapping(value = "/customerInfo")
 public class CustomerInfoController extends BaseController{
 	private Logger logger = LoggerFactory.getLogger(this.getClass());

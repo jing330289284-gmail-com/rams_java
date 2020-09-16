@@ -1,6 +1,8 @@
 package jp.co.lyc.cms.model;
 
-public class CustomerDepartmentInfoModel {
+import jp.co.lyc.cms.common.BaseController;
+
+public class CustomerDepartmentInfoModel extends BaseController{
 
 	String customerNo;//お客様番号
 	String customerDepartmentCode;//部門番号
@@ -75,7 +77,7 @@ public class CustomerDepartmentInfoModel {
 		this.customerDepartmentMail = customerDepartmentMail;
 	}
 	public String getUpdateUser() {
-		return updateUser;
+		return getSession().getAttribute("employeeName").toString();
 	}
 	public void setUpdateUser(String updateUser) {
 		this.updateUser = updateUser;
