@@ -117,6 +117,7 @@ public class EmployeeInfoService {
 	 */
 	public EmployeeModel getEmployeeByEmployeeNo(Map<String, Object> sendMap) {
 		EmployeeModel model = employeeInfoMapper.getEmployeeByEmployeeNo(sendMap);
+		//model.setBpInfoModel(bpInfoMapper.getBpInfo(sendMap));
 		return model;
 	}
 
@@ -196,13 +197,13 @@ public class EmployeeInfoService {
 		Map<String, Object> pbModelSendMap = new HashMap<String, Object>();
 		BpInfoModel pbModel = (BpInfoModel) sendMap.get("bpInfoModel");
 		pbModelSendMap.put("bpEmployeeNo", pbModel.getBpEmployeeNo());
-		pbModelSendMap.put("actionType", pbModel.getActionType());
+		//pbModelSendMap.put("actionType", pbModel.getActionType());
 		pbModelSendMap.put("bpBelongCustomerCode", pbModel.getBpBelongCustomerCode());
 		pbModelSendMap.put("bpUnitPrice", pbModel.getBpUnitPrice());
 		pbModelSendMap.put("bpSalesProgressCode", pbModel.getBpSalesProgressCode());
 		pbModelSendMap.put("bpRemark", pbModel.getBpRemark());
 		pbModelSendMap.put("bpOtherCompanyAdmissionEndDate", pbModel.getBpOtherCompanyAdmissionEndDate());
-		pbModelSendMap.put("updateUser", pbModel.getUpdateUser());
+		pbModelSendMap.put("updateUser", sendMap.get("updateUser").toString());
 		return pbModelSendMap;
 	}
 

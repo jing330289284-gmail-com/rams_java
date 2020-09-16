@@ -4,7 +4,7 @@
     <resultMap id="bpInfoModel" type="jp.co.lyc.cms.model.BpInfoModel"/>
     <resultMap id="MapResult" type="map"/>
     <!-- 諸費用検索 -->
-    <select id="selectBp" parameterType="String" resultMap="bpInfoModel">
+    <select id="getBpInfo" parameterType="String" resultMap="bpInfoModel">
         SELECT
 			T011.bpEmployeeNo,
 			T011.bpUnitPrice,
