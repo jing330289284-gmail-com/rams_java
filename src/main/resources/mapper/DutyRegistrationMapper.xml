@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="jp.co.lyc.cms.mapper.DutyRegistrationMapper">
     <resultMap id="DutyRegistration" type="jp.co.lyc.cms.model.DutyRegistrationModel"/>
+    <resultMap id="EmployeeWorkTime" type="jp.co.lyc.cms.model.EmployeeWorkTimeModel"/>
     <insert id="insertDutyRegistration" parameterType="String">
 		INSERT INTO breakTime(
 			employeeNo,
@@ -81,6 +82,33 @@
 			employeeNo = #{employeeNo}
 			and yearMonth = #{breakTimeYearMonth}
     </select>
+    <select id="selectDuty" resultMap="EmployeeWorkTime" parameterType="String">
+		SELECT
+		    `employeeNo`
+		    , `yearAndMonth`
+		    , `day`
+		    , `week`
+		    , `morningTime`
+		    , `afternoonTime`
+		    , `holidayFlag`
+		    , `workTime`
+		    , `confirmFlag`
+		    , `siteCustomer`
+		    , `customer`
+		    , `siteResponsiblePerson`
+		    , `systemName`
+		    , `createTime`
+		    , `updateTime`
+		    , `updateUser`
+		FROM
+			employeeWorkTime 
+		WHERE
+			employeeNo = #{employeeNo}
+			and yearAndMonth = #{yearAndMonth}
+	        <if test="day != null">
+				and day = #{day}
+			</if>
+    </select>
 	<update id="updateDutyRegistration" parameterType="String">
 		UPDATE breakTime
 		SET 
@@ -96,5 +124,25 @@
 		WHERE 
 			employeeNo = #{employeeNo}
 			and yearMonth = #{breakTimeYearMonth}
-    </update> 
+    </update>
+	<update id="updateDuty" parameterType="String">
+		UPDATE employeeWorkTime
+		SET 
+			week = #{week},
+			morningTime = #{morningTime},
+			afternoonTime = #{afternoonTime},
+			holidayFlag = #{holidayFlag},
+			workTime = #{workTime},
+			confirmFlag = #{confirmFlag},
+			siteCustomer = #{siteCustomer},
+			customer = #{customer},
+			siteResponsiblePerson = #{siteResponsiblePerson},
+			systemName = #{systemName},
+			updateTime = now(),
+			updateUser = #{updateUser}
+		WHERE 
+			employeeNo = #{employeeNo}
+			and yearAndMonth = #{yearAndMonth}
+			and day = #{day}
+    </update>
 </mapper>

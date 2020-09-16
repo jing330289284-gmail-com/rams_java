@@ -83,8 +83,8 @@ public class DutyRegistrationModel {
 	public void setUpdateUser(String updateUser) {
 		this.updateUser = updateUser;
 	}
-	public HashMap<String, String> toHashMap() {
-		HashMap<String, String> map = new HashMap<String, String>();
+	public HashMap<String, Object> toHashMap() {
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("breakTimeIsConst", this.getBreakTimeIsConst());
 		map.put("employeeNo", this.getEmployeeNo());
 		map.put("breakTimeYearMonth", this.getBreakTimeYearMonth());

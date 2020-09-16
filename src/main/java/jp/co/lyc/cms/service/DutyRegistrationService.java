@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import jp.co.lyc.cms.model.DutyRegistrationModel;
+import jp.co.lyc.cms.model.EmployeeWorkTimeModel;
 import jp.co.lyc.cms.mapper.DutyRegistrationMapper;
 
 @Component
@@ -19,8 +20,17 @@ public class DutyRegistrationService {
 	 * @param TopCustomerNo
 	 * @return
 	 */
-	public DutyRegistrationModel selectDutyRegistration(HashMap<String, String> sendMap) {
+	public DutyRegistrationModel selectDutyRegistration(Map<String, Object> sendMap) {
 		DutyRegistrationModel resultMod = dutyRegistrationMapper.selectDutyRegistration(sendMap);
+		return resultMod;
+	}
+	/**
+	 * 
+	 * @param sendMap
+	 * @return
+	 */
+	public EmployeeWorkTimeModel[] selectDuty(Map<String, Object> sendMap) {
+		EmployeeWorkTimeModel[] resultMod = dutyRegistrationMapper.selectDuty(sendMap);
 		return resultMod;
 	}
 	
@@ -28,7 +38,7 @@ public class DutyRegistrationService {
 	 * インサート
 	 * @param sendMap
 	 */
-	public boolean insertDutyRegistration(HashMap<String, String> sendMap) {
+	public boolean insertDutyRegistration(HashMap<String, Object> sendMap) {
 		boolean result = true;
 		try {
 			dutyRegistrationMapper.insertDutyRegistration(sendMap);
@@ -60,7 +70,7 @@ public class DutyRegistrationService {
 	 * アップデート
 	 * @param sendMap
 	 */
-	public boolean updateDutyRegistration(HashMap<String, String> sendMap) {
+	public boolean updateDutyRegistration(HashMap<String, Object> sendMap) {
 		boolean result = true;
 		try {
 			dutyRegistrationMapper.updateDutyRegistration(sendMap);
@@ -72,6 +82,21 @@ public class DutyRegistrationService {
 		return result;
 	}
 	
+	/**
+	 * アップデート
+	 * @param sendMap
+	 */
+	public boolean updateDuty(Map<String, Object> sendMap) {
+		boolean result = true;
+		try {
+			dutyRegistrationMapper.updateDuty(sendMap);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return result = false;
+		}
+		return result;
+	}
 	
 	/**
 	 * 
