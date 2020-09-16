@@ -11,7 +11,7 @@
 	<!-- EmployeeNamee -->
 	<select id ="getEmployeeName"
 		resultType="jp.co.lyc.cms.model.ModelClass">
-		SELECT employeeNo code ,CONCAT(employeeFristName,employeeLastName) name 
+		SELECT employeeNo code ,CONCAT(employeeFristName,employeeLastName,'(',employeeNo,')') name 
 		FROM rams.T001Employee
 	</select>
 	
