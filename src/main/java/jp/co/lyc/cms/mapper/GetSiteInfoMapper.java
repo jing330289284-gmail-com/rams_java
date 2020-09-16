@@ -12,7 +12,7 @@ import jp.co.lyc.cms.model.SiteModel;
 
 public interface GetSiteInfoMapper {
 
-	public void siteInsert(Map<String, String> sendMap);
+	public void siteInsert(Map<String, Object> sendMap);
 
 	public List<SiteModel> getSiteInfo(@Param("employeeNo")String employeeNo);
 	

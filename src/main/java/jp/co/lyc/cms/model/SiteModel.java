@@ -36,6 +36,15 @@ public class SiteModel implements Serializable {
 	String updateUser;
 	String levelName;
 	String typeOfIndustryName;
+	String typeOfIndustryCode;
+
+	public String getTypeOfIndustryCode() {
+		return typeOfIndustryCode;
+	}
+
+	public void setTypeOfIndustryCode(String typeOfIndustryCode) {
+		this.typeOfIndustryCode = typeOfIndustryCode;
+	}
 
 	public String getEmployeeNo() {
 		return employeeNo;
