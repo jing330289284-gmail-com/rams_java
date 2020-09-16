@@ -1,5 +1,6 @@
 package jp.co.lyc.cms.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,6 +21,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import jp.co.lyc.cms.common.BaseController;
+import jp.co.lyc.cms.model.AccountInfoModel;
 import jp.co.lyc.cms.model.DutyManagementModel;
 import jp.co.lyc.cms.model.DutyRegistrationModel;
 import jp.co.lyc.cms.model.EmployeeWorkTimeModel;
@@ -83,16 +85,69 @@ public class DutyRegistrationController extends BaseController{
 			tempJsonObject.put("updateUser", super.getSession().getAttribute("employeeNo"));
 			
 			EmployeeWorkTimeModel employeeWorkTimeModel = EmployeeWorkTimeModel.fromHashMap(tempJsonObject.getInnerMap());
-			result = this.insert(employeeWorkTimeModel);
+			EmployeeWorkTimeModel[] checkMod = dutyRegistrationService.selectDuty(employeeWorkTimeModel.toHashMap());
+			if (checkMod.length > 0)	{
+				result = this.update(employeeWorkTimeModel);				
+			}
+			else	{
+				result = this.insert(employeeWorkTimeModel);
+			}
 		}
-		
-//		DutyRegistrationModel checkMod = dutyRegistrationService.selectDutyRegistration(dutyRegistrationModel.toHashMap());
-//		if (checkMod == null) {
-//			result = insert(dutyRegistrationModel);
-//		} else if (checkMod != null ) {
-//			result = update(dutyRegistrationModel);
-//		}
 		logger.info("DutyRegistrationController.dutyInsert:" + "登録終了");
+		return result;
+	}
+	/**
+	 */
+	@RequestMapping(value = "/getDutyInfo", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> getDutyInfo(@RequestBody String requestJson) {
+		logger.info("DutyRegistrationController.dutySelect:" + "検索開始");
+		Map<String, Object> result = new HashMap<String, Object>();
+		JSONObject jsonObject = JSON.parseObject(requestJson);
+		jsonObject.put("employeeNo", super.getSession().getAttribute("employeeNo"));
+		jsonObject.put("breakTimeYearMonth", jsonObject.getOrDefault("yearMonth", ""));
+
+		DutyRegistrationModel dutyRegistrationModel = dutyRegistrationService.selectDutyRegistration(jsonObject.getInnerMap());
+
+		result.put("breakTime", dutyRegistrationModel);
+		result.put("employeeNo", super.getSession().getAttribute("employeeNo"));
+		ArrayList<Map<String, Object>> dutyData = this.dutySelect(requestJson);
+		result.put("dateData", dutyData);
+		if (dutyData.size() > 0)	{
+			result.put("siteCustomer", dutyData.get(0).get("siteCustomer"));
+			result.put("customer", dutyData.get(0).get("customer"));
+			result.put("siteResponsiblePerson", dutyData.get(0).get("siteResponsiblePerson"));
+			result.put("systemName", dutyData.get(0).get("systemName"));
+		}
+		logger.info("DutyRegistrationController.dutySelect:" + "検索終了");	
+		return result;
+	}
+	public ArrayList<Map<String, Object>> dutySelect(String requestJson) {
+		logger.info("DutyRegistrationController.dutySelect:" + "検索開始");
+		ArrayList<Map<String, Object>> result = new ArrayList<Map<String, Object>>();
+		EmployeeWorkTimeModel[] arrEmployeeWorkTimeModel = null;
+		JSONObject jsonObject = JSON.parseObject(requestJson);
+		jsonObject.put("employeeNo", super.getSession().getAttribute("employeeNo"));
+		jsonObject.put("yearAndMonth", jsonObject.getOrDefault("yearMonth", ""));
+		arrEmployeeWorkTimeModel  = dutyRegistrationService.selectDuty(jsonObject.getInnerMap());
+		Map<String, Object> tempMap = new HashMap<String, Object>();
+		for (EmployeeWorkTimeModel employeeWorkTimeModel : arrEmployeeWorkTimeModel)	{
+			tempMap = new HashMap<String, Object>();
+			tempMap.put("day",			employeeWorkTimeModel.getDay());
+			tempMap.put("yearMonth",	employeeWorkTimeModel.getYearAndMonth());
+			tempMap.put("startTime",	employeeWorkTimeModel.getMorningTime());
+			tempMap.put("endTime",		employeeWorkTimeModel.getAfternoonTime());
+			tempMap.put("isWork",		employeeWorkTimeModel.getHolidayFlag());
+			tempMap.put("workHour",		employeeWorkTimeModel.getWorkTime());
+			result.add(tempMap);
+		}
+		if (result.size() > 0)	{
+			result.get(0).put("siteCustomer", arrEmployeeWorkTimeModel[0].getSiteCustomer());
+			result.get(0).put("customer", arrEmployeeWorkTimeModel[0].getCustomer());
+			result.get(0).put("siteResponsiblePerson", arrEmployeeWorkTimeModel[0].getSiteResponsiblePerson());
+			result.get(0).put("systemName", arrEmployeeWorkTimeModel[0].getSystemName());
+		}
+		logger.info("DutyRegistrationController.dutySelect:" + "検索終了");	
 		return result;
 	}
 	/**
@@ -103,7 +158,8 @@ public class DutyRegistrationController extends BaseController{
 	public boolean insert(DutyRegistrationModel dutyRegistrationModel) {
 		logger.info("DutyRegistrationController.insert::" + "インサート開始");
 		boolean result = false;
-		HashMap<String, String> sendMap = dutyRegistrationModel.toHashMap();
+		dutyRegistrationModel.setEmployeeNo((String)super.getSession().getAttribute("employeeNo"));
+		HashMap<String, Object> sendMap = dutyRegistrationModel.toHashMap();
 		result  = dutyRegistrationService.insertDutyRegistration(sendMap);
 		logger.info("DutyRegistrationController.insert::" + "インサート終了");
 		return result;	
@@ -130,8 +186,21 @@ public class DutyRegistrationController extends BaseController{
 	public boolean update(DutyRegistrationModel dutyRegistrationModel) {
 		logger.info("DutyRegistrationController.update:" + "アップデート開始");
 		boolean result = false;
-		HashMap<String, String> sendMap = dutyRegistrationModel.toHashMap();
+		HashMap<String, Object> sendMap = dutyRegistrationModel.toHashMap();
 		result  = dutyRegistrationService.updateDutyRegistration(sendMap);
+		logger.info("DutyRegistrationController.update:" + "アップデート終了");
+		return result;	
+	}
+	/**
+	 * アップデート
+	 * @param topCustomerMod
+	 * @return
+	 */
+	public boolean update(EmployeeWorkTimeModel employeeWorkTimeModel) {
+		logger.info("DutyRegistrationController.update:" + "アップデート開始");
+		boolean result = false;
+		Map<String, Object> sendMap = employeeWorkTimeModel.toHashMap();
+		result  = dutyRegistrationService.updateDuty(sendMap);
 		logger.info("DutyRegistrationController.update:" + "アップデート終了");
 		return result;	
 	}
