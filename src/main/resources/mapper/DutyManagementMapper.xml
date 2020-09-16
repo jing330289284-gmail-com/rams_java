@@ -49,7 +49,7 @@
 	<update id="updateDutyManagement" parameterType="String">
 		UPDATE workTotalTime
 		SET 
-			approvalStatus = 1,
+			approvalStatus = 1
 		WHERE 
 			employeeNo = #{employeeNo}
 			and attendanceYearAndMonth = #{yearAndMonth}

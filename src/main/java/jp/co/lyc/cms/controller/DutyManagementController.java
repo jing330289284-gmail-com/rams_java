@@ -32,7 +32,7 @@ public class DutyManagementController {
 	 */
 	@RequestMapping(value = "/selectDutyManagement", method = RequestMethod.POST)
 	@ResponseBody
-	public List<DutyManagementModel> breakTimeInsert(@RequestBody HashMap<String, String> dutyManagementModel) {
+	public List<DutyManagementModel> selectDutyManagement(@RequestBody HashMap<String, String> dutyManagementModel) {
 		logger.info("DutyManagementController.selectDutyManagement:" + "検索開始");
 		logger.info(dutyManagementModel.toString());
 		List<DutyManagementModel> checkMod = dutyManagementService.selectDutyManagement(dutyManagementModel);
@@ -47,7 +47,7 @@ public class DutyManagementController {
 	 */
 	@RequestMapping(value = "/updateDutyManagement", method = RequestMethod.POST)
 	@ResponseBody
-	public boolean update(HashMap<String, String> dutyManagementModel) {
+	public boolean updateDutyManagement(@RequestBody HashMap<String, String> dutyManagementModel){
 		logger.info("DutyManagementController.updateDutyManagement:" + "アップデート開始");
 		boolean result = false;
 		HashMap<String, String> sendMap = dutyManagementModel;
