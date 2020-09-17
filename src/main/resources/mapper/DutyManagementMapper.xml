@@ -12,15 +12,15 @@
 			concat_ws("-",t006.payOffRange1,t006.payOffRange2) as payOffRange,
 			wtt.sumWorkTime workTime,
 			concat("￥",FORMAT(if(wtt.sumWorkTime>t006.payOffRange2,t005.salary/t006.payOffRange2*(wtt.sumWorkTime-t006.payOffRange2),if(t006.payOffRange1>wtt.sumWorkTime,t005.salary/t006.payOffRange1*(wtt.sumWorkTime-t006.payOffRange1),0)),0))overTimePay, 
-			if(ewt.employeeWorkTimeHaveData=1,'　アップロード',if(wtt.attendanceRegisterFlag=1,'　時間登録',''))checkSection,
+			if(ewt.employeeWorkTimeHaveData=1,'0',if(wtt.attendanceRegisterFlag=1,'1','2'))checkSection,
 			ewt.updateTime,
-			if(wtt.approvalStatus=1,"済み","未")approvalStatus
+			if(wtt.approvalStatus=1,"0","1")approvalStatus
 		FROM 
 			T001Employee as t001
 		left join
-			T005WagesInfo as t005 on t001.employeeNo=t005.employeeNo
+			(SELECT employeeNo,max(reflectYearAndMonth),salary FROM T005WagesInfo where reflectYearAndMonth&lt;=#{yearAndMonth} group by T005WagesInfo.employeeNo)t005 on t001.employeeNo=t005.employeeNo
 		left join
-			T006EmployeeSiteInfo as t006 on t001.employeeNo=t006.employeeNo
+			(SELECT employeeNo,max(admissionStartDate),payOffRange1,payOffRange2,customerNo FROM T006EmployeeSiteInfo where admissionStartDate&lt;=concat(#{yearAndMonth},"99") group by T006EmployeeSiteInfo.employeeNo)t006 on t001.employeeNo=t006.employeeNo
 		left join
 			T007CustomerInfo as t007 on t006.customerNo=t007.customerNo
 		left join
