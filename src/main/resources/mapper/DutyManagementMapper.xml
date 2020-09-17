@@ -31,7 +31,7 @@
 			workTotalTime as wtt on t001.employeeNo=wtt.employeeNo and wtt.attendanceYearAndMonth=#{yearAndMonth}
 		,(SELECT   @rowNo:=0) AS rowNo
 		WHERE
-		ewt.yearAndMonth = #{yearAndMonth}
+		wtt.attendanceYearAndMonth = #{yearAndMonth}
 		<if test="approvalStatus == 0">
 		</if>
 		<if test="approvalStatus == 1">
