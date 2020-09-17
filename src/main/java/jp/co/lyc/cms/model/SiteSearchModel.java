@@ -1,8 +1,6 @@
 package jp.co.lyc.cms.model;
 
-import jp.co.lyc.cms.common.BaseController;
-
-public class SiteSearchModel extends BaseController {
+public class SiteSearchModel{
 
 	/**
 	 * 

@@ -2,7 +2,7 @@ package jp.co.lyc.cms.model;
 
 import jp.co.lyc.cms.common.BaseController;
 
-public class SiteModel extends BaseController {
+public class SiteModel{
 
 	/**
 	 * 
@@ -187,7 +187,7 @@ public class SiteModel extends BaseController {
 	}
 
 	public String getUpdateUser() {
-		return getSession().getAttribute("employeeName").toString();
+		return updateUser;
 	}
 
 	public void setUpdateUser(String updateUser) {

@@ -97,4 +97,18 @@ public abstract class UtilsCheckMethod {
 		}
 		return false;
 	}
+	
+	/**
+	 * 数字をチェック
+	 * 
+	 * @param URL
+	 * @return
+	 */
+	public static boolean numberFormat(String number) {
+		String alphabetFormat  = "^[0-9]+$";
+		if (number.matches(alphabetFormat)) {
+			return true;
+		}
+		return false;
+	}
 }

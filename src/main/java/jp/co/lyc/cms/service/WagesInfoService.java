@@ -1,5 +1,6 @@
 package jp.co.lyc.cms.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import jp.co.lyc.cms.mapper.ExpensesInfoMapper;
 import jp.co.lyc.cms.mapper.WagesInfoMapper;
+import jp.co.lyc.cms.model.ExpensesInfoModel;
 import jp.co.lyc.cms.model.WagesInfoModel;
 
 @Component
@@ -32,12 +34,6 @@ public class WagesInfoService {
 		try {
 			HashMap<String, String> sendMap = getSendMap(wagesInfoModel);
 			wagesInfoMapper.insert(sendMap);
-			if(wagesInfoModel.getExpensesInfoModel() != null) {
-				wagesInfoModel.getExpensesInfoModel().setUpdateUser(wagesInfoModel.getUpdateUser());
-				HashMap<String, String> sendMapExpensesInfo = 
-						expensesInfoService.getSendMap(wagesInfoModel.getExpensesInfoModel());
-				expensesInfoMapper.insert(sendMapExpensesInfo);
-			}
 			return true;
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -57,12 +53,6 @@ public class WagesInfoService {
 		try {
 			HashMap<String, String> sendMap = getSendMap(wagesInfoModel);
 			wagesInfoMapper.update(sendMap);
-			if(wagesInfoModel.getExpensesInfoModel() != null) {
-				wagesInfoModel.getExpensesInfoModel().setUpdateUser(wagesInfoModel.getUpdateUser());
-				HashMap<String, String> sendMapExpensesInfo = 
-						expensesInfoService.getSendMap(wagesInfoModel.getExpensesInfoModel());
-				expensesInfoMapper.update(sendMapExpensesInfo);
-			}
 			return true;
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -80,6 +70,7 @@ public class WagesInfoService {
 		HashMap<String, String> sendMap = new HashMap<String, String>();
 		sendMap.put("employeeNo", wagesInfoModel.getEmployeeNo());
 		sendMap.put("reflectYearAndMonth", wagesInfoModel.getReflectYearAndMonth());
+		sendMap.put("updatedReflectYearAndMonth", wagesInfoModel.getUpdatedReflectYearAndMonth());
 		sendMap.put("socialInsuranceFlag", wagesInfoModel.getSocialInsuranceFlag());
 		sendMap.put("salary", wagesInfoModel.getSalary());
 		sendMap.put("waitingCost", wagesInfoModel.getWaitingCost());
