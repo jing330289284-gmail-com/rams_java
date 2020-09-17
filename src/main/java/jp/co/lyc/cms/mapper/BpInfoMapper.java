@@ -1,6 +1,5 @@
 package jp.co.lyc.cms.mapper;
 
-import java.util.ArrayList;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -15,7 +14,7 @@ public interface BpInfoMapper {
 	 * @param sendMap
 	 * @return
 	 */
-	public ArrayList<BpInfoModel> selectBp(Map<String, String> sendMap);
+	public BpInfoModel getBpInfo(Map<String, Object> sendMap);
 	/**
 	 * インサート
 	 * @param sendMap

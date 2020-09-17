@@ -1,8 +1,8 @@
 package jp.co.lyc.cms.model;
 
-import java.io.Serializable;
+import jp.co.lyc.cms.common.BaseController;
 
-public class SiteSearchModel implements Serializable {
+public class SiteSearchModel extends BaseController {
 
 	/**
 	 * 

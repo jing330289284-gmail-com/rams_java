@@ -145,7 +145,7 @@ public class EmployeeInfoController extends BaseController {
 	@RequestMapping(value = "/deleteEmployeeInfo", method = RequestMethod.POST)
 	@ResponseBody
 	public boolean deleteEmployeeInfo(@RequestBody EmployeeModel emp) throws Exception {
-		logger.info("GetEmployeeInfoController.addEmployeeInfo:" + "削除開始");
+		logger.info("GetEmployeeInfoController.deleteEmployeeInfo:" + "削除開始");
 
 		Map<String, Object> sendMap = getParam(emp);
 		boolean result = true;
@@ -154,7 +154,7 @@ public class EmployeeInfoController extends BaseController {
 			// 自分のファイルを削除
 			// utilsController.deleteDir(emp.getResidentCardInfo());
 		}
-		logger.info("GetEmployeeInfoController.addEmployeeInfo:" + "削除結束");
+		logger.info("GetEmployeeInfoController.deleteEmployeeInfo:" + "削除結束");
 		return result;
 	}
 
@@ -167,11 +167,11 @@ public class EmployeeInfoController extends BaseController {
 	@RequestMapping(value = "/getEmployeeByEmployeeNo", method = RequestMethod.POST)
 	@ResponseBody
 	public EmployeeModel getEmployeeByEmployeeNo(@RequestBody EmployeeModel emp) throws Exception {
-		logger.info("GetEmployeeInfoController.addEmployeeInfo:" + "EmployeeNoによると、社員情報を取得開始");
+		logger.info("GetEmployeeInfoController.getEmployeeByEmployeeNo:" + "EmployeeNoによると、社員情報を取得開始");
 		Map<String, Object> sendMap = getParam(emp);
 		EmployeeModel model;
 		model = employeeInfoService.getEmployeeByEmployeeNo(sendMap);
-		logger.info("GetEmployeeInfoController.addEmployeeInfo:" + "EmployeeNoによると、社員情報を取得結束");
+		logger.info("GetEmployeeInfoController.getEmployeeByEmployeeNo:" + "EmployeeNoによると、社員情報を取得結束");
 		return model;
 	}
 

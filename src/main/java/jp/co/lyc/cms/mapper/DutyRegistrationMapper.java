@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import jp.co.lyc.cms.model.DutyRegistrationModel;
+import jp.co.lyc.cms.model.EmployeeWorkTimeModel;
+
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
@@ -13,7 +15,7 @@ public interface DutyRegistrationMapper {
 	 * インサート
 	 * @param sendMap
 	 */
-	public void insertDutyRegistration(HashMap<String, String> sendMap);
+	public void insertDutyRegistration(HashMap<String, Object> sendMap);
 	/**
 	 * インサート
 	 * @param sendMap
@@ -24,12 +26,23 @@ public interface DutyRegistrationMapper {
 	 * @param TopCustomerNo
 	 * @return
 	 */
-	public DutyRegistrationModel selectDutyRegistration(HashMap<String, String> sendMap);
+	public DutyRegistrationModel selectDutyRegistration(Map<String, Object> sendMap);
+	/**
+	 * 
+	 * @param sendMap
+	 * @return
+	 */
+	public EmployeeWorkTimeModel[] selectDuty(Map<String, Object> sendMap);
 	/**
 	 * アップデート
 	 * @param sendMap
 	 */
-	public void updateDutyRegistration(HashMap<String, String> sendMap);	
+	public void updateDutyRegistration(HashMap<String, Object> sendMap);	
+	/**
+	 * アップデート
+	 * @param sendMap
+	 */
+	public void updateDuty(Map<String, Object> sendMap);	
 	/**
 	 * 上位お客様削除
 	 * @param customerNo

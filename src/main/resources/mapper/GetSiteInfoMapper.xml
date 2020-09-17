@@ -6,10 +6,10 @@
 		insert into
 		T006EmployeeSiteInfo(employeeNo,customerNo,topCustomerNo,admissionStartDate,admissionEndDate,
 		siteManager,systemName,developLanguageCode,stationCode,unitPrice,siteRoleCode,payOffRange1,payOffRange2,relatedEmployees,
-		levelCode,remark,updateTime,createTime,updateUser)
+		levelCode,typeOfIndustryCode,remark,updateTime,createTime,updateUser)
 		values(#{employeeNo},#{customerNo},#{topCustomerNo},#{admissionStartDate},#{admissionEndDate},
 		#{siteManager},#{systemName},#{developLanguageCode},#{location},#{unitPrice},#{siteRoleCode},#{payOffRange1},
-		#{payOffRange2},#{relatedEmployees},#{levelCode},#{remark},now(),now(),#{updateUser})
+		#{payOffRange2},#{relatedEmployees},#{levelCode},#{typeOfIndustryCode},#{remark},now(),now(),#{updateUser})
 	</insert>
 
 	<update id="siteUpdate" parameterType="map">
@@ -27,8 +27,14 @@
 		a.unitPrice,
 		a.admissionStartDate,
 		a.admissionEndDate,
+		a.siteManager,
+		a.payOffRange1,
+		a.payOffRange2,
+		a.relatedEmployees,
+		a.remark,
 		b.siteRoleName,
-		if(c.customerAbbreviation is
+		if(c.customerAbbreviation
+		is
 		null or
 		trim(c.customerAbbreviation)='',c.customerName,c.customerAbbreviation)
 		as customerName,
@@ -37,7 +43,9 @@
 		trim(d.topCustomerAbbreviation)='',d.topCustomerName,d.topCustomerAbbreviation)
 		as topCustomerName,
 		e.developLanguageName,
-		f.stationName
+		f.stationName as location,
+		h.levelName,
+		i.typeOfIndustryName
 		FROM
 		rams.T006EmployeeSiteInfo a
 		LEFT JOIN
@@ -50,13 +58,25 @@
 		LEFT JOIN
 		rams.T008TopCustomerInfo d ON
 		a.topCustomerNo = d.topCustomerNo
-		LEFT JOIN
-		rams.M011DevelopLanguage e ON
+		LEFT
+		JOIN
+		rams.M011DevelopLanguage e
+		ON
 		a.developLanguageCode =
 		e.developLanguageCode
 		LEFT JOIN
 		rams.M013Station f ON
-		a.stationCode = f.stationCode
+		a.stationCode =
+		f.stationCode
+		LEFT JOIN
+		rams.M008Level h ON
+		a.levelCode =
+		h.levelCode
+		LEFT
+		JOIN
+		rams.M022TypeOfIndustry i ON
+		a.typeOfIndustryCode =
+		i.typeOfIndustryCode
 		WHERE
 		1=1
 		<if test="employeeNo!= null and employeeNo!= ''">
