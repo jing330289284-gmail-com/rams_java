@@ -22,7 +22,7 @@
 		T003.postcode,
 		T003.firstHalfAddress,
 		T003.lastHalfAddress,
-		T003.stationCode,
+		M013.stationName,
 		TIMESTAMPDIFF(MONTH,
 		NOW(),
 		T002.stayPeriod) AS stayPeriod,
