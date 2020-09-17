@@ -20,11 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import jp.co.lyc.cms.mapper.testMapper;
 import jp.co.lyc.cms.model.PersonalSalesSearchModel;
-import jp.co.lyc.cms.model.SalesSituationModel;
 import jp.co.lyc.cms.service.PersonalSalesSearchService;
-import jp.co.lyc.cms.validation.EmployeeInfoValidation;
 import jp.co.lyc.cms.validation.PersonalSalesValidation;
 
 
@@ -34,8 +31,6 @@ import jp.co.lyc.cms.validation.PersonalSalesValidation;
 public class PersonalSalesSearchController {
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
-	@Autowired
-	testMapper testMapper;
 
 	@Autowired
 	PersonalSalesSearchService personalSalesSearchService;
