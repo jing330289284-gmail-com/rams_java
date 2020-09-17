@@ -33,8 +33,10 @@ public abstract class UtilsCheckMethod {
 	 */
 	public static boolean checkPhoneNo(String phoneNo) {
 		String pattern = "^\\d{2,4}-\\d{2,4}-\\d{4}$";
+		String pattern2 = "^\\d{2,4}\\d{2,4}\\d{4}$";
 		Pattern p = Pattern.compile(pattern);
-		if (p.matcher(phoneNo).find()) {
+		Pattern p2 = Pattern.compile(pattern2);
+		if (p.matcher(phoneNo).find()||p2.matcher(phoneNo).find()) {
 			return true;
 		} else {
 			return false;
@@ -71,7 +73,7 @@ public abstract class UtilsCheckMethod {
 	}
 	
 	/**
-	 * メールをチェック
+	 * urlをチェック
 	 * 
 	 * @param URL
 	 * @return

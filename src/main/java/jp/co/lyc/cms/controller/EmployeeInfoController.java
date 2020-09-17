@@ -286,9 +286,7 @@ public class EmployeeInfoController extends BaseController {
 		String employeeStatus = emp.getEmployeeStatus();// 社員ステータス
 		// String picInfo = emp.getPicInfo();// 写真
 		String yearsOfExperience = emp.getYearsOfExperience();// 経験年数
-
 		AccountInfoModel accountInfoModel = emp.getAccountInfo();// 口座情報
-
 		CostInfoModel costModel = emp.getCostModel();// 諸費用
 		BpInfoModel bpInfoModel = emp.getBpInfoModel();// bp情報
 		String password = emp.getPassword();// パスワード

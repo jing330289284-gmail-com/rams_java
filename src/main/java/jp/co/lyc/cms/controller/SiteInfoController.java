@@ -80,6 +80,7 @@ public class SiteInfoController extends BaseController {
 		return relatedEmployees;
 	}
 
+	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
