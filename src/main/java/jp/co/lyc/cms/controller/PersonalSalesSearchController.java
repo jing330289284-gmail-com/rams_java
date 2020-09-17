@@ -11,34 +11,66 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.DataBinder;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import jp.co.lyc.cms.mapper.testMapper;
 import jp.co.lyc.cms.model.PersonalSalesSearchModel;
+import jp.co.lyc.cms.model.SalesSituationModel;
 import jp.co.lyc.cms.service.PersonalSalesSearchService;
+import jp.co.lyc.cms.validation.EmployeeInfoValidation;
+import jp.co.lyc.cms.validation.PersonalSalesValidation;
+
 
 @Controller
 @CrossOrigin(origins = "http://127.0.0.1:3000")
 @RequestMapping(value = "/personalSales")
 public class PersonalSalesSearchController {
-
+	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	@Autowired
+	testMapper testMapper;
 
 	@Autowired
 	PersonalSalesSearchService personalSalesSearchService;
 
+	String errorsMessage = "";
 	@RequestMapping(value = "/searchEmpDetails", method = RequestMethod.POST)
 	@ResponseBody
-	public List<PersonalSalesSearchModel> searchEmpDetails(@RequestBody PersonalSalesSearchModel empInfo) {
-
-		logger.info("PersonalSalesSearchController.searchEmpDetails:" + "検索開始");
+	public  Map<String, Object>searchEmpDetails(@RequestBody PersonalSalesSearchModel empInfo) {
+		//List<String> b = new ArrayList<String>();
+		// b = testMapper.countByUserList();
+		Date d = new Date();
+		  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
 		List<PersonalSalesSearchModel> personModelList = new ArrayList<PersonalSalesSearchModel>();
+		logger.info("PersonalSalesSearchController.searchEmpDetails:" + "検索開始");	
 		Date day=new Date();
 		SimpleDateFormat df = new SimpleDateFormat("yyyyMM");
 		String sysTime = df.format(day);
+		errorsMessage = "";
+		DataBinder binder = new DataBinder(empInfo);
+		binder.setValidator(new PersonalSalesValidation());
+		binder.validate();
+		BindingResult results = binder.getBindingResult();
+		Map<String, Object> resulterr = new HashMap<>();
+		if (results.hasErrors()) {
+			results.getAllErrors().forEach(o -> {
+				FieldError error = (FieldError) o;
+				errorsMessage += error.getDefaultMessage();// エラーメッセージ
+			});			
+	
+		resulterr.put("errorsMessage", errorsMessage);// エラーメッセージ
+		return resulterr;
+		}
+		else {
+		
+
 		try {
 			String startYandM = empInfo.getStartYearAndMonth();
 			String endYandM = empInfo.getEndYearAndMonth();
@@ -117,27 +149,25 @@ public class PersonalSalesSearchController {
 			}
 
 			Map<String, Object> sendMap = getDetailParam(empInfo);
-			int workCount =0;
-			for(int i=0;i<getYandM.size();i++) {
-				sendMap.put("getYandM", getYandM.get(i));
-				List<PersonalSalesSearchModel>result =new ArrayList<PersonalSalesSearchModel>();
-				result = personalSalesSearchService.searchEmpDetails(sendMap);
-				if(result.size()==1&&null==result.get(0)||result.size()==0) {
-					PersonalSalesSearchModel onlyYandM =new PersonalSalesSearchModel();
-					onlyYandM.setOnlyYandM(getYandM.get(i));
-					personModelList.add(onlyYandM);
-				}else {
-				workCount++;
-				personModelList.add(result.get(0));
-				personModelList.get(i).setOnlyYandM(getYandM.get(i));
+			int workCount =0;		
+				sendMap.put("getYandM", getYandM);
+				//List<PersonalSalesSearchModel>personModelList =new ArrayList<PersonalSalesSearchModel>();
+				personModelList = personalSalesSearchService.searchEmpDetails(sendMap);
+				for(int i=0;i<personModelList.size();i++) {
+					if(personModelList.get(i).getUnitPrice()!=null) {
+						workCount++;
+						personModelList.get(0).setWorkMonthCount(workCount);
+					}
 				}
-				personModelList.get(0).setWorkMonthCount(workCount);
-			}
-		} catch (Exception e) {
+		}
+			catch (Exception e) {
 			e.printStackTrace();
 		}
 		logger.info("PersonalSalesSearchController.searchEmpDetails:" + "検索結束");
-		return personModelList;
+		Map<String, Object>resultdata = new HashMap<>();
+		resultdata.put("data",personModelList);
+		return resultdata;
+	}
 	}
 
 	public Map<String, Object> getDetailParam(PersonalSalesSearchModel empInfo) {
@@ -164,4 +194,25 @@ public class PersonalSalesSearchController {
 		}
 		return sendMap;
 	}
+	
+	
+//	@RequestMapping(value = "/InputvalueCheck", method = RequestMethod.POST)
+//	@ResponseBody
+//	public Map<String, Object> InputvalueCheck(@RequestBody PersonalSalesSearchModel psm) {
+//		logger.info("updateSalesSituation:" + "検索開始");
+//		errorsMessage = "";
+//		DataBinder binder = new DataBinder(psm);
+//		binder.setValidator(new PersonalSalesValidation());
+//		binder.validate();
+//		BindingResult results = binder.getBindingResult();
+//		Map<String, Object> result = new HashMap<>();
+//		if (results.hasErrors()) {
+//			results.getAllErrors().forEach(o -> {
+//				FieldError error = (FieldError) o;
+//				errorsMessage += error.getDefaultMessage();// エラーメッセージ
+//			});			
+//	}
+//		result.put("errorsMessage", errorsMessage);// エラーメッセージ
+//		return result;
+//	}
 }
