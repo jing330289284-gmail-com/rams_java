@@ -22,6 +22,7 @@ import com.alibaba.fastjson.JSONObject;
 
 import jp.co.lyc.cms.common.BaseController;
 import jp.co.lyc.cms.model.AccountInfoModel;
+import jp.co.lyc.cms.model.BreakTimeModel;
 import jp.co.lyc.cms.model.DutyManagementModel;
 import jp.co.lyc.cms.model.DutyRegistrationModel;
 import jp.co.lyc.cms.model.EmployeeWorkTimeModel;
@@ -46,7 +47,8 @@ public class DutyRegistrationController extends BaseController{
 		logger.info("DutyRegistrationController.breakTimeInsert:" + "登録開始");
 		boolean result = false;
 		logger.info(dutyRegistrationModel.toString());
-		DutyRegistrationModel checkMod = dutyRegistrationService.selectDutyRegistration(dutyRegistrationModel.toHashMap());
+//		DutyRegistrationModel checkMod = dutyRegistrationService.selectDutyRegistration(dutyRegistrationModel.toHashMap());
+		DutyRegistrationModel checkMod = null;
 		if (checkMod == null) {
 			result = this.insert(dutyRegistrationModel);
 		} else if (checkMod != null ) {
@@ -107,9 +109,9 @@ public class DutyRegistrationController extends BaseController{
 		jsonObject.put("employeeNo", super.getSession().getAttribute("employeeNo"));
 		jsonObject.put("breakTimeYearMonth", jsonObject.getOrDefault("yearMonth", ""));
 
-		DutyRegistrationModel dutyRegistrationModel = dutyRegistrationService.selectDutyRegistration(jsonObject.getInnerMap());
+		BreakTimeModel breakTimeModel = dutyRegistrationService.selectDutyRegistration(jsonObject.getInnerMap());
 
-		result.put("breakTime", dutyRegistrationModel);
+		result.put("breakTime", breakTimeModel);
 		result.put("employeeNo", super.getSession().getAttribute("employeeNo"));
 		ArrayList<Map<String, Object>> dutyData = this.dutySelect(requestJson);
 		result.put("dateData", dutyData);

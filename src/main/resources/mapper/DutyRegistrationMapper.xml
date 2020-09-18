@@ -3,6 +3,8 @@
 <mapper namespace="jp.co.lyc.cms.mapper.DutyRegistrationMapper">
     <resultMap id="DutyRegistration" type="jp.co.lyc.cms.model.DutyRegistrationModel"/>
     <resultMap id="EmployeeWorkTime" type="jp.co.lyc.cms.model.EmployeeWorkTimeModel"/>
+    <resultMap id="BreakTime" type="jp.co.lyc.cms.model.BreakTimeModel"/>
+    
     <insert id="insertDutyRegistration" parameterType="String">
 		INSERT INTO breakTime(
 			employeeNo,
@@ -65,10 +67,11 @@
 		    , #{updateUser}
 		)
     </insert>
-    <select id="selectDutyRegistration" resultMap="DutyRegistration" parameterType="String">
+    <select id="selectDutyRegistration" resultMap="BreakTime" parameterType="String">
 		SELECT
 			employeeNo,
 			yearMonth,
+			breakTimeFixedStatus,
 			lunchBreakStartTime,
 			lunchBreakFinshTime,
 			lunchBreakTime,
