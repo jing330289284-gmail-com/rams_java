@@ -37,12 +37,9 @@ public class PersonalSalesSearchController {
 
 	String errorsMessage = "";
 	@RequestMapping(value = "/searchEmpDetails", method = RequestMethod.POST)
+	
 	@ResponseBody
 	public  Map<String, Object>searchEmpDetails(@RequestBody PersonalSalesSearchModel empInfo) {
-		//List<String> b = new ArrayList<String>();
-		// b = testMapper.countByUserList();
-		Date d = new Date();
-		  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
 		List<PersonalSalesSearchModel> personModelList = new ArrayList<PersonalSalesSearchModel>();
 		logger.info("PersonalSalesSearchController.searchEmpDetails:" + "検索開始");	
 		Date day=new Date();
@@ -146,7 +143,6 @@ public class PersonalSalesSearchController {
 			Map<String, Object> sendMap = getDetailParam(empInfo);
 			int workCount =0;		
 				sendMap.put("getYandM", getYandM);
-				//List<PersonalSalesSearchModel>personModelList =new ArrayList<PersonalSalesSearchModel>();
 				personModelList = personalSalesSearchService.searchEmpDetails(sendMap);
 				for(int i=0;i<personModelList.size();i++) {
 					if(personModelList.get(i).getUnitPrice()!=null) {
@@ -189,25 +185,4 @@ public class PersonalSalesSearchController {
 		}
 		return sendMap;
 	}
-	
-	
-//	@RequestMapping(value = "/InputvalueCheck", method = RequestMethod.POST)
-//	@ResponseBody
-//	public Map<String, Object> InputvalueCheck(@RequestBody PersonalSalesSearchModel psm) {
-//		logger.info("updateSalesSituation:" + "検索開始");
-//		errorsMessage = "";
-//		DataBinder binder = new DataBinder(psm);
-//		binder.setValidator(new PersonalSalesValidation());
-//		binder.validate();
-//		BindingResult results = binder.getBindingResult();
-//		Map<String, Object> result = new HashMap<>();
-//		if (results.hasErrors()) {
-//			results.getAllErrors().forEach(o -> {
-//				FieldError error = (FieldError) o;
-//				errorsMessage += error.getDefaultMessage();// エラーメッセージ
-//			});			
-//	}
-//		result.put("errorsMessage", errorsMessage);// エラーメッセージ
-//		return result;
-//	}
 }
