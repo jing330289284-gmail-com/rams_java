@@ -46,7 +46,7 @@ public class WagesInfoController extends BaseController{
 		HashMap<String, String> sendMap = new HashMap<String, String>();
 		sendMap.put("employeeNo", wagesInfoMod.getEmployeeNo());
 		ArrayList<WagesInfoModel> wagesInfoList = wagesInfoMapper.getWagesInfo(sendMap);
-		if(wagesInfoList.size() < 0) {
+		if(wagesInfoList.size() == 0) {
 			result.put("errorsMessage", "該当社員の給料データがない");
 			return result;
 		}
@@ -79,7 +79,7 @@ public class WagesInfoController extends BaseController{
 			return result;
 		}
 		wagesInfoModel.setUpdateUser((String)getSession().getAttribute("employeeName"));
-		if(wagesInfoModel.getActionType().equals("insert")) {
+		if(wagesInfoModel.getActionType().equals("insert")) {//插入场合
 			HashMap<String, String> sendMap = new HashMap<String, String>();
 			sendMap.put("employeeNo", wagesInfoModel.getEmployeeNo());
 			sendMap.put("reflectYearAndMonth", wagesInfoModel.getReflectYearAndMonth());
@@ -94,7 +94,22 @@ public class WagesInfoController extends BaseController{
 			}else {
 				result.put("errorsMessage","登録失败");
 			}
-		}else if(wagesInfoModel.getActionType().equals("update")) {
+		}else if(wagesInfoModel.getActionType().equals("update")) {//更新场合
+			HashMap<String, String> sendMap = new HashMap<String, String>();
+			sendMap.put("employeeNo", wagesInfoModel.getEmployeeNo());
+			//更新しておく反映年月の取得
+			ArrayList<WagesInfoModel> lastList = wagesInfoMapper.getWagesInfo(sendMap);
+			if(!lastList.get(lastList.size() - 1).getReflectYearAndMonth().equals(
+					wagesInfoModel.getReflectYearAndMonth())) {
+				sendMap.put("reflectYearAndMonth", wagesInfoModel.getReflectYearAndMonth());
+				ArrayList<WagesInfoModel> checkMod = wagesInfoMapper.getWagesInfo(sendMap);
+				if(checkMod.size() > 0) {
+					result.put("errorsMessage","更新した反映年月はデータベースにあるため、反映年月を確認してください！");
+					return result;
+				}
+			}
+			wagesInfoModel.setUpdatedReflectYearAndMonth(
+					lastList.get(lastList.size()-1).getReflectYearAndMonth());
 			boolean resultBool = wagesInfoService.update(wagesInfoModel);
 			if(resultBool) {
 				result.put("message","更新成功");

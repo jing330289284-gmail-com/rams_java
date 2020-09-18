@@ -14,7 +14,7 @@
 			concat("￥",FORMAT(if(wtt.sumWorkTime>t006.payOffRange2,t005.salary/t006.payOffRange2*(wtt.sumWorkTime-t006.payOffRange2),if(t006.payOffRange1>wtt.sumWorkTime,t005.salary/t006.payOffRange1*(wtt.sumWorkTime-t006.payOffRange1),0)),0))overTimePay, 
 			if(ewt.employeeWorkTimeHaveData=1,'0',if(wtt.attendanceRegisterFlag=1,'1','2'))checkSection,
 			ewt.updateTime,
-			if(wtt.approvalStatus=1,"0","1")approvalStatus
+			if(wtt.approvalStatus=1,"1","0")approvalStatus
 		FROM 
 			T001Employee as t001
 		left join
@@ -26,11 +26,12 @@
 		left join
 			M013Station as m013 on t007.stationCode=m013.stationCode
 		left join
-			(SELECT employeeNo,updateTime,yearAndMonth,1 as employeeWorkTimeHaveData FROM employeeWorkTime group by employeeNo)ewt on t001.employeeNo=ewt.employeeNo
-		left join workTotalTime as wtt on t001.employeeNo=wtt.employeeNo and ewt.yearAndMonth=wtt.attendanceYearAndMonth 
+			(SELECT employeeNo,updateTime,yearAndMonth,1 as employeeWorkTimeHaveData FROM employeeWorkTime group by employeeNo)ewt on t001.employeeNo=ewt.employeeNo and ewt.yearAndMonth=#{yearAndMonth}
+		left join
+			workTotalTime as wtt on t001.employeeNo=wtt.employeeNo and wtt.attendanceYearAndMonth=#{yearAndMonth}
 		,(SELECT   @rowNo:=0) AS rowNo
 		WHERE
-		ewt.yearAndMonth = #{yearAndMonth}
+		wtt.attendanceYearAndMonth = #{yearAndMonth}
 		<if test="approvalStatus == 0">
 		</if>
 		<if test="approvalStatus == 1">
