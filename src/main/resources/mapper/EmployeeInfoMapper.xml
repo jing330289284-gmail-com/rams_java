@@ -23,9 +23,7 @@
 		T003.firstHalfAddress,
 		T003.lastHalfAddress,
 		M013.stationName,
-		TIMESTAMPDIFF(MONTH,
-		NOW(),
-		T002.stayPeriod) AS stayPeriod,
+		T002.stayPeriod,
 		T002.resumeInfo1,
 		T002.resumeInfo2,
 		T002.residentCardInfo
