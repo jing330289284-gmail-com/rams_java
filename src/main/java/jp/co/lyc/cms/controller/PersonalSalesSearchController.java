@@ -37,6 +37,7 @@ public class PersonalSalesSearchController {
 
 	String errorsMessage = "";
 	@RequestMapping(value = "/searchEmpDetails", method = RequestMethod.POST)
+	
 	@ResponseBody
 	public  Map<String, Object>searchEmpDetails(@RequestBody PersonalSalesSearchModel empInfo) {
 		List<PersonalSalesSearchModel> personModelList = new ArrayList<PersonalSalesSearchModel>();
