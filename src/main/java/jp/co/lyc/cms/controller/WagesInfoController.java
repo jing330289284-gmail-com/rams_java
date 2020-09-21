@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import jp.co.lyc.cms.common.BaseController;
+import jp.co.lyc.cms.mapper.ExpensesInfoMapper;
 import jp.co.lyc.cms.mapper.WagesInfoMapper;
+import jp.co.lyc.cms.model.ExpensesInfoModel;
 import jp.co.lyc.cms.model.WagesInfoModel;
 import jp.co.lyc.cms.service.WagesInfoService;
 import jp.co.lyc.cms.validation.WagesInfoValidation;
@@ -35,6 +37,9 @@ public class WagesInfoController extends BaseController{
 	@Autowired
 	WagesInfoMapper wagesInfoMapper;
 	
+	@Autowired
+	ExpensesInfoMapper expensesInfoMapper;
+	
 	/**
 	 * 
 	 * @return
@@ -43,17 +48,93 @@ public class WagesInfoController extends BaseController{
 	@ResponseBody
 	public Map<String, Object> getWagesInfo(@RequestBody WagesInfoModel wagesInfoMod) {
 		HashMap<String, Object> result = new HashMap<String, Object>();
+		if(wagesInfoMod.getEmployeeNo() == null) {
+			result.put("errorsMessage", "");
+			return result;
+		}
+		if (!wagesInfoMod.getEmployeeNo().substring(0,3).equals("LYC")) {
+			result.put("errorsMessage", "本社社員（LYCXXX）を選択してください！");
+			return result;
+		}
 		HashMap<String, String> sendMap = new HashMap<String, String>();
 		sendMap.put("employeeNo", wagesInfoMod.getEmployeeNo());
 		ArrayList<WagesInfoModel> wagesInfoList = wagesInfoMapper.getWagesInfo(sendMap);
+		ArrayList<ExpensesInfoModel> expensesInfoList = expensesInfoMapper.getExpensesInfo(sendMap);
 		if(wagesInfoList.size() == 0) {
 			result.put("errorsMessage", "該当社員の給料データがない");
 			return result;
+		}else if(expensesInfoList.size() != 0) {
+			wagesInfoList = dataReset(wagesInfoList,expensesInfoList);
+		}else if(expensesInfoList.size() == 0) {
+			for(int i = 0;i<wagesInfoList.size();i++) {
+				//給料期間
+				if(i != wagesInfoList.size() -1) {
+					wagesInfoList.get(i).setPeriod(wagesInfoList.get(i).getReflectYearAndMonth() + "~" + 
+							wagesInfoList.get(i+1).getReflectYearAndMonth());
+				}else {
+					wagesInfoList.get(i).setPeriod(wagesInfoList.get(i).getReflectYearAndMonth() + "~");
+				}
+			}
 		}
 		result.put("wagesInfoList", wagesInfoList);
 		return result;
 	}
-	
+	/**
+	 * 検索したデータの再処理
+	 * @param wagesInfoModels
+	 * @param expensesInfoModels
+	 * @return
+	 */
+	public ArrayList<WagesInfoModel> dataReset(ArrayList<WagesInfoModel> wagesInfoModels ,
+			ArrayList<ExpensesInfoModel> expensesInfoModels) {
+		ArrayList<WagesInfoModel> resuList = new ArrayList<WagesInfoModel>();
+		for(int i = 0;i<wagesInfoModels.size();i++) {
+			WagesInfoModel w = wagesInfoModels.get(i);
+			//給料情報の反映年月
+			int wagesDate = 
+					Integer.parseInt(w.getReflectYearAndMonth());
+			//前の給料情報の反映年月
+			int nextWagesDate = 0;
+			//第一件ではない場合
+			//給料期間
+			if(i != wagesInfoModels.size() -1) {
+				nextWagesDate = Integer.parseInt(wagesInfoModels.get(i + 1).getReflectYearAndMonth());
+				w.setPeriod(w.getReflectYearAndMonth() + "~" + 
+						wagesInfoModels.get(i+1).getReflectYearAndMonth());
+			}else {
+				w.setPeriod(w.getReflectYearAndMonth() + "~");
+			}
+			ArrayList<ExpensesInfoModel> expensesInfoModelsInWages = new ArrayList<ExpensesInfoModel>();
+			for(int j = 0;j<expensesInfoModels.size();j++) {
+				ExpensesInfoModel e = expensesInfoModels.get(j);
+				//諸費用期間
+				if(j != expensesInfoModels.size() -1) {
+					e.setExpensesPeriod(e.getExpensesReflectYearAndMonth() + "~" + 
+							expensesInfoModels.get(j+1).getExpensesReflectYearAndMonth());
+				}else {
+					e.setExpensesPeriod(e.getExpensesReflectYearAndMonth() + "~");
+				}
+				//諸費用の反映年月
+				int expensesDate = 
+						Integer.parseInt(expensesInfoModels.get(j).getExpensesReflectYearAndMonth());
+				if(i == wagesInfoModels.size()) {
+					if(expensesDate >= wagesDate) {
+						expensesInfoModelsInWages.add(e);
+					}
+				}else if(i != wagesInfoModels.size()){
+					if(expensesDate < nextWagesDate &&  expensesDate >= wagesDate) {
+						expensesInfoModelsInWages.add(e);
+					}
+				}
+			}
+			if(expensesInfoModelsInWages.size() == 0) {
+				expensesInfoModelsInWages = null;
+			}
+			w.setExpensesInfoModels(expensesInfoModelsInWages);
+			resuList.add(w);
+		}
+		return resuList;
+	}
 	/**
 	 * 登録ボタン
 	 * @param wagesInfoModel

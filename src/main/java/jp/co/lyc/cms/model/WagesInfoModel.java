@@ -6,6 +6,7 @@ import jp.co.lyc.cms.common.BaseController;
 
 public class WagesInfoModel {
 	String employeeNo;//社員名
+	String period;//給料期間
 	String reflectYearAndMonth;//反映年月
 	String updatedReflectYearAndMonth;//反映年月
 	String socialInsuranceFlag;//社会保険フラグ
@@ -22,16 +23,65 @@ public class WagesInfoModel {
 	String nextRaiseMonth;//次回昇給月
 	String totalAmount;//総額
 	String employeeFormCode;//社員形式
+	String employeeFormName;//社員形式コード
 	String remark;//備考
 	String updateUser;//更新者
 	ExpensesInfoModel expensesInfoModel;//諸費用画面データ
 	String actionType;//処理区分
 	ArrayList<ExpensesInfoModel> expensesInfoModels;
+	//諸費用データ
+	String expensesPeriod;//諸費用期間
+	String expensesReflectYearAndMonth;
+	String updateExpensesReflectYearAndMonth;
 	String transportationExpenses;
-	String leaderAllowanceAmount;
-	String housingAllowance;
+	String otherAllowanceName;
 	String otherAllowanceAmount;
+	String leaderAllowanceAmount;
+	String housingStatus;
+	String housingAllowance;
 	
+	public String getEmployeeFormName() {
+		return employeeFormName;
+	}
+	public void setEmployeeFormName(String employeeFormName) {
+		this.employeeFormName = employeeFormName;
+	}
+	public String getExpensesPeriod() {
+		return expensesPeriod;
+	}
+	public void setExpensesPeriod(String expensesPeriod) {
+		this.expensesPeriod = expensesPeriod;
+	}
+	public String getExpensesReflectYearAndMonth() {
+		return expensesReflectYearAndMonth;
+	}
+	public void setExpensesReflectYearAndMonth(String expensesReflectYearAndMonth) {
+		this.expensesReflectYearAndMonth = expensesReflectYearAndMonth;
+	}
+	public String getUpdateExpensesReflectYearAndMonth() {
+		return updateExpensesReflectYearAndMonth;
+	}
+	public void setUpdateExpensesReflectYearAndMonth(String updateExpensesReflectYearAndMonth) {
+		this.updateExpensesReflectYearAndMonth = updateExpensesReflectYearAndMonth;
+	}
+	public String getOtherAllowanceName() {
+		return otherAllowanceName;
+	}
+	public void setOtherAllowanceName(String otherAllowanceName) {
+		this.otherAllowanceName = otherAllowanceName;
+	}
+	public String getHousingStatus() {
+		return housingStatus;
+	}
+	public void setHousingStatus(String housingStatus) {
+		this.housingStatus = housingStatus;
+	}
+	public String getPeriod() {
+		return period;
+	}
+	public void setPeriod(String period) {
+		this.period = period;
+	}
 	public String getTransportationExpenses() {
 		return transportationExpenses;
 	}
