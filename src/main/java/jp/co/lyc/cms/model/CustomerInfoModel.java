@@ -26,6 +26,7 @@ public class CustomerInfoModel {
 	String customerRankingName;//お客様ランキング名前
 	String companyNatureName;//会社性質名前
 	String topCustomerName;//上位お客様名前
+	String siteLocationCode;//現場場所コード
 	String location;//現場場所
 	String rowNo;//行番号
 	String purchasingManagers;//購買担当
@@ -41,7 +42,12 @@ public class CustomerInfoModel {
 	AccountInfoModel accountInfo;
 	TopCustomerInfoModel topCustomerInfo;
 	
-	
+	public String getSiteLocationCode() {
+		return siteLocationCode;
+	}
+	public void setSiteLocationCode(String siteLocationCode) {
+		this.siteLocationCode = siteLocationCode;
+	}
 	public String getStationName() {
 		return stationName;
 	}

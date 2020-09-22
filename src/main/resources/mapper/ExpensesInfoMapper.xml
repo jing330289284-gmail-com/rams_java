@@ -81,22 +81,4 @@
 		WHERE 
 			employeeNo = #{employeeNo}
 </update>
-
-<!--  -->
-<select id="getExpensesInfoByDate" parameterType="String" resultMap="expensesInfoModel">
-	SELECT
-		expensesReflectYearAndMonth,
-		otherAllowanceName,
-		otherAllowanceAmount,
-		leaderAllowanceAmount,
-		housingStatus,
-		housingAllowance,
-		transportationExpenses 
-	FROM
-		T013ExpensesInfo 
-	WHERE
-		employeeNo = #{employeeNo}
-		AND 
-			expensesReflectYearAndMonth = #{expensesReflectYearAndMonth}
-</select>
 </mapper>
