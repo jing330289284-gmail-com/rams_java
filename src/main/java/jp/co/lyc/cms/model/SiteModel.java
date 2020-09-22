@@ -2,7 +2,7 @@ package jp.co.lyc.cms.model;
 
 import jp.co.lyc.cms.common.BaseController;
 
-public class SiteModel {
+public class SiteModel{
 
 	/**
 	 * 

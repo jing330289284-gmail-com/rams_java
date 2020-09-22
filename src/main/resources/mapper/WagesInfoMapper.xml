@@ -137,5 +137,6 @@
 		updateUser = #{updateUser}
 		WHERE 
 			employeeNo = #{employeeNo}
+			AND reflectYearAndMonth = #{updatedReflectYearAndMonth}
 </update>
 </mapper>

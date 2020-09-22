@@ -6,14 +6,28 @@ public class ExpensesInfoModel extends BaseController{
 	
 	String employeeNo;
 	String expensesReflectYearAndMonth;
+	String updateExpensesReflectYearAndMonth;
 	String transportationExpenses;
 	String otherAllowanceName;
 	String otherAllowanceAmount;
 	String leaderAllowanceAmount;
 	String housingStatus;
 	String housingAllowance;
+	String actionType;
 	String updateUser;
 	
+	public String getActionType() {
+		return actionType;
+	}
+	public void setActionType(String actionType) {
+		this.actionType = actionType;
+	}
+	public String getUpdateExpensesReflectYearAndMonth() {
+		return updateExpensesReflectYearAndMonth;
+	}
+	public void setUpdateExpensesReflectYearAndMonth(String updateExpensesReflectYearAndMonth) {
+		this.updateExpensesReflectYearAndMonth = updateExpensesReflectYearAndMonth;
+	}
 	public String getEmployeeNo() {
 		return employeeNo;
 	}

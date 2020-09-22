@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import jp.co.lyc.cms.model.BreakTimeModel;
 import jp.co.lyc.cms.model.DutyRegistrationModel;
 import jp.co.lyc.cms.model.EmployeeWorkTimeModel;
 import jp.co.lyc.cms.mapper.DutyRegistrationMapper;
@@ -20,8 +22,8 @@ public class DutyRegistrationService {
 	 * @param TopCustomerNo
 	 * @return
 	 */
-	public DutyRegistrationModel selectDutyRegistration(Map<String, Object> sendMap) {
-		DutyRegistrationModel resultMod = dutyRegistrationMapper.selectDutyRegistration(sendMap);
+	public BreakTimeModel selectDutyRegistration(Map<String, Object> sendMap) {
+		BreakTimeModel resultMod = dutyRegistrationMapper.selectDutyRegistration(sendMap);
 		return resultMod;
 	}
 	/**

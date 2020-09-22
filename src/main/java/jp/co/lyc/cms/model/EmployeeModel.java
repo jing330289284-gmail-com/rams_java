@@ -55,7 +55,7 @@ public class EmployeeModel implements Serializable {
 	String phoneNo;// 携帯電話
 	String employmentInsuranceNo;// 雇用保険番号
 	String departmentCode;// 部署コード
-	String nearestStation;// 寄り駅
+	String stationName;// 寄り駅
 	String oldPassword;//古いパスワード
 	String customer;// お客様
 	String employeeName;
@@ -476,12 +476,13 @@ public class EmployeeModel implements Serializable {
 		this.departmentCode = departmentCode;
 	}
 
-	public String getNearestStation() {
-		return nearestStation;
+
+	public String getStationName() {
+		return stationName;
 	}
 
-	public void setNearestStation(String nearestStation) {
-		this.nearestStation = nearestStation;
+	public void setStationName(String stationName) {
+		this.stationName = stationName;
 	}
 
 	public String getCustomer() {

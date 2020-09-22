@@ -7,6 +7,7 @@ public class PersonalSalesSearchModel implements Serializable  {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	String errormessage;
 	String onlyYandM;
 	int workMonthCount;
 	String employeeName;//社員名
@@ -141,5 +142,12 @@ public class PersonalSalesSearchModel implements Serializable  {
 	public void setPaymentTotal(String paymentTotal) {
 		this.paymentTotal = paymentTotal;
 	}
+	public String getErrormessage() {
+		return errormessage;
+	}
+	public void setErrormessage(String errormessage) {
+		this.errormessage = errormessage;
+	}
+	
 	
 }

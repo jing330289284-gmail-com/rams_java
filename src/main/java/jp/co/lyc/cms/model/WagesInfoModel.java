@@ -1,10 +1,13 @@
 package jp.co.lyc.cms.model;
 
+import java.util.ArrayList;
+
 import jp.co.lyc.cms.common.BaseController;
 
 public class WagesInfoModel {
 	String employeeNo;//社員名
 	String reflectYearAndMonth;//反映年月
+	String updatedReflectYearAndMonth;//反映年月
 	String socialInsuranceFlag;//社会保険フラグ
 	String salary;//給料
 	String waitingCost;//非稼動費用
@@ -23,7 +26,48 @@ public class WagesInfoModel {
 	String updateUser;//更新者
 	ExpensesInfoModel expensesInfoModel;//諸費用画面データ
 	String actionType;//処理区分
+	ArrayList<ExpensesInfoModel> expensesInfoModels;
+	String transportationExpenses;
+	String leaderAllowanceAmount;
+	String housingAllowance;
+	String otherAllowanceAmount;
 	
+	public String getTransportationExpenses() {
+		return transportationExpenses;
+	}
+	public void setTransportationExpenses(String transportationExpenses) {
+		this.transportationExpenses = transportationExpenses;
+	}
+	public String getLeaderAllowanceAmount() {
+		return leaderAllowanceAmount;
+	}
+	public void setLeaderAllowanceAmount(String leaderAllowanceAmount) {
+		this.leaderAllowanceAmount = leaderAllowanceAmount;
+	}
+	public String getHousingAllowance() {
+		return housingAllowance;
+	}
+	public void setHousingAllowance(String housingAllowance) {
+		this.housingAllowance = housingAllowance;
+	}
+	public String getOtherAllowanceAmount() {
+		return otherAllowanceAmount;
+	}
+	public void setOtherAllowanceAmount(String otherAllowanceAmount) {
+		this.otherAllowanceAmount = otherAllowanceAmount;
+	}
+	public ArrayList<ExpensesInfoModel> getExpensesInfoModels() {
+		return expensesInfoModels;
+	}
+	public void setExpensesInfoModels(ArrayList<ExpensesInfoModel> expensesInfoModels) {
+		this.expensesInfoModels = expensesInfoModels;
+	}
+	public String getUpdatedReflectYearAndMonth() {
+		return updatedReflectYearAndMonth;
+	}
+	public void setUpdatedReflectYearAndMonth(String updatedReflectYearAndMonth) {
+		this.updatedReflectYearAndMonth = updatedReflectYearAndMonth;
+	}
 	public String getActionType() {
 		return actionType;
 	}

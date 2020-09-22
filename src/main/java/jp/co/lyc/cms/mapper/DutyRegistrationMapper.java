@@ -3,6 +3,7 @@ package jp.co.lyc.cms.mapper;
 import java.util.HashMap;
 import java.util.Map;
 
+import jp.co.lyc.cms.model.BreakTimeModel;
 import jp.co.lyc.cms.model.DutyRegistrationModel;
 import jp.co.lyc.cms.model.EmployeeWorkTimeModel;
 
@@ -26,7 +27,7 @@ public interface DutyRegistrationMapper {
 	 * @param TopCustomerNo
 	 * @return
 	 */
-	public DutyRegistrationModel selectDutyRegistration(Map<String, Object> sendMap);
+	public BreakTimeModel selectDutyRegistration(Map<String, Object> sendMap);
 	/**
 	 * 
 	 * @param sendMap
