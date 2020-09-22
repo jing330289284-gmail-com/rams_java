@@ -26,6 +26,17 @@ public class GetSiteInfoService {
 		}
 		return true;
 	}
+	
+	public boolean updateSiteInfo(Map<String, Object> sendMap) {
+		try {
+			getSiteInfoMapper.siteUpdate(sendMap);
+		} catch (Exception e) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
 
 	public List<SiteModel> getSiteInfo(String employeeNo) {
 

@@ -37,6 +37,15 @@ public class SiteModel{
 	String levelName;
 	String typeOfIndustryName;
 	String typeOfIndustryCode;
+	String checkDate;
+
+	public String getCheckDate() {
+		return checkDate;
+	}
+
+	public void setCheckDate(String checkDate) {
+		this.checkDate = checkDate;
+	}
 
 	public String getTypeOfIndustryCode() {
 		return typeOfIndustryCode;

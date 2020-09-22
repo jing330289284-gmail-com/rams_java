@@ -11,7 +11,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.DataBinder;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,9 +21,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import jp.co.lyc.cms.common.BaseController;
-import jp.co.lyc.cms.model.MasterModel;
 import jp.co.lyc.cms.model.SiteModel;
 import jp.co.lyc.cms.service.GetSiteInfoService;
+import jp.co.lyc.cms.validation.SiteInfoValidation;
 
 @Controller
 @CrossOrigin(origins = "http://127.0.0.1:3000")
@@ -48,8 +50,7 @@ public class SiteInfoController extends BaseController {
 		String period;
 		if (beginDate != null) {
 			stringBuilder1 = new StringBuffer(beginDate);
-			stringBuilder1.insert(6, ".");
-			stringBuilder1.insert(4, ".");
+
 			period = stringBuilder1 + "〜";
 		} else {
 			period = "未定";
@@ -57,8 +58,7 @@ public class SiteInfoController extends BaseController {
 		}
 		if (endDate != null) {
 			stringBuilder2 = new StringBuffer(endDate);
-			stringBuilder2.insert(6, ".");
-			stringBuilder2.insert(4, ".");
+
 			period = period + stringBuilder2;
 		}
 
@@ -80,18 +80,31 @@ public class SiteInfoController extends BaseController {
 		return relatedEmployees;
 	}
 
-	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	GetSiteInfoService getSiteInfoService;
+	String errorsMessage = "";
 
 	@RequestMapping(value = "/insertSiteInfo")
 	@ResponseBody
 	public Map<String, Object> insertSiteInfo(@RequestBody SiteModel siteModel) {
 		Map<String, Object> result = new HashMap<>();
+		errorsMessage = "";
+		DataBinder binder = new DataBinder(siteModel);
+		binder.setValidator(new SiteInfoValidation());
+		binder.validate();
+		BindingResult results = binder.getBindingResult();
+		if (results.hasErrors()) {
+			results.getAllErrors().forEach(o -> {
+				FieldError error = (FieldError) o;
+				errorsMessage += error.getDefaultMessage();// エラーメッセージ
+			});
+			result.put("errorsMessage", errorsMessage);// エラーメッセージ
+			return result;
+		}
 		// 登陆处理
-		if (insert(siteModel)) {
+		if (insert(putData(siteModel))) {
 			result.put("result", true);
 		} else {
 			result.put("result", false);
@@ -101,12 +114,60 @@ public class SiteInfoController extends BaseController {
 
 	}
 
+	@RequestMapping(value = "/updateSiteInfo")
+	@ResponseBody
+	public Map<String, Object> updateSiteInfo(@RequestBody SiteModel siteModel) {
+		Map<String, Object> result = new HashMap<>();
+		errorsMessage = "";
+		DataBinder binder = new DataBinder(siteModel);
+		binder.setValidator(new SiteInfoValidation());
+		binder.validate();
+		BindingResult results = binder.getBindingResult();
+		if (results.hasErrors()) {
+			results.getAllErrors().forEach(o -> {
+				FieldError error = (FieldError) o;
+				errorsMessage += error.getDefaultMessage();// エラーメッセージ
+			});
+			result.put("errorsMessage", errorsMessage);// エラーメッセージ
+			return result;
+		}
+		// 登陆处理
+		if (update(putData(siteModel))) {
+			result.put("result", true);
+		} else {
+			result.put("result", false);
+		}
+		logger.info("SiteInfoController.updateSiteInfo:" + "追加結束");
+		return result;
+
+	}
+
 	/**
-	 * インサート
+	 * insert
 	 * 
 	 * @return
 	 */
-	public boolean insert(SiteModel siteModel) {
+
+	public boolean insert(Map<String, Object> sendMap) {
+		return getSiteInfoService.insertSiteInfo(sendMap);
+	}
+
+	/**
+	 * update
+	 * 
+	 * @return
+	 */
+
+	public boolean update(Map<String, Object> sendMap) {
+		return getSiteInfoService.updateSiteInfo(sendMap);
+	}
+
+	/**
+	 * データ整理
+	 * 
+	 * @return
+	 */
+	public Map<String, Object> putData(SiteModel siteModel) {
 		HttpSession loginSession = getSession();
 		Map<String, Object> sendMap = new HashMap<String, Object>();
 		String employeeNo = siteModel.getEmployeeNo();
@@ -127,6 +188,7 @@ public class SiteInfoController extends BaseController {
 		String levelCode = siteModel.getLevelCode();
 		String typeOfIndustryCode = siteModel.getTypeOfIndustryCode();
 		String remark = siteModel.getRemark();
+		String workDate = siteModel.getWorkDate();
 
 		if (employeeNo != null && employeeNo.length() != 0) {
 			sendMap.put("employeeNo", employeeNo);
@@ -179,8 +241,11 @@ public class SiteInfoController extends BaseController {
 		if (typeOfIndustryCode != null && typeOfIndustryCode.length() != 0) {
 			sendMap.put("typeOfIndustryCode", typeOfIndustryCode);
 		}
+		if (workDate != null && workDate.length() != 0) {
+			sendMap.put("workDate", workDate);
+		}
 		sendMap.put("updateUser", loginSession.getAttribute("employeeName"));
-		return getSiteInfoService.insertSiteInfo(sendMap);
+		return sendMap;
 	}
 
 	@RequestMapping(value = "/getSiteInfo", method = RequestMethod.POST)
@@ -193,6 +258,32 @@ public class SiteInfoController extends BaseController {
 			for (int a = 0; a < siteList.size(); a++) {
 				siteList.get(a).setWorkDate(
 						dateToPeriod(siteList.get(a).getAdmissionStartDate(), siteList.get(a).getAdmissionEndDate()));
+				String[] relatedEmployees;
+				if (siteList.get(a).getRelatedEmployees() != "" && siteList.get(a).getRelatedEmployees() != null) {
+					relatedEmployees = siteList.get(a).getRelatedEmployees().split(",");
+
+					if (relatedEmployees.length > 0) {
+						if (relatedEmployees[0] != "") {
+							siteList.get(a).setRelated1Employees(relatedEmployees[0]);
+						}
+					}
+					if (relatedEmployees.length > 1) {
+						if (relatedEmployees[1] != "") {
+							siteList.get(a).setRelated2Employees(relatedEmployees[1]);
+						}
+					}
+					if (relatedEmployees.length > 2) {
+						if (relatedEmployees[2] != "") {
+							siteList.get(a).setRelated3Employees(relatedEmployees[2]);
+						}
+					}
+					if (relatedEmployees.length > 3) {
+						if (relatedEmployees[3] != "") {
+							siteList.get(a).setRelated4Employees(relatedEmployees[3]);
+						}
+					}
+				}
+
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
