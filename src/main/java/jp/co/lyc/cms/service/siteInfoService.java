@@ -7,18 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
-import jp.co.lyc.cms.mapper.GetSiteInfoMapper;
+import jp.co.lyc.cms.mapper.SiteInfoMapper;
 import jp.co.lyc.cms.model.SiteModel;
 
 @Component
-public class GetSiteInfoService {
+public class siteInfoService {
 
 	@Autowired
-	GetSiteInfoMapper getSiteInfoMapper;
+	SiteInfoMapper siteInfoMapper;
 
 	public boolean insertSiteInfo(Map<String, Object> sendMap) {
 		try {
-			getSiteInfoMapper.siteInsert(sendMap);
+			siteInfoMapper.siteInsert(sendMap);
 		} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			e.printStackTrace();
@@ -29,7 +29,7 @@ public class GetSiteInfoService {
 	
 	public boolean updateSiteInfo(Map<String, Object> sendMap) {
 		try {
-			getSiteInfoMapper.siteUpdate(sendMap);
+			siteInfoMapper.siteUpdate(sendMap);
 		} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			e.printStackTrace();
@@ -40,7 +40,7 @@ public class GetSiteInfoService {
 
 	public List<SiteModel> getSiteInfo(String employeeNo) {
 
-		List<SiteModel> siteList = getSiteInfoMapper.getSiteInfo(employeeNo);
+		List<SiteModel> siteList = siteInfoMapper.getSiteInfo(employeeNo);
 		return siteList;
 	}
 

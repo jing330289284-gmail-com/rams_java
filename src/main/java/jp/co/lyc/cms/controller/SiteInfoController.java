@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import jp.co.lyc.cms.common.BaseController;
 import jp.co.lyc.cms.model.SiteModel;
-import jp.co.lyc.cms.service.GetSiteInfoService;
+import jp.co.lyc.cms.service.siteInfoService;
 import jp.co.lyc.cms.validation.SiteInfoValidation;
 
 @Controller
@@ -83,7 +83,7 @@ public class SiteInfoController extends BaseController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
-	GetSiteInfoService getSiteInfoService;
+	siteInfoService siteInfoService;
 	String errorsMessage = "";
 
 	@RequestMapping(value = "/insertSiteInfo")
@@ -149,7 +149,7 @@ public class SiteInfoController extends BaseController {
 	 */
 
 	public boolean insert(Map<String, Object> sendMap) {
-		return getSiteInfoService.insertSiteInfo(sendMap);
+		return siteInfoService.insertSiteInfo(sendMap);
 	}
 
 	/**
@@ -159,7 +159,7 @@ public class SiteInfoController extends BaseController {
 	 */
 
 	public boolean update(Map<String, Object> sendMap) {
-		return getSiteInfoService.updateSiteInfo(sendMap);
+		return siteInfoService.updateSiteInfo(sendMap);
 	}
 
 	/**
@@ -254,7 +254,7 @@ public class SiteInfoController extends BaseController {
 		List<SiteModel> siteList = new ArrayList<SiteModel>();
 
 		try {
-			siteList = getSiteInfoService.getSiteInfo(employeeName.get("employeeName").toString());
+			siteList = siteInfoService.getSiteInfo(employeeName.get("employeeName").toString());
 			for (int a = 0; a < siteList.size(); a++) {
 				siteList.get(a).setWorkDate(
 						dateToPeriod(siteList.get(a).getAdmissionStartDate(), siteList.get(a).getAdmissionEndDate()));
