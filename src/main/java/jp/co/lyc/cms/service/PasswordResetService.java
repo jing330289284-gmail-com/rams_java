@@ -39,8 +39,8 @@ public class PasswordResetService {
 	 * @param passwordResetId
 	 * @return
 	 */
-	public void deleteAll(String IdForEmployeeNo) {
-		passwordResetMapper.deleteAll(IdForEmployeeNo);
+	public void deleteAll(String idForEmployeeNo) {
+		passwordResetMapper.deleteAll(idForEmployeeNo);
 	};
 	
 	/**

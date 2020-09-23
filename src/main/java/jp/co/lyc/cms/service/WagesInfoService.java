@@ -1,16 +1,16 @@
 package jp.co.lyc.cms.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
+import jp.co.lyc.cms.mapper.EmployeeInfoMapper;
 import jp.co.lyc.cms.mapper.ExpensesInfoMapper;
 import jp.co.lyc.cms.mapper.WagesInfoMapper;
-import jp.co.lyc.cms.model.ExpensesInfoModel;
 import jp.co.lyc.cms.model.WagesInfoModel;
 
 @Component
@@ -24,6 +24,9 @@ public class WagesInfoService {
 	
 	@Autowired
 	ExpensesInfoService expensesInfoService;
+	
+	@Autowired
+	EmployeeInfoMapper employeeInfoMapper;
 	/**
 	 * 追加の場合
 	 * @param wagesInfoModel
@@ -34,6 +37,11 @@ public class WagesInfoService {
 		try {
 			HashMap<String, String> sendMap = getSendMap(wagesInfoModel);
 			wagesInfoMapper.insert(sendMap);
+			Map<String, Object> employeeDetailMap = new HashMap<String, Object>();
+			employeeDetailMap.put("employeeNo", wagesInfoModel.getEmployeeNo());
+			employeeDetailMap.put("employeeFormCode", wagesInfoModel.getEmployeeFormCode());
+			employeeDetailMap.put("updateUser", wagesInfoModel.getUpdateUser());
+			employeeInfoMapper.updateEmployeeInfoDetail(employeeDetailMap);
 			return true;
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -53,6 +61,11 @@ public class WagesInfoService {
 		try {
 			HashMap<String, String> sendMap = getSendMap(wagesInfoModel);
 			wagesInfoMapper.update(sendMap);
+			Map<String, Object> employeeDetailMap = new HashMap<String, Object>();
+			employeeDetailMap.put("employeeNo", wagesInfoModel.getEmployeeNo());
+			employeeDetailMap.put("employeeFormCode", wagesInfoModel.getEmployeeFormCode());
+			employeeDetailMap.put("updateUser", wagesInfoModel.getUpdateUser());
+			employeeInfoMapper.updateEmployeeInfoDetail(employeeDetailMap);
 			return true;
 		} catch (Exception e) {
 			// TODO: handle exception

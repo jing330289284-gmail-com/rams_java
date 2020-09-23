@@ -137,7 +137,7 @@ public class Login2Controller extends BaseController {
 		String passwordResetId = uuid.toString();
 		HashMap<String, String> sendMap = new HashMap<String, String>();
 		sendMap.put("passwordResetId", passwordResetId);
-		sendMap.put("IdForEmployeeNo", loginModel.getEmployeeNo());
+		sendMap.put("idForEmployeeNo", loginModel.getEmployeeNo());
 		es.insert(sendMap);
 		String context = loginModel.getEmployeeNo() + " さん<br/>" + 
 				"お疲れ様でした！<br/>" +

@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import jp.co.lyc.cms.model.SiteModel;
 import jp.co.lyc.cms.model.WagesInfoModel;
 
 @Mapper
@@ -27,4 +28,10 @@ public interface WagesInfoMapper {
 	 * @return
 	 */
 	public void update(HashMap<String, String> sendMap);
+	
+	/**
+	 * 稼働判断
+	 * @return
+	 */
+	public ArrayList<String> kadouCheck(String employeeNo);
 }

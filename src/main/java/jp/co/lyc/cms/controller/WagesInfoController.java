@@ -56,6 +56,13 @@ public class WagesInfoController extends BaseController{
 			result.put("errorsMessage", "本社社員（LYCXXX）を選択してください！");
 			return result;
 		}
+		boolean kadouCheck = true;
+		ArrayList<String> relatedEmployees = wagesInfoMapper.kadouCheck(wagesInfoMod.getEmployeeNo());
+		if(relatedEmployees.size() != 0) {
+			kadouCheck = false;
+			result.put("relatedEmployees", relatedEmployees);
+		}
+		result.put("kadouCheck", kadouCheck);
 		HashMap<String, String> sendMap = new HashMap<String, String>();
 		sendMap.put("employeeNo", wagesInfoMod.getEmployeeNo());
 		ArrayList<WagesInfoModel> wagesInfoList = wagesInfoMapper.getWagesInfo(sendMap);
@@ -85,6 +92,7 @@ public class WagesInfoController extends BaseController{
 	 * @param expensesInfoModels
 	 * @return
 	 */
+	@SuppressWarnings("null")
 	public ArrayList<WagesInfoModel> dataReset(ArrayList<WagesInfoModel> wagesInfoModels ,
 			ArrayList<ExpensesInfoModel> expensesInfoModels) {
 		ArrayList<WagesInfoModel> resuList = new ArrayList<WagesInfoModel>();
@@ -127,8 +135,17 @@ public class WagesInfoController extends BaseController{
 					}
 				}
 			}
+			//写入给料明细的最新诸费用
+			ExpensesInfoModel monthNewData = new ExpensesInfoModel();
 			if(expensesInfoModelsInWages.size() == 0) {
 				expensesInfoModelsInWages = null;
+			}else {
+				monthNewData = expensesInfoModelsInWages.get(expensesInfoModelsInWages.size()-1);
+				w.setTransportationExpenses(monthNewData.getTransportationExpenses());
+				w.setLeaderAllowanceAmount(monthNewData.getLeaderAllowanceAmount());
+				w.setHousingAllowance(monthNewData.getHousingAllowance());
+				w.setOtherAllowanceName(monthNewData.getOtherAllowanceName());
+				w.setOtherAllowanceAmount(monthNewData.getOtherAllowanceAmount());
 			}
 			w.setExpensesInfoModels(expensesInfoModelsInWages);
 			resuList.add(w);
