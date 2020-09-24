@@ -28,7 +28,7 @@ public interface PasswordResetMapper {
 	 * @param passwordResetId
 	 * @return
 	 */
-	public void deleteAll(String IdForEmployeeNo);
+	public void deleteAll(String idForEmployeeNo);
 	
 	/**
 	 * パスワードリセット

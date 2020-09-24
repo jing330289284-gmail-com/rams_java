@@ -26,6 +26,8 @@ public class WagesInfoValidation implements Validator{
 			if (methodName.equals("toroku")) {
 				if(UtilsCheckMethod.isNullOrEmpty(p.getEmployeeNo())) {
 					errors.rejectValue("employeeNo", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001","社員名"));
+				}else if(!p.getEmployeeNo().substring(0,3).equals("LYC")) {
+					errors.rejectValue("employeeNo", "", StatusCodeToMsgMap.getErrMsgbyCode("MSG0012"));
 				}
 				if(UtilsCheckMethod.isNullOrEmpty(p.getSalary()) && UtilsCheckMethod.isNullOrEmpty(p.getWaitingCost())) {
 					errors.rejectValue("salary", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001","給料または非稼働費用"));
@@ -35,6 +37,16 @@ public class WagesInfoValidation implements Validator{
 				}
 				if(UtilsCheckMethod.isNullOrEmpty(p.getTotalAmount())) {
 					errors.rejectValue("totalAmount", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG003","入力した金額"));
+				}
+				if(p.getBonusFlag().equals("1")) {
+					if(!UtilsCheckMethod.isNullOrEmpty(p.getScheduleOfBonusAmount()) && 
+							UtilsCheckMethod.isNullOrEmpty(p.getNextBonusMonth())) {
+						errors.rejectValue("nextBonusMonth", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001","次のボーナス月"));
+					}
+					if(UtilsCheckMethod.isNullOrEmpty(p.getScheduleOfBonusAmount()) && 
+							!UtilsCheckMethod.isNullOrEmpty(p.getNextBonusMonth())) {
+						errors.rejectValue("scheduleOfBonusAmount", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001","ボーナス予定額"));
+					}
 				}
 			}
 		}

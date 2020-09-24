@@ -35,10 +35,10 @@
 	
 	<!-- パスワードリセットURLをインサート -->
 	<insert id="insert" parameterType="String">
-	INSERT INTO T012passwordrest ( passwordResetId, idCreateTime, IdForEmployeeNo ) 
+	INSERT INTO T012passwordrest ( passwordResetId, idCreateTime, idForEmployeeNo ) 
 	VALUE
 		( #{passwordResetId},
 		NOW( ),
-		#{IdForEmployeeNo})
+		#{idForEmployeeNo})
 	</insert>
 </mapper>

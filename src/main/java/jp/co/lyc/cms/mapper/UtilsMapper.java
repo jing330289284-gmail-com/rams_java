@@ -119,6 +119,13 @@ public interface UtilsMapper {
 	 */
 	public List<ModelClass> getEmployeeName();
 	
+	/**
+	 * 本社社員氏名を取得する
+	 * 
+	 * 
+	 */
+	public List<ModelClass> getEmployeeNameNoBP();
+	
 	
 	/**
 	 * 資格を取得

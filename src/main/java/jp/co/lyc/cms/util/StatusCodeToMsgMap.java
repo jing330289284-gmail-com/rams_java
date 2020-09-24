@@ -21,7 +21,8 @@ public abstract class StatusCodeToMsgMap {
           statusCodeToMsg.put("MSG009", "正しい[0]範囲を入力してください。");
           statusCodeToMsg.put("MSG010", "入場時間が間違って、前回の退場時間より大きくしください。");
           statusCodeToMsg.put("MSG011", "前回現場がまだ終わらないので、登録できない");
-          statusCodeToMsg.put("MSG0012", "");
+          statusCodeToMsg.put("MSG0012", "本社社員（LYCXXX）を選択してください！");
+          statusCodeToMsg.put("MSG0013", "");
     }
 
     public static String getErrMsgbyCode(String ecode) {

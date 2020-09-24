@@ -15,6 +15,17 @@
 		FROM rams.T001Employee
 	</select>
 	
+	<!-- 本社社員名 -->
+	<select id ="getEmployeeNameNoBP"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT
+			employeeNo CODE,
+			CONCAT( employeeFristName, employeeLastName, '(', employeeNo, ')' ) NAME 
+		FROM
+			rams.T001Employee 
+		WHERE
+			employeeNo LIKE concat( '%', "LYC", '%' )
+	</select>
 
 	<!-- 在留資格 -->
 	<select id="getVisa" resultType="jp.co.lyc.cms.model.ModelClass">

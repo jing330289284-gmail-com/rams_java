@@ -10,7 +10,10 @@
 		T005.employeeNo,
 		T005.reflectYearAndMonth,
 		T005.socialInsuranceFlag,
-		T005.salary,
+		CASE
+		WHEN T005.salary IS NULL THEN
+		T005.waitingCost ELSE T005.salary 
+		END AS salary,
 		T005.waitingCost,
 		T005.welfarePensionAmount,
 		T005.healthInsuranceAmount,
@@ -34,6 +37,17 @@
 		<if test="reflectYearAndMonth != null">
 			AND T005.reflectYearAndMonth = #{reflectYearAndMonth}
 		</if>
+</select>
+
+<!-- 稼働判断 -->
+<select id="kadouCheck" parameterType="String" resultMap="StringResult">
+	SELECT
+		relatedEmployees
+	FROM
+		T006EmployeeSiteInfo 
+	WHERE
+		employeeNo = #{employeeNo}
+		AND admissionEndDate IS NULL
 </select>
 
 <!-- インサート -->

@@ -5,7 +5,7 @@ import java.util.Date;
 public class PasswordResetModel {
 
 	String passwordResetId;//パスワードリセットID
-	String IdForEmployeeNo;//パスワードリセットID対応の社員番号
+	String idForEmployeeNo;//パスワードリセットID対応の社員番号
 	Date idCreateTime;//パスワードリセットID
 	String password;//新パスワード
 	String updateUser;//更新者
@@ -29,10 +29,10 @@ public class PasswordResetModel {
 		this.passwordResetId = passwordResetId;
 	}
 	public String getIdForEmployeeNo() {
-		return IdForEmployeeNo;
+		return idForEmployeeNo;
 	}
 	public void setIdForEmployeeNo(String idForEmployeeNo) {
-		IdForEmployeeNo = idForEmployeeNo;
+		this.idForEmployeeNo = idForEmployeeNo;
 	}
 	public Date getIdCreateTime() {
 		return idCreateTime;

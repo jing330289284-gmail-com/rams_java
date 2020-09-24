@@ -208,6 +208,16 @@ public class UtilsService {
 	public List<ModelClass> getEmployeeName() {
 		return utilsMapper.getEmployeeName();
 	}
+	
+	/**
+	 * 本社社員氏名取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getEmployeeNameNoBP() {
+		return utilsMapper.getEmployeeNameNoBP();
+	}
+	
 	/**
 	 * お客様性質
 	 * 
