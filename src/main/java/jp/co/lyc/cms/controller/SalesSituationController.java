@@ -25,7 +25,7 @@ import jp.co.lyc.cms.validation.EmployeeInfoValidation;
 import jp.co.lyc.cms.validation.SalesSituationValidation;
 
 @Controller
-@CrossOrigin(origins = "http://127.0.0.1:3000")
+//@CrossOrigin(origins = "http://127.0.0.1:3000")
 @RequestMapping(value = "/salesSituation")
 public class SalesSituationController  extends BaseController {
 

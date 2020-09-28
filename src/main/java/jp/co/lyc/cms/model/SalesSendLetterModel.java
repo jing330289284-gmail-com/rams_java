@@ -49,6 +49,28 @@ public class SalesSendLetterModel {
 	String customerDepartmentMail;// メール
 	int rowId;
 	String salesPersonsAppend;
+	String purchasingManagers2;
+	String positionCode2;
+	String purchasingManagersMail2;
+	
+	public String getPurchasingManagers2() {
+		return purchasingManagers2;
+	}
+	public void setPurchasingManagers2(String purchasingManagers2) {
+		this.purchasingManagers2 = purchasingManagers2;
+	}
+	public String getPositionCode2() {
+		return positionCode2;
+	}
+	public void setPositionCode2(String positionCode2) {
+		this.positionCode2 = positionCode2;
+	}
+	public String getPurchasingManagersMail2() {
+		return purchasingManagersMail2;
+	}
+	public void setPurchasingManagersMail2(String purchasingManagersMail2) {
+		this.purchasingManagersMail2 = purchasingManagersMail2;
+	}
 
 	public String getSalesPersonsAppend() {
 		return salesPersonsAppend;
