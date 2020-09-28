@@ -13,10 +13,10 @@ public interface WorkRepotMapper {
 	 * @param TopCustomerNo
 	 * @return
 	 */
-	public List<WorkRepotModel> selectWorkRepot() ;
+	public List<WorkRepotModel> selectWorkRepot(WorkRepotModel workRepotModel) ;
 	/**
 	 * アップデート
 	 * @param sendMap
 	 */
-	public void updateWorkRepot(HashMap<String, String> sendMap);	
+	public void updateWorkRepot(WorkRepotModel workRepotModel) ;	
 }

@@ -351,4 +351,5 @@ public class UtilsService {
 	public List<ModelClass> getTypeOfIndustry() {
 		return utilsMapper.getTypeOfIndustry();
 	}
+
 }
