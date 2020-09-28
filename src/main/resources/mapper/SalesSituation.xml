@@ -10,8 +10,8 @@ SELECT
 FROM
     ((SELECT 
     T001.employeeNo,
-    T002.resumeInfo1,
-    T002.resumeInfo2,
+    T015.resumeInfo1,
+    T015.resumeInfo2,
     CONCAT(T001.employeeFristName,
             T001.employeeLastName) AS 'employeeName',
     M013.stationName AS 'nearestStation',
@@ -39,7 +39,7 @@ FROM
     T010.interviewCustomer2,
     T010.hopeLowestPrice,
     T010.hopeHighestPrice,
-   
+    T010.customerContractStatus,
     T010.remark,
     IF(ISNULL(T010.salesStaff),
         '',
@@ -59,6 +59,9 @@ FROM
     M012SiteRole M012 ON T002.siteRoleCode = M012.siteRoleCode
         LEFT JOIN
     T010SalesSituation T010 ON T001.employeeNo = T010.employeeNo
+        LEFT JOIN
+    T015ResumeManagement T015 ON T001.employeeNo = T015.employeeNo
+    
 WHERE
     T002.intoCompanyYearAndMonth = #{sysDate}
         AND T002.intoCompanyCode = 1
@@ -71,8 +74,8 @@ WHERE
             T010SalesSituation where salesProgressCode IN (3 , 5)))  
 ORDER BY T001.employeeNo) UNION ALL (SELECT 
     T001.employeeNo,
-    T002.resumeInfo1,
-    T002.resumeInfo2,
+    T015.resumeInfo1,
+    T015.resumeInfo2,
     CONCAT(T001.employeeFristName,
             T001.employeeLastName) AS 'employeeName',
     M013.stationName AS 'nearestStation',
@@ -102,7 +105,7 @@ ORDER BY T001.employeeNo) UNION ALL (SELECT
     T010.interviewCustomer2,
     T010.hopeLowestPrice,
     T010.hopeHighestPrice,
-  
+    T010.customerContractStatus,
     T010.remark,
     IF(ISNULL(T010.salesStaff),
         '',
@@ -122,12 +125,14 @@ FROM
     M012SiteRole M012 ON T002.siteRoleCode = M012.siteRoleCode
         LEFT JOIN
     T010SalesSituation T010 ON T001.employeeNo = T010.employeeNo
+            LEFT JOIN
+    T015ResumeManagement T015 ON T001.employeeNo = T015.employeeNo
 WHERE
     LEFT(T006.admissionEndDate, 6) = #{sysDate}
 ORDER BY T001.employeeNo) UNION ALL (SELECT 
     T011.bpEmployeeNo AS employeeNo,
-    T002.resumeInfo1,
-    T002.resumeInfo2,
+    T015.resumeInfo1,
+    T015.resumeInfo2,
     CONCAT(T001.employeeFristName,
             T001.employeeLastName) AS 'employeeName',
     M013.stationName AS 'nearestStation',
@@ -155,7 +160,7 @@ ORDER BY T001.employeeNo) UNION ALL (SELECT
     T010.interviewCustomer2,
     T010.hopeLowestPrice,
     T010.hopeHighestPrice,
-
+    T010.customerContractStatus,
     T010.remark,
     IF(ISNULL(T010.salesStaff),
         '',
@@ -175,6 +180,8 @@ FROM
     M012SiteRole M012 ON T002.siteRoleCode = M012.siteRoleCode
         LEFT JOIN
     T010SalesSituation T010 ON T011.bpEmployeeNo = T010.employeeNo
+                LEFT JOIN
+    T015ResumeManagement T015 ON T001.employeeNo = T015.employeeNo
 WHERE
     T011.bpSalesProgressCode IN (1 , 2) and T011.bpOtherCompanyAdmissionEndDate = #{sysDate}
     and T011.bpEmployeeNo  not in(SELECT 
@@ -184,8 +191,8 @@ WHERE
 ORDER BY T011.bpEmployeeNo)union all(
 SELECT 
     T010.employeeNo AS employeeNo,
-    T002.resumeInfo1,
-    T002.resumeInfo2,
+    T015.resumeInfo1,
+    T015.resumeInfo2,
     CONCAT(T001.employeeFristName,
             T001.employeeLastName) AS 'employeeName',
     M013.stationName AS 'nearestStation',
@@ -213,7 +220,7 @@ SELECT
     T010.interviewCustomer2,
     T010.hopeLowestPrice,
     T010.hopeHighestPrice,
-   
+    T010.customerContractStatus,
     T010.remark,
     IF(ISNULL(T010.salesStaff),
         '',
@@ -233,11 +240,12 @@ FROM
     T006EmployeeSiteInfo T006 ON T010.employeeNo = T006.employeeNo
         LEFT JOIN
     M012SiteRole M012 ON T002.siteRoleCode = M012.siteRoleCode
+                LEFT JOIN
+    T015ResumeManagement T015 ON T001.employeeNo = T015.employeeNo
 WHERE
     T010.salesProgressCode IN (3 , 5) and  T010.salesYearAndMonth = #{sysDate}
 ORDER BY T010.employeeNo)) temp,(select @rowno:=0) as rowNo 
 ORDER BY employeeNo	
-
     </select>
     
     <!--営業状況更新 -->
@@ -255,6 +263,7 @@ ORDER BY employeeNo
 		hopeHighestPrice,
 		salesPriorityStatus,
 		salesProgressCode,
+		customerContractStatus,
 		remark,
 		salesStaff,
 		updateTime,
@@ -274,6 +283,7 @@ ORDER BY employeeNo
 		#{hopeHighestPrice},
 		#{salesPriorityStatus},
 		#{salesProgressCode},
+		#{customerContractStatus},
 		#{remark},
 		#{salesStaff},
 		 NOW(),
@@ -290,6 +300,7 @@ ORDER BY employeeNo
 			hopeHighestPrice=#{hopeHighestPrice},
 			salesPriorityStatus=#{salesPriorityStatus},
 			salesProgressCode=#{salesProgressCode},
+			customerContractStatus=#{customerContractStatus},
 			remark=#{remark},
 			salesStaff=#{salesStaff},
 			updateTime= NOW(),
@@ -331,6 +342,7 @@ ORDER BY employeeNo
 		salesYearAndMonth,
 		salesProgressCode,
 		salesStaff,
+		customerContractStatus,
 		updateTime,
 		createTime,
 		updateUser)
@@ -340,12 +352,14 @@ ORDER BY employeeNo
 		#{salesYearAndMonth},
 		#{salesProgressCode},
 		#{salesStaff},
+		#{customerContractStatus},
 		 NOW(),
 		 NOW(),
 		#{updateUser})
 		ON DUPLICATE KEY UPDATE
 			salesProgressCode=#{salesProgressCode},
 			salesStaff=#{salesStaff},
+			customerContractStatus=#{customerContractStatus},
 			updateTime= NOW(),
 			createTime= NOW(),
 			updateUser=#{updateUser}
