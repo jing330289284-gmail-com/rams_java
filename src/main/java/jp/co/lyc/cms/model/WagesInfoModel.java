@@ -2,8 +2,6 @@ package jp.co.lyc.cms.model;
 
 import java.util.ArrayList;
 
-import jp.co.lyc.cms.common.BaseController;
-
 public class WagesInfoModel {
 	String employeeNo;//社員名
 	String period;//給料期間

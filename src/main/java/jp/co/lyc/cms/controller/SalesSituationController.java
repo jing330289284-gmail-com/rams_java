@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.DataBinder;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,11 +20,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import jp.co.lyc.cms.common.BaseController;
 import jp.co.lyc.cms.model.SalesSituationModel;
 import jp.co.lyc.cms.service.SalesSituationService;
-import jp.co.lyc.cms.validation.EmployeeInfoValidation;
 import jp.co.lyc.cms.validation.SalesSituationValidation;
 
 @Controller
-//@CrossOrigin(origins = "http://127.0.0.1:3000")
 @RequestMapping(value = "/salesSituation")
 public class SalesSituationController  extends BaseController {
 

@@ -1,14 +1,12 @@
 package jp.co.lyc.cms.service;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import jp.co.lyc.cms.model.WorkRepotModel;
 import jp.co.lyc.cms.mapper.WorkRepotMapper;
+import jp.co.lyc.cms.model.WorkRepotModel;
 
 @Component
 public class WorkRepotService {

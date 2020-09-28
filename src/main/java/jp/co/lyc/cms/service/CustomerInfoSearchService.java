@@ -6,7 +6,6 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import jp.co.lyc.cms.mapper.CustomerInfoMapper;
 import jp.co.lyc.cms.mapper.CustomerInfoSearchMapper;
 import jp.co.lyc.cms.model.CustomerInfoModel;
 

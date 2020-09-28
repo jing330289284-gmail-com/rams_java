@@ -3,14 +3,13 @@ package jp.co.lyc.cms.controller;
 import java.util.Date;
 import java.util.HashMap;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import jp.co.lyc.cms.common.BaseController;
 import jp.co.lyc.cms.model.PasswordResetModel;
 import jp.co.lyc.cms.service.PasswordResetService;
@@ -18,7 +17,6 @@ import jp.co.lyc.cms.service.PasswordResetService;
 @Controller
 @RequestMapping(value = "/passwordReset")
 public class PasswordResetController extends BaseController{
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
 	PasswordResetService passwordResetService;
@@ -47,8 +45,6 @@ public class PasswordResetController extends BaseController{
 	@RequestMapping(value = "/passwordReset", method = RequestMethod.POST)
 	@ResponseBody
 	public String passwordReset(@RequestBody PasswordResetModel pswMod ) {
-		long nd = 1000 * 24 * 60 * 60;
-	    long nh = 1000 * 60 * 60;
 	    String passwordResetId = pswMod.getPasswordResetId();
 		PasswordResetModel pswModel = passwordResetService.selectPasswordResetInfo(passwordResetId);
 		if(pswModel == null) {

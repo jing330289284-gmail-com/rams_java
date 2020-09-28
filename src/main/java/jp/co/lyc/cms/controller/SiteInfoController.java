@@ -14,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.DataBinder;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,7 +25,6 @@ import jp.co.lyc.cms.service.siteInfoService;
 import jp.co.lyc.cms.validation.SiteInfoValidation;
 
 @Controller
-@CrossOrigin(origins = "http://127.0.0.1:3000")
 public class SiteInfoController extends BaseController {
 	private String dateToString(String date) {
 		String[] a = date.split("/");

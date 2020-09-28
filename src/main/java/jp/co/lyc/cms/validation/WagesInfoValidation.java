@@ -2,7 +2,7 @@ package jp.co.lyc.cms.validation;
 
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-import jp.co.lyc.cms.controller.WagesInfoController;
+
 import jp.co.lyc.cms.model.WagesInfoModel;
 import jp.co.lyc.cms.util.StatusCodeToMsgMap;
 import jp.co.lyc.cms.util.UtilsCheckMethod;

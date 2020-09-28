@@ -5,7 +5,6 @@ import java.util.HashMap;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import jp.co.lyc.cms.model.SiteModel;
 import jp.co.lyc.cms.model.WagesInfoModel;
 
 @Mapper

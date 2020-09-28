@@ -1,8 +1,6 @@
 package jp.co.lyc.cms.model;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
 
 public class SendLettersConfirmModel implements Serializable {
 

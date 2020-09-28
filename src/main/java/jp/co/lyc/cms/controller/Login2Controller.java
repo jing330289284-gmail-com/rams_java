@@ -30,7 +30,6 @@ import jp.co.lyc.cms.service.Login2Service;
 import jp.co.lyc.cms.util.UtilsCheckMethod;
 import jp.co.lyc.cms.util.UtilsController;
 import jp.co.lyc.cms.validation.Login2Validation;
-import jp.co.lyc.cms.validation.LoginValidation;
 
 @Controller
 @RequestMapping(value = "/login2")
