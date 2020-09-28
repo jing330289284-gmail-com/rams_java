@@ -23,7 +23,8 @@
 	        </choose>
 			T006.employeeNo,
 			CONCAT( T001.employeeFristName ,T001.employeeLastName ) AS employeeName,
-			T006.stationCode,
+			T006.stationCode AS siteLocationCode,
+			M013SITE.stationName AS location,
 			T006.siteManager,
 			T006.unitPrice 
 		FROM
@@ -34,6 +35,7 @@
 			AND T006.AdmissionEndDate IS NOT NULL
 			LEFT JOIN T001Employee AS T001 ON T006.employeeNo = T001.employeeNo
 			LEFT JOIN M013Station AS M013 ON T007.stationCode = M013.stationCode
+			LEFT JOIN M013Station AS M013SITE ON T006.stationCode = M013SITE.stationCode
 			LEFT JOIN M008Level AS M008 ON T007.levelCode = M008.levelCode
 			LEFT JOIN M007CompanyNature AS M007 ON T007.companyNatureCode = M007.companyNatureCode	
 		<choose>

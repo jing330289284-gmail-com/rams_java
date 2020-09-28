@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jp.co.lyc.cms.mapper.SalesSendLetterMapper">
+    <resultMap id="SalesSendLetter" type="jp.co.lyc.cms.model.SalesSendLetterModel"/>
+    <!--　お客様取る -->
+    <select id="getSalesCustomers" resultType="jp.co.lyc.cms.model.SalesSendLetterModel">
+	SELECT 
+	(@rowNo:=@rowNo+1 ) AS rowId,
+    T007.customerNo,
+    T007.customerName,
+    T007.purchasingManagers,
+    T009.customerDepartmentCode,
+    T009.positionCode,
+    T007.purchasingManagersMail,
+    T007.levelCode,
+    '' AS monthCount
+FROM
+    T007CustomerInfo AS T007
+        LEFT JOIN
+    T009CustomerDepartmentInfo AS T009 ON T007.customerNo = T009.customerNo
+        AND T007.purchasingManagers = T009.responsiblePerson, (SELECT
+		@rowNo:=-1) AS rowId
+    </select>
+        <!--　担当取る -->
+    <select id="getSalesPersons" parameterType="String" resultType="jp.co.lyc.cms.model.SalesSendLetterModel">
+SELECT 
+    customerDepartmentCode,
+    positionCode,
+    responsiblePerson,
+    customerDepartmentMail
+FROM
+    T009CustomerDepartmentInfo
+WHERE
+    customerNo = #{customerNo};
+    </select>
+</mapper>

@@ -13,10 +13,15 @@
 	</insert>
 
 	<update id="siteUpdate" parameterType="map">
-		update account_information
+		update T006EmployeeSiteInfo
 		set
-		bankCode=#{bankCode},bankBranchCode=#{bankBranchCode},accountNo=#{accountNo},accountName=#{accountName},updateDate=now()
-		where employeeNo=#{employeeNo}
+		employeeNo=#{employeeNo},customerNo=#{customerNo},topCustomerNo=#{topCustomerNo},admissionStartDate=#{admissionStartDate},
+		admissionEndDate=#{admissionEndDate},siteManager=#{siteManager},systemName=#{systemName},
+		developLanguageCode=#{developLanguageCode},stationCode=#{location},unitPrice=#{unitPrice},
+		siteRoleCode=#{siteRoleCode},payOffRange1=#{payOffRange1},payOffRange2=#{payOffRange2},
+		relatedEmployees=#{relatedEmployees},levelCode=#{levelCode},typeOfIndustryCode=#{typeOfIndustryCode},
+		remark=#{remark},updateTime=now(),updateUser=#{updateUser}
+		where employeeNo=#{employeeNo} AND admissionStartDate=#{workDate}
 
 	</update>
 
@@ -32,6 +37,8 @@
 		a.payOffRange2,
 		a.relatedEmployees,
 		a.remark,
+		a.levelCode,
+		a.siteRoleCode,
 		b.siteRoleName,
 		if(c.customerAbbreviation
 		is
