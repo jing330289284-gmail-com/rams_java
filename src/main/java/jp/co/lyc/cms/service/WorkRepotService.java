@@ -22,8 +22,8 @@ public class WorkRepotService {
 	 * @return
 	 */
 	
-	public List<WorkRepotModel> selectWorkRepot()  {
-		List<WorkRepotModel> resultMod = workRepotMapper.selectWorkRepot();
+	public List<WorkRepotModel> selectWorkRepot(WorkRepotModel workRepotModel)  {
+		List<WorkRepotModel> resultMod = workRepotMapper.selectWorkRepot(workRepotModel);
 		return resultMod;
 	}
 	/**
@@ -31,10 +31,10 @@ public class WorkRepotService {
 	 * @param sendMap
 	 */
 	
-	public boolean updateDutyManagement(HashMap<String, String> sendMap) {
+	public boolean updateDutyManagement(WorkRepotModel workRepotModel) {
 		boolean result = true;
 		try {
-			workRepotMapper.updateWorkRepot(sendMap);
+			workRepotMapper.updateWorkRepot(workRepotModel);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

@@ -4,7 +4,6 @@
     <resultMap id="WorkRepot" type="jp.co.lyc.cms.model.WorkRepotModel"/>
     <select id="selectWorkRepot" resultMap="WorkRepot" parameterType="String">
 		SELECT
-			(@rowNo:=@rowNo + 1) AS rowNo,
 			attendanceYearAndMonth,
 			workingTimeReport,
 			sumWorkTime,
@@ -13,16 +12,21 @@
 			approvalStatus
 		FROM 
 			workTotalTime
-			,(SELECT   @rowNo:=0) AS rowNo
 		WHERE
-		attendanceRegisterFlag = 0
+			attendanceRegisterFlag = 0 AND
+			employeeNo = #{employeeNo}
+		ORDER BY
+			attendanceYearAndMonth
+		DESC
     </select>
 	<update id="updateWorkRepot" parameterType="String">
 		UPDATE workTotalTime
 		SET 
+			updateTime= now(),
+			sumWorkTime = #{sumWorkTime},
 			approvalStatus = 1
 		WHERE 
 			employeeNo = #{employeeNo}
-			and attendanceYearAndMonth = #{yearAndMonth}
+			and attendanceYearAndMonth = #{attendanceYearAndMonth}
     </update> 
 </mapper>

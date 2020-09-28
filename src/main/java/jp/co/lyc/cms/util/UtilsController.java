@@ -224,7 +224,32 @@ public class UtilsController {
 		List<ModelClass> list = getStatus(gender);
 		return list;
 	}
-
+	/**
+	 * approvalを取得する
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getApproval", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getApproval() {
+		Properties properties = getProperties();
+		String approval = properties.getProperty("approval");
+		List<ModelClass> list = getStatus(approval);
+		return list;
+	}
+	/**
+	 * CheckSectionを取得する
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getCheckSection", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getCheckSection() {
+		Properties properties = getProperties();
+		String checkSection = properties.getProperty("checkSection");
+		List<ModelClass> list = getStatus(checkSection);
+		return list;
+	}
 	/**
 	 * 上場
 	 * 
@@ -670,6 +695,8 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getEmployeeNameNoBP();
 		return list;
 	}
+
+ 
 	/**
 	 * パスワードリセット
 	 * 
