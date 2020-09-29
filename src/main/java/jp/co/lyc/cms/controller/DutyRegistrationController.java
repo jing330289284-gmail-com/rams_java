@@ -110,6 +110,7 @@ public class DutyRegistrationController extends BaseController{
 
 		result.put("breakTime", breakTimeModel);
 		result.put("employeeNo", super.getSession().getAttribute("employeeNo"));
+		result.put("employeeName", super.getSession().getAttribute("employeeName"));
 		ArrayList<Map<String, Object>> dutyData = this.dutySelect(requestJson);
 		result.put("dateData", dutyData);
 		if (dutyData.size() > 0)	{
