@@ -288,187 +288,192 @@ public class EmployeeInfoController extends BaseController {
 		AccountInfoModel accountInfoModel = emp.getAccountInfo();// 口座情報
 		BpInfoModel bpInfoModel = emp.getBpInfoModel();// bp情報
 		String password = emp.getPassword();// パスワード
+		String siteRoleCode = emp.getSiteRoleCode();//役割コード
+
 		//　　住所情報開始
 		String postcode = emp.getPostcode();// 郵便番号
 		String firstHalfAddress = emp.getFirstHalfAddress();//住所前半
 		String lastHalfAddress = emp.getLastHalfAddress();//住所後半
 		String stationCode = emp.getStationCode();//　　最寄駅1
-		if (stationCode != null && stationCode.length() != 0) {
+		
+		if (stationCode != null) {
 			sendMap.put("stationCode", stationCode);
 		}
 		//　　住所情報終了
 
-		if (employeeNo != null && employeeNo.length() != 0) {
+		if (employeeNo != null ) {
 			sendMap.put("employeeNo", employeeNo);
 		}
-		if (employeeFristName != null && employeeFristName.length() != 0) {
+		if (employeeFristName != null ) {
 			sendMap.put("employeeFristName", employeeFristName);
 		}
-		if (employeeLastName != null && employeeLastName.length() != 0) {
+		if (employeeLastName != null ) {
 			sendMap.put("employeeLastName", employeeLastName);
 		}
-		if (furigana != null && furigana.length() != 0) {
+		if (furigana != null ) {
 			sendMap.put("furigana", furigana);
 		}
-		if (alphabetName != null && alphabetName.length() != 0) {
+		if (alphabetName != null ) {
 			sendMap.put("alphabetName", alphabetName);
 		}
-		if (birthday != null && birthday.length() != 0) {
+		if (birthday != null ) {
 			sendMap.put("birthday", birthday);
 		}
-		if (japaneseCalendar != null && japaneseCalendar.length() != 0) {
+		if (japaneseCalendar != null ) {
 			sendMap.put("japaneseCalendar", japaneseCalendar);
 		}
 
-		if (occupationCode != null && occupationCode.length() != 0) {
+		if (occupationCode != null ) {
 			sendMap.put("occupationCode", occupationCode);
 		}
-		if (departmentCode != null && departmentCode.length() != 0) {
+		if (departmentCode != null ) {
 			sendMap.put("departmentCode", departmentCode);
 		}
-		if (companyMail != null && companyMail.length() != 0) {
+		if (companyMail != null ) {
 			sendMap.put("companyMail", companyMail);
 		}
-		if (graduationUniversity != null && graduationUniversity.length() != 0) {
+		if (graduationUniversity != null ) {
 			sendMap.put("graduationUniversity", graduationUniversity);
 		}
-		if (major != null && major.length() != 0) {
+		if (major != null ) {
 			sendMap.put("major", major);
 		}
-		if (graduationYearAndMonth != null && graduationYearAndMonth.length() != 0) {
+		if (graduationYearAndMonth != null ) {
 			sendMap.put("graduationYearAndMonth", graduationYearAndMonth);
 		}
-		if (intoCompanyYearAndMonth != null && intoCompanyYearAndMonth.length() != 0) {
+		if (intoCompanyYearAndMonth != null ) {
 			sendMap.put("intoCompanyYearAndMonth", intoCompanyYearAndMonth);
 		}
-		if (retirementYearAndMonth != null && retirementYearAndMonth.length() != 0) {
+		if (retirementYearAndMonth != null ) {
 			sendMap.put("retirementYearAndMonth", retirementYearAndMonth);
 		}
-		if (comeToJapanYearAndMonth != null && comeToJapanYearAndMonth.length() != 0) {
+		if (comeToJapanYearAndMonth != null ) {
 			sendMap.put("comeToJapanYearAndMonth", comeToJapanYearAndMonth);
 		}
-		if (birthplace != null && birthplace.length() != 0) {
+		if (birthplace != null ) {
 			sendMap.put("birthplace", birthplace);
 		}
-		if (phoneNo != null && phoneNo.length() != 0) {
+		if (phoneNo != null ) {
 			sendMap.put("phoneNo", phoneNo);
 		}
 
-		if (residenceCode != null && residenceCode.length() != 0) {
+		if (residenceCode != null) {
 			sendMap.put("residenceCode", residenceCode);
 		}
-		if (residenceCardNo != null && residenceCardNo.length() != 0) {
+		if (residenceCardNo != null ) {
 			sendMap.put("residenceCardNo", residenceCardNo);
 		}
-		if (stayPeriod != null && stayPeriod.length() != 0) {
+		if (stayPeriod != null ) {
 			sendMap.put("stayPeriod", stayPeriod);
 		}
-		if (employmentInsuranceNo != null && employmentInsuranceNo.length() != 0) {
+		if (employmentInsuranceNo != null ) {
 			sendMap.put("employmentInsuranceNo", employmentInsuranceNo);
 		}
-		if (myNumber != null && myNumber.length() != 0) {
+		if (myNumber != null ) {
 			sendMap.put("myNumber", myNumber);
 		}
-		if (resumeRemark2 != null && resumeRemark2.length() != 0) {
+		if (resumeRemark2 != null ) {
 			sendMap.put("resumeRemark2", resumeRemark2);
 		}
-		if (resumeRemark1 != null && resumeRemark1.length() != 0) {
+		if (resumeRemark1 != null ) {
 			sendMap.put("resumeRemark1", resumeRemark1);
 		}
-		if (passportNo != null && passportNo.length() != 0) {
+		if (passportNo != null ) {
 			sendMap.put("passportNo", passportNo);
 		}
-		if (employeeFormCode != null && employeeFormCode.length() != 0) {
+		if (employeeFormCode != null ) {
 			sendMap.put("employeeFormCode", employeeFormCode);
 		}
-		if (customer != null && customer.length() != 0) {
+		if (customer != null ) {
 			sendMap.put("customer", customer);
 		}
-		if (intoCompanyCode != null && intoCompanyCode.length() != 0) {
+		if (intoCompanyCode != null ) {
 			sendMap.put("intoCompanyCode", intoCompanyCode);
 		}
-		if (nationalityCode != null && nationalityCode.length() != 0) {
+		if (nationalityCode != null ) {
 			sendMap.put("nationalityCode", nationalityCode);
 		}
 
-		if (genderStatus != null && genderStatus.length() != 0) {
+		if (genderStatus != null ) {
 			sendMap.put("genderStatus", genderStatus);
 		}
-		if (ageFrom != null && ageFrom.length() != 0) {
+		if (ageFrom != null ) {
 			sendMap.put("ageFrom", ageFrom);
 		}
-		if (ageTo != null && ageTo.length() != 0) {
+		if (ageTo != null ) {
 			sendMap.put("ageTo", ageTo);
 		}
 
-		if (unitPriceFrom != null && unitPriceFrom.length() != 0) {
+		if (unitPriceFrom != null ) {
 			sendMap.put("unitPriceFrom", unitPriceFrom);
 		}
-		if (unitPriceTo != null && unitPriceTo.length() != 0) {
+		if (unitPriceTo != null ) {
 			sendMap.put("unitPriceTo", unitPriceTo);
 		}
-		if (japaneseLevelCode != null && japaneseLevelCode.length() != 0) {
+		if (japaneseLevelCode != null ) {
 			sendMap.put("japaneseLevelCode", japaneseLevelCode);
 		}
-		if (englishLevelCode != null && englishLevelCode.length() != 0) {
+		if (englishLevelCode != null ) {
 			sendMap.put("englishLevelCode", englishLevelCode);
 		}
-		if (certification1 != null && certification1.length() != 0) {
+		if (certification1 != null ) {
 			sendMap.put("certification1", certification1);
 		}
-		if (certification2 != null && certification2.length() != 0) {
+		if (certification2 != null ) {
 			sendMap.put("certification2", certification2);
 		}
-		if (postcode != null && postcode.length() != 0) {
+		if (postcode != null ) {
 			sendMap.put("postcode", postcode);
 		}
-		if (firstHalfAddress != null && firstHalfAddress.length() != 0) {
+		if (firstHalfAddress != null ) {
 			sendMap.put("firstHalfAddress", firstHalfAddress);
 		}
-		if (lastHalfAddress != null && lastHalfAddress.length() != 0) {
+		if (lastHalfAddress != null ) {
 			sendMap.put("lastHalfAddress", lastHalfAddress);
 		}
-		if (developLanguage4 != null && developLanguage4.length() != 0) {
+		if (developLanguage4 != null ) {
 			sendMap.put("developLanguage4", developLanguage4);
 		}
-		if (developLanguage5 != null && developLanguage5.length() != 0) {
+		if (developLanguage5 != null ) {
 			sendMap.put("developLanguage5", developLanguage5);
 		}
-		if (kadou != null && kadou.length() != 0) {
+		if (kadou != null ) {
 			sendMap.put("kadou", kadou);
 		}
 
-		if (developLanguage1 != null && developLanguage1.length() != 0) {
+		if (developLanguage1 != null ) {
 			sendMap.put("developLanguage1", developLanguage1);
 		}
-		if (developLanguage2 != null && developLanguage2.length() != 0) {
+		if (developLanguage2 != null ) {
 			sendMap.put("developLanguage2", developLanguage2);
 		}
-		if (developLanguage3 != null && developLanguage3.length() != 0) {
+		if (developLanguage3 != null ) {
 			sendMap.put("developLanguage3", developLanguage3);
 		}
-		if (intoCompanyYearAndMonthFrom != null && intoCompanyYearAndMonthFrom.length() != 0) {
+		if (intoCompanyYearAndMonthFrom != null ) {
 			sendMap.put("intoCompanyYearAndMonthFrom", intoCompanyYearAndMonthFrom);
 		}
-		if (intoCompanyYearAndMonthTo != null && intoCompanyYearAndMonthTo.length() != 0) {
+		if (intoCompanyYearAndMonthTo != null ) {
 			sendMap.put("intoCompanyYearAndMonthTo", intoCompanyYearAndMonthTo);
 		}
-		if (authorityCode != null && authorityCode.length() != 0) {
+		if (authorityCode != null ) {
 			sendMap.put("authorityCode", authorityCode);
 		}
 		sendMap.put("updateUser", loginSession.getAttribute("employeeName"));
-		if (employeeStatus != null && employeeStatus.length() != 0) {
+		if (employeeStatus != null ) {
 			sendMap.put("employeeStatus", employeeStatus);
 		}
-		if (yearsOfExperience != null && yearsOfExperience.length() != 0) {
+		if (yearsOfExperience != null ) {
 			sendMap.put("yearsOfExperience", yearsOfExperience);
 		}
 		sendMap.put("bankInfoModel", accountInfoModel);
 		sendMap.put("bpInfoModel", bpInfoModel);
-		if (password != null && password.length() != 0) {
+		if (password != null ) {
 			sendMap.put("password", password);
 		}
-		
+		if (siteRoleCode != null ) {
+			sendMap.put("siteRoleCode", siteRoleCode);
+		}
 		return sendMap;
 	}
 

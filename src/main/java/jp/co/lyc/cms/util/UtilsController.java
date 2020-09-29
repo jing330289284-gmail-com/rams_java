@@ -758,6 +758,7 @@ public class UtilsController {
 
 	public Map<String, Object> upload(MultipartFile uploadFile, Map<String, Object> sendMap, String key, String Info) {
 		if (uploadFile == null) {
+			//sendMap.put(key, "");
 			return sendMap;
 		}
 		String realPath = new String("src/main/resources" + UPLOAD_PATH_PREFIX + sendMap.get("employeeNo") + "_"
