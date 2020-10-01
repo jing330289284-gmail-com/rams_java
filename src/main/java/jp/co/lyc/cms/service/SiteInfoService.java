@@ -11,7 +11,7 @@ import jp.co.lyc.cms.mapper.SiteInfoMapper;
 import jp.co.lyc.cms.model.SiteModel;
 
 @Component
-public class siteInfoService {
+public class SiteInfoService {
 
 	@Autowired
 	SiteInfoMapper siteInfoMapper;
