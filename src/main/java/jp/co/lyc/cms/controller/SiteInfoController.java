@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import jp.co.lyc.cms.common.BaseController;
 import jp.co.lyc.cms.model.SiteModel;
-import jp.co.lyc.cms.service.siteInfoService;
+import jp.co.lyc.cms.service.SiteInfoService;
 import jp.co.lyc.cms.validation.SiteInfoValidation;
 
 @Controller
@@ -81,7 +81,7 @@ public class SiteInfoController extends BaseController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
-	siteInfoService siteInfoService;
+	SiteInfoService siteInfoService;
 	String errorsMessage = "";
 
 	@RequestMapping(value = "/insertSiteInfo")

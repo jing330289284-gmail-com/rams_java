@@ -19,4 +19,9 @@ public interface WorkRepotMapper {
 	 * @param sendMap
 	 */
 	public void updateWorkRepot(WorkRepotModel workRepotModel) ;	
+	/**
+	 * ファイル名入力
+	 * @param sendMap
+	 */
+	public void insertWorkRepot(WorkRepotModel workRepotModel) ;	
 }

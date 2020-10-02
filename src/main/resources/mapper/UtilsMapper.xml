@@ -7,24 +7,39 @@
 		SELECT employeeFormCode code,employeeFormName name FROM
 		M005EmployeeForm;
 	</select>
-	
-	<!-- 社員名 -->
-	<select id ="getEmployeeName"
+
+	<!-- 営業結果パターン -->
+	<select id="getSalesPuttern"
 		resultType="jp.co.lyc.cms.model.ModelClass">
-		SELECT employeeNo code ,CONCAT(employeeFristName,employeeLastName,'(',employeeNo,')') name 
+		SELECT salesPutternCode code,salesPutternName name FROM
+		M024SalesPuttern;
+	</select>
+
+	<!-- 特別ポイント -->
+	<select id="getSpecialPoint"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT specialPointConditionCode code,specialPointConditionName name FROM
+		M023SpecialPointCondition;
+	</select>
+
+	<!-- 社員名 -->
+	<select id="getEmployeeName"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT employeeNo code
+		,CONCAT(employeeFristName,employeeLastName,'(',employeeNo,')') name
 		FROM rams.T001Employee
 	</select>
-	
+
 	<!-- 本社社員名 -->
-	<select id ="getEmployeeNameNoBP"
+	<select id="getEmployeeNameNoBP"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT
-			employeeNo CODE,
-			CONCAT( employeeFristName, employeeLastName, '(', employeeNo, ')' ) NAME 
+		employeeNo CODE,
+		CONCAT( employeeFristName, employeeLastName, '(', employeeNo, ')' ) NAME
 		FROM
-			rams.T001Employee 
+		rams.T001Employee
 		WHERE
-			employeeNo LIKE concat( '%', "LYC", '%' )
+		employeeNo LIKE concat( '%', "LYC", '%' )
 	</select>
 
 	<!-- 在留資格 -->
@@ -286,7 +301,8 @@
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT
 		employeeNo code,
-		CONCAT(employeeFristName, employeeLastName) name
+		CONCAT(employeeFristName,
+		employeeLastName) name
 		FROM
 		T001Employee
 		WHERE

@@ -100,6 +100,30 @@ public class UtilsController {
 	}
 
 	/**
+	 * 営業結果パターン
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getSalesPuttern", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getSalesPuttern() {
+		List<ModelClass> list = utilsService.getSalesPuttern();
+		return list;
+	}
+
+	/**
+	 * 特別ポイント
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getSpecialPoint", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getSpecialPoint() {
+		List<ModelClass> list = utilsService.getSpecialPoint();
+		return list;
+	}
+	
+	/**
 	 * レベル
 	 * 
 	 * @return
@@ -110,7 +134,7 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getLevel();
 		return list;
 	}
-
+	
 	/**
 	 * 日本語レベルを取得
 	 * 
@@ -458,6 +482,21 @@ public class UtilsController {
 	}
 
 	/**
+	 * 契約区分
+	 * 
+	 * @return
+	 */
+
+	@RequestMapping(value = "/getCustomerContractStatus", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getCustomerContractStatus() {
+		Properties properties = getProperties();
+		String customerContractStatus = properties.getProperty("customerContract");
+		List<ModelClass> list = getStatus(customerContractStatus);
+		return list;
+	}
+	
+	/**
 	 * 営業担当選ぶ
 	 * 
 	 * @return
@@ -758,6 +797,7 @@ public class UtilsController {
 
 	public Map<String, Object> upload(MultipartFile uploadFile, Map<String, Object> sendMap, String key, String Info) {
 		if (uploadFile == null) {
+			//sendMap.put(key, "");
 			return sendMap;
 		}
 		String realPath = new String("src/main/resources" + UPLOAD_PATH_PREFIX + sendMap.get("employeeNo") + "_"

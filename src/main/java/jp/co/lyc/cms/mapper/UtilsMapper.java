@@ -16,6 +16,20 @@ public interface UtilsMapper {
 	 * 
 	 */
 	public List<ModelClass> getNationalitys();
+	
+	/**
+	 * 営業結果パターンを取得
+	 * 
+	 * 
+	 */
+	public List<ModelClass> getSalesPuttern();
+	
+	/**
+	 * 特別ポイントを取得
+	 * 
+	 * 
+	 */
+	public List<ModelClass> getSpecialPoint();
 
 	/**
 	 * お客様を取得

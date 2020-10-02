@@ -1,15 +1,31 @@
 package jp.co.lyc.cms.model;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class WorkRepotModel {
 
 	String employeeNo;
+	String employeeName;
 	String attendanceYearAndMonth;
 	String workingTimeReport;
 	String sumWorkTime;
 	String updateUser;
 	String updateTime;
 	String approvalStatus;
+	MultipartFile workRepotFile;
 
+	public MultipartFile getWorkRepotFile() {
+		return workRepotFile;
+	}
+	public void setWorkRepotFile(MultipartFile workRepotFile) {
+		this.workRepotFile = workRepotFile;
+	}
+	public String getEmployeeName() {
+		return employeeName;
+	}
+	public void setEmployeeName(String employeeName) {
+		this.employeeName = employeeName;
+	}
 	public String getEmployeeNo() {
 		return employeeNo;
 	}
