@@ -3,11 +3,10 @@ package jp.co.lyc.cms.mapper;
 import java.util.HashMap;
 import java.util.Map;
 
-import jp.co.lyc.cms.model.BreakTimeModel;
-import jp.co.lyc.cms.model.DutyRegistrationModel;
-import jp.co.lyc.cms.model.EmployeeWorkTimeModel;
-
 import org.apache.ibatis.annotations.Mapper;
+
+import jp.co.lyc.cms.model.BreakTimeModel;
+import jp.co.lyc.cms.model.EmployeeWorkTimeModel;
 
 @Mapper
 public interface DutyRegistrationMapper {

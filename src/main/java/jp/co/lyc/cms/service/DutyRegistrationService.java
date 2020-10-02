@@ -6,10 +6,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import jp.co.lyc.cms.model.BreakTimeModel;
-import jp.co.lyc.cms.model.DutyRegistrationModel;
-import jp.co.lyc.cms.model.EmployeeWorkTimeModel;
 import jp.co.lyc.cms.mapper.DutyRegistrationMapper;
+import jp.co.lyc.cms.model.BreakTimeModel;
+import jp.co.lyc.cms.model.EmployeeWorkTimeModel;
 
 @Component
 public class DutyRegistrationService {

@@ -13,7 +13,10 @@
     T009.positionCode,
     T007.purchasingManagersMail,
     T007.levelCode,
-    '' AS monthCount
+    '' AS monthCount,
+    '' AS purchasingManagers2,
+	'' AS positionCode2,
+	'' AS purchasingManagersMail2
 FROM
     T007CustomerInfo AS T007
         LEFT JOIN

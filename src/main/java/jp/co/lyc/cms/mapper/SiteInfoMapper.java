@@ -10,7 +10,7 @@ import jp.co.lyc.cms.model.SiteModel;
 
 @Mapper
 
-public interface GetSiteInfoMapper {
+public interface SiteInfoMapper {
 	/**
 	 * 現場情報を登録
 	 * 

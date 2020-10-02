@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jp.co.lyc.cms.mapper.SendLettersConfirmMapper">
+    <resultMap id="SendLettersConfirm" type="jp.co.lyc.cms.model.SendLettersConfirmModel"/>
+    <!--　お客様取る -->
+    <select id="getSalesEmps" resultType="jp.co.lyc.cms.model.SendLettersConfirmModel">
+	SELECT 
+    CONCAT(T001.employeeFristName,
+            T001.employeeLastName) AS 'employeeName',
+    T002.employeeStatus,
+    T010.hopeHighestPrice,
+    T002.genderStatus,
+    M003.nationalityName,
+    T002.birthday,
+    M013.stationName,
+    CONCAT_WS(',',
+            T002.developLanguage1,
+            T002.developLanguage2,
+            T002.developLanguage3,
+            T002.developLanguage4,
+            T002.developLanguage5) AS 'developLanguage',
+    T002.yearsOfExperience,
+    M010.japaneseLevelName,
+    MONTH(CURRENT_DATE) + 1 AS beginMonth,
+    T010.salesProgressCode,
+    T010.remark
+FROM
+    T001Employee T001
+        LEFT JOIN
+    T002EmployeeDetail T002 ON T001.employeeNo = T002.employeeNo
+        LEFT JOIN
+    M010JapaneseLevel M010 ON M010.japaneseLevelCode = T002.japaneseLevelCode
+        LEFT JOIN
+    M003Nationality M003 ON M003.nationalityCode = T002.nationalityCode
+        LEFT JOIN
+    T010SalesSituation T010 ON T001.employeeNo = T010.employeeNo
+        LEFT JOIN
+    T003AddressInfo T003 ON T001.employeeNo = T003.employeeNo
+        LEFT JOIN
+    M013Station M013 ON M013.stationCode = T003.stationCode
+WHERE
+    T001.employeeNo IN 
+     <foreach collection="array" index="index" item="item" open="(" separator="," close=")">
+         #{item}
+    </foreach>
+    </select>
+</mapper>

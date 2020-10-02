@@ -3,7 +3,9 @@ package jp.co.lyc.cms.controller;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+
 import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.amazonaws.services.sns.AmazonSNSClient;
 import com.amazonaws.services.sns.model.MessageAttributeValue;
 import com.amazonaws.services.sns.model.PublishRequest;
@@ -25,7 +28,6 @@ import jp.co.lyc.cms.model.EmployeeModel;
 import jp.co.lyc.cms.model.LoginModel;
 import jp.co.lyc.cms.service.EmployeeInfoService;
 import jp.co.lyc.cms.util.UtilsCheckMethod;
-import jp.co.lyc.cms.validation.CustomerInfoValidation;
 import jp.co.lyc.cms.validation.LoginValidation;
 
 @Controller

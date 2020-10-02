@@ -2,7 +2,6 @@ package jp.co.lyc.cms.model;
 
 public class WorkRepotModel {
 
-	int rowNo;
 	String employeeNo;
 	String attendanceYearAndMonth;
 	String workingTimeReport;
@@ -10,12 +9,7 @@ public class WorkRepotModel {
 	String updateUser;
 	String updateTime;
 	String approvalStatus;
-	public int getRowNo() {
-		return rowNo;
-	}
-	public void setRowNo(int rowNo) {
-		this.rowNo = rowNo;
-	}
+
 	public String getEmployeeNo() {
 		return employeeNo;
 	}

@@ -12,7 +12,7 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import jp.co.lyc.cms.mapper.AccountInfoMapper;
 import jp.co.lyc.cms.mapper.BpInfoMapper;
 import jp.co.lyc.cms.mapper.EmployeeInfoMapper;
-import jp.co.lyc.cms.mapper.GetSiteInfoMapper;
+import jp.co.lyc.cms.mapper.SiteInfoMapper;
 import jp.co.lyc.cms.model.AccountInfoModel;
 import jp.co.lyc.cms.model.BpInfoModel;
 import jp.co.lyc.cms.model.EmployeeModel;
@@ -30,7 +30,7 @@ public class EmployeeInfoService {
 	BpInfoMapper bpInfoMapper;
 	
 	@Autowired
-	GetSiteInfoMapper siteInfoMapper;
+	SiteInfoMapper siteInfoMapper;
 
 	/**
 	 * ログイン

@@ -41,8 +41,35 @@ public class SalesSituationModel implements Serializable {
 	String resumeInfo2;// 履歴書情報2
 	String rowNo;// 
 	String nowCustomer;
+	String customerContractStatus;
+	String purchasingManagers2;
+	String positionCode2;
+	String purchasingManagersMail2;
 	
-	
+	public String getPurchasingManagers2() {
+		return purchasingManagers2;
+	}
+	public void setPurchasingManagers2(String purchasingManagers2) {
+		this.purchasingManagers2 = purchasingManagers2;
+	}
+	public String getPositionCode2() {
+		return positionCode2;
+	}
+	public void setPositionCode2(String positionCode2) {
+		this.positionCode2 = positionCode2;
+	}
+	public String getPurchasingManagersMail2() {
+		return purchasingManagersMail2;
+	}
+	public void setPurchasingManagersMail2(String purchasingManagersMail2) {
+		this.purchasingManagersMail2 = purchasingManagersMail2;
+	}
+	public String getCustomerContractStatus() {
+		return customerContractStatus;
+	}
+	public void setCustomerContractStatus(String customerContractStatus) {
+		this.customerContractStatus = customerContractStatus;
+	}	
 	public String getNowCustomer() {
 		return nowCustomer;
 	}

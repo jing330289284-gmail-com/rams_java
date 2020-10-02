@@ -7,8 +7,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,7 +30,6 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -224,7 +221,32 @@ public class UtilsController {
 		List<ModelClass> list = getStatus(gender);
 		return list;
 	}
-
+	/**
+	 * approvalを取得する
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getApproval", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getApproval() {
+		Properties properties = getProperties();
+		String approval = properties.getProperty("approval");
+		List<ModelClass> list = getStatus(approval);
+		return list;
+	}
+	/**
+	 * CheckSectionを取得する
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getCheckSection", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getCheckSection() {
+		Properties properties = getProperties();
+		String checkSection = properties.getProperty("checkSection");
+		List<ModelClass> list = getStatus(checkSection);
+		return list;
+	}
 	/**
 	 * 上場
 	 * 
@@ -670,6 +692,8 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getEmployeeNameNoBP();
 		return list;
 	}
+
+ 
 	/**
 	 * パスワードリセット
 	 * 

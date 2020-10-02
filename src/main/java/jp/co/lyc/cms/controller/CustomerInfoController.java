@@ -15,7 +15,6 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.DataBinder;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,8 +25,6 @@ import jp.co.lyc.cms.model.CustomerDepartmentInfoModel;
 import jp.co.lyc.cms.model.CustomerInfoModel;
 import jp.co.lyc.cms.service.CustomerInfoService;
 import jp.co.lyc.cms.validation.CustomerInfoValidation;
-import jp.co.lyc.cms.validation.EmployeeInfoValidation;
-import jp.co.lyc.cms.model.TopCustomerInfoModel;
 @Controller
 @RequestMapping(value = "/customerInfo")
 public class CustomerInfoController extends BaseController{

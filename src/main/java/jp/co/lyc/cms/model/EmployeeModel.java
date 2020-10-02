@@ -76,7 +76,6 @@ public class EmployeeModel implements Serializable {
 	AccountInfoModel accountInfo;//口座情報
 	String yearsOfExperience; //  経験年数
 	
-	CostInfoModel costModel;//諸費用
 	BpInfoModel bpInfoModel;//PB情報
 
 	String postcode;//郵便番号
@@ -669,13 +668,6 @@ public class EmployeeModel implements Serializable {
 		this.yearsOfExperience = yearsOfExperience;
 	}
 
-	public CostInfoModel getCostModel() {
-		return costModel;
-	}
-
-	public void setCostModel(CostInfoModel costModel) {
-		this.costModel = costModel;
-	}
 
 
 	public String getPostcode() {

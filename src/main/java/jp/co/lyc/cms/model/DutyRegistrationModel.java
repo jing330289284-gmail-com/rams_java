@@ -1,7 +1,6 @@
 package jp.co.lyc.cms.model;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class DutyRegistrationModel {
 
