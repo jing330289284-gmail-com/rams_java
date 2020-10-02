@@ -52,8 +52,8 @@
 	)
 </insert>
 <!-- アップデート -->
-<update id="udpate" parameterType="String">
-	UPDATE T005WagesInfo 
+<update id="update" parameterType="String">
+	UPDATE T013ExpensesInfo 
 		SET 
 		<if test="expensesReflectYearAndMonth != null">
 			expensesReflectYearAndMonth = #{expensesReflectYearAndMonth},
@@ -80,5 +80,7 @@
 		updateUser = #{updateUser}
 		WHERE 
 			employeeNo = #{employeeNo}
+		AND
+			expensesReflectYearAndMonth = #{updateExpensesReflectYearAndMonth}
 </update>
 </mapper>

@@ -87,7 +87,7 @@ public class ExpensesInfoController extends BaseController{
 			HashMap<String, String> sendMap = new HashMap<String, String>();
 			sendMap.put("employeeNo", expensesInfoModel.getEmployeeNo());
 			ArrayList<ExpensesInfoModel> lastList = expensesInfoMapper.getExpensesInfo(sendMap);
-			if(!lastList.get(lastList.size()).getExpensesReflectYearAndMonth().equals(
+			if(!lastList.get(lastList.size()-1).getExpensesReflectYearAndMonth().equals(
 					expensesInfoModel.getExpensesReflectYearAndMonth())) {
 				sendMap.put("expensesReflectYearAndMonth",expensesInfoModel.getExpensesReflectYearAndMonth());
 				ArrayList<ExpensesInfoModel> checkList = expensesInfoMapper.getExpensesInfo(sendMap);
