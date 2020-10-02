@@ -18,6 +18,26 @@ public class UtilsService {
 	UtilsMapper utilsMapper;
 
 	/**
+	 * 営業結果パターンを取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getSalesPuttern() {
+		List<ModelClass> list = utilsMapper.getSalesPuttern();
+		return list;
+	}
+
+	/**
+	 * 特別ポイントを取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getSpecialPoint() {
+		List<ModelClass> list = utilsMapper.getSpecialPoint();
+		return list;
+	}
+	
+	/**
 	 * 国籍を取得
 	 * 
 	 * @return
@@ -26,7 +46,7 @@ public class UtilsService {
 		List<ModelClass> list = utilsMapper.getNationalitys();
 		return list;
 	}
-
+	
 	/**
 	 * 社員形式を取得
 	 * 
