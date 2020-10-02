@@ -125,7 +125,7 @@ public class WagesInfoController extends BaseController{
 				//諸費用の反映年月
 				int expensesDate = 
 						Integer.parseInt(expensesInfoModels.get(j).getExpensesReflectYearAndMonth());
-				if(i == wagesInfoModels.size()) {
+				if(i == wagesInfoModels.size()-1) {
 					if(expensesDate >= wagesDate) {
 						expensesInfoModelsInWages.add(e);
 					}
