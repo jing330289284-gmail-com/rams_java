@@ -29,10 +29,26 @@ public class WorkRepotService {
 	 * @param sendMap
 	 */
 	
-	public boolean updateDutyManagement(WorkRepotModel workRepotModel) {
+	public boolean updateWorkRepot(WorkRepotModel workRepotModel) {
 		boolean result = true;
 		try {
 			workRepotMapper.updateWorkRepot(workRepotModel);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return result = false;
+		}
+		return result;
+	}
+	/**
+	 *ファイル名入力
+	 * @param sendMap
+	 */
+	
+	public boolean insertWorkRepot(WorkRepotModel workRepotModel) {
+		boolean result = true;
+		try {
+			workRepotMapper.insertWorkRepot(workRepotModel);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

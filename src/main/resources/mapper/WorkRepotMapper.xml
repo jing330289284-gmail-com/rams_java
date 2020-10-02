@@ -11,7 +11,7 @@
 			updateTime,
 			approvalStatus
 		FROM 
-			workTotalTime
+			T018WorkTotalTime
 		WHERE
 			attendanceRegisterFlag = 0 AND
 			employeeNo = #{employeeNo}
@@ -20,7 +20,7 @@
 		DESC
     </select>
 	<update id="updateWorkRepot" parameterType="String">
-		UPDATE workTotalTime
+		UPDATE T018WorkTotalTime
 		SET 
 			updateTime= now(),
 			sumWorkTime = #{sumWorkTime},
@@ -29,4 +29,14 @@
 			employeeNo = #{employeeNo}
 			and attendanceYearAndMonth = #{attendanceYearAndMonth}
     </update> 
+   	<insert id="insertWorkRepot" parameterType="String">
+    	insert into 
+    		T018WorkTotalTime(workingTimeReport,updateTime,updateUser,approvalStatus,createTime,employeeNo,attendanceYearAndMonth,attendanceRegisterFlag)
+			values(#{workingTimeReport},now(),#{employeeName},0,now(),#{employeeName},#{attendanceYearAndMonth},0)
+		on DUPLICATE key update
+			workingTimeReport = #{workingTimeReport},
+			updateTime= now(),
+			updateUser = #{employeeName}
+
+    </insert> 
 </mapper>
