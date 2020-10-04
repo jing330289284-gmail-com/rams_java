@@ -114,29 +114,6 @@ public class CustomerInfoController extends BaseController{
 	}
 
 	/**
-	 * 明細更新ボタン
-	 * @param customerDepartmentInfoModel
-	 * @return 0成功，1失败，2部门在部门表中不存在
-	 */
-	@RequestMapping(value = "/meisaiUpdate", method = RequestMethod.POST)
-	@ResponseBody
-	@Transactional(rollbackFor = Exception.class)
-	public String meisaiUpdate(@RequestBody CustomerDepartmentInfoModel customerDepartmentInfoModel) {
-		logger.info("CustomerInfoController.onloadPage:" + "明細更新開始");
-		customerDepartmentInfoModel.setUpdateUser((String)getSession().getAttribute("employeeNo"));
-		try {
-			logger.info("CustomerInfoController.onloadPage:" + "明細更新終了");
-			return customerInfoSer.meisaiToroku(customerDepartmentInfoModel);
-		} catch (Exception e) {
-			// TODO: handle exception
-			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-			e.printStackTrace();
-			logger.info("CustomerInfoController.onloadPage:" + "明細更新終了");
-			return "1";
-		}
-	}
-
-	/**
 	 * 部門情報検索
 	 * @param customerInfoModel
 	 * @return

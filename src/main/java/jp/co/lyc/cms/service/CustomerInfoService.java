@@ -107,14 +107,6 @@ public class CustomerInfoService {
 	public String CustomerInfoToDB(CustomerInfoModel customerInfoMod) {
 		logger.info("CustomerInfoController.onloadPage:" + "登録開始");
 		CustomerInfoModel checkMod = selectCustomerInfo(customerInfoMod.getCustomerNo());
-		for(CustomerDepartmentInfoModel customerDepartmentInfoModel:
-			customerInfoMod.getCustomerDepartmentList()) {
-			String customerDepartmentCode = 
-					selectDepartmentCode(customerDepartmentInfoModel.getCustomerDepartmentName());
-			if(UtilsCheckMethod.isNullOrEmpty(customerDepartmentCode)) {
-				return "4";
-			}
-		}
 		if (checkMod == null && customerInfoMod.getActionType().equals("insert")) {//追加の場合
 			try {
 				customerInfoMapper.insertCustomerInfo(setSendMap(customerInfoMod));
@@ -133,14 +125,17 @@ public class CustomerInfoService {
 					customerDepartmentInfoModel.setActionType(customerInfoMod.getActionType());
 					customerDepartmentInfoModel.setCustomerNo(customerInfoMod.getCustomerNo());
 					customerDepartmentInfoModel.setUpdateUser(customerInfoMod.getUpdateUser());
-					String meisaiResult = 
-							meisaiToroku(customerDepartmentInfoModel);
-					if(meisaiResult.equals("1")) {
-						logger.info("CustomerInfoController.onloadPage:" + "登録終了");
-						return "3";
-					}else if(meisaiResult.equals("2")) {
-						logger.info("CustomerInfoController.onloadPage:" + "登録終了");
-						return "4";
+					if (!UtilsCheckMethod.isNullOrEmpty(
+							customerDepartmentInfoModel.getCustomerDepartmentCode())) {
+						String meisaiResult = 
+								meisaiToroku(customerDepartmentInfoModel);
+						if(meisaiResult.equals("1")) {
+							logger.info("CustomerInfoController.onloadPage:" + "登録終了");
+							return "3";
+						}else if(meisaiResult.equals("2")) {
+							logger.info("CustomerInfoController.onloadPage:" + "登録終了");
+							return "4";
+						}
 					}
 				}
 				return "0";//result（0）成功（1）失敗
@@ -164,14 +159,17 @@ public class CustomerInfoService {
 					customerDepartmentInfoModel.setActionType(customerInfoMod.getActionType());
 					customerDepartmentInfoModel.setCustomerNo(customerInfoMod.getCustomerNo());
 					customerDepartmentInfoModel.setUpdateUser(customerInfoMod.getUpdateUser());
-					String meisaiResult = 
-							meisaiToroku(customerDepartmentInfoModel);
-					if(meisaiResult.equals("1")) {
-						logger.info("CustomerInfoController.onloadPage:" + "登録終了");
-						return "3";
-					}else if(meisaiResult.equals("2")) {
-						logger.info("CustomerInfoController.onloadPage:" + "登録終了");
-						return "4";
+					if (!UtilsCheckMethod.isNullOrEmpty(
+							customerDepartmentInfoModel.getCustomerDepartmentCode())) {
+						String meisaiResult = 
+								meisaiToroku(customerDepartmentInfoModel);
+						if(meisaiResult.equals("1")) {
+							logger.info("CustomerInfoController.onloadPage:" + "登録終了");
+							return "3";
+						}else if(meisaiResult.equals("2")) {
+							logger.info("CustomerInfoController.onloadPage:" + "登録終了");
+							return "4";
+						}
 					}
 				}
 				return "0";//result（0）成功（1）失敗
@@ -199,17 +197,14 @@ public class CustomerInfoService {
 		HashMap<String, String> sendMap = new HashMap<>();
 		sendMap.put("customerNo", customerDepartmentInfoModel.getCustomerNo());	
 		String resultCode = "0";//処理結果
-		String customerDepartmentCode = 
-				selectDepartmentCode(customerDepartmentInfoModel.getCustomerDepartmentName());
-		//resultCode : 2(部門が部門マスタに存在しない)
-		if(UtilsCheckMethod.isNullOrEmpty(customerDepartmentCode)) {
-			logger.info("BankInfoController.toroku:" + "明細登録終了");
-			return resultCode = "2";
-		}
-		sendMap.put("customerDepartmentCode", customerDepartmentCode);
+		sendMap.put("customerDepartmentCode", customerDepartmentInfoModel.getCustomerDepartmentCode());
 		sendMap.put("customerNo", customerDepartmentInfoModel.getCustomerNo());
 		sendMap.put("positionCode", customerDepartmentInfoModel.getPositionCode());
 		sendMap.put("responsiblePerson", customerDepartmentInfoModel.getResponsiblePerson());
+		sendMap.put("typeOfIndustryCode", customerDepartmentInfoModel.getTypeOfIndustryCode());
+		sendMap.put("developLanguageCode1", customerDepartmentInfoModel.getDevelopLanguageCode1());
+		sendMap.put("developLanguageCode2", customerDepartmentInfoModel.getDevelopLanguageCode2());
+		sendMap.put("stationCode", customerDepartmentInfoModel.getStationCode());
 		sendMap.put("customerDepartmentMail", customerDepartmentInfoModel.getCustomerDepartmentMail());
 		sendMap.put("updateUser", customerDepartmentInfoModel.getUpdateUser());
 		//resultCode : 0(処理成功)1（処理失敗）
@@ -324,6 +319,7 @@ public class CustomerInfoService {
 		sendMap.put("remark", customerInfoMod.getRemark());
 		sendMap.put("purchasingManagersMail", customerInfoMod.getPurchasingManagersMail());
 		sendMap.put("paymentsiteCode", customerInfoMod.getPaymentsiteCode());
+		sendMap.put("capitalStock", customerInfoMod.getCapitalStock());
 		sendMap.put("updateUser", customerInfoMod.getUpdateUser());
 		sendMap.put("customerNo", customerInfoMod.getCustomerNo());	
 		return sendMap;	

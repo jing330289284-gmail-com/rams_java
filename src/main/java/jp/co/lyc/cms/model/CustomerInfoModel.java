@@ -33,6 +33,7 @@ public class CustomerInfoModel {
 	String purchasingManagersMail;//メール
 	String customerAbbreviation;//お客様略称
 	String paymentsiteCode;//支払サイト
+	String capitalStock;//資本金
 	ArrayList<String> locationList;//同社の現場場所リスト
 	ArrayList<String> siteManagerList;//同社の現場責任者リスト
 	ArrayList<String> unitPriceList;//単価リスト
@@ -42,6 +43,12 @@ public class CustomerInfoModel {
 	AccountInfoModel accountInfo;
 	TopCustomerInfoModel topCustomerInfo;
 	
+	public String getCapitalStock() {
+		return capitalStock;
+	}
+	public void setCapitalStock(String capitalStock) {
+		this.capitalStock = capitalStock;
+	}
 	public String getSiteLocationCode() {
 		return siteLocationCode;
 	}
