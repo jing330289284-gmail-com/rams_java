@@ -2,33 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="jp.co.lyc.cms.mapper.SalesPointSetMapper">
 
-	<insert id="salesPointInsert" parameterType="map">
-		insert into
-		T006EmployeeSiteInfo(employeeNo,customerNo,topCustomerNo,admissionStartDate,admissionEndDate,
-		siteManager,systemName,developLanguageCode,stationCode,unitPrice,siteRoleCode,payOffRange1,payOffRange2,relatedEmployees,
-		levelCode,typeOfIndustryCode,remark,updateTime,createTime,updateUser)
-		values(#{employeeNo},#{customerNo},#{topCustomerNo},#{admissionStartDate},#{admissionEndDate},
-		#{siteManager},#{systemName},#{developLanguageCode},#{location},#{unitPrice},#{siteRoleCode},#{payOffRange1},
-		#{payOffRange2},#{relatedEmployees},#{levelCode},#{typeOfIndustryCode},#{remark},now(),now(),#{updateUser})
-	</insert>
-
 	<update id="salesPointUpdate" parameterType="map">
 		update
-		T006EmployeeSiteInfo
+		T014SalesPointInfo
 		set
-		employeeNo=#{employeeNo},customerNo=#{customerNo},topCustomerNo=#{topCustomerNo},admissionStartDate=#{admissionStartDate},
-		admissionEndDate=#{admissionEndDate},siteManager=#{siteManager},systemName=#{systemName},
-		developLanguageCode=#{developLanguageCode},stationCode=#{location},unitPrice=#{unitPrice},
-		siteRoleCode=#{siteRoleCode},payOffRange1=#{payOffRange1},payOffRange2=#{payOffRange2},
-		relatedEmployees=#{relatedEmployees},levelCode=#{levelCode},typeOfIndustryCode=#{typeOfIndustryCode},
-		remark=#{remark},updateTime=now(),updateUser=#{updateUser}
-		where
-		employeeNo=#{employeeNo} AND admissionStartDate=#{workDate}
-
+		employeeStatus=#{employee},intoCompanyCode=#{newMember},customerContractStatus=#{customerContract},
+		levelCode=#{level},salesProgressCode=#{salesPuttern},specialPointConditionCode=#{specialPoint},
+		salesPoint=#{point},remark=#{remark},updateTime=now(),updateUser=#{updateUser}
+		where id=#{no}
 	</update>
 
-	<select id="getSalesPointInfo"
-		parameterType="map"
+	<delete id="salesPointDelete" parameterType="map">
+		DELETE FROM
+		rams.T014SalesPointInfo WHERE id= #{no};
+	</delete>
+
+	<select id="getSalesPointInfo" parameterType="map"
 		resultType="jp.co.lyc.cms.model.SalesPointSetModel">
 		SELECT id as no,employeeStatus as employee,intoCompanyCode as
 		newMember,customerContractStatus as customerContract,
