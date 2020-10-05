@@ -86,12 +86,12 @@ public class WorkRepotController extends BaseController {
 		return result;
 	}
 	
-	public final static String UPLOAD_PATH_PREFIX = "/file/";
+	public final static String UPLOAD_PATH_PREFIX = "C:"+File.separator+"file"+File.separator;
 	public String upload(WorkRepotModel workRepotModel,MultipartFile workRepotFile) {
 		if (workRepotFile== null) {
 			return "";
 		}
-		String realPath = new String("src/main/resources" + UPLOAD_PATH_PREFIX + "_作業報告書フォルダ"+ workRepotModel.getAttendanceYearAndMonth().substring(0,4) +"/"+workRepotModel.getAttendanceYearAndMonth().substring(5));
+		String realPath = new String(UPLOAD_PATH_PREFIX + "作業報告書フォルダ"+ File.separator+workRepotModel.getAttendanceYearAndMonth().substring(0,4) + File.separator+workRepotModel.getAttendanceYearAndMonth().substring(4));
 		File file = new File(realPath);
 		if (!file.isDirectory()) {
 			file.mkdirs();

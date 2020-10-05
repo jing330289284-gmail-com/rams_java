@@ -7,6 +7,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,6 +32,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -100,30 +103,6 @@ public class UtilsController {
 	}
 
 	/**
-	 * 営業結果パターン
-	 * 
-	 * @return
-	 */
-	@RequestMapping(value = "/getSalesPuttern", method = RequestMethod.POST)
-	@ResponseBody
-	public List<ModelClass> getSalesPuttern() {
-		List<ModelClass> list = utilsService.getSalesPuttern();
-		return list;
-	}
-
-	/**
-	 * 特別ポイント
-	 * 
-	 * @return
-	 */
-	@RequestMapping(value = "/getSpecialPoint", method = RequestMethod.POST)
-	@ResponseBody
-	public List<ModelClass> getSpecialPoint() {
-		List<ModelClass> list = utilsService.getSpecialPoint();
-		return list;
-	}
-	
-	/**
 	 * レベル
 	 * 
 	 * @return
@@ -134,7 +113,7 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getLevel();
 		return list;
 	}
-	
+
 	/**
 	 * 日本語レベルを取得
 	 * 
@@ -482,21 +461,6 @@ public class UtilsController {
 	}
 
 	/**
-	 * 契約区分
-	 * 
-	 * @return
-	 */
-
-	@RequestMapping(value = "/getCustomerContractStatus", method = RequestMethod.POST)
-	@ResponseBody
-	public List<ModelClass> getCustomerContractStatus() {
-		Properties properties = getProperties();
-		String customerContractStatus = properties.getProperty("customerContract");
-		List<ModelClass> list = getStatus(customerContractStatus);
-		return list;
-	}
-	
-	/**
 	 * 営業担当選ぶ
 	 * 
 	 * @return
@@ -719,18 +683,6 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getEmployeeName();
 		return list;
 	}
-	
-	/**
-	 * 社員氏名を取得する
-	 * 
-	 * @return
-	 */
-	@RequestMapping(value = "/getEmployeeNameNoBP", method = RequestMethod.POST)
-	@ResponseBody
-	public List<ModelClass> getEmployeeNameNoBP() {
-		List<ModelClass> list = utilsService.getEmployeeNameNoBP();
-		return list;
-	}
 
  
 	/**
@@ -827,12 +779,20 @@ public class UtilsController {
 	public void downloadTemplateFile(@RequestBody ModelClass model, HttpServletResponse response) throws IOException {
 		// TODO
 		String filePath = model.getName();
+
+			
+
 		Resource resource = new ClassPathResource(filePath);// 用来读取resources下的文件
 		InputStream is = null;
 		BufferedInputStream bis = null;
 		OutputStream os = null;
 		try {
-			File file = resource.getFile();
+			File file;
+			if (filePath.contains("作業報告書")){
+				file=new File(filePath);			
+			}else {
+				file = resource.getFile();
+			}
 			if (!file.exists()) {
 				return;
 			}
@@ -869,8 +829,8 @@ public class UtilsController {
 				e.printStackTrace();
 			}
 		}
-	}
-	/**
+	
+	}	/**
 	 * メールを発送する
 	 * @param emailMod
 	 */
