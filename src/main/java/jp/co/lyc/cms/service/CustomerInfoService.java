@@ -222,17 +222,20 @@ public class CustomerInfoService {
 	 */
 	public boolean checkCustomerDepartment(ArrayList<CustomerDepartmentInfoModel> initList) {
 		for (CustomerDepartmentInfoModel c : initList) {
-			String position = c.getPositionCode();
-			String customerDepartmentCode = c.getCustomerDepartmentCode();
 			int count = 0;
-			for (CustomerDepartmentInfoModel d : initList) {
-				if (position.equals(d.getPositionCode())
-						&& customerDepartmentCode.equals(d.getCustomerDepartmentCode())) {
-					count++;
+			if(!UtilsCheckMethod.isNullOrEmpty(c.getPositionCode()) 
+					&& !UtilsCheckMethod.isNullOrEmpty(c.getCustomerDepartmentCode())) {
+				String position = c.getPositionCode();
+				String customerDepartmentCode = c.getCustomerDepartmentCode();
+				for (CustomerDepartmentInfoModel d : initList) {
+					if (position.equals(d.getPositionCode())
+							&& customerDepartmentCode.equals(d.getCustomerDepartmentCode())) {
+						count++;
+					}
 				}
-			}
-			if (count > 1) {
-				return false;
+				if (count > 1) {
+					return false;
+				}
 			}
 		}
 		return true;
