@@ -25,67 +25,72 @@ import jp.co.lyc.cms.model.CustomerDepartmentInfoModel;
 import jp.co.lyc.cms.model.CustomerInfoModel;
 import jp.co.lyc.cms.service.CustomerInfoService;
 import jp.co.lyc.cms.validation.CustomerInfoValidation;
+
 @Controller
 @RequestMapping(value = "/customerInfo")
-public class CustomerInfoController extends BaseController{
+public class CustomerInfoController extends BaseController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
-	
-	//お客様情報service
+
+	// お客様情報service
 	@Autowired
 	CustomerInfoService customerInfoSer;
-	//口座情報service
+	// 口座情報service
 	@Autowired
 	AccountInfoController accountInfoController;
-	//上位お客様情報service
+	// 上位お客様情報service
 	@Autowired
 	TopCustomerInfoController topCustomerInfoController;
-	
+
 	String errorsMessage = "";
+
 	/**
 	 * 页面加载
+	 * 
 	 * @param customerInfoMod
 	 * @return
 	 */
 	@RequestMapping(value = "/onloadPage", method = RequestMethod.POST)
 	@ResponseBody
-	public HashMap<String,Object> onloadPage(@RequestBody CustomerInfoModel customerInfoMod ) {
+	public HashMap<String, Object> onloadPage(@RequestBody CustomerInfoModel customerInfoMod) {
 		logger.info("CustomerInfoController.onloadPage:" + "初期化開始");
-		HashMap<String,Object> resultMap = new HashMap<>();
+		HashMap<String, Object> resultMap = new HashMap<>();
 		HashMap<String, String> sendMap = new HashMap<>();
-		if(customerInfoMod.getActionType() != null) {
-			//修正と詳細の場合
+		if (customerInfoMod.getActionType() != null) {
+			// 修正と詳細の場合
 			if (customerInfoMod.getActionType().equals("update") || customerInfoMod.getActionType().equals("detail")) {
-				customerInfoMod = customerInfoSer.selectCustomerInfo(customerInfoMod.getCustomerNo());	
+				customerInfoMod = customerInfoSer.selectCustomerInfo(customerInfoMod.getCustomerNo());
 				sendMap.put("customerNo", customerInfoMod.getCustomerNo());
-				ArrayList<CustomerDepartmentInfoModel> customerDepartmentInfoList = 
-						customerInfoSer.selectCustomerDepartmentInfo(sendMap);
+				ArrayList<CustomerDepartmentInfoModel> customerDepartmentInfoList = customerInfoSer
+						.selectCustomerDepartmentInfo(sendMap);
 				resultMap.put("customerInfoMod", customerInfoMod);
 				resultMap.put("customerDepartmentInfoList", customerDepartmentInfoList);
-			}else if(customerInfoMod.getActionType().equals("insert")){
-				//追加の場合
+			} else if (customerInfoMod.getActionType().equals("insert")) {
+				// 追加の場合
 				String saiban = customerInfoSer.customerNoSaiBan();
-				int num = Integer.parseInt(saiban.substring(1),10);
+				int num = Integer.parseInt(saiban.substring(1), 10);
 				num += 1;
-				if(num < 10) {
+				if (num < 10) {
 					saiban = "C00" + Integer.toString(num);
-				}else if(num >=10 && num < 100) {
+				} else if (num >= 10 && num < 100) {
 					saiban = "C0" + Integer.toString(num);
-				}else if(num >= 100) {
+				} else if (num >= 100) {
 					saiban = "C" + Integer.toString(num);
 				}
 				sendMap.put("customerNo", saiban);
-				//部門のデータ
-				ArrayList<CustomerDepartmentInfoModel> customerDepartmentInfoList = 
-						customerInfoSer.selectCustomerDepartmentInfo(sendMap);
-				resultMap.put("customerNoSaiBan",saiban);
+				// 部門のデータ
+				ArrayList<CustomerDepartmentInfoModel> customerDepartmentInfoList = customerInfoSer
+						.selectCustomerDepartmentInfo(sendMap);
+				resultMap.put("customerNoSaiBan", saiban);
 				resultMap.put("customerDepartmentInfoList", customerDepartmentInfoList);
 			}
 		}
 		logger.info("CustomerInfoController.onloadPage:" + "初期化終了");
-		return resultMap;	
+		return resultMap;
 	}
+
 	/**
 	 * 登录按钮
+	 * 
 	 * @param customerInfoMod
 	 * @return 0成功，1失败，2上位客户不存在，3明细登录失败，4部门在部门表中不存在
 	 */
@@ -108,28 +113,41 @@ public class CustomerInfoController extends BaseController{
 			return result;
 		}
 		HttpSession session = getSession();
-		customerInfoMod.setUpdateUser((String)session.getAttribute("employeeNo"));
-		result.put("result", customerInfoSer.CustomerInfoToDB(customerInfoMod));
+		customerInfoMod.setUpdateUser((String) session.getAttribute("employeeNo"));
+		String resultString = customerInfoSer.CustomerInfoToDB(customerInfoMod);
+		if (resultString.equals("1")) {
+			result.put("errorsMessage", "お客様の処理失敗しました");
+		} else if (resultString.equals("2")) {
+			result.put("errorsMessage", "程序错误");
+		} else if (resultString.equals("3")) {
+			result.put("errorsMessage", "お客様部門の処理失敗しました");
+		} else if (resultString.equals("4")) {
+			result.put("errorsMessage", "お客様部門またはお客様部門職位が存在する");
+		} else if (resultString.equals("5")) {
+			result.put("errorsMessage", "入力したお客様部門またはお客様部門職位が重复しました");
+		}
 		return result;
 	}
 
 	/**
 	 * 部門情報検索
+	 * 
 	 * @param customerInfoModel
 	 * @return
 	 */
-	public ArrayList<CustomerDepartmentInfoModel> getCustomerDepartmentInfo( String customerNo) {
+	public ArrayList<CustomerDepartmentInfoModel> getCustomerDepartmentInfo(String customerNo) {
 		logger.info("BankInfoController.toroku:" + "部門情報検索開始");
 		HashMap<String, String> sendMap = new HashMap<>();
 		sendMap.put("customerNo", customerNo);
-		ArrayList<CustomerDepartmentInfoModel> customerDepartmentInfoList = 
-				customerInfoSer.selectCustomerDepartmentInfo(sendMap);
+		ArrayList<CustomerDepartmentInfoModel> customerDepartmentInfoList = customerInfoSer
+				.selectCustomerDepartmentInfo(sendMap);
 		logger.info("BankInfoController.toroku:" + "部門情報検索終了");
 		return customerDepartmentInfoList;
 	}
-	
+
 	/**
 	 * 部門削除
+	 * 
 	 * @return
 	 */
 	@RequestMapping(value = "/customerDepartmentdelete", method = RequestMethod.POST)

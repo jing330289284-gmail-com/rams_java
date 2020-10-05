@@ -164,8 +164,10 @@
 		SELECT
 			CONCAT( ( @rowNo := @rowNo + 1 ) ) AS rowNo,
 			M018.customerDepartmentName,
-			M018.customerDepartmentCode,
-			M019.positionCode,
+			T009.customerDepartmentCode,
+			T009.customerDepartmentCode AS beforeCDCode,
+			T009.positionCode,
+			T009.positionCode AS beforePCode,
 			M019.positionName,
 			T009.responsiblePerson,
 			T009.typeOfIndustryCode,
@@ -190,6 +192,9 @@
 			T009.customerNo = #{customerNo}
 		<if test="customerDepartmentCode != NULL">
 			AND T009.customerDepartmentCode = #{customerDepartmentCode}
+		</if>
+		<if test="positionCode != NULL">
+			AND T009.positionCode = #{positionCode}
 		</if>
     </select>
     <!-- 部門名前連想 -->
@@ -270,7 +275,9 @@
 		WHERE 
 			customerNo = #{customerNo}
 		AND 
-			customerDepartmentCode = #{customerDepartmentCode}
+			customerDepartmentCode = #{beforeCDCode}
+		AND 
+			positionCode = #{beforePCode}
     </update>
         <!-- 部門削除 -->
     <delete id="customerDepartmentdelete" parameterType="String">
