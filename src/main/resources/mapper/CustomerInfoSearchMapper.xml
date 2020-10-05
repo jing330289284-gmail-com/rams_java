@@ -57,19 +57,22 @@
 			AND T007.customerName like concat('%',#{customerName},'%')
 		</if>
 		<if test="levelCode != null">
-			AND T007.levelCode=#{levelCode}
+			AND T007.levelCode= #{levelCode}
 		</if>
 		<if test="companyNatureCode != null">
-			AND T007.companyNatureCode=#{companyNatureCode}
+			AND T007.companyNatureCode= #{companyNatureCode}
 		</if>
-		<if test="topCustomerName != null">
-			AND T007.topCustomerNo = topNo.topCustomerNo
+		<if test="topCustomerNo != null">
+			AND T007.topCustomerNo = #{topCustomerNo}
 		</if>
 		<if test="businessStartDate != null">
 			AND T007.businessStartDate >= #{businessStartDate}
 		</if>
 		<if test="paymentsiteCode != null">
 			AND T007.paymentsiteCode = #{paymentsiteCode}
+		</if>
+		<if test="stationCode != null">
+			AND T007.stationCode = #{stationCode}
 		</if>
 		 ORDER BY
 			T007.customerNo
