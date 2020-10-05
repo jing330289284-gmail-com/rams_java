@@ -35,7 +35,7 @@
 	
 	<!-- パスワードリセットURLをインサート -->
 	<insert id="insert" parameterType="String">
-	INSERT INTO T012passwordrest ( passwordResetId, idCreateTime, idForEmployeeNo ) 
+	INSERT INTO T012Passwordreset ( passwordResetId, idCreateTime, idForEmployeeNo ) 
 	VALUE
 		( #{passwordResetId},
 		NOW( ),
