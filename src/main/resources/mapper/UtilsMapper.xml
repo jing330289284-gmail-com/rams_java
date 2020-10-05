@@ -11,14 +11,17 @@
 	<!-- 営業結果パターン -->
 	<select id="getSalesPuttern"
 		resultType="jp.co.lyc.cms.model.ModelClass">
-		SELECT salesPutternCode code,salesPutternName name FROM
+		SELECT salesPutternCode code,salesPutternName
+		name,salesPutternCode value,salesPutternName text FROM
 		M024SalesPuttern;
 	</select>
 
 	<!-- 特別ポイント -->
 	<select id="getSpecialPoint"
 		resultType="jp.co.lyc.cms.model.ModelClass">
-		SELECT specialPointConditionCode code,specialPointConditionName name FROM
+		SELECT specialPointConditionCode
+		code,specialPointConditionName name,specialPointConditionCode
+		value,specialPointConditionName text FROM
 		M023SpecialPointCondition;
 	</select>
 
@@ -35,7 +38,8 @@
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT
 		employeeNo CODE,
-		CONCAT( employeeFristName, employeeLastName, '(', employeeNo, ')' ) NAME
+		CONCAT( employeeFristName,
+		employeeLastName, '(', employeeNo, ')' ) NAME
 		FROM
 		rams.T001Employee
 		WHERE
@@ -159,7 +163,9 @@
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT
 		levelCode code,
-		levelName name
+		levelName name,
+		levelCode value,
+		levelName text
 		FROM
 		M008Level
 	</select>
