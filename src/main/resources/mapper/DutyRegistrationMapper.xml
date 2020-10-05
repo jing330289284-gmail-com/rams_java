@@ -6,16 +6,19 @@
     <resultMap id="BreakTime" type="jp.co.lyc.cms.model.BreakTimeModel"/>
     
     <insert id="insertDutyRegistration" parameterType="String">
-		INSERT INTO breakTime(
+		INSERT INTO T017BreakTime(
 			employeeNo,
-			yearMonth,
+			yearAndMonth,
 			lunchBreakStartTime,
 			lunchBreakFinshTime,
 			lunchBreakTime,
 			nightBreakStartTime,
 			nightBreakfinshTime,
 			nightBreakTime,
-			totalBreakTime
+			totalBreakTime,
+		    createTime,
+		    updateTime,
+		    updateUser
 		) 
 		VALUE(
 			#{employeeNo},
@@ -26,11 +29,14 @@
 			#{breakTimeNightStart},
 			#{breakTimeNightEnd},
 			#{breakTimeNightbreakTimeHour},
-			#{breakTimeSumHour}
+			#{breakTimeSumHour},
+			NOW(),
+			NOW(),
+			#{employeeNo}
 		)
     </insert>
     <insert id="insertDuty" parameterType="String">
-		INSERT INTO `employeeWorkTime`( 
+		INSERT INTO `T016EmployeeWorkTime`( 
 		    `employeeNo`
 		    , `yearAndMonth`
 		    , `day`
@@ -44,6 +50,8 @@
 		    , `customer`
 		    , `siteResponsiblePerson`
 		    , `systemName`
+			, `workContent`
+			, `remark`
 		    , `createTime`
 		    , `updateTime`
 		    , `updateUser`
@@ -62,6 +70,8 @@
 		    , #{customer}
 		    , #{siteResponsiblePerson}
 		    , #{systemName}
+			, #{workContent}
+			, #{remark}
 		    , now()
 		    , now()
 		    , #{updateUser}
@@ -70,7 +80,7 @@
     <select id="selectDutyRegistration" resultMap="BreakTime" parameterType="String">
 		SELECT
 			employeeNo,
-			yearMonth,
+			yearAndMonth,
 			breakTimeFixedStatus,
 			lunchBreakStartTime,
 			lunchBreakFinshTime,
@@ -80,10 +90,10 @@
 			nightBreakTime,
 			totalBreakTime
 		FROM
-			breakTime 
+			T017BreakTime 
 		WHERE
 			employeeNo = #{employeeNo}
-			and yearMonth = #{breakTimeYearMonth}
+			and yearAndMonth = #{breakTimeYearMonth}
     </select>
     <select id="selectDuty" resultMap="EmployeeWorkTime" parameterType="String">
 		SELECT
@@ -100,11 +110,13 @@
 		    , `customer`
 		    , `siteResponsiblePerson`
 		    , `systemName`
+			, `workContent`
+			, `remark`
 		    , `createTime`
 		    , `updateTime`
 		    , `updateUser`
 		FROM
-			employeeWorkTime 
+			T016EmployeeWorkTime 
 		WHERE
 			employeeNo = #{employeeNo}
 			and yearAndMonth = #{yearAndMonth}
@@ -113,23 +125,25 @@
 			</if>
     </select>
 	<update id="updateDutyRegistration" parameterType="String">
-		UPDATE breakTime
+		UPDATE T017BreakTime
 		SET 
 			employeeNo = #{employeeNo},
-			yearMonth = #{breakTimeYearMonth},
+			yearAndMonth = #{breakTimeYearMonth},
 			lunchBreakStartTime = #{breakTimeDayStart},
 			lunchBreakFinshTime = #{breakTimeDayEnd},
 			lunchBreakTime = #{breakTimeDaybreakTimeHour},
 			nightBreakStartTime = #{breakTimeNightStart},
 			nightBreakfinshTime = #{breakTimeNightEnd},
 			nightBreakTime = #{breakTimeNightbreakTimeHour},
-			totalBreakTime = #{breakTimeSumHour}			
+			totalBreakTime = #{breakTimeSumHour},
+			updateTime = now(),
+			updateUser = #{employeeNo}
 		WHERE 
 			employeeNo = #{employeeNo}
-			and yearMonth = #{breakTimeYearMonth}
+			and yearAndMonth = #{breakTimeYearMonth}
     </update>
 	<update id="updateDuty" parameterType="String">
-		UPDATE employeeWorkTime
+		UPDATE T016EmployeeWorkTime
 		SET 
 			week = #{week},
 			morningTime = #{morningTime},
@@ -140,6 +154,8 @@
 			siteCustomer = #{siteCustomer},
 			customer = #{customer},
 			siteResponsiblePerson = #{siteResponsiblePerson},
+			workContent = #{workContent},
+			remark = #{remark},
 			systemName = #{systemName},
 			updateTime = now(),
 			updateUser = #{updateUser}
