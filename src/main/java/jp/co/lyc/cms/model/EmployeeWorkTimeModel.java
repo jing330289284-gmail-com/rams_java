@@ -18,6 +18,8 @@ public class EmployeeWorkTimeModel {
 	String customer;
 	String siteResponsiblePerson;
 	String systemName;
+	String workContent;
+	String remark;
 	String createTime;
 	String updateTime;
 	String updateUser;
@@ -118,7 +120,18 @@ public class EmployeeWorkTimeModel {
 	public void setUpdateUser(String updateUser) {
 		this.updateUser = updateUser;
 	}
-
+	public String getWorkContent() {
+		return workContent;
+	}
+	public void setWorkContent(String workContent) {
+		this.workContent = workContent;
+	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
 	public Map<String, Object> toHashMap() {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("employeeNo", this.getEmployeeNo());
@@ -134,6 +147,8 @@ public class EmployeeWorkTimeModel {
 		map.put("customer", this.getCustomer());
 		map.put("siteResponsiblePerson", this.getSiteResponsiblePerson());
 		map.put("systemName", this.getSystemName());
+		map.put("workContent", this.getWorkContent());
+		map.put("remark", this.getRemark());
 		map.put("createTime", this.getCreateTime());
 		map.put("updateTime", this.getUpdateTime());
 		map.put("updateUser", this.getUpdateUser());
@@ -164,6 +179,8 @@ public class EmployeeWorkTimeModel {
 		employeeWorkTimeModel.setCustomer(String.valueOf(map.get("customer")));
 		employeeWorkTimeModel.setSiteResponsiblePerson(String.valueOf(map.get("siteResponsiblePerson")));
 		employeeWorkTimeModel.setSystemName(String.valueOf(map.get("systemName")));
+		employeeWorkTimeModel.setWorkContent(String.valueOf(map.get("workContent")));
+		employeeWorkTimeModel.setRemark(String.valueOf(map.get("remark")));
 		employeeWorkTimeModel.setCreateTime(String.valueOf(map.get("createTime")));
 		employeeWorkTimeModel.setUpdateTime(String.valueOf(map.get("updateTime")));
 		employeeWorkTimeModel.setUpdateUser(String.valueOf(map.get("updateUser")));
@@ -176,8 +193,9 @@ public class EmployeeWorkTimeModel {
 				+ ", week=" + week + ", morningTime=" + morningTime + ", afternoonTime=" + afternoonTime
 				+ ", holidayFlag=" + holidayFlag + ", workTime=" + workTime + ", confirmFlag=" + confirmFlag
 				+ ", siteCustomer=" + siteCustomer + ", customer=" + customer + ", siteResponsiblePerson="
-				+ siteResponsiblePerson + ", systemName=" + systemName + ", createTime=" + createTime + ", updateTime="
-				+ updateTime + ", updateUser=" + updateUser + "]";
+				+ siteResponsiblePerson + ", systemName=" + systemName + ", workContent=" + workContent + ", remark="
+				+ remark + ", createTime=" + createTime + ", updateTime=" + updateTime + ", updateUser=" + updateUser
+				+ "]";
 	}
 	@Override
 	public int hashCode() {

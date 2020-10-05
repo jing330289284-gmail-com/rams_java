@@ -139,6 +139,8 @@ public class DutyRegistrationController extends BaseController{
 			tempMap.put("endTime",		employeeWorkTimeModel.getAfternoonTime());
 			tempMap.put("isWork",		employeeWorkTimeModel.getHolidayFlag());
 			tempMap.put("workHour",		employeeWorkTimeModel.getWorkTime());
+			tempMap.put("workContent",	employeeWorkTimeModel.getWorkContent());
+			tempMap.put("remark",		employeeWorkTimeModel.getRemark());
 			result.add(tempMap);
 		}
 		if (result.size() > 0)	{

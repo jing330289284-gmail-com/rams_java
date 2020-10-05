@@ -50,6 +50,8 @@
 		    , `customer`
 		    , `siteResponsiblePerson`
 		    , `systemName`
+			, `workContent`
+			, `remark`
 		    , `createTime`
 		    , `updateTime`
 		    , `updateUser`
@@ -68,6 +70,8 @@
 		    , #{customer}
 		    , #{siteResponsiblePerson}
 		    , #{systemName}
+			, #{workContent}
+			, #{remark}
 		    , now()
 		    , now()
 		    , #{updateUser}
@@ -106,6 +110,8 @@
 		    , `customer`
 		    , `siteResponsiblePerson`
 		    , `systemName`
+			, `workContent`
+			, `remark`
 		    , `createTime`
 		    , `updateTime`
 		    , `updateUser`
@@ -148,6 +154,8 @@
 			siteCustomer = #{siteCustomer},
 			customer = #{customer},
 			siteResponsiblePerson = #{siteResponsiblePerson},
+			workContent = #{workContent},
+			remark = #{remark},
 			systemName = #{systemName},
 			updateTime = now(),
 			updateUser = #{updateUser}
