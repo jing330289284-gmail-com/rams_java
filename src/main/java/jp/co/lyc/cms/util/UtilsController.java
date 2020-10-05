@@ -7,8 +7,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,7 +30,6 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -62,6 +59,45 @@ public class UtilsController {
 	@ResponseBody
 	public List<ModelClass> getNationalitys() {
 		List<ModelClass> list = utilsService.getNationalitys();
+		return list;
+	}
+
+	/**
+	 * 営業結果パターン
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getSalesPuttern", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getSalesPuttern() {
+		List<ModelClass> list = utilsService.getSalesPuttern();
+		return list;
+	}
+
+	/**
+	 * 特別ポイント
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getSpecialPoint", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getSpecialPoint() {
+		List<ModelClass> list = utilsService.getSpecialPoint();
+		return list;
+	}
+
+	/**
+	 * 契約区分
+	 * 
+	 * @return
+	 */
+
+	@RequestMapping(value = "/getCustomerContractStatus", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getCustomerContractStatus() {
+		Properties properties = getProperties();
+		String customerContractStatus = properties.getProperty("customerContract");
+		List<ModelClass> list = getStatus(customerContractStatus);
 		return list;
 	}
 
@@ -224,6 +260,7 @@ public class UtilsController {
 		List<ModelClass> list = getStatus(gender);
 		return list;
 	}
+
 	/**
 	 * approvalを取得する
 	 * 
@@ -237,6 +274,7 @@ public class UtilsController {
 		List<ModelClass> list = getStatus(approval);
 		return list;
 	}
+
 	/**
 	 * CheckSectionを取得する
 	 * 
@@ -250,6 +288,7 @@ public class UtilsController {
 		List<ModelClass> list = getStatus(checkSection);
 		return list;
 	}
+
 	/**
 	 * 上場
 	 * 
@@ -684,7 +723,6 @@ public class UtilsController {
 		return list;
 	}
 
- 
 	/**
 	 * パスワードリセット
 	 * 
@@ -749,7 +787,7 @@ public class UtilsController {
 
 	public Map<String, Object> upload(MultipartFile uploadFile, Map<String, Object> sendMap, String key, String Info) {
 		if (uploadFile == null) {
-			//sendMap.put(key, "");
+			// sendMap.put(key, "");
 			return sendMap;
 		}
 		String realPath = new String("src/main/resources" + UPLOAD_PATH_PREFIX + sendMap.get("employeeNo") + "_"
@@ -780,17 +818,15 @@ public class UtilsController {
 		// TODO
 		String filePath = model.getName();
 
-			
-
 		Resource resource = new ClassPathResource(filePath);// 用来读取resources下的文件
 		InputStream is = null;
 		BufferedInputStream bis = null;
 		OutputStream os = null;
 		try {
 			File file;
-			if (filePath.contains("作業報告書")){
-				file=new File(filePath);			
-			}else {
+			if (filePath.contains("作業報告書")) {
+				file = new File(filePath);
+			} else {
 				file = resource.getFile();
 			}
 			if (!file.exists()) {
@@ -829,53 +865,57 @@ public class UtilsController {
 				e.printStackTrace();
 			}
 		}
-	
-	}	/**
+
+	}
+
+	/**
 	 * メールを発送する
+	 * 
 	 * @param emailMod
 	 */
-	public void EmailSend(EmailModel emailMod){
-    	Session session = null;
+	public void EmailSend(EmailModel emailMod) {
+		Session session = null;
 		try {
-			//创建一个资源文件 
+			// 创建一个资源文件
 			Properties properties = new Properties();
-			//显示日志	
-			properties.setProperty("mail.debug","true");
-			//	邮箱类别
-			properties.setProperty("mail.host","smtp.lolipop.jp");
-			//设定验证开启
-			properties.setProperty("mail.smtp.auth","true");
-			//发送 接受方式 
-			properties.setProperty("mail.transpot.prococol","smtp");
-			//设置请求服务器端口号
-			properties.put("mail.smtp.port",587);
-			//设置ssl加密服务开启
-			properties.setProperty("mail.smtp.ssl.enable","smtp");
-			//创建加密证书
+			// 显示日志
+			properties.setProperty("mail.debug", "true");
+			// 邮箱类别
+			properties.setProperty("mail.host", "smtp.lolipop.jp");
+			// 设定验证开启
+			properties.setProperty("mail.smtp.auth", "true");
+			// 发送 接受方式
+			properties.setProperty("mail.transpot.prococol", "smtp");
+			// 设置请求服务器端口号
+			properties.put("mail.smtp.port", 587);
+			// 设置ssl加密服务开启
+			properties.setProperty("mail.smtp.ssl.enable", "smtp");
+			// 创建加密证书
 			MailSSLSocketFactory sf = new MailSSLSocketFactory();
-			//properties 底层调用的的是put方法
+			// properties 底层调用的的是put方法
 			properties.put("Mail.smtp.ssl.socketFactory", sf);
-			//获取具有以上属性的邮件session --->连接池
+			// 获取具有以上属性的邮件session --->连接池
 			session = Session.getInstance(properties);
-			//创建获取连接
-			Transport transport  = session.getTransport();
-			//进行连接
+			// 创建获取连接
+			Transport transport = session.getTransport();
+			// 进行连接
 			transport.connect(emailMod.getUserName(), emailMod.getPassword());
-			//创建一个信息
-			Message message  = new MimeMessage(session);
-			//设定发送方
+			// 创建一个信息
+			Message message = new MimeMessage(session);
+			// 设定发送方
 			message.setFrom(new InternetAddress(emailMod.getUserName()));
-			//设置主题内容
+			// 设置主题内容
 			message.setSubject(emailMod.getSubject());
-			message.setContent(emailMod.getContext(), "text/html;charset=utf-8");;
+			message.setContent(emailMod.getContext(), "text/html;charset=utf-8");
+			;
 			String[] addresss = emailMod.getToAddress().split(",");
 			int len = addresss.length;
-			Address [] adds = new Address[len];
+			Address[] adds = new Address[len];
 			for (int i = 0; i < len; i++) {
 				adds[i] = new InternetAddress(addresss[i]);
 			}
-			
-			//发送邮件
+
+			// 发送邮件
 			transport.sendMessage(message, adds);
 		} catch (GeneralSecurityException e) {
 			// TODO Auto-generated catch block
@@ -887,5 +927,6 @@ public class UtilsController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    }
+	}
+
 }
