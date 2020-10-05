@@ -138,6 +138,7 @@ public class LoginController extends BaseController {
                 new HashMap<String, MessageAttributeValue>();
 //        sendSMSMessage(snsClient, message, phoneNumber, smsAttributes);
         loginSession.setAttribute("verificationCode", verificationCode);
+        result.put("verificationCode", verificationCode);
         return result;
 	}
 	/**
