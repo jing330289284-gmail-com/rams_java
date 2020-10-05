@@ -559,6 +559,8 @@ public class UtilsController {
 			ModelClass statusModel = new ModelClass();
 			statusModel.setCode(entry.getKey());
 			statusModel.setName(entry.getValue());
+			statusModel.setValue(entry.getKey());
+			statusModel.setText(entry.getValue());
 			list.add(statusModel);
 		}
 		return list;
