@@ -1,13 +1,13 @@
 package jp.co.lyc.cms.model;
 
-import jp.co.lyc.cms.common.BaseController;
-
 public class CustomerDepartmentInfoModel{
 
 	String customerNo;//お客様番号
 	String customerDepartmentCode;//部門番号
+	String beforeCDCode;//元部門番号
 	String customerDepartmentName;//部門名称
 	String positionCode;//職位コード
+	String beforePCode;//元職員番号
 	String positionName;//職位
 	String responsiblePerson;//責任者
 	String customerDepartmentMail;//メール
@@ -24,6 +24,18 @@ public class CustomerDepartmentInfoModel{
 	String actionType;//処理区分
 	String resultCode;//処理結果
 	
+	public String getBeforeCDCode() {
+		return beforeCDCode;
+	}
+	public void setBeforeCDCode(String beforeCDCode) {
+		this.beforeCDCode = beforeCDCode;
+	}
+	public String getBeforePCode() {
+		return beforePCode;
+	}
+	public void setBeforePCode(String beforePCode) {
+		this.beforePCode = beforePCode;
+	}
 	public String getTypeOfIndustryCode() {
 		return typeOfIndustryCode;
 	}

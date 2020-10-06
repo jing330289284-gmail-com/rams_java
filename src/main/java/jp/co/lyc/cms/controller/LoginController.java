@@ -33,26 +33,29 @@ public class LoginController extends BaseController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	EmployeeInfoService es;
-	
+
 	String errorsMessage = "";
+
 	@RequestMapping(value = "/init", method = RequestMethod.POST)
 	@ResponseBody
 	public boolean init() {
-		if(UtilsCheckMethod.isNullOrEmpty((String)getSession().getAttribute("employeeNo"))) {
+		if (UtilsCheckMethod.isNullOrEmpty((String) getSession().getAttribute("employeeNo"))) {
 			return false;
-		}else{
+		} else {
 			return true;
 		}
 	}
+
 	/**
 	 * ログインボタン
+	 * 
 	 * @param loginModel
 	 * @param employeeModel
 	 * @return
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> login(@RequestBody LoginModel loginModel, EmployeeModel employeeModel ) {
+	public Map<String, Object> login(@RequestBody LoginModel loginModel, EmployeeModel employeeModel) {
 		errorsMessage = "";
 		DataBinder binder = new DataBinder(loginModel);
 		binder.setValidator(new LoginValidation());
@@ -74,27 +77,28 @@ public class LoginController extends BaseController {
 		sendMap.put("employeeNo", loginModel.employeeNo);
 		sendMap.put("password", loginModel.password);
 		employeeModel = es.getEmployeeModel(sendMap);
-		if(!loginModel.getVerificationCode().equals( loginSession.getAttribute("verificationCode"))) {
+		if (!loginModel.getVerificationCode().equals(loginSession.getAttribute("verificationCode"))) {
 			errorsMessage += "入力した社員番号やパスワードや認証番号が間違いため、ログインできません";
 			return result;
 		}
 		resultMap.put("employeeModel", employeeModel);
-		if(employeeModel != null) {
+		if (employeeModel != null) {
 			loginSession.setAttribute("employeeNo", employeeModel.getEmployeeNo());
 			loginSession.setAttribute("authorityName", employeeModel.getAuthorityName());
 			loginSession.setAttribute("authorityCode", employeeModel.getAuthorityCode());
-			loginSession.setAttribute("employeeName", employeeModel.getEmployeeFristName() +
-					"" + employeeModel.getEmployeeLastName());
-		}else {
-			loginSession.invalidate();//重置session
+			loginSession.setAttribute("employeeName",
+					employeeModel.getEmployeeFristName() + "" + employeeModel.getEmployeeLastName());
+		} else {
+			loginSession.invalidate();// 重置session
 		}
 		logger.info("LoginController.login:" + "ログイン終了");
 		return result;
 	}
+
 	@RequestMapping(value = "/sendVerificationCode", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> sendVerificationCode(@RequestBody LoginModel loginModel) {
-		//发送短信
+		// 发送短信
 		errorsMessage = "";
 		DataBinder binder = new DataBinder(loginModel);
 		binder.setValidator(new LoginValidation());
@@ -115,45 +119,44 @@ public class LoginController extends BaseController {
 		sendMap.put("password", loginModel.password);
 		EmployeeModel employeeModel = es.getEmployeeModel(sendMap);
 		String phoneNoInDB = "";
-		if(employeeModel != null) {
+		if (employeeModel != null) {
 			phoneNoInDB = es.getEmployeePhoneNo(loginModel.getEmployeeNo());
-		}else {
+		} else {
 			errorsMessage += "ユーザー名またはパースワード入力が間違いました。";
 			result.put("errorsMessage", errorsMessage);
 			return result;
 		}
-        AmazonSNSClient snsClient = new AmazonSNSClient();
-        String message = "";//短信内容
-        String str="0123456789";
-		StringBuilder sb=new StringBuilder(4);
-		for(int i=0;i<4;i++){
-			char ch=str.charAt(new Random().nextInt(str.length()));
+		AmazonSNSClient snsClient = new AmazonSNSClient();
+		String message = "";// 短信内容
+		String str = "0123456789";
+		StringBuilder sb = new StringBuilder(4);
+		for (int i = 0; i < 4; i++) {
+			char ch = str.charAt(new Random().nextInt(str.length()));
 			sb.append(ch);
-			}
-        String verificationCode = sb.toString();
-        message = "認証番号は：" + verificationCode;
-        System.out.println("验证码是：" + message);
-        String phoneNumber = "+81" + phoneNoInDB;//目标电话号码
-        Map<String, MessageAttributeValue> smsAttributes = 
-                new HashMap<String, MessageAttributeValue>();
+		}
+		String verificationCode = sb.toString();
+		message = "認証番号は：" + verificationCode;
+		System.out.println("验证码是：" + message);
+		String phoneNumber = "+81" + phoneNoInDB;// 目标电话号码
+		Map<String, MessageAttributeValue> smsAttributes = new HashMap<String, MessageAttributeValue>();
 //        sendSMSMessage(snsClient, message, phoneNumber, smsAttributes);
-        loginSession.setAttribute("verificationCode", verificationCode);
-        result.put("verificationCode", verificationCode);
-        return result;
+		loginSession.setAttribute("verificationCode", verificationCode);
+		result.put("verificationCode", verificationCode);
+		return result;
 	}
+
 	/**
 	 * 发送短信
+	 * 
 	 * @param snsClient
 	 * @param message
 	 * @param phoneNumber
 	 * @param smsAttributes
 	 */
-	public static void sendSMSMessage(AmazonSNSClient snsClient, String message, 
-			String phoneNumber, Map<String, MessageAttributeValue> smsAttributes) {
-	        PublishResult result = snsClient.publish(new PublishRequest()
-	                        .withMessage(message)
-	                        .withPhoneNumber(phoneNumber)
-	                        .withMessageAttributes(smsAttributes));
-	        System.out.println(result); // Prints the message ID.
+	public static void sendSMSMessage(AmazonSNSClient snsClient, String message, String phoneNumber,
+			Map<String, MessageAttributeValue> smsAttributes) {
+		PublishResult result = snsClient.publish(new PublishRequest().withMessage(message).withPhoneNumber(phoneNumber)
+				.withMessageAttributes(smsAttributes));
+		System.out.println(result); // Prints the message ID.
 	}
 }

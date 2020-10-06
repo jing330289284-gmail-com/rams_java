@@ -51,7 +51,7 @@ public interface CustomerInfoMapper {
 	 * @param customerNo
 	 * @return
 	 */
-	public ArrayList<CustomerDepartmentInfoModel> selectCustomerDepartmentInfo(HashMap<String, String> sendMapd);
+	public ArrayList<CustomerDepartmentInfoModel> selectCustomerDepartmentInfo(HashMap<String, String> sendMap);
 	/**
 	 * アップデート
 	 * @return

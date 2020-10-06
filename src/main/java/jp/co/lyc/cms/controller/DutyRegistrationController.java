@@ -110,9 +110,10 @@ public class DutyRegistrationController extends BaseController{
 
 		result.put("breakTime", breakTimeModel);
 		result.put("employeeNo", super.getSession().getAttribute("employeeNo"));
+		result.put("employeeName", super.getSession().getAttribute("employeeName"));
 		ArrayList<Map<String, Object>> dutyData = this.dutySelect(requestJson);
 		result.put("dateData", dutyData);
-		if (dutyData.size() > 0)	{
+		if (dutyData != null && dutyData.size() > 0)	{
 			result.put("siteCustomer", dutyData.get(0).get("siteCustomer"));
 			result.put("customer", dutyData.get(0).get("customer"));
 			result.put("siteResponsiblePerson", dutyData.get(0).get("siteResponsiblePerson"));
@@ -138,6 +139,8 @@ public class DutyRegistrationController extends BaseController{
 			tempMap.put("endTime",		employeeWorkTimeModel.getAfternoonTime());
 			tempMap.put("isWork",		employeeWorkTimeModel.getHolidayFlag());
 			tempMap.put("workHour",		employeeWorkTimeModel.getWorkTime());
+			tempMap.put("workContent",	employeeWorkTimeModel.getWorkContent());
+			tempMap.put("remark",		employeeWorkTimeModel.getRemark());
 			result.add(tempMap);
 		}
 		if (result.size() > 0)	{
