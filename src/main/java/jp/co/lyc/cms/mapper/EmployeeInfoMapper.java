@@ -1,5 +1,6 @@
 package jp.co.lyc.cms.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -99,4 +100,19 @@ public interface EmployeeInfoMapper {
 	 * @return
 	 */
 	public String getEmployeePhoneNo(String employeeNo);
+	/**
+	 * 履歴書を追加
+	 * @param sendMap
+	 */
+	public void insertResumeManagement(HashMap<String, Object> sendMap);
+	/**
+	 * 履歴書を修正
+	 * @param sendMap
+	 */
+	public void updateResumeManagement(Map<String, Object> sendMap);
+	/**
+	 * 履歴書を削除
+	 * @param sendMap
+	 */
+	public void deleteResumeManagement(Map<String, Object> sendMap);
 }

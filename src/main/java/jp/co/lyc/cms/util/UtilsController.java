@@ -355,11 +355,11 @@ public class UtilsController {
 	 * @return
 	 */
 
-	@RequestMapping(value = "/getEmployee", method = RequestMethod.POST)
+	@RequestMapping(value = "/getEmployeeStatus", method = RequestMethod.POST)
 	@ResponseBody
-	public List<ModelClass> getEmployee() {
+	public List<ModelClass> getEmployeeStatus() {
 		Properties properties = getProperties();
-		String employee = properties.getProperty("employee");
+		String employee = properties.getProperty("employeeStatus");
 		List<ModelClass> list = getStatus(employee);
 		return list;
 	}
@@ -789,7 +789,7 @@ public class UtilsController {
 
 	public Map<String, Object> upload(MultipartFile uploadFile, Map<String, Object> sendMap, String key, String Info) {
 		if (uploadFile == null) {
-			// sendMap.put(key, "");
+			sendMap.put(key, "");
 			return sendMap;
 		}
 		String realPath = new String("src/main/resources" + UPLOAD_PATH_PREFIX + sendMap.get("employeeNo") + "_"
@@ -817,9 +817,7 @@ public class UtilsController {
 	@RequestMapping(value = "/download", method = RequestMethod.POST)
 	@ResponseBody
 	public void downloadTemplateFile(@RequestBody ModelClass model, HttpServletResponse response) throws IOException {
-		// TODO
 		String filePath = model.getName();
-
 		Resource resource = new ClassPathResource(filePath);// 用来读取resources下的文件
 		InputStream is = null;
 		BufferedInputStream bis = null;

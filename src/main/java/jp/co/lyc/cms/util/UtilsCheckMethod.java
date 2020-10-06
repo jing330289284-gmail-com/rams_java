@@ -64,12 +64,7 @@ public abstract class UtilsCheckMethod {
 	 * @return
 	 */
 	public static boolean checkKatakana(String katakana) {
-		String format = "^[ｦ-ﾟ]*$";
-		String format2 = "^[ァ-ヶー]*$";
-		if (katakana.matches(format)||katakana.matches(format2)) {
-			return true;
-		}
-		return false;
+		return Pattern.matches("^[ァ-ヶー]*$", katakana);
 	}
 	
 	/**

@@ -45,8 +45,8 @@ public class EmployeeInfoValidation implements Validator {
 					errors.rejectValue("companyMail", "社内メール",
 							StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG003", "社内メール"));
 				}
-				if (!UtilsCheckMethod.isNullOrEmpty(p.getFurigana1() + p.getFurigana2())
-						&& UtilsCheckMethod.checkKatakana(p.getFurigana1() + p.getFurigana2())) {
+				if (!UtilsCheckMethod.isNullOrEmpty(p.getFurigana1()+p.getFurigana2())
+						&& !UtilsCheckMethod.checkKatakana(p.getFurigana1()+p.getFurigana2())) {
 					errors.rejectValue("furigana", "カタカナ", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG003", "カタカナ"));
 				}
 				/**
@@ -62,6 +62,10 @@ public class EmployeeInfoValidation implements Validator {
 						&& !UtilsCheckMethod.alphabetFormat(p.getAlphabetName())) {
 					errors.rejectValue("alphabetName", "ローマ字",
 							StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG003", "ローマ字"));
+				}
+				if (UtilsCheckMethod.isNullOrEmpty(p.getResumeInfo1())) {
+					errors.rejectValue("resumeInfo1", "履歴書1",
+							StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001", "履歴書1"));
 				}
 			}
 		}

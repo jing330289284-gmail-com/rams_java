@@ -161,10 +161,6 @@
 		developLanguage5,
 		certification1,
 		certification2,
-		resumeInfo1,
-		resumeRemark1,
-		resumeInfo2,
-		resumeRemark2,
 		residentCardInfo,
 		passportInfo,
 		companyMail,
@@ -210,10 +206,6 @@
 		#{developLanguage5},
 		#{certification1},
 		#{certification2},
-		#{resumeInfo1},
-		#{resumeRemark1},
-		#{resumeInfo2},
-		#{resumeRemark2},
 		#{residentCardInfo},
 		#{passportInfo},
 		#{companyMail},
@@ -331,14 +323,6 @@
 		japaneseCalendar=#{japaneseCalendar},
 		certification1=#{certification1},
 		certification2=#{certification2},
-		<if test="resumeInfo1!= null">
-			resumeInfo1=#{resumeInfo1},
-		</if>
-		resumeRemark1=#{resumeRemark1},
-		<if test="resumeInfo2!= null">
-			resumeInfo2=#{resumeInfo2},
-		</if>
-		resumeRemark2=#{resumeRemark2},
 		<if test="residentCardInfo!= null">
 			residentCardInfo=#{residentCardInfo},
 		</if>
@@ -414,10 +398,6 @@
 		T002.developLanguage5,
 		T002.certification1,
 		T002.certification2,
-		T002.resumeInfo1,
-		T002.resumeRemark1,
-		T002.resumeInfo2,
-		T002.resumeRemark2,
 		T002.residentCardInfo,
 		T002.passportInfo,
 		T002.companyMail,
@@ -538,4 +518,64 @@
 		employeeNo =
 		#{employeeNo}
 	</select>
+	
+	<!--履歴書を追加 -->
+	<insert id="insertResumeManagement" parameterType="String">
+		INSERT INTO
+		T015ResumeManagement (
+		employeeNo,
+		resumeInfo1,
+		resumeRemark1,
+		resumeInfo2,
+		resumeRemark2,
+		updateTime,
+		createTime,
+		updateUser
+		)
+		VALUES(
+		#{employeeNo},
+		#{resumeInfo1},
+		#{resumeRemark1},
+		#{resumeInfo2},
+		#{resumeRemark2},
+		NOW(),
+		NOW(),
+		#{updateUser}
+		)
+	</insert>
+	<!-- 履歴書を修正 -->
+	<update id="updateResumeManagement" parameterType="String">
+		UPDATE
+		T015ResumeManagement
+		SET
+		<if test="employeeNo!=  null">
+			employeeNo =#{employeeNo},
+		</if>
+		<if test="resumeInfo1!=   null">
+			resumeInfo1 =#{resumeInfo1},
+		</if>
+		<if test="resumeRemark1!=  null">
+			resumeRemark1 =#{resumeRemark1},
+		</if>
+		<if test="resumeInfo2!=  null">
+			resumeInfo2=#{resumeInfo2},
+		</if>
+		<if test="resumeRemark2!= null">
+			resumeRemark2 =#{resumeRemark2},
+		</if>
+		updateTime = NOW(),
+		updateUser =
+		#{updateUser}
+		WHERE
+		employeeNo =
+		#{employeeNo}
+	</update>
+		<!-- 履歴書を削除 -->
+	<delete id="deleteResumeManagement" parameterType="String">
+		DELETE
+		FROM
+		T015ResumeManagement
+		WHERE
+		employeeNo = #{employeeNo};
+	</delete>
 </mapper>
