@@ -24,8 +24,6 @@
 		T003.lastHalfAddress,
 		M013.stationName,
 		T002.stayPeriod,
-		T002.resumeInfo1,
-		T002.resumeInfo2,
 		T002.residentCardInfo
 		<include refid="tableJoin" />
 		WHERE
@@ -41,7 +39,7 @@
 			AND T002.employeeFormCode=#{employeeFormCode}
 		</if>
 		<if test="employeeStatus!=null">
-			AND T002.status=#{employeeStatus}
+			AND T002.employeeStatus=#{employeeStatus}
 		</if>
 		<if test="genderStatus!=null">
 			AND T002.genderStatus=#{genderStatus}
