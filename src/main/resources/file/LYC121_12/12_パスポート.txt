@@ -1,0 +1,59 @@
+①展示组件(Presentational component)和容器组件(Container component)之间有何不同
+Presentational component とはViewで使います、Container componentとはロジックで使います
+開発やプロジェクトを理解しやすいためにロジックとview分かれます
+Container Component は、Presentatinal Component に対して
+ redux の store を繋(つな)がり役割役割(やくわり)があります
+
+ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+②使用两个api的时候怎么处理
+二つ以上のApiの使う時、http-proxy-middleware　Componentを利用しています
+setupProxy.jsに複数のapiを配置する
+
+ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+③前台针对react代码如何测试
+(フロントでreactのソースがどんな方法でテストをしますか？)
+三つ方法があります。１jest　2ブラウザdebug 3.alert()
+
+ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+
+④两个页面直接怎么传值，两个页面怎么跳转 router  link
+(二つ画面が間にどうやって遷移できますか？)
+三つの方法があります
+1.this.props 2.localstage 3.rudux
+ーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+
+⑤Component 组件怎么用　
+(componentどう使われますか?)
+プロジェクトで、自分用のComponentをよく作成します。
+自分は作成したComponentをimportして使います。
+ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+
+⑥状态管理怎么实现，redux怎么用 
+appに<Provider />を利用し。storeを利用し　reducerを利用し　action と dispatchを利用し
+store
+Redux の中心的な存在です。action を受け取ってその内容を元に、
+一つ前の state」 に対して  reducer  で変更を加えた「新しい state」を生成し、それによって state を更新します。
+reducer state を変更するために使用される関数です。 一つ前の state と、受け取った action の内容を元に、
+新しい state を作って return する関数です。action.type で分岐して、返す内容を決めています
+action と dispatch
+action は単なるオブジェクトです。dispatch によって発行されます。 
+dispatch で action を発行すると、store に送られて、state の更新のために使われます。
+reducer が受け取って、action.type によって分岐していましたよね。
+connectReact Component に対して、store の state と dispatch を props として渡していくために使用するメソッドです。
+ これらを受け取った、新しいコンポーネントを作成します。
+ーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+
+⑦画面デザインadmin template経験等等                   Pafōmansu
+経験があります。
+直近のプロジェクトで画面レイアウトのデザイン及び画面のパフォーマンス作業を担当しました
+ーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+⑧API调用同期非同期及注意点 
+非同期の実行効率は高くて、スピードが速いですが、メモリが結構利用されました
+同期の実行効率が低くHikukuて、時間がかかりますが、プロセスをコントロールが役立ちます。
+多くのコントロールできない意外な状況を避けることができます。
+
+ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+⑨アジャイル開発経験
+あります。アジャイル開発で直近プロジェクトを参加しました。
+機能設計があり、詳細設計がなし、二週間で簡単お成果物が出ます
+開発期間中の仕様変更がよく発生しました
