@@ -13,7 +13,15 @@ public class WorkRepotService {
 
 	@Autowired
 	WorkRepotMapper workRepotMapper;
-		
+	/**
+	 * 画面情報検索 本月
+	 * @param TopCustomerNo
+	 * @return
+	 */
+	
+	public void selectCheckWorkRepot(WorkRepotModel workRepotModel)  {
+		workRepotMapper.selectCheckWorkRepot(workRepotModel);
+	}
 	/**
 	 * 画面情報検索
 	 * @param TopCustomerNo
@@ -45,10 +53,10 @@ public class WorkRepotService {
 	 * @param sendMap
 	 */
 	
-	public boolean insertWorkRepot(WorkRepotModel workRepotModel) {
+	public boolean updateWorkRepotFile(WorkRepotModel workRepotModel) {
 		boolean result = true;
 		try {
-			workRepotMapper.insertWorkRepot(workRepotModel);
+			workRepotMapper.updateWorkRepotFile(workRepotModel);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

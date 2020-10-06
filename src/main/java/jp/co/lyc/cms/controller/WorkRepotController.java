@@ -36,8 +36,12 @@ public class WorkRepotController extends BaseController {
 	@RequestMapping(value = "/selectWorkRepot", method = RequestMethod.POST)
 	@ResponseBody
 	public List<WorkRepotModel> selectWorkRepot(WorkRepotModel workRepotModel) {
-		logger.info("WorkRepotController.selectWorkRepot:" + "検索開始");
 		workRepotModel.setEmployeeNo(getSession().getAttribute("employeeNo").toString());
+		workRepotModel.setEmployeeName(getSession().getAttribute("employeeName").toString()); 	
+		logger.info("WorkRepotController.selectCheckWorkRepot:" + "検索開始");
+		workRepotService.selectCheckWorkRepot(workRepotModel);
+		logger.info("WorkRepotController.selectCheckWorkRepot:" + "検索終了");
+		logger.info("WorkRepotController.selectWorkRepot:" + "検索開始");
 		List<WorkRepotModel> checkMod = workRepotService.selectWorkRepot(workRepotModel);
 		logger.info("WorkRepotController.selectWorkRepot:" + "検索終了");
 		return checkMod;
@@ -64,9 +68,9 @@ public class WorkRepotController extends BaseController {
 	 * @param
 	 * @return boolean
 ---	 */
-	@RequestMapping(value = "/insertWorkRepot", method = RequestMethod.POST)
+	@RequestMapping(value = "/updateWorkRepotFile", method = RequestMethod.POST)
 	@ResponseBody
-	public boolean insertWorkRepot(@RequestParam(value = "emp", required = false) String JSONEmp,
+	public boolean updateWorkRepotFile(@RequestParam(value = "emp", required = false) String JSONEmp,
 			@RequestParam(value = "workRepotFile", required = false) MultipartFile workRepotFile) throws Exception {
 		logger.info("WorkRepotController.insertWorkRepot:" + "追加開始");
 		JSONObject jsonObject = JSON.parseObject(JSONEmp);
@@ -81,7 +85,7 @@ public class WorkRepotController extends BaseController {
 			return false;
 		}
 		workRepotModel.setWorkingTimeReport(getFilename);
-		boolean result  = workRepotService.insertWorkRepot(workRepotModel);
+		boolean result  = workRepotService.updateWorkRepotFile(workRepotModel);
 		logger.info("WorkRepotController.insertWorkRepot:" + "追加結束");
 		return result;
 	}

@@ -13,6 +13,7 @@ public interface WorkRepotMapper {
 	 * @param TopCustomerNo
 	 * @return
 	 */
+	public void selectCheckWorkRepot(WorkRepotModel workRepotModel) ;
 	public List<WorkRepotModel> selectWorkRepot(WorkRepotModel workRepotModel) ;
 	/**
 	 * アップデート
@@ -23,5 +24,5 @@ public interface WorkRepotMapper {
 	 * ファイル名入力
 	 * @param sendMap
 	 */
-	public void insertWorkRepot(WorkRepotModel workRepotModel) ;	
+	public void updateWorkRepotFile(WorkRepotModel workRepotModel) ;	
 }
