@@ -7,6 +7,7 @@ public class PersonalSalesSearchModel implements Serializable  {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	String nodata;
 	String errormessage;
 	String onlyYandM;
 	int workMonthCount;
@@ -147,6 +148,12 @@ public class PersonalSalesSearchModel implements Serializable  {
 	}
 	public void setErrormessage(String errormessage) {
 		this.errormessage = errormessage;
+	}
+	public String getNodata() {
+		return nodata;
+	}
+	public void setNodata(String nodata) {
+		this.nodata = nodata;
 	}
 	
 	

@@ -58,8 +58,6 @@ public class PersonalSalesSearchController {
 			resulterr.put("errorsMessage", errorsMessage);// エラーメッセージ
 			return resulterr;
 		} else {
-
-			try {
 				String startYandM = empInfo.getStartYearAndMonth();
 				String endYandM = empInfo.getEndYearAndMonth();
 				String fiscalYear = empInfo.getFiscalYear();
@@ -138,19 +136,24 @@ public class PersonalSalesSearchController {
 				int workCount = 0;
 				sendMap.put("getYandM", getYandM);
 				personModelList = personalSalesSearchService.searchEmpDetails(sendMap);
+				if(personModelList.size()==0) {
+					String noData = "";
+					noData="条件に該当する結果が存在しない";
+					resulterr.put("noData",noData);
+					return resulterr;
+				}
+				else{
 				for (int i = 0; i < personModelList.size(); i++) {
 					if (personModelList.get(i).getUnitPrice() != null) {
 						workCount++;
 						personModelList.get(0).setWorkMonthCount(workCount);
 					}
 				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			logger.info("PersonalSalesSearchController.searchEmpDetails:" + "検索結束");
-			Map<String, Object> resultdata = new HashMap<>();
-			resultdata.put("data", personModelList);
-			return resultdata;
+				logger.info("PersonalSalesSearchController.searchEmpDetails:" + "検索結束");
+				Map<String, Object> resultdata = new HashMap<>();
+				resultdata.put("data", personModelList);
+				return resultdata;
+				}
 		}
 	}
 
