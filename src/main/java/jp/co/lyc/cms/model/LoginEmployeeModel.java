@@ -1,6 +1,6 @@
 package jp.co.lyc.cms.model;
 
-public class Login2Model {
+public class LoginEmployeeModel {
 	public String employeeNo;//社員番号
 	public String password;//パスワード
 	public String phoneNo;//电话号码

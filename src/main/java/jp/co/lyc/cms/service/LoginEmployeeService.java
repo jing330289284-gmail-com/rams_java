@@ -8,14 +8,14 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
-import jp.co.lyc.cms.mapper.Login2Mapper;
+import jp.co.lyc.cms.mapper.LoginEmployeeMapper;
 import jp.co.lyc.cms.model.EmployeeModel;
 
 @Component
-public class Login2Service {
+public class LoginEmployeeService {
 	
 	@Autowired
-	Login2Mapper login2Mapper;
+	LoginEmployeeMapper login2Mapper;
 	
 	
 	/**

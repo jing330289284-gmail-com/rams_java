@@ -108,4 +108,17 @@ public abstract class UtilsCheckMethod {
 		}
 		return false;
 	}
+	
+	/**
+	 * 数字、大小文字、記号いずれ存在チェック
+	 * @param password
+	 * @return
+	 */
+	public static boolean passwordCheck(String password) {
+		String alphabetFormat  = "^(?![A-Za-z]+$)(?![A-Z0-9_\\\\W]+$)(?![a-z0-9_\\\\W]+$)[\\\\w\\\\W]{8,}$";
+		if (password.matches(alphabetFormat)) {
+			return true;
+		}
+		return false;
+	}
 }

@@ -2,19 +2,19 @@ package jp.co.lyc.cms.validation;
 
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-import jp.co.lyc.cms.model.Login2Model;
+import jp.co.lyc.cms.model.LoginEmployeeModel;
 import jp.co.lyc.cms.util.StatusCodeToMsgMap;
 import jp.co.lyc.cms.util.UtilsCheckMethod;
 
-public class Login2Validation implements Validator{
+public class LoginEmployeeValidation implements Validator{
 	@Override
 	public boolean supports(Class<?> clazz) {
-		return Login2Model.class.equals(clazz);
+		return LoginEmployeeModel.class.equals(clazz);
 	}
 	
 	@Override
 	public void validate(Object obj, Errors errors) {
-		Login2Model p = (Login2Model) obj;
+		LoginEmployeeModel p = (LoginEmployeeModel) obj;
 		
 		StackTraceElement elements[] = Thread.currentThread().getStackTrace();
 		

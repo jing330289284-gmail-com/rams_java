@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import jp.co.lyc.cms.model.EmployeeModel;
 
 @Mapper
-public interface Login2Mapper {
+public interface LoginEmployeeMapper {
 	
 	/**
 	 * ログイン
