@@ -785,14 +785,14 @@ public class UtilsController {
 		return props;
 	}
 
-	public final static String UPLOAD_PATH_PREFIX = "/file/";
+	public final static String UPLOAD_PATH_PREFIX = "c:/file/";
 
 	public Map<String, Object> upload(MultipartFile uploadFile, Map<String, Object> sendMap, String key, String Info) {
 		if (uploadFile == null) {
 			sendMap.put(key, "");
 			return sendMap;
 		}
-		String realPath = new String("src/main/resources" + UPLOAD_PATH_PREFIX + sendMap.get("employeeNo") + "_"
+		String realPath = new String(UPLOAD_PATH_PREFIX + sendMap.get("employeeNo") + "_"
 				+ sendMap.get("employeeFristName") + sendMap.get("employeeLastName"));
 		File file = new File(realPath);
 		if (!file.isDirectory()) {
