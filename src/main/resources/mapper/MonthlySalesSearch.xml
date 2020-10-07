@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jp.co.lyc.cms.mapper.MonthlySalesSearchMapper">
+	<resultMap id="monthlySalesInfo"
+		type="jp.co.lyc.cms.model.MonthlySalesSearchModel" />
+
+<select id="getMonthlySalesInfo" parameterType="map"
+		resultMap="monthlySalesInfo"> 
+		
+		<foreach item="getYandM" collection="getYandM" index="index">
+		<if test="index != 0">
+                    union
+                </if>
+	select distinct
+    CONCAT(( @rowNo := @rowNo + 1 )) AS rowNo,
+    T002.employeeNo,
+    M005.employeeFormName,
+    CONCAT(T001.employeeFristName,T001.employeeLastName)as employeeName,
+    T002.employeeStatus,
+    M005.employeeFormName,
+    M014.occupationName,
+    CAST((T006.unitPrice*10000) As unsigned) As unitPrice,
+    CAST(T005.salary As unsigned) As salary,
+    CAST((T013.transportationExpenses + T005.scheduleOfBonusAmount + T005.insuranceFeeAmount +T013.otherAllowanceAmount + T013.leaderAllowanceAmount + T013.housingAllowance) As unsigned) As otherFee,
+    CAST(T005.waitingCost As unsigned) As waitingCost,
+    <choose>
+		<when test="unitPrice != null">
+		            (T006.unitPrice*10000 - (T005.salary + T013.transportationExpenses + T005.scheduleOfBonusAmount + T005.insuranceFeeAmount +T013.otherAllowanceAmount + T013.leaderAllowanceAmount + T013.housingAllowance + T005.waitingCost)) As monthlyGrosProfits,
+		</when>
+		        <otherwise>
+		            (0 - (T005.salary + T013.transportationExpenses + T005.scheduleOfBonusAmount + T005.insuranceFeeAmount +T013.otherAllowanceAmount + T013.leaderAllowanceAmount + T013.housingAllowance) + T005.waitingCost) As monthlyGrosProfits
+		        </otherwise>
+	        </choose>
+     from (
+		select employeeNo, max(reflectYearAndMonth) as reflectYearAndMonth from T005WagesInfo
+		where reflectYearAndMonth &lt;=#{getYandM}
+		group by employeeNo
+    ) as A
+    left join T005WagesInfo As T005 on
+		A.employeeNo = T005.employeeNo
+        and A.reflectYearAndMonth = T005.reflectYearAndMonth
+	left join (
+		select employeeNo, max(expensesReflectYearAndMonth) as expensesReflectYearAndMonth from T013ExpensesInfo
+		where expensesReflectYearAndMonth &lt;= #{getYandM}
+		group by employeeNo  
+    ) as C on
+    A.employeeNo = C.employeeNo
+    left join T013ExpensesInfo As T013 on
+		C.employeeNo = T013.employeeNo
+        and C.expensesReflectYearAndMonth = T013.expensesReflectYearAndMonth
+ left join T002EmployeeDetail as T002 ON A.employeeNo =T002.employeeNo
+ left join M005EmployeeForm  as M005 ON T002.employeeFormCode=M005.employeeFormCode
+ left join M014Occupation as M014 ON T002.occupationCode = M014.occupationCode
+ left join T001Employee as T001 ON  A.employeeNo = T001.employeeNo
+ left join T006EmployeeSiteInfo as T006 ON A.employeeNo = T006.employeeNo AND #{getYandM} between left(admissionStartDate,6) and left(admissionEndDate,6) ,
+ (SELECT @rowNo := 0 ) AS rowNo 
+ 
+		WHERE 1=1
+		<if test="employeeClassification != null">
+			AND employeeStatus = #{employeeClassification}
+		</if>
+		<if test="employeeForms != null">
+			AND T002.employeeFormCode = #{employeeForms}
+		</if>
+		<if test="employeeOccupation != null">
+			AND T002.occupationCode = #{employeeOccupation}
+		</if>
+		<if test="kadou == 0">
+			AND #{getYandM} between left(admissionStartDate,6) and left(admissionEndDate,6)
+		</if>
+		<if test="kadou == 1">
+		 	AND left(admissionEndDate,6) &lt;= #{nowYandM} 
+		</if>
+		<if test="utilPricefront != null &amp;&amp; utilPriceback != null">
+			AND T006.unitPrice between  #{utilPricefront} and #{utilPriceback}
+		</if>
+		<if test="utilPricefront != null &amp;&amp; utilPriceback == null">
+			AND T006.unitPrice &gt;= #{utilPricefront}
+		</if>
+		<if test="utilPricefront== null &amp;&amp; utilPriceback != null">
+			AND T006.unitPrice &lt;= #{utilPriceback}
+		</if>
+		
+		<if test="salaryFront != null &amp;&amp; salaryBack != null">
+			AND T005.salary between  ${salaryFront}*10000 and ${salaryBack}*10000
+		</if>
+		<if test="salaryFront != null &amp;&amp; salaryBack == null">
+			AND T005.salary &gt;= ${salaryFront}*10000
+		</if>
+		<if test="salaryFront == null &amp;&amp; salaryBack != null">
+			AND T005.salary &lt;= ${salaryBack}*10000
+		</if>
+			
+		<if test="grossProfitFront != null &amp;&amp; grossProfitBack != null">
+			AND (T006.unitPrice*10000 - (T005.salary + (T013.transportationExpenses + T005.scheduleOfBonusAmount + T005.insuranceFeeAmount +T013.otherAllowanceAmount + T013.leaderAllowanceAmount + T013.housingAllowance) + T005.waitingCost))
+			 between  ${grossProfitFront}*10000 and ${grossProfitBack}*10000
+		</if>
+		<if test="grossProfitFront != null &amp;&amp; grossProfitBack == null">
+			AND (T006.unitPrice*10000 - (T005.salary + (T013.transportationExpenses + T005.scheduleOfBonusAmount + T005.insuranceFeeAmount +T013.otherwanceAmount + T013.leaderAllowanceAmount + T013.housingAllowance) + T005.waitingCost)) &gt;= ${grossProfitFront}*10000
+		</if>
+		<if test="grossProfitFront== null &amp;&amp; grossProfitBack != null">
+			AND (T006.unitPrice*10000 - (T005.salary + (T013.transportationExpenses + T005.scheduleOfBonusAmount + T005.insuranceFeeAmount +T013.otherAllowanceAmount + T013.leaderAllowanceAmount + T013.housingAllowance) + T005.waitingCost)) &lt;= ${grossProfitBack}*10000
+		</if>
+		</foreach>
+		</select>
+		</mapper>
+		

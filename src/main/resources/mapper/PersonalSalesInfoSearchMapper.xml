@@ -19,32 +19,36 @@
 		T006.admissionStartDate,
 		M005.employeeFormName,
 		T007.customerName,
-		(T006.unitPrice*10000) As unitPrice,
-		(T005.salary + 0) As salary,
-		(T013.transportationExpenses + 0) As transportationExpenses,
+		CAST((T006.unitPrice*10000) As unsigned) As unitPrice,
+		CAST(T005.salary As unsigned) As salary,
+		CAST(B${getYandM}.transportationExpenses As unsigned) As transportationExpenses,
 		T005.SocialInsuranceFlag,
-		(T005.insuranceFeeAmount + 0) As insuranceFeeAmount,
+		CAST(T005.insuranceFeeAmount As unsigned) As insuranceFeeAmount,
 		T005.bonusFlag,
-		(T005.scheduleOfBonusAmount + 0) As scheduleOfBonusAmount,
-		(T013.leaderAllowanceAmount + 0) As leaderAllowanceAmount,
-		(T013.otherAllowanceAmount + 0) As otherAllowanceAmount,
-		(T006.unitPrice*10000 - T005.salary - T013.transportationExpenses - T005.insuranceFeeAmount - T005.scheduleOfBonusAmount - T013.leaderAllowanceAmount - T013.otherAllowanceAmount)
+		CAST(T005.scheduleOfBonusAmount As unsigned) As scheduleOfBonusAmount,
+		CAST(B${getYandM}.leaderAllowanceAmount As unsigned) As leaderAllowanceAmount,
+		CAST(B${getYandM}.otherAllowanceAmount As unsigned) As otherAllowanceAmount,
+		(T006.unitPrice*10000 - T005.salary - B${getYandM}.transportationExpenses - T005.insuranceFeeAmount - T005.scheduleOfBonusAmount - B${getYandM}.leaderAllowanceAmount - B${getYandM}.otherAllowanceAmount)
 		As grosProfits,
-		(T005.salary + T013.transportationExpenses + T005.insuranceFeeAmount + T005.scheduleOfBonusAmount + T013.leaderAllowanceAmount + T013.otherAllowanceAmount) As paymentTotal
+		CAST((T005.salary + B${getYandM}.transportationExpenses + T005.insuranceFeeAmount + T005.scheduleOfBonusAmount + B${getYandM}.leaderAllowanceAmount + B${getYandM}.otherAllowanceAmount) As unsigned) As paymentTotal
 		FROM
 		T001Employee As T001
 		Left JOIN 
 		T005WagesInfo As T005 ON T001.employeeNo = T005.employeeNo
 		AND reflectYearAndMonth &lt;= #{getYandM}
 		LEFT JOIN 
-		M005EmployeeForm As M005 ON T005.employeeFormCode = M005.employeeFormCode
+		T002EmployeeDetail As T002 ON T001.employeeNo = T002.employeeNo
+		LEFT JOIN 
+		M005EmployeeForm As M005 ON T002.employeeFormCode = M005.employeeFormCode
 		LEFT JOIN 
 		T006EmployeeSiteInfo As T006 ON T005.employeeNo = T006.employeeNo	
 		AND #{getYandM} between left(admissionStartDate,6) and left(admissionEndDate,6)
 		LEFT JOIN 
 		T007CustomerInfo As T007 ON T006.customerNo  =T007.customerNo
 		LEFT JOIN
-		T013ExpensesInfo As T013 ON T005.employeeNo = T013.employeeNo and T005.reflectYearAndMonth = T013.ExpensesreflectYearAndMonth
+		<!-- T013ExpensesInfo As T013 ON T001.employeeNo = T013.employeeNo and T013.ExpensesreflectYearAndMonth &lt;= #{getYandM} -->
+		(SELECT * FROM T013ExpensesInfo WHERE employeeNo = #{employeeName} and ExpensesreflectYearAndMonth &lt;= #{getYandM} ORDER BY ABS(#{getYandM} - ExpensesreflectYearAndMonth) ASC
+		limit 1) As B${getYandM} ON B${getYandM}.employeeNo = T001.employeeNo
 		WHERE
 		T005.employeeNo=#{employeeName}
 		ORDER BY ABS(#{getYandM} - reflectYearAndMonth) ASC
