@@ -721,6 +721,18 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getQualification();
 		return list;
 	}
+	
+	/**
+	 * 社員氏名を取得する
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getEmployeeNameNoBP", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getEmployeeNameNoBP() {
+		List<ModelClass> list = utilsService.getEmployeeNameNoBP();
+		return list;
+	}
 
 	/**
 	 * 条件を取得

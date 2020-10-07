@@ -25,19 +25,19 @@ import jp.co.lyc.cms.common.BaseController;
 import jp.co.lyc.cms.mapper.PasswordResetMapper;
 import jp.co.lyc.cms.model.EmailModel;
 import jp.co.lyc.cms.model.EmployeeModel;
-import jp.co.lyc.cms.model.Login2Model;
-import jp.co.lyc.cms.service.Login2Service;
+import jp.co.lyc.cms.model.LoginEmployeeModel;
+import jp.co.lyc.cms.service.LoginEmployeeService;
 import jp.co.lyc.cms.util.UtilsCheckMethod;
 import jp.co.lyc.cms.util.UtilsController;
-import jp.co.lyc.cms.validation.Login2Validation;
+import jp.co.lyc.cms.validation.LoginEmployeeValidation;
 
 @Controller
 @RequestMapping(value = "/login2")
-public class Login2Controller extends BaseController {
+public class LoginEmployeeController extends BaseController {
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
-	Login2Service es;
+	LoginEmployeeService es;
 
 	@Autowired
 	UtilsController utils;
@@ -64,11 +64,11 @@ public class Login2Controller extends BaseController {
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> login(@RequestBody Login2Model loginModel, EmployeeModel employeeModel ) {
+	public Map<String, Object> login(@RequestBody LoginEmployeeModel loginModel, EmployeeModel employeeModel ) {
 		logger.info("LoginController.login:" + "ログイン開始");
 		errorsMessage = "";
 		DataBinder binder = new DataBinder(loginModel);
-		binder.setValidator(new Login2Validation());
+		binder.setValidator(new LoginEmployeeValidation());
 		binder.validate();
 		BindingResult results = binder.getBindingResult();
 		Map<String, Object> result = new HashMap<>();
@@ -94,7 +94,8 @@ public class Login2Controller extends BaseController {
 			loginSession.setAttribute("employeeName", employeeModel.getEmployeeFristName() +
 					"" + employeeModel.getEmployeeLastName());
 		}else {
-			loginSession.invalidate();//重置session
+			errorsMessage += "社員番号またはパスワードが間違いました！";
+			result.put("errorsMessage", errorsMessage);//重置session
 		}
 		logger.info("LoginController.login:" + "ログイン終了");
 		return result;
@@ -102,11 +103,11 @@ public class Login2Controller extends BaseController {
 	
 	@RequestMapping(value = "/sendMail", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> sendMail(@RequestBody Login2Model loginModel) {
+	public Map<String, Object> sendMail(@RequestBody LoginEmployeeModel loginModel) {
 		logger.info("LoginController.login:" + "メール発送開始");
 		errorsMessage = "";
 		DataBinder binder = new DataBinder(loginModel);
-		binder.setValidator(new Login2Validation());
+		binder.setValidator(new LoginEmployeeValidation());
 		binder.validate();
 		BindingResult results = binder.getBindingResult();
 		Map<String, Object> result = new HashMap<>();
