@@ -523,6 +523,42 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getSalesProgress();
 		return list;
 	}
+	
+	/**
+	 * 日本語ラベル状況取得
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getJapaneaseConversationLevel", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getJapaneaseConversationLevel() {
+		List<ModelClass> list = utilsService.getJapaneaseConversationLevel();
+		return list;
+	}
+	
+	/**
+	 * 英語状況取得
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getEnglishConversationLevel", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getEnglishConversationLevel() {
+		List<ModelClass> list = utilsService.getEnglishConversationLevel();
+		return list;
+	}
+	
+	/**
+	 * 対応工程況取得
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getProjectPhase", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getProjectPhase() {
+		List<ModelClass> list = utilsService.getProjectPhase();
+		return list;
+	}
 
 	/**
 	 * 場所取る

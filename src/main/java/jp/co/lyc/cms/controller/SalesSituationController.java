@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import jp.co.lyc.cms.common.BaseController;
 import jp.co.lyc.cms.model.SalesSituationModel;
+import jp.co.lyc.cms.model.SalesContent;
 import jp.co.lyc.cms.service.SalesSituationService;
 import jp.co.lyc.cms.validation.SalesSituationValidation;
 
@@ -109,6 +110,81 @@ public class SalesSituationController  extends BaseController {
 		logger.info("updateSalesSituation" + "検索結束");
 		return index+index1;
 	}
+	
+	/**
+	 * データを取得
+	 * 
+	 * @param emp
+	 * @return List
+	 */
+
+	@RequestMapping(value = "/getPersonalSalesInfo", method = RequestMethod.POST)
+	@ResponseBody
+	public List<SalesSituationModel> getPersonalSalesInfo(@RequestBody SalesSituationModel model) {
+
+		logger.info("getPersonalSalesInfo:" + "検索開始");
+		int count = salesSituationService.getCount(model.getEmployeeNo());
+		List<SalesSituationModel> salesSituationList = new ArrayList<SalesSituationModel>();
+		if(count==0) {
+			try {
+				salesSituationList = salesSituationService.getPersonalSalesInfo(model.getEmployeeNo());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else {
+			try {
+				salesSituationList = salesSituationService.getPersonalSalesInfoFromT019(model.getEmployeeNo());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+
+		logger.info("updateSalesSituation" + "検索結束");
+		return salesSituationList;
+	}
+	
+	/**
+	 * データを取得
+	 * 
+	 * @param emp
+	 * @return List
+	 */
+
+	@RequestMapping(value = "/updateEmployeeAddressInfo", method = RequestMethod.POST)
+	@ResponseBody
+	public int updateEmployeeAddressInfo(@RequestBody SalesSituationModel model) {
+
+
+		model.setUpdateUser(getSession().getAttribute("employeeName").toString());
+		logger.info("getPersonalSalesInfo:" + "検索開始");
+		int index =0;
+		try {
+			index = salesSituationService.updateEmployeeAddressInfo(model);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		logger.info("updateSalesSituation" + "検索結束");
+		return index;
+	}
+	
+	@RequestMapping(value = "/updateSalesSentence", method = RequestMethod.POST)
+	@ResponseBody
+	public int updateSalesSentence(@RequestBody SalesContent model) {
+
+
+		model.setUpdateUser(getSession().getAttribute("employeeName").toString());
+		logger.info("getPersonalSalesInfo:" + "検索開始");
+		int index =0;
+		try {
+			index = salesSituationService.updateSalesSentence(model);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		logger.info("updateSalesSituation" + "検索結束");
+		return index;
+	}
+	
 
 
 }

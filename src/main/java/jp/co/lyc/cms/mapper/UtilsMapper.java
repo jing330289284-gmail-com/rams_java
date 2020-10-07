@@ -88,6 +88,27 @@ public interface UtilsMapper {
 	 * 
 	 */
 	public List<ModelClass> getIntoCompany();
+	
+	/**
+	 * 入社区分を取得
+	 * 
+	 * 
+	 */
+	public List<ModelClass> getJapaneaseConversationLevel();
+	
+	/**
+	 * 入社区分を取得
+	 * 
+	 * 
+	 */
+	public List<ModelClass> getEnglishConversationLevel();
+	
+	/**
+	 * 入社区分を取得
+	 * 
+	 * 
+	 */
+	public List<ModelClass> getProjectPhase();
 
 	/**
 	 * 役割 を取得

@@ -130,6 +130,36 @@ public class UtilsService {
 	}
 
 	/**
+	 * 営業状況取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getJapaneaseConversationLevel() {
+		List<ModelClass> list = utilsMapper.getJapaneaseConversationLevel();
+		return list;
+	}
+	
+	/**
+	 * 営業状況取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getEnglishConversationLevel() {
+		List<ModelClass> list = utilsMapper.getEnglishConversationLevel();
+		return list;
+	}
+	
+	/**
+	 * 営業状況取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getProjectPhase() {
+		List<ModelClass> list = utilsMapper.getProjectPhase();
+		return list;
+	}
+	
+	/**
 	 * 入社区分を取得
 	 * 
 	 * @return
