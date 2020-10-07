@@ -323,4 +323,30 @@
 		FROM
 		M021SalesProgress
 	</select>
+		<!-- 営業状況取得 -->
+	<select id="getJapaneaseConversationLevel"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT
+		japaneaseConversationName name,
+		japaneaseConversationLevel code
+		FROM
+		M025JapaneaseConversationLevel
+	</select>
+			<!-- 営業状況取得 -->
+	<select id="getEnglishConversationLevel"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT
+		englishConversationName name,
+		englishConversationLevel code
+		FROM
+		M026EnglishConversationLevel
+	</select>
+		<select id="getProjectPhase"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT
+		projectPhaseName name,
+		projectPhaseCode code
+		FROM
+		M027ProjectPhase
+	</select>
 </mapper>

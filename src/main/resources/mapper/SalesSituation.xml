@@ -365,4 +365,155 @@ ORDER BY employeeNo
 			updateUser=#{updateUser}
 
 	</insert>
+	<select id="getPersonalSalesInfo" parameterType="String" resultType="jp.co.lyc.cms.model.SalesSituationModel">
+	
+SELECT 
+    CONCAT(t001.employeeFristName,
+            t001.employeeLastName) AS employeeFullName,
+    t002.genderStatus,
+    CONCAT(m003.nationalityName, '籍') AS nationalityName,
+    t002.employeeStatus,
+    t002.birthday,
+    "" as age,
+    t003.stationCode AS 'nearestStation',
+    t002.japaneseLevelCode,
+    t002.englishLevelCode,
+        "" as japaneaseConversationLevel,
+"" as englishConversationLevel,
+    t002.yearsOfExperience,
+    t002.siteRoleCode,
+    CONCAT_WS(',',
+            t002.developLanguage1,
+            t002.developLanguage2,
+            t002.developLanguage3,
+            t002.developLanguage4,
+            t002.developLanguage5) AS 'developLanguage',
+    t010.salesYearAndMonth,
+    t010.salesProgressCode
+FROM
+    T001Employee t001
+        LEFT JOIN
+    T002EmployeeDetail t002 ON t001.employeeNo = t002.employeeNo
+        LEFT JOIN
+    M003Nationality m003 ON t002.nationalityCode = m003.nationalityCode
+        LEFT JOIN
+    T003AddressInfo t003 ON t001.employeeNo = t003.employeeNo
+        LEFT JOIN
+    M013Station m013 ON m013.stationCode = t003.stationCode
+        LEFT JOIN
+    T010SalesSituation t010 ON t001.employeeNo = t010.employeeNo
+WHERE
+    t001.employeeNo =#{employeeNo}
+</select>
+	<select id="getPersonalSalesInfoFromT019" parameterType="String" resultType="jp.co.lyc.cms.model.SalesSituationModel">
+	
+SELECT 
+    CONCAT(t001.employeeFristName,
+            t001.employeeLastName) AS employeeFullName,
+    t002.genderStatus,
+    CONCAT(m003.nationalityName, '籍') AS nationalityName,
+    t002.employeeStatus,
+    t019.age,
+    t019.stationCode AS 'nearestStation',
+    t002.japaneseLevelCode,
+    t002.englishLevelCode,
+    t019.japaneaseConversationLevel,
+t019.englishConversationLevel,
+    t019.yearsOfExperience,
+    t019.projectPhaseCode siteRoleCode,
+    
+        t019.developLanguageCode6 as developLanguage1,
+         t019.developLanguageCode7   as developLanguage2,
+          t019.developLanguageCode8  as developLanguage3,
+          t019.developLanguageCode9  as developLanguage4,
+           t019.developLanguageCode10 as developLanguage5,
+           t019.unitPrice,
+           t019.remark,
+    t010.salesYearAndMonth,
+    t010.salesProgressCode
+FROM
+    T001Employee t001
+        LEFT JOIN
+    T002EmployeeDetail t002 ON t001.employeeNo = t002.employeeNo
+        LEFT JOIN
+    M003Nationality m003 ON t002.nationalityCode = m003.nationalityCode
+        LEFT JOIN
+    T010SalesSituation t010 ON t001.employeeNo = t010.employeeNo
+            LEFT JOIN
+    T019SalesSentence t019 ON t019.employeeNo = t001.employeeNo
+WHERE
+    t001.employeeNo =#{employeeNo}
+</select>
+<update id="updateEmployeeAddressInfo" parameterType="String">
+
+UPDATE T003AddressInfo 
+SET 
+    stationCode = #{stationCode},
+    updateTime= NOW(),
+    updateUser=#{updateUser}
+WHERE
+    employeeNo = #{employeeNo}
+	</update>
+		<insert id="updateSalesSentence" parameterType="String">
+INSERT INTO T019SalesSentence
+(employeeNo,
+stationCode,
+age,
+japaneaseConversationLevel,
+englishConversationLevel,
+yearsOfExperience,
+projectPhaseCode,
+developLanguageCode6,
+developLanguageCode7,
+developLanguageCode8,
+developLanguageCode9,
+developLanguageCode10,
+unitPrice,
+remark,
+createTime,
+updateTime,
+updateUser)
+VALUES
+(#{employeeNo},
+#{stationCode},
+#{age},
+#{japaneaseConversationLevel},
+#{englishConversationLevel},
+#{yearsOfExperience},
+#{projectPhaseCode},
+#{developLanguageCode6},
+#{developLanguageCode7},
+#{developLanguageCode8},
+#{developLanguageCode9},
+#{developLanguageCode10},
+#{unitPrice},
+#{remark},
+NOW(),
+NOW(),
+#{updateUser})
+		ON DUPLICATE KEY UPDATE
+stationCode=#{stationCode},
+age=#{age},
+japaneaseConversationLevel=#{japaneaseConversationLevel},
+englishConversationLevel=#{englishConversationLevel},
+yearsOfExperience=#{yearsOfExperience},
+developLanguageCode6=#{developLanguageCode6},
+developLanguageCode7=#{developLanguageCode7},
+developLanguageCode8=#{developLanguageCode8},
+developLanguageCode9=#{developLanguageCode9},
+developLanguageCode10=#{developLanguageCode10},
+unitPrice=#{unitPrice},
+remark=#{remark},
+updateTime=NOW(),
+updateUser=#{updateUser}
+
+	</insert>
+		<select id="getCount" parameterType="String" resultType="int">
+	
+SELECT 
+count(*)
+from T019SalesSentence T019
+WHERE
+    T019.employeeNo =#{employeeNo}
+</select>
 </mapper>
