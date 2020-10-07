@@ -359,7 +359,7 @@ public class UtilsController {
 	@ResponseBody
 	public List<ModelClass> getEmployeeStatus() {
 		Properties properties = getProperties();
-		String employee = properties.getProperty("employeeStatus");
+		String employee = properties.getProperty("employee");
 		List<ModelClass> list = getStatus(employee);
 		return list;
 	}

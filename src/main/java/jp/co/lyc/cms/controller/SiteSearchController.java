@@ -102,11 +102,11 @@ public class SiteSearchController {
 			month = 0;
 		}
 		if (year == 0) {
-			return month + "月";
+			return month + "ヶ月";
 		} else if (month == 0) {
-			return year + "年";
+			return year + "ヶ年";
 		} else
-			return year + "年" + month + "月";
+			return year + "ヶ年" + month + "ヶ月";
 	}
 
 	@Autowired
