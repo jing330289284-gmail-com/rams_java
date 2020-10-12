@@ -878,17 +878,11 @@ public class UtilsController {
 	@ResponseBody
 	public void downloadTemplateFile(@RequestBody ModelClass model, HttpServletResponse response) throws IOException {
 		String filePath = model.getName();
-		Resource resource = new ClassPathResource(filePath);// 用来读取resources下的文件
 		InputStream is = null;
 		BufferedInputStream bis = null;
 		OutputStream os = null;
 		try {
-			File file;
-			if (filePath.contains("作業報告書")) {
-				file = new File(filePath);
-			} else {
-				file = resource.getFile();
-			}
+			File file = new File(filePath);
 			if (!file.exists()) {
 				return;
 			}
@@ -989,4 +983,17 @@ public class UtilsController {
 		}
 	}
 
+	/**
+	 * enterPeriodを取得する
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getEnterPeriod", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getEnterPeriod() {
+		Properties properties = getProperties();
+		String enterPeriod = properties.getProperty("enterPeriod");
+		List<ModelClass> list = getStatus(enterPeriod);
+		return list;
+	}
 }

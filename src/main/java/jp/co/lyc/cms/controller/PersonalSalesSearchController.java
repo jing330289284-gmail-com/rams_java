@@ -159,7 +159,7 @@ public class PersonalSalesSearchController {
 
 	public Map<String, Object> getDetailParam(PersonalSalesSearchModel empInfo) {
 		Map<String, Object> sendMap = new HashMap<String, Object>();
-		String employeeName = empInfo.getEmployeeName();
+		String employeeName = empInfo.getEmployeeName().substring(empInfo.getEmployeeName().indexOf("(")+1,empInfo.getEmployeeName().indexOf(")"));
 		String employeeNo = empInfo.getEmployeeNo();
 		String fiscalYear = empInfo.getFiscalYear();
 		String startYearAndMonth = empInfo.getStartYearAndMonth();
