@@ -115,7 +115,7 @@ public abstract class UtilsCheckMethod {
 	 * @return
 	 */
 	public static boolean passwordCheck(String password) {
-		String alphabetFormat  = "^(?![A-Za-z]+$)(?![A-Z0-9_\\\\W]+$)(?![a-z0-9_\\\\W]+$)[\\\\w\\\\W]{8,}$";
+		String alphabetFormat  = "^(?![A-Za-z0-9]+$)(?![a-z0-9\\W]+$)(?![A-Za-z\\W]+$)(?![A-Z0-9\\W]+$)[a-zA-Z0-9\\W]{8,}$";
 		if (password.matches(alphabetFormat)) {
 			return true;
 		}

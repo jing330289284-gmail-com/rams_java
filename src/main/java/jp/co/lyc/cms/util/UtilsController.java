@@ -977,4 +977,17 @@ public class UtilsController {
 		}
 	}
 
+	/**
+	 * enterPeriodを取得する
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getEnterPeriod", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getEnterPeriod() {
+		Properties properties = getProperties();
+		String enterPeriod = properties.getProperty("enterPeriod");
+		List<ModelClass> list = getStatus(enterPeriod);
+		return list;
+	}
 }
