@@ -572,7 +572,19 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getStation();
 		return list;
 	}
+	/**
+	 * 費用区分取る
+	 * 
+	 * @return
+	 */
 
+	@RequestMapping(value = "/getCostClassification", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getCostClassification() {
+		List<ModelClass> list = utilsService.getCostClassification();
+		return list;
+	}
+	
 	/**
 	 * 業種を取る
 	 * 

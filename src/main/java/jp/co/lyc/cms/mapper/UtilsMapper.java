@@ -263,6 +263,12 @@ public interface UtilsMapper {
 	public List<ModelClass> getStation();
 	
 	/**
+	 *  費用区分
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getCostClassification();
+	/**
 	 * 業種
 	 * 
 	 * @return
