@@ -34,7 +34,7 @@ public class PasswordSetEmployeeValidation implements Validator{
 						errors.rejectValue("newPassword", "", 
 								StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG005", "パスワードの枠"));
 					}
-					if(UtilsCheckMethod.passwordCheck(p.getNewPassword())) {
+					if(!UtilsCheckMethod.passwordCheck(p.getNewPassword())) {
 						errors.rejectValue("newPassword", "", 
 								StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG007", "パスワード"));
 					}
