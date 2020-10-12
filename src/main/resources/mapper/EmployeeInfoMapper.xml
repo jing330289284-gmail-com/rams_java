@@ -24,7 +24,11 @@
 		T003.lastHalfAddress,
 		M013.stationName,
 		T002.stayPeriod,
-		T002.residentCardInfo
+		T002.residentCardInfo,
+		T015.resumeInfo1,
+		T015.resumeRemark1,
+		T015.resumeInfo2,
+		T015.resumeRemark2
 		<include refid="tableJoin" />
 		WHERE
 		1 = 1
@@ -252,6 +256,7 @@
 		<include refid="T001" />
 		<include refid="T002" />
 		<include refid="T003" />
+		<include refid="T015" />
 		<include refid="tableJoin" />
 		WHERE
 		1 = 1
@@ -415,7 +420,13 @@
 		T003.lastHalfAddress,
 		T003.stationCode,
 		T003.createTime,
-		T003.updateUser
+		T003.updateUser,
+	</sql>
+	<sql id="T015">
+		T015.resumeInfo1,
+		T015.resumeRemark1,
+		T015.resumeInfo2,
+		T015.resumeRemark2
 	</sql>
 	<sql id="tableJoin">
 		FROM
@@ -425,6 +436,10 @@
 		ON
 		T002.employeeNo =
 		T001.employeeNo
+		LEFT JOIN
+		T015ResumeManagement AS T015
+		ON
+		T015.employeeNo=T001.employeeNo
 		LEFT JOIN
 		T006EmployeeSiteInfo AS
 		T006
