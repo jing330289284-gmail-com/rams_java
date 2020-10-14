@@ -418,7 +418,11 @@ public class UtilsService {
 	public List<ModelClass> getTypeOfIndustry() {
 		return utilsMapper.getTypeOfIndustry();
 	}
-
+	/**
+	 *交通手段
+	 * 
+	 * @return
+	 */
 	public List<ModelClass> getTransportation() {
 		return utilsMapper.getTransportation();
 	}
