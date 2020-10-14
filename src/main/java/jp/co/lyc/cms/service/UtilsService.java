@@ -419,4 +419,8 @@ public class UtilsService {
 		return utilsMapper.getTypeOfIndustry();
 	}
 
+	public List<ModelClass> getTransportation() {
+		return utilsMapper.getTransportation();
+	}
+
 }

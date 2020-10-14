@@ -281,4 +281,10 @@ public interface UtilsMapper {
 	 * @return
 	 */	
 	public List<ModelClass> getSalesProgress();
+	/**
+	 * 交通手段を取得
+	 * 
+	 * @return
+	 */	
+	public List<ModelClass> getTransportation();
 }

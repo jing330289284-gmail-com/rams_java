@@ -81,6 +81,12 @@
 		SELECT costClassificationCode code,costClassificationName name FROM
 		rams.M028CostClassification;
 	</select>
+	<!--交通手段 -->
+	<select id="getTransportation"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT transportationCode code,transportationName name FROM
+		rams.M029Transportation;
+	</select>
 	<!--業種 -->
 	<select id="getTypeOfIndustry"
 		resultType="jp.co.lyc.cms.model.ModelClass">

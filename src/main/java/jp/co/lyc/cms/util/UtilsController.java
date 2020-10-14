@@ -584,6 +584,18 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getCostClassification();
 		return list;
 	}
+	/**
+	 *交通手段を取る
+	 * 
+	 * @return
+	 */
+
+	@RequestMapping(value = "/getTransportation", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getTransportation() {
+		List<ModelClass> list = utilsService.getTransportation();
+		return list;
+	}
 	
 	/**
 	 * 業種を取る
