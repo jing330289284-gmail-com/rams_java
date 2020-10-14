@@ -244,6 +244,7 @@ FROM
     T015ResumeManagement T015 ON T001.employeeNo = T015.employeeNo
 WHERE
     T010.salesProgressCode IN (3 , 5) and  T010.salesYearAndMonth = #{sysDate}
+    and (T006.admissionEndDate is null or T006.admissionEndDate='')
 ORDER BY T010.employeeNo)) temp,(select @rowno:=0) as rowNo 
 ORDER BY employeeNo	
     </select>
