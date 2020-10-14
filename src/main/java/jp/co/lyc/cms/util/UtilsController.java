@@ -288,7 +288,19 @@ public class UtilsController {
 		List<ModelClass> list = getStatus(checkSection);
 		return list;
 	}
-
+	/**
+	 * CheckSectionを取得する
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getRound", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getRound() {
+		Properties properties = getProperties();
+		String round = properties.getProperty("round");
+		List<ModelClass> list = getStatus(round);
+		return list;
+	}
 	/**
 	 * 上場
 	 * 
