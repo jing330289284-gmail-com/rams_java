@@ -142,6 +142,7 @@ public class SalesPointSetController extends BaseController {
 	public Map<String, Object> putData(SalesPointSetModel salesPointSetModel) {
 		HttpSession loginSession = getSession();
 		Map<String, Object> sendMap = new HashMap<String, Object>();
+		String no = salesPointSetModel.getNo();
 		String employee = salesPointSetModel.getEmployee();
 		String newMember = salesPointSetModel.getNewMember();
 		String customerContract = salesPointSetModel.getCustomerContract();
@@ -151,6 +152,9 @@ public class SalesPointSetController extends BaseController {
 		String point = salesPointSetModel.getPoint();
 		String remark = salesPointSetModel.getRemark();
 
+		if (no != null && no.length() != 0) {
+			sendMap.put("no", no);
+		}
 		if (employee != null && employee.length() != 0) {
 			sendMap.put("employee", employee);
 		}

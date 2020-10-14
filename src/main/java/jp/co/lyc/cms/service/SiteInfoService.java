@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import jp.co.lyc.cms.mapper.SiteInfoMapper;
@@ -16,6 +17,7 @@ public class SiteInfoService {
 	@Autowired
 	SiteInfoMapper siteInfoMapper;
 
+	@Transactional(rollbackFor = Exception.class)
 	public boolean insertSiteInfo(Map<String, Object> sendMap) {
 		try {
 			siteInfoMapper.siteInsert(sendMap);
@@ -26,7 +28,8 @@ public class SiteInfoService {
 		}
 		return true;
 	}
-	
+
+	@Transactional(rollbackFor = Exception.class)
 	public boolean updateSiteInfo(Map<String, Object> sendMap) {
 		try {
 			siteInfoMapper.siteUpdate(sendMap);
