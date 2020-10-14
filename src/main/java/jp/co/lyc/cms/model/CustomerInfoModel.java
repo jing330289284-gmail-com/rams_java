@@ -11,6 +11,7 @@ public class CustomerInfoModel {
 	String establishmentDate;//設立年月
 	String businessStartDate;//取引開始日
 	String levelCode;//お客様ランキングコード
+	String levelName;//お客様ランキング
 	String listedCompanyFlag;//上場会社フラグ
 	String companyNatureCode;//会社性質コード
 	String url;//URL
@@ -43,6 +44,12 @@ public class CustomerInfoModel {
 	AccountInfoModel accountInfo;
 	TopCustomerInfoModel topCustomerInfo;
 	
+	public String getLevelName() {
+		return levelName;
+	}
+	public void setLevelName(String levelName) {
+		this.levelName = levelName;
+	}
 	public String getCapitalStock() {
 		return capitalStock;
 	}

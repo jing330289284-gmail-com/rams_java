@@ -75,7 +75,12 @@
 		SELECT stationCode code,stationName name FROM
 		rams.M013Station;
 	</select>
-
+	<!--駅 -->
+	<select id="getCostClassification"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT costClassificationCode code,costClassificationName name FROM
+		rams.M028CostClassification;
+	</select>
 	<!--業種 -->
 	<select id="getTypeOfIndustry"
 		resultType="jp.co.lyc.cms.model.ModelClass">
