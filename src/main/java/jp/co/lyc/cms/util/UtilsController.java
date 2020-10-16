@@ -8,7 +8,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.security.GeneralSecurityException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -1020,18 +1023,4 @@ public class UtilsController {
 		List<ModelClass> list = getStatus(enterPeriod);
 		return list;
 	}
-	
-	/**
-	 * 状況変動ステータスを取得する
-	 * 
-	 * @return
-	 */
-	@RequestMapping(value = "/getSituationChange", method = RequestMethod.POST)
-	@ResponseBody
-	public List<ModelClass> getSituationChange() {
-
-		List<ModelClass> list = utilsService.getSituationChange();
-		return list;
-	}
-	
 }

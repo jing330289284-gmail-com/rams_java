@@ -1,6 +1,8 @@
 package jp.co.lyc.cms.controller;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,12 +20,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.thoughtworks.xstream.io.path.Path;
 
 import jp.co.lyc.cms.common.BaseController;
 import jp.co.lyc.cms.model.BreakTimeModel;
 import jp.co.lyc.cms.model.DutyRegistrationModel;
 import jp.co.lyc.cms.model.EmployeeWorkTimeModel;
 import jp.co.lyc.cms.service.DutyRegistrationService;
+import net.sf.jasperreports.engine.JREmptyDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRMapCollectionDataSource;
+import net.sf.jasperreports.engine.util.JRLoader;
 
 @Controller
 @RequestMapping(value = "/dutyRegistration")
@@ -94,6 +106,32 @@ public class DutyRegistrationController extends BaseController{
 		}
 		logger.info("DutyRegistrationController.dutyInsert:" + "登録終了");
 		return result;
+	}
+	/**
+	 */
+	@RequestMapping(value = "/downloadPDF", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean downloadPDF(@RequestBody String requestJson) {
+		logger.info("DutyRegistrationController.downloadPDF:" + "開始");
+		Map<String, Object> dutyData = this.getDutyInfo(requestJson);
+		ArrayList<Map<String, Object>> dutyDate = this.dutySelect(requestJson);
+		File inputFile = new File("E:\\rams_java\\src\\main\\resources\\test.jrxml");
+		File outputFile = new File("E:\\rams_java\\src\\main\\resources\\test.pdf");
+		try {
+			Map<String, Object> parameters = new HashMap<String, Object>();
+			Collection<Map<String, ?>> source = new ArrayList<>();
+			parameters.put("Year", "2011");
+			parameters.put("Month", "09");
+			JasperReport report = JasperCompileManager.compileReport(inputFile.getAbsolutePath());
+			JasperPrint print = JasperFillManager.fillReport(report, parameters, new JREmptyDataSource());
+			JasperExportManager.exportReportToPdfFile(print, outputFile.getAbsolutePath());
+			logger.info(String.valueOf(inputFile.exists()));
+		} 
+		catch (JRException e) {
+			logger.error(e.getMessage());
+		}
+		logger.info("DutyRegistrationController.downloadPDF:" + "終了");
+		return true;
 	}
 	/**
 	 */
