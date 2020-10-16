@@ -1,5 +1,6 @@
 package jp.co.lyc.cms.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import org.slf4j.Logger;
@@ -31,10 +32,16 @@ public class EnterPeriodSearchController extends BaseController {
 	
 	String errorsMessage = "";
 
-	@RequestMapping(value = "/toroku", method = RequestMethod.POST)
+	/**
+	 * 検索ボタン
+	 * @param enterPeriodSearchModel
+	 * @return
+	 */
+	@RequestMapping(value = "/selectEnterPeriodData", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> selectEnterPeriodData(@RequestBody 
 			EnterPeriodSearchModel enterPeriodSearchModel) {
+		errorsMessage = "";
 		logger.info("EnterPeriodSearchController.selectEnterPeriodData:" + "検索開始");
 		DataBinder binder = new DataBinder(enterPeriodSearchModel);
 		binder.setValidator(new EnterPeriodSearchValidation());
@@ -50,7 +57,22 @@ public class EnterPeriodSearchController extends BaseController {
 			logger.info("EnterPeriodSearchController.selectEnterPeriodData:" + "検索終了");
 			return result;
 		}
-		
+		HashMap<String, String> sendMap = enterPeriodSearchService.getSendMap(enterPeriodSearchModel);
+		ArrayList<EnterPeriodSearchModel> resultList = new ArrayList<EnterPeriodSearchModel>();
+		if(enterPeriodSearchModel.getEnterPeriodKbn().equals("0")) {
+			//入社の場合
+			resultList = enterPeriodSearchService.selectEnterPeriodData(sendMap);
+		}else if(enterPeriodSearchModel.getEnterPeriodKbn().equals("1")){
+			//入場の場合
+		}else if(enterPeriodSearchModel.getEnterPeriodKbn().equals("2")){
+			//ボーナスの場合
+		}		
+		if(resultList == null || resultList.size() == 0) {
+			errorsMessage += "今月データがないです";// エラーメッセージ
+			result.put("errorsMessage", errorsMessage);// エラーメッセージ
+		}else {
+			result.put("enterPeriodList", resultList);
+		}
 		logger.info("EnterPeriodSearchController.selectEnterPeriodData:" + "検索終了");
 		return result;
 	}

@@ -2,6 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="jp.co.lyc.cms.mapper.SalesPointSetMapper">
 
+	<insert id="salesPointInsert" parameterType="map">
+		insert into
+		T014SalesPointInfo(employeeStatus,intoCompanyCode,customerContractStatus,levelCode,
+		salesProgressCode,specialPointConditionCode,salesPoint,remark,updateTime,createTime,updateUser)
+		values(#{employee},#{newMember},#{customerContract},#{level},#{salesPuttern},
+		#{specialPoint},#{point},#{remark},now(),now(),#{updateUser})
+	</insert>
+
 	<update id="salesPointUpdate" parameterType="map">
 		update
 		T014SalesPointInfo
@@ -39,13 +47,5 @@
 		</if>
 
 	</select>
-	<!--　　現場情報を削除 -->
-	<delete id="deleteEmployeeSiteInfo" parameterType="String">
-		DELETE
-		FROM
-		T006EmployeeSiteInfo
-		WHERE
-		employeeNo = #{employeeNo};
-	</delete>
 
 </mapper>
