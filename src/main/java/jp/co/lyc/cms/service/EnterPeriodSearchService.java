@@ -22,7 +22,7 @@ public class EnterPeriodSearchService {
 	 * @param sendMap
 	 * @return
 	 */
-	public ArrayList<EnterPeriodSearchModel> selectEnterPeriodData(HashMap<String, String> sendMap) {
+	public ArrayList<EnterPeriodSearchModel> selectEnterPeriodDataForIntoCompany(HashMap<String, String> sendMap) {
 		//社員最初の入場期日を取得
 		ArrayList<EnterPeriodSearchModel> dateList = 
 				enterPeriodSearchMapper.selectAdmissionStartDate(sendMap);
@@ -60,10 +60,86 @@ public class EnterPeriodSearchService {
 		//非稼働期間以外のデータ
 		ArrayList<EnterPeriodSearchModel> resultList = 
 				enterPeriodSearchMapper.selectEnterPeriodData(resultSendMap);
+		return selectNonSitePeriod(resultList,resultSendMap);
+	}
+	/**
+	 * 区分は入場の場合
+	 * @return
+	 */
+	public ArrayList<EnterPeriodSearchModel> selectEnterPeriodDataForIntoSite(HashMap<String, String> sendMap) {
+		//社員今の入場期日を取得
+		ArrayList<EnterPeriodSearchModel> dateList = 
+				enterPeriodSearchMapper.selectAdmissionStartDateForNow(sendMap);
+		//画面の年月
+		String yearAndMonth = sendMap.get("yearAndMonth");
+		ArrayList<String> fullYearPeople = new ArrayList<String>();
+		for(EnterPeriodSearchModel epsmod:dateList) {
+			//最近の入場期日を別れる
+			int startDateMonth = Integer.parseInt(epsmod.getAdmissionStartDate().substring(4,6));
+			//画面の期日を別れる
+			int dateMonth = Integer.parseInt(yearAndMonth.substring(4));
+			//計算
+			int month = dateMonth - startDateMonth;
+			
+			if(month == 0) {
+				fullYearPeople.add(epsmod.getEmployeeNo());
+			}
+		}
+		if(fullYearPeople.size() == 0) {
+			return null;
+		}
+		HashMap<String, Object> resultSendMap = new HashMap<String, Object>();
+		resultSendMap.put("fullYearPeople", fullYearPeople);
+		//非稼働期間以外のデータ
+		ArrayList<EnterPeriodSearchModel> resultList = 
+				enterPeriodSearchMapper.selectEnterPeriodData(resultSendMap);
+		return selectNonSitePeriod(resultList,resultSendMap);
+	}
+	
+	/**
+	 * 区分はボーナスの場合
+	 * @param sendMap
+	 * @return
+	 */
+	public ArrayList<EnterPeriodSearchModel> selectScheduleOfBonusAmount(HashMap<String, String> sendMap) {
+		//社員今の入場期日を取得
+		ArrayList<EnterPeriodSearchModel> dateList = 
+				enterPeriodSearchMapper.selectScheduleOfBonusAmount(sendMap);
+		//画面の年月
+		String yearAndMonth = sendMap.get("yearAndMonth");
+		ArrayList<String> fullYearPeople = new ArrayList<String>();
+		for(EnterPeriodSearchModel epsModel:dateList) {
+			//次のボーナス月
+			int nextBonusMonth = Integer.parseInt(epsModel.getNextBonusMonth().substring(4));
+			//画面の月
+			int monthPage = Integer.parseInt(yearAndMonth.substring(4)); 
+			if(monthPage - nextBonusMonth == 0) {
+				fullYearPeople.add(epsModel.getEmployeeNo());
+			}
+		}
+		if(fullYearPeople.size() == 0) {
+			return null;
+		}
+		HashMap<String, Object> resultSendMap = new HashMap<String, Object>();
+		resultSendMap.put("fullYearPeople", fullYearPeople);
+		//非稼働期間以外のデータ
+		ArrayList<EnterPeriodSearchModel> resultList = 
+				enterPeriodSearchMapper.selectEnterPeriodData(resultSendMap);
+		return selectNonSitePeriod(resultList,resultSendMap);
+	}
+	/**
+	 * 非稼働期間を取得
+	 * @param resultList
+	 * @param resultSendMap
+	 * @return
+	 */
+	public ArrayList<EnterPeriodSearchModel> selectNonSitePeriod(ArrayList<EnterPeriodSearchModel> resultList, 
+			HashMap<String, Object> resultSendMap) {
+		ArrayList<EnterPeriodSearchModel> epsList = resultList;
 		//非稼働期間
-		ArrayList<EnterPeriodSearchModel> periodList = 
-				enterPeriodSearchMapper.selectNonSitePeriod(resultSendMap);
-		for(EnterPeriodSearchModel eps:resultList) {
+				ArrayList<EnterPeriodSearchModel> periodList = 
+						enterPeriodSearchMapper.selectNonSitePeriod(resultSendMap);
+		for(EnterPeriodSearchModel eps:epsList) {
 			String employeeNo = eps.getEmployeeNo();
 			ArrayList<EnterPeriodSearchModel> periodsList = new ArrayList<EnterPeriodSearchModel>();
 			for(EnterPeriodSearchModel pl : periodList) {
@@ -75,7 +151,7 @@ public class EnterPeriodSearchService {
 			}
 			eps.setNonSitePeriodsList(periodsList);
 		}
-		return resultList;
+		return epsList;
 	}
 	
 	/**

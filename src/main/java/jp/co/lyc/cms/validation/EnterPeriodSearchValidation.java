@@ -19,7 +19,7 @@ public class EnterPeriodSearchValidation implements Validator {
 		for (int i = 0; i < elements.length; i++) {
 			StackTraceElement stackTraceElement = elements[i];
 			String methodName = stackTraceElement.getMethodName();
-			if (methodName.equals("passwordReset")) {
+			if (methodName.equals("selectEnterPeriodData")) {
 			}
 		}
 	}

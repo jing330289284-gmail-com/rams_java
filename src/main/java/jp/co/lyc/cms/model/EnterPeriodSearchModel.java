@@ -3,6 +3,7 @@ package jp.co.lyc.cms.model;
 import java.util.ArrayList;
 
 public class EnterPeriodSearchModel {
+	String rowNo;//行番号
 	String employeeNo;
 	String yearAndMonth;//年月
 	String employeeName;//社員名
@@ -19,6 +20,12 @@ public class EnterPeriodSearchModel {
 	String nonSiteMonths;//非稼働月数
 	ArrayList<EnterPeriodSearchModel> nonSitePeriodsList;
 
+	public String getRowNo() {
+		return rowNo;
+	}
+	public void setRowNo(String rowNo) {
+		this.rowNo = rowNo;
+	}
 	public ArrayList<EnterPeriodSearchModel> getNonSitePeriodsList() {
 		return nonSitePeriodsList;
 	}

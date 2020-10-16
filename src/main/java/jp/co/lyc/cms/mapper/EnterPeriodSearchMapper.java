@@ -30,4 +30,18 @@ public interface EnterPeriodSearchMapper {
 	 */
 	public ArrayList<EnterPeriodSearchModel> selectNonSitePeriod(HashMap<String, Object> fullYearPeople);
 	
+	/**
+	 * 最新の入場期日を取得
+	 * @param sendMap
+	 * @return
+	 */
+	public ArrayList<EnterPeriodSearchModel> selectAdmissionStartDateForNow(HashMap<String, String> sendMap);
+	
+	/**
+	 * ボーナス月を取得
+	 * @param sendMap
+	 * @return
+	 */
+	public ArrayList<EnterPeriodSearchModel> selectScheduleOfBonusAmount(HashMap<String, String> sendMap);
+	
 }

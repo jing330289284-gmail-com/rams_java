@@ -60,12 +60,14 @@ public class EnterPeriodSearchController extends BaseController {
 		HashMap<String, String> sendMap = enterPeriodSearchService.getSendMap(enterPeriodSearchModel);
 		ArrayList<EnterPeriodSearchModel> resultList = new ArrayList<EnterPeriodSearchModel>();
 		if(enterPeriodSearchModel.getEnterPeriodKbn().equals("0")) {
-			//入社の場合
-			resultList = enterPeriodSearchService.selectEnterPeriodData(sendMap);
+			//区分は入社の場合
+			resultList = enterPeriodSearchService.selectEnterPeriodDataForIntoCompany(sendMap);
 		}else if(enterPeriodSearchModel.getEnterPeriodKbn().equals("1")){
-			//入場の場合
+			//区分は入場の場合
+			resultList = enterPeriodSearchService.selectEnterPeriodDataForIntoSite(sendMap);
 		}else if(enterPeriodSearchModel.getEnterPeriodKbn().equals("2")){
-			//ボーナスの場合
+			//区分はボーナスの場合
+			resultList = enterPeriodSearchService.selectScheduleOfBonusAmount(sendMap);
 		}		
 		if(resultList == null || resultList.size() == 0) {
 			errorsMessage += "今月データがないです";// エラーメッセージ

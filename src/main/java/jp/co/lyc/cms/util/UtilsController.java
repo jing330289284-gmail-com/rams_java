@@ -762,7 +762,7 @@ public class UtilsController {
 	}
 	
 	/**
-	 * 社員氏名を取得する
+	 * 社員氏名（BP社員ない）を取得する
 	 * 
 	 * @return
 	 */
