@@ -1020,4 +1020,18 @@ public class UtilsController {
 		List<ModelClass> list = getStatus(enterPeriod);
 		return list;
 	}
+	
+	/**
+	 * 状況変動ステータスを取得する
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getSituationChange", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getSituationChange() {
+
+		List<ModelClass> list = utilsService.getSituationChange();
+		return list;
+	}
+	
 }

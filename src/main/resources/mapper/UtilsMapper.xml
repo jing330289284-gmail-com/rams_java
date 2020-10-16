@@ -360,4 +360,14 @@
 		FROM
 		M027ProjectPhase
 	</select>
+	
+			<!-- 営業状況取得 -->
+	<select id="getSituationChange"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT
+		situationChangeName name,
+		situationChangeCode code
+		FROM
+		M030SituationChange
+	</select>
 </mapper>
