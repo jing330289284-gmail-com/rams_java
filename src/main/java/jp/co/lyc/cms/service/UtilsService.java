@@ -426,5 +426,14 @@ public class UtilsService {
 	public List<ModelClass> getTransportation() {
 		return utilsMapper.getTransportation();
 	}
+	
+	/**
+	 *状況変動
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getSituationChange() {
+		return utilsMapper.getSituationChange();
+	}
 
 }

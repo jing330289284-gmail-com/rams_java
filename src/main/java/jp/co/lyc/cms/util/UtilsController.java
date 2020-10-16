@@ -1048,4 +1048,16 @@ public class UtilsController {
         }
         return l.intValue();
     }
+	/**
+	 * 状況変動ステータスを取得する
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getSituationChange", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getSituationChange() {
+
+		List<ModelClass> list = utilsService.getSituationChange();
+		return list;
+	}
 }

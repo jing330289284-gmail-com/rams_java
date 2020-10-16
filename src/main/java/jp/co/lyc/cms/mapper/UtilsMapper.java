@@ -287,4 +287,12 @@ public interface UtilsMapper {
 	 * @return
 	 */	
 	public List<ModelClass> getTransportation();
+	
+	/**
+	 * 状況変動を取得
+	 * 
+	 * @return
+	 */	
+	public List<ModelClass> getSituationChange();
+	
 }
