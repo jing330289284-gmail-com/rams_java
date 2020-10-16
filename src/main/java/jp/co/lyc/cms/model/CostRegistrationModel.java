@@ -3,28 +3,30 @@ package jp.co.lyc.cms.model;
 import org.springframework.web.multipart.MultipartFile;
 
 public class CostRegistrationModel {
-
+	int rowNo;
 	String employeeNo;
 	String employeeName;
-	String attendanceYearAndMonth;
-	String workingTimeReport;
-	String sumWorkTime;
+	String happendDate;
+	int costClassificationCode;
+	String dueDate;
+	String detailedName;
+	int stationCode;
+	int originCode;
+	int transportationCode;
+	int destinationCode;
+	int cost;
+	String remark;
+	int roundCode;
+	String costFile;
 	String updateUser;
 	String updateTime;
-	String approvalStatus;
-	MultipartFile workRepotFile;
-
-	public MultipartFile getWorkRepotFile() {
-		return workRepotFile;
+	String createTime;
+	MultipartFile costFileFile;
+	public int getRowNo() {
+		return rowNo;
 	}
-	public void setWorkRepotFile(MultipartFile workRepotFile) {
-		this.workRepotFile = workRepotFile;
-	}
-	public String getEmployeeName() {
-		return employeeName;
-	}
-	public void setEmployeeName(String employeeName) {
-		this.employeeName = employeeName;
+	public void setRowNo(int rowNo) {
+		this.rowNo = rowNo;
 	}
 	public String getEmployeeNo() {
 		return employeeNo;
@@ -32,23 +34,83 @@ public class CostRegistrationModel {
 	public void setEmployeeNo(String employeeNo) {
 		this.employeeNo = employeeNo;
 	}
-	public String getAttendanceYearAndMonth() {
-		return attendanceYearAndMonth;
+	public String getEmployeeName() {
+		return employeeName;
 	}
-	public void setAttendanceYearAndMonth(String attendanceYearAndMonth) {
-		this.attendanceYearAndMonth = attendanceYearAndMonth;
+	public void setEmployeeName(String employeeName) {
+		this.employeeName = employeeName;
 	}
-	public String getWorkingTimeReport() {
-		return workingTimeReport;
+	public String getHappendDate() {
+		return happendDate;
 	}
-	public void setWorkingTimeReport(String workingTimeReport) {
-		this.workingTimeReport = workingTimeReport;
+	public void setHappendDate(String happendDate) {
+		this.happendDate = happendDate;
 	}
-	public String getSumWorkTime() {
-		return sumWorkTime;
+	public int getCostClassificationCode() {
+		return costClassificationCode;
 	}
-	public void setSumWorkTime(String sumWorkTime) {
-		this.sumWorkTime = sumWorkTime;
+	public void setCostClassificationCode(int costClassificationCode) {
+		this.costClassificationCode = costClassificationCode;
+	}
+	public String getDueDate() {
+		return dueDate;
+	}
+	public void setDueDate(String dueDate) {
+		this.dueDate = dueDate;
+	}
+	public String getDetailedName() {
+		return detailedName;
+	}
+	public void setDetailedName(String detailedName) {
+		this.detailedName = detailedName;
+	}
+	public int getStationCode() {
+		return stationCode;
+	}
+	public void setStationCode(int stationCode) {
+		this.stationCode = stationCode;
+	}
+	public int getOriginCode() {
+		return originCode;
+	}
+	public void setOriginCode(int originCode) {
+		this.originCode = originCode;
+	}
+	public int getTransportationCode() {
+		return transportationCode;
+	}
+	public void setTransportationCode(int transportationCode) {
+		this.transportationCode = transportationCode;
+	}
+	public int getDestinationCode() {
+		return destinationCode;
+	}
+	public void setDestinationCode(int destinationCode) {
+		this.destinationCode = destinationCode;
+	}
+	public int getCost() {
+		return cost;
+	}
+	public void setCost(int cost) {
+		this.cost = cost;
+	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	public int getRoundCode() {
+		return roundCode;
+	}
+	public void setRoundCode(int roundCode) {
+		this.roundCode = roundCode;
+	}
+	public String getCostFile() {
+		return costFile;
+	}
+	public void setCostFile(String costFile) {
+		this.costFile = costFile;
 	}
 	public String getUpdateUser() {
 		return updateUser;
@@ -62,11 +124,16 @@ public class CostRegistrationModel {
 	public void setUpdateTime(String updateTime) {
 		this.updateTime = updateTime;
 	}
-	public String getApprovalStatus() {
-		return approvalStatus;
+	public String getCreateTime() {
+		return createTime;
 	}
-	public void setApprovalStatus(String approvalStatus) {
-		this.approvalStatus = approvalStatus;
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
 	}
-	
+	public MultipartFile getCostFileFile() {
+		return costFileFile;
+	}
+	public void setCostFileFile(MultipartFile costFileFile) {
+		this.costFileFile = costFileFile;
+	}
 }

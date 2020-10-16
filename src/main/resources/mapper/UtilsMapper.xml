@@ -79,7 +79,9 @@
 	<select id="getCostClassification"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT costClassificationCode code,costClassificationName name FROM
-		rams.M028CostClassification;
+		rams.M028CostClassification
+		where
+		costClassificationCode>0;
 	</select>
 	<!--交通手段 -->
 	<select id="getTransportation"
