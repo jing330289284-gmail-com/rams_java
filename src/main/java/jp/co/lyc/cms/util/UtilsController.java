@@ -762,7 +762,7 @@ public class UtilsController {
 	}
 	
 	/**
-	 * 社員氏名を取得する
+	 * 社員氏名（BP社員ない）を取得する
 	 * 
 	 * @return
 	 */
@@ -1021,6 +1021,43 @@ public class UtilsController {
 		Properties properties = getProperties();
 		String enterPeriod = properties.getProperty("enterPeriod");
 		List<ModelClass> list = getStatus(enterPeriod);
+		return list;
+	}
+	
+    /**
+             * 日数計算
+     * @param startTime ： 開始時間
+     * @param endTime  ： 終了時間
+     * @return   
+     */
+    public static int caculateTotalTime(String startTime,String endTime) {
+        SimpleDateFormat formatter =   new SimpleDateFormat( "yyyy-MM-dd");
+        Date date1=null;
+        Date date = null;
+        Long l = 0L;
+        try {
+            date = formatter.parse(startTime);
+            long ts = date.getTime();
+            date1 =  formatter.parse(endTime);
+            long ts1 = date1.getTime();
+
+            l = (ts - ts1) / (1000 * 60 * 60 * 24);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return l.intValue();
+    }
+	/**
+	 * 状況変動ステータスを取得する
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getSituationChange", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getSituationChange() {
+
+		List<ModelClass> list = utilsService.getSituationChange();
 		return list;
 	}
 }
