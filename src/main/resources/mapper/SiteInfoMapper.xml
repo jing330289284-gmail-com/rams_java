@@ -6,10 +6,11 @@
 		insert into
 		T006EmployeeSiteInfo(employeeNo,customerNo,topCustomerNo,admissionStartDate,admissionEndDate,
 		siteManager,systemName,developLanguageCode,stationCode,unitPrice,siteRoleCode,payOffRange1,payOffRange2,relatedEmployees,
-		levelCode,typeOfIndustryCode,remark,updateTime,createTime,updateUser)
+		levelCode,typeOfIndustryCode,nonSitePeriod,nonSiteMonths,remark,updateTime,createTime,updateUser)
 		values(#{employeeNo},#{customerNo},#{topCustomerNo},#{admissionStartDate},#{admissionEndDate},
 		#{siteManager},#{systemName},#{developLanguageCode},#{location},#{unitPrice},#{siteRoleCode},#{payOffRange1},
-		#{payOffRange2},#{relatedEmployees},#{levelCode},#{typeOfIndustryCode},#{remark},now(),now(),#{updateUser})
+		#{payOffRange2},#{relatedEmployees},#{levelCode},#{typeOfIndustryCode},#{nonSitePeriod},#{nonSiteMonths},
+		#{remark},now(),now(),#{updateUser})
 	</insert>
 
 	<update id="siteUpdate" parameterType="map">

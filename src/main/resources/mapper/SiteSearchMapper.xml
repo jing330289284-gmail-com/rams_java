@@ -57,7 +57,7 @@
 		h.bpEmployeeNo
 		WHERE
 		1=1
-		<if test="employeeNo!= null and employeeNo!= ''">
+		<if test="employeeName!= null and employeeName!= ''">
 			AND a.employeeNo = #{employeeName}
 		</if>
 		<if test="siteRoleCode!= null and siteRoleCode!= ''">

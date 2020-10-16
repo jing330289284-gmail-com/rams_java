@@ -1,6 +1,7 @@
 package jp.co.lyc.cms.controller;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,19 +28,22 @@ import jp.co.lyc.cms.validation.SiteInfoValidation;
 @Controller
 public class SiteInfoController extends BaseController {
 	private String dateToString(String date) {
-		String[] a = date.split("/");
-		String b = a[0];
-		if (a[1].length() == 1) {
-			b = b + "0" + a[1];
-		} else {
-			b = b + a[1];
-		}
-		if (a[2].length() == 1) {
-			b = b + "0" + a[2];
-		} else {
-			b = b + a[2];
-		}
-		return b;
+		if (date != null && date.length() != 0) {
+			String[] a = date.split("/");
+			String b = a[0];
+			if (a[1].length() == 1) {
+				b = b + "0" + a[1];
+			} else {
+				b = b + a[1];
+			}
+			if (a[2].length() == 1) {
+				b = b + "0" + a[2];
+			} else {
+				b = b + a[2];
+			}
+			return b;
+		} else
+			return "";
 	}
 
 	private String dateToPeriod(String beginDate, String endDate) {
@@ -76,6 +80,59 @@ public class SiteInfoController extends BaseController {
 			relatedEmployees = relatedEmployees + "," + related4Employees;
 		}
 		return relatedEmployees;
+	}
+
+	// 计算待机月
+	private String timeCalculate(String checkDate, String admissionStartDate) {
+		if (checkDate == "1") {
+			return "";
+		} else {
+			int beginYear = 0;
+			int beginMonth = 0;
+			int beginDay = 0;
+			int endYear = 0;
+			int endMonth = 0;
+			int endDay = 0;
+			if (checkDate != null) {
+				beginYear = Integer.parseInt(checkDate.substring(0, 4));
+				beginMonth = Integer.parseInt(checkDate.substring(4, 6));
+				beginDay = Integer.parseInt(checkDate.substring(6));
+			}
+			if (admissionStartDate != null) {
+				endYear = Integer.parseInt(admissionStartDate.substring(0, 4));
+				endMonth = Integer.parseInt(admissionStartDate.substring(4, 6));
+				endDay = Integer.parseInt(admissionStartDate.substring(6));
+			}
+			int year = 0;
+			int month = 0;
+			if (Math.abs(endDay - beginDay) >= 15) {
+				if ((endMonth - beginMonth) >= 0) {
+					year = endYear - beginYear;
+					month = endMonth - beginMonth + 1;
+				} else if ((endMonth - beginMonth) < 0) {
+					year = endYear - beginYear - 1;
+					month = endMonth - beginMonth + 13;
+				}
+			} else if (Math.abs(endDay - beginDay) < 15) {
+				if ((endMonth - beginMonth) >= 0) {
+					year = endYear - beginYear;
+					month = endMonth - beginMonth;
+				} else if ((endMonth - beginMonth) < 0) {
+					year = endYear - beginYear - 1;
+					month = endMonth - beginMonth + 12;
+				}
+			}
+			if (month == 12) {
+				year = year + 1;
+				month = 0;
+			}
+			month = month + year * 12;
+			if (month == 0) {
+				return "";
+			} else {
+				return month + "";
+			}
+		}
 	}
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -171,10 +228,10 @@ public class SiteInfoController extends BaseController {
 		String employeeNo = siteModel.getEmployeeNo();
 		String customerNo = siteModel.getCustomerNo();
 		String topCustomerNo = siteModel.getTopCustomerNo();
-		String admissionStartDate = siteModel.getAdmissionStartDate();
+		String admissionStartDate = dateToString(siteModel.getAdmissionStartDate());
 		String location = siteModel.getLocation();
 		String siteManager = siteModel.getSiteManager();
-		String admissionEndDate = siteModel.getAdmissionEndDate();
+		String admissionEndDate = dateToString(siteModel.getAdmissionEndDate());
 		String unitPrice = siteModel.getUnitPrice();
 		String siteRoleCode = siteModel.getSiteRoleCode();
 		String payOffRange1 = siteModel.getPayOffRange1();
@@ -187,7 +244,13 @@ public class SiteInfoController extends BaseController {
 		String typeOfIndustryCode = siteModel.getTypeOfIndustryCode();
 		String remark = siteModel.getRemark();
 		String workDate = siteModel.getWorkDate();
+		String checkDate = siteModel.getCheckDate();
+		String nonSiteMonths = timeCalculate(checkDate, admissionStartDate);
 
+		sendMap.put("nonSiteMonths", nonSiteMonths);
+		if (nonSiteMonths != "") {
+			sendMap.put("nonSitePeriod", checkDate + "〜" + admissionStartDate);
+		}
 		if (employeeNo != null && employeeNo.length() != 0) {
 			sendMap.put("employeeNo", employeeNo);
 		}
@@ -198,7 +261,7 @@ public class SiteInfoController extends BaseController {
 			sendMap.put("topCustomerNo", topCustomerNo);
 		}
 		if (admissionStartDate != null && admissionStartDate.length() != 0) {
-			sendMap.put("admissionStartDate", dateToString(admissionStartDate));
+			sendMap.put("admissionStartDate", admissionStartDate);
 		}
 		if (location != null && location.length() != 0) {
 			sendMap.put("location", location);
@@ -207,7 +270,7 @@ public class SiteInfoController extends BaseController {
 			sendMap.put("siteManager", siteManager);
 		}
 		if (admissionEndDate != null && admissionEndDate.length() != 0) {
-			sendMap.put("admissionEndDate", dateToString(admissionEndDate));
+			sendMap.put("admissionEndDate", admissionEndDate);
 		}
 		if (unitPrice != null && unitPrice.length() != 0) {
 			sendMap.put("unitPrice", unitPrice);

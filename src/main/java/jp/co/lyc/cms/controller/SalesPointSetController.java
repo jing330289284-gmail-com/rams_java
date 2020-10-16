@@ -11,9 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.DataBinder;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,12 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import jp.co.lyc.cms.common.BaseController;
-import jp.co.lyc.cms.model.MasterModel;
 import jp.co.lyc.cms.model.SalesPointSetModel;
-import jp.co.lyc.cms.model.SiteModel;
 import jp.co.lyc.cms.service.SalesPointSetService;
-import jp.co.lyc.cms.util.StatusCodeToMsgMap;
-import jp.co.lyc.cms.validation.SiteInfoValidation;
 
 @Controller
 @CrossOrigin(origins = "http://127.0.0.1:3000")
@@ -38,22 +31,22 @@ public class SalesPointSetController extends BaseController {
 	SalesPointSetService salesPointSetService;
 	String errorsMessage = "";
 
-//	  @RequestMapping(value = "/insertSiteInfo")
-//	  
-//	  @ResponseBody public Map<String, Object> insertSiteInfo(@RequestBody
-//	  SiteModel siteModel) { Map<String, Object> result = new HashMap<>();
-//	  errorsMessage = ""; DataBinder binder = new DataBinder(siteModel);
-//	  binder.setValidator(new SiteInfoValidation()); binder.validate();
-//	  BindingResult results = binder.getBindingResult(); if (results.hasErrors()) {
-//	  results.getAllErrors().forEach(o -> { FieldError error = (FieldError) o;
-//	  errorsMessage += error.getDefaultMessage();// エラーメッセージ });
-//	  result.put("errorsMessage", errorsMessage);// エラーメッセージ return result; } //
-//	  登陆处理 if (insert(putData(siteModel))) { result.put("result", true); } else {
-//	  result.put("result", false); }
-//	  logger.info("SiteInfoController.insertSiteInfo:" + "追加結束"); return result;
-//	  
-//	  }
-//	  
+	@RequestMapping(value = "/salesPointInsert", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> salesPointInsert(@RequestBody SalesPointSetModel salesPointSetModel) {
+		Map<String, Object> result = new HashMap<>();
+		errorsMessage = "";
+
+		// 登陆处理
+		if (insert(putData(salesPointSetModel))) {
+			result.put("result", true);
+		} else {
+			result.put("result", false);
+		}
+		logger.info("SalesPointSetController.salesPointInsert:" + "追加結束");
+		return result;
+
+	}
 
 	/**
 	 * 修正ボタン
@@ -79,18 +72,17 @@ public class SalesPointSetController extends BaseController {
 		logger.info("SalesPointSetController.salesPointUpdate:" + "修正結束");
 		return result;
 	}
+
 	/**
 	 * insert
 	 * 
 	 * @return
 	 */
 
-	/*
-	 * 
-	 * public boolean insert(Map<String, Object> sendMap) { return
-	 * salesPointSetService.insertSiteInfo(sendMap); }
-	 * 
-	 */
+	public boolean insert(Map<String, Object> sendMap) {
+		return salesPointSetService.salesPointInsert(sendMap);
+	}
+
 	/**
 	 * update
 	 * 

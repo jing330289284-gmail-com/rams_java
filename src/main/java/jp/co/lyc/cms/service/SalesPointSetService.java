@@ -18,7 +18,7 @@ public class SalesPointSetService {
 	@Autowired
 	SalesPointSetMapper salesPointSetMapper;
 
-	public boolean insertSiteInfo(Map<String, Object> sendMap) {
+	public boolean salesPointInsert(Map<String, Object> sendMap) {
 		try {
 			salesPointSetMapper.salesPointInsert(sendMap);
 		} catch (Exception e) {

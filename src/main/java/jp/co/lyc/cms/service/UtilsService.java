@@ -402,7 +402,14 @@ public class UtilsService {
 	public List<ModelClass> getStation() {
 		return utilsMapper.getStation();
 	}
-
+	/**
+	 *  費用区分
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getCostClassification() {
+		return utilsMapper.getCostClassification();
+	}
 	/**
 	 * 業種
 	 * 
@@ -410,6 +417,14 @@ public class UtilsService {
 	 */
 	public List<ModelClass> getTypeOfIndustry() {
 		return utilsMapper.getTypeOfIndustry();
+	}
+	/**
+	 *交通手段
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getTransportation() {
+		return utilsMapper.getTransportation();
 	}
 
 }

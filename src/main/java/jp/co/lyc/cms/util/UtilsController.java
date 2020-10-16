@@ -291,7 +291,19 @@ public class UtilsController {
 		List<ModelClass> list = getStatus(checkSection);
 		return list;
 	}
-
+	/**
+	 * CheckSectionを取得する
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getRound", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getRound() {
+		Properties properties = getProperties();
+		String round = properties.getProperty("round");
+		List<ModelClass> list = getStatus(round);
+		return list;
+	}
 	/**
 	 * 上場
 	 * 
@@ -575,7 +587,31 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getStation();
 		return list;
 	}
+	/**
+	 * 費用区分取る
+	 * 
+	 * @return
+	 */
 
+	@RequestMapping(value = "/getCostClassification", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getCostClassification() {
+		List<ModelClass> list = utilsService.getCostClassification();
+		return list;
+	}
+	/**
+	 *交通手段を取る
+	 * 
+	 * @return
+	 */
+
+	@RequestMapping(value = "/getTransportation", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getTransportation() {
+		List<ModelClass> list = utilsService.getTransportation();
+		return list;
+	}
+	
 	/**
 	 * 業種を取る
 	 * 
@@ -869,17 +905,11 @@ public class UtilsController {
 	@ResponseBody
 	public void downloadTemplateFile(@RequestBody ModelClass model, HttpServletResponse response) throws IOException {
 		String filePath = model.getName();
-		Resource resource = new ClassPathResource(filePath);// 用来读取resources下的文件
 		InputStream is = null;
 		BufferedInputStream bis = null;
 		OutputStream os = null;
 		try {
-			File file;
-			if (filePath.contains("作業報告書")) {
-				file = new File(filePath);
-			} else {
-				file = resource.getFile();
-			}
+			File file = new File(filePath);
 			if (!file.exists()) {
 				return;
 			}

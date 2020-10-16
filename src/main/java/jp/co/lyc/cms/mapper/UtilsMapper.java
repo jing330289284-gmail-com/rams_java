@@ -263,6 +263,12 @@ public interface UtilsMapper {
 	public List<ModelClass> getStation();
 	
 	/**
+	 *  費用区分
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getCostClassification();
+	/**
 	 * 業種
 	 * 
 	 * @return
@@ -275,4 +281,10 @@ public interface UtilsMapper {
 	 * @return
 	 */	
 	public List<ModelClass> getSalesProgress();
+	/**
+	 * 交通手段を取得
+	 * 
+	 * @return
+	 */	
+	public List<ModelClass> getTransportation();
 }
