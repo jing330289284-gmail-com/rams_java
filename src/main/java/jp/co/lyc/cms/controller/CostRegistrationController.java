@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -46,29 +45,13 @@ public class CostRegistrationController extends BaseController {
 		logger.info("CostRegistrationController.selectCostRegistration:" + "検索終了");
 		return checkMod;
 	}
-
-	/**
-	 * アップデート
-	 * @param topCustomerMod
-	 * @return
-	 */
-	@RequestMapping(value = "/updatecostRegistration", method = RequestMethod.POST)
-	@ResponseBody
-	public boolean updateCostRegistrationModel(@RequestBody CostRegistrationModel emp){
-		emp.setEmployeeNo(getSession().getAttribute("employeeNo").toString());
-		logger.info("DutyManagementController.updatecostRegistration:" + "アップデート開始");
-		boolean result = false;	
-		result  = costRegistrationService.updateCostRegistration(emp);
-		logger.info("DutyManagementController.updatecostRegistration:" + "アップデート終了");
-		return result;	
-	}
 	/**
 	 * 作業報告書アップロード
 	 * 
 	 * @param
 	 * @return boolean
 ---	 */
-	@RequestMapping(value = "/updateCostRegistrationFile", method = RequestMethod.POST)
+	@RequestMapping(value = "/updatecostRegistration", method = RequestMethod.POST)
 	@ResponseBody
 	public boolean updateCostRegistrationFile(@RequestParam(value = "emp", required = false) String JSONEmp,
 			@RequestParam(value = "costRegistrationFile", required = false) MultipartFile costRegistrationFile) throws Exception {
@@ -84,7 +67,7 @@ public class CostRegistrationController extends BaseController {
 		} catch (Exception e) {
 			return false;
 		}
-		costRegistrationModel.setWorkingTimeReport(getFilename);
+		costRegistrationModel.setCostFile(getFilename);
 		boolean result  = costRegistrationService.updateCostRegistration(costRegistrationModel);
 		logger.info("CostRegistrationController.insertCostRegistration:" + "追加結束");
 		return result;
@@ -95,14 +78,14 @@ public class CostRegistrationController extends BaseController {
 		if (costRegistrationFile== null) {
 			return "";
 		}
-		String realPath = new String(UPLOAD_PATH_PREFIX + "作業報告書フォルダ"+ File.separator+costRegistrationModel.getAttendanceYearAndMonth().substring(0,4) + File.separator+costRegistrationModel.getAttendanceYearAndMonth().substring(4));
+		String realPath = new String(UPLOAD_PATH_PREFIX + "作業報告書フォルダ"+ File.separator+costRegistrationModel.getHappendDate().substring(0,4) + File.separator+costRegistrationModel.getHappendDate().substring(4));
 		File file = new File(realPath);
 		if (!file.isDirectory()) {
 			file.mkdirs();
 		}
 		String fileName =costRegistrationFile.getOriginalFilename();
 		String suffix = fileName.substring(fileName.lastIndexOf(".") + 1);
-		String newName = costRegistrationModel.getEmployeeNo() + "_"+costRegistrationModel.getAttendanceYearAndMonth()+costRegistrationModel.getEmployeeName()+ "_作業報告書"+ "." + suffix;
+		String newName = costRegistrationModel.getEmployeeNo() + "_"+costRegistrationModel.getHappendDate()+costRegistrationModel.getEmployeeName()+ "_作業報告書"+ "." + suffix;
 		try {
 			File newFile = new File(file.getAbsolutePath() + File.separator + newName);
 			costRegistrationFile.transferTo(newFile);
