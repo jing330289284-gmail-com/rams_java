@@ -1060,4 +1060,19 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getSituationChange();
 		return list;
 	}
+	
+	/**
+	 * serverIP
+	 * 
+	 * @return
+	 */
+
+	@RequestMapping(value = "/getServerIP", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getServerIP() {
+		Properties properties = getProperties();
+		String serverIP = properties.getProperty("serverIP");
+		List<ModelClass> list = getStatus(serverIP);
+		return list;
+	}
 }
