@@ -16,6 +16,7 @@ public class SalesSituationModel implements Serializable {
 	String stationCode;
 	String interviewCustomer1;
 	String interviewDate2;
+	String stationCode1;
 	String stationCode2;
 	String interviewCustomer2;
 	String hopeLowestPrice;
@@ -62,6 +63,13 @@ String developLanguage2;
 String developLanguage3;
 String developLanguage4;
 String developLanguage5;
+
+public String getStationCode1() {
+	return stationCode1;
+}
+public void setStationCode1(String stationCode1) {
+	this.stationCode1 = stationCode1;
+}
 public String getDevelopLanguage1() {
 	return developLanguage1;
 }
