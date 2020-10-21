@@ -123,8 +123,8 @@ public class EmployeeInfoController extends BaseController {
 		Map<String, Object> sendMap = getParam(emp);// パラメータ
 		boolean result = true;
 		try {
-			sendMap = utilsController.upload(resumeInfo1, sendMap, "resumeInfo1", "履歴書1");
-			sendMap = utilsController.upload(resumeInfo2, sendMap, "resumeInfo2", "履歴書2");
+			sendMap = utilsController.upload(resumeInfo1, sendMap, "resumeInfo1", emp.getResumeName1());
+			sendMap = utilsController.upload(resumeInfo2, sendMap, "resumeInfo2", emp.getResumeName2());
 			sendMap = utilsController.upload(residentCardInfo, sendMap, "residentCardInfo", "在留カード");
 			sendMap = utilsController.upload(passportInfo, sendMap, "passportInfo", "パスポート");
 		    sendMap = utilsController.upload(pictures, sendMap, "picInfo", "写真");
