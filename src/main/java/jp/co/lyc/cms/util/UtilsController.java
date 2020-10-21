@@ -105,6 +105,21 @@ public class UtilsController {
 	}
 
 	/**
+	 * 契約区分
+	 * 
+	 * @return
+	 */
+
+	@RequestMapping(value = "/getSiteStateStatus", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getSiteStateStatus() {
+		Properties properties = getProperties();
+		String siteStateStatus = properties.getProperty("siteState");
+		List<ModelClass> list = getStatus(siteStateStatus);
+		return list;
+	}
+	
+	/**
 	 * 社員形式を取得
 	 * 
 	 * @return
@@ -857,7 +872,7 @@ public class UtilsController {
 		return props;
 	}
 
-	public final static String UPLOAD_PATH_PREFIX = "c:/file/";
+	public final static String UPLOAD_PATH_PREFIX = "c:/file/履歴書/";
 
 	public Map<String, Object> upload(MultipartFile uploadFile, Map<String, Object> sendMap, String key, String Info) {
 		if (uploadFile == null) {
