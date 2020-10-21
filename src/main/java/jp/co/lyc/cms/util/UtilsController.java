@@ -1075,4 +1075,17 @@ public class UtilsController {
 		List<ModelClass> list = getStatus(serverIP);
 		return list;
 	}
+	
+	/**
+	 * 取引区分
+	 * @return
+	 */
+	@RequestMapping(value = "/getTransaction", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getTransaction() {
+		Properties properties = getProperties();
+		String transaction = properties.getProperty("transaction");
+		List<ModelClass> list = getStatus(transaction);
+		return list;
+	}
 }
