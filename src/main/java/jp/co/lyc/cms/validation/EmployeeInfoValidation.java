@@ -67,6 +67,11 @@ public class EmployeeInfoValidation implements Validator {
 					errors.rejectValue("resumeInfo1", "履歴書1",
 							StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001", "履歴書1"));
 				}
+				/*
+				 * if (UtilsCheckMethod.isNullOrEmpty(p.getResumeInfo1())) {
+				 * errors.rejectValue("resumeInfo1", "履歴書1",
+				 * StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001", "履歴書1")); }
+				 */
 			}
 		}
 
