@@ -485,21 +485,6 @@ public class UtilsController {
 	}
 
 	/**
-	 * 住宅ステータス
-	 * 
-	 * @return
-	 */
-
-	@RequestMapping(value = "/getHousingStatus", method = RequestMethod.POST)
-	@ResponseBody
-	public List<ModelClass> getHousingStatus() {
-		Properties properties = getProperties();
-		String HousingStatus = properties.getProperty("housingStatus");
-		List<ModelClass> list = getStatus(HousingStatus);
-		return list;
-	}
-
-	/**
 	 * 営業ステータス
 	 * 
 	 * @return
