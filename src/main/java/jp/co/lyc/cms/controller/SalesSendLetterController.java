@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import jp.co.lyc.cms.common.BaseController;
 import jp.co.lyc.cms.model.SalesSendLetterModel;
+import jp.co.lyc.cms.model.ModelClass;
 import jp.co.lyc.cms.service.SalesSendLetterService;
 
 @Controller
@@ -55,6 +56,36 @@ public class SalesSendLetterController  extends BaseController {
 		List<SalesSendLetterModel> salesPersonsList = new ArrayList<SalesSendLetterModel>();
 		try {
 			salesPersonsList = salesSendLetterService.getSalesPersons(model.getCustomerNo());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		logger.info("getSalesPersons" + "検索結束");
+		return salesPersonsList;
+	}
+	
+	@RequestMapping(value = "/creatList", method = RequestMethod.POST)
+	@ResponseBody
+	public int creatList(@RequestBody SalesSendLetterModel model) {
+
+		model.setUpdateUser(getSession().getAttribute("employeeName").toString());
+		logger.info("getSalesPersons:" + "検索開始");
+		int index=0;
+		try {
+			index = salesSendLetterService.creatList(model);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		logger.info("getSalesPersons" + "検索結束");
+		return index;
+	}
+	
+	@RequestMapping(value = "/getLists", method = RequestMethod.POST)
+	@ResponseBody
+	public List<SalesSendLetterModel> getLists() {
+
+		List<SalesSendLetterModel> salesPersonsList = new ArrayList<SalesSendLetterModel>();
+		try {
+			salesPersonsList = salesSendLetterService.getLists();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
