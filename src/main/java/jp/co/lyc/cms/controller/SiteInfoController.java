@@ -84,7 +84,7 @@ public class SiteInfoController extends BaseController {
 
 	// 计算待机月
 	private String timeCalculate(String checkDate, String admissionStartDate) {
-		if (checkDate == "1") {
+		if (checkDate.equals("1")) {
 			return "";
 		} else {
 			int beginYear = 0;
