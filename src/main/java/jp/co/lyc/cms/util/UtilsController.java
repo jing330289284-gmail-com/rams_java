@@ -872,7 +872,7 @@ public class UtilsController {
 		return props;
 	}
 
-	public final static String UPLOAD_PATH_PREFIX = "c:/file/";
+	public final static String UPLOAD_PATH_PREFIX = "c:/file/履歴書/";
 
 	public Map<String, Object> upload(MultipartFile uploadFile, Map<String, Object> sendMap, String key, String Info) {
 		if (uploadFile == null) {
