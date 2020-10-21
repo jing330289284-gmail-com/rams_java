@@ -26,9 +26,9 @@
 		T002.stayPeriod,
 		T002.residentCardInfo,
 		T015.resumeInfo1,
-		T015.resumeRemark1,
+		T015.resumeName1,
 		T015.resumeInfo2,
-		T015.resumeRemark2
+		T015.resumeName2
 		<include refid="tableJoin" />
 		WHERE
 		1 = 1
@@ -424,9 +424,9 @@
 	</sql>
 	<sql id="T015">
 		T015.resumeInfo1,
-		T015.resumeRemark1,
+		T015.resumeName1,
 		T015.resumeInfo2,
-		T015.resumeRemark2
+		T015.resumeName2
 	</sql>
 	<sql id="tableJoin">
 		FROM
@@ -538,9 +538,9 @@
 		T015ResumeManagement (
 		employeeNo,
 		resumeInfo1,
-		resumeRemark1,
+		resumeName1,
 		resumeInfo2,
-		resumeRemark2,
+		resumeName2,
 		updateTime,
 		createTime,
 		updateUser
@@ -548,9 +548,9 @@
 		VALUES(
 		#{employeeNo},
 		#{resumeInfo1},
-		#{resumeRemark1},
+		#{resumeName1},
 		#{resumeInfo2},
-		#{resumeRemark2},
+		#{resumeName2},
 		NOW(),
 		NOW(),
 		#{updateUser}
@@ -567,14 +567,14 @@
 		<if test="resumeInfo1!=   null">
 			resumeInfo1 =#{resumeInfo1},
 		</if>
-		<if test="resumeRemark1!=  null">
-			resumeRemark1 =#{resumeRemark1},
+		<if test="resumeName1!=  null">
+			resumeName1 =#{resumeName1},
 		</if>
 		<if test="resumeInfo2!=  null">
 			resumeInfo2=#{resumeInfo2},
 		</if>
-		<if test="resumeRemark2!= null">
-			resumeRemark2 =#{resumeRemark2},
+		<if test="resumeName2!= null">
+			resumeName2 =#{resumeName2},
 		</if>
 		updateTime = NOW(),
 		updateUser =

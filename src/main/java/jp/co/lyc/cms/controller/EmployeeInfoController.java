@@ -273,8 +273,8 @@ public class EmployeeInfoController extends BaseController {
 		String stayPeriod = emp.getStayPeriod();// 在留期間
 		String employmentInsuranceNo = emp.getEmploymentInsuranceNo();// 雇用保険番号
 		String myNumber = emp.getMyNumber();// マイナンバー
-		String resumeRemark1 = emp.getResumeRemark1();// 備考１
-		String resumeRemark2 = emp.getResumeRemark2();// 備考２
+		String resumeName1 = emp.getResumeName1();// 備考１
+		String resumeName2 = emp.getResumeName2();// 備考２
 		String passportNo = emp.getPassportNo();// パスポート
 		String ageFrom = emp.getAgeFrom();// 開始年齢
 		String ageTo = emp.getAgeTo();// 終了年齢
@@ -375,11 +375,11 @@ public class EmployeeInfoController extends BaseController {
 		if (myNumber != null ) {
 			sendMap.put("myNumber", myNumber);
 		}
-		if (resumeRemark2 != null ) {
-			sendMap.put("resumeRemark2", resumeRemark2);
+		if (resumeName2 != null ) {
+			sendMap.put("resumeName2", resumeName2);
 		}
-		if (resumeRemark1 != null ) {
-			sendMap.put("resumeRemark1", resumeRemark1);
+		if (resumeName1 != null ) {
+			sendMap.put("resumeName1", resumeName1);
 		}
 		if (passportNo != null ) {
 			sendMap.put("passportNo", passportNo);

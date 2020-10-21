@@ -39,7 +39,9 @@
 		SELECT
 		employeeNo CODE,
 		CONCAT( employeeFristName,
-		employeeLastName, '(', employeeNo, ')' ) NAME
+		employeeLastName, '(', employeeNo, ')' ) NAME,
+		CONCAT( employeeFristName,
+		employeeLastName ) TEXT
 		FROM
 		rams.T001Employee
 		WHERE
