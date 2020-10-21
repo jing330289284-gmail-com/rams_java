@@ -299,6 +299,8 @@ public class EmployeeInfoController extends BaseController {
 		String lastHalfAddress = emp.getLastHalfAddress();//住所後半
 		String stationCode = emp.getStationCode();//　　最寄駅1
 		
+		String employeeName = emp.getEmployeeName();//社員名
+		
 		if (stationCode != null) {
 			sendMap.put("stationCode", stationCode);
 		}
@@ -476,6 +478,9 @@ public class EmployeeInfoController extends BaseController {
 		}
 		if (siteRoleCode != null ) {
 			sendMap.put("siteRoleCode", siteRoleCode);
+		}
+		if (employeeName != null ) {
+			sendMap.put("employeeName", employeeName);
 		}
 		return sendMap;
 	}

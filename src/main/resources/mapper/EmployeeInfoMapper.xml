@@ -9,7 +9,7 @@
 		SELECT
 		(@rowNo:=@rowNo + 1) AS rowNo,
 		T001.employeeNo,
-		CONCAT(T001.employeeFristName,' ',T001.employeeLastName)as
+		CONCAT(T001.employeeFristName,' ',T001.employeeLastName) as
 		employeeFristName ,
 		T002.Furigana,
 		T002.alphabetName,
@@ -35,9 +35,9 @@
 		<if test="employeeNo!=null">
 			AND T001.employeeNo=#{employeeNo}
 		</if>
-		<if test="employeeFristName!=null">
-			AND T001.employeeFristName like
-			concat('%',#{employeeFristName},'%')
+		<if test="employeeName!=null">
+			AND CONCAT(T001.employeeFristName,T001.employeeLastName) like
+			concat('%',#{employeeName},'%')
 		</if>
 		<if test="employeeFormCode!=null">
 			AND T002.employeeFormCode=#{employeeFormCode}
@@ -437,7 +437,8 @@
 		T002.employeeNo =
 		T001.employeeNo
 		LEFT JOIN
-		T015ResumeManagement AS T015
+		T015ResumeManagement AS
+		T015
 		ON
 		T015.employeeNo=T001.employeeNo
 		LEFT JOIN
@@ -531,7 +532,7 @@
 		employeeNo =
 		#{employeeNo}
 	</select>
-	
+
 	<!--履歴書を追加 -->
 	<insert id="insertResumeManagement" parameterType="String">
 		INSERT INTO
@@ -583,7 +584,7 @@
 		employeeNo =
 		#{employeeNo}
 	</update>
-		<!-- 履歴書を削除 -->
+	<!-- 履歴書を削除 -->
 	<delete id="deleteResumeManagement" parameterType="String">
 		DELETE
 		FROM
