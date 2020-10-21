@@ -69,9 +69,22 @@
 	<update id="updateCostRegistration" parameterType="String">
 		UPDATE T020CostInfo
 		SET 
-			updateTime= now(),
-			sumWorkTime = #{sumWorkTime},
-			approvalStatus = 1
+			employeeNo = #{employeeNo},
+			happendDate = #{happendDate},
+			costClassificationCode = #{costClassificationCode},
+			dueDate = #{dueDate},
+			detailedName = #{detailedName},
+			stationCode = #{stationCode},
+			originCode = #{originCode},
+			transportationCode = #{transportationCode},
+			destinationCode = #{destinationCode},
+			cost = #{cost},
+			remark = #{remark},
+			roundCode = #{roundCode},
+			costFile = #{costFile},
+			updateTime =now(),
+			createTime =now(),
+			updateUser = #{employeeName}
 		WHERE 
 			employeeNo = #{employeeNo}
 			and attendanceYearAndMonth = #{attendanceYearAndMonth}

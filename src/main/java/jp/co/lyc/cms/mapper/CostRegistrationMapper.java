@@ -18,5 +18,7 @@ public interface CostRegistrationMapper {
 	 * アップデート
 	 * @param sendMap
 	 */
-	public void updateCostRegistration(CostRegistrationModel costRegistrationModel) ;	
+	public void updateCostRegistration(CostRegistrationModel costRegistrationModel) ;
+	public void insertCostRegistration(CostRegistrationModel costRegistrationModel) ;
+	public void deletetCostRegistration(CostRegistrationModel costRegistrationModel) ;
 }

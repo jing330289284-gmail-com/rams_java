@@ -28,7 +28,8 @@ public class CostRegistrationController extends BaseController {
 	@Autowired
 	CostRegistrationService costRegistrationService;
 	/**
-	 * 登録ボタン
+	 * 
+	 * 検索
 	 * @param topCustomerMod
 	 * @return
 	 */
@@ -46,14 +47,14 @@ public class CostRegistrationController extends BaseController {
 		return checkMod;
 	}
 	/**
-	 * 作業報告書アップロード
+	 * 追加
 	 * 
 	 * @param
 	 * @return boolean
 ---	 */
-	@RequestMapping(value = "/updatecostRegistration", method = RequestMethod.POST)
+	@RequestMapping(value = "/insertCostRegistration", method = RequestMethod.POST)
 	@ResponseBody
-	public boolean updateCostRegistrationFile(@RequestParam(value = "emp", required = false) String JSONEmp,
+	public boolean insertCostRegistration(@RequestParam(value = "emp", required = false) String JSONEmp,
 			@RequestParam(value = "costRegistrationFile", required = false) MultipartFile costRegistrationFile) throws Exception {
 		logger.info("CostRegistrationController.insertCostRegistration:" + "追加開始");
 		JSONObject jsonObject = JSON.parseObject(JSONEmp);
@@ -68,8 +69,62 @@ public class CostRegistrationController extends BaseController {
 			return false;
 		}
 		costRegistrationModel.setCostFile(getFilename);
-		boolean result  = costRegistrationService.updateCostRegistration(costRegistrationModel);
+		boolean result  = costRegistrationService.insertCostRegistration(costRegistrationModel);
 		logger.info("CostRegistrationController.insertCostRegistration:" + "追加結束");
+		return result;
+	}
+	/**
+	 * 修正
+	 * 
+	 * @param
+	 * @return boolean
+---	 */
+	@RequestMapping(value = "/updatecostRegistration", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean updateCostRegistration(@RequestParam(value = "emp", required = false) String JSONEmp,
+			@RequestParam(value = "costRegistrationFile", required = false) MultipartFile costRegistrationFile) throws Exception {
+		logger.info("CostRegistrationController.insertCostRegistration:" + "修正開始");
+		JSONObject jsonObject = JSON.parseObject(JSONEmp);
+		CostRegistrationModel costRegistrationModel = JSON.parseObject(jsonObject.toJSONString(), new TypeReference<CostRegistrationModel>() {
+		});
+		costRegistrationModel.setEmployeeNo(getSession().getAttribute("employeeNo").toString());
+		costRegistrationModel.setEmployeeName(getSession().getAttribute("employeeName").toString()); 
+		String getFilename;
+		try {
+			getFilename=upload(costRegistrationModel,costRegistrationFile);
+		} catch (Exception e) {
+			return false;
+		}
+		costRegistrationModel.setCostFile(getFilename);
+		boolean result  = costRegistrationService.updateCostRegistration(costRegistrationModel);
+		logger.info("CostRegistrationController.insertCostRegistration:" + "修正結束");
+		return result;
+	}
+	/**
+	 * 修正」
+	 * 
+	 * @param
+	 * @return boolean
+---	 */
+	@RequestMapping(value = "/deletetCostRegistration", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean deletetCostRegistration(@RequestParam(value = "emp", required = false) String JSONEmp,
+			@RequestParam(value = "costRegistrationFile", required = false) MultipartFile costRegistrationFile) throws Exception {
+		logger.info("CostRegistrationController.deletetCostRegistration:" + "削除開始");
+		JSONObject jsonObject = JSON.parseObject(JSONEmp);
+		CostRegistrationModel costRegistrationModel = JSON.parseObject(jsonObject.toJSONString(), new TypeReference<CostRegistrationModel>() {
+		});
+		costRegistrationModel.setEmployeeNo(getSession().getAttribute("employeeNo").toString());
+		costRegistrationModel.setEmployeeName(getSession().getAttribute("employeeName").toString()); 
+		String getFilename;
+		try {
+			getFilename=upload(costRegistrationModel,costRegistrationFile);
+		} catch (Exception e) {
+			return false;
+		}
+		costRegistrationModel.setCostFile(getFilename);
+		boolean result  = costRegistrationService.updateCostRegistration(costRegistrationModel);
+		logger.info("CostRegistrationController.deletetCostRegistration:" + "削除結束");
 		return result;
 	}
 	
@@ -84,15 +139,13 @@ public class CostRegistrationController extends BaseController {
 			file.mkdirs();
 		}
 		String fileName =costRegistrationFile.getOriginalFilename();
-		String suffix = fileName.substring(fileName.lastIndexOf(".") + 1);
-		String newName = costRegistrationModel.getEmployeeNo() + "_"+costRegistrationModel.getHappendDate()+costRegistrationModel.getEmployeeName()+ "_作業報告書"+ "." + suffix;
 		try {
-			File newFile = new File(file.getAbsolutePath() + File.separator + newName);
+			File newFile = new File(file.getAbsolutePath() + File.separator + fileName);
 			costRegistrationFile.transferTo(newFile);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "";
 		}
-		return realPath+"/"+newName;
+		return realPath+"/"+fileName;
 	}
 }

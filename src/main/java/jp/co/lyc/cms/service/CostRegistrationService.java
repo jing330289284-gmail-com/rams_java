@@ -48,4 +48,26 @@ public class CostRegistrationService {
 		}
 		return result;
 	}
+	public boolean insertCostRegistration(CostRegistrationModel costRegistrationModel) {
+		boolean result = true;
+		try {
+			costRegistrationMapper.insertCostRegistration(costRegistrationModel);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return result = false;
+		}
+		return result;
+	}
+	public boolean deletetCostRegistration(CostRegistrationModel costRegistrationModel) {
+		boolean result = true;
+		try {
+			costRegistrationMapper.insertCostRegistration(costRegistrationModel);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return result = false;
+		}
+		return result;
+	}
 }
