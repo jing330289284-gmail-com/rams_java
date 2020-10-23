@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -27,6 +28,8 @@ import jp.co.lyc.cms.model.BreakTimeModel;
 import jp.co.lyc.cms.model.DutyRegistrationModel;
 import jp.co.lyc.cms.model.EmployeeWorkTimeModel;
 import jp.co.lyc.cms.service.DutyRegistrationService;
+import jp.co.lyc.cms.util.UtilsController;
+import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -34,7 +37,9 @@ import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.data.JRMapCollectionDataSource;
+import net.sf.jasperreports.engine.design.JRDesignVariable;
 import net.sf.jasperreports.engine.util.JRLoader;
 
 @Controller
@@ -88,6 +93,7 @@ public class DutyRegistrationController extends BaseController{
 			tempJsonObject.put("afternoonTime", tempJsonObject.getOrDefault("endTime", ""));
 			tempJsonObject.put("holidayFlag", tempJsonObject.getOrDefault("isWork", ""));
 			tempJsonObject.put("workTime", tempJsonObject.getOrDefault("workHour", ""));
+			tempJsonObject.put("breakTime", tempJsonObject.getOrDefault("sleepHour", ""));
 			tempJsonObject.put("confirmFlag", "0");
 			tempJsonObject.put("siteCustomer", jsonObject.getOrDefault("siteCustomer", ""));
 			tempJsonObject.put("customer", jsonObject.getOrDefault("customer", ""));
@@ -111,17 +117,41 @@ public class DutyRegistrationController extends BaseController{
 	 */
 	@RequestMapping(value = "/downloadPDF", method = RequestMethod.POST)
 	@ResponseBody
-	public boolean downloadPDF(@RequestBody String requestJson) {
+	public String downloadPDF(@RequestBody String requestJson) {
 		logger.info("DutyRegistrationController.downloadPDF:" + "開始");
+		JSONObject jsonObject = JSON.parseObject(requestJson);
+		String yearMonth = (String)jsonObject.getOrDefault("yearMonth", "");
 		Map<String, Object> dutyData = this.getDutyInfo(requestJson);
 		ArrayList<Map<String, Object>> dutyDate = this.dutySelect(requestJson);
-		File inputFile = new File("E:\\rams_java\\src\\main\\resources\\test.jrxml");
-		File outputFile = new File("E:\\rams_java\\src\\main\\resources\\test.pdf");
+		String user = (String) dutyData.get("employeeName");
+		File nowFile = new File(".").getAbsoluteFile();
+		File inputFile = new File(nowFile.getParentFile(), "src/main/resources/PDFTemplate/dutyTemplate.jrxml");
+		File outputFile = new File(UtilsController.DOWNLOAD_PATH_BASE + "dutyReport/", user + "_" + yearMonth + ".pdf");
+		outputFile.getParentFile().mkdirs();
 		try {
 			Map<String, Object> parameters = new HashMap<String, Object>();
 			Collection<Map<String, ?>> source = new ArrayList<>();
-			parameters.put("Year", "2011");
-			parameters.put("Month", "09");
+			parameters.put("Year", yearMonth.substring(0, 4));
+			parameters.put("Month", yearMonth.substring(4, 6));
+			parameters.put("siteCustomer", dutyData.get("siteCustomer"));
+			parameters.put("customer", dutyData.get("customer"));
+			parameters.put("siteResponsiblePerson", dutyData.get("siteResponsiblePerson"));
+			parameters.put("systemName", dutyData.get("systemName"));
+			parameters.put("user", user);
+			
+	        ArrayList<Map<String,?>> tableData = new ArrayList<>();
+	        Map<String,Object> rowData = new Hashtable<>();
+	        for (int i = 0; i < dutyDate.size(); i++)	{
+	        	rowData = new Hashtable<>();
+	        	rowData = dutyDate.get(i);
+	        	rowData.put("morningTime", dutyDate.get(i).get("startTime"));
+	        	rowData.put("afternoonTime", dutyDate.get(i).get("endTime"));
+	        	rowData.put("workTime", dutyDate.get(i).get("workHour"));
+	        	rowData.put("breakTime", dutyDate.get(i).get("breakTime"));
+	        	tableData.add(rowData);
+	        }
+	        JRDataSource ds = new JRBeanCollectionDataSource(tableData);
+	        parameters.put("dataTableResource", ds);
 			JasperReport report = JasperCompileManager.compileReport(inputFile.getAbsolutePath());
 			JasperPrint print = JasperFillManager.fillReport(report, parameters, new JREmptyDataSource());
 			JasperExportManager.exportReportToPdfFile(print, outputFile.getAbsolutePath());
@@ -131,7 +161,7 @@ public class DutyRegistrationController extends BaseController{
 			logger.error(e.getMessage());
 		}
 		logger.info("DutyRegistrationController.downloadPDF:" + "終了");
-		return true;
+		return outputFile.getAbsolutePath();
 	}
 	/**
 	 */
@@ -171,6 +201,7 @@ public class DutyRegistrationController extends BaseController{
 		Map<String, Object> tempMap = new HashMap<String, Object>();
 		for (EmployeeWorkTimeModel employeeWorkTimeModel : arrEmployeeWorkTimeModel)	{
 			tempMap = new HashMap<String, Object>();
+			tempMap = employeeWorkTimeModel.toHashMap();
 			tempMap.put("day",			employeeWorkTimeModel.getDay());
 			tempMap.put("yearMonth",	employeeWorkTimeModel.getYearAndMonth());
 			tempMap.put("startTime",	employeeWorkTimeModel.getMorningTime());
