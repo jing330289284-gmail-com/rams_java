@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
+import java.util.Comparator;
 
 import javax.servlet.http.HttpSession;
 
@@ -23,6 +24,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.thoughtworks.xstream.io.path.Path;
 
+import edu.emory.mathcs.backport.java.util.Collections;
 import jp.co.lyc.cms.common.BaseController;
 import jp.co.lyc.cms.model.BreakTimeModel;
 import jp.co.lyc.cms.model.DutyRegistrationModel;
@@ -141,6 +143,7 @@ public class DutyRegistrationController extends BaseController{
 			
 	        ArrayList<Map<String,?>> tableData = new ArrayList<>();
 	        Map<String,Object> rowData = new Hashtable<>();
+			Double totalWorkTime = 0.0;
 	        for (int i = 0; i < dutyDate.size(); i++)	{
 	        	rowData = new Hashtable<>();
 	        	rowData = dutyDate.get(i);
@@ -149,9 +152,19 @@ public class DutyRegistrationController extends BaseController{
 	        	rowData.put("workTime", dutyDate.get(i).get("workHour"));
 	        	rowData.put("breakTime", dutyDate.get(i).get("breakTime"));
 	        	tableData.add(rowData);
+	        	totalWorkTime += Double.valueOf((String) dutyDate.get(i).get("workHour"));
 	        }
+	        Collections.sort(tableData, new Comparator<Map<String, Object>>(){
+	        	public int compare(Map<String, Object> first, Map<String, Object> second) {
+					// TODO: Null checking, both for maps and values
+	        		Integer firstValue = Integer.valueOf((String) first.get("day"));
+	        		Integer secondValue = Integer.valueOf((String) second.get("day"));
+					return firstValue.compareTo(secondValue);
+				}
+	        });
 	        JRDataSource ds = new JRBeanCollectionDataSource(tableData);
 	        parameters.put("dataTableResource", ds);
+	        parameters.put("TotalWorkTime", totalWorkTime);
 			JasperReport report = JasperCompileManager.compileReport(inputFile.getAbsolutePath());
 			JasperPrint print = JasperFillManager.fillReport(report, parameters, new JREmptyDataSource());
 			JasperExportManager.exportReportToPdfFile(print, outputFile.getAbsolutePath());
