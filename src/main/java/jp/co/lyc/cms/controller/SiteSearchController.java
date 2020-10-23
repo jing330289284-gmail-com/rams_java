@@ -80,13 +80,21 @@ public class SiteSearchController {
 		}
 		int year = 0;
 		int month = 0;
-		if (Math.abs(endDay - beginDay) >= 15) {
+		if (endDay - beginDay >= 15) {
 			if ((endMonth - beginMonth) >= 0) {
 				year = endYear - beginYear;
 				month = endMonth - beginMonth + 1;
 			} else if ((endMonth - beginMonth) < 0) {
 				year = endYear - beginYear - 1;
 				month = endMonth - beginMonth + 13;
+			}
+		} else if (endDay - beginDay <= -15) {
+			if ((endMonth - beginMonth) >= 0) {
+				year = endYear - beginYear;
+				month = endMonth - beginMonth - 1;
+			} else if ((endMonth - beginMonth) < 0) {
+				year = endYear - beginYear - 1;
+				month = endMonth - beginMonth + 11;
 			}
 		} else if (Math.abs(endDay - beginDay) < 15) {
 			if ((endMonth - beginMonth) >= 0) {
