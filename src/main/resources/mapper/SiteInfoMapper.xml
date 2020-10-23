@@ -9,21 +9,22 @@
 		levelCode,typeOfIndustryCode,nonSitePeriod,nonSiteMonths,remark,updateTime,createTime,updateUser)
 		values(#{employeeNo},#{customerNo},#{topCustomerNo},#{admissionStartDate},#{admissionEndDate},
 		#{siteManager},#{systemName},#{developLanguageCode},#{location},#{unitPrice},#{siteRoleCode},#{payOffRange1},
-		#{payOffRange2},#{relatedEmployees},#{levelCode},#{typeOfIndustryCode},#{nonSitePeriod},#{nonSiteMonths},
-		#{remark},now(),now(),#{updateUser})
+		#{payOffRange2},#{relatedEmployees},#{levelCode},#{typeOfIndustryCode},#{nonSitePeriod},#{nonSiteMonths},#{dailyCalculationStatus},
+		#{workState},#{remark},now(),now(),#{updateUser})
 	</insert>
 
 	<update id="siteUpdate" parameterType="map">
-		update T006EmployeeSiteInfo
+		update
+		T006EmployeeSiteInfo
 		set
 		employeeNo=#{employeeNo},customerNo=#{customerNo},topCustomerNo=#{topCustomerNo},admissionStartDate=#{admissionStartDate},
 		admissionEndDate=#{admissionEndDate},siteManager=#{siteManager},systemName=#{systemName},
 		developLanguageCode=#{developLanguageCode},stationCode=#{location},unitPrice=#{unitPrice},
 		siteRoleCode=#{siteRoleCode},payOffRange1=#{payOffRange1},payOffRange2=#{payOffRange2},
 		relatedEmployees=#{relatedEmployees},levelCode=#{levelCode},typeOfIndustryCode=#{typeOfIndustryCode},
-		remark=#{remark},updateTime=now(),updateUser=#{updateUser}
+		nonSitePeriod=#{nonSitePeriod},nonSiteMonths=#{nonSiteMonths},dailyCalculationStatus=#{dailyCalculationStatus},
+		workState=#{workState},remark=#{remark},updateTime=now(),updateUser=#{updateUser}
 		where employeeNo=#{employeeNo} AND admissionStartDate=#{workDate}
-
 	</update>
 
 	<select id="getSiteInfo" parameterType="java.lang.String"
@@ -37,6 +38,8 @@
 		a.payOffRange1,
 		a.payOffRange2,
 		a.relatedEmployees,
+		a.dailyCalculationStatus,
+		a.workState,
 		a.remark,
 		a.levelCode,
 		a.siteRoleCode,
@@ -55,34 +58,35 @@
 		h.levelName,
 		i.typeOfIndustryName
 		FROM
-		rams.T006EmployeeSiteInfo a
-		LEFT JOIN
-		rams.M012SiteRole b
+		T006EmployeeSiteInfo a
+		LEFT
+		JOIN
+		M012SiteRole b
 		ON
 		a.siteRoleCode = b.siteRoleCode
 		LEFT JOIN
-		rams.T007CustomerInfo c ON
+		T007CustomerInfo c ON
 		a.customerNo = c.customerNo
 		LEFT JOIN
-		rams.T008TopCustomerInfo d ON
+		T008TopCustomerInfo d ON
 		a.topCustomerNo = d.topCustomerNo
 		LEFT
 		JOIN
-		rams.M011DevelopLanguage e
+		M011DevelopLanguage e
 		ON
 		a.developLanguageCode =
 		e.developLanguageCode
 		LEFT JOIN
-		rams.M013Station f ON
+		M013Station f ON
 		a.stationCode =
 		f.stationCode
 		LEFT JOIN
-		rams.M008Level h ON
+		M008Level h ON
 		a.levelCode =
 		h.levelCode
 		LEFT
 		JOIN
-		rams.M022TypeOfIndustry i ON
+		M022TypeOfIndustry i ON
 		a.typeOfIndustryCode =
 		i.typeOfIndustryCode
 		WHERE
