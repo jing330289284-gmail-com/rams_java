@@ -29,7 +29,7 @@
 			employeeNo = #{employeeNo}
     </select>
     <insert id="insertCostRegistration" parameterType="String">
-	INSERT INTO T020CostInfo(
+		INSERT INTO T020CostInfo(
 			employeeNo,
 			happendDate,
 			costClassificationCode,
@@ -50,19 +50,19 @@
 			#{employeeNo},
 			#{happendDate},
 			#{costClassificationCode},
-			#{dueDate},
-			#{detailedName},
+			#{dueDate,jdbcType=VARCHAR},
+			#{detailedName,jdbcType=VARCHAR},
 			#{stationCode},
 			#{originCode},
 			#{transportationCode},
 			#{destinationCode},
 			#{cost},
-			#{remark},
+			#{remark,jdbcType=VARCHAR},
 			#{roundCode},
 			#{costFile},
 			NOW(),
 			NOW(),
-			#{updateUser})
+			#{employeeName})
     </insert>
 	<update id="updateCostRegistration" parameterType="String">
 		UPDATE T020CostInfo
