@@ -29,7 +29,9 @@
 	<select id="getEmployeeName"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT employeeNo code
-		,CONCAT(employeeFristName,employeeLastName,'(',employeeNo,')') name
+		,CONCAT(employeeFristName,employeeLastName,'(',employeeNo,')') name,
+		CONCAT( employeeFristName,
+		employeeLastName ) TEXT
 		FROM rams.T001Employee
 	</select>
 

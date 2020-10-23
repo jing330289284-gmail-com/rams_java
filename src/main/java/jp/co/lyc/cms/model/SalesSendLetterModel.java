@@ -52,7 +52,22 @@ public class SalesSendLetterModel {
 	String purchasingManagers2;
 	String positionCode2;
 	String purchasingManagersMail2;
+	String name;
+	String code;
 	
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}
 	public String getPurchasingManagers2() {
 		return purchasingManagers2;
 	}

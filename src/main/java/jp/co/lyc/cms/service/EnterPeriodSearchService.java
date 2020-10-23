@@ -48,7 +48,7 @@ public class EnterPeriodSearchService {
 			}else{
 				month = year*12 + month - nonSiteMonths;
 			}
-			if(month != 0 && month%12 == 0) {
+			if(month != 0 && month%12 == 0 && epsModel.getEmployeeNo().substring(0,3).equals("LYC")) {
 				fullYearPeople.add(epsModel.getEmployeeNo());
 			}
 		}
@@ -75,13 +75,15 @@ public class EnterPeriodSearchService {
 		ArrayList<String> fullYearPeople = new ArrayList<String>();
 		for(EnterPeriodSearchModel epsmod:dateList) {
 			//最近の入場期日を別れる
+			int startDateYear = Integer.parseInt(epsmod.getAdmissionStartDate().substring(0,4));
 			int startDateMonth = Integer.parseInt(epsmod.getAdmissionStartDate().substring(4,6));
 			//画面の期日を別れる
+			int dateYear = Integer.parseInt(yearAndMonth.substring(0,4));
 			int dateMonth = Integer.parseInt(yearAndMonth.substring(4));
 			//計算
+			int year = dateYear - startDateYear;
 			int month = dateMonth - startDateMonth;
-			
-			if(month == 0) {
+			if((year > 0 || year == 0) && month == 0) {
 				fullYearPeople.add(epsmod.getEmployeeNo());
 			}
 		}
@@ -109,11 +111,7 @@ public class EnterPeriodSearchService {
 		String yearAndMonth = sendMap.get("yearAndMonth");
 		ArrayList<String> fullYearPeople = new ArrayList<String>();
 		for(EnterPeriodSearchModel epsModel:dateList) {
-			//次のボーナス月
-			int nextBonusMonth = Integer.parseInt(epsModel.getNextBonusMonth().substring(4));
-			//画面の月
-			int monthPage = Integer.parseInt(yearAndMonth.substring(4)); 
-			if(monthPage - nextBonusMonth == 0) {
+			if(epsModel.getNextBonusMonth().equals(yearAndMonth) && epsModel.getEmployeeNo().substring(0,3).equals("LYC")) {
 				fullYearPeople.add(epsModel.getEmployeeNo());
 			}
 		}

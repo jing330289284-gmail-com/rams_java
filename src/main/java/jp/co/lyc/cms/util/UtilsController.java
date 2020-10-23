@@ -485,21 +485,6 @@ public class UtilsController {
 	}
 
 	/**
-	 * 住宅ステータス
-	 * 
-	 * @return
-	 */
-
-	@RequestMapping(value = "/getHousingStatus", method = RequestMethod.POST)
-	@ResponseBody
-	public List<ModelClass> getHousingStatus() {
-		Properties properties = getProperties();
-		String HousingStatus = properties.getProperty("housingStatus");
-		List<ModelClass> list = getStatus(HousingStatus);
-		return list;
-	}
-
-	/**
 	 * 営業ステータス
 	 * 
 	 * @return
@@ -1088,6 +1073,19 @@ public class UtilsController {
 		Properties properties = getProperties();
 		String serverIP = properties.getProperty("serverIP");
 		List<ModelClass> list = getStatus(serverIP);
+		return list;
+	}
+	
+	/**
+	 * 取引区分
+	 * @return
+	 */
+	@RequestMapping(value = "/getTransaction", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getTransaction() {
+		Properties properties = getProperties();
+		String transaction = properties.getProperty("transaction");
+		List<ModelClass> list = getStatus(transaction);
 		return list;
 	}
 }

@@ -36,4 +36,25 @@ FROM
 WHERE
     customerNo = #{customerNo};
     </select>
+    <insert id="creatList" parameterType="String">
+    INSERT INTO T021CustomerSendMailStorageList
+		(StorageListName,
+		transmissionClassificationCode,
+		customerList,
+		updateTime,
+		createTime,
+		updateUser)
+		VALUES
+		(
+		#{name},
+		1,
+		#{code},
+		 NOW(),
+		 NOW(),
+		#{updateUser})
+    </insert>
+        <select id="getLists" resultType="jp.co.lyc.cms.model.SalesSendLetterModel">
+select StorageListName as name,transmissionClassificationCode as code,customerList as customerNo
+from T021CustomerSendMailStorageList
+    </select>
 </mapper>
