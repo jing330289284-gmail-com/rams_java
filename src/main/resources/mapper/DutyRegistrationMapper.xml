@@ -49,6 +49,7 @@
 		    , `siteCustomer`
 		    , `customer`
 		    , `siteResponsiblePerson`
+			, `breakTime`
 		    , `systemName`
 			, `workContent`
 			, `remark`
@@ -69,6 +70,7 @@
 		    , #{siteCustomer}
 		    , #{customer}
 		    , #{siteResponsiblePerson}
+			, #{breakTime}
 		    , #{systemName}
 			, #{workContent}
 			, #{remark}
@@ -109,6 +111,7 @@
 		    , `siteCustomer`
 		    , `customer`
 		    , `siteResponsiblePerson`
+		    , `breakTime`
 		    , `systemName`
 			, `workContent`
 			, `remark`
@@ -156,6 +159,7 @@
 			siteResponsiblePerson = #{siteResponsiblePerson},
 			workContent = #{workContent},
 			remark = #{remark},
+			breakTime = #{breakTime},
 			systemName = #{systemName},
 			updateTime = now(),
 			updateUser = #{updateUser}

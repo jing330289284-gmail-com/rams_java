@@ -901,6 +901,7 @@ public class UtilsController {
 
 	}
 
+	public static final String DOWNLOAD_PATH_BASE = "C:/file/";
 	@RequestMapping(value = "/download", method = RequestMethod.POST)
 	@ResponseBody
 	public void downloadTemplateFile(@RequestBody ModelClass model, HttpServletResponse response) throws IOException {
