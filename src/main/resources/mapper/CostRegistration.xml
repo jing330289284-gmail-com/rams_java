@@ -29,8 +29,7 @@
 			employeeNo = #{employeeNo}
     </select>
     <insert id="insertCostRegistration" parameterType="String">
-	INSERT INTO
-		T020CostInfo(
+	INSERT INTO T020CostInfo(
 			employeeNo,
 			happendDate,
 			costClassificationCode,
@@ -47,24 +46,23 @@
 			updateTime,
 			createTime,
 			updateUser)
-		VALUES(
-			{employeeNo},
-			{happendDate},
-			{costClassificationCode},
-			{dueDate},
-			{detailedName},
-			{stationCode},
-			{originCode},
-			{transportationCode},
-			{destinationCode},
-			{cost},
-			{remark},
-			{roundCode},
-			{costFile},
+		VALUE(
+			#{employeeNo},
+			#{happendDate},
+			#{costClassificationCode},
+			#{dueDate},
+			#{detailedName},
+			#{stationCode},
+			#{originCode},
+			#{transportationCode},
+			#{destinationCode},
+			#{cost},
+			#{remark},
+			#{roundCode},
+			#{costFile},
 			NOW(),
 			NOW(),
-			#{updateUser}
-		)
+			#{updateUser})
     </insert>
 	<update id="updateCostRegistration" parameterType="String">
 		UPDATE T020CostInfo
@@ -87,7 +85,8 @@
 			updateUser = #{employeeName}
 		WHERE 
 			employeeNo = #{employeeNo}
-			and attendanceYearAndMonth = #{attendanceYearAndMonth}
+			and happendDate = #{happendDate},
+			and costClassificationCode = #{costClassificationCode}
     </update>
 
 </mapper>
