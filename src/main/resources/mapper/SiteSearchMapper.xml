@@ -27,32 +27,32 @@
 		employeeFrom
 
 		FROM
-		rams.T006EmployeeSiteInfo a
+		T006EmployeeSiteInfo a
 		LEFT JOIN
-		rams.M012SiteRole
+		M012SiteRole
 		b ON
 		a.siteRoleCode = b.siteRoleCode
 		LEFT JOIN
-		rams.T007CustomerInfo c ON
+		T007CustomerInfo c ON
 		a.customerNo = c.customerNo
 		LEFT JOIN
-		rams.T002EmployeeDetail d ON
+		T002EmployeeDetail d ON
 		a.employeeNo = d.employeeNo
 		LEFT JOIN
-		rams.M011DevelopLanguage e ON
+		M011DevelopLanguage e ON
 		a.developLanguageCode =
 		e.developLanguageCode
 		LEFT JOIN
-		rams.M013Station
+		M013Station
 		f ON
 		a.stationCode =
 		f.stationCode
 		LEFT JOIN
-		rams.T001Employee g ON
+		T001Employee g ON
 		a.employeeNo =
 		g.employeeNo
 		LEFT JOIN
-		rams.T011BpInfoSupplement h ON
+		T011BpInfoSupplement h ON
 		a.employeeNo =
 		h.bpEmployeeNo
 		WHERE
