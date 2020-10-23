@@ -133,7 +133,7 @@ public class CostRegistrationController extends BaseController {
 		if (costFile== null) {
 			return "";
 		}
-		String realPath = new String(UPLOAD_PATH_PREFIX + "作業報告書フォルダ"+ File.separator+costRegistrationModel.getHappendDate().substring(0,4) + File.separator+costRegistrationModel.getHappendDate().substring(4));
+		String realPath = new String(UPLOAD_PATH_PREFIX + "作業報告書フォルダ"+ File.separator+costRegistrationModel.getHappendDate().substring(0,4) + File.separator+costRegistrationModel.getHappendDate().substring(4,6));
 		File file = new File(realPath);
 		if (!file.isDirectory()) {
 			file.mkdirs();
@@ -146,6 +146,6 @@ public class CostRegistrationController extends BaseController {
 			e.printStackTrace();
 			return "";
 		}
-		return realPath+"/"+fileName;
+		return realPath+File.separator+fileName;
 	}
 }
