@@ -43,7 +43,70 @@ public class CustomerInfoModel {
 	String resultCode;
 	AccountInfoModel accountInfo;
 	TopCustomerInfoModel topCustomerInfo;
+	String admissionStartDate;//入場期日
+	String admissionEndDate;//退場期日
+	String traderPerson;//取引総人月
+	String paymentSiteName;
+	String traderPersonFront;
+	String traderPersonBack;
+	String transactionStatus;
+	String capitalStockFront;
+	String capitalStockBack;
 	
+	public String getTraderPersonFront() {
+		return traderPersonFront;
+	}
+	public void setTraderPersonFront(String traderPersonFront) {
+		this.traderPersonFront = traderPersonFront;
+	}
+	public String getTraderPersonBack() {
+		return traderPersonBack;
+	}
+	public void setTraderPersonBack(String traderPersonBack) {
+		this.traderPersonBack = traderPersonBack;
+	}
+	public String getTransactionStatus() {
+		return transactionStatus;
+	}
+	public void setTransactionStatus(String transactionStatus) {
+		this.transactionStatus = transactionStatus;
+	}
+	public String getCapitalStockFront() {
+		return capitalStockFront;
+	}
+	public void setCapitalStockFront(String capitalStockFront) {
+		this.capitalStockFront = capitalStockFront;
+	}
+	public String getCapitalStockBack() {
+		return capitalStockBack;
+	}
+	public void setCapitalStockBack(String capitalStockBack) {
+		this.capitalStockBack = capitalStockBack;
+	}
+	public String getPaymentSiteName() {
+		return paymentSiteName;
+	}
+	public void setPaymentSiteName(String paymentSiteName) {
+		this.paymentSiteName = paymentSiteName;
+	}
+	public String getTraderPerson() {
+		return traderPerson;
+	}
+	public void setTraderPerson(String traderPerson) {
+		this.traderPerson = traderPerson;
+	}
+	public String getAdmissionStartDate() {
+		return admissionStartDate;
+	}
+	public void setAdmissionStartDate(String admissionStartDate) {
+		this.admissionStartDate = admissionStartDate;
+	}
+	public String getAdmissionEndDate() {
+		return admissionEndDate;
+	}
+	public void setAdmissionEndDate(String admissionEndDate) {
+		this.admissionEndDate = admissionEndDate;
+	}
 	public String getLevelName() {
 		return levelName;
 	}
