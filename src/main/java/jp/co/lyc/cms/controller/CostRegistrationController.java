@@ -37,10 +37,6 @@ public class CostRegistrationController extends BaseController {
 	@ResponseBody
 	public List<CostRegistrationModel> selectCostRegistration(CostRegistrationModel costRegistrationModel) {
 		costRegistrationModel.setEmployeeNo(getSession().getAttribute("employeeNo").toString());
-		costRegistrationModel.setEmployeeName(getSession().getAttribute("employeeName").toString()); 	
-		logger.info("CostRegistrationController.selectCheckCostRegistration:" + "検索開始");
-		costRegistrationService.selectCheckCostRegistration(costRegistrationModel);
-		logger.info("CostRegistrationController.selectCheckCostRegistration:" + "検索終了");
 		logger.info("CostRegistrationController.selectCostRegistration:" + "検索開始");
 		List<CostRegistrationModel> checkMod = costRegistrationService.selectCostRegistration(costRegistrationModel);
 		logger.info("CostRegistrationController.selectCostRegistration:" + "検索終了");

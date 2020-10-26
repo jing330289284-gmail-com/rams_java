@@ -13,15 +13,7 @@ public class CostRegistrationService {
 
 	@Autowired
 	CostRegistrationMapper costRegistrationMapper;
-	/**
-	 * 画面情報検索 本月
-	 * @param TopCustomerNo
-	 * @return
-	 */
-	
-	public void selectCheckCostRegistration(CostRegistrationModel costRegistrationModel)  {
-		costRegistrationMapper.selectCostRegistration(costRegistrationModel);
-	}
+
 	/**
 	 * 画面情報検索
 	 * @param TopCustomerNo
