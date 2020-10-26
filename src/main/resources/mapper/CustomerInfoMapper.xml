@@ -9,10 +9,15 @@
     <resultMap id="CustomerDepartmentInfo" type="jp.co.lyc.cms.model.CustomerDepartmentInfoModel"/>
     <!-- お客様番号採番 -->
     <select id="customerNoSaiBan" resultMap="customerNoSaiBan">
-        SELECT 
-        	MAX(customerNo) AS saibanCustomerNo
-        FROM 
-        	T007CustomerInfo
+		SELECT
+			CASE
+				
+			WHEN
+				customerNo IS NULL THEN
+				'C000' ELSE MAX( customerNo ) 
+				END AS saibanCustomerNo 
+			FROM
+			T007CustomerInfo
     </select>
     <!-- 上位お客様連想 -->
     <select id="selectTopCustomer" resultMap="topCustomer" parameterType="String">
