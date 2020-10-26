@@ -22,7 +22,7 @@
 
 	<delete id="salesPointDelete" parameterType="map">
 		DELETE FROM
-		rams.T014SalesPointInfo WHERE id= #{no};
+		T014SalesPointInfo WHERE id= #{no};
 	</delete>
 
 	<select id="getSalesPointInfo" parameterType="map"
@@ -33,7 +33,7 @@
 		level,salesProgressCode as salesPuttern,specialPointConditionCode
 		as
 		specialPoint,salesPoint as point,remark FROM
-		rams.T014SalesPointInfo
+		T014SalesPointInfo
 		WHERE
 		1=1
 		<if test="employee!= null and employee!= ''">

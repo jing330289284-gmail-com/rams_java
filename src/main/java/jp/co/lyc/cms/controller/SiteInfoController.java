@@ -105,13 +105,21 @@ public class SiteInfoController extends BaseController {
 			}
 			int year = 0;
 			int month = 0;
-			if (Math.abs(endDay - beginDay) >= 15) {
+			if (endDay - beginDay >= 15) {
 				if ((endMonth - beginMonth) >= 0) {
 					year = endYear - beginYear;
 					month = endMonth - beginMonth + 1;
 				} else if ((endMonth - beginMonth) < 0) {
 					year = endYear - beginYear - 1;
 					month = endMonth - beginMonth + 13;
+				}
+			} else if (endDay - beginDay <= -15) {
+				if ((endMonth - beginMonth) >= 0) {
+					year = endYear - beginYear;
+					month = endMonth - beginMonth - 1;
+				} else if ((endMonth - beginMonth) < 0) {
+					year = endYear - beginYear - 1;
+					month = endMonth - beginMonth + 11;
 				}
 			} else if (Math.abs(endDay - beginDay) < 15) {
 				if ((endMonth - beginMonth) >= 0) {
@@ -246,10 +254,14 @@ public class SiteInfoController extends BaseController {
 		String workDate = siteModel.getWorkDate();
 		String checkDate = siteModel.getCheckDate();
 		String nonSiteMonths = timeCalculate(checkDate, admissionStartDate);
+		String workState = siteModel.getWorkState();
+		String dailyCalculationStatus = siteModel.getDailyCalculationStatus();
 
 		sendMap.put("nonSiteMonths", nonSiteMonths);
 		if (nonSiteMonths != "") {
 			sendMap.put("nonSitePeriod", checkDate + "〜" + admissionStartDate);
+		} else {
+			sendMap.put("nonSitePeriod", "");
 		}
 		if (employeeNo != null && employeeNo.length() != 0) {
 			sendMap.put("employeeNo", employeeNo);
@@ -305,6 +317,14 @@ public class SiteInfoController extends BaseController {
 		if (workDate != null && workDate.length() != 0) {
 			sendMap.put("workDate", workDate);
 		}
+		if (workState != null && workState.length() != 0) {
+			sendMap.put("workState", workState);
+		}
+		if (dailyCalculationStatus != null && dailyCalculationStatus.length() != 0) {
+			sendMap.put("dailyCalculationStatus", "1");
+		}else {
+			sendMap.put("dailyCalculationStatus", "0");
+		}
 		sendMap.put("updateUser", loginSession.getAttribute("employeeName"));
 		return sendMap;
 	}
@@ -322,7 +342,6 @@ public class SiteInfoController extends BaseController {
 				String[] relatedEmployees;
 				if (siteList.get(a).getRelatedEmployees() != "" && siteList.get(a).getRelatedEmployees() != null) {
 					relatedEmployees = siteList.get(a).getRelatedEmployees().split(",");
-
 					if (relatedEmployees.length > 0) {
 						if (relatedEmployees[0] != "") {
 							siteList.get(a).setRelated1Employees(relatedEmployees[0]);
@@ -344,7 +363,6 @@ public class SiteInfoController extends BaseController {
 						}
 					}
 				}
-
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

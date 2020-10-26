@@ -187,7 +187,7 @@ WHERE
     and T011.bpEmployeeNo  not in(SELECT 
             employeeNo
         FROM
-            rams.T006EmployeeSiteInfo)
+            T006EmployeeSiteInfo)
 ORDER BY T011.bpEmployeeNo)union all(
 SELECT 
     T010.employeeNo AS employeeNo,
