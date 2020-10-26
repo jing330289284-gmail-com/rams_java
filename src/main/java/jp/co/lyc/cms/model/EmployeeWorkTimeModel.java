@@ -18,6 +18,7 @@ public class EmployeeWorkTimeModel {
 	String customer;
 	String siteResponsiblePerson;
 	String systemName;
+	String breakTime;
 	String workContent;
 	String remark;
 	String createTime;
@@ -102,6 +103,12 @@ public class EmployeeWorkTimeModel {
 	public void setSystemName(String systemName) {
 		this.systemName = systemName;
 	}
+	public String getBreakTime() {
+		return breakTime;
+	}
+	public void setBreakTime(String breakTime) {
+		this.breakTime = breakTime;
+	}
 	public String getCreateTime() {
 		return createTime;
 	}
@@ -146,6 +153,7 @@ public class EmployeeWorkTimeModel {
 		map.put("siteCustomer", this.getSiteCustomer());
 		map.put("customer", this.getCustomer());
 		map.put("siteResponsiblePerson", this.getSiteResponsiblePerson());
+		map.put("breakTime", this.getBreakTime());
 		map.put("systemName", this.getSystemName());
 		map.put("workContent", this.getWorkContent());
 		map.put("remark", this.getRemark());
@@ -178,6 +186,7 @@ public class EmployeeWorkTimeModel {
 		employeeWorkTimeModel.setSiteCustomer(String.valueOf(map.get("siteCustomer")));
 		employeeWorkTimeModel.setCustomer(String.valueOf(map.get("customer")));
 		employeeWorkTimeModel.setSiteResponsiblePerson(String.valueOf(map.get("siteResponsiblePerson")));
+		employeeWorkTimeModel.setBreakTime(String.valueOf(map.get("breakTime")));
 		employeeWorkTimeModel.setSystemName(String.valueOf(map.get("systemName")));
 		employeeWorkTimeModel.setWorkContent(String.valueOf(map.get("workContent")));
 		employeeWorkTimeModel.setRemark(String.valueOf(map.get("remark")));
@@ -193,9 +202,9 @@ public class EmployeeWorkTimeModel {
 				+ ", week=" + week + ", morningTime=" + morningTime + ", afternoonTime=" + afternoonTime
 				+ ", holidayFlag=" + holidayFlag + ", workTime=" + workTime + ", confirmFlag=" + confirmFlag
 				+ ", siteCustomer=" + siteCustomer + ", customer=" + customer + ", siteResponsiblePerson="
-				+ siteResponsiblePerson + ", systemName=" + systemName + ", workContent=" + workContent + ", remark="
-				+ remark + ", createTime=" + createTime + ", updateTime=" + updateTime + ", updateUser=" + updateUser
-				+ "]";
+				+ siteResponsiblePerson + ", systemName=" + systemName + ", breakTime=" + breakTime + ", workContent="
+				+ workContent + ", remark=" + remark + ", createTime=" + createTime + ", updateTime=" + updateTime
+				+ ", updateUser=" + updateUser + "]";
 	}
 	@Override
 	public int hashCode() {

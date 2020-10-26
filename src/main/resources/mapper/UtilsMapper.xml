@@ -32,7 +32,7 @@
 		,CONCAT(employeeFristName,employeeLastName,'(',employeeNo,')') name,
 		CONCAT( employeeFristName,
 		employeeLastName ) TEXT
-		FROM rams.T001Employee
+		FROM T001Employee
 	</select>
 
 	<!-- 本社社員名 -->
@@ -45,7 +45,7 @@
 		CONCAT( employeeFristName,
 		employeeLastName ) TEXT
 		FROM
-		rams.T001Employee
+		T001Employee
 		WHERE
 		employeeNo LIKE concat( '%', "LYC", '%' )
 	</select>
@@ -70,20 +70,20 @@
 		null or
 		trim(customerAbbreviation)='',customerName,customerAbbreviation) name
 		FROM
-		rams.T007CustomerInfo;
+		T007CustomerInfo;
 	</select>
 
 	<!--駅 -->
 	<select id="getStation"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT stationCode code,stationName name FROM
-		rams.M013Station;
+		M013Station;
 	</select>
 	<!--費用区分 -->
 	<select id="getCostClassification"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT costClassificationCode code,costClassificationName name FROM
-		rams.M028CostClassification
+		M028CostClassification
 		where
 		costClassificationCode>0;
 	</select>
@@ -91,13 +91,13 @@
 	<select id="getTransportation"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT transportationCode code,transportationName name FROM
-		rams.M029Transportation;
+		M029Transportation;
 	</select>
 	<!--業種 -->
 	<select id="getTypeOfIndustry"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT typeOfIndustryCode code,typeOfIndustryName name FROM
-		rams.M022TypeOfIndustry;
+		M022TypeOfIndustry;
 	</select>
 
 	<!--トップお客様 -->
@@ -108,7 +108,7 @@
 		trim(topCustomerAbbreviation)='',topCustomerName,topCustomerAbbreviation)
 		name
 		FROM
-		rams.T008TopCustomerInfo;
+		T008TopCustomerInfo;
 	</select>
 
 	<!--開発言語 -->
@@ -116,7 +116,7 @@
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT developLanguageCode code,developLanguageName name
 		FROM
-		rams.M011DevelopLanguage;
+		M011DevelopLanguage;
 	</select>
 
 	<!--日本語レベル -->

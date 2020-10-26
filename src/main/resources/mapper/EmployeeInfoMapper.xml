@@ -459,7 +459,7 @@
 		T003.employeeNo
 		LEFT
 		JOIN
-		rams.M013Station AS M013 ON
+		M013Station AS M013 ON
 		T003.stationCode =
 		M013.stationCode
 		LEFT

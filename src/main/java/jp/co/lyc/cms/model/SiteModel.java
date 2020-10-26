@@ -1,41 +1,59 @@
 package jp.co.lyc.cms.model;
 
-public class SiteModel{
+public class SiteModel {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -2028159323401651353L;
-	String employeeNo;
-	String systemName;
-	String location;
-	String customerNo;
-	String topCustomerNo;
-	String developLanguageCode;
-	String unitPrice;
-	String developLanguageName;
-	String siteRoleCode;
-	String siteManager;
-	String admissionStartDate;
-	String admissionEndDate;
-	String payOffRange1;
-	String payOffRange2;
-	String workDate;
-	String customerName;
-	String topCustomerName;
-	String siteRoleName;
-	String relatedEmployees;
-	String related1Employees;
-	String related2Employees;
-	String related3Employees;
-	String related4Employees;
-	String levelCode;
-	String remark;
-	String updateUser;
-	String levelName;
-	String typeOfIndustryName;
-	String typeOfIndustryCode;
-	String checkDate;
+	String employeeNo;// 社員番号
+	String systemName;// システム名
+	String location;// 場所
+	String customerNo;// お客様コード
+	String topCustomerNo;// トップお客様コード
+	String developLanguageCode;// 開発言語コード
+	String unitPrice;// 単価
+	String developLanguageName;// 開発言語名称
+	String siteRoleCode;// 役割コード
+	String siteManager;// 現場責任者
+	String admissionStartDate;// 入場日付
+	String admissionEndDate;// 退場日付
+	String payOffRange1;// 精算時間1
+	String payOffRange2;// 精算時間2
+	String workDate;// 現場期間
+	String customerName;// お客様名称
+	String topCustomerName;// トップお客様名称
+	String siteRoleName;// 役割名称
+	String relatedEmployees;// 関連社員1+2+3+4
+	String related1Employees;// 関連社員1
+	String related2Employees;// 関連社員2
+	String related3Employees;// 関連社員3
+	String related4Employees;// 関連社員4
+	String levelCode;// 評価コード
+	String remark;// 備考
+	String updateUser;// 更新者
+	String levelName;// 評価名称
+	String typeOfIndustryName;// 業種名称
+	String typeOfIndustryCode;// 業種コード
+	String checkDate;// 前回現場の退場日付
+	String dailyCalculationStatus;// 日割計算区分
+	String workState;// 現場状態
+
+	public String getDailyCalculationStatus() {
+		return dailyCalculationStatus;
+	}
+
+	public void setDailyCalculationStatus(String dailyCalculationStatus) {
+		this.dailyCalculationStatus = dailyCalculationStatus;
+	}
+
+	public String getWorkState() {
+		return workState;
+	}
+
+	public void setWorkState(String workState) {
+		this.workState = workState;
+	}
 
 	public String getCheckDate() {
 		return checkDate;
