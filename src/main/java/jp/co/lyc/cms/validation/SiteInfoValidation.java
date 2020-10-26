@@ -35,6 +35,10 @@ public class SiteInfoValidation implements Validator {
 		if (UtilsCheckMethod.isNullOrEmpty(p.getUnitPrice())) {
 			errors.rejectValue("unitPrice", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001", "単価"));
 		}
+		// 现场状态终了以及单金调整时退场年月不能为空
+		if (UtilsCheckMethod.isNullOrEmpty(p.getAdmissionEndDate()) && !(p.getWorkState().equals("0"))) {
+			errors.rejectValue("unitPrice", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001", "退場年月日"));
+		}
 		// 精算范围后面小于前面
 		if (!UtilsCheckMethod.isNullOrEmpty(p.getPayOffRange1())
 				&& !UtilsCheckMethod.isNullOrEmpty(p.getPayOffRange2())) {
