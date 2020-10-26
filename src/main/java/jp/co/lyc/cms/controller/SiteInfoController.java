@@ -158,7 +158,10 @@ public class SiteInfoController extends BaseController {
 		binder.setValidator(new SiteInfoValidation());
 		binder.validate();
 		BindingResult results = binder.getBindingResult();
-		if (results.hasErrors()) {
+		if (siteModel.getWorkState().equals("2")) {
+			result.put("errorsMessage", "単金調整登録不可");// エラーメッセージ
+			return result;
+		} else if (results.hasErrors()) {
 			results.getAllErrors().forEach(o -> {
 				FieldError error = (FieldError) o;
 				errorsMessage += error.getDefaultMessage();// エラーメッセージ
@@ -322,7 +325,7 @@ public class SiteInfoController extends BaseController {
 		}
 		if (dailyCalculationStatus != null && dailyCalculationStatus.length() != 0) {
 			sendMap.put("dailyCalculationStatus", "1");
-		}else {
+		} else {
 			sendMap.put("dailyCalculationStatus", "0");
 		}
 		sendMap.put("updateUser", loginSession.getAttribute("employeeName"));
