@@ -18,6 +18,7 @@ public class CostRegistrationModel {
 	String remark;
 	int roundCode;
 	String costFile;
+	String line;
 	String updateUser;
 	String updateTime;
 	String createTime;
@@ -135,5 +136,11 @@ public class CostRegistrationModel {
 	}
 	public void setCostFileFile(MultipartFile costFileFile) {
 		this.costFileFile = costFileFile;
+	}
+	public String getLine() {
+		return line;
+	}
+	public void setLine(String line) {
+		this.line = line;
 	}
 }
