@@ -118,7 +118,7 @@ public class UtilsController {
 		List<ModelClass> list = getStatus(siteStateStatus);
 		return list;
 	}
-	
+
 	/**
 	 * 社員形式を取得
 	 * 
@@ -306,6 +306,7 @@ public class UtilsController {
 		List<ModelClass> list = getStatus(checkSection);
 		return list;
 	}
+
 	/**
 	 * CheckSectionを取得する
 	 * 
@@ -319,6 +320,7 @@ public class UtilsController {
 		List<ModelClass> list = getStatus(round);
 		return list;
 	}
+
 	/**
 	 * 上場
 	 * 
@@ -538,7 +540,7 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getSalesProgress();
 		return list;
 	}
-	
+
 	/**
 	 * 日本語ラベル状況取得
 	 * 
@@ -550,7 +552,7 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getJapaneaseConversationLevel();
 		return list;
 	}
-	
+
 	/**
 	 * 英語状況取得
 	 * 
@@ -562,7 +564,7 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getEnglishConversationLevel();
 		return list;
 	}
-	
+
 	/**
 	 * 対応工程況取得
 	 * 
@@ -587,6 +589,7 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getStation();
 		return list;
 	}
+
 	/**
 	 * 費用区分取る
 	 * 
@@ -599,8 +602,9 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getCostClassification();
 		return list;
 	}
+
 	/**
-	 *交通手段を取る
+	 * 交通手段を取る
 	 * 
 	 * @return
 	 */
@@ -611,7 +615,7 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getTransportation();
 		return list;
 	}
-	
+
 	/**
 	 * 業種を取る
 	 * 
@@ -760,7 +764,7 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getQualification();
 		return list;
 	}
-	
+
 	/**
 	 * 社員氏名（BP社員ない）を取得する
 	 * 
@@ -872,15 +876,23 @@ public class UtilsController {
 		return props;
 	}
 
-	public final static String UPLOAD_PATH_PREFIX = "c:/file/履歴書/";
+	public final static String UPLOAD_PATH_PREFIX_resumeInfo = "c:/file/履歴書/";
+	public final static String UPLOAD_PATH_PREFIX_others = "c:/file/情報/";
 
 	public Map<String, Object> upload(MultipartFile uploadFile, Map<String, Object> sendMap, String key, String Info) {
 		if (uploadFile == null) {
 			sendMap.put(key, "");
 			return sendMap;
 		}
-		String realPath = new String(UPLOAD_PATH_PREFIX + sendMap.get("employeeNo") + "_"
-				+ sendMap.get("employeeFristName") + sendMap.get("employeeLastName"));
+		String realPath;
+		if (key.equals("resumeInfo1") || key.equals("resumeInfo2")) {
+			realPath = new String(UPLOAD_PATH_PREFIX_resumeInfo + sendMap.get("employeeNo") + "_"
+					+ sendMap.get("employeeFristName") + sendMap.get("employeeLastName"));
+		} else {
+			realPath = new String(UPLOAD_PATH_PREFIX_others + sendMap.get("employeeNo") + "_"
+					+ sendMap.get("employeeFristName") + sendMap.get("employeeLastName"));
+		}
+
 		File file = new File(realPath);
 		if (!file.isDirectory()) {
 			file.mkdirs();
@@ -902,6 +914,7 @@ public class UtilsController {
 	}
 
 	public static final String DOWNLOAD_PATH_BASE = "C:/file/";
+
 	@RequestMapping(value = "/download", method = RequestMethod.POST)
 	@ResponseBody
 	public void downloadTemplateFile(@RequestBody ModelClass model, HttpServletResponse response) throws IOException {
@@ -1024,31 +1037,33 @@ public class UtilsController {
 		List<ModelClass> list = getStatus(enterPeriod);
 		return list;
 	}
-	
-    /**
-             * 日数計算
-     * @param startTime ： 開始時間
-     * @param endTime  ： 終了時間
-     * @return   
-     */
-    public static int caculateTotalTime(String startTime,String endTime) {
-        SimpleDateFormat formatter =   new SimpleDateFormat( "yyyy-MM-dd");
-        Date date1=null;
-        Date date = null;
-        Long l = 0L;
-        try {
-            date = formatter.parse(startTime);
-            long ts = date.getTime();
-            date1 =  formatter.parse(endTime);
-            long ts1 = date1.getTime();
 
-            l = (ts - ts1) / (1000 * 60 * 60 * 24);
+	/**
+	 * 日数計算
+	 * 
+	 * @param startTime ： 開始時間
+	 * @param endTime   ： 終了時間
+	 * @return
+	 */
+	public static int caculateTotalTime(String startTime, String endTime) {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		Date date1 = null;
+		Date date = null;
+		Long l = 0L;
+		try {
+			date = formatter.parse(startTime);
+			long ts = date.getTime();
+			date1 = formatter.parse(endTime);
+			long ts1 = date1.getTime();
 
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return l.intValue();
-    }
+			l = (ts - ts1) / (1000 * 60 * 60 * 24);
+
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return l.intValue();
+	}
+
 	/**
 	 * 状況変動ステータスを取得する
 	 * 
@@ -1061,7 +1076,7 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getSituationChange();
 		return list;
 	}
-	
+
 	/**
 	 * serverIP
 	 * 
@@ -1076,9 +1091,10 @@ public class UtilsController {
 		List<ModelClass> list = getStatus(serverIP);
 		return list;
 	}
-	
+
 	/**
 	 * 取引区分
+	 * 
 	 * @return
 	 */
 	@RequestMapping(value = "/getTransaction", method = RequestMethod.POST)
