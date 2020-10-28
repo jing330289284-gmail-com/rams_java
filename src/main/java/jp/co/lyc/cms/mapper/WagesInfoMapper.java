@@ -33,4 +33,11 @@ public interface WagesInfoMapper {
 	 * @return
 	 */
 	public ArrayList<String> kadouCheck(String employeeNo);
+	
+	/**
+	 * 保険検索
+	 * @param employeeNo
+	 * @return
+	 */
+	public ArrayList<WagesInfoModel> hokenSearch(String employeeNo);
 }

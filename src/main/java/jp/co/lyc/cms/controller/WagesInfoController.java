@@ -176,6 +176,20 @@ public class WagesInfoController extends BaseController{
 			logger.info("WagesInfoController.onloadPage:" + "登録終了");
 			return result;
 		}
+		//非稼働の場合、保険は前件の保険を使う
+		ArrayList<String> relatedEmployees = wagesInfoMapper.kadouCheck(wagesInfoModel.getEmployeeNo());
+		if(relatedEmployees.size() == 0) {
+			ArrayList<WagesInfoModel> hokenList = 
+					wagesInfoMapper.hokenSearch(wagesInfoModel.getEmployeeNo());
+			if(hokenList.size() != 0) {
+				wagesInfoModel.setWelfarePensionAmount(
+						hokenList.get(hokenList.size()-1).getWelfarePensionAmount());
+				wagesInfoModel.setHealthInsuranceAmount(
+						hokenList.get(hokenList.size()-1).getHealthInsuranceAmount());
+				wagesInfoModel.setInsuranceFeeAmount(
+						hokenList.get(hokenList.size()-1).getInsuranceFeeAmount());
+			}
+		}
 		wagesInfoModel.setUpdateUser((String)getSession().getAttribute("employeeName"));
 		if(wagesInfoModel.getActionType().equals("insert")) {//插入场合
 			HashMap<String, String> sendMap = new HashMap<String, String>();
