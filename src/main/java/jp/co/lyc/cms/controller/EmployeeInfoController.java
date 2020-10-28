@@ -97,7 +97,7 @@ public class EmployeeInfoController extends BaseController {
 			@RequestParam(value = "resumeInfo2", required = false) MultipartFile resumeInfo2,
 			@RequestParam(value = "residentCardInfo", required = false) MultipartFile residentCardInfo,
 			@RequestParam(value = "passportInfo", required = false) MultipartFile passportInfo,
-			@RequestParam(value = "pictures", required = false) MultipartFile pictures) throws Exception {
+			@RequestParam(value = "picInfo", required = false) MultipartFile pictures) throws Exception {
 		logger.info("GetEmployeeInfoController.insertEmployee:" + "追加開始");
 		errorsMessage = "";
 		JSONObject jsonObject = JSON.parseObject(JSONEmp);
