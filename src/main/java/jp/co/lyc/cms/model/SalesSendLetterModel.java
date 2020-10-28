@@ -54,8 +54,15 @@ public class SalesSendLetterModel {
 	String purchasingManagersMail2;
 	String name;
 	String code;
+	String[] ctmNos;
 	
 	
+	public String[] getCtmNos() {
+		return ctmNos;
+	}
+	public void setCtmNos(String[] ctmNos) {
+		this.ctmNos = ctmNos;
+	}
 	public String getName() {
 		return name;
 	}

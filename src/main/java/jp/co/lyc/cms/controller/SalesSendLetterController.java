@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import jp.co.lyc.cms.common.BaseController;
 import jp.co.lyc.cms.model.SalesSendLetterModel;
+import jp.co.lyc.cms.model.SalesSendLettersListName;
+import jp.co.lyc.cms.model.SendLettersConfirmModel;
 import jp.co.lyc.cms.model.ModelClass;
 import jp.co.lyc.cms.service.SalesSendLetterService;
 
@@ -91,5 +93,61 @@ public class SalesSendLetterController  extends BaseController {
 		}
 		logger.info("getSalesPersons" + "検索結束");
 		return salesPersonsList;
+	}
+	
+	@RequestMapping(value = "/listNameUpdate", method = RequestMethod.POST)
+	@ResponseBody
+	public void listNameUpdate(@RequestBody SalesSendLettersListName salesSendLettersListNames) {
+
+		if(!salesSendLettersListNames.getStorageListName2().equals(salesSendLettersListNames.getOldStorageListName2())) {
+			updateName(salesSendLettersListNames.getStorageListName2(),salesSendLettersListNames.getOldStorageListName2());
+		}
+		if(!salesSendLettersListNames.getStorageListName3().equals(salesSendLettersListNames.getOldStorageListName3())) {
+			updateName(salesSendLettersListNames.getStorageListName3(),salesSendLettersListNames.getOldStorageListName3());
+		}
+		if(!salesSendLettersListNames.getStorageListName1().equals(salesSendLettersListNames.getOldStorageListName1())) {
+			updateName(salesSendLettersListNames.getStorageListName1(),salesSendLettersListNames.getOldStorageListName1());
+		}
+	}
+	
+	@RequestMapping(value = "/getCustomersByNos", method = RequestMethod.POST)
+	@ResponseBody
+	public List<SalesSendLetterModel> getCustomersByNos(@RequestBody SalesSendLetterModel model) {
+
+		logger.info("getCustomers:" + "検索開始");
+		List<SalesSendLetterModel> salesCustomersList = new ArrayList<SalesSendLetterModel>();
+		try {
+			salesCustomersList = salesSendLetterService.getSalesCustomersByNos(model.getCtmNos());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		logger.info("getCustomers" + "検索結束");
+		return salesCustomersList;
+	}
+	
+	private void updateName(String storageListName,String oldStorageListName) {
+		SalesSendLettersListName updateModel= new SalesSendLettersListName();
+		updateModel.setUpdateUser(getSession().getAttribute("employeeName").toString());
+		updateModel.setStorageListName(storageListName);
+		updateModel.setOldStorageListName(oldStorageListName);
+		try {
+			salesSendLetterService.listNameUpdate(updateModel);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping(value = "/deleteList", method = RequestMethod.POST)
+	@ResponseBody
+	public int deleteList(@RequestBody SalesSendLettersListName salesSendLettersListNames) {
+		logger.info("getSalesPersons:" + "検索開始");
+		int index=0;
+		try {
+			index = salesSendLetterService.deleteList(salesSendLettersListNames.getStorageListName());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		logger.info("getSalesPersons" + "検索結束");
+		return index;
 	}
 	}

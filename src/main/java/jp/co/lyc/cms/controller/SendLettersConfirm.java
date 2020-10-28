@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import jp.co.lyc.cms.common.BaseController;
+import jp.co.lyc.cms.model.EmployeeModel;
+import jp.co.lyc.cms.model.SalesSituationModel;
 import jp.co.lyc.cms.model.SendLettersConfirmModel;
 import jp.co.lyc.cms.service.SendLettersConfirmService;
 
@@ -40,6 +42,53 @@ public class SendLettersConfirm  extends BaseController {
 		List<SendLettersConfirmModel> sendLettersConfirmModelList = new ArrayList<SendLettersConfirmModel>();
 		try {
 			sendLettersConfirmModelList = sendLettersConfirmService.getSalesEmps(model.getEmployeeNos());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		logger.info("getSalesEmps" + "検索結束");
+		return sendLettersConfirmModelList;
+	}
+	
+	@RequestMapping(value = "/getAllEmpsWithResume", method = RequestMethod.POST)
+	@ResponseBody
+	public List<SalesSituationModel> getAllEmpsWithResume() {
+
+		logger.info("getSalesEmps:" + "検索開始");
+		List<SalesSituationModel> sendLettersConfirmModelList = new ArrayList<SalesSituationModel>();
+		try {
+			sendLettersConfirmModelList = sendLettersConfirmService.getAllEmpsWithResume();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		logger.info("getSalesEmps" + "検索結束");
+		return sendLettersConfirmModelList;
+	}
+	
+	@RequestMapping(value = "/getLoginUserInfo", method = RequestMethod.POST)
+	@ResponseBody
+	public List<EmployeeModel> getLoginUserInfo() {
+
+		logger.info("getSalesEmps:" + "検索開始");
+		String lobinUserNo = getSession().getAttribute("employeeNo").toString();
+		List<EmployeeModel> sendLettersConfirmModelList = new ArrayList<EmployeeModel>();
+		try {
+			sendLettersConfirmModelList = sendLettersConfirmService.getLoginUserInfo(lobinUserNo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		logger.info("getSalesEmps" + "検索結束");
+		return sendLettersConfirmModelList;
+	}	
+	
+	@RequestMapping(value = "/getMail", method = RequestMethod.POST)
+	@ResponseBody
+	public List<EmployeeModel> getMail() {
+
+		logger.info("getSalesEmps:" + "検索開始");
+		
+		List<EmployeeModel> sendLettersConfirmModelList = new ArrayList<EmployeeModel>();
+		try {
+			sendLettersConfirmModelList = sendLettersConfirmService.getMail();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
