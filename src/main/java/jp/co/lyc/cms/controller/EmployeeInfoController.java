@@ -190,7 +190,8 @@ public class EmployeeInfoController extends BaseController {
 			@RequestParam(value = "resumeInfo1", required = false) MultipartFile resumeInfo1,
 			@RequestParam(value = "resumeInfo2", required = false) MultipartFile resumeInfo2,
 			@RequestParam(value = "residentCardInfo", required = false) MultipartFile residentCardInfo,
-			@RequestParam(value = "passportInfo", required = false) MultipartFile passportInfo) throws Exception {
+			@RequestParam(value = "passportInfo", required = false) MultipartFile passportInfo,
+			@RequestParam(value = "picInfo", required = false) MultipartFile pictures) throws Exception {
 		logger.info("GetEmployeeInfoController.updateEmployee:" + "修正開始");
 		 errorsMessage = "";
 		JSONObject jsonObject = JSON.parseObject(JSONEmp);
@@ -220,6 +221,7 @@ public class EmployeeInfoController extends BaseController {
 			sendMap = utilsController.upload(resumeInfo2, sendMap, "resumeInfo2", emp.getResumeName2());
 			sendMap = utilsController.upload(residentCardInfo, sendMap, "residentCardInfo", "在留カード");
 			sendMap = utilsController.upload(passportInfo, sendMap, "passportInfo", "パスポート");
+		    sendMap = utilsController.upload(pictures, sendMap, "picInfo", "写真");
 			result = employeeInfoService.updateEmployee(sendMap);
 		} catch (Exception e) {
 			resultMap.put("result", false);
@@ -289,7 +291,6 @@ public class EmployeeInfoController extends BaseController {
 		String intoCompanyYearAndMonthTo = emp.getIntoCompanyYearAndMonthTo();// 入社年月先
 		String authorityCode = emp.getAuthorityCode();// 権限
 		String employeeStatus = emp.getEmployeeStatus();// 社員ステータス
-		// String picInfo = emp.getPicInfo();// 写真
 		String yearsOfExperience = emp.getYearsOfExperience();// 経験年数
 		AccountInfoModel accountInfoModel = emp.getAccountInfo();// 口座情報
 		BpInfoModel bpInfoModel = emp.getBpInfoModel();// bp情報
