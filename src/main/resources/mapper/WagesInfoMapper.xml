@@ -49,6 +49,18 @@
 		employeeNo = #{employeeNo}
 		AND admissionEndDate IS NULL
 </select>
+<!-- 保険検索 -->
+<select id="hokenSearch" parameterType="String" resultMap="wagesInfoModel">
+	SELECT
+		employeeNo,
+		welfarePensionAmount,
+		healthInsuranceAmount,
+		insuranceFeeAmount 
+	FROM
+		T005WagesInfo 
+	WHERE
+		employeeNo = #{employeeNo}
+</select>
 
 <!-- インサート -->
 <insert id="insert" parameterType="String">
