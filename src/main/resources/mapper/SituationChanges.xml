@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jp.co.lyc.cms.mapper.SituationChangesMapper">
+	<resultMap id="detailsInfo"
+		type="jp.co.lyc.cms.model.SituationChangesModel" />
+
+
+	<select id="getSituationChanges" parameterType="map"
+		resultMap="detailsInfo">
+		SELECT 
+			T005.reflectYearAndMonth,
+			T005.employeeNo,
+			CONCAT(T001.employeeFristName,T001.employeeLastName)as employeeName,
+			M005.employeeFormName,
+			T002.employeeFormCode,
+			T005.salary,
+			T005.socialInsuranceFlag,
+			CAST(T005.insuranceFeeAmount As unsigned) As insuranceFeeAmount,
+			CAST(T005.scheduleOfBonusAmount As unsigned) As scheduleOfBonusAmount,
+			T005.remark,
+			T002.intoCompanyYearAndMonth
+		FROM
+		T001Employee As T001		
+			LEFT JOIN T005WagesInfo As T005  on T001.employeeNo = T005.employeeNo
+			LEFT JOIN M005EmployeeForm As M005 on T005.employeeFormCode = M005.employeeFormCode
+			LEFT JOIN T002EmployeeDetail As T002 on T001.employeeNo = T002.employeeNo
+	    WHERE 
+			reflectYearAndMonth between #{startYandM} and #{endYandM}
+	         <if test="classification == 3">
+	         	AND intoCompanyYearAndMonth between #{startYandM} and #{endYandM}
+	         </if>
+	         <if test="classification == 4">
+	         	AND retirementYearAndMonth between #{startYandM} and #{endYandM}
+	         </if>	    
+	         order by employeeNo,reflectYearAndMonth
+	</select>
+	
+	<select id="getSituationChangesFront" parameterType="map"
+		resultMap="detailsInfo">
+		<foreach item="getYandM" collection="getYandM" index="index">
+		      <foreach item="getEmpNo" collection="getEmpNo" index="index2" >
+		<if test="index2 != 0 || index != 0">
+                    union
+                </if>
+       SELECT * FROM(
+       SELECT 
+			T005f.reflectYearAndMonth,
+			T005f.employeeNo,
+			CONCAT(T001f.employeeFristName,T001f.employeeLastName)as employeeName,
+			M005f.employeeFormName,
+			T005f.salary,
+			T005f.socialInsuranceFlag,
+			CAST(T005f.insuranceFeeAmount As unsigned) As insuranceFeeAmount,
+			CAST(T005f.scheduleOfBonusAmount As unsigned) As scheduleOfBonusAmount,
+			T005f.remark
+		FROM
+			T005WagesInfo As T005f
+			LEFT JOIN T001Employee As T001f on T001f.employeeNo = T005f.employeeNo
+			LEFT JOIN M005EmployeeForm As M005f on T005f.employeeFormCode = M005f.employeeFormCode
+        WHERE 
+        T005f.employeeNo =
+
+     			#{getEmpNo}
+
+        and reflectYearAndMonth &lt; #{getYandM}
+  		ORDER BY ABS(#{getYandM} - reflectYearAndMonth) ASC
+		limit 1 )As A${getYandM}
+		</foreach>
+		</foreach>
+		 order by employeeNo,reflectYearAndMonth
+          </select>
+     
+	<select id="getSituationIntoORretirement" parameterType="map"
+		resultMap="detailsInfo">
+		SELECT 
+			A.reflectYearAndMonth,
+			T002.employeeNo,
+			CONCAT(T001.employeeFristName,T001.employeeLastName)as employeeName,
+			M005.employeeFormName,
+			T005.salary,
+			T005.socialInsuranceFlag,
+			CAST(T005.insuranceFeeAmount As unsigned) As insuranceFeeAmount,
+			CAST(T005.scheduleOfBonusAmount As unsigned) As scheduleOfBonusAmount,
+			T005.remark	
+		FROM 
+		T002EmployeeDetail As T002 
+		LEFT JOIN 
+		T001Employee As T001 on T002.employeeNo=T001.employeeNo
+		LEFT JOIN
+		(SELECT 
+		employeeNo,
+		MIN(reflectYearAndMonth) as reflectYearAndMonth 
+		FROM 
+		T005WagesInfo group by employeeNo ) As A on A.employeeNo=T001.employeeNo
+		LEFT JOIN T005WagesInfo As T005 on A.reflectYearAndMonth = T005.reflectYearAndMonth 
+		AND
+		A.employeeNo=T005.employeeNo
+		LEFT JOIN M005EmployeeForm As M005 on T002.employeeFormCode = M005.employeeFormCode
+		WHERE 1=1
+		<if test="classification == 3">
+		 AND intoCompanyYearAndMonth between #{startYandM} and #{endYandM}
+		</if>
+		<if test="classification == 4">
+		AND retirementYearAndMonth between #{startYandM} and #{endYandM}
+		</if>
+		</select>
+</mapper>
