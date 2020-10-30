@@ -49,6 +49,16 @@ public class EmployeeInfoValidation implements Validator {
 						&& !UtilsCheckMethod.checkKatakana(p.getFurigana1()+p.getFurigana2())) {
 					errors.rejectValue("furigana", "カタカナ", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG003", "カタカナ"));
 				}
+				if (UtilsCheckMethod.isNullOrEmpty(p.getGenderStatus())) {
+					errors.rejectValue("genderStatus", "性別", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001", "性別"));
+				}
+				if (UtilsCheckMethod.isNullOrEmpty(p.getNationalityCode())) {
+					errors.rejectValue("nationalityCode", "出身地", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001", "出身地"));
+				}
+				if (UtilsCheckMethod.isNullOrEmpty(p.getIntoCompanyYearAndMonth())) {
+					errors.rejectValue("intoCompanyYearAndMonth", "入社年月", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001", "入社年月"));
+
+				}
 				/**
 				 * 社員の場合
 				 */
