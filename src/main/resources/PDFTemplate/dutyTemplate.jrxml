@@ -17,6 +17,15 @@
 			<pen lineWidth="0.5" lineColor="#000000"/>
 		</box>
 	</style>
+	<style name="Table_CH_TEXT" mode="Opaque" backcolor="#FFFFFF">
+		<box leftPadding="2">
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
 	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF" hTextAlign="Left" vTextAlign="Justified">
 		<box leftPadding="0">
 			<pen lineWidth="0.5" lineColor="#000000"/>
@@ -35,6 +44,19 @@
 			<rightPen lineWidth="0.5" lineColor="#000000"/>
 		</box>
 	</style>
+	<style name="Table_TD_TEXT_WEEK" style="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box leftPadding="2">
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[AND($F{isBreak} )]]></conditionExpression>
+			<style forecolor="#FF0000" fontName="游明朝標準"/>
+		</conditionalStyle>
+	</style>
 	<subDataset name="dataTable1Dataset" uuid="6344ea2a-4d91-4402-a21c-70f8e34b31e2">
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 		<parameter name="TotalWorkTime" class="java.lang.Double"/>
@@ -49,6 +71,8 @@
 		<field name="breakTime" class="java.lang.String"/>
 		<field name="workContent" class="java.lang.String"/>
 		<field name="remark" class="java.lang.String"/>
+		<field name="holidayFlag" class="java.lang.String"/>
+		<field name="isBreak" class="java.lang.Boolean"/>
 	</subDataset>
 	<parameter name="Year" class="java.lang.String"/>
 	<parameter name="Month" class="java.lang.String"/>
@@ -83,7 +107,7 @@
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textFieldExpression><![CDATA[$P{siteCustomer}]]></textFieldExpression>
@@ -93,36 +117,70 @@
 				<text><![CDATA[御中]]></text>
 			</staticText>
 			<textField>
-				<reportElement style="Style1" x="20" y="48" width="140" height="20" uuid="e09b2005-6046-4d94-be1d-4b4421bd3598">
+				<reportElement style="Style1" x="65" y="48" width="80" height="20" uuid="e09b2005-6046-4d94-be1d-4b4421bd3598">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
-				<textFieldExpression><![CDATA["業務名称："+$P{systemName}]]></textFieldExpression>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textFieldExpression><![CDATA[$P{systemName}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Style1" x="448" y="26" width="126" height="20" uuid="caafc2b3-c583-477f-95d9-2127d270eb45">
+				<reportElement style="Style1" x="485" y="26" width="84" height="20" uuid="caafc2b3-c583-477f-95d9-2127d270eb45">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textFieldExpression><![CDATA["会社名："+$P{customer}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{customer}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Style1" x="449" y="48" width="126" height="20" uuid="86d8ab51-bde9-4751-ac9a-3150ee9238cb">
+				<reportElement style="Style1" x="495" y="48" width="74" height="20" uuid="86d8ab51-bde9-4751-ac9a-3150ee9238cb">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
-				<textFieldExpression><![CDATA["責任者名："+$P{siteResponsiblePerson}]]></textFieldExpression>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement markup="none"/>
+				<textFieldExpression><![CDATA[$P{siteResponsiblePerson}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Style1" x="449" y="71" width="126" height="20" uuid="0805dba3-9d6f-4a58-8805-15591107a2fd">
+				<reportElement style="Style1" x="505" y="71" width="64" height="20" uuid="0805dba3-9d6f-4a58-8805-15591107a2fd">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
-				<textFieldExpression><![CDATA["作業担当者："+$P{user}]]></textFieldExpression>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textFieldExpression><![CDATA[$P{user}]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement style="Style1" x="450" y="26" width="35" height="20" uuid="a49edd85-f219-4bfd-98e8-7616352d0a40">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<text><![CDATA[会社名]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Style1" x="450" y="48" width="45" height="20" uuid="a199187f-0c45-4ce3-a147-1e6c771e4dcb">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<text><![CDATA[責任者名]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Style1" x="450" y="71" width="55" height="20" uuid="428f46ca-bf85-470f-8e4a-2ffe86088f8b">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<text><![CDATA[作業担当者]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Style1" x="20" y="48" width="45" height="20" uuid="007a1b3f-9aa9-4969-a31e-ad72dee3417c">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<text><![CDATA[責任者名]]></text>
+			</staticText>
 		</band>
 	</title>
 	<detail>
@@ -163,15 +221,14 @@
 						<jr:columnHeader style="Table_CH" height="40">
 							<staticText>
 								<reportElement style="Table_CH" x="0" y="0" width="25" height="40" uuid="8dc0982d-6b92-4469-96d3-efe4e581d452"/>
-								<text><![CDATA[曜
-日]]></text>
+								<text><![CDATA[曜日]]></text>
 							</staticText>
 						</jr:columnHeader>
 						<jr:columnFooter style="Table_TD" height="20"/>
 						<jr:detailCell style="Table_TD" height="20">
 							<property name="com.jaspersoft.studio.unit.height" value="px"/>
 							<textField>
-								<reportElement style="Table_TD_TEXT" x="0" y="0" width="25" height="20" uuid="3f2780ac-4f54-4e14-801c-ba75bc2338ad"/>
+								<reportElement style="Table_TD_TEXT_WEEK" x="0" y="0" width="25" height="20" uuid="3f2780ac-4f54-4e14-801c-ba75bc2338ad"/>
 								<textFieldExpression><![CDATA[$F{week}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
@@ -205,7 +262,7 @@
 						</jr:columnHeader>
 						<jr:columnFooter style="Table_TD" height="20">
 							<staticText>
-								<reportElement style="Table_TD_TEXT" x="0" y="0" width="45" height="20" uuid="e91aa659-c97f-4732-b98e-1b7e69e6fb3e"/>
+								<reportElement style="Table_CH_TEXT" x="0" y="0" width="45" height="20" uuid="e91aa659-c97f-4732-b98e-1b7e69e6fb3e"/>
 								<box leftPadding="0"/>
 								<text><![CDATA[合計]]></text>
 							</staticText>
@@ -230,7 +287,7 @@
 						</jr:columnHeader>
 						<jr:columnFooter style="Table_TD" height="20">
 							<textField>
-								<reportElement style="Table_TD_TEXT" x="0" y="0" width="40" height="20" uuid="7b2ed000-e681-4681-b4e5-1110bc545542"/>
+								<reportElement style="Table_CH_TEXT" x="0" y="0" width="40" height="20" uuid="7b2ed000-e681-4681-b4e5-1110bc545542"/>
 								<textFieldExpression><![CDATA[$P{TotalWorkTime} + "H"]]></textFieldExpression>
 							</textField>
 						</jr:columnFooter>
@@ -254,38 +311,38 @@
 						<jr:detailCell style="Table_TD" height="20">
 							<textField>
 								<reportElement style="Table_TD_TEXT" x="0" y="0" width="45" height="20" uuid="8b968b98-4b10-4b44-b0c9-1de66c5b1e1e"/>
-								<textFieldExpression><![CDATA[$F{breakTime}]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{breakTime} + "H"]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="180" uuid="d28c164e-de13-4457-ade3-00ec0ae44681">
+					<jr:column width="176" uuid="d28c164e-de13-4457-ade3-00ec0ae44681">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column7"/>
 						<jr:columnHeader style="Table_CH" height="40">
 							<staticText>
-								<reportElement style="Table_CH" x="0" y="0" width="180" height="40" uuid="ab2eb7c1-8450-4c38-a999-14e7cb59ad7c"/>
+								<reportElement style="Table_CH" x="0" y="0" width="176" height="40" uuid="ab2eb7c1-8450-4c38-a999-14e7cb59ad7c"/>
 								<text><![CDATA[作業内容]]></text>
 							</staticText>
 						</jr:columnHeader>
 						<jr:columnFooter style="Table_TD" height="20"/>
 						<jr:detailCell style="Table_TD" height="20">
 							<textField>
-								<reportElement style="Table_TD_TEXT" x="0" y="0" width="180" height="20" uuid="3fe74f29-e3a2-4291-8550-4c603821821b"/>
+								<reportElement style="Table_TD_TEXT" x="0" y="0" width="176" height="20" uuid="3fe74f29-e3a2-4291-8550-4c603821821b"/>
 								<textFieldExpression><![CDATA[$F{workContent}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="159" uuid="d5a647b6-ac14-4406-91ef-4b4e77c8c00a">
+					<jr:column width="160" uuid="d5a647b6-ac14-4406-91ef-4b4e77c8c00a">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column8"/>
 						<jr:columnHeader style="Table_CH" height="40">
 							<staticText>
-								<reportElement style="Table_CH" x="0" y="0" width="159" height="40" uuid="151da184-eec8-481f-bbbe-0ebd32e65643"/>
+								<reportElement style="Table_CH" x="0" y="0" width="160" height="40" uuid="151da184-eec8-481f-bbbe-0ebd32e65643"/>
 								<text><![CDATA[備考]]></text>
 							</staticText>
 						</jr:columnHeader>
 						<jr:columnFooter style="Table_TD" height="20"/>
 						<jr:detailCell style="Table_TD" height="20">
 							<textField>
-								<reportElement style="Table_TD_TEXT" x="0" y="0" width="159" height="20" uuid="d181eac0-e940-4fe5-ab3d-149d384d1f07"/>
+								<reportElement style="Table_TD_TEXT" x="0" y="0" width="160" height="20" uuid="d181eac0-e940-4fe5-ab3d-149d384d1f07"/>
 								<textFieldExpression><![CDATA[$F{remark}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>

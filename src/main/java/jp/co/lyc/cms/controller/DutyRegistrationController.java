@@ -10,6 +10,7 @@ import java.util.Comparator;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -147,10 +148,12 @@ public class DutyRegistrationController extends BaseController{
 	        for (int i = 0; i < dutyDate.size(); i++)	{
 	        	rowData = new Hashtable<>();
 	        	rowData = dutyDate.get(i);
-	        	rowData.put("morningTime", dutyDate.get(i).get("startTime"));
-	        	rowData.put("afternoonTime", dutyDate.get(i).get("endTime"));
+	        	rowData.put("morningTime", UtilsController.TimeInsertChar((String)dutyDate.get(i).get("startTime")));
+	        	rowData.put("afternoonTime", UtilsController.TimeInsertChar((String)dutyDate.get(i).get("endTime")));
 	        	rowData.put("workTime", dutyDate.get(i).get("workHour"));
-	        	rowData.put("breakTime", dutyDate.get(i).get("breakTime"));
+	        	rowData.put("breakTime", StringUtils.defaultString((String)dutyDate.get(i).get("breakTime"), "0"));
+	        	String nowDate = yearMonth.substring(0, 4) + "-" + yearMonth.substring(4, 6) + "-" + StringUtils.leftPad((String)dutyDate.get(i).get("day"), 2, "0");
+	        	rowData.put("isBreak", UtilsController.isHoliday(nowDate));
 	        	tableData.add(rowData);
 	        	totalWorkTime += Double.valueOf((String) dutyDate.get(i).get("workHour"));
 	        }
@@ -168,7 +171,6 @@ public class DutyRegistrationController extends BaseController{
 			JasperReport report = JasperCompileManager.compileReport(inputFile.getAbsolutePath());
 			JasperPrint print = JasperFillManager.fillReport(report, parameters, new JREmptyDataSource());
 			JasperExportManager.exportReportToPdfFile(print, outputFile.getAbsolutePath());
-			logger.info(String.valueOf(inputFile.exists()));
 		} 
 		catch (JRException e) {
 			logger.error(e.getMessage());

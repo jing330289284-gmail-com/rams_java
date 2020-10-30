@@ -1,22 +1,28 @@
 package jp.co.lyc.cms.util;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.net.URL;
 import java.security.GeneralSecurityException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
+import java.util.Set;
+import java.util.TimeZone;
 
 import javax.mail.Address;
 import javax.mail.Message;
@@ -28,6 +34,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
@@ -52,6 +60,26 @@ public class UtilsController {
 
 	@Autowired
 	UtilsService utilsService;
+	
+	public static Map<String, String> JapanHoliday = new HashMap<String, String>();
+	static {
+		StringBuffer json = new StringBuffer();
+		try {
+			URL url = new URL("https://holidays-jp.github.io/api/v1/date.json");
+			InputStream is = url.openStream();  // throws an IOException
+			BufferedReader  br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+			String line = "";
+	        while ((line = br.readLine()) != null) {
+	        	json.append(line);
+	        }
+		} catch (Exception e) {}
+		com.alibaba.fastjson.JSONObject jsonObject = com.alibaba.fastjson.JSON.parseObject(json.toString());
+//		String yearMonth = (String)jsonObject.getOrDefault("yearMonth", "");
+		Set<String> keys =  jsonObject.keySet();
+		for (String key : keys)	{
+			JapanHoliday.put(key, jsonObject.getString(key));
+		}
+	}
 
 	/**
 	 * 国籍を取得
@@ -1104,5 +1132,48 @@ public class UtilsController {
 		String transaction = properties.getProperty("transaction");
 		List<ModelClass> list = getStatus(transaction);
 		return list;
+	}
+	/**
+	 * 0130 -> 01:30
+	 * @param time(string)
+	 * @param inputChar(string default->:)
+	 * @return String
+	 */
+	public static String TimeInsertChar(String time, String inputChar) {
+		return StringUtils.isEmpty(time) ? "" : time.substring(0, 2) + inputChar + time.substring(2, 4);
+	}
+	/**
+	 * 0130 -> 01:30
+	 * @param time(string)
+	 * @param inputChar(string default->:)
+	 * @return String
+	 */
+	public static String TimeInsertChar(String time) {
+		return TimeInsertChar(time, ":");
+	}
+	/**
+	 * 祝休日
+	 * @param timestamp in Millis
+	 * @return Boolean
+	 */
+	public static Boolean isHoliday(String date) {
+		return isHoliday(date, "yyyy-MM-dd");
+	}
+	/**
+	 * 祝休日
+	 * @param dateString date
+	 * @param dateFormat date format
+	 * @return Boolean
+	 */
+	public static Boolean isHoliday(String dateString, String dateFormat) {
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
+		Date date = new Date();
+		try {
+			date = simpleDateFormat.parse(dateString);
+		} catch (ParseException e) {}
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		int week = calendar.get(Calendar.DAY_OF_WEEK);
+		return JapanHoliday.containsKey(date) || week == Calendar.SUNDAY || week == Calendar.SATURDAY;
 	}
 }
