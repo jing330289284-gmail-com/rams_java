@@ -17,7 +17,73 @@ public class EmailModel {
     private String context;
     //设置邮件类型
     private String contextType;
+    // fileのパース
+    private String resumePath;
+    //　メール内容
+    private String mailConfirmContont;
+    //　メールTO
+    private String selectedmail;
+    //　メールCC
+    private String[] selectedMailCC;
+ //　メールFROM
+    private String mailFrom;
+    
+    private String mailTitle;
+    
+    private String resumeName;
+    
+    
+    
 
+    
+    
+    
+    
+	public String getResumeName() {
+		return resumeName;
+	}
+	public void setResumeName(String resumeName) {
+		this.resumeName = resumeName;
+	}
+	public String getMailTitle() {
+		return mailTitle;
+	}
+	public void setMailTitle(String mailTitle) {
+		this.mailTitle = mailTitle;
+	}
+	public String getMailFrom() {
+		return mailFrom;
+	}
+	public void setMailFrom(String mailFrom) {
+		this.mailFrom = mailFrom;
+	}
+	public String getResumePath() {
+		return resumePath;
+	}
+	public void setResumePath(String resumePath) {
+		this.resumePath = resumePath;
+	}
+	public String getMailConfirmContont() {
+		return mailConfirmContont;
+	}
+	public void setMailConfirmContont(String mailConfirmContont) {
+		this.mailConfirmContont = mailConfirmContont;
+	}
+	public String getSelectedmail() {
+		return selectedmail;
+	}
+	public void setSelectedmail(String selectedmail) {
+		this.selectedmail = selectedmail;
+	}
+	public String[] getSelectedMailCC() {
+		return selectedMailCC;
+	}
+	public void setSelectedMailCC(String[] selectedMailCC) {
+		this.selectedMailCC = selectedMailCC;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	public String getUserName() {
 		return userName;
 	}

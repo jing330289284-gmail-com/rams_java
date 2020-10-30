@@ -16,11 +16,22 @@ FROM
             T001.employeeLastName) AS 'employeeName',
     M013.stationName AS 'nearestStation',
     CONCAT_WS(',',
-            T002.developLanguage1,
-            T002.developLanguage2,
-            T002.developLanguage3,
-            T002.developLanguage4,
-            T002.developLanguage5) AS 'developLanguage',
+        
+        IF(ISNULL(T002.developLanguage1) or T002.developLanguage1='',
+        null,
+        M011a.developLanguageName),
+         IF(ISNULL(T002.developLanguage2) or T002.developLanguage2='',
+        null,
+        M011b.developLanguageName),
+         IF(ISNULL(T002.developLanguage3) or T002.developLanguage3='',
+        null,
+        M011c.developLanguageName),
+         IF(ISNULL(T002.developLanguage4) or T002.developLanguage4='',
+        null,
+        M011d.developLanguageName),
+         IF(ISNULL(T002.developLanguage5) or T002.developLanguage5='',
+        null,
+        M011e.developLanguageName)) AS 'developLanguage',
     '' AS customer,
     '' as nowCustomer,
     M012.siteRoleName AS siteRoleCode,
@@ -53,6 +64,23 @@ FROM
     M013Station M013 ON M013.stationCode = T003.stationCode
         LEFT JOIN
     T002EmployeeDetail T002 ON T001.employeeNo = T002.employeeNo
+     LEFT JOIN
+               
+    M011DevelopLanguage M011a ON M011a.developLanguageCode = T002.developLanguage1
+    
+                LEFT JOIN
+               
+    M011DevelopLanguage M011b ON M011b.developLanguageCode = T002.developLanguage2
+                LEFT JOIN
+               
+    M011DevelopLanguage M011c ON M011c.developLanguageCode = T002.developLanguage3
+                LEFT JOIN
+               
+    M011DevelopLanguage M011d ON M011d.developLanguageCode = T002.developLanguage4
+    
+                LEFT JOIN
+               
+    M011DevelopLanguage M011e ON M011e.developLanguageCode = T002.developLanguage5
         LEFT JOIN
     T006EmployeeSiteInfo T006 ON T001.employeeNo = T006.employeeNo
         LEFT JOIN
@@ -80,11 +108,22 @@ ORDER BY T001.employeeNo) UNION ALL (SELECT
             T001.employeeLastName) AS 'employeeName',
     M013.stationName AS 'nearestStation',
     CONCAT_WS(',',
-            T002.developLanguage1,
-            T002.developLanguage2,
-            T002.developLanguage3,
-            T002.developLanguage4,
-            T002.developLanguage5) AS 'developLanguage',
+        
+        IF(ISNULL(T002.developLanguage1) or T002.developLanguage1='',
+        null,
+        M011a.developLanguageName),
+         IF(ISNULL(T002.developLanguage2) or T002.developLanguage2='',
+        null,
+        M011b.developLanguageName),
+         IF(ISNULL(T002.developLanguage3) or T002.developLanguage3='',
+        null,
+        M011c.developLanguageName),
+         IF(ISNULL(T002.developLanguage4) or T002.developLanguage4='',
+        null,
+        M011d.developLanguageName),
+         IF(ISNULL(T002.developLanguage5) or T002.developLanguage5='',
+        null,
+        M011e.developLanguageName)) AS 'developLanguage',
     '' AS customer,
     T006.customerNo as nowCustomer,
     M012.siteRoleName AS siteRoleCode,
@@ -119,6 +158,23 @@ FROM
     M013Station M013 ON M013.stationCode = T003.stationCode
         LEFT JOIN
     T002EmployeeDetail T002 ON T001.employeeNo = T002.employeeNo
+     LEFT JOIN
+               
+    M011DevelopLanguage M011a ON M011a.developLanguageCode = T002.developLanguage1
+    
+                LEFT JOIN
+               
+    M011DevelopLanguage M011b ON M011b.developLanguageCode = T002.developLanguage2
+                LEFT JOIN
+               
+    M011DevelopLanguage M011c ON M011c.developLanguageCode = T002.developLanguage3
+                LEFT JOIN
+               
+    M011DevelopLanguage M011d ON M011d.developLanguageCode = T002.developLanguage4
+    
+                LEFT JOIN
+               
+    M011DevelopLanguage M011e ON M011e.developLanguageCode = T002.developLanguage5
         LEFT JOIN
     T006EmployeeSiteInfo T006 ON T001.employeeNo = T006.employeeNo
         LEFT JOIN
@@ -137,11 +193,22 @@ ORDER BY T001.employeeNo) UNION ALL (SELECT
             T001.employeeLastName) AS 'employeeName',
     M013.stationName AS 'nearestStation',
     CONCAT_WS(',',
-            T002.developLanguage1,
-            T002.developLanguage2,
-            T002.developLanguage3,
-            T002.developLanguage4,
-            T002.developLanguage5) AS 'developLanguage',
+        
+        IF(ISNULL(T002.developLanguage1) or T002.developLanguage1='',
+        null,
+        M011a.developLanguageName),
+         IF(ISNULL(T002.developLanguage2) or T002.developLanguage2='',
+        null,
+        M011b.developLanguageName),
+         IF(ISNULL(T002.developLanguage3) or T002.developLanguage3='',
+        null,
+        M011c.developLanguageName),
+         IF(ISNULL(T002.developLanguage4) or T002.developLanguage4='',
+        null,
+        M011d.developLanguageName),
+         IF(ISNULL(T002.developLanguage5) or T002.developLanguage5='',
+        null,
+        M011e.developLanguageName)) AS 'developLanguage',
     '' AS customer,
     '' as nowCustomer,
     M012.siteRoleName AS siteRoleCode,
@@ -176,6 +243,23 @@ FROM
     M013Station M013 ON M013.stationCode = T003.stationCode
         LEFT JOIN
     T002EmployeeDetail T002 ON T011.bpEmployeeNo = T002.employeeNo
+     LEFT JOIN
+               
+    M011DevelopLanguage M011a ON M011a.developLanguageCode = T002.developLanguage1
+    
+                LEFT JOIN
+               
+    M011DevelopLanguage M011b ON M011b.developLanguageCode = T002.developLanguage2
+                LEFT JOIN
+               
+    M011DevelopLanguage M011c ON M011c.developLanguageCode = T002.developLanguage3
+                LEFT JOIN
+               
+    M011DevelopLanguage M011d ON M011d.developLanguageCode = T002.developLanguage4
+    
+                LEFT JOIN
+               
+    M011DevelopLanguage M011e ON M011e.developLanguageCode = T002.developLanguage5
         LEFT JOIN
     M012SiteRole M012 ON T002.siteRoleCode = M012.siteRoleCode
         LEFT JOIN
@@ -197,11 +281,22 @@ SELECT
             T001.employeeLastName) AS 'employeeName',
     M013.stationName AS 'nearestStation',
     CONCAT_WS(',',
-            T002.developLanguage1,
-            T002.developLanguage2,
-            T002.developLanguage3,
-            T002.developLanguage4,
-            T002.developLanguage5) AS 'developLanguage',
+        
+        IF(ISNULL(T002.developLanguage1) or T002.developLanguage1='',
+        null,
+        M011a.developLanguageName),
+         IF(ISNULL(T002.developLanguage2) or T002.developLanguage2='',
+        null,
+        M011b.developLanguageName),
+         IF(ISNULL(T002.developLanguage3) or T002.developLanguage3='',
+        null,
+        M011c.developLanguageName),
+         IF(ISNULL(T002.developLanguage4) or T002.developLanguage4='',
+        null,
+        M011d.developLanguageName),
+         IF(ISNULL(T002.developLanguage5) or T002.developLanguage5='',
+        null,
+        M011e.developLanguageName)) AS 'developLanguage',
     T006.customerNo AS customer,
     T006.customerNo as nowCustomer,
     M012.siteRoleName AS siteRoleCode,
@@ -236,6 +331,23 @@ FROM
     M013Station M013 ON M013.stationCode = T003.stationCode
         LEFT JOIN
     T002EmployeeDetail T002 ON T010.employeeNo = T002.employeeNo
+     LEFT JOIN
+               
+    M011DevelopLanguage M011a ON M011a.developLanguageCode = T002.developLanguage1
+    
+                LEFT JOIN
+               
+    M011DevelopLanguage M011b ON M011b.developLanguageCode = T002.developLanguage2
+                LEFT JOIN
+               
+    M011DevelopLanguage M011c ON M011c.developLanguageCode = T002.developLanguage3
+                LEFT JOIN
+               
+    M011DevelopLanguage M011d ON M011d.developLanguageCode = T002.developLanguage4
+    
+                LEFT JOIN
+               
+    M011DevelopLanguage M011e ON M011e.developLanguageCode = T002.developLanguage5
         LEFT JOIN
     T006EmployeeSiteInfo T006 ON T010.employeeNo = T006.employeeNo
         LEFT JOIN
@@ -383,18 +495,46 @@ SELECT
 "" as englishConversationLevel,
     t002.yearsOfExperience,
     t002.siteRoleCode,
-    CONCAT_WS(',',
-            t002.developLanguage1,
-            t002.developLanguage2,
-            t002.developLanguage3,
-            t002.developLanguage4,
-            t002.developLanguage5) AS 'developLanguage',
+     CONCAT_WS(',',
+        
+        IF(ISNULL(T002.developLanguage1) or T002.developLanguage1='',
+        null,
+        M011a.developLanguageName),
+         IF(ISNULL(T002.developLanguage2) or T002.developLanguage2='',
+        null,
+        M011b.developLanguageName),
+         IF(ISNULL(T002.developLanguage3) or T002.developLanguage3='',
+        null,
+        M011c.developLanguageName),
+         IF(ISNULL(T002.developLanguage4) or T002.developLanguage4='',
+        null,
+        M011d.developLanguageName),
+         IF(ISNULL(T002.developLanguage5) or T002.developLanguage5='',
+        null,
+        M011e.developLanguageName)) AS 'developLanguage',
     t010.salesYearAndMonth,
     t010.salesProgressCode
 FROM
     T001Employee t001
         LEFT JOIN
     T002EmployeeDetail t002 ON t001.employeeNo = t002.employeeNo
+     LEFT JOIN
+               
+    M011DevelopLanguage M011a ON M011a.developLanguageCode = T002.developLanguage1
+    
+                LEFT JOIN
+               
+    M011DevelopLanguage M011b ON M011b.developLanguageCode = T002.developLanguage2
+                LEFT JOIN
+               
+    M011DevelopLanguage M011c ON M011c.developLanguageCode = T002.developLanguage3
+                LEFT JOIN
+               
+    M011DevelopLanguage M011d ON M011d.developLanguageCode = T002.developLanguage4
+    
+                LEFT JOIN
+               
+    M011DevelopLanguage M011e ON M011e.developLanguageCode = T002.developLanguage5
         LEFT JOIN
     M003Nationality m003 ON t002.nationalityCode = m003.nationalityCode
         LEFT JOIN

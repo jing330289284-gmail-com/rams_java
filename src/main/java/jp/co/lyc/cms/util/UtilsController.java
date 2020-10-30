@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,6 +19,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
 
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
 import javax.mail.Address;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -25,7 +29,10 @@ import javax.mail.NoSuchProviderException;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+import javax.mail.internet.MimeUtility;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -1024,6 +1031,101 @@ public class UtilsController {
 		}
 	}
 
+	/**
+	 * sendMailWithFile
+	 * 
+	 * @param emailMod
+	 * @param path
+	 */
+	public void sendMailWithFile(EmailModel emailMod) {
+
+		Session session = null;
+		try {
+			//　创建一个资源文件
+			Properties properties = new Properties();
+			//　 显示日志
+			properties.setProperty("mail.debug", "true");
+			//　 邮箱类别
+			properties.setProperty("mail.host", "smtp.lolipop.jp");
+			//　 设定验证开启
+			properties.setProperty("mail.smtp.auth", "true");
+			//　 发送 接受方式
+			properties.setProperty("mail.transpot.prococol", "smtp");
+			//　 设置请求服务器端口号
+			properties.put("mail.smtp.port", 587);
+			//　 设置ssl加密服务开启
+			properties.setProperty("mail.smtp.ssl.enable", "smtp");
+			//　 创建加密证书
+			MailSSLSocketFactory sf = new MailSSLSocketFactory();
+			// properties 底层调用的的是put方法
+			properties.put("Mail.smtp.ssl.socketFactory", sf);
+			//　 获取具有以上属性的邮件session --->　连接池
+			session = Session.getInstance(properties);
+			//　 创建获取连接
+			Transport transport = session.getTransport();
+			//　 进行连接
+			transport.connect("mail@lyc.co.jp", "Lyc2020-0908-");
+			//　 创建一个信息
+			Message message = new MimeMessage(session);
+			//　 设定发送方
+			message.setFrom(new InternetAddress("mail@lyc.co.jp"));
+			//　 设置主题内容
+			message.setSubject(emailMod.getMailTitle());
+			//message.setContent(emailMod.getContext(), "text/html;charset=utf-8");
+			String[] addresssCC = emailMod.getSelectedMailCC();
+			int lenCC = addresssCC.length;
+			Address[] addsCC = new Address[lenCC];
+			for (int i = 0; i < lenCC; i++) {
+				addsCC[i] = new InternetAddress(addresssCC[i]);
+			}
+			//InternetAddress[] sendCC = new InternetAddress[] {new InternetAddress("jyw.fendou@gmail.com", "", "UTF-8")};
+			message.addRecipients(MimeMessage.RecipientType.CC, addsCC);
+			
+			 //向multipart对象中添加邮件的各个部分内容，包括文本内容和附件
+	         MimeMultipart multipart = new MimeMultipart();
+	         //设置邮件的文本内容
+	         MimeBodyPart contentPart = new MimeBodyPart();
+	         contentPart.setContent(emailMod.getMailConfirmContont(), "text/html;charset=UTF-8");
+	         multipart.addBodyPart(contentPart);
+			//添加附件
+	         MimeBodyPart filePart = new MimeBodyPart();
+	         DataSource source = new FileDataSource(emailMod.getResumePath());
+	         //添加附件的内容
+	         filePart.setDataHandler(new DataHandler(source));
+	         //添加附件的标题
+	         filePart.setFileName(MimeUtility.encodeText(emailMod.getResumeName()));
+	         multipart.addBodyPart(filePart);
+	         multipart.setSubType("mixed");
+	         //将multipart对象放到message中
+	         message.setContent(multipart);
+			
+			String[] addresss = emailMod.getSelectedmail().split(",");
+			int len = addresss.length;
+			Address[] adds = new Address[len];
+			for (int i = 0; i < len; i++) {
+				adds[i] = new InternetAddress(addresss[i]);
+			}
+			message.addRecipients(MimeMessage.RecipientType.TO, adds);
+
+			//　 发送邮件
+			transport.sendMessage(message, message.getAllRecipients());
+			//　transport.close();
+		} catch (GeneralSecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchProviderException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+	}
+	
 	/**
 	 * enterPeriodを取得する
 	 * 
