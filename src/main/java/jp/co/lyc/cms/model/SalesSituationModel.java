@@ -40,7 +40,7 @@ public class SalesSituationModel implements Serializable {
 	String admissionEndDate;
 	String resumeInfo1;// 履歴書情報1
 	String resumeInfo2;// 履歴書情報2
-	String rowNo;// 
+	int rowNo;// 
 	String nowCustomer;
 	String customerContractStatus;
 	String purchasingManagers2;
@@ -202,10 +202,10 @@ public void setAge(String age) {
 	public void setNowCustomer(String nowCustomer) {
 		this.nowCustomer = nowCustomer;
 	}
-	public String getRowNo() {
+	public int getRowNo() {
 		return rowNo;
 	}
-	public void setRowNo(String rowNo) {
+	public void setRowNo(int rowNo) {
 		this.rowNo = rowNo;
 	}
 	public String getResumeInfo1() {

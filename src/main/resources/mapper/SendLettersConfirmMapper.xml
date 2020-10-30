@@ -13,12 +13,23 @@
     M003.nationalityName,
     T002.birthday,
     M013.stationName,
-    CONCAT_WS(',',
-            T002.developLanguage1,
-            T002.developLanguage2,
-            T002.developLanguage3,
-            T002.developLanguage4,
-            T002.developLanguage5) AS 'developLanguage',
+   CONCAT_WS(',',
+        
+        IF(ISNULL(T002.developLanguage1) or T002.developLanguage1='',
+        null,
+        M011a.developLanguageName),
+         IF(ISNULL(T002.developLanguage2) or T002.developLanguage2='',
+        null,
+        M011b.developLanguageName),
+         IF(ISNULL(T002.developLanguage3) or T002.developLanguage3='',
+        null,
+        M011c.developLanguageName),
+         IF(ISNULL(T002.developLanguage4) or T002.developLanguage4='',
+        null,
+        M011d.developLanguageName),
+         IF(ISNULL(T002.developLanguage5) or T002.developLanguage5='',
+        null,
+        M011e.developLanguageName)) AS 'developLanguage',
     T002.yearsOfExperience,
     M010.japaneseLevelName,
     MONTH(CURRENT_DATE) + 1 AS beginMonth,
@@ -33,6 +44,23 @@ FROM
     T015ResumeManagement T015 ON T001.employeeNo = T015.employeeNo
         LEFT JOIN
     T002EmployeeDetail T002 ON T001.employeeNo = T002.employeeNo
+     LEFT JOIN
+               
+    M011DevelopLanguage M011a ON M011a.developLanguageCode = T002.developLanguage1
+    
+                LEFT JOIN
+               
+    M011DevelopLanguage M011b ON M011b.developLanguageCode = T002.developLanguage2
+                LEFT JOIN
+               
+    M011DevelopLanguage M011c ON M011c.developLanguageCode = T002.developLanguage3
+                LEFT JOIN
+               
+    M011DevelopLanguage M011d ON M011d.developLanguageCode = T002.developLanguage4
+    
+                LEFT JOIN
+               
+    M011DevelopLanguage M011e ON M011e.developLanguageCode = T002.developLanguage5
         LEFT JOIN
     M010JapaneseLevel M010 ON M010.japaneseLevelCode = T002.japaneseLevelCode
         LEFT JOIN
