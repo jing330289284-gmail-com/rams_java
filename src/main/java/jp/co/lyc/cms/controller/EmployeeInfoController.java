@@ -201,9 +201,15 @@ public class EmployeeInfoController extends BaseController {
 		JSONObject jsonObject = JSON.parseObject(JSONEmp);
 		EmployeeModel emp = JSON.parseObject(jsonObject.toJSONString(), new TypeReference<EmployeeModel>() {
 		});
+
 		if (resumeInfo1 != null) {
 			emp.setResumeInfo1(resumeInfo1.getOriginalFilename());
+		} else {
+			if (resumeInfo1URL != null) {
+				emp.setResumeInfo1("resumeInfo1URL");
+			}
 		}
+
 		DataBinder binder = new DataBinder(emp);
 		binder.setValidator(new EmployeeInfoValidation());
 		binder.validate();
