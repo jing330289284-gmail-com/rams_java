@@ -9,7 +9,7 @@ public class CostRegistrationModel {
 	String happendDate;
 	int costClassificationCode;
 	String dueDate;
-	String detailedName;
+	String detailedNameOrLine;
 	int stationCode;
 	int originCode;
 	int transportationCode;
@@ -18,7 +18,6 @@ public class CostRegistrationModel {
 	String remark;
 	int roundCode;
 	String costFile;
-	String line;
 	String updateUser;
 	String updateTime;
 	String createTime;
@@ -59,11 +58,11 @@ public class CostRegistrationModel {
 	public void setDueDate(String dueDate) {
 		this.dueDate = dueDate;
 	}
-	public String getDetailedName() {
-		return detailedName;
+	public String getDetailedNameOrLine() {
+		return detailedNameOrLine;
 	}
-	public void setDetailedName(String detailedName) {
-		this.detailedName = detailedName;
+	public void setDetailedNameOrLine(String detailedNameOrLine) {
+		this.detailedNameOrLine = detailedNameOrLine;
 	}
 	public int getStationCode() {
 		return stationCode;
@@ -136,11 +135,5 @@ public class CostRegistrationModel {
 	}
 	public void setCostFileFile(MultipartFile costFileFile) {
 		this.costFileFile = costFileFile;
-	}
-	public String getLine() {
-		return line;
-	}
-	public void setLine(String line) {
-		this.line = line;
 	}
 }

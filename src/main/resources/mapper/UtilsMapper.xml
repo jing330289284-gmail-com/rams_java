@@ -86,8 +86,6 @@
 		SELECT costClassificationCode code,costClassificationName
 		name FROM
 		M028CostClassification
-		where
-		costClassificationCode>0;
 	</select>
 	<!--交通手段 -->
 	<select id="getTransportation"
