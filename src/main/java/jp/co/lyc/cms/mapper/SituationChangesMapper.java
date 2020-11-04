@@ -16,4 +16,6 @@ public List<SituationChangesModel>getSituationChangesFront(Map<String, Object> s
 
 public List<SituationChangesModel>getSituationIntoORretirement(Map<String, Object> sendMap);
 
+public List<SituationChangesModel>getSituationBonus(Map<String, Object> sendMap);
+
 }

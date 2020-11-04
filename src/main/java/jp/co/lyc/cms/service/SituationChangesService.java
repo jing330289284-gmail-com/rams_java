@@ -27,4 +27,9 @@ public class SituationChangesService {
 		List<SituationChangesModel>SituationChangeList =SituationChangesMapper.getSituationChangesFront(sendMap);
 		return SituationChangeList;
 	}
+	
+	public List<SituationChangesModel>searchSitautionChangesBonus(Map<String, Object> sendMap){
+		List<SituationChangesModel>SituationChangeList =SituationChangesMapper.getSituationBonus(sendMap);
+		return SituationChangeList;
+	}
 }
