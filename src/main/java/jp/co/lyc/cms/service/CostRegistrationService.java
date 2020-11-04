@@ -51,10 +51,10 @@ public class CostRegistrationService {
 		}
 		return result;
 	}
-	public boolean deletetCostRegistration(CostRegistrationModel costRegistrationModel) {
+	public boolean deleteCostRegistration(CostRegistrationModel costRegistrationModel) {
 		boolean result = true;
 		try {
-			costRegistrationMapper.insertCostRegistration(costRegistrationModel);
+			costRegistrationMapper.deleteCostRegistration(costRegistrationModel);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

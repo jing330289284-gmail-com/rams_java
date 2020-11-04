@@ -24,5 +24,5 @@ public interface CostRegistrationMapper {
 	 * @param sendMap
 	 */
 	public void insertCostRegistration(CostRegistrationModel costRegistrationModel) ;
-	public void deletetCostRegistration(CostRegistrationModel costRegistrationModel) ;
+	public void deleteCostRegistration(CostRegistrationModel costRegistrationModel) ;
 }

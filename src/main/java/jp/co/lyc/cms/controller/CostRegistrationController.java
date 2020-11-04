@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +19,7 @@ import com.alibaba.fastjson.TypeReference;
 
 import jp.co.lyc.cms.common.BaseController;
 import jp.co.lyc.cms.model.CostRegistrationModel;
+import jp.co.lyc.cms.model.WorkRepotModel;
 import jp.co.lyc.cms.service.CostRegistrationService;
 
 @Controller
@@ -79,7 +81,7 @@ public class CostRegistrationController extends BaseController {
 	@ResponseBody
 	public boolean updateCostRegistration(@RequestParam(value = "emp", required = false) String JSONEmp,
 			@RequestParam(value = "costFile", required = false) MultipartFile costFile) throws Exception {
-		logger.info("CostRegistrationController.insertCostRegistration:" + "修正開始");
+		logger.info("CostRegistrationController.updateCostRegistration:" + "修正開始");
 		JSONObject jsonObject = JSON.parseObject(JSONEmp);
 		CostRegistrationModel costRegistrationModel = JSON.parseObject(jsonObject.toJSONString(), new TypeReference<CostRegistrationModel>() {
 		});
@@ -93,37 +95,33 @@ public class CostRegistrationController extends BaseController {
 		}
 		costRegistrationModel.setCostFile(getFilename);
 		boolean result  = costRegistrationService.updateCostRegistration(costRegistrationModel);
-		logger.info("CostRegistrationController.insertCostRegistration:" + "修正結束");
+		logger.info("CostRegistrationController.updateCostRegistration:" + "修正結束");
 		return result;
 	}
 	/**
-	 * 修正」
+	 * 削除
 	 * 
 	 * @param
 	 * @return boolean
 ---	 */
-	@RequestMapping(value = "/deletetCostRegistration", method = RequestMethod.POST)
+	@RequestMapping(value = "/deleteCostRegistration", method = RequestMethod.POST)
 	@ResponseBody
-	public boolean deletetCostRegistration(@RequestParam(value = "emp", required = false) String JSONEmp,
-			@RequestParam(value = "costFile", required = false) MultipartFile costFile) throws Exception {
-		logger.info("CostRegistrationController.deletetCostRegistration:" + "削除開始");
-		JSONObject jsonObject = JSON.parseObject(JSONEmp);
-		CostRegistrationModel costRegistrationModel = JSON.parseObject(jsonObject.toJSONString(), new TypeReference<CostRegistrationModel>() {
-		});
-		costRegistrationModel.setEmployeeNo(getSession().getAttribute("employeeNo").toString());
-		costRegistrationModel.setEmployeeName(getSession().getAttribute("employeeName").toString()); 
-		String getFilename;
-		try {
-			getFilename=upload(costRegistrationModel,costFile);
-		} catch (Exception e) {
-			return false;
+	public boolean deleteCostRegistration(@RequestBody CostRegistrationModel emp) {
+		logger.info("CostRegistrationController.deleteCostRegistration:" + "削除開始");
+		emp.setEmployeeNo(getSession().getAttribute("employeeNo").toString());
+		boolean flag=false;
+		if(emp.getCostFile()!=null) {
+			try {
+				flag=delete(emp,emp.getCostFile());
+			} catch (Exception e) {
+				return flag;
+			}
 		}
-		costRegistrationModel.setCostFile(getFilename);
-		boolean result  = costRegistrationService.updateCostRegistration(costRegistrationModel);
-		logger.info("CostRegistrationController.deletetCostRegistration:" + "削除結束");
+		boolean result  = costRegistrationService.deleteCostRegistration(emp);
+		logger.info("CostRegistrationController.deleteCostRegistration:" + "削除結束");
 		return result;
 	}
-	
+	//ファイルアップロード
 	public final static String UPLOAD_PATH_PREFIX = "C:"+File.separator+"file"+File.separator;
 	public String upload(CostRegistrationModel costRegistrationModel,MultipartFile costFile) {
 		if (costFile== null) {
@@ -143,5 +141,18 @@ public class CostRegistrationController extends BaseController {
 			return "";
 		}
 		return realPath+File.separator+fileName;
+	}
+	//ファイル削除
+	public boolean delete(CostRegistrationModel costRegistrationModel,String costFile) {
+		boolean flag = false; 
+		if (costFile== null) {
+			return flag;
+		}
+		File file = new File(costFile);
+	    if (file.isFile() && file.exists()) {  
+	        file.delete();  
+	        flag = true;  
+	    }
+	    return flag;
 	}
 }

@@ -9,7 +9,7 @@
 			happendDate,
 			costClassificationCode,
 			dueDate,
-			detailedName,
+			detailedNameOrLine,
 			stationCode,
 			originCode,
 			transportationCode,
@@ -18,7 +18,6 @@
 			remark,
 			roundCode,
 			CONVERT (costFile USING utf8)costFile,
-			line,
 			updateTime,
 			createTime,
 			updateUser
@@ -29,13 +28,13 @@
 			happendDate &lt;= date_format(date_add(NOW(), interval 2 MONTH) ,'%Y%m%d') AND
 			employeeNo = #{employeeNo}
     </select>
-    <insert id="insertCostRegistration" parameterType="String">
+    <insert id="insertCostRegistration" parameterType="map">
 		INSERT INTO T020CostInfo(
 			employeeNo,
 			happendDate,
 			costClassificationCode,
 			dueDate,
-			detailedName,
+			detailedNameOrLine,
 			stationCode,
 			originCode,
 			transportationCode,
@@ -44,7 +43,6 @@
 			remark,
 			roundCode,
 			costFile,
-			line,
 			updateTime,
 			createTime,
 			updateUser)
@@ -52,29 +50,28 @@
 			#{employeeNo},
 			#{happendDate},
 			#{costClassificationCode},
-			#{dueDate,jdbcType=VARCHAR},
-			#{detailedName,jdbcType=VARCHAR},
+			#{dueDate},
+			#{detailedNameOrLine},
 			#{stationCode},
 			#{originCode},
 			#{transportationCode},
 			#{destinationCode},
 			#{cost},
-			#{remark,jdbcType=VARCHAR},
+			#{remark},
 			#{roundCode},
 			#{costFile},
-			#{line},
 			NOW(),
 			NOW(),
 			#{employeeName})
     </insert>
-	<update id="updateCostRegistration" parameterType="String">
+	<update id="updateCostRegistration" parameterType="map">
 		UPDATE T020CostInfo
 		SET 
 			employeeNo = #{employeeNo},
 			happendDate = #{happendDate},
 			costClassificationCode = #{costClassificationCode},
 			dueDate = #{dueDate},
-			detailedName = #{detailedName},
+			detailedNameOrLine = #{detailedNameOrLine},
 			stationCode = #{stationCode},
 			originCode = #{originCode},
 			transportationCode = #{transportationCode},
@@ -83,7 +80,6 @@
 			remark = #{remark},
 			roundCode = #{roundCode},
 			costFile = #{costFile},
-			line = #{line},
 			updateTime =now(),
 			createTime =now(),
 			updateUser = #{employeeName}
@@ -92,5 +88,14 @@
 			and happendDate = #{happendDate},
 			and costClassificationCode = #{costClassificationCode}
     </update>
-
+   	<delete id="deleteCostRegistration" parameterType="map">
+    	DELETE FROM 
+    		T020CostInfo
+		WHERE
+			employeeNo = #{employeeNo}
+		AND 
+			happendDate = #{happendDate}
+		AND 
+			costClassificationCode = #{costClassificationCode}
+    </delete>
 </mapper>
