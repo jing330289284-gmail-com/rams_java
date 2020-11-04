@@ -67,7 +67,6 @@
 	<update id="updateCostRegistration" parameterType="map">
 		UPDATE T020CostInfo
 		SET 
-			employeeNo = #{employeeNo},
 			happendDate = #{happendDate},
 			costClassificationCode = #{costClassificationCode},
 			dueDate = #{dueDate},
@@ -85,8 +84,8 @@
 			updateUser = #{employeeName}
 		WHERE 
 			employeeNo = #{employeeNo}
-			and happendDate = #{happendDate},
-			and costClassificationCode = #{costClassificationCode}
+			and happendDate = #{oldHappendDate},
+			and costClassificationCode = #{oldCostClassificationCode}
     </update>
    	<delete id="deleteCostRegistration" parameterType="map">
     	DELETE FROM 
@@ -94,8 +93,8 @@
 		WHERE
 			employeeNo = #{employeeNo}
 		AND 
-			happendDate = #{happendDate}
+			happendDate = #{oldHappendDate}
 		AND 
-			costClassificationCode = #{costClassificationCode}
+			costClassificationCode = #{oldCostClassificationCode}
     </delete>
 </mapper>

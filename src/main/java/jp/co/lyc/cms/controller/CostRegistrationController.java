@@ -19,7 +19,6 @@ import com.alibaba.fastjson.TypeReference;
 
 import jp.co.lyc.cms.common.BaseController;
 import jp.co.lyc.cms.model.CostRegistrationModel;
-import jp.co.lyc.cms.model.WorkRepotModel;
 import jp.co.lyc.cms.service.CostRegistrationService;
 
 @Controller
@@ -88,12 +87,17 @@ public class CostRegistrationController extends BaseController {
 		costRegistrationModel.setEmployeeNo(getSession().getAttribute("employeeNo").toString());
 		costRegistrationModel.setEmployeeName(getSession().getAttribute("employeeName").toString()); 
 		String getFilename;
-		try {
-			getFilename=upload(costRegistrationModel,costFile);
-		} catch (Exception e) {
-			return false;
+		if(costRegistrationModel.isChangeFile()) {
+			try {
+				delete(costRegistrationModel);
+				getFilename=upload(costRegistrationModel,costFile);
+			} catch (Exception e) {
+				return false;
+			}
+			costRegistrationModel.setCostFile(getFilename);
 		}
-		costRegistrationModel.setCostFile(getFilename);
+		
+		
 		boolean result  = costRegistrationService.updateCostRegistration(costRegistrationModel);
 		logger.info("CostRegistrationController.updateCostRegistration:" + "修正結束");
 		return result;
@@ -112,7 +116,7 @@ public class CostRegistrationController extends BaseController {
 		boolean flag=false;
 		if(emp.getCostFile()!=null) {
 			try {
-				flag=delete(emp,emp.getCostFile());
+				flag=delete(emp);
 			} catch (Exception e) {
 				return flag;
 			}
@@ -133,23 +137,23 @@ public class CostRegistrationController extends BaseController {
 			file.mkdirs();
 		}
 		String fileName =costFile.getOriginalFilename();
+		String suffix = fileName.substring(fileName.lastIndexOf(".") + 1);
+		String newName =costRegistrationModel.getHappendDate().substring(4,8)+costRegistrationModel.getCostClassificationName()+ "." + suffix;
+	
 		try {
-			File newFile = new File(file.getAbsolutePath() + File.separator + fileName);
+			File newFile = new File(file.getAbsolutePath() + File.separator + newName);
 			costFile.transferTo(newFile);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "";
 		}
-		return realPath+File.separator+fileName;
+		return realPath+File.separator+newName;
 	}
 	//ファイル削除
-	public boolean delete(CostRegistrationModel costRegistrationModel,String costFile) {
+	public boolean delete(CostRegistrationModel costRegistrationModel) {
 		boolean flag = false; 
-		if (costFile== null) {
-			return flag;
-		}
-		File file = new File(costFile);
-	    if (file.isFile() && file.exists()) {  
+		File file = new File(costRegistrationModel.getCostFile());
+	    if (file.isFile() && file.exists()) {
 	        file.delete();  
 	        flag = true;  
 	    }

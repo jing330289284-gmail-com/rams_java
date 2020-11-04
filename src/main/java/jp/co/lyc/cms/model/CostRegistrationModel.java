@@ -1,13 +1,14 @@
 package jp.co.lyc.cms.model;
-
-import org.springframework.web.multipart.MultipartFile;
-
 public class CostRegistrationModel {
 	int rowNo;
 	String employeeNo;
 	String employeeName;
 	String happendDate;
+	String oldHappendDate;
 	int costClassificationCode;
+	int oldCostClassificationCode;
+	String costClassificationName;
+	String oldCostClassificationName;
 	String dueDate;
 	String detailedNameOrLine;
 	int stationCode;
@@ -21,7 +22,7 @@ public class CostRegistrationModel {
 	String updateUser;
 	String updateTime;
 	String createTime;
-	MultipartFile costFileFile;
+	boolean changeFile;
 	public int getRowNo() {
 		return rowNo;
 	}
@@ -130,10 +131,34 @@ public class CostRegistrationModel {
 	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
 	}
-	public MultipartFile getCostFileFile() {
-		return costFileFile;
+	public boolean isChangeFile() {
+		return changeFile;
 	}
-	public void setCostFileFile(MultipartFile costFileFile) {
-		this.costFileFile = costFileFile;
+	public void setChangeFile(boolean changeFile) {
+		this.changeFile = changeFile;
+	}
+	public String getOldHappendDate() {
+		return oldHappendDate;
+	}
+	public void setOldHappendDate(String oldHappendDate) {
+		this.oldHappendDate = oldHappendDate;
+	}
+	public int getOldCostClassificationCode() {
+		return oldCostClassificationCode;
+	}
+	public void setOldCostClassificationCode(int oldCostClassificationCode) {
+		this.oldCostClassificationCode = oldCostClassificationCode;
+	}
+	public String getCostClassificationName() {
+		return costClassificationName;
+	}
+	public void setCostClassificationName(String costClassificationName) {
+		this.costClassificationName = costClassificationName;
+	}
+	public String getOldCostClassificationName() {
+		return oldCostClassificationName;
+	}
+	public void setOldCostClassificationName(String oldCostClassificationName) {
+		this.oldCostClassificationName = oldCostClassificationName;
 	}
 }
