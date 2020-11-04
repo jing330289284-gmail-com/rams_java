@@ -27,10 +27,37 @@ public class SendLettersConfirmModel implements Serializable {
 	String japaneseLevelName;
 	String beginMonth;
 	String[] employeeNos;
+	String resumeInfo1;// 履歴書情報1
+	String resumeInfo2;// 
+	String resume;// 履歴書情報1
 
 	int rowNo;// 
 	
 	
+	public String getResumeInfo1() {
+		return resumeInfo1;
+	}
+
+	public void setResumeInfo1(String resumeInfo1) {
+		this.resumeInfo1 = resumeInfo1;
+	}
+
+	public String getResumeInfo2() {
+		return resumeInfo2;
+	}
+
+	public void setResumeInfo2(String resumeInfo2) {
+		this.resumeInfo2 = resumeInfo2;
+	}
+
+	public String getResume() {
+		return resume;
+	}
+
+	public void setResume(String resume) {
+		this.resume = resume;
+	}
+
 	public String[] getEmployeeNos() {
 		return employeeNos;
 	}

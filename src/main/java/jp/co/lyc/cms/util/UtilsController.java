@@ -1,23 +1,32 @@
 package jp.co.lyc.cms.util;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
 import java.security.GeneralSecurityException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
+import java.util.Set;
 
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
 import javax.mail.Address;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -25,9 +34,13 @@ import javax.mail.NoSuchProviderException;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+import javax.mail.internet.MimeUtility;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
@@ -52,6 +65,26 @@ public class UtilsController {
 
 	@Autowired
 	UtilsService utilsService;
+	
+	public static Map<String, String> JapanHoliday = new HashMap<String, String>();
+	static {
+		StringBuffer json = new StringBuffer();
+		try {
+			URL url = new URL("https://holidays-jp.github.io/api/v1/date.json");
+			InputStream is = url.openStream();  // throws an IOException
+			BufferedReader  br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+			String line = "";
+	        while ((line = br.readLine()) != null) {
+	        	json.append(line);
+	        }
+		} catch (Exception e) {}
+		com.alibaba.fastjson.JSONObject jsonObject = com.alibaba.fastjson.JSON.parseObject(json.toString());
+//		String yearMonth = (String)jsonObject.getOrDefault("yearMonth", "");
+		Set<String> keys =  jsonObject.keySet();
+		for (String key : keys)	{
+			JapanHoliday.put(key, jsonObject.getString(key));
+		}
+	}
 
 	/**
 	 * 国籍を取得
@@ -118,7 +151,7 @@ public class UtilsController {
 		List<ModelClass> list = getStatus(siteStateStatus);
 		return list;
 	}
-	
+
 	/**
 	 * 社員形式を取得
 	 * 
@@ -306,6 +339,7 @@ public class UtilsController {
 		List<ModelClass> list = getStatus(checkSection);
 		return list;
 	}
+
 	/**
 	 * CheckSectionを取得する
 	 * 
@@ -319,6 +353,7 @@ public class UtilsController {
 		List<ModelClass> list = getStatus(round);
 		return list;
 	}
+
 	/**
 	 * 上場
 	 * 
@@ -538,7 +573,7 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getSalesProgress();
 		return list;
 	}
-	
+
 	/**
 	 * 日本語ラベル状況取得
 	 * 
@@ -550,7 +585,7 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getJapaneaseConversationLevel();
 		return list;
 	}
-	
+
 	/**
 	 * 英語状況取得
 	 * 
@@ -562,7 +597,7 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getEnglishConversationLevel();
 		return list;
 	}
-	
+
 	/**
 	 * 対応工程況取得
 	 * 
@@ -587,6 +622,7 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getStation();
 		return list;
 	}
+
 	/**
 	 * 費用区分取る
 	 * 
@@ -599,8 +635,9 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getCostClassification();
 		return list;
 	}
+
 	/**
-	 *交通手段を取る
+	 * 交通手段を取る
 	 * 
 	 * @return
 	 */
@@ -611,7 +648,7 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getTransportation();
 		return list;
 	}
-	
+
 	/**
 	 * 業種を取る
 	 * 
@@ -760,7 +797,7 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getQualification();
 		return list;
 	}
-	
+
 	/**
 	 * 社員氏名（BP社員ない）を取得する
 	 * 
@@ -872,15 +909,23 @@ public class UtilsController {
 		return props;
 	}
 
-	public final static String UPLOAD_PATH_PREFIX = "c:/file/履歴書/";
+	public final static String UPLOAD_PATH_PREFIX_resumeInfo = "c:/file/履歴書/";
+	public final static String UPLOAD_PATH_PREFIX_others = "c:/file/情報/";
 
 	public Map<String, Object> upload(MultipartFile uploadFile, Map<String, Object> sendMap, String key, String Info) {
 		if (uploadFile == null) {
 			sendMap.put(key, "");
 			return sendMap;
 		}
-		String realPath = new String(UPLOAD_PATH_PREFIX + sendMap.get("employeeNo") + "_"
-				+ sendMap.get("employeeFristName") + sendMap.get("employeeLastName"));
+		String realPath;
+		if (key.equals("resumeInfo1") || key.equals("resumeInfo2")) {
+			realPath = new String(UPLOAD_PATH_PREFIX_resumeInfo + sendMap.get("employeeNo") + "_"
+					+ sendMap.get("employeeFristName") + sendMap.get("employeeLastName"));
+		} else {
+			realPath = new String(UPLOAD_PATH_PREFIX_others + sendMap.get("employeeNo") + "_"
+					+ sendMap.get("employeeFristName") + sendMap.get("employeeLastName"));
+		}
+
 		File file = new File(realPath);
 		if (!file.isDirectory()) {
 			file.mkdirs();
@@ -902,6 +947,7 @@ public class UtilsController {
 	}
 
 	public static final String DOWNLOAD_PATH_BASE = "C:/file/";
+
 	@RequestMapping(value = "/download", method = RequestMethod.POST)
 	@ResponseBody
 	public void downloadTemplateFile(@RequestBody ModelClass model, HttpServletResponse response) throws IOException {
@@ -1012,6 +1058,101 @@ public class UtilsController {
 	}
 
 	/**
+	 * sendMailWithFile
+	 * 
+	 * @param emailMod
+	 * @param path
+	 */
+	public void sendMailWithFile(EmailModel emailMod) {
+
+		Session session = null;
+		try {
+			//　创建一个资源文件
+			Properties properties = new Properties();
+			//　 显示日志
+			properties.setProperty("mail.debug", "true");
+			//　 邮箱类别
+			properties.setProperty("mail.host", "smtp.lolipop.jp");
+			//　 设定验证开启
+			properties.setProperty("mail.smtp.auth", "true");
+			//　 发送 接受方式
+			properties.setProperty("mail.transpot.prococol", "smtp");
+			//　 设置请求服务器端口号
+			properties.put("mail.smtp.port", 587);
+			//　 设置ssl加密服务开启
+			properties.setProperty("mail.smtp.ssl.enable", "smtp");
+			//　 创建加密证书
+			MailSSLSocketFactory sf = new MailSSLSocketFactory();
+			// properties 底层调用的的是put方法
+			properties.put("Mail.smtp.ssl.socketFactory", sf);
+			//　 获取具有以上属性的邮件session --->　连接池
+			session = Session.getInstance(properties);
+			//　 创建获取连接
+			Transport transport = session.getTransport();
+			//　 进行连接
+			transport.connect("mail@lyc.co.jp", "Lyc2020-0908-");
+			//　 创建一个信息
+			Message message = new MimeMessage(session);
+			//　 设定发送方
+			message.setFrom(new InternetAddress("mail@lyc.co.jp"));
+			//　 设置主题内容
+			message.setSubject(emailMod.getMailTitle());
+			//message.setContent(emailMod.getContext(), "text/html;charset=utf-8");
+			String[] addresssCC = emailMod.getSelectedMailCC();
+			int lenCC = addresssCC.length;
+			Address[] addsCC = new Address[lenCC];
+			for (int i = 0; i < lenCC; i++) {
+				addsCC[i] = new InternetAddress(addresssCC[i]);
+			}
+			//InternetAddress[] sendCC = new InternetAddress[] {new InternetAddress("jyw.fendou@gmail.com", "", "UTF-8")};
+			message.addRecipients(MimeMessage.RecipientType.CC, addsCC);
+			
+			 //向multipart对象中添加邮件的各个部分内容，包括文本内容和附件
+	         MimeMultipart multipart = new MimeMultipart();
+	         //设置邮件的文本内容
+	         MimeBodyPart contentPart = new MimeBodyPart();
+	         contentPart.setContent(emailMod.getMailConfirmContont(), "text/html;charset=UTF-8");
+	         multipart.addBodyPart(contentPart);
+			//添加附件
+	         MimeBodyPart filePart = new MimeBodyPart();
+	         DataSource source = new FileDataSource(emailMod.getResumePath());
+	         //添加附件的内容
+	         filePart.setDataHandler(new DataHandler(source));
+	         //添加附件的标题
+	         filePart.setFileName(MimeUtility.encodeText(emailMod.getResumeName()));
+	         multipart.addBodyPart(filePart);
+	         multipart.setSubType("mixed");
+	         //将multipart对象放到message中
+	         message.setContent(multipart);
+			
+			String[] addresss = emailMod.getSelectedmail().split(",");
+			int len = addresss.length;
+			Address[] adds = new Address[len];
+			for (int i = 0; i < len; i++) {
+				adds[i] = new InternetAddress(addresss[i]);
+			}
+			message.addRecipients(MimeMessage.RecipientType.TO, adds);
+
+			//　 发送邮件
+			transport.sendMessage(message, message.getAllRecipients());
+			//　transport.close();
+		} catch (GeneralSecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchProviderException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+	}
+	
+	/**
 	 * enterPeriodを取得する
 	 * 
 	 * @return
@@ -1024,31 +1165,33 @@ public class UtilsController {
 		List<ModelClass> list = getStatus(enterPeriod);
 		return list;
 	}
-	
-    /**
-             * 日数計算
-     * @param startTime ： 開始時間
-     * @param endTime  ： 終了時間
-     * @return   
-     */
-    public static int caculateTotalTime(String startTime,String endTime) {
-        SimpleDateFormat formatter =   new SimpleDateFormat( "yyyy-MM-dd");
-        Date date1=null;
-        Date date = null;
-        Long l = 0L;
-        try {
-            date = formatter.parse(startTime);
-            long ts = date.getTime();
-            date1 =  formatter.parse(endTime);
-            long ts1 = date1.getTime();
 
-            l = (ts - ts1) / (1000 * 60 * 60 * 24);
+	/**
+	 * 日数計算
+	 * 
+	 * @param startTime ： 開始時間
+	 * @param endTime   ： 終了時間
+	 * @return
+	 */
+	public static int caculateTotalTime(String startTime, String endTime) {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		Date date1 = null;
+		Date date = null;
+		Long l = 0L;
+		try {
+			date = formatter.parse(startTime);
+			long ts = date.getTime();
+			date1 = formatter.parse(endTime);
+			long ts1 = date1.getTime();
 
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return l.intValue();
-    }
+			l = (ts - ts1) / (1000 * 60 * 60 * 24);
+
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return l.intValue();
+	}
+
 	/**
 	 * 状況変動ステータスを取得する
 	 * 
@@ -1061,7 +1204,7 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getSituationChange();
 		return list;
 	}
-	
+
 	/**
 	 * serverIP
 	 * 
@@ -1076,9 +1219,10 @@ public class UtilsController {
 		List<ModelClass> list = getStatus(serverIP);
 		return list;
 	}
-	
+
 	/**
 	 * 取引区分
+	 * 
 	 * @return
 	 */
 	@RequestMapping(value = "/getTransaction", method = RequestMethod.POST)
@@ -1088,5 +1232,48 @@ public class UtilsController {
 		String transaction = properties.getProperty("transaction");
 		List<ModelClass> list = getStatus(transaction);
 		return list;
+	}
+	/**
+	 * 0130 -> 01:30
+	 * @param time(string)
+	 * @param inputChar(string default->:)
+	 * @return String
+	 */
+	public static String TimeInsertChar(String time, String inputChar) {
+		return StringUtils.isEmpty(time) ? "" : time.substring(0, 2) + inputChar + time.substring(2, 4);
+	}
+	/**
+	 * 0130 -> 01:30
+	 * @param time(string)
+	 * @param inputChar(string default->:)
+	 * @return String
+	 */
+	public static String TimeInsertChar(String time) {
+		return TimeInsertChar(time, ":");
+	}
+	/**
+	 * 祝休日
+	 * @param timestamp in Millis
+	 * @return Boolean
+	 */
+	public static Boolean isHoliday(String date) {
+		return isHoliday(date, "yyyy-MM-dd");
+	}
+	/**
+	 * 祝休日
+	 * @param dateString date
+	 * @param dateFormat date format
+	 * @return Boolean
+	 */
+	public static Boolean isHoliday(String dateString, String dateFormat) {
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
+		Date date = new Date();
+		try {
+			date = simpleDateFormat.parse(dateString);
+		} catch (ParseException e) {}
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		int week = calendar.get(Calendar.DAY_OF_WEEK);
+		return JapanHoliday.containsKey(date) || week == Calendar.SUNDAY || week == Calendar.SATURDAY;
 	}
 }

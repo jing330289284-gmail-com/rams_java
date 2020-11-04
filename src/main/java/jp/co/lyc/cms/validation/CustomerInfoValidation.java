@@ -39,7 +39,13 @@ public class CustomerInfoValidation implements Validator {
 				if(!UtilsCheckMethod.isNullOrEmpty(p.getUrl())) {
 					if (UtilsCheckMethod.checkUrl(p.getUrl())) {
 						errors.rejectValue("url", "", 
-								StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG0011","お客様URL"));
+								StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG007","お客様URL"));
+					}
+				}
+				if(!UtilsCheckMethod.isNullOrEmpty(p.getCapitalStock())) {
+					if (UtilsCheckMethod.numberFormat(p.getCapitalStock())) {
+						errors.rejectValue("capitalStock", "", 
+								StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG007","資本金"));
 					}
 				}
 				for(CustomerDepartmentInfoModel a : p.getCustomerDepartmentList()) {

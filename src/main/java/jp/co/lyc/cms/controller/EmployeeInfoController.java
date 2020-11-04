@@ -57,7 +57,7 @@ public class EmployeeInfoController extends BaseController {
 	@ResponseBody
 	public Map<String, Object> getEmployeeInfo(@RequestBody EmployeeModel emp) {
 		logger.info("GetEmployeeInfoController.getEmployeeInfo:" + "検索開始");
-		 errorsMessage = "";
+		errorsMessage = "";
 		DataBinder binder = new DataBinder(emp);
 		binder.setValidator(new EmployeeInfoValidation());
 		binder.validate();
@@ -97,13 +97,13 @@ public class EmployeeInfoController extends BaseController {
 			@RequestParam(value = "resumeInfo2", required = false) MultipartFile resumeInfo2,
 			@RequestParam(value = "residentCardInfo", required = false) MultipartFile residentCardInfo,
 			@RequestParam(value = "passportInfo", required = false) MultipartFile passportInfo,
-			@RequestParam(value = "pictures", required = false) MultipartFile pictures) throws Exception {
+			@RequestParam(value = "picInfo", required = false) MultipartFile pictures) throws Exception {
 		logger.info("GetEmployeeInfoController.insertEmployee:" + "追加開始");
 		errorsMessage = "";
 		JSONObject jsonObject = JSON.parseObject(JSONEmp);
 		EmployeeModel emp = JSON.parseObject(jsonObject.toJSONString(), new TypeReference<EmployeeModel>() {
 		});
-		if(resumeInfo1!=null) {
+		if (resumeInfo1 != null) {
 			emp.setResumeInfo1(resumeInfo1.getOriginalFilename());
 		}
 		DataBinder binder = new DataBinder(emp);
@@ -127,7 +127,7 @@ public class EmployeeInfoController extends BaseController {
 			sendMap = utilsController.upload(resumeInfo2, sendMap, "resumeInfo2", emp.getResumeName2());
 			sendMap = utilsController.upload(residentCardInfo, sendMap, "residentCardInfo", "在留カード");
 			sendMap = utilsController.upload(passportInfo, sendMap, "passportInfo", "パスポート");
-		    sendMap = utilsController.upload(pictures, sendMap, "picInfo", "写真");
+			sendMap = utilsController.upload(pictures, sendMap, "picInfo", "写真");
 			employeeInfoService.insertEmployee((HashMap<String, Object>) sendMap);
 		} catch (Exception e) {
 			resultMap.put("result", false);
@@ -190,13 +190,18 @@ public class EmployeeInfoController extends BaseController {
 			@RequestParam(value = "resumeInfo1", required = false) MultipartFile resumeInfo1,
 			@RequestParam(value = "resumeInfo2", required = false) MultipartFile resumeInfo2,
 			@RequestParam(value = "residentCardInfo", required = false) MultipartFile residentCardInfo,
-			@RequestParam(value = "passportInfo", required = false) MultipartFile passportInfo) throws Exception {
+			@RequestParam(value = "passportInfo", required = false) MultipartFile passportInfo,
+			@RequestParam(value = "picInfo", required = false) MultipartFile pictures,
+			@RequestParam(value = "resumeInfo1URL", required = false) String resumeInfo1URL,
+			@RequestParam(value = "resumeInfo2URL", required = false) String resumeInfo2URL,
+			@RequestParam(value = "residentCardInfoURL", required = false) String residentCardInfoURL,
+			@RequestParam(value = "passportInfoURL", required = false) String passportInfoURL) throws Exception {
 		logger.info("GetEmployeeInfoController.updateEmployee:" + "修正開始");
-		 errorsMessage = "";
+		errorsMessage = "";
 		JSONObject jsonObject = JSON.parseObject(JSONEmp);
 		EmployeeModel emp = JSON.parseObject(jsonObject.toJSONString(), new TypeReference<EmployeeModel>() {
 		});
-		if(resumeInfo1!=null) {
+		if (resumeInfo1 != null) {
 			emp.setResumeInfo1(resumeInfo1.getOriginalFilename());
 		}
 		DataBinder binder = new DataBinder(emp);
@@ -220,6 +225,7 @@ public class EmployeeInfoController extends BaseController {
 			sendMap = utilsController.upload(resumeInfo2, sendMap, "resumeInfo2", emp.getResumeName2());
 			sendMap = utilsController.upload(residentCardInfo, sendMap, "residentCardInfo", "在留カード");
 			sendMap = utilsController.upload(passportInfo, sendMap, "passportInfo", "パスポート");
+			sendMap = utilsController.upload(pictures, sendMap, "picInfo", "写真");
 			result = employeeInfoService.updateEmployee(sendMap);
 		} catch (Exception e) {
 			resultMap.put("result", false);
@@ -289,200 +295,199 @@ public class EmployeeInfoController extends BaseController {
 		String intoCompanyYearAndMonthTo = emp.getIntoCompanyYearAndMonthTo();// 入社年月先
 		String authorityCode = emp.getAuthorityCode();// 権限
 		String employeeStatus = emp.getEmployeeStatus();// 社員ステータス
-		// String picInfo = emp.getPicInfo();// 写真
 		String yearsOfExperience = emp.getYearsOfExperience();// 経験年数
 		AccountInfoModel accountInfoModel = emp.getAccountInfo();// 口座情報
 		BpInfoModel bpInfoModel = emp.getBpInfoModel();// bp情報
 		String password = emp.getPassword();// パスワード
-		String siteRoleCode = emp.getSiteRoleCode();//役割コード
+		String siteRoleCode = emp.getSiteRoleCode();// 役割コード
 
-		//　　住所情報開始
+		// 住所情報開始
 		String postcode = emp.getPostcode();// 郵便番号
-		String firstHalfAddress = emp.getFirstHalfAddress();//住所前半
-		String lastHalfAddress = emp.getLastHalfAddress();//住所後半
-		String stationCode = emp.getStationCode();//　　最寄駅1
-		
-		String employeeName = emp.getEmployeeName();//社員名
-		
+		String firstHalfAddress = emp.getFirstHalfAddress();// 住所前半
+		String lastHalfAddress = emp.getLastHalfAddress();// 住所後半
+		String stationCode = emp.getStationCode();// 最寄駅1
+
+		String employeeName = emp.getEmployeeName();// 社員名
+
 		if (stationCode != null) {
 			sendMap.put("stationCode", stationCode);
 		}
-		//　　住所情報終了
+		// 住所情報終了
 
-		if (employeeNo != null ) {
+		if (employeeNo != null) {
 			sendMap.put("employeeNo", employeeNo);
 		}
-		if (employeeFristName != null ) {
+		if (employeeFristName != null) {
 			sendMap.put("employeeFristName", employeeFristName);
 		}
-		if (employeeLastName != null ) {
+		if (employeeLastName != null) {
 			sendMap.put("employeeLastName", employeeLastName);
 		}
-		if (furigana != null ) {
+		if (furigana != null) {
 			sendMap.put("furigana", furigana);
 		}
-		if (alphabetName != null ) {
+		if (alphabetName != null) {
 			sendMap.put("alphabetName", alphabetName);
 		}
-		if (birthday != null ) {
+		if (birthday != null) {
 			sendMap.put("birthday", birthday);
 		}
-		if (japaneseCalendar != null ) {
+		if (japaneseCalendar != null) {
 			sendMap.put("japaneseCalendar", japaneseCalendar);
 		}
 
-		if (occupationCode != null ) {
+		if (occupationCode != null) {
 			sendMap.put("occupationCode", occupationCode);
 		}
-		if (departmentCode != null ) {
+		if (departmentCode != null) {
 			sendMap.put("departmentCode", departmentCode);
 		}
-		if (companyMail != null ) {
+		if (companyMail != null) {
 			sendMap.put("companyMail", companyMail);
 		}
-		if (graduationUniversity != null ) {
+		if (graduationUniversity != null) {
 			sendMap.put("graduationUniversity", graduationUniversity);
 		}
-		if (major != null ) {
+		if (major != null) {
 			sendMap.put("major", major);
 		}
-		if (graduationYearAndMonth != null ) {
+		if (graduationYearAndMonth != null) {
 			sendMap.put("graduationYearAndMonth", graduationYearAndMonth);
 		}
-		if (intoCompanyYearAndMonth != null ) {
+		if (intoCompanyYearAndMonth != null) {
 			sendMap.put("intoCompanyYearAndMonth", intoCompanyYearAndMonth);
 		}
-		if (retirementYearAndMonth != null ) {
+		if (retirementYearAndMonth != null) {
 			sendMap.put("retirementYearAndMonth", retirementYearAndMonth);
 		}
-		if (comeToJapanYearAndMonth != null ) {
+		if (comeToJapanYearAndMonth != null) {
 			sendMap.put("comeToJapanYearAndMonth", comeToJapanYearAndMonth);
 		}
-		if (birthplace != null ) {
+		if (birthplace != null) {
 			sendMap.put("birthplace", birthplace);
 		}
-		if (phoneNo != null ) {
+		if (phoneNo != null) {
 			sendMap.put("phoneNo", phoneNo);
 		}
 
 		if (residenceCode != null) {
 			sendMap.put("residenceCode", residenceCode);
 		}
-		if (residenceCardNo != null ) {
+		if (residenceCardNo != null) {
 			sendMap.put("residenceCardNo", residenceCardNo);
 		}
-		if (stayPeriod != null ) {
+		if (stayPeriod != null) {
 			sendMap.put("stayPeriod", stayPeriod);
 		}
-		if (employmentInsuranceNo != null ) {
+		if (employmentInsuranceNo != null) {
 			sendMap.put("employmentInsuranceNo", employmentInsuranceNo);
 		}
-		if (myNumber != null ) {
+		if (myNumber != null) {
 			sendMap.put("myNumber", myNumber);
 		}
-		if (resumeName2 != null ) {
+		if (resumeName2 != null) {
 			sendMap.put("resumeName2", resumeName2);
 		}
-		if (resumeName1 != null ) {
+		if (resumeName1 != null) {
 			sendMap.put("resumeName1", resumeName1);
 		}
-		if (passportNo != null ) {
+		if (passportNo != null) {
 			sendMap.put("passportNo", passportNo);
 		}
-		if (employeeFormCode != null ) {
+		if (employeeFormCode != null) {
 			sendMap.put("employeeFormCode", employeeFormCode);
 		}
-		if (customer != null ) {
+		if (customer != null) {
 			sendMap.put("customer", customer);
 		}
-		if (intoCompanyCode != null ) {
+		if (intoCompanyCode != null) {
 			sendMap.put("intoCompanyCode", intoCompanyCode);
 		}
-		if (nationalityCode != null ) {
+		if (nationalityCode != null) {
 			sendMap.put("nationalityCode", nationalityCode);
 		}
 
-		if (genderStatus != null ) {
+		if (genderStatus != null) {
 			sendMap.put("genderStatus", genderStatus);
 		}
-		if (ageFrom != null ) {
+		if (ageFrom != null) {
 			sendMap.put("ageFrom", ageFrom);
 		}
-		if (ageTo != null ) {
+		if (ageTo != null) {
 			sendMap.put("ageTo", ageTo);
 		}
 
-		if (unitPriceFrom != null ) {
+		if (unitPriceFrom != null) {
 			sendMap.put("unitPriceFrom", unitPriceFrom);
 		}
-		if (unitPriceTo != null ) {
+		if (unitPriceTo != null) {
 			sendMap.put("unitPriceTo", unitPriceTo);
 		}
-		if (japaneseLevelCode != null ) {
+		if (japaneseLevelCode != null) {
 			sendMap.put("japaneseLevelCode", japaneseLevelCode);
 		}
-		if (englishLevelCode != null ) {
+		if (englishLevelCode != null) {
 			sendMap.put("englishLevelCode", englishLevelCode);
 		}
-		if (certification1 != null ) {
+		if (certification1 != null) {
 			sendMap.put("certification1", certification1);
 		}
-		if (certification2 != null ) {
+		if (certification2 != null) {
 			sendMap.put("certification2", certification2);
 		}
-		if (postcode != null ) {
+		if (postcode != null) {
 			sendMap.put("postcode", postcode);
 		}
-		if (firstHalfAddress != null ) {
+		if (firstHalfAddress != null) {
 			sendMap.put("firstHalfAddress", firstHalfAddress);
 		}
-		if (lastHalfAddress != null ) {
+		if (lastHalfAddress != null) {
 			sendMap.put("lastHalfAddress", lastHalfAddress);
 		}
-		if (developLanguage4 != null ) {
+		if (developLanguage4 != null) {
 			sendMap.put("developLanguage4", developLanguage4);
 		}
-		if (developLanguage5 != null ) {
+		if (developLanguage5 != null) {
 			sendMap.put("developLanguage5", developLanguage5);
 		}
-		if (kadou != null ) {
+		if (kadou != null) {
 			sendMap.put("kadou", kadou);
 		}
 
-		if (developLanguage1 != null ) {
+		if (developLanguage1 != null) {
 			sendMap.put("developLanguage1", developLanguage1);
 		}
-		if (developLanguage2 != null ) {
+		if (developLanguage2 != null) {
 			sendMap.put("developLanguage2", developLanguage2);
 		}
-		if (developLanguage3 != null ) {
+		if (developLanguage3 != null) {
 			sendMap.put("developLanguage3", developLanguage3);
 		}
-		if (intoCompanyYearAndMonthFrom != null ) {
+		if (intoCompanyYearAndMonthFrom != null) {
 			sendMap.put("intoCompanyYearAndMonthFrom", intoCompanyYearAndMonthFrom);
 		}
-		if (intoCompanyYearAndMonthTo != null ) {
+		if (intoCompanyYearAndMonthTo != null) {
 			sendMap.put("intoCompanyYearAndMonthTo", intoCompanyYearAndMonthTo);
 		}
-		if (authorityCode != null ) {
+		if (authorityCode != null) {
 			sendMap.put("authorityCode", authorityCode);
 		}
 		sendMap.put("updateUser", loginSession.getAttribute("employeeName"));
-		if (employeeStatus != null ) {
+		if (employeeStatus != null) {
 			sendMap.put("employeeStatus", employeeStatus);
 		}
-		if (yearsOfExperience != null ) {
+		if (yearsOfExperience != null) {
 			sendMap.put("yearsOfExperience", yearsOfExperience);
 		}
 		sendMap.put("bankInfoModel", accountInfoModel);
 		sendMap.put("bpInfoModel", bpInfoModel);
-		if (password != null ) {
+		if (password != null) {
 			sendMap.put("password", password);
 		}
-		if (siteRoleCode != null ) {
+		if (siteRoleCode != null) {
 			sendMap.put("siteRoleCode", siteRoleCode);
 		}
-		if (employeeName != null ) {
+		if (employeeName != null) {
 			sendMap.put("employeeName", employeeName);
 		}
 		return sendMap;

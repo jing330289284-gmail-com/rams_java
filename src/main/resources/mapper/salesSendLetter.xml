@@ -55,6 +55,47 @@ WHERE
     </insert>
         <select id="getLists" resultType="jp.co.lyc.cms.model.SalesSendLetterModel">
 select StorageListName as name,transmissionClassificationCode as code,customerList as customerNo
-from T021CustomerSendMailStorageList
+from T021CustomerSendMailStorageList order by StorageListName
     </select>
+    
+    	<update id="listNameUpdate" parameterType="String">
+		update
+		T021CustomerSendMailStorageList
+		set
+		StorageListName=#{storageListName},updateTime=now(),updateUser=#{updateUser}
+		where StorageListName=#{oldStorageListName} and transmissionClassificationCode=1
+	</update>
+	 <select id="getSalesCustomersByNos" resultType="jp.co.lyc.cms.model.SalesSendLetterModel">
+	SELECT 
+	(@rowNo:=@rowNo+1 ) AS rowId,
+    T007.customerNo,
+    T007.customerName,
+    T007.purchasingManagers,
+    T009.customerDepartmentCode,
+    T009.positionCode,
+    T007.purchasingManagersMail,
+    T007.levelCode,
+    '' AS monthCount,
+    '' AS purchasingManagers2,
+	'' AS positionCode2,
+	'' AS purchasingManagersMail2
+FROM
+    T007CustomerInfo AS T007
+        LEFT JOIN
+    T009CustomerDepartmentInfo AS T009 ON T007.customerNo = T009.customerNo
+        AND T007.purchasingManagers = T009.responsiblePerson, (SELECT
+		@rowNo:=-1) AS rowId
+		WHERE
+   T007.customerNo IN 
+     <foreach collection="array" index="index" item="item" open="(" separator="," close=")">
+         #{item}
+    </foreach>
+    </select>
+    	<delete id="deleteList" parameterType="String">
+		DELETE
+		FROM
+		T021CustomerSendMailStorageList
+		WHERE
+		StorageListName=#{storageListName} and transmissionClassificationCode=1
+	</delete>
 </mapper>

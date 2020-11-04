@@ -42,7 +42,8 @@
 		employeeNo CODE,
 		CONCAT( employeeFristName,
 		employeeLastName, '(', employeeNo, ')' ) NAME,
-		CONCAT( employeeFristName,
+		CONCAT(
+		employeeFristName,
 		employeeLastName ) TEXT
 		FROM
 		T001Employee
@@ -82,7 +83,8 @@
 	<!--費用区分 -->
 	<select id="getCostClassification"
 		resultType="jp.co.lyc.cms.model.ModelClass">
-		SELECT costClassificationCode code,costClassificationName name FROM
+		SELECT costClassificationCode code,costClassificationName
+		name FROM
 		M028CostClassification
 	</select>
 	<!--交通手段 -->
@@ -262,7 +264,10 @@
 	<select id="getNO" resultType="String" parameterType="map"
 		statementType="STATEMENT">
 		SELECT
-		(CASE WHEN (CONVERT(SUBSTRING(a.${columnName},
+		(CASE
+		WHEN count(*) = 0
+		then CONCAT('${typeName}','001')
+		WHEN (CONVERT(SUBSTRING(a.${columnName},
 		4),SIGNED) + 1) &lt;10
 		THEN
 		CONCAT(CONCAT('${typeName}','00'),(CONVERT(SUBSTRING(a.${columnName},4)
@@ -338,7 +343,7 @@
 		FROM
 		M021SalesProgress
 	</select>
-		<!-- 営業状況取得 -->
+	<!-- 営業状況取得 -->
 	<select id="getJapaneaseConversationLevel"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT
@@ -347,7 +352,7 @@
 		FROM
 		M025JapaneaseConversationLevel
 	</select>
-			<!-- 営業状況取得 -->
+	<!-- 営業状況取得 -->
 	<select id="getEnglishConversationLevel"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT
@@ -356,7 +361,7 @@
 		FROM
 		M026EnglishConversationLevel
 	</select>
-		<select id="getProjectPhase"
+	<select id="getProjectPhase"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT
 		projectPhaseName name,
@@ -364,8 +369,8 @@
 		FROM
 		M027ProjectPhase
 	</select>
-	
-			<!-- 営業状況取得 -->
+
+	<!-- 営業状況取得 -->
 	<select id="getSituationChange"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT

@@ -23,22 +23,16 @@
     CAST(T005.salary As unsigned) As salary,
     CAST((T013.transportationExpenses + T005.scheduleOfBonusAmount + T005.insuranceFeeAmount +T013.otherAllowanceAmount + T013.leaderAllowanceAmount + T013.housingAllowance) As unsigned) As otherFee,
     CAST(T005.waitingCost As unsigned) As waitingCost,
-    <choose>
-		<when test="unitPrice != null">
-		            (T006.unitPrice*10000 - (T005.salary + T013.transportationExpenses + T005.scheduleOfBonusAmount + T005.insuranceFeeAmount +T013.otherAllowanceAmount + T013.leaderAllowanceAmount + T013.housingAllowance + T005.waitingCost)) As monthlyGrosProfits,
-		</when>
-		        <otherwise>
-		            (0 - (T005.salary + T013.transportationExpenses + T005.scheduleOfBonusAmount + T005.insuranceFeeAmount +T013.otherAllowanceAmount + T013.leaderAllowanceAmount + T013.housingAllowance) + T005.waitingCost) As monthlyGrosProfits
-		        </otherwise>
-	        </choose>
+	(T006.unitPrice*10000 - (T005.salary + T013.transportationExpenses + T005.scheduleOfBonusAmount + T005.insuranceFeeAmount +T013.otherAllowanceAmount + T013.leaderAllowanceAmount + T013.housingAllowance + T005.waitingCost)) As monthlyGrosProfits
+
      from (
-		select employeeNo, max(reflectYearAndMonth) as reflectYearAndMonth from T005WagesInfo
+		select employeeNo, max(reflectYearAndMonth),salary as reflectYearAndMonth from T005WagesInfo
 		where reflectYearAndMonth &lt;=#{getYandM}
 		group by employeeNo
     ) as A
     left join T005WagesInfo As T005 on
 		A.employeeNo = T005.employeeNo
-        and A.reflectYearAndMonth = T005.reflectYearAndMonth
+        and A.reflectYearAndMonth &lt;= T005.reflectYearAndMonth
 	left join (
 		select employeeNo, max(expensesReflectYearAndMonth) as expensesReflectYearAndMonth from T013ExpensesInfo
 		where expensesReflectYearAndMonth &lt;= #{getYandM}
@@ -52,10 +46,11 @@
  left join M005EmployeeForm  as M005 ON T002.employeeFormCode=M005.employeeFormCode
  left join M014Occupation as M014 ON T002.occupationCode = M014.occupationCode
  left join T001Employee as T001 ON  A.employeeNo = T001.employeeNo
- left join T006EmployeeSiteInfo as T006 ON A.employeeNo = T006.employeeNo AND #{getYandM} between left(admissionStartDate,6) and left(admissionEndDate,6) ,
+ left join T006EmployeeSiteInfo as T006 ON A.employeeNo = T006.employeeNo AND #{getYandM} between left(admissionStartDate,6) and left(admissionEndDate,6), 
  (SELECT @rowNo := 0 ) AS rowNo 
  
 		WHERE 1=1
+		
 		<if test="employeeClassification != null">
 			AND employeeStatus = #{employeeClassification}
 		</if>

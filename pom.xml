@@ -88,7 +88,12 @@
 		    <version>1.0</version>
 		    <scope>system</scope>
 		    <systemPath>${project.basedir}/bin/jasperreports-fonts-6.10.0.jar</systemPath>
-		</dependency>		
+		</dependency>
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports-functions</artifactId>
+			<version>6.15.0</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>CMS</finalName>

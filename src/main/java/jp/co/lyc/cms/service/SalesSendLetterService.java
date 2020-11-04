@@ -6,7 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import jp.co.lyc.cms.mapper.SalesSendLetterMapper;
-import jp.co.lyc.cms.model.ModelClass;
+import jp.co.lyc.cms.model.SalesSendLettersListName;
+import jp.co.lyc.cms.model.SendLettersConfirmModel;
 import jp.co.lyc.cms.model.SalesSendLetterModel;
 
 
@@ -30,5 +31,17 @@ public class SalesSendLetterService {
 	
 	public List<SalesSendLetterModel> getLists(){
 		return salesSendLetterMapper.getLists();
+	};
+	
+	public int listNameUpdate(SalesSendLettersListName model){
+		return salesSendLetterMapper.listNameUpdate(model);
+	};
+	
+	public List<SalesSendLetterModel> getSalesCustomersByNos(String[] ctmNos){
+		return salesSendLetterMapper.getSalesCustomersByNos(ctmNos);
+	};
+	
+	public int deleteList(String storageListName){
+		return salesSendLetterMapper.deleteList(storageListName);
 	};
 }
