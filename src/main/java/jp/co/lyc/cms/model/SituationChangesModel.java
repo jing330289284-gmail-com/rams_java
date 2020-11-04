@@ -23,7 +23,11 @@ public class SituationChangesModel implements Serializable {
 	String scheduleOfBonusAmount;
 	String employeeFormCode;
 	String intoCompanyYearAndMonth;
+	String retirementYearAndMonth;
 	String salaryFlag;
+	String bonusFlag;
+	String lastTimeBonusAmount;
+	int rowNo;
 	public String getStartYandM() {
 		return startYandM;
 	}
@@ -119,6 +123,30 @@ public class SituationChangesModel implements Serializable {
 	}
 	public void setSalaryFlag(String salaryFlag) {
 		this.salaryFlag = salaryFlag;
+	}
+	public String getBonusFlag() {
+		return bonusFlag;
+	}
+	public void setBonusFlag(String bonusFlag) {
+		this.bonusFlag = bonusFlag;
+	}
+	public String getRetirementYearAndMonth() {
+		return retirementYearAndMonth;
+	}
+	public void setRetirementYearAndMonth(String retirementYearAndMonth) {
+		this.retirementYearAndMonth = retirementYearAndMonth;
+	}
+	public int getRowNo() {
+		return rowNo;
+	}
+	public void setRowNo(int rowNo) {
+		this.rowNo = rowNo;
+	}
+	public String getLastTimeBonusAmount() {
+		return lastTimeBonusAmount;
+	}
+	public void setLastTimeBonusAmount(String lastTimeBonusAmount) {
+		this.lastTimeBonusAmount = lastTimeBonusAmount;
 	}
 
 
