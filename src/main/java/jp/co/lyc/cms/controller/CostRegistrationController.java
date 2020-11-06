@@ -76,7 +76,7 @@ public class CostRegistrationController extends BaseController {
 	 * @param
 	 * @return boolean
 ---	 */
-	@RequestMapping(value = "/updatecostRegistration", method = RequestMethod.POST)
+	@RequestMapping(value = "/updateCostRegistration", method = RequestMethod.POST)
 	@ResponseBody
 	public boolean updateCostRegistration(@RequestParam(value = "emp", required = false) String JSONEmp,
 			@RequestParam(value = "costFile", required = false) MultipartFile costFile) throws Exception {
@@ -87,21 +87,45 @@ public class CostRegistrationController extends BaseController {
 		costRegistrationModel.setEmployeeNo(getSession().getAttribute("employeeNo").toString());
 		costRegistrationModel.setEmployeeName(getSession().getAttribute("employeeName").toString()); 
 		String getFilename;
+		//ファイルに変更がある
 		if(costRegistrationModel.isChangeFile()) {
-			try {
-				delete(costRegistrationModel);
-				getFilename=upload(costRegistrationModel,costFile);
-			} catch (Exception e) {
-				return false;
+			//ファイル名に変更がある
+			if(costRegistrationModel.getCostClassificationCode()!=costRegistrationModel.getOldCostClassificationCode()||
+			!costRegistrationModel.getHappendDate().equals(costRegistrationModel.getOldHappendDate())){
+				//新しいファイルではない,rename
+				if(costFile==null) {
+					getFilename=rename(costRegistrationModel);
+					costRegistrationModel.setCostFile(getFilename);
+				}else {
+					//新しいファイル
+					try {
+						delete(costRegistrationModel);
+						getFilename=upload(costRegistrationModel,costFile);
+						costRegistrationModel.setCostFile(getFilename);
+					} catch (Exception e) {
+						return false;
+					}
+				}
+			}else {
+				//新しいファイル
+				if(costFile!=null) {
+					try {
+						delete(costRegistrationModel);
+						getFilename=upload(costRegistrationModel,costFile);
+						costRegistrationModel.setCostFile(getFilename);
+					} catch (Exception e) {
+						return false;
+					}
+				}
 			}
-			costRegistrationModel.setCostFile(getFilename);
 		}
-		
+
 		
 		boolean result  = costRegistrationService.updateCostRegistration(costRegistrationModel);
 		logger.info("CostRegistrationController.updateCostRegistration:" + "修正結束");
 		return result;
 	}
+
 	/**
 	 * 削除
 	 * 
@@ -152,11 +176,28 @@ public class CostRegistrationController extends BaseController {
 	//ファイル削除
 	public boolean delete(CostRegistrationModel costRegistrationModel) {
 		boolean flag = false; 
-		File file = new File(costRegistrationModel.getCostFile());
+		File file = new File(costRegistrationModel.getOldCostFile());
 	    if (file.isFile() && file.exists()) {
 	        file.delete();  
 	        flag = true;  
 	    }
 	    return flag;
+	}
+	//ファイルリネーム
+	private String rename(CostRegistrationModel costRegistrationModel) {
+		String realPath = new String(UPLOAD_PATH_PREFIX + "作業報告書フォルダ"+ File.separator+costRegistrationModel.getHappendDate().substring(0,4) + File.separator+costRegistrationModel.getHappendDate().substring(4,6));
+		String oldRealPath= new String(costRegistrationModel.getOldCostFile());
+		
+		File oldFile = new File(oldRealPath);
+		String suffix = oldRealPath.substring(oldRealPath.lastIndexOf(".") + 1);
+		String newName =costRegistrationModel.getHappendDate().substring(4,8)+costRegistrationModel.getCostClassificationName()+ "." + suffix;
+		try {
+		oldFile.renameTo(new File(realPath+File.separator + newName));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "";
+		}
+		return realPath+File.separator+newName;
+
 	}
 }

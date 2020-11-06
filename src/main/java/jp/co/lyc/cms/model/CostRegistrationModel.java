@@ -5,20 +5,21 @@ public class CostRegistrationModel {
 	String employeeName;
 	String happendDate;
 	String oldHappendDate;
-	int costClassificationCode;
-	int oldCostClassificationCode;
+	String costClassificationCode;
+	String oldCostClassificationCode;
 	String costClassificationName;
 	String oldCostClassificationName;
 	String dueDate;
 	String detailedNameOrLine;
-	int stationCode;
-	int originCode;
-	int transportationCode;
-	int destinationCode;
-	int cost;
+	String stationCode;
+	String originCode;
+	String transportationCode;
+	String destinationCode;
+	String cost;
 	String remark;
-	int roundCode;
+	String roundCode;
 	String costFile;
+	String oldCostFile;
 	String updateUser;
 	String updateTime;
 	String createTime;
@@ -47,10 +48,10 @@ public class CostRegistrationModel {
 	public void setHappendDate(String happendDate) {
 		this.happendDate = happendDate;
 	}
-	public int getCostClassificationCode() {
+	public String getCostClassificationCode() {
 		return costClassificationCode;
 	}
-	public void setCostClassificationCode(int costClassificationCode) {
+	public void setCostClassificationCode(String costClassificationCode) {
 		this.costClassificationCode = costClassificationCode;
 	}
 	public String getDueDate() {
@@ -65,34 +66,34 @@ public class CostRegistrationModel {
 	public void setDetailedNameOrLine(String detailedNameOrLine) {
 		this.detailedNameOrLine = detailedNameOrLine;
 	}
-	public int getStationCode() {
+	public String getStationCode() {
 		return stationCode;
 	}
-	public void setStationCode(int stationCode) {
+	public void setStationCode(String stationCode) {
 		this.stationCode = stationCode;
 	}
-	public int getOriginCode() {
+	public String getOriginCode() {
 		return originCode;
 	}
-	public void setOriginCode(int originCode) {
+	public void setOriginCode(String originCode) {
 		this.originCode = originCode;
 	}
-	public int getTransportationCode() {
+	public String getTransportationCode() {
 		return transportationCode;
 	}
-	public void setTransportationCode(int transportationCode) {
+	public void setTransportationCode(String transportationCode) {
 		this.transportationCode = transportationCode;
 	}
-	public int getDestinationCode() {
+	public String getDestinationCode() {
 		return destinationCode;
 	}
-	public void setDestinationCode(int destinationCode) {
+	public void setDestinationCode(String destinationCode) {
 		this.destinationCode = destinationCode;
 	}
-	public int getCost() {
+	public String getCost() {
 		return cost;
 	}
-	public void setCost(int cost) {
+	public void setCost(String cost) {
 		this.cost = cost;
 	}
 	public String getRemark() {
@@ -101,10 +102,10 @@ public class CostRegistrationModel {
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
-	public int getRoundCode() {
+	public String getRoundCode() {
 		return roundCode;
 	}
-	public void setRoundCode(int roundCode) {
+	public void setRoundCode(String roundCode) {
 		this.roundCode = roundCode;
 	}
 	public String getCostFile() {
@@ -143,10 +144,10 @@ public class CostRegistrationModel {
 	public void setOldHappendDate(String oldHappendDate) {
 		this.oldHappendDate = oldHappendDate;
 	}
-	public int getOldCostClassificationCode() {
+	public String getOldCostClassificationCode() {
 		return oldCostClassificationCode;
 	}
-	public void setOldCostClassificationCode(int oldCostClassificationCode) {
+	public void setOldCostClassificationCode(String oldCostClassificationCode) {
 		this.oldCostClassificationCode = oldCostClassificationCode;
 	}
 	public String getCostClassificationName() {
@@ -161,4 +162,11 @@ public class CostRegistrationModel {
 	public void setOldCostClassificationName(String oldCostClassificationName) {
 		this.oldCostClassificationName = oldCostClassificationName;
 	}
+	public String getOldCostFile() {
+		return oldCostFile;
+	}
+	public void setOldCostFile(String oldCostFile) {
+		this.oldCostFile = oldCostFile;
+	}
+	
 }

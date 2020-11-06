@@ -84,7 +84,7 @@
 			updateUser = #{employeeName}
 		WHERE 
 			employeeNo = #{employeeNo}
-			and happendDate = #{oldHappendDate},
+			and happendDate = #{oldHappendDate}
 			and costClassificationCode = #{oldCostClassificationCode}
     </update>
    	<delete id="deleteCostRegistration" parameterType="map">
