@@ -914,7 +914,7 @@ public class UtilsController {
 
 	public Map<String, Object> upload(MultipartFile uploadFile, Map<String, Object> sendMap, String key, String Info) {
 		if (uploadFile == null) {
-			sendMap.put(key, "");
+			/* sendMap.put(key, ""); */
 			return sendMap;
 		}
 		String realPath;

@@ -36,7 +36,8 @@
 			AND T001.employeeNo=#{employeeNo}
 		</if>
 		<if test="employeeName!=null">
-			AND CONCAT(T001.employeeFristName,T001.employeeLastName) like
+			AND CONCAT(T001.employeeFristName,T001.employeeLastName)
+			like
 			concat('%',#{employeeName},'%')
 		</if>
 		<if test="employeeFormCode!=null">
@@ -332,6 +333,9 @@
 		<if test="passportInfo!= null">
 			passportInfo=#{passportInfo},
 		</if>
+		<if test="picInfo!= null">
+			picInfo=#{picInfo},
+		</if>
 		companyMail=#{companyMail},
 		phoneNo=#{phoneNo},
 		employmentInsuranceNo=#{employmentInsuranceNo},
@@ -411,6 +415,7 @@
 		T002.updateTime,
 		T002.createTime,
 		T002.updateUser,
+		T002.picInfo,
 		T002.yearsOfExperience,
 	</sql>
 	<sql id="T003">

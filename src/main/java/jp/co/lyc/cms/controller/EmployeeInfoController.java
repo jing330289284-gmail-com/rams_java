@@ -96,8 +96,8 @@ public class EmployeeInfoController extends BaseController {
 			@RequestParam(value = "resumeInfo1", required = false) MultipartFile resumeInfo1,
 			@RequestParam(value = "resumeInfo2", required = false) MultipartFile resumeInfo2,
 			@RequestParam(value = "residentCardInfo", required = false) MultipartFile residentCardInfo,
-			@RequestParam(value = "passportInfo", required = false) MultipartFile passportInfo,
-			@RequestParam(value = "picInfo", required = false) MultipartFile pictures) throws Exception {
+			@RequestParam(value = "passportInfo", required = false) MultipartFile passportInfo
+			) throws Exception {
 		logger.info("GetEmployeeInfoController.insertEmployee:" + "追加開始");
 		errorsMessage = "";
 		JSONObject jsonObject = JSON.parseObject(JSONEmp);
@@ -127,7 +127,7 @@ public class EmployeeInfoController extends BaseController {
 			sendMap = utilsController.upload(resumeInfo2, sendMap, "resumeInfo2", emp.getResumeName2());
 			sendMap = utilsController.upload(residentCardInfo, sendMap, "residentCardInfo", "在留カード");
 			sendMap = utilsController.upload(passportInfo, sendMap, "passportInfo", "パスポート");
-			sendMap = utilsController.upload(pictures, sendMap, "picInfo", "写真");
+			//sendMap = utilsController.upload(pictures, sendMap, "picInfo", "写真");
 			employeeInfoService.insertEmployee((HashMap<String, Object>) sendMap);
 		} catch (Exception e) {
 			resultMap.put("result", false);
@@ -191,7 +191,6 @@ public class EmployeeInfoController extends BaseController {
 			@RequestParam(value = "resumeInfo2", required = false) MultipartFile resumeInfo2,
 			@RequestParam(value = "residentCardInfo", required = false) MultipartFile residentCardInfo,
 			@RequestParam(value = "passportInfo", required = false) MultipartFile passportInfo,
-			@RequestParam(value = "picInfo", required = false) MultipartFile pictures,
 			@RequestParam(value = "resumeInfo1URL", required = false) String resumeInfo1URL,
 			@RequestParam(value = "resumeInfo2URL", required = false) String resumeInfo2URL,
 			@RequestParam(value = "residentCardInfoURL", required = false) String residentCardInfoURL,
@@ -201,9 +200,15 @@ public class EmployeeInfoController extends BaseController {
 		JSONObject jsonObject = JSON.parseObject(JSONEmp);
 		EmployeeModel emp = JSON.parseObject(jsonObject.toJSONString(), new TypeReference<EmployeeModel>() {
 		});
+
 		if (resumeInfo1 != null) {
 			emp.setResumeInfo1(resumeInfo1.getOriginalFilename());
+		} else {
+			if (resumeInfo1URL != null) {
+				emp.setResumeInfo1("resumeInfo1URL");
+			}
 		}
+
 		DataBinder binder = new DataBinder(emp);
 		binder.setValidator(new EmployeeInfoValidation());
 		binder.validate();
@@ -225,7 +230,6 @@ public class EmployeeInfoController extends BaseController {
 			sendMap = utilsController.upload(resumeInfo2, sendMap, "resumeInfo2", emp.getResumeName2());
 			sendMap = utilsController.upload(residentCardInfo, sendMap, "residentCardInfo", "在留カード");
 			sendMap = utilsController.upload(passportInfo, sendMap, "passportInfo", "パスポート");
-			sendMap = utilsController.upload(pictures, sendMap, "picInfo", "写真");
 			result = employeeInfoService.updateEmployee(sendMap);
 		} catch (Exception e) {
 			resultMap.put("result", false);
@@ -308,6 +312,7 @@ public class EmployeeInfoController extends BaseController {
 		String stationCode = emp.getStationCode();// 最寄駅1
 
 		String employeeName = emp.getEmployeeName();// 社員名
+		String picInfo = emp.getPicInfo();
 
 		if (stationCode != null) {
 			sendMap.put("stationCode", stationCode);
@@ -489,6 +494,9 @@ public class EmployeeInfoController extends BaseController {
 		}
 		if (employeeName != null) {
 			sendMap.put("employeeName", employeeName);
+		}
+		if (picInfo != null) {
+			sendMap.put("picInfo", picInfo);
 		}
 		return sendMap;
 	}
