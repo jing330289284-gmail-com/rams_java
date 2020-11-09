@@ -66,9 +66,12 @@ public class CostRegistrationController extends BaseController {
 			return false;
 		}
 		costRegistrationModel.setCostFile(getFilename);
-		boolean result  = costRegistrationService.insertCostRegistration(costRegistrationModel);
+		try {
+		costRegistrationService.insertCostRegistration(costRegistrationModel);} catch (Exception e) {
+			return false;
+		}
 		logger.info("CostRegistrationController.insertCostRegistration:" + "追加結束");
-		return result;
+		return true;
 	}
 	/**
 	 * 修正
@@ -118,6 +121,8 @@ public class CostRegistrationController extends BaseController {
 					}
 				}
 			}
+		}else {
+			costRegistrationModel.setCostFile(costRegistrationModel.getOldCostFile());
 		}
 
 		
@@ -138,7 +143,7 @@ public class CostRegistrationController extends BaseController {
 		logger.info("CostRegistrationController.deleteCostRegistration:" + "削除開始");
 		emp.setEmployeeNo(getSession().getAttribute("employeeNo").toString());
 		boolean flag=false;
-		if(emp.getCostFile()!=null) {
+		if(emp.getOldCostFile()!=null) {
 			try {
 				flag=delete(emp);
 			} catch (Exception e) {
