@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jp.co.lyc.cms.mapper.SalesProfitMapper">
+
+	<!-- 売上情報検索 -->
+    <select id="getSalesProfitInfo" parameterType="string" resultType="jp.co.lyc.cms.model.SalesProfitModel">
+		SELECT
+		T002EmployeeDetail.intoCompanyCode employeeStatus,
+		concat(T001Employee.employeeFristName,T001Employee.employeeLastName) employeeName,
+		T007CustomerInfo.customerAbbreviation customerName,
+		T006EmployeeSiteInfo.admissionStartDate,
+		T006EmployeeSiteInfo.admissionEndDate,
+		T006EmployeeSiteInfo.unitPrice
+		FROM T010SalesSituation
+		INNER JOIN T001Employee
+		ON T010SalesSituation.employeeNo = T001Employee.employeeNo
+		LEFT JOIN T002EmployeeDetail
+		ON T002EmployeeDetail.employeeNo = T010SalesSituation.employeeNo
+		INNER JOIN T006EmployeeSiteInfo
+		ON T010SalesSituation.employeeNo = T006EmployeeSiteInfo.employeeNo
+		AND T010SalesSituation.salesYearAndMonth = SUBSTRING(T006EmployeeSiteInfo.admissionStartDate, 1, 6)
+		AND T010SalesSituation.salesProgressCode = '4'
+		INNER JOIN T007CustomerInfo
+		ON T006EmployeeSiteInfo.customerNo = T007CustomerInfo.customerNo
+		WHERE
+			<if test="eigyou != null">
+				T010SalesSituation.salesStaff =  #{eigyou}
+			</if>
+			<if test="intoCompanyCode != null">
+				AND T002EmployeeDetail.intoCompanyCode = #{intoCompanyCode}
+			</if>
+		AND NOT
+		(T006EmployeeSiteInfo.admissionStartDate <![CDATA[ > ]]> #{endDate}
+		OR T006EmployeeSiteInfo.admissionEndDate <![CDATA[ < ]]> #{startDate})
+    </select>
+
+</mapper>
