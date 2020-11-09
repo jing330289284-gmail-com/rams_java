@@ -17,6 +17,8 @@
 		#{getYandM} As onlyYandM,
 		T005.reflectYearAndMonth,
 		T006.admissionStartDate,
+		T006.dailyCalculationStatus,
+		T006.admissionEndDate,
 		M005.employeeFormName,
 		T007.customerName,
 		CAST((T006.unitPrice*10000) As unsigned) As unitPrice,
@@ -30,7 +32,8 @@
 		CAST(B${getYandM}.otherAllowanceAmount As unsigned) As otherAllowanceAmount,
 		(T006.unitPrice*10000 - T005.salary - B${getYandM}.transportationExpenses - T005.insuranceFeeAmount - T005.scheduleOfBonusAmount - B${getYandM}.leaderAllowanceAmount - B${getYandM}.otherAllowanceAmount)
 		As grosProfits,
-		CAST((T005.salary + B${getYandM}.transportationExpenses + T005.insuranceFeeAmount + T005.scheduleOfBonusAmount + B${getYandM}.leaderAllowanceAmount + B${getYandM}.otherAllowanceAmount) As unsigned) As paymentTotal
+		CAST((T005.salary + B${getYandM}.transportationExpenses + T005.insuranceFeeAmount + T005.scheduleOfBonusAmount + B${getYandM}.leaderAllowanceAmount + B${getYandM}.otherAllowanceAmount) As unsigned) As paymentTotal,
+		T018.DeductionsAndOvertimePay
 		FROM
 		T001Employee As T001
 		Left JOIN 
@@ -43,10 +46,12 @@
 		LEFT JOIN 
 		T006EmployeeSiteInfo As T006 ON T005.employeeNo = T006.employeeNo	
 		AND #{getYandM} between left(admissionStartDate,6) and left(admissionEndDate,6)
+		LEFT JOIN
+		T018WorkTotalTime As T018 ON T001.employeeNo = T018.employeeNo 
+		AND #{getYandM} =T018.attendanceYearAndMonth
 		LEFT JOIN 
 		T007CustomerInfo As T007 ON T006.customerNo  =T007.customerNo
 		LEFT JOIN
-		<!-- T013ExpensesInfo As T013 ON T001.employeeNo = T013.employeeNo and T013.ExpensesreflectYearAndMonth &lt;= #{getYandM} -->
 		(SELECT * FROM T013ExpensesInfo WHERE employeeNo = #{employeeName} and ExpensesreflectYearAndMonth &lt;= #{getYandM} ORDER BY ABS(#{getYandM} - ExpensesreflectYearAndMonth) ASC
 		limit 1) As B${getYandM} ON B${getYandM}.employeeNo = T001.employeeNo
 		WHERE
