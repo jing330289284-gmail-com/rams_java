@@ -28,7 +28,9 @@ public class PersonalSalesSearchModel implements Serializable  {
 	String otherAllowanceAmount;//他の手当
 	String grosProfits;//粗利
 	String paymentTotal;
-
+	String dailyCalculationStatus;
+	String admissionEndDate;
+	String DeductionsAndOvertimePay;
 	public String getEmployeeName() {
 		return employeeName;
 	}
@@ -155,6 +157,25 @@ public class PersonalSalesSearchModel implements Serializable  {
 	public void setNodata(String nodata) {
 		this.nodata = nodata;
 	}
+	public String getDailyCalculationStatus() {
+		return dailyCalculationStatus;
+	}
+	public void setDailyCalculationStatus(String dailyCalculationStatus) {
+		this.dailyCalculationStatus = dailyCalculationStatus;
+	}
+	public String getAdmissionEndDate() {
+		return admissionEndDate;
+	}
+	public void setAdmissionEndDate(String admissionEndDate) {
+		this.admissionEndDate = admissionEndDate;
+	}
+	public String getDeductionsAndOvertimePay() {
+		return DeductionsAndOvertimePay;
+	}
+	public void setDeductionsAndOvertimePay(String deductionsAndOvertimePay) {
+		DeductionsAndOvertimePay = deductionsAndOvertimePay;
+	}
+
 	
 	
 }
