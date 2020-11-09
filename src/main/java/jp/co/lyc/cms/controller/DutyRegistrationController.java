@@ -67,9 +67,9 @@ public class DutyRegistrationController extends BaseController {
 		logger.info(dutyRegistrationModel.toString());
 //		DutyRegistrationModel checkMod = dutyRegistrationService.selectDutyRegistration(dutyRegistrationModel.toHashMap());
 		DutyRegistrationModel checkMod = null;
-		if (checkMod == null) {
+		if (checkMod != null) {
 			result = this.insert(dutyRegistrationModel);
-		} else if (checkMod != null) {
+		} else {
 			result = this.update(dutyRegistrationModel);
 		}
 		logger.info("DutyRegistrationController.breakTimeInsert:" + "登録終了");
