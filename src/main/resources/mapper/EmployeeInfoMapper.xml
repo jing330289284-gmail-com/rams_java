@@ -301,6 +301,8 @@
 		genderStatus=#{genderStatus},
 		birthday=#{birthday},
 		japaneseCalendar=#{japaneseCalendar},
+		alphabetName= #{alphabetName},
+		employeeFormCode=#{employeeFormCode},
 		furigana=#{furigana},
 		nationalityCode=#{nationalityCode},
 		birthplace=#{birthplace},
@@ -340,6 +342,7 @@
 		phoneNo=#{phoneNo},
 		employmentInsuranceNo=#{employmentInsuranceNo},
 		siteRoleCode=#{siteRoleCode},
+		yearsOfExperience=#{yearsOfExperience},
 		updateTime=NOW(),
 		updateUser=
 		#{updateUser}
