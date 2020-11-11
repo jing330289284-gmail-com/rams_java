@@ -4,9 +4,9 @@
 
 	<insert id="salesPointInsert" parameterType="map">
 		insert into
-		T014SalesPointInfo(employeeStatus,intoCompanyCode,customerContractStatus,levelCode,
+		T014SalesPointInfo(id,employeeStatus,intoCompanyCode,customerContractStatus,levelCode,
 		salesProgressCode,specialPointConditionCode,salesPoint,remark,updateTime,createTime,updateUser)
-		values(#{employee},#{newMember},#{customerContract},#{level},#{salesPuttern},
+		values(#{no},#{employee},#{newMember},#{customerContract},#{level},#{salesPuttern},
 		#{specialPoint},#{point},#{remark},now(),now(),#{updateUser})
 	</insert>
 
@@ -24,6 +24,14 @@
 		DELETE FROM
 		T014SalesPointInfo WHERE id= #{no};
 	</delete>
+
+	<update id="salesPointUpdateAfterDelete" parameterType="map">
+		update
+		T014SalesPointInfo
+		set
+		id = id - 1
+		where id > #{no};
+	</update>
 
 	<select id="getSalesPointInfo" parameterType="map"
 		resultType="jp.co.lyc.cms.model.SalesPointSetModel">

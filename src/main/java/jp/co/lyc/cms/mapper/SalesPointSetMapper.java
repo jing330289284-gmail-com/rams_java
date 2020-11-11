@@ -26,6 +26,11 @@ public interface SalesPointSetMapper {
 	 * 
 	 */
 	public void salesPointDelete(Map<String, Object> sendMap);
+	/**
+	 * 営業ポイント設定を削除修正
+	 * 
+	 */
+	public void salesPointUpdateAfterDelete(Map<String, Object> sendMap);
 
 	/**
 	 * 営業ポイント設定を取得
