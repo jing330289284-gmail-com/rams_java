@@ -128,22 +128,34 @@
 			</if>
     </select>
 	<update id="updateDutyRegistration" parameterType="String">
-		UPDATE T017BreakTime
-		SET 
-			employeeNo = #{employeeNo},
-			yearAndMonth = #{breakTimeYearMonth},
-			lunchBreakStartTime = #{breakTimeDayStart},
-			lunchBreakFinshTime = #{breakTimeDayEnd},
-			lunchBreakTime = #{breakTimeDaybreakTimeHour},
-			nightBreakStartTime = #{breakTimeNightStart},
-			nightBreakfinshTime = #{breakTimeNightEnd},
-			nightBreakTime = #{breakTimeNightbreakTimeHour},
-			totalBreakTime = #{breakTimeSumHour},
-			updateTime = now(),
-			updateUser = #{employeeNo}
-		WHERE 
-			employeeNo = #{employeeNo}
-			and yearAndMonth = #{breakTimeYearMonth}
+		REPLACE INTO T017BreakTime( 
+			employeeNo,
+			yearAndMonth,
+			lunchBreakStartTime,
+			lunchBreakFinshTime,
+			lunchBreakTime,
+			nightBreakStartTime,
+			nightBreakfinshTime,
+			nightBreakTime,
+			totalBreakTime,
+			createTime,
+		    updateTime,
+		    updateUser
+		) 
+		VALUES ( 
+			#{employeeNo},
+			#{breakTimeYearMonth},
+			#{breakTimeDayStart},
+			#{breakTimeDayEnd},
+			#{breakTimeDaybreakTimeHour},
+			#{breakTimeNightStart},
+			#{breakTimeNightEnd},
+			#{breakTimeNightbreakTimeHour},
+			#{breakTimeSumHour},
+			NOW(),
+			NOW(),
+			#{employeeNo}
+		)
     </update>
 	<update id="updateDuty" parameterType="String">
 		UPDATE T016EmployeeWorkTime

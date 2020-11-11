@@ -92,7 +92,7 @@ FROM
     
 WHERE
     T002.intoCompanyYearAndMonth = #{sysDate}
-        AND T002.intoCompanyCode = 1
+        AND T002.intoCompanyCode &lt;&gt;0
         AND T002.employeeNo NOT IN ((SELECT 
             employeeNo
         FROM
@@ -497,19 +497,19 @@ SELECT
     t002.siteRoleCode,
      CONCAT_WS(',',
         
-        IF(ISNULL(T002.developLanguage1) or T002.developLanguage1='',
+        IF(ISNULL(t002.developLanguage1) or t002.developLanguage1='',
         null,
         M011a.developLanguageName),
-         IF(ISNULL(T002.developLanguage2) or T002.developLanguage2='',
+         IF(ISNULL(t002.developLanguage2) or t002.developLanguage2='',
         null,
         M011b.developLanguageName),
-         IF(ISNULL(T002.developLanguage3) or T002.developLanguage3='',
+         IF(ISNULL(t002.developLanguage3) or t002.developLanguage3='',
         null,
         M011c.developLanguageName),
-         IF(ISNULL(T002.developLanguage4) or T002.developLanguage4='',
+         IF(ISNULL(t002.developLanguage4) or t002.developLanguage4='',
         null,
         M011d.developLanguageName),
-         IF(ISNULL(T002.developLanguage5) or T002.developLanguage5='',
+         IF(ISNULL(t002.developLanguage5) or t002.developLanguage5='',
         null,
         M011e.developLanguageName)) AS 'developLanguage',
     t010.salesYearAndMonth,
@@ -520,21 +520,21 @@ FROM
     T002EmployeeDetail t002 ON t001.employeeNo = t002.employeeNo
      LEFT JOIN
                
-    M011DevelopLanguage M011a ON M011a.developLanguageCode = T002.developLanguage1
+    M011DevelopLanguage M011a ON M011a.developLanguageCode = t002.developLanguage1
     
                 LEFT JOIN
                
-    M011DevelopLanguage M011b ON M011b.developLanguageCode = T002.developLanguage2
+    M011DevelopLanguage M011b ON M011b.developLanguageCode = t002.developLanguage2
                 LEFT JOIN
                
-    M011DevelopLanguage M011c ON M011c.developLanguageCode = T002.developLanguage3
+    M011DevelopLanguage M011c ON M011c.developLanguageCode = t002.developLanguage3
                 LEFT JOIN
                
-    M011DevelopLanguage M011d ON M011d.developLanguageCode = T002.developLanguage4
+    M011DevelopLanguage M011d ON M011d.developLanguageCode = t002.developLanguage4
     
                 LEFT JOIN
                
-    M011DevelopLanguage M011e ON M011e.developLanguageCode = T002.developLanguage5
+    M011DevelopLanguage M011e ON M011e.developLanguageCode = t002.developLanguage5
         LEFT JOIN
     M003Nationality m003 ON t002.nationalityCode = m003.nationalityCode
         LEFT JOIN
