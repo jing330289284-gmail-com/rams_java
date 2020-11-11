@@ -32,40 +32,37 @@ public class SalesProfitController extends BaseController {
 
 	String errorsMessage = "";
 
-
 	@RequestMapping(value = "/getSalesProfitInfo", method = RequestMethod.POST)
 	@ResponseBody
 	public List<SalesProfitModel> getSalesPointInfo(@RequestBody SalesProfitModel salesProfitModel) {
-		//		List<SalesPointSetModel> siteList = new ArrayList<SalesPointSetModel>();
-		//		Map<String, Object> sendMap = new HashMap<String, Object>();
-		//		String employee = salesPointSetModel.getEmployee();
-		//		String newMember = salesPointSetModel.getNewMember();
-		//		String customerContract = salesPointSetModel.getCustomerContract();
-		//		if (employee != null && employee.length() != 0) {
-		//			sendMap.put("employee", employee);
-		//		}
-		//		if (newMember != null && newMember.length() != 0) {
-		//			sendMap.put("newMember", newMember);
-		//		}
-		//		if (customerContract != null && customerContract.length() != 0) {
-		//			sendMap.put("customerContract", customerContract);
-		//		}
-		//		try {
-		//			siteList = salesPointSetService.getSalesPointInfo(sendMap);
+		// List<SalesPointSetModel> siteList = new ArrayList<SalesPointSetModel>();
+		// Map<String, Object> sendMap = new HashMap<String, Object>();
+		// String employee = salesPointSetModel.getEmployee();
+		// String newMember = salesPointSetModel.getNewMember();
+		// String customerContract = salesPointSetModel.getCustomerContract();
+		// if (employee != null && employee.length() != 0) {
+		// sendMap.put("employee", employee);
+		// }
+		// if (newMember != null && newMember.length() != 0) {
+		// sendMap.put("newMember", newMember);
+		// }
+		// if (customerContract != null && customerContract.length() != 0) {
+		// sendMap.put("customerContract", customerContract);
+		// }
+		// try {
+		// siteList = salesPointSetService.getSalesPointInfo(sendMap);
 		//
-		//		} catch (Exception e) {
-		//			e.printStackTrace();
-		//		}
+		// } catch (Exception e) {
+		// e.printStackTrace();
+		// }
 		List<SalesProfitModel> siteList = salesProfitService.getSalesProfitInfo(salesProfitModel);
 
-
-
-		//		SalesProfitModel sm = new SalesProfitModel();
-		//		sm.setRowNo("1");
-		//		sm.setYearAndMonth("10月");
-		//		sm.setEmployeeName("テスト社員");
-		//		sm.setEmployeeStatus("在籍");
-		//		siteList.add(sm);
+		// SalesProfitModel sm = new SalesProfitModel();
+		// sm.setRowNo("1");
+		// sm.setYearAndMonth("10月");
+		// sm.setEmployeeName("テスト社員");
+		// sm.setEmployeeStatus("在籍");
+		// siteList.add(sm);
 //		SalesProfitModel sm = new SalesProfitModel();
 //		sm.setRowNo("1");
 //		sm.setYearAndMonth(salesProfitModel.getStartDate());
@@ -73,10 +70,19 @@ public class SalesProfitController extends BaseController {
 //		sm.setEmployeeStatus(salesProfitModel.getEmployeeStatus());
 //		siteList.add(sm);
 
-
-
 		logger.info("SalesProfitController.getSalesPointInfo:" + "検索結束");
 		return siteList;
+	}
+
+	@RequestMapping(value = "/getSalesProfitInfo", method = RequestMethod.POST)
+	@ResponseBody
+	public List<SalesProfitModel> getSalesInfo(@RequestBody SalesProfitModel salesProfitModel) {
+
+		// List<SalesProfitModel> siteList =
+		// salesProfitService.getSalesProfitInfo(salesProfitModel);
+
+		logger.info("SalesProfitController.getSalesPointInfo:" + "検索結束");
+		return null;
 	}
 
 	/**
