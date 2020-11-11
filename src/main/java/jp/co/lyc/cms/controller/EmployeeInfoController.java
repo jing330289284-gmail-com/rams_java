@@ -427,7 +427,7 @@ public class EmployeeInfoController extends BaseController {
 		if (unitPriceTo != null) {
 			sendMap.put("unitPriceTo", unitPriceTo);
 		}
-		if (japaneseLevelCode != null) {
+		if (japaneseLevelCode!= null) {
 			sendMap.put("japaneseLevelCode", japaneseLevelCode);
 		}
 		if (englishLevelCode != null) {
