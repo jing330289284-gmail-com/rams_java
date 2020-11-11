@@ -30,26 +30,35 @@ public class CostRegistrationService {
 	 */
 	
 	public boolean updateCostRegistration(CostRegistrationModel costRegistrationModel) {
-		boolean result = true;
+		if(!costRegistrationModel.getCostClassificationCode().equals(costRegistrationModel.getOldCostClassificationCode())||
+		!costRegistrationModel.getHappendDate().equals(costRegistrationModel.getOldHappendDate())){
+			List<CostRegistrationModel> resultMod = costRegistrationMapper.selectCheckCostRegistration(costRegistrationModel);
+			if( resultMod.size() > 0){
+				return false;
+			}
+		}
 		try {
 			costRegistrationMapper.updateCostRegistration(costRegistrationModel);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-			return result = false;
+			return false;
 		}
-		return result;
+		return true;
 	}
 	public boolean insertCostRegistration(CostRegistrationModel costRegistrationModel) {
-		boolean result = true;
+		List<CostRegistrationModel> resultMod = costRegistrationMapper.selectCheckCostRegistration(costRegistrationModel);
+		if( resultMod.size() > 0){
+			return false;
+		}
 		try {
 			costRegistrationMapper.insertCostRegistration(costRegistrationModel);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-			return result = false;
+			return false;
 		}
-		return result;
+		return true;
 	}
 	public boolean deleteCostRegistration(CostRegistrationModel costRegistrationModel) {
 		boolean result = true;

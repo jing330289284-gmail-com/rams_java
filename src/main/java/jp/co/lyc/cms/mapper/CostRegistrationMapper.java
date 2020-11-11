@@ -25,4 +25,5 @@ public interface CostRegistrationMapper {
 	 */
 	public void insertCostRegistration(CostRegistrationModel costRegistrationModel) ;
 	public void deleteCostRegistration(CostRegistrationModel costRegistrationModel) ;
+	public List<CostRegistrationModel> selectCheckCostRegistration(CostRegistrationModel costRegistrationModel);
 }
