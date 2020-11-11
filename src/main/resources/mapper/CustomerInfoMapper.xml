@@ -138,8 +138,8 @@
 		<if test="customerRankingCode != null">
 			customerRankingCode = #{customerRankingCode},
 		</if>	
-		<if test="listedCompany != null">
-			listedCompany = #{listedCompany},
+		<if test="listedCompanyFlag != null">
+			listedCompanyFlag = #{listedCompanyFlag},
 		</if>	
 		<if test="url != null">
 			url = #{url},
@@ -195,11 +195,19 @@
 			( SELECT @rowNo := 0 ) AS rowNo 
 		WHERE
 			T009.customerNo = #{customerNo}
-		<if test="customerDepartmentCode != NULL">
-			AND T009.customerDepartmentCode = #{customerDepartmentCode}
+		<if test="beforeCDCode == NULL">
+			<if test="customerDepartmentCode != NULL">
+				AND T009.customerDepartmentCode = #{customerDepartmentCode}
+			</if>
+			<if test="positionCode != NULL">
+				AND T009.positionCode = #{positionCode}
+			</if>
 		</if>
-		<if test="positionCode != NULL">
-			AND T009.positionCode = #{positionCode}
+		<if test="beforeCDCode != NULL">
+			AND 
+				T009.customerDepartmentCode = #{beforeCDCode}
+			AND 
+				T009.positionCode = #{beforePCode}
 		</if>
     </select>
     <!-- 部門名前連想 -->
@@ -254,6 +262,8 @@
     <update id="updateCustomerDepartment" parameterType="String">
 		UPDATE T009CustomerDepartmentInfo
 		SET 
+		customerDepartmentCode = #{customerDepartmentCode},
+		positionCode = #{positionCode},
 		<if test="positionCode != null">
 			positionCode = #{positionCode},
 		</if>

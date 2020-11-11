@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import jp.co.lyc.cms.common.BaseController;
+import jp.co.lyc.cms.mapper.CustomerInfoMapper;
 import jp.co.lyc.cms.model.CustomerDepartmentInfoModel;
 import jp.co.lyc.cms.model.CustomerInfoModel;
 import jp.co.lyc.cms.service.CustomerInfoService;
@@ -40,6 +41,8 @@ public class CustomerInfoController extends BaseController {
 	// 上位お客様情報service
 	@Autowired
 	TopCustomerInfoController topCustomerInfoController;
+	@Autowired
+	CustomerInfoMapper customerInfoMapper;
 
 	String errorsMessage = "";
 
@@ -96,7 +99,6 @@ public class CustomerInfoController extends BaseController {
 	 */
 	@RequestMapping(value = "/toroku", method = RequestMethod.POST)
 	@ResponseBody
-	@Transactional(rollbackFor = Exception.class)
 	public Map<String, Object> toroku(@RequestBody CustomerInfoModel customerInfoMod) {
 		errorsMessage = "";
 		DataBinder binder = new DataBinder(customerInfoMod);
@@ -126,6 +128,9 @@ public class CustomerInfoController extends BaseController {
 		} else if (resultString.equals("5")) {
 			result.put("errorsMessage", "入力したお客様部門またはお客様部門職位が重复しました");
 		}
+		HashMap<String, String> sendMap = new HashMap<String, String>();
+		sendMap.put("customerNo", customerInfoMod.getCustomerNo());
+		result.put("customerDepartmentList", customerInfoMapper.selectCustomerDepartmentInfo(sendMap));
 		return result;
 	}
 
