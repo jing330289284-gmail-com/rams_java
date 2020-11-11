@@ -28,6 +28,17 @@
 			happendDate &lt;= date_format(date_add(NOW(), interval 2 MONTH) ,'%Y%m%d') AND
 			employeeNo = #{employeeNo}
     </select>
+        <select id="selectCheckCostRegistration" resultMap="CostRegistration" parameterType="map">
+		SELECT
+			employeeNo
+		FROM
+			T020CostInfo
+		WHERE
+			employeeNo = #{employeeNo} AND
+			happendDate = #{happendDate} AND
+			costClassificationCode = #{costClassificationCode}
+    </select>
+    
     <insert id="insertCostRegistration" parameterType="map">
 		INSERT INTO T020CostInfo(
 			employeeNo,

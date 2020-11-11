@@ -24,7 +24,7 @@ import jp.co.lyc.cms.service.CostRegistrationService;
 @Controller
 @RequestMapping(value = "/costRegistration")
 public class CostRegistrationController extends BaseController { 
-
+	public final static String UPLOAD_PATH_PREFIX = "C:"+File.separator+"file"+File.separator;
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	CostRegistrationService costRegistrationService;
@@ -43,6 +43,14 @@ public class CostRegistrationController extends BaseController {
 		logger.info("CostRegistrationController.selectCostRegistration:" + "検索終了");
 		return checkMod;
 	}
+	@RequestMapping(value = "/selectEmployeeName", method = RequestMethod.POST)
+	@ResponseBody
+	public CostRegistrationModel selectEmployeeName(CostRegistrationModel costRegistrationModel) {
+		logger.info("CostRegistrationController.selectEmployeeName:" + "検索開始");
+		costRegistrationModel.setEmployeeName(getSession().getAttribute("employeeName").toString());
+		logger.info("CostRegistrationController.selectEmployeeName:" + "検索終了");
+		return costRegistrationModel;
+	}
 	/**
 	 * 追加
 	 * 
@@ -59,17 +67,17 @@ public class CostRegistrationController extends BaseController {
 		});
 		costRegistrationModel.setEmployeeNo(getSession().getAttribute("employeeNo").toString());
 		costRegistrationModel.setEmployeeName(getSession().getAttribute("employeeName").toString()); 
+		costRegistrationModel.setCostFile(getName(costRegistrationModel, costFile));
 		String getFilename;
-		try {
-			getFilename=upload(costRegistrationModel,costFile);
-		} catch (Exception e) {
-			return false;
-		}
+
+			boolean fla=costRegistrationService.insertCostRegistration(costRegistrationModel);
+			if(!fla) {
+				return false;
+			}
+		getFilename=upload(costRegistrationModel,costFile);
+
 		costRegistrationModel.setCostFile(getFilename);
-		try {
-		costRegistrationService.insertCostRegistration(costRegistrationModel);} catch (Exception e) {
-			return false;
-		}
+	
 		logger.info("CostRegistrationController.insertCostRegistration:" + "追加結束");
 		return true;
 	}
@@ -90,10 +98,16 @@ public class CostRegistrationController extends BaseController {
 		costRegistrationModel.setEmployeeNo(getSession().getAttribute("employeeNo").toString());
 		costRegistrationModel.setEmployeeName(getSession().getAttribute("employeeName").toString()); 
 		String getFilename;
+		costRegistrationModel.setCostFile(getName(costRegistrationModel, costFile));
+		boolean fla=costRegistrationService.updateCostRegistration(costRegistrationModel);
+		//新KEYに変更できない
+		if(!fla) {
+			return false;
+		}
 		//ファイルに変更がある
 		if(costRegistrationModel.isChangeFile()) {
 			//ファイル名に変更がある
-			if(costRegistrationModel.getCostClassificationCode()!=costRegistrationModel.getOldCostClassificationCode()||
+			if(!costRegistrationModel.getCostClassificationCode().equals(costRegistrationModel.getOldCostClassificationCode())||
 			!costRegistrationModel.getHappendDate().equals(costRegistrationModel.getOldHappendDate())){
 				//新しいファイルではない,rename
 				if(costFile==null) {
@@ -125,10 +139,9 @@ public class CostRegistrationController extends BaseController {
 			costRegistrationModel.setCostFile(costRegistrationModel.getOldCostFile());
 		}
 
-		
-		boolean result  = costRegistrationService.updateCostRegistration(costRegistrationModel);
+
 		logger.info("CostRegistrationController.updateCostRegistration:" + "修正結束");
-		return result;
+		return true;
 	}
 
 	/**
@@ -155,7 +168,7 @@ public class CostRegistrationController extends BaseController {
 		return result;
 	}
 	//ファイルアップロード
-	public final static String UPLOAD_PATH_PREFIX = "C:"+File.separator+"file"+File.separator;
+
 	public String upload(CostRegistrationModel costRegistrationModel,MultipartFile costFile) {
 		if (costFile== null) {
 			return "";
@@ -204,5 +217,21 @@ public class CostRegistrationController extends BaseController {
 		}
 		return realPath+File.separator+newName;
 
+	}
+	private String getName(CostRegistrationModel costRegistrationModel,MultipartFile costFile) {
+		String realPath = new String(UPLOAD_PATH_PREFIX + "作業報告書フォルダ"+ File.separator+costRegistrationModel.getHappendDate().substring(0,4) + File.separator+costRegistrationModel.getHappendDate().substring(4,6));
+		//新ファイル
+		if (costFile!=null) {
+			String fileName =costFile.getOriginalFilename();
+			String suffix = fileName.substring(fileName.lastIndexOf(".") + 1);
+			String newName =costRegistrationModel.getHappendDate().substring(4,8)+costRegistrationModel.getCostClassificationName()+ "." + suffix;
+			return realPath+File.separator+newName;
+		}else {
+			//新ファイル名
+			String oldRealPath= new String(costRegistrationModel.getOldCostFile());
+			String suffix = oldRealPath.substring(oldRealPath.lastIndexOf(".") + 1);
+			String newName =costRegistrationModel.getHappendDate().substring(4,8)+costRegistrationModel.getCostClassificationName()+ "." + suffix;
+			return realPath+File.separator+newName;
+		}
 	}
 }
