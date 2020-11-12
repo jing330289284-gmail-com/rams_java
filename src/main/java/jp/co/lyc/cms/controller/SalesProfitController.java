@@ -74,7 +74,7 @@ public class SalesProfitController extends BaseController {
 		return siteList;
 	}
 
-	@RequestMapping(value = "/getSalesProfitInfo", method = RequestMethod.POST)
+	@RequestMapping(value = "/getSalesProfitInfo2", method = RequestMethod.POST)
 	@ResponseBody
 	public List<SalesProfitModel> getSalesInfo(@RequestBody SalesProfitModel salesProfitModel) {
 
