@@ -11,9 +11,9 @@
 	<!-- 営業結果パターン -->
 	<select id="getSalesPuttern"
 		resultType="jp.co.lyc.cms.model.ModelClass">
-		SELECT salesPutternCode code,salesPutternName
-		name,salesPutternCode value,salesPutternName text FROM
-		M024SalesPuttern;
+		SELECT salesPatternCode code,salesPatternName
+		name,salesPatternCode value,salesPatternName text FROM
+		M024SalesPattern;
 	</select>
 
 	<!-- 特別ポイント -->
