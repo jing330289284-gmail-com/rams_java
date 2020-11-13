@@ -18,7 +18,7 @@ public abstract class UtilsCheckMethod {
 	 * @return
 	 */
 	public static boolean isNullOrEmpty(String aString) {
-		if (aString == null || aString.isEmpty()) {
+		if (aString == null || aString.isEmpty()||aString.equals("")) {
 			return true;
 		} else {
 			return  false;
