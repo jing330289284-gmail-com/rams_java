@@ -295,4 +295,34 @@ public interface UtilsMapper {
 	 */	
 	public List<ModelClass> getSituationChange();
 	
+	/**
+	 * 確率取得
+	 * @return
+	 */
+	public List<ModelClass> getSuccessRate();
+	
+	/**
+	 * 年齢制限取得
+	 * @return
+	 */
+	public List<ModelClass> getAgeClassification();
+	
+	/**
+	 * 面談回数取得
+	 * @return
+	 */
+	public List<ModelClass> getNoOfInterview();
+	
+	/**
+	 * 入場期限取得
+	 * @return
+	 */
+	public List<ModelClass> getAdmissionPeriod();
+	
+	/**
+	 * 案件タイプ取得
+	 * @return
+	 */
+	public List<ModelClass> getProjectType();
+	
 }

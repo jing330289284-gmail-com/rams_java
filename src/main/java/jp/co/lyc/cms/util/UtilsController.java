@@ -1204,6 +1204,66 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getSituationChange();
 		return list;
 	}
+	
+	/**
+	 * 確率取得
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getSuccessRate", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getSuccessRate() {
+		List<ModelClass> list = utilsService.getSuccessRate();
+		return list;
+	}
+	
+	/**
+	 * 年齢制限取得
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getAgeClassification", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getAgeClassification() {
+		List<ModelClass> list = utilsService.getAgeClassification();
+		return list;
+	}
+	
+	/**
+	 * 面談回数取得
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getNoOfInterview", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getNoOfInterview() {
+		List<ModelClass> list = utilsService.getNoOfInterview();
+		return list;
+	}
+	
+	/**
+	 * 入場期限取得
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getAdmissionPeriod", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getAdmissionPeriod() {
+		List<ModelClass> list = utilsService.getAdmissionPeriod();
+		return list;
+	}
+	
+	/**
+	 * 案件タイプ取得
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getProjectType", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getProjectType() {
+		List<ModelClass> list = utilsService.getProjectType();
+		return list;
+	}
 
 	/**
 	 * serverIP

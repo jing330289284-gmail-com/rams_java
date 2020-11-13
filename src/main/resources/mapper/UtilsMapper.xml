@@ -379,4 +379,54 @@
 		FROM
 		M030SituationChange
 	</select>
+	
+	<!-- 確率取得 -->
+	<select id="getSuccessRate"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT
+		successRateName name,
+		successRateCode code
+		FROM
+		M033SuccessRate
+	</select>
+	
+	<!-- 年齢制限取得 -->
+	<select id="getAgeClassification"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT
+		ageClassificationName name,
+		ageClassificationCode code
+		FROM
+		M034AgeClassification
+	</select>
+	
+	<!--面談回数取得 -->
+	<select id="getNoOfInterview"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT
+		noOfInterviewName name,
+		noOfInterviewCode code
+		FROM
+		M035NoOfInterview
+	</select>
+	
+	<!--入場期限取得 -->
+	<select id="getAdmissionPeriod"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT
+		admissionPeriodName name,
+		admissionPeriodCode code
+		FROM
+		M036AdmissionPeriod
+	</select>
+	
+	<!--案件タイプ取得 -->
+	<select id="getProjectType"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT
+		projectTypeName name,
+		projectTypeCode code
+		FROM
+		M037ProjectType
+	</select>
 </mapper>

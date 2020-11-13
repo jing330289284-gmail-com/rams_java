@@ -436,4 +436,48 @@ public class UtilsService {
 		return utilsMapper.getSituationChange();
 	}
 
+	/**
+	 *確率取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getSuccessRate() {
+		return utilsMapper.getSuccessRate();
+	}
+	
+	/**
+	 *年齢制限取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getAgeClassification() {
+		return utilsMapper.getAgeClassification();
+	}
+	
+	/**
+	 *面談回数取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getNoOfInterview() {
+		return utilsMapper.getNoOfInterview();
+	}
+	
+	/**
+	 *入場期限取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getAdmissionPeriod() {
+		return utilsMapper.getAdmissionPeriod();
+	}
+	
+	/**
+	 *案件タイプ取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getProjectType() {
+		return utilsMapper.getProjectType();
+	}
 }
