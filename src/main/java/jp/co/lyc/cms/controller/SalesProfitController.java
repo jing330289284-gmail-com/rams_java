@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import jp.co.lyc.cms.common.BaseController;
+import jp.co.lyc.cms.model.SalesInfoModel;
 import jp.co.lyc.cms.model.SalesPointSetModel;
 import jp.co.lyc.cms.model.SalesProfitModel;
 import jp.co.lyc.cms.service.SalesProfitService;
@@ -74,15 +75,15 @@ public class SalesProfitController extends BaseController {
 		return siteList;
 	}
 
-	@RequestMapping(value = "/getSalesProfitInfo2", method = RequestMethod.POST)
+	@RequestMapping(value = "/getSalesInfo", method = RequestMethod.POST)
 	@ResponseBody
-	public List<SalesProfitModel> getSalesInfo(@RequestBody SalesProfitModel salesProfitModel) {
+	public List<SalesInfoModel> getSalesInfo(@RequestBody SalesProfitModel salesProfitModel) {
 
 		// List<SalesProfitModel> siteList =
 		// salesProfitService.getSalesProfitInfo(salesProfitModel);
-
+		List<SalesInfoModel> siteList = salesProfitService.getSalesInfo(salesProfitModel);
 		logger.info("SalesProfitController.getSalesPointInfo:" + "検索結束");
-		return null;
+		return siteList;
 	}
 
 	/**
