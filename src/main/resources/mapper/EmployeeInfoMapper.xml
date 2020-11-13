@@ -61,14 +61,18 @@
 		<if test="nationalityCode != null">
 			AND T002.nationalityCode=#{nationalityCode}
 		</if>
+				<if test="siteRoleCode != null">
+			AND T002.siteRoleCode=#{siteRoleCode}
+		</if>
+		
 		<if test="customer!= null">
 			AND T007.customerName=#{customer}
 		</if>
 		<if test="intoCompanyCode!= null">
 			AND T002.intoCompanyCode=#{intoCompanyCode}
 		</if>
-		<if test="japaneaseLevelCode!=  null">
-			AND T002.japaneseLevelCode=#{japaneaseLevelCode}
+		<if test="japaneseLevelCode!=  null">
+			AND T002.japaneseLevelCode=#{japaneseLevelCode}
 		</if>
 		<if test="developLanguage1 != null">
 			AND T002.developLanguage1=#{developLanguage1}
@@ -301,6 +305,8 @@
 		genderStatus=#{genderStatus},
 		birthday=#{birthday},
 		japaneseCalendar=#{japaneseCalendar},
+		alphabetName= #{alphabetName},
+		employeeFormCode=#{employeeFormCode},
 		furigana=#{furigana},
 		nationalityCode=#{nationalityCode},
 		birthplace=#{birthplace},
@@ -340,6 +346,10 @@
 		phoneNo=#{phoneNo},
 		employmentInsuranceNo=#{employmentInsuranceNo},
 		siteRoleCode=#{siteRoleCode},
+		yearsOfExperience=#{yearsOfExperience},
+				departmentCode=#{departmentCode},
+		
+		
 		updateTime=NOW(),
 		updateUser=
 		#{updateUser}

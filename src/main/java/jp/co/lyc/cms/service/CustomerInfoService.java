@@ -133,24 +133,24 @@ public class CustomerInfoService {
 					topCustomerInfoMapper
 							.insertTopCustomerInfo(topCustomerInfoService.setSendMap(topCustomerInfoModel));
 				}
-				if (customerInfoMod.getCustomerDepartmentList().size() > 0) {
-					if (!checkCustomerDepartment(customerInfoMod.getCustomerDepartmentList())) {
-						return "5";
-					}
-				}
-				for (CustomerDepartmentInfoModel customerDepartmentInfoModel : customerInfoMod
-						.getCustomerDepartmentList()) {
-					customerDepartmentInfoModel.setActionType(customerInfoMod.getActionType());
-					customerDepartmentInfoModel.setCustomerNo(customerInfoMod.getCustomerNo());
-					customerDepartmentInfoModel.setUpdateUser(customerInfoMod.getUpdateUser());
-					if (!UtilsCheckMethod.isNullOrEmpty(customerDepartmentInfoModel.getCustomerDepartmentCode())) {
-						String meisaiResult = meisaiToroku(customerDepartmentInfoModel);
-						if (meisaiResult.equals("1")) {
-							logger.info("CustomerInfoController.onloadPage:" + "登録終了");
-							return "3";
-						}
-					}
-				}
+//				if (customerInfoMod.getCustomerDepartmentList().size() > 0) {
+//					if (!checkCustomerDepartment(customerInfoMod.getCustomerDepartmentList())) {
+//						return "5";
+//					}
+//				}
+//				for (CustomerDepartmentInfoModel customerDepartmentInfoModel : customerInfoMod
+//						.getCustomerDepartmentList()) {
+//					customerDepartmentInfoModel.setActionType(customerInfoMod.getActionType());
+//					customerDepartmentInfoModel.setCustomerNo(customerInfoMod.getCustomerNo());
+//					customerDepartmentInfoModel.setUpdateUser(customerInfoMod.getUpdateUser());
+//					if (!UtilsCheckMethod.isNullOrEmpty(customerDepartmentInfoModel.getCustomerDepartmentCode())) {
+//						String meisaiResult = meisaiToroku(customerDepartmentInfoModel);
+//						if (meisaiResult.equals("1")) {
+//							logger.info("CustomerInfoController.onloadPage:" + "登録終了");
+//							return "3";
+//						}
+//					}
+//				}
 				return "0";// result（0）成功（1）失敗
 			} catch (Exception e) {
 				TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -161,42 +161,39 @@ public class CustomerInfoService {
 			}
 		} else if (checkMod != null && (customerInfoMod.getActionType().equals("update"))) {// 修正の場合
 			try {
-				customerInfoMapper.updateCustomerInfo(setSendMap(customerInfoMod));
-				if (customerInfoMod.getAccountInfo() != null) {
-					AccountInfoModel accountInfoModel = customerInfoMod.getAccountInfo();
-					accountInfoModel.setUpdateUser(customerInfoMod.getUpdateUser());
-					accountInfoMapper.updateAccount(accountInfoService.setSendMap(accountInfoModel));
-				}
-				if (customerInfoMod.getCustomerDepartmentList().size() > 0) {
-					if (!checkCustomerDepartment(customerInfoMod.getCustomerDepartmentList())) {
-						return "5";
+				if(customerInfoMod.getCustomerDepartmentList() == null) {
+					customerInfoMapper.updateCustomerInfo(setSendMap(customerInfoMod));
+					if (customerInfoMod.getAccountInfo() != null) {
+						AccountInfoModel accountInfoModel = customerInfoMod.getAccountInfo();
+						accountInfoModel.setUpdateUser(customerInfoMod.getUpdateUser());
+						accountInfoMapper.updateAccount(accountInfoService.setSendMap(accountInfoModel));
 					}
-				}
-				for (CustomerDepartmentInfoModel customerDepartmentInfoModel : customerInfoMod
-						.getCustomerDepartmentList()) {
-					// 存在チェック
-					HashMap<String, String> sendMap = new HashMap<String, String>();
-					sendMap.put("customerNo", customerInfoMod.getCustomerNo());
-					sendMap.put("customerDepartmentCode", customerDepartmentInfoModel.getCustomerDepartmentCode());
-					sendMap.put("positionCode", customerDepartmentInfoModel.getPositionCode());
-					ArrayList<CustomerDepartmentInfoModel> checkList = customerInfoMapper
-							.selectCustomerDepartmentInfo(sendMap);
-					if (checkList.size() > 0) {
-						return "4";
+				}else {
+					if (customerInfoMod.getCustomerDepartmentList().size() > 0) {
+						if (!checkCustomerDepartment(customerInfoMod.getCustomerDepartmentList())) {
+							return "5";
+						}
 					}
-					if (!UtilsCheckMethod.isNullOrEmpty(customerDepartmentInfoModel.getBeforeCDCode())
-							&& !UtilsCheckMethod.isNullOrEmpty(customerDepartmentInfoModel.getBeforePCode())) {
-						customerDepartmentInfoModel.setActionType(customerInfoMod.getActionType());
-					} else {
-						customerDepartmentInfoModel.setActionType("insert");
-					}
-					customerDepartmentInfoModel.setCustomerNo(customerInfoMod.getCustomerNo());
-					customerDepartmentInfoModel.setUpdateUser(customerInfoMod.getUpdateUser());
-					if (!UtilsCheckMethod.isNullOrEmpty(customerDepartmentInfoModel.getCustomerDepartmentCode())) {
-						String meisaiResult = meisaiToroku(customerDepartmentInfoModel);
-						if (meisaiResult.equals("1")) {
-							logger.info("CustomerInfoController.onloadPage:" + "登録終了");
-							return "3";
+					for (CustomerDepartmentInfoModel customerDepartmentInfoModel : customerInfoMod
+							.getCustomerDepartmentList()) {
+						// 存在チェック
+						if (!UtilsCheckMethod.isNullOrEmpty(customerDepartmentInfoModel.getBeforeCDCode())
+								&& !UtilsCheckMethod.isNullOrEmpty(customerDepartmentInfoModel.getBeforePCode())) {
+							customerDepartmentInfoModel.setActionType(customerInfoMod.getActionType());
+						} else {
+							customerDepartmentInfoModel.setActionType("insert");
+						}
+						customerDepartmentInfoModel.setCustomerNo(customerInfoMod.getCustomerNo());
+						customerDepartmentInfoModel.setUpdateUser(customerInfoMod.getUpdateUser());
+						if (!UtilsCheckMethod.isNullOrEmpty(customerDepartmentInfoModel.getCustomerDepartmentCode())) {
+							String meisaiResult = meisaiToroku(customerDepartmentInfoModel);
+							if (meisaiResult.equals("1")) {
+								logger.info("CustomerInfoController.onloadPage:" + "登録終了");
+								return "3";
+							}else if(meisaiResult.equals("2")) {
+								logger.info("CustomerInfoController.onloadPage:" + "登録終了");
+								return "4";
+							}
 						}
 					}
 				}
@@ -256,6 +253,8 @@ public class CustomerInfoService {
 		if (customerDepartmentInfoModel.getActionType().equals("update")) {
 			sendMap.put("beforeCDCode", customerDepartmentInfoModel.getBeforeCDCode());
 			sendMap.put("beforePCode", customerDepartmentInfoModel.getBeforePCode());
+			sendMap.put("positionCode", customerDepartmentInfoModel.getPositionCode());
+			sendMap.put("customerDepartmentCode", customerDepartmentInfoModel.getCustomerDepartmentCode());
 		} else {
 			sendMap.put("positionCode", customerDepartmentInfoModel.getPositionCode());
 			sendMap.put("customerDepartmentCode", customerDepartmentInfoModel.getCustomerDepartmentCode());
@@ -272,6 +271,20 @@ public class CustomerInfoService {
 		if (customerDepartmentInfoModel.getActionType().equals("update")) {
 			if (selectCustomerDepartmentInfo(sendMap).size() != 0) {
 				try {
+					if(!customerDepartmentInfoModel.getBeforeCDCode().equals(
+							customerDepartmentInfoModel.getCustomerDepartmentCode()) || 
+						!customerDepartmentInfoModel.getBeforePCode().equals(
+								customerDepartmentInfoModel.getPositionCode())) {
+						HashMap<String, String> checkMap = new HashMap<String, String>();
+						checkMap.put("customerNo", customerDepartmentInfoModel.getCustomerNo());
+						checkMap.put("customerDepartmentCode", customerDepartmentInfoModel.getCustomerDepartmentCode());
+						checkMap.put("positionCode", customerDepartmentInfoModel.getPositionCode());
+						ArrayList<CustomerDepartmentInfoModel> checkList = customerInfoMapper
+								.selectCustomerDepartmentInfo(checkMap);
+						if (checkList.size() > 0) {
+							return "2";
+						}
+					}
 					resultCode = (updateCustomerDepartment(sendMap) ? "0" : "1");
 				} catch (Exception e) {
 					// TODO: handle exception
@@ -281,6 +294,15 @@ public class CustomerInfoService {
 				}
 			} else {
 				try {
+					HashMap<String, String> checkMap = new HashMap<String, String>();
+					checkMap.put("customerNo", customerDepartmentInfoModel.getCustomerNo());
+					checkMap.put("customerDepartmentCode", customerDepartmentInfoModel.getCustomerDepartmentCode());
+					checkMap.put("positionCode", customerDepartmentInfoModel.getPositionCode());
+					ArrayList<CustomerDepartmentInfoModel> checkList = customerInfoMapper
+							.selectCustomerDepartmentInfo(checkMap);
+					if (checkList.size() > 0) {
+						return "2";
+					}
 					resultCode = (insertCustomerDepartment(sendMap) ? "0" : "1");
 				} catch (Exception e) {
 					// TODO: handle exception

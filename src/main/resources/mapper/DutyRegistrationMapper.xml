@@ -131,6 +131,7 @@
 		REPLACE INTO T017BreakTime( 
 			employeeNo,
 			yearAndMonth,
+			breakTimeFixedStatus,
 			lunchBreakStartTime,
 			lunchBreakFinshTime,
 			lunchBreakTime,
@@ -145,6 +146,7 @@
 		VALUES ( 
 			#{employeeNo},
 			#{breakTimeYearMonth},
+			"1",
 			#{breakTimeDayStart},
 			#{breakTimeDayEnd},
 			#{breakTimeDaybreakTimeHour},

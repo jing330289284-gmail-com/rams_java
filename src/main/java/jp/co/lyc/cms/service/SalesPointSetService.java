@@ -38,6 +38,7 @@ public class SalesPointSetService {
 	public boolean salesPointDelete(HashMap<String, Object> sendMap) {
 		try {
 			salesPointSetMapper.salesPointDelete(sendMap);
+			salesPointSetMapper.salesPointUpdateAfterDelete(sendMap);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

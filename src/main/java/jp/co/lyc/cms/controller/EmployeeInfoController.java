@@ -127,7 +127,6 @@ public class EmployeeInfoController extends BaseController {
 			sendMap = utilsController.upload(resumeInfo2, sendMap, "resumeInfo2", emp.getResumeName2());
 			sendMap = utilsController.upload(residentCardInfo, sendMap, "residentCardInfo", "在留カード");
 			sendMap = utilsController.upload(passportInfo, sendMap, "passportInfo", "パスポート");
-			//sendMap = utilsController.upload(pictures, sendMap, "picInfo", "写真");
 			employeeInfoService.insertEmployee((HashMap<String, Object>) sendMap);
 		} catch (Exception e) {
 			resultMap.put("result", false);
@@ -428,7 +427,7 @@ public class EmployeeInfoController extends BaseController {
 		if (unitPriceTo != null) {
 			sendMap.put("unitPriceTo", unitPriceTo);
 		}
-		if (japaneseLevelCode != null) {
+		if (japaneseLevelCode!= null) {
 			sendMap.put("japaneseLevelCode", japaneseLevelCode);
 		}
 		if (englishLevelCode != null) {
