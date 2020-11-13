@@ -83,7 +83,7 @@ public class LoginController extends BaseController {
 		}
 		resultMap.put("employeeModel", employeeModel);
 		if (employeeModel != null) {
-			if(employeeModel.getAuthorityCode().equals("0")) {
+			if(employeeModel.getAuthorityCode().equals("0") || employeeModel.getAuthorityCode().equals("1")) {
 				loginSession.invalidate();// 重置session
 				errorsMessage += "権限不足";
 				return result;
