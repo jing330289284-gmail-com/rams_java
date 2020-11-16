@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jp.co.lyc.cms.mapper.ProjectInfoMapper">
+	<resultMap id="projectInfoModel"
+		type="jp.co.lyc.cms.model.ProjectInfoModel" />
+	<resultMap id="String"
+		type="java.lang.String" />
+	<select id="saiban" resultMap="String" parameterType="String">
+	SELECT
+		projectNo 
+	FROM
+		T022ProjectInfo 
+	WHERE
+		projectNo LIKE CONCAT('%',#{yearAndMonth})
+	</select>
+	<select id="getPersonInCharge" resultMap="projectInfoModel" parameterType="String">
+	SELECT
+		T007.representative AS name,
+		"" AS mail 
+	FROM
+		T007CustomerInfo AS T007 
+	WHERE
+		T007.customerNo = #{customerNo} UNION ALL
+	SELECT
+		T007.purchasingManagers AS name,
+		T007.purchasingManagersMail AS mail 
+	FROM
+		T007CustomerInfo AS T007 
+	WHERE
+		T007.customerNo = #{customerNo} UNION ALL
+	SELECT
+		T009.responsiblePerson AS name,
+		T009.customerDepartmentMail AS mail 
+	FROM
+		T009CustomerDepartmentInfo AS T009 
+	WHERE
+		T009.customerNo = #{customerNo}
+	</select>
+</mapper>
