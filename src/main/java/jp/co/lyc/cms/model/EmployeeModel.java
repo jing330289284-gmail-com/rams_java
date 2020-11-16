@@ -96,6 +96,7 @@ public class EmployeeModel implements Serializable {
 
 	String furigana1;// カタカナ1
 	String furigana2;// カタカナ2
+	String passportInfo;
 
 	public int getRowNo() {
 		return rowNo;
