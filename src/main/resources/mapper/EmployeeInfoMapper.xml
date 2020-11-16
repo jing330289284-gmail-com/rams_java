@@ -61,10 +61,10 @@
 		<if test="nationalityCode != null">
 			AND T002.nationalityCode=#{nationalityCode}
 		</if>
-				<if test="siteRoleCode != null">
+		<if test="siteRoleCode != null">
 			AND T002.siteRoleCode=#{siteRoleCode}
 		</if>
-		
+
 		<if test="customer!= null">
 			AND T007.customerName=#{customer}
 		</if>
@@ -302,37 +302,108 @@
 		<if test="employeeNo!=  null">
 			employeeNo =#{employeeNo},
 		</if>
-		genderStatus=#{genderStatus},
-		birthday=#{birthday},
-		japaneseCalendar=#{japaneseCalendar},
-		alphabetName= #{alphabetName},
-		employeeFormCode=#{employeeFormCode},
-		furigana=#{furigana},
-		nationalityCode=#{nationalityCode},
-		birthplace=#{birthplace},
-		intoCompanyCode=#{intoCompanyCode},
-		intoCompanyYearAndMonth=#{intoCompanyYearAndMonth},
-		employeeStatus=#{employeeStatus},
-		retirementYearAndMonth=#{retirementYearAndMonth},
-		myNumber=#{myNumber},
-		occupationCode=#{occupationCode},
-		comeToJapanYearAndMonth=#{comeToJapanYearAndMonth},
-		graduationUniversity=#{graduationUniversity},
-		graduationYearAndMonth=#{graduationYearAndMonth},
-		major=#{major},
-		residenceCode=#{residenceCode},
-		residenceCardNo=#{residenceCardNo},
-		stayPeriod=#{stayPeriod},
-		japaneseLevelCode=#{japaneseLevelCode},
-		englishLevelCode=#{englishLevelCode},
-		developLanguage1=#{developLanguage1},
-		developLanguage2=#{developLanguage2},
-		developLanguage3=#{developLanguage3},
-		developLanguage4=#{developLanguage4},
-		developLanguage5=#{developLanguage5},
-		japaneseCalendar=#{japaneseCalendar},
-		certification1=#{certification1},
-		certification2=#{certification2},
+		<if test="genderStatus!=  null">
+			genderStatus =#{genderStatus},
+		</if>
+		<if test="birthday!=  null">
+			birthday =#{birthday},
+		</if>
+		<if test="japaneseCalendar!=  null">
+			japaneseCalendar =#{japaneseCalendar},
+		</if>
+		<if test="alphabetName!=  null">
+			alphabetName =#{alphabetName},
+		</if>
+		<if test="employeeFormCode!=  null">
+			employeeFormCode =#{employeeFormCode},
+		</if>
+		<if test="furigana!=  null">
+			furigana =#{furigana},
+		</if>
+		<if test="nationalityCode!=  null">
+			nationalityCode =#{nationalityCode},
+		</if>
+		<if test="intoCompanyCode!=  null">
+			intoCompanyCode =#{intoCompanyCode},
+		</if>
+		<if test="intoCompanyYearAndMonth!=  null">
+			intoCompanyYearAndMonth =#{intoCompanyYearAndMonth},
+		</if>
+		<if test="employeeStatus!=  null">
+			employeeStatus =#{employeeStatus},
+		</if>
+		<if test="retirementYearAndMonth!=  null">
+			retirementYearAndMonth =#{retirementYearAndMonth},
+		</if>
+		<if test="myNumber!=  null">
+			myNumber =#{myNumber},
+		</if>
+		<if test="occupationCode!=  null">
+			occupationCode =#{occupationCode},
+		</if>
+		<if test="comeToJapanYearAndMonth!=  null">
+			comeToJapanYearAndMonth =#{comeToJapanYearAndMonth},
+		</if>
+		<if test="employeeStatus!=  null">
+			employeeStatus =#{graduationUniversity},
+		</if>
+		<if test="graduationYearAndMonth!=  null">
+			graduationYearAndMonth =#{graduationYearAndMonth},
+		</if>
+		<if test="major!=  null">
+			major =#{major},
+		</if>
+		<if test="residenceCode!=  null">
+			residenceCode =#{residenceCode},
+		</if>
+		<if test="residenceCardNo!=  null">
+			residenceCardNo =#{residenceCardNo},
+		</if>
+		<if test="stayPeriod!=  null">
+			stayPeriod =#{stayPeriod},
+		</if>
+		<if test="japaneseLevelCode!=  null">
+			japaneseLevelCode =#{japaneseLevelCode},
+		</if>
+		<if test="englishLevelCode!=  null">
+			englishLevelCode =#{englishLevelCode},
+		</if>
+		<if test="developLanguage1!=  null">
+			developLanguage1 =#{developLanguage1},
+		</if>
+		<if test="developLanguage2!=  null">
+			developLanguage2 =#{developLanguage2},
+		</if>
+		<if test="developLanguage3!=  null">
+			developLanguage3 =#{developLanguage3},
+		</if>
+		<if test="developLanguage4!=  null">
+			developLanguage4 =#{developLanguage4},
+		</if>
+		<if test="developLanguage5!=  null">
+			developLanguage5 =#{developLanguage5},
+		</if>
+		<if test="japaneseCalendar!=  null">
+			japaneseCalendar =#{japaneseCalendar},
+		</if>
+		<if test="certification1!=  null">
+			certification1 =#{certification1},
+		</if>
+		<if test="certification2!=  null">
+			certification2 =#{certification2},
+		</if>
+		<if test="companyMail!=  null">
+			companyMail =#{companyMail},
+		</if>
+		<if test="phoneNo!=  null">
+			phoneNo =#{phoneNo},
+		</if>
+		<if test="employmentInsuranceNo!=  null">
+			employmentInsuranceNo =#{employmentInsuranceNo},
+		</if>
+		<if test="siteRoleCode!=  null">
+			siteRoleCode =#{siteRoleCode},
+		</if>
 		<if test="residentCardInfo!= null">
 			residentCardInfo=#{residentCardInfo},
 		</if>
@@ -342,14 +413,15 @@
 		<if test="picInfo!= null">
 			picInfo=#{picInfo},
 		</if>
-		companyMail=#{companyMail},
-		phoneNo=#{phoneNo},
-		employmentInsuranceNo=#{employmentInsuranceNo},
-		siteRoleCode=#{siteRoleCode},
-		yearsOfExperience=#{yearsOfExperience},
-				departmentCode=#{departmentCode},
-		
-		
+		<if test="yearsOfExperience!= null">
+			yearsOfExperience=#{yearsOfExperience},
+		</if>
+		<if test="departmentCode!= null">
+			departmentCode=#{departmentCode},
+		</if>
+		<if test="picInfo!= null">
+			picInfo=#{picInfo},
+		</if>
 		updateTime=NOW(),
 		updateUser=
 		#{updateUser}
