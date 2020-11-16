@@ -25,8 +25,10 @@
 			T020CostInfo
 			,(SELECT   @rowNo:=0) AS rowNo
 		WHERE
-			happendDate &lt;= date_format(date_add(NOW(), interval 2 MONTH) ,'%Y%m%d') AND
+			happendDate >= DATE_ADD(curdate(),interval -day(curdate())+1 day) AND
 			employeeNo = #{employeeNo}
+		ORDER BY
+			happendDate
     </select>
         <select id="selectCheckCostRegistration" resultMap="CostRegistration" parameterType="map">
 		SELECT
