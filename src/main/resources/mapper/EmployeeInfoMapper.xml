@@ -104,7 +104,7 @@
 			</if>
 		</if>
 		ORDER BY
-		T001.employeeNo
+		rowNo
 		DESC
 	</select>
 

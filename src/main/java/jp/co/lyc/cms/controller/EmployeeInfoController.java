@@ -202,11 +202,7 @@ public class EmployeeInfoController extends BaseController {
 
 		if (resumeInfo1 != null) {
 			emp.setResumeInfo1(resumeInfo1.getOriginalFilename());
-		} else {
-			if (resumeInfo1URL != null) {
-				emp.setResumeInfo1("resumeInfo1URL");
-			}
-		}
+		} 
 
 		DataBinder binder = new DataBinder(emp);
 		binder.setValidator(new EmployeeInfoValidation());
