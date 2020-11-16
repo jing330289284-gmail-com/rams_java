@@ -28,7 +28,7 @@ public class EmployeeInfoService {
 
 	@Autowired
 	BpInfoMapper bpInfoMapper;
-	
+
 	@Autowired
 	SiteInfoMapper siteInfoMapper;
 
@@ -69,13 +69,13 @@ public class EmployeeInfoService {
 			employeeInfoMapper.insertEmployeeInfo(sendMap);
 			employeeInfoMapper.insertEmployeeInfoDetail(sendMap);
 			employeeInfoMapper.insertAddressInfo(sendMap);
-			if(sendMap.get("bpInfoModel") != null) {// BP情報
+			if (sendMap.get("bpInfoModel") != null) {// BP情報
 				bpInfoMapper.insertBp(getParamBpModel(sendMap));
 			}
 			if (sendMap.get("bankInfoModel") != null) {// 口座情報
 				accountInfoMapper.insertAccount(getParamBankInfoModel(sendMap));
 			}
-			employeeInfoMapper.insertResumeManagement(sendMap);//履歴書を追加
+			employeeInfoMapper.insertResumeManagement(sendMap);// 履歴書を追加
 		} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			e.printStackTrace();
@@ -135,10 +135,13 @@ public class EmployeeInfoService {
 			if (sendMap.get("bankInfoModel") != null) {// 口座情報
 				accountInfoMapper.updateAccount(getParamBankInfoModel(sendMap));
 			}
-			if(sendMap.get("bpInfoModel") != null) {
-				bpInfoMapper.updateBp(getParamBpModel(sendMap));
+			if (sendMap.get("bpInfoModel") != null) {
+				int row = bpInfoMapper.updateBp(getParamBpModel(sendMap));
+				if (row == 0) {
+					bpInfoMapper.insertBp(getParamBpModel(sendMap));
+				}
 			}
-			employeeInfoMapper.updateResumeManagement(sendMap);//履歴書を追加
+			employeeInfoMapper.updateResumeManagement(sendMap);// 履歴書を追加
 		} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			e.printStackTrace();
@@ -146,7 +149,6 @@ public class EmployeeInfoService {
 		}
 		return result;
 	}
-
 
 	// 口座情報のパラメータをセットします。
 	public HashMap<String, String> getParamBankInfoModel(Map<String, Object> sendMap) {
@@ -163,7 +165,6 @@ public class EmployeeInfoService {
 		return bankInfoModelSendMap;
 	}
 
-	
 	private Map<String, Object> getParamBpModel(Map<String, Object> sendMap) {
 		Map<String, Object> pbModelSendMap = new HashMap<String, Object>();
 		BpInfoModel pbModel = (BpInfoModel) sendMap.get("bpInfoModel");
@@ -176,18 +177,16 @@ public class EmployeeInfoService {
 		pbModelSendMap.put("updateUser", sendMap.get("updateUser").toString());
 		return pbModelSendMap;
 	}
-	
 
-
-	
 	/**
 	 * ログイン認証番号の電話番号存在チェック
+	 * 
 	 * @param employeeNo
 	 * @return
 	 */
-	
+
 	public String getEmployeePhoneNo(String employeeNo) {
 		return employeeInfoMapper.getEmployeePhoneNo(employeeNo);
 	}
-	
+
 }

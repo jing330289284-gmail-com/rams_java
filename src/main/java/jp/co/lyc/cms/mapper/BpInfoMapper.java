@@ -23,8 +23,9 @@ public interface BpInfoMapper {
 	/**
 	 * アップデート
 	 * @param sendMap
+	 * @return int
 	 */
-	public void updateBp(Map<String, Object> sendMap);
+	public int updateBp(Map<String, Object> sendMap);
 	
 	/**
 	 * Bpを削除
