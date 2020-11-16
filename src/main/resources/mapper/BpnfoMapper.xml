@@ -47,7 +47,7 @@
 			NOW(),
 			#{updateUser})
     </insert>
-    <!-- 諸p費用情報アップデート -->
+    <!--   諸p費用情報アップデート -->
     <update id="updateBp" parameterType="String">
 		UPDATE T011BpInfoSupplement
 		SET 
@@ -74,6 +74,8 @@
 		WHERE 
 			bpEmployeeNo = #{bpEmployeeNo}
     </update>
+    
+    
     <!--　　Pbを削除 -->
 	<delete id="deleteBpInfo" parameterType="String">
 		DELETE

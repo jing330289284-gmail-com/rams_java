@@ -132,7 +132,6 @@ public class EmployeeInfoService {
 			employeeInfoMapper.updateEmployeeInfo(sendMap);
 			employeeInfoMapper.updateEmployeeInfoDetail(sendMap);
 			employeeInfoMapper.updateAddressInfo(sendMap);
-		
 			if (sendMap.get("bankInfoModel") != null) {// 口座情報
 				accountInfoMapper.updateAccount(getParamBankInfoModel(sendMap));
 			}
@@ -140,7 +139,6 @@ public class EmployeeInfoService {
 				bpInfoMapper.updateBp(getParamBpModel(sendMap));
 			}
 			employeeInfoMapper.updateResumeManagement(sendMap);//履歴書を追加
-
 		} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			e.printStackTrace();
@@ -178,6 +176,8 @@ public class EmployeeInfoService {
 		pbModelSendMap.put("updateUser", sendMap.get("updateUser").toString());
 		return pbModelSendMap;
 	}
+	
+
 
 	
 	/**
