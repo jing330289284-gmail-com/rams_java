@@ -48,7 +48,7 @@
 
 	<!-- 売上情報検索 -->
 	<select id="getSalesInfo" parameterType="string"
-		resultType="jp.co.lyc.cms.model.SalesProfitModel">
+		resultType="jp.co.lyc.cms.model.SalesInfoModel">
 		SELECT
 		T006EmployeeSiteInfo.employeeNo,
 		T001Employee.employeeFristName,
@@ -56,11 +56,9 @@
 		T002EmployeeDetail.intoCompanyCode,
 		T006EmployeeSiteInfo.admissionStartDate,
 		T006EmployeeSiteInfo.admissionEndDate,
-		T005WagesInfo.reflectYearAndMonth,
 		T006EmployeeSiteInfo.unitPrice,
 		T007CustomerInfo.customerName,
-		T007CustomerInfo.customerAbbreviation,
-		T005WagesInfo.salary
+		T007CustomerInfo.customerAbbreviation
 		FROM T006EmployeeSiteInfo
 		LEFT JOIN
 		T002EmployeeDetail
@@ -74,20 +72,11 @@
 		JOIN T007CustomerInfo
 		ON
 		T006EmployeeSiteInfo.customerNo=T007CustomerInfo.customerNo
-		LEFT JOIN
-		T005WagesInfo
-		ON
-		T006EmployeeSiteInfo.employeeNo=T005WagesInfo.employeeNo
-		and
-		SUBSTRING(T006EmployeeSiteInfo.admissionStartDate, 1, 6) <![CDATA[ <= ]]>
-		T005WagesInfo.reflectYearAndMonth
-		and
-		SUBSTRING(T006EmployeeSiteInfo.admissionEndDate, 1, 6) <![CDATA[ >= ]]>
-		T005WagesInfo.reflectYearAndMonth
 		where
-		T006EmployeeSiteInfo.admissionStartDate <![CDATA[ > ]]>
+		T006EmployeeSiteInfo.admissionEndDate <![CDATA[ > ]]>
 		#{startDate}
-		and T006EmployeeSiteInfo.admissionEndDate <![CDATA[ < ]]>
+		AND
+		T006EmployeeSiteInfo.admissionEndDate  <![CDATA[ < ]]>
 		#{endDate}
 		ORDER BY
 		T006EmployeeSiteInfo.admissionStartDate
