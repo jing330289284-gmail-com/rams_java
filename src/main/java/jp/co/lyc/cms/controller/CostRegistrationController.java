@@ -98,7 +98,11 @@ public class CostRegistrationController extends BaseController {
 		costRegistrationModel.setEmployeeNo(getSession().getAttribute("employeeNo").toString());
 		costRegistrationModel.setEmployeeName(getSession().getAttribute("employeeName").toString()); 
 		String getFilename;
-		costRegistrationModel.setCostFile(getName(costRegistrationModel, costFile));
+		if(costFile==null&&!costRegistrationModel.getCostClassificationCode().equals(costRegistrationModel.getOldCostClassificationCode())) {
+			costRegistrationModel.setCostFile("");
+		}else {
+			costRegistrationModel.setCostFile(getName(costRegistrationModel, costFile));
+		}
 		boolean fla=costRegistrationService.updateCostRegistration(costRegistrationModel);
 		//新KEYに変更できない
 		if(!fla) {
