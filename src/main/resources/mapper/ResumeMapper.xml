@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jp.co.lyc.cms.mapper.ResumeMapper">
+    <resultMap id="Resume" type="jp.co.lyc.cms.model.ResumeModel"/>
+     <insert id="selectCheckResume" parameterType="String">
+
+    </insert>
+    <select id="selectResume" resultMap="Resume" parameterType="String">
+		SELECT 
+			IFNULL((@rowNo:=@rowNo + 1),1)rowNo,
+			IFNULL(resumeInfo1,'')resumeInfo1,
+			IFNULL(resumeName1,'')resumeName1,
+			IFNULL(resumeInfo2,'')resumeInfo2,
+			IFNULL(resumeName2,'')resumeName2,
+			IFNULL(updateTime,'')updateTime,
+			IFNULL(updateUser,'')updateUser,
+           	count(*)
+		FROM 
+			T015ResumeManagement
+			,(SELECT   @rowNo:=0) AS rowNo
+		WHERE
+			employeeNo = #{employeeNo}
+    </select>
+	<update id="updateResume" parameterType="String">
+		UPDATE T018WorkTotalTime
+		SET 
+			updateTime= now(),
+			sumWorkTime = #{sumWorkTime},
+			approvalStatus = 1
+		WHERE 
+			employeeNo = #{employeeNo}
+			and attendanceYearAndMonth = #{attendanceYearAndMonth}
+    </update> 
+   	<update id="updateResumeFile" parameterType="String">
+   	UPDATE T018WorkTotalTime
+		SET 
+			workingTimeReport= #{workingTimeReport}
+			updateTime= now(),
+		WHERE 
+			employeeNo = #{employeeNo}
+			and attendanceYearAndMonth = #{attendanceYearAndMonth}
+    </update> 
+</mapper>
