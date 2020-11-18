@@ -18,4 +18,6 @@ public interface SalesProfitMapper {
 			String endDate);
 
 	public List<SalesInfoModel> getSalesInfo(String eigyou, String intoCompanyCode, String startDate, String endDate);
+
+	public SalesInfoModel getCustomerName(String bpBelongCustomerCode);
 }
