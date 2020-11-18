@@ -75,10 +75,20 @@
 			AND T002.japaneseLevelCode=#{japaneseLevelCode}
 		</if>
 		<if test="developLanguage1 != null">
-			AND T002.developLanguage1=#{developLanguage1}
+			AND (T002.developLanguage1=#{developLanguage1} 
+			or T002.developLanguage2=#{developLanguage1} 
+			or T002.developLanguage3=#{developLanguage1} 
+			or T002.developLanguage4=#{developLanguage1} 
+			or T002.developLanguage5=#{developLanguage1} 
+			)
 		</if>
 		<if test="developLanguage2 != null">
-			AND T002.developLanguage2=#{developLanguage2}
+			AND (T002.developLanguage1=#{developLanguage2} 
+			or T002.developLanguage2=#{developLanguage2} 
+			or T002.developLanguage3=#{developLanguage2} 
+			or T002.developLanguage4=#{developLanguage2} 
+			or T002.developLanguage5=#{developLanguage2} 
+			)
 		</if>
 		<if test="developLanguage3!= null">
 			AND T002.developLanguage3=#{developLanguage3}
@@ -345,8 +355,8 @@
 		<if test="comeToJapanYearAndMonth!=  null">
 			comeToJapanYearAndMonth =#{comeToJapanYearAndMonth},
 		</if>
-		<if test="employeeStatus!=  null">
-			employeeStatus =#{graduationUniversity},
+		<if test="graduationUniversity!=  null">
+			graduationUniversity =#{graduationUniversity},
 		</if>
 		<if test="graduationYearAndMonth!=  null">
 			graduationYearAndMonth =#{graduationYearAndMonth},
