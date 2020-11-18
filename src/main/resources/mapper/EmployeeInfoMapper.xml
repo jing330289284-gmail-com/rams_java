@@ -66,7 +66,7 @@
 		</if>
 
 		<if test="customer!= null">
-			AND T007.customerName=#{customer}
+			AND T007.customerNo=#{customer}
 		</if>
 		<if test="intoCompanyCode!= null">
 			AND T002.intoCompanyCode=#{intoCompanyCode}
@@ -105,7 +105,8 @@
 		</if>
 		ORDER BY
 		rowNo
-		DESC
+		ASC
+		
 	</select>
 
 	<!-- 社員情報を追加 -->
