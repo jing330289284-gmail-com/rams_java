@@ -2,6 +2,8 @@ package jp.co.lyc.cms.model;
 
 public class ProjectInfoModel {
 
+	String code;
+	String name;
 	String projectNo;
 	String projectName;
 	String nationalityCode;
@@ -28,7 +30,33 @@ public class ProjectInfoModel {
 	String workStartPeriod;
 	String requiredItem1;
 	String requiredItem2;
+	String noOfInterviewCode;
+	String actionType;
 	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}
+	public String getActionType() {
+		return actionType;
+	}
+	public void setActionType(String actionType) {
+		this.actionType = actionType;
+	}
+	public String getNoOfInterviewCode() {
+		return noOfInterviewCode;
+	}
+	public void setNoOfInterviewCode(String noOfInterviewCode) {
+		this.noOfInterviewCode = noOfInterviewCode;
+	}
 	public String getProjectNo() {
 		return projectNo;
 	}

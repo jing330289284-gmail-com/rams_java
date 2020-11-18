@@ -22,7 +22,6 @@ import jp.co.lyc.cms.model.SalesPointSetModel;
 import jp.co.lyc.cms.service.SalesPointSetService;
 
 @Controller
-@CrossOrigin(origins = "http://127.0.0.1:3000")
 public class SalesPointSetController extends BaseController {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
