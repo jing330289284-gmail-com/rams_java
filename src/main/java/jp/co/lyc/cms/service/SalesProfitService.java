@@ -40,4 +40,8 @@ public class SalesProfitService {
 				startTime, endTime);
 	}
 
+	public SalesInfoModel getCustomerName(String bpBelongCustomerCode) {
+
+		return salesProfitMapper.getCustomerName(bpBelongCustomerCode);
+	}
 }

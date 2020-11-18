@@ -1,5 +1,6 @@
 package jp.co.lyc.cms.controller;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -90,8 +91,16 @@ public class SalesProfitController extends BaseController {
 	@ResponseBody
 	public List<SalesInfoModel> getSalesInfo(@RequestBody SalesProfitModel salesProfitModel) {
 
+		if (salesProfitModel.getEmployeeName() != null && salesProfitModel.getEmployeeName().equals(""))
+			salesProfitModel.setEmployeeName(null);
+		if (salesProfitModel.getEmployeeStatus() != null && salesProfitModel.getEmployeeStatus().equals(""))
+			salesProfitModel.setEmployeeStatus(null);
+
 		List<SalesInfoModel> siteList = salesProfitService.getSalesInfo(salesProfitModel);
 		logger.info("SalesProfitController.getSalesPointInfo:" + "検索結束");
+
+		int siteRoleNameAll = 0;
+		int profitAll = 0;
 
 		for (int i = 0; i < siteList.size(); i++) {
 			String yearAndMonth = siteList.get(i).getAdmissionStartDate().substring(0, 6);
@@ -100,7 +109,7 @@ public class SalesProfitController extends BaseController {
 					yearAndMonth = "";
 				}
 			}
-			siteList.get(i).setYearAndMonth(yearAndMonth);
+			siteList.get(i).setYearAndMonth(yearAndMonth.substring(0, 4) + "/" + yearAndMonth.substring(4, 6));
 			siteList.get(i).setCustomerName(
 					siteList.get(i).getCustomerAbbreviation() == null ? siteList.get(i).getCustomerName()
 							: siteList.get(i).getCustomerAbbreviation());
@@ -120,7 +129,8 @@ public class SalesProfitController extends BaseController {
 				workDateStart = startTime;
 			}
 
-			siteList.get(i).setWorkDate(workDateStart + " ~ " + workDateEnd);
+			siteList.get(i).setWorkDate(workDateStart.substring(0, 4) + "/" + workDateStart.substring(4, 6) + " ~ "
+					+ workDateEnd.substring(0, 4) + "/" + workDateEnd.substring(4, 6));
 
 			DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM");
 			int months = Months
@@ -130,7 +140,7 @@ public class SalesProfitController extends BaseController {
 							formatter.parseDateTime(workDateEnd.substring(0, 4) + "-" + workDateEnd.substring(4, 6)))
 					.getMonths() + 1;
 			siteList.get(i).setProfit(Integer.toString(Integer.parseInt(siteList.get(i).getUnitPrice()) * months));
-
+			profitAll += Integer.parseInt(siteList.get(i).getUnitPrice()) * months;
 			String startYandM = workDateStart;
 			String endYandM = workDateEnd;
 			List<String> getYandM = new ArrayList<String>();
@@ -190,47 +200,49 @@ public class SalesProfitController extends BaseController {
 			List<PersonalSalesSearchModel> personModelList = new ArrayList<PersonalSalesSearchModel>();
 			personModelList = personalSalesSearchService.searchEmpDetails(sendMap);
 			int salary = 0;
+			int bpSalary = 0;
 			for (int j = 0; j < personModelList.size(); j++) {
-				salary += Integer.parseInt(personModelList.get(j).getSalary());
+				if (!(personModelList.get(j).getSalary() == null))
+					salary += Integer.parseInt(personModelList.get(j).getSalary());
 			}
 			siteList.get(i).setSalary(Integer.toString(salary));
 			siteList.get(i).setRowNo(Integer.toString(i + 1));
-			siteList.get(i).setSiteRoleName(Integer.toString(salary - Integer.parseInt(siteList.get(i).getProfit())));
+			siteList.get(i).setSiteRoleName(Integer.toString(Integer.parseInt(siteList.get(i).getProfit()) - salary));
+			siteRoleNameAll += Integer.parseInt(siteList.get(i).getProfit()) - salary;
+			String employeeStatus = "";
+			if (!(siteList.get(i).getEmployeeStatus() == null)) {
+				if (siteList.get(i).getEmployeeStatus().equals("0"))
+					employeeStatus = "社員";
+				else if (siteList.get(i).getEmployeeStatus().equals("1")) {
+					employeeStatus = "協力";
+					if (siteList.get(i).getBpUnitPrice() != null) {
+						bpSalary = Integer.parseInt(siteList.get(i).getBpUnitPrice()) * months;
+						siteList.get(i).setSalary(Integer.toString(bpSalary));
+					}
+				} else
+					employeeStatus = "";
+			}
+			siteList.get(i).setEmployeeStatus(employeeStatus);
+			if (!(siteList.get(i).getBpBelongCustomerCode() == null)) {
+				if (!(salesProfitService.getCustomerName(siteList.get(i).getBpBelongCustomerCode()) == null)) {
+					String employeeFrom = salesProfitService.getCustomerName(siteList.get(i).getBpBelongCustomerCode())
+							.getCustomerName();
+					siteList.get(i).setEmployeeFrom(employeeFrom);
+				}
+			} else
+				siteList.get(i).setEmployeeFrom("");
+			siteList.get(i).setSiteRoleName(formatString((float) Integer.parseInt(siteList.get(i).getSiteRoleName())));
+			siteList.get(i).setUnitPrice(formatString((float) Integer.parseInt(siteList.get(i).getUnitPrice())));
+			siteList.get(i).setProfit(formatString((float) Integer.parseInt(siteList.get(i).getProfit())));
+			siteList.get(i).setSalary(formatString((float) Integer.parseInt(siteList.get(i).getSalary())));
 		}
+		siteList.get(0).setProfitAll(formatString((float) profitAll));
+		siteList.get(0).setSiteRoleNameAll(formatString((float) siteRoleNameAll));
 		return siteList;
 	}
 
-	/**
-	 * データ整理
-	 *
-	 * @return
-	 */
-	/*
-	 * public Map<String, Object> putData(SalesPointSetModel salesPointSetModel) {
-	 * HttpSession loginSession = getSession(); Map<String, Object> sendMap = new
-	 * HashMap<String, Object>(); String no = salesPointSetModel.getNo(); String
-	 * employee = salesPointSetModel.getEmployee(); String newMember =
-	 * salesPointSetModel.getNewMember(); String customerContract =
-	 * salesPointSetModel.getCustomerContract(); String level =
-	 * salesPointSetModel.getLevel(); String salesPuttern =
-	 * salesPointSetModel.getSalesPuttern(); String specialPoint =
-	 * salesPointSetModel.getSpecialPoint(); String point =
-	 * salesPointSetModel.getPoint(); String remark =
-	 * salesPointSetModel.getRemark();
-	 * 
-	 * if (no != null && no.length() != 0) { sendMap.put("no", no); } if (employee
-	 * != null && employee.length() != 0) { sendMap.put("employee", employee); } if
-	 * (newMember != null && newMember.length() != 0) { sendMap.put("newMember",
-	 * newMember); } if (customerContract != null && customerContract.length() != 0)
-	 * { sendMap.put("customerContract", customerContract); } if (level != null &&
-	 * level.length() != 0) { sendMap.put("level", level); } if (salesPuttern !=
-	 * null && salesPuttern.length() != 0) { sendMap.put("salesPuttern",
-	 * salesPuttern); } if (specialPoint != null && specialPoint.length() != 0) {
-	 * sendMap.put("specialPoint", specialPoint); } if (point != null &&
-	 * point.length() != 0) { sendMap.put("point", point); } if (remark != null &&
-	 * remark.length() != 0) { sendMap.put("remark", remark); }
-	 * 
-	 * sendMap.put("updateUser", loginSession.getAttribute("employeeName")); return
-	 * sendMap; }
-	 */
+	private String formatString(Float data) {
+		DecimalFormat df = new DecimalFormat("#,###");
+		return df.format(data);
+	}
 }
