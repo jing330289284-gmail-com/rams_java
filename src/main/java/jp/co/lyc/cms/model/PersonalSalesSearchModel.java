@@ -1,12 +1,14 @@
 package jp.co.lyc.cms.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class PersonalSalesSearchModel implements Serializable  {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	String status;
 	String nodata;
 	String errormessage;
 	String onlyYandM;
@@ -24,13 +26,18 @@ public class PersonalSalesSearchModel implements Serializable  {
 	String transportationExpenses;//交通代
 	String insuranceFeeAmount;//社会保険
 	String scheduleOfBonusAmount;
-	String leaderAllowanceAmount;//リーダー手当
-	String otherAllowanceAmount;//他の手当
+	String allowanceAmount;
 	String grosProfits;//粗利
 	String paymentTotal;
 	String dailyCalculationStatus;
 	String admissionEndDate;
 	String DeductionsAndOvertimePay;
+	String otherAllowanceName;
+	String otherAllowanceAmount;
+	String housingAllowance;
+	String leaderAllowanceAmount;
+	String relatedEmployees;
+	List<String> empNameList;
 	public String getEmployeeName() {
 		return employeeName;
 	}
@@ -103,17 +110,11 @@ public class PersonalSalesSearchModel implements Serializable  {
 	public void setScheduleOfBonusAmount(String scheduleOfBonusAmount) {
 		this.scheduleOfBonusAmount = scheduleOfBonusAmount;
 	}
-	public String getLeaderAllowanceAmount() {
-		return leaderAllowanceAmount;
+	public String getAllowanceAmount() {
+		return allowanceAmount;
 	}
-	public void setLeaderAllowanceAmount(String leaderAllowanceAmount) {
-		this.leaderAllowanceAmount = leaderAllowanceAmount;
-	}
-	public String getOtherAllowanceAmount() {
-		return otherAllowanceAmount;
-	}
-	public void setOtherAllowanceAmount(String otherAllowanceAmount) {
-		this.otherAllowanceAmount = otherAllowanceAmount;
+	public void setAllowanceAmount(String allowanceAmount) {
+		this.allowanceAmount = allowanceAmount;
 	}
 	public String getGrosProfits() {
 		return grosProfits;
@@ -175,6 +176,50 @@ public class PersonalSalesSearchModel implements Serializable  {
 	public void setDeductionsAndOvertimePay(String deductionsAndOvertimePay) {
 		DeductionsAndOvertimePay = deductionsAndOvertimePay;
 	}
+	public String getOtherAllowanceName() {
+		return otherAllowanceName;
+	}
+	public void setOtherAllowanceName(String otherAllowanceName) {
+		this.otherAllowanceName = otherAllowanceName;
+	}
+	public String getOtherAllowanceAmount() {
+		return otherAllowanceAmount;
+	}
+	public void setOtherAllowanceAmount(String otherAllowanceAmount) {
+		this.otherAllowanceAmount = otherAllowanceAmount;
+	}
+	public String getHousingAllowance() {
+		return housingAllowance;
+	}
+	public void setHousingAllowance(String housingAllowance) {
+		this.housingAllowance = housingAllowance;
+	}
+	public String getLeaderAllowanceAmount() {
+		return leaderAllowanceAmount;
+	}
+	public void setLeaderAllowanceAmount(String leaderAllowanceAmount) {
+		this.leaderAllowanceAmount = leaderAllowanceAmount;
+	}
+	public String getRelatedEmployees() {
+		return relatedEmployees;
+	}
+	public void setRelatedEmployees(String relatedEmployees) {
+		this.relatedEmployees = relatedEmployees;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public List<String> getEmpNameList() {
+		return empNameList;
+	}
+	public void setEmpNameList(List<String> empNameList) {
+		this.empNameList = empNameList;
+	}
+
+
 
 	
 	
