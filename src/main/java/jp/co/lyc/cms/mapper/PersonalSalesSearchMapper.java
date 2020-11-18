@@ -10,7 +10,8 @@ import jp.co.lyc.cms.model.PersonalSalesSearchModel;
 @Mapper
 public interface PersonalSalesSearchMapper{
 
-	
 	public List<PersonalSalesSearchModel> getEmployeeSalesInfo(Map<String, Object> sendMap);
+	
+	public List<PersonalSalesSearchModel> getEmpAllowance(Map<String, Object> sendMap);
 
 }
