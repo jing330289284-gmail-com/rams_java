@@ -97,7 +97,7 @@ public class CostRegistrationController extends BaseController {
 		});
 		costRegistrationModel.setEmployeeNo(getSession().getAttribute("employeeNo").toString());
 		costRegistrationModel.setEmployeeName(getSession().getAttribute("employeeName").toString()); 
-		String getFilename;
+		String getFilename="";
 		if(costFile==null&&!costRegistrationModel.getCostClassificationCode().equals(costRegistrationModel.getOldCostClassificationCode())) {
 			costRegistrationModel.setCostFile("");
 		}else {
@@ -116,9 +116,11 @@ public class CostRegistrationController extends BaseController {
 					//新しいファイルがない
 					if(costFile==null) {
 						if(!costRegistrationModel.getCostClassificationCode().equals(costRegistrationModel.getOldCostClassificationCode())){
-							//区分が変更された,旧ファイル削除
-							delete(costRegistrationModel);
-							getFilename="";
+							if(costRegistrationModel.getCostClassificationCode().equals("1")||costRegistrationModel.getOldCostClassificationCode().equals("1")){
+								//区分が変更された,旧ファイル削除
+								delete(costRegistrationModel);
+								
+							}
 						}else {
 							//区分に変更がない、改名
 							getFilename=rename(costRegistrationModel);
