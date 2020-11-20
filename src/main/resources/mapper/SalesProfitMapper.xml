@@ -96,7 +96,18 @@
 
 	<select id="getCustomerName" parameterType="string"
 		resultType="jp.co.lyc.cms.model.SalesInfoModel">
-		SELECT customerName FROM T007CustomerInfo where
-		T007CustomerInfo.customerNo = #{bpBelongCustomerCode};
+		SELECT customerNo,customerName FROM rams.T007CustomerInfo;
+	</select>
+
+	<select id="getEmployeeNoSalary" parameterType="string"
+		resultType="jp.co.lyc.cms.model.SalesInfoModel">
+		SELECT employeeNo,reflectYearAndMonth,salary FROM
+		T005WagesInfo order by employeeNo,reflectYearAndMonth;
+	</select>
+
+	<select id="getEmployeeName" parameterType="string"
+		resultType="jp.co.lyc.cms.model.SalesInfoModel">
+		SELECT employeeNo,employeeFristName,employeeLastName FROM
+		rams.T001Employee;
 	</select>
 </mapper>

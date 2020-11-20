@@ -40,8 +40,18 @@ public class SalesProfitService {
 				startTime, endTime);
 	}
 
-	public SalesInfoModel getCustomerName(String bpBelongCustomerCode) {
+	public List<SalesInfoModel> getCustomerName() {
 
-		return salesProfitMapper.getCustomerName(bpBelongCustomerCode);
+		return salesProfitMapper.getCustomerName();
+	}
+
+	public List<SalesInfoModel> getEmployeeNoSalary() {
+
+		return salesProfitMapper.getEmployeeNoSalary();
+	}
+
+	public List<SalesInfoModel> getEmployeeName() {
+
+		return salesProfitMapper.getEmployeeName();
 	}
 }
