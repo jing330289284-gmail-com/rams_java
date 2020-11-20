@@ -51,6 +51,16 @@
 		employeeNo LIKE concat( '%', "LYC", '%' )
 	</select>
 
+	<!-- お客様名 -->
+	<select id="getCustomerName"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT
+			customerNo CODE,
+			CONCAT( customerName, '(', customerNo, ')' ) NAME,
+			customerName TEXT 
+		FROM
+			T007CustomerInfo
+	</select>
 	<!-- 在留資格 -->
 	<select id="getVisa" resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT visaCode code,visaName
