@@ -809,7 +809,19 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getEmployeeNameNoBP();
 		return list;
 	}
-
+	
+	/**
+	 * お客様名
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getCustomerName", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getCustomerName() {
+		List<ModelClass> list = utilsService.getCustomerName();
+		return list;
+	}
+	
 	/**
 	 * 条件を取得
 	 * 
