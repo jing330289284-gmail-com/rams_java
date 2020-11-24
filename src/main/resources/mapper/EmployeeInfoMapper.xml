@@ -107,13 +107,11 @@
 		<if test="kadou!=null">
 			<if test='kadou=="0"'>
 				AND T006.AdmissionStartDate is not null AND
-				T006.AdmissionEndDate is
-				null
+				T006.AdmissionEndDate is null
 			</if>
 			<if test='kadou=="1"'>
 				AND T006.AdmissionStartDate is null AND
-				T006.AdmissionEndDate is not
-				null
+				T006.AdmissionEndDate is not null
 			</if>
 		</if>
 		ORDER BY
@@ -547,11 +545,11 @@
 		T006
 		ON T001.employeeNo
 		= T006.employeeNo
-		AND admissionStartDate =
+	<!-- 	AND admissionStartDate =
 		(SELECT
 		MAX(admissionStartDate)
 		FROM
-		T006EmployeeSiteInfo)
+		T006EmployeeSiteInfo) -->
 		LEFT
 		JOIN
 		T003AddressInfo AS T003
