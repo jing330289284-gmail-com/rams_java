@@ -102,12 +102,12 @@
 			&lt;=#{intoCompanyYearAndMonthTo}
 		</if>
 		<if test="kadou!=null">
-			<if test="kadou='0'">
+			<if test='kadou=="0"'>
 				AND T006.AdmissionStartDate is not null AND
 				T006.AdmissionEndDate is
 				null
 			</if>
-			<if test="kadou='1'">
+			<if test='kadou=="1"'>
 				AND T006.AdmissionStartDate is null AND
 				T006.AdmissionEndDate is not
 				null

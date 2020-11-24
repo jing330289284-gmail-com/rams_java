@@ -475,21 +475,6 @@ public class UtilsController {
 	}
 
 	/**
-	 * 資格
-	 * 
-	 * @return
-	 */
-
-	@RequestMapping(value = "/getQualificationType", method = RequestMethod.POST)
-	@ResponseBody
-	public List<ModelClass> getQualificationType() {
-		Properties properties = getProperties();
-		String qualificationType = properties.getProperty("qualificationType");
-		List<ModelClass> list = getStatus(qualificationType);
-		return list;
-	}
-
-	/**
 	 * ボーナス
 	 * 
 	 * @return
