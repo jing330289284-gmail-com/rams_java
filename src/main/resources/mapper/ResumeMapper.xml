@@ -35,14 +35,14 @@
 			updateUser
 			)
 		VALUES(
-			employeeNo= #{employeeNo},
-			resumeInfo1= #{resumeInfo1},
-			resumeName1= #{resumeName1},
-			resumeInfo2= #{resumeInfo2},
-			resumeName2= #{resumeName2},
-			updateTime= now(),
-			createTime= now(),
-			updateUser= #{employeeName}
+			#{employeeNo},
+			#{resumeInfo1},
+			#{resumeName1},
+			#{resumeInfo2},
+			#{resumeName2},
+			now(),
+			now(),
+			#{employeeName}
 		) ON DUPLICATE KEY UPDATE
 			resumeInfo1= #{resumeInfo1},
 			resumeName1= #{resumeName1},
