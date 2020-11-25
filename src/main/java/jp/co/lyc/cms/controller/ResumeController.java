@@ -59,7 +59,7 @@ public class ResumeController extends BaseController {
 	 * @param topCustomerMod
 	 * @return
 	 */
-	public final static String UPLOAD_PATH_PREFIX_resumeInfo = "c:/file/履歴書/";
+	public final static String UPLOAD_PATH_PREFIX_resumeInfo = "c:"+File.separator+"file"+File.separator+"履歴書"+File.separator;
 	@RequestMapping(value = "/insertResume", method = RequestMethod.POST)
 	@ResponseBody
 	public boolean insertResume(@RequestParam(value = "emp", required = false) String JSONEmp,
@@ -77,23 +77,24 @@ public class ResumeController extends BaseController {
 		String realPath = new String(UPLOAD_PATH_PREFIX_resumeInfo + resumeModel.getEmployeeNo() + "_"
 				+ resumeModel.getEmployeeName());
 		//ファイル退避
-		if(resumeModel.getResumeInfo1()!=null) {
+		if(!resumeModel.getResumeInfo1().equals("")) {
 			rename(resumeModel,true,1);
 		}
-		if(resumeModel.getResumeInfo2()!=null) {
+		if(!resumeModel.getResumeInfo2().equals("")) {
 			rename(resumeModel,true,2);
 		}
-		
+		String newFile1="";
+		String newFile2="";
 		if(filePath1==null)  {
 			//新ファイルパス存在しない→改名
-			if(resumeModel.getResumeInfo1()!=null) {
+			if(!resumeModel.getResumeInfo1().equals("")) {
 				rename(resumeModel,false,1);
 			}
 		}else{
 			//新ファイルパス存在→新ファイルアップロード→旧ファイルパス削除
 			try {
-				upload(resumeModel.getResumeName2(),filePath1,realPath);
-				if(resumeModel.getResumeInfo1()!=null) {
+				newFile1=upload(resumeModel.getResumeName1(),filePath1,realPath);
+				if(!resumeModel.getResumeInfo1().equals("")) {
 					delete(resumeModel,1);
 				}
 			} catch (Exception e) {
@@ -102,14 +103,14 @@ public class ResumeController extends BaseController {
 		}
 		if(filePath2==null)  {
 			//新ファイルパス存在しない→改名
-			if(resumeModel.getResumeInfo2()!=null) {
+			if(!resumeModel.getResumeInfo2().equals("")) {
 				rename(resumeModel,false,2);
 			}
 		}else{
 			//新ファイルパス存在→新ファイルアップロード→旧ファイルパス削除
 			try {
-				upload(resumeModel.getResumeName2(),filePath2,realPath);
-				if(resumeModel.getResumeInfo2()!=null) {
+				newFile2=upload(resumeModel.getResumeName2(),filePath2,realPath);
+				if(!resumeModel.getResumeInfo2().equals("")) {
 					delete(resumeModel,2);
 				}
 			} catch (Exception e) {
@@ -117,14 +118,11 @@ public class ResumeController extends BaseController {
 			}
 		}
 		//SQL実行
-		resumeModel.setResumeInfo1(realPath+File.separator+resumeModel.getResumeName1());
-		resumeModel.setResumeInfo2(realPath+File.separator+resumeModel.getResumeName2());
+			resumeModel.setResumeInfo1(newFile1);
+			resumeModel.setResumeInfo2(newFile2);
 		boolean result  = resumeService.insertResume(resumeModel);
-		if(!result) {
-			return false;
-		}
 		logger.info("ResumeController.insertResume:" + "追加結束");
-		return true;
+		return result;
 	}
 	//ファイルリネーム
 	private boolean rename(ResumeModel resumeModel,boolean flag,int fileNo) {
@@ -186,7 +184,7 @@ public class ResumeController extends BaseController {
 			e.printStackTrace();
 			return "";
 		}
-		return realPath+"/"+newName;
+		return realPath+File.separator+newName;
 	}
 	public boolean delete(ResumeModel resumeModel,int fileNo) {
 		File file = null ;
