@@ -44,7 +44,7 @@
 			AND T002.employeeFormCode=#{employeeFormCode}
 		</if>
 		<if test="employeeFormCode==null">
-			AND T002.employeeFormCode in (0,1,2,4)
+			AND T002.employeeFormCode !='3'
 		</if>
 		<if test="employeeStatus!=null">
 			AND T002.employeeStatus=#{employeeStatus}
