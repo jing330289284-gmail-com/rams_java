@@ -43,6 +43,9 @@
 		<if test="employeeFormCode!=null">
 			AND T002.employeeFormCode=#{employeeFormCode}
 		</if>
+		<if test="employeeFormCode==null">
+			AND T002.employeeFormCode in (0,1,2,4)
+		</if>
 		<if test="employeeStatus!=null">
 			AND T002.employeeStatus=#{employeeStatus}
 		</if>
@@ -66,7 +69,7 @@
 		</if>
 
 		<if test="customer!= null">
-			AND T007.customerName=#{customer}
+			AND T007.customerNo=#{customer}
 		</if>
 		<if test="intoCompanyCode!= null">
 			AND T002.intoCompanyCode=#{intoCompanyCode}
@@ -75,10 +78,20 @@
 			AND T002.japaneseLevelCode=#{japaneseLevelCode}
 		</if>
 		<if test="developLanguage1 != null">
-			AND T002.developLanguage1=#{developLanguage1}
+			AND (T002.developLanguage1=#{developLanguage1} 
+			or T002.developLanguage2=#{developLanguage1} 
+			or T002.developLanguage3=#{developLanguage1} 
+			or T002.developLanguage4=#{developLanguage1} 
+			or T002.developLanguage5=#{developLanguage1} 
+			)
 		</if>
 		<if test="developLanguage2 != null">
-			AND T002.developLanguage2=#{developLanguage2}
+			AND (T002.developLanguage1=#{developLanguage2} 
+			or T002.developLanguage2=#{developLanguage2} 
+			or T002.developLanguage3=#{developLanguage2} 
+			or T002.developLanguage4=#{developLanguage2} 
+			or T002.developLanguage5=#{developLanguage2} 
+			)
 		</if>
 		<if test="developLanguage3!= null">
 			AND T002.developLanguage3=#{developLanguage3}
@@ -92,20 +105,19 @@
 			&lt;=#{intoCompanyYearAndMonthTo}
 		</if>
 		<if test="kadou!=null">
-			<if test="kadou='0'">
+			<if test='kadou=="0"'>
 				AND T006.AdmissionStartDate is not null AND
-				T006.AdmissionEndDate is
-				null
+				T006.AdmissionEndDate is null
 			</if>
-			<if test="kadou='1'">
+			<if test='kadou=="1"'>
 				AND T006.AdmissionStartDate is null AND
-				T006.AdmissionEndDate is not
-				null
+				T006.AdmissionEndDate is not null
 			</if>
 		</if>
 		ORDER BY
 		rowNo
-		DESC
+		ASC
+		
 	</select>
 
 	<!-- 社員情報を追加 -->
@@ -344,8 +356,8 @@
 		<if test="comeToJapanYearAndMonth!=  null">
 			comeToJapanYearAndMonth =#{comeToJapanYearAndMonth},
 		</if>
-		<if test="employeeStatus!=  null">
-			employeeStatus =#{graduationUniversity},
+		<if test="graduationUniversity!=  null">
+			graduationUniversity =#{graduationUniversity},
 		</if>
 		<if test="graduationYearAndMonth!=  null">
 			graduationYearAndMonth =#{graduationYearAndMonth},
@@ -533,11 +545,11 @@
 		T006
 		ON T001.employeeNo
 		= T006.employeeNo
-		AND admissionStartDate =
+	<!-- 	AND admissionStartDate =
 		(SELECT
 		MAX(admissionStartDate)
 		FROM
-		T006EmployeeSiteInfo)
+		T006EmployeeSiteInfo) -->
 		LEFT
 		JOIN
 		T003AddressInfo AS T003

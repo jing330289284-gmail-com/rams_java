@@ -13,7 +13,6 @@ public class ProjectInfoModel {
 	String customerNo;
 	String personInCharge;
 	String mail;
-	String phoneNo;
 	String keyWordOfLanagurue1;
 	String keyWordOfLanagurue2;
 	String keyWordOfLanagurue3;
@@ -31,8 +30,29 @@ public class ProjectInfoModel {
 	String requiredItem1;
 	String requiredItem2;
 	String noOfInterviewCode;
+	String experienceYear;
+	String siteLoaction;
 	String actionType;
+	String updateUser;
 	
+	public String getSiteLoaction() {
+		return siteLoaction;
+	}
+	public void setSiteLoaction(String siteLoaction) {
+		this.siteLoaction = siteLoaction;
+	}
+	public String getExperienceYear() {
+		return experienceYear;
+	}
+	public void setExperienceYear(String experienceYear) {
+		this.experienceYear = experienceYear;
+	}
+	public String getUpdateUser() {
+		return updateUser;
+	}
+	public void setUpdateUser(String updateUser) {
+		this.updateUser = updateUser;
+	}
 	public String getName() {
 		return name;
 	}
@@ -110,12 +130,6 @@ public class ProjectInfoModel {
 	}
 	public void setMail(String mail) {
 		this.mail = mail;
-	}
-	public String getPhoneNo() {
-		return phoneNo;
-	}
-	public void setPhoneNo(String phoneNo) {
-		this.phoneNo = phoneNo;
 	}
 	public String getKeyWordOfLanagurue1() {
 		return keyWordOfLanagurue1;

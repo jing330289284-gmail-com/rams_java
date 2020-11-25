@@ -60,6 +60,9 @@
 		<if test="employeeName!= null and employeeName!= ''">
 			AND a.employeeNo = #{employeeName}
 		</if>
+		<if test="stationCode!= null and stationCode!= ''">
+			AND a.stationCode = #{stationCode}
+		</if>
 		<if test="siteRoleCode!= null and siteRoleCode!= ''">
 			AND a.siteRoleCode = #{siteRoleCode}
 		</if>
@@ -114,10 +117,10 @@
 			AND d.employeeStatus = #{employeeStatus}
 		</if>
 		<if test="employeeForm!= null and employeeForm!= ''">
-			<if test="employeeForm ='0'">
-				AND d.employeeFormCode &lt;&gt; '3'
+				<if test='employeeForm=="0"'>
+				AND d.employeeFormCode in ('0','1','2','4')
 			</if>
-			<if test="employeeForm ='1'">
+			<if test='employeeForm=="1"'>
 				AND d.employeeFormCode = '3'
 			</if>
 		</if>

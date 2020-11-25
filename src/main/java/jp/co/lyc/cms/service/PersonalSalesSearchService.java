@@ -19,4 +19,9 @@ public class PersonalSalesSearchService {
 		List<PersonalSalesSearchModel> personalList = personalSalesSearchMapper.getEmployeeSalesInfo(sendMap);
 		return personalList;
 	}
+	
+	public List<PersonalSalesSearchModel> searchEmpAllowance(Map<String, Object> sendMap) {
+		List<PersonalSalesSearchModel> personalList = personalSalesSearchMapper.getEmpAllowance(sendMap);
+		return personalList;
+	}
 }

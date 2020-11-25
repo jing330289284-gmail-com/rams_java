@@ -28,12 +28,16 @@
 		CAST(T005.insuranceFeeAmount As unsigned) As insuranceFeeAmount,
 		T005.bonusFlag,
 		CAST(T005.scheduleOfBonusAmount As unsigned) As scheduleOfBonusAmount,
-		CAST(B${getYandM}.leaderAllowanceAmount As unsigned) As leaderAllowanceAmount,
-		CAST(B${getYandM}.otherAllowanceAmount As unsigned) As otherAllowanceAmount,
-		(T006.unitPrice*10000 - T005.salary - B${getYandM}.transportationExpenses - T005.insuranceFeeAmount - T005.scheduleOfBonusAmount - B${getYandM}.leaderAllowanceAmount - B${getYandM}.otherAllowanceAmount)
-		As grosProfits,
-		CAST((T005.salary + B${getYandM}.transportationExpenses + T005.insuranceFeeAmount + T005.scheduleOfBonusAmount + B${getYandM}.leaderAllowanceAmount + B${getYandM}.otherAllowanceAmount) As unsigned) As paymentTotal,
-		T018.DeductionsAndOvertimePay
+		(CAST(B${getYandM}.leaderAllowanceAmount As unsigned)+CAST(B${getYandM}.otherAllowanceAmount As unsigned)+CAST(B${getYandM}.housingAllowance As unsigned) )As allowanceAmount,
+		<!-- (T006.unitPrice*10000 - T005.salary - B${getYandM}.transportationExpenses - T005.insuranceFeeAmount - T005.scheduleOfBonusAmount - B${getYandM}.leaderAllowanceAmount - B${getYandM}.otherAllowanceAmount)
+		As grosProfits,  -->	
+		CAST((T005.salary + B${getYandM}.transportationExpenses + T005.insuranceFeeAmount + T005.scheduleOfBonusAmount + B${getYandM}.leaderAllowanceAmount + B${getYandM}.otherAllowanceAmount + B${getYandM}.housingAllowance) As unsigned) As paymentTotal,
+		T018.DeductionsAndOvertimePay,
+		B${getYandM}.otherAllowanceName,
+		B${getYandM}.otherAllowanceAmount,
+		B${getYandM}.housingAllowance,
+		B${getYandM}.leaderAllowanceAmount,
+		T006.relatedEmployees
 		FROM
 		T001Employee As T001
 		Left JOIN 
@@ -58,7 +62,34 @@
 		T005.employeeNo=#{employeeName}
 		ORDER BY ABS(#{getYandM} - reflectYearAndMonth) ASC
 		limit 1 ) As A${getYandM}
-		</foreach>
+		</foreach>	
+		</select>
 		
+		<select id="getEmpAllowance" parameterType="map"
+		resultMap="detailsInfo">
+				<foreach item="getYandM" collection="getYandM" index="index">
+		<if test="index != 0">
+                    union all
+                </if>
+		SELECT * FROM(
+		SELECT 
+			T013.otherAllowanceName,
+			T013.otherAllowanceAmount,
+			T013.housingAllowance,
+			T013.leaderAllowanceAmount,
+			T006.relatedEmployees
+		FROM
+			T013ExpensesInfo As T013
+		LEFT JOIN 
+			T006EmployeeSiteInfo As T006 ON T013.employeeNo = T006.employeeNo
+        WHERE 
+           T013.employeeNo = #{employeeName}
+        AND
+           #{getYandM} between left(admissionStartDate,6) and left(admissionEndDate,6)
+        AND
+        	#{getYandM} > T013.expensesReflectYearAndMonth
+        ORDER BY ABS(#{getYandM} - T013.expensesReflectYearAndMonth) ASC
+		limit 1 ) As B${getYandM}	
+		</foreach>
 		</select>
 </mapper>

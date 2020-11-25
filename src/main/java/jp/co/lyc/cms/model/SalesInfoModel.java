@@ -25,6 +25,60 @@ public class SalesInfoModel {
 	String workDate; // 入場期間
 	String profit; // 売上
 	String siteRoleName; // 粗利
+	String bpBelongCustomerCode; // 所属会社
+	String profitAll; // 売上合計
+	String siteRoleNameAll; // 粗利合計
+	String bpUnitPrice; // BP単価
+	String reflectYearAndMonth; // 反映年月
+	String customerNo; // 会社番号
+
+	public String getCustomerNo() {
+		return customerNo;
+	}
+
+	public void setCustomerNo(String customerNo) {
+		this.customerNo = customerNo;
+	}
+
+	public String getReflectYearAndMonth() {
+		return reflectYearAndMonth;
+	}
+
+	public void setReflectYearAndMonth(String reflectYearAndMonth) {
+		this.reflectYearAndMonth = reflectYearAndMonth;
+	}
+
+	public String getBpUnitPrice() {
+		return bpUnitPrice;
+	}
+
+	public void setBpUnitPrice(String bpUnitPrice) {
+		this.bpUnitPrice = bpUnitPrice;
+	}
+
+	public String getProfitAll() {
+		return profitAll;
+	}
+
+	public void setProfitAll(String profitAll) {
+		this.profitAll = profitAll;
+	}
+
+	public String getSiteRoleNameAll() {
+		return siteRoleNameAll;
+	}
+
+	public void setSiteRoleNameAll(String siteRoleNameAll) {
+		this.siteRoleNameAll = siteRoleNameAll;
+	}
+
+	public String getBpBelongCustomerCode() {
+		return bpBelongCustomerCode;
+	}
+
+	public void setBpBelongCustomerCode(String bpBelongCustomerCode) {
+		this.bpBelongCustomerCode = bpBelongCustomerCode;
+	}
 
 	public String getRowNo() {
 		return rowNo;

@@ -8,6 +8,7 @@
     CONCAT(T001.employeeFristName,
             T001.employeeLastName) AS 'employeeName',
     T002.employeeStatus,
+    T002.employeeNo,
     T010.hopeHighestPrice,
     T002.genderStatus,
     M003.nationalityName,

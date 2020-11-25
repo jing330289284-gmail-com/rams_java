@@ -98,6 +98,14 @@ public class EmployeeModel implements Serializable {
 	String furigana2;// カタカナ2
 	String passportInfo;
 
+	public String getPassportInfo() {
+		return passportInfo;
+	}
+
+	public void setPassportInfo(String passportInfo) {
+		this.passportInfo = passportInfo;
+	}
+
 	public int getRowNo() {
 		return rowNo;
 	}

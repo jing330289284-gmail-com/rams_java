@@ -40,4 +40,18 @@ public class SalesProfitService {
 				startTime, endTime);
 	}
 
+	public List<SalesInfoModel> getCustomerName() {
+
+		return salesProfitMapper.getCustomerName();
+	}
+
+	public List<SalesInfoModel> getEmployeeNoSalary() {
+
+		return salesProfitMapper.getEmployeeNoSalary();
+	}
+
+	public List<SalesInfoModel> getEmployeeName() {
+
+		return salesProfitMapper.getEmployeeName();
+	}
 }

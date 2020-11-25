@@ -269,6 +269,15 @@ public class UtilsService {
 	}
 	
 	/**
+	 * お客様名
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getCustomerName() {
+		return utilsMapper.getCustomerName();
+	}
+	
+	/**
 	 * お客様性質
 	 * 
 	 * @return

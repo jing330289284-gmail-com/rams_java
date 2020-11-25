@@ -11,7 +11,7 @@
 	FROM
 		T022ProjectInfo 
 	WHERE
-		projectNo LIKE CONCAT('%',#{yearAndMonth})
+		projectNo LIKE CONCAT(#{yearAndMonth} , '%')
 	</select>
 	<select id="getPersonInCharge" resultMap="projectInfoModel" parameterType="String">
 	SELECT
@@ -35,5 +35,212 @@
 		T009CustomerDepartmentInfo AS T009 
 	WHERE
 		T009.customerNo = #{customerNo}
+	</select>
+	<!-- インサート -->
+	<insert id="insert" parameterType="String">
+		INSERT INTO T022ProjectInfo(
+		projectNo,
+		projectName,
+		nationalityCode,
+		admissionPeriod,
+		projectType,
+		successRate,
+		customerNo,
+		personInCharge,
+		mail,
+		phoneNo,
+		keyWordOfLanagurue1,
+		keyWordOfLanagurue2,
+		keyWordOfLanagurue3,
+		typeOfIndustry,
+		projectInfoDetail,
+		japaneaseConversationLevel,
+		unitPriceRangeLowest,
+		unitPriceRangeHighest,
+		ageClassificationCode,
+		projectPhaseStart,
+		projectPhaseEnd,
+		payOffRangeLowest,
+		payOffRangeHighest,
+		workStartPeriod,
+		experienceYear,
+		noOfInterviewCode,
+		siteLoaction,
+		requiredItem1,
+		requiredItem2,
+		updateTime,
+		createTime,
+		updateUser
+	) 
+	VALUES(
+		#{projectNo},
+		#{projectName},
+		#{nationalityCode},
+		#{admissionPeriod},
+		#{projectType},
+		#{successRate},
+		#{customerNo},
+		#{personInCharge},
+		#{mail},
+		#{phoneNo},
+		#{keyWordOfLanagurue1},
+		#{keyWordOfLanagurue2},
+		#{keyWordOfLanagurue3},
+		#{typeOfIndustry},
+		#{projectInfoDetail},
+		#{japaneaseConversationLevel},
+		#{unitPriceRangeLowest},
+		#{unitPriceRangeHighest},
+		#{ageClassificationCode},
+		#{projectPhaseStart},
+		#{projectPhaseEnd},
+		#{payOffRangeLowest},
+		#{payOffRangeHighest},
+		#{workStartPeriod},
+		#{experienceYear},
+		#{noOfInterviewCode},
+		#{siteLoaction},
+		#{requiredItem1},
+		#{requiredItem2},
+		NOW(),
+		NOW(),
+		#{updateUser}
+	)
+	</insert>
+	<!-- アップデート -->
+	<update id="update">
+	UPDATE T022ProjectInfo 
+		SET 
+		<if test="projectName != null">
+			projectName = #{projectName},
+		</if>
+		<if test="nationalityCode != null">
+			nationalityCode = #{nationalityCode},
+		</if>	
+		<if test="admissionPeriod != null">
+			admissionPeriod = #{admissionPeriod},
+		</if>		
+		<if test="projectType != null">
+			projectType = #{projectType},
+		</if>	
+		<if test="successRate != null">
+			successRate = #{successRate},
+		</if>	
+		<if test="customerNo != null">
+			customerNo = #{customerNo},
+		</if>	
+		<if test="personInCharge != null">
+			personInCharge = #{personInCharge},
+		</if>	
+		<if test="mail != null">
+			mail = #{mail},
+		</if>	
+		<if test="phoneNo != null">
+			phoneNo = #{phoneNo},
+		</if>	
+		<if test="keyWordOfLanagurue1 != null">
+			keyWordOfLanagurue1 = #{keyWordOfLanagurue1},
+		</if>	
+		<if test="keyWordOfLanagurue2 != null">
+			keyWordOfLanagurue2 = #{keyWordOfLanagurue2},
+		</if>	
+		<if test="keyWordOfLanagurue3 != null">
+			keyWordOfLanagurue3 = #{keyWordOfLanagurue3},
+		</if>	
+		<if test="typeOfIndustry != null">
+			typeOfIndustry = #{typeOfIndustry},
+		</if>	
+		<if test="projectInfoDetail != null">
+			projectInfoDetail = #{projectInfoDetail},
+		</if>	
+		<if test="japaneaseConversationLevel != null">
+			japaneaseConversationLevel = #{japaneaseConversationLevel},
+		</if>		
+		<if test="unitPriceRangeLowest != null">
+			unitPriceRangeLowest = #{unitPriceRangeLowest},
+		</if>	
+		<if test="unitPriceRangeHighest != null">
+			unitPriceRangeHighest = #{unitPriceRangeHighest},
+		</if>	
+		<if test="ageClassificationCode != null">
+			ageClassificationCode = #{ageClassificationCode},
+		</if>	
+		<if test="projectPhaseStart != null">
+			projectPhaseStart = #{projectPhaseStart},
+		</if>	
+		<if test="projectPhaseEnd != null">
+			projectPhaseEnd = #{projectPhaseEnd},
+		</if>	
+		<if test="payOffRangeLowest != null">
+			payOffRangeLowest = #{payOffRangeLowest},
+		</if>	
+		<if test="payOffRangeHighest != null">
+			payOffRangeHighest = #{payOffRangeHighest},
+		</if>	
+		<if test="workStartPeriod != null">
+			workStartPeriod = #{workStartPeriod},
+		</if>	
+		<if test="experienceYear != null">
+			experienceYear = #{experienceYear},
+		</if>	
+		<if test="noOfInterviewCode != null">
+			noOfInterviewCode = #{noOfInterviewCode},
+		</if>	
+		<if test="siteLoaction != null">
+			siteLoaction = #{siteLoaction},
+		</if>	
+		<if test="requiredItem1 != null">
+			requiredItem1 = #{requiredItem1},
+		</if>	
+		<if test="requiredItem2 != null">
+			requiredItem2 = #{requiredItem2},
+		</if>	
+		updateTime = NOW(),
+		updateUser = #{updateUser}
+		WHERE 
+			projectNo = #{projectNo}
+	</update>
+	<!-- 案件情報の取得 -->
+	<select id="getProjectInfo" resultMap="projectInfoModel" parameterType="String">
+	SELECT
+		T022.projectNo,
+		T022.projectName,
+		T022.nationalityCode,
+		T022.admissionPeriod,
+		T022.projectType,
+		T022.successRate,
+		T022.customerNo,
+		T022.personInCharge,
+		T022.mail,
+		T022.phoneNo,
+		T022.keyWordOfLanagurue1,
+		T022.keyWordOfLanagurue2,
+		T022.keyWordOfLanagurue3,
+		T022.typeOfIndustry,
+		T022.projectInfoDetail,
+		T022.japaneaseConversationLevel,
+		T022.unitPriceRangeLowest,
+		T022.unitPriceRangeHighest,
+		T022.ageClassificationCode,
+		T022.projectPhaseStart,
+		T022.projectPhaseEnd,
+		T022.payOffRangeLowest,
+		T022.payOffRangeHighest,
+		T022.workStartPeriod,
+		T022.experienceYear,
+		T022.noOfInterviewCode,
+		T022.siteLoaction,
+		T022.requiredItem1,
+		T022.requiredItem2,
+		T022.updateTime,
+		T022.createTime,
+		T022.updateUser
+	FROM
+		T022ProjectInfo AS T022
+	WHERE
+		1=1
+		<if test="projectNo != null">
+			AND T022.projectNo = #{projectNo}
+		</if>
 	</select>
 </mapper>

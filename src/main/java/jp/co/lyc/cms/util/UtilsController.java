@@ -475,21 +475,6 @@ public class UtilsController {
 	}
 
 	/**
-	 * 資格
-	 * 
-	 * @return
-	 */
-
-	@RequestMapping(value = "/getQualificationType", method = RequestMethod.POST)
-	@ResponseBody
-	public List<ModelClass> getQualificationType() {
-		Properties properties = getProperties();
-		String qualificationType = properties.getProperty("qualificationType");
-		List<ModelClass> list = getStatus(qualificationType);
-		return list;
-	}
-
-	/**
 	 * ボーナス
 	 * 
 	 * @return
@@ -809,7 +794,19 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getEmployeeNameNoBP();
 		return list;
 	}
-
+	
+	/**
+	 * お客様名
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getCustomerName", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getCustomerName() {
+		List<ModelClass> list = utilsService.getCustomerName();
+		return list;
+	}
+	
 	/**
 	 * 条件を取得
 	 * 
