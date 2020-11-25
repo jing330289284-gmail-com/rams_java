@@ -170,8 +170,7 @@ public class EmployeeInfoController extends BaseController {
 	public EmployeeModel getEmployeeByEmployeeNo(@RequestBody EmployeeModel emp) throws Exception {
 		logger.info("GetEmployeeInfoController.getEmployeeByEmployeeNo:" + "EmployeeNoによると、社員情報を取得開始");
 		Map<String, Object> sendMap = getParam(emp);
-		EmployeeModel model;
-		model = employeeInfoService.getEmployeeByEmployeeNo(sendMap);
+		EmployeeModel	model = employeeInfoService.getEmployeeByEmployeeNo(sendMap);
 		logger.info("GetEmployeeInfoController.getEmployeeByEmployeeNo:" + "EmployeeNoによると、社員情報を取得結束");
 		return model;
 	}

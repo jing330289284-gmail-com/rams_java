@@ -18,4 +18,10 @@ public interface SalesProfitMapper {
 			String endDate);
 
 	public List<SalesInfoModel> getSalesInfo(String eigyou, String intoCompanyCode, String startDate, String endDate);
+
+	public List<SalesInfoModel> getCustomerName();
+
+	public List<SalesInfoModel> getEmployeeNoSalary();
+
+	public List<SalesInfoModel> getEmployeeName();
 }
