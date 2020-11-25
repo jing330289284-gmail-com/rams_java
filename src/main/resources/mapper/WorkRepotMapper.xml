@@ -60,8 +60,8 @@
    	<update id="updateWorkRepotFile" parameterType="String">
    	UPDATE T018WorkTotalTime
 		SET 
-			workingTimeReport= #{workingTimeReport}
-			updateTime= now(),
+			workingTimeReport= #{workingTimeReport},
+			updateTime= now()
 		WHERE 
 			employeeNo = #{employeeNo}
 			and attendanceYearAndMonth = #{attendanceYearAndMonth}
