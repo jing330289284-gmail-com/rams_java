@@ -37,26 +37,10 @@ public class ResumeService {
 	 * @param sendMap
 	 */
 	
-	public boolean updateResume(ResumeModel resumeModel) {
+	public boolean insertResume(ResumeModel resumeModel) {
 		boolean result = true;
 		try {
-			resumeMapper.updateResume(resumeModel);
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-			return result = false;
-		}
-		return result;
-	}
-	/**
-	 *ファイル名入力
-	 * @param sendMap
-	 */
-	
-	public boolean updateResumeFile(ResumeModel resumeModel) {
-		boolean result = true;
-		try {
-			resumeMapper.updateResumeFile(resumeModel);
+			resumeMapper.insertResume(resumeModel);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

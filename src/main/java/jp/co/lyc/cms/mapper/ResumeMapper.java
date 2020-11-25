@@ -16,13 +16,8 @@ public interface ResumeMapper {
 	public void selectCheckResume(ResumeModel resumeModel) ;
 	public List<ResumeModel> selectResume(ResumeModel resumeModel) ;
 	/**
-	 * アップデート
+	 *insert
 	 * @param sendMap
 	 */
-	public void updateResume(ResumeModel resumeModel) ;	
-	/**
-	 * ファイル名入力
-	 * @param sendMap
-	 */
-	public void updateResumeFile(ResumeModel resumeModel) ;	
+	public void insertResume(ResumeModel resumeModel) ;	
 }
