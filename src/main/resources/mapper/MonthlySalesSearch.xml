@@ -26,7 +26,7 @@
 	(T006.unitPrice*10000 - (T005.salary + T013.transportationExpenses + T005.scheduleOfBonusAmount + T005.insuranceFeeAmount +T013.otherAllowanceAmount + T013.leaderAllowanceAmount + T013.housingAllowance + T005.waitingCost)) As monthlyGrosProfits
 
      from (
-		select employeeNo, max(reflectYearAndMonth),salary as reflectYearAndMonth from T005WagesInfo
+		select employeeNo, max(reflectYearAndMonth),salary , reflectYearAndMonth from T005WagesInfo
 		where reflectYearAndMonth &lt;=#{getYandM}
 		group by employeeNo
     ) as A
