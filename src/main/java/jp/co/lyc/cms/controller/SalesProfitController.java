@@ -262,7 +262,7 @@ public class SalesProfitController extends BaseController {
 			siteList.get(0).setProfitAll(formatString((float) profitAll));
 			siteList.get(0).setSiteRoleNameAll(formatString((float) siteRoleNameAll));
 		} else {
-			siteList.add(new SalesInfoModel());
+			//siteList.add(new SalesInfoModel());
 		}
 		return siteList;
 	}

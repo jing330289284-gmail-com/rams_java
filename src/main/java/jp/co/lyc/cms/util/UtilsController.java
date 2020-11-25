@@ -65,23 +65,24 @@ public class UtilsController {
 
 	@Autowired
 	UtilsService utilsService;
-	
+
 	public static Map<String, String> JapanHoliday = new HashMap<String, String>();
 	static {
 		StringBuffer json = new StringBuffer();
 		try {
 			URL url = new URL("https://holidays-jp.github.io/api/v1/date.json");
-			InputStream is = url.openStream();  // throws an IOException
-			BufferedReader  br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+			InputStream is = url.openStream(); // throws an IOException
+			BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
 			String line = "";
-	        while ((line = br.readLine()) != null) {
-	        	json.append(line);
-	        }
-		} catch (Exception e) {}
+			while ((line = br.readLine()) != null) {
+				json.append(line);
+			}
+		} catch (Exception e) {
+		}
 		com.alibaba.fastjson.JSONObject jsonObject = com.alibaba.fastjson.JSON.parseObject(json.toString());
 //		String yearMonth = (String)jsonObject.getOrDefault("yearMonth", "");
-		Set<String> keys =  jsonObject.keySet();
-		for (String key : keys)	{
+		Set<String> keys = jsonObject.keySet();
+		for (String key : keys) {
 			JapanHoliday.put(key, jsonObject.getString(key));
 		}
 	}
@@ -794,7 +795,7 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getEmployeeNameNoBP();
 		return list;
 	}
-	
+
 	/**
 	 * お客様名
 	 * 
@@ -806,7 +807,7 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getCustomerName();
 		return list;
 	}
-	
+
 	/**
 	 * 条件を取得
 	 * 
@@ -1064,64 +1065,65 @@ public class UtilsController {
 
 		Session session = null;
 		try {
-			//　创建一个资源文件
+			// 创建一个资源文件
 			Properties properties = new Properties();
-			//　 显示日志
+			// 显示日志
 			properties.setProperty("mail.debug", "true");
-			//　 邮箱类别
+			// 邮箱类别
 			properties.setProperty("mail.host", "smtp.lolipop.jp");
-			//　 设定验证开启
+			// 设定验证开启
 			properties.setProperty("mail.smtp.auth", "true");
-			//　 发送 接受方式
+			// 发送 接受方式
 			properties.setProperty("mail.transpot.prococol", "smtp");
-			//　 设置请求服务器端口号
+			// 设置请求服务器端口号
 			properties.put("mail.smtp.port", 587);
-			//　 设置ssl加密服务开启
+			// 设置ssl加密服务开启
 			properties.setProperty("mail.smtp.ssl.enable", "smtp");
-			//　 创建加密证书
+			// 创建加密证书
 			MailSSLSocketFactory sf = new MailSSLSocketFactory();
 			// properties 底层调用的的是put方法
 			properties.put("Mail.smtp.ssl.socketFactory", sf);
-			//　 获取具有以上属性的邮件session --->　连接池
+			// 获取具有以上属性的邮件session ---> 连接池
 			session = Session.getInstance(properties);
-			//　 创建获取连接
+			// 创建获取连接
 			Transport transport = session.getTransport();
-			//　 进行连接
+			// 进行连接
 			transport.connect("mail@lyc.co.jp", "Lyc2020-0908-");
-			//　 创建一个信息
+			// 创建一个信息
 			Message message = new MimeMessage(session);
-			//　 设定发送方
+			// 设定发送方
 			message.setFrom(new InternetAddress("mail@lyc.co.jp"));
-			//　 设置主题内容
+			// 设置主题内容
 			message.setSubject(emailMod.getMailTitle());
-			//message.setContent(emailMod.getContext(), "text/html;charset=utf-8");
+			// message.setContent(emailMod.getContext(), "text/html;charset=utf-8");
 			String[] addresssCC = emailMod.getSelectedMailCC();
 			int lenCC = addresssCC.length;
 			Address[] addsCC = new Address[lenCC];
 			for (int i = 0; i < lenCC; i++) {
 				addsCC[i] = new InternetAddress(addresssCC[i]);
 			}
-			//InternetAddress[] sendCC = new InternetAddress[] {new InternetAddress("jyw.fendou@gmail.com", "", "UTF-8")};
+			// InternetAddress[] sendCC = new InternetAddress[] {new
+			// InternetAddress("jyw.fendou@gmail.com", "", "UTF-8")};
 			message.addRecipients(MimeMessage.RecipientType.CC, addsCC);
-			
-			 //向multipart对象中添加邮件的各个部分内容，包括文本内容和附件
-	         MimeMultipart multipart = new MimeMultipart();
-	         //设置邮件的文本内容
-	         MimeBodyPart contentPart = new MimeBodyPart();
-	         contentPart.setContent(emailMod.getMailConfirmContont(), "text/html;charset=UTF-8");
-	         multipart.addBodyPart(contentPart);
-			//添加附件
-	         MimeBodyPart filePart = new MimeBodyPart();
-	         DataSource source = new FileDataSource(emailMod.getResumePath());
-	         //添加附件的内容
-	         filePart.setDataHandler(new DataHandler(source));
-	         //添加附件的标题
-	         filePart.setFileName(MimeUtility.encodeText(emailMod.getResumeName()));
-	         multipart.addBodyPart(filePart);
-	         multipart.setSubType("mixed");
-	         //将multipart对象放到message中
-	         message.setContent(multipart);
-			
+
+			// 向multipart对象中添加邮件的各个部分内容，包括文本内容和附件
+			MimeMultipart multipart = new MimeMultipart();
+			// 设置邮件的文本内容
+			MimeBodyPart contentPart = new MimeBodyPart();
+			contentPart.setContent(emailMod.getMailConfirmContont(), "text/html;charset=UTF-8");
+			multipart.addBodyPart(contentPart);
+			// 添加附件
+			MimeBodyPart filePart = new MimeBodyPart();
+			DataSource source = new FileDataSource(emailMod.getResumePath());
+			// 添加附件的内容
+			filePart.setDataHandler(new DataHandler(source));
+			// 添加附件的标题
+			filePart.setFileName(MimeUtility.encodeText(emailMod.getResumeName()));
+			multipart.addBodyPart(filePart);
+			multipart.setSubType("mixed");
+			// 将multipart对象放到message中
+			message.setContent(multipart);
+
 			String[] addresss = emailMod.getSelectedmail().split(",");
 			int len = addresss.length;
 			Address[] adds = new Address[len];
@@ -1130,9 +1132,9 @@ public class UtilsController {
 			}
 			message.addRecipients(MimeMessage.RecipientType.TO, adds);
 
-			//　 发送邮件
+			// 发送邮件
 			transport.sendMessage(message, message.getAllRecipients());
-			//　transport.close();
+			// transport.close();
 		} catch (GeneralSecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1146,9 +1148,9 @@ public class UtilsController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	
+
 	}
-	
+
 	/**
 	 * enterPeriodを取得する
 	 * 
@@ -1201,7 +1203,7 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getSituationChange();
 		return list;
 	}
-	
+
 	/**
 	 * 確率取得
 	 * 
@@ -1213,7 +1215,7 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getSuccessRate();
 		return list;
 	}
-	
+
 	/**
 	 * 年齢制限取得
 	 * 
@@ -1225,7 +1227,7 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getAgeClassification();
 		return list;
 	}
-	
+
 	/**
 	 * 面談回数取得
 	 * 
@@ -1237,7 +1239,7 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getNoOfInterview();
 		return list;
 	}
-	
+
 	/**
 	 * 入場期限取得
 	 * 
@@ -1249,7 +1251,7 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getAdmissionPeriod();
 		return list;
 	}
-	
+
 	/**
 	 * 案件タイプ取得
 	 * 
@@ -1259,6 +1261,18 @@ public class UtilsController {
 	@ResponseBody
 	public List<ModelClass> getProjectType() {
 		List<ModelClass> list = utilsService.getProjectType();
+		return list;
+	}
+
+	/**
+	 * 社員氏名を取得する
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getEmployeeNameByOccupationName", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getEmployeeNameByOccupationName() {
+		List<ModelClass> list = utilsService.getEmployeeNameByOccupationName();
 		return list;
 	}
 
@@ -1290,8 +1304,10 @@ public class UtilsController {
 		List<ModelClass> list = getStatus(transaction);
 		return list;
 	}
+
 	/**
 	 * 0130 -> 01:30
+	 * 
 	 * @param time(string)
 	 * @param inputChar(string default->:)
 	 * @return String
@@ -1299,8 +1315,10 @@ public class UtilsController {
 	public static String TimeInsertChar(String time, String inputChar) {
 		return StringUtils.isEmpty(time) ? "" : time.substring(0, 2) + inputChar + time.substring(2, 4);
 	}
+
 	/**
 	 * 0130 -> 01:30
+	 * 
 	 * @param time(string)
 	 * @param inputChar(string default->:)
 	 * @return String
@@ -1308,16 +1326,20 @@ public class UtilsController {
 	public static String TimeInsertChar(String time) {
 		return TimeInsertChar(time, ":");
 	}
+
 	/**
 	 * 祝休日
+	 * 
 	 * @param timestamp in Millis
 	 * @return Boolean
 	 */
 	public static Boolean isHoliday(String date) {
 		return isHoliday(date, "yyyy-MM-dd");
 	}
+
 	/**
 	 * 祝休日
+	 * 
 	 * @param dateString date
 	 * @param dateFormat date format
 	 * @return Boolean
@@ -1327,7 +1349,8 @@ public class UtilsController {
 		Date date = new Date();
 		try {
 			date = simpleDateFormat.parse(dateString);
-		} catch (ParseException e) {}
+		} catch (ParseException e) {
+		}
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
 		int week = calendar.get(Calendar.DAY_OF_WEEK);
