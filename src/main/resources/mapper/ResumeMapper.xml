@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="jp.co.lyc.cms.mapper.ResumeMapper">
+<resultMap id="stringResult" type="String"/>
     <resultMap id="Resume" type="jp.co.lyc.cms.model.ResumeModel"/>
-     <insert id="selectCheckResume" parameterType="String">
-
-    </insert>
+    <select id="selectEmployeeName" resultMap="stringResult" parameterType="String">
+  		SELECT 
+			CONCAT(IFNULL(t001.employeeFristName,''),IFNULL(upper(left(t002.alphabetName,1)),''))employeeName
+		FROM
+			rams.T001Employee t001
+		JOIN
+			rams.T002EmployeeDetail t002
+		ON
+			t001.employeeNo=t002.employeeNo
+		WHERE
+			t001.employeeNo = #{employeeNo}
+    </select>
     <select id="selectResume" resultMap="Resume" parameterType="String">
 		SELECT 
 			IFNULL((@rowNo:=@rowNo + 1),1)rowNo,
