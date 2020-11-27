@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jp.co.lyc.cms.mapper.SalesPointSetMapper">
+
+	<insert id="salesPointInsert" parameterType="map">
+		insert into
+		T014SalesPointInfo(id,employeeStatus,intoCompanyCode,customerContractStatus,levelCode,
+		salesProgressCode,specialPointConditionCode,salesPoint,remark,updateTime,createTime,updateUser)
+		values(#{no},#{employee},#{newMember},#{customerContract},#{level},#{salesPuttern},
+		#{specialPoint},#{point},#{remark},now(),now(),#{updateUser})
+	</insert>
+
+	<update id="salesPointUpdate" parameterType="map">
+		update
+		T014SalesPointInfo
+		set
+		employeeStatus=#{employee},intoCompanyCode=#{newMember},customerContractStatus=#{customerContract},
+		levelCode=#{level},salesProgressCode=#{salesPuttern},specialPointConditionCode=#{specialPoint},
+		salesPoint=#{point},remark=#{remark},updateTime=now(),updateUser=#{updateUser}
+		where id=#{no}
+	</update>
+
+	<delete id="salesPointDelete" parameterType="map">
+		DELETE FROM
+		T014SalesPointInfo WHERE id= #{no};
+	</delete>
+
+	<update id="salesPointUpdateAfterDelete" parameterType="map">
+		update
+		T014SalesPointInfo
+		set
+		id = id - 1
+		where id > #{no};
+	</update>
+
+	<select id="getSalesPointInfo" parameterType="map"
+		resultType="jp.co.lyc.cms.model.SalesPointSetModel">
+		SELECT id as no,employeeStatus as employee,intoCompanyCode as
+		newMember,customerContractStatus as customerContract,
+		levelCode as
+		level,salesProgressCode as salesPuttern,specialPointConditionCode
+		as
+		specialPoint,salesPoint as point,remark FROM
+		T014SalesPointInfo
+		WHERE
+		1=1
+		<if test="employee!= null and employee!= ''">
+			AND employeeStatus = #{employee}
+		</if>
+		<if test="newMember!= null and newMember!= ''">
+			AND intoCompanyCode = #{newMember}
+		</if>
+		<if test="customerContract!= null and customerContract!= ''">
+			AND customerContractStatus = #{customerContract}
+		</if>
+
+	</select>
+
+</mapper>

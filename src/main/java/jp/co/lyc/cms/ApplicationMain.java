@@ -15,8 +15,8 @@ public class ApplicationMain {
 		SpringApplication.run(ApplicationMain.class, args);
 	}
 	@Bean
-	public FilterRegistrationBean registFilter(){
-		FilterRegistrationBean bean = new FilterRegistrationBean();
+	public FilterRegistrationBean<Myfilter> registFilter(){
+		FilterRegistrationBean<Myfilter> bean = new FilterRegistrationBean<Myfilter>();
 		// 定义filter的过滤路径规则。
 		bean.addUrlPatterns("/*");
 		bean.setFilter(new Myfilter());

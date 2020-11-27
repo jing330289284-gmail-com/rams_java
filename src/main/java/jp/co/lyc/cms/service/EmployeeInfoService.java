@@ -10,13 +10,12 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import jp.co.lyc.cms.mapper.AccountInfoMapper;
-import jp.co.lyc.cms.mapper.CostInfoMapper;
+import jp.co.lyc.cms.mapper.BpInfoMapper;
 import jp.co.lyc.cms.mapper.EmployeeInfoMapper;
-import jp.co.lyc.cms.mapper.GetSiteInfoMapper;
+import jp.co.lyc.cms.mapper.SiteInfoMapper;
 import jp.co.lyc.cms.model.AccountInfoModel;
-import jp.co.lyc.cms.model.CostInfoModel;
+import jp.co.lyc.cms.model.BpInfoModel;
 import jp.co.lyc.cms.model.EmployeeModel;
-import jp.co.lyc.cms.model.SiteModel;
 
 @Component
 public class EmployeeInfoService {
@@ -28,10 +27,10 @@ public class EmployeeInfoService {
 	AccountInfoMapper accountInfoMapper;
 
 	@Autowired
-	CostInfoMapper costInfoMapper;
+	BpInfoMapper bpInfoMapper;
 
 	@Autowired
-	GetSiteInfoMapper siteInfoMapper;
+	SiteInfoMapper siteInfoMapper;
 
 	/**
 	 * ログイン
@@ -70,12 +69,13 @@ public class EmployeeInfoService {
 			employeeInfoMapper.insertEmployeeInfo(sendMap);
 			employeeInfoMapper.insertEmployeeInfoDetail(sendMap);
 			employeeInfoMapper.insertAddressInfo(sendMap);
+			if (sendMap.get("bpInfoModel") != null) {// BP情報
+				bpInfoMapper.insertBp(getParamBpModel(sendMap));
+			}
 			if (sendMap.get("bankInfoModel") != null) {// 口座情報
 				accountInfoMapper.insertAccount(getParamBankInfoModel(sendMap));
 			}
-			if (sendMap.get("costModel") != null) {// 諸費用
-				costInfoMapper.insertCost(getParamCostModel(sendMap));
-			}
+			employeeInfoMapper.insertResumeManagement(sendMap);// 履歴書を追加
 		} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			e.printStackTrace();
@@ -98,7 +98,8 @@ public class EmployeeInfoService {
 			employeeInfoMapper.deleteEmployeeInfoDetail(sendMap);
 			siteInfoMapper.deleteEmployeeSiteInfo(sendMap);
 			employeeInfoMapper.deleteAddressInfo(sendMap);
-			costInfoMapper.deleteCostInfo(sendMap);
+			bpInfoMapper.deleteBpInfo(sendMap);
+			employeeInfoMapper.deleteResumeManagement(sendMap);
 		} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			e.printStackTrace();
@@ -134,9 +135,13 @@ public class EmployeeInfoService {
 			if (sendMap.get("bankInfoModel") != null) {// 口座情報
 				accountInfoMapper.updateAccount(getParamBankInfoModel(sendMap));
 			}
-			if (sendMap.get("costModel") != null) {// 諸費用
-				costInfoMapper.updateCost(getParamCostModel(sendMap));
+			if (sendMap.get("bpInfoModel") != null) {
+				int row = bpInfoMapper.updateBp(getParamBpModel(sendMap));
+				if (row == 0) {
+					bpInfoMapper.insertBp(getParamBpModel(sendMap));
+				}
 			}
+			employeeInfoMapper.updateResumeManagement(sendMap);// 履歴書を追加
 		} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			e.printStackTrace();
@@ -160,65 +165,28 @@ public class EmployeeInfoService {
 		return bankInfoModelSendMap;
 	}
 
-	// 諸費用のパラメータをセットします。
-	public Map<String, Object> getParamCostModel(Map<String, Object> sendMap) {
-		Map<String, Object> costModelSendMap = new HashMap<String, Object>();
-		CostInfoModel costModel = (CostInfoModel) sendMap.get("costModel");
-		sendMap.put("employeeNo", costModel.getEmployeeNo());
-		sendMap.put("reflectYearAndMonth", costModel.getReflectYearAndMonth());
-		sendMap.put("salary", costModel.getSalary());
-		sendMap.put("waitingCost", costModel.getWaitingCost());
-		sendMap.put("welfarePensionAmount", costModel.getWelfarePensionAmount());
-		sendMap.put("healthInsuranceAmount", costModel.getHealthInsuranceAmount());
-		sendMap.put("insuranceFeeAmount", costModel.getInsuranceFeeAmount());
-		sendMap.put("lastTimeBonusAmount", costModel.getLastTimeBonusAmount());
-		sendMap.put("scheduleOfBonusAmount", costModel.getScheduleOfBonusAmount());
-		sendMap.put("transportationExpenses", costModel.getTransportationExpenses());
-		sendMap.put("nextBonusMonth", costModel.getNextBonusMonth());
-		sendMap.put("nextRaiseMonth", costModel.getNextRaiseMonth());
-		sendMap.put("otherAllowance", costModel.getOtherAllowance());
-		sendMap.put("otherAllowanceAmount", costModel.getOtherAllowanceAmount());
-		sendMap.put("leaderAllowanceAmount", costModel.getLeaderAllowanceAmount());
-		sendMap.put("totalAmount", costModel.getTotalAmount());
-		sendMap.put("remark", costModel.getRemark());
-		sendMap.put("employeeFormCode", costModel.getEmployeeFormCode());
-		sendMap.put("housingStatus", costModel.getHousingStatus());
-		sendMap.put("housingAllowance", costModel.getHousingAllowance());
-		sendMap.put("updateUser", costModel.getUpdateUser());
-		return costModelSendMap;
+	private Map<String, Object> getParamBpModel(Map<String, Object> sendMap) {
+		Map<String, Object> pbModelSendMap = new HashMap<String, Object>();
+		BpInfoModel pbModel = (BpInfoModel) sendMap.get("bpInfoModel");
+		pbModelSendMap.put("bpEmployeeNo", pbModel.getBpEmployeeNo());
+		pbModelSendMap.put("bpBelongCustomerCode", pbModel.getBpBelongCustomerCode());
+		pbModelSendMap.put("bpUnitPrice", pbModel.getBpUnitPrice());
+		pbModelSendMap.put("bpSalesProgressCode", pbModel.getBpSalesProgressCode());
+		pbModelSendMap.put("bpRemark", pbModel.getBpRemark());
+		pbModelSendMap.put("bpOtherCompanyAdmissionEndDate", pbModel.getBpOtherCompanyAdmissionEndDate());
+		pbModelSendMap.put("updateUser", sendMap.get("updateUser").toString());
+		return pbModelSendMap;
 	}
 
-	// 現場情報のパラメータをセットします。
-	public Map<String, String> getParamSiteModel(Map<String, Object> sendMap) {
-		Map<String, String> costModelSendMap = new HashMap<String, String>();
-		SiteModel siteModel = (SiteModel) sendMap.get("siteModel");
-		sendMap.put("employeeNo", siteModel.getEmployeeNo());
-		sendMap.put("customerNo", siteModel.getCustomerNo());
-		sendMap.put("topCustomerNo", siteModel.getTopCustomerNo());
-		sendMap.put("admissionStartDate", siteModel.getAdmissionStartDate());
-		sendMap.put("location", siteModel.getLocation());
-		sendMap.put("siteManager", siteModel.getSiteManager());
-		sendMap.put("admissionEndDate", siteModel.getAdmissionEndDate());
-		sendMap.put("unitPrice", siteModel.getUnitPrice());
-		sendMap.put("siteRoleCode", siteModel.getSiteRoleCode());
-		sendMap.put("payOffRange1", siteModel.getPayOffRange1());
-		sendMap.put("payOffRange2", siteModel.getPayOffRange2());
-		sendMap.put("systemName", siteModel.getSystemName());
-		sendMap.put("developLanguageCode", siteModel.getDevelopLanguageCode());
-		sendMap.put("related1Employees", siteModel.getRelated1Employees());
-		sendMap.put("levelCode", siteModel.getLevelCode());
-		sendMap.put("remark", siteModel.getRemark());
-		sendMap.put("updateUser", siteModel.getUpdateUser());
-		return costModelSendMap;
-	}
-	
 	/**
 	 * ログイン認証番号の電話番号存在チェック
+	 * 
 	 * @param employeeNo
 	 * @return
 	 */
-	
+
 	public String getEmployeePhoneNo(String employeeNo) {
 		return employeeInfoMapper.getEmployeePhoneNo(employeeNo);
 	}
+
 }

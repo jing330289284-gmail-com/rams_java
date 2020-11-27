@@ -33,64 +33,89 @@
 			<version>2.1.0</version>
 		</dependency>
 		<dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
-        <dependency>
-    		<groupId>net.sourceforge.nekohtml</groupId>
-    		<artifactId>nekohtml</artifactId>
-    		<version>1.9.22</version>
-		</dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-aop</artifactId>
-        </dependency>
-        <dependency>
-        	<groupId>net.sf.json-lib</groupId>
-        	<artifactId>json-lib</artifactId>
-        	<version>2.4</version>
-        	<classifier>jdk15</classifier>
-        </dependency>
-        <dependency>
-		    <groupId>com.amazonaws</groupId>
-		    <artifactId>aws-java-sdk-sns</artifactId>
-		    <version>1.11.229</version>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
 		<dependency>
-		    <groupId>com.alibaba</groupId>
-		    <artifactId>fastjson</artifactId>
-		    <version>1.2.47</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>net.sourceforge.nekohtml</groupId>
+			<artifactId>nekohtml</artifactId>
+			<version>1.9.22</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.json-lib</groupId>
+			<artifactId>json-lib</artifactId>
+			<version>2.4</version>
+			<classifier>jdk15</classifier>
+		</dependency>
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk-sns</artifactId>
+			<version>1.11.229</version>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.47</version>
+		</dependency>
+		<dependency >
+		     <groupId >com.sun.mail</groupId >
+		     <artifactId >javax.mail</artifactId >
+		     <version >1.6.0</version >
+		</dependency >
+		
+<dependency>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-war-plugin</artifactId>
+    <version>2.6</version>
+</dependency>
+
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>6.15.0</version>
+		</dependency>
+		<dependency>
+		    <groupId>jasperreports-fonts</groupId>
+		    <artifactId>jasperreports-fonts</artifactId>
+		    <version>1.0</version>
+		    <scope>system</scope>
+		    <systemPath>${project.basedir}/bin/jasperreports-fonts-6.10.0.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports-functions</artifactId>
+			<version>6.15.0</version>
 		</dependency>
 	</dependencies>
 	<build>
 		<finalName>CMS</finalName>
 
-  <resources>
-      <resource>
-        <directory>src/main/java</directory>
-        <includes>
-          <include>**/*.properties</include>
-          <include>**/*.xml</include>
-        </includes>
-        <!--是否替换资源中的属性-->
-        <filtering>false</filtering>
-      </resource>
-      <resource>
-        <directory>src/main/resources</directory>
-        <includes>
-          <include>**/*.properties</include>
-          <include>**/*.xml</include>
-          <include>**/*.yml</include>
-          <include>**/Dockerfile</include>
-          <include>**/*.xlsx</include>
-        </includes>
-        <!--是否替换资源中的属性-->
-        <filtering>false</filtering>
-      </resource>
-  </resources>
-</build>
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.properties</include>
+					<include>**/*.xml</include>
+				</includes>
+				<!--是否替换资源中的属性 -->
+				<filtering>false</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.*</include>
+				</includes>
+				<!--是否替换资源中的属性 -->
+				<filtering>false</filtering>
+			</resource>
+		</resources>
+	</build>
 </project>

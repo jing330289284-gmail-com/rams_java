@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jp.co.lyc.cms.mapper.ExpensesInfoMapper">
+<resultMap type="jp.co.lyc.cms.model.ExpensesInfoModel" id="expensesInfoModel"></resultMap>
+
+<!-- 諸費用データ取得 -->
+<select id="getExpensesInfo" parameterType="String" resultMap="expensesInfoModel">
+	SELECT
+		expensesReflectYearAndMonth,
+		otherAllowanceName,
+		otherAllowanceAmount,
+		leaderAllowanceAmount,
+		housingStatus,
+		housingAllowance,
+		transportationExpenses 
+	FROM
+		T013ExpensesInfo 
+	WHERE
+		employeeNo = #{employeeNo}
+		<if test="expensesReflectYearAndMonth != null">
+				AND expensesReflectYearAndMonth = #{expensesReflectYearAndMonth}
+		</if>
+</select>
+
+<!-- インサート -->
+<insert id="insert" parameterType="String">
+	INSERT INTO T013ExpensesInfo(
+		employeeNo,
+		expensesReflectYearAndMonth,
+		transportationExpenses,
+		otherAllowanceName,
+		otherAllowanceAmount,
+		leaderAllowanceAmount,
+		housingStatus,
+		housingAllowance,
+		updateTime,
+		createTime,
+		updateUser
+	)
+	VALUES(
+		#{employeeNo},
+		#{expensesReflectYearAndMonth},
+		#{transportationExpenses},
+		#{otherAllowanceName},
+		#{otherAllowanceAmount},
+		#{leaderAllowanceAmount},
+		#{housingStatus},
+		#{housingAllowance},
+		NOW(),
+		NOW(),
+		#{updateUser}
+	)
+</insert>
+<!-- アップデート -->
+<update id="update" parameterType="String">
+	UPDATE T013ExpensesInfo 
+		SET 
+		<if test="expensesReflectYearAndMonth != null">
+			expensesReflectYearAndMonth = #{expensesReflectYearAndMonth},
+		</if>
+		<if test="transportationExpenses != null">
+			transportationExpenses = #{transportationExpenses},
+		</if>
+		<if test="otherAllowanceName != null">
+			otherAllowanceName = #{otherAllowanceName},
+		</if>	
+		<if test="otherAllowanceAmount != null">
+			otherAllowanceAmount = #{otherAllowanceAmount},
+		</if>		
+		<if test="leaderAllowanceAmount != null">
+			leaderAllowanceAmount = #{leaderAllowanceAmount},
+		</if>		
+		<if test="housingStatus != null">
+			housingStatus = #{housingStatus},
+		</if>	
+		<if test="housingAllowance != null">
+			housingAllowance = #{housingAllowance},
+		</if>			
+		updateTime = NOW(),
+		updateUser = #{updateUser}
+		WHERE 
+			employeeNo = #{employeeNo}
+		AND
+			expensesReflectYearAndMonth = #{updateExpensesReflectYearAndMonth}
+</update>
+</mapper>

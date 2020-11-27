@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jp.co.lyc.cms.mapper.SendLettersConfirmMapper">
+    <resultMap id="SendLettersConfirm" type="jp.co.lyc.cms.model.SendLettersConfirmModel"/>
+    <!--　お客様取る -->
+    <select id="getSalesEmps" resultType="jp.co.lyc.cms.model.SendLettersConfirmModel">
+	SELECT 
+    CONCAT(T001.employeeFristName,
+            T001.employeeLastName) AS 'employeeName',
+    T002.employeeStatus,
+    T002.employeeNo,
+    T010.hopeHighestPrice,
+    T002.genderStatus,
+    M003.nationalityName,
+    T002.birthday,
+    M013.stationName,
+   CONCAT_WS(',',
+        
+        IF(ISNULL(T002.developLanguage1) or T002.developLanguage1='',
+        null,
+        M011a.developLanguageName),
+         IF(ISNULL(T002.developLanguage2) or T002.developLanguage2='',
+        null,
+        M011b.developLanguageName),
+         IF(ISNULL(T002.developLanguage3) or T002.developLanguage3='',
+        null,
+        M011c.developLanguageName),
+         IF(ISNULL(T002.developLanguage4) or T002.developLanguage4='',
+        null,
+        M011d.developLanguageName),
+         IF(ISNULL(T002.developLanguage5) or T002.developLanguage5='',
+        null,
+        M011e.developLanguageName)) AS 'developLanguage',
+    T002.yearsOfExperience,
+    M010.japaneseLevelName,
+    MONTH(CURRENT_DATE) + 1 AS beginMonth,
+    T010.salesProgressCode,
+    T010.remark,
+        T015.resumeInfo1,
+    T015.resumeInfo2,
+    '' as resume
+FROM
+    T001Employee T001
+    LEFT JOIN
+    T015ResumeManagement T015 ON T001.employeeNo = T015.employeeNo
+        LEFT JOIN
+    T002EmployeeDetail T002 ON T001.employeeNo = T002.employeeNo
+     LEFT JOIN
+               
+    M011DevelopLanguage M011a ON M011a.developLanguageCode = T002.developLanguage1
+    
+                LEFT JOIN
+               
+    M011DevelopLanguage M011b ON M011b.developLanguageCode = T002.developLanguage2
+                LEFT JOIN
+               
+    M011DevelopLanguage M011c ON M011c.developLanguageCode = T002.developLanguage3
+                LEFT JOIN
+               
+    M011DevelopLanguage M011d ON M011d.developLanguageCode = T002.developLanguage4
+    
+                LEFT JOIN
+               
+    M011DevelopLanguage M011e ON M011e.developLanguageCode = T002.developLanguage5
+        LEFT JOIN
+    M010JapaneseLevel M010 ON M010.japaneseLevelCode = T002.japaneseLevelCode
+        LEFT JOIN
+    M003Nationality M003 ON M003.nationalityCode = T002.nationalityCode
+        LEFT JOIN
+    T010SalesSituation T010 ON T001.employeeNo = T010.employeeNo
+        LEFT JOIN
+    T003AddressInfo T003 ON T001.employeeNo = T003.employeeNo
+        LEFT JOIN
+    M013Station M013 ON M013.stationCode = T003.stationCode
+WHERE
+    T001.employeeNo IN 
+     <foreach collection="array" index="index" item="item" open="(" separator="," close=")">
+         #{item}
+    </foreach>
+    </select>
+        <select id="getAllEmpsWithResume" resultType="jp.co.lyc.cms.model.SalesSituationModel">
+	SELECT 
+    CONCAT(T001.employeeFristName,
+            T001.employeeLastName) AS 'employeeName',
+      T001.employeeNo,
+    T015.resumeInfo1,
+    T015.resumeInfo2
+FROM
+    T001Employee T001
+    LEFT JOIN
+    T015ResumeManagement T015 ON T001.employeeNo = T015.employeeNo
+
+    </select>
+     <select id="getLoginUserInfo" resultType="jp.co.lyc.cms.model.EmployeeModel">
+    	SELECT 
+    T001.employeeFristName,
+            T001.employeeLastName,
+      T002.*
+FROM
+    T001Employee T001
+    LEFT JOIN
+    T002EmployeeDetail T002 ON T001.employeeNo = T002.employeeNo
+WHERE
+    T001.employeeNo = #{lobinUserNo}
+    </select>
+         <select id="getMail" resultType="jp.co.lyc.cms.model.EmployeeModel">
+    	SELECT 
+      T002.*
+FROM
+
+    T002EmployeeDetail T002 
+WHERE
+    T002.occupationCode = "3"
+    </select>
+</mapper>

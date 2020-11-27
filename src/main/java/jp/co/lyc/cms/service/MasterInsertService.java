@@ -4,6 +4,8 @@ import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import jp.co.lyc.cms.mapper.MasterInsertMapper;
 import jp.co.lyc.cms.model.MasterModel;
@@ -33,12 +35,12 @@ public class MasterInsertService {
 	 * 
 	 * @param sendMap
 	 */
-
-	public boolean insertMaster(HashMap<String, String> sendMap) {
+	@Transactional(rollbackFor = Exception.class)
+	public boolean insertMaster(HashMap<String, Object> sendMap) {
 		try {
 			masterInsertMapper.insertMaster(sendMap);
 		} catch (Exception e) {
-			// TODO: handle exception
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			e.printStackTrace();
 			return false;
 		}

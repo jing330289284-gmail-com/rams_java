@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jp.co.lyc.cms.mapper.DutyManagementMapper">
+    <resultMap id="DutyManagement" type="jp.co.lyc.cms.model.DutyManagementModel"/>
+    <select id="selectDutyManagement" resultMap="DutyManagement" parameterType="String">
+		SELECT
+			(@rowNo:=@rowNo + 1) AS rowNo,
+			t001.employeeNo,
+			concat_ws(" ",t001.employeeFristName,t001.employeeLastName) as employeeName,
+			t007.customerName,
+			m013.stationName,
+			concat_ws("-",t006.payOffRange1,t006.payOffRange2) as payOffRange,
+			T018.sumWorkTime workTime,
+			concat("￥",FORMAT(if(T018.sumWorkTime>t006.payOffRange2,t005.salary/t006.payOffRange2*(T018.sumWorkTime-t006.payOffRange2),if(t006.payOffRange1>T018.sumWorkTime,t005.salary/t006.payOffRange1*(T018.sumWorkTime-t006.payOffRange1),0)),0))overTimePay, 
+			if(T016.employeeWorkTimeHaveData=1,'0',if(T018.attendanceRegisterFlag=1,'1','2'))checkSection,
+			T016.updateTime,
+			if(T018.approvalStatus=1,"1","0")approvalStatus
+		FROM 
+			T001Employee as t001
+		left join
+			(SELECT employeeNo,max(reflectYearAndMonth),salary FROM T005WagesInfo where reflectYearAndMonth&lt;=#{yearAndMonth} group by T005WagesInfo.employeeNo)t005 on t001.employeeNo=t005.employeeNo
+		left join
+			(SELECT employeeNo,max(admissionStartDate),payOffRange1,payOffRange2,customerNo FROM T006EmployeeSiteInfo where admissionStartDate&lt;=concat(#{yearAndMonth},"99") group by T006EmployeeSiteInfo.employeeNo)t006 on t001.employeeNo=t006.employeeNo
+		left join
+			T007CustomerInfo as t007 on t006.customerNo=t007.customerNo
+		left join
+			M013Station as m013 on t007.stationCode=m013.stationCode
+		left join
+			(SELECT employeeNo,updateTime,yearAndMonth,1 as employeeWorkTimeHaveData FROM T016EmployeeWorkTime group by employeeNo)T016 on t001.employeeNo=T016.employeeNo and T016.yearAndMonth=#{yearAndMonth}
+		left join
+			T018WorkTotalTime as T018 on t001.employeeNo=T018.employeeNo and T018.attendanceYearAndMonth=#{yearAndMonth}
+		,(SELECT   @rowNo:=0) AS rowNo
+		WHERE
+		T018.attendanceYearAndMonth = #{yearAndMonth}
+		<if test="approvalStatus == 0">
+		</if>
+		<if test="approvalStatus == 1">
+			and T018.approvalStatus!=1
+		</if>
+		<if test="approvalStatus == 2">
+			and T018.approvalStatus=1
+		</if>
+		<if test="approvalStatus == 3">
+			and T018.sumWorkTime>0
+		</if>
+		<if test="approvalStatus == 4">
+			and T016.employeeWorkTimeHaveData=1
+		</if>
+    </select>
+	<update id="updateDutyManagement" parameterType="String">
+		UPDATE T018WorkTotalTime
+		SET 
+			approvalStatus = 1
+		WHERE 
+			employeeNo = #{employeeNo}
+			and attendanceYearAndMonth = #{yearAndMonth}
+    </update> 
+</mapper>

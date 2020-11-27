@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jp.co.lyc.cms.mapper.EnterPeriodSearchMapper">
+	<resultMap id="EnterPeriodSearchModel"
+		type="jp.co.lyc.cms.model.EnterPeriodSearchModel" />
+	<resultMap id="stringResult" type="String" />
+	<!-- 結果を出ます -->
+	<select id="selectEnterPeriodData" parameterType="String" resultMap="EnterPeriodSearchModel">
+	SELECT
+		CONCAT( ( @rowNo := @rowNo + 1 ) ) AS rowNo,
+		T001.employeeNo,
+		CONCAT( T001.employeeFristName, T001.employeeLastName ) AS employeeName,
+	CASE
+		WHEN T005data.salary != '' THEN
+		T005data.salary ELSE T005data.befoSalary
+		END AS salary,
+	T005data.insuranceFeeAmount,
+	T005data.reflectYearAndMonth,
+	T005data.scheduleOfBonusAmount,
+	T006data.admissionStartDate,
+	T006data.unitPrice,
+	T006data.admissionEndDate 
+	FROM
+		T001Employee AS T001
+		LEFT JOIN (
+		SELECT
+			T005.employeeNo,
+			T005.salary,
+			T005beforeSa.befoSalary,
+			T005.insuranceFeeAmount,
+			T005.reflectYearAndMonth,
+			T005.scheduleOfBonusAmount 
+		FROM
+			T005WagesInfo AS T005
+			LEFT JOIN ( SELECT T005r.employeeNo, MAX( T005r.reflectYearAndMonth ) AS reflectYearAndMonth FROM T005WagesInfo AS T005r GROUP BY T005r.employeeNo ) AS T005rs ON T005rs.employeeNo = T005.employeeNo 
+			AND T005rs.reflectYearAndMonth = T005.reflectYearAndMonth
+			LEFT JOIN (
+			SELECT
+				T005befoSa.employeeNo,
+				T005befoSa.salary AS befoSalary 
+			FROM
+				T005WagesInfo T005befoSa
+				LEFT JOIN (
+				SELECT
+					T005befo.employeeNo,
+					MAX( T005befo.reflectYearAndMonth ) AS befoReflectYearAndMonth 
+				FROM
+					T005WagesInfo AS T005befo
+					LEFT JOIN ( SELECT T005t.employeeNo, MAX( T005t.reflectYearAndMonth ) AS reflectYearAndMonth FROM T005WagesInfo AS T005t GROUP BY T005t.employeeNo ) AS T005now ON T005befo.employeeNo = T005now.employeeNo 
+				WHERE
+					T005befo.reflectYearAndMonth &lt; T005now.reflectYearAndMonth 
+				GROUP BY
+					T005befo.employeeNo 
+				) AS T005before ON T005befoSa.employeeNo = T005before.employeeNo 
+			WHERE
+				T005befoSa.reflectYearAndMonth = T005before.befoReflectYearAndMonth 
+			GROUP BY
+				T005befoSa.employeeNo 
+			) AS T005beforeSa ON T005.employeeNo = T005beforeSa.employeeNo 
+		WHERE
+			T005.reflectYearAndMonth = T005rs.reflectYearAndMonth 
+		GROUP BY
+			T005.employeeNo 
+		) AS T005data ON T005data.employeeNo = T001.employeeNo
+		LEFT JOIN (
+		SELECT
+			T006.employeeNo,
+			T006.admissionStartDate,
+			T006.unitPrice,
+			T006.admissionEndDate 
+		FROM
+			T006EmployeeSiteInfo AS T006
+			LEFT JOIN ( SELECT T006r.employeeNo, MAX( T006r.admissionStartDate ) AS admissionStartDate FROM T006EmployeeSiteInfo AS T006r GROUP BY T006r.employeeNo ) AS T006rs ON T006rs.employeeNo = T006.employeeNo 
+			AND T006rs.admissionStartDate = T006.admissionStartDate 
+		WHERE
+			T006.admissionStartDate = T006rs.admissionStartDate 
+		GROUP BY
+			T006.employeeNo 
+		) AS T006data ON T006data.employeeNo = T001.employeeNo,
+		( SELECT @rowNo := 0 ) AS rowNo 
+	WHERE
+	1 = 1
+		<if test="fullYearPeople != null">
+		AND T001.employeeNo IN
+			<trim prefix="(" suffix=")">
+	            <foreach collection="fullYearPeople" index="index" item="employeeNo" separator=",">
+	                #{employeeNo}
+	            </foreach>
+	        </trim>
+		</if>
+		<if test="employeeNo != null">
+		AND T001.employeeNo = #{employeeNo}
+		</if>
+	</select>
+	<!-- 最初の入場期日を取得 -->
+	<select id="selectAdmissionStartDate" parameterType="String" resultMap="EnterPeriodSearchModel">
+		SELECT
+			T001.employeeNo,
+			T006.admissionStartDate,
+			CAST( SUM( T006.nonSiteMonths ) AS CHAR ) AS nonSiteMonths 
+		FROM
+			T001Employee AS T001
+			LEFT JOIN T006EmployeeSiteInfo AS T006 ON T001.employeeNo = T006.employeeNo
+			LEFT JOIN ( SELECT T006s.employeeNo, T006s.admissionStartDate FROM T006EmployeeSiteInfo AS T006s GROUP BY T006s.employeeNo ) AS T006date ON T006date.employeeNo = T001.employeeNo 
+		WHERE
+			T006date.admissionStartDate != "" 
+			AND T001.employeeNo IN ( SELECT T006k.employeeNo FROM T006EmployeeSiteInfo AS T006k WHERE T006k.admissionEndDate IS NULL GROUP BY T006k.employeeNo ) 
+			<if test="employeeNo != null">
+				AND T001.employeeNo = #{employeeNo}
+			</if> 
+		GROUP BY
+			T001.employeeNo
+	</select>
+	<!-- 社員の非稼働期間検索 -->
+	<select id="selectNonSitePeriod" parameterType="String" resultMap="EnterPeriodSearchModel"> 
+		<foreach item="employeeNo" collection="fullYearPeople" index="index">
+			<if test="index != 0">
+                    union all
+            </if>
+            SELECT
+				T006EmployeeSiteInfo.employeeNo,
+				T006EmployeeSiteInfo.nonSitePeriod,
+				T006EmployeeSiteInfo.nonSiteMonths 
+			FROM
+				T006EmployeeSiteInfo 
+			WHERE
+				employeeNo = #{employeeNo}
+        </foreach>
+	</select>
+	<!-- 最新の入場期日を取得 -->
+	<select id="selectAdmissionStartDateForNow" parameterType="String" resultMap="EnterPeriodSearchModel">
+	SELECT
+		T001.employeeNo,
+		T006ade.admissionStartDate 
+	FROM
+		T001Employee AS T001
+		LEFT JOIN T006EmployeeSiteInfo AS T006 ON T001.employeeNo = T006.employeeNo
+		LEFT JOIN ( SELECT T006e.employeeNo, T006e.admissionStartDate FROM T006EmployeeSiteInfo AS T006e WHERE T006e.admissionEndDate IS NULL ) AS T006ade ON T006ade.employeeNo = T001.employeeNo 
+	WHERE
+		T006.admissionEndDate IS NULL 
+		AND T001.employeeNo IN ( SELECT T006k.employeeNo FROM T006EmployeeSiteInfo AS T006k WHERE T006k.admissionEndDate IS NULL GROUP BY T006k.employeeNo ) 
+		<if test="employeeNo != null">
+			AND T001.employeeNo = #{employeeNo}
+		</if> 
+	GROUP BY
+		T001.employeeNo
+	</select>
+	<!-- ボーナス月を取得 -->
+	<select id="selectScheduleOfBonusAmount" parameterType="String" resultMap="EnterPeriodSearchModel">
+	SELECT
+		T001.employeeNo,
+		T005.nextBonusMonth 
+	FROM
+		T001Employee AS T001
+		LEFT JOIN T005WagesInfo AS T005 ON T001.employeeNo = T005.employeeNo
+		LEFT JOIN ( SELECT T005k.employeeNo, MAX( T005k.reflectYearAndMonth ) AS reflectYearAndMonth FROM T005WagesInfo AS T005k GROUP BY T005k.employeeNo ) AS T005date ON T001.employeeNo = T005date.employeeNo 
+	WHERE
+		T005.reflectYearAndMonth = T005date.reflectYearAndMonth 
+		AND T005.nextBonusMonth != ''
+		<if test="employeeNo != null">
+			AND T001.employeeNo = #{employeeNo}
+		</if> 
+	</select>
+</mapper>

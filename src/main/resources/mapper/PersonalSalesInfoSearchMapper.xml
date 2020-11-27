@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jp.co.lyc.cms.mapper.PersonalSalesSearchMapper">
+	<resultMap id="detailsInfo"
+		type="jp.co.lyc.cms.model.PersonalSalesSearchModel" />
+
+		<!-- 個人売上 -->
+	<select id="getEmployeeSalesInfo" parameterType="map"
+		resultMap="detailsInfo">
+		
+		<foreach item="getYandM" collection="getYandM" index="index">
+		<if test="index != 0">
+                    union
+                </if>
+		SELECT * FROM (
+		SELECT distinct
+		#{getYandM} As onlyYandM,
+		T005.reflectYearAndMonth,
+		T006.admissionStartDate,
+		T006.dailyCalculationStatus,
+		T006.admissionEndDate,
+		M005.employeeFormName,
+		T007.customerName,
+		CAST((T006.unitPrice*10000) As unsigned) As unitPrice,
+		CAST(T005.salary As unsigned) As salary,
+		CAST(B${getYandM}.transportationExpenses As unsigned) As transportationExpenses,
+		T005.SocialInsuranceFlag,
+		CAST(T005.insuranceFeeAmount As unsigned) As insuranceFeeAmount,
+		T005.bonusFlag,
+		CAST(T005.scheduleOfBonusAmount As unsigned) As scheduleOfBonusAmount,
+		(CAST(B${getYandM}.leaderAllowanceAmount As unsigned)+CAST(B${getYandM}.otherAllowanceAmount As unsigned)+CAST(B${getYandM}.housingAllowance As unsigned) )As allowanceAmount,
+		<!-- (T006.unitPrice*10000 - T005.salary - B${getYandM}.transportationExpenses - T005.insuranceFeeAmount - T005.scheduleOfBonusAmount - B${getYandM}.leaderAllowanceAmount - B${getYandM}.otherAllowanceAmount)
+		As grosProfits,  -->	
+		CAST((T005.salary + B${getYandM}.transportationExpenses + T005.insuranceFeeAmount + T005.scheduleOfBonusAmount + B${getYandM}.leaderAllowanceAmount + B${getYandM}.otherAllowanceAmount + B${getYandM}.housingAllowance) As unsigned) As paymentTotal,
+		T018.DeductionsAndOvertimePay,
+		B${getYandM}.otherAllowanceName,
+		B${getYandM}.otherAllowanceAmount,
+		B${getYandM}.housingAllowance,
+		B${getYandM}.leaderAllowanceAmount,
+		T006.relatedEmployees
+		FROM
+		T001Employee As T001
+		Left JOIN 
+		T005WagesInfo As T005 ON T001.employeeNo = T005.employeeNo
+		AND reflectYearAndMonth &lt;= #{getYandM}
+		LEFT JOIN 
+		T002EmployeeDetail As T002 ON T001.employeeNo = T002.employeeNo
+		LEFT JOIN 
+		M005EmployeeForm As M005 ON T002.employeeFormCode = M005.employeeFormCode
+		LEFT JOIN 
+		T006EmployeeSiteInfo As T006 ON T005.employeeNo = T006.employeeNo	
+		AND #{getYandM} between left(admissionStartDate,6) and left(admissionEndDate,6)
+		LEFT JOIN
+		T018WorkTotalTime As T018 ON T001.employeeNo = T018.employeeNo 
+		AND #{getYandM} =T018.attendanceYearAndMonth
+		LEFT JOIN 
+		T007CustomerInfo As T007 ON T006.customerNo  =T007.customerNo
+		LEFT JOIN
+		(SELECT * FROM T013ExpensesInfo WHERE employeeNo = #{employeeName} and ExpensesreflectYearAndMonth &lt;= #{getYandM} ORDER BY ABS(#{getYandM} - ExpensesreflectYearAndMonth) ASC
+		limit 1) As B${getYandM} ON B${getYandM}.employeeNo = T001.employeeNo
+		WHERE
+		T005.employeeNo=#{employeeName}
+		ORDER BY ABS(#{getYandM} - reflectYearAndMonth) ASC
+		limit 1 ) As A${getYandM}
+		</foreach>	
+		</select>
+		
+		<select id="getEmpAllowance" parameterType="map"
+		resultMap="detailsInfo">
+				<foreach item="getYandM" collection="getYandM" index="index">
+		<if test="index != 0">
+                    union all
+                </if>
+		SELECT * FROM(
+		SELECT 
+			T013.otherAllowanceName,
+			T013.otherAllowanceAmount,
+			T013.housingAllowance,
+			T013.leaderAllowanceAmount,
+			T006.relatedEmployees
+		FROM
+			T013ExpensesInfo As T013
+		LEFT JOIN 
+			T006EmployeeSiteInfo As T006 ON T013.employeeNo = T006.employeeNo
+        WHERE 
+           T013.employeeNo = #{employeeName}
+        AND
+           #{getYandM} between left(admissionStartDate,6) and left(admissionEndDate,6)
+        AND
+        	#{getYandM} > T013.expensesReflectYearAndMonth
+        ORDER BY ABS(#{getYandM} - T013.expensesReflectYearAndMonth) ASC
+		limit 1 ) As B${getYandM}	
+		</foreach>
+		</select>
+</mapper>

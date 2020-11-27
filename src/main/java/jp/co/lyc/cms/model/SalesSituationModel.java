@@ -13,9 +13,10 @@ public class SalesSituationModel implements Serializable {
 	String employeeNo;
 	String salesYearAndMonth;
 	String interviewDate1;
-	String stationCode1;
+	String stationCode;
 	String interviewCustomer1;
 	String interviewDate2;
+	String stationCode1;
 	String stationCode2;
 	String interviewCustomer2;
 	String hopeLowestPrice;
@@ -39,7 +40,174 @@ public class SalesSituationModel implements Serializable {
 	String admissionEndDate;
 	String resumeInfo1;// 履歴書情報1
 	String resumeInfo2;// 履歴書情報2
-	
+	int rowNo;// 
+	String nowCustomer;
+	String customerContractStatus;
+	String purchasingManagers2;
+	String positionCode2;
+	String purchasingManagersMail2;
+	String employeeFullName;
+	String genderStatus;
+	String nationalityName;
+	String employeeStatus;
+	String birthday;
+	String yearsOfExperience;
+	String projectPhase;
+	String japaneseLevelCode;
+	String englishLevelCode;
+String age;
+String japaneaseConversationLevel;
+String englishConversationLevel;
+String developLanguage1;
+String developLanguage2;
+String developLanguage3;
+String developLanguage4;
+String developLanguage5;
+
+public String getStationCode1() {
+	return stationCode1;
+}
+public void setStationCode1(String stationCode1) {
+	this.stationCode1 = stationCode1;
+}
+public String getDevelopLanguage1() {
+	return developLanguage1;
+}
+public void setDevelopLanguage1(String developLanguage1) {
+	this.developLanguage1 = developLanguage1;
+}
+public String getDevelopLanguage2() {
+	return developLanguage2;
+}
+public void setDevelopLanguage2(String developLanguage2) {
+	this.developLanguage2 = developLanguage2;
+}
+public String getDevelopLanguage3() {
+	return developLanguage3;
+}
+public void setDevelopLanguage3(String developLanguage3) {
+	this.developLanguage3 = developLanguage3;
+}
+public String getDevelopLanguage4() {
+	return developLanguage4;
+}
+public void setDevelopLanguage4(String developLanguage4) {
+	this.developLanguage4 = developLanguage4;
+}
+public String getDevelopLanguage5() {
+	return developLanguage5;
+}
+public void setDevelopLanguage5(String developLanguage5) {
+	this.developLanguage5 = developLanguage5;
+}
+public String getJapaneaseConversationLevel() {
+	return japaneaseConversationLevel;
+}
+public void setJapaneaseConversationLevel(String japaneaseConversationLevel) {
+	this.japaneaseConversationLevel = japaneaseConversationLevel;
+}
+public String getEnglishConversationLevel() {
+	return englishConversationLevel;
+}
+public void setEnglishConversationLevel(String englishConversationLevel) {
+	this.englishConversationLevel = englishConversationLevel;
+}
+public String getAge() {
+	return age;
+}
+public void setAge(String age) {
+	this.age = age;
+}
+	public String getJapaneseLevelCode() {
+		return japaneseLevelCode;
+	}
+	public void setJapaneseLevelCode(String japaneseLevelCode) {
+		this.japaneseLevelCode = japaneseLevelCode;
+	}
+	public String getEnglishLevelCode() {
+		return englishLevelCode;
+	}
+	public void setEnglishLevelCode(String englishLevelCode) {
+		this.englishLevelCode = englishLevelCode;
+	}
+	public String getEmployeeFullName() {
+		return employeeFullName;
+	}
+	public void setEmployeeFullName(String employeeFullName) {
+		this.employeeFullName = employeeFullName;
+	}
+	public String getGenderStatus() {
+		return genderStatus;
+	}
+	public void setGenderStatus(String genderStatus) {
+		this.genderStatus = genderStatus;
+	}
+	public String getNationalityName() {
+		return nationalityName;
+	}
+	public void setNationalityName(String nationalityName) {
+		this.nationalityName = nationalityName;
+	}
+	public String getEmployeeStatus() {
+		return employeeStatus;
+	}
+	public void setEmployeeStatus(String employeeStatus) {
+		this.employeeStatus = employeeStatus;
+	}
+	public String getBirthday() {
+		return birthday;
+	}
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
+	}
+	public String getYearsOfExperience() {
+		return yearsOfExperience;
+	}
+	public void setYearsOfExperience(String yearsOfExperience) {
+		this.yearsOfExperience = yearsOfExperience;
+	}
+	public String getProjectPhase() {
+		return projectPhase;
+	}
+	public void setProjectPhase(String projectPhase) {
+		this.projectPhase = projectPhase;
+	}
+	public String getPurchasingManagers2() {
+		return purchasingManagers2;
+	}
+	public void setPurchasingManagers2(String purchasingManagers2) {
+		this.purchasingManagers2 = purchasingManagers2;
+	}
+	public String getPositionCode2() {
+		return positionCode2;
+	}
+	public void setPositionCode2(String positionCode2) {
+		this.positionCode2 = positionCode2;
+	}
+	public String getPurchasingManagersMail2() {
+		return purchasingManagersMail2;
+	}
+	public void setPurchasingManagersMail2(String purchasingManagersMail2) {
+		this.purchasingManagersMail2 = purchasingManagersMail2;
+	}
+	public String getCustomerContractStatus() {
+		return customerContractStatus;
+	}
+	public void setCustomerContractStatus(String customerContractStatus) {
+		this.customerContractStatus = customerContractStatus;
+	}	
+	public String getNowCustomer() {
+		return nowCustomer;
+	}
+	public void setNowCustomer(String nowCustomer) {
+		this.nowCustomer = nowCustomer;
+	}
+	public int getRowNo() {
+		return rowNo;
+	}
+	public void setRowNo(int rowNo) {
+		this.rowNo = rowNo;
+	}
 	public String getResumeInfo1() {
 		return resumeInfo1;
 	}
@@ -135,11 +303,11 @@ public class SalesSituationModel implements Serializable {
 	public void setInterviewDate1(String interviewDate1) {
 		this.interviewDate1 = interviewDate1;
 	}
-	public String getStationCode1() {
-		return stationCode1;
+	public String getStationCode() {
+		return stationCode;
 	}
-	public void setStationCode1(String stationCode1) {
-		this.stationCode1 = stationCode1;
+	public void setStationCode(String stationCode) {
+		this.stationCode = stationCode;
 	}
 	public String getInterviewCustomer1() {
 		return interviewCustomer1;

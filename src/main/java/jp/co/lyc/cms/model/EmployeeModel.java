@@ -43,19 +43,19 @@ public class EmployeeModel implements Serializable {
 	String developLanguage3;// 技術语言3
 	String developLanguage4;// 技術语言4
 	String developLanguage5;// 技術语言5
-	String certification1;// 資格1
+	String certification1;//　　資格1
 	String certification2;// 資格2
 	String resumeInfo1;// 履歴書情報1
-	String resumeRemark1;// 履歴書備考1
+	String resumeName1;// 履歴書備考1
 	String resumeInfo2;// 履歴書情報2
-	String resumeRemark2;// 履歴書備考2
+	String resumeName2;// 履歴書備考2
 	String residentCardInfo;// 在留カード情報
 	String passportNo;// パスポート
 	String companyMail;// 社内メールアドレス
 	String phoneNo;// 携帯電話
 	String employmentInsuranceNo;// 雇用保険番号
 	String departmentCode;// 部署コード
-	String nearestStation;// 寄り駅
+	String stationName;// 寄り駅
 	String oldPassword;//古いパスワード
 	String customer;// お客様
 	String employeeName;
@@ -76,17 +76,12 @@ public class EmployeeModel implements Serializable {
 	AccountInfoModel accountInfo;//口座情報
 	String yearsOfExperience; //  経験年数
 	
-	CostInfoModel costModel;//諸費用
-	
-	SiteModel siteModel;//現場情報
+	BpInfoModel bpInfoModel;//PB情報
 
 	String postcode;//郵便番号
 	String firstHalfAddress;//住所前半
 	String lastHalfAddress;//住所後半
-	String stationCode1;//
-	String stationCode2;//
-	String stationName;//
-	String housingStatus;//
+	String stationCode;//
 
 	public String getOldPassword() {
 		return oldPassword;
@@ -101,6 +96,15 @@ public class EmployeeModel implements Serializable {
 
 	String furigana1;// カタカナ1
 	String furigana2;// カタカナ2
+	String passportInfo;
+
+	public String getPassportInfo() {
+		return passportInfo;
+	}
+
+	public void setPassportInfo(String passportInfo) {
+		this.passportInfo = passportInfo;
+	}
 
 	public int getRowNo() {
 		return rowNo;
@@ -408,12 +412,21 @@ public class EmployeeModel implements Serializable {
 		this.resumeInfo1 = resumeInfo1;
 	}
 
-	public String getResumeRemark1() {
-		return resumeRemark1;
+
+	public String getResumeName1() {
+		return resumeName1;
 	}
 
-	public void setResumeRemark1(String resumeRemark1) {
-		this.resumeRemark1 = resumeRemark1;
+	public void setResumeName1(String resumeName1) {
+		this.resumeName1 = resumeName1;
+	}
+
+	public String getResumeName2() {
+		return resumeName2;
+	}
+
+	public void setResumeName2(String resumeName2) {
+		this.resumeName2 = resumeName2;
 	}
 
 	public String getResumeInfo2() {
@@ -424,13 +437,6 @@ public class EmployeeModel implements Serializable {
 		this.resumeInfo2 = resumeInfo2;
 	}
 
-	public String getResumeRemark2() {
-		return resumeRemark2;
-	}
-
-	public void setResumeRemark2(String resumeRemark2) {
-		this.resumeRemark2 = resumeRemark2;
-	}
 
 	public String getResidentCardInfo() {
 		return residentCardInfo;
@@ -480,12 +486,13 @@ public class EmployeeModel implements Serializable {
 		this.departmentCode = departmentCode;
 	}
 
-	public String getNearestStation() {
-		return nearestStation;
+
+	public String getStationName() {
+		return stationName;
 	}
 
-	public void setNearestStation(String nearestStation) {
-		this.nearestStation = nearestStation;
+	public void setStationName(String stationName) {
+		this.stationName = stationName;
 	}
 
 	public String getCustomer() {
@@ -672,21 +679,7 @@ public class EmployeeModel implements Serializable {
 		this.yearsOfExperience = yearsOfExperience;
 	}
 
-	public CostInfoModel getCostModel() {
-		return costModel;
-	}
 
-	public void setCostModel(CostInfoModel costModel) {
-		this.costModel = costModel;
-	}
-
-	public SiteModel getSiteModel() {
-		return siteModel;
-	}
-
-	public void setSiteModel(SiteModel siteModel) {
-		this.siteModel = siteModel;
-	}
 
 	public String getPostcode() {
 		return postcode;
@@ -711,36 +704,24 @@ public class EmployeeModel implements Serializable {
 		this.lastHalfAddress = lastHalfAddress;
 	}
 
-	public String getStationCode1() {
-		return stationCode1;
+
+
+	public BpInfoModel getBpInfoModel() {
+		return bpInfoModel;
 	}
 
-	public void setStationCode1(String stationCode1) {
-		this.stationCode1 = stationCode1;
+	public void setBpInfoModel(BpInfoModel bpInfoModel) {
+		this.bpInfoModel = bpInfoModel;
 	}
 
-	public String getStationCode2() {
-		return stationCode2;
+	public String getStationCode() {
+		return stationCode;
 	}
 
-	public void setStationCode2(String stationCode2) {
-		this.stationCode2 = stationCode2;
+	public void setStationCode(String stationCode) {
+		this.stationCode = stationCode;
 	}
 
-	public String getHousingStatus() {
-		return housingStatus;
-	}
-
-	public void setHousingStatus(String housingStatus) {
-		this.housingStatus = housingStatus;
-	}
-
-	public String getStationName() {
-		return stationName;
-	}
-
-	public void setStationName(String stationName) {
-		this.stationName = stationName;
-	}
+	
 
 }

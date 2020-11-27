@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import jp.co.lyc.cms.mapper.MasterUpdateMapper;
 import jp.co.lyc.cms.model.MasterModel;
@@ -20,10 +22,26 @@ public class MasterUpdateService {
 	 * 
 	 * @param sendMap
 	 */
-
-	public boolean updateMaster(HashMap<String, String> sendMap) {
+	@Transactional(rollbackFor = Exception.class)
+	public boolean updateMaster(HashMap<String, Object> sendMap) {
 		try {
 			masterUpdateMapper.updateMaster(sendMap);
+		} catch (Exception e) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * 削除
+	 * 
+	 * @param sendMap
+	 */
+	public boolean deleteMaster(HashMap<String, Object> sendMap) {
+		try {
+			masterUpdateMapper.deleteMaster(sendMap);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -31,7 +49,6 @@ public class MasterUpdateService {
 		}
 		return true;
 	}
-
 	/**
 	 * 明細取得
 	 * 

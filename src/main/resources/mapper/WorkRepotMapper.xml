@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jp.co.lyc.cms.mapper.WorkRepotMapper">
+    <resultMap id="WorkRepot" type="jp.co.lyc.cms.model.WorkRepotModel"/>
+     <insert id="selectCheckWorkRepot" parameterType="String">
+	INSERT INTO
+		T018WorkTotalTime(
+		employeeNo,
+		attendanceYearAndMonth,
+		attendanceRegisterFlag,
+		approvalStatus,
+		updateTime,
+		createTime,
+		updateUser)
+	SELECT 
+		#{employeeNo},
+		DATE_FORMAT(now(),'%Y%m'),
+		0,
+		0,
+		now(),
+		now(),
+		#{employeeName}
+	FROM DUAL
+	WHERE NOT EXISTS
+	(SELECT
+		employeeNo
+	FROM
+		T018WorkTotalTime
+	WHERE
+		attendanceYearAndMonth=DATE_FORMAT(now(),'%Y%m') AND
+		employeeNo = #{employeeNo})
+    </insert>
+    <select id="selectWorkRepot" resultMap="WorkRepot" parameterType="String">
+		SELECT
+			attendanceYearAndMonth,
+			CONVERT (workingTimeReport USING utf8)workingTimeReport,
+			sumWorkTime,
+			updateUser,
+			updateTime,
+			approvalStatus
+		FROM 
+			T018WorkTotalTime
+		WHERE
+			attendanceRegisterFlag = 0 AND
+			employeeNo = #{employeeNo}
+		ORDER BY
+			attendanceYearAndMonth
+		DESC
+    </select>
+	<update id="updateWorkRepot" parameterType="String">
+		UPDATE T018WorkTotalTime
+		SET 
+			updateTime= now(),
+			sumWorkTime = #{sumWorkTime},
+			approvalStatus = 1
+		WHERE 
+			employeeNo = #{employeeNo}
+			and attendanceYearAndMonth = #{attendanceYearAndMonth}
+    </update> 
+   	<update id="updateWorkRepotFile" parameterType="String">
+   	UPDATE T018WorkTotalTime
+		SET 
+			workingTimeReport= #{workingTimeReport},
+			updateTime= now()
+		WHERE 
+			employeeNo = #{employeeNo}
+			and attendanceYearAndMonth = #{attendanceYearAndMonth}
+    </update> 
+</mapper>

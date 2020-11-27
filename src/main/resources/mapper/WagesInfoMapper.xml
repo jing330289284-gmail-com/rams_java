@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jp.co.lyc.cms.mapper.WagesInfoMapper">
+<resultMap type="String" id="StringResult"></resultMap>
+<resultMap type="jp.co.lyc.cms.model.WagesInfoModel" id="wagesInfoModel"></resultMap>
+
+<!-- 給料情報の取得 -->
+<select id="getWagesInfo" parameterType="String" resultMap="wagesInfoModel">
+	SELECT
+		T005.employeeNo,
+		T005.reflectYearAndMonth,
+		T005.socialInsuranceFlag,
+		CASE
+		WHEN T005.salary IS NULL THEN
+		T005.waitingCost ELSE T005.salary 
+		END AS salary,
+		T005.waitingCost,
+		T005.welfarePensionAmount,
+		T005.healthInsuranceAmount,
+		T005.insuranceFeeAmount,
+		T005.lastTimeBonusAmount,
+		T005.scheduleOfBonusAmount,
+		T005.bonusFlag,
+		T005.nextBonusMonth,
+		T005.monthOfCompanyPay,
+		T005.nextRaiseMonth,
+		T005.totalAmount,
+		T005.employeeFormCode,
+		M005.employeeFormName,
+		T005.remark 
+	FROM
+		T005WagesInfo AS T005
+		LEFT JOIN M005EmployeeForm AS M005
+		ON T005.employeeFormCode = M005.employeeFormCode
+	WHERE
+		T005.employeeNo = #{employeeNo}
+		<if test="reflectYearAndMonth != null">
+			AND T005.reflectYearAndMonth = #{reflectYearAndMonth}
+		</if>
+</select>
+
+<!-- 稼働判断 -->
+<select id="kadouCheck" parameterType="String" resultMap="StringResult">
+	SELECT
+		relatedEmployees
+	FROM
+		T006EmployeeSiteInfo 
+	WHERE
+		employeeNo = #{employeeNo}
+		AND admissionEndDate IS NULL
+</select>
+<!-- 保険検索 -->
+<select id="hokenSearch" parameterType="String" resultMap="wagesInfoModel">
+	SELECT
+		employeeNo,
+		welfarePensionAmount,
+		healthInsuranceAmount,
+		insuranceFeeAmount 
+	FROM
+		T005WagesInfo 
+	WHERE
+		employeeNo = #{employeeNo}
+</select>
+
+<!-- インサート -->
+<insert id="insert" parameterType="String">
+	INSERT INTO T005WagesInfo(
+		employeeNo,
+		reflectYearAndMonth,
+		socialInsuranceFlag,
+		salary,
+		waitingCost,
+		welfarePensionAmount,
+		healthInsuranceAmount,
+		insuranceFeeAmount,
+		lastTimeBonusAmount,
+		scheduleOfBonusAmount,
+		bonusFlag,
+		nextBonusMonth,
+		monthOfCompanyPay,
+		nextRaiseMonth,
+		totalAmount,
+		employeeFormCode,
+		remark,
+		updateTime,
+		createTime,
+		updateUser
+	) 
+	VALUES(
+		#{employeeNo},
+		#{reflectYearAndMonth},
+		#{socialInsuranceFlag},
+		#{salary},
+		#{waitingCost},
+		#{welfarePensionAmount},
+		#{healthInsuranceAmount},
+		#{insuranceFeeAmount},
+		#{lastTimeBonusAmount},
+		#{scheduleOfBonusAmount},
+		#{bonusFlag},
+		#{nextBonusMonth},
+		#{monthOfCompanyPay},
+		#{nextRaiseMonth},
+		#{totalAmount},
+		#{employeeFormCode},
+		#{remark},
+		NOW(),
+		NOW(),
+		#{updateUser}
+	)
+</insert>
+
+<!-- アップデート -->
+<update id="update" parameterType="String">
+	UPDATE T005WagesInfo 
+		SET 
+		<if test="reflectYearAndMonth != null">
+			reflectYearAndMonth = #{reflectYearAndMonth},
+		</if>
+		<if test="socialInsuranceFlag != null">
+			socialInsuranceFlag = #{socialInsuranceFlag},
+		</if>
+		<if test="salary != null">
+			salary = #{salary},
+		</if>	
+		<if test="waitingCost != null">
+			waitingCost = #{waitingCost},
+		</if>		
+		<if test="welfarePensionAmount != null">
+			welfarePensionAmount = #{welfarePensionAmount},
+		</if>	
+		<if test="healthInsuranceAmount != null">
+			healthInsuranceAmount = #{healthInsuranceAmount},
+		</if>	
+		<if test="insuranceFeeAmount != null">
+			insuranceFeeAmount = #{insuranceFeeAmount},
+		</if>	
+		<if test="lastTimeBonusAmount != null">
+			lastTimeBonusAmount = #{lastTimeBonusAmount},
+		</if>	
+		<if test="scheduleOfBonusAmount != null">
+			scheduleOfBonusAmount = #{scheduleOfBonusAmount},
+		</if>	
+		<if test="bonusFlag != null">
+			bonusFlag = #{bonusFlag},
+		</if>	
+		<if test="nextBonusMonth != null">
+			nextBonusMonth = #{nextBonusMonth},
+		</if>	
+		<if test="monthOfCompanyPay != null">
+			monthOfCompanyPay = #{monthOfCompanyPay},
+		</if>	
+		<if test="nextRaiseMonth != null">
+			nextRaiseMonth = #{nextRaiseMonth},
+		</if>	
+		<if test="totalAmount != null">
+			totalAmount = #{totalAmount},
+		</if>	
+		<if test="employeeFormCode != null">
+			employeeFormCode = #{employeeFormCode},
+		</if>	
+		<if test="remark != null">
+			remark = #{remark},
+		</if>		
+		updateTime = NOW(),
+		updateUser = #{updateUser}
+		WHERE 
+			employeeNo = #{employeeNo}
+			AND reflectYearAndMonth = #{updatedReflectYearAndMonth}
+</update>
+</mapper>

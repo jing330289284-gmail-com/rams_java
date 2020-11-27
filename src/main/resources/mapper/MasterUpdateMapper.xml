@@ -6,13 +6,13 @@
 		resultType="java.lang.String">
 		SELECT * FROM ${master} WHERE ${columnName} = #{data}
 	</select>
-	
+
 	<!-- 明細取得 -->
 	<select id="getMasterInfo" parameterType="map"
 		resultType="jp.co.lyc.cms.model.MasterModel">
 		SELECT ${columnCode} code,${columnName} data FROM ${master}
 	</select>
-	
+
 	<!-- 修正 -->
 	<insert id="updateMaster" parameterType="map">
 		UPDATE ${master} SET
@@ -21,4 +21,10 @@
 		updateUser = #{updateUser}
 		WHERE ${columnCode} = #{code}
 	</insert>
+
+	<!-- 削除 -->
+	<delete id="deleteMaster" parameterType="String">
+		DELETE FROM ${master}
+		WHERE ${columnCode} = #{code};
+	</delete>
 </mapper>

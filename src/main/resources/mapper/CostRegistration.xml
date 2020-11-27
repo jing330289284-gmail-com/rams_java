@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jp.co.lyc.cms.mapper.CostRegistrationMapper">
+    <resultMap id="CostRegistration" type="jp.co.lyc.cms.model.CostRegistrationModel"/>
+    <select id="selectCostRegistration" resultMap="CostRegistration" parameterType="String">
+		SELECT
+			(@rowNo:=@rowNo + 1) AS rowNo,
+			employeeNo,
+			happendDate,
+			costClassificationCode,
+			dueDate,
+			detailedNameOrLine,
+			stationCode,
+			originCode,
+			transportationCode,
+			destinationCode,
+			cost,
+			remark,
+			roundCode,
+			CONVERT (costFile USING utf8)costFile,
+			updateTime,
+			createTime,
+			updateUser
+		FROM 
+			T020CostInfo
+			,(SELECT   @rowNo:=0) AS rowNo
+		WHERE
+			happendDate >= DATE_ADD(curdate(),interval -day(curdate())+1 day) AND
+			employeeNo = #{employeeNo}
+		ORDER BY
+			happendDate
+    </select>
+        <select id="selectCheckCostRegistration" resultMap="CostRegistration" parameterType="map">
+		SELECT
+			employeeNo
+		FROM
+			T020CostInfo
+		WHERE
+			employeeNo = #{employeeNo} AND
+			happendDate = #{happendDate} AND
+			costClassificationCode = #{costClassificationCode}
+    </select>
+    
+    <insert id="insertCostRegistration" parameterType="map">
+		INSERT INTO T020CostInfo(
+			employeeNo,
+			happendDate,
+			costClassificationCode,
+			dueDate,
+			detailedNameOrLine,
+			stationCode,
+			originCode,
+			transportationCode,
+			destinationCode,
+			cost,
+			remark,
+			roundCode,
+			costFile,
+			updateTime,
+			createTime,
+			updateUser)
+		VALUE(
+			#{employeeNo},
+			#{happendDate},
+			#{costClassificationCode},
+			#{dueDate},
+			#{detailedNameOrLine},
+			#{stationCode},
+			#{originCode},
+			#{transportationCode},
+			#{destinationCode},
+			#{cost},
+			#{remark},
+			#{roundCode},
+			#{costFile},
+			NOW(),
+			NOW(),
+			#{employeeName})
+    </insert>
+	<update id="updateCostRegistration" parameterType="map">
+		UPDATE T020CostInfo
+		SET 
+			happendDate = #{happendDate},
+			costClassificationCode = #{costClassificationCode},
+			dueDate = #{dueDate},
+			detailedNameOrLine = #{detailedNameOrLine},
+			stationCode = #{stationCode},
+			originCode = #{originCode},
+			transportationCode = #{transportationCode},
+			destinationCode = #{destinationCode},
+			cost = #{cost},
+			remark = #{remark},
+			roundCode = #{roundCode},
+			costFile = #{costFile},
+			updateTime =now(),
+			createTime =now(),
+			updateUser = #{employeeName}
+		WHERE 
+			employeeNo = #{employeeNo}
+			and happendDate = #{oldHappendDate}
+			and costClassificationCode = #{oldCostClassificationCode}
+    </update>
+   	<delete id="deleteCostRegistration" parameterType="map">
+    	DELETE FROM 
+    		T020CostInfo
+		WHERE
+			employeeNo = #{employeeNo}
+		AND 
+			happendDate = #{oldHappendDate}
+		AND 
+			costClassificationCode = #{oldCostClassificationCode}
+    </delete>
+</mapper>

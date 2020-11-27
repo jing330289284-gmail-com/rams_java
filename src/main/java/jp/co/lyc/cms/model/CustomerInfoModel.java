@@ -6,10 +6,12 @@ public class CustomerInfoModel {
 
 	String customerNo;//お客様番号
 	String customerName;//お客様名
-	String stationCode;//本社
+	String stationCode;//本社場所コード
+	String stationName;//本社場所名前
 	String establishmentDate;//設立年月
 	String businessStartDate;//取引開始日
 	String levelCode;//お客様ランキングコード
+	String levelName;//お客様ランキング
 	String listedCompanyFlag;//上場会社フラグ
 	String companyNatureCode;//会社性質コード
 	String url;//URL
@@ -25,12 +27,14 @@ public class CustomerInfoModel {
 	String customerRankingName;//お客様ランキング名前
 	String companyNatureName;//会社性質名前
 	String topCustomerName;//上位お客様名前
+	String siteLocationCode;//現場場所コード
 	String location;//現場場所
 	String rowNo;//行番号
 	String purchasingManagers;//購買担当
 	String purchasingManagersMail;//メール
 	String customerAbbreviation;//お客様略称
 	String paymentsiteCode;//支払サイト
+	String capitalStock;//資本金
 	ArrayList<String> locationList;//同社の現場場所リスト
 	ArrayList<String> siteManagerList;//同社の現場責任者リスト
 	ArrayList<String> unitPriceList;//単価リスト
@@ -39,7 +43,94 @@ public class CustomerInfoModel {
 	String resultCode;
 	AccountInfoModel accountInfo;
 	TopCustomerInfoModel topCustomerInfo;
+	String admissionStartDate;//入場期日
+	String admissionEndDate;//退場期日
+	String traderPerson;//取引総人月
+	String paymentSiteName;
+	String traderPersonFront;
+	String traderPersonBack;
+	String transactionStatus;
+	String capitalStockFront;
+	String capitalStockBack;
 	
+	public String getTraderPersonFront() {
+		return traderPersonFront;
+	}
+	public void setTraderPersonFront(String traderPersonFront) {
+		this.traderPersonFront = traderPersonFront;
+	}
+	public String getTraderPersonBack() {
+		return traderPersonBack;
+	}
+	public void setTraderPersonBack(String traderPersonBack) {
+		this.traderPersonBack = traderPersonBack;
+	}
+	public String getTransactionStatus() {
+		return transactionStatus;
+	}
+	public void setTransactionStatus(String transactionStatus) {
+		this.transactionStatus = transactionStatus;
+	}
+	public String getCapitalStockFront() {
+		return capitalStockFront;
+	}
+	public void setCapitalStockFront(String capitalStockFront) {
+		this.capitalStockFront = capitalStockFront;
+	}
+	public String getCapitalStockBack() {
+		return capitalStockBack;
+	}
+	public void setCapitalStockBack(String capitalStockBack) {
+		this.capitalStockBack = capitalStockBack;
+	}
+	public String getPaymentSiteName() {
+		return paymentSiteName;
+	}
+	public void setPaymentSiteName(String paymentSiteName) {
+		this.paymentSiteName = paymentSiteName;
+	}
+	public String getTraderPerson() {
+		return traderPerson;
+	}
+	public void setTraderPerson(String traderPerson) {
+		this.traderPerson = traderPerson;
+	}
+	public String getAdmissionStartDate() {
+		return admissionStartDate;
+	}
+	public void setAdmissionStartDate(String admissionStartDate) {
+		this.admissionStartDate = admissionStartDate;
+	}
+	public String getAdmissionEndDate() {
+		return admissionEndDate;
+	}
+	public void setAdmissionEndDate(String admissionEndDate) {
+		this.admissionEndDate = admissionEndDate;
+	}
+	public String getLevelName() {
+		return levelName;
+	}
+	public void setLevelName(String levelName) {
+		this.levelName = levelName;
+	}
+	public String getCapitalStock() {
+		return capitalStock;
+	}
+	public void setCapitalStock(String capitalStock) {
+		this.capitalStock = capitalStock;
+	}
+	public String getSiteLocationCode() {
+		return siteLocationCode;
+	}
+	public void setSiteLocationCode(String siteLocationCode) {
+		this.siteLocationCode = siteLocationCode;
+	}
+	public String getStationName() {
+		return stationName;
+	}
+	public void setStationName(String stationName) {
+		this.stationName = stationName;
+	}
 	public AccountInfoModel getAccountInfo() {
 		return accountInfo;
 	}

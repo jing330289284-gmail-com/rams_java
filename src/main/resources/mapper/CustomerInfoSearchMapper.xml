@@ -11,27 +11,45 @@
 			T007.customerName,
 			M008.levelName,
 			T007.stationCode,
+			M013.stationName,
 			M007.companyNatureName,
 			<if test="topCustomerNo != null">
 				T008.topCustomerName,
 			</if>
 			T006.employeeNo,
 			CONCAT( T001.employeeFristName ,T001.employeeLastName ) AS employeeName,
-			T006.stationCode,
+			T006.stationCode AS siteLocationCode,
+			M013SITE.stationName AS location,
 			T006.siteManager,
-			T006.unitPrice 
+			T006.unitPrice,
+			T006.admissionStartDate,
+			T006.admissionEndDate,
+			T007.paymentsiteCode,
+			T007.capitalStock,
+			T007.purchasingManagers,
+			M020.paymentSiteName
 		FROM
 			T007CustomerInfo AS T007
 			LEFT JOIN T006EmployeeSiteInfo AS T006 ON T007.customerNo = T006.customerNo 
-			AND T007.topCustomerNo = T006.topCustomerNo
-			AND T006.AdmissionStartDate IS NOT NULL
-			AND T006.AdmissionEndDate IS NOT NULL
 			LEFT JOIN T001Employee AS T001 ON T006.employeeNo = T001.employeeNo
+			LEFT JOIN M013Station AS M013 ON T007.stationCode = M013.stationCode
+			LEFT JOIN M013Station AS M013SITE ON T006.stationCode = M013SITE.stationCode
 			LEFT JOIN M008Level AS M008 ON T007.levelCode = M008.levelCode
 			LEFT JOIN M007CompanyNature AS M007 ON T007.companyNatureCode = M007.companyNatureCode	
 			<if test="topCustomerNo != null">
 				LEFT JOIN T008TopCustomerInfo AS T008 ON T007.topCustomerNo = T008.topCustomerNo
 			</if>
+			LEFT JOIN M020PaymentSite AS M020 ON T007.paymentsiteCode = M020.paymentSiteCode
+		<choose>
+	        <when test="topCustomerName != null">
+	            LEFT JOIN 
+					( SELECT topCustomerNo,topCustomerName FROM T008TopCustomerInfo WHERE topCustomerName LIKE concat('%',#{topCustomerName},'%') ) AS topNo ON T007.topCustomerNo = topNo.topCustomerNo
+	        </when>
+	        <otherwise>
+	            LEFT JOIN
+				 	T008TopCustomerInfo AS T008 ON T007.topCustomerNo = T008.topCustomerNo
+	        </otherwise>
+        </choose>
 			,( SELECT @rowNo := 0 ) AS rowNo 
 		WHERE 1=1
 		<if test="customerNo != null">
@@ -41,10 +59,10 @@
 			AND T007.customerName like concat('%',#{customerName},'%')
 		</if>
 		<if test="levelCode != null">
-			AND T007.levelCode=#{levelCode}
+			AND T007.levelCode= #{levelCode}
 		</if>
 		<if test="companyNatureCode != null">
-			AND T007.companyNatureCode=#{companyNatureCode}
+			AND T007.companyNatureCode= #{companyNatureCode}
 		</if>
 		<if test="topCustomerNo != null">
 			AND T007.topCustomerNo = #{topCustomerNo}
@@ -54,6 +72,15 @@
 		</if>
 		<if test="paymentsiteCode != null">
 			AND T007.paymentsiteCode = #{paymentsiteCode}
+		</if>
+		<if test="stationCode != null">
+			AND T007.stationCode = #{stationCode}
+		</if>
+		<if test="capitalStockFront != null">
+			AND CAST(T007.capitalStock AS decimal) &gt;= #{capitalStockFront}
+		</if>
+		<if test="capitalStockBack != null">
+			AND CAST(T007.capitalStock AS decimal) &lt;= #{capitalStockBack}
 		</if>
 		 ORDER BY
 			T007.customerNo

@@ -18,6 +18,26 @@ public class UtilsService {
 	UtilsMapper utilsMapper;
 
 	/**
+	 * 営業結果パターンを取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getSalesPuttern() {
+		List<ModelClass> list = utilsMapper.getSalesPuttern();
+		return list;
+	}
+
+	/**
+	 * 特別ポイントを取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getSpecialPoint() {
+		List<ModelClass> list = utilsMapper.getSpecialPoint();
+		return list;
+	}
+
+	/**
 	 * 国籍を取得
 	 * 
 	 * @return
@@ -108,6 +128,37 @@ public class UtilsService {
 		List<ModelClass> list = utilsMapper.getSalesProgress();
 		return list;
 	}
+
+	/**
+	 * 営業状況取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getJapaneaseConversationLevel() {
+		List<ModelClass> list = utilsMapper.getJapaneaseConversationLevel();
+		return list;
+	}
+
+	/**
+	 * 営業状況取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getEnglishConversationLevel() {
+		List<ModelClass> list = utilsMapper.getEnglishConversationLevel();
+		return list;
+	}
+
+	/**
+	 * 営業状況取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getProjectPhase() {
+		List<ModelClass> list = utilsMapper.getProjectPhase();
+		return list;
+	}
+
 	/**
 	 * 入社区分を取得
 	 * 
@@ -117,6 +168,7 @@ public class UtilsService {
 		List<ModelClass> list = utilsMapper.getIntoCompany();
 		return list;
 	}
+
 	/**
 	 * 役割 を取得
 	 * 
@@ -196,6 +248,33 @@ public class UtilsService {
 	 */
 	public List<ModelClass> getLevel() {
 		return utilsMapper.getLevel();
+	}
+
+	/**
+	 * 社員氏名取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getEmployeeName() {
+		return utilsMapper.getEmployeeName();
+	}
+
+	/**
+	 * 本社社員氏名取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getEmployeeNameNoBP() {
+		return utilsMapper.getEmployeeNameNoBP();
+	}
+
+	/**
+	 * お客様名
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getCustomerName() {
+		return utilsMapper.getCustomerName();
 	}
 
 	/**
@@ -305,7 +384,7 @@ public class UtilsService {
 			return "";
 		}
 	}
-	
+
 	/**
 	 * 営業担当
 	 * 
@@ -314,7 +393,7 @@ public class UtilsService {
 	public List<ModelClass> getSalesPerson() {
 		return utilsMapper.getSalesPerson();
 	}
-	
+
 	/**
 	 * 場所
 	 * 
@@ -322,5 +401,95 @@ public class UtilsService {
 	 */
 	public List<ModelClass> getStation() {
 		return utilsMapper.getStation();
+	}
+
+	/**
+	 * 費用区分
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getCostClassification() {
+		return utilsMapper.getCostClassification();
+	}
+
+	/**
+	 * 業種
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getTypeOfIndustry() {
+		return utilsMapper.getTypeOfIndustry();
+	}
+
+	/**
+	 * 交通手段
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getTransportation() {
+		return utilsMapper.getTransportation();
+	}
+
+	/**
+	 * 状況変動
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getSituationChange() {
+		return utilsMapper.getSituationChange();
+	}
+
+	/**
+	 * 確率取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getSuccessRate() {
+		return utilsMapper.getSuccessRate();
+	}
+
+	/**
+	 * 年齢制限取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getAgeClassification() {
+		return utilsMapper.getAgeClassification();
+	}
+
+	/**
+	 * 面談回数取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getNoOfInterview() {
+		return utilsMapper.getNoOfInterview();
+	}
+
+	/**
+	 * 入場期限取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getAdmissionPeriod() {
+		return utilsMapper.getAdmissionPeriod();
+	}
+
+	/**
+	 * 案件タイプ取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getProjectType() {
+		return utilsMapper.getProjectType();
+	}
+
+	/**
+	 * 社員氏名(営業、管理者)を取得する
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getEmployeeNameByOccupationName() {
+		return utilsMapper.getEmployeeNameByOccupationName();
 	}
 }

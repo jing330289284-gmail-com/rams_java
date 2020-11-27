@@ -11,7 +11,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.DataBinder;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,13 +27,13 @@ import com.alibaba.fastjson.TypeReference;
 
 import jp.co.lyc.cms.common.BaseController;
 import jp.co.lyc.cms.model.AccountInfoModel;
-import jp.co.lyc.cms.model.CostInfoModel;
+import jp.co.lyc.cms.model.BpInfoModel;
 import jp.co.lyc.cms.model.EmployeeModel;
 import jp.co.lyc.cms.service.EmployeeInfoService;
 import jp.co.lyc.cms.util.UtilsController;
+import jp.co.lyc.cms.validation.EmployeeInfoValidation;
 
 @Controller
-@CrossOrigin(origins = "http://127.0.0.1:3000")
 @RequestMapping(value = "/employee")
 public class EmployeeInfoController extends BaseController {
 
@@ -49,12 +51,27 @@ public class EmployeeInfoController extends BaseController {
 	 * @param emp
 	 * @return List
 	 */
+	String errorsMessage = "";;
 
 	@RequestMapping(value = "/getEmployeeInfo", method = RequestMethod.POST)
 	@ResponseBody
-	public List<EmployeeModel> getEmployeeInfo(@RequestBody EmployeeModel emp) {
-
+	public Map<String, Object> getEmployeeInfo(@RequestBody EmployeeModel emp) {
 		logger.info("GetEmployeeInfoController.getEmployeeInfo:" + "検索開始");
+		errorsMessage = "";
+		DataBinder binder = new DataBinder(emp);
+		binder.setValidator(new EmployeeInfoValidation());
+		binder.validate();
+		BindingResult results = binder.getBindingResult();
+		Map<String, Object> result = new HashMap<>();
+		if (results.hasErrors()) {
+			results.getAllErrors().forEach(o -> {
+				FieldError error = (FieldError) o;
+				errorsMessage += error.getDefaultMessage();// エラーメッセージ
+			});
+			result.put("errorsMessage", errorsMessage);// エラーメッセージ
+			return result;
+		}
+
 		List<EmployeeModel> employeeList = new ArrayList<EmployeeModel>();
 		try {
 			Map<String, Object> sendMap = getParam(emp);
@@ -62,8 +79,9 @@ public class EmployeeInfoController extends BaseController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		result.put("data", employeeList);
 		logger.info("GetEmployeeInfoController.getEmployeeInfo:" + "検索結束");
-		return employeeList;
+		return result;
 	}
 
 	/**
@@ -74,29 +92,49 @@ public class EmployeeInfoController extends BaseController {
 	 */
 	@RequestMapping(value = "/insertEmployee", method = RequestMethod.POST)
 	@ResponseBody
-	public boolean insertEmployee(@RequestParam(value = "emp", required = false) String JSONEmp,
+	public Map<String, Object> insertEmployee(@RequestParam(value = "emp", required = false) String JSONEmp,
 			@RequestParam(value = "resumeInfo1", required = false) MultipartFile resumeInfo1,
 			@RequestParam(value = "resumeInfo2", required = false) MultipartFile resumeInfo2,
 			@RequestParam(value = "residentCardInfo", required = false) MultipartFile residentCardInfo,
-			@RequestParam(value = "passportInfo", required = false) MultipartFile passportInfo) throws Exception {
+			@RequestParam(value = "passportInfo", required = false) MultipartFile passportInfo
+			) throws Exception {
 		logger.info("GetEmployeeInfoController.insertEmployee:" + "追加開始");
+		errorsMessage = "";
 		JSONObject jsonObject = JSON.parseObject(JSONEmp);
 		EmployeeModel emp = JSON.parseObject(jsonObject.toJSONString(), new TypeReference<EmployeeModel>() {
 		});
-		Map<String, Object> sendMap = getParam(emp);
+		if (resumeInfo1 != null) {
+			emp.setResumeInfo1(resumeInfo1.getOriginalFilename());
+		}
+		DataBinder binder = new DataBinder(emp);
+		binder.setValidator(new EmployeeInfoValidation());
+		binder.validate();
+		BindingResult results = binder.getBindingResult();
+		Map<String, Object> resultMap = new HashMap<>();// 戻す
+		if (results.hasErrors()) {
+			results.getAllErrors().forEach(o -> {
+				FieldError error = (FieldError) o;
+				errorsMessage += error.getDefaultMessage();// エラーメッセージ
+			});
+			resultMap.put("errorsMessage", errorsMessage);// エラーメッセージ
+			return resultMap;
+		}
+
+		Map<String, Object> sendMap = getParam(emp);// パラメータ
 		boolean result = true;
 		try {
-			sendMap = utilsController.upload(resumeInfo1, sendMap, "resumeInfo1", "履歴書1");
-			sendMap = utilsController.upload(resumeInfo2, sendMap, "resumeInfo2", "履歴書2");
+			sendMap = utilsController.upload(resumeInfo1, sendMap, "resumeInfo1", emp.getResumeName1());
+			sendMap = utilsController.upload(resumeInfo2, sendMap, "resumeInfo2", emp.getResumeName2());
 			sendMap = utilsController.upload(residentCardInfo, sendMap, "residentCardInfo", "在留カード");
 			sendMap = utilsController.upload(passportInfo, sendMap, "passportInfo", "パスポート");
-			// sendMap = utilsController.upload(picInfo, sendMap, "picInfo", "写真");
 			employeeInfoService.insertEmployee((HashMap<String, Object>) sendMap);
 		} catch (Exception e) {
-			return result = false;
+			resultMap.put("result", false);
+			return resultMap;
 		}
+		resultMap.put("result", result);
 		logger.info("GetEmployeeInfoController.insertEmployee:" + "追加結束");
-		return result;
+		return resultMap;
 	}
 
 	/**
@@ -108,12 +146,16 @@ public class EmployeeInfoController extends BaseController {
 	@RequestMapping(value = "/deleteEmployeeInfo", method = RequestMethod.POST)
 	@ResponseBody
 	public boolean deleteEmployeeInfo(@RequestBody EmployeeModel emp) throws Exception {
-		logger.info("GetEmployeeInfoController.addEmployeeInfo:" + "削除開始");
+		logger.info("GetEmployeeInfoController.deleteEmployeeInfo:" + "削除開始");
 
 		Map<String, Object> sendMap = getParam(emp);
 		boolean result = true;
 		result = employeeInfoService.deleteEmployeeInfo(sendMap);
-		logger.info("GetEmployeeInfoController.addEmployeeInfo:" + "削除結束");
+		if (result) {
+			// 自分のファイルを削除
+			// utilsController.deleteDir(emp.getResidentCardInfo());
+		}
+		logger.info("GetEmployeeInfoController.deleteEmployeeInfo:" + "削除結束");
 		return result;
 	}
 
@@ -126,11 +168,10 @@ public class EmployeeInfoController extends BaseController {
 	@RequestMapping(value = "/getEmployeeByEmployeeNo", method = RequestMethod.POST)
 	@ResponseBody
 	public EmployeeModel getEmployeeByEmployeeNo(@RequestBody EmployeeModel emp) throws Exception {
-		logger.info("GetEmployeeInfoController.addEmployeeInfo:" + "EmployeeNoによると、社員情報を取得開始");
+		logger.info("GetEmployeeInfoController.getEmployeeByEmployeeNo:" + "EmployeeNoによると、社員情報を取得開始");
 		Map<String, Object> sendMap = getParam(emp);
-		EmployeeModel model;
-		model = employeeInfoService.getEmployeeByEmployeeNo(sendMap);
-		logger.info("GetEmployeeInfoController.addEmployeeInfo:" + "EmployeeNoによると、社員情報を取得結束");
+		EmployeeModel	model = employeeInfoService.getEmployeeByEmployeeNo(sendMap);
+		logger.info("GetEmployeeInfoController.getEmployeeByEmployeeNo:" + "EmployeeNoによると、社員情報を取得結束");
 		return model;
 	}
 
@@ -143,25 +184,54 @@ public class EmployeeInfoController extends BaseController {
 
 	@RequestMapping(value = "/updateEmployee", method = RequestMethod.POST)
 	@ResponseBody
-	public boolean updateEmployee(@RequestParam(value = "emp", required = false) String JSONEmp,
+	public Map<String, Object> updateEmployee(@RequestParam(value = "emp", required = false) String JSONEmp,
 			@RequestParam(value = "resumeInfo1", required = false) MultipartFile resumeInfo1,
 			@RequestParam(value = "resumeInfo2", required = false) MultipartFile resumeInfo2,
 			@RequestParam(value = "residentCardInfo", required = false) MultipartFile residentCardInfo,
-			@RequestParam(value = "passportInfo", required = false) MultipartFile passportInfo) throws Exception {
+			@RequestParam(value = "passportInfo", required = false) MultipartFile passportInfo,
+			@RequestParam(value = "resumeInfo1URL", required = false) String resumeInfo1URL,
+			@RequestParam(value = "resumeInfo2URL", required = false) String resumeInfo2URL,
+			@RequestParam(value = "residentCardInfoURL", required = false) String residentCardInfoURL,
+			@RequestParam(value = "passportInfoURL", required = false) String passportInfoURL) throws Exception {
 		logger.info("GetEmployeeInfoController.updateEmployee:" + "修正開始");
-
+		errorsMessage = "";
 		JSONObject jsonObject = JSON.parseObject(JSONEmp);
 		EmployeeModel emp = JSON.parseObject(jsonObject.toJSONString(), new TypeReference<EmployeeModel>() {
 		});
+
+		if (resumeInfo1 != null) {
+			emp.setResumeInfo1(resumeInfo1.getOriginalFilename());
+		} 
+
+		DataBinder binder = new DataBinder(emp);
+		binder.setValidator(new EmployeeInfoValidation());
+		binder.validate();
+		BindingResult results = binder.getBindingResult();
+		Map<String, Object> resultMap = new HashMap<>();// 繰り返し
+		if (results.hasErrors()) {
+			results.getAllErrors().forEach(o -> {
+				FieldError error = (FieldError) o;
+				errorsMessage += error.getDefaultMessage();// エラーメッセージ
+			});
+			resultMap.put("errorsMessage", errorsMessage);// エラーメッセージ
+			return resultMap;
+		}
+
 		Map<String, Object> sendMap = getParam(emp);
 		boolean result = true;
-		sendMap = utilsController.upload(resumeInfo1, sendMap, "resumeInfo1", "履歴書1");
-		sendMap = utilsController.upload(resumeInfo2, sendMap, "resumeInfo2", "履歴書2");
-		sendMap = utilsController.upload(residentCardInfo, sendMap, "residentCardInfo", "在留カード");
-		sendMap = utilsController.upload(passportInfo, sendMap, "passportInfo", "パスポート");
-		result = employeeInfoService.updateEmployee(sendMap);
+		try {
+			sendMap = utilsController.upload(resumeInfo1, sendMap, "resumeInfo1", emp.getResumeName1());
+			sendMap = utilsController.upload(resumeInfo2, sendMap, "resumeInfo2", emp.getResumeName2());
+			sendMap = utilsController.upload(residentCardInfo, sendMap, "residentCardInfo", "在留カード");
+			sendMap = utilsController.upload(passportInfo, sendMap, "passportInfo", "パスポート");
+			result = employeeInfoService.updateEmployee(sendMap);
+		} catch (Exception e) {
+			resultMap.put("result", false);
+			return resultMap;
+		}
+		resultMap.put("result", result);
 		logger.info("GetEmployeeInfoController.updateEmployee:" + "修正結束");
-		return result;
+		return resultMap;
 	}
 
 	/**
@@ -200,9 +270,6 @@ public class EmployeeInfoController extends BaseController {
 		String englishLevelCode = emp.getEnglishLevelCode();// 英語
 		String certification1 = emp.getCertification1();// 資格1
 		String certification2 = emp.getCertification2();// 資格2
-		String postcode = emp.getPostcode();// 郵便番号
-		String firstHalfAddress = emp.getFirstHalfAddress();//
-		String lastHalfAddress = emp.getLastHalfAddress();//
 		String developLanguage1 = emp.getDevelopLanguage1();// 技術语言1
 		String developLanguage2 = emp.getDevelopLanguage2();// 技術语言2
 		String developLanguage3 = emp.getDevelopLanguage3();// 技術语言3
@@ -213,8 +280,8 @@ public class EmployeeInfoController extends BaseController {
 		String stayPeriod = emp.getStayPeriod();// 在留期間
 		String employmentInsuranceNo = emp.getEmploymentInsuranceNo();// 雇用保険番号
 		String myNumber = emp.getMyNumber();// マイナンバー
-		String resumeRemark1 = emp.getResumeRemark1();// 備考１
-		String resumeRemark2 = emp.getResumeRemark2();// 備考２
+		String resumeName1 = emp.getResumeName1();// 備考１
+		String resumeName2 = emp.getResumeName2();// 備考２
 		String passportNo = emp.getPassportNo();// パスポート
 		String ageFrom = emp.getAgeFrom();// 開始年齢
 		String ageTo = emp.getAgeTo();// 終了年齢
@@ -226,185 +293,204 @@ public class EmployeeInfoController extends BaseController {
 		String intoCompanyYearAndMonthTo = emp.getIntoCompanyYearAndMonthTo();// 入社年月先
 		String authorityCode = emp.getAuthorityCode();// 権限
 		String employeeStatus = emp.getEmployeeStatus();// 社員ステータス
-		// String picInfo = emp.getPicInfo();// 写真
 		String yearsOfExperience = emp.getYearsOfExperience();// 経験年数
-
 		AccountInfoModel accountInfoModel = emp.getAccountInfo();// 口座情報
-
-		CostInfoModel costModel = emp.getCostModel();// 諸費用
-
+		BpInfoModel bpInfoModel = emp.getBpInfoModel();// bp情報
 		String password = emp.getPassword();// パスワード
+		String siteRoleCode = emp.getSiteRoleCode();// 役割コード
 
-		if (employeeNo != null && employeeNo.length() != 0) {
+		// 住所情報開始
+		String postcode = emp.getPostcode();// 郵便番号
+		String firstHalfAddress = emp.getFirstHalfAddress();// 住所前半
+		String lastHalfAddress = emp.getLastHalfAddress();// 住所後半
+		String stationCode = emp.getStationCode();// 最寄駅1
+
+		String employeeName = emp.getEmployeeName();// 社員名
+		String picInfo = emp.getPicInfo();
+
+		if (stationCode != null) {
+			sendMap.put("stationCode", stationCode);
+		}
+		// 住所情報終了
+
+		if (employeeNo != null) {
 			sendMap.put("employeeNo", employeeNo);
 		}
-		if (employeeFristName != null && employeeFristName.length() != 0) {
+		if (employeeFristName != null) {
 			sendMap.put("employeeFristName", employeeFristName);
 		}
-		if (employeeLastName != null && employeeLastName.length() != 0) {
+		if (employeeLastName != null) {
 			sendMap.put("employeeLastName", employeeLastName);
 		}
-		if (furigana != null && furigana.length() != 0) {
+		if (furigana != null) {
 			sendMap.put("furigana", furigana);
 		}
-		if (alphabetName != null && alphabetName.length() != 0) {
+		if (alphabetName != null) {
 			sendMap.put("alphabetName", alphabetName);
 		}
-		if (birthday != null && birthday.length() != 0) {
+		if (birthday != null) {
 			sendMap.put("birthday", birthday);
 		}
-		if (japaneseCalendar != null && japaneseCalendar.length() != 0) {
+		if (japaneseCalendar != null) {
 			sendMap.put("japaneseCalendar", japaneseCalendar);
 		}
 
-		if (occupationCode != null && occupationCode.length() != 0) {
+		if (occupationCode != null) {
 			sendMap.put("occupationCode", occupationCode);
 		}
-		if (departmentCode != null && departmentCode.length() != 0) {
+		if (departmentCode != null) {
 			sendMap.put("departmentCode", departmentCode);
 		}
-		if (companyMail != null && companyMail.length() != 0) {
+		if (companyMail != null) {
 			sendMap.put("companyMail", companyMail);
 		}
-		if (graduationUniversity != null && graduationUniversity.length() != 0) {
+		if (graduationUniversity != null) {
 			sendMap.put("graduationUniversity", graduationUniversity);
 		}
-		if (major != null && major.length() != 0) {
+		if (major != null) {
 			sendMap.put("major", major);
 		}
-		if (graduationYearAndMonth != null && graduationYearAndMonth.length() != 0) {
+		if (graduationYearAndMonth != null) {
 			sendMap.put("graduationYearAndMonth", graduationYearAndMonth);
 		}
-		if (intoCompanyYearAndMonth != null && intoCompanyYearAndMonth.length() != 0) {
+		if (intoCompanyYearAndMonth != null) {
 			sendMap.put("intoCompanyYearAndMonth", intoCompanyYearAndMonth);
 		}
-		if (retirementYearAndMonth != null && retirementYearAndMonth.length() != 0) {
+		if (retirementYearAndMonth != null) {
 			sendMap.put("retirementYearAndMonth", retirementYearAndMonth);
 		}
-		if (comeToJapanYearAndMonth != null && comeToJapanYearAndMonth.length() != 0) {
+		if (comeToJapanYearAndMonth != null) {
 			sendMap.put("comeToJapanYearAndMonth", comeToJapanYearAndMonth);
 		}
-		if (birthplace != null && birthplace.length() != 0) {
+		if (birthplace != null) {
 			sendMap.put("birthplace", birthplace);
 		}
-		if (phoneNo != null && phoneNo.length() != 0) {
+		if (phoneNo != null) {
 			sendMap.put("phoneNo", phoneNo);
 		}
 
-		if (residenceCode != null && residenceCode.length() != 0) {
+		if (residenceCode != null) {
 			sendMap.put("residenceCode", residenceCode);
 		}
-		if (residenceCardNo != null && residenceCardNo.length() != 0) {
+		if (residenceCardNo != null) {
 			sendMap.put("residenceCardNo", residenceCardNo);
 		}
-		if (stayPeriod != null && stayPeriod.length() != 0) {
+		if (stayPeriod != null) {
 			sendMap.put("stayPeriod", stayPeriod);
 		}
-		if (employmentInsuranceNo != null && employmentInsuranceNo.length() != 0) {
+		if (employmentInsuranceNo != null) {
 			sendMap.put("employmentInsuranceNo", employmentInsuranceNo);
 		}
-		if (myNumber != null && myNumber.length() != 0) {
+		if (myNumber != null) {
 			sendMap.put("myNumber", myNumber);
 		}
-		if (resumeRemark2 != null && resumeRemark2.length() != 0) {
-			sendMap.put("resumeRemark2", resumeRemark2);
+		if (resumeName2 != null) {
+			sendMap.put("resumeName2", resumeName2);
 		}
-		if (resumeRemark1 != null && resumeRemark1.length() != 0) {
-			sendMap.put("resumeRemark1", resumeRemark1);
+		if (resumeName1 != null) {
+			sendMap.put("resumeName1", resumeName1);
 		}
-		if (passportNo != null && passportNo.length() != 0) {
+		if (passportNo != null) {
 			sendMap.put("passportNo", passportNo);
 		}
-		if (employeeFormCode != null && employeeFormCode.length() != 0) {
+		if (employeeFormCode != null) {
 			sendMap.put("employeeFormCode", employeeFormCode);
 		}
-		if (customer != null && customer.length() != 0) {
+		if (customer != null) {
 			sendMap.put("customer", customer);
 		}
-		if (intoCompanyCode != null && intoCompanyCode.length() != 0) {
+		if (intoCompanyCode != null) {
 			sendMap.put("intoCompanyCode", intoCompanyCode);
 		}
-		if (nationalityCode != null && nationalityCode.length() != 0) {
+		if (nationalityCode != null) {
 			sendMap.put("nationalityCode", nationalityCode);
 		}
 
-		if (genderStatus != null && genderStatus.length() != 0) {
+		if (genderStatus != null) {
 			sendMap.put("genderStatus", genderStatus);
 		}
-		if (ageFrom != null && ageFrom.length() != 0) {
+		if (ageFrom != null) {
 			sendMap.put("ageFrom", ageFrom);
 		}
-		if (ageTo != null && ageTo.length() != 0) {
+		if (ageTo != null) {
 			sendMap.put("ageTo", ageTo);
 		}
 
-		if (unitPriceFrom != null && unitPriceFrom.length() != 0) {
+		if (unitPriceFrom != null) {
 			sendMap.put("unitPriceFrom", unitPriceFrom);
 		}
-		if (unitPriceTo != null && unitPriceTo.length() != 0) {
+		if (unitPriceTo != null) {
 			sendMap.put("unitPriceTo", unitPriceTo);
 		}
-		if (japaneseLevelCode != null && japaneseLevelCode.length() != 0) {
+		if (japaneseLevelCode!= null) {
 			sendMap.put("japaneseLevelCode", japaneseLevelCode);
 		}
-		if (englishLevelCode != null && englishLevelCode.length() != 0) {
+		if (englishLevelCode != null) {
 			sendMap.put("englishLevelCode", englishLevelCode);
 		}
-		if (certification1 != null && certification1.length() != 0) {
+		if (certification1 != null) {
 			sendMap.put("certification1", certification1);
 		}
-		if (certification2 != null && certification2.length() != 0) {
+		if (certification2 != null) {
 			sendMap.put("certification2", certification2);
 		}
-		if (postcode != null && postcode.length() != 0) {
+		if (postcode != null) {
 			sendMap.put("postcode", postcode);
 		}
-		if (firstHalfAddress != null && firstHalfAddress.length() != 0) {
+		if (firstHalfAddress != null) {
 			sendMap.put("firstHalfAddress", firstHalfAddress);
 		}
-		if (lastHalfAddress != null && lastHalfAddress.length() != 0) {
+		if (lastHalfAddress != null) {
 			sendMap.put("lastHalfAddress", lastHalfAddress);
 		}
-		if (developLanguage4 != null && developLanguage4.length() != 0) {
+		if (developLanguage4 != null) {
 			sendMap.put("developLanguage4", developLanguage4);
 		}
-		if (developLanguage5 != null && developLanguage5.length() != 0) {
+		if (developLanguage5 != null) {
 			sendMap.put("developLanguage5", developLanguage5);
 		}
-		if (kadou != null && kadou.length() != 0) {
+		if (kadou != null) {
 			sendMap.put("kadou", kadou);
 		}
 
-		if (developLanguage1 != null && developLanguage1.length() != 0) {
+		if (developLanguage1 != null) {
 			sendMap.put("developLanguage1", developLanguage1);
 		}
-		if (developLanguage2 != null && developLanguage2.length() != 0) {
+		if (developLanguage2 != null) {
 			sendMap.put("developLanguage2", developLanguage2);
 		}
-		if (developLanguage3 != null && developLanguage3.length() != 0) {
+		if (developLanguage3 != null) {
 			sendMap.put("developLanguage3", developLanguage3);
 		}
-		if (intoCompanyYearAndMonthFrom != null && intoCompanyYearAndMonthFrom.length() != 0) {
+		if (intoCompanyYearAndMonthFrom != null) {
 			sendMap.put("intoCompanyYearAndMonthFrom", intoCompanyYearAndMonthFrom);
 		}
-		if (intoCompanyYearAndMonthTo != null && intoCompanyYearAndMonthTo.length() != 0) {
+		if (intoCompanyYearAndMonthTo != null) {
 			sendMap.put("intoCompanyYearAndMonthTo", intoCompanyYearAndMonthTo);
 		}
-		if (authorityCode != null && authorityCode.length() != 0) {
+		if (authorityCode != null) {
 			sendMap.put("authorityCode", authorityCode);
 		}
 		sendMap.put("updateUser", loginSession.getAttribute("employeeName"));
-		if (employeeStatus != null && employeeStatus.length() != 0) {
+		if (employeeStatus != null) {
 			sendMap.put("employeeStatus", employeeStatus);
 		}
-		if (yearsOfExperience != null && yearsOfExperience.length() != 0) {
+		if (yearsOfExperience != null) {
 			sendMap.put("yearsOfExperience", yearsOfExperience);
 		}
 		sendMap.put("bankInfoModel", accountInfoModel);
-		sendMap.put("costModel", costModel);
-
-		if (password != null && password.length() != 0) {
+		sendMap.put("bpInfoModel", bpInfoModel);
+		if (password != null) {
 			sendMap.put("password", password);
+		}
+		if (siteRoleCode != null) {
+			sendMap.put("siteRoleCode", siteRoleCode);
+		}
+		if (employeeName != null) {
+			sendMap.put("employeeName", employeeName);
+		}
+		if (picInfo != null) {
+			sendMap.put("picInfo", picInfo);
 		}
 		return sendMap;
 	}

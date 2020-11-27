@@ -3,14 +3,13 @@
 <mapper namespace="jp.co.lyc.cms.mapper.EmployeeInfoMapper">
 	<resultMap id="Employee"
 		type="jp.co.lyc.cms.model.EmployeeModel" />
-	<resultMap id="stringResult"
-		type="String" />
+	<resultMap id="stringResult" type="String" />
 	<select id="getEmployeeInfo" parameterType="map"
 		resultMap="Employee">
 		SELECT
 		(@rowNo:=@rowNo + 1) AS rowNo,
 		T001.employeeNo,
-		CONCAT(T001.employeeFristName,' ',T001.employeeLastName)as
+		CONCAT(T001.employeeFristName,' ',T001.employeeLastName) as
 		employeeFristName ,
 		T002.Furigana,
 		T002.alphabetName,
@@ -23,25 +22,32 @@
 		T003.postcode,
 		T003.firstHalfAddress,
 		T003.lastHalfAddress,
-		T003.stationCode1,
-		TIMESTAMPDIFF(MONTH,
-		NOW(),
-		T002.stayPeriod) AS stayPeriod
+		M013.stationName,
+		T002.stayPeriod,
+		T002.residentCardInfo,
+		T015.resumeInfo1,
+		T015.resumeName1,
+		T015.resumeInfo2,
+		T015.resumeName2
 		<include refid="tableJoin" />
 		WHERE
 		1 = 1
 		<if test="employeeNo!=null">
 			AND T001.employeeNo=#{employeeNo}
 		</if>
-		<if test="employeeFristName!=null">
-			AND T001.employeeFristName like
-			concat('%',#{employeeFristName},'%')
+		<if test="employeeName!=null">
+			AND CONCAT(T001.employeeFristName,T001.employeeLastName)
+			like
+			concat('%',#{employeeName},'%')
 		</if>
 		<if test="employeeFormCode!=null">
 			AND T002.employeeFormCode=#{employeeFormCode}
 		</if>
+		<if test="employeeFormCode==null">
+			AND T002.employeeFormCode !='3'
+		</if>
 		<if test="employeeStatus!=null">
-			AND T002.status=#{employeeStatus}
+			AND T002.employeeStatus=#{employeeStatus}
 		</if>
 		<if test="genderStatus!=null">
 			AND T002.genderStatus=#{genderStatus}
@@ -58,20 +64,34 @@
 		<if test="nationalityCode != null">
 			AND T002.nationalityCode=#{nationalityCode}
 		</if>
+		<if test="siteRoleCode != null">
+			AND T002.siteRoleCode=#{siteRoleCode}
+		</if>
+
 		<if test="customer!= null">
-			AND T007.customerName=#{customer}
+			AND T007.customerNo=#{customer}
 		</if>
 		<if test="intoCompanyCode!= null">
 			AND T002.intoCompanyCode=#{intoCompanyCode}
 		</if>
-		<if test="japaneaseLevelCode!=  null">
-			AND T002.japaneseLevelCode=#{japaneaseLevelCode}
+		<if test="japaneseLevelCode!=  null">
+			AND T002.japaneseLevelCode=#{japaneseLevelCode}
 		</if>
 		<if test="developLanguage1 != null">
-			AND T002.developLanguage1=#{developLanguage1}
+			AND (T002.developLanguage1=#{developLanguage1} 
+			or T002.developLanguage2=#{developLanguage1} 
+			or T002.developLanguage3=#{developLanguage1} 
+			or T002.developLanguage4=#{developLanguage1} 
+			or T002.developLanguage5=#{developLanguage1} 
+			)
 		</if>
 		<if test="developLanguage2 != null">
-			AND T002.developLanguage2=#{developLanguage2}
+			AND (T002.developLanguage1=#{developLanguage2} 
+			or T002.developLanguage2=#{developLanguage2} 
+			or T002.developLanguage3=#{developLanguage2} 
+			or T002.developLanguage4=#{developLanguage2} 
+			or T002.developLanguage5=#{developLanguage2} 
+			)
 		</if>
 		<if test="developLanguage3!= null">
 			AND T002.developLanguage3=#{developLanguage3}
@@ -85,20 +105,19 @@
 			&lt;=#{intoCompanyYearAndMonthTo}
 		</if>
 		<if test="kadou!=null">
-			<if test="kadou='0'">
+			<if test='kadou=="0"'>
 				AND T006.AdmissionStartDate is not null AND
-				T006.AdmissionEndDate is
-				null
+				T006.AdmissionEndDate is null
 			</if>
-			<if test="kadou='1'">
+			<if test='kadou=="1"'>
 				AND T006.AdmissionStartDate is null AND
-				T006.AdmissionEndDate is not
-				null
+				T006.AdmissionEndDate is not null
 			</if>
 		</if>
 		ORDER BY
-		T001.employeeNo
-		DESC
+		rowNo
+		ASC
+		
 	</select>
 
 	<!-- 社員情報を追加 -->
@@ -161,10 +180,6 @@
 		developLanguage5,
 		certification1,
 		certification2,
-		resumeInfo1,
-		resumeRemark1,
-		resumeInfo2,
-		resumeRemark2,
 		residentCardInfo,
 		passportInfo,
 		companyMail,
@@ -210,10 +225,6 @@
 		#{developLanguage5},
 		#{certification1},
 		#{certification2},
-		#{resumeInfo1},
-		#{resumeRemark1},
-		#{resumeInfo2},
-		#{resumeRemark2},
 		#{residentCardInfo},
 		#{passportInfo},
 		#{companyMail},
@@ -262,6 +273,7 @@
 		<include refid="T001" />
 		<include refid="T002" />
 		<include refid="T003" />
+		<include refid="T015" />
 		<include refid="tableJoin" />
 		WHERE
 		1 = 1
@@ -272,74 +284,156 @@
 		UPDATE
 		T001Employee
 		SET
-		employeeFristName =#{employeeFristName},
-		employeeLastName =#{employeeLastName},
-		password=#{password},
-		authorityCode =#{authorityCode},
+		<if test="employeeNo!=  null">
+			employeeNo =#{employeeNo},
+		</if>
+		<if test="employeeFristName!=  null">
+			employeeFristName =#{employeeFristName},
+		</if>
+		<if test="employeeLastName!=  null">
+			employeeLastName =#{employeeLastName},
+		</if>
+		<if test="password!=  null">
+			password=#{password},
+		</if>
+		<if test="employeeFristName!= null">
+			authorityCode =#{authorityCode},
+		</if>
 		updateTime = NOW(),
 		updateUser =
 		#{updateUser}
 		WHERE
-		employeeNo = #{employeeNo}
+		employeeNo =
+		#{employeeNo}
 	</update>
 	<!-- 社員情報詳細を修正 -->
 	<update id="updateEmployeeInfoDetail" parameterType="String">
 		UPDATE
 		T002EmployeeDetail
 		SET
-		genderStatus=#{genderStatus},
-		birthday=#{birthday},
-		japaneseCalendar=#{japaneseCalendar},
-		furigana=#{furigana},
-		nationalityCode=#{nationalityCode},
-		birthplace=#{birthplace},
-		intoCompanyCode=#{intoCompanyCode},
-		intoCompanyYearAndMonth=
-		#{intoCompanyYearAndMonth},
-		employeeStatus=#{employeeStatus},
-		retirementYearAndMonth=#{retirementYearAndMonth},
-		myNumber=
-		#{myNumber},
-		occupationCode=#{occupationCode},
-		comeToJapanYearAndMonth=#{comeToJapanYearAndMonth},
-		graduationUniversity=#{graduationUniversity},
-		graduationYearAndMonth
-		=#{graduationYearAndMonth},
-		major=#{major},
-		residenceCode=
-		#{residenceCode},
-		residenceCardNo=#{residenceCardNo},
-		stayPeriod=
-		#{stayPeriod},
-		japaneseLevelCode=#{japaneseLevelCode},
-		englishLevelCode=#{englishLevelCode},
-		developLanguage1=
-		#{developLanguage1},
-		developLanguage2=#{developLanguage2},
-		developLanguage3=#{developLanguage3},
-		developLanguage4=
-		#{developLanguage4},
-		developLanguage5=#{developLanguage5},
-		japaneseCalendar=#{japaneseCalendar},
-		certification1=
-		#{certification1},
-		certification2=#{certification2},
-		resumeInfo1=
-		#{resumeInfo1},
-		resumeRemark1=#{resumeRemark1},
-		resumeInfo2=
-		#{resumeInfo2},
-		resumeRemark2=#{resumeRemark2},
-		residentCardInfo=
-		#{residentCardInfo},
-		passportInfo=#{passportInfo},
-		companyMail=
-		#{companyMail},
-		phoneNo=#{phoneNo},
-		employmentInsuranceNo=
-		#{employmentInsuranceNo},
-		siteRoleCode=
-		#{siteRoleCode},
+		<if test="employeeNo!=  null">
+			employeeNo =#{employeeNo},
+		</if>
+		<if test="genderStatus!=  null">
+			genderStatus =#{genderStatus},
+		</if>
+		<if test="birthday!=  null">
+			birthday =#{birthday},
+		</if>
+		<if test="japaneseCalendar!=  null">
+			japaneseCalendar =#{japaneseCalendar},
+		</if>
+		<if test="alphabetName!=  null">
+			alphabetName =#{alphabetName},
+		</if>
+		<if test="employeeFormCode!=  null">
+			employeeFormCode =#{employeeFormCode},
+		</if>
+		<if test="furigana!=  null">
+			furigana =#{furigana},
+		</if>
+		<if test="nationalityCode!=  null">
+			nationalityCode =#{nationalityCode},
+		</if>
+		<if test="intoCompanyCode!=  null">
+			intoCompanyCode =#{intoCompanyCode},
+		</if>
+		<if test="intoCompanyYearAndMonth!=  null">
+			intoCompanyYearAndMonth =#{intoCompanyYearAndMonth},
+		</if>
+		<if test="employeeStatus!=  null">
+			employeeStatus =#{employeeStatus},
+		</if>
+		<if test="retirementYearAndMonth!=  null">
+			retirementYearAndMonth =#{retirementYearAndMonth},
+		</if>
+		<if test="myNumber!=  null">
+			myNumber =#{myNumber},
+		</if>
+		<if test="occupationCode!=  null">
+			occupationCode =#{occupationCode},
+		</if>
+		<if test="comeToJapanYearAndMonth!=  null">
+			comeToJapanYearAndMonth =#{comeToJapanYearAndMonth},
+		</if>
+		<if test="graduationUniversity!=  null">
+			graduationUniversity =#{graduationUniversity},
+		</if>
+		<if test="graduationYearAndMonth!=  null">
+			graduationYearAndMonth =#{graduationYearAndMonth},
+		</if>
+		<if test="major!=  null">
+			major =#{major},
+		</if>
+		<if test="residenceCode!=  null">
+			residenceCode =#{residenceCode},
+		</if>
+		<if test="residenceCardNo!=  null">
+			residenceCardNo =#{residenceCardNo},
+		</if>
+		<if test="stayPeriod!=  null">
+			stayPeriod =#{stayPeriod},
+		</if>
+		<if test="japaneseLevelCode!=  null">
+			japaneseLevelCode =#{japaneseLevelCode},
+		</if>
+		<if test="englishLevelCode!=  null">
+			englishLevelCode =#{englishLevelCode},
+		</if>
+		<if test="developLanguage1!=  null">
+			developLanguage1 =#{developLanguage1},
+		</if>
+		<if test="developLanguage2!=  null">
+			developLanguage2 =#{developLanguage2},
+		</if>
+		<if test="developLanguage3!=  null">
+			developLanguage3 =#{developLanguage3},
+		</if>
+		<if test="developLanguage4!=  null">
+			developLanguage4 =#{developLanguage4},
+		</if>
+		<if test="developLanguage5!=  null">
+			developLanguage5 =#{developLanguage5},
+		</if>
+		<if test="japaneseCalendar!=  null">
+			japaneseCalendar =#{japaneseCalendar},
+		</if>
+		<if test="certification1!=  null">
+			certification1 =#{certification1},
+		</if>
+		<if test="certification2!=  null">
+			certification2 =#{certification2},
+		</if>
+		<if test="companyMail!=  null">
+			companyMail =#{companyMail},
+		</if>
+		<if test="phoneNo!=  null">
+			phoneNo =#{phoneNo},
+		</if>
+		<if test="employmentInsuranceNo!=  null">
+			employmentInsuranceNo =#{employmentInsuranceNo},
+		</if>
+		<if test="siteRoleCode!=  null">
+			siteRoleCode =#{siteRoleCode},
+		</if>
+		<if test="residentCardInfo!= null">
+			residentCardInfo=#{residentCardInfo},
+		</if>
+		<if test="passportInfo!= null">
+			passportInfo=#{passportInfo},
+		</if>
+		<if test="picInfo!= null">
+			picInfo=#{picInfo},
+		</if>
+		<if test="yearsOfExperience!= null">
+			yearsOfExperience=#{yearsOfExperience},
+		</if>
+		<if test="departmentCode!= null">
+			departmentCode=#{departmentCode},
+		</if>
+		<if test="picInfo!= null">
+			picInfo=#{picInfo},
+		</if>
 		updateTime=NOW(),
 		updateUser=
 		#{updateUser}
@@ -355,9 +449,7 @@
 		postcode=#{postcode},
 		firstHalfAddress=#{firstHalfAddress},
 		lastHalfAddress=#{lastHalfAddress},
-		stationCode1=(SELECT
-		coalesce(stationCode,-1) from M013Station where
-		stationName=#{nearestStation} ),
+		stationCode=#{stationCode},
 		updateTime=NOW(),
 		updateUser=#{updateUser}
 		WHERE
@@ -407,10 +499,6 @@
 		T002.developLanguage5,
 		T002.certification1,
 		T002.certification2,
-		T002.resumeInfo1,
-		T002.resumeRemark1,
-		T002.resumeInfo2,
-		T002.resumeRemark2,
 		T002.residentCardInfo,
 		T002.passportInfo,
 		T002.companyMail,
@@ -421,6 +509,7 @@
 		T002.updateTime,
 		T002.createTime,
 		T002.updateUser,
+		T002.picInfo,
 		T002.yearsOfExperience,
 	</sql>
 	<sql id="T003">
@@ -428,11 +517,15 @@
 		T003.postcode,
 		T003.firstHalfAddress,
 		T003.lastHalfAddress,
-		T003.stationCode1,
-		T003.stationCode2,
-		T003.housingStatus,
+		T003.stationCode,
 		T003.createTime,
-		T003.updateUser
+		T003.updateUser,
+	</sql>
+	<sql id="T015">
+		T015.resumeInfo1,
+		T015.resumeName1,
+		T015.resumeInfo2,
+		T015.resumeName2
 	</sql>
 	<sql id="tableJoin">
 		FROM
@@ -443,11 +536,16 @@
 		T002.employeeNo =
 		T001.employeeNo
 		LEFT JOIN
+		T015ResumeManagement AS
+		T015
+		ON
+		T015.employeeNo=T001.employeeNo
+		LEFT JOIN
 		T006EmployeeSiteInfo AS
 		T006
 		ON T001.employeeNo
 		= T006.employeeNo
-		AND admissionStartDate =
+	 	AND admissionStartDate =
 		(SELECT
 		MAX(admissionStartDate)
 		FROM
@@ -460,17 +558,17 @@
 		T003.employeeNo
 		LEFT
 		JOIN
-		rams.M013Station AS M013 ON
-		T003.stationCode1 =
+		M013Station AS M013 ON
+		T003.stationCode =
 		M013.stationCode
 		LEFT
 		JOIN
-		T005ExpensesInfo AS T005 ON
+		T005WagesInfo AS T005 ON
 		T001.employeeNo =T005.employeeNo
 		and
 		reflectYearAndMonth = (SELECT
 		MAX(reflectYearAndMonth) FROM
-		T005ExpensesInfo)
+		T005WagesInfo)
 		LEFT JOIN
 		T007CustomerInfo AS T007 ON
 		T006.customerNo =
@@ -486,9 +584,7 @@
 		postcode,
 		firstHalfAddress,
 		lastHalfAddress,
-		stationCode1,
-		stationCode2,
-		housingStatus,
+		stationCode,
 		updateTime,
 		createTime,
 		updateUser
@@ -498,11 +594,7 @@
 		#{postcode},
 		#{firstHalfAddress},
 		#{lastHalfAddress},
-		(SELECT
-		coalesce(stationCode,-1) from M013Station where
-		stationName=#{nearestStation} ),
-		null,
-		null,
+		#{stationCode},
 		NOW(),
 		NOW(),
 		#{updateUser}
@@ -519,20 +611,84 @@
 		M009.authorityName
 		FROM
 		T001Employee T001
-		LEFT JOIN M009Authority M009 ON T001.authorityCode = M009.authorityCode
-		LEFT JOIN T002EmployeeDetail T002 ON T001.employeeNo = T002.employeeNo
+		LEFT JOIN M009Authority M009 ON T001.authorityCode =
+		M009.authorityCode
+		LEFT JOIN T002EmployeeDetail T002 ON T001.employeeNo
+		= T002.employeeNo
 		WHERE
 		T001. PASSWORD = MD5(#{password})
-		AND T001.employeeNo = #{employeeNo}
+		AND
+		T001.employeeNo = #{employeeNo}
 	</select>
-	<!-- ログイン認証番号の電話番号存在チェック -->
+	<!-- ログイン社員番号の電話番号を取得 -->
 	<select id="getEmployeePhoneNo" parameterType="String"
 		resultMap="stringResult">
 		SELECT
-			phoneNo 
+		phoneNo
 		FROM
-			T002EmployeeDetail 
+		T002EmployeeDetail
 		WHERE
-			employeeNo = #{employeeNo}
+		employeeNo =
+		#{employeeNo}
 	</select>
+
+	<!--履歴書を追加 -->
+	<insert id="insertResumeManagement" parameterType="String">
+		INSERT INTO
+		T015ResumeManagement (
+		employeeNo,
+		resumeInfo1,
+		resumeName1,
+		resumeInfo2,
+		resumeName2,
+		updateTime,
+		createTime,
+		updateUser
+		)
+		VALUES(
+		#{employeeNo},
+		#{resumeInfo1},
+		#{resumeName1},
+		#{resumeInfo2},
+		#{resumeName2},
+		NOW(),
+		NOW(),
+		#{updateUser}
+		)
+	</insert>
+	<!-- 履歴書を修正 -->
+	<update id="updateResumeManagement" parameterType="String">
+		UPDATE
+		T015ResumeManagement
+		SET
+		<if test="employeeNo!=  null">
+			employeeNo =#{employeeNo},
+		</if>
+		<if test="resumeInfo1!=   null">
+			resumeInfo1 =#{resumeInfo1},
+		</if>
+		<if test="resumeName1!=  null">
+			resumeName1 =#{resumeName1},
+		</if>
+		<if test="resumeInfo2!=  null">
+			resumeInfo2=#{resumeInfo2},
+		</if>
+		<if test="resumeName2!= null">
+			resumeName2 =#{resumeName2},
+		</if>
+		updateTime = NOW(),
+		updateUser =
+		#{updateUser}
+		WHERE
+		employeeNo =
+		#{employeeNo}
+	</update>
+	<!-- 履歴書を削除 -->
+	<delete id="deleteResumeManagement" parameterType="String">
+		DELETE
+		FROM
+		T015ResumeManagement
+		WHERE
+		employeeNo = #{employeeNo};
+	</delete>
 </mapper>

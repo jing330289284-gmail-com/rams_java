@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jp.co.lyc.cms.mapper.SalesProfitMapper">
+
+	<!-- 売上情報検索 -->
+	<select id="getSalesProfitInfo" parameterType="string"
+		resultType="jp.co.lyc.cms.model.SalesProfitModel">
+		SELECT
+		T002EmployeeDetail.intoCompanyCode employeeStatus,
+		concat(T001Employee.employeeFristName,T001Employee.employeeLastName)
+		employeeName,
+		T007CustomerInfo.customerAbbreviation customerName,
+		T006EmployeeSiteInfo.admissionStartDate,
+		T006EmployeeSiteInfo.admissionEndDate,
+		T006EmployeeSiteInfo.unitPrice
+		FROM T010SalesSituation
+		INNER JOIN T001Employee
+		ON
+		T010SalesSituation.employeeNo = T001Employee.employeeNo
+		LEFT JOIN
+		T002EmployeeDetail
+		ON T002EmployeeDetail.employeeNo =
+		T010SalesSituation.employeeNo
+		INNER JOIN T006EmployeeSiteInfo
+		ON
+		T010SalesSituation.employeeNo = T006EmployeeSiteInfo.employeeNo
+		AND
+		T010SalesSituation.salesYearAndMonth =
+		SUBSTRING(T006EmployeeSiteInfo.admissionStartDate, 1, 6)
+		AND
+		T010SalesSituation.salesProgressCode = '4'
+		INNER JOIN T007CustomerInfo
+		ON T006EmployeeSiteInfo.customerNo = T007CustomerInfo.customerNo
+		WHERE
+		<if test="eigyou != null">
+			T010SalesSituation.salesStaff = #{eigyou}
+		</if>
+		<if test="intoCompanyCode != null">
+			AND T002EmployeeDetail.intoCompanyCode =
+			#{intoCompanyCode}
+		</if>
+		AND NOT
+		(T006EmployeeSiteInfo.admissionStartDate <![CDATA[ > ]]>
+		#{endDate}
+		OR T006EmployeeSiteInfo.admissionEndDate <![CDATA[ < ]]>
+		#{startDate})
+	</select>
+
+	<!-- 売上情報検索 -->
+	<select id="getSalesInfo" parameterType="string"
+		resultType="jp.co.lyc.cms.model.SalesInfoModel">
+		SELECT
+		T006EmployeeSiteInfo.employeeNo,
+		T001Employee.employeeFristName,
+		T001Employee.employeeLastName,
+		T002EmployeeDetail.employeeStatus,
+		T006EmployeeSiteInfo.admissionStartDate,
+		T006EmployeeSiteInfo.admissionEndDate,
+		T006EmployeeSiteInfo.unitPrice,
+		T007CustomerInfo.customerName,
+		T007CustomerInfo.customerAbbreviation,
+		T011BpInfoSupplement.bpBelongCustomerCode,
+		T011BpInfoSupplement.bpUnitPrice
+		FROM T006EmployeeSiteInfo
+		LEFT
+		JOIN
+		T002EmployeeDetail
+		ON
+		T006EmployeeSiteInfo.employeeNo=T002EmployeeDetail.employeeNo
+		LEFT JOIN
+		T001Employee
+		ON
+		T006EmployeeSiteInfo.employeeNo=T001Employee.employeeNo
+		LEFT
+		JOIN T007CustomerInfo
+		ON
+		T006EmployeeSiteInfo.customerNo=T007CustomerInfo.customerNo
+		LEFT JOIN
+		T011BpInfoSupplement
+		ON
+		T006EmployeeSiteInfo.employeeNo=T011BpInfoSupplement.bpEmployeeNo
+		where
+		T006EmployeeSiteInfo.admissionEndDate <![CDATA[ > ]]>
+		#{startDate}
+		AND
+		T006EmployeeSiteInfo.admissionEndDate  <![CDATA[ < ]]>
+		#{endDate}
+		and employeeStatus =
+		ifnull(#{intoCompanyCode},employeeStatus)
+		and
+		T006EmployeeSiteInfo.employeeNo =
+		ifnull(#{eigyou},T006EmployeeSiteInfo.employeeNo)
+		ORDER BY
+		T006EmployeeSiteInfo.admissionStartDate
+	</select>
+
+	<select id="getCustomerName" parameterType="string"
+		resultType="jp.co.lyc.cms.model.SalesInfoModel">
+		SELECT customerNo,customerName FROM rams.T007CustomerInfo;
+	</select>
+
+	<select id="getEmployeeNoSalary" parameterType="string"
+		resultType="jp.co.lyc.cms.model.SalesInfoModel">
+		SELECT employeeNo,reflectYearAndMonth,salary FROM
+		T005WagesInfo order by employeeNo,reflectYearAndMonth;
+	</select>
+
+	<select id="getEmployeeName" parameterType="string"
+		resultType="jp.co.lyc.cms.model.SalesInfoModel">
+		SELECT employeeNo,employeeFristName,employeeLastName FROM
+		rams.T001Employee;
+	</select>
+</mapper>

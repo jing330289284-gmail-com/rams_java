@@ -2,17 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="jp.co.lyc.cms.mapper.DutyRegistrationMapper">
     <resultMap id="DutyRegistration" type="jp.co.lyc.cms.model.DutyRegistrationModel"/>
+    <resultMap id="EmployeeWorkTime" type="jp.co.lyc.cms.model.EmployeeWorkTimeModel"/>
+    <resultMap id="BreakTime" type="jp.co.lyc.cms.model.BreakTimeModel"/>
+    
     <insert id="insertDutyRegistration" parameterType="String">
-		INSERT INTO breakTime(
+		INSERT INTO T017BreakTime(
 			employeeNo,
-			yearMonth,
+			yearAndMonth,
 			lunchBreakStartTime,
 			lunchBreakFinshTime,
 			lunchBreakTime,
 			nightBreakStartTime,
 			nightBreakfinshTime,
 			nightBreakTime,
-			totalBreakTime
+			totalBreakTime,
+		    createTime,
+		    updateTime,
+		    updateUser
 		) 
 		VALUE(
 			#{employeeNo},
@@ -23,13 +29,61 @@
 			#{breakTimeNightStart},
 			#{breakTimeNightEnd},
 			#{breakTimeNightbreakTimeHour},
-			#{breakTimeSumHour}
+			#{breakTimeSumHour},
+			NOW(),
+			NOW(),
+			#{employeeNo}
 		)
     </insert>
-    <select id="selectDutyRegistration" resultMap="DutyRegistration" parameterType="String">
+    <insert id="insertDuty" parameterType="String">
+		INSERT INTO `T016EmployeeWorkTime`( 
+		    `employeeNo`
+		    , `yearAndMonth`
+		    , `day`
+		    , `week`
+		    , `morningTime`
+		    , `afternoonTime`
+		    , `holidayFlag`
+		    , `workTime`
+		    , `confirmFlag`
+		    , `siteCustomer`
+		    , `customer`
+		    , `siteResponsiblePerson`
+			, `breakTime`
+		    , `systemName`
+			, `workContent`
+			, `remark`
+		    , `createTime`
+		    , `updateTime`
+		    , `updateUser`
+		) 
+		VALUES ( 
+		      #{employeeNo}
+		    , #{yearAndMonth}
+		    , #{day}
+		    , #{week}
+		    , #{morningTime}
+		    , #{afternoonTime}
+		    , #{holidayFlag}
+		    , #{workTime}
+		    , #{confirmFlag}
+		    , #{siteCustomer}
+		    , #{customer}
+		    , #{siteResponsiblePerson}
+			, #{breakTime}
+		    , #{systemName}
+			, #{workContent}
+			, #{remark}
+		    , now()
+		    , now()
+		    , #{updateUser}
+		)
+    </insert>
+    <select id="selectDutyRegistration" resultMap="BreakTime" parameterType="String">
 		SELECT
 			employeeNo,
-			yearMonth,
+			yearAndMonth,
+			breakTimeFixedStatus,
 			lunchBreakStartTime,
 			lunchBreakFinshTime,
 			lunchBreakTime,
@@ -38,25 +92,94 @@
 			nightBreakTime,
 			totalBreakTime
 		FROM
-			breakTime 
+			T017BreakTime 
 		WHERE
 			employeeNo = #{employeeNo}
-			and yearMonth = #{breakTimeYearMonth}
+			and yearAndMonth = #{breakTimeYearMonth}
+    </select>
+    <select id="selectDuty" resultMap="EmployeeWorkTime" parameterType="String">
+		SELECT
+		    `employeeNo`
+		    , `yearAndMonth`
+		    , `day`
+		    , `week`
+		    , `morningTime`
+		    , `afternoonTime`
+		    , `holidayFlag`
+		    , `workTime`
+		    , `confirmFlag`
+		    , `siteCustomer`
+		    , `customer`
+		    , `siteResponsiblePerson`
+		    , `breakTime`
+		    , `systemName`
+			, `workContent`
+			, `remark`
+		    , `createTime`
+		    , `updateTime`
+		    , `updateUser`
+		FROM
+			T016EmployeeWorkTime 
+		WHERE
+			employeeNo = #{employeeNo}
+			and yearAndMonth = #{yearAndMonth}
+	        <if test="day != null">
+				and day = #{day}
+			</if>
     </select>
 	<update id="updateDutyRegistration" parameterType="String">
-		UPDATE breakTime
+		REPLACE INTO T017BreakTime( 
+			employeeNo,
+			yearAndMonth,
+			breakTimeFixedStatus,
+			lunchBreakStartTime,
+			lunchBreakFinshTime,
+			lunchBreakTime,
+			nightBreakStartTime,
+			nightBreakfinshTime,
+			nightBreakTime,
+			totalBreakTime,
+			createTime,
+		    updateTime,
+		    updateUser
+		) 
+		VALUES ( 
+			#{employeeNo},
+			#{breakTimeYearMonth},
+			"1",
+			#{breakTimeDayStart},
+			#{breakTimeDayEnd},
+			#{breakTimeDaybreakTimeHour},
+			#{breakTimeNightStart},
+			#{breakTimeNightEnd},
+			#{breakTimeNightbreakTimeHour},
+			#{breakTimeSumHour},
+			NOW(),
+			NOW(),
+			#{employeeNo}
+		)
+    </update>
+	<update id="updateDuty" parameterType="String">
+		UPDATE T016EmployeeWorkTime
 		SET 
-			employeeNo = #{employeeNo},
-			yearMonth = #{breakTimeYearMonth},
-			lunchBreakStartTime = #{breakTimeDayStart},
-			lunchBreakFinshTime = #{breakTimeDayEnd},
-			lunchBreakTime = #{breakTimeDaybreakTimeHour},
-			nightBreakStartTime = #{breakTimeNightStart},
-			nightBreakfinshTime = #{breakTimeNightEnd},
-			nightBreakTime = #{breakTimeNightbreakTimeHour},
-			totalBreakTime = #{breakTimeSumHour}			
+			week = #{week},
+			morningTime = #{morningTime},
+			afternoonTime = #{afternoonTime},
+			holidayFlag = #{holidayFlag},
+			workTime = #{workTime},
+			confirmFlag = #{confirmFlag},
+			siteCustomer = #{siteCustomer},
+			customer = #{customer},
+			siteResponsiblePerson = #{siteResponsiblePerson},
+			workContent = #{workContent},
+			remark = #{remark},
+			breakTime = #{breakTime},
+			systemName = #{systemName},
+			updateTime = now(),
+			updateUser = #{updateUser}
 		WHERE 
 			employeeNo = #{employeeNo}
-			and yearMonth = #{breakTimeYearMonth}
-    </update> 
+			and yearAndMonth = #{yearAndMonth}
+			and day = #{day}
+    </update>
 </mapper>
