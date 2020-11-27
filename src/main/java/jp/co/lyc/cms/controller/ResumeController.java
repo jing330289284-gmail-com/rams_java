@@ -2,13 +2,11 @@ package jp.co.lyc.cms.controller;
 
 import java.io.File;
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,8 +18,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 
 import jp.co.lyc.cms.common.BaseController;
-import jp.co.lyc.cms.model.CostRegistrationModel;
-import jp.co.lyc.cms.model.EmployeeModel;
 import jp.co.lyc.cms.model.ResumeModel;
 import jp.co.lyc.cms.service.ResumeService;
 
@@ -50,7 +46,9 @@ public class ResumeController extends BaseController {
 	@ResponseBody
 	public ResumeModel selectEmployeeName(ResumeModel resumeModel) {
 		logger.info("CostRegistrationController.selectEmployeeName:" + "検索開始");
-		resumeModel.setEmployeeName(getSession().getAttribute("employeeName").toString());
+		String employeeName;
+		employeeName=resumeService.selectEmployeeName(getSession().getAttribute("employeeNo").toString());
+		resumeModel.setEmployeeName(employeeName);
 		logger.info("CostRegistrationController.selectEmployeeName:" + "検索終了");
 		return resumeModel;
 	}
@@ -118,8 +116,8 @@ public class ResumeController extends BaseController {
 			}
 		}
 		//SQL実行
-			resumeModel.setResumeInfo1(newFile1);
-			resumeModel.setResumeInfo2(newFile2);
+		resumeModel.setResumeInfo1(newFile1);
+		resumeModel.setResumeInfo2(newFile2);
 		boolean result  = resumeService.insertResume(resumeModel);
 		logger.info("ResumeController.insertResume:" + "追加結束");
 		return result;
@@ -131,7 +129,7 @@ public class ResumeController extends BaseController {
 				String oldPath= new String(resumeModel.getResumeInfo1());
 				File oldFile = new File(oldPath);
 				try {
-				oldFile.renameTo(new File(oldPath + "ForChangeName"));
+					oldFile.renameTo(new File(oldPath + "ForChangeName"));
 				} catch (Exception e) {
 					e.printStackTrace();
 					return false;
@@ -140,26 +138,32 @@ public class ResumeController extends BaseController {
 				String oldPath= new String(resumeModel.getResumeInfo2());
 				File oldFile = new File(oldPath);
 				try {
-				oldFile.renameTo(new File(oldPath + "ForChangeName"));
+					oldFile.renameTo(new File(oldPath + "ForChangeName"));
 				} catch (Exception e) {
 					e.printStackTrace();
 					return false;
 				}
-		}else {	//旧ファイル名を戻す
+		}else {	//ファイル変更なし、フロントの名前にする
+			String realPath = new String(UPLOAD_PATH_PREFIX_resumeInfo + resumeModel.getEmployeeNo() + "_"
+					+ resumeModel.getEmployeeName());
 			if(fileNo==1){
-				String oldPath= new String(resumeModel.getResumeInfo1());
-				File oldFile = new File(oldPath+ "ForChangeName");
+				String suffix = resumeModel.getResumeInfo1().substring(resumeModel.getResumeInfo1().lastIndexOf(".") + 1);
+				String newName = resumeModel.getResumeName1()+ "." + suffix;
+				String oldPath= new String(resumeModel.getResumeInfo1()+ "ForChangeName");
+				File oldFile = new File(oldPath);
 				try {
-					oldFile.renameTo(new File(oldPath));
+						oldFile.renameTo(new File(realPath+ File.separator + newName));
 					} catch (Exception e) {
 						e.printStackTrace();
 						return false;
 					}
 			}else if(fileNo==2){
-				String oldPath= new String(resumeModel.getResumeInfo2());
-				File oldFile = new File(oldPath+ "ForChangeName");
+				String suffix = resumeModel.getResumeInfo2().substring(resumeModel.getResumeInfo2().lastIndexOf(".") + 1);
+				String newName = resumeModel.getResumeName2()+ "." + suffix;
+				String oldPath= new String(resumeModel.getResumeInfo2()+ "ForChangeName");
+				File oldFile = new File(oldPath);
 				try {
-					oldFile.renameTo(new File(oldPath));
+						oldFile.renameTo(new File(oldPath+ File.separator + newName));
 					} catch (Exception e) {
 						e.printStackTrace();
 						return false;

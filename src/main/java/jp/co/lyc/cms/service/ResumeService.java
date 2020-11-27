@@ -32,6 +32,10 @@ public class ResumeService {
 		List<ResumeModel> resultMod = resumeMapper.selectResume(resumeModel);
 		return resultMod;
 	}
+	public String selectEmployeeName(String employeeNo)  {
+		String employeeName = resumeMapper.selectEmployeeName(employeeNo);
+		return employeeName;
+	}
 	/**
 	 * アップデート
 	 * @param sendMap
