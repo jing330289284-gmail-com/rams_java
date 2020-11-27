@@ -459,8 +459,7 @@
 		T002EmployeeDetail.occupationCode =
 		M014Occupation.occupationCode
 		where
-		T002EmployeeDetail.occupationCode = "1"
-		or T002EmployeeDetail.occupationCode = "3"
-		or T002EmployeeDetail.occupationCode = "4";
+		T002EmployeeDetail.occupationCode = "0"
+		or T002EmployeeDetail.occupationCode = "1";
 	</select>
 </mapper>

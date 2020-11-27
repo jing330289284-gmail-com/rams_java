@@ -85,6 +85,7 @@
 		AND
 		T006EmployeeSiteInfo.admissionEndDate  <![CDATA[ < ]]>
 		#{endDate}
+		<!-- or isnull(admissionEndDate) -->
 		and employeeStatus =
 		ifnull(#{intoCompanyCode},employeeStatus)
 		and
