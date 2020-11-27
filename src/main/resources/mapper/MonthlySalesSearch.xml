@@ -32,7 +32,7 @@
     ) as A
     left join T005WagesInfo As T005 on
 		A.employeeNo = T005.employeeNo
-        and A.reflectYearAndMonth &lt;= T005.reflectYearAndMonth
+        and A.reflectYearAndMonth = T005.reflectYearAndMonth
 	left join (
 		select employeeNo, max(expensesReflectYearAndMonth) as expensesReflectYearAndMonth from T013ExpensesInfo
 		where expensesReflectYearAndMonth &lt;= #{getYandM}
