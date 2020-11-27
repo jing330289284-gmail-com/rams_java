@@ -114,12 +114,15 @@ public class SalesProfitController extends BaseController {
 			int profitAll = 0;
 			for (int i = 0; i < siteList.size(); i++) {
 				String yearAndMonth = siteList.get(i).getAdmissionStartDate().substring(0, 6);
-				if (i > 0) {
-					if (yearAndMonth.equals(siteList.get(i - 1).getYearAndMonth())) {
-						yearAndMonth = "";
-					}
-				}
-				siteList.get(i).setYearAndMonth(yearAndMonth.substring(0, 4) + "/" + yearAndMonth.substring(4, 6));
+				/*
+				 * if (i > 0) { String yearAndMonthTemp = yearAndMonth.substring(0, 4) + "/" +
+				 * yearAndMonth.substring(4, 6); if (yearAndMonthTemp.equals(siteList.get(i -
+				 * 1).getYearAndMonth())) { yearAndMonth = ""; } else { yearAndMonth =
+				 * yearAndMonthTemp; } } else { yearAndMonth = yearAndMonth.substring(0, 4) +
+				 * "/" + yearAndMonth.substring(4, 6); }
+				 */
+				yearAndMonth = yearAndMonth.substring(0, 4) + "/" + yearAndMonth.substring(4, 6);
+				siteList.get(i).setYearAndMonth(yearAndMonth);
 				siteList.get(i).setCustomerName(
 						siteList.get(i).getCustomerAbbreviation() == null ? siteList.get(i).getCustomerName()
 								: siteList.get(i).getCustomerAbbreviation());
@@ -132,16 +135,24 @@ public class SalesProfitController extends BaseController {
 				String startTime = dateFormat.format(salesProfitModel.getStartDate()).toString();
 				String endTime = dateFormat.format(salesProfitModel.getEndDate()).toString();
 				String admissionStartDate = siteList.get(i).getAdmissionStartDate().substring(0, 6);
-				String admissionEndDate = siteList.get(i).getAdmissionEndDate().substring(0, 6);
+				String admissionEndDate = "";
+				if (siteList.get(i).getAdmissionEndDate() != null)
+					admissionEndDate = siteList.get(i).getAdmissionEndDate().substring(0, 6);
 				String workDateStart = admissionStartDate;
 				String workDateEnd = admissionEndDate;
 				if (Integer.parseInt(startTime) > Integer.parseInt(admissionStartDate)) {
 					workDateStart = startTime;
 				}
 
-				siteList.get(i).setWorkDate(workDateStart.substring(0, 4) + "/" + workDateStart.substring(4, 6) + " ~ "
-						+ workDateEnd.substring(0, 4) + "/" + workDateEnd.substring(4, 6));
+				if (workDateEnd.equals(""))
+					siteList.get(i)
+							.setWorkDate(workDateStart.substring(0, 4) + "/" + workDateStart.substring(4, 6) + " ~ ");
+				else
+					siteList.get(i).setWorkDate(workDateStart.substring(0, 4) + "/" + workDateStart.substring(4, 6)
+							+ " ~ " + workDateEnd.substring(0, 4) + "/" + workDateEnd.substring(4, 6));
 
+				if (workDateEnd.equals(""))
+					workDateEnd = endTime;
 				DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM");
 				int months = Months.monthsBetween(
 						formatter.parseDateTime(workDateStart.substring(0, 4) + "-" + workDateStart.substring(4, 6)),
@@ -212,7 +223,8 @@ public class SalesProfitController extends BaseController {
 						if (employeeNo.equals(employeeSales.get(x).getEmployeeNo())) {
 							if (Integer.parseInt(employeeSales.get(x).getReflectYearAndMonth()) <= Integer
 									.parseInt(yearMonth)) {
-								salaryTemp = Integer.parseInt(employeeSales.get(x).getSalary());
+								if (!employeeSales.get(x).getSalary().equals(""))
+									salaryTemp = Integer.parseInt(employeeSales.get(x).getSalary());
 							}
 						}
 
@@ -232,7 +244,8 @@ public class SalesProfitController extends BaseController {
 					} else if (siteList.get(i).getEmployeeStatus().equals("1")) {
 						employeeStatus = "協力";
 						if (siteList.get(i).getBpUnitPrice() != null) {
-							bpSalary = Integer.parseInt(siteList.get(i).getBpUnitPrice()) * months;
+							if (!siteList.get(i).getBpUnitPrice().equals(""))
+								bpSalary = Integer.parseInt(siteList.get(i).getBpUnitPrice()) * months;
 							siteList.get(i).setSalary(Integer.toString(bpSalary));
 							siteRoleNameAll += Integer.parseInt(siteList.get(i).getProfit()) - bpSalary;
 						}
@@ -251,8 +264,9 @@ public class SalesProfitController extends BaseController {
 
 				} else
 					siteList.get(i).setEmployeeFrom("");
-				siteList.get(i)
-						.setSiteRoleName(formatString((float) Integer.parseInt(siteList.get(i).getSiteRoleName())));
+				if (siteList.get(i).getSiteRoleName() != null)
+					siteList.get(i)
+							.setSiteRoleName(formatString((float) Integer.parseInt(siteList.get(i).getSiteRoleName())));
 				siteList.get(i).setUnitPrice(formatString((float) Integer.parseInt(siteList.get(i).getUnitPrice())));
 				siteList.get(i).setProfit(formatString((float) Integer.parseInt(siteList.get(i).getProfit())));
 				siteList.get(i).setSalary(formatString((float) Integer.parseInt(siteList.get(i).getSalary())));
@@ -261,8 +275,6 @@ public class SalesProfitController extends BaseController {
 
 			siteList.get(0).setProfitAll(formatString((float) profitAll));
 			siteList.get(0).setSiteRoleNameAll(formatString((float) siteRoleNameAll));
-		} else {
-			//siteList.add(new SalesInfoModel());
 		}
 		return siteList;
 	}
