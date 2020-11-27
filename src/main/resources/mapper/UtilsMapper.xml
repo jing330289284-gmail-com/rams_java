@@ -55,11 +55,12 @@
 	<select id="getCustomerName"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT
-			customerNo CODE,
-			CONCAT( customerName, '(', customerNo, ')' ) NAME,
-			customerName TEXT 
+		customerNo CODE,
+		CONCAT( customerName, '(',
+		customerNo, ')' ) NAME,
+		customerName TEXT
 		FROM
-			T007CustomerInfo
+		T007CustomerInfo
 	</select>
 	<!-- 在留資格 -->
 	<select id="getVisa" resultType="jp.co.lyc.cms.model.ModelClass">
@@ -276,7 +277,8 @@
 		SELECT
 		(CASE
 		WHEN count(*) = 0
-		then CONCAT('${typeName}','001')
+		then
+		CONCAT('${typeName}','001')
 		WHEN (CONVERT(SUBSTRING(a.${columnName},
 		4),SIGNED) + 1) &lt;10
 		THEN
@@ -389,7 +391,7 @@
 		FROM
 		M030SituationChange
 	</select>
-	
+
 	<!-- 確率取得 -->
 	<select id="getSuccessRate"
 		resultType="jp.co.lyc.cms.model.ModelClass">
@@ -399,7 +401,7 @@
 		FROM
 		M033SuccessRate
 	</select>
-	
+
 	<!-- 年齢制限取得 -->
 	<select id="getAgeClassification"
 		resultType="jp.co.lyc.cms.model.ModelClass">
@@ -409,7 +411,7 @@
 		FROM
 		M034AgeClassification
 	</select>
-	
+
 	<!--面談回数取得 -->
 	<select id="getNoOfInterview"
 		resultType="jp.co.lyc.cms.model.ModelClass">
@@ -419,7 +421,7 @@
 		FROM
 		M035NoOfInterview
 	</select>
-	
+
 	<!--入場期限取得 -->
 	<select id="getAdmissionPeriod"
 		resultType="jp.co.lyc.cms.model.ModelClass">
@@ -429,7 +431,7 @@
 		FROM
 		M036AdmissionPeriod
 	</select>
-	
+
 	<!--案件タイプ取得 -->
 	<select id="getProjectType"
 		resultType="jp.co.lyc.cms.model.ModelClass">
@@ -438,5 +440,27 @@
 		projectTypeCode code
 		FROM
 		M037ProjectType
+	</select>
+
+	<!-- 社員名(営業、管理者) -->
+	<select id="getEmployeeNameByOccupationName"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT T002EmployeeDetail.employeeNo
+		code,CONCAT(T001Employee.employeeFristName,T001Employee.employeeLastName,'(',T002EmployeeDetail.employeeNo,')')
+		name,
+		CONCAT( T001Employee.employeeFristName,
+		T001Employee.employeeLastName ) TEXT
+		FROM T002EmployeeDetail
+		LEFT JOIN
+		T001Employee
+		ON T002EmployeeDetail.employeeNo = T001Employee.employeeNo
+		LEFT JOIN M014Occupation
+		ON
+		T002EmployeeDetail.occupationCode =
+		M014Occupation.occupationCode
+		where
+		T002EmployeeDetail.occupationCode = "1"
+		or T002EmployeeDetail.occupationCode = "3"
+		or T002EmployeeDetail.occupationCode = "4";
 	</select>
 </mapper>

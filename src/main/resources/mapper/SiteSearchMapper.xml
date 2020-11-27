@@ -118,7 +118,7 @@
 		</if>
 		<if test="employeeForm!= null and employeeForm!= ''">
 				<if test='employeeForm=="0"'>
-				AND d.employeeFormCode in ('0','1','2','4')
+				AND d.employeeFormCode !='3'
 			</if>
 			<if test='employeeForm=="1"'>
 				AND d.employeeFormCode = '3'

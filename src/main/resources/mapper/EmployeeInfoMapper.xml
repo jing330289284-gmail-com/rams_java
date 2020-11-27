@@ -44,7 +44,7 @@
 			AND T002.employeeFormCode=#{employeeFormCode}
 		</if>
 		<if test="employeeFormCode==null">
-			AND T002.employeeFormCode in (0,1,2,4)
+			AND T002.employeeFormCode !='3'
 		</if>
 		<if test="employeeStatus!=null">
 			AND T002.employeeStatus=#{employeeStatus}
@@ -545,11 +545,11 @@
 		T006
 		ON T001.employeeNo
 		= T006.employeeNo
-	<!-- 	AND admissionStartDate =
+	 	AND admissionStartDate =
 		(SELECT
 		MAX(admissionStartDate)
 		FROM
-		T006EmployeeSiteInfo) -->
+		T006EmployeeSiteInfo)
 		LEFT
 		JOIN
 		T003AddressInfo AS T003

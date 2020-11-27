@@ -16,14 +16,14 @@ public interface UtilsMapper {
 	 * 
 	 */
 	public List<ModelClass> getNationalitys();
-	
+
 	/**
 	 * 営業結果パターンを取得
 	 * 
 	 * 
 	 */
 	public List<ModelClass> getSalesPuttern();
-	
+
 	/**
 	 * 特別ポイントを取得
 	 * 
@@ -88,21 +88,21 @@ public interface UtilsMapper {
 	 * 
 	 */
 	public List<ModelClass> getIntoCompany();
-	
+
 	/**
 	 * 入社区分を取得
 	 * 
 	 * 
 	 */
 	public List<ModelClass> getJapaneaseConversationLevel();
-	
+
 	/**
 	 * 入社区分を取得
 	 * 
 	 * 
 	 */
 	public List<ModelClass> getEnglishConversationLevel();
-	
+
 	/**
 	 * 入社区分を取得
 	 * 
@@ -153,21 +153,21 @@ public interface UtilsMapper {
 	 * 
 	 */
 	public List<ModelClass> getEmployeeName();
-	
+
 	/**
 	 * 本社社員氏名を取得する
 	 * 
 	 * 
 	 */
 	public List<ModelClass> getEmployeeNameNoBP();
-	
+
 	/**
 	 * お客様名
 	 * 
 	 * 
 	 */
 	public List<ModelClass> getCustomerName();
-	
+
 	/**
 	 * 資格を取得
 	 * 
@@ -253,82 +253,95 @@ public interface UtilsMapper {
 	 * @return
 	 */
 	public void resetPassword(HashMap<String, String> sendMap);
-	
+
 	/**
 	 * 営業担当検索
 	 * 
 	 * @return
 	 */
 	public List<ModelClass> getSalesPerson();
-	
+
 	/**
 	 * 場所
 	 * 
 	 * @return
 	 */
 	public List<ModelClass> getStation();
-	
+
 	/**
-	 *  費用区分
+	 * 費用区分
 	 * 
 	 * @return
 	 */
 	public List<ModelClass> getCostClassification();
+
 	/**
 	 * 業種
 	 * 
 	 * @return
 	 */
 	public List<ModelClass> getTypeOfIndustry();
-	
+
 	/**
 	 * 営業状況取得
 	 * 
 	 * @return
-	 */	
+	 */
 	public List<ModelClass> getSalesProgress();
+
 	/**
 	 * 交通手段を取得
 	 * 
 	 * @return
-	 */	
+	 */
 	public List<ModelClass> getTransportation();
-	
+
 	/**
 	 * 状況変動を取得
 	 * 
 	 * @return
-	 */	
+	 */
 	public List<ModelClass> getSituationChange();
-	
+
 	/**
 	 * 確率取得
+	 * 
 	 * @return
 	 */
 	public List<ModelClass> getSuccessRate();
-	
+
 	/**
 	 * 年齢制限取得
+	 * 
 	 * @return
 	 */
 	public List<ModelClass> getAgeClassification();
-	
+
 	/**
 	 * 面談回数取得
+	 * 
 	 * @return
 	 */
 	public List<ModelClass> getNoOfInterview();
-	
+
 	/**
 	 * 入場期限取得
+	 * 
 	 * @return
 	 */
 	public List<ModelClass> getAdmissionPeriod();
-	
+
 	/**
 	 * 案件タイプ取得
+	 * 
 	 * @return
 	 */
 	public List<ModelClass> getProjectType();
-	
+
+	/**
+	 * 社員氏名(営業、管理者)を取得する
+	 * 
+	 * 
+	 */
+	public List<ModelClass> getEmployeeNameByOccupationName();
 }
