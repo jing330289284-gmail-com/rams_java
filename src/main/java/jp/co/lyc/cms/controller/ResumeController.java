@@ -86,7 +86,7 @@ public class ResumeController extends BaseController {
 		if(filePath1==null)  {
 			//新ファイルパス存在しない→改名
 			if(!resumeModel.getResumeInfo1().equals("")) {
-				rename(resumeModel,false,1);
+				newFile1=rename(resumeModel,false,1);
 			}
 		}else{
 			//新ファイルパス存在→新ファイルアップロード→旧ファイルパス削除
@@ -102,7 +102,7 @@ public class ResumeController extends BaseController {
 		if(filePath2==null)  {
 			//新ファイルパス存在しない→改名
 			if(!resumeModel.getResumeInfo2().equals("")) {
-				rename(resumeModel,false,2);
+				newFile2=rename(resumeModel,false,2);
 			}
 		}else{
 			//新ファイルパス存在→新ファイルアップロード→旧ファイルパス削除
@@ -116,14 +116,19 @@ public class ResumeController extends BaseController {
 			}
 		}
 		//SQL実行
-		resumeModel.setResumeInfo1(newFile1);
-		resumeModel.setResumeInfo2(newFile2);
+		if(!newFile1.equals("")) {
+			resumeModel.setResumeInfo1(newFile1);
+		}
+		if(!newFile2.equals("")) {
+			resumeModel.setResumeInfo2(newFile2);
+		}
 		boolean result  = resumeService.insertResume(resumeModel);
 		logger.info("ResumeController.insertResume:" + "追加結束");
 		return result;
 	}
 	//ファイルリネーム
-	private boolean rename(ResumeModel resumeModel,boolean flag,int fileNo) {
+	private String rename(ResumeModel resumeModel,boolean flag,int fileNo) {
+String returnStr="";
 		if(flag) {	//旧ファイルを一時退避
 			if(fileNo==1){
 				String oldPath= new String(resumeModel.getResumeInfo1());
@@ -132,7 +137,7 @@ public class ResumeController extends BaseController {
 					oldFile.renameTo(new File(oldPath + "ForChangeName"));
 				} catch (Exception e) {
 					e.printStackTrace();
-					return false;
+					return returnStr;
 				}
 			}else if(fileNo==2){
 				String oldPath= new String(resumeModel.getResumeInfo2());
@@ -141,8 +146,9 @@ public class ResumeController extends BaseController {
 					oldFile.renameTo(new File(oldPath + "ForChangeName"));
 				} catch (Exception e) {
 					e.printStackTrace();
-					return false;
+					return returnStr;
 				}
+			}
 		}else {	//ファイル変更なし、フロントの名前にする
 			String realPath = new String(UPLOAD_PATH_PREFIX_resumeInfo + resumeModel.getEmployeeNo() + "_"
 					+ resumeModel.getEmployeeName());
@@ -153,9 +159,10 @@ public class ResumeController extends BaseController {
 				File oldFile = new File(oldPath);
 				try {
 						oldFile.renameTo(new File(realPath+ File.separator + newName));
+						returnStr= realPath+ File.separator + newName;
 					} catch (Exception e) {
 						e.printStackTrace();
-						return false;
+						return returnStr;
 					}
 			}else if(fileNo==2){
 				String suffix = resumeModel.getResumeInfo2().substring(resumeModel.getResumeInfo2().lastIndexOf(".") + 1);
@@ -163,15 +170,15 @@ public class ResumeController extends BaseController {
 				String oldPath= new String(resumeModel.getResumeInfo2()+ "ForChangeName");
 				File oldFile = new File(oldPath);
 				try {
-						oldFile.renameTo(new File(oldPath+ File.separator + newName));
+						oldFile.renameTo(new File(realPath+ File.separator + newName));
+						returnStr= realPath+ File.separator + newName;
 					} catch (Exception e) {
 						e.printStackTrace();
-						return false;
+						return returnStr;
 					}
 				}
 			}
-		}
-		return true;
+		return returnStr;
 	}
 	public String upload(String resumeName,MultipartFile resumeFile,String realPath) {
 		File file = new File(realPath);
