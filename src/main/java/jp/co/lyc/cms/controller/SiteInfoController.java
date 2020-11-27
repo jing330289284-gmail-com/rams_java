@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import jp.co.lyc.cms.common.BaseController;
+import jp.co.lyc.cms.model.EmployeeModel;
 import jp.co.lyc.cms.model.SiteModel;
 import jp.co.lyc.cms.service.SiteInfoService;
 import jp.co.lyc.cms.util.StatusCodeToMsgMap;
@@ -373,5 +374,17 @@ public class SiteInfoController extends BaseController {
 
 		logger.info("GetEmployeeInfoController.getEmployeeInfo:" + "検索結束");
 		return siteList;
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/deleteSiteInfo", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean deleteSiteInfo(@RequestBody  Map map) throws Exception {
+		logger.info("SiteInfoController.deleteSiteInfo:" + "削除開始");
+		boolean result = true;
+		result = siteInfoService.deleteSiteInfo(map);
+		logger.info("SiteInfoController.deleteSiteInfo:" + "削除結束");
+		return result;
 	}
 }

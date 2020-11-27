@@ -96,6 +96,22 @@ public abstract class UtilsCheckMethod {
 	}
 	
 	/**
+	 * 郵便番号をチェック
+	 * 
+	 * @param URL
+	 * @return
+	 */
+	public static boolean postCodeFormat(String postCode) {
+		String postCodeFormat  = "^[0-9]{7}$";
+		if (postCode.matches(postCodeFormat)) {
+			return true;
+		}
+		return false;
+	}
+	
+	
+	
+	/**
 	 * 数字をチェック
 	 * 
 	 * @param URL
