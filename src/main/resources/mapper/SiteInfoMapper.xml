@@ -96,13 +96,24 @@
 		</if>
 
 	</select>
-	<!--　　現場情報を削除 -->
+	<!--　　現場情報を削除 社員画面から -->
 	<delete id="deleteEmployeeSiteInfo" parameterType="String">
 		DELETE
 		FROM
 		T006EmployeeSiteInfo
 		WHERE
 		employeeNo = #{employeeNo};
+	</delete>
+
+	<!--現場情報を削除 現場情報画面から -->
+	<delete id="deleteSiteInfo" parameterType="String">
+		DELETE
+		FROM
+		T006EmployeeSiteInfo
+		WHERE
+		employeeNo = #{employeeNo}
+		and
+		admissionStartDate = #{admissionStartDate};
 	</delete>
 
 </mapper>
