@@ -13,14 +13,9 @@
 			T007.stationCode,
 			M013.stationName,
 			M007.companyNatureName,
-			<choose>
-		        <when test="topCustomerName != null">
-		            topNo.topCustomerName,
-		        </when>
-		        <otherwise>
-		            T008.topCustomerName,
-		        </otherwise>
-	        </choose>
+			<if test="topCustomerNo != null">
+				T008.topCustomerName,
+			</if>
 			T006.employeeNo,
 			CONCAT( T001.employeeFristName ,T001.employeeLastName ) AS employeeName,
 			T006.stationCode AS siteLocationCode,
@@ -41,6 +36,9 @@
 			LEFT JOIN M013Station AS M013SITE ON T006.stationCode = M013SITE.stationCode
 			LEFT JOIN M008Level AS M008 ON T007.levelCode = M008.levelCode
 			LEFT JOIN M007CompanyNature AS M007 ON T007.companyNatureCode = M007.companyNatureCode	
+			<if test="topCustomerNo != null">
+				LEFT JOIN T008TopCustomerInfo AS T008 ON T007.topCustomerNo = T008.topCustomerNo
+			</if>
 			LEFT JOIN M020PaymentSite AS M020 ON T007.paymentsiteCode = M020.paymentSiteCode
 		<choose>
 	        <when test="topCustomerName != null">

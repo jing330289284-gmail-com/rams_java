@@ -45,18 +45,20 @@ public class EmployeeInfoValidation implements Validator {
 					errors.rejectValue("companyMail", "社内メール",
 							StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG003", "社内メール"));
 				}
-				if (!UtilsCheckMethod.isNullOrEmpty(p.getFurigana1()+p.getFurigana2())
-						&& !UtilsCheckMethod.checkKatakana(p.getFurigana1()+p.getFurigana2())) {
+				if (!UtilsCheckMethod.isNullOrEmpty(p.getFurigana1() + p.getFurigana2())
+						&& !UtilsCheckMethod.checkKatakana(p.getFurigana1() + p.getFurigana2())) {
 					errors.rejectValue("furigana", "カタカナ", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG003", "カタカナ"));
 				}
 				if (UtilsCheckMethod.isNullOrEmpty(p.getGenderStatus())) {
 					errors.rejectValue("genderStatus", "性別", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001", "性別"));
 				}
 				if (UtilsCheckMethod.isNullOrEmpty(p.getNationalityCode())) {
-					errors.rejectValue("nationalityCode", "出身地", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001", "出身地"));
+					errors.rejectValue("nationalityCode", "出身地",
+							StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001", "出身地"));
 				}
 				if (UtilsCheckMethod.isNullOrEmpty(p.getIntoCompanyYearAndMonth())) {
-					errors.rejectValue("intoCompanyYearAndMonth", "入社年月", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001", "入社年月"));
+					errors.rejectValue("intoCompanyYearAndMonth", "入社年月",
+							StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001", "入社年月"));
 
 				}
 				/**
@@ -73,14 +75,18 @@ public class EmployeeInfoValidation implements Validator {
 					errors.rejectValue("alphabetName", "ローマ字",
 							StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG003", "ローマ字"));
 				}
+				if (!UtilsCheckMethod.isNullOrEmpty(p.getPostcode())
+						&& !UtilsCheckMethod.alphabetFormat(p.getPostcode())
+						&& UtilsCheckMethod.isNullOrEmpty(p.getFirstHalfAddress())) {
+					errors.rejectValue("postcode", "郵便番号", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG003", "郵便番号"));
+				}
 				if (!UtilsCheckMethod.isNullOrEmpty(p.getResumeInfo1())) {
 					if (UtilsCheckMethod.isNullOrEmpty(p.getResumeName1())) {
 						errors.rejectValue("resumeName1", "履歴書1名",
 								StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001", "履歴書1名"));
 					}
 				}
-				
-				
+
 			}
 		}
 

@@ -217,15 +217,6 @@
 		FROM
 		M019Position
 	</select>
-	<!-- 上位お客様連想 -->
-	<select id="getTopCustomerDrop"
-		resultType="jp.co.lyc.cms.model.ModelClass">
-		SELECT
-		topCustomerName label,
-		topCustomerNo value
-		FROM
-		T008TopCustomerInfo
-	</select>
 
 	<!-- 部門名前連想 -->
 	<select id="getDepartmentMasterDrop"
@@ -459,8 +450,7 @@
 		T002EmployeeDetail.occupationCode =
 		M014Occupation.occupationCode
 		where
-		T002EmployeeDetail.occupationCode = "1"
-		or T002EmployeeDetail.occupationCode = "3"
-		or T002EmployeeDetail.occupationCode = "4";
+		T002EmployeeDetail.occupationCode = "0"
+		or T002EmployeeDetail.occupationCode = "1";
 	</select>
 </mapper>

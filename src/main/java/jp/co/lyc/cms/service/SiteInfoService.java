@@ -47,4 +47,25 @@ public class SiteInfoService {
 		return siteList;
 	}
 
+
+	
+	/**
+	 * 現場情報を削除
+	 * 
+	 * @param emp
+	 * @return boolean
+	 */
+	@Transactional(rollbackFor = Exception.class)
+	public boolean deleteSiteInfo(Map<String, Object> sendMap) {
+		boolean result = true;
+		try {
+			siteInfoMapper.deleteSiteInfo(sendMap);
+		} catch (Exception e) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			e.printStackTrace();
+			return result = false;
+		}
+		return result;
+	}
+
 }
