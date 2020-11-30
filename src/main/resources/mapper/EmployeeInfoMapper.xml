@@ -31,15 +31,36 @@
 		T015.resumeName2
 		FROM
 		T001Employee AS T001
-		LEFT JOIN T002EmployeeDetail AS T002 ON T002.employeeNo =T001.employeeNo
-		LEFT JOIN T015ResumeManagement AS T015 ON T015.employeeNo=T001.employeeNo
-		LEFT JOIN T006EmployeeSiteInfo AS T006 ON T001.employeeNo = T006.employeeNo
-		AND admissionStartDate =(SELECT MAX(admissionStartDate) FROM T006EmployeeSiteInfo )
+		LEFT JOIN
+		T002EmployeeDetail AS T002 ON T002.employeeNo =T001.employeeNo
+		LEFT
+		JOIN T015ResumeManagement AS T015 ON T015.employeeNo=T001.employeeNo
+		LEFT JOIN T006EmployeeSiteInfo AS T006 ON T001.employeeNo =
+		T006.employeeNo
+		AND admissionStartDate in
+		(
+		<if test="kadou!=null">
+			<if test='kadou=="0"'>
+				SELECT MAX(admissionStartDate) FROM T006EmployeeSiteInfo
+				where 1=1 GROUP BY employeeNo
+			</if>
+			<if test='kadou=="1"'>
+				SELECT MAX(admissionEndDate) FROM T006EmployeeSiteInfo
+				where 1=1 GROUP BY employeeNo
+			</if>
+		</if>
+		<if test="kadou==null">
+			SELECT MAX(admissionStartDate) FROM T006EmployeeSiteInfo where 1=1
+		</if>
+		)
 		LEFT JOIN T003AddressInfo AS T003 ON T001.employeeNo=T003.employeeNo
 		LEFT JOIN M013Station AS M013 ON T003.stationCode=M013.stationCode
 		LEFT JOIN T005WagesInfo AS T005 ON T001.employeeNo=T005.employeeNo
-		and reflectYearAndMonth = (SELECT MAX(reflectYearAndMonth) FROM T005WagesInfo)
-		LEFT JOIN T007CustomerInfo AS T007 ON T006.customerNo =T007.customerNo,
+		and
+		reflectYearAndMonth = (SELECT MAX(reflectYearAndMonth) FROM
+		T005WagesInfo)
+		LEFT JOIN T007CustomerInfo AS T007 ON T006.customerNo
+		=T007.customerNo,
 		(SELECT @rowNo:=0) AS rowNo WHERE 1 = 1
 		<if test="employeeNo!=null">
 			AND T001.employeeNo=#{employeeNo}
@@ -123,12 +144,17 @@
 		</if>
 		<if test="kadou!=null">
 			<if test='kadou=="0"'>
-				AND T006.AdmissionStartDate is not null AND
-				T006.AdmissionEndDate is null
+				AND ( AdmissionStartDate is not null
+				AND AdmissionEndDate is null
+				AND AdmissionStartDate
+				&lt;date_format(now(),'%Y%m%d'))
+				or
+				(AdmissionEndDate
+				&lt;date_format(now(),'%Y%m%d'))
 			</if>
 			<if test='kadou=="1"'>
-				AND T006.AdmissionStartDate is null AND
-				T006.AdmissionEndDate is not null
+				AND
+				AdmissionEndDate is not null and (AdmissionEndDate &lt;date_format(now(),'%Y%m%d'))
 			</if>
 		</if>
 		ORDER BY
@@ -340,6 +366,7 @@
 		<if test="japaneseCalendar!=  null">
 			japaneseCalendar =#{japaneseCalendar},
 		</if>
+	
 		<if test="alphabetName!=  null">
 			alphabetName =#{alphabetName},
 		</if>
@@ -488,6 +515,8 @@
 		T002.birthday,
 		T002.japaneseCalendar,
 		T002.alphabetName,
+	    SUBSTRING_INDEX(T002.alphabetName, ' ',1) alphabetName1,
+		SUBSTRING_INDEX(T002.alphabetName, ' ',-1) alphabetName2,
 		T002.furigana,
 		SUBSTRING_INDEX(T002.furigana, ' ',1) furigana1,
 		SUBSTRING_INDEX(T002.furigana, ' ',-1) furigana2,
