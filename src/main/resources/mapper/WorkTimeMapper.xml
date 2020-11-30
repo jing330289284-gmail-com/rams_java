@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jp.co.lyc.cms.mapper.CostRegistrationMapper">
+    <resultMap id="CostRegistration" type="jp.co.lyc.cms.model.CostRegistrationModel"/>
+    <select id="selectCostRegistration" resultMap="CostRegistration" parameterType="String">
+		SELECT
+			(@rowNo:=@rowNo + 1) AS rowNo,
+			employeeNo,
+			happendDate,
+			costClassificationCode,
+			dueDate,
+			detailedNameOrLine,
+			stationCode,
+			originCode,
+			transportationCode,
+			destinationCode,
+			cost,
+			remark,
+			roundCode,
+			CONVERT (costFile USING utf8)costFile,
+			updateTime,
+			createTime,
+			updateUser
+		FROM 
+			T020CostInfo
+			,(SELECT   @rowNo:=0) AS rowNo
+		WHERE
+			yearAndMonth1 >= #{yearAndMonth1} AND
+			yearAndMonth2 &lt;= #{employeeNo}
+		ORDER BY
+			yearAndMonth
+    </select>
+</mapper>
