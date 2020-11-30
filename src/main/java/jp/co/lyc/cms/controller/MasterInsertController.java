@@ -67,6 +67,9 @@ public class MasterInsertController extends BaseController {
 		sendMap.put("master", masterModel.getMaster());
 		sendMap.put("data", masterModel.getData());
 		sendMap.put("columnName", masterModel.getMaster().substring(4) + "name");
+		String columnCodeName = masterModel.getMaster().substring(4,5).toLowerCase();
+		String newColumnCodeName =columnCodeName+masterModel.getMaster().substring(5);
+		sendMap.put("columnCode", newColumnCodeName + "Code");
 		sendMap.put("updateUser", loginSession.getAttribute("employeeName"));
 		return masterInsertService.insertMaster(sendMap);
 
@@ -79,6 +82,7 @@ public class MasterInsertController extends BaseController {
 	 */
 	public boolean checkHave(MasterModel masterModel) {
 		masterModel.setColumnName(masterModel.getMaster().substring(4) + "name");
+		
 		return masterInsertService.checkHave(masterModel);
 
 	}
