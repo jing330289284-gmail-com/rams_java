@@ -12,7 +12,6 @@ public class MasterModel implements Serializable {
 	String columnCode;// code名
 	String columnName;// name名
 	String updateUser;// ログインの社員
-
 	public String getUpdateUser() {
 		return updateUser;
 	}

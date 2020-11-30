@@ -8,6 +8,6 @@
 	</select>
 	<!-- データのインサート -->
 	<insert id="insertMaster" parameterType="map">
-		INSERT INTO ${master} (${columnName},updateTime,createTime,updateUser) VALUE(#{data},NOW(),NOW(),#{updateUser})
+		INSERT INTO ${master} (${columnCode},${columnName},updateTime,createTime,updateUser) VALUE((select max(${columnCode})+1 from ${master} as ${columnName}),#{data},NOW(),NOW(),#{updateUser})
 	</insert>
 </mapper>
