@@ -1,33 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="jp.co.lyc.cms.mapper.CostRegistrationMapper">
-    <resultMap id="CostRegistration" type="jp.co.lyc.cms.model.CostRegistrationModel"/>
-    <select id="selectCostRegistration" resultMap="CostRegistration" parameterType="String">
+<mapper namespace="jp.co.lyc.cms.mapper.WorkTimeMapper">
+    <resultMap id="WorkTime" type="jp.co.lyc.cms.model.WorkTimeModel"/>
+    <select id="selectWorkTime" resultMap="WorkTime" parameterType="String">
 		SELECT
 			(@rowNo:=@rowNo + 1) AS rowNo,
-			employeeNo,
-			happendDate,
-			costClassificationCode,
-			dueDate,
-			detailedNameOrLine,
-			stationCode,
-			originCode,
-			transportationCode,
-			destinationCode,
-			cost,
-			remark,
-			roundCode,
-			CONVERT (costFile USING utf8)costFile,
-			updateTime,
-			createTime,
-			updateUser
+			T018.attendanceYearAndMonth,
+			T006.systemName,
+			T006.stationName,
+			concat(T006.payOffRange1,T006.payOffRange1),
+			T018.attendanceDays,
+			T018.sumWorkTime,
+			averageSumWorkTime,
+			workTimeRank,
+			carCost,
+			otherCost
 		FROM 
-			T020CostInfo
-			,(SELECT   @rowNo:=0) AS rowNo
+			T018WorkTotalTime T018
+		LEFT JOIN
+			T006EmployeeSiteInfo T006 ON T018.attendanceYearAndMonth = T006.admissionStartDate
+		AND
+			T018.employeeNo=T006.employeeNo
+		LEFT JOIN
+			T020CostInfo T020 ON T006.attendanceYearAndMonth = T020.happendDate
+		AND
+			T018.employeeNo=T020.employeeNo
+		LEFT JOIN
+		LEFT JOIN
+			(SELECT   @rowNo:=0) AS rowNo
 		WHERE
 			yearAndMonth1 >= #{yearAndMonth1} AND
-			yearAndMonth2 &lt;= #{employeeNo}
+			yearAndMonth2 &lt;= #{employeeNo} AND
+			employeeNo= #{employeeNo}
 		ORDER BY
-			yearAndMonth
+			attendanceYearAndMonth
     </select>
 </mapper>

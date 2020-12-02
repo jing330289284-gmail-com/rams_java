@@ -1,6 +1,7 @@
 package jp.co.lyc.cms.model;
 public class WorkTimeModel {
 	int rowNo;
+	String employeeNo;
 	String attendanceYearAndMonth;
 	String systemName;//システム名
 	String stationName;//場所
@@ -18,6 +19,12 @@ public class WorkTimeModel {
 	}
 	public void setRowNo(int rowNo) {
 		this.rowNo = rowNo;
+	}
+	public String getEmployeeNo() {
+		return employeeNo;
+	}
+	public void setEmployeeNo(String employeeNo) {
+		this.employeeNo = employeeNo;
 	}
 	public String getAttendanceYearAndMonth() {
 		return attendanceYearAndMonth;
