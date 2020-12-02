@@ -95,9 +95,44 @@
 		T006EmployeeSiteInfo.admissionStartDate
 	</select>
 
+	<!-- 営業ポイント情報検索 -->
+	<select id="getPointInfo" parameterType="string"
+		resultType="jp.co.lyc.cms.model.SalesInfoModel">
+		SELECT
+		T010SalesSituation.employeeNo,T001Employee.employeeFristName,T001Employee.employeeLastName,T010SalesSituation.salesYearAndMonth yearAndMonth,T007CustomerInfo.customerName,T002EmployeeDetail.intoCompanyCode,M004IntoCompany.intoCompanyName,T010SalesSituation.salesStaff
+		FROM T010SalesSituation
+		LEFT JOIN T002EmployeeDetail
+		ON
+		T010SalesSituation.employeeNo=T002EmployeeDetail.employeeNo
+		LEFT JOIN
+		M004IntoCompany
+		ON
+		T002EmployeeDetail.intoCompanyCode=M004IntoCompany.intoCompanyCode
+		LEFT JOIN T011BpInfoSupplement
+		ON
+		T010SalesSituation.employeeNo=T011BpInfoSupplement.bpEmployeeNo
+		LEFT
+		JOIN T007CustomerInfo
+		ON
+		T010SalesSituation.interviewCustomer1=T007CustomerInfo.customerNo
+		LEFT
+		JOIN T001Employee
+		ON
+		T010SalesSituation.employeeNo =
+		T001Employee.employeeNo
+		Where
+		T010SalesSituation.salesStaff =
+		ifnull(#{eigyou},T010SalesSituation.salesStaff)
+		and salesYearAndMonth
+		between ifnull(#{startDate},salesYearAndMonth) and
+		ifnull(#{endDate},salesYearAndMonth)
+		order by
+		salesYearAndMonth,employeeNo
+	</select>
+
 	<select id="getCustomerName" parameterType="string"
 		resultType="jp.co.lyc.cms.model.SalesInfoModel">
-		SELECT customerNo,customerName FROM rams.T007CustomerInfo;
+		SELECT customerNo,customerName FROM T007CustomerInfo;
 	</select>
 
 	<select id="getEmployeeNoSalary" parameterType="string"
@@ -109,6 +144,6 @@
 	<select id="getEmployeeName" parameterType="string"
 		resultType="jp.co.lyc.cms.model.SalesInfoModel">
 		SELECT employeeNo,employeeFristName,employeeLastName FROM
-		rams.T001Employee;
+		T001Employee;
 	</select>
 </mapper>

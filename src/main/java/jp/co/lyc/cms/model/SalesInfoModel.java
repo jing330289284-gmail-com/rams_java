@@ -31,6 +31,25 @@ public class SalesInfoModel {
 	String bpUnitPrice; // BP単価
 	String reflectYearAndMonth; // 反映年月
 	String customerNo; // 会社番号
+	String intoCompanyName; // 会社番号
+	String intoCompanyCode; // 会社番号
+	
+	
+	public String getIntoCompanyName() {
+		return intoCompanyName;
+	}
+
+	public void setIntoCompanyName(String intoCompanyName) {
+		this.intoCompanyName = intoCompanyName;
+	}
+
+	public String getIntoCompanyCode() {
+		return intoCompanyCode;
+	}
+
+	public void setIntoCompanyCode(String intoCompanyCode) {
+		this.intoCompanyCode = intoCompanyCode;
+	}
 
 	public String getCustomerNo() {
 		return customerNo;
