@@ -8,31 +8,35 @@
 			T018.attendanceYearAndMonth,
 			T006.systemName,
 			T006.stationName,
-			concat(T006.payOffRange1,T006.payOffRange1),
+			concat(T006.payOffRange1,T006.payOffRange1) payOffRange,
 			T018.attendanceDays,
 			T018.sumWorkTime,
-			averageSumWorkTime,
-			workTimeRank,
-			carCost,
-			otherCost
-		FROM 
-			T018WorkTotalTime T018
+			t1.averageSumWorkTime,
+			t0.workTimeRank,
+			T2.carCost,
+			T3.otherCost
+		FROM
+			T018WorkTotalTime t018
 		LEFT JOIN
-			T006EmployeeSiteInfo T006 ON T018.attendanceYearAndMonth = T006.admissionStartDate
-		AND
-			T018.employeeNo=T006.employeeNo
+			(select row_number()over(partition by attendanceYearAndMonth order by sumWorkTime desc) as workTimeRank,
+			sumWorkTime,employeeNo,attendanceYearAndMonth from rams.T018WorkTotalTime)t0
+			ON t018.attendanceYearAndMonth=t0.attendanceYearAndMonth
 		LEFT JOIN
-			T020CostInfo T020 ON T006.attendanceYearAndMonth = T020.happendDate
-		AND
-			T018.employeeNo=T020.employeeNo
+			(select round(avg(sumWorkTime)) as averageSumWorkTime,attendanceYearAndMonth from rams.T018WorkTotalTime group by attendanceYearAndMonth)t1
+			ON t018.attendanceYearAndMonth=t1.attendanceYearAndMonth
 		LEFT JOIN
+			(SELECT sum(cost) as carCost,left(happendDate,6) as happendDate FROM T020CostInfo where employeeNo=#{employeeNo} and costClassificationCode=0 group by left(happendDate,6))t2
+			ON T006.attendanceYearAndMonth = T2.happendDate
+		LEFT JOIN
+			(SELECT sum(cost) as otherCost,left(happendDate,6) as happendDate FROM T020CostInfo where employeeNo=#{employeeNo} and costClassificationCode!=0 group by left(happendDate,6))t3
+			ON T006.attendanceYearAndMonth = T3.happendDate
 		LEFT JOIN
 			(SELECT   @rowNo:=0) AS rowNo
 		WHERE
-			yearAndMonth1 >= #{yearAndMonth1} AND
-			yearAndMonth2 &lt;= #{employeeNo} AND
-			employeeNo= #{employeeNo}
+			T018.attendanceYearAndMonth >= #{yearAndMonth1} AND
+			T018.attendanceYearAndMonth &lt;= #{yearAndMonth2} AND
+			T018.employeeNo= #{employeeNo}
 		ORDER BY
-			attendanceYearAndMonth
+			T018.attendanceYearAndMonth
     </select>
 </mapper>

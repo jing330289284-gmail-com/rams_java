@@ -29,7 +29,14 @@ public class WorkTimeController extends BaseController {
 	@RequestMapping(value = "/selectWorkTime", method = RequestMethod.POST)
 	@ResponseBody
 	public List<WorkTimeModel> selectWorkTime(WorkTimeModel workTimeModel) {
+		if((workTimeModel.getYearAndMonth1()).isEmpty()) {
+			workTimeModel.setYearAndMonth1("000000");
+		}
+		if((workTimeModel.getYearAndMonth2()).isEmpty()) {
+			workTimeModel.setYearAndMonth2("999999");
+		}
 		logger.info("CostRegistrationController.selectCostRegistration:" + "検索開始");
+		workTimeModel.setEmployeeNo(getSession().getAttribute("employeeNo").toString());
 		List<WorkTimeModel> checkMod = workTimeService.selectWorkTime(workTimeModel);
 		logger.info("CostRegistrationController.selectCostRegistration:" + "検索終了");
 		return checkMod;
