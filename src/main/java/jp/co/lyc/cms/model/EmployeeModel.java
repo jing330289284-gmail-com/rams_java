@@ -18,7 +18,8 @@ public class EmployeeModel implements Serializable {
 	String genderStatus;// 性別ステータス
 	String birthday;// 年齢
 	String japaneseCalendar;// 和暦
-	String alphabetName;// ローマ字
+	String alphabetName1;// ローマ字
+	String alphabetName2;// ローマ字
 	String furigana;// カタカナ
 	String nationalityCode;// 出身地コード(国)
 	String birthplace;// 出身地(県)
@@ -188,13 +189,6 @@ public class EmployeeModel implements Serializable {
 		this.japaneseCalendar = japaneseCalendar;
 	}
 
-	public String getAlphabetName() {
-		return alphabetName;
-	}
-
-	public void setAlphabetName(String alphabetName) {
-		this.alphabetName = alphabetName;
-	}
 
 	public String getFurigana() {
 		return furigana;
@@ -720,6 +714,22 @@ public class EmployeeModel implements Serializable {
 
 	public void setStationCode(String stationCode) {
 		this.stationCode = stationCode;
+	}
+
+	public String getAlphabetName1() {
+		return alphabetName1;
+	}
+
+	public void setAlphabetName1(String alphabetName1) {
+		this.alphabetName1 = alphabetName1;
+	}
+
+	public String getAlphabetName2() {
+		return alphabetName2;
+	}
+
+	public void setAlphabetName2(String alphabetName2) {
+		this.alphabetName2 = alphabetName2;
 	}
 
 	

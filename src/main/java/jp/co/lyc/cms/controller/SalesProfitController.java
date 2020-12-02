@@ -158,8 +158,9 @@ public class SalesProfitController extends BaseController {
 						formatter.parseDateTime(workDateStart.substring(0, 4) + "-" + workDateStart.substring(4, 6)),
 						formatter.parseDateTime(workDateEnd.substring(0, 4) + "-" + workDateEnd.substring(4, 6)))
 						.getMonths() + 1;
-				siteList.get(i).setProfit(Integer.toString(Integer.parseInt(siteList.get(i).getUnitPrice()) * months));
-				profitAll += Integer.parseInt(siteList.get(i).getUnitPrice()) * months;
+				siteList.get(i)
+						.setProfit(Integer.toString(Integer.parseInt(siteList.get(i).getUnitPrice()) * 10000 * months));
+				profitAll += Integer.parseInt(siteList.get(i).getUnitPrice()) * months * 10000;
 				String startYandM = workDateStart;
 				String endYandM = workDateEnd;
 				List<String> getYandM = new ArrayList<String>();
@@ -245,7 +246,7 @@ public class SalesProfitController extends BaseController {
 						employeeStatus = "協力";
 						if (siteList.get(i).getBpUnitPrice() != null) {
 							if (!siteList.get(i).getBpUnitPrice().equals(""))
-								bpSalary = Integer.parseInt(siteList.get(i).getBpUnitPrice()) * months;
+								bpSalary = Integer.parseInt(siteList.get(i).getBpUnitPrice()) * months * 10000;
 							siteList.get(i).setSalary(Integer.toString(bpSalary));
 							siteRoleNameAll += Integer.parseInt(siteList.get(i).getProfit()) - bpSalary;
 						}
@@ -267,7 +268,8 @@ public class SalesProfitController extends BaseController {
 				if (siteList.get(i).getSiteRoleName() != null)
 					siteList.get(i)
 							.setSiteRoleName(formatString((float) Integer.parseInt(siteList.get(i).getSiteRoleName())));
-				siteList.get(i).setUnitPrice(formatString((float) Integer.parseInt(siteList.get(i).getUnitPrice())));
+				siteList.get(i)
+						.setUnitPrice(formatString((float) Integer.parseInt(siteList.get(i).getUnitPrice()) * 10000));
 				siteList.get(i).setProfit(formatString((float) Integer.parseInt(siteList.get(i).getProfit())));
 				siteList.get(i).setSalary(formatString((float) Integer.parseInt(siteList.get(i).getSalary())));
 
