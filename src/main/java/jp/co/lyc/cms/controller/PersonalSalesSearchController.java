@@ -170,6 +170,9 @@ public class PersonalSalesSearchController {
 					if(UtilsCheckMethod.isNullOrEmpty(personModelList.get(i).getOtherAllowanceAmount())) {
 						personModelList.get(i).setOtherAllowanceAmount("0");
 					}
+					if(UtilsCheckMethod.isNullOrEmpty(personModelList.get(i).getHousingAllowance())) {
+						personModelList.get(i).setHousingAllowance("0");
+					}
 					List<String> empNameList =new ArrayList<String>();
 					if(personModelList.get(i).getRelatedEmployees()!=null) {
 						
