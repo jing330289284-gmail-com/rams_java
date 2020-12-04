@@ -34,7 +34,14 @@ public class ProjectInfoModel {
 	String siteLoaction;
 	String actionType;
 	String updateUser;
+	String theSelectProjectperiodStatus;
 	
+	public String getTheSelectProjectperiodStatus() {
+		return theSelectProjectperiodStatus;
+	}
+	public void setTheSelectProjectperiodStatus(String theSelectProjectperiodStatus) {
+		this.theSelectProjectperiodStatus = theSelectProjectperiodStatus;
+	}
 	public String getSiteLoaction() {
 		return siteLoaction;
 	}
