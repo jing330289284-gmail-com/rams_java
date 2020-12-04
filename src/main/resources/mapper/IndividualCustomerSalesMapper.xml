@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jp.co.lyc.cms.mapper.IndividualCustomerSalesMapper">
+	<resultMap id="detailsInfo"
+		type="jp.co.lyc.cms.model.IndividualCustomerSalesModel" />
+		
+		<select id="getCustomerSalesInfo" parameterType="map"
+		resultMap="detailsInfo">
+			<foreach item="getYandM" collection="getYandM" index="index">
+			<if test="index != 0">
+			union all
+	                </if>
+SELECT * FROM(
+select 
+${getYandM} As yearAndMonth,
+A.max As maxUnitPrice,
+B.min As minUnitPrice,
+CONCAT(T001.employeeFristName,T001.employeeLastName)as employeeName,
+T006.unitPrice,
+M012.siteRoleName,
+T018.DeductionsAndOvertimePay,
+M013.stationName
+from 
+T001Employee as T001 
+left join  T006EmployeeSiteInfo as T006 on T001.employeeNo=T006.employeeNo 
+left join  T002EmployeeDetail as T002 on T002.employeeNo=T001.employeeNo 
+left join M012SiteRole as M012 on M012.siteRoleCode=T002.siteRoleCode
+left join M013Station as M013 on T006.stationCode =M013.stationCode
+left join T018WorkTotalTime as T018 on T018.employeeNo= T002.employeeNo and #{getYandM} =T018.attendanceYearAndMonth
+left join (select MAX(unitPrice) as max from T006EmployeeSiteInfo As T006 
+where #{getYandM} between left(admissionStartDate,6) and left(admissionEndDate,6) and T006.customerNo =  #{customerName} )as A on 1=1
+
+left join (select MIN(unitPrice) as min from T006EmployeeSiteInfo As T006 
+where #{getYandM} between left(admissionStartDate,6) and left(admissionEndDate,6) and T006.customerNo =  #{customerName} )as B on 1=1
+
+where  #{getYandM} between left(admissionStartDate,6) and left(admissionEndDate,6) and T006.customerNo = #{customerName}
+)As A${getYandM}
+                
+             </foreach>
+		</select>
+</mapper>
