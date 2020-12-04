@@ -7,11 +7,11 @@ public class WorkTimeModel {
 	String stationName;//場所
 	String payOffRange;//精算時間
 	String attendanceDays;//出勤日数
-	String sumWorkTime;//出勤時間
-	String averageSumWorkTime;//会社平均稼働
+	Integer sumWorkTime;//出勤時間
+	Integer averageSumWorkTime;//会社平均稼働
 	String workTimeRank;//社内稼動ランキング
-	String carCost;//交通費用
-	String otherCost;//他の費用
+	Integer carCost;//交通費用
+	Integer otherCost;//他の費用
 	String yearAndMonth1;//検索用
 	String yearAndMonth2;//検索用
 	public int getRowNo() {
@@ -56,16 +56,16 @@ public class WorkTimeModel {
 	public void setAttendanceDays(String attendanceDays) {
 		this.attendanceDays = attendanceDays;
 	}
-	public String getSumWorkTime() {
+	public Integer getSumWorkTime() {
 		return sumWorkTime;
 	}
-	public void setSumWorkTime(String sumWorkTime) {
+	public void setSumWorkTime(Integer sumWorkTime) {
 		this.sumWorkTime = sumWorkTime;
 	}
-	public String getAverageSumWorkTime() {
+	public Integer getAverageSumWorkTime() {
 		return averageSumWorkTime;
 	}
-	public void setAverageSumWorkTime(String averageSumWorkTime) {
+	public void setAverageSumWorkTime(Integer averageSumWorkTime) {
 		this.averageSumWorkTime = averageSumWorkTime;
 	}
 	public String getWorkTimeRank() {
@@ -74,16 +74,16 @@ public class WorkTimeModel {
 	public void setWorkTimeRank(String workTimeRank) {
 		this.workTimeRank = workTimeRank;
 	}
-	public String getCarCost() {
+	public Integer getCarCost() {
 		return carCost;
 	}
-	public void setCarCost(String carCost) {
+	public void setCarCost(Integer carCost) {
 		this.carCost = carCost;
 	}
-	public String getOtherCost() {
+	public Integer getOtherCost() {
 		return otherCost;
 	}
-	public void setOtherCost(String otherCost) {
+	public void setOtherCost(Integer otherCost) {
 		this.otherCost = otherCost;
 	}
 	public String getYearAndMonth1() {
