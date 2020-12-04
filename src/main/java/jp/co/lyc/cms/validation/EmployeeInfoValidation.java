@@ -70,9 +70,14 @@ public class EmployeeInfoValidation implements Validator {
 								StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001", "社内メール"));
 					}
 				}
-				if (!UtilsCheckMethod.isNullOrEmpty(p.getAlphabetName())
-						&& !UtilsCheckMethod.alphabetFormat(p.getAlphabetName())) {
-					errors.rejectValue("alphabetName", "ローマ字",
+				if (!UtilsCheckMethod.isNullOrEmpty(p.getAlphabetName1())
+						&& !UtilsCheckMethod.alphabetFormat(p.getAlphabetName1())) {
+					errors.rejectValue("alphabetName1", "ローマ字",
+							StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG003", "ローマ字"));
+				}
+				if (!UtilsCheckMethod.isNullOrEmpty(p.getAlphabetName2())
+						&& !UtilsCheckMethod.alphabetFormat(p.getAlphabetName2())) {
+					errors.rejectValue("alphabetName2", "ローマ字",
 							StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG003", "ローマ字"));
 				}
 				if (!UtilsCheckMethod.isNullOrEmpty(p.getPostcode())

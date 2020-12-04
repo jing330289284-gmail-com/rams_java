@@ -248,7 +248,8 @@ public class EmployeeInfoController extends BaseController {
 		String employeeLastName = emp.getEmployeeLastName();// 社員名
 		String furigana = (emp.getFurigana1() != null ? emp.getFurigana1() : "") + " "
 				+ (emp.getFurigana2() != null ? emp.getFurigana2() : "");// カタカナ
-		String alphabetName = emp.getAlphabetName();// ローマ字
+		String alphabetName = (emp.getAlphabetName1() != null ? emp.getAlphabetName1() : "") + " "
+				+ (emp.getAlphabetName2() != null ? emp.getAlphabetName2() : "");// カタカナ
 		String birthday = emp.getBirthday();// 年齢
 		String genderStatus = emp.getGenderStatus();// 性別ステータス
 		String intoCompanyCode = emp.getIntoCompanyCode();// 入社区分
