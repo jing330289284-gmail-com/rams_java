@@ -14,7 +14,7 @@ public interface SalesProfitMapper {
 	 * 営業個別売上情報取得
 	 *
 	 */
-	public List<SalesProfitModel> getPointInfo(String eigyou, String startDate, String endDate);
+	public List<SalesInfoModel> getPointInfo(String eigyou, String startDate, String endDate);
 
 	public List<SalesInfoModel> getSalesInfo(String eigyou, String intoCompanyCode, String startDate, String endDate);
 
@@ -23,4 +23,6 @@ public interface SalesProfitMapper {
 	public List<SalesInfoModel> getEmployeeNoSalary();
 
 	public List<SalesInfoModel> getEmployeeName();
+	
+	public List<SalesInfoModel> getEmployeeSiteInfo();
 }

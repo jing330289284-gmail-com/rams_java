@@ -149,6 +149,7 @@ public class SalesPointSetController extends BaseController {
 		String salesPuttern = salesPointSetModel.getSalesPuttern();
 		String specialPoint = salesPointSetModel.getSpecialPoint();
 		String point = salesPointSetModel.getPoint();
+		String specialPointNo = salesPointSetModel.getSpecialPointNo();
 		String remark = salesPointSetModel.getRemark();
 
 		if (no != null && no.length() != 0) {
@@ -177,6 +178,9 @@ public class SalesPointSetController extends BaseController {
 		}
 		if (remark != null && remark.length() != 0) {
 			sendMap.put("remark", remark);
+		}
+		if (specialPointNo != null && specialPointNo.length() != 0) {
+			sendMap.put("specialPointNo", specialPointNo);
 		}
 
 		sendMap.put("updateUser", loginSession.getAttribute("employeeName"));
