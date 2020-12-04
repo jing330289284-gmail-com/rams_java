@@ -330,6 +330,13 @@ public interface UtilsMapper {
 	 * @return
 	 */
 	public List<ModelClass> getProjectType();
+	
+	/**
+	 * 案件番号取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getProjectNo();
 
 	/**
 	 * 社員氏名(営業、管理者)を取得する

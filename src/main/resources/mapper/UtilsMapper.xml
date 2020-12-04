@@ -432,6 +432,16 @@
 		FROM
 		M037ProjectType
 	</select>
+	
+	<!--案件番号取得 -->
+	<select id="getProjectNo"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT
+			projectNo NAME,
+			projectNo CODE 
+		FROM
+			T022ProjectInfo
+	</select>
 
 	<!-- 社員名(営業、管理者) -->
 	<select id="getEmployeeNameByOccupationName"

@@ -17,17 +17,20 @@ public class SalesProfitService {
 	@Autowired
 	SalesProfitMapper salesProfitMapper;
 
-	public List<SalesProfitModel> getSalesProfitInfo(SalesProfitModel salesProfitModel) {
+	public List<SalesProfitModel> getPointInfo(SalesProfitModel salesProfitModel) {
 
 //		List<SalesPointSetModel> siteList = salesProfitMapper.getSalesProfitInfo(sendMap);
 //		return siteList;
 		// salesProfitModel.getEmployeeName(), salesProfitModel.getEmployeeStatus(),
 		// salesProfitModel.getStartDate(), salesProfitModel.getEndDate()
 
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
-		return salesProfitMapper.getSalesProfitInfo(salesProfitModel.getEmployeeName(),
-				salesProfitModel.getEmployeeStatus(), dateFormat.format(salesProfitModel.getStartDate()),
-				dateFormat.format(salesProfitModel.getEndDate()));
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMM");
+		// String startTime =
+		// dateFormat.format(salesProfitModel.getStartDate()).toString();
+		// String endTime = dateFormat.format(salesProfitModel.getEndDate()).toString();
+		String startTime = null;
+		String endTime = null;
+		return salesProfitMapper.getPointInfo(salesProfitModel.getEmployeeName(), startTime, endTime);
 	}
 
 	public List<SalesInfoModel> getSalesInfo(SalesProfitModel salesProfitModel) {
