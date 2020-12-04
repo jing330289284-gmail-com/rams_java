@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jp.co.lyc.cms.mapper.ProjectInfoSearchMapper">
+	<resultMap id="projectInfoModel"
+		type="jp.co.lyc.cms.model.ProjectInfoModel" />
+	<resultMap id="String" type="java.lang.String" />
+	<!--  案件情報取得 -->
+	<select id="searchProjectInfo" resultMap="projectInfoModel" parameterType="String">
+	</select>
+</mapper>
