@@ -7,8 +7,8 @@ public class WorkTimeModel {
 	String stationName;//場所
 	String payOffRange;//精算時間
 	String attendanceDays;//出勤日数
-	Integer sumWorkTime;//出勤時間
-	Integer averageSumWorkTime;//会社平均稼働
+	String sumWorkTime;//出勤時間
+	String averageSumWorkTime;//会社平均稼働
 	String workTimeRank;//社内稼動ランキング
 	Integer carCost;//交通費用
 	Integer otherCost;//他の費用
@@ -56,16 +56,16 @@ public class WorkTimeModel {
 	public void setAttendanceDays(String attendanceDays) {
 		this.attendanceDays = attendanceDays;
 	}
-	public Integer getSumWorkTime() {
+	public String getSumWorkTime() {
 		return sumWorkTime;
 	}
-	public void setSumWorkTime(Integer sumWorkTime) {
+	public void setSumWorkTime(String sumWorkTime) {
 		this.sumWorkTime = sumWorkTime;
 	}
-	public Integer getAverageSumWorkTime() {
+	public String getAverageSumWorkTime() {
 		return averageSumWorkTime;
 	}
-	public void setAverageSumWorkTime(Integer averageSumWorkTime) {
+	public void setAverageSumWorkTime(String averageSumWorkTime) {
 		this.averageSumWorkTime = averageSumWorkTime;
 	}
 	public String getWorkTimeRank() {

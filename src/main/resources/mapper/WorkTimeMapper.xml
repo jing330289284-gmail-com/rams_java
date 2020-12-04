@@ -7,11 +7,11 @@
 			T018.attendanceYearAndMonth,
 			T006.systemName,
 			T006.stationCode as stationName,
-			concat(ifnull(T006.payOffRange1,"")," - ",ifnull(T006.payOffRange2,"")) payOffRange,
-			T018.attendanceDays,
-			T018.sumWorkTime,
-			T0.workTimeRank,
-			T1.averageSumWorkTime,
+			concat(ifnull(T006.payOffRange1,""),"H - ",ifnull(T006.payOffRange2,""),"H") payOffRange,
+			concat(T018.attendanceDays,"日") attendanceDays,
+			concat(T018.sumWorkTime,"H") sumWorkTime,
+			concat("NO.",T0.workTimeRank) workTimeRank,
+			concat(T1.averageSumWorkTime,"H") averageSumWorkTime,
 			T2.carCost,
 			T3.otherCost
 		FROM
