@@ -522,6 +522,21 @@ public class UtilsController {
 		List<ModelClass> list = getStatus(salesPriorityStatus);
 		return list;
 	}
+	
+	/**
+	 * 案件期間選択ステータス
+	 * 
+	 * @return
+	 */
+
+	@RequestMapping(value = "/getTheSelectProjectperiodStatus", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getTheSelectProjectperiodStatus() {
+		Properties properties = getProperties();
+		String salesPriorityStatus = properties.getProperty("theSelectProjectperiodStatus");
+		List<ModelClass> list = getStatus(salesPriorityStatus);
+		return list;
+	}
 
 	/**
 	 * 営業担当選ぶ
@@ -1249,6 +1264,18 @@ public class UtilsController {
 	@ResponseBody
 	public List<ModelClass> getProjectType() {
 		List<ModelClass> list = utilsService.getProjectType();
+		return list;
+	}
+	
+	/**
+	 *案件番号取得
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getProjectNo", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getProjectNo() {
+		List<ModelClass> list = utilsService.getProjectNo();
 		return list;
 	}
 
