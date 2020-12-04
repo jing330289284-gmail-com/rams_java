@@ -44,12 +44,54 @@ public class SalesProfitController extends BaseController {
 
 	@RequestMapping(value = "/getPointInfo", method = RequestMethod.POST)
 	@ResponseBody
-	public List<SalesProfitModel> getPointInfo(@RequestBody SalesProfitModel salesProfitModel) {
+	public List<SalesInfoModel> getPointInfo(@RequestBody SalesProfitModel salesProfitModel) {
 
-		List<SalesProfitModel> siteList = salesProfitService.getPointInfo(salesProfitModel);
-
+		List<SalesInfoModel> siteList = salesProfitService.getPointInfo(salesProfitModel);
+		List<SalesInfoModel> customerName = salesProfitService.getCustomerName();
+		List<SalesInfoModel> employeeSiteInfo = salesProfitService.getEmployeeSiteInfo();
 		// 取值之后的操作
+		for (int i = 0; i < siteList.size(); i++) {
 
+			// 设置行番号
+			siteList.get(i).setRowNo(Integer.toString(i + 1));
+
+			// 设置社员名
+			String employeeName = (siteList.get(i).getEmployeeFristName() == null ? ""
+					: siteList.get(i).getEmployeeFristName())
+					+ (siteList.get(i).getEmployeeLastName() == null ? "" : siteList.get(i).getEmployeeLastName());
+			siteList.get(i).setEmployeeName(employeeName);
+
+			// 设置社员区分
+			String employeeStatus = "";
+			if (!(siteList.get(i).getEmployeeStatus() == null)) {
+				if (siteList.get(i).getEmployeeStatus().equals("0")) {
+					employeeStatus = "社員";
+				} else if (siteList.get(i).getEmployeeStatus().equals("1")) {
+					employeeStatus = "協力";
+				} else
+					employeeStatus = "";
+			}
+			siteList.get(i).setEmployeeStatus(employeeStatus);
+
+			// 设置所属会社
+			if (!(siteList.get(i).getBpBelongCustomerCode() == null)) {
+				for (int z = 0; z < customerName.size(); z++) {
+					if (siteList.get(i).getBpBelongCustomerCode().equals(customerName.get(z).getCustomerNo())) {
+						siteList.get(i).setEmployeeFrom(customerName.get(z).getCustomerName());
+					}
+				}
+			} else
+				siteList.get(i).setEmployeeFrom("");
+
+			// 设置契約区分
+			if (siteList.get(i).getCustomerContractStatus().equals("0")) {
+				siteList.get(i).setCustomerContractStatus("即存");
+			} else if (siteList.get(i).getCustomerContractStatus().equals("1")) {
+				siteList.get(i).setCustomerContractStatus("新规");
+			} else {
+				siteList.get(i).setCustomerContractStatus("");
+			}
+		}
 		logger.info("SalesProfitController.getSalesPointInfo:" + "検索結束");
 		return siteList;
 	}

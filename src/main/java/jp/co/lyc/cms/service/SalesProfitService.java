@@ -17,7 +17,7 @@ public class SalesProfitService {
 	@Autowired
 	SalesProfitMapper salesProfitMapper;
 
-	public List<SalesProfitModel> getPointInfo(SalesProfitModel salesProfitModel) {
+	public List<SalesInfoModel> getPointInfo(SalesProfitModel salesProfitModel) {
 
 //		List<SalesPointSetModel> siteList = salesProfitMapper.getSalesProfitInfo(sendMap);
 //		return siteList;
@@ -56,5 +56,10 @@ public class SalesProfitService {
 	public List<SalesInfoModel> getEmployeeName() {
 
 		return salesProfitMapper.getEmployeeName();
+	}
+
+	public List<SalesInfoModel> getEmployeeSiteInfo() {
+
+		return salesProfitMapper.getEmployeeSiteInfo();
 	}
 }

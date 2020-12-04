@@ -5,9 +5,9 @@
 	<insert id="salesPointInsert" parameterType="map">
 		insert into
 		T014SalesPointInfo(id,employeeStatus,intoCompanyCode,customerContractStatus,levelCode,
-		salesProgressCode,specialPointConditionCode,salesPoint,remark,updateTime,createTime,updateUser)
+		salesProgressCode,specialPointConditionCode,salesPoint,specialsalesPoint,remark,updateTime,createTime,updateUser)
 		values(#{no},#{employee},#{newMember},#{customerContract},#{level},#{salesPuttern},
-		#{specialPoint},#{point},#{remark},now(),now(),#{updateUser})
+		#{specialPoint},#{point},#{specialPointNo},#{remark},now(),now(),#{updateUser})
 	</insert>
 
 	<update id="salesPointUpdate" parameterType="map">
@@ -16,7 +16,7 @@
 		set
 		employeeStatus=#{employee},intoCompanyCode=#{newMember},customerContractStatus=#{customerContract},
 		levelCode=#{level},salesProgressCode=#{salesPuttern},specialPointConditionCode=#{specialPoint},
-		salesPoint=#{point},remark=#{remark},updateTime=now(),updateUser=#{updateUser}
+		salesPoint=#{point},specialsalesPoint=#{specialPointNo},remark=#{remark},updateTime=now(),updateUser=#{updateUser}
 		where id=#{no}
 	</update>
 
@@ -40,7 +40,7 @@
 		levelCode as
 		level,salesProgressCode as salesPuttern,specialPointConditionCode
 		as
-		specialPoint,salesPoint as point,remark FROM
+		specialPoint,salesPoint as point,specialsalesPoint as specialPointNo,remark FROM
 		T014SalesPointInfo
 		WHERE
 		1=1

@@ -1,5 +1,7 @@
 package jp.co.lyc.cms.model;
 
+import java.util.Date;
+
 public class SalesInfoModel {
 
 	/**
@@ -33,8 +35,55 @@ public class SalesInfoModel {
 	String customerNo; // 会社番号
 	String intoCompanyName; // 会社番号
 	String intoCompanyCode; // 会社番号
-	
-	
+	String customerContractStatus; // 契约区分
+	String salesProgressName; // 営業結果パターン
+	String startTime; // 現場開始年月
+	String endTime; // 現場終了年月
+	String levelCode; // レベルコード
+	String point; // ポイント
+	Date startDate;// 現場開始時間
+	Date endDate;// 現場終了時間
+
+	public String getPoint() {
+		return point;
+	}
+
+	public void setPoint(String point) {
+		this.point = point;
+	}
+
+	public String getSalesProgressName() {
+		return salesProgressName;
+	}
+
+	public void setSalesProgressName(String salesProgressName) {
+		this.salesProgressName = salesProgressName;
+	}
+
+	public String getCustomerContractStatus() {
+		return customerContractStatus;
+	}
+
+	public void setCustomerContractStatus(String customerContractStatus) {
+		this.customerContractStatus = customerContractStatus;
+	}
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
 	public String getIntoCompanyName() {
 		return intoCompanyName;
 	}
