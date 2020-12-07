@@ -20,6 +20,7 @@ import jp.co.lyc.cms.common.BaseController;
 import jp.co.lyc.cms.mapper.ExpensesInfoMapper;
 import jp.co.lyc.cms.mapper.WagesInfoMapper;
 import jp.co.lyc.cms.model.ExpensesInfoModel;
+import jp.co.lyc.cms.model.SiteModel;
 import jp.co.lyc.cms.model.WagesInfoModel;
 import jp.co.lyc.cms.service.WagesInfoService;
 import jp.co.lyc.cms.validation.WagesInfoValidation;
@@ -57,10 +58,18 @@ public class WagesInfoController extends BaseController{
 			return result;
 		}
 		boolean kadouCheck = true;
-		ArrayList<String> relatedEmployees = wagesInfoMapper.kadouCheck(wagesInfoMod.getEmployeeNo());
-		if(relatedEmployees.size() != 0) {
+		ArrayList<SiteModel> kadouList = wagesInfoMapper.kadouCheck(wagesInfoMod.getEmployeeNo());
+		if(kadouList.size() != 0) {
 			kadouCheck = false;
-			result.put("relatedEmployees", relatedEmployees);
+			boolean leaderCheck = false;
+			if(kadouList.get(0) != null) {
+				if(kadouList.get(0).getSiteRoleCode().equals("0") || 
+						kadouList.get(0).getSiteRoleCode().equals("1")) {
+					leaderCheck = true;
+				}
+			}
+			result.put("kadouList", kadouList);
+			result.put("leaderCheck", leaderCheck);
 		}
 		result.put("kadouCheck", kadouCheck);
 		HashMap<String, String> sendMap = new HashMap<String, String>();
@@ -68,6 +77,9 @@ public class WagesInfoController extends BaseController{
 		ArrayList<WagesInfoModel> wagesInfoList = wagesInfoMapper.getWagesInfo(sendMap);
 		ArrayList<ExpensesInfoModel> expensesInfoList = expensesInfoMapper.getExpensesInfo(sendMap);
 		if(wagesInfoList.size() == 0) {
+			//追加の場合（データがない）、T002に社員形式を取得
+			WagesInfoModel a = wagesInfoMapper.getEmployeeForm(wagesInfoMod.getEmployeeNo());
+			result.put("employeeFormCode", a.getEmployeeFormCode());
 			result.put("errorsMessage", "該当社員の給料データがない");
 			return result;
 		}else if(expensesInfoList.size() != 0) {
@@ -177,7 +189,7 @@ public class WagesInfoController extends BaseController{
 			return result;
 		}
 		//非稼働の場合、保険は前件の保険を使う
-		ArrayList<String> relatedEmployees = wagesInfoMapper.kadouCheck(wagesInfoModel.getEmployeeNo());
+		ArrayList<SiteModel> relatedEmployees = wagesInfoMapper.kadouCheck(wagesInfoModel.getEmployeeNo());
 		if(relatedEmployees.size() == 0) {
 			ArrayList<WagesInfoModel> hokenList = 
 					wagesInfoMapper.hokenSearch(wagesInfoModel.getEmployeeNo());
