@@ -136,7 +136,7 @@
 	</select>
 
 	<select id="getCustomerName" parameterType="string"
-		resultType="jp.co.lyc.cms.model.SalesInfoModel">
+		resultType="jp.co.lyc.cms.model.SalesEmployeeModel">
 		SELECT customerNo,customerName FROM T007CustomerInfo;
 	</select>
 
@@ -153,7 +153,7 @@
 	</select>
 
 	<select id="getEmployeeSiteInfo" parameterType="string"
-		resultType="jp.co.lyc.cms.model.SalesInfoModel">
+		resultType="jp.co.lyc.cms.model.SalesEmployeeModel">
 		SELECT
 		T006EmployeeSiteInfo.employeeNo,substring(admissionStartDate,1,6)
 		as
@@ -163,5 +163,10 @@
 		LEFT JOIN T007CustomerInfo
 		ON
 		T006EmployeeSiteInfo.customerNo=T007CustomerInfo.customerNo;
+	</select>
+
+	<select id="getSalesPointInfo" parameterType="string"
+		resultType="jp.co.lyc.cms.model.SalesPointModel">
+		SELECT * FROM T014SalesPointInfo;
 	</select>
 </mapper>

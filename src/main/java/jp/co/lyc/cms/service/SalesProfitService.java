@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import jp.co.lyc.cms.mapper.SalesProfitMapper;
+import jp.co.lyc.cms.model.SalesEmployeeModel;
 import jp.co.lyc.cms.model.SalesInfoModel;
+import jp.co.lyc.cms.model.SalesPointModel;
 import jp.co.lyc.cms.model.SalesProfitModel;
 
 @Component
@@ -43,7 +45,7 @@ public class SalesProfitService {
 				startTime, endTime);
 	}
 
-	public List<SalesInfoModel> getCustomerName() {
+	public List<SalesEmployeeModel> getCustomerName() {
 
 		return salesProfitMapper.getCustomerName();
 	}
@@ -58,8 +60,12 @@ public class SalesProfitService {
 		return salesProfitMapper.getEmployeeName();
 	}
 
-	public List<SalesInfoModel> getEmployeeSiteInfo() {
+	public List<SalesEmployeeModel> getEmployeeSiteInfo() {
 
 		return salesProfitMapper.getEmployeeSiteInfo();
+	}
+
+	public List<SalesPointModel> getSalesPointInfo() {
+		return salesProfitMapper.getSalesPointInfo();
 	}
 }
