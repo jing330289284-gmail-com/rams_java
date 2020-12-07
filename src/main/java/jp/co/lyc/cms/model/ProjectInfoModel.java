@@ -16,7 +16,6 @@ public class ProjectInfoModel {
 	String keyWordOfLanagurue1;
 	String keyWordOfLanagurue2;
 	String keyWordOfLanagurue3;
-	String typeOfIndustry;
 	String projectInfoDetail;
 	String japaneaseConversationLevel;
 	String unitPriceRangeLowest;
@@ -35,7 +34,21 @@ public class ProjectInfoModel {
 	String actionType;
 	String updateUser;
 	String theSelectProjectperiodStatus;
+	String remark;
+	String recruitmentNumbers;
 	
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	public String getRecruitmentNumbers() {
+		return recruitmentNumbers;
+	}
+	public void setRecruitmentNumbers(String recruitmentNumbers) {
+		this.recruitmentNumbers = recruitmentNumbers;
+	}
 	public String getTheSelectProjectperiodStatus() {
 		return theSelectProjectperiodStatus;
 	}
@@ -155,12 +168,6 @@ public class ProjectInfoModel {
 	}
 	public void setKeyWordOfLanagurue3(String keyWordOfLanagurue3) {
 		this.keyWordOfLanagurue3 = keyWordOfLanagurue3;
-	}
-	public String getTypeOfIndustry() {
-		return typeOfIndustry;
-	}
-	public void setTypeOfIndustry(String typeOfIndustry) {
-		this.typeOfIndustry = typeOfIndustry;
 	}
 	public String getProjectInfoDetail() {
 		return projectInfoDetail;

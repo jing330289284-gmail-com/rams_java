@@ -1244,14 +1244,14 @@ public class UtilsController {
 	}
 
 	/**
-	 * 入場期限取得
+	 * 案件期限取得
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/getAdmissionPeriod", method = RequestMethod.POST)
+	@RequestMapping(value = "/getProjectPeriod", method = RequestMethod.POST)
 	@ResponseBody
-	public List<ModelClass> getAdmissionPeriod() {
-		List<ModelClass> list = utilsService.getAdmissionPeriod();
+	public List<ModelClass> getProjectPeriod() {
+		List<ModelClass> list = utilsService.getProjectPeriod();
 		return list;
 	}
 
