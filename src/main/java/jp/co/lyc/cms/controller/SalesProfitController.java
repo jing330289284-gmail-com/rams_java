@@ -1,8 +1,10 @@
 package jp.co.lyc.cms.controller;
 
+import java.beans.VetoableChangeListener;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,12 +23,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import jp.co.lyc.cms.common.BaseController;
 import jp.co.lyc.cms.model.PersonalSalesSearchModel;
+import jp.co.lyc.cms.model.SalesEmployeeModel;
 import jp.co.lyc.cms.model.SalesInfoModel;
+import jp.co.lyc.cms.model.SalesPointModel;
 import jp.co.lyc.cms.model.SalesPointSetModel;
 import jp.co.lyc.cms.model.SalesProfitModel;
 import jp.co.lyc.cms.service.SalesProfitService;
+import software.amazon.ion.impl.PrivateScalarConversions.ValueVariant;
 
-import org.joda.time.DateTime;
 import org.joda.time.Months;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -47,8 +51,12 @@ public class SalesProfitController extends BaseController {
 	public List<SalesInfoModel> getPointInfo(@RequestBody SalesProfitModel salesProfitModel) {
 
 		List<SalesInfoModel> siteList = salesProfitService.getPointInfo(salesProfitModel);
-		List<SalesInfoModel> customerName = salesProfitService.getCustomerName();
-		List<SalesInfoModel> employeeSiteInfo = salesProfitService.getEmployeeSiteInfo();
+		List<SalesEmployeeModel> customerName = salesProfitService.getCustomerName();
+		List<SalesEmployeeModel> employeeSiteInfo = salesProfitService.getEmployeeSiteInfo();
+		List<SalesPointModel> pointInfoList = salesProfitService.getSalesPointInfo();
+
+		int pointAll = 0;
+
 		// 取值之后的操作
 		for (int i = 0; i < siteList.size(); i++) {
 
@@ -71,7 +79,7 @@ public class SalesProfitController extends BaseController {
 				} else
 					employeeStatus = "";
 			}
-			siteList.get(i).setEmployeeStatus(employeeStatus);
+			siteList.get(i).setEmployeeStatusName(employeeStatus);
 
 			// 设置所属会社
 			if (!(siteList.get(i).getBpBelongCustomerCode() == null)) {
@@ -83,6 +91,91 @@ public class SalesProfitController extends BaseController {
 			} else
 				siteList.get(i).setEmployeeFrom("");
 
+			// 设置お客様
+			for (int j = 0; j < employeeSiteInfo.size(); j++) {
+				if (siteList.get(i).getEmployeeNo().equals(employeeSiteInfo.get(j).getEmployeeNo())) {
+					if (Integer.parseInt(siteList.get(i).getYearAndMonth()) >= Integer
+							.parseInt(employeeSiteInfo.get(j).getStartTime())) {
+						if (employeeSiteInfo.get(j).getEndTime() == null) {
+							siteList.get(i).setCustomerName(employeeSiteInfo.get(j).getCustomerName());
+							siteList.get(i).setLevelCode(employeeSiteInfo.get(j).getLevelCode());
+							siteList.get(i).setStartTime(employeeSiteInfo.get(j).getStartTime());
+							siteList.get(i).setEndTime(employeeSiteInfo.get(j).getEndTime());
+							break;
+						} else if (Integer.parseInt(siteList.get(i).getYearAndMonth()) <= Integer
+								.parseInt(employeeSiteInfo.get(j).getEndTime())) {
+							siteList.get(i).setCustomerName(employeeSiteInfo.get(j).getCustomerName());
+							siteList.get(i).setLevelCode(employeeSiteInfo.get(j).getLevelCode());
+							siteList.get(i).setStartTime(employeeSiteInfo.get(j).getStartTime());
+							siteList.get(i).setEndTime(employeeSiteInfo.get(j).getEndTime());
+							break;
+						}
+					}
+				}
+			}
+
+			// 计算ポイント
+			for (int j = 0; j < pointInfoList.size(); j++) {
+				if (siteList.get(i).getEmployeeStatus() != null && pointInfoList.get(j).getEmployeeStatus() != null
+						&& siteList.get(i).getIntoCompanyCode() != null
+						&& pointInfoList.get(j).getIntoCompanyCode() != null
+						&& siteList.get(i).getCustomerContractStatus() != null
+						&& pointInfoList.get(j).getCustomerContractStatus() != null
+						&& siteList.get(i).getLevelCode() != null && pointInfoList.get(j).getLevelCode() != null
+						&& siteList.get(i).getSalesProgressCode() != null
+						&& pointInfoList.get(j).getSalesProgressCode() != null) {
+					if (siteList.get(i).getEmployeeStatus().equals(pointInfoList.get(j).getEmployeeStatus())
+							&& siteList.get(i).getIntoCompanyCode().equals(pointInfoList.get(j).getIntoCompanyCode())
+							&& siteList.get(i).getCustomerContractStatus()
+									.equals(pointInfoList.get(j).getCustomerContractStatus())
+							&& siteList.get(i).getLevelCode().equals(pointInfoList.get(j).getLevelCode())
+							&& siteList.get(i).getSalesProgressCode()
+									.equals(pointInfoList.get(j).getSalesProgressCode())) {
+						siteList.get(i).setPoint(pointInfoList.get(j).getSalesPoint());
+					}
+				}
+			}
+
+			// 特別计算ポイント
+			if (siteList.get(i).getStartTime() != null) {
+				if (siteList.get(i).getEndTime() == null) {
+					Date day = new Date();
+					SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMM");
+					siteList.get(i).setEndTime(dateFormat.format(day));
+				}
+				int months = Integer.parseInt(siteList.get(i).getEndTime())
+						- Integer.parseInt(siteList.get(i).getStartTime());
+				if (months >= 12) {
+					siteList.get(i).setSpecialsalesPointCondition("2");
+				} else if (months >= 6) {
+					siteList.get(i).setSpecialsalesPointCondition("0");
+				} else if (months >= 3) {
+					siteList.get(i).setSpecialsalesPointCondition("1");
+				} else {
+					siteList.get(i).setSpecialsalesPointCondition("");
+				}
+				for (int j = 0; j < pointInfoList.size(); j++) {
+					if (siteList.get(i).getSpecialsalesPointCondition()
+							.equals(pointInfoList.get(j).getSpecialPointConditionCode())) {
+						siteList.get(i).setSpecialsalesPoint(pointInfoList.get(j).getSpecialsalesPoint());
+					}
+				}
+				switch (siteList.get(i).getSpecialsalesPointCondition()) {
+				case "":
+					siteList.get(i).setSpecialsalesPointCondition("");
+					break;
+				case "0":
+					siteList.get(i).setSpecialsalesPointCondition("同現場で稼働六か月以上");
+					break;
+				case "1":
+					siteList.get(i).setSpecialsalesPointCondition("紹介入社稼動三ヶ月");
+					break;
+				case "2":
+					siteList.get(i).setSpecialsalesPointCondition("同現場で1年以上単価調整");
+					break;
+				}
+			}
+
 			// 设置契約区分
 			if (siteList.get(i).getCustomerContractStatus().equals("0")) {
 				siteList.get(i).setCustomerContractStatus("即存");
@@ -91,7 +184,17 @@ public class SalesProfitController extends BaseController {
 			} else {
 				siteList.get(i).setCustomerContractStatus("");
 			}
+
+			// 合计ポイント
+			if (siteList.get(i).getPoint() != null) {
+				pointAll += Integer.parseInt(siteList.get(i).getPoint());
+			}
+			if (siteList.get(i).getSpecialsalesPoint() != null) {
+				pointAll += Integer.parseInt(siteList.get(i).getSpecialsalesPoint());
+			}
 		}
+		if (siteList.size() > 0)
+			siteList.get(0).setPointAll(Integer.toString(pointAll));
 		logger.info("SalesProfitController.getSalesPointInfo:" + "検索結束");
 		return siteList;
 	}
@@ -106,7 +209,7 @@ public class SalesProfitController extends BaseController {
 			salesProfitModel.setEmployeeStatus(null);
 
 		List<SalesInfoModel> employeeSales = salesProfitService.getEmployeeNoSalary();
-		List<SalesInfoModel> customerName = salesProfitService.getCustomerName();
+		List<SalesEmployeeModel> customerName = salesProfitService.getCustomerName();
 		List<SalesInfoModel> employeeNameToNo = salesProfitService.getEmployeeName();
 
 		if (salesProfitModel.getEmployeeName() != null) {
