@@ -537,7 +537,20 @@ public class UtilsController {
 		List<ModelClass> list = getStatus(salesPriorityStatus);
 		return list;
 	}
+	/**
+	 * 作業報告書送信ステータス
+	 * 
+	 * @return
+	 */
 
+	@RequestMapping(value = "/getSendWorkReportStatus", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getSendWorkReportStatus() {
+		Properties properties = getProperties();
+		String sendWorkReportStatus = properties.getProperty("sendWorkReportStatus");
+		List<ModelClass> list = getStatus(sendWorkReportStatus);
+		return list;
+	}
 	/**
 	 * 営業担当選ぶ
 	 * 
