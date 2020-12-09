@@ -11,17 +11,13 @@
     T007.purchasingManagers,
     T009.customerDepartmentCode,
     T009.positionCode,
-    T007.purchasingManagersMail,
-    '' AS monthCount,
-    '' AS purchasingManagers2,
-	'' AS positionCode2,
-	'' AS purchasingManagersMail2
+    T009.customerDepartmentMail
 FROM
     T007CustomerInfo AS T007
         LEFT JOIN
     T009CustomerDepartmentInfo AS T009 ON T007.customerNo = T009.customerNo
-        AND T007.purchasingManagers = T009.responsiblePerson, (SELECT
-		@rowNo:=-1) AS rowId
+       , (SELECT
+		@rowNo:=0) AS rowId
     </select>
         <!--　担当取る -->
     <select id="getSalesPersons" parameterType="String" resultType="jp.co.lyc.cms.model.SendRepotModel">
@@ -46,7 +42,7 @@ WHERE
 		VALUES
 		(
 		#{name},
-		1,
+		0,
 		#{code},
 		 NOW(),
 		 NOW(),
@@ -54,7 +50,7 @@ WHERE
     </insert>
         <select id="getLists" resultType="jp.co.lyc.cms.model.SendRepotModel">
 select StorageListName as name,transmissionClassificationCode as code,customerList as customerNo
-from T021CustomerSendMailStorageList order by StorageListName
+from T021CustomerSendMailStorageList where transmissionClassificationCode=0 order by StorageListName
     </select>
     
     	<update id="listNameUpdate" parameterType="String">
@@ -62,7 +58,7 @@ from T021CustomerSendMailStorageList order by StorageListName
 		T021CustomerSendMailStorageList
 		set
 		StorageListName=#{storageListName},updateTime=now(),updateUser=#{updateUser}
-		where StorageListName=#{oldStorageListName} and transmissionClassificationCode=1
+		where StorageListName=#{oldStorageListName} and transmissionClassificationCode=0
 	</update>
 	 <select id="getSalesCustomersByNos" resultType="jp.co.lyc.cms.model.SendRepotModel">
 	SELECT 
@@ -95,6 +91,6 @@ FROM
 		FROM
 		T021CustomerSendMailStorageList
 		WHERE
-		StorageListName=#{storageListName} and transmissionClassificationCode=1
+		StorageListName=#{storageListName} and transmissionClassificationCode=0
 	</delete>
 </mapper>
