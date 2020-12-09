@@ -571,7 +571,8 @@ t019.englishConversationLevel,
            t019.unitPrice,
            t019.remark,
     t010.salesYearAndMonth,
-    t010.salesProgressCode
+    t010.salesProgressCode,
+    t019.theMonthOfStartWork 
 FROM
     T001Employee t001
         LEFT JOIN
@@ -644,6 +645,8 @@ developLanguageCode8=#{developLanguageCode8},
 developLanguageCode9=#{developLanguageCode9},
 developLanguageCode10=#{developLanguageCode10},
 unitPrice=#{unitPrice},
+theMonthOfStartWork=#{beginMonth},
+salesProgressCode=#{salesProgressCode},
 remark=#{remark},
 updateTime=NOW(),
 updateUser=#{updateUser}
