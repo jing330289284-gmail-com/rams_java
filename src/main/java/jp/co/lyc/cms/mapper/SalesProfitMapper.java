@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Mapper;
 import jp.co.lyc.cms.model.SalesEmployeeModel;
 import jp.co.lyc.cms.model.SalesInfoModel;
 import jp.co.lyc.cms.model.SalesPointModel;
-import jp.co.lyc.cms.model.SalesProfitModel;
 
 @Mapper
 public interface SalesProfitMapper {
