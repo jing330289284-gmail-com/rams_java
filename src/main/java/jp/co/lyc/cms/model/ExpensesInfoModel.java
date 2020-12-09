@@ -10,11 +10,17 @@ public class ExpensesInfoModel{
 	String otherAllowanceName;
 	String otherAllowanceAmount;
 	String leaderAllowanceAmount;
-	String housingStatus;
+	String totalExpenses;
 	String housingAllowance;
 	String actionType;
 	String updateUser;
 	
+	public String getTotalExpenses() {
+		return totalExpenses;
+	}
+	public void setTotalExpenses(String totalExpenses) {
+		this.totalExpenses = totalExpenses;
+	}
 	public String getExpensesPeriod() {
 		return expensesPeriod;
 	}
@@ -32,9 +38,6 @@ public class ExpensesInfoModel{
 	}
 	public String getHousingAllowance() {
 		return housingAllowance;
-	}
-	public String getHousingStatus() {
-		return housingStatus;
 	}
 	public String getLeaderAllowanceAmount() {
 		return leaderAllowanceAmount;
@@ -65,9 +68,6 @@ public class ExpensesInfoModel{
 	}
 	public void setHousingAllowance(String housingAllowance) {
 		this.housingAllowance = housingAllowance;
-	}
-	public void setHousingStatus(String housingStatus) {
-		this.housingStatus = housingStatus;
 	}
 	public void setLeaderAllowanceAmount(String leaderAllowanceAmount) {
 		this.leaderAllowanceAmount = leaderAllowanceAmount;
