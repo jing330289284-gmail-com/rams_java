@@ -1,5 +1,6 @@
 package jp.co.lyc.cms.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -60,7 +61,44 @@ public class ProjectInfoSearchController {
 			logger.info("projectInfoSearchController.onloadPage:" + "登録終了");
 			return result;
 		}
-		result.put("projectInfoList", projectInfoSearchService.getProjectInfo(projectInfoModel));
+		ArrayList<ProjectInfoModel> resultList =  projectInfoSearchService.getProjectInfo(projectInfoModel);
+		if(resultList.size() == 0) {
+			result.put("errorsMessage","該当データなし");
+			return result;
+		}
+		result.put("projectInfoList",resultList);
+		return result;
+	}
+	/**
+	 * 案件情報の削除
+	 * @param projectInfoModel
+	 * @return
+	 */
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> delete(@RequestBody ProjectInfoModel projectInfoModel) {
+		logger.info("projectInfoSearchController.delete:" + "初期化開始");
+		Map<String, Object> result = new HashMap<String, Object>();
+		errorsMessage = "";
+		DataBinder binder = new DataBinder(projectInfoModel);
+		binder.setValidator(new ProjectInfoValidation());
+		binder.validate();
+		BindingResult results = binder.getBindingResult();
+		if (results.hasErrors()) {
+			results.getAllErrors().forEach(o -> {
+				FieldError error = (FieldError) o;
+				errorsMessage += error.getDefaultMessage();// エラーメッセージ
+			});
+			result.put("errorsMessage", errorsMessage);// エラーメッセージ
+			logger.info("projectInfoSearchController.delete:" + "登録終了");
+			return result;
+		}
+		boolean res = projectInfoSearchService.delete(projectInfoModel);
+		if(res) {
+			result.put("message", "削除成功");
+		}else {
+			result.put("errorsMessage", "削除失敗");
+		}
 		return result;
 	}
 }

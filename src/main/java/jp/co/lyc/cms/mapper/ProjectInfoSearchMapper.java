@@ -14,4 +14,10 @@ public interface ProjectInfoSearchMapper {
 	 * @return
 	 */
 	public ArrayList<ProjectInfoModel> searchProjectInfo(HashMap<String, String> sendMap);
+	
+	/**
+	 * 案件情報の削除
+	 * @param projectNo
+	 */
+	public void delete(String projectNo);
 }
