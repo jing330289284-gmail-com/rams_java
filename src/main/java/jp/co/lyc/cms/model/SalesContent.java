@@ -34,7 +34,29 @@ public class SalesContent implements Serializable {
 	Date createTime;
 	Date updateTime;
 	String updateUser;
+	/* 営業送信のレビュー票NO.4とNO.5を指摘対応（2020/12/07　張棟）START*/
+	/* 営業状況*/
+	String beginMonth;
 	
+	/* 稼働開始*/
+	String salesProgressCode;
+	
+	public String getBeginMonth() {
+		return beginMonth;
+	}
+
+	public void setBeginMonth(String beginMonth) {
+		this.beginMonth = beginMonth;
+	}
+	
+	public String getSalesProgressCode() {
+		return salesProgressCode;
+	}
+
+	public void setSalesProgressCode(String salesProgressCode) {
+		this.salesProgressCode = salesProgressCode;
+	}
+	/* 営業送信のレビュー票NO.4とNO.5を指摘対応（2020/12/07　張棟）END*/
 	public String getStationCode() {
 		return stationCode;
 	}
