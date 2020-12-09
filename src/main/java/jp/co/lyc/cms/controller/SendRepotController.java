@@ -47,6 +47,25 @@ public class SendRepotController  extends BaseController {
 		logger.info("getCustomers" + "検索結束");
 		return salesCustomersList;
 	}
+	/**
+	 * リストを取得
+	 * 
+	 * @param なし
+	 * @return List
+	 */
+	@RequestMapping(value = "/getLists", method = RequestMethod.POST)
+	@ResponseBody
+	public List<SendRepotModel> getLists() {
+
+		List<SendRepotModel> salesPersonsList = new ArrayList<SendRepotModel>();
+		try {
+			salesPersonsList = sendRepotService.getLists();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		logger.info("getSalesPersons" + "検索結束");
+		return salesPersonsList;
+	}
 	
 	@RequestMapping(value = "/getSalesPersons", method = RequestMethod.POST)
 	@ResponseBody
@@ -79,20 +98,7 @@ public class SendRepotController  extends BaseController {
 		return index;
 	}
 	
-	@RequestMapping(value = "/getLists", method = RequestMethod.POST)
-	@ResponseBody
-	public List<SendRepotModel> getLists() {
 
-		List<SendRepotModel> salesPersonsList = new ArrayList<SendRepotModel>();
-		try {
-			salesPersonsList = sendRepotService.getLists();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		logger.info("getSalesPersons" + "検索結束");
-		return salesPersonsList;
-	}
-	
 	@RequestMapping(value = "/listNameUpdate", method = RequestMethod.POST)
 	@ResponseBody
 	public void listNameUpdate(@RequestBody SendRepotsListName sendRepotsListNames) {
@@ -152,7 +158,11 @@ public class SendRepotController  extends BaseController {
 	@ResponseBody
 	private static void openFolder() throws IOException{
 		Calendar now = Calendar.getInstance();
-		String path="C:\\file\\作業報告書フォルダ\\"+now.get(Calendar.YEAR) + "\\"+ (now.get(Calendar.MONTH) + 1)+ "\\";
-	    Runtime.getRuntime().exec("explorer.exe /select, "+path);
+		String theMonth=Integer.toString(now.get(Calendar.MONTH) + 1);
+		if((now.get(Calendar.MONTH) + 1)<10) {
+			 theMonth="0"+theMonth;
+		}
+		String path="C:\\file\\作業報告書フォルダ\\"+now.get(Calendar.YEAR) + "\\"+ theMonth;
+	    Runtime.getRuntime().exec("explorer.exe  /n,/select, "+path);
 	    }
 	}
