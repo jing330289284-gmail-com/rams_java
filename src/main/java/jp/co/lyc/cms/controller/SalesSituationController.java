@@ -119,12 +119,11 @@ public class SalesSituationController  extends BaseController {
 	}
 	
 	/**
-	 * データを取得
+	 * 画面初期化のデータを取得
 	 * 
 	 * @param emp
 	 * @return List
 	 */
-
 	@RequestMapping(value = "/getPersonalSalesInfo", method = RequestMethod.POST)
 	@ResponseBody
 	public List<SalesSituationModel> getPersonalSalesInfo(@RequestBody SalesSituationModel model) {
@@ -155,7 +154,6 @@ public class SalesSituationController  extends BaseController {
 				e.printStackTrace();
 			}
 		}
-		
 
 		logger.info("updateSalesSituation" + "検索結束");
 		return salesSituationList;
@@ -185,14 +183,17 @@ public class SalesSituationController  extends BaseController {
 		return index;
 	}
 	
+	/**
+	 * 子画面の更新ボタンを押下する
+	 **/
 	@RequestMapping(value = "/updateSalesSentence", method = RequestMethod.POST)
 	@ResponseBody
 	public int updateSalesSentence(@RequestBody SalesContent model) {
 
-
 		model.setUpdateUser(getSession().getAttribute("employeeName").toString());
 		logger.info("getPersonalSalesInfo:" + "検索開始");
 		int index =0;
+		model.setBeginMonth(model.getTempDate());
 		try {
 			index = salesSituationService.updateSalesSentence(model);
 		} catch (Exception e) {

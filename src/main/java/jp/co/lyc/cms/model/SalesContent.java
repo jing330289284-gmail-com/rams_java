@@ -3,6 +3,8 @@ package jp.co.lyc.cms.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.core.io.SegmentedStringWriter;
+
 public class SalesContent implements Serializable {
 
 	/**
@@ -38,6 +40,15 @@ public class SalesContent implements Serializable {
 	/* 営業状況*/
 	String beginMonth;
 	
+	String tempDate;
+	public String getTempDate() {
+		return tempDate;
+	}
+
+	public void setTempDate(String tempDate) {
+		this.tempDate = tempDate;
+	}
+
 	/* 稼働開始*/
 	String salesProgressCode;
 	
