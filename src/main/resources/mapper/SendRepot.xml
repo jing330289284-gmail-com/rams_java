@@ -4,20 +4,37 @@
     <resultMap id="SendRepot" type="jp.co.lyc.cms.model.SendRepotModel"/>
     <!--　お客様取る -->
     <select id="getSalesCustomers" resultType="jp.co.lyc.cms.model.SendRepotModel">
-	SELECT 
-	(@rowNo:=@rowNo+1 ) AS rowId,
+SELECT 
     T007.customerNo,
     T007.customerName,
-    T007.purchasingManagers,
+    T007.representative as responsiblePerson,
+    "" as customerDepartmentCode,
+    "" as positionCode,
+    T007.purchasingManagersMail as customerDepartmentMail
+FROM
+    T007CustomerInfo AS T007
+UNION
+SELECT 
+    T007.customerNo,
+    T007.customerName,
+    T007.purchasingManagers as responsiblePerson,
+    0 as customerDepartmentCode,
+    0 as positionCode,
+    T007.purchasingManagersMail as customerDepartmentMail
+FROM
+    T007CustomerInfo AS T007
+UNION
+SELECT
+    T007.customerNo,
+    T007.customerName,
+    T009.responsiblePerson,
     T009.customerDepartmentCode,
     T009.positionCode,
     T009.customerDepartmentMail
 FROM
     T007CustomerInfo AS T007
-        LEFT JOIN
+LEFT JOIN
     T009CustomerDepartmentInfo AS T009 ON T007.customerNo = T009.customerNo
-       , (SELECT
-		@rowNo:=0) AS rowId
     </select>
         <!--　担当取る -->
     <select id="getSalesPersons" parameterType="String" resultType="jp.co.lyc.cms.model.SendRepotModel">
