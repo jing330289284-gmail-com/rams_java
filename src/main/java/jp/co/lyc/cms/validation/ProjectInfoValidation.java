@@ -30,7 +30,8 @@ public class ProjectInfoValidation implements Validator {
 					errors.rejectValue("projectType", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001", "案件種別"));
 				}
 				if (UtilsCheckMethod.isNullOrEmpty(p.getAdmissionPeriod())) {
-					errors.rejectValue("admissionPeriod", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001", "入場時期"));
+					errors.rejectValue("admissionPeriod", "",
+							StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001", "入場時期"));
 				}
 				if (!UtilsCheckMethod.isNullOrEmpty(p.getUnitPriceRangeLowest())
 						&& !UtilsCheckMethod.isNullOrEmpty(p.getUnitPriceRangeHighest())) {
@@ -70,6 +71,10 @@ public class ProjectInfoValidation implements Validator {
 						errors.rejectValue("unitPriceRangeLowest", "",
 								StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG009", "単価"));
 					}
+				}
+			} else if (methodName.equals("delete")) {
+				if (UtilsCheckMethod.isNullOrEmpty(p.getProjectNo())) {
+					errors.rejectValue("projectNo", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001", "案件番号"));
 				}
 			}
 		}

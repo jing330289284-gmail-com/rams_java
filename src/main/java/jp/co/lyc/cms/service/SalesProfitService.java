@@ -1,6 +1,5 @@
 package jp.co.lyc.cms.service;
 
-import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -21,17 +20,13 @@ public class SalesProfitService {
 
 	public List<SalesInfoModel> getPointInfo(SalesProfitModel salesProfitModel) {
 
-//		List<SalesPointSetModel> siteList = salesProfitMapper.getSalesProfitInfo(sendMap);
-//		return siteList;
-		// salesProfitModel.getEmployeeName(), salesProfitModel.getEmployeeStatus(),
-		// salesProfitModel.getStartDate(), salesProfitModel.getEndDate()
-
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMM");
-		// String startTime =
-		// dateFormat.format(salesProfitModel.getStartDate()).toString();
-		// String endTime = dateFormat.format(salesProfitModel.getEndDate()).toString();
 		String startTime = null;
 		String endTime = null;
+		if (salesProfitModel.getStartDate() != null && salesProfitModel.getEndDate() != null) {
+			startTime = dateFormat.format(salesProfitModel.getStartDate()).toString();
+			endTime = dateFormat.format(salesProfitModel.getEndDate()).toString();
+		}
 		return salesProfitMapper.getPointInfo(salesProfitModel.getEmployeeName(), startTime, endTime);
 	}
 

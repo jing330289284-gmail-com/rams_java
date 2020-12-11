@@ -1,15 +1,10 @@
 package jp.co.lyc.cms.controller;
 
-import java.beans.VetoableChangeListener;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,14 +17,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import jp.co.lyc.cms.common.BaseController;
-import jp.co.lyc.cms.model.PersonalSalesSearchModel;
 import jp.co.lyc.cms.model.SalesEmployeeModel;
 import jp.co.lyc.cms.model.SalesInfoModel;
 import jp.co.lyc.cms.model.SalesPointModel;
-import jp.co.lyc.cms.model.SalesPointSetModel;
 import jp.co.lyc.cms.model.SalesProfitModel;
 import jp.co.lyc.cms.service.SalesProfitService;
-import software.amazon.ion.impl.PrivateScalarConversions.ValueVariant;
 
 import org.joda.time.Months;
 import org.joda.time.format.DateTimeFormat;
