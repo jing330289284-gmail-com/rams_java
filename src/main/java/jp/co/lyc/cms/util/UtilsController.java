@@ -537,7 +537,20 @@ public class UtilsController {
 		List<ModelClass> list = getStatus(salesPriorityStatus);
 		return list;
 	}
+	/**
+	 * 作業報告書送信ステータス
+	 * 
+	 * @return
+	 */
 
+	@RequestMapping(value = "/getSendWorkReportStatus", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getSendWorkReportStatus() {
+		Properties properties = getProperties();
+		String sendWorkReportStatus = properties.getProperty("sendWorkReportStatus");
+		List<ModelClass> list = getStatus(sendWorkReportStatus);
+		return list;
+	}
 	/**
 	 * 営業担当選ぶ
 	 * 
@@ -1244,14 +1257,14 @@ public class UtilsController {
 	}
 
 	/**
-	 * 入場期限取得
+	 * 案件期限取得
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/getAdmissionPeriod", method = RequestMethod.POST)
+	@RequestMapping(value = "/getProjectPeriod", method = RequestMethod.POST)
 	@ResponseBody
-	public List<ModelClass> getAdmissionPeriod() {
-		List<ModelClass> list = utilsService.getAdmissionPeriod();
+	public List<ModelClass> getProjectPeriod() {
+		List<ModelClass> list = utilsService.getProjectPeriod();
 		return list;
 	}
 

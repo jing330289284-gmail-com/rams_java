@@ -24,31 +24,34 @@ public class ProjectInfoValidation implements Validator {
 			String methodName = stackTraceElement.getMethodName();
 			if (methodName.equals("toroku")) {
 				if (UtilsCheckMethod.isNullOrEmpty(p.getProjectName())) {
-					errors.rejectValue("projectName", "", 
-							StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001", "案件名"));
+					errors.rejectValue("projectName", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001", "案件名"));
+				}
+				if (UtilsCheckMethod.isNullOrEmpty(p.getProjectType())) {
+					errors.rejectValue("projectType", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001", "案件種別"));
+				}
+				if (UtilsCheckMethod.isNullOrEmpty(p.getAdmissionPeriod())) {
+					errors.rejectValue("admissionPeriod", "",
+							StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001", "入場時期"));
 				}
 				if (!UtilsCheckMethod.isNullOrEmpty(p.getUnitPriceRangeLowest())
 						&& !UtilsCheckMethod.isNullOrEmpty(p.getUnitPriceRangeHighest())) {
-					if (Integer.parseInt(p.getUnitPriceRangeLowest()) > 
-							Integer.parseInt(p.getUnitPriceRangeHighest())
-							|| Integer.parseInt(p.getUnitPriceRangeLowest()) == 
-								Integer.parseInt(p.getUnitPriceRangeHighest())) {
+					if (Integer.parseInt(p.getUnitPriceRangeLowest()) > Integer.parseInt(p.getUnitPriceRangeHighest())
+							|| Integer.parseInt(p.getUnitPriceRangeLowest()) == Integer
+									.parseInt(p.getUnitPriceRangeHighest())) {
 						errors.rejectValue("unitPriceRangeLowest", "",
 								StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG009", "単価"));
 					}
 				}
-				if(!UtilsCheckMethod.isNullOrEmpty(p.getPayOffRangeLowest())
+				if (!UtilsCheckMethod.isNullOrEmpty(p.getPayOffRangeLowest())
 						&& !UtilsCheckMethod.isNullOrEmpty(p.getPayOffRangeHighest())) {
-					if (Integer.parseInt(p.getPayOffRangeLowest()) > 
-					Integer.parseInt(p.getPayOffRangeHighest())) {
+					if (Integer.parseInt(p.getPayOffRangeLowest()) > Integer.parseInt(p.getPayOffRangeHighest())) {
 						errors.rejectValue("payOffRangeLowest", "",
 								StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG009", "清算範囲"));
 					}
 				}
-				if(!UtilsCheckMethod.isNullOrEmpty(p.getProjectPhaseStart())
+				if (!UtilsCheckMethod.isNullOrEmpty(p.getProjectPhaseStart())
 						&& !UtilsCheckMethod.isNullOrEmpty(p.getProjectPhaseEnd())) {
-					if (Integer.parseInt(p.getProjectPhaseStart()) > 
-					Integer.parseInt(p.getProjectPhaseEnd())) {
+					if (Integer.parseInt(p.getProjectPhaseStart()) > Integer.parseInt(p.getProjectPhaseEnd())) {
 						errors.rejectValue("projectPhaseEnd", "",
 								StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG009", "作業工程"));
 					}
@@ -58,6 +61,20 @@ public class ProjectInfoValidation implements Validator {
 						errors.rejectValue("payOffRangeLowest", "",
 								StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG009", "メール"));
 					}
+				}
+			} else if (methodName.equals("search")) {
+				if (!UtilsCheckMethod.isNullOrEmpty(p.getUnitPriceRangeLowest())
+						&& !UtilsCheckMethod.isNullOrEmpty(p.getUnitPriceRangeHighest())) {
+					if (Integer.parseInt(p.getUnitPriceRangeLowest()) > Integer.parseInt(p.getUnitPriceRangeHighest())
+							|| Integer.parseInt(p.getUnitPriceRangeLowest()) == Integer
+									.parseInt(p.getUnitPriceRangeHighest())) {
+						errors.rejectValue("unitPriceRangeLowest", "",
+								StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG009", "単価"));
+					}
+				}
+			} else if (methodName.equals("delete")) {
+				if (UtilsCheckMethod.isNullOrEmpty(p.getProjectNo())) {
+					errors.rejectValue("projectNo", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001", "案件番号"));
 				}
 			}
 		}

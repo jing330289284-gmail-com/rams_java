@@ -106,7 +106,7 @@ public class ProjectInfoController extends BaseController{
 				errorsMessage += error.getDefaultMessage();// エラーメッセージ
 			});
 			result.put("errorsMessage", errorsMessage);// エラーメッセージ
-			logger.info("WagesInfoController.onloadPage:" + "登録終了");
+			logger.info("projectInfoSearchController.onloadPage:" + "登録終了");
 			return result;
 		}
 		projectInfoModel.setUpdateUser((String)getSession().getAttribute("employeeName"));

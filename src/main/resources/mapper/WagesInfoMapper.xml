@@ -3,6 +3,7 @@
 <mapper namespace="jp.co.lyc.cms.mapper.WagesInfoMapper">
 <resultMap type="String" id="StringResult"></resultMap>
 <resultMap type="jp.co.lyc.cms.model.WagesInfoModel" id="wagesInfoModel"></resultMap>
+<resultMap type="jp.co.lyc.cms.model.SiteModel" id="siteModel"></resultMap>
 
 <!-- 給料情報の取得 -->
 <select id="getWagesInfo" parameterType="String" resultMap="wagesInfoModel">
@@ -11,7 +12,7 @@
 		T005.reflectYearAndMonth,
 		T005.socialInsuranceFlag,
 		CASE
-		WHEN T005.salary IS NULL THEN
+		WHEN T005.salary = "" THEN
 		T005.waitingCost ELSE T005.salary 
 		END AS salary,
 		T005.waitingCost,
@@ -38,11 +39,21 @@
 			AND T005.reflectYearAndMonth = #{reflectYearAndMonth}
 		</if>
 </select>
-
-<!-- 稼働判断 -->
-<select id="kadouCheck" parameterType="String" resultMap="StringResult">
+<select id="getEmployeeForm" parameterType="String" resultMap="wagesInfoModel">
 	SELECT
-		relatedEmployees
+		T002.employeeFormCode,
+		M005.employeeFormName 
+	FROM
+		T002EmployeeDetail AS T002
+		LEFT JOIN M005EmployeeForm AS M005 ON T002.employeeNo = M005.employeeFormCode 
+	WHERE
+		T002.employeeNo = #{employeeNo}
+</select>
+<!-- 稼働判断 -->
+<select id="kadouCheck" parameterType="String" resultMap="siteModel">
+	SELECT
+		relatedEmployees,
+		siteRoleCode
 	FROM
 		T006EmployeeSiteInfo 
 	WHERE

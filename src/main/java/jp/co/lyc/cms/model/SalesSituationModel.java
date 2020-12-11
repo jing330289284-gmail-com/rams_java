@@ -63,6 +63,17 @@ String developLanguage2;
 String developLanguage3;
 String developLanguage4;
 String developLanguage5;
+/*2020/12/09 START 張棟*/
+/* 稼働開始 */
+String theMonthOfStartWork;
+public String getTheMonthOfStartWork() {
+	return theMonthOfStartWork;
+}
+public void setTheMonthOfStartWork(String theMonthOfStartWork) {
+	this.theMonthOfStartWork = theMonthOfStartWork;
+}
+
+/* 2020/12/09 END 張棟*/
 
 public String getStationCode1() {
 	return stationCode1;

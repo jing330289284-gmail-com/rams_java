@@ -1,6 +1,5 @@
 package jp.co.lyc.cms.service;
 
-import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -8,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import jp.co.lyc.cms.mapper.SalesProfitMapper;
+import jp.co.lyc.cms.model.SalesEmployeeModel;
 import jp.co.lyc.cms.model.SalesInfoModel;
+import jp.co.lyc.cms.model.SalesPointModel;
 import jp.co.lyc.cms.model.SalesProfitModel;
 
 @Component
@@ -17,19 +18,15 @@ public class SalesProfitService {
 	@Autowired
 	SalesProfitMapper salesProfitMapper;
 
-	public List<SalesProfitModel> getPointInfo(SalesProfitModel salesProfitModel) {
-
-//		List<SalesPointSetModel> siteList = salesProfitMapper.getSalesProfitInfo(sendMap);
-//		return siteList;
-		// salesProfitModel.getEmployeeName(), salesProfitModel.getEmployeeStatus(),
-		// salesProfitModel.getStartDate(), salesProfitModel.getEndDate()
+	public List<SalesInfoModel> getPointInfo(SalesProfitModel salesProfitModel) {
 
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMM");
-		// String startTime =
-		// dateFormat.format(salesProfitModel.getStartDate()).toString();
-		// String endTime = dateFormat.format(salesProfitModel.getEndDate()).toString();
 		String startTime = null;
 		String endTime = null;
+		if (salesProfitModel.getStartDate() != null && salesProfitModel.getEndDate() != null) {
+			startTime = dateFormat.format(salesProfitModel.getStartDate()).toString();
+			endTime = dateFormat.format(salesProfitModel.getEndDate()).toString();
+		}
 		return salesProfitMapper.getPointInfo(salesProfitModel.getEmployeeName(), startTime, endTime);
 	}
 
@@ -43,7 +40,7 @@ public class SalesProfitService {
 				startTime, endTime);
 	}
 
-	public List<SalesInfoModel> getCustomerName() {
+	public List<SalesEmployeeModel> getCustomerName() {
 
 		return salesProfitMapper.getCustomerName();
 	}
@@ -56,5 +53,14 @@ public class SalesProfitService {
 	public List<SalesInfoModel> getEmployeeName() {
 
 		return salesProfitMapper.getEmployeeName();
+	}
+
+	public List<SalesEmployeeModel> getEmployeeSiteInfo() {
+
+		return salesProfitMapper.getEmployeeSiteInfo();
+	}
+
+	public List<SalesPointModel> getSalesPointInfo() {
+		return salesProfitMapper.getSalesPointInfo();
 	}
 }

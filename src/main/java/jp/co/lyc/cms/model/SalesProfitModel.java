@@ -1,6 +1,7 @@
 package jp.co.lyc.cms.model;
 
 import java.util.Date;
+
 public class SalesProfitModel {
 
 	/**
@@ -23,8 +24,26 @@ public class SalesProfitModel {
 	String lastName;// 名
 	String admissionStartDate;
 	String admissionEndDate;
+	String customerContractStatus; // 契约区分
+	String intoCompanyCode; // 入社区分
 	Date startDate;// 現場開始時間
 	Date endDate;// 現場終了時間
+
+	public String getCustomerContractStatus() {
+		return customerContractStatus;
+	}
+
+	public void setCustomerContractStatus(String customerContractStatus) {
+		this.customerContractStatus = customerContractStatus;
+	}
+
+	public String getIntoCompanyCode() {
+		return intoCompanyCode;
+	}
+
+	public void setIntoCompanyCode(String intoCompanyCode) {
+		this.intoCompanyCode = intoCompanyCode;
+	}
 
 	public String getAdmissionStartDate() {
 		return admissionStartDate;

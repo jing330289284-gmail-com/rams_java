@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import jp.co.lyc.cms.model.SiteModel;
 import jp.co.lyc.cms.model.WagesInfoModel;
 
 @Mapper
@@ -32,7 +33,7 @@ public interface WagesInfoMapper {
 	 * 稼働判断
 	 * @return
 	 */
-	public ArrayList<String> kadouCheck(String employeeNo);
+	public ArrayList<SiteModel> kadouCheck(String employeeNo);
 	
 	/**
 	 * 保険検索
@@ -40,4 +41,11 @@ public interface WagesInfoMapper {
 	 * @return
 	 */
 	public ArrayList<WagesInfoModel> hokenSearch(String employeeNo);
+	
+	/**
+	 * 社員形式を取得
+	 * @param employeeNo
+	 * @return
+	 */
+	public WagesInfoModel getEmployeeForm(String employeeNo);
 }

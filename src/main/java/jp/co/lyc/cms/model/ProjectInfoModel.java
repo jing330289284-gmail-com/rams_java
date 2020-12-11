@@ -10,20 +10,27 @@ public class ProjectInfoModel {
 	String admissionPeriod;
 	String projectType;
 	String successRate;
+	String successRateName;
 	String customerNo;
+	String customerName;
 	String personInCharge;
 	String mail;
 	String keyWordOfLanagurue1;
+	String keyWordOfLanagurueName1;
 	String keyWordOfLanagurue2;
+	String keyWordOfLanagurueName2;
 	String keyWordOfLanagurue3;
-	String typeOfIndustry;
+	String keyWordOfLanagurueName3;
 	String projectInfoDetail;
 	String japaneaseConversationLevel;
+	String japaneaseConversationName;
 	String unitPriceRangeLowest;
 	String unitPriceRangeHighest;
 	String ageClassificationCode;
 	String projectPhaseStart;
+	String projectPhaseNameStart;
 	String projectPhaseEnd;
+	String projectPhaseNameEnd;
 	String payOffRangeLowest;
 	String payOffRangeHighest;
 	String workStartPeriod;
@@ -34,7 +41,90 @@ public class ProjectInfoModel {
 	String siteLoaction;
 	String actionType;
 	String updateUser;
+	String theSelectProjectperiodStatus;
+	String remark;
+	String recruitmentNumbers;
+	String rowNo;
+	String yearAndMonth;
 	
+	public String getYearAndMonth() {
+		return yearAndMonth;
+	}
+	public void setYearAndMonth(String yearAndMonth) {
+		this.yearAndMonth = yearAndMonth;
+	}
+	public String getSuccessRateName() {
+		return successRateName;
+	}
+	public void setSuccessRateName(String successRateName) {
+		this.successRateName = successRateName;
+	}
+	public String getCustomerName() {
+		return customerName;
+	}
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+	public String getKeyWordOfLanagurueName1() {
+		return keyWordOfLanagurueName1;
+	}
+	public void setKeyWordOfLanagurueName1(String keyWordOfLanagurueName1) {
+		this.keyWordOfLanagurueName1 = keyWordOfLanagurueName1;
+	}
+	public String getKeyWordOfLanagurueName2() {
+		return keyWordOfLanagurueName2;
+	}
+	public void setKeyWordOfLanagurueName2(String keyWordOfLanagurueName2) {
+		this.keyWordOfLanagurueName2 = keyWordOfLanagurueName2;
+	}
+	public String getKeyWordOfLanagurueName3() {
+		return keyWordOfLanagurueName3;
+	}
+	public void setKeyWordOfLanagurueName3(String keyWordOfLanagurueName3) {
+		this.keyWordOfLanagurueName3 = keyWordOfLanagurueName3;
+	}
+	public String getJapaneaseConversationName() {
+		return japaneaseConversationName;
+	}
+	public void setJapaneaseConversationName(String japaneaseConversationName) {
+		this.japaneaseConversationName = japaneaseConversationName;
+	}
+	public String getProjectPhaseNameStart() {
+		return projectPhaseNameStart;
+	}
+	public void setProjectPhaseNameStart(String projectPhaseNameStart) {
+		this.projectPhaseNameStart = projectPhaseNameStart;
+	}
+	public String getProjectPhaseNameEnd() {
+		return projectPhaseNameEnd;
+	}
+	public void setProjectPhaseNameEnd(String projectPhaseNameEnd) {
+		this.projectPhaseNameEnd = projectPhaseNameEnd;
+	}
+	public String getRowNo() {
+		return rowNo;
+	}
+	public void setRowNo(String rowNo) {
+		this.rowNo = rowNo;
+	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	public String getRecruitmentNumbers() {
+		return recruitmentNumbers;
+	}
+	public void setRecruitmentNumbers(String recruitmentNumbers) {
+		this.recruitmentNumbers = recruitmentNumbers;
+	}
+	public String getTheSelectProjectperiodStatus() {
+		return theSelectProjectperiodStatus;
+	}
+	public void setTheSelectProjectperiodStatus(String theSelectProjectperiodStatus) {
+		this.theSelectProjectperiodStatus = theSelectProjectperiodStatus;
+	}
 	public String getSiteLoaction() {
 		return siteLoaction;
 	}
@@ -148,12 +238,6 @@ public class ProjectInfoModel {
 	}
 	public void setKeyWordOfLanagurue3(String keyWordOfLanagurue3) {
 		this.keyWordOfLanagurue3 = keyWordOfLanagurue3;
-	}
-	public String getTypeOfIndustry() {
-		return typeOfIndustry;
-	}
-	public void setTypeOfIndustry(String typeOfIndustry) {
-		this.typeOfIndustry = typeOfIndustry;
 	}
 	public String getProjectInfoDetail() {
 		return projectInfoDetail;

@@ -1,10 +1,13 @@
 package jp.co.lyc.cms.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections.ListUtils;
+import org.castor.core.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.amazonaws.internal.FIFOCache;
+import com.amazonaws.util.StringUtils;
+
+import ch.qos.logback.core.joran.conditional.IfAction;
 import jp.co.lyc.cms.common.BaseController;
 import jp.co.lyc.cms.model.SalesSituationModel;
 import jp.co.lyc.cms.model.SalesContent;
@@ -134,6 +141,16 @@ public class SalesSituationController  extends BaseController {
 		}else {
 			try {
 				salesSituationList = salesSituationService.getPersonalSalesInfoFromT019(model.getEmployeeNo());
+				/* 2020/12/09 STRAT 張棟*/
+				//　時間のフォーマットを変更する。例えば「202009->2020/09」
+				if (salesSituationList != null && salesSituationList.size() != 0 &&
+						!StringUtils.isNullOrEmpty(salesSituationList.get(0).getTheMonthOfStartWork())) {
+						salesSituationList.get(0).setTheMonthOfStartWork(DateFormat(salesSituationList.get(0).getTheMonthOfStartWork()));
+				} else {
+					// 取るデータがnullの時
+					
+				}
+				/* 2020/12/09 END 張棟*/
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -186,5 +203,14 @@ public class SalesSituationController  extends BaseController {
 	}
 	
 
+	/**
+	 * 文字列の実装
+	 * */
+	private String DateFormat(String date) {
+		String dateStr = date.substring(0, 4)
+		+ "/"
+		+ date.substring(4, 6);
+		return dateStr;
+	}
 
 }

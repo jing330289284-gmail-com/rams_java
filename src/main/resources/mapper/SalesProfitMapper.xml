@@ -99,11 +99,16 @@
 	<select id="getPointInfo" parameterType="string"
 		resultType="jp.co.lyc.cms.model.SalesInfoModel">
 		SELECT
-		T010SalesSituation.employeeNo,T001Employee.employeeFristName,T001Employee.employeeLastName,T010SalesSituation.salesYearAndMonth yearAndMonth,T007CustomerInfo.customerName,T002EmployeeDetail.intoCompanyCode,M004IntoCompany.intoCompanyName,T010SalesSituation.salesStaff
+		T010SalesSituation.employeeNo,M021SalesProgress.salesProgressName,T010SalesSituation.salesProgressCode,T010SalesSituation.customerContractStatus,T002EmployeeDetail.employeeStatus,T011BpInfoSupplement.bpBelongCustomerCode,T001Employee.employeeFristName,T001Employee.employeeLastName,T010SalesSituation.salesYearAndMonth
+		yearAndMonth,T007CustomerInfo.customerName,T002EmployeeDetail.intoCompanyCode,M004IntoCompany.intoCompanyName,T010SalesSituation.salesStaff
 		FROM T010SalesSituation
 		LEFT JOIN T002EmployeeDetail
 		ON
 		T010SalesSituation.employeeNo=T002EmployeeDetail.employeeNo
+		LEFT JOIN
+		M021SalesProgress
+		ON
+		T010SalesSituation.salesProgressCode=M021SalesProgress.salesProgressCode
 		LEFT JOIN
 		M004IntoCompany
 		ON
@@ -131,7 +136,7 @@
 	</select>
 
 	<select id="getCustomerName" parameterType="string"
-		resultType="jp.co.lyc.cms.model.SalesInfoModel">
+		resultType="jp.co.lyc.cms.model.SalesEmployeeModel">
 		SELECT customerNo,customerName FROM T007CustomerInfo;
 	</select>
 
@@ -145,5 +150,23 @@
 		resultType="jp.co.lyc.cms.model.SalesInfoModel">
 		SELECT employeeNo,employeeFristName,employeeLastName FROM
 		T001Employee;
+	</select>
+
+	<select id="getEmployeeSiteInfo" parameterType="string"
+		resultType="jp.co.lyc.cms.model.SalesEmployeeModel">
+		SELECT
+		T006EmployeeSiteInfo.employeeNo,substring(admissionStartDate,1,6)
+		as
+		startTime,substring(admissionEndDate,1,6) as
+		endTime,T006EmployeeSiteInfo.customerNo,T007CustomerInfo.customerName,T007CustomerInfo.levelCode
+		FROM T006EmployeeSiteInfo
+		LEFT JOIN T007CustomerInfo
+		ON
+		T006EmployeeSiteInfo.customerNo=T007CustomerInfo.customerNo;
+	</select>
+
+	<select id="getSalesPointInfo" parameterType="string"
+		resultType="jp.co.lyc.cms.model.SalesPointModel">
+		SELECT * FROM T014SalesPointInfo;
 	</select>
 </mapper>

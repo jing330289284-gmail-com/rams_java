@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jp.co.lyc.cms.mapper.ProjectInfoSearchMapper">
+	<resultMap id="projectInfoModel"
+		type="jp.co.lyc.cms.model.ProjectInfoModel" />
+	<resultMap id="String" type="java.lang.String" />
+	<!-- 案件情報取得 -->
+	<select id="searchProjectInfo" resultMap="projectInfoModel"
+		parameterType="String">
+		SELECT
+		CONCAT( ( @rowNo := @rowNo + 1 ) ) AS rowNo,
+		T022.projectNo,
+		T022.projectName,
+		T022.nationalityCode,
+		T022.admissionPeriod,
+		T022.projectType,
+		T022.successRate,
+		M033.successRateName,
+		T022.customerNo,
+		T007.customerName,
+		T022.personInCharge,
+		T022.mail,
+		T022.phoneNo,
+		T022.keyWordOfLanagurue1,
+		M011a.developLanguageName AS
+		keyWordOfLanagurueName1,
+		T022.keyWordOfLanagurue2,
+		M011b.developLanguageName AS keyWordOfLanagurueName2,
+		T022.keyWordOfLanagurue3,
+		M011c.developLanguageName AS
+		keyWordOfLanagurueName3,
+		T022.projectInfoDetail,
+		T022.japaneaseConversationLevel,
+		M025.japaneaseConversationName,
+		T022.unitPriceRangeLowest,
+		T022.unitPriceRangeHighest,
+		T022.ageClassificationCode,
+		T022.projectPhaseStart,
+		M027s.projectPhaseName AS projectPhaseNameStart,
+		T022.projectPhaseEnd,
+		M027e.projectPhaseName AS projectPhaseNameEnd,
+		T022.payOffRangeLowest,
+		T022.payOffRangeHighest,
+		T022.workStartPeriod,
+		T022.experienceYear,
+		T022.noOfInterviewCode,
+		T022.siteLoaction,
+		T022.requiredItem1,
+		T022.requiredItem2,
+		T022.recruitmentNumbers,
+		T022.remark
+		FROM
+		T022ProjectInfo AS T022
+		LEFT JOIN M033SuccessRate AS M033 ON
+		T022.successRate = M033.successRateCode
+		AND T022.successRate != ""
+		LEFT
+		JOIN M025JapaneaseConversationLevel AS
+		M025 ON
+		T022.japaneaseConversationLevel =
+		M025.japaneaseConversationLevel
+		AND
+		T022.japaneaseConversationLevel != ""
+		LEFT JOIN M027ProjectPhase AS
+		M027s ON T022.projectPhaseStart = M027s.projectPhaseCode
+		AND
+		T022.projectPhaseStart != ""
+		LEFT JOIN M027ProjectPhase AS M027e ON
+		T022.projectPhaseEnd = M027e.projectPhaseCode
+		AND T022.projectPhaseEnd
+		!= ""
+		LEFT JOIN T007CustomerInfo AS T007 ON
+		T022.customerNo =
+		T007.customerNo
+		AND T022.customerNo != ""
+		LEFT JOIN M011DevelopLanguage
+		AS M011a ON
+		T022.keyWordOfLanagurue1 = M011a.developLanguageCode
+		AND
+		T022.keyWordOfLanagurue1 != ""
+		LEFT JOIN M011DevelopLanguage AS M011b
+		ON T022.keyWordOfLanagurue2 = M011b.developLanguageCode
+		AND
+		T022.keyWordOfLanagurue2 != ""
+		LEFT JOIN M011DevelopLanguage AS M011c
+		ON T022.keyWordOfLanagurue3 = M011c.developLanguageCode
+		AND
+		T022.keyWordOfLanagurue3 != "",
+		( SELECT @rowNo := 0 ) AS rowNo
+		WHERE
+		1 =
+		1
+		<if test="yearAndMonth != null">
+			AND T022.admissionPeriod &gt; #{yearAndMonth}
+		</if>
+		<if test="projectNo != null">
+			AND T022.projectNo = #{projectNo}
+		</if>
+		<if test="keyWordOfLanagurue1 != null">
+			AND #{keyWordOfLanagurue1} in
+			(T022.keyWordOfLanagurue1,T022.keyWordOfLanagurue2,T022.keyWordOfLanagurue3)
+		</if>
+		<if test="keyWordOfLanagurue2 != null">
+			AND #{keyWordOfLanagurue2} in
+			(T022.keyWordOfLanagurue1,T022.keyWordOfLanagurue2,T022.keyWordOfLanagurue3)
+		</if>
+		<if test="keyWordOfLanagurue3 != null">
+			AND #{keyWordOfLanagurue3} in
+			(T022.keyWordOfLanagurue1,T022.keyWordOfLanagurue2,T022.keyWordOfLanagurue3)
+		</if>
+		<if test="projectType != null">
+			AND T022.projectType = #{projectType}
+		</if>
+		<if test="admissionPeriod != null">
+			AND T022.admissionPeriod = #{admissionPeriod}
+		</if>
+		<if test="unitPriceRangeLowest != null">
+			AND T022.unitPriceRangeLowest &gt;=
+			#{unitPriceRangeLowest}
+		</if>
+		<if test="unitPriceRangeHighest != null">
+			AND T022.unitPriceRangeHighest &lt;=
+			#{unitPriceRangeHighest}
+		</if>
+		<if test="japaneaseConversationLevel != null">
+			AND T022.japaneaseConversationLevel =
+			#{japaneaseConversationLevel}
+		</if>
+		<if test="nationalityCode != null">
+			AND T022.nationalityCode = #{nationalityCode}
+		</if>
+		<if test="experienceYear != null">
+			AND CAST( T022.experienceYear AS DECIMAL ) &gt;=
+			#{experienceYear}
+		</if>
+		<if test="projectPhaseStart != null">
+			AND CAST( T022.projectPhaseStart AS DECIMAL ) &gt;=
+			#{projectPhaseStart}
+		</if>
+		<if test="noOfInterviewCode != null">
+			AND T022.noOfInterviewCode = #{noOfInterviewCode}
+		</if>
+		<if test="successRate != null">
+			AND T022.successRate = #{successRate}
+		</if>
+		ORDER BY
+		T022.projectNo
+	</select>
+	<delete id="delete" parameterType="String">
+		DELETE 
+	FROM
+		T022ProjectInfo 
+	WHERE
+		projectNo = #{projectNo}
+	</delete>
+</mapper>

@@ -70,7 +70,7 @@ public class ExpensesInfoService {
 		sendMap.put("otherAllowanceName", expensesInfoModel.getOtherAllowanceName());
 		sendMap.put("otherAllowanceAmount", expensesInfoModel.getOtherAllowanceAmount());
 		sendMap.put("leaderAllowanceAmount", expensesInfoModel.getLeaderAllowanceAmount());
-		sendMap.put("housingStatus", expensesInfoModel.getHousingStatus());
+		sendMap.put("totalExpenses", expensesInfoModel.getTotalExpenses());
 		sendMap.put("housingAllowance", expensesInfoModel.getHousingAllowance());
 		sendMap.put("updateUser", expensesInfoModel.getUpdateUser());
 		return sendMap;

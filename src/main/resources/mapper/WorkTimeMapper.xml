@@ -4,34 +4,38 @@
     <resultMap id="WorkTime" type="jp.co.lyc.cms.model.WorkTimeModel"/>
     <select id="selectWorkTime" resultMap="WorkTime" parameterType="String">
 		SELECT
-			(@rowNo:=@rowNo + 1) AS rowNo,
 			T018.attendanceYearAndMonth,
 			T006.systemName,
-			T006.stationName,
-			concat(T006.payOffRange1,T006.payOffRange1) payOffRange,
-			T018.attendanceDays,
-			T018.sumWorkTime,
-			t1.averageSumWorkTime,
-			t0.workTimeRank,
+			T006.stationCode as stationName,
+			concat(ifnull(T006.payOffRange1,""),"H - ",ifnull(T006.payOffRange2,""),"H") payOffRange,
+			concat(T018.attendanceDays,"日") attendanceDays,
+			concat(T018.sumWorkTime,"H") sumWorkTime,
+			concat("NO.",T0.workTimeRank) workTimeRank,
+			concat(T1.averageSumWorkTime,"H") averageSumWorkTime,
 			T2.carCost,
 			T3.otherCost
 		FROM
-			T018WorkTotalTime t018
+			T018WorkTotalTime T018
 		LEFT JOIN
 			(select row_number()over(partition by attendanceYearAndMonth order by sumWorkTime desc) as workTimeRank,
-			sumWorkTime,employeeNo,attendanceYearAndMonth from rams.T018WorkTotalTime)t0
-			ON t018.attendanceYearAndMonth=t0.attendanceYearAndMonth
+			sumWorkTime,employeeNo,attendanceYearAndMonth from T018WorkTotalTime)T0
+			ON T018.attendanceYearAndMonth=T0.attendanceYearAndMonth AND T018.employeeNo=T0.employeeNo
 		LEFT JOIN
-			(select round(avg(sumWorkTime)) as averageSumWorkTime,attendanceYearAndMonth from rams.T018WorkTotalTime group by attendanceYearAndMonth)t1
-			ON t018.attendanceYearAndMonth=t1.attendanceYearAndMonth
+			(select round(avg(sumWorkTime)) as averageSumWorkTime,attendanceYearAndMonth from T018WorkTotalTime group by attendanceYearAndMonth)T1
+			ON T018.attendanceYearAndMonth=T1.attendanceYearAndMonth
 		LEFT JOIN
-			(SELECT sum(cost) as carCost,left(happendDate,6) as happendDate FROM T020CostInfo where employeeNo=#{employeeNo} and costClassificationCode=0 group by left(happendDate,6))t2
-			ON T006.attendanceYearAndMonth = T2.happendDate
+			(SELECT sum(cost) as carCost,left(happendDate,6) as happendDate FROM T020CostInfo where employeeNo=#{employeeNo} and costClassificationCode=0 group by left(happendDate,6))T2
+			ON T018.attendanceYearAndMonth = T2.happendDate
 		LEFT JOIN
-			(SELECT sum(cost) as otherCost,left(happendDate,6) as happendDate FROM T020CostInfo where employeeNo=#{employeeNo} and costClassificationCode!=0 group by left(happendDate,6))t3
-			ON T006.attendanceYearAndMonth = T3.happendDate
+			(SELECT sum(cost) as otherCost,left(happendDate,6) as happendDate FROM T020CostInfo where employeeNo=#{employeeNo} and costClassificationCode!=0 group by left(happendDate,6))T3
+			ON T018.attendanceYearAndMonth = T3.happendDate
 		LEFT JOIN
-			(SELECT   @rowNo:=0) AS rowNo
+			T006EmployeeSiteInfo T006
+			 ON T018.attendanceYearAndMonth>=left(T006.admissionStartDate,6)
+			 AND  
+			(T018.attendanceYearAndMonth&lt;= left(T006.admissionEndDate,6)
+			OR T006.admissionEndDate is null) 
+			 AND T018.employeeNo=T006.employeeNo
 		WHERE
 			T018.attendanceYearAndMonth >= #{yearAndMonth1} AND
 			T018.attendanceYearAndMonth &lt;= #{yearAndMonth2} AND

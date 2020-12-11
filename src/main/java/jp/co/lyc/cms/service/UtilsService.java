@@ -467,12 +467,12 @@ public class UtilsService {
 	}
 
 	/**
-	 * 入場期限取得
+	 * 案件期限取得
 	 * 
 	 * @return
 	 */
-	public List<ModelClass> getAdmissionPeriod() {
-		return utilsMapper.getAdmissionPeriod();
+	public List<ModelClass> getProjectPeriod() {
+		return utilsMapper.getProjectPeriod();
 	}
 
 	/**

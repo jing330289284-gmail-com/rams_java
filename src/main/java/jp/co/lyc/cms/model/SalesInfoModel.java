@@ -1,5 +1,7 @@
 package jp.co.lyc.cms.model;
 
+import java.util.Date;
+
 public class SalesInfoModel {
 
 	/**
@@ -15,6 +17,7 @@ public class SalesInfoModel {
 	String admissionStartDate; // 現場開始年月
 	String admissionEndDate; // 現場終了年月
 	String employeeStatus; // 社員区分
+	String employeeStatusName; // 社員区分
 	String employeeFrom; // 所属
 	// データ処理
 	String rowNo; // 自動採番
@@ -33,8 +36,123 @@ public class SalesInfoModel {
 	String customerNo; // 会社番号
 	String intoCompanyName; // 会社番号
 	String intoCompanyCode; // 会社番号
-	
-	
+	String customerContractStatus; // 契约区分
+	String salesProgressName; // 営業結果パターン
+	String startTime; // 現場開始年月
+	String endTime; // 現場終了年月
+	String levelCode; // レベルコード
+	String point; // ポイント
+	String specialsalesPoint; // 特別ポイント
+	String pointAll; // 合计ポイント
+	String specialsalesPointCondition; // 特別ポイント理由
+	String salesProgressCode;
+	Date startDate;// 現場開始時間
+	Date endDate;// 現場終了時間
+
+	public String getPointAll() {
+		return pointAll;
+	}
+
+	public void setPointAll(String pointAll) {
+		this.pointAll = pointAll;
+	}
+
+	public String getSpecialsalesPoint() {
+		return specialsalesPoint;
+	}
+
+	public void setSpecialsalesPoint(String specialsalesPoint) {
+		this.specialsalesPoint = specialsalesPoint;
+	}
+
+	public String getSpecialsalesPointCondition() {
+		return specialsalesPointCondition;
+	}
+
+	public void setSpecialsalesPointCondition(String specialsalesPointCondition) {
+		this.specialsalesPointCondition = specialsalesPointCondition;
+	}
+
+	public String getEmployeeStatusName() {
+		return employeeStatusName;
+	}
+
+	public void setEmployeeStatusName(String employeeStatusName) {
+		this.employeeStatusName = employeeStatusName;
+	}
+
+	public String getSalesProgressCode() {
+		return salesProgressCode;
+	}
+
+	public void setSalesProgressCode(String salesProgressCode) {
+		this.salesProgressCode = salesProgressCode;
+	}
+
+	public String getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
+
+	public String getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
+
+	public String getLevelCode() {
+		return levelCode;
+	}
+
+	public void setLevelCode(String levelCode) {
+		this.levelCode = levelCode;
+	}
+
+	public String getPoint() {
+		return point;
+	}
+
+	public void setPoint(String point) {
+		this.point = point;
+	}
+
+	public String getSalesProgressName() {
+		return salesProgressName;
+	}
+
+	public void setSalesProgressName(String salesProgressName) {
+		this.salesProgressName = salesProgressName;
+	}
+
+	public String getCustomerContractStatus() {
+		return customerContractStatus;
+	}
+
+	public void setCustomerContractStatus(String customerContractStatus) {
+		this.customerContractStatus = customerContractStatus;
+	}
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
 	public String getIntoCompanyName() {
 		return intoCompanyName;
 	}

@@ -413,14 +413,14 @@
 		M035NoOfInterview
 	</select>
 
-	<!--入場期限取得 -->
-	<select id="getAdmissionPeriod"
+	<!--案件期限取得 -->
+	<select id="getProjectPeriod"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT
-		admissionPeriodName name,
-		admissionPeriodCode code
+		projectPeriodCode code,
+		projectPeriodName name
 		FROM
-		M036AdmissionPeriod
+		M036ProjectPeriod
 	</select>
 
 	<!--案件タイプ取得 -->

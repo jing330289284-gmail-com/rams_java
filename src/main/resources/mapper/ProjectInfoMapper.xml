@@ -52,7 +52,6 @@
 		keyWordOfLanagurue1,
 		keyWordOfLanagurue2,
 		keyWordOfLanagurue3,
-		typeOfIndustry,
 		projectInfoDetail,
 		japaneaseConversationLevel,
 		unitPriceRangeLowest,
@@ -68,6 +67,8 @@
 		siteLoaction,
 		requiredItem1,
 		requiredItem2,
+		remark,
+		recruitmentNumbers,
 		updateTime,
 		createTime,
 		updateUser
@@ -86,7 +87,6 @@
 		#{keyWordOfLanagurue1},
 		#{keyWordOfLanagurue2},
 		#{keyWordOfLanagurue3},
-		#{typeOfIndustry},
 		#{projectInfoDetail},
 		#{japaneaseConversationLevel},
 		#{unitPriceRangeLowest},
@@ -102,6 +102,8 @@
 		#{siteLoaction},
 		#{requiredItem1},
 		#{requiredItem2},
+		#{remark},
+		#{recruitmentNumbers},
 		NOW(),
 		NOW(),
 		#{updateUser}
@@ -146,9 +148,6 @@
 		</if>	
 		<if test="keyWordOfLanagurue3 != null">
 			keyWordOfLanagurue3 = #{keyWordOfLanagurue3},
-		</if>	
-		<if test="typeOfIndustry != null">
-			typeOfIndustry = #{typeOfIndustry},
 		</if>	
 		<if test="projectInfoDetail != null">
 			projectInfoDetail = #{projectInfoDetail},
@@ -195,6 +194,12 @@
 		<if test="requiredItem2 != null">
 			requiredItem2 = #{requiredItem2},
 		</if>	
+		<if test="remark != null">
+			remark = #{remark},
+		</if>
+		<if test="recruitmentNumbers != null">
+			recruitmentNumbers = #{recruitmentNumbers},
+		</if>
 		updateTime = NOW(),
 		updateUser = #{updateUser}
 		WHERE 
@@ -216,7 +221,6 @@
 		T022.keyWordOfLanagurue1,
 		T022.keyWordOfLanagurue2,
 		T022.keyWordOfLanagurue3,
-		T022.typeOfIndustry,
 		T022.projectInfoDetail,
 		T022.japaneaseConversationLevel,
 		T022.unitPriceRangeLowest,
@@ -232,6 +236,8 @@
 		T022.siteLoaction,
 		T022.requiredItem1,
 		T022.requiredItem2,
+		T022.recruitmentNumbers,
+		T022.remark,
 		T022.updateTime,
 		T022.createTime,
 		T022.updateUser

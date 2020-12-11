@@ -318,11 +318,11 @@ public interface UtilsMapper {
 	public List<ModelClass> getNoOfInterview();
 
 	/**
-	 * 入場期限取得
+	 * 案件期限取得
 	 * 
 	 * @return
 	 */
-	public List<ModelClass> getAdmissionPeriod();
+	public List<ModelClass> getProjectPeriod();
 
 	/**
 	 * 案件タイプ取得

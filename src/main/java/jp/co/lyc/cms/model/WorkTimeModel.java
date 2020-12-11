@@ -10,8 +10,8 @@ public class WorkTimeModel {
 	String sumWorkTime;//出勤時間
 	String averageSumWorkTime;//会社平均稼働
 	String workTimeRank;//社内稼動ランキング
-	String carCost;//交通費用
-	String otherCost;//他の費用
+	Integer carCost;//交通費用
+	Integer otherCost;//他の費用
 	String yearAndMonth1;//検索用
 	String yearAndMonth2;//検索用
 	public int getRowNo() {
@@ -74,16 +74,16 @@ public class WorkTimeModel {
 	public void setWorkTimeRank(String workTimeRank) {
 		this.workTimeRank = workTimeRank;
 	}
-	public String getCarCost() {
+	public Integer getCarCost() {
 		return carCost;
 	}
-	public void setCarCost(String carCost) {
+	public void setCarCost(Integer carCost) {
 		this.carCost = carCost;
 	}
-	public String getOtherCost() {
+	public Integer getOtherCost() {
 		return otherCost;
 	}
-	public void setOtherCost(String otherCost) {
+	public void setOtherCost(Integer otherCost) {
 		this.otherCost = otherCost;
 	}
 	public String getYearAndMonth1() {

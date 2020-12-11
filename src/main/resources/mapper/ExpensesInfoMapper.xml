@@ -10,7 +10,7 @@
 		otherAllowanceName,
 		otherAllowanceAmount,
 		leaderAllowanceAmount,
-		housingStatus,
+		totalExpenses,
 		housingAllowance,
 		transportationExpenses 
 	FROM
@@ -31,7 +31,7 @@
 		otherAllowanceName,
 		otherAllowanceAmount,
 		leaderAllowanceAmount,
-		housingStatus,
+		totalExpenses,
 		housingAllowance,
 		updateTime,
 		createTime,
@@ -44,7 +44,7 @@
 		#{otherAllowanceName},
 		#{otherAllowanceAmount},
 		#{leaderAllowanceAmount},
-		#{housingStatus},
+		#{totalExpenses},
 		#{housingAllowance},
 		NOW(),
 		NOW(),
@@ -70,8 +70,8 @@
 		<if test="leaderAllowanceAmount != null">
 			leaderAllowanceAmount = #{leaderAllowanceAmount},
 		</if>		
-		<if test="housingStatus != null">
-			housingStatus = #{housingStatus},
+		<if test="totalExpenses != null">
+			totalExpenses = #{totalExpenses},
 		</if>	
 		<if test="housingAllowance != null">
 			housingAllowance = #{housingAllowance},
