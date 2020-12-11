@@ -21,4 +21,17 @@ public List<IndividualCustomerSalesModel>searchCustomerSales(Map<String, Object>
 	
 }
 
+
+public List<IndividualCustomerSalesModel>searchCustomerSalestwice(Map<String, Object> sendMap){
+	List<IndividualCustomerSalesModel> searchCustomerSalestwice = individualCustomerSalesMapper.getCustomerSalesInfoTwice(sendMap);
+	return searchCustomerSalestwice;
+	
+}
+
+public List<IndividualCustomerSalesModel>searchCustomerSalesthird(Map<String, Object> sendMap){
+	List<IndividualCustomerSalesModel> searchCustomerSalesthird = individualCustomerSalesMapper.getCustomerSalesInfoThird(sendMap);
+	return searchCustomerSalesthird;
+	
+}
+
 }

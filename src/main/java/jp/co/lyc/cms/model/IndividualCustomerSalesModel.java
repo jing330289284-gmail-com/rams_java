@@ -1,6 +1,7 @@
 package jp.co.lyc.cms.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class IndividualCustomerSalesModel implements Serializable  {
 
@@ -16,7 +17,7 @@ public class IndividualCustomerSalesModel implements Serializable  {
 	String unitPrice;
 	String DeductionsAndOvertimePay;
 	String employeeName;
-	String occupationName;
+	String siteRoleName;
 	String yearAndMonth;
 	String maxUnitPrice;
 	String minUnitPrice;
@@ -25,6 +26,13 @@ public class IndividualCustomerSalesModel implements Serializable  {
 	String workPeoSum;
 	String overTimeFee;
 	String expectFee;
+	String totalAmount;
+	String employeeNo;
+	String grossProfit;
+	String totalExpenses;
+	String stationName;
+	List empDetail;
+	int totalworkPeoSum;
 	public String getCustomerName() {
 		return customerName;
 	}
@@ -67,11 +75,12 @@ public class IndividualCustomerSalesModel implements Serializable  {
 	public void setEmployeeName(String employeeName) {
 		this.employeeName = employeeName;
 	}
-	public String getOccupationName() {
-		return occupationName;
+	
+	public String getSiteRoleName() {
+		return siteRoleName;
 	}
-	public void setOccupationName(String occupationName) {
-		this.occupationName = occupationName;
+	public void setSiteRoleName(String siteRoleName) {
+		this.siteRoleName = siteRoleName;
 	}
 	public String getYearAndMonth() {
 		return yearAndMonth;
@@ -121,7 +130,49 @@ public class IndividualCustomerSalesModel implements Serializable  {
 	public void setExpectFee(String expectFee) {
 		this.expectFee = expectFee;
 	}
-	
+	public String getTotalAmount() {
+		return totalAmount;
+	}
+	public void setTotalAmount(String totalAmount) {
+		this.totalAmount = totalAmount;
+	}
+	public String getEmployeeNo() {
+		return employeeNo;
+	}
+	public void setEmployeeNo(String employeeNo) {
+		this.employeeNo = employeeNo;
+	}
+	public String getGrossProfit() {
+		return grossProfit;
+	}
+	public void setGrossProfit(String grossProfit) {
+		this.grossProfit = grossProfit;
+	}
+	public String getTotalExpenses() {
+		return totalExpenses;
+	}
+	public void setTotalExpenses(String totalExpenses) {
+		this.totalExpenses = totalExpenses;
+	}
+	public String getStationName() {
+		return stationName;
+	}
+	public void setStationName(String stationName) {
+		this.stationName = stationName;
+	}
+	public List getEmpDetail() {
+		return empDetail;
+	}
+	public void setEmpDetail(List empDetail) {
+		this.empDetail = empDetail;
+	}
+	public int getTotalworkPeoSum() {
+		return totalworkPeoSum;
+	}
+	public void setTotalworkPeoSum(int totalworkPeoSum) {
+		this.totalworkPeoSum = totalworkPeoSum;
+	}
+
 
 
 }

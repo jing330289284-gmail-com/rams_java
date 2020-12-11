@@ -28,9 +28,7 @@
 		CAST(T005.insuranceFeeAmount As unsigned) As insuranceFeeAmount,
 		T005.bonusFlag,
 		CAST(T005.scheduleOfBonusAmount As unsigned) As scheduleOfBonusAmount,
-		(CAST(B${getYandM}.leaderAllowanceAmount As unsigned)+CAST(B${getYandM}.otherAllowanceAmount As unsigned)+CAST(B${getYandM}.housingAllowance As unsigned) )As allowanceAmount,
-		<!-- (T006.unitPrice*10000 - T005.salary - B${getYandM}.transportationExpenses - T005.insuranceFeeAmount - T005.scheduleOfBonusAmount - B${getYandM}.leaderAllowanceAmount - B${getYandM}.otherAllowanceAmount)
-		As grosProfits,  -->	
+		(CAST(B${getYandM}.leaderAllowanceAmount As unsigned)+CAST(B${getYandM}.otherAllowanceAmount As unsigned)+CAST(B${getYandM}.housingAllowance As unsigned) )As allowanceAmount,	
 		CAST((T005.salary + B${getYandM}.transportationExpenses + T005.insuranceFeeAmount + T005.scheduleOfBonusAmount + B${getYandM}.leaderAllowanceAmount + B${getYandM}.otherAllowanceAmount + B${getYandM}.housingAllowance) As unsigned) As paymentTotal,
 		T018.DeductionsAndOvertimePay,
 		B${getYandM}.otherAllowanceName,
@@ -49,7 +47,8 @@
 		M005EmployeeForm As M005 ON T002.employeeFormCode = M005.employeeFormCode
 		LEFT JOIN 
 		T006EmployeeSiteInfo As T006 ON T005.employeeNo = T006.employeeNo	
-		AND #{getYandM} between left(admissionStartDate,6) and left(admissionEndDate,6)
+		AND #{getYandM} between left(admissionStartDate,6) and IFNULL(admissionEndDate,date_format(now(),'%Y%m'))
+			
 		LEFT JOIN
 		T018WorkTotalTime As T018 ON T001.employeeNo = T018.employeeNo 
 		AND #{getYandM} =T018.attendanceYearAndMonth

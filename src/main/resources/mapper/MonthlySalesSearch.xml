@@ -46,7 +46,7 @@
  left join M005EmployeeForm  as M005 ON T002.employeeFormCode=M005.employeeFormCode
  left join M014Occupation as M014 ON T002.occupationCode = M014.occupationCode
  left join T001Employee as T001 ON  A.employeeNo = T001.employeeNo
- left join T006EmployeeSiteInfo as T006 ON A.employeeNo = T006.employeeNo AND #{getYandM} between left(admissionStartDate,6) and left(admissionEndDate,6), 
+ left join T006EmployeeSiteInfo as T006 ON A.employeeNo = T006.employeeNo AND #{getYandM} between left(admissionStartDate,6) and IFNULL(admissionEndDate,date_format(now(),'%Y%m')),
  (SELECT @rowNo := 0 ) AS rowNo 
  
 		WHERE 1=1
