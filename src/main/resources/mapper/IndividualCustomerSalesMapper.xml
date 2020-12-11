@@ -3,39 +3,86 @@
 <mapper namespace="jp.co.lyc.cms.mapper.IndividualCustomerSalesMapper">
 	<resultMap id="detailsInfo"
 		type="jp.co.lyc.cms.model.IndividualCustomerSalesModel" />
-		
-		<select id="getCustomerSalesInfo" parameterType="map"
-		resultMap="detailsInfo">
-			<foreach item="getYandM" collection="getYandM" index="index">
+
+	<select id="getCustomerSalesInfo" parameterType="map" resultMap="detailsInfo">
+		<foreach item="getYandM" collection="getYandM" index="index">
 			<if test="index != 0">
-			union all
-	                </if>
-SELECT * FROM(
-select 
-${getYandM} As yearAndMonth,
-A.max As maxUnitPrice,
-B.min As minUnitPrice,
-CONCAT(T001.employeeFristName,T001.employeeLastName)as employeeName,
-T006.unitPrice,
-M012.siteRoleName,
-T018.DeductionsAndOvertimePay,
-M013.stationName
-from 
-T001Employee as T001 
-left join  T006EmployeeSiteInfo as T006 on T001.employeeNo=T006.employeeNo 
-left join  T002EmployeeDetail as T002 on T002.employeeNo=T001.employeeNo 
-left join M012SiteRole as M012 on M012.siteRoleCode=T002.siteRoleCode
-left join M013Station as M013 on T006.stationCode =M013.stationCode
-left join T018WorkTotalTime as T018 on T018.employeeNo= T002.employeeNo and #{getYandM} =T018.attendanceYearAndMonth
-left join (select MAX(unitPrice) as max from T006EmployeeSiteInfo As T006 
-where #{getYandM} between left(admissionStartDate,6) and left(admissionEndDate,6) and T006.customerNo =  #{customerName} )as A on 1=1
+				union all
+			</if>
+			SELECT * FROM(
+			select
+			#{getYandM} As yearAndMonth,
+			T001.employeeNo,
+			A.maxP As maxUnitPrice,
+			A.minP As minUnitPrice,
+			CONCAT(T001.employeeFristName,T001.employeeLastName)as employeeName,
+			T006.unitPrice,
+			M012.siteRoleName,
+			T018.DeductionsAndOvertimePay,
+			M013.stationName
+			from
+			T001Employee as T001
+			left join
+			T006EmployeeSiteInfo as T006 on T001.employeeNo=T006.employeeNo
+			left
+			join T002EmployeeDetail as T002 on
+			T002.employeeNo=T001.employeeNo
+			left join M012SiteRole as M012 on M012.siteRoleCode=T006.siteRoleCode
+			left join M013Station as M013 on T006.stationCode =M013.stationCode
+			left join T018WorkTotalTime as T018 on T018.employeeNo=
+			T002.employeeNo and #{getYandM} =T018.attendanceYearAndMonth
+			left join
+			(select MAX(unitPrice + 0) as maxP,MIN(unitPrice + 0) as minP
+			from
+			T006EmployeeSiteInfo As T006
+			where #{getYandM} between
+			left(admissionStartDate,6) and
+			IFNULL(admissionEndDate,date_format(now(),'%Y%m')) and
+			T006.customerNo = #{customerName} )as A
+			on 1=1
+			where #{getYandM}
+			between left(admissionStartDate,6) and
+			IFNULL(admissionEndDate,date_format(now(),'%Y%m')) and
+			T006.customerNo = #{customerName}
+			)As A${getYandM}
+		</foreach>
+	</select>
 
-left join (select MIN(unitPrice) as min from T006EmployeeSiteInfo As T006 
-where #{getYandM} between left(admissionStartDate,6) and left(admissionEndDate,6) and T006.customerNo =  #{customerName} )as B on 1=1
-
-where  #{getYandM} between left(admissionStartDate,6) and left(admissionEndDate,6) and T006.customerNo = #{customerName}
-)As A${getYandM}
-                
-             </foreach>
-		</select>
+	<select id="getCustomerSalesInfoTwice" parameterType="map"
+		resultMap="detailsInfo">
+		<foreach item="tempList" collection="tempList" index="index">
+			<if test="index != 0">
+				union
+			</if>
+			select * from (select ${tempList.yearAndMonth} as
+			yearAndMonth,T005.employeeNo,
+			T005.totalAmount
+			from
+			T005WagesInfo As
+			T005
+			where T005.employeeNo=
+			#{tempList.empNo} 
+			and reflectYearAndMonth &lt;= #{tempList.yearAndMonth}
+			ORDER BY
+			ABS(#{tempList.yearAndMonth} - reflectYearAndMonth) ASC
+			limit 1) As
+			A${tempList.yearAndMonth}
+		</foreach>
+	</select>
+	
+		<select id="getCustomerSalesInfoThird" parameterType="map"
+		resultMap="detailsInfo">
+	<foreach item="tempList" collection="tempList" index="index">
+			<if test="index != 0">
+				union
+			</if>
+			select * from(select ${tempList.yearAndMonth} as
+			yearAndMonth, totalExpenses
+			from T013ExpensesInfo 
+			where employeeNo =#{tempList.empNo}
+			and expensesReflectYearAndMonth &lt;= #{tempList.yearAndMonth}
+			ORDER BY ABS(#{tempList.yearAndMonth}- expensesReflectYearAndMonth) ASC
+		limit 1 ) As B${tempList.yearAndMonth}
+		</foreach>
+	</select>
 </mapper>

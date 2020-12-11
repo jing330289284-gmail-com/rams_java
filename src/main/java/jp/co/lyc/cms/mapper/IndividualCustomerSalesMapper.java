@@ -10,4 +10,7 @@ import jp.co.lyc.cms.model.IndividualCustomerSalesModel;
 @Mapper
 public interface IndividualCustomerSalesMapper {
 	public List<IndividualCustomerSalesModel> getCustomerSalesInfo(Map<String, Object> sendMap);
+	public List<IndividualCustomerSalesModel> getCustomerSalesInfoTwice(Map<String, Object> sendMap);
+	public List<IndividualCustomerSalesModel> getCustomerSalesInfoThird(Map<String, Object> sendMap);
 }
+
