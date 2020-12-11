@@ -14,7 +14,6 @@ public interface SendRepotMapper {
 	 * @param sendMap
 	 * @return
 	 */
-	
 	public List<SendRepotModel> getSalesCustomers();
 	public List<SendRepotModel> getSalesPersons(String customerNo);
 	public int creatList(SendRepotModel model);
@@ -22,6 +21,4 @@ public interface SendRepotMapper {
 	public int listNameUpdate(SendRepotsListName model);
 	public List<SendRepotModel> getSalesCustomersByNos(String[] ctmNos);
 	public int deleteList(String storageListName);
-	
-	
 }
