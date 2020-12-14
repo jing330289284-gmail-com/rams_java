@@ -646,7 +646,6 @@ developLanguageCode9=#{developLanguageCode9},
 developLanguageCode10=#{developLanguageCode10},
 unitPrice=#{unitPrice},
 theMonthOfStartWork=#{beginMonth},
-salesProgressCode=#{salesProgressCode},
 remark=#{remark},
 updateTime=NOW(),
 updateUser=#{updateUser}

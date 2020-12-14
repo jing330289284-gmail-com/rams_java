@@ -106,6 +106,18 @@ public class SalesProfitController extends BaseController {
 				}
 			}
 
+			if (siteList.get(i).getIntoCompanyName().equals("新人")) {
+				siteList.get(i).setIntoCompanyCode("0");
+			} else {
+				siteList.get(i).setIntoCompanyCode("1");
+			}
+
+			if (siteList.get(i).getSalesProgressCode().equals("5")) {
+				siteList.get(i).setSalesProgressCode("1");
+			} else if (siteList.get(i).getSalesProgressCode().equals("4")) {
+				siteList.get(i).setSalesProgressCode("2");
+			}
+
 			// 计算ポイント
 			for (int j = 0; j < pointInfoList.size(); j++) {
 				if (siteList.get(i).getEmployeeStatus() != null && pointInfoList.get(j).getEmployeeStatus() != null
