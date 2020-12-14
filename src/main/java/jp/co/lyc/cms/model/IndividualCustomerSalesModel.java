@@ -33,6 +33,9 @@ public class IndividualCustomerSalesModel implements Serializable  {
 	String stationName;
 	List empDetail;
 	int totalworkPeoSum;
+	int totaluPrice;
+	int overTimeOrExpectFee;
+	int totalgrossProfit;
 	public String getCustomerName() {
 		return customerName;
 	}
@@ -171,6 +174,24 @@ public class IndividualCustomerSalesModel implements Serializable  {
 	}
 	public void setTotalworkPeoSum(int totalworkPeoSum) {
 		this.totalworkPeoSum = totalworkPeoSum;
+	}
+	public int getTotaluPrice() {
+		return totaluPrice;
+	}
+	public void setTotaluPrice(int totaluPrice) {
+		this.totaluPrice = totaluPrice;
+	}
+	public int getOverTimeOrExpectFee() {
+		return overTimeOrExpectFee;
+	}
+	public void setOverTimeOrExpectFee(int overTimeOrExpectFee) {
+		this.overTimeOrExpectFee = overTimeOrExpectFee;
+	}
+	public int getTotalgrossProfit() {
+		return totalgrossProfit;
+	}
+	public void setTotalgrossProfit(int totalgrossProfit) {
+		this.totalgrossProfit = totalgrossProfit;
 	}
 
 

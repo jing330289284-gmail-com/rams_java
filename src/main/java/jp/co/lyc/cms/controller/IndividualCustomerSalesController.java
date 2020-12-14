@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +14,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.DataBinder;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,6 +26,7 @@ import jp.co.lyc.cms.model.CustomerEmployeeDetail;
 import jp.co.lyc.cms.model.IndividualCustomerSalesModel;
 import jp.co.lyc.cms.service.IndividualCustomerSalesService;
 import jp.co.lyc.cms.util.UtilsCheckMethod;
+import jp.co.lyc.cms.validation.IndividualCustomerSalesValidation;
 
 @Controller
 @RequestMapping(value = "/customerSales")
@@ -35,6 +39,21 @@ public class IndividualCustomerSalesController {
 	
 	@ResponseBody
 	public Map<String, Object> searchCustomerSales(@RequestBody IndividualCustomerSalesModel customerSalesInfo) throws IOException {
+		errorsMessage = "";
+		DataBinder binder = new DataBinder(customerSalesInfo);
+		binder.setValidator(new IndividualCustomerSalesValidation());
+		binder.validate();
+		BindingResult results = binder.getBindingResult();
+		Map<String, Object> resulterr = new HashMap<>();
+		if (results.hasErrors()) {
+			results.getAllErrors().forEach(o -> {
+				FieldError error = (FieldError) o;
+				errorsMessage += error.getDefaultMessage();// エラーメッセージ
+			});
+
+			resulterr.put("errorsMessage", errorsMessage);// エラーメッセージ
+			return resulterr;
+		} else {
 		List<IndividualCustomerSalesModel> CustomerSalesModelList = new ArrayList<IndividualCustomerSalesModel>();
 		Date day = new Date();
 		SimpleDateFormat df = new SimpleDateFormat("yyyyMM");
@@ -119,7 +138,6 @@ public class IndividualCustomerSalesController {
 		CustomerSalesModelList =individualCustomerSalesService.searchCustomerSales(sendMap);
 		logger.info("IndividualCustomerSalesController.searchCustomerSales:" + "検索結束");
 		if(CustomerSalesModelList.size()==0) {
-			Map<String, Object> resulterr = new HashMap<>();
 			String noData = "";
 			noData="条件に該当する結果が存在しない";
 			resulterr.put("noData",noData);
@@ -195,6 +213,9 @@ public class IndividualCustomerSalesController {
 			int totalAm=0;
 			for(int m =0;m<CustomerSalesModelListTwice.size();m++) {
 				if(CustomerSalesModelListThird.get(n).getYearAndMonth().equals(CustomerSalesModelListTwice.get(m).getYearAndMonth())) {
+					if(CustomerSalesModelListThird.get(n).getTotalExpenses()==null||CustomerSalesModelListThird.get(n).getTotalExpenses().equals("")) {
+						CustomerSalesModelListThird.get(n).setTotalExpenses("0");
+					}
 				 totalAm =Integer.parseInt(CustomerSalesModelListTwice.get(m).getTotalAmount())+ Integer.parseInt(CustomerSalesModelListThird.get(n).getTotalExpenses());					
 				 CustomerSalesModelListTwice.get(m).setTotalAmount(String.valueOf(totalAm));
 					}
@@ -249,14 +270,30 @@ public class IndividualCustomerSalesController {
 		}
 		
 		int totalworkPeoSum =0;
+		int totaluPrice =0;
+		int overTimeOrExpectFee =0;
+		int totalgrossProfit=0;
 		for(int c=0;c<cusModelLi.size();c++) {
+			if(cusModelLi.get(c).getOverTimeFee()==null||cusModelLi.get(c).getOverTimeFee().equals("")) {
+				cusModelLi.get(c).setOverTimeFee("0");
+			}
+			if(cusModelLi.get(c).getExpectFee()==null||cusModelLi.get(c).getExpectFee().equals("")) {
+				cusModelLi.get(c).setExpectFee("0");
+			}
 			totalworkPeoSum=totalworkPeoSum+Integer.parseInt(cusModelLi.get(c).getWorkPeoSum());
+			totaluPrice=totaluPrice +Integer.parseInt(cusModelLi.get(c).getTotalUnitPrice());
+			overTimeOrExpectFee=overTimeOrExpectFee + Integer.parseInt(cusModelLi.get(c).getTotalUnitPrice())*10000+ Integer.parseInt(cusModelLi.get(c).getOverTimeFee())-Integer.parseInt(cusModelLi.get(c).getExpectFee());
+			totalgrossProfit=totalgrossProfit+Integer.parseInt(cusModelLi.get(c).getGrossProfit());
 		}
 		cusModelLi.get(0).setTotalworkPeoSum(totalworkPeoSum);
-	
+		cusModelLi.get(0).setTotaluPrice(totaluPrice*10000);
+		cusModelLi.get(0).setOverTimeOrExpectFee(overTimeOrExpectFee);
+		cusModelLi.get(0).setTotalgrossProfit(totalgrossProfit);
+		
 		resultdata.put("data", cusModelLi);
 		return resultdata;
 		}	
+		}
 	}
 	public Map<String, Object> getDetailParam(IndividualCustomerSalesModel customerSalesInfo) {
 		Map<String, Object> sendMap = new HashMap<String, Object>();
@@ -264,6 +301,10 @@ public class IndividualCustomerSalesController {
 		String fiscalYear =customerSalesInfo.getFiscalYear();
 		String startYear = customerSalesInfo.getStartYear();
 		String endYear = customerSalesInfo.getEndYear();
+		Calendar cal = Calendar.getInstance();
+		int year = cal.get(Calendar.YEAR);
+		int month = cal.get(Calendar.MONTH )+1;
+		String yAndM =year+""+month;
 		if (customerName != null && customerName.length() != 0) {
 			sendMap.put("customerName", customerName);
 		}
@@ -275,6 +316,13 @@ public class IndividualCustomerSalesController {
 		}
 		if (endYear != null && endYear.length() != 0) {
 			sendMap.put("endYear", endYear);
+		}
+		if(startYear== null||startYear=="") {
+			sendMap.put("startYear", "201901");
+		}
+		
+		if(endYear== null||endYear=="") {
+			sendMap.put("endYear", yAndM);
 		}
 		
 		return sendMap;
