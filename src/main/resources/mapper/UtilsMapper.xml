@@ -443,6 +443,15 @@
 			T022ProjectInfo
 	</select>
 
+	<!--送信日付設定取得 -->
+	<select id="getSendReportOfDateSeting"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT
+			SendReportOfDateSetingName NAME,
+			SendReportOfDateSetingCode CODE
+		FROM
+			M038SendReportOfDateSeting
+	</select>
 	<!-- 社員名(営業、管理者) -->
 	<select id="getEmployeeNameByOccupationName"
 		resultType="jp.co.lyc.cms.model.ModelClass">

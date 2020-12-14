@@ -4,37 +4,86 @@
     <resultMap id="SendRepot" type="jp.co.lyc.cms.model.SendRepotModel"/>
     <!--　お客様取る -->
     <select id="getSalesCustomers" resultType="jp.co.lyc.cms.model.SendRepotModel">
-SELECT 
-    T007.customerNo,
-    T007.customerName,
-    T007.representative as responsiblePerson,
-    "" as customerDepartmentCode,
-    "" as positionCode,
-    T007.purchasingManagersMail as customerDepartmentMail
-FROM
-    T007CustomerInfo AS T007
+SELECT * FROM(
+	SELECT 
+		customerNo,
+		customerName,
+		purchasingManagersMail,
+		purchasingManagers,
+		"社長" as customerDepartment,
+		customerDepartmentCode,
+		positionCode,
+		representative as responsiblePerson 
+	FROM 
+		rams.T007CustomerInfo
+	where 
+		representative!=""
 UNION
-SELECT 
-    T007.customerNo,
-    T007.customerName,
-    T007.purchasingManagers as responsiblePerson,
-    0 as customerDepartmentCode,
-    0 as positionCode,
-    T007.purchasingManagersMail as customerDepartmentMail
-FROM
-    T007CustomerInfo AS T007
+	SELECT 
+		T007.customerNo,
+		T007.customerName,
+		T007.purchasingManagersMail,
+		T007.purchasingManagers,
+		T007.customerDepartment,
+		T007.customerDepartmentCode,
+		T007.positionCode,
+		T009.responsiblePerson 
+	FROM
+		(SELECT 
+			customerNo,
+			customerName,
+			purchasingManagersMail,
+			purchasingManagers,
+			"購買部" as customerDepartment,
+			customerDepartmentCode,
+			positionCode
+		FROM 
+			T007CustomerInfo 
+		WHERE
+			purchasingManagers!="" 
+		AND
+			customerDepartmentCode=3)T007
+		LEFT JOIN 
+			T009CustomerDepartmentInfo T009
+		ON 
+			T007.customerNo=T009.customerNo
+		AND
+			T007.customerDepartmentCode=T009.customerDepartmentCode
 UNION
-SELECT
-    T007.customerNo,
-    T007.customerName,
-    T009.responsiblePerson,
-    T009.customerDepartmentCode,
-    T009.positionCode,
-    T009.customerDepartmentMail
-FROM
-    T007CustomerInfo AS T007
-LEFT JOIN
-    T009CustomerDepartmentInfo AS T009 ON T007.customerNo = T009.customerNo
+	SELECT 
+		T007.customerNo,
+		T007.customerName,
+		T007.purchasingManagersMail,
+		T007.purchasingManagers,
+		T007.customerDepartment,
+		T007.customerDepartmentCode,
+		T007.positionCode,
+		T009.responsiblePerson 
+	FROM
+		(SELECT 
+			customerNo,
+			customerName,
+			purchasingManagersMail,
+			purchasingManagers,
+			"営業部" as customerDepartment,
+			customerDepartmentCode,
+			positionCode,
+			representative as responsiblePerson 
+		FROM 
+			T007CustomerInfo
+		WHERE
+			purchasingManagers!="" 
+		AND
+			customerDepartmentCode=4)T007
+		LEFT JOIN 
+			T009CustomerDepartmentInfo T009 
+		ON
+			T007.customerNo=T009.customerNo 
+		AND
+			T007.customerDepartmentCode=T009.customerDepartmentCode
+		GROUP BY
+		 customerNo)as T007
+
     </select>
         <!--　担当取る -->
     <select id="getSalesPersons" parameterType="String" resultType="jp.co.lyc.cms.model.SendRepotModel">

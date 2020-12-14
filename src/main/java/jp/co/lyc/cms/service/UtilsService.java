@@ -492,7 +492,14 @@ public class UtilsService {
 	public List<ModelClass> getProjectNo() {
 		return utilsMapper.getProjectNo();
 	}
-
+	/**
+	 * 送信日付設定取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getSendReportOfDateSeting() {
+		return utilsMapper.getSendReportOfDateSeting();
+	}
 	/**
 	 * 社員氏名(営業、管理者)を取得する
 	 * 

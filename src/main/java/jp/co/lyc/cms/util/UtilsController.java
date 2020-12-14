@@ -1291,7 +1291,17 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getProjectNo();
 		return list;
 	}
-
+	/**
+	 *送信日付設定取得
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getSendReportOfDateSeting", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getSendReportOfDateSeting() {
+		List<ModelClass> list = utilsService.getSendReportOfDateSeting();
+		return list;
+	}
 	/**
 	 * 社員氏名を取得する
 	 * 
