@@ -12,6 +12,7 @@
 		T022.projectNo,
 		T022.projectName,
 		T022.nationalityCode,
+		M003.nationalityName,
 		T022.admissionPeriod,
 		T022.projectType,
 		T022.successRate,
@@ -22,13 +23,11 @@
 		T022.mail,
 		T022.phoneNo,
 		T022.keyWordOfLanagurue1,
-		M011a.developLanguageName AS
-		keyWordOfLanagurueName1,
+		M011a.developLanguageName AS keyWordOfLanagurueName1,
 		T022.keyWordOfLanagurue2,
 		M011b.developLanguageName AS keyWordOfLanagurueName2,
 		T022.keyWordOfLanagurue3,
-		M011c.developLanguageName AS
-		keyWordOfLanagurueName3,
+		M011c.developLanguageName AS keyWordOfLanagurueName3,
 		T022.projectInfoDetail,
 		T022.japaneaseConversationLevel,
 		M025.japaneaseConversationName,
@@ -42,54 +41,61 @@
 		T022.payOffRangeLowest,
 		T022.payOffRangeHighest,
 		T022.workStartPeriod,
+		CASE
+
+		WHEN M036.projectPeriodName IS NULL THEN
+		T022.workStartPeriod ELSE M036.projectPeriodName
+		END AS projectPeriodName,
 		T022.experienceYear,
 		T022.noOfInterviewCode,
-		T022.siteLoaction,
+		M035.noOfInterviewName,
+		T022.siteLocation,
+		M013.stationName AS siteLocationName,
 		T022.requiredItem1,
 		T022.requiredItem2,
 		T022.recruitmentNumbers,
 		T022.remark
 		FROM
 		T022ProjectInfo AS T022
-		LEFT JOIN M033SuccessRate AS M033 ON
-		T022.successRate = M033.successRateCode
+		LEFT JOIN M033SuccessRate AS M033 ON T022.successRate =
+		M033.successRateCode
 		AND T022.successRate != ""
-		LEFT
-		JOIN M025JapaneaseConversationLevel AS
-		M025 ON
-		T022.japaneaseConversationLevel =
-		M025.japaneaseConversationLevel
-		AND
-		T022.japaneaseConversationLevel != ""
-		LEFT JOIN M027ProjectPhase AS
-		M027s ON T022.projectPhaseStart = M027s.projectPhaseCode
-		AND
-		T022.projectPhaseStart != ""
-		LEFT JOIN M027ProjectPhase AS M027e ON
-		T022.projectPhaseEnd = M027e.projectPhaseCode
-		AND T022.projectPhaseEnd
-		!= ""
-		LEFT JOIN T007CustomerInfo AS T007 ON
-		T022.customerNo =
-		T007.customerNo
+		LEFT JOIN M025JapaneaseConversationLevel AS M025 ON
+		T022.japaneaseConversationLevel = M025.japaneaseConversationLevel
+		AND T022.japaneaseConversationLevel != ""
+		LEFT JOIN M027ProjectPhase AS M027s ON T022.projectPhaseStart =
+		M027s.projectPhaseCode
+		AND T022.projectPhaseStart != ""
+		LEFT JOIN M027ProjectPhase AS M027e ON T022.projectPhaseEnd =
+		M027e.projectPhaseCode
+		AND T022.projectPhaseEnd != ""
+		LEFT JOIN T007CustomerInfo AS T007 ON T022.customerNo = T007.customerNo
 		AND T022.customerNo != ""
-		LEFT JOIN M011DevelopLanguage
-		AS M011a ON
-		T022.keyWordOfLanagurue1 = M011a.developLanguageCode
-		AND
-		T022.keyWordOfLanagurue1 != ""
-		LEFT JOIN M011DevelopLanguage AS M011b
-		ON T022.keyWordOfLanagurue2 = M011b.developLanguageCode
-		AND
-		T022.keyWordOfLanagurue2 != ""
-		LEFT JOIN M011DevelopLanguage AS M011c
-		ON T022.keyWordOfLanagurue3 = M011c.developLanguageCode
-		AND
-		T022.keyWordOfLanagurue3 != "",
-		( SELECT @rowNo := 0 ) AS rowNo
+		LEFT JOIN M011DevelopLanguage AS M011a ON T022.keyWordOfLanagurue1 =
+		M011a.developLanguageCode
+		AND T022.keyWordOfLanagurue1 != ""
+		LEFT JOIN M011DevelopLanguage AS M011b ON T022.keyWordOfLanagurue2 =
+		M011b.developLanguageCode
+		AND T022.keyWordOfLanagurue2 != ""
+		LEFT JOIN M011DevelopLanguage AS M011c ON T022.keyWordOfLanagurue3 =
+		M011c.developLanguageCode
+		AND T022.keyWordOfLanagurue3 != ""
+		LEFT JOIN M013Station AS M013 ON T022.siteLocation = M013.stationCode
+		AND T022.siteLocation != ""
+		LEFT JOIN M003Nationality AS M003 ON T022.nationalityCode =
+		M003.nationalityCode
+		AND T022.nationalityCode != ""
+		LEFT JOIN M035NoOfInterview AS M035 ON T022.noOfInterviewCode =
+		M035.noOfInterviewCode
+		AND T022.noOfInterviewCode != ""
+		LEFT JOIN M036ProjectPeriod AS M036 ON T022.workStartPeriod =
+		M036.projectPeriodCode
+		AND LENGTH( T022.workStartPeriod ) &lt; 2
+		AND T022.workStartPeriod != "",
+		(
+		SELECT @rowNo := 0 ) AS rowNo
 		WHERE
-		1 =
-		1
+		1 = 1
 		<if test="yearAndMonth != null">
 			AND T022.admissionPeriod &gt; #{yearAndMonth}
 		</if>
@@ -147,10 +153,10 @@
 		T022.projectNo
 	</select>
 	<delete id="delete" parameterType="String">
-		DELETE 
-	FROM
-		T022ProjectInfo 
-	WHERE
+		DELETE
+		FROM
+		T022ProjectInfo
+		WHERE
 		projectNo = #{projectNo}
 	</delete>
 </mapper>
