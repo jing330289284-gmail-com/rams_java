@@ -147,6 +147,18 @@ public class PersonalSalesSearchController {
 					return resulterr;
 				}
 				else{
+					List<PersonalSalesSearchModel> personModelListTwice = new ArrayList<PersonalSalesSearchModel>();
+					logger.info("PersonalSalesSearchController.searchEmpAllowance:" + "二回目検索開始");
+					personModelListTwice = personalSalesSearchService.searchEmpAllowance(sendMap);
+					logger.info("PersonalSalesSearchController.searchEmpAllowance:" + "二回目検索結束");
+					
+					for (int i = 0; i < personModelList.size(); i++) {
+						for(int m = 0; m < personModelListTwice.size(); m++) {
+							if(personModelList.get(i).getOnlyYandM().equals(personModelListTwice.get(m).getNextBonusMonth())) {
+								personModelList.get(i).setBonusFee(personModelListTwice.get(m).getScheduleOfBonusAmount());
+							}
+						}
+					}
 				for (int i = 0; i < personModelList.size(); i++) {
 
 					if(UtilsCheckMethod.isNullOrEmpty(personModelList.get(i).getUnitPrice())) {
@@ -161,8 +173,8 @@ public class PersonalSalesSearchController {
 					if(UtilsCheckMethod.isNullOrEmpty(personModelList.get(i).getInsuranceFeeAmount())) {
 						personModelList.get(i).setInsuranceFeeAmount("0");
 					}
-					if(UtilsCheckMethod.isNullOrEmpty(personModelList.get(i).getScheduleOfBonusAmount())) {
-						personModelList.get(i).setScheduleOfBonusAmount("0");
+					if(UtilsCheckMethod.isNullOrEmpty(personModelList.get(i).getBonusFee())) {
+						personModelList.get(i).setBonusFee("0");;
 					}
 					if(UtilsCheckMethod.isNullOrEmpty(personModelList.get(i).getLeaderAllowanceAmount())) {
 						personModelList.get(i).setLeaderAllowanceAmount("0");
@@ -172,6 +184,9 @@ public class PersonalSalesSearchController {
 					}
 					if(UtilsCheckMethod.isNullOrEmpty(personModelList.get(i).getHousingAllowance())) {
 						personModelList.get(i).setHousingAllowance("0");
+					}
+					if(UtilsCheckMethod.isNullOrEmpty(personModelList.get(i).getDeductionsAndOvertimePay())) {
+						personModelList.get(i).setDeductionsAndOvertimePay("0");
 					}
 					List<String> empNameList =new ArrayList<String>();
 					if(personModelList.get(i).getRelatedEmployees()!=null) {
@@ -188,13 +203,13 @@ public class PersonalSalesSearchController {
 								Integer.parseInt(personModelList.get(i).getSalary())-
 								Integer.parseInt(personModelList.get(i).getTransportationExpenses())-
 								Integer.parseInt(personModelList.get(i).getInsuranceFeeAmount())-
-								Integer.parseInt(personModelList.get(i).getScheduleOfBonusAmount())-
+								Integer.parseInt(personModelList.get(i).getBonusFee())-
 								Integer.parseInt(personModelList.get(i).getLeaderAllowanceAmount())-
 								Integer.parseInt(personModelList.get(i).getOtherAllowanceAmount())-
 								Integer.parseInt(personModelList.get(i).getHousingAllowance()));
 					personModelList.get(i).setGrosProfits(grosProfits);
 				}
-
+				
 				Map<String, Object> resultdata = new HashMap<>();
 				resultdata.put("data", personModelList);
 				return resultdata;
