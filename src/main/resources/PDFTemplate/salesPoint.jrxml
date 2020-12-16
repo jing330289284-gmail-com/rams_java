@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.10.0.final using JasperReports Library version 6.10.0-unknown  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4_2" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ab62fbb6-57c7-4b81-bb4d-8850acaa47ec">
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="123" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement x="190" y="0" width="170" height="35" uuid="d66156d9-5003-4d22-a0ab-d9408f67d337"/>
+				<textElement>
+					<font fontName="黑体" size="20"/>
+				</textElement>
+				<text><![CDATA[営業ポイント確認]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="50" width="70" height="19" uuid="dbeade8e-15e9-4d6d-847f-c60ec4e4153d"/>
+				<textElement>
+					<font fontName="黑体" size="12"/>
+				</textElement>
+				<text><![CDATA[営業担当：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="90" width="110" height="19" uuid="0060642c-d99c-4775-9f8a-f5be49f2b3b0"/>
+				<textElement>
+					<font fontName="黑体" size="12"/>
+				</textElement>
+				<text><![CDATA[売上トータル合計：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="190" y="90" width="108" height="19" uuid="24d1804c-61f9-4b14-a99b-c8335860b52d"/>
+				<textElement>
+					<font fontName="黑体" size="12"/>
+				</textElement>
+				<text><![CDATA[粗利トータル合計：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="190" y="50" width="70" height="19" uuid="172b587c-b486-491c-9e64-d7026f1196a6"/>
+				<textElement>
+					<font fontName="黑体" size="12"/>
+				</textElement>
+				<text><![CDATA[対象年月：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="89" width="140" height="19" uuid="d2d2ce55-1553-46b3-9a84-34f29a979343"/>
+				<textElement>
+					<font fontName="黑体" size="12"/>
+				</textElement>
+				<text><![CDATA[ポイントトータル合計：]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="-20" y="122" width="595" height="1" uuid="9d285a9c-f1ab-425a-8349-7baed46458ee"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+		</band>
+	</title>
+	<detail>
+		<band height="200" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement x="0" y="10" width="60" height="19" uuid="28da91b0-b4ee-4fb9-9747-9577f0267e33"/>
+				<textElement>
+					<font fontName="黑体" size="12"/>
+				</textElement>
+				<text><![CDATA[売上合計：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="40" width="110" height="19" uuid="40f0c56f-f6b4-4513-81bb-9195cb7c00ff"/>
+				<textElement>
+					<font fontName="黑体" size="12"/>
+				</textElement>
+				<text><![CDATA[自社新人営業人数：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="70" width="120" height="19" uuid="fb99666a-e9dc-4729-a5f9-23854dd90ced"/>
+				<textElement>
+					<font fontName="黑体" size="12"/>
+				</textElement>
+				<text><![CDATA[自社経験者営業人数：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="190" y="10" width="68" height="19" uuid="54e68af6-d446-42d3-a2b3-ec8fc1be6961"/>
+				<textElement>
+					<font fontName="黑体" size="12"/>
+				</textElement>
+				<text><![CDATA[粗利合計：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="10" width="90" height="19" uuid="66360a63-1801-4608-90e9-3cd4bcf67561"/>
+				<textElement>
+					<font fontName="黑体" size="12"/>
+				</textElement>
+				<text><![CDATA[ポイント合計：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="130" width="60" height="19" uuid="a9d7f26d-e93a-4848-88ba-c3e7e428a9d7"/>
+				<textElement>
+					<font fontName="黑体" size="12"/>
+				</textElement>
+				<text><![CDATA[売上合計：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="160" width="80" height="19" uuid="941adf4f-7253-434a-aef1-031bbe5aee2a"/>
+				<textElement>
+					<font fontName="黑体" size="12"/>
+				</textElement>
+				<text><![CDATA[BP営業人数：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="190" y="130" width="68" height="19" uuid="c9358eac-6478-4256-8cfb-075870b250b0"/>
+				<textElement>
+					<font fontName="黑体" size="12"/>
+				</textElement>
+				<text><![CDATA[粗利合計：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="130" width="90" height="19" uuid="b708ebbc-68ca-4976-9e7a-15ce3fb7ab12"/>
+				<textElement>
+					<font fontName="黑体" size="12"/>
+				</textElement>
+				<text><![CDATA[ポイント合計：]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

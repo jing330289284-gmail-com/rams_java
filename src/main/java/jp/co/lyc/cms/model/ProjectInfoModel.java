@@ -7,7 +7,9 @@ public class ProjectInfoModel {
 	String projectNo;
 	String projectName;
 	String nationalityCode;
+	String nationalityName;
 	String admissionPeriod;
+	String projectPeriodName;
 	String projectType;
 	String successRate;
 	String successRateName;
@@ -37,8 +39,9 @@ public class ProjectInfoModel {
 	String requiredItem1;
 	String requiredItem2;
 	String noOfInterviewCode;
+	String noOfInterviewName;
 	String experienceYear;
-	String siteLoaction;
+	String siteLocation;
 	String actionType;
 	String updateUser;
 	String theSelectProjectperiodStatus;
@@ -46,7 +49,32 @@ public class ProjectInfoModel {
 	String recruitmentNumbers;
 	String rowNo;
 	String yearAndMonth;
+	String siteLocationName;
 	
+	public String getProjectPeriodName() {
+		return projectPeriodName;
+	}
+	public void setProjectPeriodName(String projectPeriodName) {
+		this.projectPeriodName = projectPeriodName;
+	}
+	public String getNoOfInterviewName() {
+		return noOfInterviewName;
+	}
+	public void setNoOfInterviewName(String noOfInterviewName) {
+		this.noOfInterviewName = noOfInterviewName;
+	}
+	public String getNationalityName() {
+		return nationalityName;
+	}
+	public void setNationalityName(String nationalityName) {
+		this.nationalityName = nationalityName;
+	}
+	public String getSiteLocationName() {
+		return siteLocationName;
+	}
+	public void setSiteLocationName(String siteLocationName) {
+		this.siteLocationName = siteLocationName;
+	}
 	public String getYearAndMonth() {
 		return yearAndMonth;
 	}
@@ -125,11 +153,11 @@ public class ProjectInfoModel {
 	public void setTheSelectProjectperiodStatus(String theSelectProjectperiodStatus) {
 		this.theSelectProjectperiodStatus = theSelectProjectperiodStatus;
 	}
-	public String getSiteLoaction() {
-		return siteLoaction;
+	public String getSiteLocation() {
+		return siteLocation;
 	}
-	public void setSiteLoaction(String siteLoaction) {
-		this.siteLoaction = siteLoaction;
+	public void setSiteLocation(String siteLocation) {
+		this.siteLocation = siteLocation;
 	}
 	public String getExperienceYear() {
 		return experienceYear;

@@ -104,7 +104,7 @@ public class ProjectInfoService {
 		sendMap.put("workStartPeriod", projectInfoModel.getWorkStartPeriod());
 		sendMap.put("experienceYear", projectInfoModel.getExperienceYear());
 		sendMap.put("noOfInterviewCode", projectInfoModel.getNoOfInterviewCode());
-		sendMap.put("siteLoaction", projectInfoModel.getSiteLoaction());
+		sendMap.put("siteLocation", projectInfoModel.getSiteLocation());
 		sendMap.put("requiredItem1", projectInfoModel.getRequiredItem1());
 		sendMap.put("requiredItem2", projectInfoModel.getRequiredItem2());
 		sendMap.put("remark", projectInfoModel.getRemark());

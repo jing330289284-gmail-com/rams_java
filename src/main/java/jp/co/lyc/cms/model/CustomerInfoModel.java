@@ -52,7 +52,21 @@ public class CustomerInfoModel {
 	String transactionStatus;
 	String capitalStockFront;
 	String capitalStockBack;
+	String customerDepartmentCode;
+	String positionCode;
 	
+	public String getCustomerDepartmentCode() {
+		return customerDepartmentCode;
+	}
+	public void setCustomerDepartmentCode(String customerDepartmentCode) {
+		this.customerDepartmentCode = customerDepartmentCode;
+	}
+	public String getPositionCode() {
+		return positionCode;
+	}
+	public void setPositionCode(String positionCode) {
+		this.positionCode = positionCode;
+	}
 	public String getTraderPersonFront() {
 		return traderPersonFront;
 	}

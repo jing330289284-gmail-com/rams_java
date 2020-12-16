@@ -1,72 +1,82 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="jp.co.lyc.cms.mapper.CustomerInfoMapper">
-    <resultMap id="SelectCustomerInfo" type="map"/>
-    <resultMap id="customerNoSaiBan" type="java.lang.String"/>
-    <resultMap id="topCustomer" type="jp.co.lyc.cms.model.TopCustomerInfoModel"/>
-    <resultMap id="CustomerDepartmentMaster" type="jp.co.lyc.cms.model.CustomerDepartmentInfoModel"/>
-    <resultMap id="CustomerInfo" type="jp.co.lyc.cms.model.CustomerInfoModel"/>
-    <resultMap id="CustomerDepartmentInfo" type="jp.co.lyc.cms.model.CustomerDepartmentInfoModel"/>
-    <!-- お客様番号採番 -->
-    <select id="customerNoSaiBan" resultMap="customerNoSaiBan">
+	<resultMap id="SelectCustomerInfo" type="map" />
+	<resultMap id="customerNoSaiBan" type="java.lang.String" />
+	<resultMap id="topCustomer"
+		type="jp.co.lyc.cms.model.TopCustomerInfoModel" />
+	<resultMap id="CustomerDepartmentMaster"
+		type="jp.co.lyc.cms.model.CustomerDepartmentInfoModel" />
+	<resultMap id="CustomerInfo"
+		type="jp.co.lyc.cms.model.CustomerInfoModel" />
+	<resultMap id="CustomerDepartmentInfo"
+		type="jp.co.lyc.cms.model.CustomerDepartmentInfoModel" />
+	<!-- お客様番号採番 -->
+	<select id="customerNoSaiBan" resultMap="customerNoSaiBan">
 		SELECT
-			CASE
-				
-			WHEN
-				customerNo IS NULL THEN
-				'C000' ELSE MAX( customerNo ) 
-				END AS saibanCustomerNo 
-			FROM
-			T007CustomerInfo
-    </select>
-    <!-- 上位お客様連想 -->
-    <select id="selectTopCustomer" resultMap="topCustomer" parameterType="String">
-        SELECT 
-        	topCustomerName
-        FROM 
-        	T008TopCustomerInfo
-        WHERE
-        	topCustomerName LIKE concat('%',#{topCustpmerName},'%')
-    </select>
-    <!-- 上位お客様存在チェック -->
-    <select id="checkTopCustomer" resultMap="customerNoSaiBan" parameterType="String">
-        SELECT 
-        	topCustomerNo
-        FROM 
-        	T008TopCustomerInfo
-        WHERE
-        	topCustomerName = #{topCustomerName}
-    </select>
-    <!-- お客様情報検索 -->
-    <select id="selectCustomerInfo" resultMap="CustomerInfo" parameterType="String">
-		SELECT
-			T007.topCustomerNo,
-			T007.url,
-			T007.representative,
-			T007.remark,
-			T007.purchasingManagersMail,
-			T007.purchasingManagers,
-			T007.paymentsiteCode,
-			T007.listedCompanyFlag,
-			T007.levelCode,
-			T007.stationCode,
-			T007.establishmentDate,
-			T007.customerNo,
-			T007.customerName,
-			T007.customerAbbreviation,
-			T007.companyNatureCode,
-			T007.businessStartDate,
-			T007.capitalStock,
-			T008.topCustomerName 
+		CASE
+
+		WHEN
+		customerNo IS NULL THEN
+		'C000' ELSE MAX( customerNo )
+		END AS saibanCustomerNo
 		FROM
-			T007CustomerInfo AS T007
-			LEFT JOIN T008TopCustomerInfo AS T008 ON T007.topCustomerNo = T008.topCustomerNo 
+		T007CustomerInfo
+	</select>
+	<!-- 上位お客様連想 -->
+	<select id="selectTopCustomer" resultMap="topCustomer"
+		parameterType="String">
+		SELECT
+		topCustomerName
+		FROM
+		T008TopCustomerInfo
 		WHERE
-			customerNo = #{customerNo}
-    </select>
-    <!-- お客様情報インサート -->
-    <insert id="insertCustomerInfo" parameterType="String">
-		INSERT INTO T007CustomerInfo(
+		topCustomerName LIKE concat('%',#{topCustpmerName},'%')
+	</select>
+	<!-- 上位お客様存在チェック -->
+	<select id="checkTopCustomer" resultMap="customerNoSaiBan"
+		parameterType="String">
+		SELECT
+		topCustomerNo
+		FROM
+		T008TopCustomerInfo
+		WHERE
+		topCustomerName = #{topCustomerName}
+	</select>
+	<!-- お客様情報検索 -->
+	<select id="selectCustomerInfo" resultMap="CustomerInfo"
+		parameterType="String">
+		SELECT
+		T007.topCustomerNo,
+		T007.url,
+		T007.representative,
+		T007.customerDepartmentCode,
+		T007.positionCode,
+		T007.purchasingManagersMail,
+		T007.purchasingManagers,
+		T007.paymentsiteCode,
+		T007.listedCompanyFlag,
+		T007.levelCode,
+		T007.stationCode,
+		T007.establishmentDate,
+		T007.customerNo,
+		T007.customerName,
+		T007.customerAbbreviation,
+		T007.companyNatureCode,
+		T007.businessStartDate,
+		T007.capitalStock,
+		T008.topCustomerName
+		FROM
+		T007CustomerInfo AS T007
+		LEFT JOIN T008TopCustomerInfo AS T008 ON T007.topCustomerNo =
+		T008.topCustomerNo
+		WHERE
+		customerNo = #{customerNo}
+	</select>
+	<!-- お客様情報インサート -->
+	<insert id="insertCustomerInfo" parameterType="String">
+		INSERT INTO
+		T007CustomerInfo(
 		customerNo,
 		customerName,
 		customerAbbreviation,
@@ -83,11 +93,12 @@
 		purchasingManagersMail,
 		paymentsiteCode,
 		capitalStock,
-		remark,
+		customerDepartmentCode,
+		positionCode,
 		updateTime,
 		createTime,
 		updateUser
-		) 
+		)
 		VALUE(
 		#{customerNo},
 		#{customerName},
@@ -105,15 +116,16 @@
 		#{purchasingManagersMail},
 		#{paymentsiteCode},
 		#{capitalStock},
-		#{remark},		
+		#{customerDepartmentCode},
+		#{positionCode},
 		NOW(),
 		NOW(),
 		#{updateUser})
-    </insert>
-    <!-- お客様情報アップデート -->
-    <update id="updateCustomerInfo" parameterType="String">
+	</insert>
+	<!-- お客様情報アップデート -->
+	<update id="updateCustomerInfo" parameterType="String">
 		UPDATE T007CustomerInfo
-		SET 
+		SET
 		<if test="customerName != null">
 			customerName = #{customerName},
 		</if>
@@ -137,13 +149,13 @@
 		</if>
 		<if test="customerRankingCode != null">
 			customerRankingCode = #{customerRankingCode},
-		</if>	
+		</if>
 		<if test="listedCompanyFlag != null">
 			listedCompanyFlag = #{listedCompanyFlag},
-		</if>	
+		</if>
 		<if test="url != null">
 			url = #{url},
-		</if>	
+		</if>
 		<if test="purchasingManagers != null">
 			purchasingManagers = #{purchasingManagers},
 		</if>
@@ -152,85 +164,97 @@
 		</if>
 		<if test="paymentsiteCode != null">
 			paymentsiteCode = #{paymentsiteCode},
-		</if>	
+		</if>
 		<if test="capitalStock != null">
 			capitalStock = #{capitalStock},
 		</if>
-		<if test="remark != null">
-			remark = #{remark},
-		</if>			
+		<if test="customerDepartmentCode != null">
+			customerDepartmentCode = #{customerDepartmentCode},
+		</if>
+		<if test="positionCode != null">
+			positionCode = #{positionCode},
+		</if>
 		updateTime = NOW(),
 		updateUser = #{updateUser}
-		WHERE 
-			customerNo = #{customerNo}
-    </update> 
-    <!-- 部門検索 -->  
-    <select id="selectCustomerDepartmentInfo" resultMap="CustomerDepartmentInfo" parameterType="map">
-		SELECT
-			CONCAT( ( @rowNo := @rowNo + 1 ) ) AS rowNo,
-			M018.customerDepartmentName,
-			T009.customerDepartmentCode,
-			T009.customerDepartmentCode AS beforeCDCode,
-			T009.positionCode,
-			T009.positionCode AS beforePCode,
-			M019.positionName,
-			T009.responsiblePerson,
-			T009.typeOfIndustryCode,
-			T009.developLanguageCode1,
-			T009.developLanguageCode2,
-			T009.stationCode,
-			M022.typeOfIndustryName,
-			M011a.developLanguageName AS developLanguageName1,
-			M011b.developLanguageName AS developLanguageName2,
-			M013.stationName,
-			T009.customerDepartmentMail 
-		FROM
-			T009CustomerDepartmentInfo AS T009
-			LEFT JOIN M019Position AS M019 ON T009.positionCode = M019.positionCode
-			LEFT JOIN M018CustomerDepartment AS M018 ON T009.customerDepartmentCode = M018.customerDepartmentCode
-			LEFT JOIN M022TypeOfIndustry AS M022 ON T009.typeOfIndustryCode = M022.typeOfIndustryCode
-			LEFT JOIN M011DevelopLanguage AS M011a ON T009.developLanguageCode1 = M011a.developLanguageCode
-			LEFT JOIN M011DevelopLanguage AS M011b ON T009.developLanguageCode2 = M011b.developLanguageCode
-			LEFT JOIN M013Station AS M013 ON T009.stationCode = M013.stationCode,
-			( SELECT @rowNo := 0 ) AS rowNo 
 		WHERE
-			T009.customerNo = #{customerNo}
+		customerNo = #{customerNo}
+	</update>
+	<!-- 部門検索 -->
+	<select id="selectCustomerDepartmentInfo"
+		resultMap="CustomerDepartmentInfo" parameterType="map">
+		SELECT
+		CONCAT( ( @rowNo := @rowNo + 1 ) ) AS rowNo,
+		M018.customerDepartmentName,
+		T009.customerDepartmentCode,
+		T009.customerDepartmentCode AS beforeCDCode,
+		T009.positionCode,
+		T009.positionCode AS beforePCode,
+		M019.positionName,
+		T009.responsiblePerson,
+		T009.typeOfIndustryCode,
+		T009.developLanguageCode1,
+		T009.developLanguageCode2,
+		T009.stationCode,
+		M022.typeOfIndustryName,
+		M011a.developLanguageName AS developLanguageName1,
+		M011b.developLanguageName AS developLanguageName2,
+		M013.stationName,
+		T009.customerDepartmentMail
+		FROM
+		T009CustomerDepartmentInfo AS T009
+		LEFT JOIN M019Position AS M019 ON T009.positionCode = M019.positionCode
+		LEFT JOIN M018CustomerDepartment AS M018 ON
+		T009.customerDepartmentCode = M018.customerDepartmentCode
+		LEFT JOIN M022TypeOfIndustry AS M022 ON T009.typeOfIndustryCode =
+		M022.typeOfIndustryCode
+		LEFT JOIN M011DevelopLanguage AS M011a ON T009.developLanguageCode1 =
+		M011a.developLanguageCode
+		LEFT JOIN M011DevelopLanguage AS M011b ON T009.developLanguageCode2 =
+		M011b.developLanguageCode
+		LEFT JOIN M013Station AS M013 ON T009.stationCode = M013.stationCode,
+		( SELECT @rowNo := 0 ) AS rowNo
+		WHERE
+		T009.customerNo = #{customerNo}
 		<if test="beforeCDCode == NULL">
 			<if test="customerDepartmentCode != NULL">
-				AND T009.customerDepartmentCode = #{customerDepartmentCode}
+				AND T009.customerDepartmentCode =
+				#{customerDepartmentCode}
 			</if>
 			<if test="positionCode != NULL">
 				AND T009.positionCode = #{positionCode}
 			</if>
 		</if>
 		<if test="beforeCDCode != NULL">
-			AND 
-				T009.customerDepartmentCode = #{beforeCDCode}
-			AND 
-				T009.positionCode = #{beforePCode}
+			AND
+			T009.customerDepartmentCode = #{beforeCDCode}
+			AND
+			T009.positionCode = #{beforePCode}
 		</if>
-    </select>
-    <!-- 部門名前連想 -->
-    <select id="selectDepartmentMaster" resultMap="CustomerDepartmentMaster" parameterType="String">
+	</select>
+	<!-- 部門名前連想 -->
+	<select id="selectDepartmentMaster"
+		resultMap="CustomerDepartmentMaster" parameterType="String">
 		SELECT
-			customerDepartmentName
+		customerDepartmentName
 		FROM
-			M018CustomerDepartment 
+		M018CustomerDepartment
 		WHERE
-			customerDepartmentName LIKE concat('%',#{customerDepartmentName},'%')
-    </select>
-    <!-- 部門コード存在チェック -->
-    <select id="selectDepartmentCode" resultMap="customerNoSaiBan" parameterType="String">
+		customerDepartmentName LIKE concat('%',#{customerDepartmentName},'%')
+	</select>
+	<!-- 部門コード存在チェック -->
+	<select id="selectDepartmentCode" resultMap="customerNoSaiBan"
+		parameterType="String">
 		SELECT
-			customerDepartmentCode
+		customerDepartmentCode
 		FROM
-			M018CustomerDepartment 
+		M018CustomerDepartment
 		WHERE
-			customerDepartmentName = #{customerDepartmentName}
-    </select>
-    <!-- 部門情報インサート -->
-    <insert id="insertCustomerDepartment" parameterType="String">
-		INSERT INTO T009CustomerDepartmentInfo(
+		customerDepartmentName = #{customerDepartmentName}
+	</select>
+	<!-- 部門情報インサート -->
+	<insert id="insertCustomerDepartment" parameterType="String">
+		INSERT INTO
+		T009CustomerDepartmentInfo(
 		customerNo,
 		customerDepartmentCode,
 		positionCode,
@@ -243,7 +267,7 @@
 		updateTime,
 		createTime,
 		updateUser
-		) 
+		)
 		VALUE(
 		#{customerNo},
 		#{customerDepartmentCode},
@@ -257,11 +281,11 @@
 		NOW(),
 		NOW(),
 		#{updateUser})
-    </insert>
-    <!-- 部門情報アップデート -->
-    <update id="updateCustomerDepartment" parameterType="String">
+	</insert>
+	<!-- 部門情報アップデート -->
+	<update id="updateCustomerDepartment" parameterType="String">
 		UPDATE T009CustomerDepartmentInfo
-		SET 
+		SET
 		customerDepartmentCode = #{customerDepartmentCode},
 		positionCode = #{positionCode},
 		<if test="positionCode != null">
@@ -272,7 +296,7 @@
 		</if>
 		<if test="customerDepartmentMail != null">
 			customerDepartmentMail = #{customerDepartmentMail},
-		</if>	
+		</if>
 		<if test="typeOfIndustryCode != null">
 			typeOfIndustryCode = #{typeOfIndustryCode},
 		</if>
@@ -284,24 +308,24 @@
 		</if>
 		<if test="stationCode != null">
 			stationCode = #{stationCode},
-		</if>		
+		</if>
 		updateTime = NOW(),
 		updateUser = #{updateUser}
-		WHERE 
-			customerNo = #{customerNo}
-		AND 
-			customerDepartmentCode = #{beforeCDCode}
-		AND 
-			positionCode = #{beforePCode}
-    </update>
-        <!-- 部門削除 -->
-    <delete id="customerDepartmentdelete" parameterType="String">
-	    DELETE 
-	    FROM 
-	    	T009CustomerDepartmentInfo 
-	    WHERE 
-	    	customerNo = #{customerNo}
-	    AND
-	    	customerDepartmentCode = #{customerDepartmentCode}
-    </delete>
+		WHERE
+		customerNo = #{customerNo}
+		AND
+		customerDepartmentCode = #{beforeCDCode}
+		AND
+		positionCode = #{beforePCode}
+	</update>
+	<!-- 部門削除 -->
+	<delete id="customerDepartmentdelete" parameterType="String">
+		DELETE
+		FROM
+		T009CustomerDepartmentInfo
+		WHERE
+		customerNo = #{customerNo}
+		AND
+		customerDepartmentCode = #{customerDepartmentCode}
+	</delete>
 </mapper>
