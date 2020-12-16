@@ -10,9 +10,9 @@ SELECT * FROM(
 		customerName,
 		purchasingManagersMail,
 		purchasingManagers,
-		"社長" as customerDepartment,
+		"" as customerDepartment,
 		customerDepartmentCode,
-		positionCode,
+		"0" as positionCode,
 		representative as responsiblePerson 
 	FROM 
 		rams.T007CustomerInfo

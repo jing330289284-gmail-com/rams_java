@@ -9,7 +9,7 @@ public class DutyManagementModel {
 	String stationName;
 	String payOffRange;
 	Integer workTime;
-	String  overTimePay;
+	String deductionsAndOvertimePay;
 	String checkSection;
 	String updateTime;
 	String updateUser;
@@ -57,11 +57,11 @@ public class DutyManagementModel {
 	public void setWorkTime(Integer workTime) {
 		this.workTime = workTime;
 	}
-	public String getOverTimePay() {
-		return overTimePay;
+	public String getDeductionsAndOvertimePay() {
+		return deductionsAndOvertimePay;
 	}
-	public void setOverTimePay(String overTimePay) {
-		this.overTimePay = overTimePay;
+	public void setDeductionsAndOvertimePay(String deductionsAndOvertimePay) {
+		this.deductionsAndOvertimePay = deductionsAndOvertimePay;
 	}
 	public String getCheckSection() {
 		return checkSection;
