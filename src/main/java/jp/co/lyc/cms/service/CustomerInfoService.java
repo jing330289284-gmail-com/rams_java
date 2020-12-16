@@ -408,6 +408,8 @@ public class CustomerInfoService {
 		sendMap.put("purchasingManagersMail", customerInfoMod.getPurchasingManagersMail());
 		sendMap.put("paymentsiteCode", customerInfoMod.getPaymentsiteCode());
 		sendMap.put("capitalStock", customerInfoMod.getCapitalStock());
+		sendMap.put("customerDepartmentCode", customerInfoMod.getCustomerDepartmentCode());
+		sendMap.put("positionCode", customerInfoMod.getPositionCode());
 		sendMap.put("updateUser", customerInfoMod.getUpdateUser());
 		sendMap.put("customerNo", customerInfoMod.getCustomerNo());
 		return sendMap;

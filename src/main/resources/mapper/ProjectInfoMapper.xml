@@ -64,7 +64,7 @@
 		workStartPeriod,
 		experienceYear,
 		noOfInterviewCode,
-		siteLoaction,
+		siteLocation,
 		requiredItem1,
 		requiredItem2,
 		remark,
@@ -99,7 +99,7 @@
 		#{workStartPeriod},
 		#{experienceYear},
 		#{noOfInterviewCode},
-		#{siteLoaction},
+		#{siteLocation},
 		#{requiredItem1},
 		#{requiredItem2},
 		#{remark},
@@ -185,8 +185,8 @@
 		<if test="noOfInterviewCode != null">
 			noOfInterviewCode = #{noOfInterviewCode},
 		</if>	
-		<if test="siteLoaction != null">
-			siteLoaction = #{siteLoaction},
+		<if test="siteLocation != null">
+			siteLocation = #{siteLocation},
 		</if>	
 		<if test="requiredItem1 != null">
 			requiredItem1 = #{requiredItem1},
@@ -233,7 +233,7 @@
 		T022.workStartPeriod,
 		T022.experienceYear,
 		T022.noOfInterviewCode,
-		T022.siteLoaction,
+		T022.siteLocation,
 		T022.requiredItem1,
 		T022.requiredItem2,
 		T022.recruitmentNumbers,
