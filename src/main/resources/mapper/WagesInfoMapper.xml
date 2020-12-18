@@ -179,4 +179,13 @@
 			employeeNo = #{employeeNo}
 			AND reflectYearAndMonth = #{updatedReflectYearAndMonth}
 </update>
+
+<!-- 最近の非稼働月数 -->
+<select id="getLastKadouPeriod" parameterType="String" resultMap="StringResult">
+	SELECT
+	nonSiteMonths
+	FROM
+	T006EmployeeSiteInfo
+	WHERE employeeNo = #{employeeNo}
+</select>
 </mapper>

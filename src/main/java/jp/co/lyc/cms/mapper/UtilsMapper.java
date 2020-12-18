@@ -343,6 +343,14 @@ public interface UtilsMapper {
 	 * @return
 	 */
 	public List<ModelClass> getSendReportOfDateSeting();
+	
+	/**
+	 * 入場期日取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getAdmissionMonth();
+	
 	/**
 	 * 社員氏名(営業、管理者)を取得する
 	 * 

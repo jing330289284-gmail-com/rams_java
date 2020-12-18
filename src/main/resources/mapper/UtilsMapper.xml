@@ -452,6 +452,16 @@
 		FROM
 			M038SendReportOfDateSeting
 	</select>
+	
+	<!--入場期日取得 -->
+	<select id="getAdmissionMonth"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT
+			admissionMonthName NAME,
+			admissionMonthCode CODE
+		FROM
+			M039AdmissionMonth
+	</select>
 	<!-- 社員名(営業、管理者) -->
 	<select id="getEmployeeNameByOccupationName"
 		resultType="jp.co.lyc.cms.model.ModelClass">

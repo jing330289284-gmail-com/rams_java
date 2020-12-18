@@ -43,6 +43,7 @@
 		projectName,
 		nationalityCode,
 		admissionPeriod,
+		admissionMonthCode,
 		projectType,
 		successRate,
 		customerNo,
@@ -78,6 +79,7 @@
 		#{projectName},
 		#{nationalityCode},
 		#{admissionPeriod},
+		#{admissionMonthCode},
 		#{projectType},
 		#{successRate},
 		#{customerNo},
@@ -121,7 +123,10 @@
 		</if>	
 		<if test="admissionPeriod != null">
 			admissionPeriod = #{admissionPeriod},
-		</if>		
+		</if>	
+		<if test="admissionMonthCode != null">
+			admissionMonthCode = #{admissionMonthCode},
+		</if>	
 		<if test="projectType != null">
 			projectType = #{projectType},
 		</if>	
@@ -212,6 +217,7 @@
 		T022.projectName,
 		T022.nationalityCode,
 		T022.admissionPeriod,
+		T022.admissionMonthCode,
 		T022.projectType,
 		T022.successRate,
 		T022.customerNo,
