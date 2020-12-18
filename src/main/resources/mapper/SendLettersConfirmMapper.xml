@@ -112,4 +112,17 @@ FROM
 WHERE
     T002.occupationCode = "3"
     </select>
+    
+    <!-- 要員追加機能の新規　20201216 　張棟　START -->
+    <select id="getAllEmployInfoName" resultType="jp.co.lyc.cms.model.AllEmployName">
+	SELECT
+		employeeNo,
+	CONCAT(employeeFristName,employeeLastName) AS employeeName
+	FROM
+		T001Employee T001
+	LEFT JOIN T011BpInfoSupplement T011
+		ON T001.employeeNo = T011.bpEmployeeNo
+    </select>
+    <!-- 要員追加機能の新規　20201216 　張棟　END -->
+    
 </mapper>
