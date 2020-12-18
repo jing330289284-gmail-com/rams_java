@@ -28,6 +28,15 @@ public class SalesProfitModel {
 	String intoCompanyCode; // 入社区分
 	Date startDate;// 現場開始時間
 	Date endDate;// 現場終了時間
+	String pdf; // pdf
+
+	public String getPdf() {
+		return pdf;
+	}
+
+	public void setPdf(String pdf) {
+		this.pdf = pdf;
+	}
 
 	public String getCustomerContractStatus() {
 		return customerContractStatus;

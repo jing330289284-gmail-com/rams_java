@@ -38,6 +38,8 @@ public class PersonalSalesSearchModel implements Serializable  {
 	String leaderAllowanceAmount;
 	String relatedEmployees;
 	List<String> empNameList;
+	String nextBonusMonth;
+	String bonusFee;
 	public String getEmployeeName() {
 		return employeeName;
 	}
@@ -218,7 +220,18 @@ public class PersonalSalesSearchModel implements Serializable  {
 	public void setEmpNameList(List<String> empNameList) {
 		this.empNameList = empNameList;
 	}
-
+	public String getNextBonusMonth() {
+		return nextBonusMonth;
+	}
+	public void setNextBonusMonth(String nextBonusMonth) {
+		this.nextBonusMonth = nextBonusMonth;
+	}
+	public String getBonusFee() {
+		return bonusFee;
+	}
+	public void setBonusFee(String bonusFee) {
+		this.bonusFee = bonusFee;
+	}
 
 
 	

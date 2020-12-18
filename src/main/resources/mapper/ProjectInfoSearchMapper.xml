@@ -15,6 +15,7 @@
 		M003.nationalityName,
 		T022.admissionPeriod,
 		T022.projectType,
+		M037.projectTypeName,
 		T022.successRate,
 		M033.successRateName,
 		T022.customerNo,
@@ -60,6 +61,9 @@
 		LEFT JOIN M033SuccessRate AS M033 ON T022.successRate =
 		M033.successRateCode
 		AND T022.successRate != ""
+		LEFT JOIN M037ProjectType AS M037 ON
+		T022.projectType = M037.projectTypeCode
+		AND T022.projectType != ""
 		LEFT JOIN M025JapaneaseConversationLevel AS M025 ON
 		T022.japaneaseConversationLevel = M025.japaneaseConversationLevel
 		AND T022.japaneaseConversationLevel != ""

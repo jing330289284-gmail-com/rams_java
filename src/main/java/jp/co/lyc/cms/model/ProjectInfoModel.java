@@ -11,6 +11,7 @@ public class ProjectInfoModel {
 	String admissionPeriod;
 	String projectPeriodName;
 	String projectType;
+	String projectTypeName;
 	String successRate;
 	String successRateName;
 	String customerNo;
@@ -51,6 +52,12 @@ public class ProjectInfoModel {
 	String yearAndMonth;
 	String siteLocationName;
 	
+	public String getProjectTypeName() {
+		return projectTypeName;
+	}
+	public void setProjectTypeName(String projectTypeName) {
+		this.projectTypeName = projectTypeName;
+	}
 	public String getProjectPeriodName() {
 		return projectPeriodName;
 	}
