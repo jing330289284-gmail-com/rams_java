@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import jp.co.lyc.cms.mapper.SendRepotMapper;
 import jp.co.lyc.cms.model.SendRepotsListName;
+import jp.co.lyc.cms.model.ModelClass;
 import jp.co.lyc.cms.model.SendRepotModel;
 
 
@@ -36,11 +37,18 @@ public class SendRepotService {
 		return sendRepotMapper.listNameUpdate(model);
 	};
 	
-	public List<SendRepotModel> getSalesCustomersByNos(String[] ctmNos){
-		return sendRepotMapper.getSalesCustomersByNos(ctmNos);
+	public List<SendRepotModel> getCustomersByNos(String[] ctmNos){
+		return sendRepotMapper.getCustomersByNos(ctmNos);
 	};
 	
 	public int deleteList(String storageListName){
+		sendRepotMapper.deleteListOfEmp(storageListName);
 		return sendRepotMapper.deleteList(storageListName);
+	};
+	public  List<ModelClass> getPurchasingManagersCode(SendRepotModel model){
+		return sendRepotMapper.getPurchasingManagersCode(model);
+	};
+	public  List<ModelClass> getCustomerDepartmentCode(SendRepotModel model){
+		return sendRepotMapper.getCustomerDepartmentCode(model);
 	};
 }
