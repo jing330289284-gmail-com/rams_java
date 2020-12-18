@@ -147,7 +147,7 @@ public class SalesProfitController extends BaseController {
 					}
 				}
 			}
-
+			
 			// 特別计算ポイント
 			if (siteList.get(i).getStartTime() != null) {
 				if (siteList.get(i).getEndTime() == null) {
@@ -189,41 +189,38 @@ public class SalesProfitController extends BaseController {
 				}
 			}
 
+			// 设置売上粗利
 			if (salesProfitModel.getPdf().equals("true")) {
-				// 设置売上粗利
-				SalesProfitModel salesProfitDate = new SalesProfitModel();
-				SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
-				String startTime = siteList.get(i).getStartTime().substring(0, 4) + "/"
-						+ siteList.get(i).getStartTime().substring(4, 6) + "/01 00:00:00";
-				String endTime = siteList.get(i).getEndTime().substring(0, 4) + "/"
-						+ siteList.get(i).getEndTime().substring(4, 6) + "/01 00:00:00";
-				Date startDate = sdFormat.parse(startTime);
-				Date endDate = sdFormat.parse(endTime);
+				if (siteList.get(i).getStartTime() != null && siteList.get(i).getEndTime() != null) {
+					SalesProfitModel salesProfitDate = new SalesProfitModel();
+					SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
 
-				salesProfitDate.setEmployeeName(siteList.get(i).getEmployeeName());
-				salesProfitDate.setStartDate(startDate);
-				salesProfitDate.setEndDate(endDate);
-				logger.info("===================================================================================");
-				if (this.getSalesInfoByPdf(salesProfitDate, employeeSales, customerName, employeeNameToNo).size() > 0) {
-					logger.info("===================================================================================");
-					siteList.get(i)
-							.setProfitAll(this
-									.getSalesInfoByPdf(salesProfitDate, employeeSales, customerName, employeeNameToNo)
-									.get(0).getProfitAll());
-					logger.info("===================================================================================");
-					siteList.get(i)
-							.setSiteRoleNameAll(this
-									.getSalesInfoByPdf(salesProfitDate, employeeSales, customerName, employeeNameToNo)
-									.get(0).getSiteRoleNameAll());
+					String startTime = siteList.get(i).getStartTime().substring(0, 4) + "/"
+							+ siteList.get(i).getStartTime().substring(4, 6) + "/01 00:00:00";
+					String endTime = siteList.get(i).getEndTime().substring(0, 4) + "/"
+							+ siteList.get(i).getEndTime().substring(4, 6) + "/01 00:00:00";
+					Date startDate = sdFormat.parse(startTime);
+					Date endDate = sdFormat.parse(endTime);
+
+					salesProfitDate.setEmployeeName(siteList.get(i).getEmployeeName());
+					salesProfitDate.setStartDate(startDate);
+					salesProfitDate.setEndDate(endDate);
+
+					List<SalesInfoModel> salesInfoByPdf = this.getSalesInfoByPdf(salesProfitDate, employeeSales,
+							customerName, employeeNameToNo);
+					if (salesInfoByPdf.size() > 0) {
+						siteList.get(i).setProfitAll(salesInfoByPdf.get(0).getProfitAll());
+						siteList.get(i).setSiteRoleNameAll(salesInfoByPdf.get(0).getSiteRoleNameAll());
+					}
+
+					/*
+					 * if (this.getSalesInfo(salesProfitDate).size() > 0) {
+					 * siteList.get(i).setProfitAll(this.getSalesInfo(salesProfitDate).get(0).
+					 * getProfitAll());
+					 * siteList.get(i).setSiteRoleNameAll(this.getSalesInfo(salesProfitDate).get(0).
+					 * getSiteRoleNameAll()); }
+					 */
 				}
-
-				/*
-				 * if (this.getSalesInfo(salesProfitDate).size() > 0) {
-				 * siteList.get(i).setProfitAll(this.getSalesInfo(salesProfitDate).get(0).
-				 * getProfitAll());
-				 * siteList.get(i).setSiteRoleNameAll(this.getSalesInfo(salesProfitDate).get(0).
-				 * getSiteRoleNameAll()); }
-				 */
 			}
 
 			// 设置契約区分
