@@ -492,6 +492,16 @@ public class UtilsService {
 	public List<ModelClass> getProjectNo() {
 		return utilsMapper.getProjectNo();
 	}
+	
+	/**
+	 * 入場期日取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getAdmissionMonth() {
+		return utilsMapper.getAdmissionMonth();
+	}
+	
 	/**
 	 * 送信日付設定取得
 	 * 

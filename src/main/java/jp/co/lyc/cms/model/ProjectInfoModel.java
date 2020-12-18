@@ -9,6 +9,8 @@ public class ProjectInfoModel {
 	String nationalityCode;
 	String nationalityName;
 	String admissionPeriod;
+	String admissionMonthCode;
+	String admissionMonthName;
 	String projectPeriodName;
 	String projectType;
 	String projectTypeName;
@@ -51,7 +53,26 @@ public class ProjectInfoModel {
 	String rowNo;
 	String yearAndMonth;
 	String siteLocationName;
+	String admissionPeriodReset;
 	
+	public String getAdmissionPeriodReset() {
+		return admissionPeriodReset;
+	}
+	public void setAdmissionPeriodReset(String admissionPeriodReset) {
+		this.admissionPeriodReset = admissionPeriodReset;
+	}
+	public String getAdmissionMonthCode() {
+		return admissionMonthCode;
+	}
+	public void setAdmissionMonthCode(String admissionMonthCode) {
+		this.admissionMonthCode = admissionMonthCode;
+	}
+	public String getAdmissionMonthName() {
+		return admissionMonthName;
+	}
+	public void setAdmissionMonthName(String admissionMonthName) {
+		this.admissionMonthName = admissionMonthName;
+	}
 	public String getProjectTypeName() {
 		return projectTypeName;
 	}

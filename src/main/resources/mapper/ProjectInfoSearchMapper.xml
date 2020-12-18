@@ -14,6 +14,8 @@
 		T022.nationalityCode,
 		M003.nationalityName,
 		T022.admissionPeriod,
+		M039.admissionMonthName,
+		CONCAT(T022.admissionPeriod,'(',M039.admissionMonthName,')') AS admissionPeriodReset,
 		T022.projectType,
 		M037.projectTypeName,
 		T022.successRate,
@@ -61,6 +63,9 @@
 		LEFT JOIN M033SuccessRate AS M033 ON T022.successRate =
 		M033.successRateCode
 		AND T022.successRate != ""
+		LEFT JOIN M039AdmissionMonth AS M039 ON T022.admissionMonthCode =
+		M039.admissionMonthCode
+		AND T022.admissionMonthCode != ""
 		LEFT JOIN M037ProjectType AS M037 ON
 		T022.projectType = M037.projectTypeCode
 		AND T022.projectType != ""

@@ -1,6 +1,7 @@
 package jp.co.lyc.cms.controller;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,11 +18,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import jp.co.lyc.cms.common.BaseController;
+import jp.co.lyc.cms.mapper.EmployeeInfoMapper;
+import jp.co.lyc.cms.mapper.EnterPeriodSearchMapper;
 import jp.co.lyc.cms.mapper.ExpensesInfoMapper;
 import jp.co.lyc.cms.mapper.WagesInfoMapper;
+import jp.co.lyc.cms.model.EmployeeModel;
+import jp.co.lyc.cms.model.EnterPeriodSearchModel;
 import jp.co.lyc.cms.model.ExpensesInfoModel;
 import jp.co.lyc.cms.model.SiteModel;
 import jp.co.lyc.cms.model.WagesInfoModel;
+import jp.co.lyc.cms.service.EmployeeInfoService;
 import jp.co.lyc.cms.service.WagesInfoService;
 import jp.co.lyc.cms.validation.WagesInfoValidation;
 
@@ -41,6 +47,14 @@ public class WagesInfoController extends BaseController{
 	@Autowired
 	ExpensesInfoMapper expensesInfoMapper;
 	
+	@Autowired
+	EmployeeInfoService employeeInfoService;
+	
+	@Autowired
+	EmployeeInfoController employeeInfoController;
+	
+	@Autowired
+	EnterPeriodSearchMapper enterPeriodSearchMapper;
 	/**
 	 * 
 	 * @return
@@ -71,15 +85,21 @@ public class WagesInfoController extends BaseController{
 			result.put("kadouList", kadouList);
 			result.put("leaderCheck", leaderCheck);
 		}
+		EmployeeModel b = new EmployeeModel();
+		b.setEmployeeNo(wagesInfoMod.getEmployeeNo());
+		b = employeeInfoService.getEmployeeByEmployeeNo(employeeInfoController.getParam(b));
+		if(!b.getOccupationCode().equals("3")) {
+			kadouCheck = false;
+		}
 		result.put("kadouCheck", kadouCheck);
 		HashMap<String, String> sendMap = new HashMap<String, String>();
 		sendMap.put("employeeNo", wagesInfoMod.getEmployeeNo());
 		ArrayList<WagesInfoModel> wagesInfoList = wagesInfoMapper.getWagesInfo(sendMap);
 		ArrayList<ExpensesInfoModel> expensesInfoList = expensesInfoMapper.getExpensesInfo(sendMap);
+		WagesInfoModel a = wagesInfoMapper.getEmployeeForm(wagesInfoMod.getEmployeeNo());
+		result.put("employeeFormCode", a.getEmployeeFormCode());
 		if(wagesInfoList.size() == 0) {
 			//追加の場合（データがない）、T002に社員形式を取得
-			WagesInfoModel a = wagesInfoMapper.getEmployeeForm(wagesInfoMod.getEmployeeNo());
-			result.put("employeeFormCode", a.getEmployeeFormCode());
 			result.put("errorsMessage", "該当社員の給料データがない");
 			return result;
 		}else if(expensesInfoList.size() != 0) {
@@ -96,6 +116,73 @@ public class WagesInfoController extends BaseController{
 			}
 		}
 		result.put("wagesInfoList", wagesInfoList);
+		WagesInfoModel bonusInfo = new WagesInfoModel();
+		//社員最初の入場期日を取得
+		HashMap<String, String> sendHashMap = new HashMap<String, String>();
+		sendHashMap.put("employeeNo", wagesInfoMod.getEmployeeNo());
+		ArrayList<EnterPeriodSearchModel> dateList = 
+				enterPeriodSearchMapper.selectAdmissionStartDate(sendHashMap);
+		//最初の現場
+		EnterPeriodSearchModel bonusSite = new EnterPeriodSearchModel();
+		//ボーナスのデータ
+		WagesInfoModel bonus = new WagesInfoModel();
+		if(!kadouCheck && dateList.size() != 0) {
+			bonusSite = dateList.get(0);
+			if(wagesInfoList.size() != 0) {
+				bonus = wagesInfoList.get(wagesInfoList.size()-1);
+				//最初の入場年
+				int yearAd = Integer.parseInt(bonusSite.getAdmissionStartDate().substring(0,4));
+				//最初の入場月
+				int monthAd = Integer.parseInt(bonusSite.getAdmissionStartDate().substring(4,6));
+				//画面の年
+				Calendar cal = Calendar.getInstance();
+				int yearPage = cal.get(Calendar.YEAR);
+				//画面の月
+				int monthPage = cal.get(Calendar.MONTH) + 1;
+				//待機開始年月
+				//待機月数
+				int nonSiteMonths = Integer.parseInt(bonusSite.getNonSiteMonths());
+				int year = yearPage - yearAd;
+				int month = monthAd - monthPage;
+				if(month == 0) {
+					month = year*12 - nonSiteMonths;
+				}else{
+					month = year*12 + month - nonSiteMonths;
+				}
+				if(month != 0 && month%12 == 0 && bonusSite.getEmployeeNo().substring(0,3).equals("LYC")) {
+					String nextBonusMonth = bonus.getNextBonusMonth();
+					int yearBonus = Integer.parseInt(nextBonusMonth.substring(0,4));
+					yearBonus += 1;
+					nextBonusMonth = Integer.toString(yearBonus) + nextBonusMonth.substring(4);
+					bonus.setNextBonusMonth(nextBonusMonth);
+				}else {
+					ArrayList<String> kadouMonths = 
+							wagesInfoMapper.getLastKadouPeriod(wagesInfoMod.getEmployeeNo());
+					int kadouMonth = 0;
+					if(kadouMonths.size() != 0) {
+						kadouMonth = Integer.parseInt(kadouMonths.get(kadouMonths.size() - 1));
+					}
+					String nextBonusMonth = bonus.getNextBonusMonth();
+					int yearBonus = Integer.parseInt(nextBonusMonth.substring(0,4));
+					int monthBonus = Integer.parseInt(nextBonusMonth.substring(4));
+					monthBonus += kadouMonth;
+					if(monthBonus > 12) {
+						monthBonus = monthBonus - 12;
+						yearBonus += 1;
+					}
+					nextBonusMonth = Integer.toString(yearBonus) 
+							+ (monthBonus > 10 ? monthBonus : "0" + monthBonus);
+					bonus.setNextBonusMonth(nextBonusMonth);
+				}
+			}
+			result.put("bonus", bonus);
+		}else if(dateList.size() == 0) {
+			result.put("bonus", null);
+			return result;
+		}else if(kadouCheck) {
+			result.put("bonus", bonus);
+			return result;
+		}
 		return result;
 	}
 	/**
