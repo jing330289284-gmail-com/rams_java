@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Properties;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import jp.co.lyc.cms.common.BaseController;
+import jp.co.lyc.cms.model.ModelClass;
 import jp.co.lyc.cms.model.SendRepotModel;
 import jp.co.lyc.cms.model.SendRepotsListName;
 import jp.co.lyc.cms.service.SendRepotService;
@@ -121,13 +123,25 @@ public class SendRepotController  extends BaseController {
 		logger.info("getCustomers:" + "検索開始");
 		List<SendRepotModel> salesCustomersList = new ArrayList<SendRepotModel>();
 		try {
-			salesCustomersList = sendRepotService.getSalesCustomersByNos(model.getCtmNos());
+			salesCustomersList = sendRepotService.getCustomersByNos(model.getCtmNos());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		logger.info("getCustomers" + "検索結束");
 		return salesCustomersList;
 	}
+	@RequestMapping(value = "/getCustomerDepartmentCode", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass>  getCustomerDepartmentCode(@RequestBody SendRepotModel model) {
+			List<ModelClass> list = sendRepotService.getCustomerDepartmentCode(model);
+			return list ;
+		}	
+	@RequestMapping(value = "/getPurchasingManagersCode", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass>  getPurchasingManagersCode(@RequestBody SendRepotModel model2) {
+			List<ModelClass> list = sendRepotService.getPurchasingManagersCode(model2);
+			return list;
+		}
 	
 	private void updateName(String storageListName,String oldStorageListName) {
 		SendRepotsListName updateModel= new SendRepotsListName();
