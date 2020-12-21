@@ -57,6 +57,17 @@ public class EmployeeInfoService {
 	}
 
 	/**
+	 * 社員情報を確認
+	 * 
+	 * @param sendMap
+	 * @return List
+	 */
+	public List<String> verificationEmployeeInfo() {
+		List<String> employeeList = employeeInfoMapper.verificationEmployeeInfo();
+		return employeeList;
+	}
+
+	/**
 	 * 社員情報を追加
 	 * 
 	 * @param sendMap
