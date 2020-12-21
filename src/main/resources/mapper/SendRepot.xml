@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="jp.co.lyc.cms.mapper.SendRepotMapper">
     <resultMap id="SendRepot" type="jp.co.lyc.cms.model.SendRepotModel"/>
+     <!--　部門取る -->
         <select id="getCustomerDepartmentCode" resultType="jp.co.lyc.cms.model.SendRepotModel">
    		SELECT 
 	   		T009.customerDepartmentCode as code,
@@ -11,12 +12,17 @@
 		LEFT JOIN 
 			M018CustomerDepartment M018
 		ON
-			M018.customerDepartmentCode=T009.customerDepartmentCode
+			T009.customerDepartmentCode=M018.customerDepartmentCode
 		WHERE
 		    T009.customerNo = #{customerNo}
+	    AND
+			T009.responsiblePerson!='' 
+		AND 
+			T009.responsiblePerson is not null
 		GROUP BY
 			T009.customerDepartmentCode;
     </select>
+    <!--　担当取る -->
     <select id="getPurchasingManagersCode" resultType="jp.co.lyc.cms.model.SendRepotModel">
   SELECT 
 	  (@rowNo:=@rowNo+1 ) AS code,
@@ -30,6 +36,19 @@
 			 customerNo = #{customerNo}
 		AND
 		    customerDepartmentCode = #{customerDepartmentCode}
+		UNION
+		SELECT 
+			representative
+		FROM
+			T007CustomerInfo 
+		WHERE 
+			customerNo = #{customerNo}
+		AND
+			representative!=''
+		AND
+			representative IS NOT NULL
+		AND
+			customerDepartmentCode=#{customerDepartmentCode}
 	    UNION
 		SELECT 
 			purchasingManagers
@@ -37,6 +56,10 @@
 			T007CustomerInfo 
 		WHERE 
 			customerNo = #{customerNo}
+		AND
+			purchasingManagers!=''
+		AND
+			purchasingManagers IS NOT NULL
 		AND
 			customerDepartmentCode=#{customerDepartmentCode}) T01,
 			(SELECT @rowNo:=0) AS rowId
@@ -55,8 +78,10 @@
 			representative as responsiblePerson 
 		FROM 
 			rams.T007CustomerInfo
-		where 
+		WHERE 
 			representative!=""
+		AND 
+			representative is not null
 	UNION
 		SELECT 
 			T007.customerNo,
@@ -80,6 +105,8 @@
 				T007CustomerInfo 
 			WHERE
 				purchasingManagers!="" 
+			AND 
+				purchasingManagers is not null
 			AND
 				customerDepartmentCode=3)T007
 			LEFT JOIN 
@@ -112,6 +139,8 @@
 				T007CustomerInfo
 			WHERE
 				purchasingManagers!="" 
+			AND 
+				purchasingManagers is not null
 			AND
 				customerDepartmentCode=4)T007
 			LEFT JOIN 
@@ -123,18 +152,7 @@
 			GROUP BY
 			 customerNo)as T007
     </select>
-    <!--　担当取る -->
-    <select id="getSalesPersons" parameterType="String" resultType="jp.co.lyc.cms.model.SendRepotModel">
-		SELECT 
-		    customerDepartmentCode,
-		    positionCode,
-		    responsiblePerson,
-		    customerDepartmentMail
-		FROM
-		    T009CustomerDepartmentInfo
-		WHERE
-		    customerNo = #{customerNo};
-	</select>
+    
     <select id="getLists" resultType="jp.co.lyc.cms.model.SendRepotModel">
 			select 
 				StorageListName as name,transmissionClassificationCode as code,customerList as customerNo
@@ -144,8 +162,7 @@
 				transmissionClassificationCode=0 order by StorageListName
     </select>
     <select id="getCustomersByNos" resultType="jp.co.lyc.cms.model.SendRepotModel">
-		SELECT 
-		(@rowNo:=@rowNo+1 ) AS rowId,
+	SELECT
 	    T007.customerNo,
 	    T007.customerName,
 	    T007.purchasingManagers,
@@ -159,21 +176,30 @@
 		'' AS purchasingManagersMail2
 	FROM
 	    T007CustomerInfo AS T007
-	        LEFT JOIN
-	    T009CustomerDepartmentInfo AS T009 ON T007.customerNo = T009.customerNo
-	        AND T007.purchasingManagers = T009.responsiblePerson, (SELECT
-			@rowNo:=0) AS rowId
-			WHERE
+	LEFT JOIN
+	    T009CustomerDepartmentInfo AS T009 
+	ON 
+		T007.customerNo = T009.customerNo
+	AND 
+		T007.purchasingManagers = T009.responsiblePerson
+	WHERE
 	   T007.customerNo IN 
-	     <foreach collection="array" index="index" item="item" open="(" separator="," close=")">
+	   <foreach collection="array" index="index" item="item" open="(" separator="," close=")">
 	         #{item}
-	    </foreach>
+	   </foreach>
     </select>
     <insert id="creatList" parameterType="String">
   		INSERT INTO T021CustomerSendMailStorageList
-		(StorageListName,
+		(
+		StorageListName,
 		transmissionClassificationCode,
 		customerList,
+		mainChargeList,
+		departmentCodeList,
+		positionCodeList,
+		mainChargeMailList,
+		subChargeMailList,
+		CandidateInChargeList,
 		updateTime,
 		createTime,
 		updateUser)
@@ -182,6 +208,12 @@
 		#{name},
 		0,
 		#{code},
+		#{mainChargeList},
+		#{departmentCodeList},
+		#{positionCodeList},
+		#{mainChargeMailList},
+		#{subChargeMailList},
+		#{CandidateInChargeList},
 		 NOW(),
 		 NOW(),
 		#{updateUser})
@@ -210,4 +242,17 @@
 		where 
 			StorageListName=#{storageListName};
 	</update>
+	
+	<!--　担当取る 未使用 -->
+    <select id="getSalesPersons" parameterType="String" resultType="jp.co.lyc.cms.model.SendRepotModel">
+		SELECT 
+		    customerDepartmentCode,
+		    positionCode,
+		    responsiblePerson,
+		    customerDepartmentMail
+		FROM
+		    T009CustomerDepartmentInfo
+		WHERE
+		    customerNo = #{customerNo};
+	</select>
 </mapper>

@@ -157,11 +157,11 @@ public class SendRepotController  extends BaseController {
 	
 	@RequestMapping(value = "/deleteList", method = RequestMethod.POST)
 	@ResponseBody
-	public int deleteList(@RequestBody SendRepotsListName sendRepotsListNames) {
+	public int deleteList(@RequestBody String storageListName) {
 		logger.info("getSalesPersons:" + "検索開始");
 		int index=0;
 		try {
-			index = sendRepotService.deleteList(sendRepotsListNames.getStorageListName());
+			index = sendRepotService.deleteList(storageListName);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
