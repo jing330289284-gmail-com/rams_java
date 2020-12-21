@@ -1,20 +1,13 @@
 package jp.co.lyc.cms.controller;
 
 import java.io.File;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
-import java.util.Comparator;
-import java.util.Date;
 
-import javax.servlet.http.HttpSession;
-
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,22 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
-import com.thoughtworks.xstream.io.path.Path;
-
-import edu.emory.mathcs.backport.java.util.Collections;
 import jp.co.lyc.cms.common.BaseController;
-import jp.co.lyc.cms.model.BreakTimeModel;
-import jp.co.lyc.cms.model.DutyRegistrationModel;
-import jp.co.lyc.cms.model.EmployeeWorkTimeModel;
 import jp.co.lyc.cms.model.SalesInfoModel;
 import jp.co.lyc.cms.model.SalesProfitModel;
-import jp.co.lyc.cms.service.DutyRegistrationService;
 import jp.co.lyc.cms.service.SalesProfitService;
 import jp.co.lyc.cms.util.UtilsController;
-import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -47,10 +29,6 @@ import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import net.sf.jasperreports.engine.data.JRMapCollectionDataSource;
-import net.sf.jasperreports.engine.design.JRDesignVariable;
-import net.sf.jasperreports.engine.util.JRLoader;
 
 @Controller
 @RequestMapping(value = "/SalesPointController")
@@ -121,7 +99,8 @@ public class SalesPointController extends BaseController {
 				} else {
 					employeeCount++;
 				}
-				employeePoint += Integer.parseInt(pointInfo.get(i).getPoint());
+				if (pointInfo.get(i).getPoint() != null)
+					employeePoint += Integer.parseInt(pointInfo.get(i).getPoint());
 				if (pointInfo.get(i).getSpecialsalesPoint() != null)
 					employeePoint += Integer.parseInt(pointInfo.get(i).getSpecialsalesPoint());
 				if (pointInfo.get(i).getProfitAll() != null)
@@ -130,7 +109,8 @@ public class SalesPointController extends BaseController {
 					employeeGrossProfit += Integer.parseInt(pointInfo.get(i).getSiteRoleNameAll().replaceAll(",", ""));
 			} else if (pointInfo.get(i).getEmployeeStatus().equals("1")) {
 				bpCount++;
-				bpPoint += Integer.parseInt(pointInfo.get(i).getPoint());
+				if (pointInfo.get(i).getPoint() != null)
+					bpPoint += Integer.parseInt(pointInfo.get(i).getPoint());
 				if (pointInfo.get(i).getSpecialsalesPoint() != null)
 					bpPoint += Integer.parseInt(pointInfo.get(i).getSpecialsalesPoint());
 				if (pointInfo.get(i).getProfitAll() != null)
@@ -153,16 +133,16 @@ public class SalesPointController extends BaseController {
 			parameters.put("yearAndMonth", yearAndMonth);
 			parameters.put("newEmployeeCount", Integer.toString(newEmployeeCount));
 			parameters.put("employeeCount", Integer.toString(employeeCount));
-			parameters.put("employeePoint", Integer.toString(employeePoint));
+			parameters.put("employeePoint", formatString((float) employeePoint));
 			parameters.put("bpCount", Integer.toString(bpCount));
-			parameters.put("bpPoint", Integer.toString(bpPoint));
-			parameters.put("totalPoint", Integer.toString(totalPoint));
-			parameters.put("employeeProfit", Integer.toString(employeeProfit));
-			parameters.put("employeeGrossProfit", Integer.toString(employeeGrossProfit));
-			parameters.put("bpProfit", Integer.toString(bpProfit));
-			parameters.put("bpGrossProfit", Integer.toString(bpGrossProfit));
-			parameters.put("totalProfit", Integer.toString(totalProfit));
-			parameters.put("totalGrossProfit", Integer.toString(totalGrossProfit));
+			parameters.put("bpPoint", formatString((float) bpPoint));
+			parameters.put("totalPoint", formatString((float) totalPoint));
+			parameters.put("employeeProfit", formatString((float) employeeProfit));
+			parameters.put("employeeGrossProfit", formatString((float) employeeGrossProfit));
+			parameters.put("bpProfit", formatString((float) bpProfit));
+			parameters.put("bpGrossProfit", formatString((float) bpGrossProfit));
+			parameters.put("totalProfit", formatString((float) totalProfit));
+			parameters.put("totalGrossProfit", formatString((float) totalGrossProfit));
 
 			JasperReport report = JasperCompileManager.compileReport(inputFile.getAbsolutePath());
 			JasperPrint print = JasperFillManager.fillReport(report, parameters, new JREmptyDataSource());
@@ -172,5 +152,10 @@ public class SalesPointController extends BaseController {
 		}
 		logger.info("SalesPointController.downloadPDF:" + "終了");
 		return outputFile.getAbsolutePath();
+	}
+
+	private String formatString(Float data) {
+		DecimalFormat df = new DecimalFormat("#,###");
+		return df.format(data);
 	}
 }

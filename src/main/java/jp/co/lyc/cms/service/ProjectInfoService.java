@@ -84,6 +84,7 @@ public class ProjectInfoService {
 		sendMap.put("projectName", projectInfoModel.getProjectName());
 		sendMap.put("nationalityCode", projectInfoModel.getNationalityCode());
 		sendMap.put("admissionPeriod", projectInfoModel.getAdmissionPeriod());
+		sendMap.put("admissionMonthCode", projectInfoModel.getAdmissionMonthCode());
 		sendMap.put("projectType", projectInfoModel.getProjectType());
 		sendMap.put("successRate", projectInfoModel.getSuccessRate());
 		sendMap.put("customerNo", projectInfoModel.getCustomerNo());

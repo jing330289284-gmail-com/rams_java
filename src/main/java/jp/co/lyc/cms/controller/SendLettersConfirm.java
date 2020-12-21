@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import jp.co.lyc.cms.common.BaseController;
+import jp.co.lyc.cms.model.AllEmployName;
 import jp.co.lyc.cms.model.EmailModel;
 import jp.co.lyc.cms.model.EmployeeModel;
 import jp.co.lyc.cms.model.SalesSituationModel;
@@ -120,4 +121,20 @@ public class SendLettersConfirm  extends BaseController {
 		utils.sendMailWithFile(emailModel);
 		logger.info("sendMailWithFile" + "送信結束");
 	}
+	
+	// 要員追加機能の新規　20201216 　張棟　START
+	/**
+	 * 名前と所属を取る<br/>
+	 * <br/>
+	 * 要員送信確認画面初期化する時、全て社内要員とBP社員の名前と所属を取る<br/>
+	 * */
+	@RequestMapping(value = "/getAllEmployInfoName", method = RequestMethod.POST)
+	@ResponseBody
+	public List<AllEmployName> getAllEmployInfoName() {
+		List<AllEmployName> EmployInfo = new ArrayList<AllEmployName>();
+		EmployInfo = sendLettersConfirmService.getAllEmployInfoName();
+		return EmployInfo;
+	}
+	// 要員追加機能の新規　20201216 　張棟　END
+	
 }

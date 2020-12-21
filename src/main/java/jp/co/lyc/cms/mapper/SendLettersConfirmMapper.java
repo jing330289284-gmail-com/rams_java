@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import jp.co.lyc.cms.model.SalesSituationModel;
 import jp.co.lyc.cms.model.SendLettersConfirmModel;
+import jp.co.lyc.cms.model.AllEmployName;
 import jp.co.lyc.cms.model.EmployeeModel;
 
 @Mapper
@@ -23,4 +24,6 @@ public interface SendLettersConfirmMapper {
 	public List<EmployeeModel> getLoginUserInfo(String lobinUserNo);
 	
 	public List<EmployeeModel> getMail();
+	
+	public List<AllEmployName> getAllEmployInfoName();
 }

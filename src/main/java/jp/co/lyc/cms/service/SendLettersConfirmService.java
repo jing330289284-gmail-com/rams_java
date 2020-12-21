@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import jp.co.lyc.cms.mapper.SendLettersConfirmMapper;
+import jp.co.lyc.cms.model.AllEmployName;
 import jp.co.lyc.cms.model.EmployeeModel;
 import jp.co.lyc.cms.model.SalesSituationModel;
 import jp.co.lyc.cms.model.SendLettersConfirmModel;
@@ -32,4 +33,8 @@ public class SendLettersConfirmService {
 	public List<EmployeeModel> getMail(){
 		return sendLettersConfirmMapper.getMail();
 	};
+	
+	public List<AllEmployName> getAllEmployInfoName(){
+		return sendLettersConfirmMapper.getAllEmployInfoName();
+	}
 }

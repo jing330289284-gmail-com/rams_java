@@ -1243,6 +1243,18 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getAgeClassification();
 		return list;
 	}
+	
+	/**
+	 * 入場期日取得
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getAdmissionMonth", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getAdmissionMonth() {
+		List<ModelClass> list = utilsService.getAdmissionMonth();
+		return list;
+	}
 
 	/**
 	 * 面談回数取得

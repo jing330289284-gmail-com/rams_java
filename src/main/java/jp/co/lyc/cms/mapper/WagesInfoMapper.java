@@ -48,4 +48,11 @@ public interface WagesInfoMapper {
 	 * @return
 	 */
 	public WagesInfoModel getEmployeeForm(String employeeNo);
+	
+	/**
+	 * 最近の非稼働月数
+	 * @param employeeNo
+	 * @return
+	 */
+	public ArrayList<String> getLastKadouPeriod(String employeeNo);
 }
