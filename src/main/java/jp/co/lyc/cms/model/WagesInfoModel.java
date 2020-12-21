@@ -1,8 +1,10 @@
 package jp.co.lyc.cms.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class WagesInfoModel {
+@SuppressWarnings("serial")
+public class WagesInfoModel implements Serializable{
 	String employeeNo;//社員名
 	String period;//給料期間
 	String reflectYearAndMonth;//反映年月
@@ -236,5 +238,4 @@ public class WagesInfoModel {
 	public void setUpdateUser(String updateUser) {
 		this.updateUser = updateUser;
 	}
-	
 }

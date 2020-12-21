@@ -1,6 +1,12 @@
 package jp.co.lyc.cms.util;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.regex.Pattern;
+
+import com.alibaba.fastjson.JSON;
 
 /**
  * 公共方法（数据格式判断）
@@ -147,4 +153,23 @@ public abstract class UtilsCheckMethod {
 		}
 		return false;
 	}
+	/**
+	 * 实体类深度拷贝
+	 * @param obj
+	 * @return
+	 */
+	public static Object copeObject(Object obj) {
+        try {
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            ObjectOutputStream os = new ObjectOutputStream(out);
+            os.writeObject(obj);
+            ByteArrayInputStream in = new ByteArrayInputStream(out.toByteArray());
+            ObjectInputStream is = new ObjectInputStream(in);
+            Object object = (Object) is.readObject();
+            return object;
+        } catch (Exception e) {
+            e.printStackTrace();
+        	return null;
+        }
+    }
 }
