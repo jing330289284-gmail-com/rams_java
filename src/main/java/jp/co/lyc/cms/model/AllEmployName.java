@@ -6,12 +6,12 @@ package jp.co.lyc.cms.model;
  * 要員送信確認画面の要員情報<br>
  * */
 public class AllEmployName {
-
+	
 	/** 要員名前*/
-	String employeeName;
+	public String employeeName;
 
 	/** 要員所属*/
-	String employeeNo;
+	public String employeeNo;
 	
 	public String getEmployeeName() {
 		return employeeName;
