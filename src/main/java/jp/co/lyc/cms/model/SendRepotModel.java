@@ -54,6 +54,12 @@ public class SendRepotModel {
 	String purchasingManagersMail2;
 	String name;
 	String code;
+	String customerList;
+	String mainChargeList;
+	String departmentCodeList;
+	String positionCodeList;
+	String mainChargeMailList;
+	String subChargeMailList;
 	String[] ctmNos;
 	
 	
@@ -443,5 +449,41 @@ public class SendRepotModel {
 	public void setPurchasingManagersMail(String purchasingManagersMail) {
 		this.purchasingManagersMail = purchasingManagersMail;
 	}
-
+	
+	public String getCustomerList() {
+		return customerList;
+	}
+	public void setCustomerList(String customerList) {
+		this.customerList = customerList;
+	}
+	public String getMainChargeList() {
+		return mainChargeList;
+	}
+	public void setMainChargeList(String mainChargeList) {
+		this.mainChargeList = mainChargeList;
+	}
+	public String getDepartmentCodeList() {
+		return departmentCodeList;
+	}
+	public void setDepartmentCodeList(String departmentCodeList) {
+		this.departmentCodeList = departmentCodeList;
+	}
+	public String getPositionCodeList() {
+		return positionCodeList;
+	}
+	public void setPositionCodeList(String positionCodeList) {
+		this.positionCodeList = positionCodeList;
+	}
+	public String getMainChargeMailList() {
+		return mainChargeMailList;
+	}
+	public void setMainChargeMailList(String mainChargeMailList) {
+		this.mainChargeMailList = mainChargeMailList;
+	}
+	public String getSubChargeMailList() {
+		return subChargeMailList;
+	}
+	public void setSubChargeMailList(String subChargeMailList) {
+		this.subChargeMailList = subChargeMailList;
+	}
 }

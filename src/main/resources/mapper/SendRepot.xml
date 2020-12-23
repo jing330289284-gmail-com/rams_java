@@ -155,12 +155,30 @@
     
     <select id="getLists" resultType="jp.co.lyc.cms.model.SendRepotModel">
 			select 
-				StorageListName as name,transmissionClassificationCode as code,customerList as customerNo
+				StorageListName as name,
+				transmissionClassificationCode as code,
+				customerList as customerNo
 			from 
 				T021CustomerSendMailStorageList 
 			where 
 				transmissionClassificationCode=0 order by StorageListName
     </select>
+     <select id="getListByName" resultType="jp.co.lyc.cms.model.SendRepotModel">
+			select 
+				customerList,
+				mainChargeList,
+				departmentCodeList,
+				positionCodeList,
+				mainChargeMailList,
+				subChargeMailList
+			from 
+				T021CustomerSendMailStorageList 
+			where 
+				transmissionClassificationCode=0
+			and
+				StorageListName=#{name}
+    </select>
+    
     <select id="getCustomersByNos" resultType="jp.co.lyc.cms.model.SendRepotModel">
 	SELECT
 	    T007.customerNo,
@@ -199,7 +217,6 @@
 		positionCodeList,
 		mainChargeMailList,
 		subChargeMailList,
-		CandidateInChargeList,
 		updateTime,
 		createTime,
 		updateUser)
@@ -207,13 +224,12 @@
 		(
 		#{name},
 		0,
-		#{code},
+		#{customerList},
 		#{mainChargeList},
 		#{departmentCodeList},
 		#{positionCodeList},
 		#{mainChargeMailList},
 		#{subChargeMailList},
-		#{CandidateInChargeList},
 		 NOW(),
 		 NOW(),
 		#{updateUser})
