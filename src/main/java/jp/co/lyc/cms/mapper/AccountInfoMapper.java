@@ -13,7 +13,7 @@ public interface AccountInfoMapper {
 	 * @param accountBelongsStatus
 	 * @return
 	 */
-	public AccountInfoModel selectAccountInfo(String employeeOrCustomerNo , String accountBelongsStatus);
+	public AccountInfoModel selectAccountInfo(String employeeOrCustomerNo);
 	/**
 	 * インサート
 	 * @param sendMap
