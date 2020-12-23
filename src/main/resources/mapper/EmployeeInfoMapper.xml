@@ -25,17 +25,22 @@
 		M013.stationName,
 		T002.stayPeriod,
 		T002.residentCardInfo,
+		T002.passportInfo,
 		T015.resumeInfo1,
 		T015.resumeName1,
 		T015.resumeInfo2,
 		T015.resumeName2
 		FROM
-		T001Employee AS T001
+		T001Employee AS
+		T001
 		LEFT JOIN
-		T002EmployeeDetail AS T002 ON T002.employeeNo =T001.employeeNo
+		T002EmployeeDetail AS T002 ON T002.employeeNo
+		=T001.employeeNo
 		LEFT
-		JOIN T015ResumeManagement AS T015 ON T015.employeeNo=T001.employeeNo
-		LEFT JOIN T006EmployeeSiteInfo AS T006 ON T001.employeeNo =
+		JOIN T015ResumeManagement AS T015 ON
+		T015.employeeNo=T001.employeeNo
+		LEFT JOIN T006EmployeeSiteInfo AS T006
+		ON T001.employeeNo =
 		T006.employeeNo
 		AND admissionStartDate in
 		(
@@ -50,7 +55,8 @@
 			</if>
 		</if>
 		<if test="kadou==null">
-			SELECT MAX(admissionStartDate) FROM T006EmployeeSiteInfo where 1=1
+			SELECT MAX(admissionStartDate) FROM T006EmployeeSiteInfo
+			where 1=1
 		</if>
 		)
 		LEFT JOIN T003AddressInfo AS T003 ON T001.employeeNo=T003.employeeNo
@@ -145,7 +151,8 @@
 		<if test="kadou!=null">
 			<if test='kadou=="0"'>
 				AND ( AdmissionStartDate is not null
-				AND AdmissionEndDate is null
+				AND AdmissionEndDate
+				is null
 				AND AdmissionStartDate
 				&lt;date_format(now(),'%Y%m%d'))
 				or
@@ -154,13 +161,21 @@
 			</if>
 			<if test='kadou=="1"'>
 				AND
-				AdmissionEndDate is not null and (AdmissionEndDate &lt;date_format(now(),'%Y%m%d'))
+				AdmissionEndDate is not null and (AdmissionEndDate
+				&lt;date_format(now(),'%Y%m%d'))
 			</if>
 		</if>
 		ORDER BY
 		rowNo
 		ASC
 
+	</select>
+
+	<!-- 社員情報を確認 -->
+	<select id="verificationEmployeeInfo" resultType="string">
+		SELECT
+		employeeNo FROM T006EmployeeSiteInfo where
+		admissionEndDate is null;
 	</select>
 
 	<!-- 社員情報を追加 -->
@@ -366,7 +381,7 @@
 		<if test="japaneseCalendar!=  null">
 			japaneseCalendar =#{japaneseCalendar},
 		</if>
-	
+
 		<if test="alphabetName!=  null">
 			alphabetName =#{alphabetName},
 		</if>
@@ -515,7 +530,7 @@
 		T002.birthday,
 		T002.japaneseCalendar,
 		T002.alphabetName,
-	    SUBSTRING_INDEX(T002.alphabetName, ' ',1) alphabetName1,
+		SUBSTRING_INDEX(T002.alphabetName, ' ',1) alphabetName1,
 		SUBSTRING_INDEX(T002.alphabetName, ' ',-1) alphabetName2,
 		T002.furigana,
 		SUBSTRING_INDEX(T002.furigana, ' ',1) furigana1,
