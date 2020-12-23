@@ -50,5 +50,10 @@ public class SendRepotService {
 	};
 	public  List<ModelClass> getCustomerDepartmentCode(SendRepotModel model){
 		return sendRepotMapper.getCustomerDepartmentCode(model);
+	}
+
+	public SendRepotModel getListByName(SendRepotModel model) {
+		// TODO Auto-generated method stub
+		return sendRepotMapper.getListByName(model);
 	};
 }
