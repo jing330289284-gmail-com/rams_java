@@ -124,6 +124,7 @@ public class CustomerInfoService {
 				customerInfoMapper.insertCustomerInfo(setSendMap(customerInfoMod));
 				if (customerInfoMod.getAccountInfo() != null) {
 					AccountInfoModel accountInfoModel = customerInfoMod.getAccountInfo();
+					accountInfoModel.setEmployeeOrCustomerNo(customerInfoMod.getCustomerNo());
 					accountInfoModel.setUpdateUser(customerInfoMod.getUpdateUser());
 					accountInfoMapper.insertAccount(accountInfoService.setSendMap(accountInfoModel));
 				}
@@ -165,8 +166,13 @@ public class CustomerInfoService {
 					customerInfoMapper.updateCustomerInfo(setSendMap(customerInfoMod));
 					if (customerInfoMod.getAccountInfo() != null) {
 						AccountInfoModel accountInfoModel = customerInfoMod.getAccountInfo();
+						accountInfoModel.setEmployeeOrCustomerNo(customerInfoMod.getCustomerNo());
 						accountInfoModel.setUpdateUser(customerInfoMod.getUpdateUser());
-						accountInfoMapper.updateAccount(accountInfoService.setSendMap(accountInfoModel));
+						if(accountInfoMapper.selectAccountInfo(customerInfoMod.getCustomerNo()) == null) {
+							accountInfoMapper.insertAccount(accountInfoService.setSendMap(accountInfoModel));
+						}else {
+							accountInfoMapper.updateAccount(accountInfoService.setSendMap(accountInfoModel));
+						}
 					}
 				}else {
 					if (customerInfoMod.getCustomerDepartmentList().size() > 0) {
