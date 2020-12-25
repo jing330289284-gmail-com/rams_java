@@ -101,7 +101,7 @@ public class EmployeeInfoController extends BaseController {
 				// 電話番号
 				String phoneNo = employeeList.get(i).getPhoneNo();
 				if (phoneNo != null && phoneNo.length() >= 11) {
-					phoneNo = phoneNo.substring(0, 3) + "-" + phoneNo.substring(3, 7) + "-" + phoneNo.substring(7, 11);
+					phoneNo = UtilsController.dateAddDash(phoneNo);
 				}
 				employeeList.get(i).setPhoneNo(phoneNo);
 
@@ -110,17 +110,15 @@ public class EmployeeInfoController extends BaseController {
 				if (birthday != null && birthday.length() >= 8) {
 					SimpleDateFormat sft = new SimpleDateFormat("yyyyMMdd");
 					Date date = sft.parse(birthday);
-					int age = this.getAgeByBirth(date);
-					birthday = birthday.substring(0, 4) + "/" + birthday.substring(4, 6) + "/"
-							+ birthday.substring(6, 8) + "(" + Integer.toString(age) + ")";
+					int age = EmployeeInfoController.getAgeByBirth(date);
+					birthday = UtilsController.dateAddOblique(birthday) + "(" + Integer.toString(age) + ")";
 				}
 				employeeList.get(i).setBirthday(birthday);
 
 				// 入社年月
 				String intoCompanyYearAndMonth = employeeList.get(i).getIntoCompanyYearAndMonth();
 				if (intoCompanyYearAndMonth != null && intoCompanyYearAndMonth.length() >= 6) {
-					intoCompanyYearAndMonth = intoCompanyYearAndMonth.substring(0, 4) + "/"
-							+ intoCompanyYearAndMonth.substring(4, 6);
+					intoCompanyYearAndMonth = UtilsController.dateAddOblique(intoCompanyYearAndMonth);
 				}
 				employeeList.get(i).setIntoCompanyYearAndMonth(intoCompanyYearAndMonth);
 			}

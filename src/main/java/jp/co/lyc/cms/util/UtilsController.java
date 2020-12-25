@@ -522,7 +522,7 @@ public class UtilsController {
 		List<ModelClass> list = getStatus(salesPriorityStatus);
 		return list;
 	}
-	
+
 	/**
 	 * 案件期間選択ステータス
 	 * 
@@ -537,6 +537,7 @@ public class UtilsController {
 		List<ModelClass> list = getStatus(salesPriorityStatus);
 		return list;
 	}
+
 	/**
 	 * 作業報告書送信ステータス
 	 * 
@@ -551,6 +552,7 @@ public class UtilsController {
 		List<ModelClass> list = getStatus(sendWorkReportStatus);
 		return list;
 	}
+
 	/**
 	 * 営業担当選ぶ
 	 * 
@@ -1243,7 +1245,7 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getAgeClassification();
 		return list;
 	}
-	
+
 	/**
 	 * 入場期日取得
 	 * 
@@ -1291,9 +1293,9 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getProjectType();
 		return list;
 	}
-	
+
 	/**
-	 *案件番号取得
+	 * 案件番号取得
 	 * 
 	 * @return
 	 */
@@ -1303,8 +1305,9 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getProjectNo();
 		return list;
 	}
+
 	/**
-	 *送信日付設定取得
+	 * 送信日付設定取得
 	 * 
 	 * @return
 	 */
@@ -1314,6 +1317,7 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getSendReportOfDateSeting();
 		return list;
 	}
+
 	/**
 	 * 社員氏名を取得する
 	 * 
@@ -1405,5 +1409,42 @@ public class UtilsController {
 		calendar.setTime(date);
 		int week = calendar.get(Calendar.DAY_OF_WEEK);
 		return JapanHoliday.containsKey(date) || week == Calendar.SUNDAY || week == Calendar.SATURDAY;
+	}
+
+	/**
+	 * 日付に / を追加する yyyymmdd -> yyyy/mm/dd yyyymm -> yyyy/mm
+	 * 
+	 * @param date String
+	 * @return date String
+	 */
+	public static String dateAddOblique(String date) {
+		switch (date.length()) {
+		case 6:
+			date = date.substring(0, 4) + "/" + date.substring(4, 6);
+			break;
+		case 8:
+			date = date.substring(0, 4) + "/" + date.substring(4, 6) + "/" + date.substring(6, 8);
+			break;
+		default:
+			break;
+		}
+		return date;
+	}
+
+	/**
+	 * 電話番号データ処理 00000000000 -> 000-0000-0000
+	 * 
+	 * @param phoneNo String
+	 * @return phoneNo String
+	 */
+	public static String dateAddDash(String phoneNo) {
+		switch (phoneNo.length()) {
+		case 11:
+			phoneNo = phoneNo.substring(0, 3) + "-" + phoneNo.substring(3, 7) + "-" + phoneNo.substring(7, 11);
+			break;
+		default:
+			break;
+		}
+		return phoneNo;
 	}
 }
