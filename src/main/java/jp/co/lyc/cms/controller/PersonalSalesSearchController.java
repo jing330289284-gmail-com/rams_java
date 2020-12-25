@@ -165,10 +165,16 @@ public class PersonalSalesSearchController {
 						personModelList.get(i).setUnitPrice("0");
 					}
 					if( UtilsCheckMethod.isNullOrEmpty(personModelList.get(i).getSalary())) {
-						personModelList.get(i).setSalary("0");
+						personModelList.get(i).setSalary("0");				
+					}
+					if( personModelList.get(i).getSalary().equals("0")) {
+						personModelList.get(i).setSalary(personModelList.get(i).getWaitingCost());				
 					}
 					if(UtilsCheckMethod.isNullOrEmpty(personModelList.get(i).getTransportationExpenses())) {
 						personModelList.get(i).setTransportationExpenses("0");
+					}
+					if(UtilsCheckMethod.isNullOrEmpty(personModelList.get(i).getWaitingCost())) {
+						personModelList.get(i).setWaitingCost("0");
 					}
 					if(UtilsCheckMethod.isNullOrEmpty(personModelList.get(i).getInsuranceFeeAmount())) {
 						personModelList.get(i).setInsuranceFeeAmount("0");
@@ -188,6 +194,11 @@ public class PersonalSalesSearchController {
 					if(UtilsCheckMethod.isNullOrEmpty(personModelList.get(i).getDeductionsAndOvertimePay())) {
 						personModelList.get(i).setDeductionsAndOvertimePay("0");
 					}
+					if(UtilsCheckMethod.isNullOrEmpty(personModelList.get(i).getDeductionsAndOvertimePayOfUnitPrice())) {
+						personModelList.get(i).setDeductionsAndOvertimePayOfUnitPrice("0");
+					}
+					
+					
 					List<String> empNameList =new ArrayList<String>();
 					if(personModelList.get(i).getRelatedEmployees()!=null) {
 						
@@ -199,14 +210,15 @@ public class PersonalSalesSearchController {
 						workCount++;
 						personModelList.get(0).setWorkMonthCount(workCount);
 					}
-					grosProfits = String.valueOf(Integer.parseInt(personModelList.get(i).getUnitPrice())-
-								Integer.parseInt(personModelList.get(i).getSalary())-
-								Integer.parseInt(personModelList.get(i).getTransportationExpenses())-
-								Integer.parseInt(personModelList.get(i).getInsuranceFeeAmount())-
-								Integer.parseInt(personModelList.get(i).getBonusFee())-
-								Integer.parseInt(personModelList.get(i).getLeaderAllowanceAmount())-
-								Integer.parseInt(personModelList.get(i).getOtherAllowanceAmount())-
-								Integer.parseInt(personModelList.get(i).getHousingAllowance()));
+					grosProfits = String.valueOf(Integer.parseInt(personModelList.get(i).getUnitPrice())+
+						Integer.parseInt(personModelList.get(i).getDeductionsAndOvertimePayOfUnitPrice())-
+								(Integer.parseInt(personModelList.get(i).getSalary())+
+								Integer.parseInt(personModelList.get(i).getTransportationExpenses())+
+								Integer.parseInt(personModelList.get(i).getInsuranceFeeAmount())+
+								Integer.parseInt(personModelList.get(i).getBonusFee())+
+								Integer.parseInt(personModelList.get(i).getLeaderAllowanceAmount())+
+								Integer.parseInt(personModelList.get(i).getOtherAllowanceAmount())+
+								Integer.parseInt(personModelList.get(i).getHousingAllowance())));
 					personModelList.get(i).setGrosProfits(grosProfits);
 				}
 				
