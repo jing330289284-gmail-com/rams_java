@@ -44,20 +44,21 @@ public class EmployeeModel implements Serializable {
 	String developLanguage3;// 技術语言3
 	String developLanguage4;// 技術语言4
 	String developLanguage5;// 技術语言5
-	String certification1;//　　資格1
+	String certification1;// 資格1
 	String certification2;// 資格2
 	String resumeInfo1;// 履歴書情報1
 	String resumeName1;// 履歴書備考1
 	String resumeInfo2;// 履歴書情報2
 	String resumeName2;// 履歴書備考2
 	String residentCardInfo;// 在留カード情報
+	String passportInfo;// 在留カード情報
 	String passportNo;// パスポート
 	String companyMail;// 社内メールアドレス
 	String phoneNo;// 携帯電話
 	String employmentInsuranceNo;// 雇用保険番号
 	String departmentCode;// 部署コード
 	String stationName;// 寄り駅
-	String oldPassword;//古いパスワード
+	String oldPassword;// 古いパスワード
 	String customer;// お客様
 	String employeeName;
 	String authorityName;
@@ -74,14 +75,14 @@ public class EmployeeModel implements Serializable {
 	String siteRoleCode;// 役割コード
 	String kadou;//
 	String visaPeriod;// ビザ期間
-	AccountInfoModel accountInfo;//口座情報
-	String yearsOfExperience; //  経験年数
-	
-	BpInfoModel bpInfoModel;//PB情報
+	AccountInfoModel accountInfo;// 口座情報
+	String yearsOfExperience; // 経験年数
 
-	String postcode;//郵便番号
-	String firstHalfAddress;//住所前半
-	String lastHalfAddress;//住所後半
+	BpInfoModel bpInfoModel;// PB情報
+
+	String postcode;// 郵便番号
+	String firstHalfAddress;// 住所前半
+	String lastHalfAddress;// 住所後半
 	String stationCode;//
 
 	public String getOldPassword() {
@@ -91,13 +92,13 @@ public class EmployeeModel implements Serializable {
 	public void setOldPassword(String oldPassword) {
 		this.oldPassword = oldPassword;
 	}
+
 	String intoCompanyYearAndMonthFrom;// 入社年月元
 	String intoCompanyYearAndMonthTo;// 入社年月先
 	String picInfo;// 写真
 
 	String furigana1;// カタカナ1
 	String furigana2;// カタカナ2
-	String passportInfo;
 
 	public String getPassportInfo() {
 		return passportInfo;
@@ -171,8 +172,6 @@ public class EmployeeModel implements Serializable {
 		this.genderStatus = genderStatus;
 	}
 
-
-
 	public String getBirthday() {
 		return birthday;
 	}
@@ -188,7 +187,6 @@ public class EmployeeModel implements Serializable {
 	public void setJapaneseCalendar(String japaneseCalendar) {
 		this.japaneseCalendar = japaneseCalendar;
 	}
-
 
 	public String getFurigana() {
 		return furigana;
@@ -406,7 +404,6 @@ public class EmployeeModel implements Serializable {
 		this.resumeInfo1 = resumeInfo1;
 	}
 
-
 	public String getResumeName1() {
 		return resumeName1;
 	}
@@ -430,7 +427,6 @@ public class EmployeeModel implements Serializable {
 	public void setResumeInfo2(String resumeInfo2) {
 		this.resumeInfo2 = resumeInfo2;
 	}
-
 
 	public String getResidentCardInfo() {
 		return residentCardInfo;
@@ -479,7 +475,6 @@ public class EmployeeModel implements Serializable {
 	public void setDepartmentCode(String departmentCode) {
 		this.departmentCode = departmentCode;
 	}
-
 
 	public String getStationName() {
 		return stationName;
@@ -673,8 +668,6 @@ public class EmployeeModel implements Serializable {
 		this.yearsOfExperience = yearsOfExperience;
 	}
 
-
-
 	public String getPostcode() {
 		return postcode;
 	}
@@ -682,6 +675,7 @@ public class EmployeeModel implements Serializable {
 	public void setPostcode(String postcode) {
 		this.postcode = postcode;
 	}
+
 	public String getFirstHalfAddress() {
 		return firstHalfAddress;
 	}
@@ -697,8 +691,6 @@ public class EmployeeModel implements Serializable {
 	public void setLastHalfAddress(String lastHalfAddress) {
 		this.lastHalfAddress = lastHalfAddress;
 	}
-
-
 
 	public BpInfoModel getBpInfoModel() {
 		return bpInfoModel;
@@ -731,7 +723,5 @@ public class EmployeeModel implements Serializable {
 	public void setAlphabetName2(String alphabetName2) {
 		this.alphabetName2 = alphabetName2;
 	}
-
-	
 
 }

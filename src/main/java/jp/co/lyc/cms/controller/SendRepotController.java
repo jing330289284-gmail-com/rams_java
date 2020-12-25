@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Properties;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -99,8 +98,21 @@ public class SendRepotController  extends BaseController {
 		logger.info("getSalesPersons" + "検索結束");
 		return index;
 	}
+	@RequestMapping(value = "/getListByName", method = RequestMethod.POST)
+	@ResponseBody
+	public SendRepotModel getListByName(@RequestBody SendRepotModel model) {
+		SendRepotModel sendRepotModel = new SendRepotModel();
+		model.setUpdateUser(getSession().getAttribute("employeeName").toString());
+		logger.info("getListByName:" + "検索開始");
+		try {
+			sendRepotModel = sendRepotService.getListByName(model);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		logger.info("getListByName" + "検索結束");
+		return sendRepotModel;
+	}	
 	
-
 	@RequestMapping(value = "/listNameUpdate", method = RequestMethod.POST)
 	@ResponseBody
 	public void listNameUpdate(@RequestBody SendRepotsListName sendRepotsListNames) {
@@ -157,11 +169,11 @@ public class SendRepotController  extends BaseController {
 	
 	@RequestMapping(value = "/deleteList", method = RequestMethod.POST)
 	@ResponseBody
-	public int deleteList(@RequestBody SendRepotsListName sendRepotsListNames) {
+	public int deleteList(@RequestBody String storageListName) {
 		logger.info("getSalesPersons:" + "検索開始");
 		int index=0;
 		try {
-			index = sendRepotService.deleteList(sendRepotsListNames.getStorageListName());
+			index = sendRepotService.deleteList(storageListName);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
