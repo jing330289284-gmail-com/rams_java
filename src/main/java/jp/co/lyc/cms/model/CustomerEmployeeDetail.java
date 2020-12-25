@@ -12,6 +12,7 @@ public class CustomerEmployeeDetail implements Serializable{
 	String siteRoleName;
 	String unitPrice;
 	String stationName;
+	String employeeNo;
 	public String getEmployeeName() {
 		return employeeName;
 	}
@@ -35,6 +36,12 @@ public class CustomerEmployeeDetail implements Serializable{
 	}
 	public void setStationName(String stationName) {
 		this.stationName = stationName;
+	}
+	public String getEmployeeNo() {
+		return employeeNo;
+	}
+	public void setEmployeeNo(String employeeNo) {
+		this.employeeNo = employeeNo;
 	}
 	
 }
