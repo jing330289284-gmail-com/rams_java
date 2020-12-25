@@ -164,29 +164,33 @@ public class WagesInfoController extends BaseController {
 					}
 					if (month != 0 && month % 12 == 0 && bonusSite.getEmployeeNo().substring(0, 3).equals("LYC")) {
 						String nextBonusMonth = bonus.getNextBonusMonth();
-						int yearBonus = Integer.parseInt(nextBonusMonth.substring(0, 4));
-						yearBonus += 1;
-						nextBonusMonth = Integer.toString(yearBonus) + nextBonusMonth.substring(4);
-						bonus.setNextBonusMonth(nextBonusMonth);
+						if(!UtilsCheckMethod.isNullOrEmpty(nextBonusMonth)) {
+							int yearBonus = Integer.parseInt(nextBonusMonth.substring(0, 4));
+							yearBonus += 1;
+							nextBonusMonth = Integer.toString(yearBonus) + nextBonusMonth.substring(4);
+							bonus.setNextBonusMonth(nextBonusMonth);
+						}
 					} else if (month != 0 && month % 12 != 0
 							&& bonusSite.getEmployeeNo().substring(0, 3).equals("LYC")) {
-						ArrayList<String> kadouMonths = wagesInfoMapper
-								.getLastKadouPeriod(wagesInfoMod.getEmployeeNo());
-						int kadouMonth = 0;
-						if (kadouMonths.size() != 0) {
-							kadouMonth = Integer.parseInt(kadouMonths.get(kadouMonths.size() - 1));
-						}
 						String nextBonusMonth = bonus.getNextBonusMonth();
-						int yearBonus = Integer.parseInt(nextBonusMonth.substring(0, 4));
-						int monthBonus = Integer.parseInt(nextBonusMonth.substring(4));
-						monthBonus += kadouMonth;
-						if (monthBonus > 12) {
-							monthBonus = monthBonus - 12;
-							yearBonus += 1;
+						if(!UtilsCheckMethod.isNullOrEmpty(nextBonusMonth)) {
+							ArrayList<String> kadouMonths = wagesInfoMapper
+									.getLastKadouPeriod(wagesInfoMod.getEmployeeNo());
+							int kadouMonth = 0;
+							if (kadouMonths.size() != 0) {
+								kadouMonth = Integer.parseInt(kadouMonths.get(kadouMonths.size() - 1));
+							}
+							int yearBonus = Integer.parseInt(nextBonusMonth.substring(0, 4));
+							int monthBonus = Integer.parseInt(nextBonusMonth.substring(4));
+							monthBonus += kadouMonth;
+							if (monthBonus > 12) {
+								monthBonus = monthBonus - 12;
+								yearBonus += 1;
+							}
+							nextBonusMonth = Integer.toString(yearBonus)
+									+ (monthBonus > 10 ? monthBonus : "0" + monthBonus);
+							bonus.setNextBonusMonth(nextBonusMonth);
 						}
-						nextBonusMonth = Integer.toString(yearBonus)
-								+ (monthBonus > 10 ? monthBonus : "0" + monthBonus);
-						bonus.setNextBonusMonth(nextBonusMonth);
 					}
 				}
 			} else {
