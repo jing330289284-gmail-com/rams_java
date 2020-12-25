@@ -259,7 +259,7 @@
 			StorageListName=#{storageListName};
 	</update>
 	
-	<!--　担当取る 未使用 -->
+	<!--　担当取る 担当追加画面-->
     <select id="getSalesPersons" parameterType="String" resultType="jp.co.lyc.cms.model.SendRepotModel">
 		SELECT 
 		    customerDepartmentCode,
@@ -269,6 +269,10 @@
 		FROM
 		    T009CustomerDepartmentInfo
 		WHERE
-		    customerNo = #{customerNo};
+			customerDepartmentMail is not null
+		AND
+			customerDepartmentMail!=""
+		AND
+		 	customerNo = #{customerNo};
 	</select>
 </mapper>
