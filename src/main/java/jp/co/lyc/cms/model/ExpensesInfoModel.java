@@ -1,6 +1,8 @@
 package jp.co.lyc.cms.model;
 
-public class ExpensesInfoModel{
+import java.io.Serializable;
+
+public class ExpensesInfoModel implements Serializable{
 	
 	String employeeNo;
 	String expensesPeriod;//諸費用期間

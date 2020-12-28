@@ -60,8 +60,10 @@
 		T007CustomerInfo.customerName,
 		T007CustomerInfo.customerAbbreviation,
 		T011BpInfoSupplement.bpBelongCustomerCode,
-		T011BpInfoSupplement.bpUnitPrice
-		FROM T006EmployeeSiteInfo
+		T011BpInfoSupplement.bpUnitPrice,
+		T010SalesSituation.salesStaff
+		FROM
+		T006EmployeeSiteInfo
 		LEFT
 		JOIN
 		T002EmployeeDetail
@@ -75,6 +77,10 @@
 		JOIN T007CustomerInfo
 		ON
 		T006EmployeeSiteInfo.customerNo=T007CustomerInfo.customerNo
+		JOIN
+		T010SalesSituation
+		ON
+		T006EmployeeSiteInfo.employeeNo=T010SalesSituation.employeeNo
 		LEFT JOIN
 		T011BpInfoSupplement
 		ON
@@ -89,8 +95,8 @@
 		and employeeStatus =
 		ifnull(#{intoCompanyCode},employeeStatus)
 		and
-		T006EmployeeSiteInfo.employeeNo =
-		ifnull(#{eigyou},T006EmployeeSiteInfo.employeeNo)
+		T010SalesSituation.salesStaff =
+		ifnull(#{eigyou},T010SalesSituation.salesStaff)
 		ORDER BY
 		T006EmployeeSiteInfo.admissionStartDate
 	</select>

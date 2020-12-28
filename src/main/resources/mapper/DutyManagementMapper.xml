@@ -12,6 +12,7 @@
 			concat_ws("-",t006.payOffRange1,t006.payOffRange2) as payOffRange,
 			T018.sumWorkTime workTime,
 			concat("￥",FORMAT(if(T018.sumWorkTime>t006.payOffRange2,t005.salary/t006.payOffRange2*(T018.sumWorkTime-t006.payOffRange2),if(t006.payOffRange1>T018.sumWorkTime,t005.salary/t006.payOffRange1*(T018.sumWorkTime-t006.payOffRange1),0)),0))deductionsAndOvertimePay, 
+			FORMAT(if(T018.sumWorkTime>t006.payOffRange2,t006.unitPrice/t006.payOffRange2*(T018.sumWorkTime-t006.payOffRange2),if(t006.payOffRange1>T018.sumWorkTime,t006.unitPrice/t006.payOffRange1*(T018.sumWorkTime-t006.payOffRange1),0)),0)deductionsAndOvertimePayOfUnitPrice, 
 			if(T016.employeeWorkTimeHaveData=1,'0',if(T018.attendanceRegisterFlag=1,'1','2'))checkSection,
 			T016.updateTime,
 			if(T018.approvalStatus=1,"1","0")approvalStatus
@@ -20,7 +21,7 @@
 		left join
 			(SELECT employeeNo,max(reflectYearAndMonth),salary FROM T005WagesInfo where reflectYearAndMonth&lt;=#{yearAndMonth} group by T005WagesInfo.employeeNo)t005 on t001.employeeNo=t005.employeeNo
 		left join
-			(SELECT employeeNo,max(admissionStartDate),payOffRange1,payOffRange2,customerNo FROM T006EmployeeSiteInfo where admissionStartDate&lt;=concat(#{yearAndMonth},"99") group by T006EmployeeSiteInfo.employeeNo)t006 on t001.employeeNo=t006.employeeNo
+			(SELECT employeeNo,unitPrice,max(admissionStartDate),payOffRange1,payOffRange2,customerNo FROM T006EmployeeSiteInfo where admissionStartDate&lt;=concat(#{yearAndMonth},"99") group by T006EmployeeSiteInfo.employeeNo)t006 on t001.employeeNo=t006.employeeNo
 		left join
 			T007CustomerInfo as t007 on t006.customerNo=t007.customerNo
 		left join
@@ -51,6 +52,7 @@
 		UPDATE T018WorkTotalTime
 		SET 
 			approvalStatus = 1,
+			deductionsAndOvertimePayOfUnitPrice=#{deductionsAndOvertimePayOfUnitPrice},
 			deductionsAndOvertimePay=#{deductionsAndOvertimePay}
 		WHERE 
 			employeeNo = #{employeeNo}

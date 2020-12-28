@@ -28,6 +28,8 @@ public interface EmployeeInfoMapper {
 	 */
 	public List<EmployeeModel> getEmployeeInfo(Map<String, Object> sendMap);
 
+	public List<EmployeeModel> getEmployeeInfo2(Map<String, Object> sendMap);
+
 	/**
 	 * 社員情報を確認
 	 * 
