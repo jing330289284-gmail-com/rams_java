@@ -171,7 +171,7 @@
 		set
 			subChargeMailList=#{subChargeMailList},updateTime=now(),updateUser=#{updateUser}
 		where 
-			StorageListName=#{oldStorageListName} and transmissionClassificationCode=0
+			StorageListName=#{storageListName} and transmissionClassificationCode=0
 	</update>
       <!--　リスト取得 -->
       <select id="getLists" resultType="jp.co.lyc.cms.model.SendRepotModel">
