@@ -152,8 +152,29 @@
 			GROUP BY
 			 customerNo)as T007
     </select>
-    
-    <select id="getLists" resultType="jp.co.lyc.cms.model.SendRepotModel">
+     <!--　担当リスト取得 -->
+      <select id="getSalesPersonsLists" resultType="jp.co.lyc.cms.model.SendRepotModel">
+     SELECT
+			customerDepartmentMail AS code,
+			responsiblePerson AS name 
+		FROM
+		    T009CustomerDepartmentInfo
+		WHERE
+			customerDepartmentMail!=''
+		AND
+		  	customerDepartmentMail IS NOT NULL
+     </select>
+        <!--　担当リスト保存 -->
+    <update id="salesPersonsListsUpdate" parameterType="String">
+		update
+			T021CustomerSendMailStorageList
+		set
+			subChargeMailList=#{subChargeMailList},updateTime=now(),updateUser=#{updateUser}
+		where 
+			StorageListName=#{storageListName} and transmissionClassificationCode=0
+	</update>
+      <!--　リスト取得 -->
+      <select id="getLists" resultType="jp.co.lyc.cms.model.SendRepotModel">
 			select 
 				StorageListName as name,
 				transmissionClassificationCode as code,
@@ -172,7 +193,7 @@
 				mainChargeMailList,
 				subChargeMailList
 			from 
-				T021CustomerSendMailStorageList 
+				T021CustomerSendMailStorageList
 			where 
 				transmissionClassificationCode=0
 			and
