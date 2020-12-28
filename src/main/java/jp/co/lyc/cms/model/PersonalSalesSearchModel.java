@@ -32,12 +32,14 @@ public class PersonalSalesSearchModel implements Serializable  {
 	String dailyCalculationStatus;
 	String admissionEndDate;
 	String DeductionsAndOvertimePay;
+	String DeductionsAndOvertimePayOfUnitPrice;
 	String otherAllowanceName;
 	String otherAllowanceAmount;
 	String housingAllowance;
 	String leaderAllowanceAmount;
 	String relatedEmployees;
 	List<String> empNameList;
+	String waitingCost;
 	String nextBonusMonth;
 	String bonusFee;
 	public String getEmployeeName() {
@@ -231,6 +233,18 @@ public class PersonalSalesSearchModel implements Serializable  {
 	}
 	public void setBonusFee(String bonusFee) {
 		this.bonusFee = bonusFee;
+	}
+	public String getWaitingCost() {
+		return waitingCost;
+	}
+	public void setWaitingCost(String waitingCost) {
+		this.waitingCost = waitingCost;
+	}
+	public String getDeductionsAndOvertimePayOfUnitPrice() {
+		return DeductionsAndOvertimePayOfUnitPrice;
+	}
+	public void setDeductionsAndOvertimePayOfUnitPrice(String deductionsAndOvertimePayOfUnitPrice) {
+		DeductionsAndOvertimePayOfUnitPrice = deductionsAndOvertimePayOfUnitPrice;
 	}
 
 

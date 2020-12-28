@@ -40,7 +40,7 @@ public class AccountInfoController {
 		HashMap<String, Object> resultMap = new HashMap<>();
 		AccountInfoModel accountInfoMod = new AccountInfoModel();
 		if (onloadMol.getActionType().equals("update") || onloadMol.getActionType().equals("detail")) {
-			accountInfoMod = getBankBranchInfo(onloadMol.getEmployeeOrCustomerNo() , onloadMol.getAccountBelongsStatus());
+			accountInfoMod = getBankBranchInfo(onloadMol.getEmployeeOrCustomerNo());
 		}
 		resultMap.put("bankName", selectutilSer.getBankInfo());
 		resultMap.put("accountInfoMod", accountInfoMod);
@@ -54,9 +54,9 @@ public class AccountInfoController {
 	 * * @param accountBelongsStatus
 	 * @return
 	 */
-	public AccountInfoModel getBankBranchInfo(String employeeOrCustomerNo , String accountBelongsStatus) {
+	public AccountInfoModel getBankBranchInfo(String employeeOrCustomerNo) {
 		logger.info("BankInfoController.selectBankInfo:" + "検索開始");
-		AccountInfoModel resultMod = bankInfoSer.selectAccountInfo(employeeOrCustomerNo , accountBelongsStatus);
+		AccountInfoModel resultMod = bankInfoSer.selectAccountInfo(employeeOrCustomerNo);
 		logger.info("BankInfoController.toroku:" + "検索終了");
 		return resultMod;	
 	}

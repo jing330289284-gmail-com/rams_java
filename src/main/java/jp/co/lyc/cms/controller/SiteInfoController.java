@@ -325,9 +325,9 @@ public class SiteInfoController extends BaseController {
 			sendMap.put("workState", workState);
 		}
 		if (dailyCalculationStatus != null && dailyCalculationStatus.length() != 0) {
-			sendMap.put("dailyCalculationStatus", "1");
-		} else {
 			sendMap.put("dailyCalculationStatus", "0");
+		} else {
+			sendMap.put("dailyCalculationStatus", "1");
 		}
 		sendMap.put("updateUser", loginSession.getAttribute("employeeName"));
 		return sendMap;

@@ -171,6 +171,157 @@
 
 	</select>
 
+	<select id="getEmployeeInfo2" parameterType="map"
+		resultMap="Employee">
+		SELECT
+		T001.employeeNo,
+		CONCAT(T001.employeeFristName,'
+		',T001.employeeLastName) as
+		employeeFristName,
+		T002.employeeStatus,
+		T002.Furigana,
+		T002.alphabetName,
+		T002.birthday,
+		T002.intoCompanyYearAndMonth,
+		T002.phoneNo,
+		T002.stayPeriod,
+		T002.residentCardInfo,
+		T002.passportInfo,
+		T002.genderStatus,
+		T002.intoCompanyCode,
+		T002.employeeFormCode,
+		T002.nationalityCode,
+		T002.siteRoleCode,
+		T002.developLanguage1,
+		T002.developLanguage2,
+		T002.residenceCode,
+		T002.japaneseLevelCode,
+		T003.postcode,
+		T003.firstHalfAddress,
+		T003.lastHalfAddress,
+		T005.salary,
+		MAX(T006.AdmissionStartDate) as admissionStartDate,
+		MAX(T006.AdmissionEndDate) as admissionEndDate,
+		T007.customerName,
+		T015.resumeInfo1,
+		T015.resumeName1,
+		T015.resumeInfo2,
+		T015.resumeName2,
+		M013.stationName
+		FROM T002EmployeeDetail as
+		T002
+		LEFT
+		JOIN T001Employee as
+		T001
+		ON T002.employeeNo =
+		T001.employeeNo
+		LEFT JOIN
+		T003AddressInfo AS
+		T003 ON
+		T002.employeeNo=T003.employeeNo
+		LEFT JOIN
+		M013Station AS M013
+		ON
+		T003.stationCode=M013.stationCode
+		LEFT JOIN
+		T005WagesInfo AS
+		T005 ON
+		T002.employeeNo=T005.employeeNo
+		and
+		reflectYearAndMonth = (SELECT
+		MAX(reflectYearAndMonth) FROM
+		T005WagesInfo)
+		LEFT JOIN
+		T006EmployeeSiteInfo AS T006
+		ON T001.employeeNo
+		=
+		T006.employeeNo
+		LEFT
+		JOIN T007CustomerInfo AS T007 ON
+		T006.customerNo
+		=T007.customerNo
+		LEFT
+		JOIN T015ResumeManagement
+		AS T015 ON
+		T015.employeeNo=T002.employeeNo
+		WHERE
+		<if test="kadou!=null">
+			<if test='kadou=="0"'>
+				admissionStartDate!="" and admissionStartDate is not null
+				and admissionEndDate is null
+			</if>
+			<if test='kadou=="1"'>
+				admissionEndDate is not null and (AdmissionEndDate
+				&lt;date_format(now(),'%Y%m%d'))
+			</if>
+		</if>
+		<if test="kadou==null">
+			1=1
+		</if>
+		and T006.customerNo =
+		ifnull(#{customer},T006.customerNo)
+		and
+		CONCAT(T001.employeeFristName,T001.employeeLastName) =
+		ifnull(#{employeeName},CONCAT(T001.employeeFristName,T001.employeeLastName))
+		and
+		intoCompanyYearAndMonth between
+		ifnull(#{intoCompanyYearAndMonthFrom},intoCompanyYearAndMonth) and
+		ifnull(#{intoCompanyYearAndMonthTo},intoCompanyYearAndMonth)
+		and
+		birthday between ifnull(#{ageTo},birthday) and
+		ifnull(#{ageFrom},birthday)
+		and
+		genderStatus =
+		ifnull(#{genderStatus},genderStatus)
+		and
+		intoCompanyCode =
+		ifnull(#{intoCompanyCode},intoCompanyCode)
+		and
+		T002.employeeFormCode =
+		ifnull(#{employeeFormCode},T002.employeeFormCode)
+		and
+		nationalityCode =
+		ifnull(#{nationalityCode},nationalityCode)
+		and
+		T002.siteRoleCode =
+		ifnull(#{siteRoleCode},T002.siteRoleCode)
+		and
+		(developLanguage1 =
+		ifnull(#{developLanguage1},developLanguage1)
+		or developLanguage1 =
+		ifnull(#{developLanguage2},developLanguage1))
+		and (developLanguage2 =
+		ifnull(#{developLanguage1},developLanguage2)
+		or developLanguage2 =
+		ifnull(#{developLanguage2},developLanguage2))
+		and (developLanguage3 =
+		ifnull(#{developLanguage1},developLanguage3)
+		or developLanguage3 =
+		ifnull(#{developLanguage2},developLanguage3))
+		and (developLanguage4 =
+		ifnull(#{developLanguage1},developLanguage4)
+		or developLanguage4 =
+		ifnull(#{developLanguage2},developLanguage4))
+		and (developLanguage5 =
+		ifnull(#{developLanguage1},developLanguage5)
+		or developLanguage5 =
+		ifnull(#{developLanguage2},developLanguage5))
+		and
+		residenceCode =
+		ifnull(#{residenceCode},residenceCode)
+		and
+		japaneseLevelCode =
+		ifnull(#{japaneseLevelCode},japaneseLevelCode)
+		and
+		employeeStatus =
+		ifnull(#{employeeStatus},employeeStatus)
+		GROUP BY
+		employeeNo
+		order
+		by
+		employeeNo;
+	</select>
+
 	<!-- 社員情報を確認 -->
 	<select id="verificationEmployeeInfo" resultType="string">
 		SELECT
@@ -351,7 +502,7 @@
 		<if test="employeeLastName!=  null">
 			employeeLastName =#{employeeLastName},
 		</if>
-		<if test="password!=  null">
+		<if test="password !=  ''">
 			password=#{password},
 		</if>
 		<if test="employeeFristName!= null">

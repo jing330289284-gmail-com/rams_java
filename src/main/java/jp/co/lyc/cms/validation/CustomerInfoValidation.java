@@ -41,7 +41,7 @@ public class CustomerInfoValidation implements Validator {
 						}
 					}
 					if (!UtilsCheckMethod.isNullOrEmpty(p.getUrl())) {
-						if (UtilsCheckMethod.checkUrl(p.getUrl())) {
+						if (!UtilsCheckMethod.checkUrl(p.getUrl())) {
 							errors.rejectValue("url", "",
 									StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG007", "お客様URL"));
 						}

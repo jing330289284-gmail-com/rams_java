@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="jp.co.lyc.cms.mapper.IndividualCustomerSalesMapper">
+<mapper
+	namespace="jp.co.lyc.cms.mapper.IndividualCustomerSalesMapper">
 	<resultMap id="detailsInfo"
 		type="jp.co.lyc.cms.model.IndividualCustomerSalesModel" />
 
-	<select id="getCustomerSalesInfo" parameterType="map" resultMap="detailsInfo">
+	<select id="getCustomerSalesInfo" parameterType="map"
+		resultMap="detailsInfo">
 		<foreach item="getYandM" collection="getYandM" index="index">
 			<if test="index != 0">
 				union all
@@ -61,7 +63,7 @@
 			T005WagesInfo As
 			T005
 			where T005.employeeNo=
-			#{tempList.empNo} 
+			#{tempList.empNo}
 			and reflectYearAndMonth &lt;= #{tempList.yearAndMonth}
 			ORDER BY
 			ABS(#{tempList.yearAndMonth} - reflectYearAndMonth) ASC
@@ -69,20 +71,23 @@
 			A${tempList.yearAndMonth}
 		</foreach>
 	</select>
-	
-		<select id="getCustomerSalesInfoThird" parameterType="map"
+
+	<select id="getCustomerSalesInfoThird" parameterType="map"
 		resultMap="detailsInfo">
-	<foreach item="tempList" collection="tempList" index="index">
+		<foreach item="tempList" collection="tempList" index="index">
 			<if test="index != 0">
 				union
 			</if>
 			select * from(select ${tempList.yearAndMonth} as
-			yearAndMonth, totalExpenses
-			from T013ExpensesInfo 
+			yearAndMonth,
+			totalExpenses
+			from T013ExpensesInfo
 			where employeeNo =#{tempList.empNo}
-			and expensesReflectYearAndMonth &lt;= #{tempList.yearAndMonth}
-			ORDER BY ABS(#{tempList.yearAndMonth}- expensesReflectYearAndMonth) ASC
-		limit 1 ) As B${tempList.yearAndMonth}
+			and expensesReflectYearAndMonth &lt;=
+			#{tempList.yearAndMonth}
+			ORDER BY ABS(#{tempList.yearAndMonth}-
+			expensesReflectYearAndMonth) ASC
+			limit 1 ) As B${tempList.yearAndMonth}
 		</foreach>
 	</select>
 </mapper>
