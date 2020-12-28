@@ -144,14 +144,7 @@ public class EmployeeInfoService {
 			employeeInfoMapper.updateEmployeeInfoDetail(sendMap);
 			employeeInfoMapper.updateAddressInfo(sendMap);
 			if (sendMap.get("bankInfoModel") != null) {// 口座情報
-				String employeeNo = (String) sendMap.get("employeeNo");
-				String accountBelongsStatus = null;
-				if (employeeNo.substring(0, 3).equals("LYC")) {
-					accountBelongsStatus = "0";
-				} else {
-					accountBelongsStatus = "1";
-				}
-				accountInfoMapper.updateAccount(getParamBankInfoModel(sendMap));
+				accountInfoMapper.replaceAccount(getParamBankInfoModel(sendMap));
 			}
 			if (sendMap.get("bpInfoModel") != null) {
 				int row = bpInfoMapper.updateBp(getParamBpModel(sendMap));
