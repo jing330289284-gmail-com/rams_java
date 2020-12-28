@@ -74,7 +74,7 @@ public class PersonalSalesSearchController {
 					startYandM = empInfo.getStartYearAndMonth();
 				}
 				if (startYandM != "0" && startYandM != null && endYandM != "0" && endYandM != null
-						&& fiscalYear == "") {
+						&& fiscalYear == null) {
 					int startY = Integer.parseInt(startYandM.substring(0, 4));
 					int startM = Integer.parseInt(startYandM.substring(4, 6));
 					int endY = Integer.parseInt(endYandM.substring(0, 4));

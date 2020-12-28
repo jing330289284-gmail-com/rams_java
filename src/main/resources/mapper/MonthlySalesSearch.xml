@@ -13,12 +13,15 @@
                 </if>
 	select distinct
     CONCAT(( @rowNo := @rowNo + 1 )) AS rowNo,
+   #{getYandM} As yearAndMonth,
     T002.employeeNo,
     M005.employeeFormName,
     CONCAT(T001.employeeFristName,T001.employeeLastName)as employeeName,
     T002.employeeStatus,
     M005.employeeFormName,
     M014.occupationName,
+    T018.deductionsAndOvertimePay ,
+    T018.deductionsAndOvertimePayOfUnitPrice ,
     CAST((T006.unitPrice*10000) As unsigned) As unitPrice,
     CAST(T005.salary As unsigned) As salary,
     CAST((T013.transportationExpenses + T005.scheduleOfBonusAmount + T005.insuranceFeeAmount +T013.otherAllowanceAmount + T013.leaderAllowanceAmount + T013.housingAllowance) As unsigned) As otherFee,
@@ -46,6 +49,7 @@
  left join M005EmployeeForm  as M005 ON T002.employeeFormCode=M005.employeeFormCode
  left join M014Occupation as M014 ON T002.occupationCode = M014.occupationCode
  left join T001Employee as T001 ON  A.employeeNo = T001.employeeNo
+ left join T018WorkTotalTime as T018 ON T002.employeeNo =T018.employeeNo AND #{getYandM} = T018.attendanceYearAndMonth
  left join T006EmployeeSiteInfo as T006 ON A.employeeNo = T006.employeeNo AND #{getYandM} between left(admissionStartDate,6) and IFNULL(admissionEndDate,date_format(now(),'%Y%m')),
  (SELECT @rowNo := 0 ) AS rowNo 
  
