@@ -1,6 +1,7 @@
 package jp.co.lyc.cms.controller;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import jp.co.lyc.cms.model.MonthlySalesSearchModel;
 import jp.co.lyc.cms.service.MonthlySalesSearchService;
+import jp.co.lyc.cms.util.UtilsCheckMethod;
 import jp.co.lyc.cms.validation.MonthlySalesSearchValidation;
 
 @Controller
@@ -119,8 +121,26 @@ public class MonthlySalesSearchController {
 		}
 		Map<String, Object> sendMap = getDetailParam(monthlyInfo);
 		sendMap.put("getYandM", getYandM);
+		
 		MonthlySalesModelList =MonthlySalesSearchService.searchMonthlySales(sendMap);
 		logger.info("MonthlySalesSearchController.searchMonthlySales:" + "検索結束");
+		for(int i =0; i<MonthlySalesModelList.size();i++) {
+			if(UtilsCheckMethod.isNullOrEmpty(MonthlySalesModelList.get(i).getEmployeeName())) {
+				MonthlySalesModelList.get(i).setEmployeeName("");
+			}
+			if(UtilsCheckMethod.isNullOrEmpty(monthlyInfo.getEmployeeClassification())) {
+				monthlyInfo.setEmployeeClassification("");
+			}
+			if(!monthlyInfo.getEmployeeClassification().equals("1")) {
+			if(!UtilsCheckMethod.isNullOrEmpty(MonthlySalesModelList.get(i).getEmployeeNo())) {
+				if(MonthlySalesModelList.get(i).getEmployeeNo().substring(0,2).equals("BP")) {
+					MonthlySalesModelList.get(i).setEmployeeName(MonthlySalesModelList.get(i).getEmployeeName()+"(BP)");
+				}								
+			}
+		}
+			
+		}
+		
 		if(MonthlySalesModelList.size()==0) {
 			String noData = "";
 			noData="条件に該当する結果が存在しない";

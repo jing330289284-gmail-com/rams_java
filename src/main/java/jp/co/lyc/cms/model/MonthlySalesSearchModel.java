@@ -33,6 +33,9 @@ String errorsMessage;
 String noData;
 String startYandM;
 String endYandM;
+String yearAndMonth;
+String DeductionsAndOvertimePay;
+String DeductionsAndOvertimePayOfUnitPrice;
 
 public String getGrossProfitFront() {
 	return grossProfitFront;
@@ -190,6 +193,26 @@ public String getEndYandM() {
 public void setEndYandM(String endYandM) {
 	this.endYandM = endYandM;
 }
+public String getYearAndMonth() {
+	return yearAndMonth;
+}
+public void setYearAndMonth(String yearAndMonth) {
+	this.yearAndMonth = yearAndMonth;
+}
+public String getDeductionsAndOvertimePay() {
+	return DeductionsAndOvertimePay;
+}
+public void setDeductionsAndOvertimePay(String deductionsAndOvertimePay) {
+	DeductionsAndOvertimePay = deductionsAndOvertimePay;
+}
+public String getDeductionsAndOvertimePayOfUnitPrice() {
+	return DeductionsAndOvertimePayOfUnitPrice;
+}
+public void setDeductionsAndOvertimePayOfUnitPrice(String deductionsAndOvertimePayOfUnitPrice) {
+	DeductionsAndOvertimePayOfUnitPrice = deductionsAndOvertimePayOfUnitPrice;
+}
+
+
 
 
 }
