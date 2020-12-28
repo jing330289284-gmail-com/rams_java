@@ -7,6 +7,7 @@ public class SiteSearchModel{
 	 */
 	private static final long serialVersionUID = -2028159323401651353L;
 	String employeeName;// 社員・BP名
+	String employeeNo;
 	String employeeStatus;// 社員区分
 	String employeeForm;// 社員形式
 	String siteRoleCode;// 役割コード
@@ -33,6 +34,15 @@ public class SiteSearchModel{
 	String developLanguageName;// 言語
 	String workTime;// 勤務時間
 	String siteRoleName;// 役割
+
+	
+	public String getEmployeeNo() {
+		return employeeNo;
+	}
+
+	public void setEmployeeNo(String employeeNo) {
+		this.employeeNo = employeeNo;
+	}
 
 	public String getEmployeeName() {
 		return employeeName;

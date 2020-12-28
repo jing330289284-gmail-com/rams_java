@@ -15,6 +15,8 @@ public class Myfilter implements Filter{
 	    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
 	        HttpServletRequest  request = (HttpServletRequest)servletRequest;
 	        HttpServletResponse response  = (HttpServletResponse) servletResponse;
+	        String requestURI = request.getRequestURI();
+	        System.out.println(requestURI);
 			response.setCharacterEncoding("UTF-8");
 		    response.setContentType("application/json; charset=utf-8");
 	        response.addHeader("Access-Control-Allow-Origin","http://127.0.0.1:3000");// * 允许所有域名跨域访问

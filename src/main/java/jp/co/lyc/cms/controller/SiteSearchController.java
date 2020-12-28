@@ -143,7 +143,7 @@ public class SiteSearchController {
 		}
 		try {
 			// 取得前端送过来的值
-			String employeeName = siteSearchModel.getEmployeeName();
+			String employeeNo = siteSearchModel.getEmployeeNo();
 			String employeeStatus = siteSearchModel.getEmployeeStatus();
 			String employeeForm = siteSearchModel.getEmployeeForm();
 			String siteRoleCode = siteSearchModel.getSiteRoleCode();
@@ -161,8 +161,8 @@ public class SiteSearchController {
 			String admissionEndDate = siteSearchModel.getAdmissionEndDate();
 			String dataAcquisitionPeriod = siteSearchModel.getDataAcquisitionPeriod();
 			// 存入map 传入后台查询用
-			if (employeeName != null && employeeName.length() != 0) {
-				sendMap.put("employeeName", employeeName);
+			if (employeeNo != null && employeeNo.length() != 0) {
+				sendMap.put("employeeNo", employeeNo);
 			}
 			if (employeeStatus != null && employeeStatus.length() != 0) {
 				sendMap.put("employeeStatus", employeeStatus);
@@ -203,14 +203,22 @@ public class SiteSearchController {
 			if (developLanguageCode != null && developLanguageCode.length() != 0) {
 				sendMap.put("developLanguageCode", developLanguageCode);
 			}
-			if (admissionStartDate != null && admissionStartDate.length() != 0) {
-				sendMap.put("admissionStartDate", dateToString(admissionStartDate));
-			}
-			if (admissionEndDate != null && admissionEndDate.length() != 0) {
-				sendMap.put("admissionEndDate", dateToString(admissionEndDate));
-			}
-			if (dataAcquisitionPeriod != null && dataAcquisitionPeriod.length() != 0) {
-				sendMap.put("dataAcquisitionPeriod", dataAcquisitionPeriod + "00");
+			if (dataAcquisitionPeriod.equals("1")) {
+				Calendar cal = Calendar.getInstance();
+				String dateNow = Integer.toString(cal.get(Calendar.YEAR));
+				int month = cal.get(Calendar.MONTH) + 1;
+				dateNow += month > 10 ? month : "0" + month;
+				int day = cal.get(Calendar.DATE);
+				dateNow += day > 10 ? day : "0" + day;
+				sendMap.put("dataAcquisitionPeriod", "1");
+				sendMap.put("admissionStartDate", dateNow);
+			}else {
+				if (admissionStartDate != null && admissionStartDate.length() != 0) {
+					sendMap.put("admissionStartDate", dateToString(admissionStartDate));
+				}
+				if (admissionEndDate != null && admissionEndDate.length() != 0) {
+					sendMap.put("admissionEndDate", dateToString(admissionEndDate));
+				}
 			}
 			siteList = SiteSearchService.getSiteInfo(sendMap);
 			for (int a = 0; a < siteList.size(); a++) {
@@ -234,7 +242,11 @@ public class SiteSearchController {
 		}
 
 		logger.info("GetEmployeeInfoController.getEmployeeInfo:" + "検索結束");
-		result.put("data", siteList);
+		if(siteList.size() != 0) {
+			result.put("data", siteList);
+		}else {
+			result.put("errorsMessage","該当データなし");
+		}
 		return result;
 	}
 
