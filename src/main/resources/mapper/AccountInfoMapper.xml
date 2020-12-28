@@ -19,7 +19,6 @@
 		AND T004.bankBranchCode = M002.bankBranchCode 
 	WHERE
 		employeeOrCustomerNo = #{employeeOrCustomerNo}
-		AND accountBelongsStatus = #{accountBelongsStatus}
     </select>
     <!-- 支店情報検索 -->
     <select id="getBankBranchInfo" resultMap="BankBranchInfo" parameterType="map">

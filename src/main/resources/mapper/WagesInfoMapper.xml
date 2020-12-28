@@ -187,5 +187,7 @@
 	FROM
 	T006EmployeeSiteInfo
 	WHERE employeeNo = #{employeeNo}
+	AND nonSitePeriod != ''
+	AND nonSiteMonths != ''
 </select>
 </mapper>

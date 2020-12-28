@@ -52,7 +52,18 @@ public class EmployeeInfoService {
 	 * @return List
 	 */
 	public List<EmployeeModel> getEmployeeInfo(Map<String, Object> sendMap) {
-		List<EmployeeModel> employeeList = employeeInfoMapper.getEmployeeInfo(sendMap);
+		List<EmployeeModel> employeeList = employeeInfoMapper.getEmployeeInfo2(sendMap);
+		return employeeList;
+	}
+
+	/**
+	 * 社員情報を確認
+	 * 
+	 * @param sendMap
+	 * @return List
+	 */
+	public List<String> verificationEmployeeInfo() {
+		List<String> employeeList = employeeInfoMapper.verificationEmployeeInfo();
 		return employeeList;
 	}
 
@@ -133,6 +144,13 @@ public class EmployeeInfoService {
 			employeeInfoMapper.updateEmployeeInfoDetail(sendMap);
 			employeeInfoMapper.updateAddressInfo(sendMap);
 			if (sendMap.get("bankInfoModel") != null) {// 口座情報
+				String employeeNo = (String) sendMap.get("employeeNo");
+				String accountBelongsStatus = null;
+				if (employeeNo.substring(0, 3).equals("LYC")) {
+					accountBelongsStatus = "0";
+				} else {
+					accountBelongsStatus = "1";
+				}
 				accountInfoMapper.updateAccount(getParamBankInfoModel(sendMap));
 			}
 			if (sendMap.get("bpInfoModel") != null) {
@@ -154,7 +172,12 @@ public class EmployeeInfoService {
 	public HashMap<String, String> getParamBankInfoModel(Map<String, Object> sendMap) {
 		HashMap<String, String> bankInfoModelSendMap = new HashMap<String, String>();
 		AccountInfoModel accountInfoModel = (AccountInfoModel) sendMap.get("bankInfoModel");
-		bankInfoModelSendMap.put("accountBelongsStatus", accountInfoModel.getAccountBelongsStatus());
+		String employeeNo = (String) sendMap.get("employeeNo");
+		if (employeeNo.substring(0, 3).equals("LYC")) {
+			bankInfoModelSendMap.put("accountBelongsStatus", "0");
+		} else {
+			bankInfoModelSendMap.put("accountBelongsStatus", "1");
+		}
 		bankInfoModelSendMap.put("bankCode", accountInfoModel.getBankCode());
 		bankInfoModelSendMap.put("accountName", accountInfoModel.getAccountName());
 		bankInfoModelSendMap.put("accountNo", accountInfoModel.getAccountNo());

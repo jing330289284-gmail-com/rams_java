@@ -13,10 +13,11 @@ public interface EmployeeInfoMapper {
 
 	/**
 	 * ログイン
+	 * 
 	 * @param sendMap
 	 * @return
 	 */
-	
+
 	public EmployeeModel getEmployeeModel(Map<String, String> sendMap);
 
 	/**
@@ -26,6 +27,16 @@ public interface EmployeeInfoMapper {
 	 * @return
 	 */
 	public List<EmployeeModel> getEmployeeInfo(Map<String, Object> sendMap);
+
+	public List<EmployeeModel> getEmployeeInfo2(Map<String, Object> sendMap);
+
+	/**
+	 * 社員情報を確認
+	 * 
+	 * @param sendMap
+	 * @return
+	 */
+	public List<String> verificationEmployeeInfo();
 
 	/**
 	 * 社員情報を追加
@@ -54,15 +65,11 @@ public interface EmployeeInfoMapper {
 	 */
 	public void deleteEmployeeInfoDetail(Map<String, Object> sendMap);
 
-
-
 	/**
 	 * 住所情報を削除
 	 * 
 	 */
 	public void deleteAddressInfo(Map<String, Object> sendMap);
-
-
 
 	/**
 	 * EmployeeNoによると、社員情報を取得
@@ -82,36 +89,46 @@ public interface EmployeeInfoMapper {
 	 * @param emp
 	 */
 	public void updateEmployeeInfoDetail(Map<String, Object> sendMap);
+
 	/**
 	 * アドレスを追加
 	 * 
 	 * @param emp
 	 */
 	public void insertAddressInfo(Map<String, Object> sendMap);
+
 	/**
 	 * アドレスを修正
 	 * 
 	 * @param emp
 	 */
 	public void updateAddressInfo(Map<String, Object> sendMap);
+
 	/**
 	 * ログイン認証番号の電話番号存在チェック
+	 * 
 	 * @param employeeNo
 	 * @return
 	 */
 	public String getEmployeePhoneNo(String employeeNo);
+
 	/**
 	 * 履歴書を追加
+	 * 
 	 * @param sendMap
 	 */
 	public void insertResumeManagement(HashMap<String, Object> sendMap);
+
 	/**
 	 * 履歴書を修正
+	 * 
 	 * @param sendMap
 	 */
 	public void updateResumeManagement(Map<String, Object> sendMap);
+
 	/**
 	 * 履歴書を削除
+	 * 
 	 * @param sendMap
 	 */
 	public void deleteResumeManagement(Map<String, Object> sendMap);

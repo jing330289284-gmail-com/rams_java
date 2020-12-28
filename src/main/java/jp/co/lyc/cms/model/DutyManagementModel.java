@@ -9,11 +9,14 @@ public class DutyManagementModel {
 	String stationName;
 	String payOffRange;
 	Integer workTime;
+	String unitPrice;
 	String deductionsAndOvertimePay;
+	String deductionsAndOvertimePayOfUnitPrice;
 	String checkSection;
 	String updateTime;
 	String updateUser;
 	String approvalStatus;
+	
 	
 	public int getRowNo() {
 		return rowNo;
@@ -68,6 +71,18 @@ public class DutyManagementModel {
 	}
 	public void setCheckSection(String checkSection) {
 		this.checkSection = checkSection;
+	}
+	public String getUnitPrice() {
+		return unitPrice;
+	}
+	public void setUnitPrice(String unitPrice) {
+		this.unitPrice = unitPrice;
+	}
+	public String getDeductionsAndOvertimePayOfUnitPrice() {
+		return deductionsAndOvertimePayOfUnitPrice;
+	}
+	public void setDeductionsAndOvertimePayOfUnitPrice(String deductionsAndOvertimePayOfUnitPrice) {
+		this.deductionsAndOvertimePayOfUnitPrice = deductionsAndOvertimePayOfUnitPrice;
 	}
 	public String getUpdateUser() {
 		return updateUser;

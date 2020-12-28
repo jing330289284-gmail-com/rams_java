@@ -18,6 +18,7 @@ public interface SendRepotMapper {
 	public List<SendRepotModel> getSalesCustomers();
 	public List<SendRepotModel> getSalesPersons(String customerNo);
 	public int creatList(SendRepotModel model);
+	public SendRepotModel getListByName(SendRepotModel model);
 	public List<SendRepotModel> getLists();
 	public int listNameUpdate(SendRepotsListName model);
 	public List<SendRepotModel> getCustomersByNos(String[] ctmNos);

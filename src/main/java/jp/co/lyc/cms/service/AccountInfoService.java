@@ -20,8 +20,8 @@ public class AccountInfoService {
 	 * @return
 	 */
 	
-	public AccountInfoModel selectAccountInfo(String employeeNo , String accountBelongsStatus) {
-		AccountInfoModel resultMod = bankMapper.selectAccountInfo(employeeNo , accountBelongsStatus);
+	public AccountInfoModel selectAccountInfo(String employeeNo) {
+		AccountInfoModel resultMod = bankMapper.selectAccountInfo(employeeNo);
 		return resultMod;
 	}
 	
