@@ -39,7 +39,7 @@ public class SendLettersConfirm  extends BaseController {
 	/**
 	 * データを取得
 	 * 
-	 * @param emp
+	 * @param model
 	 * @return List
 	 */
 
@@ -51,6 +51,10 @@ public class SendLettersConfirm  extends BaseController {
 		List<SendLettersConfirmModel> sendLettersConfirmModelList = new ArrayList<SendLettersConfirmModel>();
 		try {
 			sendLettersConfirmModelList = sendLettersConfirmService.getSalesEmps(model.getEmployeeNos());
+			int i =1;
+			for (SendLettersConfirmModel sendletter : sendLettersConfirmModelList) {
+                sendletter.setIndex(i++);
+            }
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

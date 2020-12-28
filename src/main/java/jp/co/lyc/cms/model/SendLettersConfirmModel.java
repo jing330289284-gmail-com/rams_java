@@ -31,7 +31,7 @@ public class SendLettersConfirmModel implements Serializable {
 	String resumeInfo2;// 
 	String resume;// 履歴書情報1
 
-	int rowNo;// 
+	int index;//
 	
 	
 	public String getResumeInfo1() {
@@ -203,12 +203,12 @@ public class SendLettersConfirmModel implements Serializable {
 		this.beginMonth = beginMonth;
 	}
 
-	public int getRowNo() {
-		return rowNo;
+	public int getIndex() {
+		return index;
 	}
 
-	public void setRowNo(int rowNo) {
-		this.rowNo = rowNo;
+	public void setIndex(int index) {
+		this.index = index;
 	}
 
 	public static long getSerialversionuid() {
