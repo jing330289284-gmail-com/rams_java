@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import jp.co.lyc.cms.common.BaseController;
 import jp.co.lyc.cms.model.EmployeeModel;
+import jp.co.lyc.cms.model.ModelClass;
 import jp.co.lyc.cms.model.SiteModel;
 import jp.co.lyc.cms.service.SiteInfoService;
 import jp.co.lyc.cms.util.StatusCodeToMsgMap;
@@ -335,9 +336,9 @@ public class SiteInfoController extends BaseController {
 
 	@RequestMapping(value = "/getSiteInfo", method = RequestMethod.POST)
 	@ResponseBody
-	public List<SiteModel> getSiteInfo(@RequestBody Map employeeName) {
+	public Map<String,Object> getSiteInfo(@RequestBody Map employeeName) {
 		List<SiteModel> siteList = new ArrayList<SiteModel>();
-
+		Map<String,Object> result = new HashMap<String, Object>();
 		try {
 			siteList = siteInfoService.getSiteInfo(employeeName.get("employeeName").toString());
 			for (int a = 0; a < siteList.size(); a++) {
@@ -373,7 +374,12 @@ public class SiteInfoController extends BaseController {
 		}
 
 		logger.info("GetEmployeeInfoController.getEmployeeInfo:" + "検索結束");
-		return siteList;
+		if(siteList.size() != 0) {
+			result.put("siteList", siteList);
+		}else {
+			result.put("errorsMessage", "該当データなし");
+		}
+		return result;
 	}
 	
 	

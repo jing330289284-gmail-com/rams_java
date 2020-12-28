@@ -32,7 +32,29 @@ public class SiteInfoService {
 	@Transactional(rollbackFor = Exception.class)
 	public boolean updateSiteInfo(Map<String, Object> sendMap) {
 		try {
-			siteInfoMapper.siteUpdate(sendMap);
+			if(sendMap.get("workState").equals("2")) {
+				List<SiteModel> lastData = siteInfoMapper.getSiteInfo((String) sendMap.get("employeeNo"));
+				String unitPriceLast = lastData.get(lastData.size() -1).getUnitPrice();
+				String admissionEndDate = (String) sendMap.get("admissionEndDate");
+				int year = Integer.parseInt(admissionEndDate.substring(0,4));
+				int month = Integer.parseInt(admissionEndDate.substring(4,6));
+				month += 1;
+				if(month > 12) {
+					month -= 12;
+					year += 1;
+				}
+				admissionEndDate = year + "" + (month > 10 ? month : "0" + month) + "01"; 
+				String unitPriceNow = (String) sendMap.get("unitPrice");
+				sendMap.replace("unitPrice", unitPriceLast);
+				siteInfoMapper.siteUpdate(sendMap);
+				sendMap.replace("workState", "0");
+				sendMap.replace("unitPrice", unitPriceNow);
+				sendMap.replace("admissionStartDate", admissionEndDate);
+				sendMap.replace("admissionEndDate", null);
+				siteInfoMapper.siteInsert(sendMap);
+			}else {
+				siteInfoMapper.siteUpdate(sendMap);
+			}
 		} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			e.printStackTrace();
