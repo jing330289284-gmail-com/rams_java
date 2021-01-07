@@ -171,7 +171,7 @@
 
 	</select>
 
-	<select id="getEmployeeInfo2" parameterType="map"
+	<select id="getEmployeesInfo" parameterType="map"
 		resultMap="Employee">
 		SELECT
 		T001.employeeNo,
@@ -251,15 +251,14 @@
 				and admissionEndDate is null
 			</if>
 			<if test='kadou=="1"'>
-				admissionEndDate is not null and (AdmissionEndDate
-				&lt;date_format(now(),'%Y%m%d'))
+				<!-- admissionEndDate is not null and (AdmissionEndDate &lt;date_format(now(),'%Y%m%d')) -->
+				1=1
 			</if>
 		</if>
 		<if test="kadou==null">
 			1=1
 		</if>
-		and T006.customerNo =
-		ifnull(#{customer},T006.customerNo)
+		<!-- and T006.customerNo = ifnull(#{customer},T006.customerNo) -->
 		and
 		CONCAT(T001.employeeFristName,T001.employeeLastName) =
 		ifnull(#{employeeName},CONCAT(T001.employeeFristName,T001.employeeLastName))
@@ -544,6 +543,9 @@
 		</if>
 		<if test="nationalityCode!=  null">
 			nationalityCode =#{nationalityCode},
+		</if>
+		<if test="birthplace!=  null">
+			birthplace =#{birthplace},
 		</if>
 		<if test="intoCompanyCode!=  null">
 			intoCompanyCode =#{intoCompanyCode},
@@ -906,4 +908,15 @@
 		WHERE
 		employeeNo = #{employeeNo};
 	</delete>
+
+	<!-- 現場あり社員番号を取得 -->
+	<select id="getEmployeeWithAdmission" parameterType="String"
+		resultMap="stringResult">
+		SELECT employeeNo FROM T006EmployeeSiteInfo
+		where
+		admissionStartDate!="" and admissionStartDate is not null
+		and admissionEndDate is null
+		GROUP BY
+		employeeNo;
+	</select>
 </mapper>

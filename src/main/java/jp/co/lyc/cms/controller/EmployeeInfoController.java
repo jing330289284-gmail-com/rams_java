@@ -81,18 +81,19 @@ public class EmployeeInfoController extends BaseController {
 			Map<String, Object> sendMap = getParam(emp);
 			employeeList = employeeInfoService.getEmployeeInfo(sendMap);
 
-			if (emp.getKadou() != null && emp.getKadou().equals("1")) {
-				employeeNoList = employeeInfoService.verificationEmployeeInfo();
-				for (int i = 0; i < employeeList.size(); i++) {
-					for (int j = 0; j < employeeNoList.size(); j++) {
-						if (employeeList.get(i).getEmployeeNo().equals(employeeNoList.get(j))) {
-							employeeList.remove(i);
-							i = 0;
-							break;
-						}
-					}
-				}
+			if (employeeList.size() <= 0) {
+				result.put("isNullMessage", "該当データなし");// 該当データがなし
+				result.put("data", employeeList);
+				return result;
 			}
+
+			/*
+			 * if (emp.getKadou() != null && emp.getKadou().equals("1")) { employeeNoList =
+			 * employeeInfoService.verificationEmployeeInfo(); for (int i = 0; i <
+			 * employeeList.size(); i++) { for (int j = 0; j < employeeNoList.size(); j++) {
+			 * if (employeeList.get(i).getEmployeeNo().equals(employeeNoList.get(j))) {
+			 * employeeList.remove(i); i = 0; break; } } } }
+			 */
 
 			for (int i = 0; i < employeeList.size(); i++) {
 				// 番号
