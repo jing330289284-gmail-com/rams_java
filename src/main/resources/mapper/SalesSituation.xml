@@ -58,7 +58,7 @@ FROM
     T010.salesPriorityStatus
 FROM
     T001Employee T001
-        LEFT JOIN
+        LEFT JOIN 
     T003AddressInfo T003 ON T001.employeeNo = T003.employeeNo
         LEFT JOIN
     M013Station M013 ON M013.stationCode = T003.stationCode
@@ -653,7 +653,7 @@ remark=#{remark},
 updateTime=NOW(),
 updateUser=#{updateUser}
 
-	</insert>
+</insert>
 		<select id="getCount" parameterType="String" resultType="int">
 	
 SELECT 
