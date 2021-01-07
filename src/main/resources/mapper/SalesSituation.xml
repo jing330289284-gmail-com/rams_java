@@ -65,7 +65,6 @@ FROM
         LEFT JOIN
     T002EmployeeDetail T002 ON T001.employeeNo = T002.employeeNo
      LEFT JOIN
-               
     M011DevelopLanguage M011a ON M011a.developLanguageCode = T002.developLanguage1
     
                 LEFT JOIN
