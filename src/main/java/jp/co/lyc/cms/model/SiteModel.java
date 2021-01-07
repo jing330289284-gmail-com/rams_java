@@ -30,6 +30,7 @@ public class SiteModel {
 	String related3Employees;// 関連社員3
 	String related4Employees;// 関連社員4
 	String levelCode;// 評価コード
+	String stationCode;
 	String remark;// 備考
 	String updateUser;// 更新者
 	String levelName;// 評価名称
@@ -38,6 +39,14 @@ public class SiteModel {
 	String checkDate;// 前回現場の退場日付
 	String dailyCalculationStatus;// 日割計算区分
 	String workState;// 現場状態
+
+	public String getStationCode() {
+		return stationCode;
+	}
+
+	public void setStationCode(String stationCode) {
+		this.stationCode = stationCode;
+	}
 
 	public String getDailyCalculationStatus() {
 		return dailyCalculationStatus;

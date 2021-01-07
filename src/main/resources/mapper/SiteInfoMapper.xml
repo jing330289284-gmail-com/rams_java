@@ -43,6 +43,10 @@
 		a.remark,
 		a.levelCode,
 		a.siteRoleCode,
+		a.stationCode,
+		a.customerNo,
+		a.topCustomerNo,
+		a.developLanguageCode,
 		b.siteRoleName,
 		if(c.customerAbbreviation
 		is

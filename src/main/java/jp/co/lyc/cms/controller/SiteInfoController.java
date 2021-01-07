@@ -340,7 +340,9 @@ public class SiteInfoController extends BaseController {
 		List<SiteModel> siteList = new ArrayList<SiteModel>();
 		Map<String,Object> result = new HashMap<String, Object>();
 		try {
-			siteList = siteInfoService.getSiteInfo(employeeName.get("employeeName").toString());
+			if(employeeName.get("employeeName") != null) {
+				siteList = siteInfoService.getSiteInfo(employeeName.get("employeeName").toString());
+			}
 			for (int a = 0; a < siteList.size(); a++) {
 				siteList.get(a).setWorkDate(
 						dateToPeriod(siteList.get(a).getAdmissionStartDate(), siteList.get(a).getAdmissionEndDate()));
