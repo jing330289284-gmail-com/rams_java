@@ -41,7 +41,7 @@ FROM
     IF(ISNULL(T010.salesProgressCode),
         '',
         T010.salesProgressCode) AS 'salesProgressCode',
-    T010.salesYearAndMonth,
+    max(T010.salesYearAndMonth) as 'salesYearAndMonth',
     T010.interviewDate1,
     T010.stationCode1,
     T010.interviewCustomer1,
@@ -100,6 +100,7 @@ WHERE
             employeeNo
         FROM
             T010SalesSituation where salesProgressCode IN (3 , 5)))  
+GROUP BY T001.employeeNo
 ORDER BY T001.employeeNo) UNION ALL (SELECT 
     T001.employeeNo,
     T015.resumeInfo1,
@@ -135,7 +136,7 @@ ORDER BY T001.employeeNo) UNION ALL (SELECT
     IF(ISNULL(T010.salesProgressCode),
         '',
         T010.salesProgressCode) AS 'salesProgressCode',
-    T010.salesYearAndMonth,
+    max(T010.salesYearAndMonth) as 'salesYearAndMonth',
     T010.interviewDate1,
     T010.stationCode1,
     T010.interviewCustomer1,
@@ -185,6 +186,7 @@ FROM
     T015ResumeManagement T015 ON T001.employeeNo = T015.employeeNo
 WHERE
     LEFT(T006.admissionEndDate, 6) = #{sysDate}
+GROUP BY T001.employeeNo
 ORDER BY T001.employeeNo) UNION ALL (SELECT 
     T011.bpEmployeeNo AS employeeNo,
     T015.resumeInfo1,
@@ -218,7 +220,7 @@ ORDER BY T001.employeeNo) UNION ALL (SELECT
     IF(ISNULL(T010.salesProgressCode),
         '',
         T010.salesProgressCode) AS 'salesProgressCode',
-    T010.salesYearAndMonth,
+    max(T010.salesYearAndMonth) as 'salesYearAndMonth',
     T010.interviewDate1,
     T010.stationCode1,
     T010.interviewCustomer1,
@@ -272,6 +274,7 @@ WHERE
             employeeNo
         FROM
             T006EmployeeSiteInfo)
+GROUP BY T001.employeeNo
 ORDER BY T011.bpEmployeeNo)union all(
 SELECT 
     T010.employeeNo AS employeeNo,
@@ -306,7 +309,7 @@ SELECT
     IF(ISNULL(T010.salesProgressCode),
         '',
         T010.salesProgressCode) AS 'salesProgressCode',
-    T010.salesYearAndMonth,
+    max(T010.salesYearAndMonth) as 'salesYearAndMonth',
     T010.interviewDate1,
     T010.stationCode1,
     T010.interviewCustomer1,
@@ -357,6 +360,7 @@ FROM
 WHERE
     T010.salesProgressCode IN (4 , 5) and  T010.salesYearAndMonth = #{sysDate}
     and (T006.admissionEndDate is null or T006.admissionEndDate='')
+GROUP BY T001.employeeNo
 ORDER BY T010.employeeNo)) temp,(select @rowno:=0) as rowNo 
 ORDER BY employeeNo	
     </select>
