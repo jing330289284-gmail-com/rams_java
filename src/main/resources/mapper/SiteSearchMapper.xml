@@ -105,7 +105,7 @@
 			AND a.developLanguageCode = #{developLanguageCode}
 		</if>
 		<if test="admissionStartDate!= null and admissionStartDate!= ''
-			and dataAcquisitionPeriod== null and dataAcquisitionPeriod== ''">
+			and dataAcquisitionPeriod== null or dataAcquisitionPeriod== ''">
 			AND a.admissionStartDate &gt;= #{admissionStartDate}
 		</if>
 		<if test="admissionEndDate!= null and admissionEndDate!= ''">

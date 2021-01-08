@@ -26,13 +26,6 @@ import jp.co.lyc.cms.validation.SiteSearchValidation;
 public class SiteSearchController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	// 日期 去“/”
-	private String dateToString(String date) {
-		String[] a = date.split("/");
-		String b = a[0] + a[1] + a[2];
-		return b;
-	}
-
 	// 时间段表示
 	private String dateToPeriod(String beginDate, String endDate) {
 		StringBuffer stringBuilder1;
@@ -213,11 +206,12 @@ public class SiteSearchController {
 				sendMap.put("dataAcquisitionPeriod", "1");
 				sendMap.put("admissionStartDate", dateNow);
 			}else {
+				sendMap.put("dataAcquisitionPeriod", null);
 				if (admissionStartDate != null && admissionStartDate.length() != 0) {
-					sendMap.put("admissionStartDate", dateToString(admissionStartDate));
+					sendMap.put("admissionStartDate", admissionStartDate);
 				}
 				if (admissionEndDate != null && admissionEndDate.length() != 0) {
-					sendMap.put("admissionEndDate", dateToString(admissionEndDate));
+					sendMap.put("admissionEndDate", admissionEndDate);
 				}
 			}
 			siteList = SiteSearchService.getSiteInfo(sendMap);
