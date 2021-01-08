@@ -197,14 +197,7 @@ public class SiteSearchController {
 				sendMap.put("developLanguageCode", developLanguageCode);
 			}
 			if (dataAcquisitionPeriod.equals("1")) {
-				Calendar cal = Calendar.getInstance();
-				String dateNow = Integer.toString(cal.get(Calendar.YEAR));
-				int month = cal.get(Calendar.MONTH) + 1;
-				dateNow += month > 10 ? month : "0" + month;
-				int day = cal.get(Calendar.DATE);
-				dateNow += day > 10 ? day : "0" + day;
 				sendMap.put("dataAcquisitionPeriod", "1");
-				sendMap.put("admissionStartDate", dateNow);
 			}else {
 				sendMap.put("dataAcquisitionPeriod", null);
 				if (admissionStartDate != null && admissionStartDate.length() != 0) {

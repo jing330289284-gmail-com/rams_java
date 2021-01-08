@@ -112,7 +112,7 @@
 			AND a.admissionEndDate &lt;= #{admissionEndDate}
 		</if>
 		<if test="dataAcquisitionPeriod!= null and dataAcquisitionPeriod!= ''">
-			AND a.admissionStartDate &gt;= #{admissionStartDate}
+			AND a.admissionEndDate IS NULL
 		</if>
 		<if test="employeeStatus!= null and employeeStatus!= ''">
 			AND d.employeeStatus = #{employeeStatus}

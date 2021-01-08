@@ -47,6 +47,7 @@
 		a.customerNo,
 		a.topCustomerNo,
 		a.developLanguageCode,
+		a.typeOfIndustryCode,
 		b.siteRoleName,
 		if(c.customerAbbreviation
 		is

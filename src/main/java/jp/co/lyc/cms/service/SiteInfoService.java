@@ -90,8 +90,8 @@ public class SiteInfoService {
 		if (siteModel.getAdmissionStartDate() != null && siteModel.getAdmissionStartDate().length() != 0) {
 			sendMap.put("admissionStartDate", siteModel.getAdmissionStartDate());
 		}
-		if (siteModel.getLocation() != null && siteModel.getLocation().length() != 0) {
-			sendMap.put("location", siteModel.getLocation());
+		if (siteModel.getStationCode() != null && siteModel.getStationCode().length() != 0) {
+			sendMap.put("location", siteModel.getStationCode());
 		}
 		if (siteModel.getSiteManager() != null && siteModel.getSiteManager().length() != 0) {
 			sendMap.put("siteManager", siteModel.getSiteManager());

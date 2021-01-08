@@ -25,6 +25,17 @@ public class Myfilter implements Filter{
 		    response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 		    response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, POST, PUT, DELETE, TRACE, OPTIONS, PATCH");
 	        // 是否让请求通过过滤器。这行代码不能漏掉。如果漏掉请求会访问不到URL
+	        if(!requestURI.contains("initializationPage") && 
+	        		!requestURI.contains("login") &&
+	        			!requestURI.contains("login2") &&
+	        				!requestURI.contains("subMenuEmployee") &&
+	        					!requestURI.contains("subMenu")) {
+	        	if(request.getSession().getAttribute("employeeNo") == null) {
+//	        	    response.setStatus(401);
+//	        	    response.getWriter().append("server error");
+	        		return;
+	        	}
+	        }
 	        filterChain.doFilter(request,response);
 	    }
 	 
