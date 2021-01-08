@@ -53,6 +53,7 @@ public class EmployeeInfoService {
 	 */
 	public List<EmployeeModel> getEmployeeInfo(Map<String, Object> sendMap) {
 		List<EmployeeModel> employeeList = employeeInfoMapper.getEmployeesInfo(sendMap);
+
 		if (sendMap.get("kadou") != null && sendMap.get("kadou").equals("1")) {
 			List<String> employeeAdmissionList = employeeInfoMapper.getEmployeeWithAdmission();
 			for (int i = 0; i < employeeList.size(); i++) {
@@ -61,6 +62,87 @@ public class EmployeeInfoService {
 						employeeList.remove(i);
 						i--;
 						break;
+					}
+				}
+			}
+		}
+		if (sendMap.get("customer") != null) {
+			List<EmployeeModel> customerNoList = employeeInfoMapper.getcustomerNo();
+			for (int i = 0; i < employeeList.size(); i++) {
+				for (int j = 0; j < customerNoList.size(); j++) {
+					if (employeeList.get(i).getEmployeeNo().equals(customerNoList.get(j).getEmployeeNo())) {
+						if (sendMap.get("customer").equals(customerNoList.get(j).getCustomerNo())) {
+							break;
+						}
+					}
+					/* employeeList.remove(i); */
+				}
+			}
+		}
+		if (sendMap.get("developLanguage1") != null || sendMap.get("developLanguage2") != null) {
+			List<EmployeeModel> employeeDevelopLanguageList = employeeInfoMapper.getEmployeesDevelopLanguage();
+			for (int i = 0; i < employeeList.size(); i++) {
+				for (int j = 0; j < employeeDevelopLanguageList.size(); j++) {
+					if (employeeList.get(i).getEmployeeNo()
+							.equals(employeeDevelopLanguageList.get(j).getEmployeeNo())) {
+						if (employeeDevelopLanguageList.get(j).getDevelopLanguage1() != null
+								&& employeeDevelopLanguageList.get(j).getDevelopLanguage2() != null
+								&& employeeDevelopLanguageList.get(j).getDevelopLanguage3() != null
+								&& employeeDevelopLanguageList.get(j).getDevelopLanguage4() != null
+								&& employeeDevelopLanguageList.get(j).getDevelopLanguage5() != null) {
+							if (sendMap.get("developLanguage1") != null && sendMap.get("developLanguage2") != null) {
+								if ((sendMap.get("developLanguage1")
+										.equals(employeeDevelopLanguageList.get(j).getDevelopLanguage1())
+										|| sendMap.get("developLanguage1")
+												.equals(employeeDevelopLanguageList.get(j).getDevelopLanguage2())
+										|| sendMap.get("developLanguage1")
+												.equals(employeeDevelopLanguageList.get(j).getDevelopLanguage3())
+										|| sendMap.get("developLanguage1")
+												.equals(employeeDevelopLanguageList.get(j).getDevelopLanguage4())
+										|| sendMap.get("developLanguage1")
+												.equals(employeeDevelopLanguageList.get(j).getDevelopLanguage5()))
+										&& (sendMap.get("developLanguage2")
+												.equals(employeeDevelopLanguageList.get(j).getDevelopLanguage1())
+												|| sendMap.get("developLanguage2").equals(
+														employeeDevelopLanguageList.get(j).getDevelopLanguage2())
+												|| sendMap.get("developLanguage2").equals(
+														employeeDevelopLanguageList.get(j).getDevelopLanguage3())
+												|| sendMap.get("developLanguage2").equals(
+														employeeDevelopLanguageList.get(j).getDevelopLanguage4())
+												|| sendMap.get("developLanguage2").equals(
+														employeeDevelopLanguageList.get(j).getDevelopLanguage5()))) {
+									break;
+								}
+							} else if (sendMap.get("developLanguage1") != null) {
+								if (sendMap.get("developLanguage1")
+										.equals(employeeDevelopLanguageList.get(j).getDevelopLanguage1())
+										|| sendMap.get("developLanguage1")
+												.equals(employeeDevelopLanguageList.get(j).getDevelopLanguage2())
+										|| sendMap.get("developLanguage1")
+												.equals(employeeDevelopLanguageList.get(j).getDevelopLanguage3())
+										|| sendMap.get("developLanguage1")
+												.equals(employeeDevelopLanguageList.get(j).getDevelopLanguage4())
+										|| sendMap.get("developLanguage1")
+												.equals(employeeDevelopLanguageList.get(j).getDevelopLanguage5())) {
+									break;
+								}
+							} else if (sendMap.get("developLanguage2") != null) {
+								if (sendMap.get("developLanguage2")
+										.equals(employeeDevelopLanguageList.get(j).getDevelopLanguage1())
+										|| sendMap.get("developLanguage2")
+												.equals(employeeDevelopLanguageList.get(j).getDevelopLanguage2())
+										|| sendMap.get("developLanguage2")
+												.equals(employeeDevelopLanguageList.get(j).getDevelopLanguage3())
+										|| sendMap.get("developLanguage2")
+												.equals(employeeDevelopLanguageList.get(j).getDevelopLanguage4())
+										|| sendMap.get("developLanguage2")
+												.equals(employeeDevelopLanguageList.get(j).getDevelopLanguage5())) {
+									break;
+								}
+							}
+							employeeList.remove(i);
+							i = 0;
+						}
 					}
 				}
 			}

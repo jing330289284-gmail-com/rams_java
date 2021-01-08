@@ -285,27 +285,6 @@
 		T002.siteRoleCode =
 		ifnull(#{siteRoleCode},T002.siteRoleCode)
 		and
-		(developLanguage1 =
-		ifnull(#{developLanguage1},developLanguage1)
-		or developLanguage1 =
-		ifnull(#{developLanguage2},developLanguage1))
-		and (developLanguage2 =
-		ifnull(#{developLanguage1},developLanguage2)
-		or developLanguage2 =
-		ifnull(#{developLanguage2},developLanguage2))
-		and (developLanguage3 =
-		ifnull(#{developLanguage1},developLanguage3)
-		or developLanguage3 =
-		ifnull(#{developLanguage2},developLanguage3))
-		and (developLanguage4 =
-		ifnull(#{developLanguage1},developLanguage4)
-		or developLanguage4 =
-		ifnull(#{developLanguage2},developLanguage4))
-		and (developLanguage5 =
-		ifnull(#{developLanguage1},developLanguage5)
-		or developLanguage5 =
-		ifnull(#{developLanguage2},developLanguage5))
-		and
 		residenceCode =
 		ifnull(#{residenceCode},residenceCode)
 		and
@@ -915,8 +894,28 @@
 		SELECT employeeNo FROM T006EmployeeSiteInfo
 		where
 		admissionStartDate!="" and admissionStartDate is not null
-		and admissionEndDate is null
+		and
+		admissionEndDate is null
 		GROUP BY
 		employeeNo;
 	</select>
+
+	<select id="getEmployeesDevelopLanguage" parameterType="map"
+		resultMap="Employee">
+		SELECT
+		employeeNo,developLanguage1,developLanguage2,developLanguage3,developLanguage4,developLanguage5
+		FROM T002EmployeeDetail;
+	</select>
+
+	<select id="getcustomerNo" parameterType="map"
+		resultMap="Employee">
+		SELECT
+		T006EmployeeSiteInfo.employeeNo,T006EmployeeSiteInfo.customerNo
+		FROM
+		T006EmployeeSiteInfo
+		left Join T002EmployeeDetail
+		on
+		newRams.T006EmployeeSiteInfo.employeeNo=newRams.T002EmployeeDetail.employeeNo;
+	</select>
+
 </mapper>
