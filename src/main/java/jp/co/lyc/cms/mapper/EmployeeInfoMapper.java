@@ -29,9 +29,12 @@ public interface EmployeeInfoMapper {
 	public List<EmployeeModel> getEmployeeInfo(Map<String, Object> sendMap);
 
 	public List<EmployeeModel> getEmployeesInfo(Map<String, Object> sendMap);
-	
+
 	public List<String> getEmployeeWithAdmission();
 
+	public List<EmployeeModel> getEmployeesDevelopLanguage();
+
+	public List<EmployeeModel> getcustomerNo();
 	/**
 	 * 社員情報を確認
 	 * 
@@ -134,4 +137,6 @@ public interface EmployeeInfoMapper {
 	 * @param sendMap
 	 */
 	public void deleteResumeManagement(Map<String, Object> sendMap);
+
+
 }

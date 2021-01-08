@@ -61,6 +61,7 @@ public class EmployeeModel implements Serializable {
 	String stationName;// 寄り駅
 	String oldPassword;// 古いパスワード
 	String customer;// お客様
+	String customerNo;// お客様No
 	String employeeName;
 	String authorityName;
 	String ageFrom;// 開始年齢
@@ -100,6 +101,14 @@ public class EmployeeModel implements Serializable {
 
 	String furigana1;// カタカナ1
 	String furigana2;// カタカナ2
+
+	public String getCustomerNo() {
+		return customerNo;
+	}
+
+	public void setCustomerNo(String customerNo) {
+		this.customerNo = customerNo;
+	}
 
 	public String getPassportInfo() {
 		return passportInfo;
