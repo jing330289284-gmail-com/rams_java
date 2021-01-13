@@ -27,4 +27,12 @@
 		DELETE FROM ${master}
 		WHERE ${columnCode} = #{code};
 	</delete>
+
+	<update id="masterUpdateAfterDelete" parameterType="String">
+		update
+		${master}
+		set
+		${columnCode} = ${columnCode} - 1
+		where ${columnCode} > #{code};
+	</update>
 </mapper>

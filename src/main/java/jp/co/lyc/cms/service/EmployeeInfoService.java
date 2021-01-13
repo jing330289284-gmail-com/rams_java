@@ -1,5 +1,6 @@
 package jp.co.lyc.cms.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -66,19 +67,33 @@ public class EmployeeInfoService {
 				}
 			}
 		}
+
+		if (sendMap.get("customer") != null && sendMap.get("customer").equals(""))
+			sendMap.put("customer", null);
+
 		if (sendMap.get("customer") != null) {
 			List<EmployeeModel> customerNoList = employeeInfoMapper.getcustomerNo();
 			for (int i = 0; i < employeeList.size(); i++) {
+				boolean deleteFlag = true;
 				for (int j = 0; j < customerNoList.size(); j++) {
 					if (employeeList.get(i).getEmployeeNo().equals(customerNoList.get(j).getEmployeeNo())) {
-						if (sendMap.get("customer").equals(customerNoList.get(j).getCustomerNo())) {
-							break;
+						if (sendMap.get("customer").toString().equals(customerNoList.get(j).getCustomerNo())) {
+							deleteFlag = false;
 						}
 					}
-					/* employeeList.remove(i); */
+				}
+				if (deleteFlag) {
+					employeeList.remove(i);
+					i--;
 				}
 			}
 		}
+
+		if (sendMap.get("developLanguage1") != null && sendMap.get("developLanguage1").equals(""))
+			sendMap.put("developLanguage1", null);
+		if (sendMap.get("developLanguage2") != null && sendMap.get("developLanguage2").equals(""))
+			sendMap.put("developLanguage2", null);
+
 		if (sendMap.get("developLanguage1") != null || sendMap.get("developLanguage2") != null) {
 			List<EmployeeModel> employeeDevelopLanguageList = employeeInfoMapper.getEmployeesDevelopLanguage();
 			for (int i = 0; i < employeeList.size(); i++) {
@@ -141,7 +156,10 @@ public class EmployeeInfoService {
 								}
 							}
 							employeeList.remove(i);
-							i = 0;
+							if (employeeList.size() > 0)
+								i = 0;
+							else
+								break;
 						}
 					}
 				}

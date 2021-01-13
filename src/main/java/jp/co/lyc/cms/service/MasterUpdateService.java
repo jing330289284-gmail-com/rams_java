@@ -42,6 +42,7 @@ public class MasterUpdateService {
 	public boolean deleteMaster(HashMap<String, Object> sendMap) {
 		try {
 			masterUpdateMapper.deleteMaster(sendMap);
+			masterUpdateMapper.masterUpdateAfterDelete(sendMap);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -49,6 +50,7 @@ public class MasterUpdateService {
 		}
 		return true;
 	}
+
 	/**
 	 * 明細取得
 	 * 
@@ -57,9 +59,12 @@ public class MasterUpdateService {
 
 	public List<MasterModel> getMasterInfo(HashMap<String, String> sendMap) {
 		List<MasterModel> masterList = masterUpdateMapper.getMasterInfo(sendMap);
+		for (int i = 0; i < masterList.size(); i++) {
+			masterList.get(i).setCode((i + 1) + "");
+		}
 		return masterList;
 	}
-	
+
 	/**
 	 * 有無判断
 	 * 
