@@ -32,12 +32,12 @@ FROM
          IF(ISNULL(T002.developLanguage5) or T002.developLanguage5='',
         null,
         M011e.developLanguageName)) AS 'developLanguage',
-    '' AS customer,
-    '' as nowCustomer,
+    null AS customer,
+    null as nowCustomer,
     M012.siteRoleName AS siteRoleCode,
-    '' AS 'unitPrice',
+    null AS 'unitPrice',
     '' AS 'admissionEndDate',
-    '' AS 'admissionStartDate',
+    null AS 'admissionStartDate',
     IF(ISNULL(T010.salesProgressCode),
         '',
         T010.salesProgressCode) AS 'salesProgressCode',
@@ -58,14 +58,13 @@ FROM
     T010.salesPriorityStatus
 FROM
     T001Employee T001
-        LEFT JOIN
+        LEFT JOIN 
     T003AddressInfo T003 ON T001.employeeNo = T003.employeeNo
         LEFT JOIN
     M013Station M013 ON M013.stationCode = T003.stationCode
         LEFT JOIN
     T002EmployeeDetail T002 ON T001.employeeNo = T002.employeeNo
      LEFT JOIN
-               
     M011DevelopLanguage M011a ON M011a.developLanguageCode = T002.developLanguage1
     
                 LEFT JOIN
@@ -100,7 +99,9 @@ WHERE
             employeeNo
         FROM
             T010SalesSituation where salesProgressCode IN (3 , 5)))  
-ORDER BY T001.employeeNo) UNION ALL (SELECT 
+<!--      AND (T010.salesYearAndMonth &gt; #{sysDate} OR T010.salesYearAndMonth IS NULL) -->
+
+ORDER BY T001.employeeNo) UNION (SELECT 
     T001.employeeNo,
     T015.resumeInfo1,
     T015.resumeInfo2,
@@ -185,7 +186,9 @@ FROM
     T015ResumeManagement T015 ON T001.employeeNo = T015.employeeNo
 WHERE
     LEFT(T006.admissionEndDate, 6) = #{sysDate}
-ORDER BY T001.employeeNo) UNION ALL (SELECT 
+	AND (T010.salesYearAndMonth &gt; #{sysDate} OR T010.salesYearAndMonth IS NULL)
+
+ORDER BY T001.employeeNo) UNION (SELECT 
     T011.bpEmployeeNo AS employeeNo,
     T015.resumeInfo1,
     T015.resumeInfo2,
@@ -272,7 +275,8 @@ WHERE
             employeeNo
         FROM
             T006EmployeeSiteInfo)
-ORDER BY T011.bpEmployeeNo)union all(
+
+ORDER BY T011.bpEmployeeNo)UNION(
 SELECT 
     T010.employeeNo AS employeeNo,
     T015.resumeInfo1,
@@ -297,12 +301,12 @@ SELECT
          IF(ISNULL(T002.developLanguage5) or T002.developLanguage5='',
         null,
         M011e.developLanguageName)) AS 'developLanguage',
-    T006.customerNo AS customer,
-    T006.customerNo as nowCustomer,
+    ifnull(T006.customerNo, '') AS customer,
+    ifnull(T006.customerNo, '') as nowCustomer,
     M012.siteRoleName AS siteRoleCode,
-       T006.unitPrice,
+    ifnull(T006.unitPrice, '') as unitPrice,
     '' AS 'admissionEndDate',
-    T006.admissionStartDate,
+    ifnull(T006.admissionStartDate, '') as admissionStartDate,
     IF(ISNULL(T010.salesProgressCode),
         '',
         T010.salesProgressCode) AS 'salesProgressCode',
@@ -357,6 +361,7 @@ FROM
 WHERE
     T010.salesProgressCode IN (4 , 5) and  T010.salesYearAndMonth = #{sysDate}
     and (T006.admissionEndDate is null or T006.admissionEndDate='')
+
 ORDER BY T010.employeeNo)) temp,(select @rowno:=0) as rowNo 
 ORDER BY employeeNo	
     </select>
@@ -650,7 +655,7 @@ remark=#{remark},
 updateTime=NOW(),
 updateUser=#{updateUser}
 
-	</insert>
+</insert>
 		<select id="getCount" parameterType="String" resultType="int">
 	
 SELECT 
