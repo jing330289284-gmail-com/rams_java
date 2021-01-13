@@ -102,12 +102,17 @@ public class SiteSearchController {
 			year = year + 1;
 			month = 0;
 		}
+		String yearAndMonth = "";
 		if (year == 0) {
-			return month + "ヶ月";
+			yearAndMonth = month + "ヶ月";
 		} else if (month == 0) {
-			return year + "ヶ年";
+			yearAndMonth = year + "ヶ年";
 		} else
-			return year + "ヶ年" + month + "ヶ月";
+			yearAndMonth = year + "ヶ年" + month + "ヶ月";
+		if(yearAndMonth.contains("-")) {
+			yearAndMonth = "";
+		}
+		return yearAndMonth;
 	}
 
 	@Autowired
@@ -153,6 +158,7 @@ public class SiteSearchController {
 			String admissionStartDate = siteSearchModel.getAdmissionStartDate();
 			String admissionEndDate = siteSearchModel.getAdmissionEndDate();
 			String dataAcquisitionPeriod = siteSearchModel.getDataAcquisitionPeriod();
+			String scheduledEndDate = siteSearchModel.getScheduledEndDate();
 			// 存入map 传入后台查询用
 			if (employeeNo != null && employeeNo.length() != 0) {
 				sendMap.put("employeeNo", employeeNo);
@@ -196,9 +202,12 @@ public class SiteSearchController {
 			if (developLanguageCode != null && developLanguageCode.length() != 0) {
 				sendMap.put("developLanguageCode", developLanguageCode);
 			}
+			if (scheduledEndDate != null && scheduledEndDate.length() != 0) {
+				sendMap.put("scheduledEndDate", scheduledEndDate);
+			}
 			if (dataAcquisitionPeriod.equals("1")) {
 				sendMap.put("dataAcquisitionPeriod", "1");
-			}else {
+			} else {
 				sendMap.put("dataAcquisitionPeriod", null);
 				if (admissionStartDate != null && admissionStartDate.length() != 0) {
 					sendMap.put("admissionStartDate", admissionStartDate);
@@ -215,8 +224,12 @@ public class SiteSearchController {
 				siteList.get(a).setWorkDate(
 						dateToPeriod(siteList.get(a).getAdmissionStartDate(), siteList.get(a).getAdmissionEndDate()));
 				// 社员形式设定
-				if (siteList.get(a).getEmployeeFrom() != null && siteList.get(a).getEmployeeFrom().length() != 0) {
-					siteList.get(a).setEmployeeFrom("BP(" + siteList.get(a).getEmployeeFrom() + ")");
+				if (siteList.get(a).getEmployeeNo().substring(0, 2).equals("BP")) {
+					if (siteList.get(a).getEmployeeFrom() != null && siteList.get(a).getEmployeeFrom().length() != 0) {
+						siteList.get(a).setEmployeeFrom("BP(" + siteList.get(a).getEmployeeFrom() + ")");
+					} else {
+						siteList.get(a).setEmployeeFrom("BP");
+					}
 				} else {
 					siteList.get(a).setEmployeeFrom("社員");
 				}
@@ -229,10 +242,10 @@ public class SiteSearchController {
 		}
 
 		logger.info("GetEmployeeInfoController.getEmployeeInfo:" + "検索結束");
-		if(siteList.size() != 0) {
+		if (siteList.size() != 0) {
 			result.put("data", siteList);
-		}else {
-			result.put("errorsMessage","該当データなし");
+		} else {
+			result.put("errorsMessage", "該当データなし");
 		}
 		return result;
 	}

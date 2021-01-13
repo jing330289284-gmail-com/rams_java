@@ -32,7 +32,7 @@ public class Myfilter implements Filter{
 	        					!requestURI.contains("subMenu")) {
 	        	if(request.getSession().getAttribute("employeeNo") == null) {
 //	        	    response.setStatus(401);
-//	        	    response.getWriter().append("server error");
+	        	    response.getWriter().append("server error");
 	        		return;
 	        	}
 	        }

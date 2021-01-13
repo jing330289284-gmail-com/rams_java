@@ -6,11 +6,11 @@
 		insert into
 		T006EmployeeSiteInfo(employeeNo,customerNo,topCustomerNo,admissionStartDate,admissionEndDate,
 		siteManager,systemName,developLanguageCode,stationCode,unitPrice,siteRoleCode,payOffRange1,payOffRange2,relatedEmployees,
-		levelCode,typeOfIndustryCode,nonSitePeriod,nonSiteMonths,dailyCalculationStatus,workState,remark,updateTime,createTime,updateUser)
+		levelCode,typeOfIndustryCode,nonSitePeriod,nonSiteMonths,dailyCalculationStatus,workState,scheduledEndDate,remark,updateTime,createTime,updateUser)
 		values(#{employeeNo},#{customerNo},#{topCustomerNo},#{admissionStartDate},#{admissionEndDate},
 		#{siteManager},#{systemName},#{developLanguageCode},#{location},#{unitPrice},#{siteRoleCode},#{payOffRange1},
 		#{payOffRange2},#{relatedEmployees},#{levelCode},#{typeOfIndustryCode},#{nonSitePeriod},#{nonSiteMonths},#{dailyCalculationStatus},
-		#{workState},#{remark},now(),now(),#{updateUser})
+		#{workState},#{scheduledEndDate},#{remark},now(),now(),#{updateUser})
 	</insert>
 
 	<update id="siteUpdate" parameterType="map">
@@ -23,7 +23,7 @@
 		siteRoleCode=#{siteRoleCode},payOffRange1=#{payOffRange1},payOffRange2=#{payOffRange2},
 		relatedEmployees=#{relatedEmployees},levelCode=#{levelCode},typeOfIndustryCode=#{typeOfIndustryCode},
 		nonSitePeriod=#{nonSitePeriod},nonSiteMonths=#{nonSiteMonths},dailyCalculationStatus=#{dailyCalculationStatus},
-		workState=#{workState},remark=#{remark},updateTime=now(),updateUser=#{updateUser}
+		workState=#{workState},scheduledEndDate=#{scheduledEndDate},remark=#{remark},updateTime=now(),updateUser=#{updateUser}
 		where employeeNo=#{employeeNo} AND admissionStartDate=#{workDate}
 	</update>
 
@@ -48,6 +48,7 @@
 		a.topCustomerNo,
 		a.developLanguageCode,
 		a.typeOfIndustryCode,
+		a.scheduledEndDate,
 		b.siteRoleName,
 		if(c.customerAbbreviation
 		is
@@ -120,5 +121,4 @@
 		and
 		admissionStartDate = #{admissionStartDate};
 	</delete>
-
 </mapper>
