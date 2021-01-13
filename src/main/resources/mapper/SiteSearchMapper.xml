@@ -4,12 +4,28 @@
 	<select id="getSiteInfo" parameterType="map"
 		resultType="jp.co.lyc.cms.model.SiteSearchModel">
 		SELECT
+		dataTab.employeeNo,
+		dataTab.systemName,
+		dataTab.unitPrice,
+		dataTab.admissionStartDate,
+		dataTab.admissionEndDate,
+		dataTab.siteRoleName,
+		dataTab.customerName,
+		dataTab.employeeNo,
+		dataTab.employeeName,
+		dataTab.developLanguageName,
+		dataTab.station,
+		dataTab.bpBelongCustomerCode,
+		dataTab.employeeFrom
+		FROM
+		(
+		SELECT
+		a.employeeNo,
 		a.systemName,
 		a.unitPrice,
 		a.admissionStartDate,
 		a.admissionEndDate,
 		b.siteRoleName,
-		a.employeeNo,
 
 		if(c.customerAbbreviation is null or
 		trim(c.customerAbbreviation)='',c.customerName,c.customerAbbreviation)
@@ -22,10 +38,18 @@
 		f.stationName as station,
 		h.bpBelongCustomerCode,
 
-		(select if(customerAbbreviation is null or
-		trim(customerAbbreviation)='',customerName,customerAbbreviation) from
-		T007CustomerInfo where customerNo=h.bpBelongCustomerCode) as
-		employeeFrom
+		(
+		SELECT
+		IF
+		( customerAbbreviation IS NULL OR trim( customerAbbreviation ) = '',
+		customerName, customerAbbreviation )
+		FROM
+		T007CustomerInfo AS T007
+		left join T011BpInfoSupplement AS T011 on
+		T007.customerNo = T011.bpBelongCustomerCode
+		WHERE
+		T011.bpEmployeeNo = a.employeeNo
+		) AS employeeFrom
 
 		FROM
 		T006EmployeeSiteInfo a
@@ -96,35 +120,45 @@
 			</if>
 		</if>
 		<if test="unitPrice1!= null and unitPrice1!= ''">
-			AND a.unitPrice &gt;= #{unitPrice1}
+			AND cast(a.unitPrice as signed) &gt;= cast(#{unitPrice1} as signed) 
 		</if>
 		<if test="unitPrice2!= null and unitPrice2!= ''">
-			AND a.unitPrice &lt;= #{unitPrice2}
+			AND cast(a.unitPrice as signed) &lt;= cast(#{unitPrice2} as signed)
 		</if>
 		<if test="developLanguageCode!= null and developLanguageCode!= ''">
 			AND a.developLanguageCode = #{developLanguageCode}
 		</if>
-		<if test="admissionStartDate!= null and admissionStartDate!= ''
+		<if
+			test="admissionStartDate!= null and admissionStartDate!= ''
 			and dataAcquisitionPeriod== null or dataAcquisitionPeriod== ''">
 			AND a.admissionStartDate &gt;= #{admissionStartDate}
 		</if>
 		<if test="admissionEndDate!= null and admissionEndDate!= ''">
 			AND a.admissionEndDate &lt;= #{admissionEndDate}
 		</if>
-		<if test="dataAcquisitionPeriod!= null and dataAcquisitionPeriod!= ''">
+		<if
+			test="dataAcquisitionPeriod!= null and dataAcquisitionPeriod!= ''">
 			AND a.admissionEndDate IS NULL
 		</if>
 		<if test="employeeStatus!= null and employeeStatus!= ''">
 			AND d.employeeStatus = #{employeeStatus}
 		</if>
 		<if test="employeeForm!= null and employeeForm!= ''">
-				<if test='employeeForm=="0"'>
+			<if test='employeeForm=="0"'>
 				AND d.employeeFormCode !='3'
 			</if>
 			<if test='employeeForm=="1"'>
 				AND d.employeeFormCode = '3'
 			</if>
 		</if>
+		<if test="scheduledEndDate != null and scheduledEndDate!= ''">
+			AND a.scheduledEndDate &lt;= #{scheduledEndDate}
+		</if>
+		ORDER BY
+		a.employeeNo,
+		a.admissionStartDate DESC
+		)AS dataTab
+		GROUP BY dataTab.employeeNo
 	</select>
 
 </mapper>

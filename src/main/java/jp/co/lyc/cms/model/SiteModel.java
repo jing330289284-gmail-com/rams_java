@@ -9,6 +9,7 @@ public class SiteModel {
 	String employeeNo;// 社員番号
 	String systemName;// システム名
 	String location;// 場所
+	String scheduledEndDate;
 	String customerNo;// お客様コード
 	String topCustomerNo;// トップお客様コード
 	String developLanguageCode;// 開発言語コード
@@ -39,6 +40,14 @@ public class SiteModel {
 	String checkDate;// 前回現場の退場日付
 	String dailyCalculationStatus;// 日割計算区分
 	String workState;// 現場状態
+
+	public String getScheduledEndDate() {
+		return scheduledEndDate;
+	}
+
+	public void setScheduledEndDate(String scheduledEndDate) {
+		this.scheduledEndDate = scheduledEndDate;
+	}
 
 	public String getStationCode() {
 		return stationCode;

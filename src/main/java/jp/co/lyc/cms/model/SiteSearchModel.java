@@ -12,6 +12,7 @@ public class SiteSearchModel{
 	String employeeForm;// 社員形式
 	String siteRoleCode;// 役割コード
 	String customerNo;// お客様コード
+	String scheduledEndDate;
 	String topCustomerNo;// トップお客様コード
 	String bpCustomerNo;// BP会社コード
 	String stationCode;// 場所コード
@@ -35,7 +36,14 @@ public class SiteSearchModel{
 	String workTime;// 勤務時間
 	String siteRoleName;// 役割
 
-	
+	public String getScheduledEndDate() {
+		return scheduledEndDate;
+	}
+
+	public void setScheduledEndDate(String scheduledEndDate) {
+		this.scheduledEndDate = scheduledEndDate;
+	}
+
 	public String getEmployeeNo() {
 		return employeeNo;
 	}

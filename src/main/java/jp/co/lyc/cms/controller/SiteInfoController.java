@@ -20,11 +20,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import jp.co.lyc.cms.common.BaseController;
+import jp.co.lyc.cms.mapper.SiteInfoMapper;
+import jp.co.lyc.cms.mapper.SiteSearchMapper;
 import jp.co.lyc.cms.model.EmployeeModel;
 import jp.co.lyc.cms.model.ModelClass;
 import jp.co.lyc.cms.model.SiteModel;
+import jp.co.lyc.cms.model.SiteSearchModel;
 import jp.co.lyc.cms.service.SiteInfoService;
 import jp.co.lyc.cms.util.StatusCodeToMsgMap;
+import jp.co.lyc.cms.util.UtilsCheckMethod;
 import jp.co.lyc.cms.validation.SiteInfoValidation;
 
 @Controller
@@ -149,6 +153,8 @@ public class SiteInfoController extends BaseController {
 
 	@Autowired
 	SiteInfoService siteInfoService;
+	@Autowired
+	SiteSearchMapper siteSearchMapper;
 	String errorsMessage = "";
 
 	@RequestMapping(value = "/insertSiteInfo")
@@ -261,7 +267,7 @@ public class SiteInfoController extends BaseController {
 		String nonSiteMonths = timeCalculate(checkDate, admissionStartDate);
 		String workState = siteModel.getWorkState();
 		String dailyCalculationStatus = siteModel.getDailyCalculationStatus();
-
+		String scheduledEndDate = siteModel.getScheduledEndDate();
 		sendMap.put("nonSiteMonths", nonSiteMonths);
 		if (nonSiteMonths != "") {
 			sendMap.put("nonSitePeriod", checkDate + "〜" + admissionStartDate);
@@ -315,6 +321,9 @@ public class SiteInfoController extends BaseController {
 		}
 		if (remark != null && remark.length() != 0) {
 			sendMap.put("remark", remark);
+		}
+		if (scheduledEndDate != null && scheduledEndDate.length() != 0) {
+			sendMap.put("remark", scheduledEndDate);
 		}
 		if (typeOfIndustryCode != null && typeOfIndustryCode.length() != 0) {
 			sendMap.put("typeOfIndustryCode", typeOfIndustryCode);
@@ -391,6 +400,10 @@ public class SiteInfoController extends BaseController {
 	public boolean deleteSiteInfo(@RequestBody  Map map) throws Exception {
 		logger.info("SiteInfoController.deleteSiteInfo:" + "削除開始");
 		boolean result = true;
+		SiteSearchModel deleteModel = (SiteSearchModel) siteSearchMapper.getSiteInfo(map).get(0);
+		if(!UtilsCheckMethod.isNullOrEmpty(deleteModel.getAdmissionEndDate())) {
+			return false;
+		}
 		result = siteInfoService.deleteSiteInfo(map);
 		logger.info("SiteInfoController.deleteSiteInfo:" + "削除結束");
 		return result;

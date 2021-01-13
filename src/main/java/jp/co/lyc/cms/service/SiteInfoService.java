@@ -59,6 +59,7 @@ public class SiteInfoService {
 				siteInfoMapper.siteInsert(sendMap);
 				lastOne.setLevelCode(levelCode);
 				lastOne.setWorkState("2");
+				lastOne.setScheduledEndDate("");
 				lastOne.setUpdateUser((String)sendMap.get("updateUser"));
 				Map<String, Object> sendMapForUp = 
 						formateData(lastOne);
@@ -119,6 +120,9 @@ public class SiteInfoService {
 		}
 		if (siteModel.getRelatedEmployees() != null && siteModel.getRelatedEmployees().length() != 0) {
 			sendMap.put("relatedEmployees", siteModel.getRelatedEmployees());
+		}
+		if (siteModel.getScheduledEndDate() != null && siteModel.getScheduledEndDate().length() != 0) {
+			sendMap.put("scheduledEndDate", siteModel.getScheduledEndDate());
 		}
 		if (siteModel.getLevelCode() != null && siteModel.getLevelCode().length() != 0) {
 			sendMap.put("levelCode", siteModel.getLevelCode());
