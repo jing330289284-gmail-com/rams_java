@@ -3,12 +3,19 @@ package jp.co.lyc.cms.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.springframework.dao.DataAccessResourceFailureException;
+
 public class SalesSituationModel implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -2028159323401651353L;
+
+	/*現在の日付 */
+	Date curDate;
+	/*社員営業され日付*/
+	String salesDate;
 	
 	String employeeNo;
 	String salesYearAndMonth;
@@ -63,6 +70,19 @@ String developLanguage2;
 String developLanguage3;
 String developLanguage4;
 String developLanguage5;
+
+public String getSalesDate() {
+	return salesDate;
+}
+public void setSalesDate(String salesDate) {
+	this.salesDate = salesDate;
+}
+public Date getCurDate() {
+	return curDate;
+}
+public void setCurDate(Date curDate) {
+	this.curDate = curDate;
+}
 /*2020/12/09 START 張棟*/
 /* 稼働開始 */
 String theMonthOfStartWork;
