@@ -40,6 +40,7 @@ public class SiteInfoService {
 				SiteModel lastOne = lastData.get(lastData.size() -1);
 				String levelCode = (String) sendMap.get("levelCode");
 				String admissionEndDate = (String) sendMap.get("admissionEndDate");
+				lastOne.setRemark((String) sendMap.get("remark"));
 				lastOne.setAdmissionEndDate(admissionEndDate);
 				lastOne.setAdmissionStartDate((String)sendMap.get("admissionStartDate"));
 				lastOne.setWorkDate((String)sendMap.get("admissionStartDate"));
@@ -51,7 +52,8 @@ public class SiteInfoService {
 					month -= 12;
 					year += 1;
 				}
-				admissionEndDate = year + "" + (month > 10 ? month : "0" + month) + "01"; 
+				admissionEndDate = year + "" + (month > 9 ? month : "0" + month) + "01"; 
+				sendMap.replace("remark", "");
 				sendMap.replace("levelCode", "");
 				sendMap.replace("workState", "0");
 				sendMap.replace("admissionStartDate", admissionEndDate);
