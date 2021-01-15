@@ -324,7 +324,7 @@
 		#{employeeNo},
 		#{employeeFristName},
 		#{employeeLastName},
-		#{password},
+		MD5(#{password}),
 		#{authorityCode},
 		NOW(),
 		NOW(),
@@ -373,6 +373,7 @@
 		phoneNo,
 		employmentInsuranceNo,
 		departmentCode,
+		contractDeadline,
 		updateTime,
 		createTime,
 		updateUser,
@@ -418,6 +419,7 @@
 		#{phoneNo},
 		#{employmentInsuranceNo},
 		#{departmentCode},
+		#{contractDeadline},
 		NOW(),
 		NOW(),
 		#{updateUser},
@@ -481,7 +483,7 @@
 			employeeLastName =#{employeeLastName},
 		</if>
 		<if test="password !=  ''">
-			password=#{password},
+			password=MD5(#{password}),
 		</if>
 		<if test="employeeFristName!= null">
 			authorityCode =#{authorityCode},
@@ -625,6 +627,9 @@
 		<if test="picInfo!= null">
 			picInfo=#{picInfo},
 		</if>
+		<if test="contractDeadline!= null">
+			contractDeadline=#{contractDeadline},
+		</if>
 		updateTime=NOW(),
 		updateUser=
 		#{updateUser}
@@ -704,6 +709,7 @@
 		T002.updateUser,
 		T002.picInfo,
 		T002.yearsOfExperience,
+		T002.contractDeadline,
 	</sql>
 	<sql id="T003">
 		T003.employeeNo,
@@ -915,7 +921,17 @@
 		T006EmployeeSiteInfo
 		left Join T002EmployeeDetail
 		on
-		newRams.T006EmployeeSiteInfo.employeeNo=newRams.T002EmployeeDetail.employeeNo;
+		T006EmployeeSiteInfo.employeeNo=T002EmployeeDetail.employeeNo;
 	</select>
 
+	<select id="getAdmissionStartDate" parameterType="map"
+		resultMap="Employee">
+		SELECT
+		T006EmployeeSiteInfo.employeeNo,left(T006EmployeeSiteInfo.admissionStartDate,6)
+		as admissionTime
+		FROM T006EmployeeSiteInfo
+		where admissionStartDate is not null
+		and
+		admissionEndDate is null;
+	</select>
 </mapper>

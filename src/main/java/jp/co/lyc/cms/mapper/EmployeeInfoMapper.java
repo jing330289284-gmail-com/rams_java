@@ -35,6 +35,8 @@ public interface EmployeeInfoMapper {
 	public List<EmployeeModel> getEmployeesDevelopLanguage();
 
 	public List<EmployeeModel> getcustomerNo();
+	
+	public List<EmployeeModel> getAdmissionStartDate();
 	/**
 	 * 社員情報を確認
 	 * 
@@ -137,6 +139,4 @@ public interface EmployeeInfoMapper {
 	 * @param sendMap
 	 */
 	public void deleteResumeManagement(Map<String, Object> sendMap);
-
-
 }
