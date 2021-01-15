@@ -15,8 +15,8 @@ public class SalesSituationService {
 	@Autowired
 	SalesSituationMapper salesSituationMapper;
 	
-	public List<SalesSituationModel> getSalesSituationModel(String sysDate){
-		return salesSituationMapper.getSalesSituationModel(sysDate);
+	public List<SalesSituationModel> getSalesSituationModel(String sysDate, String curDate, String salesDate){
+		return salesSituationMapper.getSalesSituationModel(sysDate, curDate, salesDate);
 	}
 	
 	public int insertSalesSituation(SalesSituationModel model){
