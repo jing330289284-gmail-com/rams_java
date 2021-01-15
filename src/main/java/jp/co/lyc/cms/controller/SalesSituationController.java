@@ -1,5 +1,6 @@
 package jp.co.lyc.cms.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -41,7 +42,7 @@ public class SalesSituationController  extends BaseController {
 
 	/**
 	 * データを取得
-	 * 
+	 * ffff
 	 * @param emp
 	 * @return List
 	 */
@@ -53,7 +54,13 @@ public class SalesSituationController  extends BaseController {
 		logger.info("getSalesSituation:" + "検索開始");
 		List<SalesSituationModel> salesSituationList = new ArrayList<SalesSituationModel>();
 		try {
-			salesSituationList = salesSituationService.getSalesSituationModel(model.getSalesYearAndMonth());
+			// 現在の日付を取得
+			Date date = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
+			String curDate = sdf.format(date);
+			// 社員営業され日付
+			String salesDate = String.valueOf(Integer.valueOf(model.getSalesYearAndMonth()) + 1);
+			salesSituationList = salesSituationService.getSalesSituationModel(model.getSalesYearAndMonth(), curDate, salesDate);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
