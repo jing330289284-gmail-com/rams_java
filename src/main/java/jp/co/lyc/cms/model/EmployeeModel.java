@@ -79,6 +79,8 @@ public class EmployeeModel implements Serializable {
 	String visaPeriod;// ビザ期間
 	AccountInfoModel accountInfo;// 口座情報
 	String yearsOfExperience; // 経験年数
+	String admissionTime; // 入場年月
+	String contractDeadline;// 契約期限(まで)
 
 	BpInfoModel bpInfoModel;// PB情報
 
@@ -86,6 +88,22 @@ public class EmployeeModel implements Serializable {
 	String firstHalfAddress;// 住所前半
 	String lastHalfAddress;// 住所後半
 	String stationCode;//
+
+	public String getContractDeadline() {
+		return contractDeadline;
+	}
+
+	public void setContractDeadline(String contractDeadline) {
+		this.contractDeadline = contractDeadline;
+	}
+
+	public String getAdmissionTime() {
+		return admissionTime;
+	}
+
+	public void setAdmissionTime(String admissionTime) {
+		this.admissionTime = admissionTime;
+	}
 
 	public String getOldPassword() {
 		return oldPassword;

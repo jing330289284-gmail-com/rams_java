@@ -17,6 +17,7 @@ import jp.co.lyc.cms.mapper.SiteInfoMapper;
 import jp.co.lyc.cms.model.AccountInfoModel;
 import jp.co.lyc.cms.model.BpInfoModel;
 import jp.co.lyc.cms.model.EmployeeModel;
+import jp.co.lyc.cms.util.UtilsController;
 
 @Component
 public class EmployeeInfoService {
@@ -162,6 +163,16 @@ public class EmployeeInfoService {
 								break;
 						}
 					}
+				}
+			}
+		}
+
+		List<EmployeeModel> admissionStartDateList = employeeInfoMapper.getAdmissionStartDate();
+		for (int i = 0; i < employeeList.size(); i++) {
+			for (int j = 0; j < admissionStartDateList.size(); j++) {
+				if (employeeList.get(i).getEmployeeNo().equals(admissionStartDateList.get(j).getEmployeeNo())) {
+					employeeList.get(i).setAdmissionTime(
+							UtilsController.dateAddOblique(admissionStartDateList.get(j).getAdmissionTime()));
 				}
 			}
 		}

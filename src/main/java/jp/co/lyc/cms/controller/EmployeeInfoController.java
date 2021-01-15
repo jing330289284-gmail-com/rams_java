@@ -325,6 +325,7 @@ public class EmployeeInfoController extends BaseController {
 		String residenceCode = emp.getResidenceCode();// 在留資格
 		String residenceCardNo = emp.getResidenceCardNo();// 在留カード
 		String stayPeriod = emp.getStayPeriod();// 在留期間
+		String contractDeadline = emp.getContractDeadline();// 契約期限
 		String employmentInsuranceNo = emp.getEmploymentInsuranceNo();// 雇用保険番号
 		String myNumber = emp.getMyNumber();// マイナンバー
 		String resumeName1 = emp.getResumeName1();// 備考１
@@ -424,6 +425,9 @@ public class EmployeeInfoController extends BaseController {
 		}
 		if (stayPeriod != null) {
 			sendMap.put("stayPeriod", stayPeriod);
+		}
+		if (contractDeadline != null) {
+			sendMap.put("contractDeadline", contractDeadline);
 		}
 		if (employmentInsuranceNo != null) {
 			sendMap.put("employmentInsuranceNo", employmentInsuranceNo);
