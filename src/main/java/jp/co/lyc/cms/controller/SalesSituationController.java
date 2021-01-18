@@ -1,6 +1,7 @@
 package jp.co.lyc.cms.controller;
 
 import java.text.SimpleDateFormat;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -39,6 +40,11 @@ public class SalesSituationController  extends BaseController {
 
 	@Autowired
 	SalesSituationService salesSituationService;
+	
+	// 12月
+	public static final String DECEMBER = "12";
+	// 1月
+	public static final String JANUARY = "01";
 
 	/**
 	 * データを取得
@@ -59,13 +65,26 @@ public class SalesSituationController  extends BaseController {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
 			String curDate = sdf.format(date);
 			// 社員営業され日付
-			String salesDate = String.valueOf(Integer.valueOf(model.getSalesYearAndMonth()) + 1);
+			String salesDate = getSalesDate(model.getSalesYearAndMonth());
+//			String salesDate = String.valueOf(Integer.valueOf(model.getSalesYearAndMonth()) + 1);
 			salesSituationList = salesSituationService.getSalesSituationModel(model.getSalesYearAndMonth(), curDate, salesDate);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		logger.info("getSalesSituation" + "検索結束");
 		return salesSituationList;
+	}
+	
+	// 社員営業され日付
+	private String getSalesDate(String getSalesYearAndMonth) {
+		String salesDate = "";
+//		if(getSalesYearAndMonth.substring(4) == DECEMBER) {
+		if(DECEMBER.equals(getSalesYearAndMonth.substring(4))) {
+			salesDate = String.valueOf(Integer.valueOf(getSalesYearAndMonth.substring(0,4)) + 1) + JANUARY;
+		}else {
+			salesDate = String.valueOf(Integer.valueOf(getSalesYearAndMonth) + 1);
+		}
+		return salesDate;
 	}
 	
 	@RequestMapping(value = "/updateSalesSituation", method = RequestMethod.POST)
