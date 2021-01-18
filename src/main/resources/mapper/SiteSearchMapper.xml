@@ -4,40 +4,19 @@
 	<select id="getSiteInfo" parameterType="map"
 		resultType="jp.co.lyc.cms.model.SiteSearchModel">
 		SELECT
-		dataTab.employeeNo,
-		dataTab.systemName,
-		dataTab.unitPrice,
-		dataTab.admissionStartDate,
-		dataTab.admissionEndDate,
-		dataTab.siteRoleName,
-		dataTab.customerName,
-		dataTab.employeeNo,
-		dataTab.employeeName,
-		dataTab.developLanguageName,
-		dataTab.station,
-		dataTab.bpBelongCustomerCode,
-		dataTab.employeeFrom
-		FROM
-		(
-		SELECT
 		a.employeeNo,
 		a.systemName,
 		a.unitPrice,
 		a.admissionStartDate,
 		a.admissionEndDate,
 		b.siteRoleName,
-
-		if(c.customerAbbreviation is null or
-		trim(c.customerAbbreviation)='',c.customerName,c.customerAbbreviation)
-		as customerName,
-
-		CONCAT(g.employeeFristName,g.employeeLastName)as
-		employeeName ,
-
+		IF
+		( c.customerAbbreviation IS NULL OR trim( c.customerAbbreviation ) =
+		'', c.customerName, c.customerAbbreviation ) AS customerName,
+		CONCAT( g.employeeFristName, g.employeeLastName ) AS employeeName,
 		e.developLanguageName,
-		f.stationName as station,
+		f.stationName AS station,
 		h.bpBelongCustomerCode,
-
 		(
 		SELECT
 		IF
@@ -45,43 +24,29 @@
 		customerName, customerAbbreviation )
 		FROM
 		T007CustomerInfo AS T007
-		left join T011BpInfoSupplement AS T011 on
-		T007.customerNo = T011.bpBelongCustomerCode
+		LEFT JOIN T011BpInfoSupplement AS T011 ON T007.customerNo =
+		T011.bpBelongCustomerCode
 		WHERE
 		T011.bpEmployeeNo = a.employeeNo
 		) AS employeeFrom
-
 		FROM
 		T006EmployeeSiteInfo a
-		LEFT JOIN
-		M012SiteRole
-		b ON
-		a.siteRoleCode = b.siteRoleCode
-		LEFT JOIN
-		T007CustomerInfo c ON
-		a.customerNo = c.customerNo
-		LEFT JOIN
-		T002EmployeeDetail d ON
-		a.employeeNo = d.employeeNo
-		LEFT JOIN
-		M011DevelopLanguage e ON
-		a.developLanguageCode =
-		e.developLanguageCode
-		LEFT JOIN
-		M013Station
-		f ON
-		a.stationCode =
-		f.stationCode
-		LEFT JOIN
-		T001Employee g ON
-		a.employeeNo =
-		g.employeeNo
-		LEFT JOIN
-		T011BpInfoSupplement h ON
-		a.employeeNo =
-		h.bpEmployeeNo
+		LEFT JOIN M012SiteRole b ON a.siteRoleCode = b.siteRoleCode AND
+		a.siteRoleCode != ''
+		LEFT JOIN T007CustomerInfo c ON a.customerNo = c.customerNo AND
+		a.customerNo != ''
+		LEFT JOIN T002EmployeeDetail d ON a.employeeNo = d.employeeNo AND
+		a.employeeNo != ''
+		LEFT JOIN M011DevelopLanguage e ON a.developLanguageCode =
+		e.developLanguageCode AND a.developLanguageCode != ''
+		LEFT JOIN M013Station f ON a.stationCode = f.stationCode AND a.stationCode
+		!= ''
+		LEFT JOIN T001Employee g ON a.employeeNo = g.employeeNo AND a.employeeNo
+		!= ''
+		LEFT JOIN T011BpInfoSupplement h ON a.employeeNo = h.bpEmployeeNo AND
+		a.employeeNo != ''
 		WHERE
-		1=1
+		1 =1
 		<if test="employeeNo!= null and employeeNo!= ''">
 			AND a.employeeNo = #{employeeNo}
 		</if>
@@ -108,7 +73,7 @@
 				AND a.payOffRange1 = #{payOffRange1}
 			</if>
 			<if test="payOffRange1 !='0'">
-				AND a.payOffRange1 &gt;= #{payOffRange1}
+				AND a.payOffRange1 = #{payOffRange1}
 			</if>
 		</if>
 		<if test="payOffRange2!= null and payOffRange2!= ''">
@@ -116,14 +81,16 @@
 				AND a.payOffRange2 = #{payOffRange2}
 			</if>
 			<if test="payOffRange2 !='0'">
-				AND a.payOffRange2 &lt;= #{payOffRange2}
+				AND a.payOffRange2 = #{payOffRange2}
 			</if>
 		</if>
 		<if test="unitPrice1!= null and unitPrice1!= ''">
-			AND cast(a.unitPrice as signed) &gt;= cast(#{unitPrice1} as signed) 
+			AND cast(a.unitPrice as signed) &gt;= cast(#{unitPrice1}
+			as signed)
 		</if>
 		<if test="unitPrice2!= null and unitPrice2!= ''">
-			AND cast(a.unitPrice as signed) &lt;= cast(#{unitPrice2} as signed)
+			AND cast(a.unitPrice as signed) &lt;= cast(#{unitPrice2}
+			as signed)
 		</if>
 		<if test="developLanguageCode!= null and developLanguageCode!= ''">
 			AND a.developLanguageCode = #{developLanguageCode}
@@ -156,9 +123,7 @@
 		</if>
 		ORDER BY
 		a.employeeNo,
-		a.admissionStartDate DESC
-		)AS dataTab
-		GROUP BY dataTab.employeeNo
+		a.admissionStartDate ASC
 	</select>
 
 </mapper>

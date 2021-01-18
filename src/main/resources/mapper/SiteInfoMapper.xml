@@ -50,59 +50,40 @@
 		a.typeOfIndustryCode,
 		a.scheduledEndDate,
 		b.siteRoleName,
-		if(c.customerAbbreviation
-		is
-		null or
-		trim(c.customerAbbreviation)='',c.customerName,c.customerAbbreviation)
-		as customerName,
-		if(d.topCustomerAbbreviation is
-		null or
-		trim(d.topCustomerAbbreviation)='',d.topCustomerName,d.topCustomerAbbreviation)
-		as topCustomerName,
+		IF
+		( c.customerAbbreviation IS NULL OR trim( c.customerAbbreviation ) =
+		'', c.customerName, c.customerAbbreviation ) AS customerName,
+		IF
+		( d.topCustomerAbbreviation IS NULL OR trim( d.topCustomerAbbreviation
+		) = '', d.topCustomerName, d.topCustomerAbbreviation ) AS
+		topCustomerName,
 		e.developLanguageName,
-		f.stationName as location,
+		f.stationName AS location,
 		h.levelName,
 		i.typeOfIndustryName
 		FROM
 		T006EmployeeSiteInfo a
-		LEFT
-		JOIN
-		M012SiteRole b
-		ON
-		a.siteRoleCode = b.siteRoleCode
-		LEFT JOIN
-		T007CustomerInfo c ON
-		a.customerNo = c.customerNo
-		LEFT JOIN
-		T008TopCustomerInfo d ON
-		a.topCustomerNo = d.topCustomerNo
-		LEFT
-		JOIN
-		M011DevelopLanguage e
-		ON
-		a.developLanguageCode =
-		e.developLanguageCode
-		LEFT JOIN
-		M013Station f ON
-		a.stationCode =
-		f.stationCode
-		LEFT JOIN
-		M008Level h ON
-		a.levelCode =
-		h.levelCode
-		LEFT
-		JOIN
-		M022TypeOfIndustry i ON
-		a.typeOfIndustryCode =
-		i.typeOfIndustryCode
+		LEFT JOIN M012SiteRole b ON a.siteRoleCode = b.siteRoleCode AND
+		a.siteRoleCode != ""
+		LEFT JOIN T007CustomerInfo c ON a.customerNo = c.customerNo AND
+		a.customerNo != ""
+		LEFT JOIN T008TopCustomerInfo d ON a.topCustomerNo = d.topCustomerNo AND
+		a.topCustomerNo != ""
+		LEFT JOIN M011DevelopLanguage e ON a.developLanguageCode =
+		e.developLanguageCode AND a.developLanguageCode != ""
+		LEFT JOIN M013Station f ON a.stationCode = f.stationCode AND a.stationCode
+		!= ""
+		LEFT JOIN M008Level h ON a.levelCode = h.levelCode AND a.levelCode != ""
+		LEFT JOIN M022TypeOfIndustry i ON a.typeOfIndustryCode =
+		i.typeOfIndustryCode AND a.typeOfIndustryCode != ""
 		WHERE
-		1=1
+		1 =1
 		<if test="employeeNo!= null and employeeNo!= ''">
 			AND a.employeeNo = #{employeeNo}
 		</if>
 
 	</select>
-	<!--　　現場情報を削除 社員画面から -->
+	<!-- 現場情報を削除 社員画面から -->
 	<delete id="deleteEmployeeSiteInfo" parameterType="String">
 		DELETE
 		FROM
