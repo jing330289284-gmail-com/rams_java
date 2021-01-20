@@ -307,7 +307,14 @@ public class EmployeeInfoController extends BaseController {
 		String graduationUniversity = emp.getGraduationUniversity();// 卒業学校
 		String major = emp.getMajor();// 専門
 		String graduationYearAndMonth = emp.getGraduationYearAndMonth();// 卒業年月
-		String intoCompanyYearAndMonth = emp.getIntoCompanyYearAndMonth();// 入社年月
+
+		// 入社年月
+		String intoCompanyYearAndMonth = null;
+		if (emp.getIntoCompanyYearAndMonth() != null) {
+			intoCompanyYearAndMonth = emp.getIntoCompanyYearAndMonth().equals(" ") ? ""
+					: emp.getIntoCompanyYearAndMonth();// 入社年月
+		}
+
 		String retirementYearAndMonth = emp.getRetirementYearAndMonth();// 退職年月
 		String comeToJapanYearAndMonth = emp.getComeToJapanYearAndMonth();// 来日年月
 		String nationalityCode = emp.getNationalityCode();// 出身地コード(国)

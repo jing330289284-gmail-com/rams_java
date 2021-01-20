@@ -915,23 +915,32 @@
 
 	<select id="getcustomerNo" parameterType="map"
 		resultMap="Employee">
+		<!-- SELECT T006EmployeeSiteInfo.employeeNo,T006EmployeeSiteInfo.customerNo 
+			FROM T006EmployeeSiteInfo left Join T002EmployeeDetail on T006EmployeeSiteInfo.employeeNo=T002EmployeeDetail.employeeNo; -->
 		SELECT
-		T006EmployeeSiteInfo.employeeNo,T006EmployeeSiteInfo.customerNo
+		T006EmployeeSiteInfo.employeeNo,customerNo
 		FROM
 		T006EmployeeSiteInfo
-		left Join T002EmployeeDetail
-		on
-		T006EmployeeSiteInfo.employeeNo=T002EmployeeDetail.employeeNo;
+		INNER JOIN (SELECT
+		employeeNo,
+		MAX(admissionStartDate) AS admissionStartDate
+		FROM
+		newRams.T006EmployeeSiteInfo
+		GROUP BY
+		employeeNo) AS TempTable
+		ON T006EmployeeSiteInfo.employeeNo = TempTable.employeeNo
+		AND T006EmployeeSiteInfo.admissionStartDate =
+		TempTable.admissionStartDate;
 	</select>
 
 	<select id="getAdmissionStartDate" parameterType="map"
 		resultMap="Employee">
+		<!-- SELECT T006EmployeeSiteInfo.employeeNo,left(T006EmployeeSiteInfo.admissionStartDate,6) 
+			as admissionTime FROM T006EmployeeSiteInfo where admissionStartDate is not 
+			null and admissionEndDate is null; -->
 		SELECT
 		T006EmployeeSiteInfo.employeeNo,left(T006EmployeeSiteInfo.admissionStartDate,6)
-		as admissionTime
-		FROM T006EmployeeSiteInfo
-		where admissionStartDate is not null
-		and
-		admissionEndDate is null;
+		as admissionTime FROM T006EmployeeSiteInfo
+		GROUP BY T006EmployeeSiteInfo.employeeNo;
 	</select>
 </mapper>
