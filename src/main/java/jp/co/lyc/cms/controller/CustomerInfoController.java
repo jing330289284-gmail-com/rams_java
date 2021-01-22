@@ -162,6 +162,7 @@ public class CustomerInfoController extends BaseController {
 		HashMap<String, String> sendMap = new HashMap<>();
 		sendMap.put("customerNo", customerDepartmentInfoModel.getCustomerNo());
 		sendMap.put("customerDepartmentCode", customerDepartmentInfoModel.getCustomerDepartmentCode());
+		sendMap.put("positionCode", customerDepartmentInfoModel.getPositionCode());
 		logger.info("BankInfoController.toroku:" + "部門削除終了");
 		return customerInfoSer.customerDepartmentdelete(sendMap);
 	}

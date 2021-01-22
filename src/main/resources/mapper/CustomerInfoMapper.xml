@@ -333,5 +333,7 @@
 		customerNo = #{customerNo}
 		AND
 		customerDepartmentCode = #{customerDepartmentCode}
+		AND
+		positionCode = #{positionCode}
 	</delete>
 </mapper>

@@ -330,8 +330,11 @@ public class WagesInfoController extends BaseController {
 			return result;
 		}
 		// 非稼働の場合、保険は前件の保険を使う
+		EmployeeModel b = new EmployeeModel();
+		b.setEmployeeNo(wagesInfoModel.getEmployeeNo());
+		b = employeeInfoService.getEmployeeByEmployeeNo(employeeInfoController.getParam(b));
 		ArrayList<SiteModel> relatedEmployees = wagesInfoMapper.kadouCheck(wagesInfoModel.getEmployeeNo());
-		if (relatedEmployees.size() == 0) {
+		if (relatedEmployees.size() == 0 && b.getOccupationCode().equals("3")) {
 			ArrayList<WagesInfoModel> hokenList = wagesInfoMapper.hokenSearch(wagesInfoModel.getEmployeeNo());
 			if (hokenList.size() != 0) {
 				wagesInfoModel.setWelfarePensionAmount(hokenList.get(hokenList.size() - 1).getWelfarePensionAmount());
