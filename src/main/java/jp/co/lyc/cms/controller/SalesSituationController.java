@@ -233,15 +233,13 @@ public class SalesSituationController  extends BaseController {
 	}
 	
 	/**
-	 * データを取得
-	 * ffff
-	 * @param emp
-	 * @return List
+	 * 画面の可変項目変更する
+	 * 
+	 * @param model
+	 * @return Map
 	 */
-
 	@RequestMapping(value = "/changeDataStatus", method = RequestMethod.POST)
 	@ResponseBody
-//	public List<SalesSituationModel> changeDataStatus(@RequestBody SalesSituationModel model) {
 	public Map<String, Object> changeDataStatus(@RequestBody SalesSituationModel model) {
 
 		logger.info("changeDataStatus:" + "更新開始");
@@ -264,7 +262,7 @@ public class SalesSituationController  extends BaseController {
 			model.setSalesYearAndMonth(salesDate);
 			// テーブルT010SalesSituation項目salesProgressCodeを変更する
 			updateCount = salesSituationService.updateDataStatus(model);
-			// 
+			// 日付に基づいて一覧を取得
 			salesSituationList = salesSituationService.getSalesSituationModel(model.getAdmissionEndDate().substring(0,6), curDate, salesDate);
 		} catch (Exception e) {
 			e.printStackTrace();
