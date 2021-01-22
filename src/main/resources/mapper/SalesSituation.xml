@@ -669,4 +669,16 @@ from T019SalesSentence T019
 WHERE
     T019.employeeNo =#{employeeNo}
 </select>
+
+	<update id="updateDataStatus" parameterType="jp.co.lyc.cms.model.SalesSituationModel">
+		UPDATE 
+			T010SalesSituation 
+		SET 
+		    salesProgressCode = #{salesProgressCode},
+		    updateTime= NOW(),
+		    updateUser=#{updateUser}
+		WHERE
+		    employeeNo = #{employeeNo}
+		    AND salesYearAndMonth = #{salesYearAndMonth}
+	</update>
 </mapper>

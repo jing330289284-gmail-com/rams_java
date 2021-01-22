@@ -32,4 +32,6 @@ public interface SalesSituationMapper {
 	public int updateSalesSentence(SalesContent model);
 	
 	public int getCount(String empNo);
+	
+	public int updateDataStatus(SalesSituationModel model);
 }

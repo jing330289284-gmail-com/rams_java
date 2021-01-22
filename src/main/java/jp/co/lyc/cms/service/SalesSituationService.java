@@ -50,4 +50,8 @@ public class SalesSituationService {
 	public int getCount(String empNo){
 		return salesSituationMapper.getCount(empNo);
 	}
+	
+	public int updateDataStatus(SalesSituationModel model){
+		return salesSituationMapper.updateDataStatus(model);
+	}
 }
