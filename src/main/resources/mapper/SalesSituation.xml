@@ -434,22 +434,22 @@ SELECT t.* FROM (
 	<!-- 現場現　を更新 -->
 	<insert id="updateEmployeeSiteInfo" parameterType="String">
 		INSERT INTO T006EmployeeSiteInfo
-		(employeeNo,
-		admissionStartDate,
-		customerNo,
-		unitPrice,
-		updateTime,
-        createTime,
-		updateUser)
+			(employeeNo,
+			admissionStartDate,
+			customerNo,
+			unitPrice,
+			updateTime,
+	        createTime,
+			updateUser)
 		VALUES
-		(
-		#{employeeNo},
-		#{admissionStartDate},
-		#{customerNo},
-		#{unitPrice},
-		 NOW(),
-         NOW(),
-		#{updateUser})
+			(
+			#{employeeNo},
+			#{admissionStartDate},
+			#{customerNo},
+			#{unitPrice},
+			 NOW(),
+	         NOW(),
+			#{updateUser})
 		ON DUPLICATE KEY UPDATE 
 			admissionStartDate=#{admissionStartDate},
 			customerNo=#{customerNo},
@@ -461,24 +461,24 @@ SELECT t.* FROM (
 	</insert>
 	<insert id="updateSalesSituation" parameterType="String">
 		INSERT INTO T010SalesSituation
-		(employeeNo,
-		salesYearAndMonth,
-		salesProgressCode,
-		salesStaff,
-		customerContractStatus,
-		updateTime,
-		createTime,
-		updateUser)
+			(employeeNo,
+			salesYearAndMonth,
+			salesProgressCode,
+			salesStaff,
+			customerContractStatus,
+			updateTime,
+			createTime,
+			updateUser)
 		VALUES
-		(
-		#{employeeNo},
-		#{salesYearAndMonth},
-		#{salesProgressCode},
-		#{salesStaff},
-		#{customerContractStatus},
-		 NOW(),
-		 NOW(),
-		#{updateUser})
+			(
+			#{employeeNo},
+			#{salesYearAndMonth},
+			#{salesProgressCode},
+			#{salesStaff},
+			#{customerContractStatus},
+			 NOW(),
+			 NOW(),
+			#{updateUser})
 		ON DUPLICATE KEY UPDATE
 			salesProgressCode=#{salesProgressCode},
 			salesStaff=#{salesStaff},
