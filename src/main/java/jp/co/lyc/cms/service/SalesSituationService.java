@@ -11,7 +11,7 @@ import jp.co.lyc.cms.model.SalesSituationModel;
 
 @Component
 public class SalesSituationService {
-
+ 
 	@Autowired
 	SalesSituationMapper salesSituationMapper;
 	

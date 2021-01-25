@@ -241,7 +241,7 @@ public class SalesSituationController  extends BaseController {
 	@RequestMapping(value = "/changeDataStatus", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> changeDataStatus(@RequestBody SalesSituationModel model) {
-
+ 
 		logger.info("changeDataStatus:" + "更新開始");
 		List<SalesSituationModel> salesSituationList = new ArrayList<SalesSituationModel>();
 		HttpSession session = getSession();
