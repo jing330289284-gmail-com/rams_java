@@ -694,7 +694,7 @@ WHERE
 			employeeNo = #{employeeNo}
 		    AND LEFT(admissionEndDate, 6) = #{admissionEndDate}
 	</update>
-	
+ 	
 	<update id="updateBPEMPInfo" parameterType="jp.co.lyc.cms.model.SalesSituationModel">
 		UPDATE
 			T011BpInfoSupplement
