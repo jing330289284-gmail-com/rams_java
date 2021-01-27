@@ -11,7 +11,89 @@ public class MasterModel implements Serializable {
 	String code;// 番号
 	String columnCode;// code名
 	String columnName;// name名
+	String bankBranchCode;
+	String bankBranchName;
+	String newBankBranchCode;
+	String newBankBranchName;
+	String bankCode;
+	String topCustomerNo;
+	String topCustomerName;
+	String topCustomerAbbreviation;
+	String url;
 	String updateUser;// ログインの社員
+	
+	public String getTopCustomerNo() {
+		return topCustomerNo;
+	}
+
+	public void setTopCustomerNo(String topCustomerNo) {
+		this.topCustomerNo = topCustomerNo;
+	}
+
+	public String getTopCustomerName() {
+		return topCustomerName;
+	}
+
+	public void setTopCustomerName(String topCustomerName) {
+		this.topCustomerName = topCustomerName;
+	}
+
+	public String getTopCustomerAbbreviation() {
+		return topCustomerAbbreviation;
+	}
+
+	public void setTopCustomerAbbreviation(String topCustomerAbbreviation) {
+		this.topCustomerAbbreviation = topCustomerAbbreviation;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public String getNewBankBranchCode() {
+		return newBankBranchCode;
+	}
+
+	public void setNewBankBranchCode(String newBankBranchCode) {
+		this.newBankBranchCode = newBankBranchCode;
+	}
+
+	public String getNewBankBranchName() {
+		return newBankBranchName;
+	}
+
+	public void setNewBankBranchName(String newBankBranchName) {
+		this.newBankBranchName = newBankBranchName;
+	}
+
+	public String getBankBranchCode() {
+		return bankBranchCode;
+	}
+
+	public void setBankBranchCode(String bankBranchCode) {
+		this.bankBranchCode = bankBranchCode;
+	}
+
+	public String getBankBranchName() {
+		return bankBranchName;
+	}
+
+	public void setBankBranchName(String bankBranchName) {
+		this.bankBranchName = bankBranchName;
+	}
+
+	public String getBankCode() {
+		return bankCode;
+	}
+
+	public void setBankCode(String bankCode) {
+		this.bankCode = bankCode;
+	}
+
 	public String getUpdateUser() {
 		return updateUser;
 	}
