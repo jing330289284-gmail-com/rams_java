@@ -683,7 +683,7 @@ WHERE
 		    employeeNo = #{employeeNo}
 		    AND salesYearAndMonth = #{salesYearAndMonth}
 	</update>
-	
+ 
 	<update id="updateEMPInfo" parameterType="jp.co.lyc.cms.model.SalesSituationModel">
 		UPDATE
 			T006EmployeeSiteInfo
