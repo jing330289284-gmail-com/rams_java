@@ -38,7 +38,7 @@ public class SalesSituationService {
 	public List<SalesSituationModel> getPersonalSalesInfoFromT019(String empNo){
 		return salesSituationMapper.getPersonalSalesInfoFromT019(empNo);
 	}
-	
+ 	
 	public int updateEmployeeAddressInfo(SalesSituationModel model){
 		return salesSituationMapper.updateEmployeeAddressInfo(model);
 	}
