@@ -268,7 +268,7 @@ public class SalesSituationController  extends BaseController {
 			
 			// テーブルT006EmployeeSiteInfo項目を変更する
 			updateCount = salesSituationService.updateEMPInfo(model);
-			
+ 			
 			// テーブルT011BpInfoSupplement項目を変更する
 			updateCount = salesSituationService.updateBPEMPInfo(model);
 			
