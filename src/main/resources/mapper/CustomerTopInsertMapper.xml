@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jp.co.lyc.cms.mapper.CustomerTopInsertMapper">
+	<!-- データの存在チェック -->
+	<select id="checkHave" parameterType="map"
+		resultType="java.lang.String">
+		SELECT * FROM T008TopCustomerInfo WHERE topCustomerName = #{topCustomerName}
+	</select>
+	
+		<!-- 最大番号取得 -->
+	<select id="getMaxCustomerNo" parameterType="map"
+		resultType="java.lang.String">
+		SELECT max(topCustomerNo) FROM T008TopCustomerInfo;
+	</select>
+	
+	<!-- データのインサート -->
+	<insert id="insertMaster" parameterType="map">
+		INSERT INTO T008TopCustomerInfo (topCustomerNo,topCustomerName,topCustomerAbbreviation,url,updateTime,createTime,updateUser) VALUE(#{max},#{topCustomerName},#{topCustomerAbbreviation},#{url},NOW(),NOW(),#{updateUser})
+	</insert>
+</mapper>

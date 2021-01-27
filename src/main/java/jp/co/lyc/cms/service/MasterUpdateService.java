@@ -35,6 +35,41 @@ public class MasterUpdateService {
 	}
 
 	/**
+	 * 修正
+	 * 
+	 * @param sendMap
+	 */
+	@Transactional(rollbackFor = Exception.class)
+	public boolean updateBankMaster(HashMap<String, Object> sendMap) {
+		try {
+			masterUpdateMapper.updateBankMaster(sendMap);
+		} catch (Exception e) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	
+	/**
+	 * 修正
+	 * 
+	 * @param sendMap
+	 */
+	@Transactional(rollbackFor = Exception.class)
+	public boolean updateCustomerMaster(HashMap<String, Object> sendMap) {
+		try {
+			masterUpdateMapper.updateCustomerMaster(sendMap);
+		} catch (Exception e) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+
+
+	/**
 	 * 削除
 	 * 
 	 * @param sendMap
@@ -52,6 +87,37 @@ public class MasterUpdateService {
 	}
 
 	/**
+	 * 削除
+	 * 
+	 * @param sendMap
+	 */
+	public boolean deleteBankMaster(HashMap<String, Object> sendMap) {
+		try {
+			masterUpdateMapper.deleteBankMaster(sendMap);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	
+	/**
+	 * 削除
+	 * 
+	 * @param sendMap
+	 */
+	public boolean deleteCustomerMaster(HashMap<String, Object> sendMap) {
+		try {
+			masterUpdateMapper.deleteCustomerMaster(sendMap);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	/**
 	 * 明細取得
 	 * 
 	 * @param sendMap
@@ -59,6 +125,22 @@ public class MasterUpdateService {
 
 	public List<MasterModel> getMasterInfo(HashMap<String, String> sendMap) {
 		List<MasterModel> masterList = masterUpdateMapper.getMasterInfo(sendMap);
+		for (int i = 0; i < masterList.size(); i++) {
+			masterList.get(i).setCode((i + 1) + "");
+		}
+		return masterList;
+	}
+
+	public List<MasterModel> getBankMasterInfo(HashMap<String, String> sendMap) {
+		List<MasterModel> masterList = masterUpdateMapper.getBankMasterInfo(sendMap);
+		for (int i = 0; i < masterList.size(); i++) {
+			masterList.get(i).setCode((i + 1) + "");
+		}
+		return masterList;
+	}
+	
+	public List<MasterModel> getCustomerMasterInfo(HashMap<String, String> sendMap) {
+		List<MasterModel> masterList = masterUpdateMapper.getCustomerMasterInfo(sendMap);
 		for (int i = 0; i < masterList.size(); i++) {
 			masterList.get(i).setCode((i + 1) + "");
 		}

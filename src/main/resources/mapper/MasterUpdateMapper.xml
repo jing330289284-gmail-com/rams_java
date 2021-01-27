@@ -13,6 +13,19 @@
 		SELECT ${columnCode} code,${columnName} data FROM ${master}
 	</select>
 
+	<!-- 銀行明細取得 -->
+	<select id="getBankMasterInfo" parameterType="map"
+		resultType="jp.co.lyc.cms.model.MasterModel">
+		SELECT bankBranchCode,bankBranchName FROM M002BankBranch
+		WHERE bankCode = ${bankCode};
+	</select>
+
+	<!-- Topお客様明細取得 -->
+	<select id="getCustomerMasterInfo" parameterType="map"
+		resultType="jp.co.lyc.cms.model.MasterModel">
+		SELECT * FROM T008TopCustomerInfo;
+	</select>
+
 	<!-- 修正 -->
 	<insert id="updateMaster" parameterType="map">
 		UPDATE ${master} SET
@@ -22,10 +35,55 @@
 		WHERE ${columnCode} = #{code}
 	</insert>
 
+	<!-- 修正 -->
+	<insert id="updateBankMaster" parameterType="map">
+		UPDATE
+		M002BankBranch SET
+		bankBranchCode = #{newBankBranchCode},
+		bankBranchName = #{newBankBranchName},
+		updateTime = NOW(),
+		updateUser =
+		#{updateUser}
+		WHERE bankCode = #{bankCode}
+		and bankBranchCode =
+		#{bankBranchCode}
+		and bankBranchName = #{bankBranchName};
+	</insert>
+
+	<!-- 修正 -->
+	<insert id="updateCustomerMaster" parameterType="map">
+		UPDATE
+		T008TopCustomerInfo SET
+		topCustomerName = #{topCustomerName},
+		topCustomerAbbreviation = #{topCustomerAbbreviation},
+		url = #{url},
+		updateTime = NOW(),
+		updateUser =
+		#{updateUser}
+		WHERE topCustomerNo =
+		#{topCustomerNo};
+	</insert>
+
 	<!-- 削除 -->
 	<delete id="deleteMaster" parameterType="String">
 		DELETE FROM ${master}
 		WHERE ${columnCode} = #{code};
+	</delete>
+
+	<!-- 削除 -->
+	<delete id="deleteBankMaster" parameterType="String">
+		DELETE FROM
+		M002BankBranch
+		WHERE bankCode = #{bankCode}
+		and bankBranchCode =
+		#{bankBranchCode}
+		and bankBranchName = #{bankBranchName};
+	</delete>
+	
+		<!-- 削除 -->
+	<delete id="deleteCustomerMaster" parameterType="String">
+		DELETE FROM T008TopCustomerInfo
+		WHERE topCustomerNo = #{topCustomerNo};
 	</delete>
 
 	<update id="masterUpdateAfterDelete" parameterType="String">
@@ -33,6 +91,7 @@
 		${master}
 		set
 		${columnCode} = ${columnCode} - 1
-		where ${columnCode} > #{code};
+		where ${columnCode} >
+		#{code};
 	</update>
 </mapper>

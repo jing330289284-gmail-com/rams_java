@@ -15,11 +15,39 @@ public interface MasterUpdateMapper {
 	public void updateMaster(HashMap<String, Object> sendMap);
 	
 	/**
+	 * 修正
+	 * 
+	 * @param sendMap
+	 */
+	public void updateBankMaster(HashMap<String, Object> sendMap);
+	
+	/**
+	 * 修正
+	 * 
+	 * @param sendMap
+	 */
+	public void updateCustomerMaster(HashMap<String, Object> sendMap);
+	
+	/**
 	 * 削除
 	 * 
 	 * @param sendMap
 	 */
 	public void deleteMaster(HashMap<String, Object> sendMap);
+	
+	/**
+	 * 削除
+	 * 
+	 * @param sendMap
+	 */
+	public void deleteBankMaster(HashMap<String, Object> sendMap);
+	
+	/**
+	 * 削除
+	 * 
+	 * @param sendMap
+	 */
+	public void deleteCustomerMaster(HashMap<String, Object> sendMap);
 
 	/**
 	 * 削除後のデータ更新
@@ -37,10 +65,28 @@ public interface MasterUpdateMapper {
 	public List<MasterModel> getMasterInfo(HashMap<String, String> sendMap);
 	
 	/**
+	 * 検索
+	 * 
+	 * @param
+	 * @return
+	 */
+	public List<MasterModel> getBankMasterInfo(HashMap<String, String> sendMap);
+	
+	/**
+	 * 検索
+	 * 
+	 * @param
+	 * @return
+	 */
+	public List<MasterModel> getCustomerMasterInfo(HashMap<String, String> sendMap);
+	
+	/**
 	 * 有無判断
 	 * @param data
 	 * @return
 	 */
 	public String checkHave(MasterModel masterModel);
+
+
 
 }
