@@ -252,6 +252,7 @@ public class SalesSituationController  extends BaseController {
 			Date date = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
 			String curDate = sdf.format(date);
+			
 			// 社員営業され日付
 			String salesDate = getSalesDate(model.getAdmissionEndDate());
 			if(DECEMBER.equals(model.getAdmissionEndDate().substring(4,6))) {
@@ -259,9 +260,18 @@ public class SalesSituationController  extends BaseController {
 			}else {
 				salesDate = String.valueOf(Integer.valueOf(model.getAdmissionEndDate().substring(0,6)) + 1);
 			}
+			
 			model.setSalesYearAndMonth(salesDate);
-			// テーブルT010SalesSituation項目salesProgressCodeを変更する
+			
+			// テーブルT010SalesSituation項目を変更する
 			updateCount = salesSituationService.updateDataStatus(model);
+			
+			// テーブルT006EmployeeSiteInfo項目を変更する
+			updateCount = salesSituationService.updateEMPInfo(model);
+			
+			// テーブルT011BpInfoSupplement項目を変更する
+			updateCount = salesSituationService.updateBPEMPInfo(model);
+			
 			// 日付に基づいて一覧を取得
 			salesSituationList = salesSituationService.getSalesSituationModel(model.getAdmissionEndDate().substring(0,6), curDate, salesDate);
 		} catch (Exception e) {

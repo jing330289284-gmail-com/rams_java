@@ -673,12 +673,35 @@ WHERE
 	<update id="updateDataStatus" parameterType="jp.co.lyc.cms.model.SalesSituationModel">
 		UPDATE 
 			T010SalesSituation 
-		SET 
+		SET
 		    salesProgressCode = #{salesProgressCode},
+		    customerContractStatus = #{customerContractStatus},
+		    salesStaff = #{salesStaff},
 		    updateTime= NOW(),
 		    updateUser=#{updateUser}
 		WHERE
 		    employeeNo = #{employeeNo}
 		    AND salesYearAndMonth = #{salesYearAndMonth}
+	</update>
+	
+	<update id="updateEMPInfo" parameterType="jp.co.lyc.cms.model.SalesSituationModel">
+		UPDATE
+			T006EmployeeSiteInfo
+		SET
+			unitPrice = #{unitPrice},
+			customerNo = #{customer}
+		WHERE
+			employeeNo = #{employeeNo}
+		    AND admissionEndDate = #{admissionEndDate}
+	</update>
+	
+	<update id="updateBPEMPInfo" parameterType="jp.co.lyc.cms.model.SalesSituationModel">
+		UPDATE
+			T011BpInfoSupplement
+		SET
+			bpUnitPrice = #{unitPrice},
+			bpBelongCustomerCode = #{customer}
+		WHERE
+			bpEmployeeNo = #{employeeNo}
 	</update>
 </mapper>

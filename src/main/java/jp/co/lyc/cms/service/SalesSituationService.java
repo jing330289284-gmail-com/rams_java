@@ -54,4 +54,12 @@ public class SalesSituationService {
 	public int updateDataStatus(SalesSituationModel model){
 		return salesSituationMapper.updateDataStatus(model);
 	}
+	
+	public int updateEMPInfo(SalesSituationModel model){
+		return salesSituationMapper.updateEMPInfo(model);
+	}
+	
+	public int updateBPEMPInfo(SalesSituationModel model){
+		return salesSituationMapper.updateBPEMPInfo(model);
+	}
 }
