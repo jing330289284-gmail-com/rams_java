@@ -55,4 +55,10 @@ public interface WagesInfoMapper {
 	 * @return
 	 */
 	public ArrayList<String> getLastKadouPeriod(String employeeNo);
+	
+	/**
+	 * 給料情報削除
+	 * @param customerNo
+	 */
+	public void delete(HashMap<String, String> sendMap);
 }

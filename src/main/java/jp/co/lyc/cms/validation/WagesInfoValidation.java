@@ -55,6 +55,13 @@ public class WagesInfoValidation implements Validator{
 						errors.rejectValue("scheduleOfBonusAmount", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001","ボーナス予定額"));
 					}
 				}
+			}else if(methodName.equals("delete")) {
+				if(UtilsCheckMethod.isNullOrEmpty(p.getEmployeeNo())) {
+					errors.rejectValue("employeeNo", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001","社員名"));
+				}
+				if(UtilsCheckMethod.isNullOrEmpty(p.getReflectYearAndMonth())) {
+					errors.rejectValue("reflectYearAndMonth", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001","反映年月"));
+				}
 			}
 		}
 		

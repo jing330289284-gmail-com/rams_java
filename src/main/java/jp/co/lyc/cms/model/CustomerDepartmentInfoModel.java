@@ -12,6 +12,7 @@ public class CustomerDepartmentInfoModel{
 	String responsiblePerson;//責任者
 	String customerDepartmentMail;//メール
 	String typeOfIndustryCode;
+	String topCustomerCode;
 	String developLanguageCode1;
 	String developLanguageCode2;
 	String stationCode;
@@ -24,6 +25,12 @@ public class CustomerDepartmentInfoModel{
 	String actionType;//処理区分
 	String resultCode;//処理結果
 	
+	public String getTopCustomerCode() {
+		return topCustomerCode;
+	}
+	public void setTopCustomerCode(String topCustomerCode) {
+		this.topCustomerCode = topCustomerCode;
+	}
 	public String getBeforeCDCode() {
 		return beforeCDCode;
 	}

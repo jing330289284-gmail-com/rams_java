@@ -162,21 +162,21 @@ public class WagesInfoController extends BaseController {
 					} else {
 						month = year * 12 + month - nonSiteMonths;
 					}
-					if (month != 0 && month % 12 == 0 && 
-							bonusSite.getEmployeeNo().substring(0, 3).equals("LYC")&& bonus != null) {
+					if (month != 0 && month % 12 == 0 && bonusSite.getEmployeeNo().substring(0, 3).equals("LYC")
+							&& bonus != null) {
 						String nextBonusMonth = bonus.getNextBonusMonth();
-						if(!UtilsCheckMethod.isNullOrEmpty(nextBonusMonth)) {
+						if (!UtilsCheckMethod.isNullOrEmpty(nextBonusMonth)) {
 							int yearBonus = Integer.parseInt(nextBonusMonth.substring(0, 4));
 							yearBonus += 1;
 							nextBonusMonth = Integer.toString(yearBonus) + nextBonusMonth.substring(4);
 							bonus.setNextBonusMonth(nextBonusMonth);
-						}else {
+						} else {
 							bonus = null;
 						}
 					} else if (month != 0 && month % 12 != 0
 							&& bonusSite.getEmployeeNo().substring(0, 3).equals("LYC")) {
 						String nextBonusMonth = bonus.getNextBonusMonth();
-						if(!UtilsCheckMethod.isNullOrEmpty(nextBonusMonth)) {
+						if (!UtilsCheckMethod.isNullOrEmpty(nextBonusMonth)) {
 							ArrayList<String> kadouMonths = wagesInfoMapper
 									.getLastKadouPeriod(wagesInfoMod.getEmployeeNo());
 							int kadouMonth = 0;
@@ -193,7 +193,7 @@ public class WagesInfoController extends BaseController {
 							nextBonusMonth = Integer.toString(yearBonus)
 									+ (monthBonus > 10 ? monthBonus : "0" + monthBonus);
 							bonus.setNextBonusMonth(nextBonusMonth);
-						}else {
+						} else {
 							bonus = null;
 						}
 					}
@@ -224,11 +224,11 @@ public class WagesInfoController extends BaseController {
 			}
 			if (month != 0 && month % 12 == 0) {
 				String yearAndMonthString = bonus.getNextBonusMonth();
-				if(!UtilsCheckMethod.isNullOrEmpty(yearAndMonthString)) {
+				if (!UtilsCheckMethod.isNullOrEmpty(yearAndMonthString)) {
 					String yearString = Integer.toString(Integer.parseInt(yearAndMonthString.substring(0, 4)) + 1);
 					yearAndMonthString = yearString + yearAndMonthString.substring(4);
 					bonus.setNextBonusMonth(yearAndMonthString);
-				}else {
+				} else {
 					bonus = null;
 				}
 			}
@@ -329,6 +329,18 @@ public class WagesInfoController extends BaseController {
 			logger.info("WagesInfoController.onloadPage:" + "登録終了");
 			return result;
 		}
+		HashMap<String, String> checkMap = new HashMap<String, String>();
+		checkMap.put("employeeNo", wagesInfoModel.getEmployeeNo());
+		ArrayList<WagesInfoModel> wagesInfoList = wagesInfoMapper.getWagesInfo(checkMap);
+		if(wagesInfoList.size() != 0) {
+			int lastEnd = Integer.parseInt(wagesInfoList.get(wagesInfoList.size() - 1).getReflectYearAndMonth());
+			int nowStart = Integer.parseInt(wagesInfoModel.getReflectYearAndMonth());
+			if (nowStart < lastEnd) {
+				errorsMessage += "新規給料情報の反映年月は既存データ以降にしてください";
+				result.put("errorsMessage", errorsMessage);// エラーメッセージ
+				return result;
+			}
+		}
 		// 非稼働の場合、保険は前件の保険を使う
 		EmployeeModel b = new EmployeeModel();
 		b.setEmployeeNo(wagesInfoModel.getEmployeeNo());
@@ -381,6 +393,38 @@ public class WagesInfoController extends BaseController {
 			}
 		}
 		logger.info("WagesInfoController.onloadPage:" + "登録終了");
+		return result;
+	}
+
+	/**
+	 * 給料情報削除
+	 * @param deleteMod
+	 * @return
+	 * @throws CloneNotSupportedException
+	 */
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> delete(@RequestBody WagesInfoModel deleteMod) throws CloneNotSupportedException {
+		logger.info("WagesInfoController.onloadPage:" + "登録開始");
+		Map<String, Object> result = new HashMap<String, Object>();
+		errorsMessage = "";
+		DataBinder binder = new DataBinder(deleteMod);
+		binder.setValidator(new WagesInfoValidation());
+		binder.validate();
+		BindingResult results = binder.getBindingResult();
+		if (results.hasErrors()) {
+			results.getAllErrors().forEach(o -> {
+				FieldError error = (FieldError) o;
+				errorsMessage += error.getDefaultMessage();// エラーメッセージ
+			});
+			result.put("errorsMessage", errorsMessage);// エラーメッセージ
+			logger.info("WagesInfoController.onloadPage:" + "登録終了");
+			return result;
+		}
+		boolean deleteResult = wagesInfoService.delete(deleteMod);
+		if (!deleteResult) {
+			result.put("errorsMessage", "削除失敗");
+		}
 		return result;
 	}
 }

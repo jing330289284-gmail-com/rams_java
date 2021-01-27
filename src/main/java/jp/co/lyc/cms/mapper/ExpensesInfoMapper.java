@@ -28,4 +28,10 @@ public interface ExpensesInfoMapper {
 	 * @param sendMap
 	 */
 	public void update(HashMap<String, String> sendMap);
+	
+	/**
+	 * 諸費用情報削除
+	 * @param customerNo
+	 */
+	public void delete(HashMap<String, String> sendMap);
 }

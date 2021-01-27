@@ -268,6 +268,7 @@ public class CustomerInfoService {
 		sendMap.put("customerNo", customerDepartmentInfoModel.getCustomerNo());
 		sendMap.put("responsiblePerson", customerDepartmentInfoModel.getResponsiblePerson());
 		sendMap.put("typeOfIndustryCode", customerDepartmentInfoModel.getTypeOfIndustryCode());
+		sendMap.put("topCustomerCode", customerDepartmentInfoModel.getTopCustomerCode());
 		sendMap.put("developLanguageCode1", customerDepartmentInfoModel.getDevelopLanguageCode1());
 		sendMap.put("developLanguageCode2", customerDepartmentInfoModel.getDevelopLanguageCode2());
 		sendMap.put("stationCode", customerDepartmentInfoModel.getStationCode());

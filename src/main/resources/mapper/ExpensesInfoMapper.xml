@@ -83,4 +83,13 @@
 		AND
 			expensesReflectYearAndMonth = #{updateExpensesReflectYearAndMonth}
 </update>
+	<delete id="delete" parameterType="String">
+		DELETE
+		FROM
+		T013ExpensesInfo
+		WHERE
+		employeeNo = #{employeeNo}
+		AND expensesReflectYearAndMonth =
+		#{expensesReflectYearAndMonth}
+	</delete>
 </mapper>

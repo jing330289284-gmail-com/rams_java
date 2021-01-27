@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import jp.co.lyc.cms.mapper.ExpensesInfoMapper;
 import jp.co.lyc.cms.model.ExpensesInfoModel;
+import jp.co.lyc.cms.model.WagesInfoModel;
 
 @Component
 public class ExpensesInfoService {
@@ -54,6 +55,23 @@ public class ExpensesInfoService {
 			e.printStackTrace();
 			return false;
 		}
+	}
+	
+	/**
+	 * 諸費用情報削除
+	 * @param customerNo
+	 */
+	
+	public boolean delete(ExpensesInfoModel expensesInfoModel) {
+		boolean result = true;
+		try {
+			expensesInfoMapper.delete(getSendMap(expensesInfoModel));
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return result = false;
+		}
+		return result;
 	}
 	/**
 	 *諸費用sendMapの作成

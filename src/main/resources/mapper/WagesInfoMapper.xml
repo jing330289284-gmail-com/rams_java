@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="jp.co.lyc.cms.mapper.WagesInfoMapper">
-<resultMap type="String" id="StringResult"></resultMap>
-<resultMap type="jp.co.lyc.cms.model.WagesInfoModel" id="wagesInfoModel"></resultMap>
-<resultMap type="jp.co.lyc.cms.model.SiteModel" id="siteModel"></resultMap>
+	<resultMap type="String" id="StringResult"></resultMap>
+	<resultMap type="jp.co.lyc.cms.model.WagesInfoModel"
+		id="wagesInfoModel"></resultMap>
+	<resultMap type="jp.co.lyc.cms.model.SiteModel"
+		id="siteModel"></resultMap>
 
-<!-- 給料情報の取得 -->
-<select id="getWagesInfo" parameterType="String" resultMap="wagesInfoModel">
-	SELECT
+	<!-- 給料情報の取得 -->
+	<select id="getWagesInfo" parameterType="String"
+		resultMap="wagesInfoModel">
+		SELECT
 		T005.employeeNo,
 		T005.reflectYearAndMonth,
 		T005.socialInsuranceFlag,
 		CASE
 		WHEN T005.salary = "" THEN
-		T005.waitingCost ELSE T005.salary 
+		CONCAT(T005.waitingCost,"(非)") ELSE T005.salary
 		END AS salary,
 		T005.waitingCost,
 		T005.welfarePensionAmount,
@@ -28,54 +31,59 @@
 		T005.totalAmount,
 		T005.employeeFormCode,
 		M005.employeeFormName,
-		T005.remark 
-	FROM
+		T005.remark
+		FROM
 		T005WagesInfo AS T005
 		LEFT JOIN M005EmployeeForm AS M005
-		ON T005.employeeFormCode = M005.employeeFormCode
-	WHERE
+		ON
+		T005.employeeFormCode = M005.employeeFormCode
+		WHERE
 		T005.employeeNo = #{employeeNo}
 		<if test="reflectYearAndMonth != null">
 			AND T005.reflectYearAndMonth = #{reflectYearAndMonth}
 		</if>
-</select>
-<select id="getEmployeeForm" parameterType="String" resultMap="wagesInfoModel">
-	SELECT
+	</select>
+	<select id="getEmployeeForm" parameterType="String"
+		resultMap="wagesInfoModel">
+		SELECT
 		T002.employeeFormCode,
-		M005.employeeFormName 
-	FROM
+		M005.employeeFormName
+		FROM
 		T002EmployeeDetail AS T002
-		LEFT JOIN M005EmployeeForm AS M005 ON T002.employeeNo = M005.employeeFormCode 
-	WHERE
+		LEFT JOIN M005EmployeeForm AS M005 ON
+		T002.employeeNo = M005.employeeFormCode
+		WHERE
 		T002.employeeNo = #{employeeNo}
-</select>
-<!-- 稼働判断 -->
-<select id="kadouCheck" parameterType="String" resultMap="siteModel">
-	SELECT
+	</select>
+	<!-- 稼働判断 -->
+	<select id="kadouCheck" parameterType="String"
+		resultMap="siteModel">
+		SELECT
 		relatedEmployees,
 		siteRoleCode
-	FROM
-		T006EmployeeSiteInfo 
-	WHERE
+		FROM
+		T006EmployeeSiteInfo
+		WHERE
 		employeeNo = #{employeeNo}
 		AND admissionEndDate IS NULL
-</select>
-<!-- 保険検索 -->
-<select id="hokenSearch" parameterType="String" resultMap="wagesInfoModel">
-	SELECT
+	</select>
+	<!-- 保険検索 -->
+	<select id="hokenSearch" parameterType="String"
+		resultMap="wagesInfoModel">
+		SELECT
 		employeeNo,
 		welfarePensionAmount,
 		healthInsuranceAmount,
-		insuranceFeeAmount 
-	FROM
-		T005WagesInfo 
-	WHERE
+		insuranceFeeAmount
+		FROM
+		T005WagesInfo
+		WHERE
 		employeeNo = #{employeeNo}
-</select>
+	</select>
 
-<!-- インサート -->
-<insert id="insert" parameterType="String">
-	INSERT INTO T005WagesInfo(
+	<!-- インサート -->
+	<insert id="insert" parameterType="String">
+		INSERT INTO T005WagesInfo(
 		employeeNo,
 		reflectYearAndMonth,
 		socialInsuranceFlag,
@@ -96,8 +104,8 @@
 		updateTime,
 		createTime,
 		updateUser
-	) 
-	VALUES(
+		)
+		VALUES(
 		#{employeeNo},
 		#{reflectYearAndMonth},
 		#{socialInsuranceFlag},
@@ -118,13 +126,13 @@
 		NOW(),
 		NOW(),
 		#{updateUser}
-	)
-</insert>
+		)
+	</insert>
 
-<!-- アップデート -->
-<update id="update" parameterType="String">
-	UPDATE T005WagesInfo 
-		SET 
+	<!-- アップデート -->
+	<update id="update" parameterType="String">
+		UPDATE T005WagesInfo
+		SET
 		<if test="reflectYearAndMonth != null">
 			reflectYearAndMonth = #{reflectYearAndMonth},
 		</if>
@@ -133,61 +141,71 @@
 		</if>
 		<if test="salary != null">
 			salary = #{salary},
-		</if>	
+		</if>
 		<if test="waitingCost != null">
 			waitingCost = #{waitingCost},
-		</if>		
+		</if>
 		<if test="welfarePensionAmount != null">
 			welfarePensionAmount = #{welfarePensionAmount},
-		</if>	
+		</if>
 		<if test="healthInsuranceAmount != null">
 			healthInsuranceAmount = #{healthInsuranceAmount},
-		</if>	
+		</if>
 		<if test="insuranceFeeAmount != null">
 			insuranceFeeAmount = #{insuranceFeeAmount},
-		</if>	
+		</if>
 		<if test="lastTimeBonusAmount != null">
 			lastTimeBonusAmount = #{lastTimeBonusAmount},
-		</if>	
+		</if>
 		<if test="scheduleOfBonusAmount != null">
 			scheduleOfBonusAmount = #{scheduleOfBonusAmount},
-		</if>	
+		</if>
 		<if test="bonusFlag != null">
 			bonusFlag = #{bonusFlag},
-		</if>	
+		</if>
 		<if test="nextBonusMonth != null">
 			nextBonusMonth = #{nextBonusMonth},
-		</if>	
+		</if>
 		<if test="monthOfCompanyPay != null">
 			monthOfCompanyPay = #{monthOfCompanyPay},
-		</if>	
+		</if>
 		<if test="nextRaiseMonth != null">
 			nextRaiseMonth = #{nextRaiseMonth},
-		</if>	
+		</if>
 		<if test="totalAmount != null">
 			totalAmount = #{totalAmount},
-		</if>	
+		</if>
 		<if test="employeeFormCode != null">
 			employeeFormCode = #{employeeFormCode},
-		</if>	
+		</if>
 		<if test="remark != null">
 			remark = #{remark},
-		</if>		
+		</if>
 		updateTime = NOW(),
 		updateUser = #{updateUser}
-		WHERE 
-			employeeNo = #{employeeNo}
-			AND reflectYearAndMonth = #{updatedReflectYearAndMonth}
-</update>
+		WHERE
+		employeeNo = #{employeeNo}
+		AND reflectYearAndMonth = #{updatedReflectYearAndMonth}
+	</update>
 
-<!-- 最近の非稼働月数 -->
-<select id="getLastKadouPeriod" parameterType="String" resultMap="StringResult">
-	SELECT
-	nonSiteMonths
-	FROM
-	T006EmployeeSiteInfo
-	WHERE employeeNo = #{employeeNo}
-	AND nonSitePeriod != ''
-	AND nonSiteMonths != ''
-</select>
+	<!-- 最近の非稼働月数 -->
+	<select id="getLastKadouPeriod" parameterType="String"
+		resultMap="StringResult">
+		SELECT
+		nonSiteMonths
+		FROM
+		T006EmployeeSiteInfo
+		WHERE employeeNo = #{employeeNo}
+		AND nonSitePeriod != ''
+		AND nonSiteMonths != ''
+	</select>
+	<delete id="delete" parameterType="String">
+		DELETE
+		FROM
+		T005WagesInfo
+		WHERE
+		employeeNo = #{employeeNo}
+		AND reflectYearAndMonth =
+		#{reflectYearAndMonth}
+	</delete>
 </mapper>
