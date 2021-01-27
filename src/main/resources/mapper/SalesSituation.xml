@@ -217,10 +217,10 @@ ORDER BY T001.employeeNo) UNION (SELECT
          IF(ISNULL(T002.developLanguage5) or T002.developLanguage5='',
         null,
         M011e.developLanguageName)) AS 'developLanguage',
-    '' AS customer,
+    T011.bpBelongCustomerCode AS customer,
     '' as nowCustomer,
     M012.siteRoleName AS siteRoleCode,
-    '' AS 'unitPrice',
+    T011.bpUnitPrice AS 'unitPrice',
     '' AS 'admissionEndDate',
     '' AS 'admissionStartDate',
     IF(ISNULL(T010.salesProgressCode),
@@ -692,7 +692,7 @@ WHERE
 			customerNo = #{customer}
 		WHERE
 			employeeNo = #{employeeNo}
-		    AND admissionEndDate = #{admissionEndDate}
+		    AND LEFT(admissionEndDate, 6) = #{admissionEndDate}
 	</update>
 	
 	<update id="updateBPEMPInfo" parameterType="jp.co.lyc.cms.model.SalesSituationModel">
