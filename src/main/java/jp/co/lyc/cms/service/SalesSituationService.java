@@ -11,12 +11,12 @@ import jp.co.lyc.cms.model.SalesSituationModel;
 
 @Component
 public class SalesSituationService {
-
+ 
 	@Autowired
 	SalesSituationMapper salesSituationMapper;
 	
-	public List<SalesSituationModel> getSalesSituationModel(String sysDate){
-		return salesSituationMapper.getSalesSituationModel(sysDate);
+	public List<SalesSituationModel> getSalesSituationModel(String sysDate, String curDate, String salesDate){
+		return salesSituationMapper.getSalesSituationModel(sysDate, curDate, salesDate);
 	}
 	
 	public int insertSalesSituation(SalesSituationModel model){
@@ -38,7 +38,7 @@ public class SalesSituationService {
 	public List<SalesSituationModel> getPersonalSalesInfoFromT019(String empNo){
 		return salesSituationMapper.getPersonalSalesInfoFromT019(empNo);
 	}
-	
+ 	 
 	public int updateEmployeeAddressInfo(SalesSituationModel model){
 		return salesSituationMapper.updateEmployeeAddressInfo(model);
 	}
@@ -49,5 +49,17 @@ public class SalesSituationService {
 	
 	public int getCount(String empNo){
 		return salesSituationMapper.getCount(empNo);
+	}
+	
+	public int updateDataStatus(SalesSituationModel model){
+		return salesSituationMapper.updateDataStatus(model);
+	}
+	
+	public int updateEMPInfo(SalesSituationModel model){
+		return salesSituationMapper.updateEMPInfo(model);
+	}
+	
+	public int updateBPEMPInfo(SalesSituationModel model){
+		return salesSituationMapper.updateBPEMPInfo(model);
 	}
 }

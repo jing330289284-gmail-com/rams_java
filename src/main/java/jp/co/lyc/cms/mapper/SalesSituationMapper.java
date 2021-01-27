@@ -14,9 +14,9 @@ public interface SalesSituationMapper {
 	 * @param sendMap
 	 * @return
 	 */
-	
-	public List<SalesSituationModel> getSalesSituationModel(String sysDate);
-	
+ 	
+	public List<SalesSituationModel> getSalesSituationModel(String sysDate, String curDate, String salesDate);
+  	
 	public int insertSalesSituation(SalesSituationModel model);
 
 	public int updateEmployeeSiteInfo(SalesSituationModel model);
@@ -32,4 +32,10 @@ public interface SalesSituationMapper {
 	public int updateSalesSentence(SalesContent model);
 	
 	public int getCount(String empNo);
+	
+	public int updateDataStatus(SalesSituationModel model);
+	
+	public int updateEMPInfo(SalesSituationModel model);
+	
+	public int updateBPEMPInfo(SalesSituationModel model);
 }

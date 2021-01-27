@@ -1,10 +1,14 @@
 package jp.co.lyc.cms.controller;
 
+import java.text.SimpleDateFormat;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.collections.ListUtils;
 import org.castor.core.util.StringUtil;
@@ -28,6 +32,7 @@ import jp.co.lyc.cms.common.BaseController;
 import jp.co.lyc.cms.model.SalesSituationModel;
 import jp.co.lyc.cms.model.SalesContent;
 import jp.co.lyc.cms.service.SalesSituationService;
+import jp.co.lyc.cms.util.StatusCodeToMsgMap;
 import jp.co.lyc.cms.validation.SalesSituationValidation;
 
 @Controller
@@ -38,10 +43,15 @@ public class SalesSituationController  extends BaseController {
 
 	@Autowired
 	SalesSituationService salesSituationService;
+	
+	// 12月
+	public static final String DECEMBER = "12";
+	// 1月
+	public static final String JANUARY = "01";
 
 	/**
 	 * データを取得
-	 * 
+	 * ffff
 	 * @param emp
 	 * @return List
 	 */
@@ -53,12 +63,31 @@ public class SalesSituationController  extends BaseController {
 		logger.info("getSalesSituation:" + "検索開始");
 		List<SalesSituationModel> salesSituationList = new ArrayList<SalesSituationModel>();
 		try {
-			salesSituationList = salesSituationService.getSalesSituationModel(model.getSalesYearAndMonth());
+			// 現在の日付を取得
+			Date date = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
+			String curDate = sdf.format(date);
+			// 社員営業され日付
+			String salesDate = getSalesDate(model.getSalesYearAndMonth());
+//			String salesDate = String.valueOf(Integer.valueOf(model.getSalesYearAndMonth()) + 1);
+			salesSituationList = salesSituationService.getSalesSituationModel(model.getSalesYearAndMonth(), curDate, salesDate);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		logger.info("getSalesSituation" + "検索結束");
 		return salesSituationList;
+	}
+	
+	// 社員営業され日付
+	private String getSalesDate(String getSalesYearAndMonth) {
+		String salesDate = "";
+//		if(getSalesYearAndMonth.substring(4) == DECEMBER) {
+		if(DECEMBER.equals(getSalesYearAndMonth.substring(4))) {
+			salesDate = String.valueOf(Integer.valueOf(getSalesYearAndMonth.substring(0,4)) + 1) + JANUARY;
+		}else {
+			salesDate = String.valueOf(Integer.valueOf(getSalesYearAndMonth) + 1);
+		}
+		return salesDate;
 	}
 	
 	@RequestMapping(value = "/updateSalesSituation", method = RequestMethod.POST)
@@ -203,7 +232,57 @@ public class SalesSituationController  extends BaseController {
 		return index;
 	}
 	
-
+	/**
+	 * 画面の可変項目変更する
+	 * 
+	 * @param model
+	 * @return Map
+	 */
+	@RequestMapping(value = "/changeDataStatus", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> changeDataStatus(@RequestBody SalesSituationModel model) {
+ 
+		logger.info("changeDataStatus:" + "更新開始");
+		List<SalesSituationModel> salesSituationList = new ArrayList<SalesSituationModel>();
+		HttpSession session = getSession();
+		model.setUpdateUser(session.getAttribute("employeeName").toString());
+		int updateCount = 0;
+		try {
+			// 現在の日付を取得
+			Date date = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
+			String curDate = sdf.format(date);
+			
+			// 社員営業され日付
+			String salesDate = getSalesDate(model.getAdmissionEndDate());
+			if(DECEMBER.equals(model.getAdmissionEndDate().substring(4,6))) {
+				salesDate = String.valueOf(Integer.valueOf(model.getAdmissionEndDate().substring(0,4)) + 1) + JANUARY;
+			}else {
+				salesDate = String.valueOf(Integer.valueOf(model.getAdmissionEndDate().substring(0,6)) + 1);
+			}
+			
+			model.setSalesYearAndMonth(salesDate);
+ 		 	
+			// テーブルT010SalesSituation項目を変更する
+			updateCount = salesSituationService.updateDataStatus(model);
+			
+			// テーブルT006EmployeeSiteInfo項目を変更する
+			updateCount = salesSituationService.updateEMPInfo(model);
+   			
+			// テーブルT011BpInfoSupplement項目を変更する
+			updateCount = salesSituationService.updateBPEMPInfo(model);
+			
+			// 日付に基づいて一覧を取得
+			salesSituationList = salesSituationService.getSalesSituationModel(model.getAdmissionEndDate().substring(0,6), curDate, salesDate);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		logger.info("changeDataStatus" + "更新結束");
+		Map<String, Object> result = new HashMap<>();
+		result.put("result", salesSituationList);
+		return result;
+	}
+	
 	/**
 	 * 文字列の実装
 	 * */

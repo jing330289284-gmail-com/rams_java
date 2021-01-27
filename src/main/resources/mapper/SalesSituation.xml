@@ -125,7 +125,7 @@ ORDER BY T001.employeeNo) UNION (SELECT
          IF(ISNULL(T002.developLanguage5) or T002.developLanguage5='',
         null,
         M011e.developLanguageName)) AS 'developLanguage',
-    '' AS customer,
+    ifnull(T006.customerNo, '') AS customer,
     T006.customerNo as nowCustomer,
     M012.siteRoleName AS siteRoleCode,
     T006.unitPrice,
@@ -186,7 +186,12 @@ FROM
     T015ResumeManagement T015 ON T001.employeeNo = T015.employeeNo
 WHERE
     LEFT(T006.admissionEndDate, 6) = #{sysDate}
-	AND (T010.salesYearAndMonth &gt; #{sysDate} OR T010.salesYearAndMonth IS NULL)
+    <if test="curDate != '' and curDate != null and sysDate lt curDate">
+    	AND (T010.salesYearAndMonth = #{salesDate} OR T010.salesYearAndMonth IS NULL)
+    </if>
+    <if test="curDate != '' and curDate != null and sysDate gt curDate or sysDate == curDate">
+    	AND (T010.salesYearAndMonth &gt; #{sysDate} OR T010.salesYearAndMonth IS NULL)
+    </if>
 
 ORDER BY T001.employeeNo) UNION (SELECT 
     T011.bpEmployeeNo AS employeeNo,
@@ -212,10 +217,10 @@ ORDER BY T001.employeeNo) UNION (SELECT
          IF(ISNULL(T002.developLanguage5) or T002.developLanguage5='',
         null,
         M011e.developLanguageName)) AS 'developLanguage',
-    '' AS customer,
+    T011.bpBelongCustomerCode AS customer,
     '' as nowCustomer,
     M012.siteRoleName AS siteRoleCode,
-    '' AS 'unitPrice',
+    T011.bpUnitPrice AS 'unitPrice',
     '' AS 'admissionEndDate',
     '' AS 'admissionStartDate',
     IF(ISNULL(T010.salesProgressCode),
@@ -277,93 +282,93 @@ WHERE
             T006EmployeeSiteInfo)
 
 ORDER BY T011.bpEmployeeNo)UNION(
-SELECT 
-    T010.employeeNo AS employeeNo,
-    T015.resumeInfo1,
-    T015.resumeInfo2,
-    CONCAT(T001.employeeFristName,
-            T001.employeeLastName) AS 'employeeName',
-    M013.stationName AS 'nearestStation',
-    CONCAT_WS(',',
-        
-        IF(ISNULL(T002.developLanguage1) or T002.developLanguage1='',
-        null,
-        M011a.developLanguageName),
-         IF(ISNULL(T002.developLanguage2) or T002.developLanguage2='',
-        null,
-        M011b.developLanguageName),
-         IF(ISNULL(T002.developLanguage3) or T002.developLanguage3='',
-        null,
-        M011c.developLanguageName),
-         IF(ISNULL(T002.developLanguage4) or T002.developLanguage4='',
-        null,
-        M011d.developLanguageName),
-         IF(ISNULL(T002.developLanguage5) or T002.developLanguage5='',
-        null,
-        M011e.developLanguageName)) AS 'developLanguage',
-    ifnull(T006.customerNo, '') AS customer,
-    ifnull(T006.customerNo, '') as nowCustomer,
-    M012.siteRoleName AS siteRoleCode,
-    ifnull(T006.unitPrice, '') as unitPrice,
-    '' AS 'admissionEndDate',
-    ifnull(T006.admissionStartDate, '') as admissionStartDate,
-    IF(ISNULL(T010.salesProgressCode),
-        '',
-        T010.salesProgressCode) AS 'salesProgressCode',
-    T010.salesYearAndMonth,
-    T010.interviewDate1,
-    T010.stationCode1,
-    T010.interviewCustomer1,
-    T010.interviewDate2,
-    T010.stationCode2,
-    T010.interviewCustomer2,
-    T010.hopeLowestPrice,
-    T010.hopeHighestPrice,
-    T010.customerContractStatus,
-    T010.remark,
-    IF(ISNULL(T010.salesStaff),
-        '',
-        T010.salesStaff) AS 'salesStaff',
-    T010.salesPriorityStatus
-FROM
-    T010SalesSituation T010
-        LEFT JOIN
-    T001Employee T001 ON T001.employeeNo = T010.employeeNo
-        LEFT JOIN
-    T003AddressInfo T003 ON T010.employeeNo = T003.employeeNo
-        LEFT JOIN
-    M013Station M013 ON M013.stationCode = T003.stationCode
-        LEFT JOIN
-    T002EmployeeDetail T002 ON T010.employeeNo = T002.employeeNo
-     LEFT JOIN
-               
-    M011DevelopLanguage M011a ON M011a.developLanguageCode = T002.developLanguage1
-    
-                LEFT JOIN
-               
-    M011DevelopLanguage M011b ON M011b.developLanguageCode = T002.developLanguage2
-                LEFT JOIN
-               
-    M011DevelopLanguage M011c ON M011c.developLanguageCode = T002.developLanguage3
-                LEFT JOIN
-               
-    M011DevelopLanguage M011d ON M011d.developLanguageCode = T002.developLanguage4
-    
-                LEFT JOIN
-               
-    M011DevelopLanguage M011e ON M011e.developLanguageCode = T002.developLanguage5
-        LEFT JOIN
-    T006EmployeeSiteInfo T006 ON T010.employeeNo = T006.employeeNo
-        LEFT JOIN
-    M012SiteRole M012 ON T002.siteRoleCode = M012.siteRoleCode
-                LEFT JOIN
-    T015ResumeManagement T015 ON T001.employeeNo = T015.employeeNo
-WHERE
-    T010.salesProgressCode IN (4 , 5) and  T010.salesYearAndMonth = #{sysDate}
-    and (T006.admissionEndDate is null or T006.admissionEndDate='')
-
-ORDER BY T010.employeeNo)) temp,(select @rowno:=0) as rowNo 
-ORDER BY employeeNo	
+SELECT t.* FROM (
+	SELECT 
+	    T010.employeeNo AS employeeNo,
+	    T015.resumeInfo1,
+	    T015.resumeInfo2,
+	    CONCAT(T001.employeeFristName,
+	            T001.employeeLastName) AS 'employeeName',
+	    M013.stationName AS 'nearestStation',
+	    CONCAT_WS(',',
+	        
+	        IF(ISNULL(T002.developLanguage1) or T002.developLanguage1='',
+	        null,
+	        M011a.developLanguageName),
+	         IF(ISNULL(T002.developLanguage2) or T002.developLanguage2='',
+	        null,
+	        M011b.developLanguageName),
+	         IF(ISNULL(T002.developLanguage3) or T002.developLanguage3='',
+	        null,
+	        M011c.developLanguageName),
+	         IF(ISNULL(T002.developLanguage4) or T002.developLanguage4='',
+	        null,
+	        M011d.developLanguageName),
+	         IF(ISNULL(T002.developLanguage5) or T002.developLanguage5='',
+	        null,
+	        M011e.developLanguageName)) AS 'developLanguage',
+	    ifnull(T006.customerNo, '') AS customer,
+	    ifnull(T006.customerNo, '') as nowCustomer,
+	    M012.siteRoleName AS siteRoleCode,
+	    ifnull(T006.unitPrice, '') as unitPrice,
+	    T006.admissionEndDate,
+	    ifnull(T006.admissionStartDate, '') as admissionStartDate,
+	    IF(ISNULL(T010.salesProgressCode),
+	        '',
+	        T010.salesProgressCode) AS 'salesProgressCode',
+	    T010.salesYearAndMonth,
+	    T010.interviewDate1,
+	    T010.stationCode1,
+	    T010.interviewCustomer1,
+	    T010.interviewDate2,
+	    T010.stationCode2,
+	    T010.interviewCustomer2,
+	    T010.hopeLowestPrice,
+	    T010.hopeHighestPrice,
+	    T010.customerContractStatus,
+	    T010.remark,
+	    IF(ISNULL(T010.salesStaff),
+	        '',
+	        T010.salesStaff) AS 'salesStaff',
+	    T010.salesPriorityStatus
+	FROM
+	    T010SalesSituation T010
+	        LEFT JOIN
+	    T001Employee T001 ON T001.employeeNo = T010.employeeNo
+	        LEFT JOIN
+	    T003AddressInfo T003 ON T010.employeeNo = T003.employeeNo
+	        LEFT JOIN
+	    M013Station M013 ON M013.stationCode = T003.stationCode
+	        LEFT JOIN
+	    T002EmployeeDetail T002 ON T010.employeeNo = T002.employeeNo
+	     LEFT JOIN
+	               
+	    M011DevelopLanguage M011a ON M011a.developLanguageCode = T002.developLanguage1
+	    LEFT JOIN
+	    M011DevelopLanguage M011b ON M011b.developLanguageCode = T002.developLanguage2
+	    LEFT JOIN
+	    M011DevelopLanguage M011c ON M011c.developLanguageCode = T002.developLanguage3
+	    LEFT JOIN
+	    M011DevelopLanguage M011d ON M011d.developLanguageCode = T002.developLanguage4
+	    LEFT JOIN
+	    M011DevelopLanguage M011e ON M011e.developLanguageCode = T002.developLanguage5
+	    LEFT JOIN
+	    T006EmployeeSiteInfo T006 ON T010.employeeNo = T006.employeeNo
+	    LEFT JOIN
+	    M012SiteRole M012 ON T002.siteRoleCode = M012.siteRoleCode
+	    LEFT JOIN
+	    T015ResumeManagement T015 ON T001.employeeNo = T015.employeeNo
+	WHERE
+	    T010.salesProgressCode IN (4 , 5) and  T010.salesYearAndMonth = #{salesDate}
+	    AND LEFT (T006.admissionEndDate, 6) = #{sysDate}
+<!-- 	    and (T006.admissionEndDate is not null or T006.admissionEndDate <![CDATA[ <> ]]> '') -->
+	
+	ORDER BY T010.employeeNo,
+	T006.admissionEndDate DESC
+	limit 10000) t
+	group by t.employeeNo
+	)) temp,(select @rowno:=0) as rowNo 
+	ORDER BY employeeNo	
     </select>
     
     <!--営業状況更新 -->
@@ -429,22 +434,22 @@ ORDER BY employeeNo
 	<!-- 現場現　を更新 -->
 	<insert id="updateEmployeeSiteInfo" parameterType="String">
 		INSERT INTO T006EmployeeSiteInfo
-		(employeeNo,
-		admissionStartDate,
-		customerNo,
-		unitPrice,
-		updateTime,
-        createTime,
-		updateUser)
+			(employeeNo,
+			admissionStartDate,
+			customerNo,
+			unitPrice,
+			updateTime,
+	        createTime,
+			updateUser)
 		VALUES
-		(
-		#{employeeNo},
-		#{admissionStartDate},
-		#{customerNo},
-		#{unitPrice},
-		 NOW(),
-         NOW(),
-		#{updateUser})
+			(
+			#{employeeNo},
+			#{admissionStartDate},
+			#{customerNo},
+			#{unitPrice},
+			 NOW(),
+	         NOW(),
+			#{updateUser})
 		ON DUPLICATE KEY UPDATE 
 			admissionStartDate=#{admissionStartDate},
 			customerNo=#{customerNo},
@@ -456,24 +461,24 @@ ORDER BY employeeNo
 	</insert>
 	<insert id="updateSalesSituation" parameterType="String">
 		INSERT INTO T010SalesSituation
-		(employeeNo,
-		salesYearAndMonth,
-		salesProgressCode,
-		salesStaff,
-		customerContractStatus,
-		updateTime,
-		createTime,
-		updateUser)
+			(employeeNo,
+			salesYearAndMonth,
+			salesProgressCode,
+			salesStaff,
+			customerContractStatus,
+			updateTime,
+			createTime,
+			updateUser)
 		VALUES
-		(
-		#{employeeNo},
-		#{salesYearAndMonth},
-		#{salesProgressCode},
-		#{salesStaff},
-		#{customerContractStatus},
-		 NOW(),
-		 NOW(),
-		#{updateUser})
+			(
+			#{employeeNo},
+			#{salesYearAndMonth},
+			#{salesProgressCode},
+			#{salesStaff},
+			#{customerContractStatus},
+			 NOW(),
+			 NOW(),
+			#{updateUser})
 		ON DUPLICATE KEY UPDATE
 			salesProgressCode=#{salesProgressCode},
 			salesStaff=#{salesStaff},
@@ -664,4 +669,39 @@ from T019SalesSentence T019
 WHERE
     T019.employeeNo =#{employeeNo}
 </select>
+  
+	<update id="updateDataStatus" parameterType="jp.co.lyc.cms.model.SalesSituationModel">
+		UPDATE 
+			T010SalesSituation 
+		SET
+		    salesProgressCode = #{salesProgressCode},
+		    customerContractStatus = #{customerContractStatus},
+		    salesStaff = #{salesStaff},
+		    updateTime= NOW(),
+		    updateUser=#{updateUser}
+		WHERE
+		    employeeNo = #{employeeNo}
+		    AND salesYearAndMonth = #{salesYearAndMonth}
+	</update>
+ 
+	<update id="updateEMPInfo" parameterType="jp.co.lyc.cms.model.SalesSituationModel">
+		UPDATE
+			T006EmployeeSiteInfo
+		SET
+			unitPrice = #{unitPrice},
+			customerNo = #{customer}
+		WHERE
+			employeeNo = #{employeeNo}
+		    AND LEFT(admissionEndDate, 6) = #{admissionEndDate}
+	</update>
+  	
+	<update id="updateBPEMPInfo" parameterType="jp.co.lyc.cms.model.SalesSituationModel">
+		UPDATE
+			T011BpInfoSupplement
+		SET
+			bpUnitPrice = #{unitPrice},
+			bpBelongCustomerCode = #{customer}
+		WHERE
+			bpEmployeeNo = #{employeeNo}
+	</update>
 </mapper>
