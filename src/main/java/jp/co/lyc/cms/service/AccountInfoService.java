@@ -4,6 +4,9 @@ import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
+
 import jp.co.lyc.cms.mapper.AccountInfoMapper;
 import jp.co.lyc.cms.model.AccountInfoModel;
 
@@ -24,7 +27,23 @@ public class AccountInfoService {
 		AccountInfoModel resultMod = bankMapper.selectAccountInfo(employeeNo);
 		return resultMod;
 	}
-	
+	/**
+	 * アープデート
+	 * @param sendMap
+	 * @return
+	 */
+	@Transactional(rollbackFor = Exception.class)
+	public boolean update(HashMap<String, String> sendMap) {
+		try {
+			bankMapper.updateAccount(sendMap);
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			e.printStackTrace();
+			return false;
+		}
+	}
 	/**
 	 * インサートとアップデートの値を設定
 	 * @param bankCol

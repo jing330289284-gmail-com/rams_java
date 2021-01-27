@@ -81,18 +81,19 @@ public class EmployeeInfoController extends BaseController {
 			Map<String, Object> sendMap = getParam(emp);
 			employeeList = employeeInfoService.getEmployeeInfo(sendMap);
 
-			if (emp.getKadou() != null && emp.getKadou().equals("1")) {
-				employeeNoList = employeeInfoService.verificationEmployeeInfo();
-				for (int i = 0; i < employeeList.size(); i++) {
-					for (int j = 0; j < employeeNoList.size(); j++) {
-						if (employeeList.get(i).getEmployeeNo().equals(employeeNoList.get(j))) {
-							employeeList.remove(i);
-							i = 0;
-							break;
-						}
-					}
-				}
+			if (employeeList.size() <= 0) {
+				result.put("isNullMessage", "該当データなし");// 該当データがなし
+				result.put("data", employeeList);
+				return result;
 			}
+
+			/*
+			 * if (emp.getKadou() != null && emp.getKadou().equals("1")) { employeeNoList =
+			 * employeeInfoService.verificationEmployeeInfo(); for (int i = 0; i <
+			 * employeeList.size(); i++) { for (int j = 0; j < employeeNoList.size(); j++) {
+			 * if (employeeList.get(i).getEmployeeNo().equals(employeeNoList.get(j))) {
+			 * employeeList.remove(i); i = 0; break; } } } }
+			 */
 
 			for (int i = 0; i < employeeList.size(); i++) {
 				// 番号
@@ -306,7 +307,14 @@ public class EmployeeInfoController extends BaseController {
 		String graduationUniversity = emp.getGraduationUniversity();// 卒業学校
 		String major = emp.getMajor();// 専門
 		String graduationYearAndMonth = emp.getGraduationYearAndMonth();// 卒業年月
-		String intoCompanyYearAndMonth = emp.getIntoCompanyYearAndMonth();// 入社年月
+
+		// 入社年月
+		String intoCompanyYearAndMonth = null;
+		if (emp.getIntoCompanyYearAndMonth() != null) {
+			intoCompanyYearAndMonth = emp.getIntoCompanyYearAndMonth().equals(" ") ? ""
+					: emp.getIntoCompanyYearAndMonth();// 入社年月
+		}
+
 		String retirementYearAndMonth = emp.getRetirementYearAndMonth();// 退職年月
 		String comeToJapanYearAndMonth = emp.getComeToJapanYearAndMonth();// 来日年月
 		String nationalityCode = emp.getNationalityCode();// 出身地コード(国)
@@ -324,6 +332,7 @@ public class EmployeeInfoController extends BaseController {
 		String residenceCode = emp.getResidenceCode();// 在留資格
 		String residenceCardNo = emp.getResidenceCardNo();// 在留カード
 		String stayPeriod = emp.getStayPeriod();// 在留期間
+		String contractDeadline = emp.getContractDeadline();// 契約期限
 		String employmentInsuranceNo = emp.getEmploymentInsuranceNo();// 雇用保険番号
 		String myNumber = emp.getMyNumber();// マイナンバー
 		String resumeName1 = emp.getResumeName1();// 備考１
@@ -423,6 +432,9 @@ public class EmployeeInfoController extends BaseController {
 		}
 		if (stayPeriod != null) {
 			sendMap.put("stayPeriod", stayPeriod);
+		}
+		if (contractDeadline != null) {
+			sendMap.put("contractDeadline", contractDeadline);
 		}
 		if (employmentInsuranceNo != null) {
 			sendMap.put("employmentInsuranceNo", employmentInsuranceNo);

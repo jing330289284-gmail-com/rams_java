@@ -162,13 +162,16 @@ public class WagesInfoController extends BaseController {
 					} else {
 						month = year * 12 + month - nonSiteMonths;
 					}
-					if (month != 0 && month % 12 == 0 && bonusSite.getEmployeeNo().substring(0, 3).equals("LYC")) {
+					if (month != 0 && month % 12 == 0 && 
+							bonusSite.getEmployeeNo().substring(0, 3).equals("LYC")&& bonus != null) {
 						String nextBonusMonth = bonus.getNextBonusMonth();
 						if(!UtilsCheckMethod.isNullOrEmpty(nextBonusMonth)) {
 							int yearBonus = Integer.parseInt(nextBonusMonth.substring(0, 4));
 							yearBonus += 1;
 							nextBonusMonth = Integer.toString(yearBonus) + nextBonusMonth.substring(4);
 							bonus.setNextBonusMonth(nextBonusMonth);
+						}else {
+							bonus = null;
 						}
 					} else if (month != 0 && month % 12 != 0
 							&& bonusSite.getEmployeeNo().substring(0, 3).equals("LYC")) {
@@ -190,6 +193,8 @@ public class WagesInfoController extends BaseController {
 							nextBonusMonth = Integer.toString(yearBonus)
 									+ (monthBonus > 10 ? monthBonus : "0" + monthBonus);
 							bonus.setNextBonusMonth(nextBonusMonth);
+						}else {
+							bonus = null;
 						}
 					}
 				}
@@ -219,9 +224,13 @@ public class WagesInfoController extends BaseController {
 			}
 			if (month != 0 && month % 12 == 0) {
 				String yearAndMonthString = bonus.getNextBonusMonth();
-				String yearString = Integer.toString(Integer.parseInt(yearAndMonthString.substring(0, 4)) + 1);
-				yearAndMonthString = yearString + yearAndMonthString.substring(4);
-				bonus.setNextBonusMonth(yearAndMonthString);
+				if(!UtilsCheckMethod.isNullOrEmpty(yearAndMonthString)) {
+					String yearString = Integer.toString(Integer.parseInt(yearAndMonthString.substring(0, 4)) + 1);
+					yearAndMonthString = yearString + yearAndMonthString.substring(4);
+					bonus.setNextBonusMonth(yearAndMonthString);
+				}else {
+					bonus = null;
+				}
 			}
 		} else if (!jijutsuFlag && wagesInfoList.size() == 0) {// 技術者ではなく、最初の給料です
 			bonus = null;
@@ -321,8 +330,11 @@ public class WagesInfoController extends BaseController {
 			return result;
 		}
 		// 非稼働の場合、保険は前件の保険を使う
+		EmployeeModel b = new EmployeeModel();
+		b.setEmployeeNo(wagesInfoModel.getEmployeeNo());
+		b = employeeInfoService.getEmployeeByEmployeeNo(employeeInfoController.getParam(b));
 		ArrayList<SiteModel> relatedEmployees = wagesInfoMapper.kadouCheck(wagesInfoModel.getEmployeeNo());
-		if (relatedEmployees.size() == 0) {
+		if (relatedEmployees.size() == 0 && b.getOccupationCode().equals("3")) {
 			ArrayList<WagesInfoModel> hokenList = wagesInfoMapper.hokenSearch(wagesInfoModel.getEmployeeNo());
 			if (hokenList.size() != 0) {
 				wagesInfoModel.setWelfarePensionAmount(hokenList.get(hokenList.size() - 1).getWelfarePensionAmount());

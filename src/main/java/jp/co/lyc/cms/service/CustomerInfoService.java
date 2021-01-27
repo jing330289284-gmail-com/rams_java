@@ -128,12 +128,12 @@ public class CustomerInfoService {
 					accountInfoModel.setUpdateUser(customerInfoMod.getUpdateUser());
 					accountInfoMapper.insertAccount(accountInfoService.setSendMap(accountInfoModel));
 				}
-				if (customerInfoMod.getTopCustomerInfo() != null) {
-					TopCustomerInfoModel topCustomerInfoModel = customerInfoMod.getTopCustomerInfo();
-					topCustomerInfoModel.setUpdateUser(customerInfoMod.getUpdateUser());
-					topCustomerInfoMapper
-							.insertTopCustomerInfo(topCustomerInfoService.setSendMap(topCustomerInfoModel));
-				}
+//				if (customerInfoMod.getTopCustomerInfo() != null) {
+//					TopCustomerInfoModel topCustomerInfoModel = customerInfoMod.getTopCustomerInfo();
+//					topCustomerInfoModel.setUpdateUser(customerInfoMod.getUpdateUser());
+//					topCustomerInfoMapper
+//							.insertTopCustomerInfo(topCustomerInfoService.setSendMap(topCustomerInfoModel));
+//				}
 //				if (customerInfoMod.getCustomerDepartmentList().size() > 0) {
 //					if (!checkCustomerDepartment(customerInfoMod.getCustomerDepartmentList())) {
 //						return "5";

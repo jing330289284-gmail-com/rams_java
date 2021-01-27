@@ -154,7 +154,12 @@ public class SendRepotController  extends BaseController {
 			List<ModelClass> list = sendRepotService.getPurchasingManagersCode(model2);
 			return list;
 		}
-	
+	@RequestMapping(value = "/getSalesPersonsLists", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass>  getSalesPersonsLists() {
+			List<ModelClass> list = sendRepotService.getSalesPersonsLists();
+			return list ;
+		}	
 	private void updateName(String storageListName,String oldStorageListName) {
 		SendRepotsListName updateModel= new SendRepotsListName();
 		updateModel.setUpdateUser(getSession().getAttribute("employeeName").toString());

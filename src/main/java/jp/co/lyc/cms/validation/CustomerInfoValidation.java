@@ -52,13 +52,13 @@ public class CustomerInfoValidation implements Validator {
 									StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG007", "資本金"));
 						}
 					}
-					if (p.getTopCustomerInfo() != null
-							&& !UtilsCheckMethod.isNullOrEmpty(p.getTopCustomerInfo().getUrl())) {
-						if (!UtilsCheckMethod.checkUrl(p.getTopCustomerInfo().getUrl())) {
-							errors.rejectValue("topCustomerInfo.url", "",
-									StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG007", "上位お客様のURL"));
-						}
-					}
+//					if (p.getTopCustomerInfo() != null
+//							&& !UtilsCheckMethod.isNullOrEmpty(p.getTopCustomerInfo().getUrl())) {
+//						if (!UtilsCheckMethod.checkUrl(p.getTopCustomerInfo().getUrl())) {
+//							errors.rejectValue("topCustomerInfo.url", "",
+//									StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG007", "上位お客様のURL"));
+//						}
+//					}
 				} else {
 					int j = 0;
 					for (CustomerDepartmentInfoModel a : p.getCustomerDepartmentList()) {

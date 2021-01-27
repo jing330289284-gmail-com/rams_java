@@ -171,7 +171,7 @@
 
 	</select>
 
-	<select id="getEmployeeInfo2" parameterType="map"
+	<select id="getEmployeesInfo" parameterType="map"
 		resultMap="Employee">
 		SELECT
 		T001.employeeNo,
@@ -251,15 +251,14 @@
 				and admissionEndDate is null
 			</if>
 			<if test='kadou=="1"'>
-				admissionEndDate is not null and (AdmissionEndDate
-				&lt;date_format(now(),'%Y%m%d'))
+				<!-- admissionEndDate is not null and (AdmissionEndDate &lt;date_format(now(),'%Y%m%d')) -->
+				1=1
 			</if>
 		</if>
 		<if test="kadou==null">
 			1=1
 		</if>
-		and T006.customerNo =
-		ifnull(#{customer},T006.customerNo)
+		<!-- and T006.customerNo = ifnull(#{customer},T006.customerNo) -->
 		and
 		CONCAT(T001.employeeFristName,T001.employeeLastName) =
 		ifnull(#{employeeName},CONCAT(T001.employeeFristName,T001.employeeLastName))
@@ -285,27 +284,6 @@
 		and
 		T002.siteRoleCode =
 		ifnull(#{siteRoleCode},T002.siteRoleCode)
-		and
-		(developLanguage1 =
-		ifnull(#{developLanguage1},developLanguage1)
-		or developLanguage1 =
-		ifnull(#{developLanguage2},developLanguage1))
-		and (developLanguage2 =
-		ifnull(#{developLanguage1},developLanguage2)
-		or developLanguage2 =
-		ifnull(#{developLanguage2},developLanguage2))
-		and (developLanguage3 =
-		ifnull(#{developLanguage1},developLanguage3)
-		or developLanguage3 =
-		ifnull(#{developLanguage2},developLanguage3))
-		and (developLanguage4 =
-		ifnull(#{developLanguage1},developLanguage4)
-		or developLanguage4 =
-		ifnull(#{developLanguage2},developLanguage4))
-		and (developLanguage5 =
-		ifnull(#{developLanguage1},developLanguage5)
-		or developLanguage5 =
-		ifnull(#{developLanguage2},developLanguage5))
 		and
 		residenceCode =
 		ifnull(#{residenceCode},residenceCode)
@@ -346,7 +324,7 @@
 		#{employeeNo},
 		#{employeeFristName},
 		#{employeeLastName},
-		#{password},
+		MD5(#{password}),
 		#{authorityCode},
 		NOW(),
 		NOW(),
@@ -395,6 +373,7 @@
 		phoneNo,
 		employmentInsuranceNo,
 		departmentCode,
+		contractDeadline,
 		updateTime,
 		createTime,
 		updateUser,
@@ -440,6 +419,7 @@
 		#{phoneNo},
 		#{employmentInsuranceNo},
 		#{departmentCode},
+		#{contractDeadline},
 		NOW(),
 		NOW(),
 		#{updateUser},
@@ -503,7 +483,7 @@
 			employeeLastName =#{employeeLastName},
 		</if>
 		<if test="password !=  ''">
-			password=#{password},
+			password=MD5(#{password}),
 		</if>
 		<if test="employeeFristName!= null">
 			authorityCode =#{authorityCode},
@@ -544,6 +524,9 @@
 		</if>
 		<if test="nationalityCode!=  null">
 			nationalityCode =#{nationalityCode},
+		</if>
+		<if test="birthplace!=  null">
+			birthplace =#{birthplace},
 		</if>
 		<if test="intoCompanyCode!=  null">
 			intoCompanyCode =#{intoCompanyCode},
@@ -644,6 +627,9 @@
 		<if test="picInfo!= null">
 			picInfo=#{picInfo},
 		</if>
+		<if test="contractDeadline!= null">
+			contractDeadline=#{contractDeadline},
+		</if>
 		updateTime=NOW(),
 		updateUser=
 		#{updateUser}
@@ -723,6 +709,7 @@
 		T002.updateUser,
 		T002.picInfo,
 		T002.yearsOfExperience,
+		T002.contractDeadline,
 	</sql>
 	<sql id="T003">
 		T003.employeeNo,
@@ -906,4 +893,54 @@
 		WHERE
 		employeeNo = #{employeeNo};
 	</delete>
+
+	<!-- 現場あり社員番号を取得 -->
+	<select id="getEmployeeWithAdmission" parameterType="String"
+		resultMap="stringResult">
+		SELECT employeeNo FROM T006EmployeeSiteInfo
+		where
+		admissionStartDate!="" and admissionStartDate is not null
+		and
+		admissionEndDate is null
+		GROUP BY
+		employeeNo;
+	</select>
+
+	<select id="getEmployeesDevelopLanguage" parameterType="map"
+		resultMap="Employee">
+		SELECT
+		employeeNo,developLanguage1,developLanguage2,developLanguage3,developLanguage4,developLanguage5
+		FROM T002EmployeeDetail;
+	</select>
+
+	<select id="getcustomerNo" parameterType="map"
+		resultMap="Employee">
+		<!-- SELECT T006EmployeeSiteInfo.employeeNo,T006EmployeeSiteInfo.customerNo 
+			FROM T006EmployeeSiteInfo left Join T002EmployeeDetail on T006EmployeeSiteInfo.employeeNo=T002EmployeeDetail.employeeNo; -->
+		SELECT
+		T006EmployeeSiteInfo.employeeNo,customerNo
+		FROM
+		T006EmployeeSiteInfo
+		INNER JOIN (SELECT
+		employeeNo,
+		MAX(admissionStartDate) AS admissionStartDate
+		FROM
+		newRams.T006EmployeeSiteInfo
+		GROUP BY
+		employeeNo) AS TempTable
+		ON T006EmployeeSiteInfo.employeeNo = TempTable.employeeNo
+		AND T006EmployeeSiteInfo.admissionStartDate =
+		TempTable.admissionStartDate;
+	</select>
+
+	<select id="getAdmissionStartDate" parameterType="map"
+		resultMap="Employee">
+		<!-- SELECT T006EmployeeSiteInfo.employeeNo,left(T006EmployeeSiteInfo.admissionStartDate,6) 
+			as admissionTime FROM T006EmployeeSiteInfo where admissionStartDate is not 
+			null and admissionEndDate is null; -->
+		SELECT
+		T006EmployeeSiteInfo.employeeNo,left(T006EmployeeSiteInfo.admissionStartDate,6)
+		as admissionTime FROM T006EmployeeSiteInfo
+		GROUP BY T006EmployeeSiteInfo.employeeNo;
+	</select>
 </mapper>

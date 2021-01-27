@@ -26,13 +26,6 @@ import jp.co.lyc.cms.validation.SiteSearchValidation;
 public class SiteSearchController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	// 日期 去“/”
-	private String dateToString(String date) {
-		String[] a = date.split("/");
-		String b = a[0] + a[1] + a[2];
-		return b;
-	}
-
 	// 时间段表示
 	private String dateToPeriod(String beginDate, String endDate) {
 		StringBuffer stringBuilder1;
@@ -109,12 +102,17 @@ public class SiteSearchController {
 			year = year + 1;
 			month = 0;
 		}
+		String yearAndMonth = "";
 		if (year == 0) {
-			return month + "ヶ月";
+			yearAndMonth = month + "ヶ月";
 		} else if (month == 0) {
-			return year + "ヶ年";
+			yearAndMonth = year + "ヶ年";
 		} else
-			return year + "ヶ年" + month + "ヶ月";
+			yearAndMonth = year + "ヶ年" + month + "ヶ月";
+		if(yearAndMonth.contains("-")) {
+			yearAndMonth = "";
+		}
+		return yearAndMonth;
 	}
 
 	@Autowired
@@ -143,7 +141,7 @@ public class SiteSearchController {
 		}
 		try {
 			// 取得前端送过来的值
-			String employeeName = siteSearchModel.getEmployeeName();
+			String employeeNo = siteSearchModel.getEmployeeNo();
 			String employeeStatus = siteSearchModel.getEmployeeStatus();
 			String employeeForm = siteSearchModel.getEmployeeForm();
 			String siteRoleCode = siteSearchModel.getSiteRoleCode();
@@ -160,9 +158,10 @@ public class SiteSearchController {
 			String admissionStartDate = siteSearchModel.getAdmissionStartDate();
 			String admissionEndDate = siteSearchModel.getAdmissionEndDate();
 			String dataAcquisitionPeriod = siteSearchModel.getDataAcquisitionPeriod();
+			String scheduledEndDate = siteSearchModel.getScheduledEndDate();
 			// 存入map 传入后台查询用
-			if (employeeName != null && employeeName.length() != 0) {
-				sendMap.put("employeeName", employeeName);
+			if (employeeNo != null && employeeNo.length() != 0) {
+				sendMap.put("employeeNo", employeeNo);
 			}
 			if (employeeStatus != null && employeeStatus.length() != 0) {
 				sendMap.put("employeeStatus", employeeStatus);
@@ -203,14 +202,19 @@ public class SiteSearchController {
 			if (developLanguageCode != null && developLanguageCode.length() != 0) {
 				sendMap.put("developLanguageCode", developLanguageCode);
 			}
-			if (admissionStartDate != null && admissionStartDate.length() != 0) {
-				sendMap.put("admissionStartDate", dateToString(admissionStartDate));
+			if (scheduledEndDate != null && scheduledEndDate.length() != 0) {
+				sendMap.put("scheduledEndDate", scheduledEndDate);
 			}
-			if (admissionEndDate != null && admissionEndDate.length() != 0) {
-				sendMap.put("admissionEndDate", dateToString(admissionEndDate));
-			}
-			if (dataAcquisitionPeriod != null && dataAcquisitionPeriod.length() != 0) {
-				sendMap.put("dataAcquisitionPeriod", dataAcquisitionPeriod + "00");
+			if (dataAcquisitionPeriod.equals("1")) {
+				sendMap.put("dataAcquisitionPeriod", "1");
+			} else {
+				sendMap.put("dataAcquisitionPeriod", null);
+				if (admissionStartDate != null && admissionStartDate.length() != 0) {
+					sendMap.put("admissionStartDate", admissionStartDate);
+				}
+				if (admissionEndDate != null && admissionEndDate.length() != 0) {
+					sendMap.put("admissionEndDate", admissionEndDate);
+				}
 			}
 			siteList = SiteSearchService.getSiteInfo(sendMap);
 			for (int a = 0; a < siteList.size(); a++) {
@@ -220,8 +224,12 @@ public class SiteSearchController {
 				siteList.get(a).setWorkDate(
 						dateToPeriod(siteList.get(a).getAdmissionStartDate(), siteList.get(a).getAdmissionEndDate()));
 				// 社员形式设定
-				if (siteList.get(a).getEmployeeFrom() != null && siteList.get(a).getEmployeeFrom().length() != 0) {
-					siteList.get(a).setEmployeeFrom("BP(" + siteList.get(a).getEmployeeFrom() + ")");
+				if (siteList.get(a).getEmployeeNo().substring(0, 2).equals("BP")) {
+					if (siteList.get(a).getEmployeeFrom() != null && siteList.get(a).getEmployeeFrom().length() != 0) {
+						siteList.get(a).setEmployeeFrom("BP(" + siteList.get(a).getEmployeeFrom() + ")");
+					} else {
+						siteList.get(a).setEmployeeFrom("BP");
+					}
 				} else {
 					siteList.get(a).setEmployeeFrom("社員");
 				}
@@ -229,12 +237,24 @@ public class SiteSearchController {
 				siteList.get(a).setWorkTime(
 						timeCalculate(siteList.get(a).getAdmissionStartDate(), siteList.get(a).getAdmissionEndDate()));
 			}
+			for(int i = 0; i < siteList.size(); i++) {
+				if(i != 0) {
+					if(siteList.get(i).getEmployeeNo().equals(siteList.get(i-1).getEmployeeNo())) {
+						siteList.get(i).setEmployeeName("");
+						siteList.get(i).setEmployeeFrom("");
+					}
+				}
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 		logger.info("GetEmployeeInfoController.getEmployeeInfo:" + "検索結束");
-		result.put("data", siteList);
+		if (siteList.size() != 0) {
+			result.put("data", siteList);
+		} else {
+			result.put("errorsMessage", "該当データなし");
+		}
 		return result;
 	}
 

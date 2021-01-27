@@ -26,4 +26,5 @@ public interface SendRepotMapper {
 	public int deleteListOfEmp(String storageListName);
 	public List<ModelClass> getPurchasingManagersCode(SendRepotModel model);
 	public List<ModelClass> getCustomerDepartmentCode(SendRepotModel model);
+	public List<ModelClass> getSalesPersonsLists();
 }

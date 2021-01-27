@@ -1,5 +1,6 @@
 package jp.co.lyc.cms.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,7 @@ import jp.co.lyc.cms.mapper.SiteInfoMapper;
 import jp.co.lyc.cms.model.AccountInfoModel;
 import jp.co.lyc.cms.model.BpInfoModel;
 import jp.co.lyc.cms.model.EmployeeModel;
+import jp.co.lyc.cms.util.UtilsController;
 
 @Component
 public class EmployeeInfoService {
@@ -52,7 +54,128 @@ public class EmployeeInfoService {
 	 * @return List
 	 */
 	public List<EmployeeModel> getEmployeeInfo(Map<String, Object> sendMap) {
-		List<EmployeeModel> employeeList = employeeInfoMapper.getEmployeeInfo2(sendMap);
+		List<EmployeeModel> employeeList = employeeInfoMapper.getEmployeesInfo(sendMap);
+
+		if (sendMap.get("kadou") != null && sendMap.get("kadou").equals("1")) {
+			List<String> employeeAdmissionList = employeeInfoMapper.getEmployeeWithAdmission();
+			for (int i = 0; i < employeeList.size(); i++) {
+				for (int j = 0; j < employeeAdmissionList.size(); j++) {
+					if (employeeList.get(i).getEmployeeNo().equals(employeeAdmissionList.get(j))) {
+						employeeList.remove(i);
+						i--;
+						break;
+					}
+				}
+			}
+		}
+
+		if (sendMap.get("customer") != null && sendMap.get("customer").equals(""))
+			sendMap.put("customer", null);
+
+		if (sendMap.get("customer") != null) {
+			List<EmployeeModel> customerNoList = employeeInfoMapper.getcustomerNo();
+			for (int i = 0; i < employeeList.size(); i++) {
+				boolean deleteFlag = true;
+				for (int j = 0; j < customerNoList.size(); j++) {
+					if (employeeList.get(i).getEmployeeNo().equals(customerNoList.get(j).getEmployeeNo())) {
+						if (sendMap.get("customer").toString().equals(customerNoList.get(j).getCustomerNo())) {
+							deleteFlag = false;
+						}
+					}
+				}
+				if (deleteFlag) {
+					employeeList.remove(i);
+					i--;
+				}
+			}
+		}
+
+		if (sendMap.get("developLanguage1") != null && sendMap.get("developLanguage1").equals(""))
+			sendMap.put("developLanguage1", null);
+		if (sendMap.get("developLanguage2") != null && sendMap.get("developLanguage2").equals(""))
+			sendMap.put("developLanguage2", null);
+
+		if (sendMap.get("developLanguage1") != null || sendMap.get("developLanguage2") != null) {
+			List<EmployeeModel> employeeDevelopLanguageList = employeeInfoMapper.getEmployeesDevelopLanguage();
+			for (int i = 0; i < employeeList.size(); i++) {
+				for (int j = 0; j < employeeDevelopLanguageList.size(); j++) {
+					if (employeeList.get(i).getEmployeeNo()
+							.equals(employeeDevelopLanguageList.get(j).getEmployeeNo())) {
+						if (employeeDevelopLanguageList.get(j).getDevelopLanguage1() != null
+								&& employeeDevelopLanguageList.get(j).getDevelopLanguage2() != null
+								&& employeeDevelopLanguageList.get(j).getDevelopLanguage3() != null
+								&& employeeDevelopLanguageList.get(j).getDevelopLanguage4() != null
+								&& employeeDevelopLanguageList.get(j).getDevelopLanguage5() != null) {
+							if (sendMap.get("developLanguage1") != null && sendMap.get("developLanguage2") != null) {
+								if ((sendMap.get("developLanguage1")
+										.equals(employeeDevelopLanguageList.get(j).getDevelopLanguage1())
+										|| sendMap.get("developLanguage1")
+												.equals(employeeDevelopLanguageList.get(j).getDevelopLanguage2())
+										|| sendMap.get("developLanguage1")
+												.equals(employeeDevelopLanguageList.get(j).getDevelopLanguage3())
+										|| sendMap.get("developLanguage1")
+												.equals(employeeDevelopLanguageList.get(j).getDevelopLanguage4())
+										|| sendMap.get("developLanguage1")
+												.equals(employeeDevelopLanguageList.get(j).getDevelopLanguage5()))
+										&& (sendMap.get("developLanguage2")
+												.equals(employeeDevelopLanguageList.get(j).getDevelopLanguage1())
+												|| sendMap.get("developLanguage2").equals(
+														employeeDevelopLanguageList.get(j).getDevelopLanguage2())
+												|| sendMap.get("developLanguage2").equals(
+														employeeDevelopLanguageList.get(j).getDevelopLanguage3())
+												|| sendMap.get("developLanguage2").equals(
+														employeeDevelopLanguageList.get(j).getDevelopLanguage4())
+												|| sendMap.get("developLanguage2").equals(
+														employeeDevelopLanguageList.get(j).getDevelopLanguage5()))) {
+									break;
+								}
+							} else if (sendMap.get("developLanguage1") != null) {
+								if (sendMap.get("developLanguage1")
+										.equals(employeeDevelopLanguageList.get(j).getDevelopLanguage1())
+										|| sendMap.get("developLanguage1")
+												.equals(employeeDevelopLanguageList.get(j).getDevelopLanguage2())
+										|| sendMap.get("developLanguage1")
+												.equals(employeeDevelopLanguageList.get(j).getDevelopLanguage3())
+										|| sendMap.get("developLanguage1")
+												.equals(employeeDevelopLanguageList.get(j).getDevelopLanguage4())
+										|| sendMap.get("developLanguage1")
+												.equals(employeeDevelopLanguageList.get(j).getDevelopLanguage5())) {
+									break;
+								}
+							} else if (sendMap.get("developLanguage2") != null) {
+								if (sendMap.get("developLanguage2")
+										.equals(employeeDevelopLanguageList.get(j).getDevelopLanguage1())
+										|| sendMap.get("developLanguage2")
+												.equals(employeeDevelopLanguageList.get(j).getDevelopLanguage2())
+										|| sendMap.get("developLanguage2")
+												.equals(employeeDevelopLanguageList.get(j).getDevelopLanguage3())
+										|| sendMap.get("developLanguage2")
+												.equals(employeeDevelopLanguageList.get(j).getDevelopLanguage4())
+										|| sendMap.get("developLanguage2")
+												.equals(employeeDevelopLanguageList.get(j).getDevelopLanguage5())) {
+									break;
+								}
+							}
+							employeeList.remove(i);
+							if (employeeList.size() > 0)
+								i = 0;
+							else
+								break;
+						}
+					}
+				}
+			}
+		}
+
+		List<EmployeeModel> admissionStartDateList = employeeInfoMapper.getAdmissionStartDate();
+		for (int i = 0; i < employeeList.size(); i++) {
+			for (int j = 0; j < admissionStartDateList.size(); j++) {
+				if (employeeList.get(i).getEmployeeNo().equals(admissionStartDateList.get(j).getEmployeeNo())) {
+					employeeList.get(i).setAdmissionTime(
+							UtilsController.dateAddOblique(admissionStartDateList.get(j).getAdmissionTime()));
+				}
+			}
+		}
 		return employeeList;
 	}
 
@@ -144,14 +267,7 @@ public class EmployeeInfoService {
 			employeeInfoMapper.updateEmployeeInfoDetail(sendMap);
 			employeeInfoMapper.updateAddressInfo(sendMap);
 			if (sendMap.get("bankInfoModel") != null) {// 口座情報
-				String employeeNo = (String) sendMap.get("employeeNo");
-				String accountBelongsStatus = null;
-				if (employeeNo.substring(0, 3).equals("LYC")) {
-					accountBelongsStatus = "0";
-				} else {
-					accountBelongsStatus = "1";
-				}
-				accountInfoMapper.updateAccount(getParamBankInfoModel(sendMap));
+				accountInfoMapper.replaceAccount(getParamBankInfoModel(sendMap));
 			}
 			if (sendMap.get("bpInfoModel") != null) {
 				int row = bpInfoMapper.updateBp(getParamBpModel(sendMap));

@@ -23,6 +23,7 @@ public class SiteInfoValidation implements Validator {
 	@Override
 	public void validate(Object obj, Errors errors) {
 		SiteModel p = (SiteModel) obj;
+		StackTraceElement elements[] = Thread.currentThread().getStackTrace();
 		// 入场年月不能为空
 		if (UtilsCheckMethod.isNullOrEmpty(p.getAdmissionStartDate())) {
 			errors.rejectValue("admissionStartDate", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001", "入場年月日"));
@@ -36,8 +37,10 @@ public class SiteInfoValidation implements Validator {
 			errors.rejectValue("unitPrice", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001", "単価"));
 		}
 		// 现场状态终了以及单金调整时退场年月不能为空
-		if (UtilsCheckMethod.isNullOrEmpty(p.getAdmissionEndDate()) && !(p.getWorkState().equals("0"))) {
-			errors.rejectValue("unitPrice", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001", "退場年月日"));
+		if (!p.getWorkState().equals("0")) {
+			if (UtilsCheckMethod.isNullOrEmpty(p.getAdmissionEndDate())) {
+				errors.rejectValue("unitPrice", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001", "退場年月日"));
+			}
 		}
 		// 精算范围后面小于前面
 		if (!UtilsCheckMethod.isNullOrEmpty(p.getPayOffRange1())

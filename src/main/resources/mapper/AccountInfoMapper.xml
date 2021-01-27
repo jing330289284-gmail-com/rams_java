@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="jp.co.lyc.cms.mapper.AccountInfoMapper">
-    <resultMap id="BankBranchInfo" type="map"/>
-    <resultMap id="AccountInfo" type="jp.co.lyc.cms.model.AccountInfoModel"/>
-    <select id="selectAccountInfo" parameterType="String" resultMap="AccountInfo">
-	SELECT
+	<resultMap id="BankBranchInfo" type="map" />
+	<resultMap id="AccountInfo"
+		type="jp.co.lyc.cms.model.AccountInfoModel" />
+	<select id="selectAccountInfo" parameterType="String"
+		resultMap="AccountInfo">
+		SELECT
 		T004.employeeOrCustomerNo,
 		T004.bankCode,
 		T004.bankBranchCode,
@@ -12,37 +14,42 @@
 		T004.accountNo,
 		T004.accountName,
 		T004.accountBelongsStatus,
-		M002.bankBranchName 
-	FROM
+		M002.bankBranchName
+		FROM
 		T004AccountInfo AS T004
-		LEFT JOIN M002BankBranch AS M002 ON T004.bankCode = M002.bankCode 
-		AND T004.bankBranchCode = M002.bankBranchCode 
-	WHERE
+		LEFT JOIN M002BankBranch AS M002 ON
+		T004.bankCode = M002.bankCode
+		AND T004.bankBranchCode =
+		M002.bankBranchCode
+		WHERE
 		employeeOrCustomerNo = #{employeeOrCustomerNo}
-    </select>
-    <!-- 支店情報検索 -->
-    <select id="getBankBranchInfo" resultMap="BankBranchInfo" parameterType="map">
-        SELECT 
-			M002.bankBranchName,
-			M002.bankBranchCode
-        FROM 
-        	M002BankBranch AS M002
-        LEFT JOIN
-        	M001Bank AS M001
-        ON  
-        	M001.bankCode = M002.bankCode
-        WHERE 
-        	M002.bankCode = #{bankCode}
-	        <if test="bankBranchCode != null">
-				AND M002.bankBranchCode = #{bankBranchCode}
-			</if>
-			<if test="bankBranchName != null">
-				AND M002.bankBranchName = #{bankBranchName}
-			</if>
-    </select>
-    <!-- 口座情報インサート -->
-    <insert id="insertAccount" parameterType="String">
-		INSERT INTO T004AccountInfo(
+	</select>
+	<!-- 支店情報検索 -->
+	<select id="getBankBranchInfo" resultMap="BankBranchInfo"
+		parameterType="map">
+		SELECT
+		M002.bankBranchName,
+		M002.bankBranchCode
+		FROM
+		M002BankBranch AS
+		M002
+		LEFT JOIN
+		M001Bank AS M001
+		ON
+		M001.bankCode = M002.bankCode
+		WHERE
+		M002.bankCode = #{bankCode}
+		<if test="bankBranchCode != null">
+			AND M002.bankBranchCode = #{bankBranchCode}
+		</if>
+		<if test="bankBranchName != null">
+			AND M002.bankBranchName = #{bankBranchName}
+		</if>
+	</select>
+	<!-- 口座情報インサート -->
+	<insert id="insertAccount" parameterType="String">
+		INSERT INTO
+		T004AccountInfo(
 		employeeOrCustomerNo,
 		accountBelongsStatus,
 		bankCode,
@@ -53,7 +60,7 @@
 		updateTime,
 		createTime,
 		updateUser
-		) 
+		)
 		VALUE(
 		#{employeeOrCustomerNo},
 		#{accountBelongsStatus},
@@ -65,11 +72,11 @@
 		NOW(),
 		NOW(),
 		#{updateUser})
-    </insert>
-    <!-- 口座情報アップデート -->
-    <update id="updateAccount" parameterType="String">
+	</insert>
+	<!-- 口座情報アップデート -->
+	<update id="updateAccount" parameterType="String">
 		UPDATE T004AccountInfo
-		SET 
+		SET
 		<if test="bankCode != null">
 			bankCode = #{bankCode},
 		</if>
@@ -81,12 +88,42 @@
 		</if>
 		<if test="accountName != null">
 			accountName = #{accountName},
-		</if>	
-			accountTypeStatus = #{accountTypeStatus},
-			updateTime = NOW(),
-			updateUser = #{updateUser}
-		WHERE 
-			employeeOrCustomerNo = #{employeeOrCustomerNo}
-			AND accountBelongsStatus = #{accountBelongsStatus}
-    </update>
+		</if>
+		accountTypeStatus = #{accountTypeStatus},
+		updateTime = NOW(),
+		updateUser = #{updateUser}
+		WHERE
+		employeeOrCustomerNo =
+		#{employeeOrCustomerNo}
+		AND accountBelongsStatus =
+		#{accountBelongsStatus}
+	</update>
+
+	<!-- 口座情報アップデート -->
+	<update id="replaceAccount" parameterType="String">
+		REPLACE INTO
+		T004AccountInfo(
+		employeeOrCustomerNo,
+		accountBelongsStatus,
+		bankCode,
+		bankBranchCode,
+		accountNo,
+		accountName,
+		accountTypeStatus,
+		updateTime,
+		createTime,
+		updateUser
+		)
+		VALUE(
+		#{employeeOrCustomerNo},
+		#{accountBelongsStatus},
+		#{bankCode},
+		#{bankBranchCode},
+		#{accountNo},
+		#{accountName},
+		#{accountTypeStatus},
+		NOW(),
+		NOW(),
+		#{updateUser})
+	</update>
 </mapper>

@@ -8,12 +8,6 @@ import jp.co.lyc.cms.util.StatusCodeToMsgMap;
 import jp.co.lyc.cms.util.UtilsCheckMethod;
 
 public class SiteSearchValidation implements Validator {
-	// 日期 去“/”
-	private String dateToString(String date) {
-		String[] a = date.split("/");
-		String b = a[0] + a[1] + a[2];
-		return b;
-	}
 
 	@Override
 	public boolean supports(Class<?> clazz) {
@@ -36,8 +30,8 @@ public class SiteSearchValidation implements Validator {
 		}
 		if (!UtilsCheckMethod.isNullOrEmpty(p.getAdmissionStartDate())
 				&& !UtilsCheckMethod.isNullOrEmpty(p.getAdmissionEndDate())) {
-			if (Integer.parseInt(dateToString(p.getAdmissionStartDate())) > Integer
-					.parseInt(dateToString(p.getAdmissionEndDate()))) {
+			if (Integer.parseInt(p.getAdmissionStartDate()) > Integer
+					.parseInt(p.getAdmissionEndDate())) {
 				errors.rejectValue("admissionStartDate", "",
 						StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG009", "入場年月日"));
 			}

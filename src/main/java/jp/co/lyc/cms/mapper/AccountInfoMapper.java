@@ -24,4 +24,10 @@ public interface AccountInfoMapper {
 	 * @param sendMap
 	 */
 	public void updateAccount(HashMap<String, String> sendMap);
+	
+	/**
+	 * アップデート
+	 * @param sendMap
+	 */
+	public void replaceAccount(HashMap<String, String> sendMap);
 }

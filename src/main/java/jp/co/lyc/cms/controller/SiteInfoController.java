@@ -20,10 +20,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import jp.co.lyc.cms.common.BaseController;
-import jp.co.lyc.cms.model.EmployeeModel;
+import jp.co.lyc.cms.mapper.SiteInfoMapper;
+import jp.co.lyc.cms.mapper.SiteSearchMapper;
 import jp.co.lyc.cms.model.SiteModel;
+import jp.co.lyc.cms.model.SiteSearchModel;
 import jp.co.lyc.cms.service.SiteInfoService;
 import jp.co.lyc.cms.util.StatusCodeToMsgMap;
+import jp.co.lyc.cms.util.UtilsCheckMethod;
 import jp.co.lyc.cms.validation.SiteInfoValidation;
 
 @Controller
@@ -148,6 +151,10 @@ public class SiteInfoController extends BaseController {
 
 	@Autowired
 	SiteInfoService siteInfoService;
+	@Autowired
+	SiteSearchMapper siteSearchMapper;
+	@Autowired
+	SiteInfoMapper siteInfoMapper;
 	String errorsMessage = "";
 
 	@RequestMapping(value = "/insertSiteInfo")
@@ -169,6 +176,23 @@ public class SiteInfoController extends BaseController {
 			});
 			result.put("errorsMessage", errorsMessage);// エラーメッセージ
 			return result;
+		}
+		List<SiteModel> checkList = siteInfoMapper.getSiteInfo(siteModel.getEmployeeNo());
+		if (checkList.size() != 0) {
+			SiteModel checkModel = checkList.get(checkList.size() - 1);
+			if (UtilsCheckMethod.isNullOrEmpty(checkModel.getAdmissionEndDate())) {
+				errorsMessage += "終了してない現場があるため、新規できない";
+				result.put("errorsMessage", errorsMessage);// エラーメッセージ
+				return result;
+			} else {
+				int lastEnd = Integer.parseInt(checkModel.getAdmissionEndDate());
+				int nowStart = Integer.parseInt(dateToString(siteModel.getAdmissionStartDate()));
+				if (nowStart < lastEnd) {
+					errorsMessage += "新規現場の入場期日は既存データの終了期日以降にしてください";
+					result.put("errorsMessage", errorsMessage);// エラーメッセージ
+					return result;
+				}
+			}
 		}
 		// 登陆处理
 		if (insert(putData(siteModel))) {
@@ -197,6 +221,17 @@ public class SiteInfoController extends BaseController {
 			});
 			result.put("errorsMessage", errorsMessage);// エラーメッセージ
 			return result;
+		}
+		List<SiteModel> checkList = siteInfoMapper.getSiteInfo(siteModel.getEmployeeNo());
+		if (checkList.size() != 0 && checkList.size() > 1) {
+			SiteModel checkModel = checkList.get(checkList.size() - 2);
+			int lastEnd = Integer.parseInt(checkModel.getAdmissionEndDate());
+			int nowStart = Integer.parseInt(dateToString(siteModel.getAdmissionStartDate()));
+			if (nowStart < lastEnd) {
+				errorsMessage += "入場期日は既存データの終了期日以降にしてください";
+				result.put("errorsMessage", errorsMessage);// エラーメッセージ
+				return result;
+			}
 		}
 		// 登陆处理
 		if (update(putData(siteModel))) {
@@ -260,7 +295,7 @@ public class SiteInfoController extends BaseController {
 		String nonSiteMonths = timeCalculate(checkDate, admissionStartDate);
 		String workState = siteModel.getWorkState();
 		String dailyCalculationStatus = siteModel.getDailyCalculationStatus();
-
+		String scheduledEndDate = siteModel.getScheduledEndDate();
 		sendMap.put("nonSiteMonths", nonSiteMonths);
 		if (nonSiteMonths != "") {
 			sendMap.put("nonSitePeriod", checkDate + "〜" + admissionStartDate);
@@ -315,6 +350,9 @@ public class SiteInfoController extends BaseController {
 		if (remark != null && remark.length() != 0) {
 			sendMap.put("remark", remark);
 		}
+		if (scheduledEndDate != null && scheduledEndDate.length() != 0) {
+			sendMap.put("scheduledEndDate", scheduledEndDate);
+		}
 		if (typeOfIndustryCode != null && typeOfIndustryCode.length() != 0) {
 			sendMap.put("typeOfIndustryCode", typeOfIndustryCode);
 		}
@@ -335,11 +373,13 @@ public class SiteInfoController extends BaseController {
 
 	@RequestMapping(value = "/getSiteInfo", method = RequestMethod.POST)
 	@ResponseBody
-	public List<SiteModel> getSiteInfo(@RequestBody Map employeeName) {
+	public Map<String, Object> getSiteInfo(@RequestBody Map employeeName) {
 		List<SiteModel> siteList = new ArrayList<SiteModel>();
-
+		Map<String, Object> result = new HashMap<String, Object>();
 		try {
-			siteList = siteInfoService.getSiteInfo(employeeName.get("employeeName").toString());
+			if (employeeName.get("employeeName") != null) {
+				siteList = siteInfoService.getSiteInfo(employeeName.get("employeeName").toString());
+			}
 			for (int a = 0; a < siteList.size(); a++) {
 				siteList.get(a).setWorkDate(
 						dateToPeriod(siteList.get(a).getAdmissionStartDate(), siteList.get(a).getAdmissionEndDate()));
@@ -373,16 +413,24 @@ public class SiteInfoController extends BaseController {
 		}
 
 		logger.info("GetEmployeeInfoController.getEmployeeInfo:" + "検索結束");
-		return siteList;
+		if (siteList.size() != 0) {
+			result.put("siteList", siteList);
+		} else {
+			result.put("errorsMessage", "該当データなし");
+		}
+		return result;
 	}
-	
-	
+
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/deleteSiteInfo", method = RequestMethod.POST)
 	@ResponseBody
-	public boolean deleteSiteInfo(@RequestBody  Map map) throws Exception {
+	public boolean deleteSiteInfo(@RequestBody Map map) throws Exception {
 		logger.info("SiteInfoController.deleteSiteInfo:" + "削除開始");
 		boolean result = true;
+		SiteSearchModel deleteModel = (SiteSearchModel) siteSearchMapper.getSiteInfo(map).get(0);
+		if (!UtilsCheckMethod.isNullOrEmpty(deleteModel.getAdmissionEndDate())) {
+			return false;
+		}
 		result = siteInfoService.deleteSiteInfo(map);
 		logger.info("SiteInfoController.deleteSiteInfo:" + "削除結束");
 		return result;

@@ -135,6 +135,12 @@
 		<if test="stationCode != null">
 			stationCode = #{stationCode},
 		</if>
+		<if test="levelCode != null">
+			levelCode = #{levelCode},
+		</if>
+		<if test="companyNatureCode != null">
+			companyNatureCode = #{companyNatureCode},
+		</if>
 		<if test="representative != null">
 			representative = #{representative},
 		</if>
@@ -327,5 +333,7 @@
 		customerNo = #{customerNo}
 		AND
 		customerDepartmentCode = #{customerDepartmentCode}
+		AND
+		positionCode = #{positionCode}
 	</delete>
 </mapper>

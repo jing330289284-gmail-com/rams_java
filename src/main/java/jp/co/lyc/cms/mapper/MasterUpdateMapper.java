@@ -22,6 +22,13 @@ public interface MasterUpdateMapper {
 	public void deleteMaster(HashMap<String, Object> sendMap);
 
 	/**
+	 * 削除後のデータ更新
+	 * 
+	 * @param sendMap
+	 */
+	public void masterUpdateAfterDelete(HashMap<String, Object> sendMap);
+	
+	/**
 	 * 検索
 	 * 
 	 * @param sendMap

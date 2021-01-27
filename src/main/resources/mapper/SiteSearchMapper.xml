@@ -4,61 +4,51 @@
 	<select id="getSiteInfo" parameterType="map"
 		resultType="jp.co.lyc.cms.model.SiteSearchModel">
 		SELECT
+		a.employeeNo,
 		a.systemName,
 		a.unitPrice,
 		a.admissionStartDate,
 		a.admissionEndDate,
 		b.siteRoleName,
-
-		if(c.customerAbbreviation is null or
-		trim(c.customerAbbreviation)='',c.customerName,c.customerAbbreviation)
-		as customerName,
-
-		CONCAT(g.employeeFristName,g.employeeLastName)as
-		employeeName ,
-
+		IF
+		( c.customerAbbreviation IS NULL OR trim( c.customerAbbreviation ) =
+		'', c.customerName, c.customerAbbreviation ) AS customerName,
+		CONCAT( g.employeeFristName, g.employeeLastName ) AS employeeName,
 		e.developLanguageName,
-		f.stationName as station,
+		f.stationName AS station,
 		h.bpBelongCustomerCode,
-
-		(select if(customerAbbreviation is null or
-		trim(customerAbbreviation)='',customerName,customerAbbreviation) from
-		T007CustomerInfo where customerNo=h.bpBelongCustomerCode) as
-		employeeFrom
-
+		(
+		SELECT
+		IF
+		( customerAbbreviation IS NULL OR trim( customerAbbreviation ) = '',
+		customerName, customerAbbreviation )
+		FROM
+		T007CustomerInfo AS T007
+		LEFT JOIN T011BpInfoSupplement AS T011 ON T007.customerNo =
+		T011.bpBelongCustomerCode
+		WHERE
+		T011.bpEmployeeNo = a.employeeNo
+		) AS employeeFrom
 		FROM
 		T006EmployeeSiteInfo a
-		LEFT JOIN
-		M012SiteRole
-		b ON
-		a.siteRoleCode = b.siteRoleCode
-		LEFT JOIN
-		T007CustomerInfo c ON
-		a.customerNo = c.customerNo
-		LEFT JOIN
-		T002EmployeeDetail d ON
-		a.employeeNo = d.employeeNo
-		LEFT JOIN
-		M011DevelopLanguage e ON
-		a.developLanguageCode =
-		e.developLanguageCode
-		LEFT JOIN
-		M013Station
-		f ON
-		a.stationCode =
-		f.stationCode
-		LEFT JOIN
-		T001Employee g ON
-		a.employeeNo =
-		g.employeeNo
-		LEFT JOIN
-		T011BpInfoSupplement h ON
-		a.employeeNo =
-		h.bpEmployeeNo
+		LEFT JOIN M012SiteRole b ON a.siteRoleCode = b.siteRoleCode AND
+		a.siteRoleCode != ''
+		LEFT JOIN T007CustomerInfo c ON a.customerNo = c.customerNo AND
+		a.customerNo != ''
+		LEFT JOIN T002EmployeeDetail d ON a.employeeNo = d.employeeNo AND
+		a.employeeNo != ''
+		LEFT JOIN M011DevelopLanguage e ON a.developLanguageCode =
+		e.developLanguageCode AND a.developLanguageCode != ''
+		LEFT JOIN M013Station f ON a.stationCode = f.stationCode AND a.stationCode
+		!= ''
+		LEFT JOIN T001Employee g ON a.employeeNo = g.employeeNo AND a.employeeNo
+		!= ''
+		LEFT JOIN T011BpInfoSupplement h ON a.employeeNo = h.bpEmployeeNo AND
+		a.employeeNo != ''
 		WHERE
-		1=1
-		<if test="employeeName!= null and employeeName!= ''">
-			AND a.employeeNo = #{employeeName}
+		1 =1
+		<if test="employeeNo!= null and employeeNo!= ''">
+			AND a.employeeNo = #{employeeNo}
 		</if>
 		<if test="stationCode!= null and stationCode!= ''">
 			AND a.stationCode = #{stationCode}
@@ -83,7 +73,7 @@
 				AND a.payOffRange1 = #{payOffRange1}
 			</if>
 			<if test="payOffRange1 !='0'">
-				AND a.payOffRange1 &gt;= #{payOffRange1}
+				AND a.payOffRange1 = #{payOffRange1}
 			</if>
 		</if>
 		<if test="payOffRange2!= null and payOffRange2!= ''">
@@ -91,19 +81,23 @@
 				AND a.payOffRange2 = #{payOffRange2}
 			</if>
 			<if test="payOffRange2 !='0'">
-				AND a.payOffRange2 &lt;= #{payOffRange2}
+				AND a.payOffRange2 = #{payOffRange2}
 			</if>
 		</if>
 		<if test="unitPrice1!= null and unitPrice1!= ''">
-			AND a.unitPrice &gt;= #{unitPrice1}
+			AND cast(a.unitPrice as signed) &gt;= cast(#{unitPrice1}
+			as signed)
 		</if>
 		<if test="unitPrice2!= null and unitPrice2!= ''">
-			AND a.unitPrice &lt;= #{unitPrice2}
+			AND cast(a.unitPrice as signed) &lt;= cast(#{unitPrice2}
+			as signed)
 		</if>
 		<if test="developLanguageCode!= null and developLanguageCode!= ''">
 			AND a.developLanguageCode = #{developLanguageCode}
 		</if>
-		<if test="admissionStartDate!= null and admissionStartDate!= ''">
+		<if
+			test="admissionStartDate!= null and admissionStartDate!= ''
+			and dataAcquisitionPeriod== null or dataAcquisitionPeriod== ''">
 			AND a.admissionStartDate &gt;= #{admissionStartDate}
 		</if>
 		<if test="admissionEndDate!= null and admissionEndDate!= ''">
@@ -111,19 +105,25 @@
 		</if>
 		<if
 			test="dataAcquisitionPeriod!= null and dataAcquisitionPeriod!= ''">
-			AND a.admissionStartDate = #{dataAcquisitionPeriod}
+			AND a.admissionEndDate IS NULL
 		</if>
 		<if test="employeeStatus!= null and employeeStatus!= ''">
 			AND d.employeeStatus = #{employeeStatus}
 		</if>
 		<if test="employeeForm!= null and employeeForm!= ''">
-				<if test='employeeForm=="0"'>
+			<if test='employeeForm=="0"'>
 				AND d.employeeFormCode !='3'
 			</if>
 			<if test='employeeForm=="1"'>
 				AND d.employeeFormCode = '3'
 			</if>
 		</if>
+		<if test="scheduledEndDate != null and scheduledEndDate!= ''">
+			AND a.scheduledEndDate &lt;= #{scheduledEndDate}
+		</if>
+		ORDER BY
+		a.employeeNo,
+		a.admissionStartDate ASC
 	</select>
 
 </mapper>

@@ -18,6 +18,7 @@ public class EmployeeModel implements Serializable {
 	String genderStatus;// 性別ステータス
 	String birthday;// 年齢
 	String japaneseCalendar;// 和暦
+	String alphabetName;// ローマ字
 	String alphabetName1;// ローマ字
 	String alphabetName2;// ローマ字
 	String furigana;// カタカナ
@@ -60,6 +61,7 @@ public class EmployeeModel implements Serializable {
 	String stationName;// 寄り駅
 	String oldPassword;// 古いパスワード
 	String customer;// お客様
+	String customerNo;// お客様No
 	String employeeName;
 	String authorityName;
 	String ageFrom;// 開始年齢
@@ -77,6 +79,8 @@ public class EmployeeModel implements Serializable {
 	String visaPeriod;// ビザ期間
 	AccountInfoModel accountInfo;// 口座情報
 	String yearsOfExperience; // 経験年数
+	String admissionTime; // 入場年月
+	String contractDeadline;// 契約期限(まで)
 
 	BpInfoModel bpInfoModel;// PB情報
 
@@ -84,6 +88,22 @@ public class EmployeeModel implements Serializable {
 	String firstHalfAddress;// 住所前半
 	String lastHalfAddress;// 住所後半
 	String stationCode;//
+
+	public String getContractDeadline() {
+		return contractDeadline;
+	}
+
+	public void setContractDeadline(String contractDeadline) {
+		this.contractDeadline = contractDeadline;
+	}
+
+	public String getAdmissionTime() {
+		return admissionTime;
+	}
+
+	public void setAdmissionTime(String admissionTime) {
+		this.admissionTime = admissionTime;
+	}
 
 	public String getOldPassword() {
 		return oldPassword;
@@ -99,6 +119,14 @@ public class EmployeeModel implements Serializable {
 
 	String furigana1;// カタカナ1
 	String furigana2;// カタカナ2
+
+	public String getCustomerNo() {
+		return customerNo;
+	}
+
+	public void setCustomerNo(String customerNo) {
+		this.customerNo = customerNo;
+	}
 
 	public String getPassportInfo() {
 		return passportInfo;
@@ -706,6 +734,14 @@ public class EmployeeModel implements Serializable {
 
 	public void setStationCode(String stationCode) {
 		this.stationCode = stationCode;
+	}
+
+	public String getAlphabetName() {
+		return alphabetName;
+	}
+
+	public void setAlphabetName(String alphabetName) {
+		this.alphabetName = alphabetName;
 	}
 
 	public String getAlphabetName1() {

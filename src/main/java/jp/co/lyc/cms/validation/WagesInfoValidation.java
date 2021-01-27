@@ -38,6 +38,13 @@ public class WagesInfoValidation implements Validator{
 				if(UtilsCheckMethod.isNullOrEmpty(p.getTotalAmount())) {
 					errors.rejectValue("totalAmount", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG003","入力した金額"));
 				}
+				if(p.getSocialInsuranceFlag().equals("1")) {
+					if(UtilsCheckMethod.isNullOrEmpty(p.getHealthInsuranceAmount()) || 
+							UtilsCheckMethod.isNullOrEmpty(p.getInsuranceFeeAmount()) ||
+							UtilsCheckMethod.isNullOrEmpty(p.getWelfarePensionAmount())) {
+						errors.rejectValue("insuranceFeeAmount", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG005","社会保険"));
+					}
+				}
 				if(p.getBonusFlag().equals("1")) {
 					if(!UtilsCheckMethod.isNullOrEmpty(p.getScheduleOfBonusAmount()) && 
 							UtilsCheckMethod.isNullOrEmpty(p.getNextBonusMonth())) {
