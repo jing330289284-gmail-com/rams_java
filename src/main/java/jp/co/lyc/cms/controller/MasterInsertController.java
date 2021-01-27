@@ -46,7 +46,7 @@ public class MasterInsertController extends BaseController {
 			result.put("errorsMessage", StatusCodeToMsgMap.getErrMsgbyCode("MSG008"));// エラーメッセージ
 			return result;
 		}
-		//登陆处理
+		//	登陆处理
 		if (insert(masterModel)) {
 			result.put("result", true);
 		} else {
@@ -82,7 +82,7 @@ public class MasterInsertController extends BaseController {
 	 */
 	public boolean checkHave(MasterModel masterModel) {
 		masterModel.setColumnName(masterModel.getMaster().substring(4) + "name");
-		
+
 		return masterInsertService.checkHave(masterModel);
 
 	}
