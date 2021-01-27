@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import jp.co.lyc.cms.common.BaseController;
 import jp.co.lyc.cms.mapper.ExpensesInfoMapper;
 import jp.co.lyc.cms.model.ExpensesInfoModel;
+import jp.co.lyc.cms.model.WagesInfoModel;
 import jp.co.lyc.cms.service.ExpensesInfoService;
 import jp.co.lyc.cms.validation.ExpensesInfoValidation;
 
@@ -68,6 +69,18 @@ public class ExpensesInfoController extends BaseController{
 			logger.info("ExpensesInfoController.onloadPage:" + "登録終了");
 			return result;
 		}
+		HashMap<String, String> checkMap = new HashMap<String, String>();
+		checkMap.put("employeeNo", expensesInfoModel.getEmployeeNo());
+		ArrayList<ExpensesInfoModel> expenseInfoList = expensesInfoMapper.getExpensesInfo(checkMap);
+		if(expenseInfoList.size() != 0) {
+			int lastEnd = Integer.parseInt(expenseInfoList.get(expenseInfoList.size() - 1).getExpensesReflectYearAndMonth());
+			int nowStart = Integer.parseInt(expensesInfoModel.getExpensesReflectYearAndMonth());
+			if (nowStart < lastEnd) {
+				errorsMessage += "新規諸費用情報の反映年月は既存データ以降にしてください";
+				result.put("errorsMessage", errorsMessage);// エラーメッセージ
+				return result;
+			}
+		}
 		expensesInfoModel.setUpdateUser((String)getSession().getAttribute("employeeName"));
 		if(expensesInfoModel.getActionType().equals("insert")) {//插入场合
 			HashMap<String, String> sendMap = new HashMap<String, String>();
@@ -103,6 +116,36 @@ public class ExpensesInfoController extends BaseController{
 			}else {
 				result.put("errorsMessage","更新失败");
 			}
+		}
+		return result;
+	}
+	/**
+	 * 諸費用削除
+	 * @param deleteMod
+	 * @return
+	 */
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> delete(@RequestBody ExpensesInfoModel deleteMod) {
+		logger.info("ExpensesInfoController.delete:" + "削除開始");
+		Map<String, Object> result = new HashMap<String, Object>();
+		errorsMessage = "";
+		DataBinder binder = new DataBinder(deleteMod);
+		binder.setValidator(new ExpensesInfoValidation());
+		binder.validate();
+		BindingResult results = binder.getBindingResult();
+		if (results.hasErrors()) {
+			results.getAllErrors().forEach(o -> {
+				FieldError error = (FieldError) o;
+				errorsMessage += error.getDefaultMessage();// エラーメッセージ
+			});
+			result.put("errorsMessage", errorsMessage);// エラーメッセージ
+			logger.info("ExpensesInfoController.onloadPage:" + "登録終了");
+			return result;
+		}
+		boolean deleteResult = expensesInfoService.delete(deleteMod);
+		if(!deleteResult) {
+			result.put("errorsMessage", "削除失敗");
 		}
 		return result;
 	}

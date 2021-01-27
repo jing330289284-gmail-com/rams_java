@@ -74,6 +74,23 @@ public class WagesInfoService {
 			return false;
 		}
 	}
+	
+	/**
+	 * 給料情報削除
+	 * @param customerNo
+	 */
+	
+	public boolean delete(WagesInfoModel wagesInfoModel) {
+		boolean result = true;
+		try {
+			wagesInfoMapper.delete(getSendMap(wagesInfoModel));
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return result = false;
+		}
+		return result;
+	}
 	/**
 	 *給料情報sendMapの作成
 	 * @param wagesInfoModel

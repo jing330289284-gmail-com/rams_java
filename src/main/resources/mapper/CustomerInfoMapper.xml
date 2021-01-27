@@ -198,6 +198,7 @@
 		M019.positionName,
 		T009.responsiblePerson,
 		T009.typeOfIndustryCode,
+		T009.topCustomerCode,
 		T009.developLanguageCode1,
 		T009.developLanguageCode2,
 		T009.stationCode,
@@ -267,6 +268,7 @@
 		responsiblePerson,
 		customerDepartmentMail,
 		typeOfIndustryCode,
+		topCustomerCode,
 		developLanguageCode1,
 		developLanguageCode2,
 		stationCode,
@@ -281,6 +283,7 @@
 		#{responsiblePerson},
 		#{customerDepartmentMail},
 		#{typeOfIndustryCode},
+		#{topCustomerCode},
 		#{developLanguageCode1},
 		#{developLanguageCode2},
 		#{stationCode},
@@ -305,6 +308,9 @@
 		</if>
 		<if test="typeOfIndustryCode != null">
 			typeOfIndustryCode = #{typeOfIndustryCode},
+		</if>
+		<if test="topCustomerCode != null">
+			topCustomerCode = #{topCustomerCode},
 		</if>
 		<if test="developLanguageCode1 != null">
 			developLanguageCode1 = #{developLanguageCode1},
