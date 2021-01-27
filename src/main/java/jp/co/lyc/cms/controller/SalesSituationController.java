@@ -262,7 +262,7 @@ public class SalesSituationController  extends BaseController {
 			}
 			
 			model.setSalesYearAndMonth(salesDate);
- 			
+		 	
 			// テーブルT010SalesSituation項目を変更する
 			updateCount = salesSituationService.updateDataStatus(model);
 			
