@@ -16,7 +16,7 @@ public interface SalesSituationMapper {
 	 */
  	
 	public List<SalesSituationModel> getSalesSituationModel(String sysDate, String curDate, String salesDate);
- 	
+  	
 	public int insertSalesSituation(SalesSituationModel model);
 
 	public int updateEmployeeSiteInfo(SalesSituationModel model);

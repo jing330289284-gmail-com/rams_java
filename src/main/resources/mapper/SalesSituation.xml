@@ -669,7 +669,7 @@ from T019SalesSentence T019
 WHERE
     T019.employeeNo =#{employeeNo}
 </select>
- 
+  
 	<update id="updateDataStatus" parameterType="jp.co.lyc.cms.model.SalesSituationModel">
 		UPDATE 
 			T010SalesSituation 
