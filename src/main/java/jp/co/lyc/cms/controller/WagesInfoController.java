@@ -120,8 +120,18 @@ public class WagesInfoController extends BaseController {
 			for (int i = 0; i < wagesInfoList.size(); i++) {
 				// 給料期間
 				if (i != wagesInfoList.size() - 1) {
+					String reflectYearAndMonth = wagesInfoList.get(i + 1).getReflectYearAndMonth();
+					int year = Integer.parseInt(reflectYearAndMonth.substring(0,4));
+					int month = Integer.parseInt(reflectYearAndMonth.substring(4));
+					String yearAndMonth = "";
+					month -= 1;
+					if(month == 0) {
+						yearAndMonth = (year - 1) + "12";
+					}else {
+						yearAndMonth = year + "" + (month > 9 ? month : "0" + month );
+					}
 					wagesInfoList.get(i).setPeriod(wagesInfoList.get(i).getReflectYearAndMonth() + "~"
-							+ wagesInfoList.get(i + 1).getReflectYearAndMonth());
+							+ yearAndMonth);
 				} else {
 					wagesInfoList.get(i).setPeriod(wagesInfoList.get(i).getReflectYearAndMonth() + "~");
 				}
@@ -170,6 +180,8 @@ public class WagesInfoController extends BaseController {
 							yearBonus += 1;
 							nextBonusMonth = Integer.toString(yearBonus) + nextBonusMonth.substring(4);
 							bonus.setNextBonusMonth(nextBonusMonth);
+							bonus.setLastTimeBonusAmount(bonus.getScheduleOfBonusAmount());
+							bonus.setScheduleOfBonusAmount("");
 						} else {
 							bonus = null;
 						}
@@ -193,6 +205,7 @@ public class WagesInfoController extends BaseController {
 							nextBonusMonth = Integer.toString(yearBonus)
 									+ (monthBonus > 10 ? monthBonus : "0" + monthBonus);
 							bonus.setNextBonusMonth(nextBonusMonth);
+							bonus.setLastTimeBonusAmount("");
 						} else {
 							bonus = null;
 						}
@@ -260,7 +273,17 @@ public class WagesInfoController extends BaseController {
 			// 給料期間
 			if (i != wagesInfoModels.size() - 1) {
 				nextWagesDate = Integer.parseInt(wagesInfoModels.get(i + 1).getReflectYearAndMonth());
-				w.setPeriod(w.getReflectYearAndMonth() + "~" + wagesInfoModels.get(i + 1).getReflectYearAndMonth());
+				String reflectYearAndMonth = wagesInfoModels.get(i + 1).getReflectYearAndMonth();
+				int year = Integer.parseInt(reflectYearAndMonth.substring(0,4));
+				int month = Integer.parseInt(reflectYearAndMonth.substring(4));
+				String yearAndMonth = "";
+				month -= 1;
+				if(month == 0) {
+					yearAndMonth = (year - 1) + "12";
+				}else {
+					yearAndMonth = year + "" + (month > 9 ? month : "0" + month );
+				}
+				w.setPeriod(w.getReflectYearAndMonth() + "~" + yearAndMonth);
 			} else {
 				w.setPeriod(w.getReflectYearAndMonth() + "~");
 			}
