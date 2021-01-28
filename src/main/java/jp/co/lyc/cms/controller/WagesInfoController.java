@@ -105,6 +105,7 @@ public class WagesInfoController extends BaseController {
 		sendMap.put("employeeNo", wagesInfoMod.getEmployeeNo());
 		ArrayList<WagesInfoModel> wagesInfoList = wagesInfoMapper.getWagesInfo(sendMap);
 		ArrayList<ExpensesInfoModel> expensesInfoList = expensesInfoMapper.getExpensesInfo(sendMap);
+		ArrayList<ExpensesInfoModel> allExpensesInfoList = new ArrayList<ExpensesInfoModel>(); 
 		WagesInfoModel a = wagesInfoMapper.getEmployeeForm(wagesInfoMod.getEmployeeNo());
 		if (!a.getEmployeeFormCode().equals("2")) {
 			// 個人事業主判断
@@ -116,6 +117,7 @@ public class WagesInfoController extends BaseController {
 			result.put("errorsMessage", "該当社員の給料データがない");
 		} else if (expensesInfoList.size() != 0) {
 			wagesInfoList = dataReset(wagesInfoList, expensesInfoList);
+			allExpensesInfoList = resetExpensesInfo(expensesInfoList);
 		} else if (expensesInfoList.size() == 0) {
 			for (int i = 0; i < wagesInfoList.size(); i++) {
 				// 給料期間
@@ -137,6 +139,7 @@ public class WagesInfoController extends BaseController {
 				}
 			}
 		}
+		result.put("allExpensesInfoList", allExpensesInfoList);
 		result.put("wagesInfoList", wagesInfoList);
 		// 社員最初の入場期日を取得
 		HashMap<String, String> sendHashMap = new HashMap<String, String>();
@@ -253,6 +256,38 @@ public class WagesInfoController extends BaseController {
 	}
 
 	/**
+	 * 全部の諸費用データ
+	 * @param expensesInfoList
+	 * @return
+	 */
+	private ArrayList<ExpensesInfoModel> resetExpensesInfo(ArrayList<ExpensesInfoModel> expensesInfoList) {
+		// TODO Auto-generated method stub
+		ArrayList<ExpensesInfoModel> resultList = new ArrayList<ExpensesInfoModel>();
+		for (int j = 0; j < expensesInfoList.size(); j++) {
+			ExpensesInfoModel e = expensesInfoList.get(j);
+			// 諸費用期間
+			if (j != expensesInfoList.size() - 1) {
+				String reflectYearAndMonth = expensesInfoList.get(j + 1).getExpensesReflectYearAndMonth();
+				int year = Integer.parseInt(reflectYearAndMonth.substring(0,4));
+				int month = Integer.parseInt(reflectYearAndMonth.substring(4));
+				String yearAndMonth = "";
+				month -= 1;
+				if(month == 0) {
+					yearAndMonth = (year - 1) + "12";
+				}else {
+					yearAndMonth = year + "" + (month > 9 ? month : "0" + month );
+				}
+				e.setExpensesPeriod(e.getExpensesReflectYearAndMonth() + "~"
+						+ yearAndMonth);
+			} else {
+				e.setExpensesPeriod(e.getExpensesReflectYearAndMonth() + "~");
+			}
+			resultList.add(e);
+		}
+		return resultList;
+	}
+
+	/**
 	 * 検索したデータの再処理
 	 * 
 	 * @param wagesInfoModels
@@ -292,8 +327,18 @@ public class WagesInfoController extends BaseController {
 				ExpensesInfoModel e = expensesInfoModels.get(j);
 				// 諸費用期間
 				if (j != expensesInfoModels.size() - 1) {
+					String reflectYearAndMonth = expensesInfoModels.get(i + 1).getExpensesReflectYearAndMonth();
+					int year = Integer.parseInt(reflectYearAndMonth.substring(0,4));
+					int month = Integer.parseInt(reflectYearAndMonth.substring(4));
+					String yearAndMonth = "";
+					month -= 1;
+					if(month == 0) {
+						yearAndMonth = (year - 1) + "12";
+					}else {
+						yearAndMonth = year + "" + (month > 9 ? month : "0" + month );
+					}
 					e.setExpensesPeriod(e.getExpensesReflectYearAndMonth() + "~"
-							+ expensesInfoModels.get(j + 1).getExpensesReflectYearAndMonth());
+							+ yearAndMonth);
 				} else {
 					e.setExpensesPeriod(e.getExpensesReflectYearAndMonth() + "~");
 				}
