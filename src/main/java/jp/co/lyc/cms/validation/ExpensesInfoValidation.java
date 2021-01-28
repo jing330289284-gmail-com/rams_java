@@ -40,8 +40,13 @@ public class ExpensesInfoValidation implements Validator{
 					}
 				}
 				if(!UtilsCheckMethod.isNullOrEmpty(p.getOtherAllowanceAmount())) {
+					if(UtilsCheckMethod.isNullOrEmpty(p.getOtherAllowanceName())) {
+						errors.rejectValue("otherAllowanceAmount", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001","他の手当"));
+					}
+				}
+				if(!UtilsCheckMethod.isNullOrEmpty(p.getOtherAllowanceAmount())) {
 					if(!UtilsCheckMethod.numberFormat(p.getOtherAllowanceAmount())) {
-						errors.rejectValue("otherAllowanceAmount", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG007","他の手当"));
+						errors.rejectValue("otherAllowanceAmount", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG007","他の手当の費用"));
 					}
 				}
 				if(!UtilsCheckMethod.isNullOrEmpty(p.getHousingAllowance())) {

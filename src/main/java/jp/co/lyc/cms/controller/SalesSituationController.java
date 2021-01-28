@@ -112,6 +112,8 @@ public class SalesSituationController  extends BaseController {
 		}
 		int index = 0;
 		try {
+			String salesDate = getSalesDate(model.getSalesYearAndMonth()).trim().toString();
+			model.setSalesDateUpdate(salesDate);
 			index = salesSituationService.insertSalesSituation(model);
 		} catch (Exception e) {
 			e.printStackTrace();
