@@ -16,7 +16,6 @@ FROM
             T001.employeeLastName) AS 'employeeName',
     M013.stationName AS 'nearestStation',
     CONCAT_WS(',',
-        
         IF(ISNULL(T002.developLanguage1) or T002.developLanguage1='',
         null,
         M011a.developLanguageName),
@@ -42,6 +41,7 @@ FROM
         '',
         T010.salesProgressCode) AS 'salesProgressCode',
     T010.salesYearAndMonth,
+    T010.salesYearAndMonth AS salesDateUpdate,
     T010.interviewDate1,
     T010.stationCode1,
     T010.interviewCustomer1,
@@ -137,6 +137,7 @@ ORDER BY T001.employeeNo) UNION (SELECT
         '',
         T010.salesProgressCode) AS 'salesProgressCode',
     T010.salesYearAndMonth,
+    T010.salesYearAndMonth AS salesDateUpdate,
     T010.interviewDate1,
     T010.stationCode1,
     T010.interviewCustomer1,
@@ -221,12 +222,13 @@ ORDER BY T001.employeeNo) UNION (SELECT
     '' as nowCustomer,
     M012.siteRoleName AS siteRoleCode,
     T011.bpUnitPrice AS 'unitPrice',
-    '' AS 'admissionEndDate',
-    '' AS 'admissionStartDate',
+    T011.bpOtherCompanyAdmissionEndDate AS 'admissionEndDate',
+    T011.bpOtherCompanyAdmissionStartDate AS 'admissionStartDate',
     IF(ISNULL(T010.salesProgressCode),
         '',
         T010.salesProgressCode) AS 'salesProgressCode',
     T010.salesYearAndMonth,
+    T010.salesYearAndMonth AS salesDateUpdate,
     T010.interviewDate1,
     T010.stationCode1,
     T010.interviewCustomer1,
@@ -275,7 +277,7 @@ FROM
                 LEFT JOIN
     T015ResumeManagement T015 ON T001.employeeNo = T015.employeeNo
 WHERE
-    T011.bpSalesProgressCode IN (1 , 2) and T011.bpOtherCompanyAdmissionEndDate = #{sysDate}
+    T011.bpSalesProgressCode IN (1 , 2) and LEFT(T011.bpOtherCompanyAdmissionEndDate,6) = #{sysDate}
     and T011.bpEmployeeNo  not in(SELECT 
             employeeNo
         FROM
@@ -317,6 +319,7 @@ SELECT t.* FROM (
 	        '',
 	        T010.salesProgressCode) AS 'salesProgressCode',
 	    T010.salesYearAndMonth,
+	    T010.salesYearAndMonth AS salesDateUpdate,
 	    T010.interviewDate1,
 	    T010.stationCode1,
 	    T010.interviewCustomer1,
@@ -395,7 +398,7 @@ SELECT t.* FROM (
 		VALUES
 		(
 		#{employeeNo},
-		#{salesYearAndMonth},
+		#{salesDateUpdate},
 		#{interviewDate1},
 		#{stationCode1},
 		#{interviewCustomer1},
