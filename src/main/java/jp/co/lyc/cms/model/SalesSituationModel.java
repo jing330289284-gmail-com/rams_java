@@ -16,6 +16,9 @@ public class SalesSituationModel implements Serializable {
 	Date curDate;
 	/*社員営業され日付*/
 	String salesDate;
+	/*面談情報更新処理用*/
+	String salesDateUpdate;
+	
 	String employeeNo;
 	String salesYearAndMonth;
 	String interviewDate1;
@@ -83,6 +86,13 @@ public void setCurDate(Date curDate) {
 	this.curDate = curDate;
 }
   
+public String getSalesDateUpdate() {
+	return salesDateUpdate;
+}
+public void setSalesDateUpdate(String salesDateUpdate) {
+	this.salesDateUpdate = salesDateUpdate;
+}
+
 /*2020/12/09 START 張棟*/
 /* 稼働開始 */
 String theMonthOfStartWork;
