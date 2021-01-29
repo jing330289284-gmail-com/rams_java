@@ -3,6 +3,7 @@ package jp.co.lyc.cms.controller;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -21,6 +22,7 @@ import jp.co.lyc.cms.common.BaseController;
 import jp.co.lyc.cms.mapper.EmployeeInfoMapper;
 import jp.co.lyc.cms.mapper.EnterPeriodSearchMapper;
 import jp.co.lyc.cms.mapper.ExpensesInfoMapper;
+import jp.co.lyc.cms.mapper.SiteInfoMapper;
 import jp.co.lyc.cms.mapper.WagesInfoMapper;
 import jp.co.lyc.cms.model.EmployeeModel;
 import jp.co.lyc.cms.model.EnterPeriodSearchModel;
@@ -57,6 +59,8 @@ public class WagesInfoController extends BaseController {
 	@Autowired
 	EnterPeriodSearchMapper enterPeriodSearchMapper;
 
+	@Autowired
+	SiteInfoMapper siteInfoMapper;
 	/**
 	 * 
 	 * @return
@@ -78,6 +82,7 @@ public class WagesInfoController extends BaseController {
 		boolean kadouCheck = true;// true稼动，false非稼动
 		boolean jigyosyaFlag = true;// true事业主，false其他
 		boolean jijutsuFlag = true;// true技术者，false非技术者
+		boolean hatsunyubaFlag = true;//true初入場または非技術者、false技術者かつ入場したことある
 		ArrayList<SiteModel> kadouList = wagesInfoMapper.kadouCheck(wagesInfoMod.getEmployeeNo());
 		if (kadouList.size() != 0) {
 			kadouCheck = false;
@@ -99,7 +104,14 @@ public class WagesInfoController extends BaseController {
 			kadouCheck = false;
 			jijutsuFlag = false;
 			nyusyaDate = b.getIntoCompanyYearAndMonth();
+		}else {
+			List<SiteModel> siteMod = new ArrayList<SiteModel>();
+			siteMod = siteInfoMapper.getSiteInfo(wagesInfoMod.getEmployeeNo());
+			if(siteMod.size() != 0) {
+				hatsunyubaFlag = false;
+			}
 		}
+		result.put("hatsunyubaFlag", hatsunyubaFlag);
 		result.put("kadouCheck", kadouCheck);
 		HashMap<String, String> sendMap = new HashMap<String, String>();
 		sendMap.put("employeeNo", wagesInfoMod.getEmployeeNo());
