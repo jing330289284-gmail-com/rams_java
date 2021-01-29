@@ -37,7 +37,7 @@ public class SalesPointSetController extends BaseController {
 		errorsMessage = "";
 
 		if (checkHave(putData(salesPointSetModel))) {
-			result.put("errorsMessage", "aaaaaa");
+			result.put("errorsMessage", "同じデータ存在しています。");
 			return result;
 		}
 
@@ -84,7 +84,7 @@ public class SalesPointSetController extends BaseController {
 	 */
 
 	public boolean checkHave(Map<String, Object> sendMap) {
-		return false;
+		return salesPointSetService.checkHave(sendMap);
 	}
 
 	/**

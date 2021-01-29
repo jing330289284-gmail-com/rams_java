@@ -18,6 +18,21 @@ public class SalesPointSetService {
 	@Autowired
 	SalesPointSetMapper salesPointSetMapper;
 
+	public boolean checkHave(Map<String, Object> sendMap) {
+		boolean isCheck = false;
+		/*
+		 * try { salesPointSetMapper.checkHave(sendMap); } catch (Exception e) {
+		 * TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+		 * e.printStackTrace(); }
+		 */
+		if (salesPointSetMapper.checkHave(sendMap).size() > 0) {
+			isCheck = true;
+		} else {
+			isCheck = false;
+		}
+		return isCheck;
+	}
+
 	public boolean salesPointInsert(Map<String, Object> sendMap) {
 		try {
 			salesPointSetMapper.salesPointInsert(sendMap);
