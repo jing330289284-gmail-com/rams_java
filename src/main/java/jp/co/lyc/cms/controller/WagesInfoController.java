@@ -327,7 +327,7 @@ public class WagesInfoController extends BaseController {
 				ExpensesInfoModel e = expensesInfoModels.get(j);
 				// 諸費用期間
 				if (j != expensesInfoModels.size() - 1) {
-					String reflectYearAndMonth = expensesInfoModels.get(i + 1).getExpensesReflectYearAndMonth();
+					String reflectYearAndMonth = expensesInfoModels.get(j + 1).getExpensesReflectYearAndMonth();
 					int year = Integer.parseInt(reflectYearAndMonth.substring(0,4));
 					int month = Integer.parseInt(reflectYearAndMonth.substring(4));
 					String yearAndMonth = "";

@@ -88,7 +88,7 @@ public class ExpensesInfoController extends BaseController{
 			sendMap.put("expensesReflectYearAndMonth",expensesInfoModel.getExpensesReflectYearAndMonth());
 			ArrayList<ExpensesInfoModel> checkList = expensesInfoMapper.getExpensesInfo(sendMap);
 			if(checkList.size() > 0) {
-				result.put("errorsMessage", "該当社員の当反映年月のデータがデータベースに存在するため、追加はできません！");// エラーメッセージ
+				result.put("errorsMessage", "該当社員の該当反映年月のデータがデータベースに存在するため、追加はできません！");// エラーメッセージ
 				return result;
 			}
 			if(expensesInfoService.insert(expensesInfoModel)) {
