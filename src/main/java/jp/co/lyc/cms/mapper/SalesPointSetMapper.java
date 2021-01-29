@@ -12,20 +12,29 @@ import jp.co.lyc.cms.model.SiteModel;
 
 public interface SalesPointSetMapper {
 	/**
+	 * 営業ポイント設定をチェック処理
+	 * 
+	 */
+	public List<SalesPointSetModel> checkHave(Map<String, Object> sendMap);
+
+	/**
 	 * 営業ポイント設定を登録
 	 * 
 	 */
 	public void salesPointInsert(Map<String, Object> sendMap);
+
 	/**
 	 * 営業ポイント設定を修正
 	 * 
 	 */
 	public void salesPointUpdate(Map<String, Object> sendMap);
+
 	/**
 	 * 営業ポイント設定を削除
 	 * 
 	 */
 	public void salesPointDelete(Map<String, Object> sendMap);
+
 	/**
 	 * 営業ポイント設定を削除修正
 	 * 
@@ -37,6 +46,5 @@ public interface SalesPointSetMapper {
 	 * 
 	 */
 	public List<SalesPointSetModel> getSalesPointInfo(Map<String, Object> sendMap);
-	
 
 }

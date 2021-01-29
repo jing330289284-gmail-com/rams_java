@@ -145,24 +145,47 @@ public class EmployeeInfoController extends BaseController {
 			@RequestParam(value = "residentCardInfo", required = false) MultipartFile residentCardInfo,
 			@RequestParam(value = "passportInfo", required = false) MultipartFile passportInfo) throws Exception {
 		logger.info("GetEmployeeInfoController.insertEmployee:" + "追加開始");
-		errorsMessage = "";
+		errorsMessage = "を入力してください。";
 		JSONObject jsonObject = JSON.parseObject(JSONEmp);
 		EmployeeModel emp = JSON.parseObject(jsonObject.toJSONString(), new TypeReference<EmployeeModel>() {
 		});
 		if (resumeInfo1 != null) {
 			emp.setResumeInfo1(resumeInfo1.getOriginalFilename());
 		}
-		DataBinder binder = new DataBinder(emp);
-		binder.setValidator(new EmployeeInfoValidation());
-		binder.validate();
-		BindingResult results = binder.getBindingResult();
 		Map<String, Object> resultMap = new HashMap<>();// 戻す
-		if (results.hasErrors()) {
-			results.getAllErrors().forEach(o -> {
-				FieldError error = (FieldError) o;
-				errorsMessage += error.getDefaultMessage();// エラーメッセージ
-			});
-			resultMap.put("errorsMessage", errorsMessage);// エラーメッセージ
+
+		/*
+		 * DataBinder binder = new DataBinder(emp); binder.setValidator(new
+		 * EmployeeInfoValidation()); binder.validate(); BindingResult results =
+		 * binder.getBindingResult();
+		 * 
+		 * if (results.hasErrors()) { results.getAllErrors().forEach(o -> { FieldError
+		 * error = (FieldError) o; errorsMessage += error.getDefaultMessage();//
+		 * エラーメッセージ }); resultMap.put("errorsMessage", errorsMessage);// エラーメッセージ return
+		 * resultMap; }
+		 */
+		if (emp.getNationalityCode() == null || emp.getNationalityCode().equals("")) {
+			errorsMessage = "国籍 " + errorsMessage;
+		}
+		if (emp.getIntoCompanyYearAndMonth() == null || emp.getIntoCompanyYearAndMonth().equals("")) {
+			errorsMessage = "入社年月 " + errorsMessage;
+		}
+
+		if (emp.getGenderStatus() == null || emp.getGenderStatus().equals("")) {
+			errorsMessage = "性別  " + errorsMessage;
+		}
+
+		if (emp.getEmployeeFristName() == null || emp.getEmployeeFristName().equals("")
+				|| emp.getEmployeeLastName() == null || emp.getEmployeeLastName().equals("")) {
+			errorsMessage = "社員名  " + errorsMessage;
+		}
+
+		if (emp.getEmployeeFristName() == null || emp.getEmployeeFristName().equals("")
+				|| emp.getEmployeeLastName() == null || emp.getEmployeeLastName().equals("")
+				|| emp.getGenderStatus() == null || emp.getGenderStatus().equals("")
+				|| emp.getIntoCompanyYearAndMonth() == null || emp.getIntoCompanyYearAndMonth().equals("")
+				|| emp.getNationalityCode() == null || emp.getNationalityCode().equals("")) {
+			resultMap.put("errorsMessage", errorsMessage);
 			return resultMap;
 		}
 
@@ -248,18 +271,41 @@ public class EmployeeInfoController extends BaseController {
 		if (resumeInfo1 != null) {
 			emp.setResumeInfo1(resumeInfo1.getOriginalFilename());
 		}
-
-		DataBinder binder = new DataBinder(emp);
-		binder.setValidator(new EmployeeInfoValidation());
-		binder.validate();
-		BindingResult results = binder.getBindingResult();
 		Map<String, Object> resultMap = new HashMap<>();// 繰り返し
-		if (results.hasErrors()) {
-			results.getAllErrors().forEach(o -> {
-				FieldError error = (FieldError) o;
-				errorsMessage += error.getDefaultMessage();// エラーメッセージ
-			});
-			resultMap.put("errorsMessage", errorsMessage);// エラーメッセージ
+
+		/*
+		 * DataBinder binder = new DataBinder(emp); binder.setValidator(new
+		 * EmployeeInfoValidation()); binder.validate(); BindingResult results =
+		 * binder.getBindingResult();
+		 * 
+		 * if (results.hasErrors()) { results.getAllErrors().forEach(o -> { FieldError
+		 * error = (FieldError) o; errorsMessage += error.getDefaultMessage();//
+		 * エラーメッセージ }); resultMap.put("errorsMessage", errorsMessage);// エラーメッセージ return
+		 * resultMap; }
+		 */
+
+		if (emp.getNationalityCode() == null || emp.getNationalityCode().equals("")) {
+			errorsMessage = "国籍 " + errorsMessage;
+		}
+		if (emp.getIntoCompanyYearAndMonth() == null || emp.getIntoCompanyYearAndMonth().equals("")) {
+			errorsMessage = "入社年月 " + errorsMessage;
+		}
+
+		if (emp.getGenderStatus() == null || emp.getGenderStatus().equals("")) {
+			errorsMessage = "性別  " + errorsMessage;
+		}
+
+		if (emp.getEmployeeFristName() == null || emp.getEmployeeFristName().equals("")
+				|| emp.getEmployeeLastName() == null || emp.getEmployeeLastName().equals("")) {
+			errorsMessage = "社員名  " + errorsMessage;
+		}
+
+		if (emp.getEmployeeFristName() == null || emp.getEmployeeFristName().equals("")
+				|| emp.getEmployeeLastName() == null || emp.getEmployeeLastName().equals("")
+				|| emp.getGenderStatus() == null || emp.getGenderStatus().equals("")
+				|| emp.getIntoCompanyYearAndMonth() == null || emp.getIntoCompanyYearAndMonth().equals("")
+				|| emp.getNationalityCode() == null || emp.getNationalityCode().equals("")) {
+			resultMap.put("errorsMessage", errorsMessage);
 			return resultMap;
 		}
 
