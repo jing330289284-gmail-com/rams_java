@@ -278,6 +278,7 @@ FROM
     T015ResumeManagement T015 ON T001.employeeNo = T015.employeeNo
 WHERE
     T011.bpSalesProgressCode IN (1 , 2) and LEFT(T011.bpOtherCompanyAdmissionEndDate,6) = #{sysDate}
+    and T010.salesYearAndMonth = #{salesDate}
     and T011.bpEmployeeNo  not in(SELECT 
             employeeNo
         FROM
