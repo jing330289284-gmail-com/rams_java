@@ -1,5 +1,6 @@
 package jp.co.lyc.cms.controller;
 
+import java.security.cert.CertPathChecker;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -35,6 +36,11 @@ public class SalesPointSetController extends BaseController {
 		Map<String, Object> result = new HashMap<>();
 		errorsMessage = "";
 
+		if (checkHave(putData(salesPointSetModel))) {
+			result.put("errorsMessage", "aaaaaa");
+			return result;
+		}
+
 		// 登陆处理
 		if (insert(putData(salesPointSetModel))) {
 			result.put("result", true);
@@ -69,6 +75,16 @@ public class SalesPointSetController extends BaseController {
 		}
 		logger.info("SalesPointSetController.salesPointUpdate:" + "修正結束");
 		return result;
+	}
+
+	/**
+	 * checkHave
+	 * 
+	 * @return
+	 */
+
+	public boolean checkHave(Map<String, Object> sendMap) {
+		return false;
 	}
 
 	/**
