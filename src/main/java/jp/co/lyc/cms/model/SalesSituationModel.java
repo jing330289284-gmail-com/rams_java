@@ -39,6 +39,9 @@ public class SalesSituationModel implements Serializable {
 	
 	String employeeName;
 	String nearestStation;
+	String developLanguageCode; 
+	String developLanguageName; 
+	
 	String developLanguage; 
 	String siteRoleCode;
 	String unitPrice;
@@ -421,6 +424,19 @@ public void setAge(String age) {
 	}
 	public void setUpdateUser(String updateUser) {
 		this.updateUser = updateUser;
+	}
+	
+	public String getDevelopLanguageCode() {
+		return developLanguageCode;
+	}
+	public void setDevelopLanguageCode(String developLanguageCode) {
+		this.developLanguageCode = developLanguageCode;
+	}
+	public String getDevelopLanguageName() {
+		return developLanguageName;
+	}
+	public void setDevelopLanguageName(String developLanguageName) {
+		this.developLanguageName = developLanguageName;
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;

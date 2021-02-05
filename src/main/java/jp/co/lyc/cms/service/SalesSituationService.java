@@ -11,15 +11,27 @@ import jp.co.lyc.cms.model.SalesSituationModel;
 
 @Component
 public class SalesSituationService {
- 
+
 	@Autowired
 	SalesSituationMapper salesSituationMapper;
-	
-	public List<SalesSituationModel> getSalesSituationModel(String sysDate, String curDate, String salesDate){
-		return salesSituationMapper.getSalesSituationModel(sysDate, curDate, salesDate);
+
+	public List<SalesSituationModel> getSalesSituationModel(String sysDate, String curDate, String salesDate) {
+		/*
+		 * return salesSituationMapper.getSalesSituationModel(sysDate, curDate,
+		 * salesDate);
+		 */
+		return salesSituationMapper.getSalesSituationInfo(sysDate, curDate, salesDate);
 	}
-	
-	public int insertSalesSituation(SalesSituationModel model){
+
+	public List<SalesSituationModel> getDevelopLanguage() {
+		return salesSituationMapper.getDevelopLanguage();
+	}
+
+	public List<SalesSituationModel> getT010SalesSituation(String sysDate, String curDate, String salesDate) {
+		return salesSituationMapper.getT010SalesSituation(sysDate, curDate, salesDate);
+	}
+
+	public int insertSalesSituation(SalesSituationModel model) {
 		return salesSituationMapper.insertSalesSituation(model);
 	}
 
@@ -27,39 +39,39 @@ public class SalesSituationService {
 		return salesSituationMapper.updateEmployeeSiteInfo(model);
 	}
 
-	public int updateSalesSituation(SalesSituationModel model){
+	public int updateSalesSituation(SalesSituationModel model) {
 		return salesSituationMapper.updateSalesSituation(model);
 	}
-	
-	public List<SalesSituationModel> getPersonalSalesInfo(String empNo){
+
+	public List<SalesSituationModel> getPersonalSalesInfo(String empNo) {
 		return salesSituationMapper.getPersonalSalesInfo(empNo);
 	}
-	
-	public List<SalesSituationModel> getPersonalSalesInfoFromT019(String empNo){
+
+	public List<SalesSituationModel> getPersonalSalesInfoFromT019(String empNo) {
 		return salesSituationMapper.getPersonalSalesInfoFromT019(empNo);
 	}
- 	 
-	public int updateEmployeeAddressInfo(SalesSituationModel model){
+
+	public int updateEmployeeAddressInfo(SalesSituationModel model) {
 		return salesSituationMapper.updateEmployeeAddressInfo(model);
 	}
-	
-	public int updateSalesSentence(SalesContent model){
+
+	public int updateSalesSentence(SalesContent model) {
 		return salesSituationMapper.updateSalesSentence(model);
 	}
-	
-	public int getCount(String empNo){
+
+	public int getCount(String empNo) {
 		return salesSituationMapper.getCount(empNo);
 	}
-	
-	public int updateDataStatus(SalesSituationModel model){
+
+	public int updateDataStatus(SalesSituationModel model) {
 		return salesSituationMapper.updateDataStatus(model);
 	}
-	
-	public int updateEMPInfo(SalesSituationModel model){
+
+	public int updateEMPInfo(SalesSituationModel model) {
 		return salesSituationMapper.updateEMPInfo(model);
 	}
-	
-	public int updateBPEMPInfo(SalesSituationModel model){
+
+	public int updateBPEMPInfo(SalesSituationModel model) {
 		return salesSituationMapper.updateBPEMPInfo(model);
 	}
 }

@@ -16,6 +16,12 @@ public interface SalesSituationMapper {
 	 */
  	
 	public List<SalesSituationModel> getSalesSituationModel(String sysDate, String curDate, String salesDate);
+	
+	public List<SalesSituationModel> getSalesSituationInfo(String sysDate, String curDate, String salesDate);
+	
+	public List<SalesSituationModel> getDevelopLanguage();
+	
+	public List<SalesSituationModel> getT010SalesSituation(String sysDate, String curDate, String salesDate);
   	
 	public int insertSalesSituation(SalesSituationModel model);
 
