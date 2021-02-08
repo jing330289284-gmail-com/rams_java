@@ -28,7 +28,7 @@
     CAST(T005.salary As unsigned) As salary,
     CAST((ifnull(T013.transportationExpenses,0) + ifnull(T005.scheduleOfBonusAmount,0) + ifnull(T005.insuranceFeeAmount,0)+ifnull(T013.otherAllowanceAmount,0) + ifnull(T013.leaderAllowanceAmount,0) + ifnull(T013.housingAllowance,0)) As unsigned) As otherFee,
     CAST(T005.waitingCost As unsigned) As waitingCost,
-	T006.unitPrice*10000 - (ifnull(T005.salary,0) + ifnull(T013.transportationExpenses,0) + ifnull(T005.scheduleOfBonusAmount,0) + ifnull(T005.insuranceFeeAmount,0) +ifnull(T013.otherAllowanceAmount,0) + ifnull(T013.leaderAllowanceAmount,0) + ifnull(T013.housingAllowance,0) + ifnull(T005.waitingCost,0)) As monthlyGrosProfits
+	ifnull(T006.unitPrice*10000,0) - (ifnull(T005.salary,0) + ifnull(T013.transportationExpenses,0) + ifnull(T005.scheduleOfBonusAmount,0) + ifnull(T005.insuranceFeeAmount,0) +ifnull(T013.otherAllowanceAmount,0) + ifnull(T013.leaderAllowanceAmount,0) + ifnull(T013.housingAllowance,0) + ifnull(T005.waitingCost,0)) As monthlyGrosProfits
 
      from (
 		select employeeNo, max(reflectYearAndMonth),salary , reflectYearAndMonth from T005WagesInfo
