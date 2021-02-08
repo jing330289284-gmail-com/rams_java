@@ -22,11 +22,13 @@
     M014.occupationName,
     T018.deductionsAndOvertimePay ,
     T018.deductionsAndOvertimePayOfUnitPrice ,
+    T006.admissionStartDate,
+    T006.admissionEndDate,
     CAST((T006.unitPrice*10000) As unsigned) As unitPrice,
     CAST(T005.salary As unsigned) As salary,
-    CAST((T013.transportationExpenses + T005.scheduleOfBonusAmount + T005.insuranceFeeAmount +T013.otherAllowanceAmount + T013.leaderAllowanceAmount + T013.housingAllowance) As unsigned) As otherFee,
+    CAST((ifnull(T013.transportationExpenses,0) + ifnull(T005.scheduleOfBonusAmount,0) + ifnull(T005.insuranceFeeAmount,0)+ifnull(T013.otherAllowanceAmount,0) + ifnull(T013.leaderAllowanceAmount,0) + ifnull(T013.housingAllowance,0)) As unsigned) As otherFee,
     CAST(T005.waitingCost As unsigned) As waitingCost,
-	(T006.unitPrice*10000 - (T005.salary + T013.transportationExpenses + T005.scheduleOfBonusAmount + T005.insuranceFeeAmount +T013.otherAllowanceAmount + T013.leaderAllowanceAmount + T013.housingAllowance + T005.waitingCost)) As monthlyGrosProfits
+	T006.unitPrice*10000 - (ifnull(T005.salary,0) + ifnull(T013.transportationExpenses,0) + ifnull(T005.scheduleOfBonusAmount,0) + ifnull(T005.insuranceFeeAmount,0) +ifnull(T013.otherAllowanceAmount,0) + ifnull(T013.leaderAllowanceAmount,0) + ifnull(T013.housingAllowance,0) + ifnull(T005.waitingCost,0)) As monthlyGrosProfits
 
      from (
 		select employeeNo, max(reflectYearAndMonth),salary , reflectYearAndMonth from T005WagesInfo
@@ -66,9 +68,11 @@
 		</if>
 		<if test="kadou == 0">
 			AND #{getYandM} between left(admissionStartDate,6) and left(admissionEndDate,6)
+			or  #{getYandM}  &gt;= left(admissionStartDate,6) 
+			AND admissionEndDate is null
 		</if>
 		<if test="kadou == 1">
-		 	AND left(admissionEndDate,6) &lt;= #{nowYandM} 
+		 	AND admissionStartDate is null
 		</if>
 		<if test="utilPricefront != null &amp;&amp; utilPriceback != null">
 			AND T006.unitPrice between  #{utilPricefront} and #{utilPriceback}

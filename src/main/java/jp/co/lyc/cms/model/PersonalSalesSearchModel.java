@@ -246,6 +246,9 @@ public class PersonalSalesSearchModel implements Serializable  {
 	public void setDeductionsAndOvertimePayOfUnitPrice(String deductionsAndOvertimePayOfUnitPrice) {
 		DeductionsAndOvertimePayOfUnitPrice = deductionsAndOvertimePayOfUnitPrice;
 	}
+	
+	
+
 
 
 	
