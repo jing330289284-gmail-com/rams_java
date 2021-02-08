@@ -195,7 +195,7 @@ public class PersonalSalesSearchController {
 						personModelList.get(i).setDeductionsAndOvertimePay("0");
 					}
 					if(UtilsCheckMethod.isNullOrEmpty(personModelList.get(i).getDeductionsAndOvertimePayOfUnitPrice())) {
-						personModelList.get(i).setDeductionsAndOvertimePayOfUnitPrice("0");
+						personModelList.get(i).setDeductionsAndOvertimePayOfUnitPrice("0");;
 					}
 					
 					

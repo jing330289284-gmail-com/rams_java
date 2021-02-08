@@ -32,7 +32,7 @@
 		T005.nextBonusMonth,
 		(CAST(B${getYandM}.leaderAllowanceAmount As unsigned)+CAST(B${getYandM}.otherAllowanceAmount As unsigned)+CAST(B${getYandM}.housingAllowance As unsigned)+CAST(B${getYandM}.transportationExpenses As unsigned) )As allowanceAmount,	
 		T018.DeductionsAndOvertimePay,
-		T018.DeductionsAndOvertimePayOfUnitPrice,
+		T018.DeductionsAndOvertimePayOfUnitPrice ,		
 		B${getYandM}.otherAllowanceName,
 		B${getYandM}.otherAllowanceAmount,
 		B${getYandM}.housingAllowance,
