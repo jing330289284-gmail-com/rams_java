@@ -67,21 +67,21 @@
 			AND T002.occupationCode = #{employeeOccupation}
 		</if>
 		<if test="kadou == 0">
-			AND #{getYandM} between left(admissionStartDate,6) and left(admissionEndDate,6)
+			AND (#{getYandM} between left(admissionStartDate,6) and left(admissionEndDate,6)
 			or  #{getYandM}  &gt;= left(admissionStartDate,6) 
-			AND admissionEndDate is null
+			AND admissionEndDate is null)
 		</if>
 		<if test="kadou == 1">
 		 	AND admissionStartDate is null
 		</if>
 		<if test="utilPricefront != null &amp;&amp; utilPriceback != null">
-			AND T006.unitPrice between  #{utilPricefront} and #{utilPriceback}
+			AND CAST((T006.unitPrice*10000) As unsigned) between CAST((#{utilPricefront}*10000) As unsigned) and CAST(( #{utilPriceback}*10000) As unsigned)
 		</if>
 		<if test="utilPricefront != null &amp;&amp; utilPriceback == null">
-			AND T006.unitPrice &gt;= #{utilPricefront}
+			AND CAST((T006.unitPrice*10000) As unsigned) &gt;= #{utilPricefront}*10000
 		</if>
 		<if test="utilPricefront== null &amp;&amp; utilPriceback != null">
-			AND T006.unitPrice &lt;= #{utilPriceback}
+			AND CAST((T006.unitPrice*10000) As unsigned) &lt;= #{utilPriceback}*10000
 		</if>
 		
 		<if test="salaryFront != null &amp;&amp; salaryBack != null">
@@ -99,7 +99,7 @@
 			 between  ${grossProfitFront}*10000 and ${grossProfitBack}*10000
 		</if>
 		<if test="grossProfitFront != null &amp;&amp; grossProfitBack == null">
-			AND (T006.unitPrice*10000 - (T005.salary + (T013.transportationExpenses + T005.scheduleOfBonusAmount + T005.insuranceFeeAmount +T013.otherwanceAmount + T013.leaderAllowanceAmount + T013.housingAllowance) + T005.waitingCost)) &gt;= ${grossProfitFront}*10000
+			AND (T006.unitPrice*10000 - (T005.salary + (T013.transportationExpenses + T005.scheduleOfBonusAmount + T005.insuranceFeeAmount +T013.otherAllowanceAmount + T013.leaderAllowanceAmount + T013.housingAllowance) + T005.waitingCost)) &gt;= ${grossProfitFront}*10000
 		</if>
 		<if test="grossProfitFront== null &amp;&amp; grossProfitBack != null">
 			AND (T006.unitPrice*10000 - (T005.salary + (T013.transportationExpenses + T005.scheduleOfBonusAmount + T005.insuranceFeeAmount +T013.otherAllowanceAmount + T013.leaderAllowanceAmount + T013.housingAllowance) + T005.waitingCost)) &lt;= ${grossProfitBack}*10000
