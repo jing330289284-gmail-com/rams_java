@@ -61,7 +61,126 @@
 		LEFT(admissionEndDate,6) =
 		#{sysDate}
 		ORDER BY employeeNo;
+	</select>
 
+	<select id="getSalesSituationInfoAfterToday"
+		parameterType="String"
+		resultType="jp.co.lyc.cms.model.SalesSituationModel">
+		SELECT T006EmployeeSiteInfo.employeeNo,
+		T006EmployeeSiteInfo.admissionStartDate,
+		T006EmployeeSiteInfo.admissionEndDate,
+		T006EmployeeSiteInfo.unitPrice,
+		ifnull(T006EmployeeSiteInfo.customerNo, '') AS customer,
+		T006EmployeeSiteInfo.customerNo as nowCustomer,
+		CONCAT(T001Employee.employeeFristName,T001Employee.employeeLastName)
+		AS
+		employeeName,
+		M013Station.stationName AS nearestStation,
+		T015ResumeManagement.resumeInfo1,
+		T015ResumeManagement.resumeInfo2,
+		T002EmployeeDetail.developLanguage1,
+		T002EmployeeDetail.developLanguage2,
+		T002EmployeeDetail.developLanguage3,
+		T002EmployeeDetail.developLanguage4,
+		T002EmployeeDetail.developLanguage5,
+		M012SiteRole.siteRoleName AS
+		siteRoleCode
+		FROM
+		T006EmployeeSiteInfo AS T006EmployeeSiteInfo
+		LEFT JOIN
+		T001Employee AS T001Employee
+		on
+		T006EmployeeSiteInfo.employeeNo =
+		T001Employee.employeeNo
+		LEFT JOIN
+		T003AddressInfo AS T003AddressInfo
+		on
+		T006EmployeeSiteInfo.employeeNo = T003AddressInfo.employeeNo
+		LEFT JOIN
+		M013Station AS M013Station
+		on T003AddressInfo.stationCode =
+		M013Station.stationCode
+		LEFT JOIN T015ResumeManagement AS
+		T015ResumeManagement
+		on T006EmployeeSiteInfo.employeeNo =
+		T015ResumeManagement.employeeNo
+		LEFT JOIN T002EmployeeDetail AS
+		T002EmployeeDetail
+		on T006EmployeeSiteInfo.employeeNo =
+		T002EmployeeDetail.employeeNo
+		LEFT JOIN M012SiteRole AS
+		M012SiteRole
+		on
+		T002EmployeeDetail.siteRoleCode =
+		M012SiteRole.siteRoleCode where admissionEndDate is not
+		null and
+		left(admissionEndDate,6) = #{sysDate}
+		
+		UNION
+		
+		SELECT
+		T006EmployeeSiteInfo.employeeNo,
+		T006EmployeeSiteInfo.admissionStartDate,
+		T006EmployeeSiteInfo.admissionEndDate,
+		T006EmployeeSiteInfo.unitPrice,
+		ifnull(T006EmployeeSiteInfo.customerNo, '') AS customer,
+		T006EmployeeSiteInfo.customerNo as nowCustomer,
+		CONCAT(T001Employee.employeeFristName,T001Employee.employeeLastName)
+		AS
+		employeeName,
+		M013Station.stationName AS nearestStation,
+		T015ResumeManagement.resumeInfo1,
+		T015ResumeManagement.resumeInfo2,
+		T002EmployeeDetail.developLanguage1,
+		T002EmployeeDetail.developLanguage2,
+		T002EmployeeDetail.developLanguage3,
+		T002EmployeeDetail.developLanguage4,
+		T002EmployeeDetail.developLanguage5,
+		M012SiteRole.siteRoleName AS
+		siteRoleCode
+		FROM
+		T006EmployeeSiteInfo AS T006EmployeeSiteInfo
+		LEFT JOIN
+		T001Employee AS T001Employee
+		on
+		T006EmployeeSiteInfo.employeeNo =
+		T001Employee.employeeNo
+		LEFT JOIN
+		T003AddressInfo AS T003AddressInfo
+		on
+		T006EmployeeSiteInfo.employeeNo = T003AddressInfo.employeeNo
+		LEFT JOIN
+		M013Station AS M013Station
+		on T003AddressInfo.stationCode =
+		M013Station.stationCode
+		LEFT JOIN T015ResumeManagement AS
+		T015ResumeManagement
+		on T006EmployeeSiteInfo.employeeNo =
+		T015ResumeManagement.employeeNo
+		LEFT JOIN T002EmployeeDetail AS
+		T002EmployeeDetail
+		on T006EmployeeSiteInfo.employeeNo =
+		T002EmployeeDetail.employeeNo
+		LEFT JOIN M012SiteRole AS
+		M012SiteRole
+		on
+		T002EmployeeDetail.siteRoleCode =
+		M012SiteRole.siteRoleCode
+		INNER JOIN
+		(SELECT
+		employeeNo,
+		MAX(admissionStartDate) AS admissionStartDate
+		FROM
+		T006EmployeeSiteInfo
+		GROUP BY
+		employeeNo) AS tempT
+		ON
+		T006EmployeeSiteInfo.employeeNo = tempT.employeeNo
+		AND
+		T006EmployeeSiteInfo.admissionStartDate = tempT.admissionStartDate
+		WHERE admissionEndDate is not null and left(admissionEndDate,6) &lt;
+		#{sysDate}
+		order by employeeNo;
 	</select>
 
 	<select id="getDevelopLanguage" parameterType="String"
@@ -859,10 +978,13 @@
 		T019.employeeNo =#{employeeNo}
 	</select>
 
-	<select id="checkEmpNoAndYM" parameterType="jp.co.lyc.cms.model.SalesSituationModel"
+	<select id="checkEmpNoAndYM"
+		parameterType="jp.co.lyc.cms.model.SalesSituationModel"
 		resultType="jp.co.lyc.cms.model.SalesSituationModel">
-		SELECT employeeNo,salesYearAndMonth FROM T010SalesSituation where
-		employeeNo = #{employeeNo} and salesYearAndMonth = #{salesYearAndMonth};
+		SELECT employeeNo,salesYearAndMonth FROM T010SalesSituation
+		where
+		employeeNo = #{employeeNo} and salesYearAndMonth =
+		#{salesYearAndMonth};
 	</select>
 
 	<update id="updateDataStatus"
@@ -907,8 +1029,9 @@
 		WHERE
 		bpEmployeeNo = #{employeeNo}
 	</update>
-	
-	<insert id="insertDataStatus" parameterType="jp.co.lyc.cms.model.SalesSituationModel">
+
+	<insert id="insertDataStatus"
+		parameterType="jp.co.lyc.cms.model.SalesSituationModel">
 		INSERT INTO
 		T010SalesSituation
 		(employeeNo,

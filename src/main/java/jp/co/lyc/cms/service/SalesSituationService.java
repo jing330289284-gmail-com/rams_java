@@ -1,5 +1,7 @@
 package jp.co.lyc.cms.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +22,14 @@ public class SalesSituationService {
 		 * return salesSituationMapper.getSalesSituationModel(sysDate, curDate,
 		 * salesDate);
 		 */
-		return salesSituationMapper.getSalesSituationInfo(sysDate, curDate, salesDate);
+		SimpleDateFormat sdf = new SimpleDateFormat();// 格式化时间
+		sdf.applyPattern("yyyyMM");// a为am/pm的标记
+		Date date = new Date();// 获取当前时间
+		if (Integer.parseInt(sysDate) >= Integer.parseInt(sdf.format(date))) {
+			return salesSituationMapper.getSalesSituationInfoAfterToday(sysDate, curDate, salesDate);
+		} else {
+			return salesSituationMapper.getSalesSituationInfo(sysDate, curDate, salesDate);
+		}
 	}
 
 	public List<SalesSituationModel> getDevelopLanguage() {
@@ -66,7 +75,7 @@ public class SalesSituationService {
 	public List<SalesSituationModel> checkEmpNoAndYM(SalesSituationModel model) {
 		return salesSituationMapper.checkEmpNoAndYM(model);
 	}
-	
+
 	public int insertDataStatus(SalesSituationModel model) {
 		return salesSituationMapper.insertDataStatus(model);
 	}
