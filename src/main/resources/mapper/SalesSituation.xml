@@ -859,6 +859,12 @@
 		T019.employeeNo =#{employeeNo}
 	</select>
 
+	<select id="checkEmpNoAndYM" parameterType="jp.co.lyc.cms.model.SalesSituationModel"
+		resultType="jp.co.lyc.cms.model.SalesSituationModel">
+		SELECT employeeNo,salesYearAndMonth FROM T010SalesSituation where
+		employeeNo = #{employeeNo} and salesYearAndMonth = #{salesYearAndMonth};
+	</select>
+
 	<update id="updateDataStatus"
 		parameterType="jp.co.lyc.cms.model.SalesSituationModel">
 		UPDATE
@@ -901,4 +907,21 @@
 		WHERE
 		bpEmployeeNo = #{employeeNo}
 	</update>
+	
+	<insert id="insertDataStatus" parameterType="jp.co.lyc.cms.model.SalesSituationModel">
+		INSERT INTO
+		T010SalesSituation
+		(employeeNo,
+		salesYearAndMonth,
+		updateTime,
+		createTime,
+		updateUser)
+		VALUES
+		(
+		#{employeeNo},
+		#{salesYearAndMonth},
+		NOW(),
+		NOW(),
+		#{updateUser})
+	</insert>
 </mapper>

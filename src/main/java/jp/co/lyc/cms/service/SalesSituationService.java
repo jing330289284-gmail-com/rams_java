@@ -63,6 +63,14 @@ public class SalesSituationService {
 		return salesSituationMapper.getCount(empNo);
 	}
 
+	public List<SalesSituationModel> checkEmpNoAndYM(SalesSituationModel model) {
+		return salesSituationMapper.checkEmpNoAndYM(model);
+	}
+	
+	public int insertDataStatus(SalesSituationModel model) {
+		return salesSituationMapper.insertDataStatus(model);
+	}
+
 	public int updateDataStatus(SalesSituationModel model) {
 		return salesSituationMapper.updateDataStatus(model);
 	}

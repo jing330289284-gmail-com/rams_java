@@ -39,6 +39,10 @@ public interface SalesSituationMapper {
 	
 	public int getCount(String empNo);
 	
+	public List<SalesSituationModel> checkEmpNoAndYM(SalesSituationModel model);
+	
+	public int insertDataStatus(SalesSituationModel model);
+	
 	public int updateDataStatus(SalesSituationModel model);
 	
 	public int updateEMPInfo(SalesSituationModel model);
