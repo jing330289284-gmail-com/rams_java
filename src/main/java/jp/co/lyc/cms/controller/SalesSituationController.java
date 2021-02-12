@@ -137,6 +137,8 @@ public class SalesSituationController extends BaseController {
 					salesSituationList.get(i).setSalesStaff(T010SalesSituationList.get(j).getSalesStaff());
 					salesSituationList.get(i)
 							.setSalesPriorityStatus(T010SalesSituationList.get(j).getSalesPriorityStatus());
+					salesSituationList.get(i).setCustomer(T010SalesSituationList.get(j).getConfirmCustomer());
+					salesSituationList.get(i).setPrice(T010SalesSituationList.get(j).getConfirmPrice());
 				}
 			}
 		}

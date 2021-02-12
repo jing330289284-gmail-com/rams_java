@@ -1063,6 +1063,8 @@
 		#{salesProgressCode},
 		customerContractStatus =
 		#{customerContractStatus},
+		confirmPrice = #{price},
+		confirmCustomer = #{customer},
 		salesStaff = #{salesStaff},
 		updateTime=
 		NOW(),
