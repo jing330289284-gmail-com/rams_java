@@ -1,5 +1,6 @@
 package jp.co.lyc.cms.controller;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Month;
 import java.util.ArrayList;
@@ -86,6 +87,9 @@ public class SalesSituationController extends BaseController {
 		for (int i = 0; i < salesSituationList.size(); i++) {
 			// 番号
 			salesSituationList.get(i).setRowNo(i + 1);
+
+			// お客様
+			salesSituationList.get(i).setCustomer("");
 
 			// 開発言語
 			String developLanguage = "";
@@ -299,15 +303,49 @@ public class SalesSituationController extends BaseController {
 	 * 
 	 * @param model
 	 * @return Map
+	 * @throws ParseException
 	 */
 	@RequestMapping(value = "/changeDataStatus", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> changeDataStatus(@RequestBody SalesSituationModel model) {
+	public Map<String, Object> changeDataStatus(@RequestBody SalesSituationModel model) throws ParseException {
+
+		Map<String, Object> result = new HashMap<>();
+		HttpSession session = getSession();
+		model.setUpdateUser(session.getAttribute("employeeName").toString());
+
+		logger.info("changeDataStatus:" + "チェック開始");
+		String errorsMessage = "";
+		if (model.getSalesProgressCode() != null && (model.getSalesProgressCode().equals("4")
+				|| model.getSalesProgressCode().equals("5") || model.getSalesProgressCode().equals("6"))) {
+			if (model.getCustomerContractStatus() == null || model.getCustomerContractStatus().equals("")) {
+				errorsMessage += "契約区分 ";
+			}
+			if (model.getCustomer() == null || model.getCustomer().equals("")) {
+				errorsMessage += "確定客様 ";
+			}
+			if (model.getPrice() == null || model.getPrice().equals("")) {
+				errorsMessage += "確定単価  ";
+			}
+
+			if (!errorsMessage.equals("")) {
+				errorsMessage += "を入力してください。";
+				result.put("errorsMessage", errorsMessage);
+				return result;
+			} else {
+				String nextAdmission = salesSituationService.getEmpNextAdmission(model.getEmployeeNo());
+				if (nextAdmission != null
+						&& (Integer.parseInt(nextAdmission) > Integer.parseInt(model.getAdmissionEndDate()))) {
+					errorsMessage += "次の現場存在しています、データをチェックしてください。";
+					result.put("errorsMessage", errorsMessage);
+					return result;
+				} else {
+					salesSituationService.insertEmpNextAdmission(model);
+				}
+			}
+		}
 
 		logger.info("changeDataStatus:" + "更新開始");
 		List<SalesSituationModel> salesSituationList = new ArrayList<SalesSituationModel>();
-		HttpSession session = getSession();
-		model.setUpdateUser(session.getAttribute("employeeName").toString());
 		int updateCount = 0;
 		try {
 			// 現在の日付を取得
@@ -345,7 +383,6 @@ public class SalesSituationController extends BaseController {
 			e.printStackTrace();
 		}
 		logger.info("changeDataStatus" + "更新結束");
-		Map<String, Object> result = new HashMap<>();
 		result.put("result", salesSituationList);
 		return result;
 	}

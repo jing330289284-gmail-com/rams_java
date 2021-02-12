@@ -45,6 +45,7 @@ public class SalesSituationModel implements Serializable {
 	String developLanguage; 
 	String siteRoleCode;
 	String unitPrice;
+	String price;
 	String salesPriorityStatus;
 	String customer;
 	String admissionStartDate;
@@ -76,6 +77,12 @@ String developLanguage3;
 String developLanguage4;
 String developLanguage5;
 
+public String getPrice() {
+	return price;
+}
+public void setPrice(String price) {
+	this.price = price;
+}
 public String getSalesDate() {
 	return salesDate;
 }

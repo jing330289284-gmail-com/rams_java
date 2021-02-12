@@ -1,6 +1,8 @@
 package jp.co.lyc.cms.service;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -17,6 +19,15 @@ public class SalesSituationService {
 	@Autowired
 	SalesSituationMapper salesSituationMapper;
 
+	public String getEmpNextAdmission(String employeeNo) {
+		return salesSituationMapper.getEmpNextAdmission(employeeNo);
+	}
+
+	public void insertEmpNextAdmission(SalesSituationModel model) throws ParseException {
+		model.setAdmissionStartDate(subMonth(model.getAdmissionEndDate()) + "01");
+		salesSituationMapper.insertEmpNextAdmission(model);
+	}
+
 	public List<SalesSituationModel> getSalesSituationModel(String sysDate, String curDate, String salesDate) {
 		/*
 		 * return salesSituationMapper.getSalesSituationModel(sysDate, curDate,
@@ -25,11 +36,13 @@ public class SalesSituationService {
 		SimpleDateFormat sdf = new SimpleDateFormat();// 格式化时间
 		sdf.applyPattern("yyyyMM");// a为am/pm的标记
 		Date date = new Date();// 获取当前时间
-		if (Integer.parseInt(sysDate) >= Integer.parseInt(sdf.format(date))) {
-			return salesSituationMapper.getSalesSituationInfoAfterToday(sysDate, curDate, salesDate);
-		} else {
-			return salesSituationMapper.getSalesSituationInfo(sysDate, curDate, salesDate);
-		}
+		return salesSituationMapper.getSalesSituationInfoAfterToday(sysDate, curDate, salesDate);
+		/*
+		 * if (Integer.parseInt(sysDate) >= Integer.parseInt(sdf.format(date))) { return
+		 * salesSituationMapper.getSalesSituationInfoAfterToday(sysDate, curDate,
+		 * salesDate); } else { return
+		 * salesSituationMapper.getSalesSituationInfo(sysDate, curDate, salesDate); }
+		 */
 	}
 
 	public List<SalesSituationModel> getDevelopLanguage() {
@@ -90,5 +103,23 @@ public class SalesSituationService {
 
 	public int updateBPEMPInfo(SalesSituationModel model) {
 		return salesSituationMapper.updateBPEMPInfo(model);
+	}
+
+	/****
+	 * 传入具体日期 ，返回具体日期增加一个月。
+	 * 
+	 * @param date 日期(2017-04-13)
+	 * @return 2017-05-13
+	 * @throws ParseException
+	 */
+	private String subMonth(String date) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
+		Date dt = sdf.parse(date);
+		Calendar rightNow = Calendar.getInstance();
+		rightNow.setTime(dt);
+		rightNow.add(Calendar.MONTH, 1);
+		Date dt1 = rightNow.getTime();
+		String reStr = sdf.format(dt1);
+		return reStr;
 	}
 }
