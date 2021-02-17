@@ -88,6 +88,11 @@ public class SalesSituationController extends BaseController {
 			// 番号
 			salesSituationList.get(i).setRowNo(i + 1);
 
+			// 社員名
+			if (salesSituationList.get(i).getEmployeeNo().substring(0, 2).equals("BP")) {
+				salesSituationList.get(i).setEmployeeName(salesSituationList.get(i).getEmployeeName() + "(BP)");
+			}
+
 			// お客様
 			salesSituationList.get(i).setCustomer("");
 
