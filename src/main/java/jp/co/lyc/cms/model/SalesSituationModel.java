@@ -1,7 +1,9 @@
 package jp.co.lyc.cms.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.dao.DataAccessResourceFailureException;
 
@@ -79,6 +81,34 @@ public class SalesSituationModel implements Serializable {
 
 	String confirmPrice;
 	String confirmCustomer;
+	ArrayList<String> employeeNoList;
+	ArrayList<String> resumeInfo1List;
+	ArrayList<String> resumeInfo2List;
+	
+
+	public ArrayList<String> getResumeInfo1List() {
+		return resumeInfo1List;
+	}
+
+	public void setResumeInfo1List(ArrayList<String> resumeInfo1List) {
+		this.resumeInfo1List = resumeInfo1List;
+	}
+
+	public ArrayList<String> getResumeInfo2List() {
+		return resumeInfo2List;
+	}
+
+	public void setResumeInfo2List(ArrayList<String> resumeInfo2List) {
+		this.resumeInfo2List = resumeInfo2List;
+	}
+
+	public ArrayList<String> getEmployeeNoList() {
+		return employeeNoList;
+	}
+
+	public void setEmployeeNoList(ArrayList<String> employeeNoList) {
+		this.employeeNoList = employeeNoList;
+	}
 
 	public String getConfirmPrice() {
 		return confirmPrice;

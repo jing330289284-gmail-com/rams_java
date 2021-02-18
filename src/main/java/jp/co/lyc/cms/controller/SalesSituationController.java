@@ -1,5 +1,10 @@
 package jp.co.lyc.cms.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.channels.FileChannel;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Month;
@@ -392,6 +397,84 @@ public class SalesSituationController extends BaseController {
 		logger.info("changeDataStatus" + "更新結束");
 		result.put("result", salesSituationList);
 		return result;
+	}
+
+	/**
+	 * 画面の可変項目変更する
+	 * 
+	 * @return Map
+	 * @throws ParseException
+	 */
+	@RequestMapping(value = "/makeDirectory", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> makeDirectory(@RequestBody SalesSituationModel model) throws ParseException {
+
+		Map<String, Object> result = new HashMap<>();
+		ArrayList<String> employeeNoList = model.getEmployeeNoList();
+		ArrayList<String> resumeInfo1List = model.getResumeInfo1List();
+		ArrayList<String> resumeInfo2List = model.getResumeInfo2List();
+
+		for (int i = 0; i < employeeNoList.size(); i++) {
+			String mkDirectoryPath = "c:\\file\\営業フォルダー\\" + model.getSalesYearAndMonth() + "\\"
+					+ employeeNoList.get(i);
+			if (mkDirectory(mkDirectoryPath)) {
+				System.out.println(mkDirectoryPath + "建立完毕");
+				if (resumeInfo1List.get(i) != null)
+					fileChannelCopy(resumeInfo1List.get(i), mkDirectoryPath);
+				if (resumeInfo2List.get(i) != null)
+					fileChannelCopy(resumeInfo2List.get(i), mkDirectoryPath);
+			} else {
+				System.out.println(mkDirectoryPath + "建立失败！此目录或许已经存在！");
+			}
+		}
+
+		return result;
+	}
+
+	public static boolean mkDirectory(String path) {
+		File file = null;
+		try {
+			file = new File(path);
+			if (!file.exists()) {
+				return file.mkdirs();
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
+		} finally {
+			file = null;
+		}
+		return false;
+	}
+
+	public void fileChannelCopy(String sFile, String tFile) {
+		FileInputStream fi = null;
+		FileOutputStream fo = null;
+		FileChannel in = null;
+		FileChannel out = null;
+		File s = new File(sFile);
+		String fileName = sFile.substring(sFile.lastIndexOf("/") + 1);
+		File t = new File(tFile + "//" + fileName);
+		if (s.exists() && s.isFile()) {
+			try {
+				fi = new FileInputStream(s);
+				fo = new FileOutputStream(t);
+				in = fi.getChannel();// 得到对应的文件通道
+				out = fo.getChannel();// 得到对应的文件通道
+				in.transferTo(0, in.size(), out);// 连接两个通道，并且从in通道读取，然后写入out通道
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					fi.close();
+					in.close();
+					fo.close();
+					out.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 
 	/**
