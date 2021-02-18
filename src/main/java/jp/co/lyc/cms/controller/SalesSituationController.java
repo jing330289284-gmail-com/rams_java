@@ -400,14 +400,15 @@ public class SalesSituationController extends BaseController {
 	}
 
 	/**
-	 * 画面の可変項目変更する
+	 * 営業フォルダー
 	 * 
 	 * @return Map
 	 * @throws ParseException
+	 * @throws Exception
 	 */
 	@RequestMapping(value = "/makeDirectory", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> makeDirectory(@RequestBody SalesSituationModel model) throws ParseException {
+	public Map<String, Object> makeDirectory(@RequestBody SalesSituationModel model) throws ParseException, Exception {
 
 		Map<String, Object> result = new HashMap<>();
 		ArrayList<String> employeeNoList = model.getEmployeeNoList();
@@ -418,19 +419,23 @@ public class SalesSituationController extends BaseController {
 			String mkDirectoryPath = "c:\\file\\営業フォルダー\\" + model.getSalesYearAndMonth() + "\\"
 					+ employeeNoList.get(i);
 			if (mkDirectory(mkDirectoryPath)) {
-				System.out.println(mkDirectoryPath + "建立完毕");
+				// System.out.println(mkDirectoryPath + "建立完毕");
 				if (resumeInfo1List.get(i) != null)
 					fileChannelCopy(resumeInfo1List.get(i), mkDirectoryPath);
 				if (resumeInfo2List.get(i) != null)
 					fileChannelCopy(resumeInfo2List.get(i), mkDirectoryPath);
 			} else {
-				System.out.println(mkDirectoryPath + "建立失败！此目录或许已经存在！");
+				// System.out.println(mkDirectoryPath + "建立失败！此目录或许已经存在！");
 			}
 		}
+		Runtime.getRuntime().exec("cmd /c start explorer c:\\file\\営業フォルダー\\" + model.getSalesYearAndMonth());
 
 		return result;
 	}
 
+	/*
+	 * 
+	 * */
 	public static boolean mkDirectory(String path) {
 		File file = null;
 		try {
