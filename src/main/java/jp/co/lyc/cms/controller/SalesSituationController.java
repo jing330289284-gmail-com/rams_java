@@ -428,7 +428,8 @@ public class SalesSituationController extends BaseController {
 				// System.out.println(mkDirectoryPath + "建立失败！此目录或许已经存在！");
 			}
 		}
-		Runtime.getRuntime().exec("cmd /c start explorer c:\\file\\営業フォルダー\\" + model.getSalesYearAndMonth());
+		//cmd指令打开对应文件夹
+		//Runtime.getRuntime().exec("cmd /c start explorer c:\\file\\営業フォルダー\\" + model.getSalesYearAndMonth());
 
 		return result;
 	}
