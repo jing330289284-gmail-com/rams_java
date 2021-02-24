@@ -1257,6 +1257,18 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getAdmissionMonth();
 		return list;
 	}
+	
+	/**
+	 * 送信対象格納リスト 取得
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getStorageListName", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getStorageListName() {
+		List<ModelClass> list = utilsService.getStorageListName();
+		return list;
+	}
 
 	/**
 	 * 面談回数取得

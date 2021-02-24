@@ -352,6 +352,13 @@ public interface UtilsMapper {
 	public List<ModelClass> getAdmissionMonth();
 	
 	/**
+	 * 送信対象格納リスト 取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getStorageListName();
+	
+	/**
 	 * 社員氏名(営業、管理者)を取得する
 	 * 
 	 * 

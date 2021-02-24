@@ -462,6 +462,18 @@
 		FROM
 			M039AdmissionMonth
 	</select>
+	
+		<!--送信対象格納リスト -->
+	<select id="getStorageListName"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT
+			customerList CODE,
+			StorageListName NAME
+		FROM
+			T021CustomerSendMailStorageList
+		WHERE
+			transmissionClassificationCode = 1
+	</select>
 	<!-- 社員名(営業、管理者) -->
 	<select id="getEmployeeNameByOccupationName"
 		resultType="jp.co.lyc.cms.model.ModelClass">

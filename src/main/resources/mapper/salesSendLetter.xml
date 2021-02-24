@@ -63,7 +63,7 @@ from T021CustomerSendMailStorageList order by StorageListName
 		T021CustomerSendMailStorageList
 		set
 		StorageListName=#{storageListName},updateTime=now(),updateUser=#{updateUser}
-		where StorageListName=#{oldStorageListName} and transmissionClassificationCode=1
+		where StorageListName=#{oldStorageListName} and transmissionClassificationCode = 1
 	</update>
 	 <select id="getSalesCustomersByNos" resultType="jp.co.lyc.cms.model.SalesSendLetterModel">
 	SELECT 

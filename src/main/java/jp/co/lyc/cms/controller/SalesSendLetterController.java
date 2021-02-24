@@ -21,7 +21,7 @@ import jp.co.lyc.cms.service.SalesSendLetterService;
 
 @Controller
 @RequestMapping(value = "/salesSendLetters")
-public class SalesSendLetterController  extends BaseController {
+public class SalesSendLetterController extends BaseController {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -49,7 +49,7 @@ public class SalesSendLetterController  extends BaseController {
 		logger.info("getCustomers" + "検索結束");
 		return salesCustomersList;
 	}
-	
+
 	@RequestMapping(value = "/getSalesPersons", method = RequestMethod.POST)
 	@ResponseBody
 	public List<SalesSendLetterModel> getSalesPersons(@RequestBody SalesSendLetterModel model) {
@@ -64,14 +64,14 @@ public class SalesSendLetterController  extends BaseController {
 		logger.info("getSalesPersons" + "検索結束");
 		return salesPersonsList;
 	}
-	
+
 	@RequestMapping(value = "/creatList", method = RequestMethod.POST)
 	@ResponseBody
 	public int creatList(@RequestBody SalesSendLetterModel model) {
 
 		model.setUpdateUser(getSession().getAttribute("employeeName").toString());
 		logger.info("getSalesPersons:" + "検索開始");
-		int index=0;
+		int index = 0;
 		try {
 			index = salesSendLetterService.creatList(model);
 		} catch (Exception e) {
@@ -80,7 +80,7 @@ public class SalesSendLetterController  extends BaseController {
 		logger.info("getSalesPersons" + "検索結束");
 		return index;
 	}
-	
+
 	@RequestMapping(value = "/getLists", method = RequestMethod.POST)
 	@ResponseBody
 	public List<SalesSendLetterModel> getLists() {
@@ -94,22 +94,17 @@ public class SalesSendLetterController  extends BaseController {
 		logger.info("getSalesPersons" + "検索結束");
 		return salesPersonsList;
 	}
-	
+
 	@RequestMapping(value = "/listNameUpdate", method = RequestMethod.POST)
 	@ResponseBody
 	public void listNameUpdate(@RequestBody SalesSendLettersListName salesSendLettersListNames) {
 
-		if(!salesSendLettersListNames.getStorageListName2().equals(salesSendLettersListNames.getOldStorageListName2())) {
-			updateName(salesSendLettersListNames.getStorageListName2(),salesSendLettersListNames.getOldStorageListName2());
-		}
-		if(!salesSendLettersListNames.getStorageListName3().equals(salesSendLettersListNames.getOldStorageListName3())) {
-			updateName(salesSendLettersListNames.getStorageListName3(),salesSendLettersListNames.getOldStorageListName3());
-		}
-		if(!salesSendLettersListNames.getStorageListName1().equals(salesSendLettersListNames.getOldStorageListName1())) {
-			updateName(salesSendLettersListNames.getStorageListName1(),salesSendLettersListNames.getOldStorageListName1());
+		if (!salesSendLettersListNames.getStorageListName().equals(salesSendLettersListNames.getOldStorageListName())) {
+			updateName(salesSendLettersListNames.getStorageListName(),
+					salesSendLettersListNames.getOldStorageListName());
 		}
 	}
-	
+
 	@RequestMapping(value = "/getCustomersByNos", method = RequestMethod.POST)
 	@ResponseBody
 	public List<SalesSendLetterModel> getCustomersByNos(@RequestBody SalesSendLetterModel model) {
@@ -124,9 +119,9 @@ public class SalesSendLetterController  extends BaseController {
 		logger.info("getCustomers" + "検索結束");
 		return salesCustomersList;
 	}
-	
-	private void updateName(String storageListName,String oldStorageListName) {
-		SalesSendLettersListName updateModel= new SalesSendLettersListName();
+
+	private void updateName(String storageListName, String oldStorageListName) {
+		SalesSendLettersListName updateModel = new SalesSendLettersListName();
 		updateModel.setUpdateUser(getSession().getAttribute("employeeName").toString());
 		updateModel.setStorageListName(storageListName);
 		updateModel.setOldStorageListName(oldStorageListName);
@@ -136,12 +131,12 @@ public class SalesSendLetterController  extends BaseController {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@RequestMapping(value = "/deleteList", method = RequestMethod.POST)
 	@ResponseBody
 	public int deleteList(@RequestBody SalesSendLettersListName salesSendLettersListNames) {
 		logger.info("getSalesPersons:" + "検索開始");
-		int index=0;
+		int index = 0;
 		try {
 			index = salesSendLetterService.deleteList(salesSendLettersListNames.getStorageListName());
 		} catch (Exception e) {
@@ -150,4 +145,4 @@ public class SalesSendLetterController  extends BaseController {
 		logger.info("getSalesPersons" + "検索結束");
 		return index;
 	}
-	}
+}

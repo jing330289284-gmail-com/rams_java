@@ -503,6 +503,15 @@ public class UtilsService {
 	}
 	
 	/**
+	 * 送信対象格納リスト 取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getStorageListName() {
+		return utilsMapper.getStorageListName();
+	}
+	
+	/**
 	 * 送信日付設定取得
 	 * 
 	 * @return
