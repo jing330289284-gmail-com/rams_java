@@ -512,6 +512,15 @@ public class UtilsService {
 	}
 	
 	/**
+	 * お客様担当者取得 取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getPurchasingManagers() {
+		return utilsMapper.getPurchasingManagers();
+	}
+	
+	/**
 	 * 送信日付設定取得
 	 * 
 	 * @return

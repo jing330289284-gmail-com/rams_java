@@ -1269,6 +1269,18 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getStorageListName();
 		return list;
 	}
+	
+	/**
+	 * お客様担当者取得 取得
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getPurchasingManagers", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getPurchasingManagers() {
+		List<ModelClass> list = utilsService.getPurchasingManagers();
+		return list;
+	}
 
 	/**
 	 * 面談回数取得

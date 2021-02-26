@@ -359,6 +359,13 @@ public interface UtilsMapper {
 	public List<ModelClass> getStorageListName();
 	
 	/**
+	 * お客様担当者取得 取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getPurchasingManagers();
+	
+	/**
 	 * 社員氏名(営業、管理者)を取得する
 	 * 
 	 * 

@@ -432,48 +432,63 @@
 		FROM
 		M037ProjectType
 	</select>
-	
+
 	<!--案件番号取得 -->
 	<select id="getProjectNo"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT
-			projectNo NAME,
-			projectNo CODE 
+		projectNo NAME,
+		projectNo CODE
 		FROM
-			T022ProjectInfo
+		T022ProjectInfo
 	</select>
 
 	<!--送信日付設定取得 -->
 	<select id="getSendReportOfDateSeting"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT
-			SendReportOfDateSetingName NAME,
-			SendReportOfDateSetingCode CODE
+		SendReportOfDateSetingName NAME,
+		SendReportOfDateSetingCode CODE
 		FROM
-			M038SendReportOfDateSeting
+		M038SendReportOfDateSeting
 	</select>
-	
+
 	<!--入場期日取得 -->
 	<select id="getAdmissionMonth"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT
-			admissionMonthName NAME,
-			admissionMonthCode CODE
+		admissionMonthName NAME,
+		admissionMonthCode CODE
 		FROM
-			M039AdmissionMonth
+		M039AdmissionMonth
 	</select>
-	
-		<!--送信対象格納リスト -->
+
+	<!--送信対象格納リスト -->
 	<select id="getStorageListName"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT
-			customerList CODE,
-			StorageListName NAME
+		customerList CODE,
+		StorageListName NAME
 		FROM
-			T021CustomerSendMailStorageList
+		T021CustomerSendMailStorageList
 		WHERE
-			transmissionClassificationCode = 1
+		transmissionClassificationCode = 1
 	</select>
+
+	<!-- お客様担当者取得 取得-->
+	<select id="getPurchasingManagers"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT
+		customerNo CODE,
+		customerName NAME,
+		purchasingManagers VALUE,
+		CONCAT(purchasingManagers,'(',customerName,' ',customerNo,')') TEXT
+		FROM
+		T007CustomerInfo
+		WHERE
+		purchasingManagers is not null and purchasingManagers != "";
+	</select>
+
 	<!-- 社員名(営業、管理者) -->
 	<select id="getEmployeeNameByOccupationName"
 		resultType="jp.co.lyc.cms.model.ModelClass">
@@ -491,7 +506,8 @@
 		T002EmployeeDetail.occupationCode =
 		M014Occupation.occupationCode
 		where
-		T002EmployeeDetail.occupationCode = "0"
+		T002EmployeeDetail.occupationCode =
+		"0"
 		or T002EmployeeDetail.occupationCode = "1";
 	</select>
 </mapper>
