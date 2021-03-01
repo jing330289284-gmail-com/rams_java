@@ -49,6 +49,28 @@ public class SalesSendLetterController extends BaseController {
 		logger.info("getCustomers" + "検索結束");
 		return salesCustomersList;
 	}
+	
+	/**
+	 * データを取得
+	 * 
+	 * @param なし
+	 * @return List
+	 */
+
+	@RequestMapping(value = "/getSalesCustomerByNo", method = RequestMethod.POST)
+	@ResponseBody
+	public List<SalesSendLetterModel> getSalesCustomerByNo(@RequestBody SalesSendLetterModel model) {
+
+		logger.info("getCustomers:" + "検索開始");
+		List<SalesSendLetterModel> salesCustomersList = new ArrayList<SalesSendLetterModel>();
+		try {
+			salesCustomersList = salesSendLetterService.getSalesCustomerByNo(model.getCustomerNo());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		logger.info("getCustomers" + "検索結束");
+		return salesCustomersList;
+	}
 
 	@RequestMapping(value = "/getSalesPersons", method = RequestMethod.POST)
 	@ResponseBody
@@ -80,6 +102,24 @@ public class SalesSendLetterController extends BaseController {
 		logger.info("getSalesPersons" + "検索結束");
 		return index;
 	}
+	
+	@RequestMapping(value = "/addNewList", method = RequestMethod.POST)
+	@ResponseBody
+	public String addNewList(@RequestBody SalesSendLetterModel model) {
+
+		model.setUpdateUser(getSession().getAttribute("employeeName").toString());
+		logger.info("getSalesPersons:" + "検索開始");
+		String name = "";
+		try {
+			name = salesSendLetterService.getMaxStorageListName();
+			model.setName(name);
+			salesSendLetterService.creatList(model);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		logger.info("getSalesPersons" + "検索結束");
+		return name;
+	}
 
 	@RequestMapping(value = "/getLists", method = RequestMethod.POST)
 	@ResponseBody
@@ -103,6 +143,30 @@ public class SalesSendLetterController extends BaseController {
 			updateName(salesSendLettersListNames.getStorageListName(),
 					salesSendLettersListNames.getOldStorageListName());
 		}
+	}
+	
+	@RequestMapping(value = "/customerListUpdate", method = RequestMethod.POST)
+	@ResponseBody
+	public String customerListUpdate(@RequestBody SalesSendLetterModel model) {
+		try {
+			salesSendLetterService.customerListUpdate(model.getStorageListName(),model.getCustomerList());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		logger.info("getSalesPersons" + "検索結束");
+		return salesSendLetterService.getCustomerList(model.getStorageListName());
+	}
+	
+	@RequestMapping(value = "/deleteCustomerList", method = RequestMethod.POST)
+	@ResponseBody
+	public String deleteCustomerList(@RequestBody SalesSendLetterModel model) {
+		try {
+			salesSendLetterService.deleteCustomerList(model);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		logger.info("getSalesPersons" + "検索結束");
+		return "";
 	}
 
 	@RequestMapping(value = "/getCustomersByNos", method = RequestMethod.POST)

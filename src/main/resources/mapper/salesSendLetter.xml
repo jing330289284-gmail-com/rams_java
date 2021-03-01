@@ -1,43 +1,88 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="jp.co.lyc.cms.mapper.SalesSendLetterMapper">
-    <resultMap id="SalesSendLetter" type="jp.co.lyc.cms.model.SalesSendLetterModel"/>
-    <!--　お客様取る -->
-    <select id="getSalesCustomers" resultType="jp.co.lyc.cms.model.SalesSendLetterModel">
-	SELECT 
-	(@rowNo:=@rowNo+1 ) AS rowId,
-    T007.customerNo,
-    T007.customerName,
-    T007.purchasingManagers,
-    T009.customerDepartmentCode,
-    T009.positionCode,
-    T007.purchasingManagersMail,
-    T007.levelCode,
-    '' AS monthCount,
-    '' AS purchasingManagers2,
-	'' AS positionCode2,
-	'' AS purchasingManagersMail2
-FROM
-    T007CustomerInfo AS T007
-        LEFT JOIN
-    T009CustomerDepartmentInfo AS T009 ON T007.customerNo = T009.customerNo
-        AND T007.purchasingManagers = T009.responsiblePerson, (SELECT
-		@rowNo:=-1) AS rowId
-    </select>
-        <!--　担当取る -->
-    <select id="getSalesPersons" parameterType="String" resultType="jp.co.lyc.cms.model.SalesSendLetterModel">
-SELECT 
-    customerDepartmentCode,
-    positionCode,
-    responsiblePerson,
-    customerDepartmentMail
-FROM
-    T009CustomerDepartmentInfo
-WHERE
-    customerNo = #{customerNo};
-    </select>
-    <insert id="creatList" parameterType="String">
-    INSERT INTO T021CustomerSendMailStorageList
+	<resultMap id="SalesSendLetter"
+		type="jp.co.lyc.cms.model.SalesSendLetterModel" />
+	<!-- お客様取る -->
+	<select id="getSalesCustomers"
+		resultType="jp.co.lyc.cms.model.SalesSendLetterModel">
+		SELECT
+		(@rowNo:=@rowNo+1 ) AS rowId,
+		T007.customerNo,
+		T007.customerName,
+		T007.purchasingManagers,
+		T009.customerDepartmentCode,
+		T009.positionCode,
+		T007.purchasingManagersMail,
+		T007.levelCode,
+		'' AS monthCount,
+		'' AS
+		purchasingManagers2,
+		'' AS positionCode2,
+		'' AS purchasingManagersMail2
+		FROM
+		T007CustomerInfo AS T007
+		LEFT JOIN
+		T009CustomerDepartmentInfo AS
+		T009 ON T007.customerNo = T009.customerNo
+		AND T007.purchasingManagers =
+		T009.responsiblePerson, (SELECT
+		@rowNo:=-1)
+		AS rowId
+	</select>
+
+	<!--指定したお客様取る -->
+	<select id="getSalesCustomerByNo" parameterType="String"
+		resultType="jp.co.lyc.cms.model.SalesSendLetterModel">
+		SELECT
+		T007.customerNo,
+		T007.customerName,
+		T007.purchasingManagers,
+		T009.customerDepartmentCode,
+		T009.positionCode,
+		T007.purchasingManagersMail,
+		T007.levelCode,
+		'' AS
+		monthCount,
+		'' AS purchasingManagers2,
+		'' AS positionCode2,
+		'' AS
+		purchasingManagersMail2
+		FROM
+		T007CustomerInfo AS T007
+		LEFT JOIN
+		T009CustomerDepartmentInfo AS T009 ON T007.customerNo =
+		T009.customerNo
+		AND T007.purchasingManagers = T009.responsiblePerson
+		WHERE T007.customerNo = #{customerNo};
+	</select>
+
+	<!-- 担当取る -->
+	<select id="getSalesPersons" parameterType="String"
+		resultType="jp.co.lyc.cms.model.SalesSendLetterModel">
+		SELECT
+		customerDepartmentCode,
+		positionCode,
+		responsiblePerson,
+		customerDepartmentMail
+		FROM
+		T009CustomerDepartmentInfo
+		WHERE
+		customerNo = #{customerNo};
+	</select>
+
+	<!-- リスト最大番号取得 -->
+	<select id="getMaxStorageListName" parameterType="String"
+		resultType="String">
+		select CONCAT('送信リスト',
+		ifnull((max(replace(StorageListName,'送信リスト','')*1)+1),'1')) as
+		StorageListName from T021CustomerSendMailStorageList
+		where StorageListName like '送信リスト%';
+	</select>
+
+	<insert id="creatList" parameterType="String">
+		INSERT INTO
+		T021CustomerSendMailStorageList
 		(StorageListName,
 		transmissionClassificationCode,
 		customerList,
@@ -49,53 +94,88 @@ WHERE
 		#{name},
 		1,
 		#{code},
-		 NOW(),
-		 NOW(),
+		NOW(),
+		NOW(),
 		#{updateUser})
-    </insert>
-        <select id="getLists" resultType="jp.co.lyc.cms.model.SalesSendLetterModel">
-select StorageListName as name,transmissionClassificationCode as code,customerList as customerNo
-from T021CustomerSendMailStorageList order by StorageListName
-    </select>
-    
-    	<update id="listNameUpdate" parameterType="String">
+	</insert>
+	<select id="getLists"
+		resultType="jp.co.lyc.cms.model.SalesSendLetterModel">
+		select StorageListName as
+		name,transmissionClassificationCode as
+		code,customerList as customerNo
+		from T021CustomerSendMailStorageList order by StorageListName
+	</select>
+
+	<update id="listNameUpdate" parameterType="String">
 		update
 		T021CustomerSendMailStorageList
 		set
 		StorageListName=#{storageListName},updateTime=now(),updateUser=#{updateUser}
-		where StorageListName=#{oldStorageListName} and transmissionClassificationCode = 1
+		where StorageListName=#{oldStorageListName} and
+		transmissionClassificationCode = 1
 	</update>
-	 <select id="getSalesCustomersByNos" resultType="jp.co.lyc.cms.model.SalesSendLetterModel">
-	SELECT 
-	(@rowNo:=@rowNo+1 ) AS rowId,
-    T007.customerNo,
-    T007.customerName,
-    T007.purchasingManagers,
-    T009.customerDepartmentCode,
-    T009.positionCode,
-    T007.purchasingManagersMail,
-    T007.levelCode,
-    '' AS monthCount,
-    '' AS purchasingManagers2,
-	'' AS positionCode2,
-	'' AS purchasingManagersMail2
-FROM
-    T007CustomerInfo AS T007
-        LEFT JOIN
-    T009CustomerDepartmentInfo AS T009 ON T007.customerNo = T009.customerNo
-        AND T007.purchasingManagers = T009.responsiblePerson, (SELECT
-		@rowNo:=-1) AS rowId
+	
+	<update id="deleteCustomerList" parameterType="String">
+		update
+		T021CustomerSendMailStorageList
+		set
+		customerList = "",updateTime=now(),updateUser=#{updateUser}
+		where StorageListName=#{storageListName} and
+		transmissionClassificationCode = 1
+	</update>
+
+	<update id="customerListUpdate" parameterType="String">
+		update
+		T021CustomerSendMailStorageList set customerList = CONCAT(
+		customerList, ',' , #{customerList}) where StorageListName =
+		#{storageListName};
+	</update>
+
+	<select id="getCustomerList" parameterType="String"
+		resultType="String">
+		SELECT customerList FROM T021CustomerSendMailStorageList
+		where StorageListName = #{storageListName};
+	</select>
+
+	<select id="getSalesCustomersByNos"
+		resultType="jp.co.lyc.cms.model.SalesSendLetterModel">
+		SELECT
+		(@rowNo:=@rowNo+1 ) AS rowId,
+		T007.customerNo,
+		T007.customerName,
+		T007.purchasingManagers,
+		T009.customerDepartmentCode,
+		T009.positionCode,
+		T007.purchasingManagersMail,
+		T007.levelCode,
+		'' AS
+		monthCount,
+		'' AS purchasingManagers2,
+		'' AS positionCode2,
+		'' AS
+		purchasingManagersMail2
+		FROM
+		T007CustomerInfo AS T007
+		LEFT JOIN
+		T009CustomerDepartmentInfo AS T009 ON T007.customerNo =
+		T009.customerNo
+		AND T007.purchasingManagers = T009.responsiblePerson,
+		(SELECT
+		@rowNo:=-1)
+		AS rowId
 		WHERE
-   T007.customerNo IN 
-     <foreach collection="array" index="index" item="item" open="(" separator="," close=")">
-         #{item}
-    </foreach>
-    </select>
-    	<delete id="deleteList" parameterType="String">
+		T007.customerNo IN
+		<foreach collection="array" index="index" item="item" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+	<delete id="deleteList" parameterType="String">
 		DELETE
 		FROM
 		T021CustomerSendMailStorageList
 		WHERE
-		StorageListName=#{storageListName} and transmissionClassificationCode=1
+		StorageListName=#{storageListName} and
+		transmissionClassificationCode=1
 	</delete>
 </mapper>

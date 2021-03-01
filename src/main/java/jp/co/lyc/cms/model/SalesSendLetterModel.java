@@ -55,8 +55,22 @@ public class SalesSendLetterModel {
 	String name;
 	String code;
 	String[] ctmNos;
+	String storageListName;
+	String customerList;
 	
 	
+	public String getStorageListName() {
+		return storageListName;
+	}
+	public void setStorageListName(String storageListName) {
+		this.storageListName = storageListName;
+	}
+	public String getCustomerList() {
+		return customerList;
+	}
+	public void setCustomerList(String customerList) {
+		this.customerList = customerList;
+	}
 	public String[] getCtmNos() {
 		return ctmNos;
 	}

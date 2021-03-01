@@ -21,6 +21,10 @@ public class SalesSendLetterService {
 		return salesSendLetterMapper.getSalesCustomers();
 	};
 	
+	public List<SalesSendLetterModel> getSalesCustomerByNo(String customerNo){
+		return salesSendLetterMapper.getSalesCustomerByNo(customerNo);
+	};
+	
 	public List<SalesSendLetterModel> getSalesPersons(String customerNo){
 		return salesSendLetterMapper.getSalesPersons(customerNo);
 	};
@@ -37,11 +41,27 @@ public class SalesSendLetterService {
 		return salesSendLetterMapper.listNameUpdate(model);
 	};
 	
+	public int deleteCustomerList(SalesSendLetterModel model){
+		return salesSendLetterMapper.deleteCustomerList(model);
+	};
+	
 	public List<SalesSendLetterModel> getSalesCustomersByNos(String[] ctmNos){
 		return salesSendLetterMapper.getSalesCustomersByNos(ctmNos);
 	};
 	
 	public int deleteList(String storageListName){
 		return salesSendLetterMapper.deleteList(storageListName);
-	};
+	}
+
+	public void customerListUpdate(String storageListName, String customerList) {
+		salesSendLetterMapper.customerListUpdate(storageListName,customerList);
+	}
+
+	public String getCustomerList(String storageListName) {
+		return salesSendLetterMapper.getCustomerList(storageListName);
+	}
+
+	public String getMaxStorageListName() {
+		return salesSendLetterMapper.getMaxStorageListName();
+	}
 }
