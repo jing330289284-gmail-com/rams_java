@@ -49,7 +49,7 @@ public class SalesSendLetterController extends BaseController {
 		logger.info("getCustomers" + "検索結束");
 		return salesCustomersList;
 	}
-	
+
 	/**
 	 * データを取得
 	 * 
@@ -83,6 +83,9 @@ public class SalesSendLetterController extends BaseController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		for (int i = 0; i < salesPersonsList.size(); i++) {
+			salesPersonsList.get(i).setRowId(i + 1);
+		}
 		logger.info("getSalesPersons" + "検索結束");
 		return salesPersonsList;
 	}
@@ -102,7 +105,7 @@ public class SalesSendLetterController extends BaseController {
 		logger.info("getSalesPersons" + "検索結束");
 		return index;
 	}
-	
+
 	@RequestMapping(value = "/addNewList", method = RequestMethod.POST)
 	@ResponseBody
 	public String addNewList(@RequestBody SalesSendLetterModel model) {
@@ -144,19 +147,19 @@ public class SalesSendLetterController extends BaseController {
 					salesSendLettersListNames.getOldStorageListName());
 		}
 	}
-	
+
 	@RequestMapping(value = "/customerListUpdate", method = RequestMethod.POST)
 	@ResponseBody
 	public String customerListUpdate(@RequestBody SalesSendLetterModel model) {
 		try {
-			salesSendLetterService.customerListUpdate(model.getStorageListName(),model.getCustomerList());
+			salesSendLetterService.customerListUpdate(model.getStorageListName(), model.getCustomerList());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		logger.info("getSalesPersons" + "検索結束");
 		return salesSendLetterService.getCustomerList(model.getStorageListName());
 	}
-	
+
 	@RequestMapping(value = "/deleteCustomerList", method = RequestMethod.POST)
 	@ResponseBody
 	public String deleteCustomerList(@RequestBody SalesSendLetterModel model) {
@@ -182,6 +185,39 @@ public class SalesSendLetterController extends BaseController {
 		}
 		logger.info("getCustomers" + "検索結束");
 		return salesCustomersList;
+	}
+
+	@RequestMapping(value = "/deleteCustomerListByNo", method = RequestMethod.POST)
+	@ResponseBody
+	public String deleteCustomerListByNo(@RequestBody SalesSendLetterModel model) {
+
+		logger.info("getCustomers:" + "検索開始");
+		String newCtmNos = "";
+		for (int i = 0; i < model.getOldCtmNos().length; i++) {
+			boolean flag = false;
+			for (int j = 0; j < model.getDeleteCtmNos().length; j++) {
+				if (model.getOldCtmNos()[i].equals(model.getDeleteCtmNos()[j])) {
+					flag = true;
+					break;
+				}
+			}
+			if (!flag) {
+				newCtmNos += model.getOldCtmNos()[i] + ",";
+			}
+		}
+		if (newCtmNos.length() > 0) {
+			newCtmNos = newCtmNos.substring(0, newCtmNos.length() - 1);
+		}
+		model.setCtmNos(newCtmNos.split(","));
+		model.setUpdateUser(getSession().getAttribute("employeeName").toString());
+		model.setCustomerList(newCtmNos);
+		try {
+			salesSendLetterService.deleteCustomerListByNo(model);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		logger.info("getCustomers" + "検索結束");
+		return newCtmNos;
 	}
 
 	private void updateName(String storageListName, String oldStorageListName) {

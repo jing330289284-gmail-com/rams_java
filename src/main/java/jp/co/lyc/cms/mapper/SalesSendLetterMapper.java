@@ -28,4 +28,5 @@ public interface SalesSendLetterMapper {
 	public void customerListUpdate(String storageListName, String customerList);
 	public String getCustomerList(String storageListName);
 	public String getMaxStorageListName();
+	public void deleteCustomerListByNo(SalesSendLetterModel model);
 }

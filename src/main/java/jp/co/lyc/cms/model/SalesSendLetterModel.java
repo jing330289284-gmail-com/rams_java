@@ -55,10 +55,24 @@ public class SalesSendLetterModel {
 	String name;
 	String code;
 	String[] ctmNos;
+	String[] oldCtmNos;
+	String[] deleteCtmNos;
 	String storageListName;
 	String customerList;
 	
 	
+	public String[] getOldCtmNos() {
+		return oldCtmNos;
+	}
+	public void setOldCtmNos(String[] oldCtmNos) {
+		this.oldCtmNos = oldCtmNos;
+	}
+	public String[] getDeleteCtmNos() {
+		return deleteCtmNos;
+	}
+	public void setDeleteCtmNos(String[] deleteCtmNos) {
+		this.deleteCtmNos = deleteCtmNos;
+	}
 	public String getStorageListName() {
 		return storageListName;
 	}

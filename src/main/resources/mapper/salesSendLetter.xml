@@ -77,7 +77,8 @@
 		select CONCAT('送信リスト',
 		ifnull((max(replace(StorageListName,'送信リスト','')*1)+1),'1')) as
 		StorageListName from T021CustomerSendMailStorageList
-		where StorageListName like '送信リスト%';
+		where
+		StorageListName like '送信リスト%';
 	</select>
 
 	<insert id="creatList" parameterType="String">
@@ -114,14 +115,17 @@
 		where StorageListName=#{oldStorageListName} and
 		transmissionClassificationCode = 1
 	</update>
-	
+
 	<update id="deleteCustomerList" parameterType="String">
 		update
 		T021CustomerSendMailStorageList
 		set
-		customerList = "",updateTime=now(),updateUser=#{updateUser}
-		where StorageListName=#{storageListName} and
-		transmissionClassificationCode = 1
+		customerList =
+		"",updateTime=now(),updateUser=#{updateUser}
+		where
+		StorageListName=#{storageListName} and
+		transmissionClassificationCode =
+		1
 	</update>
 
 	<update id="customerListUpdate" parameterType="String">
@@ -129,6 +133,12 @@
 		T021CustomerSendMailStorageList set customerList = CONCAT(
 		customerList, ',' , #{customerList}) where StorageListName =
 		#{storageListName};
+	</update>
+
+	<update id="deleteCustomerListByNo" parameterType="String">
+		update
+		T021CustomerSendMailStorageList set customerList = #{customerList}
+		where StorageListName = #{storageListName};
 	</update>
 
 	<select id="getCustomerList" parameterType="String"

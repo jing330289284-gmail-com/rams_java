@@ -64,4 +64,8 @@ public class SalesSendLetterService {
 	public String getMaxStorageListName() {
 		return salesSendLetterMapper.getMaxStorageListName();
 	}
+
+	public void deleteCustomerListByNo(SalesSendLetterModel model) {
+		salesSendLetterMapper.deleteCustomerListByNo(model);
+	}
 }
