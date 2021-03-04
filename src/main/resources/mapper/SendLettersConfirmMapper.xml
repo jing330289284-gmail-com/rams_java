@@ -67,7 +67,12 @@ FROM
         LEFT JOIN
     M003Nationality M003 ON M003.nationalityCode = T002.nationalityCode
         LEFT JOIN
-    T010SalesSituation T010 ON T001.employeeNo = T010.employeeNo
+    (SELECT T010.* FROM (SELECT employeeNo, max(salesYearAndMonth) as salesYearAndMonth
+FROM T010SalesSituation
+GROUP BY employeeNo) as Emp
+Left join T010SalesSituation T010
+on T010.employeeNo = Emp.employeeNo
+and T010.salesYearAndMonth = Emp.salesYearAndMonth) T010 ON T001.employeeNo = T010.employeeNo
         LEFT JOIN
     T003AddressInfo T003 ON T001.employeeNo = T003.employeeNo
         LEFT JOIN
@@ -78,7 +83,8 @@ WHERE
          #{item}
     </foreach>
     </select>
-        <select id="getAllEmpsWithResume" resultType="jp.co.lyc.cms.model.SalesSituationModel">
+
+<select id="getAllEmpsWithResume" resultType="jp.co.lyc.cms.model.SalesSituationModel">
 	SELECT 
     CONCAT(T001.employeeFristName,
             T001.employeeLastName) AS 'employeeName',
@@ -91,7 +97,8 @@ FROM
     T015ResumeManagement T015 ON T001.employeeNo = T015.employeeNo
 
     </select>
-     <select id="getLoginUserInfo" resultType="jp.co.lyc.cms.model.EmployeeModel">
+
+<select id="getLoginUserInfo" resultType="jp.co.lyc.cms.model.EmployeeModel">
     	SELECT 
     T001.employeeFristName,
             T001.employeeLastName,
