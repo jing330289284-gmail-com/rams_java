@@ -10,6 +10,7 @@
     T002.employeeStatus,
     T002.employeeNo,
     T010.hopeHighestPrice,
+	T019.unitPrice,
     T002.genderStatus,
     M003.nationalityName,
     T002.birthday,
@@ -64,6 +65,9 @@ FROM
     M011DevelopLanguage M011e ON M011e.developLanguageCode = T002.developLanguage5
         LEFT JOIN
     M010JapaneseLevel M010 ON M010.japaneseLevelCode = T002.japaneseLevelCode
+         LEFT JOIN
+               
+    T019SalesSentence T019 ON T019.employeeNo = T002.employeeNo
         LEFT JOIN
     M003Nationality M003 ON M003.nationalityCode = T002.nationalityCode
         LEFT JOIN
@@ -110,14 +114,19 @@ FROM
 WHERE
     T001.employeeNo = #{lobinUserNo}
     </select>
-         <select id="getMail" resultType="jp.co.lyc.cms.model.EmployeeModel">
-    	SELECT 
-      T002.*
+<select id="getMail" resultType="jp.co.lyc.cms.model.EmployeeModel">
+SELECT 
+      companyMail
 FROM
-
     T002EmployeeDetail T002 
 WHERE
-    T002.occupationCode = "3"
+    occupationCode != "3"
+and
+	occupationCode != ""
+and
+    companyMail != ""
+and 
+	companyMail is not null;
     </select>
     
     <!-- 要員追加機能の新規　20201216 　張棟　START -->

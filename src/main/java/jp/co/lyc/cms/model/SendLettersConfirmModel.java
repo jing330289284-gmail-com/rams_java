@@ -13,6 +13,7 @@ public class SendLettersConfirmModel implements Serializable {
 	String employeeName;
 	String salesYearAndMonth;
 	String hopeHighestPrice;
+	String unitPrice;
 	String salesProgressCode;
 	String remark;
 	String updateUser;
@@ -34,6 +35,14 @@ public class SendLettersConfirmModel implements Serializable {
 	int index;//
 	
 	
+	public String getUnitPrice() {
+		return unitPrice;
+	}
+
+	public void setUnitPrice(String unitPrice) {
+		this.unitPrice = unitPrice;
+	}
+
 	public String getResumeInfo1() {
 		return resumeInfo1;
 	}
