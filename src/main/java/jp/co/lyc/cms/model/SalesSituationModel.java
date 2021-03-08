@@ -46,6 +46,7 @@ public class SalesSituationModel implements Serializable {
 
 	String developLanguage;
 	String siteRoleCode;
+	String siteRoleName;
 	String unitPrice;
 	String price;
 	String salesPriorityStatus;
@@ -85,6 +86,14 @@ public class SalesSituationModel implements Serializable {
 	ArrayList<String> resumeInfo1List;
 	ArrayList<String> resumeInfo2List;
 	
+
+	public String getSiteRoleName() {
+		return siteRoleName;
+	}
+
+	public void setSiteRoleName(String siteRoleName) {
+		this.siteRoleName = siteRoleName;
+	}
 
 	public ArrayList<String> getResumeInfo1List() {
 		return resumeInfo1List;

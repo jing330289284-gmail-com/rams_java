@@ -862,6 +862,7 @@
 		englishConversationLevel,
 		t002.yearsOfExperience,
 		t002.siteRoleCode,
+		M012.siteRoleName,
 		CONCAT_WS(',',
 
 		IF(ISNULL(t002.developLanguage1) or
@@ -890,6 +891,10 @@
 		LEFT JOIN
 		T002EmployeeDetail t002 ON t001.employeeNo =
 		t002.employeeNo
+				LEFT JOIN
+
+		M012SiteRole M012 ON
+		M012.siteRoleCode = t002.siteRoleCode
 		LEFT JOIN
 
 		M011DevelopLanguage M011a ON
@@ -944,6 +949,7 @@
 		t019.englishConversationLevel,
 		t019.yearsOfExperience,
 		t002.siteRoleCode,
+		M012.siteRoleName,
 
 		t019.developLanguageCode6 as
 		developLanguage1,
@@ -960,6 +966,8 @@
 		T001Employee t001
 		LEFT JOIN
 		T002EmployeeDetail t002 ON t001.employeeNo = t002.employeeNo
+		LEFT JOIN
+		M012SiteRole M012 ON M012.siteRoleCode = t002.siteRoleCode
 		LEFT JOIN
 		M003Nationality m003 ON t002.nationalityCode = m003.nationalityCode
 		LEFT JOIN
