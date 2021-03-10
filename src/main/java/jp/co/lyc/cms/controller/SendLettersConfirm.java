@@ -1,5 +1,6 @@
 package jp.co.lyc.cms.controller;
 
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -111,7 +112,7 @@ public class SendLettersConfirm  extends BaseController {
 	
 	@RequestMapping(value = "/sendMailWithFile", method = RequestMethod.POST)
 	@ResponseBody
-	public void sendMailWithFile(@RequestBody EmailModel emailModel) {
+	public void sendMailWithFile(@RequestBody EmailModel emailModel){
 
 		logger.info("sendMailWithFile:" + "送信開始");
 		
@@ -122,6 +123,7 @@ public class SendLettersConfirm  extends BaseController {
 		emailModel.setPassword("Lyc2020-0908-");
 		//emailModel.setFromAddress(model.getMailFrom());
 		emailModel.setContextType("text/html;charset=utf-8");
+		//utils.EmailSend(emailModel);
 		utils.sendMailWithFile(emailModel);
 		logger.info("sendMailWithFile" + "送信結束");
 	}

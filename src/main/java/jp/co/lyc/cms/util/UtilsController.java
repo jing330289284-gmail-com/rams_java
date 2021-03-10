@@ -28,9 +28,13 @@ import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
 import javax.mail.Address;
+import javax.mail.Authenticator;
+import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.Multipart;
 import javax.mail.NoSuchProviderException;
+import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
@@ -1038,16 +1042,16 @@ public class UtilsController {
 			MailSSLSocketFactory sf = new MailSSLSocketFactory();
 			// properties 底层调用的的是put方法
 			properties.put("Mail.smtp.ssl.socketFactory", sf);
-			// 获取具有以上属性的邮件session --->连接池
+			// 获取具有以上属性的邮件session ---> 连接池
 			session = Session.getInstance(properties);
 			// 创建获取连接
 			Transport transport = session.getTransport();
 			// 进行连接
-			transport.connect(emailMod.getUserName(), emailMod.getPassword());
+			transport.connect("mail@lyc.co.jp", "Lyc2020-0908-");
 			// 创建一个信息
 			Message message = new MimeMessage(session);
 			// 设定发送方
-			message.setFrom(new InternetAddress(emailMod.getUserName()));
+			message.setFrom(new InternetAddress("mail@lyc.co.jp"));
 			// 设置主题内容
 			message.setSubject(emailMod.getSubject());
 			message.setContent(emailMod.getContext(), "text/html;charset=utf-8");
@@ -1110,7 +1114,7 @@ public class UtilsController {
 			// 创建一个信息
 			Message message = new MimeMessage(session);
 			// 设定发送方
-			message.setFrom(new InternetAddress("mail@lyc.co.jp"));
+			message.setFrom(new InternetAddress("yibugo@lyc.co.jp"));
 			// 设置主题内容
 			message.setSubject(emailMod.getMailTitle());
 			// message.setContent(emailMod.getContext(), "text/html;charset=utf-8");
@@ -1132,7 +1136,8 @@ public class UtilsController {
 			multipart.addBodyPart(contentPart);
 			// 添加附件
 			MimeBodyPart filePart = new MimeBodyPart();
-			DataSource source = new FileDataSource(emailMod.getResumePath());
+			//DataSource source = new FileDataSource(emailMod.getResumePath());
+			DataSource source = new FileDataSource("C:\\file\\履歴書\\新建文本文档.txt");
 			// 添加附件的内容
 			filePart.setDataHandler(new DataHandler(source));
 			// 添加附件的标题
