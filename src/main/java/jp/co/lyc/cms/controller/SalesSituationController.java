@@ -298,6 +298,12 @@ public class SalesSituationController extends BaseController {
 	public int updateSalesSentence(@RequestBody SalesContent model) {
 
 		model.setUpdateUser(getSession().getAttribute("employeeName").toString());
+		if(model.getJapaneaseConversationLevel() != null && model.getJapaneaseConversationLevel().equals("")) {
+			model.setJapaneaseConversationLevel(null);
+		}
+		if(model.getEnglishConversationLevel() != null && model.getEnglishConversationLevel().equals("")) {
+			model.setEnglishConversationLevel(null);
+		}
 		logger.info("getPersonalSalesInfo:" + "検索開始");
 		int index = 0;
 		model.setBeginMonth(model.getTempDate());

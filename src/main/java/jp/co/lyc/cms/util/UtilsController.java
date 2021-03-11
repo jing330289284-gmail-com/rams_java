@@ -1148,10 +1148,18 @@ public class UtilsController {
 			message.setContent(multipart);
 
 			String[] addresss = emailMod.getSelectedmail().split(",");
-			int len = addresss.length;
+			int len = 0;
+			for (int i = 0; i < addresss.length; i++) {
+				if(!addresss[i].equals(""))
+					len++;
+			}
 			Address[] adds = new Address[len];
-			for (int i = 0; i < len; i++) {
-				adds[i] = new InternetAddress(addresss[i]);
+			len = 0;
+			for (int i = 0; i < addresss.length; i++) {
+				if(!addresss[i].equals("")) {
+					adds[len] = new InternetAddress(addresss[i]);
+					len++;
+				}
 			}
 			message.addRecipients(MimeMessage.RecipientType.TO, adds);
 
