@@ -59,8 +59,22 @@ public class SalesSendLetterModel {
 	String[] deleteCtmNos;
 	String storageListName;
 	String customerList;
+	String mainChargeList;
+	String departmentCodeList;
+
 	
-	
+	public String getDepartmentCodeList() {
+		return departmentCodeList;
+	}
+	public void setDepartmentCodeList(String departmentCodeList) {
+		this.departmentCodeList = departmentCodeList;
+	}
+	public String getMainChargeList() {
+		return mainChargeList;
+	}
+	public void setMainChargeList(String mainChargeList) {
+		this.mainChargeList = mainChargeList;
+	}
 	public String[] getOldCtmNos() {
 		return oldCtmNos;
 	}

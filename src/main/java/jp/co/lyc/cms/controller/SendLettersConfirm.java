@@ -27,13 +27,13 @@ import jp.co.lyc.cms.util.UtilsController;
 
 @Controller
 @RequestMapping(value = "/sendLettersConfirm")
-public class SendLettersConfirm  extends BaseController {
+public class SendLettersConfirm extends BaseController {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	SendLettersConfirmService sendLettersConfirmService;
-	
+
 	@Autowired
 	UtilsController utils;
 
@@ -52,17 +52,17 @@ public class SendLettersConfirm  extends BaseController {
 		List<SendLettersConfirmModel> sendLettersConfirmModelList = new ArrayList<SendLettersConfirmModel>();
 		try {
 			sendLettersConfirmModelList = sendLettersConfirmService.getSalesEmps(model.getEmployeeNos());
-			int i =1;
+			int i = 1;
 			for (SendLettersConfirmModel sendletter : sendLettersConfirmModelList) {
-                sendletter.setIndex(i++);
-            }
+				sendletter.setIndex(i++);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		logger.info("getSalesEmps" + "検索結束");
 		return sendLettersConfirmModelList;
 	}
-	
+
 	@RequestMapping(value = "/getAllEmpsWithResume", method = RequestMethod.POST)
 	@ResponseBody
 	public List<SalesSituationModel> getAllEmpsWithResume() {
@@ -77,7 +77,7 @@ public class SendLettersConfirm  extends BaseController {
 		logger.info("getSalesEmps" + "検索結束");
 		return sendLettersConfirmModelList;
 	}
-	
+
 	@RequestMapping(value = "/getLoginUserInfo", method = RequestMethod.POST)
 	@ResponseBody
 	public List<EmployeeModel> getLoginUserInfo() {
@@ -90,16 +90,23 @@ public class SendLettersConfirm  extends BaseController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		if (sendLettersConfirmModelList.get(0).getPhoneNo() != null
+				&& !sendLettersConfirmModelList.get(0).getPhoneNo().equals("")) {
+			sendLettersConfirmModelList.get(0)
+					.setPhoneNo(sendLettersConfirmModelList.get(0).getPhoneNo().substring(0, 3) + "-"
+							+ sendLettersConfirmModelList.get(0).getPhoneNo().substring(3, 7) + "-"
+							+ sendLettersConfirmModelList.get(0).getPhoneNo().substring(7, 11));
+		}
 		logger.info("getSalesEmps" + "検索結束");
 		return sendLettersConfirmModelList;
-	}	
-	
+	}
+
 	@RequestMapping(value = "/getMail", method = RequestMethod.POST)
 	@ResponseBody
 	public List<EmployeeModel> getMail() {
 
 		logger.info("getSalesEmps:" + "検索開始");
-		
+
 		List<EmployeeModel> sendLettersConfirmModelList = new ArrayList<EmployeeModel>();
 		try {
 			sendLettersConfirmModelList = sendLettersConfirmService.getMail();
@@ -109,31 +116,31 @@ public class SendLettersConfirm  extends BaseController {
 		logger.info("getSalesEmps" + "検索結束");
 		return sendLettersConfirmModelList;
 	}
-	
+
 	@RequestMapping(value = "/sendMailWithFile", method = RequestMethod.POST)
 	@ResponseBody
-	public void sendMailWithFile(@RequestBody EmailModel emailModel){
+	public void sendMailWithFile(@RequestBody EmailModel emailModel) {
 
 		logger.info("sendMailWithFile:" + "送信開始");
-		
-		//EmailModel emailModel = new EmailModel();
-		//　String mail = es.getEmployeeCompanyMail(loginModel.getEmployeeNo());
-		//　受信人のメール
+
+		// EmailModel emailModel = new EmailModel();
+		// String mail = es.getEmployeeCompanyMail(loginModel.getEmployeeNo());
+		// 受信人のメール
 		emailModel.setUserName(getSession().getAttribute("employeeName").toString());
 		emailModel.setPassword("Lyc2020-0908-");
-		//emailModel.setFromAddress(model.getMailFrom());
+		// emailModel.setFromAddress(model.getMailFrom());
 		emailModel.setContextType("text/html;charset=utf-8");
-		//utils.EmailSend(emailModel);
+		// utils.EmailSend(emailModel);
 		utils.sendMailWithFile(emailModel);
 		logger.info("sendMailWithFile" + "送信結束");
 	}
-	
-	// 要員追加機能の新規　20201216 　張棟　START
+
+	// 要員追加機能の新規 20201216 張棟 START
 	/**
 	 * 名前と所属を取る<br/>
 	 * <br/>
 	 * 要員送信確認画面初期化する時、全て社内要員とBP社員の名前と所属を取る<br/>
-	 * */
+	 */
 	@RequestMapping(value = "/getAllEmployInfoName", method = RequestMethod.POST)
 	@ResponseBody
 	public List<AllEmployName> getAllEmployInfoName() {
@@ -141,6 +148,6 @@ public class SendLettersConfirm  extends BaseController {
 		EmployInfo = sendLettersConfirmService.getAllEmployInfoName();
 		return EmployInfo;
 	}
-	// 要員追加機能の新規　20201216 　張棟　END
-	
+	// 要員追加機能の新規 20201216 張棟 END
+
 }

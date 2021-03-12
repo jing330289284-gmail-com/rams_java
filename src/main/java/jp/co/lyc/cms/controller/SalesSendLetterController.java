@@ -113,6 +113,15 @@ public class SalesSendLetterController extends BaseController {
 		model.setUpdateUser(getSession().getAttribute("employeeName").toString());
 		logger.info("getSalesPersons:" + "検索開始");
 		String name = "";
+		String mainChargeList = "";
+		String departmentCodeList = "";
+		String[] code = model.getCode().split(",");
+		for (int i = 0; i < code.length; i++) {
+			mainChargeList += code[i] + ":;";
+			departmentCodeList += code[i] + ":;";
+		}
+		model.setMainChargeList(mainChargeList);
+		model.setDepartmentCodeList(departmentCodeList);
 		try {
 			name = salesSendLetterService.getMaxStorageListName();
 			model.setName(name);
@@ -160,6 +169,49 @@ public class SalesSendLetterController extends BaseController {
 		return salesSendLetterService.getCustomerList(model.getStorageListName());
 	}
 
+	@RequestMapping(value = "/customerSendMailStorageListUpdate", method = RequestMethod.POST)
+	@ResponseBody
+	public void customerSendMailStorageListUpdate(@RequestBody SalesSendLetterModel model) {
+		SalesSendLetterModel salesSendLetter = new SalesSendLetterModel();
+		String mainChargeList = "";
+		String departmentCodeList = "";
+		try {
+			salesSendLetter = salesSendLetterService.getMainChargeList(model.getStorageListName());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		String[] selectedRowKeys = salesSendLetter.getMainChargeList().split(";");
+		String[] selectedRowNames = salesSendLetter.getDepartmentCodeList().split(";");
+
+		for (int i = 0; i < selectedRowKeys.length; i++) {
+			String[] customerRowKeys = selectedRowKeys[i].split(":");
+			if (model.getCustomerNo().equals(customerRowKeys[0])) {
+				mainChargeList += model.getCustomerNo() + ":" + model.getMainChargeList() + ";";
+
+			} else {
+				mainChargeList += selectedRowKeys[i] + ";";
+			}
+		}
+
+		for (int i = 0; i < selectedRowNames.length; i++) {
+			String[] customerRowNames = selectedRowNames[i].split(":");
+			if (model.getCustomerNo().equals(customerRowNames[0])) {
+				departmentCodeList += model.getCustomerNo() + ":" + model.getDepartmentCodeList() + ";";
+
+			} else {
+				departmentCodeList += selectedRowNames[i] + ";";
+			}
+		}
+
+		try {
+			salesSendLetterService.customerSendMailStorageListUpdate(model.getStorageListName(), mainChargeList,
+					departmentCodeList);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	@RequestMapping(value = "/deleteCustomerList", method = RequestMethod.POST)
 	@ResponseBody
 	public String deleteCustomerList(@RequestBody SalesSendLetterModel model) {
@@ -178,12 +230,37 @@ public class SalesSendLetterController extends BaseController {
 
 		logger.info("getCustomers:" + "検索開始");
 		List<SalesSendLetterModel> salesCustomersList = new ArrayList<SalesSendLetterModel>();
+		SalesSendLetterModel salesSendLetter = new SalesSendLetterModel();
 		try {
 			salesCustomersList = salesSendLetterService.getSalesCustomersByNos(model.getCtmNos());
+			salesSendLetter = salesSendLetterService.getMainChargeList(model.getStorageListName());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		logger.info("getCustomers" + "検索結束");
+		if (model.getStorageListName() != "" && model.getStorageListName() != null) {
+			String[] selectedRowKeys = salesSendLetter.getMainChargeList().split(";");
+			String[] selectedRowNames = salesSendLetter.getDepartmentCodeList().split(";");
+
+			for (int i = 0; i < salesCustomersList.size(); i++) {
+				salesCustomersList.get(i).setStorageListName(model.getStorageListName());
+				for (int j = 0; j < selectedRowKeys.length; j++) {
+					String[] customerRowKeys = selectedRowKeys[j].split(":");
+					if (salesCustomersList.get(i).getCustomerNo().equals(customerRowKeys[0])) {
+						salesCustomersList.get(i)
+								.setMainChargeList(customerRowKeys.length > 1 ? customerRowKeys[1] : "");
+					}
+				}
+				for (int j = 0; j < selectedRowNames.length; j++) {
+					String[] aaacustomerRowNames = selectedRowNames[j].split(":");
+					if (salesCustomersList.get(i).getCustomerNo().equals(aaacustomerRowNames[0])) {
+						salesCustomersList.get(i)
+								.setSalesPersonsAppend(aaacustomerRowNames.length > 1 ? aaacustomerRowNames[1] : "");
+					}
+				}
+			}
+		}
+
 		return salesCustomersList;
 	}
 
@@ -211,6 +288,48 @@ public class SalesSendLetterController extends BaseController {
 		model.setCtmNos(newCtmNos.split(","));
 		model.setUpdateUser(getSession().getAttribute("employeeName").toString());
 		model.setCustomerList(newCtmNos);
+
+		SalesSendLetterModel salesSendLetter = new SalesSendLetterModel();
+		try {
+			salesSendLetter = salesSendLetterService.getMainChargeList(model.getStorageListName());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		String[] selectedRowKeys = salesSendLetter.getMainChargeList().split(";");
+		String[] selectedRowNames = salesSendLetter.getDepartmentCodeList().split(";");
+		String mainChargeList = "";
+		String departmentCodeList = "";
+
+		for (int i = 0; i < selectedRowKeys.length; i++) {
+			for (int j = 0; j < model.getCtmNos().length; j++) {
+				String[] customerRowKeys = selectedRowKeys[i].split(":");
+				if (model.getCtmNos()[j].equals(customerRowKeys[0])) {
+					mainChargeList += model.getCtmNos()[j] + ":";
+					if (customerRowKeys.length > 1)
+						mainChargeList += customerRowKeys[1] + ";";
+					else
+						mainChargeList += ";";
+				}
+			}
+		}
+		
+		for (int i = 0; i < selectedRowNames.length; i++) {
+			for (int j = 0; j < model.getCtmNos().length; j++) {
+				String[] customerRowNames = selectedRowNames[i].split(":");
+				if (model.getCtmNos()[j].equals(customerRowNames[0])) {
+					departmentCodeList += model.getCtmNos()[j] + ":";
+					if (customerRowNames.length > 1)
+						departmentCodeList += customerRowNames[1] + ";";
+					else
+						departmentCodeList += ";";
+				}
+			}
+		}
+		
+		model.setMainChargeList(mainChargeList);
+		model.setDepartmentCodeList(departmentCodeList);
+
+
 		try {
 			salesSendLetterService.deleteCustomerListByNo(model);
 		} catch (Exception e) {

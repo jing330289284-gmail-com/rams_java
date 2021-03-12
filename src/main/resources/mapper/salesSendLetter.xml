@@ -87,6 +87,8 @@
 		(StorageListName,
 		transmissionClassificationCode,
 		customerList,
+		mainChargeList,
+		departmentCodeList,
 		updateTime,
 		createTime,
 		updateUser)
@@ -95,10 +97,13 @@
 		#{name},
 		1,
 		#{code},
+		#{mainChargeList},
+		#{departmentCodeList},
 		NOW(),
 		NOW(),
 		#{updateUser})
 	</insert>
+	
 	<select id="getLists"
 		resultType="jp.co.lyc.cms.model.SalesSendLetterModel">
 		select StorageListName as
@@ -120,8 +125,10 @@
 		update
 		T021CustomerSendMailStorageList
 		set
-		customerList =
-		"",updateTime=now(),updateUser=#{updateUser}
+		customerList = "",
+		mainChargeList = "",
+		departmentCodeList = "",
+		updateTime=now(),updateUser=#{updateUser}
 		where
 		StorageListName=#{storageListName} and
 		transmissionClassificationCode =
@@ -130,14 +137,32 @@
 
 	<update id="customerListUpdate" parameterType="String">
 		update
-		T021CustomerSendMailStorageList set customerList = CONCAT(
-		customerList, ',' , #{customerList}) where StorageListName =
-		#{storageListName};
+		T021CustomerSendMailStorageList
+		set
+		customerList = CONCAT(customerList, ',' , #{customerList}),
+		mainChargeList = CONCAT(mainChargeList,#{customerList},':;'),
+		departmentCodeList = CONCAT(departmentCodeList,#{customerList},':;')
+		where 
+		StorageListName = #{storageListName};
+	</update>
+	
+	<update id="customerSendMailStorageListUpdate" parameterType="String">
+		update
+		T021CustomerSendMailStorageList
+		set
+		mainChargeList = #{mainChargeList},
+		departmentCodeList = #{departmentCodeList}
+		where
+		StorageListName = #{storageListName};
 	</update>
 
 	<update id="deleteCustomerListByNo" parameterType="String">
 		update
-		T021CustomerSendMailStorageList set customerList = #{customerList}
+		T021CustomerSendMailStorageList
+		set
+		customerList = #{customerList},
+		mainChargeList = #{mainChargeList},
+		departmentCodeList = #{departmentCodeList}
 		where StorageListName = #{storageListName};
 	</update>
 
@@ -180,6 +205,17 @@
 			#{item}
 		</foreach>
 	</select>
+	
+	<select id="getMainChargeList"
+		resultType="jp.co.lyc.cms.model.SalesSendLetterModel">
+		SELECT
+		mainChargeList,
+		departmentCodeList
+		FROM
+		T021CustomerSendMailStorageList
+		WHERE StorageListName = #{storageListName}
+	</select>
+	
 	<delete id="deleteList" parameterType="String">
 		DELETE
 		FROM

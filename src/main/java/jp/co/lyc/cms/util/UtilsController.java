@@ -1143,6 +1143,7 @@ public class UtilsController {
 			// 添加附件的标题
 			filePart.setFileName(MimeUtility.encodeText(emailMod.getResumeName()));
 			multipart.addBodyPart(filePart);
+			//multipart.addBodyPart(filePart);
 			multipart.setSubType("mixed");
 			// 将multipart对象放到message中
 			message.setContent(multipart);

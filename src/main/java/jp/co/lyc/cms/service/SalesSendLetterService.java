@@ -68,4 +68,13 @@ public class SalesSendLetterService {
 	public void deleteCustomerListByNo(SalesSendLetterModel model) {
 		salesSendLetterMapper.deleteCustomerListByNo(model);
 	}
+
+	public SalesSendLetterModel getMainChargeList(String storageListName) {
+		return salesSendLetterMapper.getMainChargeList(storageListName);
+	}
+
+	public void customerSendMailStorageListUpdate(String storageListName, String mainChargeList,
+			String departmentCodeList) {
+		salesSendLetterMapper.customerSendMailStorageListUpdate(storageListName,mainChargeList,departmentCodeList);
+	}
 }
