@@ -1,9 +1,14 @@
 package jp.co.lyc.cms.controller;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.nio.channels.FileChannel;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -13,10 +18,14 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.collections.ListUtils;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.castor.core.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +45,7 @@ import com.amazonaws.util.StringUtils;
 import ch.qos.logback.core.joran.conditional.IfAction;
 import jp.co.lyc.cms.common.BaseController;
 import jp.co.lyc.cms.model.SalesSituationModel;
+import jp.co.lyc.cms.model.MasterModel;
 import jp.co.lyc.cms.model.SalesContent;
 import jp.co.lyc.cms.service.SalesSituationService;
 import jp.co.lyc.cms.util.StatusCodeToMsgMap;
@@ -298,10 +308,10 @@ public class SalesSituationController extends BaseController {
 	public int updateSalesSentence(@RequestBody SalesContent model) {
 
 		model.setUpdateUser(getSession().getAttribute("employeeName").toString());
-		if(model.getJapaneaseConversationLevel() != null && model.getJapaneaseConversationLevel().equals("")) {
+		if (model.getJapaneaseConversationLevel() != null && model.getJapaneaseConversationLevel().equals("")) {
 			model.setJapaneaseConversationLevel(null);
 		}
-		if(model.getEnglishConversationLevel() != null && model.getEnglishConversationLevel().equals("")) {
+		if (model.getEnglishConversationLevel() != null && model.getEnglishConversationLevel().equals("")) {
 			model.setEnglishConversationLevel(null);
 		}
 		logger.info("getPersonalSalesInfo:" + "検索開始");
@@ -434,10 +444,59 @@ public class SalesSituationController extends BaseController {
 				// System.out.println(mkDirectoryPath + "建立失败！此目录或许已经存在！");
 			}
 		}
-		//cmd指令打开对应文件夹
-		//Runtime.getRuntime().exec("cmd /c start explorer c:\\file\\営業フォルダー\\" + model.getSalesYearAndMonth());
+		String dir = "c:\\file\\営業フォルダー\\" + model.getSalesYearAndMonth();
+		String rar = "c:\\file\\salesFolder\\" + model.getSalesYearAndMonth() + ".rar";
+		zip(dir, rar, true);
+		// cmd指令打开对应文件夹
+		// Runtime.getRuntime().exec("cmd /c start explorer c:\\file\\営業フォルダー\\" +
+		// model.getSalesYearAndMonth());
 
 		return result;
+	}
+
+	/**
+	 * 打包
+	 *
+	 * @param dir            要打包的目录
+	 * @param zipFile        打包后的文件路径
+	 * @param includeBaseDir 是否包括最外层目录
+	 * @throws Exception
+	 */
+	public static void zip(String dir, String zipFile, boolean includeBaseDir) throws Exception {
+		if (zipFile.startsWith(dir)) {
+			throw new RuntimeException("打包生成的文件不能在打包目录中");
+		}
+		try (ZipOutputStream out = new ZipOutputStream(new FileOutputStream(zipFile))) {
+			File fileDir = new File(dir);
+			String baseDir = "";
+			if (includeBaseDir) {
+				baseDir = fileDir.getName();
+			}
+			compress(out, fileDir, baseDir);
+		}
+	}
+
+	public static void compress(ZipOutputStream out, File sourceFile, String base) throws Exception {
+
+		if (sourceFile.isDirectory()) {
+			base = base.length() == 0 ? "" : base + File.separator;
+			File[] files = sourceFile.listFiles();
+			if (ArrayUtils.isEmpty(files)) {
+				// todo 打包空目录
+				// out.putNextEntry(new ZipEntry(base));
+				return;
+			}
+			for (File file : files) {
+				compress(out, file, base + file.getName());
+			}
+		} else {
+			out.putNextEntry(new ZipEntry(base));
+			try (FileInputStream in = new FileInputStream(sourceFile)) {
+				IOUtils.copy(in, out);
+			} catch (Exception e) {
+				throw new RuntimeException("打包异常: " + e.getMessage());
+			}
+		}
 	}
 
 	/*
