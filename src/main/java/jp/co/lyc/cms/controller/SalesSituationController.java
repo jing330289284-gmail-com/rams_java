@@ -422,6 +422,26 @@ public class SalesSituationController extends BaseController {
 	 * @throws ParseException
 	 * @throws Exception
 	 */
+	@RequestMapping(value = "/checkDirectory", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean checkDirectory(@RequestBody SalesSituationModel model) throws ParseException, Exception {
+
+		String mkDirectoryPath = "c:\\file\\営業フォルダー\\" + model.getSalesYearAndMonth();
+		File folder = new File(mkDirectoryPath);
+		if (!folder.exists() && !folder.isDirectory()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * 営業フォルダー
+	 * 
+	 * @return Map
+	 * @throws ParseException
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/makeDirectory", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> makeDirectory(@RequestBody SalesSituationModel model) throws ParseException, Exception {
@@ -442,6 +462,11 @@ public class SalesSituationController extends BaseController {
 					fileChannelCopy(resumeInfo2List.get(i), mkDirectoryPath);
 			} else {
 				// System.out.println(mkDirectoryPath + "建立失败！此目录或许已经存在！");
+				deleteFile(new File(mkDirectoryPath));
+				if (resumeInfo1List.get(i) != null)
+					fileChannelCopy(resumeInfo1List.get(i), mkDirectoryPath);
+				if (resumeInfo2List.get(i) != null)
+					fileChannelCopy(resumeInfo2List.get(i), mkDirectoryPath);
 			}
 		}
 		String dir = "c:\\file\\営業フォルダー\\" + model.getSalesYearAndMonth();
@@ -452,6 +477,18 @@ public class SalesSituationController extends BaseController {
 		// model.getSalesYearAndMonth());
 
 		return result;
+	}
+
+	private static void deleteFile(File file) {
+		if (file.isFile()) {// 判断是否为文件，是，则删除
+			file.delete();
+		} else {// 不为文件，则为文件夹
+			String[] childFilePath = file.list();// 获取文件夹下所有文件相对路径
+			for (String path : childFilePath) {
+				File childFile = new File(file.getAbsoluteFile() + "/" + path);
+				deleteFile(childFile);// 递归，对每个都进行判断
+			}
+		}
 	}
 
 	/**
