@@ -237,15 +237,22 @@
 		T006EmployeeSiteInfo.employeeNo,T006EmployeeSiteInfo.admissionStartDate,T006EmployeeSiteInfo.admissionEndDate
 		FROM
 		T006EmployeeSiteInfo as T006EmployeeSiteInfo
-		INNER JOIN (SELECT employeeNo,salesYearAndMonth FROM
-		T010SalesSituation where salesYearAndMonth = #{salesDate}) as
+		INNER JOIN (SELECT
+		employeeNo,salesYearAndMonth FROM
+		T010SalesSituation where
+		salesYearAndMonth = #{salesDate}) as
 		tempT
-		ON T006EmployeeSiteInfo.employeeNo = tempT.employeeNo
-		AND left(T006EmployeeSiteInfo.admissionStartDate,6) =
+		ON
+		T006EmployeeSiteInfo.employeeNo = tempT.employeeNo
+		AND
+		left(T006EmployeeSiteInfo.admissionStartDate,6) =
 		tempT.salesYearAndMonth
 		where admissionEndDate is null) as temp
-		ON T006EmployeeSiteInfo.employeeNo = temp.employeeNo
-		AND T006EmployeeSiteInfo.admissionStartDate = temp.admissionStartDate) as temp
+		ON
+		T006EmployeeSiteInfo.employeeNo = temp.employeeNo
+		AND
+		T006EmployeeSiteInfo.admissionStartDate = temp.admissionStartDate) as
+		temp
 		group by employeeNo
 		order by employeeNo;
 	</select>
@@ -863,20 +870,24 @@
 		t002.yearsOfExperience,
 		t002.siteRoleCode,
 		M012.siteRoleName,
+		t015.resumeInfo1,
+		t015.resumeInfo2,
 		CONCAT_WS(',',
 
 		IF(ISNULL(t002.developLanguage1) or
 		t002.developLanguage1='',
 		null,
 		M011a.developLanguageName),
-		IF(ISNULL(t002.developLanguage2) or t002.developLanguage2='',
+		IF(ISNULL(t002.developLanguage2) or
+		t002.developLanguage2='',
 		null,
 		M011b.developLanguageName),
 		IF(ISNULL(t002.developLanguage3) or
 		t002.developLanguage3='',
 		null,
 		M011c.developLanguageName),
-		IF(ISNULL(t002.developLanguage4) or t002.developLanguage4='',
+		IF(ISNULL(t002.developLanguage4) or
+		t002.developLanguage4='',
 		null,
 		M011d.developLanguageName),
 		IF(ISNULL(t002.developLanguage5) or
@@ -891,41 +902,54 @@
 		LEFT JOIN
 		T002EmployeeDetail t002 ON t001.employeeNo =
 		t002.employeeNo
-				LEFT JOIN
+		LEFT JOIN
 
 		M012SiteRole M012 ON
 		M012.siteRoleCode = t002.siteRoleCode
 		LEFT JOIN
 
 		M011DevelopLanguage M011a ON
-		M011a.developLanguageCode = t002.developLanguage1
+		M011a.developLanguageCode =
+		t002.developLanguage1
 
 		LEFT JOIN
 
-		M011DevelopLanguage M011b ON M011b.developLanguageCode =
+		M011DevelopLanguage M011b ON
+		M011b.developLanguageCode =
 		t002.developLanguage2
 		LEFT JOIN
 
 		M011DevelopLanguage M011c ON
-		M011c.developLanguageCode = t002.developLanguage3
+		M011c.developLanguageCode =
+		t002.developLanguage3
 		LEFT JOIN
 
-		M011DevelopLanguage M011d ON M011d.developLanguageCode =
+		M011DevelopLanguage M011d ON
+		M011d.developLanguageCode =
 		t002.developLanguage4
 
 		LEFT JOIN
 
 		M011DevelopLanguage M011e ON
-		M011e.developLanguageCode = t002.developLanguage5
+		M011e.developLanguageCode =
+		t002.developLanguage5
 		LEFT JOIN
-		M003Nationality m003 ON t002.nationalityCode = m003.nationalityCode
+
+		T015ResumeManagement t015 ON
+		t015.employeeNo = t002.employeeNo
 		LEFT JOIN
-		T003AddressInfo t003 ON t001.employeeNo = t003.employeeNo
+		M003Nationality m003 ON
+		t002.nationalityCode = m003.nationalityCode
 		LEFT JOIN
-		M013Station m013 ON m013.stationCode = t003.stationCode
+		T003AddressInfo
+		t003 ON t001.employeeNo = t003.employeeNo
+		LEFT JOIN
+		M013Station m013 ON
+		m013.stationCode = t003.stationCode
 		LEFT
 		JOIN
-		T010SalesSituation t010 ON t001.employeeNo = t010.employeeNo
+		T010SalesSituation t010 ON
+		t001.employeeNo = t010.employeeNo
 		WHERE
 		t001.employeeNo =#{employeeNo}
 	</select>
@@ -947,6 +971,8 @@
 		t002.englishLevelCode,
 		t019.japaneaseConversationLevel,
 		t019.englishConversationLevel,
+		t015.resumeInfo1,
+		t015.resumeInfo2,
 		t019.yearsOfExperience,
 		t002.siteRoleCode,
 		M012.siteRoleName,
@@ -967,13 +993,20 @@
 		LEFT JOIN
 		T002EmployeeDetail t002 ON t001.employeeNo = t002.employeeNo
 		LEFT JOIN
+		T015ResumeManagement t015 ON t015.employeeNo = t002.employeeNo
+		LEFT
+		JOIN
 		M012SiteRole M012 ON M012.siteRoleCode = t002.siteRoleCode
+		LEFT
+		JOIN
+		M003Nationality m003 ON t002.nationalityCode =
+		m003.nationalityCode
 		LEFT JOIN
-		M003Nationality m003 ON t002.nationalityCode = m003.nationalityCode
+		T010SalesSituation t010 ON
+		t001.employeeNo = t010.employeeNo
 		LEFT JOIN
-		T010SalesSituation t010 ON t001.employeeNo = t010.employeeNo
-		LEFT JOIN
-		T019SalesSentence t019 ON t019.employeeNo = t001.employeeNo
+		T019SalesSentence t019 ON
+		t019.employeeNo = t001.employeeNo
 		WHERE
 		t001.employeeNo =#{employeeNo}
 	</select>
@@ -1072,7 +1105,8 @@
 		customerContractStatus =
 		#{customerContractStatus},
 		confirmPrice = #{price},
-		confirmCustomer = #{customer},
+		confirmCustomer =
+		#{customer},
 		salesStaff = #{salesStaff},
 		updateTime=
 		NOW(),

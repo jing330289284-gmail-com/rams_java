@@ -83,9 +83,17 @@ public class SalesSituationModel implements Serializable {
 	String confirmPrice;
 	String confirmCustomer;
 	ArrayList<String> employeeNoList;
+	ArrayList<String> resumeInfoList;
 	ArrayList<String> resumeInfo1List;
 	ArrayList<String> resumeInfo2List;
-	
+
+	public ArrayList<String> getResumeInfoList() {
+		return resumeInfoList;
+	}
+
+	public void setResumeInfoList(ArrayList<String> resumeInfoList) {
+		this.resumeInfoList = resumeInfoList;
+	}
 
 	public String getSiteRoleName() {
 		return siteRoleName;

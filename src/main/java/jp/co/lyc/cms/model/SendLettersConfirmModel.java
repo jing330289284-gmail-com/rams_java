@@ -1,6 +1,7 @@
 package jp.co.lyc.cms.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class SendLettersConfirmModel implements Serializable {
 
@@ -8,7 +9,7 @@ public class SendLettersConfirmModel implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -2028159323401651353L;
-	
+
 	String employeeNo;
 	String employeeName;
 	String salesYearAndMonth;
@@ -20,7 +21,7 @@ public class SendLettersConfirmModel implements Serializable {
 	String employeeStatus;
 	String stationName;
 	String nearestStation;
-	String developLanguage; 
+	String developLanguage;
 	String genderStatus;
 	String nationalityName;
 	String birthday;
@@ -28,13 +29,30 @@ public class SendLettersConfirmModel implements Serializable {
 	String japaneseLevelName;
 	String beginMonth;
 	String[] employeeNos;
+	ArrayList<String> resumeInfoList;
+	String resumeInfoName;// 履歴書
 	String resumeInfo1;// 履歴書情報1
-	String resumeInfo2;// 
+	String resumeInfo2;//
 	String resume;// 履歴書情報1
 
 	int index;//
-	
-	
+
+	public String getResumeInfoName() {
+		return resumeInfoName;
+	}
+
+	public void setResumeInfoName(String resumeInfoName) {
+		this.resumeInfoName = resumeInfoName;
+	}
+
+	public ArrayList<String> getResumeInfoList() {
+		return resumeInfoList;
+	}
+
+	public void setResumeInfoList(ArrayList<String> resumeInfoList) {
+		this.resumeInfoList = resumeInfoList;
+	}
+
 	public String getUnitPrice() {
 		return unitPrice;
 	}
@@ -74,7 +92,6 @@ public class SendLettersConfirmModel implements Serializable {
 	public void setEmployeeNos(String[] employeeNos) {
 		this.employeeNos = employeeNos;
 	}
-
 
 	public String getEmployeeNo() {
 		return employeeNo;
@@ -223,8 +240,5 @@ public class SendLettersConfirmModel implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
-	
-	
-	
+
 }

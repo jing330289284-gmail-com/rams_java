@@ -21,6 +21,7 @@ public class EmployeeModel implements Serializable {
 	String alphabetName;// ローマ字
 	String alphabetName1;// ローマ字
 	String alphabetName2;// ローマ字
+	String alphabetName3;// ローマ字
 	String furigana;// カタカナ
 	String nationalityCode;// 出身地コード(国)
 	String birthplace;// 出身地(県)
@@ -88,6 +89,14 @@ public class EmployeeModel implements Serializable {
 	String firstHalfAddress;// 住所前半
 	String lastHalfAddress;// 住所後半
 	String stationCode;//
+
+	public String getAlphabetName3() {
+		return alphabetName3;
+	}
+
+	public void setAlphabetName3(String alphabetName3) {
+		this.alphabetName3 = alphabetName3;
+	}
 
 	public String getContractDeadline() {
 		return contractDeadline;

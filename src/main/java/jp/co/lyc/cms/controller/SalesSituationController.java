@@ -273,6 +273,21 @@ public class SalesSituationController extends BaseController {
 			}
 		}
 
+		if (salesSituationList.size() > 0) {
+			ArrayList<String> resumeInfoTemp = new ArrayList<String>();
+			if (!(salesSituationList.get(0).getResumeInfo1() == null
+					|| salesSituationList.get(0).getResumeInfo1().equals(""))) {
+				resumeInfoTemp.add(salesSituationList.get(0).getResumeInfo1()
+						.split("/")[salesSituationList.get(0).getResumeInfo1().split("/").length - 1]);
+			}
+			if (!(salesSituationList.get(0).getResumeInfo2() == null
+					|| salesSituationList.get(0).getResumeInfo2().equals(""))) {
+				resumeInfoTemp.add(salesSituationList.get(0).getResumeInfo2()
+						.split("/")[salesSituationList.get(0).getResumeInfo2().split("/").length - 1]);
+			}
+			salesSituationList.get(0).setResumeInfoList(resumeInfoTemp);
+		}
+
 		logger.info("updateSalesSituation" + "検索結束");
 		return salesSituationList;
 	}

@@ -59,6 +59,25 @@ public class SendLettersConfirm extends BaseController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		for (int j = 0; j < sendLettersConfirmModelList.size(); j++) {
+			ArrayList<String> resumeInfoTemp = new ArrayList<String>();
+			if (!(sendLettersConfirmModelList.get(j).getResumeInfo1() == null
+					|| sendLettersConfirmModelList.get(j).getResumeInfo1().equals(""))) {
+				resumeInfoTemp.add(sendLettersConfirmModelList.get(j).getResumeInfo1()
+						.split("/")[sendLettersConfirmModelList.get(j).getResumeInfo1().split("/").length - 1]);
+			}
+			if (!(sendLettersConfirmModelList.get(j).getResumeInfo2() == null
+					|| sendLettersConfirmModelList.get(j).getResumeInfo2().equals(""))) {
+				resumeInfoTemp.add(sendLettersConfirmModelList.get(j).getResumeInfo2()
+						.split("/")[sendLettersConfirmModelList.get(j).getResumeInfo2().split("/").length - 1]);
+			}
+			sendLettersConfirmModelList.get(j).setResumeInfoList(resumeInfoTemp);
+			if (resumeInfoTemp.size() > 0) {
+				sendLettersConfirmModelList.get(j).setResumeInfoName(resumeInfoTemp.get(0));
+			} else {
+				sendLettersConfirmModelList.get(j).setResumeInfoName("");
+			}
+		}
 		logger.info("getSalesEmps" + "検索結束");
 		return sendLettersConfirmModelList;
 	}

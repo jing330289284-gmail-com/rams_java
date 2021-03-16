@@ -175,6 +175,11 @@ public class EmployeeInfoController extends BaseController {
 			errorsMessage = "性別  " + errorsMessage;
 		}
 
+		if (emp.getAlphabetName1() == null || emp.getAlphabetName1().equals("") || emp.getAlphabetName2() == null
+				|| emp.getAlphabetName2().equals("")) {
+			errorsMessage = "ローマ字  " + errorsMessage;
+		}
+
 		if (emp.getEmployeeFristName() == null || emp.getEmployeeFristName().equals("")
 				|| emp.getEmployeeLastName() == null || emp.getEmployeeLastName().equals("")) {
 			errorsMessage = "社員名  " + errorsMessage;
@@ -182,9 +187,11 @@ public class EmployeeInfoController extends BaseController {
 
 		if (emp.getEmployeeFristName() == null || emp.getEmployeeFristName().equals("")
 				|| emp.getEmployeeLastName() == null || emp.getEmployeeLastName().equals("")
-				|| emp.getGenderStatus() == null || emp.getGenderStatus().equals("")
-				|| emp.getIntoCompanyYearAndMonth() == null || emp.getIntoCompanyYearAndMonth().equals("")
-				|| emp.getNationalityCode() == null || emp.getNationalityCode().equals("")) {
+				|| emp.getAlphabetName1() == null || emp.getAlphabetName1().equals("") || emp.getAlphabetName2() == null
+				|| emp.getAlphabetName2().equals("") || emp.getGenderStatus() == null
+				|| emp.getGenderStatus().equals("") || emp.getIntoCompanyYearAndMonth() == null
+				|| emp.getIntoCompanyYearAndMonth().equals("") || emp.getNationalityCode() == null
+				|| emp.getNationalityCode().equals("")) {
 			resultMap.put("errorsMessage", errorsMessage);
 			return resultMap;
 		}
@@ -263,7 +270,7 @@ public class EmployeeInfoController extends BaseController {
 			@RequestParam(value = "residentCardInfoURL", required = false) String residentCardInfoURL,
 			@RequestParam(value = "passportInfoURL", required = false) String passportInfoURL) throws Exception {
 		logger.info("GetEmployeeInfoController.updateEmployee:" + "修正開始");
-		errorsMessage = "";
+		errorsMessage = "を入力してください。";
 		JSONObject jsonObject = JSON.parseObject(JSONEmp);
 		EmployeeModel emp = JSON.parseObject(jsonObject.toJSONString(), new TypeReference<EmployeeModel>() {
 		});
@@ -295,6 +302,11 @@ public class EmployeeInfoController extends BaseController {
 			errorsMessage = "性別  " + errorsMessage;
 		}
 
+		if (emp.getAlphabetName1() == null || emp.getAlphabetName1().equals("") || emp.getAlphabetName2() == null
+				|| emp.getAlphabetName2().equals("")) {
+			errorsMessage = "ローマ字  " + errorsMessage;
+		}
+
 		if (emp.getEmployeeFristName() == null || emp.getEmployeeFristName().equals("")
 				|| emp.getEmployeeLastName() == null || emp.getEmployeeLastName().equals("")) {
 			errorsMessage = "社員名  " + errorsMessage;
@@ -302,9 +314,11 @@ public class EmployeeInfoController extends BaseController {
 
 		if (emp.getEmployeeFristName() == null || emp.getEmployeeFristName().equals("")
 				|| emp.getEmployeeLastName() == null || emp.getEmployeeLastName().equals("")
-				|| emp.getGenderStatus() == null || emp.getGenderStatus().equals("")
-				|| emp.getIntoCompanyYearAndMonth() == null || emp.getIntoCompanyYearAndMonth().equals("")
-				|| emp.getNationalityCode() == null || emp.getNationalityCode().equals("")) {
+				|| emp.getAlphabetName1() == null || emp.getAlphabetName1().equals("") || emp.getAlphabetName2() == null
+				|| emp.getAlphabetName2().equals("") || emp.getGenderStatus() == null
+				|| emp.getGenderStatus().equals("") || emp.getIntoCompanyYearAndMonth() == null
+				|| emp.getIntoCompanyYearAndMonth().equals("") || emp.getNationalityCode() == null
+				|| emp.getNationalityCode().equals("")) {
 			resultMap.put("errorsMessage", errorsMessage);
 			return resultMap;
 		}
@@ -341,7 +355,10 @@ public class EmployeeInfoController extends BaseController {
 		String furigana = (emp.getFurigana1() != null ? emp.getFurigana1() : "") + " "
 				+ (emp.getFurigana2() != null ? emp.getFurigana2() : "");// カタカナ
 		String alphabetName = (emp.getAlphabetName1() != null ? emp.getAlphabetName1() : "") + " "
-				+ (emp.getAlphabetName2() != null ? emp.getAlphabetName2() : "");// カタカナ
+				+ (emp.getAlphabetName2() != null ? emp.getAlphabetName2() : "")
+				+ (emp.getAlphabetName3() != null ? " " + emp.getAlphabetName3() : "");// カタカナ
+		String alphabetName2 = emp.getAlphabetName2() != null ? emp.getAlphabetName2() : "";
+		String alphabetName3 = emp.getAlphabetName3() != null ? emp.getAlphabetName3() : "";
 		String birthday = emp.getBirthday();// 年齢
 		String genderStatus = emp.getGenderStatus();// 性別ステータス
 		String intoCompanyCode = emp.getIntoCompanyCode();// 入社区分
@@ -428,6 +445,12 @@ public class EmployeeInfoController extends BaseController {
 		}
 		if (alphabetName != null) {
 			sendMap.put("alphabetName", alphabetName);
+		}
+		if (alphabetName2 != null) {
+			sendMap.put("alphabetName2", alphabetName2);
+		}
+		if (alphabetName3 != null) {
+			sendMap.put("alphabetName3", alphabetName3);
 		}
 		if (birthday != null) {
 			sendMap.put("birthday", birthday);

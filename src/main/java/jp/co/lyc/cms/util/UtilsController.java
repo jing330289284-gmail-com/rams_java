@@ -952,8 +952,14 @@ public class UtilsController {
 		}
 		String fileName = uploadFile.getOriginalFilename();
 		String suffix = fileName.substring(fileName.lastIndexOf(".") + 1);
-		String newName = sendMap.get("employeeFristName").toString() + sendMap.get("employeeLastName").toString() + "_"
-				+ Info + "." + suffix;
+		// String newName = sendMap.get("employeeFristName").toString() +
+		// sendMap.get("employeeLastName").toString() + "_" + Info + "." + suffix;
+		String alphabetName2 = sendMap.get("alphabetName2").toString().substring(0, 1).toUpperCase();
+		String alphabetName3 = sendMap.get("alphabetName3").toString().length() > 0
+				? sendMap.get("alphabetName3").toString().substring(0, 1).toUpperCase()
+				: "";
+		String newName = sendMap.get("employeeFristName").toString() + alphabetName2 + alphabetName3 + "_" + Info + "."
+				+ suffix;
 		try {
 			File newFile = new File(file.getAbsolutePath() + File.separator + newName);
 			uploadFile.transferTo(newFile);
@@ -1136,14 +1142,14 @@ public class UtilsController {
 			multipart.addBodyPart(contentPart);
 			// 添加附件
 			MimeBodyPart filePart = new MimeBodyPart();
-			//DataSource source = new FileDataSource(emailMod.getResumePath());
+			// DataSource source = new FileDataSource(emailMod.getResumePath());
 			DataSource source = new FileDataSource("C:\\file\\履歴書\\新建文本文档.txt");
 			// 添加附件的内容
 			filePart.setDataHandler(new DataHandler(source));
 			// 添加附件的标题
 			filePart.setFileName(MimeUtility.encodeText(emailMod.getResumeName()));
 			multipart.addBodyPart(filePart);
-			//multipart.addBodyPart(filePart);
+			// multipart.addBodyPart(filePart);
 			multipart.setSubType("mixed");
 			// 将multipart对象放到message中
 			message.setContent(multipart);
@@ -1151,13 +1157,13 @@ public class UtilsController {
 			String[] addresss = emailMod.getSelectedmail().split(",");
 			int len = 0;
 			for (int i = 0; i < addresss.length; i++) {
-				if(!addresss[i].equals(""))
+				if (!addresss[i].equals(""))
 					len++;
 			}
 			Address[] adds = new Address[len];
 			len = 0;
 			for (int i = 0; i < addresss.length; i++) {
-				if(!addresss[i].equals("")) {
+				if (!addresss[i].equals("")) {
 					adds[len] = new InternetAddress(addresss[i]);
 					len++;
 				}
@@ -1271,7 +1277,7 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getAdmissionMonth();
 		return list;
 	}
-	
+
 	/**
 	 * 送信対象格納リスト 取得
 	 * 
@@ -1283,7 +1289,7 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getStorageListName();
 		return list;
 	}
-	
+
 	/**
 	 * お客様担当者取得 取得
 	 * 
