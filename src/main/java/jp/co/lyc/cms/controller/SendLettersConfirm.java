@@ -149,8 +149,10 @@ public class SendLettersConfirm extends BaseController {
 		emailModel.setPassword("Lyc2020-0908-");
 		// emailModel.setFromAddress(model.getMailFrom());
 		emailModel.setContextType("text/html;charset=utf-8");
-		// utils.EmailSend(emailModel);
-		utils.sendMailWithFile(emailModel);
+		if (emailModel.getResumePath() == null || emailModel.getResumePath().equals(""))
+			utils.EmailSend(emailModel);
+		else
+			utils.sendMailWithFile(emailModel);
 		logger.info("sendMailWithFile" + "送信結束");
 	}
 

@@ -1028,6 +1028,7 @@ public class UtilsController {
 	 * @param emailMod
 	 */
 	public void EmailSend(EmailModel emailMod) {
+
 		Session session = null;
 		try {
 			// 创建一个资源文件
@@ -1057,20 +1058,51 @@ public class UtilsController {
 			// 创建一个信息
 			Message message = new MimeMessage(session);
 			// 设定发送方
-			message.setFrom(new InternetAddress("mail@lyc.co.jp"));
+			message.setFrom(new InternetAddress("yibugo@lyc.co.jp"));
 			// 设置主题内容
-			message.setSubject(emailMod.getSubject());
-			message.setContent(emailMod.getContext(), "text/html;charset=utf-8");
-			;
-			String[] addresss = emailMod.getToAddress().split(",");
-			int len = addresss.length;
-			Address[] adds = new Address[len];
-			for (int i = 0; i < len; i++) {
-				adds[i] = new InternetAddress(addresss[i]);
+			message.setSubject(emailMod.getMailTitle());
+			// message.setContent(emailMod.getContext(), "text/html;charset=utf-8");
+			String[] addresssCC = emailMod.getSelectedMailCC();
+			int lenCC = addresssCC.length;
+			Address[] addsCC = new Address[lenCC];
+			for (int i = 0; i < lenCC; i++) {
+				addsCC[i] = new InternetAddress(addresssCC[i]);
 			}
+			// InternetAddress[] sendCC = new InternetAddress[] {new
+			// InternetAddress("jyw.fendou@gmail.com", "", "UTF-8")};
+			message.addRecipients(MimeMessage.RecipientType.CC, addsCC);
+
+			// 向multipart对象中添加邮件的各个部分内容，包括文本内容和附件
+			MimeMultipart multipart = new MimeMultipart();
+			// 设置邮件的文本内容
+			MimeBodyPart contentPart = new MimeBodyPart();
+			contentPart.setContent(emailMod.getMailConfirmContont(), "text/html;charset=UTF-8");
+			multipart.addBodyPart(contentPart);
+
+			// multipart.addBodyPart(filePart);
+			multipart.setSubType("mixed");
+			// 将multipart对象放到message中
+			message.setContent(multipart);
+
+			String[] addresss = emailMod.getSelectedmail().split(",");
+			int len = 0;
+			for (int i = 0; i < addresss.length; i++) {
+				if (!addresss[i].equals(""))
+					len++;
+			}
+			Address[] adds = new Address[len];
+			len = 0;
+			for (int i = 0; i < addresss.length; i++) {
+				if (!addresss[i].equals("")) {
+					adds[len] = new InternetAddress(addresss[i]);
+					len++;
+				}
+			}
+			message.addRecipients(MimeMessage.RecipientType.TO, adds);
 
 			// 发送邮件
-			transport.sendMessage(message, adds);
+			transport.sendMessage(message, message.getAllRecipients());
+			// transport.close();
 		} catch (GeneralSecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
