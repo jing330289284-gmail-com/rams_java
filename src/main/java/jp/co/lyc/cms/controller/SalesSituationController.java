@@ -108,6 +108,27 @@ public class SalesSituationController extends BaseController {
 				salesSituationList.get(i).setEmployeeName(salesSituationList.get(i).getEmployeeName() + "(BP)");
 			}
 
+			// 履歴書名前
+			if (salesSituationList.get(i).getResumeInfo1() != null
+					&& !salesSituationList.get(i).getResumeInfo1().equals("")) {
+				String resumeName = salesSituationList.get(i).getResumeName1();
+				String resumetemp = salesSituationList.get(i).getResumeInfo1();
+				resumeName = resumetemp.split("/")[resumetemp.split("/").length - 1].split("_")[0] + "_" + resumeName
+						+ "." + resumetemp.split("/")[resumetemp.split("/").length - 1].split(
+								"\\.")[resumetemp.split("/")[resumetemp.split("/").length - 1].split("\\.").length - 1];
+				salesSituationList.get(i).setResumeName1(resumeName);
+			}
+
+			if (salesSituationList.get(i).getResumeInfo2() != null
+					&& !salesSituationList.get(i).getResumeInfo2().equals("")) {
+				String resumeName = salesSituationList.get(i).getResumeName2();
+				String resumetemp = salesSituationList.get(i).getResumeInfo2();
+				resumeName = resumetemp.split("/")[resumetemp.split("/").length - 1].split("_")[0] + "_" + resumeName
+						+ "." + resumetemp.split("/")[resumetemp.split("/").length - 1].split(
+								"\\.")[resumetemp.split("/")[resumetemp.split("/").length - 1].split("\\.").length - 1];
+				salesSituationList.get(i).setResumeName2(resumeName);
+			}
+
 			// お客様
 			salesSituationList.get(i).setCustomer("");
 

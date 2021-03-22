@@ -56,6 +56,8 @@ public class SalesSituationModel implements Serializable {
 	String admissionEndDate;
 	String resumeInfo1;// 履歴書情報1
 	String resumeInfo2;// 履歴書情報2
+	String resumeName1;// 履歴書情報1
+	String resumeName2;// 履歴書情報2
 	int rowNo;//
 	String nowCustomer;
 	String customerContractStatus;
@@ -86,6 +88,22 @@ public class SalesSituationModel implements Serializable {
 	ArrayList<String> resumeInfoList;
 	ArrayList<String> resumeInfo1List;
 	ArrayList<String> resumeInfo2List;
+
+	public String getResumeName1() {
+		return resumeName1;
+	}
+
+	public void setResumeName1(String resumeName1) {
+		this.resumeName1 = resumeName1;
+	}
+
+	public String getResumeName2() {
+		return resumeName2;
+	}
+
+	public void setResumeName2(String resumeName2) {
+		this.resumeName2 = resumeName2;
+	}
 
 	public ArrayList<String> getResumeInfoList() {
 		return resumeInfoList;

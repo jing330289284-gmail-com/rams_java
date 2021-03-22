@@ -872,11 +872,17 @@
 		<if test="resumeName1!=  null">
 			resumeName1 =#{resumeName1},
 		</if>
+		<if test="resumeName1 ==  null || resumeName1 ==  ''">
+			resumeInfo1 = null,
+		</if>
 		<if test="resumeInfo2!=  null">
 			resumeInfo2=#{resumeInfo2},
 		</if>
 		<if test="resumeName2!= null">
 			resumeName2 =#{resumeName2},
+		</if>
+		<if test="resumeName2 ==  null || resumeName2 ==  ''">
+			resumeInfo2 = null,
 		</if>
 		updateTime = NOW(),
 		updateUser =
@@ -928,8 +934,10 @@
 		newRams.T006EmployeeSiteInfo
 		GROUP BY
 		employeeNo) AS TempTable
-		ON T006EmployeeSiteInfo.employeeNo = TempTable.employeeNo
-		AND T006EmployeeSiteInfo.admissionStartDate =
+		ON
+		T006EmployeeSiteInfo.employeeNo = TempTable.employeeNo
+		AND
+		T006EmployeeSiteInfo.admissionStartDate =
 		TempTable.admissionStartDate;
 	</select>
 
@@ -941,6 +949,7 @@
 		SELECT
 		T006EmployeeSiteInfo.employeeNo,left(T006EmployeeSiteInfo.admissionStartDate,6)
 		as admissionTime FROM T006EmployeeSiteInfo
-		GROUP BY T006EmployeeSiteInfo.employeeNo;
+		GROUP BY
+		T006EmployeeSiteInfo.employeeNo;
 	</select>
 </mapper>
