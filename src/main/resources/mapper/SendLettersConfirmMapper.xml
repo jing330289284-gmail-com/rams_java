@@ -37,8 +37,10 @@
     MONTH(CURRENT_DATE) + 1 AS beginMonth,
     T010.salesProgressCode,
     T010.remark,
-        T015.resumeInfo1,
+	T015.resumeInfo1,
     T015.resumeInfo2,
+    T015.resumeName1,
+    T015.resumeName2,
     '' as resume
 FROM
     T001Employee T001
@@ -105,7 +107,8 @@ FROM
 <select id="getLoginUserInfo" resultType="jp.co.lyc.cms.model.EmployeeModel">
     	SELECT 
     T001.employeeFristName,
-            T001.employeeLastName,
+    T001.employeeLastName,
+    T001.authorityCode,
       T002.*
 FROM
     T001Employee T001
@@ -141,4 +144,27 @@ and
     </select>
     <!-- 要員追加機能の新規　20201216 　張棟　END -->
     
+    <insert id="updateSalesSentence" parameterType="String">
+		INSERT INTO
+		T019SalesSentence
+		(employeeNo,
+		unitPrice,
+		updateTime,
+		createTime,
+		updateUser)
+		VALUES
+		(
+		#{employeeNo},
+		#{unitPrice},
+		NOW(),
+		NOW(),
+		#{updateUser})
+		ON
+		DUPLICATE KEY UPDATE
+		employeeNo=#{employeeNo},
+		unitPrice=#{unitPrice},
+		updateTime= NOW(),
+		createTime= NOW(),
+		updateUser=#{updateUser}
+	</insert>
 </mapper>

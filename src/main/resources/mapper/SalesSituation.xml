@@ -881,6 +881,8 @@
 		M012.siteRoleName,
 		t015.resumeInfo1,
 		t015.resumeInfo2,
+		t015.resumeName1,
+		t015.resumeName2,
 		CONCAT_WS(',',
 
 		IF(ISNULL(t002.developLanguage1) or
@@ -982,7 +984,10 @@
 		t019.englishConversationLevel,
 		t015.resumeInfo1,
 		t015.resumeInfo2,
+		t015.resumeName1,
+		t015.resumeName2,
 		t019.yearsOfExperience,
+		t019.projectPhaseCode as projectPhase,
 		t002.siteRoleCode,
 		M012.siteRoleName,
 
@@ -1057,7 +1062,7 @@
 		#{japaneaseConversationLevel},
 		#{englishConversationLevel},
 		#{yearsOfExperience},
-		#{projectPhaseCode},
+		#{projectPhase},
 		#{developLanguageCode6},
 		#{developLanguageCode7},
 		#{developLanguageCode8},
@@ -1074,6 +1079,7 @@
 		japaneaseConversationLevel=#{japaneaseConversationLevel},
 		englishConversationLevel=#{englishConversationLevel},
 		yearsOfExperience=#{yearsOfExperience},
+		projectPhaseCode=#{projectPhase},
 		developLanguageCode6=#{developLanguageCode6},
 		developLanguageCode7=#{developLanguageCode7},
 		developLanguageCode8=#{developLanguageCode8},

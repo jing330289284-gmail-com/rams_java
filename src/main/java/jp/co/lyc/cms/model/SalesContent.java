@@ -25,7 +25,7 @@ public class SalesContent implements Serializable {
 	String japaneaseConversationLevel;
 	String englishConversationLevel;
 	String yearsOfExperience;
-	String projectPhaseCode;
+	String projectPhase;
 	String developLanguageCode6;
 	String developLanguageCode7;
 	String developLanguageCode8;
@@ -108,12 +108,12 @@ public class SalesContent implements Serializable {
 		this.yearsOfExperience = yearsOfExperience;
 	}
 
-	public String getProjectPhaseCode() {
-		return projectPhaseCode;
+	public String getProjectPhase() {
+		return projectPhase;
 	}
 
-	public void setProjectPhaseCode(String projectPhaseCode) {
-		this.projectPhaseCode = projectPhaseCode;
+	public void setProjectPhase(String projectPhase) {
+		this.projectPhase = projectPhase;
 	}
 
 	public String getDevelopLanguageCode6() {

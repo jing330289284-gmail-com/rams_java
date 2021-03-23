@@ -61,15 +61,24 @@ public class SendLettersConfirm extends BaseController {
 		}
 		for (int j = 0; j < sendLettersConfirmModelList.size(); j++) {
 			ArrayList<String> resumeInfoTemp = new ArrayList<String>();
-			if (!(sendLettersConfirmModelList.get(j).getResumeInfo1() == null
-					|| sendLettersConfirmModelList.get(j).getResumeInfo1().equals(""))) {
-				resumeInfoTemp.add(sendLettersConfirmModelList.get(j).getResumeInfo1()
-						.split("/")[sendLettersConfirmModelList.get(j).getResumeInfo1().split("/").length - 1]);
+			/*
+			 * if (!(sendLettersConfirmModelList.get(j).getResumeInfo1() == null ||
+			 * sendLettersConfirmModelList.get(j).getResumeInfo1().equals(""))) {
+			 * resumeInfoTemp.add(sendLettersConfirmModelList.get(j).getResumeInfo1()
+			 * .split("/")[sendLettersConfirmModelList.get(j).getResumeInfo1().split("/").
+			 * length - 1]); } if (!(sendLettersConfirmModelList.get(j).getResumeInfo2() ==
+			 * null || sendLettersConfirmModelList.get(j).getResumeInfo2().equals(""))) {
+			 * resumeInfoTemp.add(sendLettersConfirmModelList.get(j).getResumeInfo2()
+			 * .split("/")[sendLettersConfirmModelList.get(j).getResumeInfo2().split("/").
+			 * length - 1]); }
+			 */
+			if (!(sendLettersConfirmModelList.get(j).getResumeName1() == null
+					|| sendLettersConfirmModelList.get(j).getResumeName1().equals(""))) {
+				resumeInfoTemp.add(sendLettersConfirmModelList.get(j).getResumeName1());
 			}
-			if (!(sendLettersConfirmModelList.get(j).getResumeInfo2() == null
-					|| sendLettersConfirmModelList.get(j).getResumeInfo2().equals(""))) {
-				resumeInfoTemp.add(sendLettersConfirmModelList.get(j).getResumeInfo2()
-						.split("/")[sendLettersConfirmModelList.get(j).getResumeInfo2().split("/").length - 1]);
+			if (!(sendLettersConfirmModelList.get(j).getResumeName2() == null
+					|| sendLettersConfirmModelList.get(j).getResumeName2().equals(""))) {
+				resumeInfoTemp.add(sendLettersConfirmModelList.get(j).getResumeName2());
 			}
 			sendLettersConfirmModelList.get(j).setResumeInfoList(resumeInfoTemp);
 			if (resumeInfoTemp.size() > 0) {
@@ -80,6 +89,16 @@ public class SendLettersConfirm extends BaseController {
 		}
 		logger.info("getSalesEmps" + "検索結束");
 		return sendLettersConfirmModelList;
+	}
+
+	@RequestMapping(value = "/updateSalesSentence", method = RequestMethod.POST)
+	@ResponseBody
+	public void updateSalesSentence(@RequestBody SendLettersConfirmModel model) {
+
+		logger.info("updateSalesSentence:" + "更新開始");
+		model.setUpdateUser(getSession().getAttribute("employeeName").toString());
+		sendLettersConfirmService.updateSalesSentence(model);
+		logger.info("updateSalesSentence" + "更新結束");
 	}
 
 	@RequestMapping(value = "/getAllEmpsWithResume", method = RequestMethod.POST)

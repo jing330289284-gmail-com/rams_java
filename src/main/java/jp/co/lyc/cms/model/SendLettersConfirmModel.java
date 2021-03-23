@@ -33,9 +33,27 @@ public class SendLettersConfirmModel implements Serializable {
 	String resumeInfoName;// 履歴書
 	String resumeInfo1;// 履歴書情報1
 	String resumeInfo2;//
+	String resumeName1;// 履歴書情報1
+	String resumeName2;//
 	String resume;// 履歴書情報1
 
 	int index;//
+
+	public String getResumeName1() {
+		return resumeName1;
+	}
+
+	public void setResumeName1(String resumeName1) {
+		this.resumeName1 = resumeName1;
+	}
+
+	public String getResumeName2() {
+		return resumeName2;
+	}
+
+	public void setResumeName2(String resumeName2) {
+		this.resumeName2 = resumeName2;
+	}
 
 	public String getResumeInfoName() {
 		return resumeInfoName;

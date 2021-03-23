@@ -26,4 +26,6 @@ public interface SendLettersConfirmMapper {
 	public List<EmployeeModel> getMail();
 	
 	public List<AllEmployName> getAllEmployInfoName();
+
+	public void updateSalesSentence(SendLettersConfirmModel model);
 }

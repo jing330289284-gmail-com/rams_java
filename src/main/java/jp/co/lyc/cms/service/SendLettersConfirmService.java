@@ -37,4 +37,8 @@ public class SendLettersConfirmService {
 	public List<AllEmployName> getAllEmployInfoName(){
 		return sendLettersConfirmMapper.getAllEmployInfoName();
 	}
+
+	public void updateSalesSentence(SendLettersConfirmModel model) {
+		sendLettersConfirmMapper.updateSalesSentence(model);
+	}
 }

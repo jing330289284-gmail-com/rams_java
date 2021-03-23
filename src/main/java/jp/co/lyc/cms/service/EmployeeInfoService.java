@@ -250,7 +250,7 @@ public class EmployeeInfoService {
 	 */
 	public EmployeeModel getEmployeeByEmployeeNo(Map<String, Object> sendMap) {
 		EmployeeModel model = employeeInfoMapper.getEmployeeByEmployeeNo(sendMap);
-		if (model.getAlphabetName() != null && !model.getAlphabetName().equals("")) {
+		if (model.getAlphabetName() != null && !(model.getAlphabetName().equals(" "))) {
 			model.setAlphabetName1(model.getAlphabetName().split(" ")[0]);
 			model.setAlphabetName2(model.getAlphabetName().split(" ")[1]);
 			if (model.getAlphabetName().split(" ").length > 2) {

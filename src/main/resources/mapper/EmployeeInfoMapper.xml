@@ -258,6 +258,9 @@
 		<if test="kadou==null">
 			1=1
 		</if>
+		<if test="authorityCode != 4">
+		and T001.authorityCode != 4 
+		</if>
 		<!-- and T006.customerNo = ifnull(#{customer},T006.customerNo) -->
 		and
 		CONCAT(T001.employeeFristName,T001.employeeLastName) =
