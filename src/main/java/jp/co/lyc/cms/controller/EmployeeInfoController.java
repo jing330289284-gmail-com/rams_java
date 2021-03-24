@@ -32,6 +32,7 @@ import jp.co.lyc.cms.common.BaseController;
 import jp.co.lyc.cms.model.AccountInfoModel;
 import jp.co.lyc.cms.model.BpInfoModel;
 import jp.co.lyc.cms.model.EmployeeModel;
+import jp.co.lyc.cms.model.S3Model;
 import jp.co.lyc.cms.service.EmployeeInfoService;
 import jp.co.lyc.cms.util.UtilsController;
 import jp.co.lyc.cms.validation.EmployeeInfoValidation;
@@ -47,6 +48,9 @@ public class EmployeeInfoController extends BaseController {
 
 	@Autowired
 	UtilsController utilsController;
+
+	@Autowired
+	S3Controller s3Controller;
 
 	/**
 	 * データを取得
@@ -201,6 +205,11 @@ public class EmployeeInfoController extends BaseController {
 		try {
 			sendMap = utilsController.upload(resumeInfo1, sendMap, "resumeInfo1", emp.getResumeName1());
 			sendMap = utilsController.upload(resumeInfo2, sendMap, "resumeInfo2", emp.getResumeName2());
+			/*
+			 * S3Model s3model = new S3Model(); s3model.setFileTest(resumeInfo1);
+			 * s3model.setFileKey("履歴書/LYC000-test/test.txt");
+			 * s3Controller.uploadFile(s3model);
+			 */
 			sendMap = utilsController.upload(residentCardInfo, sendMap, "residentCardInfo", "在留カード");
 			sendMap = utilsController.upload(passportInfo, sendMap, "passportInfo", "パスポート");
 			employeeInfoService.insertEmployee((HashMap<String, Object>) sendMap);
