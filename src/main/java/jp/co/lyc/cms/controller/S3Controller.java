@@ -1,6 +1,7 @@
 package jp.co.lyc.cms.controller;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,6 +25,7 @@ import com.amazonaws.services.s3.model.AmazonS3Exception;
 import com.amazonaws.services.s3.model.Bucket;
 import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
+import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.amazonaws.services.s3.transfer.MultipleFileUpload;
 import com.amazonaws.services.s3.transfer.TransferManager;
 
@@ -53,53 +55,28 @@ public class S3Controller extends BaseController {
 	@ResponseBody
 	public void uploadFile(@RequestBody S3Model model) {
 		AmazonS3 s3 = new AmazonS3Client(new BasicAWSCredentials(AWS_ACCESS_KEY, AWS_SECRET_KEY));
-		// 文件上传前的名称
-		String fileName = model.getFileTest().getOriginalFilename();
-		File file = new File(fileName);
-		OutputStream out = null;
-		try {
-			// 获取文件流，以文件流的方式输出到新文件
-//		    InputStream in = multipartFile.getInputStream();
-			out = new FileOutputStream(file);
-			byte[] ss = model.getFileTest().getBytes();
-			for (int i = 0; i < ss.length; i++) {
-				out.write(ss[i]);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			if (out != null) {
-				try {
-					out.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
 
 		try {
-			s3.putObject(BUCKET_NAME, model.getFileKey(), file);
+			s3.putObject(BUCKET_NAME, model.getFileKey(), new File(model.getFilePath()));
 		} catch (AmazonS3Exception e) {
 			System.err.print(e.getErrorMessage());
 		}
-		
-		// 操作完上的文件 需要删除在根目录下生成的文件
-		File f = new File(file.toURI());
-		if (f.delete()){
-		    System.out.println("删除成功");
-		}else {
-		    System.out.println("删除失败");
-		}
-
 	}
 
 	@RequestMapping(value = "/downloadFile", method = RequestMethod.POST)
 	@ResponseBody
 	public void downloadFile(@RequestBody S3Model model) {
 		AmazonS3 s3 = new AmazonS3Client(new BasicAWSCredentials(AWS_ACCESS_KEY, AWS_SECRET_KEY));
+		String testString = model.getDownLoadPath().substring(0, model.getDownLoadPath().lastIndexOf("//"));
+		File folder = new File(model.getDownLoadPath().substring(0, model.getDownLoadPath().lastIndexOf("//")));
+		if (!folder.exists() && !folder.isDirectory()) {
+			folder.mkdirs();
+			System.out.println("创建文件夹");
+		} else {
+			System.out.println("文件夹已存在");
+		}
 
-		String targetFilePath = "C:\\file\\test.txt";
-		amazonS3Downloading(s3, BUCKET_NAME, model.getFileKey(), targetFilePath);
+		amazonS3Downloading(s3, BUCKET_NAME, model.getFileKey(), model.getDownLoadPath());
 	}
 
 	public static void amazonS3Downloading(AmazonS3 s3Client, String bucketName, String key, String targetFilePath) {

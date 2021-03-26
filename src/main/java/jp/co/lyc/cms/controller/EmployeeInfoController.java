@@ -205,13 +205,23 @@ public class EmployeeInfoController extends BaseController {
 		try {
 			sendMap = utilsController.upload(resumeInfo1, sendMap, "resumeInfo1", emp.getResumeName1());
 			sendMap = utilsController.upload(resumeInfo2, sendMap, "resumeInfo2", emp.getResumeName2());
-			/*
-			 * S3Model s3model = new S3Model(); s3model.setFileTest(resumeInfo1);
-			 * s3model.setFileKey("履歴書/LYC000-test/test.txt");
-			 * s3Controller.uploadFile(s3model);
-			 */
 			sendMap = utilsController.upload(residentCardInfo, sendMap, "residentCardInfo", "在留カード");
 			sendMap = utilsController.upload(passportInfo, sendMap, "passportInfo", "パスポート");
+			S3Model s3Model = new S3Model();
+			if (sendMap.get("resumeInfo1") != null || sendMap.get("resumeInfo1") != "") {
+				String filePath = sendMap.get("resumeInfo1").toString();
+				String fileKey = filePath.split("file/")[1];
+				s3Model.setFileKey(fileKey);
+				s3Model.setFilePath(filePath);
+				s3Controller.uploadFile(s3Model);
+			}
+			if (sendMap.get("resumeInfo2") != null || sendMap.get("resumeInfo2") != "") {
+				String filePath = sendMap.get("resumeInfo2").toString();
+				String fileKey = filePath.split("file/")[1];
+				s3Model.setFileKey(fileKey);
+				s3Model.setFilePath(filePath);
+				s3Controller.uploadFile(s3Model);
+			}
 			employeeInfoService.insertEmployee((HashMap<String, Object>) sendMap);
 		} catch (Exception e) {
 			resultMap.put("result", false);
@@ -339,6 +349,21 @@ public class EmployeeInfoController extends BaseController {
 			sendMap = utilsController.upload(resumeInfo2, sendMap, "resumeInfo2", emp.getResumeName2());
 			sendMap = utilsController.upload(residentCardInfo, sendMap, "residentCardInfo", "在留カード");
 			sendMap = utilsController.upload(passportInfo, sendMap, "passportInfo", "パスポート");
+			S3Model s3Model = new S3Model();
+			if (sendMap.get("resumeInfo1") != null || sendMap.get("resumeInfo1") != "") {
+				String filePath = sendMap.get("resumeInfo1").toString();
+				String fileKey = filePath.split("file/")[1];
+				s3Model.setFileKey(fileKey);
+				s3Model.setFilePath(filePath);
+				s3Controller.uploadFile(s3Model);
+			}
+			if (sendMap.get("resumeInfo2") != null || sendMap.get("resumeInfo2") != "") {
+				String filePath = sendMap.get("resumeInfo2").toString();
+				String fileKey = filePath.split("file/")[1];
+				s3Model.setFileKey(fileKey);
+				s3Model.setFilePath(filePath);
+				s3Controller.uploadFile(s3Model);
+			}
 			result = employeeInfoService.updateEmployee(sendMap);
 		} catch (Exception e) {
 			resultMap.put("result", false);
