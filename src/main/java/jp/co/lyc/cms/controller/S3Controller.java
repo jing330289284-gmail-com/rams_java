@@ -36,8 +36,8 @@ import jp.co.lyc.cms.model.S3Model;
 @RequestMapping(value = "/s3Controller")
 public class S3Controller extends BaseController {
 
-	final String AWS_ACCESS_KEY = "AKIAUCIQPBQYUDMUAVX2"; // 【你的 access_key】
-	final String AWS_SECRET_KEY = "0N5X3pqZuInlDHFPYn5YkxbX65h0L3jWvDgd6qM+"; // 【你的 aws_secret_key】
+	final String AWS_ACCESS_KEY = "AKIAUCIQPBQYR2626LF3"; // 【你的 access_key】
+	final String AWS_SECRET_KEY = "wIJriCBMib1Jc6gDCnQOcGQ6c7LBdqijczY3LbIo"; // 【你的 aws_secret_key】
 	final String BUCKET_NAME = "ramsstoragedevices"; // 【你的bucket名字】
 
 	@RequestMapping(value = "/createBucket", method = RequestMethod.POST)
@@ -63,12 +63,51 @@ public class S3Controller extends BaseController {
 		}
 	}
 
+	@RequestMapping(value = "/downloadTest", method = RequestMethod.POST)
+	@ResponseBody
+	public InputStream downloadTest(@RequestBody S3Model model) {
+		AmazonS3 s3 = new AmazonS3Client(new BasicAWSCredentials(AWS_ACCESS_KEY, AWS_SECRET_KEY));
+		String folderPath = model.getDownLoadPath().substring(0, model.getDownLoadPath().lastIndexOf("//"));
+		File folder = new File(folderPath);
+		if (!folder.exists() && !folder.isDirectory()) {
+			folder.mkdirs();
+			System.out.println("创建文件夹");
+		} else {
+			System.out.println("文件夹已存在");
+		}
+
+		return testdownload(s3, BUCKET_NAME, model.getFileKey(), model.getDownLoadPath());
+	}
+
+	public static InputStream testdownload(AmazonS3 s3Client, String bucketName, String key, String targetFilePath) {
+		S3Object object = s3Client.getObject(new GetObjectRequest(bucketName, key));
+		InputStream input = null;
+
+		if (object != null) {
+			System.out.println("Content-Type: " + object.getObjectMetadata().getContentType());
+			try {
+				// 获取文件流
+				input = object.getObjectContent();
+
+			} finally {
+				if (input != null) {
+					try {
+						input.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+		return input;
+	}
+
 	@RequestMapping(value = "/downloadFile", method = RequestMethod.POST)
 	@ResponseBody
 	public void downloadFile(@RequestBody S3Model model) {
 		AmazonS3 s3 = new AmazonS3Client(new BasicAWSCredentials(AWS_ACCESS_KEY, AWS_SECRET_KEY));
-		String testString = model.getDownLoadPath().substring(0, model.getDownLoadPath().lastIndexOf("//"));
-		File folder = new File(model.getDownLoadPath().substring(0, model.getDownLoadPath().lastIndexOf("//")));
+		String folderPath = model.getDownLoadPath().substring(0, model.getDownLoadPath().lastIndexOf("//"));
+		File folder = new File(folderPath);
 		if (!folder.exists() && !folder.isDirectory()) {
 			folder.mkdirs();
 			System.out.println("创建文件夹");
