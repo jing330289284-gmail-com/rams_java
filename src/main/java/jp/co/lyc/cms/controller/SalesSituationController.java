@@ -46,6 +46,7 @@ import ch.qos.logback.core.joran.conditional.IfAction;
 import jp.co.lyc.cms.common.BaseController;
 import jp.co.lyc.cms.model.SalesSituationModel;
 import jp.co.lyc.cms.model.MasterModel;
+import jp.co.lyc.cms.model.S3Model;
 import jp.co.lyc.cms.model.SalesContent;
 import jp.co.lyc.cms.service.SalesSituationService;
 import jp.co.lyc.cms.util.StatusCodeToMsgMap;
@@ -60,6 +61,9 @@ public class SalesSituationController extends BaseController {
 
 	@Autowired
 	SalesSituationService salesSituationService;
+
+	@Autowired
+	S3Controller s3Controller;
 
 	// 12月
 	public static final String DECEMBER = "12";
@@ -461,7 +465,7 @@ public class SalesSituationController extends BaseController {
 	}
 
 	/**
-	 * 営業フォルダー
+	 * 営業フォルダ
 	 * 
 	 * @return Map
 	 * @throws ParseException
@@ -471,7 +475,7 @@ public class SalesSituationController extends BaseController {
 	@ResponseBody
 	public boolean checkDirectory(@RequestBody SalesSituationModel model) throws ParseException, Exception {
 
-		String mkDirectoryPath = "c:\\file\\営業フォルダー\\" + model.getSalesYearAndMonth();
+		String mkDirectoryPath = "c:\\file\\営業フォルダ\\" + model.getSalesYearAndMonth();
 		File folder = new File(mkDirectoryPath);
 		if (!folder.exists() && !folder.isDirectory()) {
 			return true;
@@ -481,7 +485,7 @@ public class SalesSituationController extends BaseController {
 	}
 
 	/**
-	 * 営業フォルダー
+	 * 営業フォルダ
 	 * 
 	 * @return Map
 	 * @throws ParseException
@@ -497,8 +501,7 @@ public class SalesSituationController extends BaseController {
 		ArrayList<String> resumeInfo2List = model.getResumeInfo2List();
 
 		for (int i = 0; i < employeeNoList.size(); i++) {
-			String mkDirectoryPath = "c:\\file\\営業フォルダー\\" + model.getSalesYearAndMonth() + "\\"
-					+ employeeNoList.get(i);
+			String mkDirectoryPath = "c:\\file\\営業フォルダ\\" + model.getSalesYearAndMonth() + "\\" + employeeNoList.get(i);
 			if (mkDirectory(mkDirectoryPath)) {
 				// System.out.println(mkDirectoryPath + "建立完毕");
 				if (resumeInfo1List.get(i) != null)
@@ -514,12 +517,17 @@ public class SalesSituationController extends BaseController {
 					fileChannelCopy(resumeInfo2List.get(i), mkDirectoryPath);
 			}
 		}
-		String dir = "c:\\file\\営業フォルダー\\" + model.getSalesYearAndMonth();
+		String dir = "c:\\file\\営業フォルダ\\" + model.getSalesYearAndMonth();
 		String rar = "c:\\file\\salesFolder\\" + model.getSalesYearAndMonth() + ".rar";
 		zip(dir, rar, true);
 		// cmd指令打开对应文件夹
-		// Runtime.getRuntime().exec("cmd /c start explorer c:\\file\\営業フォルダー\\" +
+		// Runtime.getRuntime().exec("cmd /c start explorer c:\\file\\営業フォルダ\\" +
 		// model.getSalesYearAndMonth());
+
+		S3Model s3Model = new S3Model();
+		s3Model.setFilePath("c:/file/salesFolder/" + model.getSalesYearAndMonth() + ".rar");
+		s3Model.setFileKey("営業フォルダ/" + model.getSalesYearAndMonth() + ".rar");
+		s3Controller.uploadFile(s3Model);
 
 		return result;
 	}

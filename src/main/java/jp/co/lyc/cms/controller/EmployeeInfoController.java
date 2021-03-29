@@ -208,14 +208,14 @@ public class EmployeeInfoController extends BaseController {
 			sendMap = utilsController.upload(residentCardInfo, sendMap, "residentCardInfo", "在留カード");
 			sendMap = utilsController.upload(passportInfo, sendMap, "passportInfo", "パスポート");
 			S3Model s3Model = new S3Model();
-			if (sendMap.get("resumeInfo1") != null || sendMap.get("resumeInfo1") != "") {
+			if (sendMap.get("resumeInfo1") != null && sendMap.get("resumeInfo1") != "") {
 				String filePath = sendMap.get("resumeInfo1").toString();
 				String fileKey = filePath.split("file/")[1];
 				s3Model.setFileKey(fileKey);
 				s3Model.setFilePath(filePath);
 				s3Controller.uploadFile(s3Model);
 			}
-			if (sendMap.get("resumeInfo2") != null || sendMap.get("resumeInfo2") != "") {
+			if (sendMap.get("resumeInfo2") != null && sendMap.get("resumeInfo2") != "") {
 				String filePath = sendMap.get("resumeInfo2").toString();
 				String fileKey = filePath.split("file/")[1];
 				s3Model.setFileKey(fileKey);
@@ -245,10 +245,16 @@ public class EmployeeInfoController extends BaseController {
 
 		Map<String, Object> sendMap = getParam(emp);
 		boolean result = true;
+		EmployeeModel model = employeeInfoService.getEmployeeByEmployeeNo(sendMap);
+		String folderKey = "履歴書/" + model.getEmployeeNo() + "_" + model.getEmployeeFristName()
+				+ model.getEmployeeLastName();
 		result = employeeInfoService.deleteEmployeeInfo(sendMap);
 		if (result) {
 			// 自分のファイルを削除
 			// utilsController.deleteDir(emp.getResidentCardInfo());
+			S3Model s3Model = new S3Model();
+			s3Model.setFolderKey(folderKey);
+			s3Controller.deleteFolder(s3Model);
 		}
 		logger.info("GetEmployeeInfoController.deleteEmployeeInfo:" + "削除結束");
 		return result;
@@ -350,14 +356,20 @@ public class EmployeeInfoController extends BaseController {
 			sendMap = utilsController.upload(residentCardInfo, sendMap, "residentCardInfo", "在留カード");
 			sendMap = utilsController.upload(passportInfo, sendMap, "passportInfo", "パスポート");
 			S3Model s3Model = new S3Model();
-			if (sendMap.get("resumeInfo1") != null || sendMap.get("resumeInfo1") != "") {
+			if (sendMap.get("resumeInfo1") != null && sendMap.get("resumeInfo1") != "") {
+				String deletefileKey = resumeInfo1URL.split("/file/")[1];
+				s3Model.setFileKey(deletefileKey);
+				s3Controller.deleteFile(s3Model);
 				String filePath = sendMap.get("resumeInfo1").toString();
 				String fileKey = filePath.split("file/")[1];
 				s3Model.setFileKey(fileKey);
 				s3Model.setFilePath(filePath);
 				s3Controller.uploadFile(s3Model);
 			}
-			if (sendMap.get("resumeInfo2") != null || sendMap.get("resumeInfo2") != "") {
+			if (sendMap.get("resumeInfo2") != null && sendMap.get("resumeInfo2") != "") {
+				String deletefileKey = resumeInfo2URL.split("/file/")[1];
+				s3Model.setFileKey(deletefileKey);
+				s3Controller.deleteFile(s3Model);
 				String filePath = sendMap.get("resumeInfo2").toString();
 				String fileKey = filePath.split("file/")[1];
 				s3Model.setFileKey(fileKey);
