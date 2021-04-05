@@ -38,9 +38,9 @@ import jp.co.lyc.cms.model.S3Model;
 @RequestMapping(value = "/s3Controller")
 public class S3Controller extends BaseController {
 
-	final String AWS_ACCESS_KEY = "AKIAUCIQPBQYWQHVGKXT"; // 【你的 access_key】
-	final String AWS_SECRET_KEY = "kJnIIrNZVvyYlWvTRYFkqBrTuoX7xD2d1FZCCowd"; // 【你的 aws_secret_key】
-	final String BUCKET_NAME = "ramsstoragedevices"; // 【你的bucket名字】
+	final String AWS_ACCESS_KEY = "AKIATDJ4VZLUZ5JZ74NX"; // 【你的 access_key】
+	final String AWS_SECRET_KEY = "VRy87g0xOD7kgA0B6Uu0Qemk79YLY7/svFQGhltf"; // 【你的 aws_secret_key】
+	final String BUCKET_NAME = "ramsdatabase"; // 【你的bucket名字】
 
 	@RequestMapping(value = "/createBucket", method = RequestMethod.POST)
 	@ResponseBody
