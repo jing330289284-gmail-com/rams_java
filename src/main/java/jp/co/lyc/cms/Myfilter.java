@@ -21,7 +21,7 @@ public class Myfilter implements Filter{
 		    response.setContentType("application/json; charset=utf-8");
 		    //response.addHeader("Access-Control-Allow-Origin","http://127.0.0.1:3000");// * 允许所有域名跨域访问
 	        //response.addHeader("Access-Control-Allow-Origin","http://13.58.173.66:3000");// * 允许所有域名跨域访问
-	        response.addHeader("Access-Control-Allow-Origin","http://44.241.80.66:3000");// * 允许所有域名跨域访问
+	        response.addHeader("Access-Control-Allow-Origin","http://54.201.204.105:3000");// * 允许所有域名跨域访问
 		    response.setHeader("Access-Control-Allow-Credentials","true");
 		    response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 		    response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, POST, PUT, DELETE, TRACE, OPTIONS, PATCH");
