@@ -9,6 +9,7 @@ import java.io.OutputStream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,19 +33,31 @@ import com.amazonaws.services.s3.transfer.MultipleFileUpload;
 import com.amazonaws.services.s3.transfer.TransferManager;
 
 import jp.co.lyc.cms.common.BaseController;
+import jp.co.lyc.cms.mapper.PasswordResetMapper;
+import jp.co.lyc.cms.mapper.S3AccessKeyMapper;
 import jp.co.lyc.cms.model.S3Model;
 
 @Controller
 @RequestMapping(value = "/s3Controller")
 public class S3Controller extends BaseController {
 
-	final String AWS_ACCESS_KEY = ""; // 【你的 access_key】
-	final String AWS_SECRET_KEY = ""; // 【你的 aws_secret_key】
+	@Autowired
+	S3AccessKeyMapper s3AccessKeyMapper;
+
 	final String BUCKET_NAME = "ramsdatabase"; // 【你的bucket名字】
+	String AWS_ACCESS_KEY = ""; // 【你的 acfcess_key】
+	String AWS_SECRET_KEY = ""; // 【你的 aws_secret_key】
+
+	public void setKey() {
+		String passwordTemp = s3AccessKeyMapper.getS3password();
+		AWS_ACCESS_KEY = passwordTemp.split(" ")[0]; // 【你的 access_key】
+		AWS_SECRET_KEY = passwordTemp.split(" ")[1]; // 【你的 aws_secret_key】
+	}
 
 	@RequestMapping(value = "/createBucket", method = RequestMethod.POST)
 	@ResponseBody
 	public void createBucket(@RequestBody S3Model model) {
+		setKey();
 		AmazonS3 s3 = new AmazonS3Client(new BasicAWSCredentials(AWS_ACCESS_KEY, AWS_SECRET_KEY));
 		try {
 			s3.createBucket(model.getBucketName());
@@ -56,8 +69,8 @@ public class S3Controller extends BaseController {
 	@RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
 	@ResponseBody
 	public void uploadFile(@RequestBody S3Model model) {
+		setKey();
 		AmazonS3 s3 = new AmazonS3Client(new BasicAWSCredentials(AWS_ACCESS_KEY, AWS_SECRET_KEY));
-
 		try {
 			s3.putObject(BUCKET_NAME, model.getFileKey(), new File(model.getFilePath()));
 		} catch (AmazonS3Exception e) {
@@ -68,6 +81,7 @@ public class S3Controller extends BaseController {
 	@RequestMapping(value = "/deleteFile", method = RequestMethod.POST)
 	@ResponseBody
 	public void deleteFile(@RequestBody S3Model model) {
+		setKey();
 		AmazonS3 s3 = new AmazonS3Client(new BasicAWSCredentials(AWS_ACCESS_KEY, AWS_SECRET_KEY));
 		try {
 			s3.deleteObject(BUCKET_NAME, model.getFileKey());
@@ -79,6 +93,7 @@ public class S3Controller extends BaseController {
 	@RequestMapping(value = "/deleteFolder", method = RequestMethod.POST)
 	@ResponseBody
 	public void deleteFolder(@RequestBody S3Model model) {
+		setKey();
 		AmazonS3 s3 = new AmazonS3Client(new BasicAWSCredentials(AWS_ACCESS_KEY, AWS_SECRET_KEY));
 
 		ObjectListing objects = s3.listObjects(BUCKET_NAME, model.getFolderKey());
@@ -94,6 +109,7 @@ public class S3Controller extends BaseController {
 	@RequestMapping(value = "/downloadFile", method = RequestMethod.POST)
 	@ResponseBody
 	public void downloadFile(@RequestBody S3Model model) {
+		setKey();
 		AmazonS3 s3 = new AmazonS3Client(new BasicAWSCredentials(AWS_ACCESS_KEY, AWS_SECRET_KEY));
 		String folderPath = model.getDownLoadPath().substring(0, model.getDownLoadPath().lastIndexOf("//"));
 		File folder = new File(folderPath);

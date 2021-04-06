@@ -488,7 +488,17 @@
 		WHERE
 		purchasingManagers is not null and purchasingManagers != "";
 	</select>
-
+		
+	<!-- 契約形態取得-->
+	<select id="getTypteOfContract"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT
+		typteOfContractCode CODE,
+		typteOfContractName NAME
+		FROM
+		M41TypteOfContract;
+	</select>
+	
 	<!-- 社員名(営業、管理者) -->
 	<select id="getEmployeeNameByOccupationName"
 		resultType="jp.co.lyc.cms.model.ModelClass">

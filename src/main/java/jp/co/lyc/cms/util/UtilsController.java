@@ -1333,6 +1333,20 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getPurchasingManagers();
 		return list;
 	}
+	
+	
+	/**
+	 * 契約形態取得
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getTypteOfContract", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getTypteOfContract() {
+		List<ModelClass> list = utilsService.getTypteOfContract();
+		return list;
+	}
+	
 
 	/**
 	 * 面談回数取得

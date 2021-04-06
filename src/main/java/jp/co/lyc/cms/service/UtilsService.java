@@ -521,6 +521,15 @@ public class UtilsService {
 	}
 	
 	/**
+	 * 契約形態 取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getTypteOfContract() {
+		return utilsMapper.getTypteOfContract();
+	}
+	
+	/**
 	 * 送信日付設定取得
 	 * 
 	 * @return

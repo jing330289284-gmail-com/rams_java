@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jp.co.lyc.cms.mapper.S3AccessKeyMapper">
+	<resultMap id="stringResult" type="String" />
+	<!-- ログイン -->
+	<select id="getS3password" resultMap="stringResult">
+		SELECT
+		T012.passwordResetId
+		FROM
+		T012Passwordreset T012
+		WHERE
+		T012. idForEmployeeNo = "S3";
+	</select>
+</mapper>

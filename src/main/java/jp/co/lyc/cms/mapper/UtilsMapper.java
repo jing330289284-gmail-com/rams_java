@@ -366,6 +366,13 @@ public interface UtilsMapper {
 	public List<ModelClass> getPurchasingManagers();
 	
 	/**
+	 * 契約形態 取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getTypteOfContract();
+	
+	/**
 	 * 社員氏名(営業、管理者)を取得する
 	 * 
 	 * 
