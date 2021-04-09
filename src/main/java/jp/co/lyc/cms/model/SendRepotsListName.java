@@ -15,7 +15,7 @@ public class SendRepotsListName implements Serializable {
 	String UpdateUser;
 	String storageListName;
 	String oldStorageListName;
-
+	String subChargeMailList;
 	public String getUpdateUser() {
 		return UpdateUser;
 	}
@@ -106,5 +106,12 @@ public class SendRepotsListName implements Serializable {
 	}
 
 
+	public String getSubChargeMailList() {
+		return subChargeMailList;
+	}
 
+
+	public void setSubChargeMailList(String subChargeMailList) {
+		this.subChargeMailList = subChargeMailList;
+	}
 }

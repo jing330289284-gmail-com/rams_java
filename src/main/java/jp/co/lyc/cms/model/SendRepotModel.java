@@ -54,13 +54,35 @@ public class SendRepotModel {
 	String purchasingManagersMail2;
 	String name;
 	String code;
-	String customerList;
-	String mainChargeList;
-	String departmentCodeList;
+	String[] oldCtmNos;
+	String[] deleteCtmNos;
+	String storageListName;
 	String positionCodeList;
 	String mainChargeMailList;
 	String subChargeMailList;
 	String[] ctmNos;
+	String customerList;
+	String mainChargeList;
+	String departmentCodeList;
+	public String[] getOldCtmNos() {
+		return oldCtmNos;
+	}
+	public void setOldCtmNos(String[] oldCtmNos) {
+		this.oldCtmNos = oldCtmNos;
+	}
+	public String[] getDeleteCtmNos() {
+		return deleteCtmNos;
+	}
+	public void setDeleteCtmNos(String[] deleteCtmNos) {
+		this.deleteCtmNos = deleteCtmNos;
+	}
+	public String getStorageListName() {
+		return storageListName;
+	}
+	public void setStorageListName(String storageListName) {
+		this.storageListName = storageListName;
+	}
+
 	
 	
 	public String[] getCtmNos() {

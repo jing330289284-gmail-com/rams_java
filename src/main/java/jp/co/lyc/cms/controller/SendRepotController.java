@@ -37,16 +37,15 @@ public class SendRepotController  extends BaseController {
 	@RequestMapping(value = "/getCustomers", method = RequestMethod.POST)
 	@ResponseBody
 	public List<SendRepotModel> getSalesSituation() {
-
 		logger.info("getCustomers:" + "検索開始");
-		List<SendRepotModel> salesCustomersList = new ArrayList<SendRepotModel>();
+		List<SendRepotModel> sendRepotList = new ArrayList<SendRepotModel>();
 		try {
-			salesCustomersList = sendRepotService.getSalesCustomers();
+			sendRepotList = sendRepotService.getCustomers();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		logger.info("getCustomers" + "検索結束");
-		return salesCustomersList;
+		return sendRepotList;
 	}
 	/**
 	 * リストを取得
@@ -64,7 +63,7 @@ public class SendRepotController  extends BaseController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		logger.info("getSalesPersons" + "検索結束");
+		logger.info("getLists" + "検索結束");
 		return salesPersonsList;
 	}
 	
@@ -79,6 +78,9 @@ public class SendRepotController  extends BaseController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		for (int i = 0; i < salesPersonsList.size(); i++) {
+			salesPersonsList.get(i).setRowId(i + 1);
+		}
 		logger.info("getSalesPersons" + "検索結束");
 		return salesPersonsList;
 	}
@@ -88,14 +90,14 @@ public class SendRepotController  extends BaseController {
 	public int creatList(@RequestBody SendRepotModel model) {
 
 		model.setUpdateUser(getSession().getAttribute("employeeName").toString());
-		logger.info("getSalesPersons:" + "検索開始");
+		logger.info("creatList:" + "検索開始");
 		int index=0;
 		try {
 			index = sendRepotService.creatList(model);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		logger.info("getSalesPersons" + "検索結束");
+		logger.info("creatList" + "検索結束");
 		return index;
 	}
 	@RequestMapping(value = "/getListByName", method = RequestMethod.POST)
@@ -131,15 +133,39 @@ public class SendRepotController  extends BaseController {
 	@RequestMapping(value = "/getCustomersByNos", method = RequestMethod.POST)
 	@ResponseBody
 	public List<SendRepotModel> getCustomersByNos(@RequestBody SendRepotModel model) {
-
-		logger.info("getCustomers:" + "検索開始");
+		logger.info("getCustomersByNos:" + "検索開始");
 		List<SendRepotModel> salesCustomersList = new ArrayList<SendRepotModel>();
+		SendRepotModel sendRepot = new SendRepotModel();
 		try {
 			salesCustomersList = sendRepotService.getCustomersByNos(model.getCtmNos());
+			sendRepot = sendRepotService.getMainChargeList(model.getStorageListName());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		logger.info("getCustomers" + "検索結束");
+		logger.info("getCustomersByNos" + "検索結束");
+		if (model.getStorageListName() != "" && model.getStorageListName() != null) {
+			String[] selectedRowKeys = sendRepot.getMainChargeList().split(";");
+			String[] selectedRowNames = sendRepot.getDepartmentCodeList().split(";");
+
+			for (int i = 0; i < salesCustomersList.size(); i++) {
+				salesCustomersList.get(i).setStorageListName(model.getStorageListName());
+				for (int j = 0; j < selectedRowKeys.length; j++) {
+					String[] customerRowKeys = selectedRowKeys[j].split(":");
+					if (salesCustomersList.get(i).getCustomerNo().equals(customerRowKeys[0])) {
+						salesCustomersList.get(i)
+								.setMainChargeList(customerRowKeys.length > 1 ? customerRowKeys[1] : "");
+					}
+				}
+				for (int j = 0; j < selectedRowNames.length; j++) {
+					String[] aaacustomerRowNames = selectedRowNames[j].split(":");
+					if (salesCustomersList.get(i).getCustomerNo().equals(aaacustomerRowNames[0])) {
+						salesCustomersList.get(i)
+								.setSalesPersonsAppend(aaacustomerRowNames.length > 1 ? aaacustomerRowNames[1] : "");
+					}
+				}
+			}
+		}
+
 		return salesCustomersList;
 	}
 	@RequestMapping(value = "/getCustomerDepartmentCode", method = RequestMethod.POST)
@@ -172,17 +198,30 @@ public class SendRepotController  extends BaseController {
 		}
 	}
 	
+	@RequestMapping(value = "/salesPersonsListsUpdate", method = RequestMethod.POST)
+	@ResponseBody
+	private void salesPersonsListsUpdate(String salesPersons,String oldStorageListName) {
+		SendRepotsListName updateModel= new SendRepotsListName();
+		updateModel.setUpdateUser(getSession().getAttribute("employeeName").toString());
+		updateModel.setOldStorageListName(oldStorageListName);
+		updateModel.setSubChargeMailList(salesPersons);
+		try {
+			sendRepotService.salesPersonsListsUpdate(updateModel);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	@RequestMapping(value = "/deleteList", method = RequestMethod.POST)
 	@ResponseBody
 	public int deleteList(@RequestBody String storageListName) {
-		logger.info("getSalesPersons:" + "検索開始");
+		logger.info("deleteList:" + "検索開始");
 		int index=0;
 		try {
 			index = sendRepotService.deleteList(storageListName);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		logger.info("getSalesPersons" + "検索結束");
+		logger.info("deleteList" + "検索結束");
 		return index;
 	}
 	@RequestMapping(value = "/openFolder", method = RequestMethod.POST)
@@ -196,4 +235,130 @@ public class SendRepotController  extends BaseController {
 		String path="C:\\file\\作業報告書フォルダ\\"+now.get(Calendar.YEAR) + "\\"+ theMonth;
 	    Runtime.getRuntime().exec("explorer.exe  /n,/select, "+path);
 	    }
+	
+	
+	
+	//追加部分
+	@RequestMapping(value = "/customerListUpdate", method = RequestMethod.POST)
+	@ResponseBody
+	public String customerListUpdate(@RequestBody SendRepotModel model) {
+		try {
+			sendRepotService.customerListUpdate(model.getStorageListName(), model.getCustomerList());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		logger.info("customerListUpdate" + "検索結束");
+		return sendRepotService.getCustomerList(model.getStorageListName());
+	}
+	@RequestMapping(value = "/deleteCustomerList", method = RequestMethod.POST)
+	@ResponseBody
+	public String deleteCustomerList(@RequestBody SendRepotModel model) {
+		try {
+			sendRepotService.deleteCustomerList(model);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		logger.info("deleteCustomerList" + "検索結束");
+		return "";
+	}
+	@RequestMapping(value = "/addNewList", method = RequestMethod.POST)
+	@ResponseBody
+	public String addNewList(@RequestBody SendRepotModel model) {
+
+		model.setUpdateUser(getSession().getAttribute("employeeName").toString());
+		logger.info("addNewList:" + "検索開始");
+		String name = "";
+		String mainChargeList = "";
+		String departmentCodeList = "";
+		String[] code = model.getCode().split(",");
+		for (int i = 0; i < code.length; i++) {
+			mainChargeList += code[i] + ":;";
+			departmentCodeList += code[i] + ":;";
+		}
+		model.setMainChargeList(mainChargeList);
+		model.setDepartmentCodeList(departmentCodeList);
+		try {
+			name = sendRepotService.getMaxStorageListName();
+			model.setName(name);
+			sendRepotService.creatList(model);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		logger.info("addNewList" + "検索結束");
+		return name;
+	}
+	@RequestMapping(value = "/deleteCustomerListByNo", method = RequestMethod.POST)
+	@ResponseBody
+	public String deleteCustomerListByNo(@RequestBody SendRepotModel model) {
+
+		logger.info("deleteCustomerListByNo:" + "検索開始");
+		String newCtmNos = "";
+		for (int i = 0; i < model.getOldCtmNos().length; i++) {
+			boolean flag = false;
+			for (int j = 0; j < model.getDeleteCtmNos().length; j++) {
+				if (model.getOldCtmNos()[i].equals(model.getDeleteCtmNos()[j])) {
+					flag = true;
+					break;
+				}
+			}
+			if (!flag) {
+				newCtmNos += model.getOldCtmNos()[i] + ",";
+			}
+		}
+		if (newCtmNos.length() > 0) {
+			newCtmNos = newCtmNos.substring(0, newCtmNos.length() - 1);
+		}
+		model.setCtmNos(newCtmNos.split(","));
+		model.setUpdateUser(getSession().getAttribute("employeeName").toString());
+		model.setCustomerList(newCtmNos);
+
+		SendRepotModel sendRepot = new SendRepotModel();
+		try {
+			sendRepot = sendRepotService.getMainChargeList(model.getStorageListName());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		String[] selectedRowKeys = sendRepot.getMainChargeList().split(";");
+		String[] selectedRowNames = sendRepot.getDepartmentCodeList().split(";");
+		String mainChargeList = "";
+		String departmentCodeList = "";
+
+		for (int i = 0; i < selectedRowKeys.length; i++) {
+			for (int j = 0; j < model.getCtmNos().length; j++) {
+				String[] customerRowKeys = selectedRowKeys[i].split(":");
+				if (model.getCtmNos()[j].equals(customerRowKeys[0])) {
+					mainChargeList += model.getCtmNos()[j] + ":";
+					if (customerRowKeys.length > 1)
+						mainChargeList += customerRowKeys[1] + ";";
+					else
+						mainChargeList += ";";
+				}
+			}
+		}
+		
+		for (int i = 0; i < selectedRowNames.length; i++) {
+			for (int j = 0; j < model.getCtmNos().length; j++) {
+				String[] customerRowNames = selectedRowNames[i].split(":");
+				if (model.getCtmNos()[j].equals(customerRowNames[0])) {
+					departmentCodeList += model.getCtmNos()[j] + ":";
+					if (customerRowNames.length > 1)
+						departmentCodeList += customerRowNames[1] + ";";
+					else
+						departmentCodeList += ";";
+				}
+			}
+		}
+		
+		model.setMainChargeList(mainChargeList);
+		model.setDepartmentCodeList(departmentCodeList);
+
+
+		try {
+			sendRepotService.deleteCustomerListByNo(model);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		logger.info("deleteCustomerListByNo" + "検索結束");
+		return newCtmNos;
+	}
 	}

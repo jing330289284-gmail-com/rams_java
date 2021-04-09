@@ -17,8 +17,8 @@ public class SendRepotService {
 	@Autowired
 	SendRepotMapper sendRepotMapper;
 	
-	public List<SendRepotModel> getSalesCustomers(){
-		return sendRepotMapper.getSalesCustomers();
+	public List<SendRepotModel> getCustomers(){
+		return sendRepotMapper.getCustomers();
 	};
 	
 	public List<SendRepotModel> getSalesPersons(String customerNo){
@@ -55,7 +55,28 @@ public class SendRepotService {
 		return sendRepotMapper.getSalesPersonsLists();
 	}
 	public SendRepotModel getListByName(SendRepotModel model) {
-		// TODO Auto-generated method stub
 		return sendRepotMapper.getListByName(model);
+	}
+	public List<ModelClass> salesPersonsListsUpdate(SendRepotsListName updateModel) {
+		return sendRepotMapper.salesPersonsListsUpdate(updateModel);
+	}
+	
+	public void customerListUpdate(String storageListName, String customerList) {
+		sendRepotMapper.customerListUpdate(storageListName,customerList);
+	}
+	public String getCustomerList(String storageListName) {
+		return sendRepotMapper.getCustomerList(storageListName);
+	}
+	public int deleteCustomerList(SendRepotModel model){
+		return sendRepotMapper.deleteCustomerList(model);
 	};
+	public String getMaxStorageListName() {
+		return sendRepotMapper.getMaxStorageListName();
+	}
+	public SendRepotModel getMainChargeList(String storageListName) {
+		return sendRepotMapper.getMainChargeList(storageListName);
+	}
+	public void deleteCustomerListByNo(SendRepotModel model) {
+		sendRepotMapper.deleteCustomerListByNo(model);
+	}
 }
