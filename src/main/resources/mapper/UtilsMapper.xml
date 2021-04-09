@@ -475,21 +475,24 @@
 		transmissionClassificationCode = 1
 	</select>
 
-	<!-- お客様担当者取得 取得-->
+	<!-- お客様担当者取得 取得 -->
 	<select id="getPurchasingManagers"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT
 		customerNo CODE,
 		customerName NAME,
-		purchasingManagers VALUE,
-		CONCAT(purchasingManagers,'(',customerName,' ',customerNo,')') TEXT
+		purchasingManagers
+		VALUE,
+		CONCAT(purchasingManagers,'(',customerName,' ',customerNo,')')
+		TEXT
 		FROM
 		T007CustomerInfo
 		WHERE
-		purchasingManagers is not null and purchasingManagers != "";
+		purchasingManagers is not null and
+		purchasingManagers != "";
 	</select>
-		
-	<!-- 契約形態取得-->
+
+	<!-- 契約形態取得 -->
 	<select id="getTypteOfContract"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT
@@ -498,7 +501,17 @@
 		FROM
 		M41TypteOfContract;
 	</select>
-	
+
+	<!-- 退職理由区分取得 -->
+	<select id="getRetirementResonClassification"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT
+		retirementResonClassificationCode CODE,
+		retirementResonClassificationName NAME
+		FROM
+		M42RetirementResonClassification;
+	</select>
+
 	<!-- 社員名(営業、管理者) -->
 	<select id="getEmployeeNameByOccupationName"
 		resultType="jp.co.lyc.cms.model.ModelClass">

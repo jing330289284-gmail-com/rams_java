@@ -330,48 +330,63 @@ public interface UtilsMapper {
 	 * @return
 	 */
 	public List<ModelClass> getProjectType();
-	
+
 	/**
 	 * 案件番号取得
 	 * 
 	 * @return
 	 */
 	public List<ModelClass> getProjectNo();
+
 	/**
 	 * 送信日付設定取得
 	 * 
 	 * @return
 	 */
 	public List<ModelClass> getSendReportOfDateSeting();
-	
+
 	/**
 	 * 入場期日取得
 	 * 
 	 * @return
 	 */
 	public List<ModelClass> getAdmissionMonth();
-	
+
 	/**
 	 * 送信対象格納リスト 取得
 	 * 
 	 * @return
 	 */
 	public List<ModelClass> getStorageListName();
-	
+
 	/**
 	 * お客様担当者取得 取得
 	 * 
 	 * @return
 	 */
 	public List<ModelClass> getPurchasingManagers();
-	
+
 	/**
 	 * 契約形態 取得
 	 * 
 	 * @return
 	 */
 	public List<ModelClass> getTypteOfContract();
-	
+
+	/**
+	 * 結婚区分 取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getMarriageClassification();
+
+	/**
+	 * 退職理由区分取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getRetirementResonClassification();
+
 	/**
 	 * 社員氏名(営業、管理者)を取得する
 	 * 

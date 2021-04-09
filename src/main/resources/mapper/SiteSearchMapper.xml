@@ -11,39 +11,53 @@
 		a.admissionEndDate,
 		b.siteRoleName,
 		IF
-		( c.customerAbbreviation IS NULL OR trim( c.customerAbbreviation ) =
-		'', c.customerName, c.customerAbbreviation ) AS customerName,
-		CONCAT( g.employeeFristName, g.employeeLastName ) AS employeeName,
+		( c.customerAbbreviation IS NULL
+		OR trim( c.customerAbbreviation ) =
+		'', c.customerName,
+		c.customerAbbreviation ) AS customerName,
+		CONCAT( g.employeeFristName,
+		g.employeeLastName ) AS employeeName,
 		e.developLanguageName,
 		f.stationName AS station,
 		h.bpBelongCustomerCode,
 		(
 		SELECT
 		IF
-		( customerAbbreviation IS NULL OR trim( customerAbbreviation ) = '',
+		(
+		customerAbbreviation IS NULL OR trim( customerAbbreviation ) = '',
 		customerName, customerAbbreviation )
 		FROM
 		T007CustomerInfo AS T007
-		LEFT JOIN T011BpInfoSupplement AS T011 ON T007.customerNo =
+		LEFT
+		JOIN T011BpInfoSupplement AS T011 ON T007.customerNo =
 		T011.bpBelongCustomerCode
 		WHERE
 		T011.bpEmployeeNo = a.employeeNo
-		) AS employeeFrom
+		) AS
+		employeeFrom
 		FROM
 		T006EmployeeSiteInfo a
-		LEFT JOIN M012SiteRole b ON a.siteRoleCode = b.siteRoleCode AND
+		LEFT JOIN M012SiteRole b ON
+		a.siteRoleCode = b.siteRoleCode AND
 		a.siteRoleCode != ''
-		LEFT JOIN T007CustomerInfo c ON a.customerNo = c.customerNo AND
-		a.customerNo != ''
+		LEFT JOIN
+		T007CustomerInfo c ON a.customerNo = c.customerNo AND
+		a.customerNo !=
+		''
 		LEFT JOIN T002EmployeeDetail d ON a.employeeNo = d.employeeNo AND
 		a.employeeNo != ''
-		LEFT JOIN M011DevelopLanguage e ON a.developLanguageCode =
-		e.developLanguageCode AND a.developLanguageCode != ''
-		LEFT JOIN M013Station f ON a.stationCode = f.stationCode AND a.stationCode
+		LEFT JOIN M011DevelopLanguage e ON
+		a.developLanguageCode =
+		e.developLanguageCode AND a.developLanguageCode
 		!= ''
-		LEFT JOIN T001Employee g ON a.employeeNo = g.employeeNo AND a.employeeNo
+		LEFT JOIN M013Station f ON a.stationCode = f.stationCode AND
+		a.stationCode
 		!= ''
-		LEFT JOIN T011BpInfoSupplement h ON a.employeeNo = h.bpEmployeeNo AND
+		LEFT JOIN T001Employee g ON a.employeeNo =
+		g.employeeNo AND a.employeeNo
+		!= ''
+		LEFT JOIN T011BpInfoSupplement h ON
+		a.employeeNo = h.bpEmployeeNo AND
 		a.employeeNo != ''
 		WHERE
 		1 =1
@@ -120,6 +134,9 @@
 		</if>
 		<if test="scheduledEndDate != null and scheduledEndDate!= ''">
 			AND a.scheduledEndDate &lt;= #{scheduledEndDate}
+		</if>
+		<if test="typteOfContractCode!= null and typteOfContractCode!= ''">
+			AND a.typteOfContractCode = #{typteOfContractCode}
 		</if>
 		ORDER BY
 		a.employeeNo,

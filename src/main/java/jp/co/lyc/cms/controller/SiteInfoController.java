@@ -296,7 +296,11 @@ public class SiteInfoController extends BaseController {
 		String workState = siteModel.getWorkState();
 		String dailyCalculationStatus = siteModel.getDailyCalculationStatus();
 		String scheduledEndDate = siteModel.getScheduledEndDate();
+		String typteOfContractCode = siteModel.getTypteOfContractCode();
 		sendMap.put("nonSiteMonths", nonSiteMonths);
+		if (typteOfContractCode != null && typteOfContractCode.length() != 0) {
+			sendMap.put("typteOfContractCode", typteOfContractCode);
+		}
 		if (nonSiteMonths != "") {
 			sendMap.put("nonSitePeriod", checkDate + "〜" + admissionStartDate);
 		} else {

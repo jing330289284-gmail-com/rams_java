@@ -483,7 +483,7 @@ public class UtilsService {
 	public List<ModelClass> getProjectType() {
 		return utilsMapper.getProjectType();
 	}
-	
+
 	/**
 	 * 案件番号取得
 	 * 
@@ -492,7 +492,7 @@ public class UtilsService {
 	public List<ModelClass> getProjectNo() {
 		return utilsMapper.getProjectNo();
 	}
-	
+
 	/**
 	 * 入場期日取得
 	 * 
@@ -501,7 +501,7 @@ public class UtilsService {
 	public List<ModelClass> getAdmissionMonth() {
 		return utilsMapper.getAdmissionMonth();
 	}
-	
+
 	/**
 	 * 送信対象格納リスト 取得
 	 * 
@@ -510,7 +510,7 @@ public class UtilsService {
 	public List<ModelClass> getStorageListName() {
 		return utilsMapper.getStorageListName();
 	}
-	
+
 	/**
 	 * お客様担当者取得 取得
 	 * 
@@ -519,7 +519,7 @@ public class UtilsService {
 	public List<ModelClass> getPurchasingManagers() {
 		return utilsMapper.getPurchasingManagers();
 	}
-	
+
 	/**
 	 * 契約形態 取得
 	 * 
@@ -528,7 +528,25 @@ public class UtilsService {
 	public List<ModelClass> getTypteOfContract() {
 		return utilsMapper.getTypteOfContract();
 	}
-	
+
+	/**
+	 * 結婚区分 取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getMarriageClassification() {
+		return utilsMapper.getMarriageClassification();
+	}
+
+	/**
+	 * 退職理由区分取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getRetirementResonClassification() {
+		return utilsMapper.getRetirementResonClassification();
+	}
+
 	/**
 	 * 送信日付設定取得
 	 * 
@@ -537,6 +555,7 @@ public class UtilsService {
 	public List<ModelClass> getSendReportOfDateSeting() {
 		return utilsMapper.getSendReportOfDateSeting();
 	}
+
 	/**
 	 * 社員氏名(営業、管理者)を取得する
 	 * 

@@ -35,24 +35,24 @@ public class SiteInfoService {
 	@Transactional(rollbackFor = Exception.class)
 	public boolean updateSiteInfo(Map<String, Object> sendMap) {
 		try {
-			if(sendMap.get("workState").equals("2")) {
+			if (sendMap.get("workState").equals("2")) {
 				List<SiteModel> lastData = siteInfoMapper.getSiteInfo((String) sendMap.get("employeeNo"));
-				SiteModel lastOne = lastData.get(lastData.size() -1);
+				SiteModel lastOne = lastData.get(lastData.size() - 1);
 				String levelCode = (String) sendMap.get("levelCode");
 				String admissionEndDate = (String) sendMap.get("admissionEndDate");
 				lastOne.setRemark((String) sendMap.get("remark"));
 				lastOne.setAdmissionEndDate(admissionEndDate);
-				lastOne.setAdmissionStartDate((String)sendMap.get("admissionStartDate"));
-				lastOne.setWorkDate((String)sendMap.get("admissionStartDate"));
-				lastOne.setEmployeeNo((String)sendMap.get("employeeNo"));
-				int year = Integer.parseInt(admissionEndDate.substring(0,4));
-				int month = Integer.parseInt(admissionEndDate.substring(4,6));
+				lastOne.setAdmissionStartDate((String) sendMap.get("admissionStartDate"));
+				lastOne.setWorkDate((String) sendMap.get("admissionStartDate"));
+				lastOne.setEmployeeNo((String) sendMap.get("employeeNo"));
+				int year = Integer.parseInt(admissionEndDate.substring(0, 4));
+				int month = Integer.parseInt(admissionEndDate.substring(4, 6));
 				month += 1;
-				if(month > 12) {
+				if (month > 12) {
 					month -= 12;
 					year += 1;
 				}
-				admissionEndDate = year + "" + (month > 9 ? month : "0" + month) + "01"; 
+				admissionEndDate = year + "" + (month > 9 ? month : "0" + month) + "01";
 				sendMap.replace("remark", "");
 				sendMap.replace("levelCode", "");
 				sendMap.replace("workState", "0");
@@ -62,12 +62,12 @@ public class SiteInfoService {
 				lastOne.setLevelCode(levelCode);
 				lastOne.setWorkState("2");
 				lastOne.setScheduledEndDate("");
-				lastOne.setUpdateUser((String)sendMap.get("updateUser"));
-				Map<String, Object> sendMapForUp = 
-						formateData(lastOne);
+				lastOne.setUpdateUser((String) sendMap.get("updateUser"));
+				lastOne.setTypteOfContractCode((String) sendMap.get("typteOfContractCode"));
+				Map<String, Object> sendMapForUp = formateData(lastOne);
 				siteInfoMapper.siteUpdate(sendMapForUp);
-				
-			}else {
+
+			} else {
 				siteInfoMapper.siteUpdate(sendMap);
 			}
 		} catch (Exception e) {
@@ -77,6 +77,7 @@ public class SiteInfoService {
 		}
 		return true;
 	}
+
 	public Map<String, Object> formateData(SiteModel siteModel) {
 		Map<String, Object> sendMap = new HashMap<String, Object>();
 		sendMap.put("nonSiteMonths", "");
@@ -156,8 +157,6 @@ public class SiteInfoService {
 		return siteList;
 	}
 
-
-	
 	/**
 	 * 現場情報を削除
 	 * 

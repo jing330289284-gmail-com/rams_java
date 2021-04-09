@@ -1,6 +1,6 @@
 package jp.co.lyc.cms.model;
 
-public class SiteSearchModel{
+public class SiteSearchModel {
 
 	/**
 	 * 
@@ -35,6 +35,15 @@ public class SiteSearchModel{
 	String developLanguageName;// 言語
 	String workTime;// 勤務時間
 	String siteRoleName;// 役割
+	String typteOfContractCode;// 役割
+
+	public String getTypteOfContractCode() {
+		return typteOfContractCode;
+	}
+
+	public void setTypteOfContractCode(String typteOfContractCode) {
+		this.typteOfContractCode = typteOfContractCode;
+	}
 
 	public String getScheduledEndDate() {
 		return scheduledEndDate;

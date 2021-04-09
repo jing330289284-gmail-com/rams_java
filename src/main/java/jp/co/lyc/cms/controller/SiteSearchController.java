@@ -109,7 +109,7 @@ public class SiteSearchController {
 			yearAndMonth = year + "ヶ年";
 		} else
 			yearAndMonth = year + "ヶ年" + month + "ヶ月";
-		if(yearAndMonth.contains("-")) {
+		if (yearAndMonth.contains("-")) {
 			yearAndMonth = "";
 		}
 		return yearAndMonth;
@@ -159,7 +159,11 @@ public class SiteSearchController {
 			String admissionEndDate = siteSearchModel.getAdmissionEndDate();
 			String dataAcquisitionPeriod = siteSearchModel.getDataAcquisitionPeriod();
 			String scheduledEndDate = siteSearchModel.getScheduledEndDate();
+			String typteOfContractCode = siteSearchModel.getTypteOfContractCode();
 			// 存入map 传入后台查询用
+			if (typteOfContractCode != null && typteOfContractCode.length() != 0) {
+				sendMap.put("typteOfContractCode", typteOfContractCode);
+			}
 			if (employeeNo != null && employeeNo.length() != 0) {
 				sendMap.put("employeeNo", employeeNo);
 			}
@@ -237,9 +241,9 @@ public class SiteSearchController {
 				siteList.get(a).setWorkTime(
 						timeCalculate(siteList.get(a).getAdmissionStartDate(), siteList.get(a).getAdmissionEndDate()));
 			}
-			for(int i = 0; i < siteList.size(); i++) {
-				if(i != 0) {
-					if(siteList.get(i).getEmployeeNo().equals(siteList.get(i-1).getEmployeeNo())) {
+			for (int i = 0; i < siteList.size(); i++) {
+				if (i != 0) {
+					if (siteList.get(i).getEmployeeNo().equals(siteList.get(i - 1).getEmployeeNo())) {
 						siteList.get(i).setEmployeeName("");
 						siteList.get(i).setEmployeeFrom("");
 					}

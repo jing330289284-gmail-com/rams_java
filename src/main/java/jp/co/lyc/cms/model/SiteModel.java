@@ -40,6 +40,15 @@ public class SiteModel {
 	String checkDate;// 前回現場の退場日付
 	String dailyCalculationStatus;// 日割計算区分
 	String workState;// 現場状態
+	String typteOfContractCode; // 契約形態
+
+	public String getTypteOfContractCode() {
+		return typteOfContractCode;
+	}
+
+	public void setTypteOfContractCode(String typteOfContractCode) {
+		this.typteOfContractCode = typteOfContractCode;
+	}
 
 	public String getScheduledEndDate() {
 		return scheduledEndDate;

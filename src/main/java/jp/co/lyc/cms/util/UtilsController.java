@@ -1333,8 +1333,7 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getPurchasingManagers();
 		return list;
 	}
-	
-	
+
 	/**
 	 * 契約形態取得
 	 * 
@@ -1346,7 +1345,60 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getTypteOfContract();
 		return list;
 	}
-	
+
+	/**
+	 * 結婚区分取得
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getMarriageClassification", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getMarriageClassification() {
+		List<ModelClass> list = utilsService.getMarriageClassification();
+		return list;
+	}
+
+	/**
+	 * 退職理由区分取得
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getRetirementResonClassification", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getRetirementResonClassification() {
+		List<ModelClass> list = utilsService.getRetirementResonClassification();
+		return list;
+	}
+
+	/**
+	 * 雇用保険加入取得
+	 * 
+	 * @return
+	 */
+
+	@RequestMapping(value = "/getEmploymentInsuranceStatus", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getEmploymentInsuranceStatus() {
+		Properties properties = getProperties();
+		String employmentInsuranceStatus = properties.getProperty("employmentInsuranceStatus");
+		List<ModelClass> list = getStatus(employmentInsuranceStatus);
+		return list;
+	}
+
+	/**
+	 * 社会保険加入取得
+	 * 
+	 * @return
+	 */
+
+	@RequestMapping(value = "/getSocialInsuranceStatus", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getSocialInsuranceStatus() {
+		Properties properties = getProperties();
+		String socialInsuranceStatus = properties.getProperty("socialInsuranceStatus");
+		List<ModelClass> list = getStatus(socialInsuranceStatus);
+		return list;
+	}
 
 	/**
 	 * 面談回数取得
