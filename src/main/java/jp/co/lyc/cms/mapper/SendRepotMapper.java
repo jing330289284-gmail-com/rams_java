@@ -15,7 +15,7 @@ public interface SendRepotMapper {
 	 * @param sendMap
 	 * @return
 	 */
-	public List<SendRepotModel> getSalesCustomers();
+	public List<SendRepotModel> getCustomers();
 	public List<SendRepotModel> getSalesPersons(String customerNo);
 	public int creatList(SendRepotModel model);
 	public SendRepotModel getListByName(SendRepotModel model);
@@ -27,4 +27,13 @@ public interface SendRepotMapper {
 	public List<ModelClass> getPurchasingManagersCode(SendRepotModel model);
 	public List<ModelClass> getCustomerDepartmentCode(SendRepotModel model);
 	public List<ModelClass> getSalesPersonsLists();
+	public List<ModelClass> salesPersonsListsUpdate(SendRepotsListName model);
+	
+	public void deleteCustomerListByNo(SendRepotModel model);
+	public int deleteCustomerList(SendRepotModel model);
+	public void customerListUpdate(String storageListName, String customerList);
+	public String getCustomerList(String storageListName);
+	public String getMaxStorageListName();
+	public SendRepotModel getMainChargeList(String storageListName);
+	public void customerSendMailStorageListUpdate(String storageListName, String mainChargeList,String departmentCodeList);
 }

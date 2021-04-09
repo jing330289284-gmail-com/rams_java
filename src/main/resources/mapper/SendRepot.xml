@@ -65,7 +65,33 @@
 			(SELECT @rowNo:=0) AS rowId
     </select>
     <!--　お客様取る -->
-    <select id="getSalesCustomers" resultType="jp.co.lyc.cms.model.SendRepotModel">
+    <select id="getCustomers"
+		resultType="jp.co.lyc.cms.model.SendRepotModel">
+		SELECT
+		(@rowNo:=@rowNo+1 ) AS rowId,
+		T007.customerNo,
+		T007.customerName,
+		T007.purchasingManagers,
+		T009.customerDepartmentCode,
+		T009.positionCode,
+		T007.purchasingManagersMail,
+		T007.levelCode,
+		'' AS monthCount,
+		'' AS
+		purchasingManagers2,
+		'' AS positionCode2,
+		'' AS purchasingManagersMail2
+		FROM
+		T007CustomerInfo AS T007
+		LEFT JOIN
+		T009CustomerDepartmentInfo AS
+		T009 ON T007.customerNo = T009.customerNo
+		AND T007.purchasingManagers =
+		T009.responsiblePerson, (SELECT
+		@rowNo:=-1)
+		AS rowId
+	</select>
+    <select id="getCustomersOLD" resultType="jp.co.lyc.cms.model.SendRepotModel">
 	SELECT * FROM(
 		SELECT 
 			customerNo,
@@ -77,7 +103,7 @@
 			"0" as positionCode,
 			representative as responsiblePerson 
 		FROM 
-			rams.T007CustomerInfo
+			T007CustomerInfo
 		WHERE 
 			representative!=""
 		AND 
@@ -201,32 +227,46 @@
     </select>
     
     <select id="getCustomersByNos" resultType="jp.co.lyc.cms.model.SendRepotModel">
-	SELECT
-	    T007.customerNo,
-	    T007.customerName,
-	    T007.purchasingManagers,
-	    T009.customerDepartmentCode,
-	    T009.positionCode,
-	    T007.purchasingManagersMail,
-	    T007.levelCode,
-	    '' AS monthCount,
-	    '' AS purchasingManagers2,
+	    SELECT
+		(@rowNo:=@rowNo+1 ) AS rowId,
+		T007.customerNo,
+		T007.customerName,
+		T007.purchasingManagers,
+		T009.customerDepartmentCode,
+		T009.positionCode,
+		T007.purchasingManagersMail,
+		T007.levelCode,
+		'' AS
+		monthCount,
+		'' AS purchasingManagers2,
 		'' AS positionCode2,
-		'' AS purchasingManagersMail2
-	FROM
-	    T007CustomerInfo AS T007
-	LEFT JOIN
-	    T009CustomerDepartmentInfo AS T009 
-	ON 
-		T007.customerNo = T009.customerNo
-	AND 
-		T007.purchasingManagers = T009.responsiblePerson
-	WHERE
-	   T007.customerNo IN 
-	   <foreach collection="array" index="index" item="item" open="(" separator="," close=")">
-	         #{item}
-	   </foreach>
-    </select>
+		'' AS
+		purchasingManagersMail2
+		FROM
+		T007CustomerInfo AS T007
+		LEFT JOIN
+		T009CustomerDepartmentInfo AS T009 ON T007.customerNo =
+		T009.customerNo
+		AND T007.purchasingManagers = T009.responsiblePerson,
+		(SELECT
+		@rowNo:=-1)
+		AS rowId
+		WHERE
+		T007.customerNo IN
+		<foreach collection="array" index="index" item="item" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+	<select id="getMainChargeList"
+		resultType="jp.co.lyc.cms.model.SendRepotModel">
+		SELECT
+		mainChargeList,
+		departmentCodeList
+		FROM
+		T021CustomerSendMailStorageList
+		WHERE StorageListName = #{storageListName}
+	</select>
     <insert id="creatList" parameterType="String">
   		INSERT INTO T021CustomerSendMailStorageList
 		(
@@ -255,6 +295,8 @@
 		 NOW(),
 		#{updateUser})
     </insert>
+
+	<!--　リスト名変更-->
     <update id="listNameUpdate" parameterType="String">
 		update
 			T021CustomerSendMailStorageList
@@ -296,4 +338,45 @@
 		AND
 		 	customerNo = #{customerNo};
 	</select>
+		<update id="deleteCustomerList" parameterType="String">
+		update
+		T021CustomerSendMailStorageList
+		set
+		customerList = "",
+		mainChargeList = "",
+		departmentCodeList = "",
+		updateTime=now(),updateUser=#{updateUser}
+		where
+		StorageListName=#{storageListName} and
+		transmissionClassificationCode =
+		0
+	</update>
+	<update id="deleteCustomerListByNo" parameterType="String">
+		update
+		T021CustomerSendMailStorageList
+		set
+		customerList = #{customerList},
+		mainChargeList = #{mainChargeList},
+		departmentCodeList = #{departmentCodeList}
+		where StorageListName = #{storageListName};
+	</update>
+	<!-- リスト最大番号取得 -->
+	<select id="getMaxStorageListName" parameterType="String"
+		resultType="String">
+		select CONCAT('送信リスト',
+		ifnull((max(replace(StorageListName,'送信リスト','')*1)+1),'1')) as
+		StorageListName from T021CustomerSendMailStorageList
+		where
+		StorageListName like '送信リスト%';
+	</select>
+		<update id="customerListUpdate" parameterType="String">
+		update
+		T021CustomerSendMailStorageList
+		set
+		customerList = CONCAT(customerList, ',' , #{customerList}),
+		mainChargeList = CONCAT(mainChargeList,#{customerList},':;'),
+		departmentCodeList = CONCAT(departmentCodeList,#{customerList},':;')
+		where 
+		StorageListName = #{storageListName};
+	</update>
 </mapper>
