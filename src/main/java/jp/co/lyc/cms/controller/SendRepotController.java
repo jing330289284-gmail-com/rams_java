@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import jp.co.lyc.cms.common.BaseController;
 import jp.co.lyc.cms.model.ModelClass;
+import jp.co.lyc.cms.model.SalesSendLettersListName;
 import jp.co.lyc.cms.model.SendRepotModel;
 import jp.co.lyc.cms.model.SendRepotsListName;
 import jp.co.lyc.cms.service.SendRepotService;
@@ -88,7 +89,6 @@ public class SendRepotController  extends BaseController {
 	@RequestMapping(value = "/creatList", method = RequestMethod.POST)
 	@ResponseBody
 	public int creatList(@RequestBody SendRepotModel model) {
-
 		model.setUpdateUser(getSession().getAttribute("employeeName").toString());
 		logger.info("creatList:" + "検索開始");
 		int index=0;
@@ -118,18 +118,10 @@ public class SendRepotController  extends BaseController {
 	@RequestMapping(value = "/listNameUpdate", method = RequestMethod.POST)
 	@ResponseBody
 	public void listNameUpdate(@RequestBody SendRepotsListName sendRepotsListNames) {
-
-		if(!sendRepotsListNames.getStorageListName2().equals(sendRepotsListNames.getOldStorageListName2())) {
-			updateName(sendRepotsListNames.getStorageListName2(),sendRepotsListNames.getOldStorageListName2());
-		}
-		if(!sendRepotsListNames.getStorageListName3().equals(sendRepotsListNames.getOldStorageListName3())) {
-			updateName(sendRepotsListNames.getStorageListName3(),sendRepotsListNames.getOldStorageListName3());
-		}
-		if(!sendRepotsListNames.getStorageListName1().equals(sendRepotsListNames.getOldStorageListName1())) {
-			updateName(sendRepotsListNames.getStorageListName1(),sendRepotsListNames.getOldStorageListName1());
-		}
+			if (!sendRepotsListNames.getStorageListName().equals(sendRepotsListNames.getOldStorageListName())) {
+				updateName(sendRepotsListNames.getStorageListName(),sendRepotsListNames.getOldStorageListName());
+			}
 	}
-	
 	@RequestMapping(value = "/getCustomersByNos", method = RequestMethod.POST)
 	@ResponseBody
 	public List<SendRepotModel> getCustomersByNos(@RequestBody SendRepotModel model) {
@@ -264,7 +256,6 @@ public class SendRepotController  extends BaseController {
 	@RequestMapping(value = "/addNewList", method = RequestMethod.POST)
 	@ResponseBody
 	public String addNewList(@RequestBody SendRepotModel model) {
-
 		model.setUpdateUser(getSession().getAttribute("employeeName").toString());
 		logger.info("addNewList:" + "検索開始");
 		String name = "";

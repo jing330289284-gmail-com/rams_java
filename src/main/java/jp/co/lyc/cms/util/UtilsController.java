@@ -1323,6 +1323,18 @@ public class UtilsController {
 	}
 
 	/**
+	 * 報告書送信対象格納リスト 取得
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getStorageListName0", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getStorageListName0() {
+		List<ModelClass> list = utilsService.getStorageListName0();
+		return list;
+	}
+	
+	/**
 	 * お客様担当者取得 取得
 	 * 
 	 * @return
