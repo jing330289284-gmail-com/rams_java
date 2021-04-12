@@ -512,6 +512,14 @@ public class UtilsService {
 	}
 
 	/**
+	 * 報告書送信対象格納リスト 取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getStorageListName0() {
+		return utilsMapper.getStorageListName0();
+	}
+	/**
 	 * お客様担当者取得 取得
 	 * 
 	 * @return

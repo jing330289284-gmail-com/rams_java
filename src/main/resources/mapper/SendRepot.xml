@@ -197,8 +197,15 @@
 		set
 			subChargeMailList=#{subChargeMailList},updateTime=now(),updateUser=#{updateUser}
 		where 
-			StorageListName=#{storageListName} and transmissionClassificationCode=0
+			StorageListName=#{storageListName} 
+		and transmissionClassificationCode=0
 	</update>
+	<select id="getCustomerList" parameterType="String"
+		resultType="String">
+		SELECT customerList FROM T021CustomerSendMailStorageList
+		where StorageListName = #{storageListName}
+		and transmissionClassificationCode=0;
+	</select>
       <!--　リスト取得 -->
       <select id="getLists" resultType="jp.co.lyc.cms.model.SendRepotModel">
 			select 
@@ -261,11 +268,14 @@
 	<select id="getMainChargeList"
 		resultType="jp.co.lyc.cms.model.SendRepotModel">
 		SELECT
-		mainChargeList,
-		departmentCodeList
+			mainChargeList,
+			departmentCodeList
 		FROM
-		T021CustomerSendMailStorageList
-		WHERE StorageListName = #{storageListName}
+			T021CustomerSendMailStorageList
+		WHERE
+			StorageListName = #{storageListName}  
+		AND
+			transmissionClassificationCode=0
 	</select>
     <insert id="creatList" parameterType="String">
   		INSERT INTO T021CustomerSendMailStorageList
@@ -285,7 +295,7 @@
 		(
 		#{name},
 		0,
-		#{customerList},
+		#{code},
 		#{mainChargeList},
 		#{departmentCodeList},
 		#{positionCodeList},
@@ -348,17 +358,19 @@
 		updateTime=now(),updateUser=#{updateUser}
 		where
 		StorageListName=#{storageListName} and
-		transmissionClassificationCode =
-		0
+		transmissionClassificationCode = 0
 	</update>
 	<update id="deleteCustomerListByNo" parameterType="String">
 		update
-		T021CustomerSendMailStorageList
+			T021CustomerSendMailStorageList
 		set
-		customerList = #{customerList},
-		mainChargeList = #{mainChargeList},
-		departmentCodeList = #{departmentCodeList}
-		where StorageListName = #{storageListName};
+			customerList = #{customerList},
+			mainChargeList = #{mainChargeList},
+			departmentCodeList = #{departmentCodeList}
+		where
+			StorageListName = #{storageListName}
+		AND
+			transmissionClassificationCode=0;
 	</update>
 	<!-- リスト最大番号取得 -->
 	<select id="getMaxStorageListName" parameterType="String"
@@ -377,6 +389,6 @@
 		mainChargeList = CONCAT(mainChargeList,#{customerList},':;'),
 		departmentCodeList = CONCAT(departmentCodeList,#{customerList},':;')
 		where 
-		StorageListName = #{storageListName};
+		StorageListName = #{storageListName} and transmissionClassificationCode=0;
 	</update>
 </mapper>
