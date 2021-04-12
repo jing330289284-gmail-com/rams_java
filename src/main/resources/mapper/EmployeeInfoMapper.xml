@@ -361,6 +361,9 @@
 		residenceCode,
 		residenceCardNo,
 		stayPeriod,
+		passportStayPeriod,
+		immigrationStartTime,
+		immigrationEndTime,
 		japaneseLevelCode,
 		englishLevelCode,
 		developLanguage1,
@@ -374,7 +377,10 @@
 		passportInfo,
 		companyMail,
 		phoneNo,
+		employmentInsuranceStatus,
 		employmentInsuranceNo,
+		socialInsuranceStatus,
+		socialInsuranceNo,
 		departmentCode,
 		contractDeadline,
 		updateTime,
@@ -407,6 +413,9 @@
 		#{residenceCode},
 		#{residenceCardNo},
 		#{stayPeriod},
+		#{passportStayPeriod},
+		#{immigrationStartTime},
+		#{immigrationEndTime},
 		#{japaneseLevelCode},
 		#{englishLevelCode},
 		#{developLanguage1},
@@ -420,7 +429,10 @@
 		#{passportInfo},
 		#{companyMail},
 		#{phoneNo},
+		#{employmentInsuranceStatus},
 		#{employmentInsuranceNo},
+		#{socialInsuranceStatus},
+		#{socialInsuranceNo},
 		#{departmentCode},
 		#{contractDeadline},
 		NOW(),
@@ -569,6 +581,15 @@
 		</if>
 		<if test="stayPeriod!=  null">
 			stayPeriod =#{stayPeriod},
+		</if>
+		<if test="passportStayPeriod!=  null">
+			passportStayPeriod =#{passportStayPeriod},
+		</if>
+		<if test="immigrationStartTime!= null">
+			immigrationStartTime =#{immigrationStartTime},
+		</if>
+		<if test="immigrationEndTime!=  null">
+			immigrationEndTime =#{immigrationEndTime},
 		</if>
 		<if test="japaneseLevelCode!=  null">
 			japaneseLevelCode =#{japaneseLevelCode},

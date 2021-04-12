@@ -441,8 +441,14 @@ public class EmployeeInfoController extends BaseController {
 		String residenceCode = emp.getResidenceCode();// 在留資格
 		String residenceCardNo = emp.getResidenceCardNo();// 在留カード
 		String stayPeriod = emp.getStayPeriod();// 在留期間
+		String passportStayPeriod = emp.getPassportStayPeriod();// パスポート期間
+		String immigrationStartTime = emp.getImmigrationStartTime();// 出入国届開始時間
+		String immigrationEndTime = emp.getImmigrationEndTime();// 出入国届終了時間
 		String contractDeadline = emp.getContractDeadline();// 契約期限
+		String employmentInsuranceStatus = emp.getEmploymentInsuranceStatus();// 雇用保険加入
 		String employmentInsuranceNo = emp.getEmploymentInsuranceNo();// 雇用保険番号
+		String socialInsuranceStatus = emp.getSocialInsuranceStatus();// 社会保険加入
+		String socialInsuranceNo = emp.getSocialInsuranceNo();// 社会保険番号
 		String myNumber = emp.getMyNumber();// マイナンバー
 		String resumeName1 = emp.getResumeName1();// 備考１
 		String resumeName2 = emp.getResumeName2();// 備考２
@@ -548,11 +554,29 @@ public class EmployeeInfoController extends BaseController {
 		if (stayPeriod != null) {
 			sendMap.put("stayPeriod", stayPeriod);
 		}
+		if (passportStayPeriod != null) {
+			sendMap.put("passportStayPeriod", passportStayPeriod);
+		}
+		if (immigrationStartTime != null) {
+			sendMap.put("immigrationStartTime", immigrationStartTime);
+		}
+		if (immigrationEndTime != null) {
+			sendMap.put("immigrationEndTime", immigrationEndTime);
+		}
 		if (contractDeadline != null) {
 			sendMap.put("contractDeadline", contractDeadline);
 		}
+		if (employmentInsuranceStatus != null) {
+			sendMap.put("employmentInsuranceStatus", employmentInsuranceStatus);
+		}
 		if (employmentInsuranceNo != null) {
 			sendMap.put("employmentInsuranceNo", employmentInsuranceNo);
+		}
+		if (socialInsuranceStatus != null) {
+			sendMap.put("socialInsuranceStatus", socialInsuranceStatus);
+		}
+		if (socialInsuranceNo != null) {
+			sendMap.put("socialInsuranceNo", socialInsuranceNo);
 		}
 		if (myNumber != null) {
 			sendMap.put("myNumber", myNumber);

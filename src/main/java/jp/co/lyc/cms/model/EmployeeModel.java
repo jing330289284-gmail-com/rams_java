@@ -39,6 +39,9 @@ public class EmployeeModel implements Serializable {
 	String residenceCode;// 在留資格
 	String residenceCardNo;// 在留カード番号
 	String stayPeriod;// 在留期間(まで)
+	String passportStayPeriod; // パスポート期間
+	String immigrationStartTime;// 出入国届開始時間
+	String immigrationEndTime;// 出入国届終了時間
 	String japaneseLevelCode;// 日本語レベルコード
 	String englishLevelCode;// 英語レベルコード
 	String developLanguage1;// 技術语言1
@@ -57,7 +60,10 @@ public class EmployeeModel implements Serializable {
 	String passportNo;// パスポート
 	String companyMail;// 社内メールアドレス
 	String phoneNo;// 携帯電話
+	String employmentInsuranceStatus;// 雇用保険加入
 	String employmentInsuranceNo;// 雇用保険番号
+	String socialInsuranceStatus;// 社会保険加入
+	String socialInsuranceNo;// 社会保険番号
 	String departmentCode;// 部署コード
 	String stationName;// 寄り駅
 	String oldPassword;// 古いパスワード
@@ -89,6 +95,58 @@ public class EmployeeModel implements Serializable {
 	String firstHalfAddress;// 住所前半
 	String lastHalfAddress;// 住所後半
 	String stationCode;//
+
+	public String getEmploymentInsuranceStatus() {
+		return employmentInsuranceStatus;
+	}
+
+	public void setEmploymentInsuranceStatus(String employmentInsuranceStatus) {
+		this.employmentInsuranceStatus = employmentInsuranceStatus;
+	}
+
+	public String getSocialInsuranceStatus() {
+		return socialInsuranceStatus;
+	}
+
+	public void setSocialInsuranceStatus(String socialInsuranceStatus) {
+		this.socialInsuranceStatus = socialInsuranceStatus;
+	}
+
+	public String getSocialInsuranceNo() {
+		return socialInsuranceNo;
+	}
+
+	public void setSocialInsuranceNo(String socialInsuranceNo) {
+		this.socialInsuranceNo = socialInsuranceNo;
+	}
+
+	public String getPassportStayPeriod() {
+		return passportStayPeriod;
+	}
+
+	public void setPassportStayPeriod(String passportStayPeriod) {
+		this.passportStayPeriod = passportStayPeriod;
+	}
+
+	public String getImmigrationStartTime() {
+		return immigrationStartTime;
+	}
+
+	public void setImmigrationStartTime(String immigrationStartTime) {
+		this.immigrationStartTime = immigrationStartTime;
+	}
+
+	public String getImmigrationEndTime() {
+		return immigrationEndTime;
+	}
+
+	public void setImmigrationEndTime(String immigrationEndTime) {
+		this.immigrationEndTime = immigrationEndTime;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 
 	public String getAlphabetName3() {
 		return alphabetName3;
