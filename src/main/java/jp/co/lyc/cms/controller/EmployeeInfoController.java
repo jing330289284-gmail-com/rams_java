@@ -357,9 +357,11 @@ public class EmployeeInfoController extends BaseController {
 			sendMap = utilsController.upload(passportInfo, sendMap, "passportInfo", "パスポート");
 			S3Model s3Model = new S3Model();
 			if (sendMap.get("resumeInfo1") != null && sendMap.get("resumeInfo1") != "") {
-				String deletefileKey = resumeInfo1URL.split("/file/")[1];
-				s3Model.setFileKey(deletefileKey);
-				s3Controller.deleteFile(s3Model);
+				if (!resumeInfo1URL.equals("")) {
+					String deletefileKey = resumeInfo1URL.split("/file/")[1];
+					s3Model.setFileKey(deletefileKey);
+					s3Controller.deleteFile(s3Model);
+				}
 				String filePath = sendMap.get("resumeInfo1").toString();
 				String fileKey = filePath.split("file/")[1];
 				s3Model.setFileKey(fileKey);
@@ -367,9 +369,11 @@ public class EmployeeInfoController extends BaseController {
 				s3Controller.uploadFile(s3Model);
 			}
 			if (sendMap.get("resumeInfo2") != null && sendMap.get("resumeInfo2") != "") {
-				String deletefileKey = resumeInfo2URL.split("/file/")[1];
-				s3Model.setFileKey(deletefileKey);
-				s3Controller.deleteFile(s3Model);
+				if (!resumeInfo2URL.equals("")) {
+					String deletefileKey = resumeInfo2URL.split("/file/")[1];
+					s3Model.setFileKey(deletefileKey);
+					s3Controller.deleteFile(s3Model);
+				}
 				String filePath = sendMap.get("resumeInfo2").toString();
 				String fileKey = filePath.split("file/")[1];
 				s3Model.setFileKey(fileKey);
@@ -425,6 +429,7 @@ public class EmployeeInfoController extends BaseController {
 		}
 
 		String retirementYearAndMonth = emp.getRetirementYearAndMonth();// 退職年月
+		String retirementResonClassification = emp.getRetirementResonClassification();// 退職区分
 		String comeToJapanYearAndMonth = emp.getComeToJapanYearAndMonth();// 来日年月
 		String nationalityCode = emp.getNationalityCode();// 出身地コード(国)
 		String birthplace = emp.getBirthplace();// 出身地(県)
@@ -534,6 +539,9 @@ public class EmployeeInfoController extends BaseController {
 		}
 		if (retirementYearAndMonth != null) {
 			sendMap.put("retirementYearAndMonth", retirementYearAndMonth);
+		}
+		if (retirementResonClassification != null) {
+			sendMap.put("retirementResonClassification", retirementResonClassification);
 		}
 		if (comeToJapanYearAndMonth != null) {
 			sendMap.put("comeToJapanYearAndMonth", comeToJapanYearAndMonth);

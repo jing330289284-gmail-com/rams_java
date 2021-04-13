@@ -351,6 +351,7 @@
 		intoCompanyYearAndMonth,
 		employeeStatus,
 		retirementYearAndMonth,
+		retirementResonClassification,
 		myNumber,
 		occupationCode,
 		employeeFormCode,
@@ -403,6 +404,7 @@
 		#{intoCompanyYearAndMonth},
 		#{employeeStatus},
 		#{retirementYearAndMonth},
+		#{retirementResonClassification},
 		#{myNumber},
 		#{occupationCode},
 		#{employeeFormCode},
@@ -555,6 +557,9 @@
 		<if test="retirementYearAndMonth!=  null">
 			retirementYearAndMonth =#{retirementYearAndMonth},
 		</if>
+		<if test="retirementResonClassification!=  null">
+			retirementResonClassification =#{retirementResonClassification},
+		</if>
 		<if test="myNumber!=  null">
 			myNumber =#{myNumber},
 		</if>
@@ -627,8 +632,17 @@
 		<if test="phoneNo!=  null">
 			phoneNo =#{phoneNo},
 		</if>
+		<if test="employmentInsuranceStatus!=  null">
+			employmentInsuranceStatus =#{employmentInsuranceStatus},
+		</if>
 		<if test="employmentInsuranceNo!=  null">
 			employmentInsuranceNo =#{employmentInsuranceNo},
+		</if>
+		<if test="socialInsuranceStatus!=  null">
+			socialInsuranceStatus =#{socialInsuranceStatus},
+		</if>			
+		<if test="socialInsuranceNo!=  null">
+			socialInsuranceNo =#{socialInsuranceNo},
 		</if>
 		<if test="siteRoleCode!=  null">
 			siteRoleCode =#{siteRoleCode},
@@ -702,6 +716,7 @@
 		T002.intoCompanyYearAndMonth,
 		T002.employeeStatus,
 		T002.retirementYearAndMonth,
+		T002.retirementResonClassification,
 		T002.myNumber,
 		T002.occupationCode,
 		T002.employeeFormCode,
@@ -725,7 +740,13 @@
 		T002.passportInfo,
 		T002.companyMail,
 		T002.phoneNo,
+		T002.passportStayPeriod,
+		T002.immigrationStartTime,
+		T002.immigrationEndTime,
+		T002.employmentInsuranceStatus,
 		T002.employmentInsuranceNo,
+		T002.socialInsuranceStatus,
+		T002.socialInsuranceNo,
 		T002.departmentCode,
 		T002.siteRoleCode,
 		T002.updateTime,

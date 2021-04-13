@@ -29,6 +29,7 @@ public class EmployeeModel implements Serializable {
 	String intoCompanyYearAndMonth;// 入社年月
 	String employeeStatus;// 社員ステータス
 	String retirementYearAndMonth;// 退職年月
+	String retirementResonClassification;// 退職区分
 	String myNumber;// マイナンバー
 	String occupationCode;// 職種コード
 	String employeeFormCode;// 社員形式
@@ -95,6 +96,14 @@ public class EmployeeModel implements Serializable {
 	String firstHalfAddress;// 住所前半
 	String lastHalfAddress;// 住所後半
 	String stationCode;//
+
+	public String getRetirementResonClassification() {
+		return retirementResonClassification;
+	}
+
+	public void setRetirementResonClassification(String retirementResonClassification) {
+		this.retirementResonClassification = retirementResonClassification;
+	}
 
 	public String getEmploymentInsuranceStatus() {
 		return employmentInsuranceStatus;
