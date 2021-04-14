@@ -31,7 +31,6 @@ public class SituationChangeController {
 	SituationChangesService SituationChangesService;
 
 	@RequestMapping(value = "/searchSituationChange", method = RequestMethod.POST)
-
 	@ResponseBody
 	public Map<String, Object> searchSituationChanges(@RequestBody SituationChangesModel situationInfo) {
 
@@ -247,7 +246,6 @@ public class SituationChangeController {
 										+ "~" + situationChangeList.get(i).getSocialInsuranceFlag();
 							}
 
-
 							// SHEYUANXINGSHI合并
 							if (situationChangeListFront.get(j).getEmployeeFormName()
 									.equals(situationChangeList.get(i).getEmployeeFormName())
@@ -446,6 +444,33 @@ public class SituationChangeController {
 		}
 	}
 
+	@RequestMapping(value = "/searchSituationTest", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> searchSituationTest(@RequestBody SituationChangesModel situationInfo) {
+
+		errorsMessage = "";
+		DataBinder binder = new DataBinder(situationInfo);
+		binder.setValidator(new SituationChangesValidation());
+		binder.validate();
+		BindingResult results = binder.getBindingResult();
+		Map<String, Object> resulterr = new HashMap<>();
+		if (results.hasErrors()) {
+			results.getAllErrors().forEach(o -> {
+				FieldError error = (FieldError) o;
+				errorsMessage += error.getDefaultMessage();// エラーメッセージ
+			});
+
+			resulterr.put("errorsMessage", errorsMessage);// エラーメッセージ
+			return resulterr;
+		} else {
+			Map<String, Object> sendMap = getDetailParam(situationInfo);
+			if (situationInfo.getClassification().equals("1")) {
+				
+			}
+			return resulterr;
+		}
+	}
+
 	public Map<String, Object> getDetailParam(SituationChangesModel situationInfo) {
 		Map<String, Object> sendMap = new HashMap<String, Object>();
 		String startYandM = situationInfo.getStartYandM();
@@ -455,7 +480,6 @@ public class SituationChangeController {
 		sendMap.put("endYandM", endYandM);
 		sendMap.put("classification", classification);
 		return sendMap;
-
 	}
 
 	public static String moneyFormat(long number) {
