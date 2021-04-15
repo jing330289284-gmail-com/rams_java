@@ -7,133 +7,234 @@
 
 	<select id="getSituationChanges" parameterType="map"
 		resultMap="detailsInfo">
-		SELECT 
-			T005.reflectYearAndMonth,
-			T005.employeeNo,
-			CONCAT(T001.employeeFristName,T001.employeeLastName)as employeeName,
-			M005.employeeFormName,
-			T002.employeeFormCode,
-			T005.salary,
-			T005.socialInsuranceFlag,
-			T005.nextBonusMonth,
-			CAST(T005.insuranceFeeAmount As unsigned) As insuranceFeeAmount,
-			CAST(T005.scheduleOfBonusAmount As unsigned) As scheduleOfBonusAmount,
-			CAST(T005.lastTimeBonusAmount As unsigned) As lastTimeBonusAmount,
-			T005.remark,
-			T002.intoCompanyYearAndMonth,
-			T002.retirementYearAndMonth
+		SELECT
+		T005.reflectYearAndMonth,
+		T005.employeeNo,
+		CONCAT(T001.employeeFristName,T001.employeeLastName)as employeeName,
+		M005.employeeFormName,
+		T002.employeeFormCode,
+		T005.salary,
+		T005.socialInsuranceFlag,
+		T005.nextBonusMonth,
+		CAST(T005.insuranceFeeAmount As unsigned) As insuranceFeeAmount,
+		CAST(T005.scheduleOfBonusAmount As unsigned) As scheduleOfBonusAmount,
+		CAST(T005.lastTimeBonusAmount As unsigned) As lastTimeBonusAmount,
+		T005.remark,
+		T002.intoCompanyYearAndMonth,
+		T002.retirementYearAndMonth
 		FROM
-		T001Employee As T001		
-			LEFT JOIN T005WagesInfo As T005  on T001.employeeNo = T005.employeeNo
-			LEFT JOIN M005EmployeeForm As M005 on T005.employeeFormCode = M005.employeeFormCode
-			LEFT JOIN T002EmployeeDetail As T002 on T001.employeeNo = T002.employeeNo
-	    WHERE 
-			reflectYearAndMonth between #{startYandM} and #{endYandM}
-	         <if test="classification == 3">
-	         	AND intoCompanyYearAndMonth between #{startYandM} and #{endYandM}
-	         </if>
-	         <if test="classification == 4">
-	         	AND retirementYearAndMonth between #{startYandM} and #{endYandM}
-	         </if>	    
-	         order by employeeNo,reflectYearAndMonth
+		T001Employee As T001
+		LEFT JOIN T005WagesInfo As T005 on
+		T001.employeeNo = T005.employeeNo
+		LEFT JOIN M005EmployeeForm As M005 on
+		T005.employeeFormCode =
+		M005.employeeFormCode
+		LEFT JOIN
+		T002EmployeeDetail As T002 on T001.employeeNo = T002.employeeNo
+		WHERE
+		reflectYearAndMonth between #{startYandM} and #{endYandM}
+		<if test="classification == 3">
+			AND intoCompanyYearAndMonth between #{startYandM} and
+			#{endYandM}
+		</if>
+		<if test="classification == 4">
+			AND retirementYearAndMonth between #{startYandM} and
+			#{endYandM}
+		</if>
+		order by employeeNo,reflectYearAndMonth
 	</select>
-	
+
 	<select id="getSituationChangesFront" parameterType="map"
 		resultMap="detailsInfo">
 		<foreach item="tempList" collection="tempList" index="index">
-		<if test="index != 0">
-                    union
-                </if>
-       SELECT * FROM(
-       SELECT 
+			<if test="index != 0">
+				union
+			</if>
+			SELECT * FROM(
+			SELECT
 			T005f.reflectYearAndMonth,
 			T005f.employeeNo,
-			CONCAT(T001f.employeeFristName,T001f.employeeLastName)as employeeName,
+			CONCAT(T001f.employeeFristName,T001f.employeeLastName)as
+			employeeName,
 			M005f.employeeFormName,
 			T005f.salary,
 			T005f.nextBonusMonth,
 			T005f.socialInsuranceFlag,
 			CAST(T005f.insuranceFeeAmount As unsigned) As insuranceFeeAmount,
-			CAST(T005f.scheduleOfBonusAmount As unsigned) As scheduleOfBonusAmount,
+			CAST(T005f.scheduleOfBonusAmount As unsigned) As
+			scheduleOfBonusAmount,
 			T005f.remark
-		FROM
+			FROM
 			T005WagesInfo As T005f
-			LEFT JOIN T001Employee As T001f on T001f.employeeNo = T005f.employeeNo
-			LEFT JOIN M005EmployeeForm As M005f on T005f.employeeFormCode = M005f.employeeFormCode
-        WHERE 
-        T005f.employeeNo =#{tempList.getEmpNo}
-        and reflectYearAndMonth &lt; #{tempList.getYandM}
-  		ORDER BY ABS(#{tempList.getYandM} - reflectYearAndMonth) ASC
-		limit 1 )As A${tempList.getYandM}
+			LEFT JOIN
+			T001Employee As T001f on
+			T001f.employeeNo = T005f.employeeNo
+			LEFT JOIN
+			M005EmployeeForm As
+			M005f on T005f.employeeFormCode =
+			M005f.employeeFormCode
+			WHERE
+			T005f.employeeNo =#{tempList.getEmpNo}
+			and
+			reflectYearAndMonth &lt; #{tempList.getYandM}
+			ORDER BY
+			ABS(#{tempList.getYandM} - reflectYearAndMonth) ASC
+			limit 1 )As
+			A${tempList.getYandM}
 		</foreach>
-		 order by employeeNo,reflectYearAndMonth
-          </select>
-     
+		order by employeeNo,reflectYearAndMonth
+	</select>
+
 	<select id="getSituationIntoORretirement" parameterType="map"
 		resultMap="detailsInfo">
-		SELECT 
+		SELECT
 		<if test="classification == 3">
-		T002.intoCompanyYearAndMonth as reflectYearAndMonth,
+			T002.intoCompanyYearAndMonth as reflectYearAndMonth,
 		</if>
 		<if test="classification == 4">
-		T002.retirementYearAndMonth as reflectYearAndMonth,
+			T002.retirementYearAndMonth as reflectYearAndMonth,
 		</if>
-			T002.employeeNo,
-			CONCAT(T001.employeeFristName,T001.employeeLastName)as employeeName,
-			M005.employeeFormName,
-			T005.salary,
-			T005.socialInsuranceFlag,
-			CAST(T005.insuranceFeeAmount As unsigned) As insuranceFeeAmount,
-			CAST(T005.scheduleOfBonusAmount As unsigned) As scheduleOfBonusAmount,
-			T005.remark	
-		FROM 
-		T002EmployeeDetail As T002 
-		LEFT JOIN 
-		T001Employee As T001 on T002.employeeNo=T001.employeeNo
-		LEFT JOIN 
-		T005WagesInfo As T005 on T002.employeeNo = T005.employeeNo and  		
+		T002.employeeNo,
+		CONCAT(T001.employeeFristName,T001.employeeLastName)as employeeName,
+		M005.employeeFormName,
+		T005.salary,
+		T005.socialInsuranceFlag,
+		CAST(T005.insuranceFeeAmount As unsigned) As insuranceFeeAmount,
+		CAST(T005.scheduleOfBonusAmount As unsigned) As scheduleOfBonusAmount,
+		T005.remark
+		FROM
+		T002EmployeeDetail As T002
+		LEFT JOIN
+		T001Employee As T001
+		on T002.employeeNo=T001.employeeNo
+		LEFT JOIN
+		T005WagesInfo As T005 on
+		T002.employeeNo = T005.employeeNo and
 		<if test="classification == 3">
-		T002.intoCompanyYearAndMonth = T005.reflectYearAndMonth
+			T002.intoCompanyYearAndMonth = T005.reflectYearAndMonth
 		</if>
-				<if test="classification == 4">
-		T002.retirementYearAndMonth = T005.reflectYearAndMonth
+		<if test="classification == 4">
+			T002.retirementYearAndMonth = T005.reflectYearAndMonth
 		</if>
 
-		LEFT JOIN M005EmployeeForm As M005 on T002.employeeFormCode = M005.employeeFormCode
+		LEFT JOIN M005EmployeeForm As M005 on T002.employeeFormCode =
+		M005.employeeFormCode
 		WHERE 1=1
 		<if test="classification == 3">
-		 AND intoCompanyYearAndMonth between #{startYandM} and #{endYandM}
+			AND intoCompanyYearAndMonth between #{startYandM} and
+			#{endYandM}
 		</if>
 		<if test="classification == 4">
-		AND retirementYearAndMonth between #{startYandM} and #{endYandM}
+			AND retirementYearAndMonth between #{startYandM} and
+			#{endYandM}
 		</if>
-		</select>
-		
-		<select id="getSituationBonus" parameterType="map"
+	</select>
+
+	<select id="getSituationBonus" parameterType="map"
 		resultMap="detailsInfo">
- 		SELECT    
-			    T005.employeeNo,
-			    CONCAT(T001.employeeFristName,
-				T001.employeeLastName)as employeeName,
-			    M005.employeeFormName,
-			    T002.employeeFormCode,
-			    T005.salary,
-			    T005.lastTimeBonusAmount,
-			    T005.socialInsuranceFlag,
-			    T005.nextBonusMonth As reflectYearAndMonth,
-			    CAST(T005.insuranceFeeAmount As unsigned) As insuranceFeeAmount,
-			    CAST(T005.scheduleOfBonusAmount As unsigned) As scheduleOfBonusAmount,
-			    T005.remark
+		SELECT
+		T005.employeeNo,
+		CONCAT(T001.employeeFristName,
+		T001.employeeLastName)as employeeName,
+		M005.employeeFormName,
+		T002.employeeFormCode,
+		T005.salary,
+		T005.lastTimeBonusAmount,
+		T005.socialInsuranceFlag,
+		T005.nextBonusMonth As reflectYearAndMonth,
+		CAST(T005.insuranceFeeAmount As unsigned) As insuranceFeeAmount,
+		CAST(T005.scheduleOfBonusAmount As unsigned) As scheduleOfBonusAmount,
+		T005.remark
 		FROM T001Employee As T001
-		LEFT JOIN    
-			T005WagesInfo as T005  on T001.employeeNo =T005.employeeNo
 		LEFT JOIN
-			 T002EmployeeDetail As T002 on T005.employeeNo = T002.employeeNo   
+		T005WagesInfo as T005 on
+		T001.employeeNo =T005.employeeNo
 		LEFT JOIN
-			 M005EmployeeForm as M005 on M005.employeeFormCode=T002.employeeFormCode  
-		WHERE 
-			nextBonusMonth between #{startYandM} and #{endYandM}
-		</select>
-		
-		
+		T002EmployeeDetail As T002 on
+		T005.employeeNo = T002.employeeNo
+		LEFT JOIN
+		M005EmployeeForm as M005 on
+		M005.employeeFormCode=T002.employeeFormCode
+		WHERE
+		nextBonusMonth between
+		#{startYandM} and #{endYandM}
+	</select>
+
+	<select id="getT005WagesInfoList" parameterType="map"
+		resultMap="detailsInfo">
+		SELECT
+		T005.employeeNo,
+		T005.reflectYearAndMonth,
+		T005.employeeFormCode,
+		M005.employeeFormName,
+		T005.salary,
+		T005.waitingCost,
+		T005.socialInsuranceFlag,
+		T005.nextBonusMonth,
+		T005.lastTimeBonusAmount,
+		T005.scheduleOfBonusAmount,
+		T005.remark
+		FROM
+		T005WagesInfo AS T005
+		LEFT JOIN
+		M005EmployeeForm as M005 on
+		M005.employeeFormCode=T005.employeeFormCode
+	</select>
+
+	<select id="searchIntoRetirement" parameterType="map"
+		resultMap="detailsInfo">
+		SELECT
+		T002.employeeNo,
+		T002.intoCompanyYearAndMonth,
+		T002.retirementYearAndMonth,
+		T002.employeeFormCode,
+		M005.employeeFormName,
+		CONCAT(T001.employeeFristName,
+		T001.employeeLastName) as employeeName
+		FROM T002EmployeeDetail As T002
+		LEFT JOIN
+		T001Employee As T001 on
+		T002.employeeNo = T001.employeeNo
+		LEFT
+		JOIN
+		M005EmployeeForm As M005 on
+		T002.employeeFormCode =
+		M005.employeeFormCode
+		WHERE
+		T001.employeeFristName is not null
+		<if test="classification == 3">
+			AND intoCompanyYearAndMonth between #{startYandM} and
+			#{endYandM}
+		</if>
+		<if test="classification == 4">
+			AND retirementYearAndMonth between #{startYandM} and
+			#{endYandM}
+		</if>
+	</select>
+
+	<select id="searchscheduleOfBonus" parameterType="map"
+		resultMap="detailsInfo">
+		SELECT
+		T005.employeeNo,
+		T005.nextBonusMonth,
+		T005.employeeFormCode,
+		M005.employeeFormName,
+		CONCAT(T001.employeeFristName,
+		T001.employeeLastName) as employeeName
+		FROM T005WagesInfo As T005
+		LEFT JOIN
+		T001Employee As T001 on
+		T005.employeeNo = T001.employeeNo
+		LEFT
+		JOIN
+		M005EmployeeForm As M005 on
+		T005.employeeFormCode =
+		M005.employeeFormCode
+		WHERE
+		nextBonusMonth
+		between #{startYandM} and
+		#{endYandM}
+		and T001.employeeFristName is not
+		null
+	</select>
 </mapper>

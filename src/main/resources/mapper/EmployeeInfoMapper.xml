@@ -296,6 +296,11 @@
 		and
 		employeeStatus =
 		ifnull(#{employeeStatus},employeeStatus)
+		<if test="socialInsuranceStatus != null">
+		and
+		socialInsuranceStatus =
+		ifnull(#{socialInsuranceStatus},socialInsuranceStatus)
+		</if>
 		GROUP BY
 		employeeNo
 		order

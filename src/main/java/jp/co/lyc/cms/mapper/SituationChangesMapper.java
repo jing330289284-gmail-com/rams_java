@@ -10,12 +10,17 @@ import jp.co.lyc.cms.model.SituationChangesModel;
 @Mapper
 public interface SituationChangesMapper {
 
-public List<SituationChangesModel>getSituationChanges(Map<String, Object> sendMap);
+	public List<SituationChangesModel> getSituationChanges(Map<String, Object> sendMap);
 
-public List<SituationChangesModel>getSituationChangesFront(Map<String, Object> sendMap);
+	public List<SituationChangesModel> getSituationChangesFront(Map<String, Object> sendMap);
 
-public List<SituationChangesModel>getSituationIntoORretirement(Map<String, Object> sendMap);
+	public List<SituationChangesModel> getSituationIntoORretirement(Map<String, Object> sendMap);
 
-public List<SituationChangesModel>getSituationBonus(Map<String, Object> sendMap);
+	public List<SituationChangesModel> getSituationBonus(Map<String, Object> sendMap);
 
+	public List<SituationChangesModel> getT005WagesInfoList(Map<String, Object> sendMap);
+
+	public List<SituationChangesModel> searchIntoRetirement(Map<String, Object> sendMap);
+
+	public List<SituationChangesModel> searchscheduleOfBonus(Map<String, Object> sendMap);
 }

@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.io.ResolverUtil.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -464,8 +465,152 @@ public class SituationChangeController {
 			return resulterr;
 		} else {
 			Map<String, Object> sendMap = getDetailParam(situationInfo);
+			List<SituationChangesModel> T005WagesInfoList = new ArrayList<SituationChangesModel>();
+			T005WagesInfoList = SituationChangesService.getT005WagesInfoList(sendMap);
+
 			if (situationInfo.getClassification().equals("1")) {
-				
+				// 給料変更処理
+				List<SituationChangesModel> reflectYearAndMonthList = new ArrayList<SituationChangesModel>();
+			} else if (situationInfo.getClassification().equals("2")) {
+				// ボーナス変更処理
+				List<SituationChangesModel> scheduleOfBonusAmountList = new ArrayList<SituationChangesModel>();
+				scheduleOfBonusAmountList = SituationChangesService.searchscheduleOfBonus(sendMap);
+				if (scheduleOfBonusAmountList.size() == 0) {
+					String noData = "";
+					noData = "条件に該当する結果が存在しない";
+					resulterr.put("data", scheduleOfBonusAmountList);
+					resulterr.put("noData", noData);
+					return resulterr;
+				}
+				for (int i = 0; i < scheduleOfBonusAmountList.size(); i++) {
+					// 番号設置
+					scheduleOfBonusAmountList.get(i).setRowNo(i + 1);
+
+					// 年月設置
+					scheduleOfBonusAmountList.get(i)
+							.setReflectYearAndMonth(scheduleOfBonusAmountList.get(i).getNextBonusMonth());
+
+					// 区分設置
+					scheduleOfBonusAmountList.get(i).setStatus("ボーナス");
+
+					// T005関連項目
+					for (int j = 0; j < T005WagesInfoList.size(); j++) {
+
+						if (scheduleOfBonusAmountList.get(i).getEmployeeNo()
+								.equals(T005WagesInfoList.get(j).getEmployeeNo())
+								&& scheduleOfBonusAmountList.get(i).getReflectYearAndMonth()
+										.equals(T005WagesInfoList.get(j).getNextBonusMonth())) {
+							// 社員形式設置
+							if (j > 0) {
+								if (T005WagesInfoList.get(j).getEmployeeNo()
+										.equals(T005WagesInfoList.get(j - 1).getEmployeeNo())
+										&& !T005WagesInfoList.get(j).getEmployeeFormName()
+												.equals(T005WagesInfoList.get(j - 1).getEmployeeFormName())) {
+									scheduleOfBonusAmountList.get(i)
+											.setEmployeeFormName(T005WagesInfoList.get(j - 1).getEmployeeFormName()
+													+ "~" + T005WagesInfoList.get(j).getEmployeeFormName());
+								}
+							}
+
+							// 給料設置
+							scheduleOfBonusAmountList.get(i)
+									.setSalary(T005WagesInfoList.get(j).getSalary().equals("")
+											? T005WagesInfoList.get(j).getWaitingCost()
+											: T005WagesInfoList.get(j).getSalary());
+
+							// 社会保険設置
+							if (j > 0) {
+								if (T005WagesInfoList.get(j).getEmployeeNo()
+										.equals(T005WagesInfoList.get(j - 1).getEmployeeNo())
+										&& !T005WagesInfoList.get(j).getSocialInsuranceFlag()
+												.equals(T005WagesInfoList.get(j - 1).getSocialInsuranceFlag())) {
+									scheduleOfBonusAmountList.get(i)
+											.setSocialInsuranceFlag((T005WagesInfoList.get(j - 1)
+													.getSocialInsuranceFlag().equals("0") ? "なし" : "追加")
+													+ "~"
+													+ (T005WagesInfoList.get(j).getSocialInsuranceFlag().equals("0")
+															? "なし"
+															: "追加"));
+								} else {
+									scheduleOfBonusAmountList.get(i).setSocialInsuranceFlag(
+											T005WagesInfoList.get(j).getSocialInsuranceFlag().equals("0") ? "なし"
+													: "追加");
+								}
+							}
+
+							// ボーナス設置
+							if (T005WagesInfoList.get(j).getLastTimeBonusAmount() != null
+									&& !T005WagesInfoList.get(j).getLastTimeBonusAmount().equals("")) {
+								scheduleOfBonusAmountList.get(i)
+										.setScheduleOfBonusAmount(T005WagesInfoList.get(j).getLastTimeBonusAmount()
+												+ "~" + T005WagesInfoList.get(j).getScheduleOfBonusAmount());
+							} else {
+								scheduleOfBonusAmountList.get(i)
+										.setScheduleOfBonusAmount(T005WagesInfoList.get(j).getScheduleOfBonusAmount());
+							}
+
+							// 備考設置
+							scheduleOfBonusAmountList.get(i).setRemark(T005WagesInfoList.get(j).getRemark());
+						}
+					}
+				}
+				resulterr.put("data", scheduleOfBonusAmountList);
+
+			} else if (situationInfo.getClassification().equals("3") || situationInfo.getClassification().equals("4")) {
+				// 入退職処理
+				List<SituationChangesModel> intoRetirementList = new ArrayList<SituationChangesModel>();
+				intoRetirementList = SituationChangesService.searchIntoRetirement(sendMap);
+				if (intoRetirementList.size() == 0) {
+					String noData = "";
+					noData = "条件に該当する結果が存在しない";
+					resulterr.put("data", intoRetirementList);
+					resulterr.put("noData", noData);
+					return resulterr;
+				}
+				for (int i = 0; i < intoRetirementList.size(); i++) {
+					// 番号設置
+					intoRetirementList.get(i).setRowNo(i + 1);
+
+					// 年月設置
+					if (situationInfo.getClassification().equals("3"))
+						intoRetirementList.get(i)
+								.setReflectYearAndMonth(intoRetirementList.get(i).getIntoCompanyYearAndMonth());
+					else if (situationInfo.getClassification().equals("4"))
+						intoRetirementList.get(i)
+								.setReflectYearAndMonth(intoRetirementList.get(i).getIntoCompanyYearAndMonth());
+
+					// 区分設置
+					if (situationInfo.getClassification().equals("3"))
+						intoRetirementList.get(i).setStatus("入職");
+					else if (situationInfo.getClassification().equals("4"))
+						intoRetirementList.get(i).setStatus("離職");
+
+					// T005関連項目
+					for (int j = 0; j < T005WagesInfoList.size(); j++) {
+
+						if (intoRetirementList.get(i).getEmployeeNo().equals(T005WagesInfoList.get(j).getEmployeeNo())
+								&& intoRetirementList.get(i).getReflectYearAndMonth()
+										.equals(T005WagesInfoList.get(j).getReflectYearAndMonth())) {
+							// 給料設置
+							intoRetirementList.get(i)
+									.setSalary(T005WagesInfoList.get(j).getSalary().equals("")
+											? T005WagesInfoList.get(j).getWaitingCost()
+											: T005WagesInfoList.get(j).getSalary());
+
+							// 社会保険設置
+							intoRetirementList.get(i).setSocialInsuranceFlag(
+									T005WagesInfoList.get(j).getSocialInsuranceFlag().equals("0") ? "なし" : "追加");
+
+							// ボーナス設置
+							intoRetirementList.get(i)
+									.setScheduleOfBonusAmount(T005WagesInfoList.get(j).getScheduleOfBonusAmount());
+
+							// 備考設置
+							intoRetirementList.get(i).setRemark(T005WagesInfoList.get(j).getRemark());
+						}
+					}
+				}
+				resulterr.put("data", intoRetirementList);
 			}
 			return resulterr;
 		}
