@@ -237,4 +237,30 @@
 		and T001.employeeFristName is not
 		null
 	</select>
+
+	<select id="getReflectYearAndMonth" parameterType="map"
+		resultMap="detailsInfo">
+		SELECT
+		T005.employeeNo,
+		T005.reflectYearAndMonth,
+		T005.employeeFormCode,
+		M005.employeeFormName,
+		CONCAT(T001.employeeFristName,
+		T001.employeeLastName) as employeeName
+		FROM T005WagesInfo As T005
+		LEFT JOIN
+		T001Employee As T001 on
+		T005.employeeNo = T001.employeeNo
+		LEFT
+		JOIN
+		M005EmployeeForm As M005 on
+		T005.employeeFormCode =
+		M005.employeeFormCode
+		WHERE
+		reflectYearAndMonth
+		between #{startYandM} and
+		#{endYandM}
+		and T001.employeeFristName is not
+		null
+	</select>
 </mapper>

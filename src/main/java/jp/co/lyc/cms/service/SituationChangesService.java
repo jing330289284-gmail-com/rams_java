@@ -47,4 +47,9 @@ public class SituationChangesService {
 		List<SituationChangesModel> scheduleOfBonusAmountList = SituationChangesMapper.searchscheduleOfBonus(sendMap);
 		return scheduleOfBonusAmountList;
 	}
+	
+	public List<SituationChangesModel> getReflectYearAndMonth(Map<String, Object> sendMap) {
+		List<SituationChangesModel> reflectYearAndMonthList = SituationChangesMapper.getReflectYearAndMonth(sendMap);
+		return reflectYearAndMonthList;
+	}
 }

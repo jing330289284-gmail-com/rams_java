@@ -468,14 +468,107 @@ public class SituationChangeController {
 			List<SituationChangesModel> T005WagesInfoList = new ArrayList<SituationChangesModel>();
 			T005WagesInfoList = SituationChangesService.getT005WagesInfoList(sendMap);
 
-			if (situationInfo.getClassification().equals("1")) {
-				// 給料変更処理
+			List<SituationChangesModel> allList = new ArrayList<SituationChangesModel>();
+			boolean allCheckFlag = situationInfo.getClassification().equals("0") ? true : false;
+
+			// 給料変更検索処理
+			if (situationInfo.getClassification().equals("1") || allCheckFlag) {
 				List<SituationChangesModel> reflectYearAndMonthList = new ArrayList<SituationChangesModel>();
-			} else if (situationInfo.getClassification().equals("2")) {
-				// ボーナス変更処理
+				reflectYearAndMonthList = SituationChangesService.getReflectYearAndMonth(sendMap);
+				if (reflectYearAndMonthList.size() == 0 && !allCheckFlag) {
+					String noData = "";
+					noData = "条件に該当する結果が存在しない";
+					resulterr.put("data", reflectYearAndMonthList);
+					resulterr.put("noData", noData);
+					return resulterr;
+				}
+				for (int i = 0; i < reflectYearAndMonthList.size(); i++) {
+					// 番号設置
+					reflectYearAndMonthList.get(i).setRowNo(i + 1);
+
+					// 区分設置
+					reflectYearAndMonthList.get(i).setStatus("給料変更");
+
+					// T005関連項目
+					for (int j = 0; j < T005WagesInfoList.size(); j++) {
+						if (T005WagesInfoList.get(j).getSocialInsuranceFlag() == null) {
+							T005WagesInfoList.get(j).setSocialInsuranceFlag("0");
+						}
+						if (reflectYearAndMonthList.get(i).getEmployeeNo()
+								.equals(T005WagesInfoList.get(j).getEmployeeNo())
+								&& reflectYearAndMonthList.get(i).getReflectYearAndMonth()
+										.equals(T005WagesInfoList.get(j).getReflectYearAndMonth())) {
+							if (j > 0) {
+								// 社員形式設置
+								if (T005WagesInfoList.get(j).getEmployeeNo()
+										.equals(T005WagesInfoList.get(j - 1).getEmployeeNo())
+										&& !T005WagesInfoList.get(j).getEmployeeFormName()
+												.equals(T005WagesInfoList.get(j - 1).getEmployeeFormName())) {
+									reflectYearAndMonthList.get(i)
+											.setEmployeeFormName(T005WagesInfoList.get(j - 1).getEmployeeFormName()
+													+ "~" + T005WagesInfoList.get(j).getEmployeeFormName());
+								}
+
+								// 給料設置
+								if (T005WagesInfoList.get(j).getEmployeeNo()
+										.equals(T005WagesInfoList.get(j - 1).getEmployeeNo())
+										&& !T005WagesInfoList.get(j).getSalary()
+												.equals(T005WagesInfoList.get(j - 1).getSalary())) {
+									reflectYearAndMonthList.get(i)
+											.setSalary((T005WagesInfoList.get(j - 1).getSalary().equals("")
+													? T005WagesInfoList.get(j - 1).getWaitingCost()
+													: T005WagesInfoList.get(j - 1).getSalary())
+													+ "~"
+													+ (T005WagesInfoList.get(j).getSalary().equals("")
+															? T005WagesInfoList.get(j).getWaitingCost()
+															: T005WagesInfoList.get(j).getSalary()));
+
+								} else {
+									reflectYearAndMonthList.get(i)
+											.setSalary(T005WagesInfoList.get(j).getSalary().equals("")
+													? T005WagesInfoList.get(j).getWaitingCost()
+													: T005WagesInfoList.get(j).getSalary());
+								}
+
+								// 社会保険設置
+								if (T005WagesInfoList.get(j).getEmployeeNo()
+										.equals(T005WagesInfoList.get(j - 1).getEmployeeNo())
+										&& !T005WagesInfoList.get(j).getSocialInsuranceFlag()
+												.equals(T005WagesInfoList.get(j - 1).getSocialInsuranceFlag())) {
+									reflectYearAndMonthList.get(i)
+											.setSocialInsuranceFlag((T005WagesInfoList.get(j - 1)
+													.getSocialInsuranceFlag().equals("0") ? "なし" : "追加")
+													+ "~"
+													+ (T005WagesInfoList.get(j).getSocialInsuranceFlag().equals("0")
+															? "なし"
+															: "追加"));
+								} else {
+									reflectYearAndMonthList.get(i).setSocialInsuranceFlag(
+											T005WagesInfoList.get(j).getSocialInsuranceFlag().equals("0") ? "なし"
+													: "追加");
+								}
+							}
+
+							// ボーナス設置
+							reflectYearAndMonthList.get(i)
+									.setScheduleOfBonusAmount(T005WagesInfoList.get(j).getScheduleOfBonusAmount());
+
+							// 備考設置
+							reflectYearAndMonthList.get(i).setRemark(T005WagesInfoList.get(j).getRemark());
+						}
+					}
+				}
+				if (allCheckFlag)
+					allList.addAll(reflectYearAndMonthList);
+				else
+					resulterr.put("data", reflectYearAndMonthList);
+			}
+
+			// ボーナス変更検索処理
+			if (situationInfo.getClassification().equals("2") || allCheckFlag) {
 				List<SituationChangesModel> scheduleOfBonusAmountList = new ArrayList<SituationChangesModel>();
 				scheduleOfBonusAmountList = SituationChangesService.searchscheduleOfBonus(sendMap);
-				if (scheduleOfBonusAmountList.size() == 0) {
+				if (scheduleOfBonusAmountList.size() == 0 && !allCheckFlag) {
 					String noData = "";
 					noData = "条件に該当する結果が存在しない";
 					resulterr.put("data", scheduleOfBonusAmountList);
@@ -495,7 +588,6 @@ public class SituationChangeController {
 
 					// T005関連項目
 					for (int j = 0; j < T005WagesInfoList.size(); j++) {
-
 						if (scheduleOfBonusAmountList.get(i).getEmployeeNo()
 								.equals(T005WagesInfoList.get(j).getEmployeeNo())
 								&& scheduleOfBonusAmountList.get(i).getReflectYearAndMonth()
@@ -554,13 +646,20 @@ public class SituationChangeController {
 						}
 					}
 				}
-				resulterr.put("data", scheduleOfBonusAmountList);
+				if (allCheckFlag)
+					allList.addAll(scheduleOfBonusAmountList);
+				else
+					resulterr.put("data", scheduleOfBonusAmountList);
 
-			} else if (situationInfo.getClassification().equals("3") || situationInfo.getClassification().equals("4")) {
-				// 入退職処理
+			}
+
+			// 入職検索処理
+			if (situationInfo.getClassification().equals("3") || allCheckFlag) {
+				if (allCheckFlag)
+					sendMap.put("classification", "3");
 				List<SituationChangesModel> intoRetirementList = new ArrayList<SituationChangesModel>();
 				intoRetirementList = SituationChangesService.searchIntoRetirement(sendMap);
-				if (intoRetirementList.size() == 0) {
+				if (intoRetirementList.size() == 0 && !allCheckFlag) {
 					String noData = "";
 					noData = "条件に該当する結果が存在しない";
 					resulterr.put("data", intoRetirementList);
@@ -572,18 +671,11 @@ public class SituationChangeController {
 					intoRetirementList.get(i).setRowNo(i + 1);
 
 					// 年月設置
-					if (situationInfo.getClassification().equals("3"))
-						intoRetirementList.get(i)
-								.setReflectYearAndMonth(intoRetirementList.get(i).getIntoCompanyYearAndMonth());
-					else if (situationInfo.getClassification().equals("4"))
-						intoRetirementList.get(i)
-								.setReflectYearAndMonth(intoRetirementList.get(i).getIntoCompanyYearAndMonth());
+					intoRetirementList.get(i)
+							.setReflectYearAndMonth(intoRetirementList.get(i).getIntoCompanyYearAndMonth());
 
 					// 区分設置
-					if (situationInfo.getClassification().equals("3"))
-						intoRetirementList.get(i).setStatus("入職");
-					else if (situationInfo.getClassification().equals("4"))
-						intoRetirementList.get(i).setStatus("離職");
+					intoRetirementList.get(i).setStatus("入職");
 
 					// T005関連項目
 					for (int j = 0; j < T005WagesInfoList.size(); j++) {
@@ -610,7 +702,73 @@ public class SituationChangeController {
 						}
 					}
 				}
-				resulterr.put("data", intoRetirementList);
+				if (allCheckFlag)
+					allList.addAll(intoRetirementList);
+				else
+					resulterr.put("data", intoRetirementList);
+			}
+			// 退職検索処理
+			if (situationInfo.getClassification().equals("4") || allCheckFlag) {
+				if (allCheckFlag)
+					sendMap.put("classification", "4");
+				List<SituationChangesModel> intoRetirementList = new ArrayList<SituationChangesModel>();
+				intoRetirementList = SituationChangesService.searchIntoRetirement(sendMap);
+				if (intoRetirementList.size() == 0 && !allCheckFlag) {
+					String noData = "";
+					noData = "条件に該当する結果が存在しない";
+					resulterr.put("data", intoRetirementList);
+					resulterr.put("noData", noData);
+					return resulterr;
+				}
+				for (int i = 0; i < intoRetirementList.size(); i++) {
+					// 番号設置
+					intoRetirementList.get(i).setRowNo(i + 1);
+
+					// 年月設置
+					intoRetirementList.get(i)
+							.setReflectYearAndMonth(intoRetirementList.get(i).getRetirementYearAndMonth());
+
+					// 区分設置
+
+					intoRetirementList.get(i).setStatus("離職");
+
+					// T005関連項目
+					for (int j = 0; j < T005WagesInfoList.size(); j++) {
+
+						if (intoRetirementList.get(i).getEmployeeNo().equals(T005WagesInfoList.get(j).getEmployeeNo())
+								&& intoRetirementList.get(i).getReflectYearAndMonth()
+										.equals(T005WagesInfoList.get(j).getReflectYearAndMonth())) {
+							// 給料設置
+							intoRetirementList.get(i)
+									.setSalary(T005WagesInfoList.get(j).getSalary().equals("")
+											? T005WagesInfoList.get(j).getWaitingCost()
+											: T005WagesInfoList.get(j).getSalary());
+
+							// 社会保険設置
+							intoRetirementList.get(i).setSocialInsuranceFlag(
+									T005WagesInfoList.get(j).getSocialInsuranceFlag().equals("0") ? "なし" : "追加");
+
+							// ボーナス設置
+							intoRetirementList.get(i)
+									.setScheduleOfBonusAmount(T005WagesInfoList.get(j).getScheduleOfBonusAmount());
+
+							// 備考設置
+							intoRetirementList.get(i).setRemark(T005WagesInfoList.get(j).getRemark());
+						}
+					}
+				}
+				if (allCheckFlag)
+					allList.addAll(intoRetirementList);
+				else
+					resulterr.put("data", intoRetirementList);
+			}
+
+			if (allCheckFlag) {
+				for (int i = 0; i < allList.size(); i++) {
+					// 番号設置
+					allList.get(i).setRowNo(i + 1);
+				}
+				resulterr.put("data", allList);
 			}
 			return resulterr;
 		}

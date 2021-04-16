@@ -23,4 +23,6 @@ public interface SituationChangesMapper {
 	public List<SituationChangesModel> searchIntoRetirement(Map<String, Object> sendMap);
 
 	public List<SituationChangesModel> searchscheduleOfBonus(Map<String, Object> sendMap);
+	
+	public List<SituationChangesModel> getReflectYearAndMonth(Map<String, Object> sendMap);
 }
