@@ -80,14 +80,39 @@
 		'' AS
 		purchasingManagers2,
 		'' AS positionCode2,
-		'' AS purchasingManagersMail2
+		'' AS purchasingManagersMail2,
+		if(T018.approvalStatus>1,"1","0")approvalStatus,
+		if(T018.sentReportStatus>1,"1","0")sentReportStatus,
 		FROM
 		T007CustomerInfo AS T007
 		LEFT JOIN
-		T009CustomerDepartmentInfo AS
-		T009 ON T007.customerNo = T009.customerNo
-		AND T007.purchasingManagers =
-		T009.responsiblePerson, (SELECT
+			T009CustomerDepartmentInfo AS T009
+		ON
+			T007.customerNo = T009.customerNo
+		AND
+			T007.purchasingManagers=T009.responsiblePerson
+		LEFT JOIN
+		(SELECT 
+				customerNo,
+				sum(approvalStatus) approvalStatus,
+				sum(sentReportStatus) sentReportStatus
+			FROM 
+				T018WorkTotalTime 
+			WHERE
+				customerNo IS NOT NULL
+			AND
+			CASE 1 WHEN DATE_FORMAT(now(),"%d")>10
+		    then
+		    attendanceYearAndMonth=DATE_FORMAT(now(),"%Y%m")
+		    else
+		    attendanceYearAndMonth=DATE_FORMAT(DATE_ADD(NOW(), INTERVAL -1 MONTH),"%Y%m")
+		    END
+			GROUP BY
+				customerNo
+		)T018
+		ON
+			T018.customerNo=T007.customerNo,
+			 (SELECT
 		@rowNo:=-1)
 		AS rowId
 	</select>
