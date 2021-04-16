@@ -3,7 +3,6 @@ package jp.co.lyc.cms.model;
 import java.util.ArrayList;
 
 public class SendRepotModel {
-
 	String customerNo;// お客様番号
 	String customerName;// お客様名
 	String stationCode;// 本社場所コード
@@ -64,6 +63,8 @@ public class SendRepotModel {
 	String customerList;
 	String mainChargeList;
 	String departmentCodeList;
+	String approvalStatus;
+	String sentReportStatus;
 	public String[] getOldCtmNos() {
 		return oldCtmNos;
 	}
@@ -507,5 +508,17 @@ public class SendRepotModel {
 	}
 	public void setSubChargeMailList(String subChargeMailList) {
 		this.subChargeMailList = subChargeMailList;
+	}
+	public String getApprovalStatus() {
+		return approvalStatus;
+	}
+	public void setApprovalStatus(String approvalStatus) {
+		this.approvalStatus = approvalStatus;
+	}
+	public String getSentReportStatus() {
+		return sentReportStatus;
+	}
+	public void setSentReportStatus(String sentReportStatus) {
+		this.sentReportStatus = sentReportStatus;
 	}
 }
