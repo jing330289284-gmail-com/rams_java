@@ -16,7 +16,8 @@ public class SendLettersConfirmModel implements Serializable {
 	String hopeHighestPrice;
 	String unitPrice;
 	String salesProgressCode;
-	String remark;
+	String remark1;
+	String remark2;
 	String updateUser;
 	String employeeStatus;
 	String stationName;
@@ -151,12 +152,20 @@ public class SendLettersConfirmModel implements Serializable {
 		this.salesProgressCode = salesProgressCode;
 	}
 
-	public String getRemark() {
-		return remark;
+	public String getRemark1() {
+		return remark1;
 	}
 
-	public void setRemark(String remark) {
-		this.remark = remark;
+	public void setRemark1(String remark1) {
+		this.remark1 = remark1;
+	}
+
+	public String getRemark2() {
+		return remark2;
+	}
+
+	public void setRemark2(String remark2) {
+		this.remark2 = remark2;
 	}
 
 	public String getUpdateUser() {

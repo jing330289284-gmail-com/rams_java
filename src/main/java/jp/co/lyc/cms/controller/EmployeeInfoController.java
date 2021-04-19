@@ -391,6 +391,38 @@ public class EmployeeInfoController extends BaseController {
 	}
 
 	/**
+	 * 社員情報を修正
+	 * 
+	 * @param emp
+	 * @return boolean
+	 */
+
+	@RequestMapping(value = "/updatePassWord", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> updatePassWord(@RequestParam(value = "emp", required = false) String JSONEmp)
+			throws Exception {
+		logger.info("GetEmployeeInfoController.updateEmployee:" + "修正開始");
+		errorsMessage = "を入力してください。";
+		JSONObject jsonObject = JSON.parseObject(JSONEmp);
+		EmployeeModel emp = JSON.parseObject(jsonObject.toJSONString(), new TypeReference<EmployeeModel>() {
+		});
+
+		Map<String, Object> resultMap = new HashMap<>();// 繰り返し
+
+		Map<String, Object> sendMap = getParam(emp);
+		boolean result = true;
+		try {
+			result = employeeInfoService.updatePassword(sendMap);
+		} catch (Exception e) {
+			resultMap.put("result", false);
+			return resultMap;
+		}
+		resultMap.put("result", result);
+		logger.info("GetEmployeeInfoController.updateEmployee:" + "修正結束");
+		return resultMap;
+	}
+
+	/**
 	 * 条件を取得
 	 * 
 	 * @param emp

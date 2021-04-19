@@ -178,7 +178,8 @@ public class SalesSituationController extends BaseController {
 					salesSituationList.get(i).setHopeHighestPrice(T010SalesSituationList.get(j).getHopeHighestPrice());
 					salesSituationList.get(i)
 							.setCustomerContractStatus(T010SalesSituationList.get(j).getCustomerContractStatus());
-					salesSituationList.get(i).setRemark(T010SalesSituationList.get(j).getRemark());
+					salesSituationList.get(i).setRemark1(T010SalesSituationList.get(j).getRemark1());
+					salesSituationList.get(i).setRemark2(T010SalesSituationList.get(j).getRemark2());
 					salesSituationList.get(i).setSalesStaff(T010SalesSituationList.get(j).getSalesStaff());
 					salesSituationList.get(i)
 							.setSalesPriorityStatus(T010SalesSituationList.get(j).getSalesPriorityStatus());

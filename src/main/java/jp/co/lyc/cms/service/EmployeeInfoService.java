@@ -292,6 +292,25 @@ public class EmployeeInfoService {
 		}
 		return result;
 	}
+	
+	/**
+	 * パスポートを修正
+	 * 
+	 * @param emp
+	 * @return boolean
+	 */
+	@Transactional(rollbackFor = Exception.class)
+	public boolean updatePassword(Map<String, Object> sendMap) {
+		boolean result = true;
+		try {
+			employeeInfoMapper.updateEmployeeInfo(sendMap);
+		} catch (Exception e) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			e.printStackTrace();
+			return result = false;
+		}
+		return result;
+	}
 
 	// 口座情報のパラメータをセットします。
 	public HashMap<String, String> getParamBankInfoModel(Map<String, Object> sendMap) {
