@@ -68,23 +68,23 @@
     <select id="getCustomers"
 		resultType="jp.co.lyc.cms.model.SendRepotModel">
 		SELECT
-		(@rowNo:=@rowNo+1 ) AS rowId,
-		T007.customerNo,
-		T007.customerName,
-		T007.purchasingManagers,
-		T009.customerDepartmentCode,
-		T009.positionCode,
-		T007.purchasingManagersMail,
-		T007.levelCode,
-		'' AS monthCount,
-		'' AS
-		purchasingManagers2,
-		'' AS positionCode2,
-		'' AS purchasingManagersMail2,
-		if(T018.approvalStatus>1,"1","0")approvalStatus,
-		if(T018.sentReportStatus>1,"1","0")sentReportStatus,
+			(@rowNo:=@rowNo+1 ) AS rowId,
+			T007.customerNo,
+			T007.customerName,
+			T007.purchasingManagers,
+			T009.customerDepartmentCode,
+			T009.positionCode,
+			T007.purchasingManagersMail,
+			T007.levelCode,
+			'' AS monthCount,
+			'' AS
+			purchasingManagers2,
+			'' AS positionCode2,
+			'' AS purchasingManagersMail2,
+			T018.approvalStatus,
+			T018.sentReportStatus
 		FROM
-		T007CustomerInfo AS T007
+			T007CustomerInfo AS T007
 		LEFT JOIN
 			T009CustomerDepartmentInfo AS T009
 		ON
@@ -94,27 +94,25 @@
 		LEFT JOIN
 		(SELECT 
 				customerNo,
-				sum(approvalStatus) approvalStatus,
-				sum(sentReportStatus) sentReportStatus
+				MIN(approvalStatus) approvalStatus,
+				MIN(sentReportStatus) sentReportStatus
 			FROM 
 				T018WorkTotalTime 
 			WHERE
 				customerNo IS NOT NULL
 			AND
-			CASE 1 WHEN DATE_FORMAT(now(),"%d")>10
-		    then
-		    attendanceYearAndMonth=DATE_FORMAT(now(),"%Y%m")
-		    else
-		    attendanceYearAndMonth=DATE_FORMAT(DATE_ADD(NOW(), INTERVAL -1 MONTH),"%Y%m")
+				CASE 1 WHEN DATE_FORMAT(now(),"%d")>10
+		    THEN
+		   		attendanceYearAndMonth=DATE_FORMAT(now(),"%Y%m")
+		    ELSE
+		    	attendanceYearAndMonth=DATE_FORMAT(DATE_ADD(NOW(), INTERVAL -1 MONTH),"%Y%m")
 		    END
 			GROUP BY
 				customerNo
 		)T018
 		ON
 			T018.customerNo=T007.customerNo,
-			 (SELECT
-		@rowNo:=-1)
-		AS rowId
+		(SELECT @rowNo:=-1) AS rowId
 	</select>
     <select id="getCustomersOLD" resultType="jp.co.lyc.cms.model.SendRepotModel">
 	SELECT * FROM(
@@ -357,23 +355,36 @@
 			StorageListName=#{storageListName};
 	</update>
 	
-	<!--　担当取る 担当追加画面-->
-    <select id="getSalesPersons" parameterType="String" resultType="jp.co.lyc.cms.model.SendRepotModel">
+	<!--　社員追加画面-->
+    <select id="getTargetEmployees" parameterType="String" resultType="jp.co.lyc.cms.model.SendRepotModel">
 		SELECT 
-		    customerDepartmentCode,
-		    positionCode,
-		    responsiblePerson,
-		    customerDepartmentMail
+		    concat_ws("",T001.employeeFristName,T001.employeeFristName) employeeName,
+		    T006.stationCode,
+		    T018.approvalStatus,
+		    T018.sentReportStatus
 		FROM
-		    T009CustomerDepartmentInfo
+		    T018WorkTotalTime T018
+		LEFT JOIN
+			T001Employee T001
+		ON
+			T001.employeeNo=T018.employeeNo
+		LEFT JOIN
+			T006EmployeeSiteInfo T006
+		ON
+			T001.employeeNo=T006.employeeNo
 		WHERE
-			customerDepartmentMail is not null
-		AND
-			customerDepartmentMail!=""
-		AND
 		 	customerNo = #{customerNo};
+		AND
+		CASE 1 
+		WHEN 
+			DATE_FORMAT(now(),"%d")>10
+	    THEN
+	   		T018.attendanceYearAndMonth=DATE_FORMAT(now(),"%Y%m")
+	    ELSE
+	    	T018.attendanceYearAndMonth=DATE_FORMAT(DATE_ADD(NOW(), INTERVAL -1 MONTH),"%Y%m")
+	    END
 	</select>
-		<update id="deleteCustomerList" parameterType="String">
+	<update id="deleteCustomerList" parameterType="String">
 		update
 		T021CustomerSendMailStorageList
 		set

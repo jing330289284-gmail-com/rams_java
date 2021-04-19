@@ -68,14 +68,14 @@ public class SendRepotController  extends BaseController {
 		return salesPersonsList;
 	}
 	
-	@RequestMapping(value = "/getSalesPersons", method = RequestMethod.POST)
+	@RequestMapping(value = "/getTargetEmployees", method = RequestMethod.POST)
 	@ResponseBody
-	public List<SendRepotModel> getSalesPersons(@RequestBody SendRepotModel model) {
+	public List<SendRepotModel> getTargetEmployees(@RequestBody SendRepotModel model) {
 
-		logger.info("getSalesPersons:" + "検索開始");
+		logger.info("getTargetEmployees:" + "検索開始");
 		List<SendRepotModel> salesPersonsList = new ArrayList<SendRepotModel>();
 		try {
-			salesPersonsList = sendRepotService.getSalesPersons(model.getCustomerNo());
+			salesPersonsList = sendRepotService.getTargetEmployees(model.getCustomerNo());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

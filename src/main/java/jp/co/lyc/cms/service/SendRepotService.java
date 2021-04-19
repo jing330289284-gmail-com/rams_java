@@ -21,8 +21,8 @@ public class SendRepotService {
 		return sendRepotMapper.getCustomers();
 	};
 	
-	public List<SendRepotModel> getSalesPersons(String customerNo){
-		return sendRepotMapper.getSalesPersons(customerNo);
+	public List<SendRepotModel> getTargetEmployees(String customerNo){
+		return sendRepotMapper.getTargetEmployees(customerNo);
 	};
 	
 	public int creatList(SendRepotModel model){

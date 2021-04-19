@@ -9,12 +9,14 @@
 		attendanceYearAndMonth,
 		attendanceRegisterFlag,
 		approvalStatus,
+		sentReportStatus,
 		updateTime,
 		createTime,
 		updateUser)
 	SELECT 
 		#{employeeNo},
 		DATE_FORMAT(now(),'%Y%m'),
+		0,
 		0,
 		0,
 		now(),
