@@ -16,7 +16,7 @@ public interface SendRepotMapper {
 	 * @return
 	 */
 	public List<SendRepotModel> getCustomers();
-	public List<SendRepotModel> getSalesPersons(String customerNo);
+	public List<SendRepotModel> getTargetEmployees(String customerNo);
 	public int creatList(SendRepotModel model);
 	public SendRepotModel getListByName(SendRepotModel model);
 	public List<SendRepotModel> getLists();

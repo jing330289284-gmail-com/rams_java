@@ -355,23 +355,36 @@
 			StorageListName=#{storageListName};
 	</update>
 	
-	<!--　担当取る 担当追加画面-->
-    <select id="getSalesPersons" parameterType="String" resultType="jp.co.lyc.cms.model.SendRepotModel">
+	<!--　社員追加画面-->
+    <select id="getTargetEmployees" parameterType="String" resultType="jp.co.lyc.cms.model.SendRepotModel">
 		SELECT 
-		    customerDepartmentCode,
-		    positionCode,
-		    responsiblePerson,
-		    customerDepartmentMail
+		    concat_ws("",T001.employeeFristName,T001.employeeFristName) employeeName,
+		    T006.stationCode,
+		    T018.approvalStatus,
+		    T018.sentReportStatus
 		FROM
-		    T009CustomerDepartmentInfo
+		    T018WorkTotalTime T018
+		LEFT JOIN
+			T001Employee T001
+		ON
+			T001.employeeNo=T018.employeeNo
+		LEFT JOIN
+			T006EmployeeSiteInfo T006
+		ON
+			T001.employeeNo=T006.employeeNo
 		WHERE
-			customerDepartmentMail is not null
-		AND
-			customerDepartmentMail!=""
-		AND
 		 	customerNo = #{customerNo};
+		AND
+		CASE 1 
+		WHEN 
+			DATE_FORMAT(now(),"%d")>10
+	    THEN
+	   		T018.attendanceYearAndMonth=DATE_FORMAT(now(),"%Y%m")
+	    ELSE
+	    	T018.attendanceYearAndMonth=DATE_FORMAT(DATE_ADD(NOW(), INTERVAL -1 MONTH),"%Y%m")
+	    END
 	</select>
-		<update id="deleteCustomerList" parameterType="String">
+	<update id="deleteCustomerList" parameterType="String">
 		update
 		T021CustomerSendMailStorageList
 		set

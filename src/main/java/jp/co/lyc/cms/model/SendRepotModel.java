@@ -48,7 +48,7 @@ public class SendRepotModel {
 	String customerDepartmentMail;// メール
 	int rowId;
 	String salesPersonsAppend;
-	String sendReportsAppend;
+	String sendRepotsAppend;
 	String purchasingManagers2;
 	String positionCode2;
 	String purchasingManagersMail2;
@@ -131,11 +131,11 @@ public class SendRepotModel {
 	public void setSalesPersonsAppend(String salesPersonsAppend) {
 		this.salesPersonsAppend = salesPersonsAppend;
 	}
-	public String getSendReportsAppend() {
-		return sendReportsAppend;
+	public String getSendRepotsAppend() {
+		return sendRepotsAppend;
 	}
-	public void setSendReportsAppend(String sendReportsAppend) {
-		this.sendReportsAppend = sendReportsAppend;
+	public void setSendRepotsAppend(String sendRepotsAppend) {
+		this.sendRepotsAppend = sendRepotsAppend;
 	}
 	public int getRowId() {
 		return rowId;
