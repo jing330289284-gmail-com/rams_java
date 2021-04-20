@@ -1,7 +1,11 @@
 package jp.co.lyc.cms.mapper;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Mapper;
+
+import jp.co.lyc.cms.model.CompanySystemSetModel;
 import jp.co.lyc.cms.model.MasterModel;
 
 @Mapper
@@ -88,5 +92,18 @@ public interface MasterUpdateMapper {
 	public String checkHave(MasterModel masterModel);
 
 
+	/**
+	 * 会社データ取得
+	 * @param data
+	 * @return
+	 */
+	public CompanySystemSetModel getCompanyDate();
+
+	/**
+	 * システム更新
+	 * 
+	 * @return
+	 */
+	public void updateSystem(HashMap<String, Object> sendMap);
 
 }

@@ -4,12 +4,15 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import jp.co.lyc.cms.common.BaseController;
+import jp.co.lyc.cms.mapper.MasterUpdateMapper;
+import jp.co.lyc.cms.model.CompanySystemSetModel;
 import jp.co.lyc.cms.model.EmployeeModel;
 import jp.co.lyc.cms.util.UtilsCheckMethod;
 
@@ -17,6 +20,9 @@ import jp.co.lyc.cms.util.UtilsCheckMethod;
 @RequestMapping(value = "/subMenu")
 public class SubMenuController extends BaseController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
+
+	@Autowired
+	MasterUpdateMapper masterUpdateMapper;
 
 	/**
 	 * 画面初期化
@@ -39,6 +45,21 @@ public class SubMenuController extends BaseController {
 			logger.info("LoginController.login:" + "サブメニュー画面の初期化終了");
 			return employeeModel;
 		}
+	}
+
+	/**
+	 * 会社情報取得
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getCompanyDate", method = RequestMethod.POST)
+	@ResponseBody
+	public CompanySystemSetModel getCompanyDate() {
+		logger.info("getCompanyDate.login:" + "サブメニュー画面の初期化開始");
+		CompanySystemSetModel companySystemSetModel = new CompanySystemSetModel();
+		logger.info("getCompanyDate.login:" + "サブメニュー画面の初期化終了");
+		companySystemSetModel = masterUpdateMapper.getCompanyDate();
+		return companySystemSetModel;
 	}
 
 	/**

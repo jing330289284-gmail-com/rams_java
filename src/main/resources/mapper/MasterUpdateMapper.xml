@@ -79,10 +79,11 @@
 		#{bankBranchCode}
 		and bankBranchName = #{bankBranchName};
 	</delete>
-	
-		<!-- 削除 -->
+
+	<!-- 削除 -->
 	<delete id="deleteCustomerMaster" parameterType="String">
-		DELETE FROM T008TopCustomerInfo
+		DELETE FROM
+		T008TopCustomerInfo
 		WHERE topCustomerNo = #{topCustomerNo};
 	</delete>
 
@@ -93,5 +94,29 @@
 		${columnCode} = ${columnCode} - 1
 		where ${columnCode} >
 		#{code};
+	</update>
+
+	<!-- 会社データ取得 -->
+	<select id="getCompanyDate" parameterType="map"
+		resultType="jp.co.lyc.cms.model.CompanySystemSetModel">
+		SELECT 
+		companyName,
+		companyLogo,
+		backgroundColor,
+		empNoHead
+		FROM T012Passwordreset
+		Where passwordResetId = "systemSet";
+	</select>
+
+	 <!-- システム更新 -->
+	<update id="updateSystem" parameterType="map">
+		update
+		T012Passwordreset
+		set
+		companyName = #{companyName},
+		companyLogo = #{companyLogo},
+		backgroundColor = #{backgroundColor},
+		empNoHead = #{empNoHead}
+		where passwordResetId = "systemSet";
 	</update>
 </mapper>

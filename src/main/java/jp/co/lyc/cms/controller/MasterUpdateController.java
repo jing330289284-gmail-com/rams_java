@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import jp.co.lyc.cms.common.BaseController;
+import jp.co.lyc.cms.model.CompanySystemSetModel;
 import jp.co.lyc.cms.model.MasterModel;
 import jp.co.lyc.cms.service.MasterUpdateService;
 import jp.co.lyc.cms.util.StatusCodeToMsgMap;
@@ -83,6 +84,22 @@ public class MasterUpdateController extends BaseController {
 		}
 		logger.info("MasterUpdateController.toroku:" + "追加結束");
 		return result;
+	}
+
+	/**
+	 * システム更新
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/updateSystem", method = RequestMethod.POST)
+	@ResponseBody
+	public void updateSystem(@RequestBody CompanySystemSetModel companySystemSetModel) {
+		HashMap<String, Object> sendMap = new HashMap<>();
+		sendMap.put("companyName", companySystemSetModel.getCompanyName().toString());
+		sendMap.put("companyLogo", companySystemSetModel.getCompanyLogo().toString());
+		sendMap.put("backgroundColor", companySystemSetModel.getBackgroundColor().toString());
+		sendMap.put("empNoHead", companySystemSetModel.getEmpNoHead().toString());
+		masterUpdateService.updateSystem(sendMap);
 	}
 
 	/**

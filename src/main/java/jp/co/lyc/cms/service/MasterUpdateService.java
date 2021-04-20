@@ -2,6 +2,7 @@ package jp.co.lyc.cms.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import jp.co.lyc.cms.mapper.MasterUpdateMapper;
+import jp.co.lyc.cms.model.CompanySystemSetModel;
 import jp.co.lyc.cms.model.MasterModel;
 
 @Component
@@ -50,7 +52,7 @@ public class MasterUpdateService {
 		}
 		return true;
 	}
-	
+
 	/**
 	 * 修正
 	 * 
@@ -67,7 +69,6 @@ public class MasterUpdateService {
 		}
 		return true;
 	}
-
 
 	/**
 	 * 削除
@@ -101,7 +102,7 @@ public class MasterUpdateService {
 		}
 		return true;
 	}
-	
+
 	/**
 	 * 削除
 	 * 
@@ -117,6 +118,7 @@ public class MasterUpdateService {
 		}
 		return true;
 	}
+
 	/**
 	 * 明細取得
 	 * 
@@ -138,7 +140,7 @@ public class MasterUpdateService {
 		}
 		return masterList;
 	}
-	
+
 	public List<MasterModel> getCustomerMasterInfo(HashMap<String, String> sendMap) {
 		List<MasterModel> masterList = masterUpdateMapper.getCustomerMasterInfo(sendMap);
 		for (int i = 0; i < masterList.size(); i++) {
@@ -159,5 +161,14 @@ public class MasterUpdateService {
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 * システム更新
+	 * 
+	 * @return
+	 */
+	public void updateSystem(HashMap<String, Object> sendMap) {
+		masterUpdateMapper.updateSystem(sendMap);
 	}
 }
