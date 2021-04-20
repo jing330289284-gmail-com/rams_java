@@ -17,7 +17,8 @@ public class SendRepotModel {
 	String updateUser;// 更新者
 	String actionType;// 処理区分
 	String topCustomerNo;// 上位客様番号
-	String employeeName;// 社員番号（要員）
+	String employeeNo;//社員番号
+	String employeeName;// 社員名
 	ArrayList<String> employeeNameList;//
 	String siteLocation;// 現場場所
 	String siteManager;// 現場責任者
@@ -518,6 +519,12 @@ public class SendRepotModel {
 	}
 	public String getApprovalStatus() {
 		return approvalStatus;
+	}
+	public String getEmployeeNo() {
+		return employeeNo;
+	}
+	public void setEmployeeNo(String employeeNo) {
+		this.employeeNo = employeeNo;
 	}
 	public void setApprovalStatus(String approvalStatus) {
 		this.approvalStatus = approvalStatus;
