@@ -218,11 +218,15 @@
 		update
 			T021CustomerSendMailStorageList
 		set
-			subChargeMailList=#{subChargeMailList},updateTime=now(),updateUser=#{updateUser}
+			subChargeMailList=#{subChargeMailList},
+			updateTime=now(),
+			updateUser=#{updateUser}
 		where 
 			StorageListName=#{storageListName} 
-		and transmissionClassificationCode=0
+		and 
+			transmissionClassificationCode=0
 	</update>
+	
 	<select id="getCustomerList" parameterType="String"
 		resultType="String">
 		SELECT customerList FROM T021CustomerSendMailStorageList
@@ -358,24 +362,46 @@
 	<!--　社員追加画面-->
     <select id="getTargetEmployees" parameterType="String" resultType="jp.co.lyc.cms.model.SendRepotModel">
 		SELECT 
-		    concat_ws("",T001.employeeFristName,T001.employeeFristName) employeeName,
+		    concat_ws("",T001.employeeFristName,T001.employeeLastName) employeeName,
+		    T001.employeeNo,
+		    T002.employeeStatus,
 		    T006.stationCode,
 		    T018.approvalStatus,
-		    T018.sentReportStatus
+		    T018.sentReportStatus,
+            T018.attendanceYearAndMonth
 		FROM
-		    T018WorkTotalTime T018
+		    newRams.T001Employee T001
 		LEFT JOIN
-			T001Employee T001
+			newRams.T018WorkTotalTime T018
 		ON
 			T001.employeeNo=T018.employeeNo
 		LEFT JOIN
-			T006EmployeeSiteInfo T006
+			newRams.T002EmployeeDetail T002
+		ON
+			T001.employeeNo=T002.employeeNo
+		LEFT JOIN
+			newRams.T006EmployeeSiteInfo T006
 		ON
 			T001.employeeNo=T006.employeeNo
-		WHERE
-		 	customerNo = #{customerNo};
 		AND
-		CASE 1 
+			T006.customerNo=T018.customerNo
+		AND
+        CASE 1 
+		WHEN 
+			DATE_FORMAT(now(),"%d")>10
+	    THEN
+	   		left(T006.admissionStartDate,6)>=DATE_FORMAT(now(),"%Y%m")
+            AND
+            DATE_FORMAT(now(),"%Y%m")&lt; =ifnull("999999",left(T006.admissionEndDate,6))
+	    ELSE
+	    	left(T006.admissionStartDate,6)>=DATE_FORMAT(DATE_ADD(NOW(), INTERVAL -1 MONTH),"%Y%m")
+			AND
+            DATE_FORMAT(DATE_ADD(NOW(), INTERVAL -1 MONTH),"%Y%m")&lt; =ifnull("999999",left(T006.admissionEndDate,6))
+		END
+		WHERE
+		 	T018.customerNo ="C001"
+		AND
+		CASE 2 
 		WHEN 
 			DATE_FORMAT(now(),"%d")>10
 	    THEN
