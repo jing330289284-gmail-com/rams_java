@@ -16,8 +16,17 @@ public class SendRepotsListName implements Serializable {
 	String storageListName;
 	String oldStorageListName;
 	String subChargeMailList;
+	String candidateInChargeList;
 	public String getUpdateUser() {
 		return UpdateUser;
+	}
+	public String getCandidateInChargeList() {
+		return candidateInChargeList;
+	}
+
+
+	public void setCandidateInChargeList(String candidateInChargeList) {
+		this.candidateInChargeList = candidateInChargeList;
 	}
 
 

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import jp.co.lyc.cms.common.BaseController;
 import jp.co.lyc.cms.model.ModelClass;
+import jp.co.lyc.cms.model.SalesSendLetterModel;
 import jp.co.lyc.cms.model.SalesSendLettersListName;
 import jp.co.lyc.cms.model.SendRepotModel;
 import jp.co.lyc.cms.model.SendRepotsListName;
@@ -199,6 +200,33 @@ public class SendRepotController  extends BaseController {
 		updateModel.setSubChargeMailList(salesPersons);
 		try {
 			sendRepotService.salesPersonsListsUpdate(updateModel);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping(value = "/targetEmployeeListsUpdate", method = RequestMethod.POST)
+	@ResponseBody
+	private void targetEmployeeListsUpdate(@RequestBody SendRepotModel model) {
+		SendRepotModel sendRepotModel = new SendRepotModel();
+		SendRepotService sendRepotService = new SendRepotService();
+		String candidateInChargeList = "";
+		try {
+			sendRepotModel = sendRepotService.getCandidateInChargeList(model);//過去のリスト取得
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		String[] selectedRowNames = model.getCandidateInChargeList().split(";");//新しい名前リスト、お客様番号で分ける
+		for (int i = 0; i < selectedRowNames.length; i++) {
+			String[] customerRowNames = selectedRowNames[i].split(":");
+			if (model.getCustomerNo().equals(customerRowNames[0])) {
+				candidateInChargeList += model.getCustomerNo() + ":" + model.getCandidateInChargeList()+ model.getCandidateInChargeList() + ";";
+			} else {
+				candidateInChargeList += selectedRowNames[i] + ";";
+			}
+		}
+		try {
+			sendRepotService.targetEmployeeListsUpdate(sendRepotModel);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
