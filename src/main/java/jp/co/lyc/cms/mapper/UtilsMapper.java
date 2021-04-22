@@ -183,6 +183,15 @@ public interface UtilsMapper {
 	 * 
 	 */
 	public String getNO(Map<String, String> sendMap);
+	
+	/**
+	 * 採番
+	 * 
+	 * @param sendMap
+	 * 
+	 * 
+	 */
+	public String getNoNew(Map<String, String> sendMap);
 
 	/**
 	 * レベル

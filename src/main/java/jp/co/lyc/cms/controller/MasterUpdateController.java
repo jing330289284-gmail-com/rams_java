@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.aspectj.internal.lang.annotation.ajcDeclareAnnotation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.amazonaws.services.s3.model.GetS3AccountOwnerRequest;
+
 import jp.co.lyc.cms.common.BaseController;
 import jp.co.lyc.cms.model.CompanySystemSetModel;
+import jp.co.lyc.cms.model.EmployeeModel;
 import jp.co.lyc.cms.model.MasterModel;
 import jp.co.lyc.cms.service.MasterUpdateService;
 import jp.co.lyc.cms.util.StatusCodeToMsgMap;
@@ -99,7 +103,13 @@ public class MasterUpdateController extends BaseController {
 		sendMap.put("companyLogo", companySystemSetModel.getCompanyLogo().toString());
 		sendMap.put("backgroundColor", companySystemSetModel.getBackgroundColor().toString());
 		sendMap.put("empNoHead", companySystemSetModel.getEmpNoHead().toString());
+		String employeeNo = (String) getSession().getAttribute("employeeNo");
+		String newEmployeeNo = companySystemSetModel.getEmpNoHead().toString()
+				+ employeeNo.substring(employeeNo.length() - 3, employeeNo.length());
+		sendMap.put("employeeNo", employeeNo);
+		sendMap.put("newEmployeeNo", newEmployeeNo);
 		masterUpdateService.updateSystem(sendMap);
+		getSession().setAttribute("employeeNo", newEmployeeNo);
 	}
 
 	/**

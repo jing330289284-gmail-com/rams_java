@@ -105,5 +105,19 @@ public interface MasterUpdateMapper {
 	 * @return
 	 */
 	public void updateSystem(HashMap<String, Object> sendMap);
+	
+	/**
+	 * システム更新
+	 * 
+	 * @return
+	 */
+	public void updateEmployeeNoT001(HashMap<String, Object> sendMap);
+	
+	/**
+	 * システム更新
+	 * 
+	 * @return
+	 */
+	public void updateEmployeeNoT002(HashMap<String, Object> sendMap);
 
 }

@@ -295,6 +295,12 @@
 		OFFSET 0;
 	</select>
 
+	<!--採番 -->
+	<select id="getNoNew" resultType="String" parameterType="map"
+		statementType="STATEMENT">
+		SELECT max(right(employeeNo,3)) FROM T001Employee;
+	</select>
+
 	<!-- 支払サイト選択肢 -->
 	<select id="getPaymentsite"
 		resultType="jp.co.lyc.cms.model.ModelClass">
@@ -485,7 +491,7 @@
 		WHERE
 		transmissionClassificationCode = 0
 	</select>
-	<!-- お客様担当者取得 取得-->
+	<!-- お客様担当者取得 取得 -->
 	<select id="getPurchasingManagers"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT
