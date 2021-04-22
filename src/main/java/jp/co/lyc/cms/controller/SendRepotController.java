@@ -211,18 +211,19 @@ public class SendRepotController  extends BaseController {
 		SendRepotModel sendRepotModel = new SendRepotModel();
 		SendRepotService sendRepotService = new SendRepotService();
 		String candidateInChargeList = "";
+		//CandidateInChargeList(お客様コード:社員ID,社員ID.社員名,社員名;お客様コード:社員ID,社員ID.社員名,社員名;)
 		try {
-			sendRepotModel = sendRepotService.getCandidateInChargeList(model);//過去のリスト取得
+			sendRepotModel = sendRepotService.getCandidateInChargeList(model);//過去のリスト取得 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		String[] selectedRowNames = model.getCandidateInChargeList().split(";");//新しい名前リスト、お客様番号で分ける
-		for (int i = 0; i < selectedRowNames.length; i++) {
-			String[] customerRowNames = selectedRowNames[i].split(":");
+		String[] selectedRowIDs = model.getCandidateInChargeList().split(";");//お客様コード:社員ID,社員ID.社員名,社員名
+		for (int i = 0; i < selectedRowIDs.length; i++) {
+			String[] customerRowNames = selectedRowIDs[i].split(":");
 			if (model.getCustomerNo().equals(customerRowNames[0])) {
 				candidateInChargeList += model.getCustomerNo() + ":" + model.getCandidateInChargeList()+ model.getCandidateInChargeList() + ";";
 			} else {
-				candidateInChargeList += selectedRowNames[i] + ";";
+				candidateInChargeList += selectedRowIDs[i] + ";";
 			}
 		}
 		try {
