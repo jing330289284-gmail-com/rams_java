@@ -240,7 +240,19 @@ public class UtilsService {
 		String no = utilsMapper.getNO(sendMap);
 		return no;
 	}
-
+	
+	/**
+	 * 採番
+	 * 
+	 * @param sendMap
+	 * 
+	 * @return
+	 */
+	public String getNoNew(Map<String, String> sendMap) {
+		String no = utilsMapper.getNoNew(sendMap);
+		return no;
+	}
+	
 	/**
 	 * レベル
 	 * 

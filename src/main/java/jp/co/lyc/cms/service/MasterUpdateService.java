@@ -170,5 +170,7 @@ public class MasterUpdateService {
 	 */
 	public void updateSystem(HashMap<String, Object> sendMap) {
 		masterUpdateMapper.updateSystem(sendMap);
-	}
+		masterUpdateMapper.updateEmployeeNoT001(sendMap);
+		masterUpdateMapper.updateEmployeeNoT002(sendMap);
+}
 }

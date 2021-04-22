@@ -128,7 +128,7 @@ public class SendLettersConfirm extends BaseController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		if (sendLettersConfirmModelList.get(0).getPhoneNo() != null
+		if (sendLettersConfirmModelList.size() > 0 && sendLettersConfirmModelList.get(0).getPhoneNo() != null
 				&& !sendLettersConfirmModelList.get(0).getPhoneNo().equals("")) {
 			sendLettersConfirmModelList.get(0)
 					.setPhoneNo(sendLettersConfirmModelList.get(0).getPhoneNo().substring(0, 3) + "-"

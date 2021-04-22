@@ -119,4 +119,22 @@
 		empNoHead = #{empNoHead}
 		where passwordResetId = "systemSet";
 	</update>
+	
+		 <!-- システム更新 -->
+	<update id="updateEmployeeNoT001" parameterType="map">
+		update
+		T001Employee
+		set
+		employeeNo = #{newEmployeeNo}
+		where employeeNo = #{employeeNo};
+	</update>
+	
+			 <!-- システム更新 -->
+	<update id="updateEmployeeNoT002" parameterType="map">
+		update
+		T002EmployeeDetail
+		set
+		employeeNo = #{newEmployeeNo}
+		where employeeNo = #{employeeNo};
+	</update>
 </mapper>
