@@ -226,7 +226,19 @@
 		and 
 			transmissionClassificationCode=0
 	</update>
-	
+		<!--　対象社員リスト保存 -->
+    <update id="targetEmployeeListsUpdate" parameterType="String">
+		update
+			T021CustomerSendMailStorageList
+		set
+			CandidateInChargeList=#{candidateInChargeList},
+			updateTime=now(),
+			updateUser=#{updateUser}
+		where
+			StorageListName=#{storageListName} 
+		and
+			transmissionClassificationCode=0
+	</update>
 	<select id="getCustomerList" parameterType="String"
 		resultType="String">
 		SELECT customerList FROM T021CustomerSendMailStorageList
@@ -249,6 +261,7 @@
 				customerList,
 				mainChargeList,
 				departmentCodeList,
+				candidateInChargeList,
 				positionCodeList,
 				mainChargeMailList,
 				subChargeMailList
@@ -296,7 +309,19 @@
 		resultType="jp.co.lyc.cms.model.SendRepotModel">
 		SELECT
 			mainChargeList,
-			departmentCodeList
+			departmentCodeList,
+			candidateInChargeList
+		FROM
+			T021CustomerSendMailStorageList
+		WHERE
+			StorageListName = #{storageListName}  
+		AND
+			transmissionClassificationCode=0
+	</select>
+		<select id="getCandidateInChargeList"
+		resultType="jp.co.lyc.cms.model.SendRepotModel">
+		SELECT
+			candidateInChargeList
 		FROM
 			T021CustomerSendMailStorageList
 		WHERE
@@ -312,6 +337,7 @@
 		customerList,
 		mainChargeList,
 		departmentCodeList,
+		candidateInChargeList,
 		positionCodeList,
 		mainChargeMailList,
 		subChargeMailList,
@@ -325,6 +351,7 @@
 		#{code},
 		#{mainChargeList},
 		#{departmentCodeList},
+		#{candidateInChargeList},
 		#{positionCodeList},
 		#{mainChargeMailList},
 		#{subChargeMailList},
@@ -386,29 +413,29 @@
 		AND
 			T006.customerNo=T018.customerNo
 		AND
-        CASE 1 
-		WHEN 
-			DATE_FORMAT(now(),"%d")>10
-	    THEN
-	   		left(T006.admissionStartDate,6)>=DATE_FORMAT(now(),"%Y%m")
-            AND
-            DATE_FORMAT(now(),"%Y%m")&lt; =ifnull("999999",left(T006.admissionEndDate,6))
-	    ELSE
-	    	left(T006.admissionStartDate,6)>=DATE_FORMAT(DATE_ADD(NOW(), INTERVAL -1 MONTH),"%Y%m")
-			AND
-            DATE_FORMAT(DATE_ADD(NOW(), INTERVAL -1 MONTH),"%Y%m")&lt; =ifnull("999999",left(T006.admissionEndDate,6))
-		END
+			CASE
+			WHEN 
+				DATE_FORMAT(now(),"%d")>10
+		    THEN
+			   		DATE_FORMAT(now(),"%Y%m")>=left(T006.admissionStartDate,6)
+		        AND
+		            DATE_FORMAT(now(),"%Y%m")&lt;=ifnull(left(T006.admissionEndDate,6),"999999")
+		    ELSE
+			    	DATE_FORMAT(DATE_ADD(NOW(), INTERVAL -1 MONTH),"%Y%m")>=left(T006.admissionStartDate,6)
+				AND
+		            DATE_FORMAT(DATE_ADD(NOW(), INTERVAL -1 MONTH),"%Y%m")&lt;=ifnull(left(T006.admissionEndDate,6),"999999")
+			END
 		WHERE
-		 	T018.customerNo ="C001"
+		 	T018.customerNo =#{customerNo}
 		AND
-		CASE 2 
-		WHEN 
-			DATE_FORMAT(now(),"%d")>10
-	    THEN
-	   		T018.attendanceYearAndMonth=DATE_FORMAT(now(),"%Y%m")
-	    ELSE
-	    	T018.attendanceYearAndMonth=DATE_FORMAT(DATE_ADD(NOW(), INTERVAL -1 MONTH),"%Y%m")
-	    END
+			CASE
+			WHEN 
+				DATE_FORMAT(now(),"%d")>10
+		    THEN
+		   		T018.attendanceYearAndMonth=DATE_FORMAT(now(),"%Y%m")
+		    ELSE
+		    	T018.attendanceYearAndMonth=DATE_FORMAT(DATE_ADD(NOW(), INTERVAL -1 MONTH),"%Y%m")
+		    END
 	</select>
 	<update id="deleteCustomerList" parameterType="String">
 		update
@@ -417,6 +444,7 @@
 		customerList = "",
 		mainChargeList = "",
 		departmentCodeList = "",
+		candidateInChargeList = "",
 		updateTime=now(),updateUser=#{updateUser}
 		where
 		StorageListName=#{storageListName} and
@@ -450,6 +478,7 @@
 		customerList = CONCAT(customerList, ',' , #{customerList}),
 		mainChargeList = CONCAT(mainChargeList,#{customerList},':;'),
 		departmentCodeList = CONCAT(departmentCodeList,#{customerList},':;')
+		candidateInChargeList = CONCAT(candidateInChargeList,#{customerList},':;')
 		where 
 		StorageListName = #{storageListName} and transmissionClassificationCode=0;
 	</update>

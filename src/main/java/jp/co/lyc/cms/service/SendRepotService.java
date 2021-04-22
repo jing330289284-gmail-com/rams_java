@@ -21,6 +21,9 @@ public class SendRepotService {
 		return sendRepotMapper.getCustomers();
 	};
 	
+	public SendRepotModel getCandidateInChargeList(SendRepotModel model){
+		return sendRepotMapper.getCandidateInChargeList(model);
+	};
 	public List<SendRepotModel> getTargetEmployees(String customerNo){
 		return sendRepotMapper.getTargetEmployees(customerNo);
 	};
@@ -61,6 +64,9 @@ public class SendRepotService {
 		return sendRepotMapper.salesPersonsListsUpdate(updateModel);
 	}
 	
+	public List<ModelClass> targetEmployeeListsUpdate(SendRepotModel sendRepotModel) {
+		return sendRepotMapper.targetEmployeeListsUpdate(sendRepotModel);
+	}
 	public void customerListUpdate(String storageListName, String customerList) {
 		sendRepotMapper.customerListUpdate(storageListName,customerList);
 	}

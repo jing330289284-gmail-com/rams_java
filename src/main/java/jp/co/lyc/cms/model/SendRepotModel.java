@@ -64,7 +64,9 @@ public class SendRepotModel {
 	String[] ctmNos;
 	String customerList;
 	String mainChargeList;
+	String candidateInChargeList;
 	String departmentCodeList;
+	String employeeStatus;
 	String approvalStatus;
 	String sentReportStatus;
 	public String[] getOldCtmNos() {
@@ -88,6 +90,12 @@ public class SendRepotModel {
 
 	
 	
+	public String getCandidateInChargeList() {
+		return candidateInChargeList;
+	}
+	public void setCandidateInChargeList(String candidateInChargeList) {
+		this.candidateInChargeList = candidateInChargeList;
+	}
 	public String[] getCtmNos() {
 		return ctmNos;
 	}
@@ -534,5 +542,11 @@ public class SendRepotModel {
 	}
 	public void setSentReportStatus(String sentReportStatus) {
 		this.sentReportStatus = sentReportStatus;
+	}
+	public String getEmployeeStatus() {
+		return employeeStatus;
+	}
+	public void setEmployeeStatus(String employeeStatus) {
+		this.employeeStatus = employeeStatus;
 	}
 }
