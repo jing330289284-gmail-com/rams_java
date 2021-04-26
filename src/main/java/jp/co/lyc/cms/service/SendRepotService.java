@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import jp.co.lyc.cms.mapper.SendRepotMapper;
 import jp.co.lyc.cms.model.SendRepotsListName;
+import jp.co.lyc.cms.mapper.SendRepotMapper;
 import jp.co.lyc.cms.model.ModelClass;
 import jp.co.lyc.cms.model.SendRepotModel;
 
@@ -21,7 +21,7 @@ public class SendRepotService {
 		return sendRepotMapper.getCustomers();
 	};
 	
-	public SendRepotModel getCandidateInChargeList(SendRepotModel model){
+	public SendRepotModel getCandidateInChargeList(String model){
 		return sendRepotMapper.getCandidateInChargeList(model);
 	};
 	public List<SendRepotModel> getTargetEmployees(String customerNo){
@@ -64,8 +64,8 @@ public class SendRepotService {
 		return sendRepotMapper.salesPersonsListsUpdate(updateModel);
 	}
 	
-	public List<ModelClass> targetEmployeeListsUpdate(SendRepotModel sendRepotModel) {
-		return sendRepotMapper.targetEmployeeListsUpdate(sendRepotModel);
+	public void targetEmployeeListsUpdate(SendRepotModel sendRepotModel) {
+		sendRepotMapper.targetEmployeeListsUpdate(sendRepotModel);
 	}
 	public void customerListUpdate(String storageListName, String customerList) {
 		sendRepotMapper.customerListUpdate(storageListName,customerList);
