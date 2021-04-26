@@ -283,27 +283,50 @@
 		T009.positionCode,
 		T007.purchasingManagersMail,
 		T007.levelCode,
+		T018.approvalStatus,
+		T018.sentReportStatus,
 		'' AS
 		monthCount,
 		'' AS purchasingManagers2,
 		'' AS positionCode2,
-		'' AS
-		purchasingManagersMail2
+		'' AS purchasingManagersMail2
 		FROM
-		T007CustomerInfo AS T007
+			T007CustomerInfo AS T007
 		LEFT JOIN
-		T009CustomerDepartmentInfo AS T009 ON T007.customerNo =
-		T009.customerNo
+		(SELECT 
+				customerNo,
+				MIN(approvalStatus) approvalStatus,
+				MIN(sentReportStatus) sentReportStatus
+			FROM 
+				T018WorkTotalTime 
+			WHERE
+				customerNo IS NOT NULL
+			AND
+				CASE 1 WHEN DATE_FORMAT(now(),"%d")>10
+		    THEN
+		   		attendanceYearAndMonth=DATE_FORMAT(now(),"%Y%m")
+		    ELSE
+		    	attendanceYearAndMonth=DATE_FORMAT(DATE_ADD(NOW(), INTERVAL -1 MONTH),"%Y%m")
+		    END
+			GROUP BY
+				customerNo
+		)T018
+        ON
+        	T007.customerNo = T018.customerNo
+		LEFT JOIN
+		T009CustomerDepartmentInfo AS T009 
+		ON 
+		T007.customerNo = T009.customerNo
 		AND T007.purchasingManagers = T009.responsiblePerson,
 		(SELECT
 		@rowNo:=-1)
 		AS rowId
 		WHERE
-		T007.customerNo IN
-		<foreach collection="array" index="index" item="item" open="("
-			separator="," close=")">
-			#{item}
-		</foreach>
+			T007.customerNo IN
+			<foreach collection="array" index="index" item="item" open="("
+				separator="," close=")">
+				#{item}
+			</foreach>
 	</select>
 	<select id="getMainChargeList"
 		resultType="jp.co.lyc.cms.model.SendRepotModel">
@@ -318,16 +341,16 @@
 		AND
 			transmissionClassificationCode=0
 	</select>
-		<select id="getCandidateInChargeList"
+		<select id="getCandidateInChargeList"  parameterType="String"
 		resultType="jp.co.lyc.cms.model.SendRepotModel">
 		SELECT
-			candidateInChargeList
+			CandidateInChargeList
 		FROM
 			T021CustomerSendMailStorageList
 		WHERE
-			StorageListName = #{storageListName}  
+			StorageListName = #{storageListName} 
 		AND
-			transmissionClassificationCode=0
+			transmissionClassificationCode = 0
 	</select>
     <insert id="creatList" parameterType="String">
   		INSERT INTO T021CustomerSendMailStorageList
@@ -341,6 +364,7 @@
 		positionCodeList,
 		mainChargeMailList,
 		subChargeMailList,
+		CandidateInChargeList,
 		updateTime,
 		createTime,
 		updateUser)
@@ -355,6 +379,7 @@
 		#{positionCodeList},
 		#{mainChargeMailList},
 		#{subChargeMailList},
+		#{CandidateInChargeList},
 		 NOW(),
 		 NOW(),
 		#{updateUser})
@@ -457,6 +482,7 @@
 			customerList = #{customerList},
 			mainChargeList = #{mainChargeList},
 			departmentCodeList = #{departmentCodeList}
+			candidateInChargeList = #{candidateInChargeList}
 		where
 			StorageListName = #{storageListName}
 		AND

@@ -205,29 +205,33 @@ public class SendRepotController  extends BaseController {
 		}
 	}
 	
+	/**
+	 * @param model
+	 */
 	@RequestMapping(value = "/targetEmployeeListsUpdate", method = RequestMethod.POST)
 	@ResponseBody
 	private void targetEmployeeListsUpdate(@RequestBody SendRepotModel model) {
 		SendRepotModel sendRepotModel = new SendRepotModel();
-		SendRepotService sendRepotService = new SendRepotService();
-		String candidateInChargeList = "";
+		String candidateInChargeList = "";//変更するカスタマの部分を書き直す
 		//CandidateInChargeList(お客様コード:社員ID,社員ID.社員名,社員名;お客様コード:社員ID,社員ID.社員名,社員名;)
 		try {
-			sendRepotModel = sendRepotService.getCandidateInChargeList(model);//過去のリスト取得 
+			sendRepotModel = sendRepotService.getCandidateInChargeList(model.getStorageListName());//過去のリスト取得 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		String[] selectedRowIDs = model.getCandidateInChargeList().split(";");//お客様コード:社員ID,社員ID.社員名,社員名
-		for (int i = 0; i < selectedRowIDs.length; i++) {
-			String[] customerRowNames = selectedRowIDs[i].split(":");
-			if (model.getCustomerNo().equals(customerRowNames[0])) {
-				candidateInChargeList += model.getCustomerNo() + ":" + model.getCandidateInChargeList()+ model.getCandidateInChargeList() + ";";
-			} else {
-				candidateInChargeList += selectedRowIDs[i] + ";";
+		String[] selectedCustemerNo = sendRepotModel.getCandidateInChargeList().split(";");//リスト中にあるすべての　お客様コード:社員ID,社員ID.社員名,社員名
+			for (int i = 0; i < selectedCustemerNo.length; i++) {
+				String[] customerRowNames = selectedCustemerNo[i].split(":");
+				if (model.getCustomerNo().equals(customerRowNames[0])) {
+					//model.getCandidateInChargeList()選択中のお客様コードが一致する場合、社員ID,社員ID.社員名,社員名を書き換える
+					candidateInChargeList += model.getCustomerNo() + ":" + model.getCandidateInChargeList()+ ";";
+				} else {
+					candidateInChargeList += selectedCustemerNo[i] + ";";
+				}
 			}
-		}
+		model.setCandidateInChargeList(candidateInChargeList);
 		try {
-			sendRepotService.targetEmployeeListsUpdate(sendRepotModel);
+			sendRepotService.targetEmployeeListsUpdate(model);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -290,13 +294,16 @@ public class SendRepotController  extends BaseController {
 		String name = "";
 		String mainChargeList = "";
 		String departmentCodeList = "";
+		String candidateInChargeList = "";
 		String[] code = model.getCode().split(",");
 		for (int i = 0; i < code.length; i++) {
 			mainChargeList += code[i] + ":;";
 			departmentCodeList += code[i] + ":;";
+			candidateInChargeList += code[i] + ":;";
 		}
 		model.setMainChargeList(mainChargeList);
 		model.setDepartmentCodeList(departmentCodeList);
+		model.setCandidateInChargeList(candidateInChargeList);
 		try {
 			name = sendRepotService.getMaxStorageListName();
 			model.setName(name);
@@ -342,6 +349,7 @@ public class SendRepotController  extends BaseController {
 		String[] selectedRowNames = sendRepot.getDepartmentCodeList().split(";");
 		String mainChargeList = "";
 		String departmentCodeList = "";
+		String candidateInChargeList = "";
 
 		for (int i = 0; i < selectedRowKeys.length; i++) {
 			for (int j = 0; j < model.getCtmNos().length; j++) {
@@ -368,10 +376,21 @@ public class SendRepotController  extends BaseController {
 				}
 			}
 		}
-		
+		for (int i = 0; i < selectedRowKeys.length; i++) {
+			for (int j = 0; j < model.getCtmNos().length; j++) {
+				String[] customerRowKeys = selectedRowKeys[i].split(":");
+				if (model.getCtmNos()[j].equals(customerRowKeys[0])) {
+					candidateInChargeList += model.getCtmNos()[j] + ":";
+					if (customerRowKeys.length > 1)
+						candidateInChargeList += customerRowKeys[1] + ";";
+					else
+						candidateInChargeList += ";";
+				}
+			}
+		}
 		model.setMainChargeList(mainChargeList);
 		model.setDepartmentCodeList(departmentCodeList);
-
+		model.setCandidateInChargeList(candidateInChargeList);
 
 		try {
 			sendRepotService.deleteCustomerListByNo(model);

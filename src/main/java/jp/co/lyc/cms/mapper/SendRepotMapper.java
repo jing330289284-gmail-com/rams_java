@@ -24,12 +24,12 @@ public interface SendRepotMapper {
 	public List<SendRepotModel> getCustomersByNos(String[] ctmNos);
 	public int deleteList(String storageListName);
 	public int deleteListOfEmp(String storageListName);
-	public SendRepotModel getCandidateInChargeList(SendRepotModel model);
+	public SendRepotModel getCandidateInChargeList(String model);
 	public List<ModelClass> getPurchasingManagersCode(SendRepotModel model);
 	public List<ModelClass> getCustomerDepartmentCode(SendRepotModel model);
 	public List<ModelClass> getSalesPersonsLists();
 	public List<ModelClass> salesPersonsListsUpdate(SendRepotsListName model);
-	public List<ModelClass> targetEmployeeListsUpdate(SendRepotModel sendRepotModel);
+	public void targetEmployeeListsUpdate(SendRepotModel sendRepotModel);
 	public void deleteCustomerListByNo(SendRepotModel model);
 	public int deleteCustomerList(SendRepotModel model);
 	public void customerListUpdate(String storageListName, String customerList);
