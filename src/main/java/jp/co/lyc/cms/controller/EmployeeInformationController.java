@@ -1,0 +1,116 @@
+package jp.co.lyc.cms.controller;
+
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.io.ResolverUtil.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.DataBinder;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import jp.co.lyc.cms.model.EmployeeInformationModel;
+import jp.co.lyc.cms.model.EmployeeModel;
+import jp.co.lyc.cms.model.SituationChangesModel;
+import jp.co.lyc.cms.service.EmployeeInformationService;
+import jp.co.lyc.cms.service.SituationChangesService;
+import jp.co.lyc.cms.util.UtilsController;
+import jp.co.lyc.cms.validation.EmployeeInfoValidation;
+import jp.co.lyc.cms.validation.SituationChangesValidation;
+
+@Controller
+@RequestMapping(value = "/EmployeeInformation")
+public class EmployeeInformationController {
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	String errorsMessage = "";
+	@Autowired
+	EmployeeInformationService employeeInformationService;
+
+	@RequestMapping(value = "/getEmployeeInformation", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> getEmployeeInformation() {
+		logger.info("GetEmployeeInfoController.getEmployeeInfo:" + "検索開始");
+
+		List<EmployeeInformationModel> employeeList = new ArrayList<EmployeeInformationModel>();
+		employeeList = employeeInformationService.getEmployeeInformation();
+		Date date = new Date();
+		for (int i = 0; i < employeeList.size(); i++) {
+			if (employeeList.get(i).getStayPeriod() == null || employeeList.get(i).getStayPeriod().equals("")) {
+				employeeList.get(i).setStayPeriod("");
+			} else {
+				employeeList.get(i)
+						.setStayPeriod(Integer.toString(dateDiff(date, employeeList.get(i).getStayPeriod())));
+			}
+
+			if (employeeList.get(i).getPassportStayPeriod() == null
+					|| employeeList.get(i).getPassportStayPeriod().equals("")) {
+				employeeList.get(i).setPassportStayPeriod("");
+			} else {
+				employeeList.get(i).setPassportStayPeriod(
+						Integer.toString(dateDiff(date, employeeList.get(i).getPassportStayPeriod())));
+			}
+
+			if (employeeList.get(i).getContractDeadline() == null
+					|| employeeList.get(i).getContractDeadline().equals("")) {
+				employeeList.get(i).setContractDeadline("");
+			} else {
+				employeeList.get(i).setContractDeadline(
+						Integer.toString(dateDiff(date, employeeList.get(i).getContractDeadline())));
+			}
+
+			String nowTime = Integer.toString(date.getMonth() + 1) + Integer.toString(date.getDate());
+			nowTime = String.format("%0" + 4 + "d", Integer.parseInt(nowTime));
+			if (employeeList.get(i).getBirthday() == null || employeeList.get(i).getBirthday().equals("")) {
+				employeeList.get(i).setBirthday("");
+			} else {
+				if (Integer.parseInt(nowTime) > Integer.parseInt(employeeList.get(i).getBirthday())) {
+					String year = Integer.toString(date.getYear() + 1901);
+					employeeList.get(i)
+							.setBirthday(Integer.toString(dateDiff(date, year + employeeList.get(i).getBirthday())));
+				} else if (Integer.parseInt(nowTime) < Integer.parseInt(employeeList.get(i).getBirthday())) {
+					String year = Integer.toString(date.getYear() + 1900);
+					employeeList.get(i)
+							.setBirthday(Integer.toString(dateDiff(date, year + employeeList.get(i).getBirthday())));
+				} else {
+					employeeList.get(i).setBirthday("0");
+				}
+			}
+		}
+		Map<String, Object> result = new HashMap<>();
+		result.put("data", employeeList);
+		logger.info("GetEmployeeInfoController.getEmployeeInfo:" + "検索結束");
+		return result;
+	}
+
+	public static int dateDiff(Date dateFrom, String dateToString) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		Date dateTo = null;
+
+		// Date型に変換
+		try {
+			dateTo = sdf.parse(dateToString);
+		} catch (java.text.ParseException e) {
+			e.printStackTrace();
+		}
+
+		// 差分の日数を計算する
+		long dateTimeTo = dateTo.getTime();
+		long dateTimeFrom = dateFrom.getTime();
+		long dayDiff = (dateTimeTo - dateTimeFrom) / (1000 * 60 * 60 * 24);
+
+		// System.out.println("差分日数 : " + dayDiff);
+		return (int) dayDiff;
+	}
+}

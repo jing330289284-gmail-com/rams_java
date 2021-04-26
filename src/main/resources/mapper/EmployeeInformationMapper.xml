@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper
+	namespace="jp.co.lyc.cms.mapper.EmployeeInformationMapper">
+	<resultMap id="detailsInfo"
+		type="jp.co.lyc.cms.model.EmployeeInformationModel" />
+
+
+	<select id="getEmployeeInformation" parameterType="map"
+		resultMap="detailsInfo">
+		SELECT T002.employeeNo,
+		concat(T001.employeeFristName,T001.employeeLastName) as employeeName,
+		right(T002.birthday,4) as birthday,
+		T002.stayPeriod,
+		T002.passportStayPeriod,
+		T002.contractDeadline,
+		T002.DealDistinctioCode
+		FROM T002EmployeeDetail as T002
+		left join T001Employee as T001
+		on
+		T002.employeeNo = T001.employeeNo
+		;
+	</select>
+</mapper>
