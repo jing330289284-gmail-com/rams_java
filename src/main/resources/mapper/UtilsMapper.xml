@@ -491,6 +491,15 @@
 		WHERE
 		transmissionClassificationCode = 0
 	</select>
+	<!--処理区分取得 -->
+	<select id="getDealDistinction"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT
+		DealDistinctioCode CODE,
+		DealDistinctioName NAME
+		FROM
+		M040DealDistinction
+	</select>
 	<!-- お客様担当者取得 取得 -->
 	<select id="getPurchasingManagers"
 		resultType="jp.co.lyc.cms.model.ModelClass">

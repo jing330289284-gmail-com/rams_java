@@ -409,4 +409,11 @@ public interface UtilsMapper {
 	*/
 	public List<ModelClass> getStorageListName0();
 	
+	/**
+	* 処理区分取得
+	* 
+	* @return
+	*/
+	public List<ModelClass> getDealDistinction();
+	
 }

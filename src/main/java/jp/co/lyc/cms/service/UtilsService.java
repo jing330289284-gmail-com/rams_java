@@ -584,4 +584,13 @@ public class UtilsService {
 	public List<ModelClass> getEmployeeNameByOccupationName() {
 		return utilsMapper.getEmployeeNameByOccupationName();
 	}
+
+	/**
+	 * 処理区分取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getDealDistinction() {
+		return utilsMapper.getDealDistinction();
+	}
 }

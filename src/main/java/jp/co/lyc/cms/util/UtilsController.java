@@ -1362,6 +1362,18 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getStorageListName0();
 		return list;
 	}
+	
+	/**
+	 * 処理区分取得
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getDealDistinction", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getDealDistinction() {
+		List<ModelClass> list = utilsService.getDealDistinction();
+		return list;
+	}
 
 	/**
 	 * お客様担当者取得 取得

@@ -1,6 +1,5 @@
 package jp.co.lyc.cms.controller;
 
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -8,27 +7,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.io.ResolverUtil.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.DataBinder;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import jp.co.lyc.cms.model.EmployeeInformationModel;
-import jp.co.lyc.cms.model.EmployeeModel;
-import jp.co.lyc.cms.model.SituationChangesModel;
 import jp.co.lyc.cms.service.EmployeeInformationService;
-import jp.co.lyc.cms.service.SituationChangesService;
-import jp.co.lyc.cms.util.UtilsController;
-import jp.co.lyc.cms.validation.EmployeeInfoValidation;
-import jp.co.lyc.cms.validation.SituationChangesValidation;
 
 @Controller
 @RequestMapping(value = "/EmployeeInformation")
@@ -46,6 +34,7 @@ public class EmployeeInformationController {
 		List<EmployeeInformationModel> employeeList = new ArrayList<EmployeeInformationModel>();
 		employeeList = employeeInformationService.getEmployeeInformation();
 		Date date = new Date();
+		// 日数計算
 		for (int i = 0; i < employeeList.size(); i++) {
 			if (employeeList.get(i).getStayPeriod() == null || employeeList.get(i).getStayPeriod().equals("")) {
 				employeeList.get(i).setStayPeriod("");
@@ -88,8 +77,32 @@ public class EmployeeInformationController {
 				}
 			}
 		}
+
+		// 排序
+		List<EmployeeInformationModel> newEmployeeList = new ArrayList<EmployeeInformationModel>();
+		for (int i = 0; i < employeeList.size(); i++) {
+			if (!employeeList.get(i).getDealDistinctioCode().equals("2")
+					&& ((employeeList.get(i).getStayPeriod().equals("") ? false
+							: Integer.parseInt(employeeList.get(i).getStayPeriod()) <= 90)
+							|| (employeeList.get(i).getBirthday().equals("") ? false
+									: Integer.parseInt(employeeList.get(i).getBirthday()) <= 7)
+							|| (employeeList.get(i).getContractDeadline().equals("") ? false
+									: Integer.parseInt(employeeList.get(i).getContractDeadline()) <= 60))) {
+				newEmployeeList.add(employeeList.get(i));
+				employeeList.remove(i);
+				i--;
+			}
+		}
+
+		for (int i = 0; i < employeeList.size(); i++) {
+			newEmployeeList.add(employeeList.get(i));
+		}
+
+		for (int i = 0; i < newEmployeeList.size(); i++) {
+			newEmployeeList.get(i).setRowNo(i + 1);
+		}
 		Map<String, Object> result = new HashMap<>();
-		result.put("data", employeeList);
+		result.put("data", newEmployeeList);
 		logger.info("GetEmployeeInfoController.getEmployeeInfo:" + "検索結束");
 		return result;
 	}

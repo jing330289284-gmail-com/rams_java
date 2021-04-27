@@ -259,7 +259,7 @@
 			1=1
 		</if>
 		<if test="authorityCode != 4">
-		and T001.authorityCode != 4 
+			and T001.authorityCode != 4
 		</if>
 		<!-- and T006.customerNo = ifnull(#{customer},T006.customerNo) -->
 		and
@@ -297,9 +297,9 @@
 		employeeStatus =
 		ifnull(#{employeeStatus},employeeStatus)
 		<if test="socialInsuranceStatus != null">
-		and
-		socialInsuranceStatus =
-		ifnull(#{socialInsuranceStatus},socialInsuranceStatus)
+			and
+			socialInsuranceStatus =
+			ifnull(#{socialInsuranceStatus},socialInsuranceStatus)
 		</if>
 		GROUP BY
 		employeeNo
@@ -394,7 +394,8 @@
 		updateUser,
 		picInfo,
 		yearsOfExperience,
-		siteRoleCode
+		siteRoleCode,
+		DealDistinctioCode
 		)
 		VALUES(
 		#{employeeNo},
@@ -447,7 +448,8 @@
 		#{updateUser},
 		#{picInfo},
 		#{yearsOfExperience},
-		#{siteRoleCode}
+		#{siteRoleCode},
+		"0"
 		)
 	</insert>
 
@@ -563,7 +565,8 @@
 			retirementYearAndMonth =#{retirementYearAndMonth},
 		</if>
 		<if test="retirementResonClassification!=  null">
-			retirementResonClassification =#{retirementResonClassification},
+			retirementResonClassification
+			=#{retirementResonClassification},
 		</if>
 		<if test="myNumber!=  null">
 			myNumber =#{myNumber},
@@ -645,7 +648,7 @@
 		</if>
 		<if test="socialInsuranceStatus!=  null">
 			socialInsuranceStatus =#{socialInsuranceStatus},
-		</if>			
+		</if>
 		<if test="socialInsuranceNo!=  null">
 			socialInsuranceNo =#{socialInsuranceNo},
 		</if>

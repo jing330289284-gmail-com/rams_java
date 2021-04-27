@@ -14,11 +14,12 @@
 		T002.stayPeriod,
 		T002.passportStayPeriod,
 		T002.contractDeadline,
-		T002.DealDistinctioCode
+		T002.dealDistinctioCode
 		FROM T002EmployeeDetail as T002
 		left join T001Employee as T001
 		on
 		T002.employeeNo = T001.employeeNo
+		order by dealDistinctioCode,employeeNo
 		;
 	</select>
 </mapper>
