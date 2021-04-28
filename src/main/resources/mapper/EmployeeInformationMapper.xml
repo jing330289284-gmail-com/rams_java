@@ -19,7 +19,22 @@
 		left join T001Employee as T001
 		on
 		T002.employeeNo = T001.employeeNo
-		order by dealDistinctioCode,employeeNo
+		order by
+		dealDistinctioCode,employeeNo
 		;
 	</select>
+
+	<update id="updateEmployeeInformation">
+		UPDATE T002EmployeeDetail
+		SET DealDistinctioCode =
+		<foreach collection="list" item="item" index="index"
+	        separator=" " open="case employeeNo" close="end">
+	        when #{item.employeeNo} then #{item.dealDistinctioCode}
+	    </foreach>
+	    where employeeNo in
+	    <foreach collection="list" item="item" index="index"
+	        separator="," open="(" close=")">
+	        #{item.employeeNo}
+	    </foreach>
+	</update>
 </mapper>

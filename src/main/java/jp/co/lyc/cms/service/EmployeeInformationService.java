@@ -21,4 +21,9 @@ public class EmployeeInformationService {
 	public List<EmployeeInformationModel> getEmployeeInformation() {
 		return employeeInformationMapper.getEmployeeInformation();
 	}
+
+	public void updateEmployeeInformation(List<EmployeeInformationModel> list) {
+		employeeInformationMapper.updateEmployeeInformation(list);
+	}
+
 }

@@ -14,6 +14,24 @@ public class EmployeeInformationModel {
 	String passportStayPeriod;// パスポート期限
 	String contractDeadline;// 契約期限
 	String dealDistinctioCode;// 処理区分
+	String[] employeeNos;// 社員・BP番号
+	String[] dealDistinctioCodes;// 処理区分
+
+	public String[] getEmployeeNos() {
+		return employeeNos;
+	}
+
+	public void setEmployeeNos(String[] employeeNos) {
+		this.employeeNos = employeeNos;
+	}
+
+	public String[] getDealDistinctioCodes() {
+		return dealDistinctioCodes;
+	}
+
+	public void setDealDistinctioCodes(String[] dealDistinctioCodes) {
+		this.dealDistinctioCodes = dealDistinctioCodes;
+	}
 
 	public int getRowNo() {
 		return rowNo;
