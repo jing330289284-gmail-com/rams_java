@@ -1,6 +1,5 @@
 package jp.co.lyc.cms.controller;
 
-import java.awt.geom.Area;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -8,8 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.aspectj.weaver.ast.And;
-import org.exolab.castor.xml.Marshaller.NilObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.amazonaws.services.s3.AmazonS3;
-
-import ch.qos.logback.core.property.FileExistsPropertyDefiner;
 import jp.co.lyc.cms.model.EmployeeInformationModel;
 import jp.co.lyc.cms.service.EmployeeInformationService;
-import net.sf.jasperreports.components.barbecue.BarcodeProviders.ShipmentIdentificationNumberProvider;
 
 @Controller
 @RequestMapping(value = "/EmployeeInformation")
@@ -127,15 +120,6 @@ public class EmployeeInformationController {
 			list.add(tempModel);
 		}
 		employeeInformationService.updateEmployeeInformation(list);
-	}
-
-	public static int test(Date dateFrom, String dateToString) {
-		List<EmployeeInformationModel> array = new ArrayList<EmployeeInformationModel>();
-		array.add(null);
-		array.clear();
-		array.add(null);
-		EmployeeInformationModel.getSerialversionuid();
-		return -1;
 	}
 
 	public static int dateDiff(Date dateFrom, String dateToString) {
