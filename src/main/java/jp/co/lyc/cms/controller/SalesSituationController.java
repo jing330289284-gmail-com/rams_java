@@ -14,6 +14,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Month;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -104,9 +105,6 @@ public class SalesSituationController extends BaseController {
 		logger.info("getSalesSituation" + "検索結束");
 
 		for (int i = 0; i < salesSituationList.size(); i++) {
-			// 番号
-			salesSituationList.get(i).setRowNo(i + 1);
-
 			// 社員名
 			if (salesSituationList.get(i).getEmployeeNo().substring(0, 2).equals("BP")) {
 				salesSituationList.get(i).setEmployeeName(salesSituationList.get(i).getEmployeeName() + "(BP)");
@@ -188,7 +186,31 @@ public class SalesSituationController extends BaseController {
 				}
 			}
 		}
-		return salesSituationList;
+
+		List<SalesSituationModel> salesSituationListTemp = new ArrayList<SalesSituationModel>();
+		for (int i = 0; i < salesSituationList.size(); i++) {
+			if (salesSituationList.get(i).getSalesPriorityStatus() != null
+					&& salesSituationList.get(i).getSalesPriorityStatus().equals("1")) {
+				salesSituationListTemp.add(salesSituationList.get(i));
+				salesSituationList.remove(i);
+				i--;
+			}
+		}
+		for (int i = 0; i < salesSituationList.size(); i++) {
+			if (salesSituationList.get(i).getSalesPriorityStatus() != null
+					&& salesSituationList.get(i).getSalesPriorityStatus().equals("2")) {
+				salesSituationListTemp.add(salesSituationList.get(i));
+				salesSituationList.remove(i);
+				i--;
+			}
+		}
+		for (int i = 0; i < salesSituationList.size(); i++) {
+			salesSituationListTemp.add(salesSituationList.get(i));
+		}
+		for (int i = 0; i < salesSituationListTemp.size(); i++) {
+			salesSituationListTemp.get(i).setRowNo(i + 1);
+		}
+		return salesSituationListTemp;
 	}
 
 	// 社員営業され日付
@@ -321,6 +343,16 @@ public class SalesSituationController extends BaseController {
 				resumeInfoTemp.add(salesSituationList.get(0).getResumeName2());
 			}
 			salesSituationList.get(0).setResumeInfoList(resumeInfoTemp);
+
+			if (salesSituationList.get(0).getYearsOfExperience().length() >= 4) {
+				Calendar date = Calendar.getInstance();
+				String year = String.valueOf(date.get(Calendar.YEAR));
+				int tempYear = Integer.parseInt(year)
+						- Integer.parseInt(salesSituationList.get(0).getYearsOfExperience().substring(0, 4)) + 1;
+				if (tempYear < 0)
+					tempYear = 0;
+				salesSituationList.get(0).setYearsOfExperience(String.valueOf(tempYear));
+			}
 		}
 
 		logger.info("updateSalesSituation" + "検索結束");

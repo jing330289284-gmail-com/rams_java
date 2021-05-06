@@ -593,4 +593,13 @@ public class UtilsService {
 	public List<ModelClass> getDealDistinction() {
 		return utilsMapper.getDealDistinction();
 	}
+	
+	/**
+	 * フレームワーク取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getFramework() {
+		return utilsMapper.getFramework();
+	}
 }

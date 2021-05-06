@@ -1376,6 +1376,18 @@ public class UtilsController {
 	}
 
 	/**
+	 *フレームワーク取得
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getFramework", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getFramework() {
+		List<ModelClass> list = utilsService.getFramework();
+		return list;
+	}
+	
+	/**
 	 * お客様担当者取得 取得
 	 * 
 	 * @return

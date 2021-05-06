@@ -377,6 +377,8 @@
 		developLanguage3,
 		developLanguage4,
 		developLanguage5,
+		frameWork1,
+		frameWork2,
 		certification1,
 		certification2,
 		residentCardInfo,
@@ -395,6 +397,7 @@
 		picInfo,
 		yearsOfExperience,
 		siteRoleCode,
+		projectTypeCode,
 		DealDistinctioCode
 		)
 		VALUES(
@@ -431,6 +434,8 @@
 		#{developLanguage3},
 		#{developLanguage4},
 		#{developLanguage5},
+		#{frameWork1},
+		#{frameWork2},
 		#{certification1},
 		#{certification2},
 		#{residentCardInfo},
@@ -449,6 +454,7 @@
 		#{picInfo},
 		#{yearsOfExperience},
 		#{siteRoleCode},
+		#{projectTypeCode},
 		"0"
 		)
 	</insert>

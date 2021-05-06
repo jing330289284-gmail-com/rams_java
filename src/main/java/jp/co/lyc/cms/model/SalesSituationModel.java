@@ -33,6 +33,7 @@ public class SalesSituationModel implements Serializable {
 	String hopeLowestPrice;
 	String hopeHighestPrice;
 	String salesProgressCode;
+	String remark;
 	String remark1;
 	String remark2;
 	String salesStaff;
@@ -89,6 +90,14 @@ public class SalesSituationModel implements Serializable {
 	ArrayList<String> resumeInfoList;
 	ArrayList<String> resumeInfo1List;
 	ArrayList<String> resumeInfo2List;
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
 
 	public String getResumeName1() {
 		return resumeName1;

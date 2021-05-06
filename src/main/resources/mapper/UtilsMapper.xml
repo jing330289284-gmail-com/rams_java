@@ -558,4 +558,13 @@
 		"0"
 		or T002EmployeeDetail.occupationCode = "1";
 	</select>
+
+	<!--フレームワーク -->
+	<select id="getFramework"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT frameWorkCode code,
+		frameWorkName name
+		FROM
+		M043frameWork;
+	</select>
 </mapper>

@@ -126,6 +126,16 @@ public class EmployeeInfoController extends BaseController {
 					intoCompanyYearAndMonth = UtilsController.dateAddOblique(intoCompanyYearAndMonth);
 				}
 				employeeList.get(i).setIntoCompanyYearAndMonth(intoCompanyYearAndMonth);
+
+				// ローマ字
+				if (employeeList.get(i).getAlphabetName() != null) {
+					String alphabetName = employeeList.get(i).getAlphabetName();
+					if (alphabetName.split(" ").length > 2) {
+						String[] temp = alphabetName.split(" ");
+						alphabetName = temp[0] + " " + temp[1] + temp[2];
+						employeeList.get(i).setAlphabetName(alphabetName);
+					}
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -475,6 +485,8 @@ public class EmployeeInfoController extends BaseController {
 		String developLanguage3 = emp.getDevelopLanguage3();// 技術语言3
 		String developLanguage4 = emp.getDevelopLanguage4();// 技術语言4
 		String developLanguage5 = emp.getDevelopLanguage5();// 技術语言5
+		String frameWork1 = emp.getFrameWork1();// フレームワーク1
+		String frameWork2 = emp.getFrameWork2();// フレームワーク2
 		String residenceCode = emp.getResidenceCode();// 在留資格
 		String residenceCardNo = emp.getResidenceCardNo();// 在留カード
 		String stayPeriod = emp.getStayPeriod();// 在留期間
@@ -505,6 +517,7 @@ public class EmployeeInfoController extends BaseController {
 		BpInfoModel bpInfoModel = emp.getBpInfoModel();// bp情報
 		String password = emp.getPassword();// パスワード
 		String siteRoleCode = emp.getSiteRoleCode();// 役割コード
+		String projectTypeCode = emp.getProjectTypeCode();// 分野コード
 
 		// 住所情報開始
 		String postcode = emp.getPostcode();// 郵便番号
@@ -686,6 +699,12 @@ public class EmployeeInfoController extends BaseController {
 		if (developLanguage5 != null) {
 			sendMap.put("developLanguage5", developLanguage5);
 		}
+		if (frameWork1 != null) {
+			sendMap.put("frameWork1", frameWork1);
+		}
+		if (frameWork2 != null) {
+			sendMap.put("frameWork2", frameWork2);
+		}
 		if (kadou != null) {
 			sendMap.put("kadou", kadou);
 		}
@@ -722,6 +741,9 @@ public class EmployeeInfoController extends BaseController {
 		}
 		if (siteRoleCode != null) {
 			sendMap.put("siteRoleCode", siteRoleCode);
+		}
+		if (projectTypeCode != null) {
+			sendMap.put("projectTypeCode", projectTypeCode);
 		}
 		if (employeeName != null) {
 			sendMap.put("employeeName", employeeName);

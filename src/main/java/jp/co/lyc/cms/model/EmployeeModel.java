@@ -50,6 +50,8 @@ public class EmployeeModel implements Serializable {
 	String developLanguage3;// 技術语言3
 	String developLanguage4;// 技術语言4
 	String developLanguage5;// 技術语言5
+	String frameWork1;// フレームワーク1
+	String frameWork2;// フレームワーク2
 	String certification1;// 資格1
 	String certification2;// 資格2
 	String resumeInfo1;// 履歴書情報1
@@ -83,6 +85,7 @@ public class EmployeeModel implements Serializable {
 	String developmentLanguageNo;// 技術
 	String sortToggleSalary;// 給料ソート
 	String siteRoleCode;// 役割コード
+	String projectTypeCode;// 役割コード
 	String kadou;//
 	String visaPeriod;// ビザ期間
 	AccountInfoModel accountInfo;// 口座情報
@@ -99,6 +102,30 @@ public class EmployeeModel implements Serializable {
 
 	public String getRetirementResonClassification() {
 		return retirementResonClassification;
+	}
+
+	public String getFrameWork1() {
+		return frameWork1;
+	}
+
+	public void setFrameWork1(String frameWork1) {
+		this.frameWork1 = frameWork1;
+	}
+
+	public String getFrameWork2() {
+		return frameWork2;
+	}
+
+	public void setFrameWork2(String frameWork2) {
+		this.frameWork2 = frameWork2;
+	}
+
+	public String getProjectTypeCode() {
+		return projectTypeCode;
+	}
+
+	public void setProjectTypeCode(String projectTypeCode) {
+		this.projectTypeCode = projectTypeCode;
 	}
 
 	public void setRetirementResonClassification(String retirementResonClassification) {

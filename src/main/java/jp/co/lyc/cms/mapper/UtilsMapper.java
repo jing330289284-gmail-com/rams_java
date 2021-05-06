@@ -416,4 +416,10 @@ public interface UtilsMapper {
 	*/
 	public List<ModelClass> getDealDistinction();
 	
+	/**
+	* フレームワーク取得
+	* 
+	* @return
+	*/
+	public List<ModelClass> getFramework();
 }
