@@ -254,6 +254,18 @@ public class UtilsService {
 	}
 	
 	/**
+	 * 採番
+	 * 
+	 * @param sendMap
+	 * 
+	 * @return
+	 */
+	public String getNoG(Map<String, String> sendMap) {
+		String no = utilsMapper.getNoG(sendMap);
+		return no;
+	}
+	
+	/**
 	 * レベル
 	 * 
 	 * @return

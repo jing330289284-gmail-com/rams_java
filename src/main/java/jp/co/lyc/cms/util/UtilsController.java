@@ -938,7 +938,44 @@ public class UtilsController {
 			sendMap.put("table", table);
 		}
 		String no = utilsService.getNoNew(sendMap);
-		no = typeName + (Integer.parseInt(no) + 1);
+		if (no != null) {
+			no = typeName + (String.format("%0" + 3 + "d", Integer.parseInt(no) + 1));
+		} else {
+			no = typeName + "001";
+		}
+		return no;
+	}
+
+	/**
+	 * 採番
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getNoG", method = RequestMethod.POST)
+	@ResponseBody
+	public String getNoG(@RequestBody ModelClass mo) {
+		Map<String, String> sendMap = new HashMap<String, String>();
+		// sendMap.put("columnName", "customerNo");
+		// sendMap.put("typeName", "C");
+		// sendMap.put("table", "employee_site_information");
+		String columnName = mo.getColumnName();// 列名は採番番号名です
+		String typeName = mo.getTypeName();// 採番番号のタイプ
+		String table = mo.getName();// テーブル
+		if (columnName != null && columnName.length() != 0) {
+			sendMap.put("columnName", columnName);
+		}
+		if (typeName != null && typeName.length() != 0) {
+			sendMap.put("typeName", typeName);
+		}
+		if (table != null && table.length() != 0) {
+			sendMap.put("table", table);
+		}
+		String no = utilsService.getNoG(sendMap);
+		if (no != null) {
+			no = typeName + (String.format("%0" + 2 + "d", Integer.parseInt(no) + 1));
+		} else {
+			no = typeName + "01";
+		}
 		return no;
 	}
 
@@ -1362,7 +1399,7 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getStorageListName0();
 		return list;
 	}
-	
+
 	/**
 	 * 処理区分取得
 	 * 
@@ -1376,7 +1413,7 @@ public class UtilsController {
 	}
 
 	/**
-	 *フレームワーク取得
+	 * フレームワーク取得
 	 * 
 	 * @return
 	 */
@@ -1386,7 +1423,7 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getFramework();
 		return list;
 	}
-	
+
 	/**
 	 * お客様担当者取得 取得
 	 * 

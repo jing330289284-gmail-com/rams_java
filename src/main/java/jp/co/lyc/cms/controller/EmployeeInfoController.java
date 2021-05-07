@@ -80,6 +80,7 @@ public class EmployeeInfoController extends BaseController {
 		}
 
 		List<EmployeeModel> employeeList = new ArrayList<EmployeeModel>();
+		List<EmployeeModel> employeeListTemp = new ArrayList<EmployeeModel>();
 		List<String> employeeNoList = new ArrayList<String>();
 		try {
 			Map<String, Object> sendMap = getParam(emp);
@@ -100,9 +101,6 @@ public class EmployeeInfoController extends BaseController {
 			 */
 
 			for (int i = 0; i < employeeList.size(); i++) {
-				// 番号
-				employeeList.get(i).setRowNo(i + 1);
-
 				// 電話番号
 				String phoneNo = employeeList.get(i).getPhoneNo();
 				if (phoneNo != null && phoneNo.length() >= 11) {
@@ -137,10 +135,30 @@ public class EmployeeInfoController extends BaseController {
 					}
 				}
 			}
+
+			for (int i = 0; i < employeeList.size(); i++) {
+				if (employeeList.get(i).getEmployeeNo().substring(3, 4).equals("G")) {
+					employeeListTemp.add(employeeList.get(i));
+					employeeList.remove(i);
+					i--;
+				}
+			}
+			for (int i = 0; i < employeeList.size(); i++) {
+				if (!employeeList.get(i).getEmployeeNo().substring(0, 2).equals("BP")) {
+					employeeListTemp.add(employeeList.get(i));
+					employeeList.remove(i);
+					i--;
+				}
+			}
+			employeeListTemp.addAll(employeeList);
+			for (int i = 0; i < employeeListTemp.size(); i++) {
+				// 番号
+				employeeListTemp.get(i).setRowNo(i + 1);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		result.put("data", employeeList);
+		result.put("data", employeeListTemp);
 		logger.info("GetEmployeeInfoController.getEmployeeInfo:" + "検索結束");
 		return result;
 	}
@@ -498,6 +516,7 @@ public class EmployeeInfoController extends BaseController {
 		String employmentInsuranceNo = emp.getEmploymentInsuranceNo();// 雇用保険番号
 		String socialInsuranceStatus = emp.getSocialInsuranceStatus();// 社会保険加入
 		String socialInsuranceNo = emp.getSocialInsuranceNo();// 社会保険番号
+		String socialInsuranceDate = emp.getSocialInsuranceDate();// 社会保険時間
 		String myNumber = emp.getMyNumber();// マイナンバー
 		String resumeName1 = emp.getResumeName1();// 備考１
 		String resumeName2 = emp.getResumeName2();// 備考２
@@ -630,6 +649,9 @@ public class EmployeeInfoController extends BaseController {
 		}
 		if (socialInsuranceNo != null) {
 			sendMap.put("socialInsuranceNo", socialInsuranceNo);
+		}
+		if (socialInsuranceDate != null) {
+			sendMap.put("socialInsuranceDate", socialInsuranceDate);
 		}
 		if (myNumber != null) {
 			sendMap.put("myNumber", myNumber);

@@ -298,7 +298,16 @@
 	<!--採番 -->
 	<select id="getNoNew" resultType="String" parameterType="map"
 		statementType="STATEMENT">
-		SELECT max(right(employeeNo,3)) FROM T001Employee;
+		SELECT max(right(employeeNo,3)) FROM T001Employee
+		WHERE left(right(employeeNo,3),1) != "G";
+	</select>
+	
+	<!--採番 -->
+	<select id="getNoG" resultType="String" parameterType="map"
+		statementType="STATEMENT">
+		SELECT right(employeeNo,2)
+		FROM T001Employee
+		WHERE left(right(employeeNo,3),1) = "G";
 	</select>
 
 	<!-- 支払サイト選択肢 -->

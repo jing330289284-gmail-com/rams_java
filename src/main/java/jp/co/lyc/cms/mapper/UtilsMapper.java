@@ -183,7 +183,7 @@ public interface UtilsMapper {
 	 * 
 	 */
 	public String getNO(Map<String, String> sendMap);
-	
+
 	/**
 	 * 採番
 	 * 
@@ -192,6 +192,15 @@ public interface UtilsMapper {
 	 * 
 	 */
 	public String getNoNew(Map<String, String> sendMap);
+
+	/**
+	 * 採番
+	 * 
+	 * @param sendMap
+	 * 
+	 * 
+	 */
+	public String getNoG(Map<String, String> sendMap);
 
 	/**
 	 * レベル
@@ -402,24 +411,25 @@ public interface UtilsMapper {
 	 * 
 	 */
 	public List<ModelClass> getEmployeeNameByOccupationName();
+
 	/**
-	* 報告書送信対象格納リスト 取得
-	* 
-	* @return
-	*/
+	 * 報告書送信対象格納リスト 取得
+	 * 
+	 * @return
+	 */
 	public List<ModelClass> getStorageListName0();
-	
+
 	/**
-	* 処理区分取得
-	* 
-	* @return
-	*/
+	 * 処理区分取得
+	 * 
+	 * @return
+	 */
 	public List<ModelClass> getDealDistinction();
-	
+
 	/**
-	* フレームワーク取得
-	* 
-	* @return
-	*/
+	 * フレームワーク取得
+	 * 
+	 * @return
+	 */
 	public List<ModelClass> getFramework();
 }

@@ -300,6 +300,10 @@
 			and
 			socialInsuranceStatus =
 			ifnull(#{socialInsuranceStatus},socialInsuranceStatus)
+			<if test="socialInsuranceDate != null">
+				and
+				socialInsuranceDate &lt;= ifnull(#{socialInsuranceDate},socialInsuranceDate)
+			</if>
 		</if>
 		GROUP BY
 		employeeNo
@@ -389,6 +393,7 @@
 		employmentInsuranceNo,
 		socialInsuranceStatus,
 		socialInsuranceNo,
+		socialInsuranceDate,
 		departmentCode,
 		contractDeadline,
 		updateTime,
@@ -446,6 +451,7 @@
 		#{employmentInsuranceNo},
 		#{socialInsuranceStatus},
 		#{socialInsuranceNo},
+		#{socialInsuranceDate},
 		#{departmentCode},
 		#{contractDeadline},
 		NOW(),
@@ -631,6 +637,12 @@
 		<if test="developLanguage5!=  null">
 			developLanguage5 =#{developLanguage5},
 		</if>
+		<if test="frameWork1 != null">
+			frameWork1 =#{frameWork1},
+		</if>
+		<if test="frameWork2 != null">
+			frameWork2 =#{frameWork2},
+		</if>
 		<if test="japaneseCalendar!=  null">
 			japaneseCalendar =#{japaneseCalendar},
 		</if>
@@ -654,6 +666,12 @@
 		</if>
 		<if test="socialInsuranceStatus!=  null">
 			socialInsuranceStatus =#{socialInsuranceStatus},
+		</if>
+		<if test="socialInsuranceDate!=  null">
+			socialInsuranceDate =#{socialInsuranceDate},
+		</if>
+		<if test="projectTypeCode !=  null">
+			projectTypeCode =#{projectTypeCode},
 		</if>
 		<if test="socialInsuranceNo!=  null">
 			socialInsuranceNo =#{socialInsuranceNo},
@@ -748,6 +766,8 @@
 		T002.developLanguage3,
 		T002.developLanguage4,
 		T002.developLanguage5,
+		T002.frameWork1,
+		T002.frameWork2,
 		T002.certification1,
 		T002.certification2,
 		T002.residentCardInfo,
@@ -761,8 +781,10 @@
 		T002.employmentInsuranceNo,
 		T002.socialInsuranceStatus,
 		T002.socialInsuranceNo,
+		T002.socialInsuranceDate,
 		T002.departmentCode,
 		T002.siteRoleCode,
+		T002.projectTypeCode,
 		T002.updateTime,
 		T002.createTime,
 		T002.updateUser,

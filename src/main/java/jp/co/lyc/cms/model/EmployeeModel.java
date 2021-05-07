@@ -67,6 +67,7 @@ public class EmployeeModel implements Serializable {
 	String employmentInsuranceNo;// 雇用保険番号
 	String socialInsuranceStatus;// 社会保険加入
 	String socialInsuranceNo;// 社会保険番号
+	String socialInsuranceDate;// 社会保険番号
 	String departmentCode;// 部署コード
 	String stationName;// 寄り駅
 	String oldPassword;// 古いパスワード
@@ -102,6 +103,14 @@ public class EmployeeModel implements Serializable {
 
 	public String getRetirementResonClassification() {
 		return retirementResonClassification;
+	}
+
+	public String getSocialInsuranceDate() {
+		return socialInsuranceDate;
+	}
+
+	public void setSocialInsuranceDate(String socialInsuranceDate) {
+		this.socialInsuranceDate = socialInsuranceDate;
 	}
 
 	public String getFrameWork1() {
