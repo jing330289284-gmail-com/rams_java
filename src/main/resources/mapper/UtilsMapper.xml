@@ -299,15 +299,38 @@
 	<select id="getNoNew" resultType="String" parameterType="map"
 		statementType="STATEMENT">
 		SELECT max(right(employeeNo,3)) FROM T001Employee
-		WHERE left(right(employeeNo,3),1) != "G";
+		WHERE
+		left(right(employeeNo,3),1) != "G"
+		and left(employeeNo,2) != "SP"
+		and
+		left(employeeNo,2) != "BP";
 	</select>
-	
+
 	<!--採番 -->
 	<select id="getNoG" resultType="String" parameterType="map"
 		statementType="STATEMENT">
-		SELECT right(employeeNo,2)
+		SELECT max(right(employeeNo,2))
 		FROM T001Employee
-		WHERE left(right(employeeNo,3),1) = "G";
+		WHERE
+		left(right(employeeNo,3),1) = "G";
+	</select>
+
+	<!--採番 -->
+	<select id="getNoBP" resultType="String" parameterType="map"
+		statementType="STATEMENT">
+		SELECT max(right(employeeNo,3))
+		FROM T001Employee
+		WHERE
+		left(employeeNo,2) = "BP";
+	</select>
+
+	<!--採番 -->
+	<select id="getNoSP" resultType="String" parameterType="map"
+		statementType="STATEMENT">
+		SELECT max(right(employeeNo,3))
+		FROM T001Employee
+		WHERE
+		left(employeeNo,2) = "SP";
 	</select>
 
 	<!-- 支払サイト選択肢 -->
@@ -533,7 +556,7 @@
 		typteOfContractCode CODE,
 		typteOfContractName NAME
 		FROM
-		M41TypteOfContract;
+		M041TypteOfContract;
 	</select>
 
 	<!-- 退職理由区分取得 -->
@@ -543,7 +566,7 @@
 		retirementResonClassificationCode CODE,
 		retirementResonClassificationName NAME
 		FROM
-		M42RetirementResonClassification;
+		M042RetirementResonClassification;
 	</select>
 
 	<!-- 社員名(営業、管理者) -->

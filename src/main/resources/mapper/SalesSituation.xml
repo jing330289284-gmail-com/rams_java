@@ -186,6 +186,73 @@
 		WHERE admissionEndDate is not null and left(admissionEndDate,6) &lt;
 		#{sysDate}
 
+
+		UNION
+
+		SELECT
+		T006EmployeeSiteInfo.employeeNo,
+		T006EmployeeSiteInfo.admissionStartDate,
+		T006EmployeeSiteInfo.admissionEndDate,
+		T006EmployeeSiteInfo.unitPrice,
+		ifnull(T006EmployeeSiteInfo.customerNo, '') AS customer,
+		T006EmployeeSiteInfo.customerNo as nowCustomer,
+		CONCAT(T001Employee.employeeFristName,T001Employee.employeeLastName)
+		AS
+		employeeName,
+		M013Station.stationName AS nearestStation,
+		T015ResumeManagement.resumeInfo1,
+		T015ResumeManagement.resumeInfo2,
+		T015ResumeManagement.resumeName1,
+		T015ResumeManagement.resumeName2,
+		T002EmployeeDetail.developLanguage1,
+		T002EmployeeDetail.developLanguage2,
+		T002EmployeeDetail.developLanguage3,
+		T002EmployeeDetail.developLanguage4,
+		T002EmployeeDetail.developLanguage5,
+		M012SiteRole.siteRoleName AS
+		siteRoleCode
+		FROM
+		T006EmployeeSiteInfo AS T006EmployeeSiteInfo
+		LEFT JOIN
+		T001Employee AS T001Employee
+		on
+		T006EmployeeSiteInfo.employeeNo =
+		T001Employee.employeeNo
+		LEFT JOIN
+		T003AddressInfo AS T003AddressInfo
+		on
+		T006EmployeeSiteInfo.employeeNo = T003AddressInfo.employeeNo
+		LEFT JOIN
+		M013Station AS M013Station
+		on T003AddressInfo.stationCode =
+		M013Station.stationCode
+		LEFT JOIN T015ResumeManagement AS
+		T015ResumeManagement
+		on T006EmployeeSiteInfo.employeeNo =
+		T015ResumeManagement.employeeNo
+		LEFT JOIN T002EmployeeDetail AS
+		T002EmployeeDetail
+		on T006EmployeeSiteInfo.employeeNo =
+		T002EmployeeDetail.employeeNo
+		LEFT JOIN M012SiteRole AS
+		M012SiteRole
+		on
+		T002EmployeeDetail.siteRoleCode =
+		M012SiteRole.siteRoleCode
+		INNER JOIN
+		(SELECT
+		employeeNo,
+		MAX(admissionStartDate) AS admissionStartDate
+		FROM
+		T006EmployeeSiteInfo
+		GROUP BY
+		employeeNo) AS tempT
+		ON
+		T006EmployeeSiteInfo.employeeNo = tempT.employeeNo
+		AND
+		T006EmployeeSiteInfo.admissionStartDate = tempT.admissionStartDate
+		WHERE scheduledEndDate = #{sysDate}
+
 		UNION
 
 		SELECT

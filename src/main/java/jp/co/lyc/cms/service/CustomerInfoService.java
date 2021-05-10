@@ -419,6 +419,7 @@ public class CustomerInfoService {
 		sendMap.put("positionCode", customerInfoMod.getPositionCode());
 		sendMap.put("updateUser", customerInfoMod.getUpdateUser());
 		sendMap.put("customerNo", customerInfoMod.getCustomerNo());
+		sendMap.put("basicContract", customerInfoMod.getBasicContract());
 		return sendMap;
 	}
 }

@@ -54,7 +54,14 @@ public class CustomerInfoModel {
 	String capitalStockBack;
 	String customerDepartmentCode;
 	String positionCode;
-	
+	String basicContract;
+
+	public String getBasicContract() {
+		return basicContract;
+	}
+	public void setBasicContract(String basicContract) {
+		this.basicContract = basicContract;
+	}
 	public String getCustomerDepartmentCode() {
 		return customerDepartmentCode;
 	}

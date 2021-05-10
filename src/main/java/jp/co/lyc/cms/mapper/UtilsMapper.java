@@ -203,6 +203,24 @@ public interface UtilsMapper {
 	public String getNoG(Map<String, String> sendMap);
 
 	/**
+	 * 採番
+	 * 
+	 * @param sendMap
+	 * 
+	 * 
+	 */
+	public String getNoSP(Map<String, String> sendMap);
+
+	/**
+	 * 採番
+	 * 
+	 * @param sendMap
+	 * 
+	 * 
+	 */
+	public String getNoBP(Map<String, String> sendMap);
+
+	/**
 	 * レベル
 	 * 
 	 * @return

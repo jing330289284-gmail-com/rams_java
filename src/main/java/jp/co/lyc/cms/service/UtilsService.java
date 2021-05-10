@@ -266,6 +266,30 @@ public class UtilsService {
 	}
 	
 	/**
+	 * 採番
+	 * 
+	 * @param sendMap
+	 * 
+	 * @return
+	 */
+	public String getNoSP(Map<String, String> sendMap) {
+		String no = utilsMapper.getNoSP(sendMap);
+		return no;
+	}
+	
+	/**
+	 * 採番
+	 * 
+	 * @param sendMap
+	 * 
+	 * @return
+	 */
+	public String getNoBP(Map<String, String> sendMap) {
+		String no = utilsMapper.getNoBP(sendMap);
+		return no;
+	}
+	
+	/**
 	 * レベル
 	 * 
 	 * @return
