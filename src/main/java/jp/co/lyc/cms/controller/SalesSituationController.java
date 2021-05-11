@@ -208,6 +208,30 @@ public class SalesSituationController extends BaseController {
 				i--;
 			}
 		}
+
+		for (int i = 0; i < salesSituationList.size(); i++) {
+			if (!salesSituationList.get(i).getEmployeeNo().substring(0, 2).equals("SC")
+					&& !salesSituationList.get(i).getEmployeeNo().substring(0, 2).equals("SP")
+					&& !salesSituationList.get(i).getEmployeeNo().substring(0, 2).equals("BP")) {
+				salesSituationListTemp.add(salesSituationList.get(i));
+				salesSituationList.remove(i);
+				i--;
+			}
+		}
+		for (int i = 0; i < salesSituationList.size(); i++) {
+			if (salesSituationList.get(i).getEmployeeNo().substring(0, 2).equals("SC")) {
+				salesSituationListTemp.add(salesSituationList.get(i));
+				salesSituationList.remove(i);
+				i--;
+			}
+		}
+		for (int i = 0; i < salesSituationList.size(); i++) {
+			if (salesSituationList.get(i).getEmployeeNo().substring(0, 2).equals("SP")) {
+				salesSituationListTemp.add(salesSituationList.get(i));
+				salesSituationList.remove(i);
+				i--;
+			}
+		}
 		for (int i = 0; i < salesSituationList.size(); i++) {
 			salesSituationListTemp.add(salesSituationList.get(i));
 		}
