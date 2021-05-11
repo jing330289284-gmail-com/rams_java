@@ -21,7 +21,21 @@ public class MasterModel implements Serializable {
 	String topCustomerAbbreviation;
 	String url;
 	String updateUser;// ログインの社員
+	int row;
 	
+	
+	public int getRow() {
+		return row;
+	}
+
+	public void setRow(int row) {
+		this.row = row;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	public String getTopCustomerNo() {
 		return topCustomerNo;
 	}

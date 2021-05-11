@@ -113,7 +113,7 @@
 		LEFT JOIN M012SiteRole AS
 		M012SiteRole
 		on
-		T002EmployeeDetail.siteRoleCode =
+		T006EmployeeSiteInfo.siteRoleCode =
 		M012SiteRole.siteRoleCode where
 		admissionEndDate is not
 		null and
@@ -169,7 +169,7 @@
 		LEFT JOIN M012SiteRole AS
 		M012SiteRole
 		on
-		T002EmployeeDetail.siteRoleCode =
+		T006EmployeeSiteInfo.siteRoleCode =
 		M012SiteRole.siteRoleCode
 		INNER JOIN
 		(SELECT
@@ -237,7 +237,7 @@
 		LEFT JOIN M012SiteRole AS
 		M012SiteRole
 		on
-		T002EmployeeDetail.siteRoleCode =
+		T006EmployeeSiteInfo.siteRoleCode =
 		M012SiteRole.siteRoleCode
 		INNER JOIN
 		(SELECT
@@ -303,7 +303,7 @@
 		LEFT JOIN M012SiteRole AS
 		M012SiteRole
 		on
-		T002EmployeeDetail.siteRoleCode =
+		T006EmployeeSiteInfo.siteRoleCode =
 		M012SiteRole.siteRoleCode
 		INNER
 		JOIN(SELECT

@@ -1,6 +1,7 @@
 package jp.co.lyc.cms.service;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -39,6 +40,11 @@ public class MasterInsertService {
 	public boolean insertMaster(HashMap<String, Object> sendMap) {
 		try {
 			masterInsertMapper.insertMaster(sendMap);
+			List<MasterModel> tempList = masterInsertMapper.getMaster(sendMap);
+			for (int i = 0; i < tempList.size(); i++) {
+				tempList.get(i).setRow(i);
+			}
+			masterInsertMapper.orderMaster(tempList, sendMap);
 		} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			e.printStackTrace();

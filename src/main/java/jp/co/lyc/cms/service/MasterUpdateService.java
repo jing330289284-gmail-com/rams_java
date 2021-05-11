@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
+import jp.co.lyc.cms.mapper.MasterInsertMapper;
 import jp.co.lyc.cms.mapper.MasterUpdateMapper;
 import jp.co.lyc.cms.model.CompanySystemSetModel;
 import jp.co.lyc.cms.model.MasterModel;
@@ -18,6 +19,9 @@ public class MasterUpdateService {
 
 	@Autowired
 	MasterUpdateMapper masterUpdateMapper;
+	
+	@Autowired
+	MasterInsertMapper masterInsertMapper;
 
 	/**
 	 * 修正
@@ -28,6 +32,11 @@ public class MasterUpdateService {
 	public boolean updateMaster(HashMap<String, Object> sendMap) {
 		try {
 			masterUpdateMapper.updateMaster(sendMap);
+			List<MasterModel> tempList = masterInsertMapper.getMaster(sendMap);
+			for (int i = 0; i < tempList.size(); i++) {
+				tempList.get(i).setRow(i);
+			}
+			masterInsertMapper.orderMaster(tempList, sendMap);
 		} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			e.printStackTrace();

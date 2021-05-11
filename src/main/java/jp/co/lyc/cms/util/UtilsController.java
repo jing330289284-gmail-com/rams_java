@@ -96,9 +96,9 @@ public class UtilsController {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/getNationalitys", method = RequestMethod.POST)
+	@RequestMapping(value = "/getNationality", method = RequestMethod.POST)
 	@ResponseBody
-	public List<ModelClass> getNationalitys() {
+	public List<ModelClass> getNationality() {
 		List<ModelClass> list = utilsService.getNationalitys();
 		return list;
 	}
@@ -108,9 +108,9 @@ public class UtilsController {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/getSalesPuttern", method = RequestMethod.POST)
+	@RequestMapping(value = "/getSalesPattern", method = RequestMethod.POST)
 	@ResponseBody
-	public List<ModelClass> getSalesPuttern() {
+	public List<ModelClass> getSalesPattern() {
 		List<ModelClass> list = utilsService.getSalesPuttern();
 		return list;
 	}
@@ -120,9 +120,9 @@ public class UtilsController {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/getSpecialPoint", method = RequestMethod.POST)
+	@RequestMapping(value = "/getSpecialPointCondition", method = RequestMethod.POST)
 	@ResponseBody
-	public List<ModelClass> getSpecialPoint() {
+	public List<ModelClass> getSpecialPointCondition() {
 		List<ModelClass> list = utilsService.getSpecialPoint();
 		return list;
 	}
@@ -162,9 +162,9 @@ public class UtilsController {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/getStaffForms", method = RequestMethod.POST)
+	@RequestMapping(value = "/getEmployeeForm", method = RequestMethod.POST)
 	@ResponseBody
-	public List<ModelClass> getStaffForms() {
+	public List<ModelClass> getEmployeeForm() {
 		List<ModelClass> list = utilsService.getStaffForms();
 		return list;
 	}
@@ -247,9 +247,9 @@ public class UtilsController {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/getDepartmentMasterDrop", method = RequestMethod.POST)
+	@RequestMapping(value = "/getCustomerDepartment", method = RequestMethod.POST)
 	@ResponseBody
-	public List<ModelClass> getDepartmentMasterDrop() {
+	public List<ModelClass> getCustomerDepartment() {
 		List<ModelClass> list = utilsService.getDepartmentMasterDrop();
 		return list;
 	}
@@ -703,9 +703,9 @@ public class UtilsController {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/getSiteMaster", method = RequestMethod.POST)
+	@RequestMapping(value = "/getSiteRole", method = RequestMethod.POST)
 	@ResponseBody
-	public List<ModelClass> getSiteMaster() {
+	public List<ModelClass> getSiteRole() {
 		List<ModelClass> list = utilsService.getSiteMaster();
 		return list;
 	}

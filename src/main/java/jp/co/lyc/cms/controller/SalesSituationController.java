@@ -108,6 +108,10 @@ public class SalesSituationController extends BaseController {
 			// 社員名
 			if (salesSituationList.get(i).getEmployeeNo().substring(0, 2).equals("BP")) {
 				salesSituationList.get(i).setEmployeeName(salesSituationList.get(i).getEmployeeName() + "(BP)");
+			} else if (salesSituationList.get(i).getEmployeeNo().substring(0, 2).equals("SP")) {
+				salesSituationList.get(i).setEmployeeName(salesSituationList.get(i).getEmployeeName() + "(SP)");
+			} else if (salesSituationList.get(i).getEmployeeNo().substring(0, 2).equals("SC")) {
+				salesSituationList.get(i).setEmployeeName(salesSituationList.get(i).getEmployeeName() + "(SC)");
 			}
 
 			// 履歴書名前
