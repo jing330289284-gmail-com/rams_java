@@ -22,8 +22,16 @@ public class MasterModel implements Serializable {
 	String url;
 	String updateUser;// ログインの社員
 	int row;
-	
-	
+	int codeNo;
+
+	public int getCodeNo() {
+		return codeNo;
+	}
+
+	public void setCodeNo(int codeNo) {
+		this.codeNo = codeNo;
+	}
+
 	public int getRow() {
 		return row;
 	}

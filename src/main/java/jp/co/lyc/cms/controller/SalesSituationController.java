@@ -191,7 +191,11 @@ public class SalesSituationController extends BaseController {
 			}
 		}
 
+		// データソート
 		List<SalesSituationModel> salesSituationListTemp = new ArrayList<SalesSituationModel>();
+		List<SalesSituationModel> salesProgressCodeListTemp = new ArrayList<SalesSituationModel>();
+
+		// 優先順ソート
 		for (int i = 0; i < salesSituationList.size(); i++) {
 			if (salesSituationList.get(i).getSalesPriorityStatus() != null
 					&& salesSituationList.get(i).getSalesPriorityStatus().equals("1")) {
@@ -209,6 +213,7 @@ public class SalesSituationController extends BaseController {
 			}
 		}
 
+		// 社員区分ソート
 		for (int i = 0; i < salesSituationList.size(); i++) {
 			if (!salesSituationList.get(i).getEmployeeNo().substring(0, 2).equals("SC")
 					&& !salesSituationList.get(i).getEmployeeNo().substring(0, 2).equals("SP")
@@ -235,6 +240,27 @@ public class SalesSituationController extends BaseController {
 		for (int i = 0; i < salesSituationList.size(); i++) {
 			salesSituationListTemp.add(salesSituationList.get(i));
 		}
+
+		// 進捗ソート
+		for (int i = 0; i < salesSituationListTemp.size(); i++) {
+			if (salesSituationListTemp.get(i).getSalesProgressCode() != null) {
+				if ((salesSituationListTemp.get(i).getSalesProgressCode().equals("4")
+						|| salesSituationListTemp.get(i).getSalesProgressCode().equals("1")
+						|| salesSituationListTemp.get(i).getSalesProgressCode().equals("2"))
+						&& !(salesSituationListTemp.get(i).getSalesPriorityStatus() != null
+								&& (salesSituationListTemp.get(i).getSalesPriorityStatus().equals("1")
+										|| salesSituationListTemp.get(i).getSalesPriorityStatus().equals("2")))) {
+					salesProgressCodeListTemp.add(salesSituationListTemp.get(i));
+					salesSituationListTemp.remove(i);
+					i--;
+				}
+			}
+		}
+		for (int i = 0; i < salesProgressCodeListTemp.size(); i++) {
+			salesSituationListTemp.add(salesProgressCodeListTemp.get(i));
+		}
+
+		// 行番号付け
 		for (int i = 0; i < salesSituationListTemp.size(); i++) {
 			salesSituationListTemp.get(i).setRowNo(i + 1);
 		}

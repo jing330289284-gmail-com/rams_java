@@ -19,6 +19,7 @@
 		left join T001Employee as T001
 		on
 		T002.employeeNo = T001.employeeNo
+		where left(T002.employeeNo,2) != "BP"
 		order by
 		dealDistinctioCode,employeeNo
 		;

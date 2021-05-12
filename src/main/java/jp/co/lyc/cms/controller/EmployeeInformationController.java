@@ -81,19 +81,92 @@ public class EmployeeInformationController {
 
 		// 排序
 		List<EmployeeInformationModel> newEmployeeList = new ArrayList<EmployeeInformationModel>();
+		List<EmployeeInformationModel> TempList = new ArrayList<EmployeeInformationModel>();
+		/*
+		 * for (int i = 0; i < employeeList.size(); i++) { if
+		 * (!employeeList.get(i).getDealDistinctioCode().equals("2") &&
+		 * ((employeeList.get(i).getStayPeriod().equals("") ? false :
+		 * Integer.parseInt(employeeList.get(i).getStayPeriod()) <= 90) ||
+		 * (employeeList.get(i).getBirthday().equals("") ? false :
+		 * Integer.parseInt(employeeList.get(i).getBirthday()) <= 7) ||
+		 * (employeeList.get(i).getContractDeadline().equals("") ? false :
+		 * Integer.parseInt(employeeList.get(i).getContractDeadline()) <= 60))) {
+		 * newEmployeeList.add(employeeList.get(i)); employeeList.remove(i); i--; } }
+		 */
+
+		// 在留カード
 		for (int i = 0; i < employeeList.size(); i++) {
 			if (!employeeList.get(i).getDealDistinctioCode().equals("2")
-					&& ((employeeList.get(i).getStayPeriod().equals("") ? false
-							: Integer.parseInt(employeeList.get(i).getStayPeriod()) <= 90)
-							|| (employeeList.get(i).getBirthday().equals("") ? false
-									: Integer.parseInt(employeeList.get(i).getBirthday()) <= 7)
-							|| (employeeList.get(i).getContractDeadline().equals("") ? false
-									: Integer.parseInt(employeeList.get(i).getContractDeadline()) <= 60))) {
-				newEmployeeList.add(employeeList.get(i));
+					&& (employeeList.get(i).getStayPeriod().equals("") ? false
+							: Integer.parseInt(employeeList.get(i).getStayPeriod()) <= 90)) {
+				TempList.add(employeeList.get(i));
 				employeeList.remove(i);
 				i--;
 			}
 		}
+		for (int x = 0; x < TempList.size() - 1; x++) {
+			for (int y = x + 1; y < TempList.size(); y++) {
+				if (Integer.parseInt(TempList.get(x).getStayPeriod()) > Integer
+						.parseInt(TempList.get(y).getStayPeriod())) {
+					EmployeeInformationModel temp = TempList.get(x);
+					TempList.set(x, TempList.get(y));
+					TempList.set(y, temp);
+				}
+			}
+		}
+		for (int i = 0; i < TempList.size(); i++) {
+			newEmployeeList.add(TempList.get(i));
+		}
+		TempList.clear();
+
+		// 誕生日
+		for (int i = 0; i < employeeList.size(); i++) {
+			if (!employeeList.get(i).getDealDistinctioCode().equals("2")
+					&& (employeeList.get(i).getBirthday().equals("") ? false
+							: Integer.parseInt(employeeList.get(i).getBirthday()) <= 7)) {
+				TempList.add(employeeList.get(i));
+				employeeList.remove(i);
+				i--;
+			}
+		}
+		for (int x = 0; x < TempList.size() - 1; x++) {
+			for (int y = x + 1; y < TempList.size(); y++) {
+				if (Integer.parseInt(TempList.get(x).getBirthday()) > Integer.parseInt(TempList.get(y).getBirthday())) {
+					EmployeeInformationModel temp = TempList.get(x);
+					TempList.set(x, TempList.get(y));
+					TempList.set(y, temp);
+				}
+			}
+		}
+		for (int i = 0; i < TempList.size(); i++) {
+			newEmployeeList.add(TempList.get(i));
+		}
+		TempList.clear();
+
+		// 契約
+		for (int i = 0; i < employeeList.size(); i++) {
+			if (!employeeList.get(i).getDealDistinctioCode().equals("2")
+					&& (employeeList.get(i).getContractDeadline().equals("") ? false
+							: Integer.parseInt(employeeList.get(i).getContractDeadline()) <= 60)) {
+				TempList.add(employeeList.get(i));
+				employeeList.remove(i);
+				i--;
+			}
+		}
+		for (int x = 0; x < TempList.size() - 1; x++) {
+			for (int y = x + 1; y < TempList.size(); y++) {
+				if (Integer.parseInt(TempList.get(x).getContractDeadline()) > Integer
+						.parseInt(TempList.get(y).getContractDeadline())) {
+					EmployeeInformationModel temp = TempList.get(x);
+					TempList.set(x, TempList.get(y));
+					TempList.set(y, temp);
+				}
+			}
+		}
+		for (int i = 0; i < TempList.size(); i++) {
+			newEmployeeList.add(TempList.get(i));
+		}
+		TempList.clear();
 
 		for (int i = 0; i < employeeList.size(); i++) {
 			newEmployeeList.add(employeeList.get(i));

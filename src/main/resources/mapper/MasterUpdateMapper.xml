@@ -10,7 +10,7 @@
 	<!-- 明細取得 -->
 	<select id="getMasterInfo" parameterType="map"
 		resultType="jp.co.lyc.cms.model.MasterModel">
-		SELECT ${columnCode} code,${columnName} data FROM ${master}
+		SELECT ${columnCode} codeNo,${columnName} data FROM ${master} order by ${columnName}
 	</select>
 
 	<!-- 銀行明細取得 -->

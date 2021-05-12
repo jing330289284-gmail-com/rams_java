@@ -14,7 +14,7 @@
 		T009.customerDepartmentCode,
 		T009.positionCode,
 		T007.purchasingManagersMail,
-		T007.levelCode,
+		M008.levelName as levelCode, 
 		'' AS monthCount,
 		'' AS
 		purchasingManagers2,
@@ -22,6 +22,9 @@
 		'' AS purchasingManagersMail2
 		FROM
 		T007CustomerInfo AS T007
+		LEFT JOIN M008Level AS M008
+		on T007.levelCode != ""
+		and T007.levelCode = M008.levelCode
 		LEFT JOIN
 		T009CustomerDepartmentInfo AS
 		T009 ON T007.customerNo = T009.customerNo
@@ -182,7 +185,7 @@
 		T009.customerDepartmentCode,
 		T009.positionCode,
 		T007.purchasingManagersMail,
-		T007.levelCode,
+		M008.levelName AS levelCode,
 		'' AS
 		monthCount,
 		'' AS purchasingManagers2,
@@ -191,6 +194,9 @@
 		purchasingManagersMail2
 		FROM
 		T007CustomerInfo AS T007
+		LEFT JOIN M008Level AS M008
+		on T007.levelCode != ""
+		and T007.levelCode = M008.levelCode
 		LEFT JOIN
 		T009CustomerDepartmentInfo AS T009 ON T007.customerNo =
 		T009.customerNo

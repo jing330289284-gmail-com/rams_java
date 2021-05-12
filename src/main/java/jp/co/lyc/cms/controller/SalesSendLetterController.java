@@ -47,6 +47,14 @@ public class SalesSendLetterController extends BaseController {
 			e.printStackTrace();
 		}
 		logger.info("getCustomers" + "検索結束");
+
+		for (int i = 0; i < salesCustomersList.size(); i++) {
+			if (salesCustomersList.get(i).getLevelCode() != null) {
+				salesCustomersList.get(i).setCustomerName(salesCustomersList.get(i).getCustomerName() + " ("
+						+ salesCustomersList.get(i).getLevelCode() + ")");
+			}
+		}
+
 		return salesCustomersList;
 	}
 
@@ -261,6 +269,13 @@ public class SalesSendLetterController extends BaseController {
 			}
 		}
 
+		for (int i = 0; i < salesCustomersList.size(); i++) {
+			if (salesCustomersList.get(i).getLevelCode() != null) {
+				salesCustomersList.get(i).setCustomerName(salesCustomersList.get(i).getCustomerName() + " ("
+						+ salesCustomersList.get(i).getLevelCode() + ")");
+			}
+		}
+
 		return salesCustomersList;
 	}
 
@@ -312,7 +327,7 @@ public class SalesSendLetterController extends BaseController {
 				}
 			}
 		}
-		
+
 		for (int i = 0; i < selectedRowNames.length; i++) {
 			for (int j = 0; j < model.getCtmNos().length; j++) {
 				String[] customerRowNames = selectedRowNames[i].split(":");
@@ -325,10 +340,9 @@ public class SalesSendLetterController extends BaseController {
 				}
 			}
 		}
-		
+
 		model.setMainChargeList(mainChargeList);
 		model.setDepartmentCodeList(departmentCodeList);
-
 
 		try {
 			salesSendLetterService.deleteCustomerListByNo(model);

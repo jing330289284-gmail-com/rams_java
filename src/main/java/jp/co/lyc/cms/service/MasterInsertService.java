@@ -40,11 +40,11 @@ public class MasterInsertService {
 	public boolean insertMaster(HashMap<String, Object> sendMap) {
 		try {
 			masterInsertMapper.insertMaster(sendMap);
-			List<MasterModel> tempList = masterInsertMapper.getMaster(sendMap);
-			for (int i = 0; i < tempList.size(); i++) {
-				tempList.get(i).setRow(i);
-			}
-			masterInsertMapper.orderMaster(tempList, sendMap);
+			/*
+			 * List<MasterModel> tempList = masterInsertMapper.getMaster(sendMap); for (int
+			 * i = 0; i < tempList.size(); i++) { tempList.get(i).setRow(i); }
+			 * masterInsertMapper.orderMaster(tempList, sendMap);
+			 */
 		} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			e.printStackTrace();

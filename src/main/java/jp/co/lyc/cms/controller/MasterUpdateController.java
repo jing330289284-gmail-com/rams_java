@@ -59,6 +59,9 @@ public class MasterUpdateController extends BaseController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		for (int i = 0; i < masterList.size(); i++) {
+			masterList.get(i).setRow(i + 1);
+		}
 		return masterList;
 	}
 
@@ -135,7 +138,7 @@ public class MasterUpdateController extends BaseController {
 		} else {
 			sendMap.put("master", masterModel.getMaster());
 			sendMap.put("columnCode", masterModel.getMaster().toString().substring(4) + "code");
-			sendMap.put("code", masterModel.getCode());
+			sendMap.put("code", masterModel.getCodeNo());
 			return masterUpdateService.deleteMaster(sendMap);
 		}
 	}
@@ -167,7 +170,7 @@ public class MasterUpdateController extends BaseController {
 			return masterUpdateService.updateBankMaster(sendMap);
 		} else {
 			sendMap.put("master", masterModel.getMaster());
-			sendMap.put("code", masterModel.getCode());
+			sendMap.put("code", masterModel.getCodeNo());
 			sendMap.put("data", masterModel.getData());
 			sendMap.put("columnName", masterModel.getMaster().substring(4) + "name");
 			sendMap.put("columnCode", masterModel.getMaster().toString().substring(4) + "code");

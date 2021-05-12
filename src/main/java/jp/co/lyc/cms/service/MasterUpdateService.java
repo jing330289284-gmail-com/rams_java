@@ -20,8 +20,9 @@ public class MasterUpdateService {
 	@Autowired
 	MasterUpdateMapper masterUpdateMapper;
 	
-	@Autowired
-	MasterInsertMapper masterInsertMapper;
+	/*
+	 * @Autowired MasterInsertMapper masterInsertMapper;
+	 */
 
 	/**
 	 * 修正
@@ -32,11 +33,11 @@ public class MasterUpdateService {
 	public boolean updateMaster(HashMap<String, Object> sendMap) {
 		try {
 			masterUpdateMapper.updateMaster(sendMap);
-			List<MasterModel> tempList = masterInsertMapper.getMaster(sendMap);
-			for (int i = 0; i < tempList.size(); i++) {
-				tempList.get(i).setRow(i);
-			}
-			masterInsertMapper.orderMaster(tempList, sendMap);
+			/*
+			 * List<MasterModel> tempList = masterInsertMapper.getMaster(sendMap); for (int
+			 * i = 0; i < tempList.size(); i++) { tempList.get(i).setRow(i); }
+			 * masterInsertMapper.orderMaster(tempList, sendMap);
+			 */
 		} catch (Exception e) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			e.printStackTrace();
@@ -136,25 +137,16 @@ public class MasterUpdateService {
 
 	public List<MasterModel> getMasterInfo(HashMap<String, String> sendMap) {
 		List<MasterModel> masterList = masterUpdateMapper.getMasterInfo(sendMap);
-		for (int i = 0; i < masterList.size(); i++) {
-			masterList.get(i).setCode((i + 1) + "");
-		}
 		return masterList;
 	}
 
 	public List<MasterModel> getBankMasterInfo(HashMap<String, String> sendMap) {
 		List<MasterModel> masterList = masterUpdateMapper.getBankMasterInfo(sendMap);
-		for (int i = 0; i < masterList.size(); i++) {
-			masterList.get(i).setCode((i + 1) + "");
-		}
 		return masterList;
 	}
 
 	public List<MasterModel> getCustomerMasterInfo(HashMap<String, String> sendMap) {
 		List<MasterModel> masterList = masterUpdateMapper.getCustomerMasterInfo(sendMap);
-		for (int i = 0; i < masterList.size(); i++) {
-			masterList.get(i).setCode((i + 1) + "");
-		}
 		return masterList;
 	}
 
