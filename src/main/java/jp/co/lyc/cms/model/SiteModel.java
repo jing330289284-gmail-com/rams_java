@@ -13,6 +13,7 @@ public class SiteModel {
 	String customerNo;// お客様コード
 	String topCustomerNo;// トップお客様コード
 	String developLanguageCode;// 開発言語コード
+	String developLanguageCode2;// 開発言語コード
 	String unitPrice;// 単価
 	String developLanguageName;// 開発言語名称
 	String siteRoleCode;// 役割コード
@@ -41,6 +42,14 @@ public class SiteModel {
 	String dailyCalculationStatus;// 日割計算区分
 	String workState;// 現場状態
 	String typteOfContractCode; // 契約形態
+
+	public String getDevelopLanguageCode2() {
+		return developLanguageCode2;
+	}
+
+	public void setDevelopLanguageCode2(String developLanguageCode2) {
+		this.developLanguageCode2 = developLanguageCode2;
+	}
 
 	public String getTypteOfContractCode() {
 		return typteOfContractCode;

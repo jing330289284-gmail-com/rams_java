@@ -5,10 +5,10 @@
 	<insert id="siteInsert" parameterType="map">
 		insert into
 		T006EmployeeSiteInfo(employeeNo,customerNo,topCustomerNo,admissionStartDate,admissionEndDate,
-		siteManager,systemName,developLanguageCode,stationCode,unitPrice,siteRoleCode,payOffRange1,payOffRange2,relatedEmployees,
+		siteManager,systemName,developLanguageCode,developLanguageCode2,stationCode,unitPrice,siteRoleCode,payOffRange1,payOffRange2,relatedEmployees,
 		levelCode,typeOfIndustryCode,nonSitePeriod,nonSiteMonths,dailyCalculationStatus,workState,scheduledEndDate,typteOfContractCode,remark,updateTime,createTime,updateUser)
 		values(#{employeeNo},#{customerNo},#{topCustomerNo},#{admissionStartDate},#{admissionEndDate},
-		#{siteManager},#{systemName},#{developLanguageCode},#{location},#{unitPrice},#{siteRoleCode},#{payOffRange1},
+		#{siteManager},#{systemName},#{developLanguageCode},#{developLanguageCode2},#{location},#{unitPrice},#{siteRoleCode},#{payOffRange1},
 		#{payOffRange2},#{relatedEmployees},#{levelCode},#{typeOfIndustryCode},#{nonSitePeriod},#{nonSiteMonths},#{dailyCalculationStatus},
 		#{workState},#{scheduledEndDate},#{typteOfContractCode},#{remark},now(),now(),#{updateUser})
 	</insert>
@@ -19,7 +19,7 @@
 		set
 		employeeNo=#{employeeNo},customerNo=#{customerNo},topCustomerNo=#{topCustomerNo},admissionStartDate=#{admissionStartDate},
 		admissionEndDate=#{admissionEndDate},siteManager=#{siteManager},systemName=#{systemName},
-		developLanguageCode=#{developLanguageCode},stationCode=#{location},unitPrice=#{unitPrice},
+		developLanguageCode=#{developLanguageCode},developLanguageCode2=#{developLanguageCode2},stationCode=#{location},unitPrice=#{unitPrice},
 		siteRoleCode=#{siteRoleCode},payOffRange1=#{payOffRange1},payOffRange2=#{payOffRange2},
 		relatedEmployees=#{relatedEmployees},levelCode=#{levelCode},typeOfIndustryCode=#{typeOfIndustryCode},
 		nonSitePeriod=#{nonSitePeriod},nonSiteMonths=#{nonSiteMonths},dailyCalculationStatus=#{dailyCalculationStatus},
@@ -47,16 +47,21 @@
 		a.customerNo,
 		a.topCustomerNo,
 		a.developLanguageCode,
+		a.developLanguageCode2,
 		a.typeOfIndustryCode,
 		a.typteOfContractCode,
 		a.scheduledEndDate,
 		b.siteRoleName,
 		IF
-		( c.customerAbbreviation IS NULL OR trim( c.customerAbbreviation ) =
-		'', c.customerName, c.customerAbbreviation ) AS customerName,
+		(
+		c.customerAbbreviation IS NULL OR trim( c.customerAbbreviation ) =
+		'',
+		c.customerName, c.customerAbbreviation ) AS customerName,
 		IF
-		( d.topCustomerAbbreviation IS NULL OR trim( d.topCustomerAbbreviation
-		) = '', d.topCustomerName, d.topCustomerAbbreviation ) AS
+		(
+		d.topCustomerAbbreviation IS NULL OR trim( d.topCustomerAbbreviation
+		)
+		= '', d.topCustomerName, d.topCustomerAbbreviation ) AS
 		topCustomerName,
 		e.developLanguageName,
 		f.stationName AS location,
@@ -64,19 +69,28 @@
 		i.typeOfIndustryName
 		FROM
 		T006EmployeeSiteInfo a
-		LEFT JOIN M012SiteRole b ON a.siteRoleCode = b.siteRoleCode AND
-		a.siteRoleCode != ""
+		LEFT JOIN
+		M012SiteRole b ON a.siteRoleCode = b.siteRoleCode AND
+		a.siteRoleCode !=
+		""
 		LEFT JOIN T007CustomerInfo c ON a.customerNo = c.customerNo AND
 		a.customerNo != ""
-		LEFT JOIN T008TopCustomerInfo d ON a.topCustomerNo = d.topCustomerNo AND
+		LEFT JOIN T008TopCustomerInfo d ON a.topCustomerNo =
+		d.topCustomerNo AND
 		a.topCustomerNo != ""
-		LEFT JOIN M011DevelopLanguage e ON a.developLanguageCode =
-		e.developLanguageCode AND a.developLanguageCode != ""
-		LEFT JOIN M013Station f ON a.stationCode = f.stationCode AND a.stationCode
+		LEFT JOIN M011DevelopLanguage
+		e ON a.developLanguageCode =
+		e.developLanguageCode AND
+		a.developLanguageCode != ""
+		LEFT JOIN M013Station f ON a.stationCode =
+		f.stationCode AND a.stationCode
 		!= ""
-		LEFT JOIN M008Level h ON a.levelCode = h.levelCode AND a.levelCode != ""
-		LEFT JOIN M022TypeOfIndustry i ON a.typeOfIndustryCode =
-		i.typeOfIndustryCode AND a.typeOfIndustryCode != ""
+		LEFT JOIN M008Level h ON
+		a.levelCode = h.levelCode AND a.levelCode != ""
+		LEFT JOIN
+		M022TypeOfIndustry i ON a.typeOfIndustryCode =
+		i.typeOfIndustryCode AND
+		a.typeOfIndustryCode != ""
 		WHERE
 		1 =1
 		<if test="employeeNo!= null and employeeNo!= ''">

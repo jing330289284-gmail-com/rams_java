@@ -285,6 +285,7 @@ public class SiteInfoController extends BaseController {
 		String payOffRange2 = siteModel.getPayOffRange2();
 		String systemName = siteModel.getSystemName();
 		String developLanguageCode = siteModel.getDevelopLanguageCode();
+		String developLanguageCode2 = siteModel.getDevelopLanguageCode2();
 		String relatedEmployees = toRelatedEmployees(siteModel.getRelated1Employees(), siteModel.getRelated2Employees(),
 				siteModel.getRelated3Employees(), siteModel.getRelated4Employees());
 		String levelCode = siteModel.getLevelCode();
@@ -344,6 +345,9 @@ public class SiteInfoController extends BaseController {
 		}
 		if (developLanguageCode != null && developLanguageCode.length() != 0) {
 			sendMap.put("developLanguageCode", developLanguageCode);
+		}
+		if (developLanguageCode2 != null && developLanguageCode2.length() != 0) {
+			sendMap.put("developLanguageCode2", developLanguageCode2);
 		}
 		if (relatedEmployees != null && relatedEmployees.length() != 0) {
 			sendMap.put("relatedEmployees", relatedEmployees);
