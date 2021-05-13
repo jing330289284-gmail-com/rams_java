@@ -37,44 +37,29 @@ public class EmployeeInformationController {
 		Date date = new Date();
 		// 日数計算
 		for (int i = 0; i < employeeList.size(); i++) {
-			if (employeeList.get(i).getStayPeriod() == null || employeeList.get(i).getStayPeriod().equals("")) {
-				employeeList.get(i).setStayPeriod("");
-			} else {
+			if (!(employeeList.get(i).getStayPeriod() == null || employeeList.get(i).getStayPeriod().equals(""))) {
+				employeeList.get(i).setStayPeriodDate(dateDiff(date, employeeList.get(i).getStayPeriod()));
+			}
+			if (!(employeeList.get(i).getPassportStayPeriod() == null
+					|| employeeList.get(i).getPassportStayPeriod().equals(""))) {
 				employeeList.get(i)
-						.setStayPeriod(Integer.toString(dateDiff(date, employeeList.get(i).getStayPeriod())));
+						.setPassportStayPeriodDate(dateDiff(date, employeeList.get(i).getPassportStayPeriod()));
 			}
 
-			if (employeeList.get(i).getPassportStayPeriod() == null
-					|| employeeList.get(i).getPassportStayPeriod().equals("")) {
-				employeeList.get(i).setPassportStayPeriod("");
-			} else {
-				employeeList.get(i).setPassportStayPeriod(
-						Integer.toString(dateDiff(date, employeeList.get(i).getPassportStayPeriod())));
-			}
-
-			if (employeeList.get(i).getContractDeadline() == null
-					|| employeeList.get(i).getContractDeadline().equals("")) {
-				employeeList.get(i).setContractDeadline("");
-			} else {
-				employeeList.get(i).setContractDeadline(
-						Integer.toString(dateDiff(date, employeeList.get(i).getContractDeadline())));
+			if (!(employeeList.get(i).getContractDeadline() == null
+					|| employeeList.get(i).getContractDeadline().equals(""))) {
+				employeeList.get(i).setContractDeadlineDate(dateDiff(date, employeeList.get(i).getContractDeadline()));
 			}
 
 			String nowTime = Integer.toString(date.getMonth() + 1) + Integer.toString(date.getDate());
 			nowTime = String.format("%0" + 4 + "d", Integer.parseInt(nowTime));
-			if (employeeList.get(i).getBirthday() == null || employeeList.get(i).getBirthday().equals("")) {
-				employeeList.get(i).setBirthday("");
-			} else {
+			if (!(employeeList.get(i).getBirthday() == null || employeeList.get(i).getBirthday().equals(""))) {
 				if (Integer.parseInt(nowTime) > Integer.parseInt(employeeList.get(i).getBirthday())) {
 					String year = Integer.toString(date.getYear() + 1901);
-					employeeList.get(i)
-							.setBirthday(Integer.toString(dateDiff(date, year + employeeList.get(i).getBirthday())));
+					employeeList.get(i).setBirthdayDate(dateDiff(date, year + employeeList.get(i).getBirthday()));
 				} else if (Integer.parseInt(nowTime) < Integer.parseInt(employeeList.get(i).getBirthday())) {
 					String year = Integer.toString(date.getYear() + 1900);
-					employeeList.get(i)
-							.setBirthday(Integer.toString(dateDiff(date, year + employeeList.get(i).getBirthday())));
-				} else {
-					employeeList.get(i).setBirthday("0");
+					employeeList.get(i).setBirthdayDate(dateDiff(date, year + employeeList.get(i).getBirthday()));
 				}
 			}
 		}
@@ -97,13 +82,15 @@ public class EmployeeInformationController {
 		// 在留カード
 		for (int i = 0; i < employeeList.size(); i++) {
 			if (!employeeList.get(i).getDealDistinctioCode().equals("2")
-					&& (employeeList.get(i).getStayPeriod().equals("") ? false
+					&& (employeeList.get(i).getStayPeriod() == null || employeeList.get(i).getStayPeriod().equals("")
+							? false
 							: Integer.parseInt(employeeList.get(i).getStayPeriod()) <= 90)) {
 				TempList.add(employeeList.get(i));
 				employeeList.remove(i);
 				i--;
 			}
 		}
+		
 		for (int x = 0; x < TempList.size() - 1; x++) {
 			for (int y = x + 1; y < TempList.size(); y++) {
 				if (Integer.parseInt(TempList.get(x).getStayPeriod()) > Integer
@@ -114,6 +101,7 @@ public class EmployeeInformationController {
 				}
 			}
 		}
+		
 		for (int i = 0; i < TempList.size(); i++) {
 			newEmployeeList.add(TempList.get(i));
 		}
@@ -146,7 +134,7 @@ public class EmployeeInformationController {
 		// 契約
 		for (int i = 0; i < employeeList.size(); i++) {
 			if (!employeeList.get(i).getDealDistinctioCode().equals("2")
-					&& (employeeList.get(i).getContractDeadline().equals("") ? false
+					&& (employeeList.get(i).getContractDeadline() == null || employeeList.get(i).getContractDeadline().equals("") ? false
 							: Integer.parseInt(employeeList.get(i).getContractDeadline()) <= 60)) {
 				TempList.add(employeeList.get(i));
 				employeeList.remove(i);

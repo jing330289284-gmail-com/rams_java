@@ -7,6 +7,10 @@ public class EmployeeInformationModel {
 	 */
 	private static final long serialVersionUID = -2028159323401651353L;
 	int rowNo;// 番号
+	int stayPeriodDate;// 在留期間
+	int passportStayPeriodDate;// パスポート期限
+	int contractDeadlineDate;// 契約期限
+	int birthdayDate; // 誕生日
 	String employeeNo;// 社員・BP番号
 	String employeeName;// 社員・BP名
 	String birthday;// 誕生日
@@ -16,6 +20,38 @@ public class EmployeeInformationModel {
 	String dealDistinctioCode;// 処理区分
 	String[] employeeNos;// 社員・BP番号
 	String[] dealDistinctioCodes;// 処理区分
+
+	public int getStayPeriodDate() {
+		return stayPeriodDate;
+	}
+
+	public void setStayPeriodDate(int stayPeriodDate) {
+		this.stayPeriodDate = stayPeriodDate;
+	}
+
+	public int getPassportStayPeriodDate() {
+		return passportStayPeriodDate;
+	}
+
+	public void setPassportStayPeriodDate(int passportStayPeriodDate) {
+		this.passportStayPeriodDate = passportStayPeriodDate;
+	}
+
+	public int getContractDeadlineDate() {
+		return contractDeadlineDate;
+	}
+
+	public void setContractDeadlineDate(int contractDeadlineDate) {
+		this.contractDeadlineDate = contractDeadlineDate;
+	}
+
+	public int getBirthdayDate() {
+		return birthdayDate;
+	}
+
+	public void setBirthdayDate(int birthdayDate) {
+		this.birthdayDate = birthdayDate;
+	}
 
 	public String[] getEmployeeNos() {
 		return employeeNos;
