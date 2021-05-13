@@ -421,6 +421,9 @@ public class CustomerInfoSearchController {
 		if (!UtilsCheckMethod.isNullOrEmpty(customerInfoMod.getCapitalStockBack())) {
 			sendMap.put("capitalStockBack", customerInfoMod.getCapitalStockBack());
 		}
+		if (!UtilsCheckMethod.isNullOrEmpty(customerInfoMod.getBasicContract())) {
+			sendMap.put("basicContract", customerInfoMod.getBasicContract());
+		}
 		logger.info("CustomerInfoController.onloadPage:" + "検索終了");
 		return customerInfoSearchService.SelectCustomerInfo(sendMap);
 	}

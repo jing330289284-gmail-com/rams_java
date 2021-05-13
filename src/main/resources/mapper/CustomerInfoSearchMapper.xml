@@ -38,24 +38,32 @@
 		T007.businessStartDate
 		FROM
 		T007CustomerInfo AS T007
-		LEFT JOIN T006EmployeeSiteInfo AS T006 ON
+		LEFT JOIN
+		T006EmployeeSiteInfo AS T006 ON
 		T007.customerNo =
 		T006.customerNo
-		LEFT JOIN T001Employee AS T001 ON
+		LEFT
+		JOIN T001Employee AS T001 ON
 		T006.employeeNo = T001.employeeNo
-		LEFT JOIN M013Station AS M013 ON
-		T007.stationCode = M013.stationCode
-		AND T007.stationCode != ""
 		LEFT JOIN
-		M013Station AS M013SITE ON T006.stationCode =
+		M013Station AS M013 ON
+		T007.stationCode = M013.stationCode
+		AND
+		T007.stationCode != ""
+		LEFT JOIN
+		M013Station AS M013SITE ON
+		T006.stationCode =
 		M013SITE.stationCode
 		AND
 		T006.stationCode != ""
-		LEFT JOIN M008Level AS M008 ON T007.levelCode =
+		LEFT
+		JOIN M008Level AS M008 ON T007.levelCode =
 		M008.levelCode
-		AND T007.levelCode != ""
+		AND
+		T007.levelCode != ""
 		LEFT JOIN M007CompanyNature AS
-		M007 ON T007.companyNatureCode =
+		M007 ON
+		T007.companyNatureCode =
 		M007.companyNatureCode
 		AND
 		T007.companyNatureCode != ""
@@ -100,6 +108,9 @@
 		<if test="capitalStockBack != null">
 			AND CAST(T007.capitalStock AS decimal) &lt;=
 			#{capitalStockBack}
+		</if>
+		<if test="basicContract != null">
+			AND T007.basicContract = #{basicContract}
 		</if>
 		ORDER BY
 		T007.customerNo

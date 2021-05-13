@@ -66,6 +66,7 @@
 		T007.businessStartDate,
 		T007.capitalStock,
 		T007.basicContract,
+		T007.remark,
 		T008.topCustomerName
 		FROM
 		T007CustomerInfo AS T007
@@ -97,6 +98,7 @@
 		customerDepartmentCode,
 		positionCode,
 		basicContract,
+		remark,
 		updateTime,
 		createTime,
 		updateUser
@@ -121,6 +123,7 @@
 		#{customerDepartmentCode},
 		#{positionCode},
 		#{basicContract},
+		#{remark},
 		NOW(),
 		NOW(),
 		#{updateUser})
@@ -185,6 +188,9 @@
 		</if>
 		<if test="basicContract != null">
 			basicContract = #{basicContract},
+		</if>
+		<if test="remark != null">
+			remark = #{remark},
 		</if>
 		updateTime = NOW(),
 		updateUser = #{updateUser}

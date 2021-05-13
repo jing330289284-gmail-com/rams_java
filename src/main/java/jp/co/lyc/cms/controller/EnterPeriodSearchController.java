@@ -29,18 +29,18 @@ public class EnterPeriodSearchController extends BaseController {
 	EnterPeriodSearchService enterPeriodSearchService;
 	@Autowired
 	EnterPeriodSearchMapper enterPeriodSearchMapper;
-	
+
 	String errorsMessage = "";
 
 	/**
 	 * 検索ボタン
+	 * 
 	 * @param enterPeriodSearchModel
 	 * @return
 	 */
 	@RequestMapping(value = "/selectEnterPeriodData", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> selectEnterPeriodData(@RequestBody 
-			EnterPeriodSearchModel enterPeriodSearchModel) {
+	public Map<String, Object> selectEnterPeriodData(@RequestBody EnterPeriodSearchModel enterPeriodSearchModel) {
 		errorsMessage = "";
 		logger.info("EnterPeriodSearchController.selectEnterPeriodData:" + "検索開始");
 		DataBinder binder = new DataBinder(enterPeriodSearchModel);
@@ -59,20 +59,30 @@ public class EnterPeriodSearchController extends BaseController {
 		}
 		HashMap<String, String> sendMap = enterPeriodSearchService.getSendMap(enterPeriodSearchModel);
 		ArrayList<EnterPeriodSearchModel> resultList = new ArrayList<EnterPeriodSearchModel>();
-		if(enterPeriodSearchModel.getEnterPeriodKbn().equals("0")) {
-			//区分は入社の場合
+		if (enterPeriodSearchModel.getEnterPeriodKbn().equals("0")) {
+			// 区分は入社の場合
 			resultList = enterPeriodSearchService.selectEnterPeriodDataForIntoCompany(sendMap);
-		}else if(enterPeriodSearchModel.getEnterPeriodKbn().equals("1")){
-			//区分は入場の場合
+		} else if (enterPeriodSearchModel.getEnterPeriodKbn().equals("1")) {
+			// 区分は入場の場合
 			resultList = enterPeriodSearchService.selectEnterPeriodDataForIntoSite(sendMap);
-		}else if(enterPeriodSearchModel.getEnterPeriodKbn().equals("2")){
-			//区分はボーナスの場合
+		} else if (enterPeriodSearchModel.getEnterPeriodKbn().equals("2")) {
+			// 区分はボーナスの場合
 			resultList = enterPeriodSearchService.selectScheduleOfBonusAmount(sendMap);
-		}		
-		if(resultList == null || resultList.size() == 0) {
+		}
+
+		if (resultList == null || resultList.size() == 0) {
 			errorsMessage += "今月データがないです";// エラーメッセージ
 			result.put("errorsMessage", errorsMessage);// エラーメッセージ
-		}else {
+		} else {
+			for (int i = 0; i < resultList.size(); i++) {
+				if (resultList.get(i).getEmployeeNo() != null
+						&& (resultList.get(i).getEmployeeNo().substring(0, 2).equals("BP")
+								|| resultList.get(i).getEmployeeNo().substring(0, 2).equals("SP")
+								|| resultList.get(i).getEmployeeNo().substring(0, 2).equals("SC"))) {
+					resultList.get(i).setEmployeeName(resultList.get(i).getEmployeeName() + "("
+							+ resultList.get(i).getEmployeeNo().substring(0, 2) + ")");
+				}
+			}
 			result.put("enterPeriodList", resultList);
 		}
 		logger.info("EnterPeriodSearchController.selectEnterPeriodData:" + "検索終了");
