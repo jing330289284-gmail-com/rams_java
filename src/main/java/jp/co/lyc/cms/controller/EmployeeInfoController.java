@@ -305,6 +305,30 @@ public class EmployeeInfoController extends BaseController {
 	}
 
 	/**
+	 * 社員情報csv出力
+	 * 
+	 * @param employeeNo
+	 * @return boolean
+	 */
+	@RequestMapping(value = "/csvDownload", method = RequestMethod.POST)
+	@ResponseBody
+	public List<EmployeeModel> csvDownload(@RequestBody List<String> employeeNo) throws Exception {
+		logger.info("GetEmployeeInfoController.csvDownload:" + "csvDownloadによると、社員情報csvを出力開始");
+		List<EmployeeModel> employeeList = new ArrayList<EmployeeModel>();
+		String[] title = { "社員区分", "社員番号", "社員名", "カタカナ", "ローマ字", "性別", "年齢", "国籍", "社員形式", "採用区分", "部署", "職種", "社内メール",
+				"携帯電話", "卒業年月", "来日年月", "入社年月", "経験年数", "役割", "契約期限", "郵便番号", "都道府県", "以後住所", "最寄り駅", "在留資格", "在留カード番号",
+				"在留カード期限", "パスポート期限", "パスポート番号", "マイナンバー", "雇用保険加入", "雇用保険番号", "社会保険加入", "社会保険番号", "出入国開始", "終了",
+				"退職年月", "退職区分" };
+		EmployeeModel emp = new EmployeeModel();
+		emp.setEmployeeNo("LYC168");
+		Map<String, Object> sendMap = getParam(emp);
+		EmployeeModel model = employeeInfoService.getEmployeeByEmployeeNo(sendMap);
+		employeeList.add(model);
+		logger.info("GetEmployeeInfoController.csvDownload:" + "csvDownloadによると、社員情報csvを出力結束");
+		return employeeList;
+	}
+
+	/**
 	 * 社員情報を修正
 	 * 
 	 * @param emp

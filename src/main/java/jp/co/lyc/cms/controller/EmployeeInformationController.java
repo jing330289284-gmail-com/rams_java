@@ -84,24 +84,23 @@ public class EmployeeInformationController {
 			if (!employeeList.get(i).getDealDistinctioCode().equals("2")
 					&& (employeeList.get(i).getStayPeriod() == null || employeeList.get(i).getStayPeriod().equals("")
 							? false
-							: Integer.parseInt(employeeList.get(i).getStayPeriod()) <= 90)) {
+							: (employeeList.get(i).getStayPeriodDate()) <= 90)) {
 				TempList.add(employeeList.get(i));
 				employeeList.remove(i);
 				i--;
 			}
 		}
-		
+
 		for (int x = 0; x < TempList.size() - 1; x++) {
 			for (int y = x + 1; y < TempList.size(); y++) {
-				if (Integer.parseInt(TempList.get(x).getStayPeriod()) > Integer
-						.parseInt(TempList.get(y).getStayPeriod())) {
+				if ((TempList.get(x).getStayPeriodDate()) > (TempList.get(y).getStayPeriodDate())) {
 					EmployeeInformationModel temp = TempList.get(x);
 					TempList.set(x, TempList.get(y));
 					TempList.set(y, temp);
 				}
 			}
 		}
-		
+
 		for (int i = 0; i < TempList.size(); i++) {
 			newEmployeeList.add(TempList.get(i));
 		}
@@ -111,7 +110,7 @@ public class EmployeeInformationController {
 		for (int i = 0; i < employeeList.size(); i++) {
 			if (!employeeList.get(i).getDealDistinctioCode().equals("2")
 					&& (employeeList.get(i).getBirthday().equals("") ? false
-							: Integer.parseInt(employeeList.get(i).getBirthday()) <= 7)) {
+							: (employeeList.get(i).getBirthdayDate()) <= 7)) {
 				TempList.add(employeeList.get(i));
 				employeeList.remove(i);
 				i--;
@@ -119,7 +118,7 @@ public class EmployeeInformationController {
 		}
 		for (int x = 0; x < TempList.size() - 1; x++) {
 			for (int y = x + 1; y < TempList.size(); y++) {
-				if (Integer.parseInt(TempList.get(x).getBirthday()) > Integer.parseInt(TempList.get(y).getBirthday())) {
+				if ((TempList.get(x).getBirthdayDate()) > (TempList.get(y).getBirthdayDate())) {
 					EmployeeInformationModel temp = TempList.get(x);
 					TempList.set(x, TempList.get(y));
 					TempList.set(y, temp);
@@ -134,8 +133,9 @@ public class EmployeeInformationController {
 		// 契約
 		for (int i = 0; i < employeeList.size(); i++) {
 			if (!employeeList.get(i).getDealDistinctioCode().equals("2")
-					&& (employeeList.get(i).getContractDeadline() == null || employeeList.get(i).getContractDeadline().equals("") ? false
-							: Integer.parseInt(employeeList.get(i).getContractDeadline()) <= 60)) {
+					&& (employeeList.get(i).getContractDeadline() == null
+							|| employeeList.get(i).getContractDeadline().equals("") ? false
+									: (employeeList.get(i).getContractDeadlineDate()) <= 60)) {
 				TempList.add(employeeList.get(i));
 				employeeList.remove(i);
 				i--;
@@ -143,8 +143,7 @@ public class EmployeeInformationController {
 		}
 		for (int x = 0; x < TempList.size() - 1; x++) {
 			for (int y = x + 1; y < TempList.size(); y++) {
-				if (Integer.parseInt(TempList.get(x).getContractDeadline()) > Integer
-						.parseInt(TempList.get(y).getContractDeadline())) {
+				if ((TempList.get(x).getContractDeadlineDate()) > (TempList.get(y).getContractDeadlineDate())) {
 					EmployeeInformationModel temp = TempList.get(x);
 					TempList.set(x, TempList.get(y));
 					TempList.set(y, temp);

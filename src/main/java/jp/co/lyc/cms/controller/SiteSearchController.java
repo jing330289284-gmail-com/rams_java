@@ -124,6 +124,7 @@ public class SiteSearchController {
 	// 现场信息查询
 	public Map<String, Object> getSiteSearchInfo(@RequestBody SiteSearchModel siteSearchModel) {
 		List<SiteSearchModel> siteList = new ArrayList<SiteSearchModel>();
+		List<SiteSearchModel> siteListTemp = new ArrayList<SiteSearchModel>();
 		Map<String, Object> sendMap = new HashMap<String, Object>();
 		errorsMessage = "";
 		DataBinder binder = new DataBinder(siteSearchModel);
@@ -222,8 +223,6 @@ public class SiteSearchController {
 			}
 			siteList = SiteSearchService.getSiteInfo(sendMap);
 			for (int a = 0; a < siteList.size(); a++) {
-				// 行番号设定
-				siteList.get(a).setRowNo((a + 1) + "");
 				// 勤務期間设定
 				siteList.get(a).setWorkDate(
 						dateToPeriod(siteList.get(a).getAdmissionStartDate(), siteList.get(a).getAdmissionEndDate()));
@@ -234,6 +233,10 @@ public class SiteSearchController {
 					} else {
 						siteList.get(a).setEmployeeFrom("BP");
 					}
+				} else if (siteList.get(a).getEmployeeNo().substring(0, 2).equals("SP")) {
+					siteList.get(a).setEmployeeFrom("SP");
+				} else if (siteList.get(a).getEmployeeNo().substring(0, 2).equals("SC")) {
+					siteList.get(a).setEmployeeFrom("SC");
 				} else {
 					siteList.get(a).setEmployeeFrom("社員");
 				}
@@ -241,11 +244,43 @@ public class SiteSearchController {
 				siteList.get(a).setWorkTime(
 						timeCalculate(siteList.get(a).getAdmissionStartDate(), siteList.get(a).getAdmissionEndDate()));
 			}
+
 			for (int i = 0; i < siteList.size(); i++) {
+				if (!(siteList.get(i).getEmployeeNo().substring(0, 2).equals("BP")
+						|| siteList.get(i).getEmployeeNo().substring(0, 2).equals("SP")
+						|| siteList.get(i).getEmployeeNo().substring(0, 2).equals("SC"))) {
+					siteListTemp.add(siteList.get(i));
+					siteList.remove(i);
+					i--;
+				}
+			}
+
+			for (int i = 0; i < siteList.size(); i++) {
+				if (siteList.get(i).getEmployeeNo().substring(0, 2).equals("SC")) {
+					siteListTemp.add(siteList.get(i));
+					siteList.remove(i);
+					i--;
+				}
+			}
+
+			for (int i = 0; i < siteList.size(); i++) {
+				if (siteList.get(i).getEmployeeNo().substring(0, 2).equals("SP")) {
+					siteListTemp.add(siteList.get(i));
+					siteList.remove(i);
+					i--;
+				}
+			}
+			for (int i = 0; i < siteList.size(); i++) {
+				siteListTemp.add(siteList.get(i));
+			}
+
+			for (int i = 0; i < siteListTemp.size(); i++) {
+				// 行番号设定
+				siteListTemp.get(i).setRowNo((i + 1) + "");
 				if (i != 0) {
-					if (siteList.get(i).getEmployeeNo().equals(siteList.get(i - 1).getEmployeeNo())) {
-						siteList.get(i).setEmployeeName("");
-						siteList.get(i).setEmployeeFrom("");
+					if (siteListTemp.get(i).getEmployeeNo().equals(siteListTemp.get(i - 1).getEmployeeNo())) {
+						siteListTemp.get(i).setEmployeeName("");
+						siteListTemp.get(i).setEmployeeFrom("");
 					}
 				}
 			}
@@ -254,8 +289,8 @@ public class SiteSearchController {
 		}
 
 		logger.info("GetEmployeeInfoController.getEmployeeInfo:" + "検索結束");
-		if (siteList.size() != 0) {
-			result.put("data", siteList);
+		if (siteListTemp.size() != 0) {
+			result.put("data", siteListTemp);
 		} else {
 			result.put("errorsMessage", "該当データなし");
 		}

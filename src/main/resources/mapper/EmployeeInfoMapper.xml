@@ -179,7 +179,7 @@
 		',T001.employeeLastName) as
 		employeeFristName,
 		T002.employeeStatus,
-		T002.Furigana,
+		T002.furigana,
 		T002.alphabetName,
 		T002.birthday,
 		T002.intoCompanyYearAndMonth,
@@ -302,7 +302,8 @@
 			ifnull(#{socialInsuranceStatus},socialInsuranceStatus)
 			<if test="socialInsuranceDate != null">
 				and
-				socialInsuranceDate &lt;= ifnull(#{socialInsuranceDate},socialInsuranceDate)
+				socialInsuranceDate &lt;=
+				ifnull(#{socialInsuranceDate},socialInsuranceDate)
 			</if>
 		</if>
 		GROUP BY

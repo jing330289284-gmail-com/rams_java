@@ -148,6 +148,15 @@ public class CustomerInfoSearchController {
 							a.getBusinessStartDate().substring(0, 4) + "/" + a.getBusinessStartDate().substring(4, 6));
 				}
 				rowNo++;
+
+				// 資本金
+				if (!UtilsCheckMethod.isNullOrEmpty(a.getCapitalStock())) {
+					String capitalStock = String.valueOf(Double.parseDouble(a.getCapitalStock()) / 100.0);
+					capitalStock = capitalStock.substring(capitalStock.length() - 1, capitalStock.length()).equals("0")
+							? capitalStock.substring(0, capitalStock.length() - 2)
+							: capitalStock;
+					a.setCapitalStock(capitalStock);
+				}
 			}
 			result.put("resultList", resiltArrayList);
 		} else {
