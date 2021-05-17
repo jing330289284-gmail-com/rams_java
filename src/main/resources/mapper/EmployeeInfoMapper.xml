@@ -175,9 +175,8 @@
 		resultMap="Employee">
 		SELECT
 		T001.employeeNo,
-		CONCAT(T001.employeeFristName,'
-		',T001.employeeLastName) as
-		employeeFristName,
+		T001.employeeFristName,
+		T001.employeeLastName,
 		T002.employeeStatus,
 		T002.furigana,
 		T002.alphabetName,
@@ -247,8 +246,12 @@
 		WHERE
 		<if test="kadou!=null">
 			<if test='kadou=="0"'>
-				admissionStartDate!="" and admissionStartDate is not null
+				admissionStartDate != "" and admissionStartDate is not
+				null
 				and admissionEndDate is null
+				or admissionStartDate != "" and
+				admissionStartDate is not null
+				and admissionEndDate &gt; #{nowDate}
 			</if>
 			<if test='kadou=="1"'>
 				<!-- admissionEndDate is not null and (AdmissionEndDate &lt;date_format(now(),'%Y%m%d')) -->
@@ -293,9 +296,15 @@
 		and
 		japaneseLevelCode =
 		ifnull(#{japaneseLevelCode},japaneseLevelCode)
+		<if test="employeeStatus != 4 ">
 		and
 		employeeStatus =
 		ifnull(#{employeeStatus},employeeStatus)
+		</if>
+		<if test="employeeStatus == 4 ">
+		and
+		employeeStatus != "1"
+		</if>
 		<if test="socialInsuranceStatus != null">
 			and
 			socialInsuranceStatus =
@@ -989,13 +998,16 @@
 	</delete>
 
 	<!-- 現場あり社員番号を取得 -->
-	<select id="getEmployeeWithAdmission" parameterType="String"
+	<select id="getEmployeeWithAdmission" parameterType="map"
 		resultMap="stringResult">
 		SELECT employeeNo FROM T006EmployeeSiteInfo
 		where
 		admissionStartDate!="" and admissionStartDate is not null
 		and
 		admissionEndDate is null
+		or admissionStartDate != "" and
+		admissionStartDate is not null
+		and admissionEndDate &gt; #{nowDate}
 		GROUP BY
 		employeeNo;
 	</select>

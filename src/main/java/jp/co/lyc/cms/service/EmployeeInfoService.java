@@ -57,7 +57,7 @@ public class EmployeeInfoService {
 		List<EmployeeModel> employeeList = employeeInfoMapper.getEmployeesInfo(sendMap);
 
 		if (sendMap.get("kadou") != null && sendMap.get("kadou").equals("1")) {
-			List<String> employeeAdmissionList = employeeInfoMapper.getEmployeeWithAdmission();
+			List<String> employeeAdmissionList = employeeInfoMapper.getEmployeeWithAdmission(sendMap);
 			for (int i = 0; i < employeeList.size(); i++) {
 				for (int j = 0; j < employeeAdmissionList.size(); j++) {
 					if (employeeList.get(i).getEmployeeNo().equals(employeeAdmissionList.get(j))) {
@@ -292,7 +292,7 @@ public class EmployeeInfoService {
 		}
 		return result;
 	}
-	
+
 	/**
 	 * パスポートを修正
 	 * 

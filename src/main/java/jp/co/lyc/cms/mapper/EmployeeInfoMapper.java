@@ -30,7 +30,7 @@ public interface EmployeeInfoMapper {
 
 	public List<EmployeeModel> getEmployeesInfo(Map<String, Object> sendMap);
 
-	public List<String> getEmployeeWithAdmission();
+	public List<String> getEmployeeWithAdmission(Map<String, Object> sendMap);
 
 	public List<EmployeeModel> getEmployeesDevelopLanguage();
 

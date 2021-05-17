@@ -151,10 +151,12 @@ public class CustomerInfoSearchController {
 
 				// 資本金
 				if (!UtilsCheckMethod.isNullOrEmpty(a.getCapitalStock())) {
-					String capitalStock = String.valueOf(Double.parseDouble(a.getCapitalStock()) / 100.0);
-					capitalStock = capitalStock.substring(capitalStock.length() - 1, capitalStock.length()).equals("0")
-							? capitalStock.substring(0, capitalStock.length() - 2)
-							: capitalStock;
+					String capitalStock = String.valueOf(Integer.parseInt(a.getCapitalStock()) / 100);
+					/*
+					 * capitalStock = capitalStock.substring(capitalStock.length() - 1,
+					 * capitalStock.length()).equals("0") ? capitalStock.substring(0,
+					 * capitalStock.length() - 2) : capitalStock;
+					 */
 					a.setCapitalStock(capitalStock);
 				}
 			}

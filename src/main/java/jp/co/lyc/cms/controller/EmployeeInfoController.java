@@ -101,6 +101,10 @@ public class EmployeeInfoController extends BaseController {
 			 */
 
 			for (int i = 0; i < employeeList.size(); i++) {
+				// 名前
+				employeeList.get(i).setEmployeeName(
+						employeeList.get(i).getEmployeeFristName() + " " + employeeList.get(i).getEmployeeLastName());
+
 				// 電話番号
 				String phoneNo = employeeList.get(i).getPhoneNo();
 				if (phoneNo != null && phoneNo.length() >= 11) {
@@ -797,6 +801,10 @@ public class EmployeeInfoController extends BaseController {
 		if (picInfo != null) {
 			sendMap.put("picInfo", picInfo);
 		}
+
+		Date date = new Date();// 此时date为当前的时间
+		SimpleDateFormat dateFormat = new SimpleDateFormat("YYYYMMdd");// 设置当前时间的格式，为年-月-日
+		sendMap.put("nowDate", dateFormat.format(date));
 		return sendMap;
 	}
 
