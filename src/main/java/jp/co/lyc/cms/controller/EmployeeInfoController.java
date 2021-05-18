@@ -31,6 +31,7 @@ import com.alibaba.fastjson.TypeReference;
 import jp.co.lyc.cms.common.BaseController;
 import jp.co.lyc.cms.model.AccountInfoModel;
 import jp.co.lyc.cms.model.BpInfoModel;
+import jp.co.lyc.cms.model.EmployeeInfoCsvModel;
 import jp.co.lyc.cms.model.EmployeeModel;
 import jp.co.lyc.cms.model.S3Model;
 import jp.co.lyc.cms.service.EmployeeInfoService;
@@ -316,20 +317,47 @@ public class EmployeeInfoController extends BaseController {
 	 */
 	@RequestMapping(value = "/csvDownload", method = RequestMethod.POST)
 	@ResponseBody
-	public List<EmployeeModel> csvDownload(@RequestBody List<String> employeeNo) throws Exception {
+	public List<EmployeeInfoCsvModel> csvDownload(@RequestBody List<String> employeeNo) throws Exception {
 		logger.info("GetEmployeeInfoController.csvDownload:" + "csvDownloadによると、社員情報csvを出力開始");
-		List<EmployeeModel> employeeList = new ArrayList<EmployeeModel>();
-		String[] title = { "社員区分", "社員番号", "社員名", "カタカナ", "ローマ字", "性別", "年齢", "国籍", "社員形式", "採用区分", "部署", "職種", "社内メール",
-				"携帯電話", "卒業年月", "来日年月", "入社年月", "経験年数", "役割", "契約期限", "郵便番号", "都道府県", "以後住所", "最寄り駅", "在留資格", "在留カード番号",
-				"在留カード期限", "パスポート期限", "パスポート番号", "マイナンバー", "雇用保険加入", "雇用保険番号", "社会保険加入", "社会保険番号", "出入国開始", "終了",
-				"退職年月", "退職区分" };
-		EmployeeModel emp = new EmployeeModel();
-		emp.setEmployeeNo("LYC168");
-		Map<String, Object> sendMap = getParam(emp);
-		EmployeeModel model = employeeInfoService.getEmployeeByEmployeeNo(sendMap);
-		employeeList.add(model);
+		List<EmployeeInfoCsvModel> employeeList = new ArrayList<EmployeeInfoCsvModel>();
+		List<EmployeeInfoCsvModel> employeeTempList = new ArrayList<EmployeeInfoCsvModel>();
+
+		employeeList = employeeInfoService.getEmployeesCSV(employeeNo);
+		for (int i = 0; i < employeeList.size(); i++) {
+			if (!employeeList.get(i).getBirthday().equals("")) {
+				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+				employeeList.get(i)
+						.setAge(String.valueOf(getAgeByBirth(dateFormat.parse(employeeList.get(i).getBirthday()))));
+			} else {
+				employeeList.get(i).setAge("");
+			}
+			if (!employeeList.get(i).getStayPeriod().equals("")) {
+				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+				employeeList.get(i).setStayPeriodYears(
+						String.valueOf(getAgeByBirth(dateFormat.parse(employeeList.get(i).getStayPeriod()))));
+			} else {
+				employeeList.get(i).setStayPeriodYears("");
+			}
+			if (!employeeList.get(i).getIntoCompanyYearAndMonth().equals("")) {
+				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM");
+				employeeList.get(i).setIntoCompanyYears(String
+						.valueOf(getAgeByBirth(dateFormat.parse(employeeList.get(i).getIntoCompanyYearAndMonth()))));
+			} else {
+				employeeList.get(i).setIntoCompanyYears("");
+			}
+		}
+		for (int i = 0; i < employeeList.size(); i++) {
+			if (!employeeList.get(i).getEmployeeNo().substring(0, 2).equals("BP")) {
+				employeeTempList.add(employeeList.get(i));
+				employeeList.remove(i);
+				i--;
+			}
+		}
+		for (int i = 0; i < employeeList.size(); i++) {
+			employeeTempList.add(employeeList.get(i));
+		}
 		logger.info("GetEmployeeInfoController.csvDownload:" + "csvDownloadによると、社員情報csvを出力結束");
-		return employeeList;
+		return employeeTempList;
 	}
 
 	/**
@@ -815,10 +843,6 @@ public class EmployeeInfoController extends BaseController {
 		/* 把出生日期放入Calendar类型的bir对象中，进行Calendar和Date类型进行转换 */
 		Calendar bir = Calendar.getInstance();
 		bir.setTime(birthday);
-		/* 如果生日大于当前日期，则抛出异常：出生日期不能大于当前日期 */
-		if (cal.before(bir)) {
-			throw new IllegalArgumentException("The birthday is before Now,It's unbelievable");
-		}
 		/* 取出当前年月日 */
 		int yearNow = cal.get(Calendar.YEAR);
 		int monthNow = cal.get(Calendar.MONTH);
@@ -827,6 +851,18 @@ public class EmployeeInfoController extends BaseController {
 		int yearBirth = bir.get(Calendar.YEAR);
 		int monthBirth = bir.get(Calendar.MONTH);
 		int dayBirth = bir.get(Calendar.DAY_OF_MONTH);
+		/* 如果生日大于当前日期，进行反转日期计算 */
+		if (cal.before(bir)) {
+			// 进行反转值计
+			/* 取出当前年月日 */
+			yearNow = bir.get(Calendar.YEAR);
+			monthNow = bir.get(Calendar.MONTH);
+			dayNow = bir.get(Calendar.DAY_OF_MONTH);
+			/* 取出出生年月日 */
+			yearBirth = cal.get(Calendar.YEAR);
+			monthBirth = cal.get(Calendar.MONTH);
+			dayBirth = cal.get(Calendar.DAY_OF_MONTH);
+		}
 		/* 大概年龄是当前年减去出生年 */
 		int age = yearNow - yearBirth;
 		/* 如果出当前月小与出生月，或者当前月等于出生月但是当前日小于出生日，那么年龄age就减一岁 */

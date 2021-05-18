@@ -101,6 +101,16 @@ public class EmployeeModel implements Serializable {
 	String lastHalfAddress;// 住所後半
 	String stationCode;//
 
+	String bpfrom;// 協力所属
+
+	public String getBpfrom() {
+		return bpfrom;
+	}
+
+	public void setBpfrom(String bpfrom) {
+		this.bpfrom = bpfrom;
+	}
+
 	public String getRetirementResonClassification() {
 		return retirementResonClassification;
 	}

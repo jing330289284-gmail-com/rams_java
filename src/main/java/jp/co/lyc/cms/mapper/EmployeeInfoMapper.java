@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import jp.co.lyc.cms.model.EmployeeInfoCsvModel;
 import jp.co.lyc.cms.model.EmployeeModel;
 
 @Mapper
@@ -30,13 +31,18 @@ public interface EmployeeInfoMapper {
 
 	public List<EmployeeModel> getEmployeesInfo(Map<String, Object> sendMap);
 
+	public List<EmployeeInfoCsvModel> getEmployeesCSV(List<String> empList);
+
 	public List<String> getEmployeeWithAdmission(Map<String, Object> sendMap);
 
 	public List<EmployeeModel> getEmployeesDevelopLanguage();
 
 	public List<EmployeeModel> getcustomerNo();
-	
+
 	public List<EmployeeModel> getAdmissionStartDate();
+
+	public List<EmployeeModel> getBpfrom();
+
 	/**
 	 * 社員情報を確認
 	 * 
@@ -139,4 +145,5 @@ public interface EmployeeInfoMapper {
 	 * @param sendMap
 	 */
 	public void deleteResumeManagement(Map<String, Object> sendMap);
+
 }

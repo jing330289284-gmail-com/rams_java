@@ -297,13 +297,13 @@
 		japaneseLevelCode =
 		ifnull(#{japaneseLevelCode},japaneseLevelCode)
 		<if test="employeeStatus != 4 ">
-		and
-		employeeStatus =
-		ifnull(#{employeeStatus},employeeStatus)
+			and
+			employeeStatus =
+			ifnull(#{employeeStatus},employeeStatus)
 		</if>
 		<if test="employeeStatus == 4 ">
-		and
-		employeeStatus != "1"
+			and
+			employeeStatus != "1"
 		</if>
 		<if test="socialInsuranceStatus != null">
 			and
@@ -320,6 +320,95 @@
 		order
 		by
 		employeeNo;
+	</select>
+
+	<!-- 社員情報を確認 -->
+	<select id="getEmployeesCSV"
+		resultType="jp.co.lyc.cms.model.EmployeeInfoCsvModel">
+		SELECT T002.employeeNo,T002.alphabetName,if(T002.contractDeadline is
+		null or T002.contractDeadline =
+		"","",concat(LEFT(T002.contractDeadline,4),"-",LEFT(RIGHT(T002.contractDeadline,4),2),"-",RIGHT(T002.contractDeadline,2)))
+		AS contractDeadline,
+		T002.companyMail,T002.japaneseCalendar,if(T002.birthday =
+		"","",concat(LEFT(T002.birthday,4),"-",LEFT(RIGHT(T002.birthday,4),2),"-",RIGHT(T002.birthday,2)))
+		AS birthday,
+		if(T002.intoCompanyYearAndMonth is null or
+		T002.intoCompanyYearAndMonth =
+		"","",concat(LEFT(T002.intoCompanyYearAndMonth,4),"-",RIGHT(T002.intoCompanyYearAndMonth,2)))
+		AS intoCompanyYearAndMonth,if(T002.stayPeriod is null or
+		T002.stayPeriod =
+		"","",concat(LEFT(T002.stayPeriod,4),"-",LEFT(RIGHT(T002.stayPeriod,4),2),"-",RIGHT(T002.stayPeriod,2)))
+		AS stayPeriod,
+		if(T002.residenceCardNo is
+		null,"",T002.residenceCardNo)
+		AS
+		residenceCardNo,if(T002.passportNo is
+		null,"",T002.passportNo) AS
+		passportNo,
+		if(T002.passportStayPeriod is null or
+		T002.passportStayPeriod =
+		"","",concat(LEFT(T002.passportStayPeriod,4),"-",LEFT(RIGHT(T002.passportStayPeriod,4),2),"-",RIGHT(T002.passportStayPeriod,2)))
+		AS passportStayPeriod,if(T002.myNumber is null,"",T002.myNumber) AS
+		myNumber,
+		if(if(T002.employmentInsuranceStatus is
+		null,"",T002.employmentInsuranceStatus) =
+		"1","あり",if(if(T002.employmentInsuranceStatus is
+		null,"",T002.employmentInsuranceStatus) = "0","なし","")) AS
+		employmentInsuranceStatus,
+		if(T002.phoneNo is null or T002.phoneNo =
+		"","",concat(LEFT(T002.phoneNo,3),"-",LEFT(RIGHT(T002.phoneNo,8),4),"-",RIGHT(T002.phoneNo,4)))
+		AS phoneNo,
+		T002.furigana,IF(T002.genderStatus = 0,"男","女") AS
+		genderStatus,
+		concat(T001.employeeFristName,T001.employeeLastName) AS
+		employeeName,
+		T003.postcode,concat(T003.firstHalfAddress,T003.lastHalfAddress) AS
+		address,
+		if(concat(if(M001.bankName is
+		null,"",M001.bankName),"-",if(M002.bankBranchName is
+		null,"",concat(M002.bankBranchName,"(",T004.bankBranchCode,")")),"-",if(T004.accountTypeStatus
+		= "0","普通","当座"),"-",T004.accountNo) is
+		null,
+		"",concat(if(M001.bankName is
+		null,"",M001.bankName),"-",if(M002.bankBranchName is
+		null,"",concat(M002.bankBranchName,"(",T004.bankBranchCode,")")),"-",if(T004.accountTypeStatus
+		= "0","普通","当座"),"-",T004.accountNo)) AS
+		accountInfo,
+		M003.nationalityName AS nationality,
+		if(M006.visaName is
+		null,"",M006.visaName) AS residenceName
+		FROM T002EmployeeDetail AS T002
+		LEFT JOIN M003Nationality AS M003
+		ON T002.nationalityCode =
+		M003.nationalityCode
+		LEFT JOIN T001Employee AS T001
+		ON T002.employeeNo =
+		T001.employeeNo
+		LEFT JOIN M006Visa AS M006
+		ON T002.residenceCode =
+		M006.visaCode
+		and T002.residenceCode is not null and T002.residenceCode
+		!= ""
+		LEFT JOIN T003AddressInfo AS T003
+		ON T002.employeeNo =
+		T003.employeeNo
+		LEFT JOIN T004AccountInfo AS T004
+		ON T002.employeeNo =
+		T004.employeeOrCustomerNo
+		LEFT JOIN M001Bank AS M001
+		ON T004.bankCode =
+		M001.bankCode
+		LEFT JOIN M002BankBranch AS M002
+		ON M001.bankCode =
+		M002.bankCode
+		and T004.bankBranchCode = M002.bankBranchCode
+		Where
+		T002.employeeNo in
+		<foreach item="item" open="(" close=")" collection="list"
+			separator=",">
+			#{item}
+		</foreach>
+		;
 	</select>
 
 	<!-- 社員情報を確認 -->
@@ -1031,14 +1120,35 @@
 		employeeNo,
 		MAX(admissionStartDate) AS admissionStartDate
 		FROM
-		newRams.T006EmployeeSiteInfo
+		T006EmployeeSiteInfo
 		GROUP BY
 		employeeNo) AS TempTable
 		ON
-		T006EmployeeSiteInfo.employeeNo = TempTable.employeeNo
+		T006EmployeeSiteInfo.employeeNo =
+		TempTable.employeeNo
 		AND
 		T006EmployeeSiteInfo.admissionStartDate =
 		TempTable.admissionStartDate;
+	</select>
+
+	<select id="getBpfrom" parameterType="map" resultMap="Employee">
+		<!-- SELECT T006EmployeeSiteInfo.employeeNo,T006EmployeeSiteInfo.customerNo 
+			FROM T006EmployeeSiteInfo left Join T002EmployeeDetail on T006EmployeeSiteInfo.employeeNo=T002EmployeeDetail.employeeNo; -->
+		SELECT T002.employeeNo,if(T007.customerAbbreviation is null or
+		trim(T007.customerAbbreviation) =
+		"",T007.customerName,T007.customerAbbreviation) as bpfrom
+		FROM
+		T002EmployeeDetail as T002
+		Left Join T011BpInfoSupplement as T011
+		on
+		T002.employeeNo = T011.bpEmployeeNo
+		Left Join T007CustomerInfo as T007
+		on T011.bpBelongCustomerCode = T007.customerNo
+		where
+		if(T007.customerAbbreviation is null or
+		trim(T007.customerAbbreviation) =
+		"",T007.customerName,T007.customerAbbreviation) is not null
+		;
 	</select>
 
 	<select id="getAdmissionStartDate" parameterType="map"
