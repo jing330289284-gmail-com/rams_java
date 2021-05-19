@@ -176,4 +176,8 @@ public class SiteInfoService {
 		return result;
 	}
 
+	public List<SiteModel> getDevelopLanguage() {
+		return siteInfoMapper.getDevelopLanguage();
+	}
+
 }

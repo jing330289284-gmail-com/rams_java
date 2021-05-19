@@ -9,6 +9,8 @@
 		a.unitPrice,
 		a.admissionStartDate,
 		a.admissionEndDate,
+		a.developLanguageCode,
+		a.developLanguageCode2,
 		b.siteRoleName,
 		IF
 		( c.customerAbbreviation IS NULL
@@ -108,6 +110,7 @@
 		</if>
 		<if test="developLanguageCode!= null and developLanguageCode!= ''">
 			AND a.developLanguageCode = #{developLanguageCode}
+			or  a.developLanguageCode2 = #{developLanguageCode}
 		</if>
 		<if
 			test="admissionStartDate!= null and admissionStartDate!= ''

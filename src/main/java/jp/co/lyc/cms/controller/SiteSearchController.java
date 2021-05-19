@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import jp.co.lyc.cms.model.SiteModel;
 import jp.co.lyc.cms.model.SiteSearchModel;
+import jp.co.lyc.cms.service.SiteInfoService;
 import jp.co.lyc.cms.service.SiteSearchService;
 import jp.co.lyc.cms.validation.SiteSearchValidation;
 
@@ -117,6 +119,10 @@ public class SiteSearchController {
 
 	@Autowired
 	SiteSearchService SiteSearchService;
+
+	@Autowired
+	SiteInfoService siteInfoService;
+
 	String errorsMessage = "";
 
 	@RequestMapping(value = "/getSiteSearchInfo", method = RequestMethod.POST)
@@ -125,6 +131,8 @@ public class SiteSearchController {
 	public Map<String, Object> getSiteSearchInfo(@RequestBody SiteSearchModel siteSearchModel) {
 		List<SiteSearchModel> siteList = new ArrayList<SiteSearchModel>();
 		List<SiteSearchModel> siteListTemp = new ArrayList<SiteSearchModel>();
+		List<SiteModel> developLanguageList = new ArrayList<SiteModel>();
+
 		Map<String, Object> sendMap = new HashMap<String, Object>();
 		errorsMessage = "";
 		DataBinder binder = new DataBinder(siteSearchModel);
@@ -222,7 +230,26 @@ public class SiteSearchController {
 				}
 			}
 			siteList = SiteSearchService.getSiteInfo(sendMap);
+			developLanguageList = siteInfoService.getDevelopLanguage();
+
 			for (int a = 0; a < siteList.size(); a++) {
+				//
+				if (siteList.get(a).getDevelopLanguageCode2() != null
+						&& !siteList.get(a).getDevelopLanguageCode2().equals("")) {
+					for (int i = 0; i < developLanguageList.size(); i++) {
+						if (siteList.get(a).getDevelopLanguageCode2()
+								.equals(developLanguageList.get(i).getDevelopLanguageCode())) {
+							if (siteList.get(a).getDevelopLanguageName() == null
+									|| siteList.get(a).getDevelopLanguageName().equals("")) {
+								siteList.get(a)
+										.setDevelopLanguageName(developLanguageList.get(i).getDevelopLanguageName());
+							} else {
+								siteList.get(a).setDevelopLanguageName(siteList.get(a).getDevelopLanguageName() + ","
+										+ developLanguageList.get(i).getDevelopLanguageName());
+							}
+						}
+					}
+				}
 				// 勤務期間设定
 				siteList.get(a).setWorkDate(
 						dateToPeriod(siteList.get(a).getAdmissionStartDate(), siteList.get(a).getAdmissionEndDate()));

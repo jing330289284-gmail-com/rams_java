@@ -383,12 +383,31 @@ public class SiteInfoController extends BaseController {
 	@ResponseBody
 	public Map<String, Object> getSiteInfo(@RequestBody Map employeeName) {
 		List<SiteModel> siteList = new ArrayList<SiteModel>();
+		List<SiteModel> developLanguageList = new ArrayList<SiteModel>();
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {
 			if (employeeName.get("employeeName") != null) {
 				siteList = siteInfoService.getSiteInfo(employeeName.get("employeeName").toString());
+				developLanguageList = siteInfoService.getDevelopLanguage();
 			}
 			for (int a = 0; a < siteList.size(); a++) {
+				if (siteList.get(a).getDevelopLanguageCode2() != null
+						&& !siteList.get(a).getDevelopLanguageCode2().equals("")) {
+					for (int i = 0; i < developLanguageList.size(); i++) {
+						if (siteList.get(a).getDevelopLanguageCode2()
+								.equals(developLanguageList.get(i).getDevelopLanguageCode())) {
+							if (siteList.get(a).getDevelopLanguageName() == null
+									|| siteList.get(a).getDevelopLanguageName().equals("")) {
+								siteList.get(a)
+										.setDevelopLanguageName(developLanguageList.get(i).getDevelopLanguageName());
+							} else {
+								siteList.get(a).setDevelopLanguageName(siteList.get(a).getDevelopLanguageName() + ","
+										+ developLanguageList.get(i).getDevelopLanguageName());
+							}
+						}
+					}
+				}
+
 				siteList.get(a).setWorkDate(
 						dateToPeriod(siteList.get(a).getAdmissionStartDate(), siteList.get(a).getAdmissionEndDate()));
 				String[] relatedEmployees;

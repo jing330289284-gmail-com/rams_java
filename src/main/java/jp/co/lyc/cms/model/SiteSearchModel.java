@@ -22,6 +22,7 @@ public class SiteSearchModel {
 	String unitPrice1;// 単価1
 	String unitPrice2;// 単価2
 	String developLanguageCode;// 開発言語コード
+	String developLanguageCode2;// 開発言語コード
 	String admissionStartDate;// 入場年月日
 	String admissionEndDate;// 退場年月日
 	String rowNo;// 番号
@@ -36,6 +37,18 @@ public class SiteSearchModel {
 	String workTime;// 勤務時間
 	String siteRoleName;// 役割
 	String typteOfContractCode;// 役割
+
+	public String getDevelopLanguageCode2() {
+		return developLanguageCode2;
+	}
+
+	public void setDevelopLanguageCode2(String developLanguageCode2) {
+		this.developLanguageCode2 = developLanguageCode2;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 
 	public String getTypteOfContractCode() {
 		return typteOfContractCode;
