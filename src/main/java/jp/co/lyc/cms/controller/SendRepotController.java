@@ -24,7 +24,7 @@ import jp.co.lyc.cms.service.SendRepotService;
 
 @Controller
 @RequestMapping(value = "/sendRepot")
-public class SendRepotController  extends BaseController {
+public class SendRepotController extends BaseController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	SendRepotService sendRepotService;
@@ -49,6 +49,7 @@ public class SendRepotController  extends BaseController {
 		logger.info("getCustomers" + "検索結束");
 		return sendRepotList;
 	}
+
 	/**
 	 * リストを取得
 	 * 
@@ -68,7 +69,7 @@ public class SendRepotController  extends BaseController {
 		logger.info("getLists" + "検索結束");
 		return salesPersonsList;
 	}
-	
+
 	@RequestMapping(value = "/getTargetEmployees", method = RequestMethod.POST)
 	@ResponseBody
 	public List<SendRepotModel> getTargetEmployees(@RequestBody SendRepotModel model) {
@@ -86,13 +87,13 @@ public class SendRepotController  extends BaseController {
 		logger.info("getSalesPersons" + "検索結束");
 		return salesPersonsList;
 	}
-	
+
 	@RequestMapping(value = "/creatList", method = RequestMethod.POST)
 	@ResponseBody
 	public int creatList(@RequestBody SendRepotModel model) {
 		model.setUpdateUser(getSession().getAttribute("employeeName").toString());
 		logger.info("creatList:" + "検索開始");
-		int index=0;
+		int index = 0;
 		try {
 			index = sendRepotService.creatList(model);
 		} catch (Exception e) {
@@ -101,6 +102,7 @@ public class SendRepotController  extends BaseController {
 		logger.info("creatList" + "検索結束");
 		return index;
 	}
+
 	@RequestMapping(value = "/getListByName", method = RequestMethod.POST)
 	@ResponseBody
 	public SendRepotModel getListByName(@RequestBody SendRepotModel model) {
@@ -114,15 +116,16 @@ public class SendRepotController  extends BaseController {
 		}
 		logger.info("getListByName" + "検索結束");
 		return sendRepotModel;
-	}	
-	
+	}
+
 	@RequestMapping(value = "/listNameUpdate", method = RequestMethod.POST)
 	@ResponseBody
 	public void listNameUpdate(@RequestBody SendRepotsListName sendRepotsListNames) {
-			if (!sendRepotsListNames.getStorageListName().equals(sendRepotsListNames.getOldStorageListName())) {
-				updateName(sendRepotsListNames.getStorageListName(),sendRepotsListNames.getOldStorageListName());
-			}
+		if (!sendRepotsListNames.getStorageListName().equals(sendRepotsListNames.getOldStorageListName())) {
+			updateName(sendRepotsListNames.getStorageListName(), sendRepotsListNames.getOldStorageListName());
+		}
 	}
+
 	@RequestMapping(value = "/getCustomersByNos", method = RequestMethod.POST)
 	@ResponseBody
 	public List<SendRepotModel> getCustomersByNos(@RequestBody SendRepotModel model) {
@@ -161,26 +164,30 @@ public class SendRepotController  extends BaseController {
 
 		return salesCustomersList;
 	}
+
 	@RequestMapping(value = "/getCustomerDepartmentCode", method = RequestMethod.POST)
 	@ResponseBody
-	public List<ModelClass>  getCustomerDepartmentCode(@RequestBody SendRepotModel model) {
-			List<ModelClass> list = sendRepotService.getCustomerDepartmentCode(model);
-			return list ;
-		}	
+	public List<ModelClass> getCustomerDepartmentCode(@RequestBody SendRepotModel model) {
+		List<ModelClass> list = sendRepotService.getCustomerDepartmentCode(model);
+		return list;
+	}
+
 	@RequestMapping(value = "/getPurchasingManagersCode", method = RequestMethod.POST)
 	@ResponseBody
-	public List<ModelClass>  getPurchasingManagersCode(@RequestBody SendRepotModel model2) {
-			List<ModelClass> list = sendRepotService.getPurchasingManagersCode(model2);
-			return list;
-		}
+	public List<ModelClass> getPurchasingManagersCode(@RequestBody SendRepotModel model2) {
+		List<ModelClass> list = sendRepotService.getPurchasingManagersCode(model2);
+		return list;
+	}
+
 	@RequestMapping(value = "/getSalesPersonsLists", method = RequestMethod.POST)
 	@ResponseBody
-	public List<ModelClass>  getSalesPersonsLists() {
-			List<ModelClass> list = sendRepotService.getSalesPersonsLists();
-			return list ;
-		}	
-	private void updateName(String storageListName,String oldStorageListName) {
-		SendRepotsListName updateModel= new SendRepotsListName();
+	public List<ModelClass> getSalesPersonsLists() {
+		List<ModelClass> list = sendRepotService.getSalesPersonsLists();
+		return list;
+	}
+
+	private void updateName(String storageListName, String oldStorageListName) {
+		SendRepotsListName updateModel = new SendRepotsListName();
 		updateModel.setUpdateUser(getSession().getAttribute("employeeName").toString());
 		updateModel.setStorageListName(storageListName);
 		updateModel.setOldStorageListName(oldStorageListName);
@@ -190,11 +197,11 @@ public class SendRepotController  extends BaseController {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@RequestMapping(value = "/salesPersonsListsUpdate", method = RequestMethod.POST)
 	@ResponseBody
-	private void salesPersonsListsUpdate(String salesPersons,String oldStorageListName) {
-		SendRepotsListName updateModel= new SendRepotsListName();
+	private void salesPersonsListsUpdate(String salesPersons, String oldStorageListName) {
+		SendRepotsListName updateModel = new SendRepotsListName();
 		updateModel.setUpdateUser(getSession().getAttribute("employeeName").toString());
 		updateModel.setOldStorageListName(oldStorageListName);
 		updateModel.setSubChargeMailList(salesPersons);
@@ -204,7 +211,7 @@ public class SendRepotController  extends BaseController {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * @param model
 	 */
@@ -212,23 +219,24 @@ public class SendRepotController  extends BaseController {
 	@ResponseBody
 	private void targetEmployeeListsUpdate(@RequestBody SendRepotModel model) {
 		SendRepotModel sendRepotModel = new SendRepotModel();
-		String candidateInChargeList = "";//変更するカスタマの部分を書き直す
-		//CandidateInChargeList(お客様コード:社員ID,社員ID.社員名,社員名;お客様コード:社員ID,社員ID.社員名,社員名;)
+		String candidateInChargeList = "";// 変更するカスタマの部分を書き直す
+		// CandidateInChargeList(お客様コード:社員ID,社員ID.社員名,社員名;お客様コード:社員ID,社員ID.社員名,社員名;)
 		try {
-			sendRepotModel = sendRepotService.getCandidateInChargeList(model.getStorageListName());//過去のリスト取得 
+			sendRepotModel = sendRepotService.getCandidateInChargeList(model.getStorageListName());// 過去のリスト取得
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		String[] selectedCustemerNo = sendRepotModel.getCandidateInChargeList().split(";");//リスト中にあるすべての　お客様コード:社員ID,社員ID.社員名,社員名
-			for (int i = 0; i < selectedCustemerNo.length; i++) {
-				String[] customerRowNames = selectedCustemerNo[i].split(":");
-				if (model.getCustomerNo().equals(customerRowNames[0])) {
-					//model.getCandidateInChargeList()選択中のお客様コードが一致する場合、社員ID,社員ID.社員名,社員名を書き換える
-					candidateInChargeList += model.getCustomerNo() + ":" + model.getCandidateInChargeList()+ ";";
-				} else {
-					candidateInChargeList += selectedCustemerNo[i] + ";";
-				}
+		String[] selectedCustemerNo = sendRepotModel.getCandidateInChargeList().split(";");// リスト中にあるすべての
+																							// お客様コード:社員ID,社員ID.社員名,社員名
+		for (int i = 0; i < selectedCustemerNo.length; i++) {
+			String[] customerRowNames = selectedCustemerNo[i].split(":");
+			if (model.getCustomerNo().equals(customerRowNames[0])) {
+				// model.getCandidateInChargeList()選択中のお客様コードが一致する場合、社員ID,社員ID.社員名,社員名を書き換える
+				candidateInChargeList += model.getCustomerNo() + ":" + model.getCandidateInChargeList() + ";";
+			} else {
+				candidateInChargeList += selectedCustemerNo[i] + ";";
 			}
+		}
 		model.setCandidateInChargeList(candidateInChargeList);
 		try {
 			sendRepotService.targetEmployeeListsUpdate(model);
@@ -236,34 +244,34 @@ public class SendRepotController  extends BaseController {
 			e.printStackTrace();
 		}
 	}
+
 	@RequestMapping(value = "/deleteList", method = RequestMethod.POST)
 	@ResponseBody
-	public int deleteList(@RequestBody String storageListName) {
+	public int deleteList(@RequestBody SendRepotModel model) {
 		logger.info("deleteList:" + "検索開始");
-		int index=0;
+		int index = 0;
 		try {
-			index = sendRepotService.deleteList(storageListName);
+			index = sendRepotService.deleteList(model.getStorageListName());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		logger.info("deleteList" + "検索結束");
 		return index;
 	}
+
 	@RequestMapping(value = "/openFolder", method = RequestMethod.POST)
 	@ResponseBody
-	private static void openFolder() throws IOException{
+	private static void openFolder() throws IOException {
 		Calendar now = Calendar.getInstance();
-		String theMonth=Integer.toString(now.get(Calendar.MONTH) + 1);
-		if((now.get(Calendar.MONTH) + 1)<10) {
-			 theMonth="0"+theMonth;
+		String theMonth = Integer.toString(now.get(Calendar.MONTH) + 1);
+		if ((now.get(Calendar.MONTH) + 1) < 10) {
+			theMonth = "0" + theMonth;
 		}
-		String path="C:\\file\\作業報告書フォルダ\\"+now.get(Calendar.YEAR) + "\\"+ theMonth;
-	    Runtime.getRuntime().exec("explorer.exe  /n,/select, "+path);
-	    }
-	
-	
-	
-	//追加部分
+		String path = "C:\\file\\作業報告書フォルダ\\" + now.get(Calendar.YEAR) + "\\" + theMonth;
+		Runtime.getRuntime().exec("explorer.exe  /n,/select, " + path);
+	}
+
+	// 追加部分
 	@RequestMapping(value = "/customerListUpdate", method = RequestMethod.POST)
 	@ResponseBody
 	public String customerListUpdate(@RequestBody SendRepotModel model) {
@@ -275,6 +283,7 @@ public class SendRepotController  extends BaseController {
 		logger.info("customerListUpdate" + "検索結束");
 		return sendRepotService.getCustomerList(model.getStorageListName());
 	}
+
 	@RequestMapping(value = "/deleteCustomerList", method = RequestMethod.POST)
 	@ResponseBody
 	public String deleteCustomerList(@RequestBody SendRepotModel model) {
@@ -286,6 +295,7 @@ public class SendRepotController  extends BaseController {
 		logger.info("deleteCustomerList" + "検索結束");
 		return "";
 	}
+
 	@RequestMapping(value = "/addNewList", method = RequestMethod.POST)
 	@ResponseBody
 	public String addNewList(@RequestBody SendRepotModel model) {
@@ -314,6 +324,7 @@ public class SendRepotController  extends BaseController {
 		logger.info("addNewList" + "検索結束");
 		return name;
 	}
+
 	@RequestMapping(value = "/deleteCustomerListByNo", method = RequestMethod.POST)
 	@ResponseBody
 	public String deleteCustomerListByNo(@RequestBody SendRepotModel model) {
@@ -363,7 +374,7 @@ public class SendRepotController  extends BaseController {
 				}
 			}
 		}
-		
+
 		for (int i = 0; i < selectedRowNames.length; i++) {
 			for (int j = 0; j < model.getCtmNos().length; j++) {
 				String[] customerRowNames = selectedRowNames[i].split(":");
@@ -400,4 +411,4 @@ public class SendRepotController  extends BaseController {
 		logger.info("deleteCustomerListByNo" + "検索結束");
 		return newCtmNos;
 	}
-	}
+}

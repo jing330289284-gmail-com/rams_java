@@ -352,7 +352,7 @@
 		AND
 			transmissionClassificationCode = 0
 	</select>
-    <insert id="creatList" parameterType="String">
+    <insert id="creatList" parameterType="jp.co.lyc.cms.model.SendRepotModel">
   		INSERT INTO T021CustomerSendMailStorageList
 		(
 		StorageListName,
@@ -364,7 +364,6 @@
 		positionCodeList,
 		mainChargeMailList,
 		subChargeMailList,
-		CandidateInChargeList,
 		updateTime,
 		createTime,
 		updateUser)
@@ -379,7 +378,6 @@
 		#{positionCodeList},
 		#{mainChargeMailList},
 		#{subChargeMailList},
-		#{CandidateInChargeList},
 		 NOW(),
 		 NOW(),
 		#{updateUser})
@@ -398,9 +396,10 @@
    	<delete id="deleteList" parameterType="String">
 		DELETE
 		FROM
-			T021CustomerSendMailStorageList
+		T021CustomerSendMailStorageList
 		WHERE
-			StorageListName=#{storageListName} and transmissionClassificationCode=0;
+		StorageListName=#{storageListName} and
+		transmissionClassificationCode=0
 	</delete>
 	 <update id="deleteListOfEmp" parameterType="String">
 		update

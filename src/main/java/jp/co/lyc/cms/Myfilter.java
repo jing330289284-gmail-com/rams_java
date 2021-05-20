@@ -33,6 +33,7 @@ public class Myfilter implements Filter{
 	        					!requestURI.contains("subMenu")) {
 	        	if(request.getSession().getAttribute("employeeNo") == null) {
 //	        	    response.setStatus(401);
+	                request.getRequestDispatcher("/subMenu/logout").forward(request, response);
 	        	    response.getWriter().append("server error");
 	        		return;
 	        	}
