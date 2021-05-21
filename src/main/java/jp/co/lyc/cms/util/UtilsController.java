@@ -1550,6 +1550,19 @@ public class UtilsController {
 		return list;
 	}
 
+	/**
+	 * お客様略称取得
+	 * 
+	 * @return
+	 */
+
+	@RequestMapping(value = "/getCustomerAbbreviation", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getCustomerAbbreviation() {
+		List<ModelClass> list = utilsService.getCustomerAbbreviation();
+		return list;
+	}
+
 
 	/**
 	 * 面談回数取得

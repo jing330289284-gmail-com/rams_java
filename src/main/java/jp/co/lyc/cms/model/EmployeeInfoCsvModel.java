@@ -30,9 +30,18 @@ public class EmployeeInfoCsvModel implements Serializable {
 	String passportStayPeriod; // パスポート期間
 	String myNumber;// マイナンバー
 	String employmentInsuranceStatus;// 雇用保険加入
+	String employmentInsuranceNo;// 雇用保険番号
 	String postcode;// 郵便番号
 	String address;// 住所
 	String accountInfo;// 口座情報
+
+	public String getEmploymentInsuranceNo() {
+		return employmentInsuranceNo;
+	}
+
+	public void setEmploymentInsuranceNo(String employmentInsuranceNo) {
+		this.employmentInsuranceNo = employmentInsuranceNo;
+	}
 
 	public String getEmployeeNo() {
 		return employeeNo;

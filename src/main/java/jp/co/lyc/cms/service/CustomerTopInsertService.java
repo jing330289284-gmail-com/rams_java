@@ -35,8 +35,13 @@ public class CustomerTopInsertService {
 	 * @return 最大番号
 	 */
 	public String getMaxCustomerNo() {
-		String customerNo = customerTopInsertMapper.getMaxCustomerNo().substring(1);
-		customerNo = "T" + String.format("%0" + 3 + "d", Integer.parseInt(customerNo) + 1);
+		String customerNo = customerTopInsertMapper.getMaxCustomerNo();
+		if (customerNo != null) {
+			customerNo = customerNo.substring(1);
+			customerNo = "T" + String.format("%0" + 3 + "d", Integer.parseInt(customerNo) + 1);
+		} else {
+			customerNo = "T001";
+		}
 		return customerNo;
 	}
 

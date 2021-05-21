@@ -11,6 +11,7 @@
 		CONCAT( ( @rowNo := @rowNo + 1 ) ) AS rowNo,
 		T007.customerNo,
 		T007.customerName,
+		T007.representative,
 		M008.levelName,
 		T007.stationCode,
 		M013.stationName,
@@ -111,6 +112,12 @@
 		</if>
 		<if test="basicContract != null">
 			AND T007.basicContract = #{basicContract}
+		</if>
+		<if test="representative != null">
+			AND T007.representative = #{representative}
+		</if>
+		<if test="listedCompanyFlag != null">
+			AND T007.listedCompanyFlag = #{listedCompanyFlag}
 		</if>
 		ORDER BY
 		T007.customerNo

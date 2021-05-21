@@ -504,6 +504,15 @@ public class UtilsService {
 	public List<ModelClass> getAgeClassification() {
 		return utilsMapper.getAgeClassification();
 	}
+	
+	/**
+	 * お客様略称取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getCustomerAbbreviation() {
+		return utilsMapper.getCustomerAbbreviation();
+	}
 
 	/**
 	 * 面談回数取得

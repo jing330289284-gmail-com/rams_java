@@ -427,13 +427,21 @@ public class CustomerInfoSearchController {
 			sendMap.put("topCustomerNo", customerInfoMod.getTopCustomerNo());
 		}
 		if (!UtilsCheckMethod.isNullOrEmpty(customerInfoMod.getCapitalStockFront())) {
-			sendMap.put("capitalStockFront", customerInfoMod.getCapitalStockFront());
+			sendMap.put("capitalStockFront",
+					String.valueOf(Integer.parseInt(customerInfoMod.getCapitalStockFront()) * 100));
 		}
 		if (!UtilsCheckMethod.isNullOrEmpty(customerInfoMod.getCapitalStockBack())) {
-			sendMap.put("capitalStockBack", customerInfoMod.getCapitalStockBack());
+			sendMap.put("capitalStockBack",
+					String.valueOf(Integer.parseInt(customerInfoMod.getCapitalStockBack()) * 100));
 		}
 		if (!UtilsCheckMethod.isNullOrEmpty(customerInfoMod.getBasicContract())) {
 			sendMap.put("basicContract", customerInfoMod.getBasicContract());
+		}
+		if (!UtilsCheckMethod.isNullOrEmpty(customerInfoMod.getRepresentative())) {
+			sendMap.put("representative", customerInfoMod.getRepresentative());
+		}
+		if (!UtilsCheckMethod.isNullOrEmpty(customerInfoMod.getListedCompanyFlag())) {
+			sendMap.put("listedCompanyFlag", customerInfoMod.getListedCompanyFlag());
 		}
 		logger.info("CustomerInfoController.onloadPage:" + "検索終了");
 		return customerInfoSearchService.SelectCustomerInfo(sendMap);

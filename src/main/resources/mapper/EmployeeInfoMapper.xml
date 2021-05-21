@@ -327,17 +327,17 @@
 		resultType="jp.co.lyc.cms.model.EmployeeInfoCsvModel">
 		SELECT T002.employeeNo,T002.alphabetName,if(T002.contractDeadline is
 		null or T002.contractDeadline =
-		"","",concat(LEFT(T002.contractDeadline,4),"-",LEFT(RIGHT(T002.contractDeadline,4),2),"-",RIGHT(T002.contractDeadline,2)))
+		"","",concat(LEFT(T002.contractDeadline,4),"/",LEFT(RIGHT(T002.contractDeadline,4),2),"/",RIGHT(T002.contractDeadline,2)))
 		AS contractDeadline,
 		T002.companyMail,T002.japaneseCalendar,if(T002.birthday =
-		"","",concat(LEFT(T002.birthday,4),"-",LEFT(RIGHT(T002.birthday,4),2),"-",RIGHT(T002.birthday,2)))
+		"","",concat(LEFT(T002.birthday,4),"/",LEFT(RIGHT(T002.birthday,4),2),"/",RIGHT(T002.birthday,2)))
 		AS birthday,
 		if(T002.intoCompanyYearAndMonth is null or
 		T002.intoCompanyYearAndMonth =
-		"","",concat(LEFT(T002.intoCompanyYearAndMonth,4),"-",RIGHT(T002.intoCompanyYearAndMonth,2)))
+		"","",concat(LEFT(T002.intoCompanyYearAndMonth,4),"/",RIGHT(T002.intoCompanyYearAndMonth,2)))
 		AS intoCompanyYearAndMonth,if(T002.stayPeriod is null or
 		T002.stayPeriod =
-		"","",concat(LEFT(T002.stayPeriod,4),"-",LEFT(RIGHT(T002.stayPeriod,4),2),"-",RIGHT(T002.stayPeriod,2)))
+		"","",concat(LEFT(T002.stayPeriod,4),"/",LEFT(RIGHT(T002.stayPeriod,4),2),"/",RIGHT(T002.stayPeriod,2)))
 		AS stayPeriod,
 		if(T002.residenceCardNo is
 		null,"",T002.residenceCardNo)
@@ -347,7 +347,7 @@
 		passportNo,
 		if(T002.passportStayPeriod is null or
 		T002.passportStayPeriod =
-		"","",concat(LEFT(T002.passportStayPeriod,4),"-",LEFT(RIGHT(T002.passportStayPeriod,4),2),"-",RIGHT(T002.passportStayPeriod,2)))
+		"","",concat(LEFT(T002.passportStayPeriod,4),"/",LEFT(RIGHT(T002.passportStayPeriod,4),2),"/",RIGHT(T002.passportStayPeriod,2)))
 		AS passportStayPeriod,if(T002.myNumber is null,"",T002.myNumber) AS
 		myNumber,
 		if(if(T002.employmentInsuranceStatus is
@@ -355,6 +355,7 @@
 		"1","あり",if(if(T002.employmentInsuranceStatus is
 		null,"",T002.employmentInsuranceStatus) = "0","なし","")) AS
 		employmentInsuranceStatus,
+		if(T002.employmentInsuranceNo is null,"",T002.employmentInsuranceNo) AS employmentInsuranceNo,
 		if(T002.phoneNo is null or T002.phoneNo =
 		"","",concat(LEFT(T002.phoneNo,3),"-",LEFT(RIGHT(T002.phoneNo,8),4),"-",RIGHT(T002.phoneNo,4)))
 		AS phoneNo,

@@ -325,21 +325,21 @@ public class EmployeeInfoController extends BaseController {
 		employeeList = employeeInfoService.getEmployeesCSV(employeeNo);
 		for (int i = 0; i < employeeList.size(); i++) {
 			if (!employeeList.get(i).getBirthday().equals("")) {
-				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 				employeeList.get(i)
 						.setAge(String.valueOf(getAgeByBirth(dateFormat.parse(employeeList.get(i).getBirthday()))));
 			} else {
 				employeeList.get(i).setAge("");
 			}
 			if (!employeeList.get(i).getStayPeriod().equals("")) {
-				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 				employeeList.get(i).setStayPeriodYears(
 						String.valueOf(getAgeByBirth(dateFormat.parse(employeeList.get(i).getStayPeriod()))));
 			} else {
 				employeeList.get(i).setStayPeriodYears("");
 			}
 			if (!employeeList.get(i).getIntoCompanyYearAndMonth().equals("")) {
-				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM");
+				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM");
 				employeeList.get(i).setIntoCompanyYears(String
 						.valueOf(getAgeByBirth(dateFormat.parse(employeeList.get(i).getIntoCompanyYearAndMonth()))));
 			} else {

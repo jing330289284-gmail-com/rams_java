@@ -33,6 +33,8 @@
 		CONCAT( employeeFristName,
 		employeeLastName ) TEXT
 		FROM T001Employee
+		order by
+		left(employeeNo,2)="BP",left(employeeNo,2)="SC",left(employeeNo,2)="SP",employeeNo
 	</select>
 
 	<!-- 本社社員名 -->
@@ -62,6 +64,22 @@
 		FROM
 		T007CustomerInfo
 	</select>
+	
+		<!-- お客様略称 -->
+	<select id="getCustomerAbbreviation"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT
+		customerNo CODE,
+		CONCAT( customerAbbreviation, '(',
+		customerNo, ')' ) NAME,
+		customerAbbreviation TEXT
+		FROM
+		T007CustomerInfo
+		WHERE
+		customerAbbreviation is not null
+		AND customerAbbreviation != ""
+	</select>
+	
 	<!-- 在留資格 -->
 	<select id="getVisa" resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT visaCode code,visaName

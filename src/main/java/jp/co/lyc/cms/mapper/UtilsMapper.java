@@ -345,6 +345,13 @@ public interface UtilsMapper {
 	 * @return
 	 */
 	public List<ModelClass> getAgeClassification();
+	
+	/**
+	 * お客様略称取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getCustomerAbbreviation();
 
 	/**
 	 * 面談回数取得

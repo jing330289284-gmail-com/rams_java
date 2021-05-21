@@ -15,6 +15,7 @@
 	
 	<!-- データのインサート -->
 	<insert id="insertMaster" parameterType="map">
-		INSERT INTO T008TopCustomerInfo (topCustomerNo,topCustomerName,topCustomerAbbreviation,url,updateTime,createTime,updateUser) VALUE(#{max},#{topCustomerName},#{topCustomerAbbreviation},#{url},NOW(),NOW(),#{updateUser})
+		INSERT INTO T008TopCustomerInfo (topCustomerNo,topCustomerName,topCustomerAbbreviation,url,updateTime,createTime,updateUser)
+		VALUE(#{max},#{topCustomerName},#{topCustomerAbbreviation},#{url},NOW(),NOW(),#{updateUser})
 	</insert>
 </mapper>

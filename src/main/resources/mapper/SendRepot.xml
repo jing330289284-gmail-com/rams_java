@@ -1,280 +1,300 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="jp.co.lyc.cms.mapper.SendRepotMapper">
-    <resultMap id="SendRepot" type="jp.co.lyc.cms.model.SendRepotModel"/>
-     <!--　部門取る -->
-        <select id="getCustomerDepartmentCode" resultType="jp.co.lyc.cms.model.SendRepotModel">
-   		SELECT 
-	   		T009.customerDepartmentCode as code,
-			M018.customerDepartmentName as name
-		FROM
-		    T009CustomerDepartmentInfo T009
-		LEFT JOIN 
-			M018CustomerDepartment M018
-		ON
-			T009.customerDepartmentCode=M018.customerDepartmentCode
-		WHERE
-		    T009.customerNo = #{customerNo}
-	    AND
-			T009.responsiblePerson!='' 
-		AND 
-			T009.responsiblePerson is not null
-		GROUP BY
-			T009.customerDepartmentCode;
-    </select>
-    <!--　担当取る -->
-    <select id="getPurchasingManagersCode" resultType="jp.co.lyc.cms.model.SendRepotModel">
-  SELECT 
-	  (@rowNo:=@rowNo+1 ) AS code,
-	  T01.responsiblePerson AS name 
-   FROM(
-   		SELECT 
-			responsiblePerson
-		FROM
-		    T009CustomerDepartmentInfo
-		WHERE
-			 customerNo = #{customerNo}
-		AND
-		    customerDepartmentCode = #{customerDepartmentCode}
-		UNION
-		SELECT 
-			representative
-		FROM
-			T007CustomerInfo 
-		WHERE 
-			customerNo = #{customerNo}
-		AND
-			representative!=''
-		AND
-			representative IS NOT NULL
-		AND
-			customerDepartmentCode=#{customerDepartmentCode}
-	    UNION
-		SELECT 
-			purchasingManagers
-		FROM
-			T007CustomerInfo 
-		WHERE 
-			customerNo = #{customerNo}
-		AND
-			purchasingManagers!=''
-		AND
-			purchasingManagers IS NOT NULL
-		AND
-			customerDepartmentCode=#{customerDepartmentCode}) T01,
-			(SELECT @rowNo:=0) AS rowId
-    </select>
-    <!--　お客様取る -->
-    <select id="getCustomers"
+	<resultMap id="SendRepot"
+		type="jp.co.lyc.cms.model.SendRepotModel" />
+	<!-- 部門取る -->
+	<select id="getCustomerDepartmentCode"
 		resultType="jp.co.lyc.cms.model.SendRepotModel">
 		SELECT
-			(@rowNo:=@rowNo+1 ) AS rowId,
-			T007.customerNo,
-			T007.customerName,
-			T007.purchasingManagers,
-			T009.customerDepartmentCode,
-			T009.positionCode,
-			T007.purchasingManagersMail,
-			T007.levelCode,
-			'' AS monthCount,
-			'' AS
-			purchasingManagers2,
-			'' AS positionCode2,
-			'' AS purchasingManagersMail2,
-			T018.approvalStatus,
-			T018.sentReportStatus
+		T009.customerDepartmentCode as code,
+		M018.customerDepartmentName as name
 		FROM
-			T007CustomerInfo AS T007
+		T009CustomerDepartmentInfo T009
 		LEFT JOIN
-			T009CustomerDepartmentInfo AS T009
+		M018CustomerDepartment M018
 		ON
-			T007.customerNo = T009.customerNo
+		T009.customerDepartmentCode=M018.customerDepartmentCode
+		WHERE
+		T009.customerNo = #{customerNo}
 		AND
-			T007.purchasingManagers=T009.responsiblePerson
+		T009.responsiblePerson!=''
+		AND
+		T009.responsiblePerson is not null
+		GROUP BY
+		T009.customerDepartmentCode;
+	</select>
+	<!-- 担当取る -->
+	<select id="getPurchasingManagersCode"
+		resultType="jp.co.lyc.cms.model.SendRepotModel">
+		SELECT
+		(@rowNo:=@rowNo+1 ) AS code,
+		T01.responsiblePerson AS
+		name
+		FROM(
+		SELECT
+		responsiblePerson
+		FROM
+		T009CustomerDepartmentInfo
+		WHERE
+		customerNo = #{customerNo}
+		AND
+		customerDepartmentCode =
+		#{customerDepartmentCode}
+		UNION
+		SELECT
+		representative
+		FROM
+		T007CustomerInfo
+		WHERE
+		customerNo = #{customerNo}
+		AND
+		representative!=''
+		AND
+		representative IS NOT NULL
+		AND
+		customerDepartmentCode=#{customerDepartmentCode}
+		UNION
+		SELECT
+		purchasingManagers
+		FROM
+		T007CustomerInfo
+		WHERE
+		customerNo = #{customerNo}
+		AND
+		purchasingManagers!=''
+		AND
+		purchasingManagers IS NOT NULL
+		AND
+		customerDepartmentCode=#{customerDepartmentCode}) T01,
+		(SELECT
+		@rowNo:=0) AS rowId
+	</select>
+	<!-- お客様取る -->
+	<select id="getCustomers"
+		resultType="jp.co.lyc.cms.model.SendRepotModel">
+		SELECT
+		(@rowNo:=@rowNo+1 ) AS rowId,
+		T007.customerNo,
+		T007.customerName,
+		T007.purchasingManagers,
+		T009.customerDepartmentCode,
+		T009.positionCode,
+		T007.purchasingManagersMail,
+		T007.levelCode,
+		'' AS monthCount,
+		'' AS
+		purchasingManagers2,
+		'' AS positionCode2,
+		'' AS purchasingManagersMail2,
+		T018.approvalStatus,
+		T018.sentReportStatus
+		FROM
+		T007CustomerInfo AS T007
 		LEFT JOIN
-		(SELECT 
-				customerNo,
-				MIN(approvalStatus) approvalStatus,
-				MIN(sentReportStatus) sentReportStatus
-			FROM 
-				T018WorkTotalTime 
-			WHERE
-				customerNo IS NOT NULL
-			AND
-				CASE 1 WHEN DATE_FORMAT(now(),"%d")>10
-		    THEN
-		   		attendanceYearAndMonth=DATE_FORMAT(now(),"%Y%m")
-		    ELSE
-		    	attendanceYearAndMonth=DATE_FORMAT(DATE_ADD(NOW(), INTERVAL -1 MONTH),"%Y%m")
-		    END
-			GROUP BY
-				customerNo
+		T009CustomerDepartmentInfo AS T009
+		ON
+		T007.customerNo =
+		T009.customerNo
+		AND
+		T007.purchasingManagers=T009.responsiblePerson
+		LEFT
+		JOIN
+		(SELECT
+		customerNo,
+		MIN(approvalStatus) approvalStatus,
+		MIN(sentReportStatus) sentReportStatus
+		FROM
+		T018WorkTotalTime
+		WHERE
+		customerNo IS NOT NULL
+		AND
+		CASE 1 WHEN DATE_FORMAT(now(),"%d")>10
+		THEN
+		attendanceYearAndMonth=DATE_FORMAT(now(),"%Y%m")
+		ELSE
+		attendanceYearAndMonth=DATE_FORMAT(DATE_ADD(NOW(), INTERVAL -1
+		MONTH),"%Y%m")
+		END
+		GROUP BY
+		customerNo
 		)T018
 		ON
-			T018.customerNo=T007.customerNo,
+		T018.customerNo=T007.customerNo,
 		(SELECT @rowNo:=-1) AS rowId
 	</select>
-    <select id="getCustomersOLD" resultType="jp.co.lyc.cms.model.SendRepotModel">
-	SELECT * FROM(
-		SELECT 
-			customerNo,
-			customerName,
-			purchasingManagersMail,
-			purchasingManagers,
-			"" as customerDepartment,
-			customerDepartmentCode,
-			"0" as positionCode,
-			representative as responsiblePerson 
-		FROM 
-			T007CustomerInfo
-		WHERE 
-			representative!=""
-		AND 
-			representative is not null
-	UNION
-		SELECT 
-			T007.customerNo,
-			T007.customerName,
-			T007.purchasingManagersMail,
-			T007.purchasingManagers,
-			T007.customerDepartment,
-			T007.customerDepartmentCode,
-			T007.positionCode,
-			T009.responsiblePerson 
+	<select id="getCustomersOLD"
+		resultType="jp.co.lyc.cms.model.SendRepotModel">
+		SELECT * FROM(
+		SELECT
+		customerNo,
+		customerName,
+		purchasingManagersMail,
+		purchasingManagers,
+		"" as customerDepartment,
+		customerDepartmentCode,
+		"0" as positionCode,
+		representative as
+		responsiblePerson
 		FROM
-			(SELECT 
-				customerNo,
-				customerName,
-				purchasingManagersMail,
-				purchasingManagers,
-				"購買部" as customerDepartment,
-				customerDepartmentCode,
-				positionCode
-			FROM 
-				T007CustomerInfo 
-			WHERE
-				purchasingManagers!="" 
-			AND 
-				purchasingManagers is not null
-			AND
-				customerDepartmentCode=3)T007
-			LEFT JOIN 
-				T009CustomerDepartmentInfo T009
-			ON 
-				T007.customerNo=T009.customerNo
-			AND
-				T007.customerDepartmentCode=T009.customerDepartmentCode
-	UNION
-		SELECT 
-			T007.customerNo,
-			T007.customerName,
-			T007.purchasingManagersMail,
-			T007.purchasingManagers,
-			T007.customerDepartment,
-			T007.customerDepartmentCode,
-			T007.positionCode,
-			T009.responsiblePerson 
-		FROM
-			(SELECT 
-				customerNo,
-				customerName,
-				purchasingManagersMail,
-				purchasingManagers,
-				"営業部" as customerDepartment,
-				customerDepartmentCode,
-				positionCode,
-				representative as responsiblePerson 
-			FROM 
-				T007CustomerInfo
-			WHERE
-				purchasingManagers!="" 
-			AND 
-				purchasingManagers is not null
-			AND
-				customerDepartmentCode=4)T007
-			LEFT JOIN 
-				T009CustomerDepartmentInfo T009 
-			ON
-				T007.customerNo=T009.customerNo 
-			AND
-				T007.customerDepartmentCode=T009.customerDepartmentCode
-			GROUP BY
-			 customerNo)as T007
-    </select>
-     <!--　担当リスト取得 -->
-      <select id="getSalesPersonsLists" resultType="jp.co.lyc.cms.model.SendRepotModel">
-     SELECT
-			customerDepartmentMail AS code,
-			responsiblePerson AS name 
-		FROM
-		    T009CustomerDepartmentInfo
+		T007CustomerInfo
 		WHERE
-			customerDepartmentMail!=''
+		representative!=""
 		AND
-		  	customerDepartmentMail IS NOT NULL
-     </select>
-        <!--　担当リスト保存 -->
-    <update id="salesPersonsListsUpdate" parameterType="String">
+		representative is not null
+		UNION
+		SELECT
+		T007.customerNo,
+		T007.customerName,
+		T007.purchasingManagersMail,
+		T007.purchasingManagers,
+		T007.customerDepartment,
+		T007.customerDepartmentCode,
+		T007.positionCode,
+		T009.responsiblePerson
+		FROM
+		(SELECT
+		customerNo,
+		customerName,
+		purchasingManagersMail,
+		purchasingManagers,
+		"購買部" as customerDepartment,
+		customerDepartmentCode,
+		positionCode
+		FROM
+		T007CustomerInfo
+		WHERE
+		purchasingManagers!=""
+		AND
+		purchasingManagers is not null
+		AND
+		customerDepartmentCode=3)T007
+		LEFT JOIN
+		T009CustomerDepartmentInfo T009
+		ON
+		T007.customerNo=T009.customerNo
+		AND
+		T007.customerDepartmentCode=T009.customerDepartmentCode
+		UNION
+		SELECT
+		T007.customerNo,
+		T007.customerName,
+		T007.purchasingManagersMail,
+		T007.purchasingManagers,
+		T007.customerDepartment,
+		T007.customerDepartmentCode,
+		T007.positionCode,
+		T009.responsiblePerson
+		FROM
+		(SELECT
+		customerNo,
+		customerName,
+		purchasingManagersMail,
+		purchasingManagers,
+		"営業部" as customerDepartment,
+		customerDepartmentCode,
+		positionCode,
+		representative as
+		responsiblePerson
+		FROM
+		T007CustomerInfo
+		WHERE
+		purchasingManagers!=""
+		AND
+		purchasingManagers is not null
+		AND
+		customerDepartmentCode=4)T007
+		LEFT
+		JOIN
+		T009CustomerDepartmentInfo T009
+		ON
+		T007.customerNo=T009.customerNo
+		AND
+		T007.customerDepartmentCode=T009.customerDepartmentCode
+		GROUP BY
+		customerNo)as T007
+	</select>
+	<!-- 担当リスト取得 -->
+	<select id="getSalesPersonsLists"
+		resultType="jp.co.lyc.cms.model.SendRepotModel">
+		SELECT
+		customerDepartmentMail AS code,
+		responsiblePerson AS
+		name
+		FROM
+		T009CustomerDepartmentInfo
+		WHERE
+		customerDepartmentMail!=''
+		AND
+		customerDepartmentMail IS NOT NULL
+	</select>
+	<!-- 担当リスト保存 -->
+	<update id="salesPersonsListsUpdate" parameterType="String">
 		update
-			T021CustomerSendMailStorageList
+		T021CustomerSendMailStorageList
 		set
-			subChargeMailList=#{subChargeMailList},
-			updateTime=now(),
-			updateUser=#{updateUser}
-		where 
-			StorageListName=#{storageListName} 
-		and 
-			transmissionClassificationCode=0
-	</update>
-		<!--　対象社員リスト保存 -->
-    <update id="targetEmployeeListsUpdate" parameterType="String">
-		update
-			T021CustomerSendMailStorageList
-		set
-			CandidateInChargeList=#{candidateInChargeList},
-			updateTime=now(),
-			updateUser=#{updateUser}
+		subChargeMailList=#{subChargeMailList},
+		updateTime=now(),
+		updateUser=#{updateUser}
 		where
-			StorageListName=#{storageListName} 
+		StorageListName=#{storageListName}
 		and
-			transmissionClassificationCode=0
+		transmissionClassificationCode=0
+	</update>
+	<!-- 対象社員リスト保存 -->
+	<update id="targetEmployeeListsUpdate" parameterType="String">
+		update
+		T021CustomerSendMailStorageList
+		set
+		CandidateInChargeList=#{candidateInChargeList},
+		updateTime=now(),
+		updateUser=#{updateUser}
+		where
+		StorageListName=#{storageListName}
+		and
+		transmissionClassificationCode=0
 	</update>
 	<select id="getCustomerList" parameterType="String"
 		resultType="String">
 		SELECT customerList FROM T021CustomerSendMailStorageList
 		where StorageListName = #{storageListName}
-		and transmissionClassificationCode=0;
+		and
+		transmissionClassificationCode=0;
 	</select>
-      <!--　リスト取得 -->
-      <select id="getLists" resultType="jp.co.lyc.cms.model.SendRepotModel">
-			select 
-				StorageListName as name,
-				transmissionClassificationCode as code,
-				customerList as customerNo
-			from 
-				T021CustomerSendMailStorageList 
-			where 
-				transmissionClassificationCode=0 order by StorageListName
-    </select>
-     <select id="getListByName" resultType="jp.co.lyc.cms.model.SendRepotModel">
-			select 
-				customerList,
-				mainChargeList,
-				departmentCodeList,
-				candidateInChargeList,
-				positionCodeList,
-				mainChargeMailList,
-				subChargeMailList
-			from 
-				T021CustomerSendMailStorageList
-			where 
-				transmissionClassificationCode=0
-			and
-				StorageListName=#{name}
-    </select>
-    
-    <select id="getCustomersByNos" resultType="jp.co.lyc.cms.model.SendRepotModel">
-	    SELECT
+	<!-- リスト取得 -->
+	<select id="getLists"
+		resultType="jp.co.lyc.cms.model.SendRepotModel">
+		select
+		StorageListName as name,
+		transmissionClassificationCode as code,
+		customerList as customerNo
+		from
+		T021CustomerSendMailStorageList
+		where
+		transmissionClassificationCode=0
+		order by StorageListName
+	</select>
+	<select id="getListByName"
+		resultType="jp.co.lyc.cms.model.SendRepotModel">
+		select
+		customerList,
+		mainChargeList,
+		departmentCodeList,
+		candidateInChargeList,
+		positionCodeList,
+		mainChargeMailList,
+		subChargeMailList
+		from
+		T021CustomerSendMailStorageList
+		where
+		transmissionClassificationCode=0
+		and
+		StorageListName=#{name}
+	</select>
+
+	<select id="getCustomersByNos"
+		resultType="jp.co.lyc.cms.model.SendRepotModel">
+		SELECT
 		(@rowNo:=@rowNo+1 ) AS rowId,
 		T007.customerNo,
 		T007.customerName,
@@ -287,73 +307,81 @@
 		T018.sentReportStatus,
 		'' AS
 		monthCount,
-		'' AS purchasingManagers2,
+		'' AS
+		purchasingManagers2,
 		'' AS positionCode2,
 		'' AS purchasingManagersMail2
 		FROM
-			T007CustomerInfo AS T007
+		T007CustomerInfo AS T007
 		LEFT JOIN
-		(SELECT 
-				customerNo,
-				MIN(approvalStatus) approvalStatus,
-				MIN(sentReportStatus) sentReportStatus
-			FROM 
-				T018WorkTotalTime 
-			WHERE
-				customerNo IS NOT NULL
-			AND
-				CASE 1 WHEN DATE_FORMAT(now(),"%d")>10
-		    THEN
-		   		attendanceYearAndMonth=DATE_FORMAT(now(),"%Y%m")
-		    ELSE
-		    	attendanceYearAndMonth=DATE_FORMAT(DATE_ADD(NOW(), INTERVAL -1 MONTH),"%Y%m")
-		    END
-			GROUP BY
-				customerNo
+		(SELECT
+		customerNo,
+		MIN(approvalStatus) approvalStatus,
+		MIN(sentReportStatus)
+		sentReportStatus
+		FROM
+		T018WorkTotalTime
+		WHERE
+		customerNo IS NOT NULL
+		AND
+		CASE 1 WHEN DATE_FORMAT(now(),"%d")>10
+		THEN
+		attendanceYearAndMonth=DATE_FORMAT(now(),"%Y%m")
+		ELSE
+		attendanceYearAndMonth=DATE_FORMAT(DATE_ADD(NOW(), INTERVAL -1
+		MONTH),"%Y%m")
+		END
+		GROUP BY
+		customerNo
 		)T018
-        ON
-        	T007.customerNo = T018.customerNo
+		ON
+		T007.customerNo =
+		T018.customerNo
 		LEFT JOIN
-		T009CustomerDepartmentInfo AS T009 
-		ON 
+		T009CustomerDepartmentInfo AS T009
+		ON
 		T007.customerNo = T009.customerNo
-		AND T007.purchasingManagers = T009.responsiblePerson,
+		AND T007.purchasingManagers =
+		T009.responsiblePerson,
 		(SELECT
 		@rowNo:=-1)
 		AS rowId
 		WHERE
-			T007.customerNo IN
-			<foreach collection="array" index="index" item="item" open="("
-				separator="," close=")">
-				#{item}
-			</foreach>
+		T007.customerNo
+		IN
+		<foreach collection="array" index="index" item="item" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
 	</select>
 	<select id="getMainChargeList"
 		resultType="jp.co.lyc.cms.model.SendRepotModel">
 		SELECT
-			mainChargeList,
-			departmentCodeList,
-			candidateInChargeList
+		mainChargeList,
+		departmentCodeList,
+		candidateInChargeList
 		FROM
-			T021CustomerSendMailStorageList
+		T021CustomerSendMailStorageList
 		WHERE
-			StorageListName = #{storageListName}  
+		StorageListName = #{storageListName}
 		AND
-			transmissionClassificationCode=0
+		transmissionClassificationCode=0
 	</select>
-		<select id="getCandidateInChargeList"  parameterType="String"
+	<select id="getCandidateInChargeList" parameterType="String"
 		resultType="jp.co.lyc.cms.model.SendRepotModel">
 		SELECT
-			CandidateInChargeList
+		CandidateInChargeList
 		FROM
-			T021CustomerSendMailStorageList
+		T021CustomerSendMailStorageList
 		WHERE
-			StorageListName = #{storageListName} 
+		StorageListName =
+		#{storageListName}
 		AND
-			transmissionClassificationCode = 0
+		transmissionClassificationCode = 0
 	</select>
-    <insert id="creatList" parameterType="jp.co.lyc.cms.model.SendRepotModel">
-  		INSERT INTO T021CustomerSendMailStorageList
+	<insert id="creatList"
+		parameterType="jp.co.lyc.cms.model.SendRepotModel">
+		INSERT INTO T021CustomerSendMailStorageList
 		(
 		StorageListName,
 		transmissionClassificationCode,
@@ -378,22 +406,23 @@
 		#{positionCodeList},
 		#{mainChargeMailList},
 		#{subChargeMailList},
-		 NOW(),
-		 NOW(),
+		NOW(),
+		NOW(),
 		#{updateUser})
-    </insert>
+	</insert>
 
-	<!--　リスト名変更-->
-    <update id="listNameUpdate" parameterType="String">
+	<!-- リスト名変更 -->
+	<update id="listNameUpdate" parameterType="String">
 		update
-			T021CustomerSendMailStorageList
+		T021CustomerSendMailStorageList
 		set
-			StorageListName=#{storageListName},updateTime=now(),updateUser=#{updateUser}
-		where 
-			StorageListName=#{oldStorageListName} and transmissionClassificationCode=0
+		StorageListName=#{storageListName},updateTime=now(),updateUser=#{updateUser}
+		where
+		StorageListName=#{oldStorageListName} and
+		transmissionClassificationCode=0
 	</update>
-	
-   	<delete id="deleteList" parameterType="String">
+
+	<delete id="deleteList" parameterType="String">
 		DELETE
 		FROM
 		T021CustomerSendMailStorageList
@@ -401,91 +430,140 @@
 		StorageListName=#{storageListName} and
 		transmissionClassificationCode=0
 	</delete>
-	 <update id="deleteListOfEmp" parameterType="String">
+	<update id="deleteListOfEmp" parameterType="String">
 		update
-			T018WorkTotalTime
+		T018WorkTotalTime
 		set
-			StorageListName="",updateTime=now(),updateUser=#{updateUser}
-		where 
-			StorageListName=#{storageListName};
+		StorageListName="",updateTime=now(),updateUser=#{updateUser}
+		where
+		StorageListName=#{storageListName};
 	</update>
-	
-	<!--　社員追加画面-->
-    <select id="getTargetEmployees" parameterType="String" resultType="jp.co.lyc.cms.model.SendRepotModel">
-		SELECT 
-		    concat_ws("",T001.employeeFristName,T001.employeeLastName) employeeName,
-		    T001.employeeNo,
-		    T002.employeeStatus,
-		    T006.stationCode,
-		    T018.approvalStatus,
-		    T018.sentReportStatus,
-            T018.attendanceYearAndMonth
+
+	<!-- 社員追加画面(old) -->
+	<select id="getTargetEmployees(old)" parameterType="String"
+		resultType="jp.co.lyc.cms.model.SendRepotModel">
+		SELECT
+		concat_ws("",T001.employeeFristName,T001.employeeLastName)
+		employeeName,
+		T001.employeeNo,
+		T002.employeeStatus,
+		T006.stationCode,
+		T018.approvalStatus,
+		T018.sentReportStatus,
+		T018.attendanceYearAndMonth
 		FROM
-		    newRams.T001Employee T001
+		newRams.T001Employee T001
 		LEFT JOIN
-			newRams.T018WorkTotalTime T018
+		newRams.T018WorkTotalTime T018
 		ON
-			T001.employeeNo=T018.employeeNo
+		T001.employeeNo=T018.employeeNo
 		LEFT JOIN
-			newRams.T002EmployeeDetail T002
+		newRams.T002EmployeeDetail
+		T002
 		ON
-			T001.employeeNo=T002.employeeNo
+		T001.employeeNo=T002.employeeNo
 		LEFT JOIN
-			newRams.T006EmployeeSiteInfo T006
+		newRams.T006EmployeeSiteInfo T006
 		ON
-			T001.employeeNo=T006.employeeNo
+		T001.employeeNo=T006.employeeNo
 		AND
-			T006.customerNo=T018.customerNo
+		T006.customerNo=T018.customerNo
 		AND
-			CASE
-			WHEN 
-				DATE_FORMAT(now(),"%d")>10
-		    THEN
-			   		DATE_FORMAT(now(),"%Y%m")>=left(T006.admissionStartDate,6)
-		        AND
-		            DATE_FORMAT(now(),"%Y%m")&lt;=ifnull(left(T006.admissionEndDate,6),"999999")
-		    ELSE
-			    	DATE_FORMAT(DATE_ADD(NOW(), INTERVAL -1 MONTH),"%Y%m")>=left(T006.admissionStartDate,6)
-				AND
-		            DATE_FORMAT(DATE_ADD(NOW(), INTERVAL -1 MONTH),"%Y%m")&lt;=ifnull(left(T006.admissionEndDate,6),"999999")
-			END
+		CASE
+		WHEN
+		DATE_FORMAT(now(),"%d")>10
+		THEN
+		DATE_FORMAT(now(),"%Y%m")>=left(T006.admissionStartDate,6)
+		AND
+		DATE_FORMAT(now(),"%Y%m")&lt;=ifnull(left(T006.admissionEndDate,6),"999999")
+		ELSE
+		DATE_FORMAT(DATE_ADD(NOW(), INTERVAL -1
+		MONTH),"%Y%m")>=left(T006.admissionStartDate,6)
+		AND
+		DATE_FORMAT(DATE_ADD(NOW(), INTERVAL -1
+		MONTH),"%Y%m")&lt;=ifnull(left(T006.admissionEndDate,6),"999999")
+		END
 		WHERE
-		 	T018.customerNo =#{customerNo}
+		T018.customerNo =#{customerNo}
 		AND
-			CASE
-			WHEN 
-				DATE_FORMAT(now(),"%d")>10
-		    THEN
-		   		T018.attendanceYearAndMonth=DATE_FORMAT(now(),"%Y%m")
-		    ELSE
-		    	T018.attendanceYearAndMonth=DATE_FORMAT(DATE_ADD(NOW(), INTERVAL -1 MONTH),"%Y%m")
-		    END
+		CASE
+		WHEN
+		DATE_FORMAT(now(),"%d")>10
+		THEN
+		T018.attendanceYearAndMonth=DATE_FORMAT(now(),"%Y%m")
+		ELSE
+		T018.attendanceYearAndMonth=DATE_FORMAT(DATE_ADD(NOW(), INTERVAL -1
+		MONTH),"%Y%m")
+		END
 	</select>
+
+	<!-- 社員追加画面 -->
+	<select id="getTargetEmployees" parameterType="String"
+		resultType="jp.co.lyc.cms.model.SendRepotModel">
+		SELECT
+		concat(T001.employeeFristName,"
+		",T001.employeeLastName) AS employeeName,
+		T002.employeeStatus,
+		ifnull(M013.stationName,"") AS stationName,
+		T006.customerNo,
+		T018.attendanceYearAndMonth,
+		T018.approvalStatus,
+		T018.sentReportStatus
+		FROM newRams.T006EmployeeSiteInfo AS T006
+		Left
+		Join newRams.T001Employee AS T001
+		ON T006.employeeNo = T001.employeeNo
+		Left Join newRams.M013Station AS M013
+		ON T006.stationCode =
+		M013.stationCode
+		Left Join newRams.T002EmployeeDetail T002
+		ON
+		T006.employeeNo=T002.employeeNo
+		Left Join newRams.T018WorkTotalTime AS
+		T018
+		ON T006.employeeNo = T018.employeeNo
+		and
+		T018.attendanceYearAndMonth = DATE_FORMAT(now(),"%Y%m")
+		where T006.admissionStartDate is
+		not null
+		and T006.admissionStartDate != ""
+		and T006.admissionStartDate
+		&lt;=
+		DATE_FORMAT(now(),"%Y%m%d")
+		and T006.admissionEndDate is null
+		and
+		T018.attendanceYearAndMonth is not null
+		and T006.customerNo = #{customerNo}
+	</select>
+
 	<update id="deleteCustomerList" parameterType="String">
 		update
 		T021CustomerSendMailStorageList
 		set
 		customerList = "",
-		mainChargeList = "",
+		mainChargeList =
+		"",
 		departmentCodeList = "",
 		candidateInChargeList = "",
 		updateTime=now(),updateUser=#{updateUser}
 		where
 		StorageListName=#{storageListName} and
-		transmissionClassificationCode = 0
+		transmissionClassificationCode =
+		0
 	</update>
 	<update id="deleteCustomerListByNo" parameterType="String">
 		update
-			T021CustomerSendMailStorageList
+		T021CustomerSendMailStorageList
 		set
-			customerList = #{customerList},
-			mainChargeList = #{mainChargeList},
-			departmentCodeList = #{departmentCodeList}
-			candidateInChargeList = #{candidateInChargeList}
+		customerList = #{customerList},
+		mainChargeList = #{mainChargeList},
+		departmentCodeList =
+		#{departmentCodeList}
+		candidateInChargeList = #{candidateInChargeList}
 		where
-			StorageListName = #{storageListName}
+		StorageListName = #{storageListName}
 		AND
-			transmissionClassificationCode=0;
+		transmissionClassificationCode=0;
 	</update>
 	<!-- リスト最大番号取得 -->
 	<select id="getMaxStorageListName" parameterType="String"
@@ -496,15 +574,20 @@
 		where
 		StorageListName like '送信リスト%';
 	</select>
-		<update id="customerListUpdate" parameterType="String">
+	<update id="customerListUpdate" parameterType="String">
 		update
 		T021CustomerSendMailStorageList
 		set
-		customerList = CONCAT(customerList, ',' , #{customerList}),
-		mainChargeList = CONCAT(mainChargeList,#{customerList},':;'),
-		departmentCodeList = CONCAT(departmentCodeList,#{customerList},':;')
-		candidateInChargeList = CONCAT(candidateInChargeList,#{customerList},':;')
-		where 
-		StorageListName = #{storageListName} and transmissionClassificationCode=0;
+		customerList = CONCAT(customerList,
+		',' , #{customerList}),
+		mainChargeList =
+		CONCAT(mainChargeList,#{customerList},':;'),
+		departmentCodeList =
+		CONCAT(departmentCodeList,#{customerList},':;')
+		candidateInChargeList =
+		CONCAT(candidateInChargeList,#{customerList},':;')
+		where
+		StorageListName = #{storageListName} and
+		transmissionClassificationCode=0;
 	</update>
 </mapper>
