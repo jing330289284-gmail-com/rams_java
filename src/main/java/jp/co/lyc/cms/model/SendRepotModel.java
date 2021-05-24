@@ -17,7 +17,7 @@ public class SendRepotModel {
 	String updateUser;// 更新者
 	String actionType;// 処理区分
 	String topCustomerNo;// 上位客様番号
-	String employeeNo;//社員番号
+	String employeeNo;// 社員番号
 	String employeeName;// 社員名
 	ArrayList<String> employeeNameList;//
 	String siteLocation;// 現場場所
@@ -69,66 +69,92 @@ public class SendRepotModel {
 	String employeeStatus;
 	String approvalStatus;
 	String sentReportStatus;
+	String noChargeList;
+
+	public String getNoChargeList() {
+		return noChargeList;
+	}
+
+	public void setNoChargeList(String noChargeList) {
+		this.noChargeList = noChargeList;
+	}
+
 	public String[] getOldCtmNos() {
 		return oldCtmNos;
 	}
+
 	public void setOldCtmNos(String[] oldCtmNos) {
 		this.oldCtmNos = oldCtmNos;
 	}
+
 	public String[] getDeleteCtmNos() {
 		return deleteCtmNos;
 	}
+
 	public void setDeleteCtmNos(String[] deleteCtmNos) {
 		this.deleteCtmNos = deleteCtmNos;
 	}
+
 	public String getStorageListName() {
 		return storageListName;
 	}
+
 	public void setStorageListName(String storageListName) {
 		this.storageListName = storageListName;
 	}
 
-	
-	
 	public String getCandidateInChargeList() {
 		return candidateInChargeList;
 	}
+
 	public void setCandidateInChargeList(String candidateInChargeList) {
 		this.candidateInChargeList = candidateInChargeList;
 	}
+
 	public String[] getCtmNos() {
 		return ctmNos;
 	}
+
 	public void setCtmNos(String[] ctmNos) {
 		this.ctmNos = ctmNos;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getCode() {
 		return code;
 	}
+
 	public void setCode(String code) {
 		this.code = code;
 	}
+
 	public String getPurchasingManagers2() {
 		return purchasingManagers2;
 	}
+
 	public void setPurchasingManagers2(String purchasingManagers2) {
 		this.purchasingManagers2 = purchasingManagers2;
 	}
+
 	public String getPositionCode2() {
 		return positionCode2;
 	}
+
 	public void setPositionCode2(String positionCode2) {
 		this.positionCode2 = positionCode2;
 	}
+
 	public String getPurchasingManagersMail2() {
 		return purchasingManagersMail2;
 	}
+
 	public void setPurchasingManagersMail2(String purchasingManagersMail2) {
 		this.purchasingManagersMail2 = purchasingManagersMail2;
 	}
@@ -140,12 +166,15 @@ public class SendRepotModel {
 	public void setSalesPersonsAppend(String salesPersonsAppend) {
 		this.salesPersonsAppend = salesPersonsAppend;
 	}
+
 	public String getSendRepotsAppend() {
 		return sendRepotsAppend;
 	}
+
 	public void setSendRepotsAppend(String sendRepotsAppend) {
 		this.sendRepotsAppend = sendRepotsAppend;
 	}
+
 	public int getRowId() {
 		return rowId;
 	}
@@ -153,7 +182,7 @@ public class SendRepotModel {
 	public void setRowId(int rowId) {
 		this.rowId = rowId;
 	}
-	
+
 	public String getPositionName() {
 		return positionName;
 	}
@@ -201,6 +230,7 @@ public class SendRepotModel {
 	public void setCustomerDepartmentMail(String customerDepartmentMail) {
 		this.customerDepartmentMail = customerDepartmentMail;
 	}
+
 	public String getStationName() {
 		return stationName;
 	}
@@ -488,64 +518,83 @@ public class SendRepotModel {
 	public void setPurchasingManagersMail(String purchasingManagersMail) {
 		this.purchasingManagersMail = purchasingManagersMail;
 	}
-	
+
 	public String getCustomerList() {
 		return customerList;
 	}
+
 	public void setCustomerList(String customerList) {
 		this.customerList = customerList;
 	}
+
 	public String getMainChargeList() {
 		return mainChargeList;
 	}
+
 	public void setMainChargeList(String mainChargeList) {
 		this.mainChargeList = mainChargeList;
 	}
+
 	public String getDepartmentCodeList() {
 		return departmentCodeList;
 	}
+
 	public void setDepartmentCodeList(String departmentCodeList) {
 		this.departmentCodeList = departmentCodeList;
 	}
+
 	public String getPositionCodeList() {
 		return positionCodeList;
 	}
+
 	public void setPositionCodeList(String positionCodeList) {
 		this.positionCodeList = positionCodeList;
 	}
+
 	public String getMainChargeMailList() {
 		return mainChargeMailList;
 	}
+
 	public void setMainChargeMailList(String mainChargeMailList) {
 		this.mainChargeMailList = mainChargeMailList;
 	}
+
 	public String getSubChargeMailList() {
 		return subChargeMailList;
 	}
+
 	public void setSubChargeMailList(String subChargeMailList) {
 		this.subChargeMailList = subChargeMailList;
 	}
+
 	public String getApprovalStatus() {
 		return approvalStatus;
 	}
+
 	public String getEmployeeNo() {
 		return employeeNo;
 	}
+
 	public void setEmployeeNo(String employeeNo) {
 		this.employeeNo = employeeNo;
 	}
+
 	public void setApprovalStatus(String approvalStatus) {
 		this.approvalStatus = approvalStatus;
 	}
+
 	public String getSentReportStatus() {
 		return sentReportStatus;
 	}
+
 	public void setSentReportStatus(String sentReportStatus) {
 		this.sentReportStatus = sentReportStatus;
 	}
+
 	public String getEmployeeStatus() {
 		return employeeStatus;
 	}
+
 	public void setEmployeeStatus(String employeeStatus) {
 		this.employeeStatus = employeeStatus;
 	}

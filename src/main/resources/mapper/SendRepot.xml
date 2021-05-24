@@ -246,9 +246,8 @@
 		update
 		T021CustomerSendMailStorageList
 		set
-		CandidateInChargeList=#{candidateInChargeList},
-		updateTime=now(),
-		updateUser=#{updateUser}
+		NoChargeList=#{noChargeList},
+		CandidateInChargeList=#{candidateInChargeList}
 		where
 		StorageListName=#{storageListName}
 		and
@@ -359,6 +358,7 @@
 		SELECT
 		mainChargeList,
 		departmentCodeList,
+		noChargeList,
 		candidateInChargeList
 		FROM
 		T021CustomerSendMailStorageList
@@ -370,6 +370,7 @@
 	<select id="getCandidateInChargeList" parameterType="String"
 		resultType="jp.co.lyc.cms.model.SendRepotModel">
 		SELECT
+		NoChargeList,
 		CandidateInChargeList
 		FROM
 		T021CustomerSendMailStorageList
@@ -388,6 +389,7 @@
 		customerList,
 		mainChargeList,
 		departmentCodeList,
+		noChargeList,
 		candidateInChargeList,
 		positionCodeList,
 		mainChargeMailList,
@@ -402,6 +404,7 @@
 		#{code},
 		#{mainChargeList},
 		#{departmentCodeList},
+		#{noChargeList},
 		#{candidateInChargeList},
 		#{positionCodeList},
 		#{mainChargeMailList},
@@ -501,8 +504,9 @@
 	<select id="getTargetEmployees" parameterType="String"
 		resultType="jp.co.lyc.cms.model.SendRepotModel">
 		SELECT
-		concat(T001.employeeFristName,"
-		",T001.employeeLastName) AS employeeName,
+		concat(T001.employeeFristName,
+		" ",
+		T001.employeeLastName) AS employeeName,
 		T002.employeeStatus,
 		ifnull(M013.stationName,"") AS stationName,
 		T006.customerNo,
@@ -511,29 +515,36 @@
 		T018.sentReportStatus
 		FROM newRams.T006EmployeeSiteInfo AS T006
 		Left
-		Join newRams.T001Employee AS T001
+		Join newRams.T001Employee
+		AS T001
 		ON T006.employeeNo = T001.employeeNo
-		Left Join newRams.M013Station AS M013
+		Left Join
+		newRams.M013Station AS M013
 		ON T006.stationCode =
 		M013.stationCode
-		Left Join newRams.T002EmployeeDetail T002
+		Left
+		Join newRams.T002EmployeeDetail T002
 		ON
 		T006.employeeNo=T002.employeeNo
 		Left Join newRams.T018WorkTotalTime AS
 		T018
-		ON T006.employeeNo = T018.employeeNo
+		ON T006.employeeNo =
+		T018.employeeNo
 		and
-		T018.attendanceYearAndMonth = DATE_FORMAT(now(),"%Y%m")
+		T018.attendanceYearAndMonth =
+		DATE_FORMAT(now(),"%Y%m")
 		where T006.admissionStartDate is
 		not null
-		and T006.admissionStartDate != ""
+		and
+		T006.admissionStartDate != ""
 		and T006.admissionStartDate
 		&lt;=
 		DATE_FORMAT(now(),"%Y%m%d")
 		and T006.admissionEndDate is null
 		and
 		T018.attendanceYearAndMonth is not null
-		and T006.customerNo = #{customerNo}
+		and T006.customerNo =
+		#{customerNo}
 	</select>
 
 	<update id="deleteCustomerList" parameterType="String">
@@ -544,7 +555,9 @@
 		mainChargeList =
 		"",
 		departmentCodeList = "",
-		candidateInChargeList = "",
+		noChargeList = "",
+		candidateInChargeList =
+		"",
 		updateTime=now(),updateUser=#{updateUser}
 		where
 		StorageListName=#{storageListName} and
@@ -558,10 +571,12 @@
 		customerList = #{customerList},
 		mainChargeList = #{mainChargeList},
 		departmentCodeList =
-		#{departmentCodeList}
+		#{departmentCodeList},
+		noChargeList = #{noChargeList},
 		candidateInChargeList = #{candidateInChargeList}
 		where
-		StorageListName = #{storageListName}
+		StorageListName =
+		#{storageListName}
 		AND
 		transmissionClassificationCode=0;
 	</update>
@@ -583,9 +598,13 @@
 		mainChargeList =
 		CONCAT(mainChargeList,#{customerList},':;'),
 		departmentCodeList =
-		CONCAT(departmentCodeList,#{customerList},':;')
-		candidateInChargeList =
-		CONCAT(candidateInChargeList,#{customerList},':;')
+		CONCAT(departmentCodeList,#{customerList},':;'),
+		NoChargeList
+		=
+		CONCAT(NoChargeList,#{customerList},':;'),
+		CandidateInChargeList
+		=
+		CONCAT(CandidateInChargeList,#{customerList},':;')
 		where
 		StorageListName = #{storageListName} and
 		transmissionClassificationCode=0;

@@ -251,7 +251,7 @@
 		T006EmployeeSiteInfo.employeeNo = tempT.employeeNo
 		AND
 		T006EmployeeSiteInfo.admissionStartDate = tempT.admissionStartDate
-		WHERE scheduledEndDate &lt;= #{sysDate}
+		WHERE scheduledEndDate &lt; #{sysDate}
 
 		UNION
 

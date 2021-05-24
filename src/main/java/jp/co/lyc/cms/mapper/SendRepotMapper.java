@@ -29,7 +29,6 @@ public interface SendRepotMapper {
 	public List<ModelClass> getCustomerDepartmentCode(SendRepotModel model);
 	public List<ModelClass> getSalesPersonsLists();
 	public List<ModelClass> salesPersonsListsUpdate(SendRepotsListName model);
-	public void targetEmployeeListsUpdate(SendRepotModel sendRepotModel);
 	public void deleteCustomerListByNo(SendRepotModel model);
 	public int deleteCustomerList(SendRepotModel model);
 	public void customerListUpdate(String storageListName, String customerList);
@@ -37,4 +36,5 @@ public interface SendRepotMapper {
 	public String getMaxStorageListName();
 	public SendRepotModel getMainChargeList(String storageListName);
 	public void customerSendMailStorageListUpdate(String storageListName, String mainChargeList,String departmentCodeList);
+	public void targetEmployeeListsUpdate(String storageListName, String noChargeList, String candidateInChargeList);
 }

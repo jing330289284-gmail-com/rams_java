@@ -160,6 +160,25 @@ public class SendRepotController extends BaseController {
 					}
 				}
 			}
+
+			selectedRowKeys = sendRepot.getNoChargeList().split(";");
+			selectedRowNames = sendRepot.getCandidateInChargeList().split(";");
+
+			for (int i = 0; i < salesCustomersList.size(); i++) {
+				for (int j = 0; j < selectedRowKeys.length; j++) {
+					String[] customerRowKeys = selectedRowKeys[j].split(":");
+					if (salesCustomersList.get(i).getCustomerNo().equals(customerRowKeys[0])) {
+						salesCustomersList.get(i).setNoChargeList(customerRowKeys.length > 1 ? customerRowKeys[1] : "");
+					}
+				}
+				for (int j = 0; j < selectedRowNames.length; j++) {
+					String[] aaacustomerRowNames = selectedRowNames[j].split(":");
+					if (salesCustomersList.get(i).getCustomerNo().equals(aaacustomerRowNames[0])) {
+						salesCustomersList.get(i)
+								.setSendRepotsAppend(aaacustomerRowNames.length > 1 ? aaacustomerRowNames[1] : "");
+					}
+				}
+			}
 		}
 
 		return salesCustomersList;
@@ -217,29 +236,41 @@ public class SendRepotController extends BaseController {
 	 */
 	@RequestMapping(value = "/targetEmployeeListsUpdate", method = RequestMethod.POST)
 	@ResponseBody
-	private void targetEmployeeListsUpdate(@RequestBody SendRepotModel model) {
+	private void targetEmployeeListsUpdate(@RequestBody SendRepotModel model) { // お客様コード:社員ID,社員ID.社員名,社員名
 		SendRepotModel sendRepotModel = new SendRepotModel();
-		String candidateInChargeList = "";// 変更するカスタマの部分を書き直す
-		// CandidateInChargeList(お客様コード:社員ID,社員ID.社員名,社員名;お客様コード:社員ID,社員ID.社員名,社員名;)
+		String noChargeList = "";
+		String candidateInChargeList = "";
 		try {
 			sendRepotModel = sendRepotService.getCandidateInChargeList(model.getStorageListName());// 過去のリスト取得
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		String[] selectedCustemerNo = sendRepotModel.getCandidateInChargeList().split(";");// リスト中にあるすべての
-																							// お客様コード:社員ID,社員ID.社員名,社員名
-		for (int i = 0; i < selectedCustemerNo.length; i++) {
-			String[] customerRowNames = selectedCustemerNo[i].split(":");
-			if (model.getCustomerNo().equals(customerRowNames[0])) {
-				// model.getCandidateInChargeList()選択中のお客様コードが一致する場合、社員ID,社員ID.社員名,社員名を書き換える
-				candidateInChargeList += model.getCustomerNo() + ":" + model.getCandidateInChargeList() + ";";
+
+		String[] selectedRowKeys = sendRepotModel.getNoChargeList().split(";");// リスト中にあるすべての
+		String[] selectedRowNames = sendRepotModel.getCandidateInChargeList().split(";");
+
+		for (int i = 0; i < selectedRowKeys.length; i++) {
+			String[] customerRowKeys = selectedRowKeys[i].split(":");
+			if (model.getCustomerNo().equals(customerRowKeys[0])) {
+				noChargeList += model.getCustomerNo() + ":" + model.getNoChargeList() + ";";
+
 			} else {
-				candidateInChargeList += selectedCustemerNo[i] + ";";
+				noChargeList += selectedRowKeys[i] + ";";
 			}
 		}
-		model.setCandidateInChargeList(candidateInChargeList);
+
+		for (int i = 0; i < selectedRowNames.length; i++) {
+			String[] customerRowNames = selectedRowNames[i].split(":");
+			if (model.getCustomerNo().equals(customerRowNames[0])) {
+				candidateInChargeList += model.getCustomerNo() + ":" + model.getCandidateInChargeList() + ";";
+
+			} else {
+				candidateInChargeList += selectedRowNames[i] + ";";
+			}
+		}
+
 		try {
-			sendRepotService.targetEmployeeListsUpdate(model);
+			sendRepotService.targetEmployeeListsUpdate(model.getStorageListName(), noChargeList, candidateInChargeList);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -304,15 +335,18 @@ public class SendRepotController extends BaseController {
 		String name = "";
 		String mainChargeList = "";
 		String departmentCodeList = "";
+		String noChargeList = "";
 		String candidateInChargeList = "";
 		String[] code = model.getCode().split(",");
 		for (int i = 0; i < code.length; i++) {
 			mainChargeList += code[i] + ":;";
 			departmentCodeList += code[i] + ":;";
+			noChargeList += code[i] + ":;";
 			candidateInChargeList += code[i] + ":;";
 		}
 		model.setMainChargeList(mainChargeList);
 		model.setDepartmentCodeList(departmentCodeList);
+		model.setNoChargeList(noChargeList);
 		model.setCandidateInChargeList(candidateInChargeList);
 		try {
 			name = sendRepotService.getMaxStorageListName();
@@ -360,6 +394,7 @@ public class SendRepotController extends BaseController {
 		String[] selectedRowNames = sendRepot.getDepartmentCodeList().split(";");
 		String mainChargeList = "";
 		String departmentCodeList = "";
+		String noChargeList = "";
 		String candidateInChargeList = "";
 
 		for (int i = 0; i < selectedRowKeys.length; i++) {
@@ -391,6 +426,18 @@ public class SendRepotController extends BaseController {
 			for (int j = 0; j < model.getCtmNos().length; j++) {
 				String[] customerRowKeys = selectedRowKeys[i].split(":");
 				if (model.getCtmNos()[j].equals(customerRowKeys[0])) {
+					noChargeList += model.getCtmNos()[j] + ":";
+					if (customerRowKeys.length > 1)
+						noChargeList += customerRowKeys[1] + ";";
+					else
+						noChargeList += ";";
+				}
+			}
+		}
+		for (int i = 0; i < selectedRowKeys.length; i++) {
+			for (int j = 0; j < model.getCtmNos().length; j++) {
+				String[] customerRowKeys = selectedRowKeys[i].split(":");
+				if (model.getCtmNos()[j].equals(customerRowKeys[0])) {
 					candidateInChargeList += model.getCtmNos()[j] + ":";
 					if (customerRowKeys.length > 1)
 						candidateInChargeList += customerRowKeys[1] + ";";
@@ -401,6 +448,7 @@ public class SendRepotController extends BaseController {
 		}
 		model.setMainChargeList(mainChargeList);
 		model.setDepartmentCodeList(departmentCodeList);
+		model.setNoChargeList(noChargeList);
 		model.setCandidateInChargeList(candidateInChargeList);
 
 		try {

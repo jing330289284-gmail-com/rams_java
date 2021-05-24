@@ -246,12 +246,14 @@
 		WHERE
 		<if test="kadou!=null">
 			<if test='kadou=="0"'>
-				admissionStartDate != "" and admissionStartDate is not
+				T006.admissionStartDate != "" and T006.admissionStartDate is not
 				null
-				and admissionEndDate is null
-				or admissionStartDate != "" and
-				admissionStartDate is not null
-				and admissionEndDate &gt; #{nowDate}
+				and T006.admissionEndDate is null
+				and if(T006.typteOfContractCode is null,1=1,T006.typteOfContractCode != "4")
+				or T006.admissionStartDate != "" and
+				T006.admissionStartDate is not null
+				and T006.admissionEndDate &gt; #{nowDate}
+				and if(T006.typteOfContractCode is null,1=1,T006.typteOfContractCode != "4")
 			</if>
 			<if test='kadou=="1"'>
 				<!-- admissionEndDate is not null and (AdmissionEndDate &lt;date_format(now(),'%Y%m%d')) -->
@@ -1095,9 +1097,11 @@
 		admissionStartDate!="" and admissionStartDate is not null
 		and
 		admissionEndDate is null
+		and if(typteOfContractCode is null,1=1,typteOfContractCode != "4")
 		or admissionStartDate != "" and
 		admissionStartDate is not null
 		and admissionEndDate &gt; #{nowDate}
+		and if(typteOfContractCode is null,1=1,typteOfContractCode != "4")
 		GROUP BY
 		employeeNo;
 	</select>
