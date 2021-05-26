@@ -31,9 +31,36 @@ public class EmployeeInfoCsvModel implements Serializable {
 	String myNumber;// マイナンバー
 	String employmentInsuranceStatus;// 雇用保険加入
 	String employmentInsuranceNo;// 雇用保険番号
+	String socialInsuranceDate;// 社会保険期限
+	String socialInsuranceNo;// 整理番号
 	String postcode;// 郵便番号
 	String address;// 住所
 	String accountInfo;// 口座情報
+	String retirementYearAndMonth;// 退職年月
+
+	public String getSocialInsuranceDate() {
+		return socialInsuranceDate;
+	}
+
+	public void setSocialInsuranceDate(String socialInsuranceDate) {
+		this.socialInsuranceDate = socialInsuranceDate;
+	}
+
+	public String getSocialInsuranceNo() {
+		return socialInsuranceNo;
+	}
+
+	public void setSocialInsuranceNo(String socialInsuranceNo) {
+		this.socialInsuranceNo = socialInsuranceNo;
+	}
+
+	public String getRetirementYearAndMonth() {
+		return retirementYearAndMonth;
+	}
+
+	public void setRetirementYearAndMonth(String retirementYearAndMonth) {
+		this.retirementYearAndMonth = retirementYearAndMonth;
+	}
 
 	public String getEmploymentInsuranceNo() {
 		return employmentInsuranceNo;

@@ -246,14 +246,20 @@
 		WHERE
 		<if test="kadou!=null">
 			<if test='kadou=="0"'>
-				T006.admissionStartDate != "" and T006.admissionStartDate is not
+				T006.admissionStartDate != "" and T006.admissionStartDate
+				is not
 				null
 				and T006.admissionEndDate is null
-				and if(T006.typteOfContractCode is null,1=1,T006.typteOfContractCode != "4")
+				and
+				if(T006.typteOfContractCode is null,1=1,T006.typteOfContractCode !=
+				"4")
 				or T006.admissionStartDate != "" and
-				T006.admissionStartDate is not null
+				T006.admissionStartDate is
+				not null
 				and T006.admissionEndDate &gt; #{nowDate}
-				and if(T006.typteOfContractCode is null,1=1,T006.typteOfContractCode != "4")
+				and
+				if(T006.typteOfContractCode is null,1=1,T006.typteOfContractCode !=
+				"4")
 			</if>
 			<if test='kadou=="1"'>
 				<!-- admissionEndDate is not null and (AdmissionEndDate &lt;date_format(now(),'%Y%m%d')) -->
@@ -341,6 +347,18 @@
 		T002.stayPeriod =
 		"","",concat(LEFT(T002.stayPeriod,4),"/",LEFT(RIGHT(T002.stayPeriod,4),2),"/",RIGHT(T002.stayPeriod,2)))
 		AS stayPeriod,
+		if(T002.socialInsuranceDate is null or
+		T002.socialInsuranceDate =
+		"","",concat(LEFT(T002.socialInsuranceDate,4),"/",LEFT(RIGHT(T002.socialInsuranceDate,4),2),"/",RIGHT(T002.socialInsuranceDate,2)))
+		AS socialInsuranceDate,
+		if(T002.retirementYearAndMonth is null or
+		T002.retirementYearAndMonth =
+		"","",concat(LEFT(T002.retirementYearAndMonth,4),"/",LEFT(RIGHT(T002.retirementYearAndMonth,4),2),"/",RIGHT(T002.retirementYearAndMonth,2)))
+		AS retirementYearAndMonth,
+		if(T002.socialInsuranceNo is
+		null,"",T002.socialInsuranceNo)
+		AS
+		socialInsuranceNo,
 		if(T002.residenceCardNo is
 		null,"",T002.residenceCardNo)
 		AS
@@ -357,7 +375,8 @@
 		"1","あり",if(if(T002.employmentInsuranceStatus is
 		null,"",T002.employmentInsuranceStatus) = "0","なし","")) AS
 		employmentInsuranceStatus,
-		if(T002.employmentInsuranceNo is null,"",T002.employmentInsuranceNo) AS employmentInsuranceNo,
+		if(T002.employmentInsuranceNo is
+		null,"",T002.employmentInsuranceNo) AS employmentInsuranceNo,
 		if(T002.phoneNo is null or T002.phoneNo =
 		"","",concat(LEFT(T002.phoneNo,3),"-",LEFT(RIGHT(T002.phoneNo,8),4),"-",RIGHT(T002.phoneNo,4)))
 		AS phoneNo,
@@ -1097,11 +1116,13 @@
 		admissionStartDate!="" and admissionStartDate is not null
 		and
 		admissionEndDate is null
-		and if(typteOfContractCode is null,1=1,typteOfContractCode != "4")
+		and if(typteOfContractCode is
+		null,1=1,typteOfContractCode != "4")
 		or admissionStartDate != "" and
 		admissionStartDate is not null
 		and admissionEndDate &gt; #{nowDate}
-		and if(typteOfContractCode is null,1=1,typteOfContractCode != "4")
+		and
+		if(typteOfContractCode is null,1=1,typteOfContractCode != "4")
 		GROUP BY
 		employeeNo;
 	</select>

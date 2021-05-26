@@ -342,6 +342,14 @@
 		#{salesDate};
 	</select>
 
+	<select id="getT011BpInfoSupplement" parameterType="String"
+		resultType="jp.co.lyc.cms.model.BpInfoModel">
+		SELECT
+		bpEmployeeNo,bpSalesProgressCode,bpOtherCompanyAdmissionEndDate FROM
+		T011BpInfoSupplement
+		where bpSalesProgressCode = '7';
+	</select>
+
 	<select id="getSalesSituationModel" parameterType="String"
 		resultType="jp.co.lyc.cms.model.SalesSituationModel">
 		SELECT
@@ -409,13 +417,16 @@
 		FROM
 		T001Employee T001
 		LEFT JOIN
-		T003AddressInfo T003 ON T001.employeeNo =
+		T003AddressInfo
+		T003 ON T001.employeeNo =
 		T003.employeeNo
 		LEFT JOIN
-		M013Station M013 ON M013.stationCode =
+		M013Station M013 ON
+		M013.stationCode =
 		T003.stationCode
 		LEFT JOIN
-		T002EmployeeDetail T002 ON T001.employeeNo =
+		T002EmployeeDetail T002 ON
+		T001.employeeNo =
 		T002.employeeNo
 		LEFT JOIN
 		M011DevelopLanguage M011a ON
@@ -526,13 +537,16 @@
 		FROM
 		T001Employee T001
 		LEFT JOIN
-		T003AddressInfo T003 ON T001.employeeNo =
+		T003AddressInfo
+		T003 ON T001.employeeNo =
 		T003.employeeNo
 		LEFT JOIN
-		M013Station M013 ON M013.stationCode =
+		M013Station M013 ON
+		M013.stationCode =
 		T003.stationCode
 		LEFT JOIN
-		T002EmployeeDetail T002 ON T001.employeeNo =
+		T002EmployeeDetail T002 ON
+		T001.employeeNo =
 		T002.employeeNo
 		LEFT JOIN
 
@@ -654,32 +668,40 @@
 		LEFT JOIN
 
 		M011DevelopLanguage M011a ON
-		M011a.developLanguageCode = T002.developLanguage1
+		M011a.developLanguageCode =
+		T002.developLanguage1
 
 		LEFT JOIN
 
-		M011DevelopLanguage M011b ON M011b.developLanguageCode =
+		M011DevelopLanguage M011b ON
+		M011b.developLanguageCode =
 		T002.developLanguage2
 		LEFT JOIN
 
 		M011DevelopLanguage M011c ON
-		M011c.developLanguageCode = T002.developLanguage3
+		M011c.developLanguageCode =
+		T002.developLanguage3
 		LEFT JOIN
 
-		M011DevelopLanguage M011d ON M011d.developLanguageCode =
+		M011DevelopLanguage M011d ON
+		M011d.developLanguageCode =
 		T002.developLanguage4
 
 		LEFT JOIN
 
 		M011DevelopLanguage M011e ON
-		M011e.developLanguageCode = T002.developLanguage5
+		M011e.developLanguageCode =
+		T002.developLanguage5
 		LEFT JOIN
-		M012SiteRole M012 ON T002.siteRoleCode = M012.siteRoleCode
+		M012SiteRole M012 ON T002.siteRoleCode =
+		M012.siteRoleCode
 		LEFT JOIN
-		T010SalesSituation T010 ON T011.bpEmployeeNo = T010.employeeNo
+		T010SalesSituation T010 ON T011.bpEmployeeNo
+		= T010.employeeNo
 		LEFT
 		JOIN
-		T015ResumeManagement T015 ON T001.employeeNo = T015.employeeNo
+		T015ResumeManagement T015 ON T001.employeeNo
+		= T015.employeeNo
 		WHERE
 		T011.bpSalesProgressCode IN (1 , 2) and
 		LEFT(T011.bpOtherCompanyAdmissionEndDate,6) =
@@ -770,31 +792,41 @@
 		LEFT JOIN
 
 		M011DevelopLanguage M011a ON
-		M011a.developLanguageCode = T002.developLanguage1
+		M011a.developLanguageCode =
+		T002.developLanguage1
 		LEFT JOIN
-		M011DevelopLanguage M011b ON M011b.developLanguageCode =
+		M011DevelopLanguage M011b ON
+		M011b.developLanguageCode =
 		T002.developLanguage2
 		LEFT JOIN
 		M011DevelopLanguage M011c ON
-		M011c.developLanguageCode = T002.developLanguage3
+		M011c.developLanguageCode =
+		T002.developLanguage3
 		LEFT JOIN
-		M011DevelopLanguage M011d ON M011d.developLanguageCode =
+		M011DevelopLanguage M011d ON
+		M011d.developLanguageCode =
 		T002.developLanguage4
 		LEFT JOIN
 		M011DevelopLanguage M011e ON
-		M011e.developLanguageCode = T002.developLanguage5
+		M011e.developLanguageCode =
+		T002.developLanguage5
 		LEFT JOIN
-		T006EmployeeSiteInfo T006 ON T010.employeeNo = T006.employeeNo
+		T006EmployeeSiteInfo T006 ON
+		T010.employeeNo = T006.employeeNo
 		LEFT
 		JOIN
-		M012SiteRole M012 ON T002.siteRoleCode = M012.siteRoleCode
+		M012SiteRole M012 ON
+		T002.siteRoleCode = M012.siteRoleCode
 		LEFT
 		JOIN
-		T015ResumeManagement T015 ON T001.employeeNo = T015.employeeNo
+		T015ResumeManagement T015
+		ON T001.employeeNo = T015.employeeNo
 		WHERE
-		T010.salesProgressCode IN (4 , 5) and T010.salesYearAndMonth =
+		T010.salesProgressCode IN (4
+		, 5) and T010.salesYearAndMonth =
 		#{salesDate}
-		AND LEFT (T006.admissionEndDate, 6) = #{sysDate}
+		AND LEFT
+		(T006.admissionEndDate, 6) = #{sysDate}
 		<!-- and (T006.admissionEndDate is not null or T006.admissionEndDate <![CDATA[ 
 			<> ]]> '') -->
 
@@ -990,7 +1022,8 @@
 		LEFT JOIN
 
 		M012SiteRole M012 ON
-		M012.siteRoleCode = t002.siteRoleCode
+		M012.siteRoleCode =
+		t002.siteRoleCode
 		LEFT JOIN
 
 		M011DevelopLanguage M011a ON
@@ -1028,7 +1061,8 @@
 		LEFT JOIN
 		T003AddressInfo
 		t003 ON t001.employeeNo = t003.employeeNo
-		LEFT JOIN
+		LEFT
+		JOIN
 		M013Station m013 ON
 		m013.stationCode = t003.stationCode
 		LEFT
@@ -1225,6 +1259,8 @@
 		T011BpInfoSupplement
 		SET
 		bpUnitPrice = #{unitPrice},
+		bpSalesProgressCode = #{salesProgressCode},
+		bpOtherCompanyAdmissionEndDate = #{admissionEndDate},
 		bpBelongCustomerCode = #{customer}
 		WHERE
 		bpEmployeeNo = #{employeeNo}
