@@ -63,6 +63,107 @@
 		ORDER BY employeeNo;
 	</select>
 
+	<select id="getEmployeeNoList" parameterType="String"
+		resultType="String">
+		SELECT employeeNo FROM T006EmployeeSiteInfo AS T006
+		inner
+		join
+		(SELECT employeeNo as a,max(admissionStartDate) as b FROM
+		T006EmployeeSiteInfo
+		group by a) AS Temp
+		on T006.employeeNo = Temp.a and
+		T006.admissionStartDate = Temp.b
+		Where (admissionEndDate is not null or
+		scheduledEndDate is not null)
+		and if(admissionEndDate is
+		null,scheduledEndDate,left(admissionEndDate,6)) &lt;
+		#{salesYearAndMonth}
+		union
+		SELECT employeeNo FROM T010SalesSituation
+		where salesYearAndMonth
+		= #{salesDate} and salesProgressCode in
+		("1","2","4")
+		order by
+		employeeNo
+		;
+	</select>
+
+	<select id="getSalesSituationList" parameterType="String"
+		resultType="jp.co.lyc.cms.model.SalesSituationModel">
+		SELECT T006EmployeeSiteInfo.employeeNo,
+		T006EmployeeSiteInfo.admissionStartDate,
+		T006EmployeeSiteInfo.admissionEndDate,
+		T006EmployeeSiteInfo.unitPrice,
+		ifnull(T006EmployeeSiteInfo.customerNo, '') AS customer,
+		T006EmployeeSiteInfo.customerNo as nowCustomer,
+		CONCAT(T001Employee.employeeFristName,T001Employee.employeeLastName)
+		AS
+		employeeName,
+		M013Station.stationName AS nearestStation,
+		T015ResumeManagement.resumeInfo1,
+		T015ResumeManagement.resumeInfo2,
+		T015ResumeManagement.resumeName1,
+		T015ResumeManagement.resumeName2,
+		T002EmployeeDetail.developLanguage1,
+		T002EmployeeDetail.developLanguage2,
+		T002EmployeeDetail.developLanguage3,
+		T002EmployeeDetail.developLanguage4,
+		T002EmployeeDetail.developLanguage5,
+		M012SiteRole.siteRoleName AS
+		siteRoleCode
+		FROM
+		T006EmployeeSiteInfo AS T006EmployeeSiteInfo
+		inner join
+		(SELECT employeeNo as a,max(admissionStartDate) as b FROM
+		T006EmployeeSiteInfo
+		group by a) AS Temp
+		on
+		T006EmployeeSiteInfo.employeeNo = Temp.a and
+		T006EmployeeSiteInfo.admissionStartDate = Temp.b
+		LEFT JOIN
+		T001Employee
+		AS T001Employee
+		on
+		T006EmployeeSiteInfo.employeeNo
+		=
+		T001Employee.employeeNo
+		LEFT JOIN
+		T003AddressInfo AS
+		T003AddressInfo
+		on
+		T006EmployeeSiteInfo.employeeNo =
+		T003AddressInfo.employeeNo
+		LEFT JOIN
+		M013Station AS M013Station
+		on T003AddressInfo.stationCode =
+		M013Station.stationCode
+		LEFT JOIN
+		T015ResumeManagement AS
+		T015ResumeManagement
+		on
+		T006EmployeeSiteInfo.employeeNo =
+		T015ResumeManagement.employeeNo
+		LEFT
+		JOIN T002EmployeeDetail AS
+		T002EmployeeDetail
+		on
+		T006EmployeeSiteInfo.employeeNo =
+		T002EmployeeDetail.employeeNo
+		LEFT
+		JOIN M012SiteRole AS
+		M012SiteRole
+		on
+		T006EmployeeSiteInfo.siteRoleCode =
+		M012SiteRole.siteRoleCode
+		where
+		T006EmployeeSiteInfo.employeeNo in
+		<foreach item="item" collection="list" open="(" close=")"
+			separator=",">
+			#{item}
+		</foreach>
+
+	</select>
+
 	<select id="getSalesSituationInfoAfterToday"
 		parameterType="String"
 		resultType="jp.co.lyc.cms.model.SalesSituationModel">
@@ -342,7 +443,7 @@
 		#{salesDate};
 	</select>
 
-	<select id="getT011BpInfoSupplement" parameterType="String"
+	<select id="getT011BpInfoSupplement"
 		resultType="jp.co.lyc.cms.model.BpInfoModel">
 		SELECT
 		bpEmployeeNo,bpSalesProgressCode,bpOtherCompanyAdmissionEndDate FROM
@@ -1301,6 +1402,7 @@
 		customerNo,
 		unitPrice,
 		developLanguageCode,
+		workState,
 		updateTime,
 		createTime,
 		updateUser)
@@ -1311,6 +1413,7 @@
 		#{customer},
 		#{price},
 		#{developLanguage1},
+		"0",
 		NOW(),
 		NOW(),
 		#{updateUser})

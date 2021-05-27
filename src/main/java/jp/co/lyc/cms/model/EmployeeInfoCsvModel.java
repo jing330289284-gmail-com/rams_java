@@ -28,6 +28,8 @@ public class EmployeeInfoCsvModel implements Serializable {
 	String residenceCardNo;// 在留カ－ド番号
 	String passportNo;// パスポート
 	String passportStayPeriod; // パスポート期間
+	String immigrationStartTime; // 出入国届開始
+	String immigrationEndTime; // 出入国届終了
 	String myNumber;// マイナンバー
 	String employmentInsuranceStatus;// 雇用保険加入
 	String employmentInsuranceNo;// 雇用保険番号
@@ -37,6 +39,22 @@ public class EmployeeInfoCsvModel implements Serializable {
 	String address;// 住所
 	String accountInfo;// 口座情報
 	String retirementYearAndMonth;// 退職年月
+
+	public String getImmigrationStartTime() {
+		return immigrationStartTime;
+	}
+
+	public void setImmigrationStartTime(String immigrationStartTime) {
+		this.immigrationStartTime = immigrationStartTime;
+	}
+
+	public String getImmigrationEndTime() {
+		return immigrationEndTime;
+	}
+
+	public void setImmigrationEndTime(String immigrationEndTime) {
+		this.immigrationEndTime = immigrationEndTime;
+	}
 
 	public String getSocialInsuranceDate() {
 		return socialInsuranceDate;

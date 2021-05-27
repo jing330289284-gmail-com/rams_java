@@ -46,6 +46,7 @@ import com.amazonaws.util.StringUtils;
 import ch.qos.logback.core.joran.conditional.IfAction;
 import jp.co.lyc.cms.common.BaseController;
 import jp.co.lyc.cms.model.SalesSituationModel;
+import jp.co.lyc.cms.model.BpInfoModel;
 import jp.co.lyc.cms.model.MasterModel;
 import jp.co.lyc.cms.model.S3Model;
 import jp.co.lyc.cms.model.SalesContent;
@@ -78,6 +79,225 @@ public class SalesSituationController extends BaseController {
 	 * @return List
 	 */
 
+	@RequestMapping(value = "/getSalesSituationNew", method = RequestMethod.POST)
+	@ResponseBody
+	public List<SalesSituationModel> getSalesSituationNew(@RequestBody SalesSituationModel model) {
+		List<String> employeeNoList = new ArrayList<String>();
+		List<SalesSituationModel> salesSituationList = new ArrayList<SalesSituationModel>();
+		List<SalesSituationModel> developLanguageList = new ArrayList<SalesSituationModel>();
+		List<SalesSituationModel> T010SalesSituationList = new ArrayList<SalesSituationModel>();
+		List<BpInfoModel> T011BpInfoSupplementList = new ArrayList<BpInfoModel>();
+		try {
+			// 現在の日付を取得
+			Date date = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
+			String curDate = sdf.format(date);
+
+			// 社員営業され日付
+			String salesDate = getSalesDate(model.getSalesYearAndMonth());
+			employeeNoList = salesSituationService.getEmployeeNoList(model.getSalesYearAndMonth(), salesDate);
+			salesSituationList = salesSituationService.getSalesSituationList(employeeNoList);
+			developLanguageList = salesSituationService.getDevelopLanguage();
+			T010SalesSituationList = salesSituationService.getT010SalesSituation(model.getSalesYearAndMonth(), curDate,
+					salesDate);
+			T011BpInfoSupplementList = salesSituationService.getT011BpInfoSupplement();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		logger.info("getSalesSituation" + "検索結束");
+
+		for (int i = 0; i < salesSituationList.size(); i++) {
+			// 社員名
+			if (salesSituationList.get(i).getEmployeeNo().substring(0, 2).equals("BP")) {
+				salesSituationList.get(i).setEmployeeName(salesSituationList.get(i).getEmployeeName() + "(BP)");
+			} else if (salesSituationList.get(i).getEmployeeNo().substring(0, 2).equals("SP")) {
+				salesSituationList.get(i).setEmployeeName(salesSituationList.get(i).getEmployeeName() + "(SP)");
+			} else if (salesSituationList.get(i).getEmployeeNo().substring(0, 2).equals("SC")) {
+				salesSituationList.get(i).setEmployeeName(salesSituationList.get(i).getEmployeeName() + "(SC)");
+			}
+
+			// 履歴書名前
+			if (salesSituationList.get(i).getResumeInfo1() != null
+					&& !salesSituationList.get(i).getResumeInfo1().equals("")) {
+				String resumeName = salesSituationList.get(i).getResumeName1();
+				String resumetemp = salesSituationList.get(i).getResumeInfo1();
+				resumeName = resumetemp.split("/")[resumetemp.split("/").length - 1].split("_")[0] + "_" + resumeName
+						+ "." + resumetemp.split("/")[resumetemp.split("/").length - 1].split(
+								"\\.")[resumetemp.split("/")[resumetemp.split("/").length - 1].split("\\.").length - 1];
+				salesSituationList.get(i).setResumeName1(resumeName);
+			}
+
+			if (salesSituationList.get(i).getResumeInfo2() != null
+					&& !salesSituationList.get(i).getResumeInfo2().equals("")) {
+				String resumeName = salesSituationList.get(i).getResumeName2();
+				String resumetemp = salesSituationList.get(i).getResumeInfo2();
+				resumeName = resumetemp.split("/")[resumetemp.split("/").length - 1].split("_")[0] + "_" + resumeName
+						+ "." + resumetemp.split("/")[resumetemp.split("/").length - 1].split(
+								"\\.")[resumetemp.split("/")[resumetemp.split("/").length - 1].split("\\.").length - 1];
+				salesSituationList.get(i).setResumeName2(resumeName);
+			}
+
+			// お客様
+			salesSituationList.get(i).setCustomer("");
+
+			// 開発言語
+			String developLanguage = "";
+			for (int j = 0; j < developLanguageList.size(); j++) {
+				if (salesSituationList.get(i).getDevelopLanguage1() != null && salesSituationList.get(i)
+						.getDevelopLanguage1().equals(developLanguageList.get(j).getDevelopLanguageCode()))
+					developLanguage += developLanguageList.get(j).getDevelopLanguageName() + ",";
+				if (salesSituationList.get(i).getDevelopLanguage2() != null && salesSituationList.get(i)
+						.getDevelopLanguage2().equals(developLanguageList.get(j).getDevelopLanguageCode()))
+					developLanguage += developLanguageList.get(j).getDevelopLanguageName() + ",";
+				if (salesSituationList.get(i).getDevelopLanguage3() != null && salesSituationList.get(i)
+						.getDevelopLanguage3().equals(developLanguageList.get(j).getDevelopLanguageCode()))
+					developLanguage += developLanguageList.get(j).getDevelopLanguageName() + ",";
+				if (salesSituationList.get(i).getDevelopLanguage4() != null && salesSituationList.get(i)
+						.getDevelopLanguage4().equals(developLanguageList.get(j).getDevelopLanguageCode()))
+					developLanguage += developLanguageList.get(j).getDevelopLanguageName() + ",";
+				if (salesSituationList.get(i).getDevelopLanguage5() != null && salesSituationList.get(i)
+						.getDevelopLanguage5().equals(developLanguageList.get(j).getDevelopLanguageCode()))
+					developLanguage += developLanguageList.get(j).getDevelopLanguageName() + ",";
+			}
+
+			if (developLanguage.length() > 0)
+				developLanguage = developLanguage.substring(0, developLanguage.length() - 1);
+			salesSituationList.get(i).setDevelopLanguage(developLanguage);
+
+			// T010
+			for (int j = 0; j < T010SalesSituationList.size(); j++) {
+				if (salesSituationList.get(i).getEmployeeNo().equals(T010SalesSituationList.get(j).getEmployeeNo())) {
+					salesSituationList.get(i)
+							.setSalesProgressCode(T010SalesSituationList.get(j).getSalesProgressCode());
+					salesSituationList.get(i).setSalesDateUpdate(T010SalesSituationList.get(j).getSalesYearAndMonth());
+					salesSituationList.get(i).setInterviewDate1(T010SalesSituationList.get(j).getInterviewDate1());
+					salesSituationList.get(i).setStationCode1(T010SalesSituationList.get(j).getStationCode1());
+					salesSituationList.get(i)
+							.setInterviewCustomer1(T010SalesSituationList.get(j).getInterviewCustomer1());
+					salesSituationList.get(i).setInterviewDate2(T010SalesSituationList.get(j).getInterviewDate2());
+					salesSituationList.get(i).setStationCode2(T010SalesSituationList.get(j).getStationCode2());
+					salesSituationList.get(i)
+							.setInterviewCustomer2(T010SalesSituationList.get(j).getInterviewCustomer2());
+					salesSituationList.get(i).setHopeLowestPrice(T010SalesSituationList.get(j).getHopeLowestPrice());
+					salesSituationList.get(i).setHopeHighestPrice(T010SalesSituationList.get(j).getHopeHighestPrice());
+					salesSituationList.get(i)
+							.setCustomerContractStatus(T010SalesSituationList.get(j).getCustomerContractStatus());
+					salesSituationList.get(i).setRemark1(T010SalesSituationList.get(j).getRemark1());
+					salesSituationList.get(i).setRemark2(T010SalesSituationList.get(j).getRemark2());
+					salesSituationList.get(i).setSalesStaff(T010SalesSituationList.get(j).getSalesStaff());
+					salesSituationList.get(i)
+							.setSalesPriorityStatus(T010SalesSituationList.get(j).getSalesPriorityStatus());
+					salesSituationList.get(i).setCustomer(T010SalesSituationList.get(j).getConfirmCustomer());
+					salesSituationList.get(i).setPrice(T010SalesSituationList.get(j).getConfirmPrice());
+				}
+			}
+		}
+
+		// データソート
+		List<SalesSituationModel> salesSituationListTemp = new ArrayList<SalesSituationModel>();
+		List<SalesSituationModel> salesProgressCodeListTemp = new ArrayList<SalesSituationModel>();
+
+		// 優先順ソート
+		for (int i = 0; i < salesSituationList.size(); i++) {
+			if (salesSituationList.get(i).getSalesProgressCode() != null
+					&& !(salesSituationList.get(i).getSalesProgressCode().equals("4")
+							|| salesSituationList.get(i).getSalesProgressCode().equals("1")
+							|| salesSituationList.get(i).getSalesProgressCode().equals("2"))
+					&& (salesSituationList.get(i).getSalesPriorityStatus() != null
+							&& salesSituationList.get(i).getSalesPriorityStatus().equals("1"))) {
+				salesSituationListTemp.add(salesSituationList.get(i));
+				salesSituationList.remove(i);
+				i--;
+			}
+		}
+		for (int i = 0; i < salesSituationList.size(); i++) {
+			if (salesSituationList.get(i).getSalesProgressCode() != null
+					&& !(salesSituationList.get(i).getSalesProgressCode().equals("4")
+							|| salesSituationList.get(i).getSalesProgressCode().equals("1")
+							|| salesSituationList.get(i).getSalesProgressCode().equals("2"))
+					&& (salesSituationList.get(i).getSalesPriorityStatus() != null
+							&& salesSituationList.get(i).getSalesPriorityStatus().equals("2"))) {
+				salesSituationListTemp.add(salesSituationList.get(i));
+				salesSituationList.remove(i);
+				i--;
+			}
+		}
+
+		// 社員区分ソート
+		for (int i = 0; i < salesSituationList.size(); i++) {
+			if (!salesSituationList.get(i).getEmployeeNo().substring(0, 2).equals("SC")
+					&& !salesSituationList.get(i).getEmployeeNo().substring(0, 2).equals("SP")
+					&& !salesSituationList.get(i).getEmployeeNo().substring(0, 2).equals("BP")) {
+				salesSituationListTemp.add(salesSituationList.get(i));
+				salesSituationList.remove(i);
+				i--;
+			}
+		}
+		for (int i = 0; i < salesSituationList.size(); i++) {
+			if (salesSituationList.get(i).getEmployeeNo().substring(0, 2).equals("SC")) {
+				salesSituationListTemp.add(salesSituationList.get(i));
+				salesSituationList.remove(i);
+				i--;
+			}
+		}
+		for (int i = 0; i < salesSituationList.size(); i++) {
+			if (salesSituationList.get(i).getEmployeeNo().substring(0, 2).equals("SP")) {
+				salesSituationListTemp.add(salesSituationList.get(i));
+				salesSituationList.remove(i);
+				i--;
+			}
+		}
+		for (int i = 0; i < salesSituationList.size(); i++) {
+			if (salesSituationList.get(i).getEmployeeNo().substring(0, 2).equals("BP")) {
+				salesSituationListTemp.add(salesSituationList.get(i));
+			}
+		}
+
+		for (int i = 0; i < salesSituationListTemp.size(); i++) {
+			if (salesSituationListTemp.get(i).getEmployeeNo().substring(0, 2).equals("BP")) {
+				for (int j = 0; j < T011BpInfoSupplementList.size(); j++) {
+					if (salesSituationListTemp.get(i).getEmployeeNo()
+							.equals(T011BpInfoSupplementList.get(j).getBpEmployeeNo())
+							&& Integer.parseInt(model.getSalesYearAndMonth()) > Integer
+									.parseInt(T011BpInfoSupplementList.get(j).getBpOtherCompanyAdmissionEndDate())) {
+						salesSituationListTemp.remove(i);
+						i--;
+						break;
+					}
+				}
+			}
+		}
+
+		// 進捗ソート
+		for (int i = 0; i < salesSituationListTemp.size(); i++) {
+			if (salesSituationListTemp.get(i).getSalesProgressCode() != null) {
+				if ((salesSituationListTemp.get(i).getSalesProgressCode().equals("4")
+						|| salesSituationListTemp.get(i).getSalesProgressCode().equals("1")
+						|| salesSituationListTemp.get(i).getSalesProgressCode().equals("2"))) {
+					salesProgressCodeListTemp.add(salesSituationListTemp.get(i));
+					salesSituationListTemp.remove(i);
+					i--;
+				}
+			}
+		}
+		for (int i = 0; i < salesProgressCodeListTemp.size(); i++) {
+			salesSituationListTemp.add(salesProgressCodeListTemp.get(i));
+		}
+
+		// 行番号付け
+		for (int i = 0; i < salesSituationListTemp.size(); i++) {
+			salesSituationListTemp.get(i).setRowNo(i + 1);
+		}
+		return salesSituationListTemp;
+	}
+
+	/**
+	 * データを取得 ffff
+	 * 
+	 * @param emp
+	 * @return List
+	 */
+
 	@RequestMapping(value = "/getSalesSituation", method = RequestMethod.POST)
 	@ResponseBody
 	public List<SalesSituationModel> getSalesSituation(@RequestBody SalesSituationModel model) {
@@ -86,6 +306,8 @@ public class SalesSituationController extends BaseController {
 		List<SalesSituationModel> salesSituationList = new ArrayList<SalesSituationModel>();
 		List<SalesSituationModel> developLanguageList = new ArrayList<SalesSituationModel>();
 		List<SalesSituationModel> T010SalesSituationList = new ArrayList<SalesSituationModel>();
+		List<BpInfoModel> T011BpInfoSupplementList = new ArrayList<BpInfoModel>();
+
 		try {
 			// 現在の日付を取得
 			Date date = new Date();
@@ -99,6 +321,7 @@ public class SalesSituationController extends BaseController {
 			developLanguageList = salesSituationService.getDevelopLanguage();
 			T010SalesSituationList = salesSituationService.getT010SalesSituation(model.getSalesYearAndMonth(), curDate,
 					salesDate);
+			T011BpInfoSupplementList = salesSituationService.getT011BpInfoSupplement();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -238,7 +461,24 @@ public class SalesSituationController extends BaseController {
 			}
 		}
 		for (int i = 0; i < salesSituationList.size(); i++) {
-			salesSituationListTemp.add(salesSituationList.get(i));
+			if (salesSituationList.get(i).getEmployeeNo().substring(0, 2).equals("BP")) {
+				salesSituationListTemp.add(salesSituationList.get(i));
+			}
+		}
+
+		for (int i = 0; i < salesSituationListTemp.size(); i++) {
+			if (salesSituationListTemp.get(i).getEmployeeNo().substring(0, 2).equals("BP")) {
+				for (int j = 0; j < T011BpInfoSupplementList.size(); j++) {
+					if (salesSituationListTemp.get(i).getEmployeeNo()
+							.equals(T011BpInfoSupplementList.get(j).getBpEmployeeNo())
+							&& Integer.parseInt(model.getSalesYearAndMonth()) > Integer
+									.parseInt(T011BpInfoSupplementList.get(j).getBpOtherCompanyAdmissionEndDate())) {
+						salesSituationListTemp.remove(i);
+						i--;
+						break;
+					}
+				}
+			}
 		}
 
 		// 進捗ソート

@@ -3,6 +3,7 @@ package jp.co.lyc.cms.mapper;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
+import jp.co.lyc.cms.model.BpInfoModel;
 import jp.co.lyc.cms.model.SalesContent;
 import jp.co.lyc.cms.model.SalesSituationModel;
 
@@ -55,4 +56,10 @@ public interface SalesSituationMapper {
 	public int updateEMPInfo(SalesSituationModel model);
 
 	public int updateBPEMPInfo(SalesSituationModel model);
+
+	public List<BpInfoModel> getT011BpInfoSupplement();
+
+	public List<String> getEmployeeNoList(String salesYearAndMonth, String salesDate);
+
+	public List<SalesSituationModel> getSalesSituationList(List<String> employeeNoList);
 }

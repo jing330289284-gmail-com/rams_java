@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import jp.co.lyc.cms.mapper.SalesSituationMapper;
+import jp.co.lyc.cms.model.BpInfoModel;
 import jp.co.lyc.cms.model.SalesContent;
 import jp.co.lyc.cms.model.SalesSituationModel;
 
@@ -51,6 +52,18 @@ public class SalesSituationService {
 
 	public List<SalesSituationModel> getT010SalesSituation(String sysDate, String curDate, String salesDate) {
 		return salesSituationMapper.getT010SalesSituation(sysDate, curDate, salesDate);
+	}
+
+	public List<BpInfoModel> getT011BpInfoSupplement() {
+		return salesSituationMapper.getT011BpInfoSupplement();
+	}
+
+	public List<String> getEmployeeNoList(String salesYearAndMonth, String salesDate) {
+		return salesSituationMapper.getEmployeeNoList(salesYearAndMonth, salesDate);
+	}
+
+	public List<SalesSituationModel> getSalesSituationList(List<String> employeeNoList) {
+		return salesSituationMapper.getSalesSituationList(employeeNoList);
 	}
 
 	public int insertSalesSituation(SalesSituationModel model) {
