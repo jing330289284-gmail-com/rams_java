@@ -290,8 +290,9 @@
 		intoCompanyCode =
 		ifnull(#{intoCompanyCode},intoCompanyCode)
 		and
-		T002.employeeFormCode =
-		ifnull(#{employeeFormCode},T002.employeeFormCode)
+		if(#{employeeFormCode} is
+		null,T002.employeeFormCode != "4",T002.employeeFormCode =
+		#{employeeFormCode})
 		and
 		nationalityCode =
 		ifnull(#{nationalityCode},nationalityCode)
