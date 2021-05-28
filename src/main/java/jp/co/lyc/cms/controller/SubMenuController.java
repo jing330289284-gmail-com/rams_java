@@ -48,6 +48,25 @@ public class SubMenuController extends BaseController {
 	}
 
 	/**
+	 * セッションチェック
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/checkSession", method = RequestMethod.POST)
+	@ResponseBody
+	public EmployeeModel checkSession() {
+		logger.info("LoginController.login:" + "セッションチェック開始");
+		if (UtilsCheckMethod.isNullOrEmpty((String) getSession().getAttribute("employeeNo"))) {
+			logger.info("LoginController.login:" + "セッションチェック失敗");
+			return null;
+		} else {
+			EmployeeModel employeeModel = new EmployeeModel();
+			logger.info("LoginController.login:" + "セッションチェック成功");
+			return employeeModel;
+		}
+	}
+
+	/**
 	 * 会社情報取得
 	 * 
 	 * @return
