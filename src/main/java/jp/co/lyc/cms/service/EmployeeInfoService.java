@@ -372,4 +372,13 @@ public class EmployeeInfoService {
 		return employeeInfoMapper.getEmployeesCSV(employeeNo);
 	}
 
+	/**
+	 * BP情報更新
+	 * 
+	 * @param sendMap
+	 */
+	public void updatebpInfo(BpInfoModel bpInfoModel) {
+		employeeInfoMapper.updatebpInfo(bpInfoModel);
+	}
+
 }

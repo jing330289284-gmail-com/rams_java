@@ -95,11 +95,17 @@ public class SalesSituationController extends BaseController {
 
 			// 社員営業され日付
 			String salesDate = getSalesDate(model.getSalesYearAndMonth());
-			employeeNoList = salesSituationService.getEmployeeNoList(model.getSalesYearAndMonth(), salesDate);
+			if (Integer.parseInt(model.getSalesYearAndMonth()) <= Integer.parseInt(curDate)) {
+				employeeNoList = salesSituationService.getEmployeeNoListBefore(salesDate);
+				T010SalesSituationList = salesSituationService.getT010SalesSituationBefore(model.getSalesYearAndMonth(),
+						curDate, salesDate);
+			} else {
+				employeeNoList = salesSituationService.getEmployeeNoList(model.getSalesYearAndMonth(), salesDate);
+				T010SalesSituationList = salesSituationService.getT010SalesSituation(model.getSalesYearAndMonth(),
+						curDate, salesDate);
+			}
 			salesSituationList = salesSituationService.getSalesSituationList(employeeNoList);
 			developLanguageList = salesSituationService.getDevelopLanguage();
-			T010SalesSituationList = salesSituationService.getT010SalesSituation(model.getSalesYearAndMonth(), curDate,
-					salesDate);
 			T011BpInfoSupplementList = salesSituationService.getT011BpInfoSupplement();
 		} catch (Exception e) {
 			e.printStackTrace();

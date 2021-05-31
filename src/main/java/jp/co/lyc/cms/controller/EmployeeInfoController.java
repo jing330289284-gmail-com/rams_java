@@ -310,6 +310,20 @@ public class EmployeeInfoController extends BaseController {
 	}
 
 	/**
+	 * BP情報update
+	 * 
+	 * @param bpInfo
+	 * @return
+	 */
+	@RequestMapping(value = "/updatebpInfo", method = RequestMethod.POST)
+	@ResponseBody
+	public void updatebpInfo(@RequestBody BpInfoModel bpInfoModel) throws Exception {
+		logger.info("GetEmployeeInfoController.getEmployeeByEmployeeNo:" + "updatebpInfo開始");
+		employeeInfoService.updatebpInfo(bpInfoModel);
+		logger.info("GetEmployeeInfoController.getEmployeeByEmployeeNo:" + "updatebpInfo結束");
+	}
+
+	/**
 	 * 社員情報csv出力
 	 * 
 	 * @param employeeNo

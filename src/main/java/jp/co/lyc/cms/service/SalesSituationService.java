@@ -54,6 +54,10 @@ public class SalesSituationService {
 		return salesSituationMapper.getT010SalesSituation(sysDate, curDate, salesDate);
 	}
 
+	public List<SalesSituationModel> getT010SalesSituationBefore(String sysDate, String curDate,
+			String salesDate) {
+		return salesSituationMapper.getT010SalesSituationBefore(sysDate, curDate, salesDate);
+	}
 	public List<BpInfoModel> getT011BpInfoSupplement() {
 		return salesSituationMapper.getT011BpInfoSupplement();
 	}
@@ -62,6 +66,10 @@ public class SalesSituationService {
 		return salesSituationMapper.getEmployeeNoList(salesYearAndMonth, salesDate);
 	}
 
+	public List<String> getEmployeeNoListBefore(String salesDate) {
+		return salesSituationMapper.getEmployeeNoListBefore(salesDate);
+	}
+	
 	public List<SalesSituationModel> getSalesSituationList(List<String> employeeNoList) {
 		return salesSituationMapper.getSalesSituationList(employeeNoList);
 	}

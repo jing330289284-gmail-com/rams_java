@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import jp.co.lyc.cms.model.BpInfoModel;
 import jp.co.lyc.cms.model.EmployeeInfoCsvModel;
 import jp.co.lyc.cms.model.EmployeeModel;
 
@@ -146,4 +147,10 @@ public interface EmployeeInfoMapper {
 	 */
 	public void deleteResumeManagement(Map<String, Object> sendMap);
 
+	/**
+	 * BP情報更新
+	 * 
+	 * @param sendMap
+	 */
+	public void updatebpInfo(BpInfoModel bpInfoModel);
 }

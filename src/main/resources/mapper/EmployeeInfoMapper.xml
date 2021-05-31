@@ -1108,6 +1108,23 @@
 		employeeNo =
 		#{employeeNo}
 	</update>
+
+	<!-- BP情報更新 -->
+	<update id="updatebpInfo"
+		parameterType="jp.co.lyc.cms.model.BpInfoModel">
+		UPDATE
+		T011BpInfoSupplement
+		SET
+		bpUnitPrice =
+		#{bpUnitPrice},
+		bpBelongCustomerCode = #{bpBelongCustomerCode},
+		bpSalesProgressCode = #{bpSalesProgressCode},
+		bpOtherCompanyAdmissionEndDate = #{bpOtherCompanyAdmissionEndDate},
+		bpRemark = #{bpRemark}
+		WHERE
+		bpEmployeeNo = #{bpEmployeeNo}
+	</update>
+
 	<!-- 履歴書を削除 -->
 	<delete id="deleteResumeManagement" parameterType="String">
 		DELETE

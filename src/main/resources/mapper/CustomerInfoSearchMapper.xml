@@ -16,15 +16,18 @@
 		T007.stationCode,
 		M013.stationName,
 		CASE
-		WHEN T007.listedCompanyFlag = "0" THEN
+		WHEN T007.listedCompanyFlag =
+		"0" THEN
 		CONCAT(
-		M007.companyNatureName, "(上場)" ) ELSE M007.companyNatureName
+		M007.companyNatureName, "(上場)" ) ELSE
+		M007.companyNatureName
 		END AS
 		companyNatureName,
 		T008.topCustomerName,
 		T006.employeeNo,
 		CONCAT(
-		T001.employeeFristName, T001.employeeLastName ) AS employeeName,
+		T001.employeeFristName, T001.employeeLastName )
+		AS employeeName,
 		T006.stationCode AS siteLocationCode,
 		M013SITE.stationName AS location,
 		T006.siteManager,
@@ -38,25 +41,30 @@
 		T007.establishmentDate,
 		T007.businessStartDate
 		FROM
-		T007CustomerInfo AS T007
+		T007CustomerInfo AS
+		T007
 		LEFT JOIN
 		T006EmployeeSiteInfo AS T006 ON
 		T007.customerNo =
 		T006.customerNo
 		LEFT
 		JOIN T001Employee AS T001 ON
-		T006.employeeNo = T001.employeeNo
+		T006.employeeNo =
+		T001.employeeNo
 		LEFT JOIN
 		M013Station AS M013 ON
-		T007.stationCode = M013.stationCode
+		T007.stationCode =
+		M013.stationCode
 		AND
 		T007.stationCode != ""
 		LEFT JOIN
-		M013Station AS M013SITE ON
+		M013Station AS
+		M013SITE ON
 		T006.stationCode =
 		M013SITE.stationCode
 		AND
-		T006.stationCode != ""
+		T006.stationCode
+		!= ""
 		LEFT
 		JOIN M008Level AS M008 ON T007.levelCode =
 		M008.levelCode
@@ -114,7 +122,8 @@
 			AND T007.basicContract = #{basicContract}
 		</if>
 		<if test="representative != null">
-			AND T007.representative = #{representative}
+			AND T007.representative like concat("%",
+			#{representative},"%")
 		</if>
 		<if test="listedCompanyFlag != null">
 			AND T007.listedCompanyFlag = #{listedCompanyFlag}

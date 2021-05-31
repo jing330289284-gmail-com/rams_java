@@ -62,4 +62,8 @@ public interface SalesSituationMapper {
 	public List<String> getEmployeeNoList(String salesYearAndMonth, String salesDate);
 
 	public List<SalesSituationModel> getSalesSituationList(List<String> employeeNoList);
+
+	public List<String> getEmployeeNoListBefore(String salesDate);
+
+	public List<SalesSituationModel> getT010SalesSituationBefore(String sysDate, String curDate, String salesDate);
 }
