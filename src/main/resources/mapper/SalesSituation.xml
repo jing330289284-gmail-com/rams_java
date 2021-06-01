@@ -73,7 +73,7 @@
 		group by a) AS Temp
 		on T006.employeeNo = Temp.a and
 		T006.admissionStartDate = Temp.b
-		left Join newRams.T002EmployeeDetail
+		left Join T002EmployeeDetail
 		AS T002
 		on T006.employeeNo = T002.employeeNo
 		Where (admissionEndDate is
