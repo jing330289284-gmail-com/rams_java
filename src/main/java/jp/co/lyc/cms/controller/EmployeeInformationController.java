@@ -51,8 +51,8 @@ public class EmployeeInformationController {
 				employeeList.get(i).setContractDeadlineDate(dateDiff(date, employeeList.get(i).getContractDeadline()));
 			}
 
-			String nowTime = Integer.toString(date.getMonth() + 1) + Integer.toString(date.getDate());
-			nowTime = String.format("%0" + 4 + "d", Integer.parseInt(nowTime));
+			String nowTime = String.format("%0" + 2 + "d", date.getMonth() + 1)
+					+ String.format("%0" + 2 + "d", date.getDate());
 			if (!(employeeList.get(i).getBirthday() == null || employeeList.get(i).getBirthday().equals(""))) {
 				if (Integer.parseInt(nowTime) > Integer.parseInt(employeeList.get(i).getBirthday())) {
 					String year = Integer.toString(date.getYear() + 1901);

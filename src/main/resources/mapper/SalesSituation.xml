@@ -1100,10 +1100,10 @@
 	</insert>
 	<select id="getPersonalSalesInfo" parameterType="String"
 		resultType="jp.co.lyc.cms.model.SalesSituationModel">
-
 		SELECT
 		CONCAT(t001.employeeFristName,
-		t001.employeeLastName)
+		upper(concat(SUBSTRING(SUBSTRING_INDEX(SUBSTRING_INDEX(t002.alphabetName, ' ', 2), ' ', -1),1,1),
+		SUBSTRING(SUBSTRING_INDEX(SUBSTRING_INDEX(t002.alphabetName, ' ', 3), ' ', -1),1,1))))
 		AS employeeFullName,
 		t002.genderStatus,
 		CONCAT(m003.nationalityName,
@@ -1212,7 +1212,8 @@
 
 		SELECT
 		CONCAT(t001.employeeFristName,
-		t001.employeeLastName)
+		upper(concat(SUBSTRING(SUBSTRING_INDEX(SUBSTRING_INDEX(t002.alphabetName, ' ', 2), ' ', -1),1,1),
+		SUBSTRING(SUBSTRING_INDEX(SUBSTRING_INDEX(t002.alphabetName, ' ', 3), ' ', -1),1,1))))
 		AS employeeFullName,
 		t002.genderStatus,
 		CONCAT(m003.nationalityName,

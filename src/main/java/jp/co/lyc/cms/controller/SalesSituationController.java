@@ -856,6 +856,7 @@ public class SalesSituationController extends BaseController {
 			}
 		}
 		String dir = "c:\\file\\営業フォルダ\\" + model.getSalesYearAndMonth();
+		mkDirectory("c:\\file\\salesFolder\\");
 		String rar = "c:\\file\\salesFolder\\" + model.getSalesYearAndMonth() + ".rar";
 		zip(dir, rar, true);
 		// cmd指令打开对应文件夹

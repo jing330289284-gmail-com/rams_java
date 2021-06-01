@@ -290,9 +290,15 @@
 		intoCompanyCode =
 		ifnull(#{intoCompanyCode},intoCompanyCode)
 		and
+		<if test="employeeName == null ">
 		if(#{employeeFormCode} is
 		null,T002.employeeFormCode != "4",T002.employeeFormCode =
 		#{employeeFormCode})
+		</if>
+		<if test="employeeName != null ">
+		T002.employeeFormCode =
+		ifnull(#{employeeFormCode},T002.employeeFormCode)
+		</if>
 		and
 		nationalityCode =
 		ifnull(#{nationalityCode},nationalityCode)
