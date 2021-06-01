@@ -262,17 +262,19 @@ public class SalesSituationController extends BaseController {
 		for (int i = 0; i < salesSituationListTemp.size(); i++) {
 			if (salesSituationListTemp.get(i).getEmployeeNo().substring(0, 2).equals("BP")) {
 				for (int j = 0; j < T011BpInfoSupplementList.size(); j++) {
+
+					if (salesSituationListTemp.get(i).getEmployeeNo()
+							.equals(T011BpInfoSupplementList.get(j).getBpEmployeeNo())
 					/*
-					 * if (salesSituationListTemp.get(i).getEmployeeNo()
-					 * .equals(T011BpInfoSupplementList.get(j).getBpEmployeeNo()) &&
-					 * Integer.parseInt(model.getSalesYearAndMonth()) > Integer
+					 * && Integer.parseInt(model.getSalesYearAndMonth()) > Integer
 					 * .parseInt(T011BpInfoSupplementList.get(j).getBpOtherCompanyAdmissionEndDate()
-					 * )) {
-					 */
-					salesSituationListTemp.remove(i);
-					i--;
-					break;
-					/* } */
+					 * )
+					 */) {
+
+						salesSituationListTemp.remove(i);
+						i--;
+						break;
+					}
 				}
 			}
 		}
