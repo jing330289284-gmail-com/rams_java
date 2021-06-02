@@ -147,29 +147,36 @@ public class SalesSituationController extends BaseController {
 			salesSituationList.get(i).setCustomer("");
 
 			// 開発言語
-			String developLanguage = "";
 			for (int j = 0; j < developLanguageList.size(); j++) {
 				if (salesSituationList.get(i).getDevelopLanguage1() != null && salesSituationList.get(i)
 						.getDevelopLanguage1().equals(developLanguageList.get(j).getDevelopLanguageCode()))
-					developLanguage += developLanguageList.get(j).getDevelopLanguageName() + ",";
+					salesSituationList.get(i)
+							.setDevelopLanguage1(developLanguageList.get(j).getDevelopLanguageName() + ",");
+				// developLanguage += developLanguageList.get(j).getDevelopLanguageName() + ",";
 				if (salesSituationList.get(i).getDevelopLanguage2() != null && salesSituationList.get(i)
 						.getDevelopLanguage2().equals(developLanguageList.get(j).getDevelopLanguageCode()))
-					developLanguage += developLanguageList.get(j).getDevelopLanguageName() + ",";
+					salesSituationList.get(i)
+							.setDevelopLanguage2(developLanguageList.get(j).getDevelopLanguageName() + ",");
+				// developLanguage += developLanguageList.get(j).getDevelopLanguageName() + ",";
 				if (salesSituationList.get(i).getDevelopLanguage3() != null && salesSituationList.get(i)
 						.getDevelopLanguage3().equals(developLanguageList.get(j).getDevelopLanguageCode()))
-					developLanguage += developLanguageList.get(j).getDevelopLanguageName() + ",";
+					salesSituationList.get(i)
+							.setDevelopLanguage3(developLanguageList.get(j).getDevelopLanguageName() + ",");
+				// developLanguage += developLanguageList.get(j).getDevelopLanguageName() + ",";
 				if (salesSituationList.get(i).getDevelopLanguage4() != null && salesSituationList.get(i)
 						.getDevelopLanguage4().equals(developLanguageList.get(j).getDevelopLanguageCode()))
-					developLanguage += developLanguageList.get(j).getDevelopLanguageName() + ",";
-				if (salesSituationList.get(i).getDevelopLanguage5() != null && salesSituationList.get(i)
-						.getDevelopLanguage5().equals(developLanguageList.get(j).getDevelopLanguageCode()))
-					developLanguage += developLanguageList.get(j).getDevelopLanguageName() + ",";
+					salesSituationList.get(i)
+							.setDevelopLanguage4(developLanguageList.get(j).getDevelopLanguageName() + ",");
+				// developLanguage += developLanguageList.get(j).getDevelopLanguageName() + ",";
 			}
+			String developLanguage = salesSituationList.get(i).getDevelopLanguage1()
+					+ salesSituationList.get(i).getDevelopLanguage2() + salesSituationList.get(i).getDevelopLanguage3()
+					+ salesSituationList.get(i).getDevelopLanguage4();
 
 			if (developLanguage.length() > 0)
 				developLanguage = developLanguage.substring(0, developLanguage.length() - 1);
 			salesSituationList.get(i).setDevelopLanguage(developLanguage);
-
+			
 			// T010
 			for (int j = 0; j < T010SalesSituationList.size(); j++) {
 				if (salesSituationList.get(i).getEmployeeNo().equals(T010SalesSituationList.get(j).getEmployeeNo())) {
@@ -731,7 +738,7 @@ public class SalesSituationController extends BaseController {
 		logger.info("changeDataStatus:" + "チェック開始");
 		String errorsMessage = "";
 		if (model.getSalesProgressCode() != null && (model.getSalesProgressCode().equals("4")
-				|| model.getSalesProgressCode().equals("5") || model.getSalesProgressCode().equals("6"))) {
+				|| model.getSalesProgressCode().equals("5")/* || model.getSalesProgressCode().equals("6") */)) {
 			if (model.getCustomerContractStatus() == null || model.getCustomerContractStatus().equals("")) {
 				errorsMessage += "契約区分 ";
 			}
