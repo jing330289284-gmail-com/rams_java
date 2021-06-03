@@ -1450,9 +1450,9 @@ public class UtilsController {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/getFramework", method = RequestMethod.POST)
+	@RequestMapping(value = "/getframeWork", method = RequestMethod.POST)
 	@ResponseBody
-	public List<ModelClass> getFramework() {
+	public List<ModelClass> getframeWork() {
 		List<ModelClass> list = utilsService.getFramework();
 		return list;
 	}

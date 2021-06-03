@@ -656,7 +656,7 @@ public class SalesSituationController extends BaseController {
 			}
 			salesSituationList.get(0).setResumeInfoList(resumeInfoTemp);
 
-			if (salesSituationList.get(0).getYearsOfExperience().length() >= 4) {
+			if (salesSituationList.get(0).getYearsOfExperience() != null && salesSituationList.get(0).getYearsOfExperience().length() >= 4) {
 				Calendar date = Calendar.getInstance();
 				String year = String.valueOf(date.get(Calendar.YEAR));
 				int tempYear = Integer.parseInt(year)
