@@ -56,6 +56,7 @@ public class SalesSituationModel implements Serializable {
 	String admissionStartDate;
 	String customerNo;
 	String admissionEndDate;
+	String scheduledEndDate;
 	String resumeInfo1;// 履歴書情報1
 	String resumeInfo2;// 履歴書情報2
 	String resumeName1;// 履歴書情報1
@@ -90,6 +91,15 @@ public class SalesSituationModel implements Serializable {
 	ArrayList<String> resumeInfoList;
 	ArrayList<String> resumeInfo1List;
 	ArrayList<String> resumeInfo2List;
+	String text;
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
 
 	public String getRemark() {
 		return remark;
@@ -659,6 +669,14 @@ public class SalesSituationModel implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public String getScheduledEndDate() {
+		return scheduledEndDate;
+	}
+
+	public void setScheduledEndDate(String scheduledEndDate) {
+		this.scheduledEndDate = scheduledEndDate;
 	}
 
 }

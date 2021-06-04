@@ -176,7 +176,7 @@ public class SalesSituationController extends BaseController {
 			if (developLanguage.length() > 0)
 				developLanguage = developLanguage.substring(0, developLanguage.length() - 1);
 			salesSituationList.get(i).setDevelopLanguage(developLanguage);
-			
+
 			// T010
 			for (int j = 0; j < T010SalesSituationList.size(); j++) {
 				if (salesSituationList.get(i).getEmployeeNo().equals(T010SalesSituationList.get(j).getEmployeeNo())) {
@@ -656,7 +656,8 @@ public class SalesSituationController extends BaseController {
 			}
 			salesSituationList.get(0).setResumeInfoList(resumeInfoTemp);
 
-			if (salesSituationList.get(0).getYearsOfExperience() != null && salesSituationList.get(0).getYearsOfExperience().length() >= 4) {
+			if (salesSituationList.get(0).getYearsOfExperience() != null
+					&& salesSituationList.get(0).getYearsOfExperience().length() >= 4) {
 				Calendar date = Calendar.getInstance();
 				String year = String.valueOf(date.get(Calendar.YEAR));
 				int tempYear = Integer.parseInt(year)
@@ -863,6 +864,7 @@ public class SalesSituationController extends BaseController {
 			}
 		}
 		String dir = "c:\\file\\営業フォルダ\\" + model.getSalesYearAndMonth();
+		creatTxtFile(dir, "営業文章", model.getText());
 		mkDirectory("c:\\file\\salesFolder\\");
 		String rar = "c:\\file\\salesFolder\\" + model.getSalesYearAndMonth() + ".rar";
 		zip(dir, rar, true);
@@ -992,4 +994,15 @@ public class SalesSituationController extends BaseController {
 		return dateStr;
 	}
 
+	/**
+	 * 创建写入txt文件
+	 * 
+	 * @throws IOException
+	 */
+	public static void creatTxtFile(String path, String name, String text) throws IOException {
+		File file = new File(path + "\\" + name + ".txt");
+		FileOutputStream fos = new FileOutputStream(file);
+		fos.write(text.getBytes());
+		fos.close();
+	}
 }
