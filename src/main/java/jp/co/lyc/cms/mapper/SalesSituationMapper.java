@@ -61,9 +61,15 @@ public interface SalesSituationMapper {
 
 	public List<String> getEmployeeNoList(String salesYearAndMonth, String salesDate);
 
+	public List<String> getBpNoList(String salesYearAndMonth, String salesDate);
+
 	public List<SalesSituationModel> getSalesSituationList(List<String> employeeNoList);
+
+	public List<SalesSituationModel> getBpSalesSituationList(List<String> BpNoList);
 
 	public List<String> getEmployeeNoListBefore(String salesDate);
 
 	public List<SalesSituationModel> getT010SalesSituationBefore(String sysDate, String curDate, String salesDate);
+
+	public int updateBPR(String employeeNo, String newBpNo);
 }

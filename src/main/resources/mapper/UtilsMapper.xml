@@ -64,8 +64,8 @@
 		FROM
 		T007CustomerInfo
 	</select>
-	
-		<!-- お客様略称 -->
+
+	<!-- お客様略称 -->
 	<select id="getCustomerAbbreviation"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT
@@ -79,7 +79,7 @@
 		customerAbbreviation is not null
 		AND customerAbbreviation != ""
 	</select>
-	
+
 	<!-- 在留資格 -->
 	<select id="getVisa" resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT visaCode code,visaName
@@ -339,6 +339,7 @@
 		SELECT max(right(employeeNo,3))
 		FROM T001Employee
 		WHERE
+		left(employeeNo,3) != "BPR" and
 		left(employeeNo,2) = "BP";
 	</select>
 

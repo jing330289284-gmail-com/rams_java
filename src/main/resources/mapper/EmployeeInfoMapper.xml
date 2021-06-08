@@ -311,14 +311,14 @@
 		and
 		japaneseLevelCode =
 		ifnull(#{japaneseLevelCode},japaneseLevelCode)
-		<if test="employeeStatus != 4 ">
+		<if test="employeeStatus != 5 ">
 			and
 			employeeStatus =
 			ifnull(#{employeeStatus},employeeStatus)
 		</if>
-		<if test="employeeStatus == 4 ">
+		<if test="employeeStatus == 5 ">
 			and
-			employeeStatus != "1"
+			employeeStatus not in ("1","4")
 		</if>
 		<if test="socialInsuranceStatus != null">
 			and

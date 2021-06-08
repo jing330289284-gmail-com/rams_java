@@ -66,12 +66,20 @@ public class SalesSituationService {
 		return salesSituationMapper.getEmployeeNoList(salesYearAndMonth, salesDate);
 	}
 
+	public List<String> getBpNoList(String salesYearAndMonth, String salesDate) {
+		return salesSituationMapper.getBpNoList(salesYearAndMonth, salesDate);
+	}
+
 	public List<String> getEmployeeNoListBefore(String salesDate) {
 		return salesSituationMapper.getEmployeeNoListBefore(salesDate);
 	}
 
 	public List<SalesSituationModel> getSalesSituationList(List<String> employeeNoList) {
 		return salesSituationMapper.getSalesSituationList(employeeNoList);
+	}
+
+	public List<SalesSituationModel> getBpSalesSituationList(List<String> BpNoList) {
+		return salesSituationMapper.getBpSalesSituationList(BpNoList);
 	}
 
 	public int insertSalesSituation(SalesSituationModel model) {
@@ -128,6 +136,10 @@ public class SalesSituationService {
 			model.setAdmissionEndDate("");
 		}
 		return salesSituationMapper.updateBPEMPInfo(model);
+	}
+
+	public int updateBPR(String employeeNo, String newBpNo) {
+		return salesSituationMapper.updateBPR(employeeNo, newBpNo);
 	}
 
 	/****

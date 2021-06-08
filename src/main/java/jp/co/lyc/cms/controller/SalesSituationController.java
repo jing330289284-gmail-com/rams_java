@@ -51,6 +51,7 @@ import jp.co.lyc.cms.model.MasterModel;
 import jp.co.lyc.cms.model.S3Model;
 import jp.co.lyc.cms.model.SalesContent;
 import jp.co.lyc.cms.service.SalesSituationService;
+import jp.co.lyc.cms.service.UtilsService;
 import jp.co.lyc.cms.util.StatusCodeToMsgMap;
 import jp.co.lyc.cms.validation.SalesSituationValidation;
 import software.amazon.ion.impl.PrivateScalarConversions.ValueVariant;
@@ -66,6 +67,9 @@ public class SalesSituationController extends BaseController {
 
 	@Autowired
 	S3Controller s3Controller;
+
+	@Autowired
+	UtilsService utilsService;
 
 	// 12月
 	public static final String DECEMBER = "12";
@@ -83,7 +87,10 @@ public class SalesSituationController extends BaseController {
 	@ResponseBody
 	public List<SalesSituationModel> getSalesSituationNew(@RequestBody SalesSituationModel model) {
 		List<String> employeeNoList = new ArrayList<String>();
+		List<String> BpNoList = new ArrayList<String>();
+
 		List<SalesSituationModel> salesSituationList = new ArrayList<SalesSituationModel>();
+		List<SalesSituationModel> bpSalesSituationList = new ArrayList<SalesSituationModel>();
 		List<SalesSituationModel> developLanguageList = new ArrayList<SalesSituationModel>();
 		List<SalesSituationModel> T010SalesSituationList = new ArrayList<SalesSituationModel>();
 		List<BpInfoModel> T011BpInfoSupplementList = new ArrayList<BpInfoModel>();
@@ -101,10 +108,12 @@ public class SalesSituationController extends BaseController {
 						curDate, salesDate);
 			} else {
 				employeeNoList = salesSituationService.getEmployeeNoList(model.getSalesYearAndMonth(), salesDate);
+				BpNoList = salesSituationService.getBpNoList(model.getSalesYearAndMonth(), salesDate);
 				T010SalesSituationList = salesSituationService.getT010SalesSituation(model.getSalesYearAndMonth(),
 						curDate, salesDate);
 			}
 			salesSituationList = salesSituationService.getSalesSituationList(employeeNoList);
+			bpSalesSituationList = salesSituationService.getBpSalesSituationList(BpNoList);
 			developLanguageList = salesSituationService.getDevelopLanguage();
 			T011BpInfoSupplementList = salesSituationService.getT011BpInfoSupplement();
 		} catch (Exception e) {
@@ -112,9 +121,15 @@ public class SalesSituationController extends BaseController {
 		}
 		logger.info("getSalesSituation" + "検索結束");
 
+		for (int i = 0; i < bpSalesSituationList.size(); i++) {
+			salesSituationList.add(bpSalesSituationList.get(i));
+		}
+
 		for (int i = 0; i < salesSituationList.size(); i++) {
 			// 社員名
-			if (salesSituationList.get(i).getEmployeeNo().substring(0, 2).equals("BP")) {
+			if (salesSituationList.get(i).getEmployeeNo().substring(0, 3).equals("BPR")) {
+				salesSituationList.get(i).setEmployeeName(salesSituationList.get(i).getEmployeeName() + "(BPR)");
+			} else if (salesSituationList.get(i).getEmployeeNo().substring(0, 2).equals("BP")) {
 				salesSituationList.get(i).setEmployeeName(salesSituationList.get(i).getEmployeeName() + "(BP)");
 			} else if (salesSituationList.get(i).getEmployeeNo().substring(0, 2).equals("SP")) {
 				salesSituationList.get(i).setEmployeeName(salesSituationList.get(i).getEmployeeName() + "(SP)");
@@ -799,9 +814,23 @@ public class SalesSituationController extends BaseController {
 			// テーブルT011BpInfoSupplement項目を変更する
 			updateCount = salesSituationService.updateBPEMPInfo(model);
 
+			if (model.getEmployeeNo().substring(0, 3).equals("BPR") && model.getSalesProgressCode().equals("4")) {
+				Map<String, String> sendMap = new HashMap<String, String>();
+				String newBpNo = utilsService.getNoBP(sendMap);
+				if (newBpNo != null) {
+					newBpNo = "BP" + String.format("%03d", Integer.parseInt(newBpNo) + 1);
+				} else {
+					newBpNo = "BP001";
+				}
+				salesSituationService.updateBPR(model.getEmployeeNo(),newBpNo);
+			}
+
 			// 日付に基づいて一覧を取得
-			salesSituationList = salesSituationService
-					.getSalesSituationModel(model.getAdmissionEndDate().substring(0, 6), curDate, salesDate);
+			/*
+			 * salesSituationList = salesSituationService
+			 * .getSalesSituationModel(model.getAdmissionEndDate().substring(0, 6), curDate,
+			 * salesDate);
+			 */
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

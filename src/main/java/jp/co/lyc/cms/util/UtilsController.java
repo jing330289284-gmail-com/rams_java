@@ -890,6 +890,36 @@ public class UtilsController {
 	 * 
 	 * @return
 	 */
+	@RequestMapping(value = "/getNoBP", method = RequestMethod.POST)
+	@ResponseBody
+	public String getNoBP(@RequestBody ModelClass mo) {
+		Map<String, String> sendMap = new HashMap<String, String>();
+		String columnName = mo.getColumnName();// 列名は採番番号名です
+		String typeName = mo.getTypeName();// 採番番号のタイプ
+		String table = mo.getName();// テーブル
+		if (columnName != null && columnName.length() != 0) {
+			sendMap.put("columnName", columnName);
+		}
+		if (typeName != null && typeName.length() != 0) {
+			sendMap.put("typeName", typeName);
+		}
+		if (table != null && table.length() != 0) {
+			sendMap.put("table", table);
+		}
+		String no = utilsService.getNoBP(sendMap);
+		if (no != null) {
+			no = typeName + (String.format("%0" + 3 + "d", Integer.parseInt(no) + 1));
+		} else {
+			no = typeName + "001";
+		}
+		return no;
+	}
+
+	/**
+	 * 採番
+	 * 
+	 * @return
+	 */
 	@RequestMapping(value = "/getNO", method = RequestMethod.POST)
 	@ResponseBody
 	public String getNO(@RequestBody ModelClass mo) {
@@ -1534,7 +1564,7 @@ public class UtilsController {
 		List<ModelClass> list = getStatus(socialInsuranceStatus);
 		return list;
 	}
-	
+
 	/**
 	 * 基本契約取得
 	 * 
@@ -1562,7 +1592,6 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getCustomerAbbreviation();
 		return list;
 	}
-
 
 	/**
 	 * 面談回数取得

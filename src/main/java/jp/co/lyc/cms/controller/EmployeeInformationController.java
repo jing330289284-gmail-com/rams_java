@@ -2,6 +2,7 @@ package jp.co.lyc.cms.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -34,33 +35,37 @@ public class EmployeeInformationController {
 
 		List<EmployeeInformationModel> employeeList = new ArrayList<EmployeeInformationModel>();
 		employeeList = employeeInformationService.getEmployeeInformation();
+		Calendar cal = Calendar.getInstance();
 		Date date = new Date();
+		String nowTime = String.format("%0" + 2 + "d", cal.get(Calendar.MONTH) + 1)
+				+ String.format("%0" + 2 + "d", cal.get(Calendar.DATE));
+		String today = String.valueOf(cal.get(Calendar.YEAR)) + nowTime;
 		// 日数計算
 		for (int i = 0; i < employeeList.size(); i++) {
 			if (!(employeeList.get(i).getStayPeriod() == null || employeeList.get(i).getStayPeriod().equals(""))) {
-				employeeList.get(i).setStayPeriodDate(dateDiff(date, employeeList.get(i).getStayPeriod()));
+				employeeList.get(i).setStayPeriodDate(dateDiff(today, employeeList.get(i).getStayPeriod()));
 			}
 			if (!(employeeList.get(i).getPassportStayPeriod() == null
 					|| employeeList.get(i).getPassportStayPeriod().equals(""))) {
 				employeeList.get(i)
-						.setPassportStayPeriodDate(dateDiff(date, employeeList.get(i).getPassportStayPeriod()));
+						.setPassportStayPeriodDate(dateDiff(today, employeeList.get(i).getPassportStayPeriod()));
 			}
 
 			if (!(employeeList.get(i).getContractDeadline() == null
 					|| employeeList.get(i).getContractDeadline().equals(""))) {
-				employeeList.get(i).setContractDeadlineDate(dateDiff(date, employeeList.get(i).getContractDeadline()));
+				employeeList.get(i).setContractDeadlineDate(dateDiff(today, employeeList.get(i).getContractDeadline()));
 			}
 
-			String nowTime = String.format("%0" + 2 + "d", date.getMonth() + 1)
-					+ String.format("%0" + 2 + "d", date.getDate());
 			if (!(employeeList.get(i).getBirthday() == null || employeeList.get(i).getBirthday().equals(""))) {
 				if (Integer.parseInt(nowTime) > Integer.parseInt(employeeList.get(i).getBirthday())) {
-					String year = Integer.toString(date.getYear() + 1901);
-					employeeList.get(i).setBirthdayDate(dateDiff(date, year + employeeList.get(i).getBirthday()));
+					String year = Integer.toString(cal.get(Calendar.YEAR) + 1);
+					employeeList.get(i).setBirthdayDate(dateDiff(today, year + employeeList.get(i).getBirthday()));
 				} else if (Integer.parseInt(nowTime) < Integer.parseInt(employeeList.get(i).getBirthday())) {
-					String year = Integer.toString(date.getYear() + 1900);
-					employeeList.get(i).setBirthdayDate(dateDiff(date, year + employeeList.get(i).getBirthday()));
+					String year = Integer.toString(cal.get(Calendar.YEAR));
+					employeeList.get(i).setBirthdayDate(dateDiff(today, year + employeeList.get(i).getBirthday()));
 				}
+			} else {
+				employeeList.get(i).setBirthdayDate(-1);
 			}
 		}
 
@@ -182,12 +187,14 @@ public class EmployeeInformationController {
 		employeeInformationService.updateEmployeeInformation(list);
 	}
 
-	public static int dateDiff(Date dateFrom, String dateToString) {
+	public static int dateDiff(String dateFromString, String dateToString) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		Date dateFrom = null;
 		Date dateTo = null;
 
 		// Date型に変換
 		try {
+			dateFrom = sdf.parse(dateFromString);
 			dateTo = sdf.parse(dateToString);
 		} catch (java.text.ParseException e) {
 			e.printStackTrace();
