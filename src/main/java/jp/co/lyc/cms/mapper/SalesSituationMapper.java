@@ -71,5 +71,9 @@ public interface SalesSituationMapper {
 
 	public List<SalesSituationModel> getT010SalesSituationBefore(String sysDate, String curDate, String salesDate);
 
-	public int updateBPR(String employeeNo, String newBpNo);
+	public void updateBPR(SalesSituationModel model);
+
+	public void updateBPRSiteInfo(SalesSituationModel model);
+
+	public List<SalesSituationModel> getSiteRoleCode();
 }

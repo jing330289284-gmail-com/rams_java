@@ -291,13 +291,14 @@
 		ifnull(#{intoCompanyCode},intoCompanyCode)
 		and
 		<if test="employeeName == null ">
-		if(#{employeeFormCode} is
-		null,T002.employeeFormCode != "4",T002.employeeFormCode =
-		#{employeeFormCode})
+			if(#{employeeFormCode} is
+			null,T002.employeeFormCode !=
+			"4",T002.employeeFormCode =
+			#{employeeFormCode})
 		</if>
 		<if test="employeeName != null ">
-		T002.employeeFormCode =
-		ifnull(#{employeeFormCode},T002.employeeFormCode)
+			T002.employeeFormCode =
+			ifnull(#{employeeFormCode},T002.employeeFormCode)
 		</if>
 		and
 		nationalityCode =
@@ -627,6 +628,24 @@
 		T003AddressInfo
 		WHERE
 		employeeNo = #{employeeNo};
+	</delete>
+
+	<!-- 社員営業状況を削除 -->
+	<delete id="deleteEmployeeSalesSituation" parameterType="String">
+		DELETE
+		FROM
+		T010SalesSituation
+		WHERE
+		employeeNo = #{employeeNo};
+	</delete>
+
+	<!-- BP情報を削除 -->
+	<delete id="deleteBpInfoSupplement" parameterType="String">
+		DELETE
+		FROM
+		T011BpInfoSupplement
+		WHERE
+		bpEmployeeNo = #{employeeNo};
 	</delete>
 
 	<!-- -->
@@ -1217,6 +1236,8 @@
 		SELECT
 		T006EmployeeSiteInfo.employeeNo,left(T006EmployeeSiteInfo.admissionStartDate,6)
 		as admissionTime FROM T006EmployeeSiteInfo
+		where typteOfContractCode is
+		null or typteOfContractCode != "4"
 		GROUP BY
 		T006EmployeeSiteInfo.employeeNo;
 	</select>

@@ -25,7 +25,7 @@ public class SalesSituationService {
 	}
 
 	public void insertEmpNextAdmission(SalesSituationModel model) throws ParseException {
-		model.setAdmissionStartDate(subMonth(model.getAdmissionEndDate()) + "01");
+		model.setAdmissionStartDate(/* subMonth( */model.getAdmissionEndDate()/* ) */ + "01");
 		salesSituationMapper.insertEmpNextAdmission(model);
 	}
 
@@ -60,6 +60,10 @@ public class SalesSituationService {
 
 	public List<BpInfoModel> getT011BpInfoSupplement() {
 		return salesSituationMapper.getT011BpInfoSupplement();
+	}
+
+	public List<SalesSituationModel> getSiteRoleCode() {
+		return salesSituationMapper.getSiteRoleCode();
 	}
 
 	public List<String> getEmployeeNoList(String salesYearAndMonth, String salesDate) {
@@ -138,8 +142,9 @@ public class SalesSituationService {
 		return salesSituationMapper.updateBPEMPInfo(model);
 	}
 
-	public int updateBPR(String employeeNo, String newBpNo) {
-		return salesSituationMapper.updateBPR(employeeNo, newBpNo);
+	public void updateBPR(SalesSituationModel model) {
+		salesSituationMapper.updateBPR(model);
+		salesSituationMapper.updateBPRSiteInfo(model);
 	}
 
 	/****

@@ -242,6 +242,8 @@ public class EmployeeInfoService {
 		try {
 			employeeInfoMapper.deleteEmployeeInfo(sendMap);
 			employeeInfoMapper.deleteEmployeeInfoDetail(sendMap);
+			employeeInfoMapper.deleteEmployeeSalesSituation(sendMap);
+			employeeInfoMapper.deleteBpInfoSupplement(sendMap);
 			siteInfoMapper.deleteEmployeeSiteInfo(sendMap);
 			employeeInfoMapper.deleteAddressInfo(sendMap);
 			bpInfoMapper.deleteBpInfo(sendMap);

@@ -133,6 +133,16 @@
 		;
 	</select>
 
+	<select id="getSiteRoleCode"
+		resultType="jp.co.lyc.cms.model.SalesSituationModel">
+		SELECT T002.employeeNo,M012.siteRoleName as siteRoleCode
+		FROM T002EmployeeDetail as T002
+		Left Join M012SiteRole as M012
+		on T002.siteRoleCode = M012.siteRoleCode
+		where T002.siteRoleCode is not null and T002.siteRoleCode != ""
+		;
+	</select>
+
 	<select id="getSalesSituationList" parameterType="String"
 		resultType="jp.co.lyc.cms.model.SalesSituationModel">
 		SELECT T006EmployeeSiteInfo.employeeNo,
@@ -1455,12 +1465,12 @@
 		salesYearAndMonth = #{salesYearAndMonth}
 	</update>
 
-	<update id="updateBPR" parameterType="String">
+	<update id="updateBPR"
+		parameterType="jp.co.lyc.cms.model.SalesSituationModel">
 		update
 		T001Employee as T001,
 		T002EmployeeDetail as T002,
 		T003AddressInfo as T003,
-		T006EmployeeSiteInfo as T006,
 		T010SalesSituation as T010,
 		T011BpInfoSupplement as T011,
 		T015ResumeManagement as T015
@@ -1469,7 +1479,6 @@
 		T002.employeeNo = #{employeeName},
 		T002.employeeStatus = "1",
 		T003.employeeNo = #{employeeName},
-		T006.employeeNo = #{employeeName},
 		T010.employeeNo = #{employeeName},
 		T011.bpEmployeeNo = #{employeeName},
 		T015.employeeNo = #{employeeName}
@@ -1478,15 +1487,21 @@
 		T002.employeeNo
 		and T001.employeeNo =
 		T003.employeeNo
-		and
-		T001.employeeNo = T006.employeeNo
 		and T001.employeeNo
 		= T010.employeeNo
-		and T001.employeeNo = T011.bpEmployeeNo
+		and
+		T001.employeeNo = T011.bpEmployeeNo
 		and
 		T001.employeeNo =
 		T015.employeeNo
 		and T001.employeeNo = #{employeeNo}
+	</update>
+
+	<update id="updateBPRSiteInfo"
+		parameterType="jp.co.lyc.cms.model.SalesSituationModel">
+		Update T006EmployeeSiteInfo set employeeNo =
+		#{employeeName}
+		where employeeNo = #{employeeNo}
 	</update>
 
 	<update id="updateEMPInfo"

@@ -93,6 +93,7 @@ public class SalesSituationController extends BaseController {
 		List<SalesSituationModel> bpSalesSituationList = new ArrayList<SalesSituationModel>();
 		List<SalesSituationModel> developLanguageList = new ArrayList<SalesSituationModel>();
 		List<SalesSituationModel> T010SalesSituationList = new ArrayList<SalesSituationModel>();
+		List<SalesSituationModel> siteRoleCodeList = new ArrayList<SalesSituationModel>();
 		List<BpInfoModel> T011BpInfoSupplementList = new ArrayList<BpInfoModel>();
 		try {
 			// 現在の日付を取得
@@ -112,10 +113,13 @@ public class SalesSituationController extends BaseController {
 				T010SalesSituationList = salesSituationService.getT010SalesSituation(model.getSalesYearAndMonth(),
 						curDate, salesDate);
 			}
-			salesSituationList = salesSituationService.getSalesSituationList(employeeNoList);
-			bpSalesSituationList = salesSituationService.getBpSalesSituationList(BpNoList);
+			if (employeeNoList.size() > 0)
+				salesSituationList = salesSituationService.getSalesSituationList(employeeNoList);
+			if (BpNoList.size() > 0)
+				bpSalesSituationList = salesSituationService.getBpSalesSituationList(BpNoList);
 			developLanguageList = salesSituationService.getDevelopLanguage();
 			T011BpInfoSupplementList = salesSituationService.getT011BpInfoSupplement();
+			siteRoleCodeList = salesSituationService.getSiteRoleCode();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -123,6 +127,18 @@ public class SalesSituationController extends BaseController {
 
 		for (int i = 0; i < bpSalesSituationList.size(); i++) {
 			salesSituationList.add(bpSalesSituationList.get(i));
+		}
+
+		for (int i = 0; i < salesSituationList.size(); i++) {
+			if (salesSituationList.get(i).getSiteRoleCode() == null
+					|| salesSituationList.get(i).getSiteRoleCode().equals("")) {
+				for (int j = 0; j < siteRoleCodeList.size(); j++) {
+					if (salesSituationList.get(i).getEmployeeNo().equals(siteRoleCodeList.get(j).getEmployeeNo())) {
+						salesSituationList.get(i).setSiteRoleCode(siteRoleCodeList.get(j).getSiteRoleCode() == null ? ""
+								: siteRoleCodeList.get(j).getSiteRoleCode());
+					}
+				}
+			}
 		}
 
 		for (int i = 0; i < salesSituationList.size(); i++) {
@@ -818,11 +834,12 @@ public class SalesSituationController extends BaseController {
 				Map<String, String> sendMap = new HashMap<String, String>();
 				String newBpNo = utilsService.getNoBP(sendMap);
 				if (newBpNo != null) {
-					newBpNo = "BP" + String.format("%03d", Integer.parseInt(newBpNo) + 1);
+					newBpNo = "BP" + String.format("%0" + 3 + "d", Integer.parseInt(newBpNo) + 1);
 				} else {
 					newBpNo = "BP001";
 				}
-				salesSituationService.updateBPR(model.getEmployeeNo(),newBpNo);
+				model.setEmployeeName(newBpNo);
+				salesSituationService.updateBPR(model);
 			}
 
 			// 日付に基づいて一覧を取得

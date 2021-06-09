@@ -13,17 +13,16 @@ public class BaseController {
 		HttpSession session = null;
 		try {
 			session = getRequest().getSession();
-			session.setMaxInactiveInterval(60*60);
+			session.setMaxInactiveInterval(60 * 60);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return session;
 	}
-	
+
 	public HttpServletRequest getRequest() {
 		RequestAttributes ra = RequestContextHolder.getRequestAttributes();
-		HttpServletRequest request = ((ServletRequestAttributes) ra)
-				.getRequest();
+		HttpServletRequest request = ((ServletRequestAttributes) ra).getRequest();
 		return request;
 	}
 }

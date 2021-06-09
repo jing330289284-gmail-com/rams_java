@@ -80,6 +80,18 @@ public interface EmployeeInfoMapper {
 	public void deleteEmployeeInfoDetail(Map<String, Object> sendMap);
 
 	/**
+	 * 社員営業状況を削除
+	 * 
+	 */
+	public void deleteEmployeeSalesSituation(Map<String, Object> sendMap);
+	
+	/**
+	 * BP情報を削除
+	 * 
+	 */
+	public void deleteBpInfoSupplement(Map<String, Object> sendMap);
+
+	/**
 	 * 住所情報を削除
 	 * 
 	 */
