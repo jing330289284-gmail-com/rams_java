@@ -156,10 +156,12 @@
 		AS
 		employeeName,
 		M013Station.stationName AS nearestStation,
+		T019SalesSentence.yearsOfExperience,
 		T015ResumeManagement.resumeInfo1,
 		T015ResumeManagement.resumeInfo2,
 		T015ResumeManagement.resumeName1,
 		T015ResumeManagement.resumeName2,
+		T002EmployeeDetail.intoCompanyYearAndMonth,
 		T002EmployeeDetail.developLanguage1,
 		T002EmployeeDetail.developLanguage2,
 		T002EmployeeDetail.developLanguage3,
@@ -193,6 +195,8 @@
 		M013Station AS M013Station
 		on T003AddressInfo.stationCode =
 		M013Station.stationCode
+		Left Join newRams.T019SalesSentence as T019SalesSentence
+		on T006EmployeeSiteInfo.employeeNo = T019SalesSentence.employeeNo
 		LEFT JOIN
 		T015ResumeManagement AS
 		T015ResumeManagement
@@ -230,6 +234,7 @@
 		CONCAT(T001Employee.employeeFristName,T001Employee.employeeLastName)
 		AS
 		employeeName,
+		T019SalesSentence.yearsOfExperience,
 		T015ResumeManagement.resumeInfo1,
 		T015ResumeManagement.resumeInfo2,
 		T015ResumeManagement.resumeName1,
@@ -237,6 +242,8 @@
 		T011BpInfoSupplement.bpUnitPrice as
 		unitPrice
 		FROM T002EmployeeDetail as T002EmployeeDetail
+		Left Join newRams.T019SalesSentence as T019SalesSentence
+		on T002EmployeeDetail.employeeNo = T019SalesSentence.employeeNo
 		Left Join
 		T015ResumeManagement as T015ResumeManagement
 		on
@@ -1426,7 +1433,6 @@
 
 	</insert>
 	<select id="getCount" parameterType="String" resultType="int">
-
 		SELECT
 		count(*)
 		from T019SalesSentence T019

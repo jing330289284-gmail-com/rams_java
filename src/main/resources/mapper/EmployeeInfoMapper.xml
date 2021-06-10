@@ -262,8 +262,7 @@
 				"4")
 			</if>
 			<if test='kadou=="1"'>
-				<!-- admissionEndDate is not null and (AdmissionEndDate &lt;date_format(now(),'%Y%m%d')) -->
-				1=1
+			1=1
 			</if>
 		</if>
 		<if test="kadou==null">
@@ -272,10 +271,9 @@
 		<if test="authorityCode != 4">
 			and T001.authorityCode != 4
 		</if>
-		<!-- and T006.customerNo = ifnull(#{customer},T006.customerNo) -->
-		and
-		CONCAT(T001.employeeFristName,T001.employeeLastName) =
+		and CONCAT(T001.employeeFristName,T001.employeeLastName) =
 		ifnull(#{employeeName},CONCAT(T001.employeeFristName,T001.employeeLastName))
+
 		and
 		intoCompanyYearAndMonth between
 		ifnull(#{intoCompanyYearAndMonthFrom},intoCompanyYearAndMonth) and
@@ -314,12 +312,12 @@
 		ifnull(#{japaneseLevelCode},japaneseLevelCode)
 		<if test="employeeStatus != 5 ">
 			and
-			employeeStatus =
-			ifnull(#{employeeStatus},employeeStatus)
+			T002.employeeStatus =
+			ifnull(#{employeeStatus},T002.employeeStatus)
 		</if>
 		<if test="employeeStatus == 5 ">
 			and
-			employeeStatus not in ("1","4")
+			T002.employeeStatus not in ("1","4")
 		</if>
 		<if test="socialInsuranceStatus != null">
 			and

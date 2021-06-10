@@ -57,6 +57,25 @@ public class EmployeeInfoService {
 	public List<EmployeeModel> getEmployeeInfo(Map<String, Object> sendMap) {
 		List<EmployeeModel> employeeList = employeeInfoMapper.getEmployeesInfo(sendMap);
 
+		if (sendMap.get("employeeStatus") != null) {
+			if (sendMap.get("kadou") != null && sendMap.get("kadou").equals("0")) {
+				for (int i = 0; i < employeeList.size(); i++) {
+					if (sendMap.get("employeeStatus").equals("5")) {
+						if (employeeList.get(i).getEmployeeStatus().equals("1")
+								|| employeeList.get(i).getEmployeeStatus().equals("4")) {
+							employeeList.remove(i);
+							i--;
+						}
+					} else {
+						if (!sendMap.get("employeeStatus").equals(employeeList.get(i).getEmployeeStatus())) {
+							employeeList.remove(i);
+							i--;
+						}
+					}
+				}
+			}
+		}
+
 		if (sendMap.get("kadou") != null && sendMap.get("kadou").equals("1")) {
 			List<String> employeeAdmissionList = employeeInfoMapper.getEmployeeWithAdmission(sendMap);
 			for (int i = 0; i < employeeList.size(); i++) {

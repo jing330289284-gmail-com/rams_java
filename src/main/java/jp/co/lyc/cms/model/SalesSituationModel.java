@@ -23,6 +23,7 @@ public class SalesSituationModel implements Serializable {
 
 	String employeeNo;
 	String salesYearAndMonth;
+	String intoCompanyYearAndMonth;
 	String interviewDate1;
 	String stationCode;
 	String interviewCustomer1;
@@ -92,6 +93,14 @@ public class SalesSituationModel implements Serializable {
 	ArrayList<String> resumeInfo1List;
 	ArrayList<String> resumeInfo2List;
 	String text;
+
+	public String getIntoCompanyYearAndMonth() {
+		return intoCompanyYearAndMonth;
+	}
+
+	public void setIntoCompanyYearAndMonth(String intoCompanyYearAndMonth) {
+		this.intoCompanyYearAndMonth = intoCompanyYearAndMonth;
+	}
 
 	public String getText() {
 		return text;
