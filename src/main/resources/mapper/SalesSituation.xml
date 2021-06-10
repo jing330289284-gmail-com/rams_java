@@ -195,7 +195,7 @@
 		M013Station AS M013Station
 		on T003AddressInfo.stationCode =
 		M013Station.stationCode
-		Left Join newRams.T019SalesSentence as T019SalesSentence
+		Left Join T019SalesSentence as T019SalesSentence
 		on T006EmployeeSiteInfo.employeeNo = T019SalesSentence.employeeNo
 		LEFT JOIN
 		T015ResumeManagement AS
@@ -242,7 +242,7 @@
 		T011BpInfoSupplement.bpUnitPrice as
 		unitPrice
 		FROM T002EmployeeDetail as T002EmployeeDetail
-		Left Join newRams.T019SalesSentence as T019SalesSentence
+		Left Join T019SalesSentence as T019SalesSentence
 		on T002EmployeeDetail.employeeNo = T019SalesSentence.employeeNo
 		Left Join
 		T015ResumeManagement as T015ResumeManagement
