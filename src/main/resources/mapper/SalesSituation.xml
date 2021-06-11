@@ -138,8 +138,10 @@
 		SELECT T002.employeeNo,M012.siteRoleName as siteRoleCode
 		FROM T002EmployeeDetail as T002
 		Left Join M012SiteRole as M012
-		on T002.siteRoleCode = M012.siteRoleCode
-		where T002.siteRoleCode is not null and T002.siteRoleCode != ""
+		on
+		T002.siteRoleCode = M012.siteRoleCode
+		where T002.siteRoleCode is not
+		null and T002.siteRoleCode != ""
 		;
 	</select>
 
@@ -161,7 +163,7 @@
 		T015ResumeManagement.resumeInfo2,
 		T015ResumeManagement.resumeName1,
 		T015ResumeManagement.resumeName2,
-		T002EmployeeDetail.intoCompanyYearAndMonth,
+		T002EmployeeDetail.yearsOfExperience as intoCompanyYearAndMonth,
 		T002EmployeeDetail.developLanguage1,
 		T002EmployeeDetail.developLanguage2,
 		T002EmployeeDetail.developLanguage3,
@@ -195,8 +197,10 @@
 		M013Station AS M013Station
 		on T003AddressInfo.stationCode =
 		M013Station.stationCode
-		Left Join T019SalesSentence as T019SalesSentence
-		on T006EmployeeSiteInfo.employeeNo = T019SalesSentence.employeeNo
+		Left Join T019SalesSentence as
+		T019SalesSentence
+		on T006EmployeeSiteInfo.employeeNo =
+		T019SalesSentence.employeeNo
 		LEFT JOIN
 		T015ResumeManagement AS
 		T015ResumeManagement
@@ -231,6 +235,7 @@
 		T002EmployeeDetail.developLanguage3,
 		T002EmployeeDetail.developLanguage4,
 		T002EmployeeDetail.developLanguage5,
+		T002EmployeeDetail.yearsOfExperience as intoCompanyYearAndMonth,
 		CONCAT(T001Employee.employeeFristName,T001Employee.employeeLastName)
 		AS
 		employeeName,
@@ -239,15 +244,28 @@
 		T015ResumeManagement.resumeInfo2,
 		T015ResumeManagement.resumeName1,
 		T015ResumeManagement.resumeName2,
+		M013Station.stationName AS nearestStation,
 		T011BpInfoSupplement.bpUnitPrice as
 		unitPrice
-		FROM T002EmployeeDetail as T002EmployeeDetail
+		FROM T002EmployeeDetail as
+		T002EmployeeDetail
 		Left Join T019SalesSentence as T019SalesSentence
-		on T002EmployeeDetail.employeeNo = T019SalesSentence.employeeNo
+		on
+		T002EmployeeDetail.employeeNo = T019SalesSentence.employeeNo
 		Left Join
 		T015ResumeManagement as T015ResumeManagement
 		on
 		T015ResumeManagement.employeeNo = T002EmployeeDetail.employeeNo
+		LEFT JOIN
+		T003AddressInfo AS
+		T003AddressInfo
+		on
+		T002EmployeeDetail.employeeNo =
+		T003AddressInfo.employeeNo
+		LEFT JOIN
+		M013Station AS M013Station
+		on T003AddressInfo.stationCode =
+		M013Station.stationCode
 		LEFT
 		JOIN
 		T001Employee
@@ -1530,7 +1548,9 @@
 		SET
 		bpUnitPrice = #{unitPrice},
 		bpSalesProgressCode = #{salesProgressCode},
-		bpOtherCompanyAdmissionEndDate = #{admissionEndDate},
+		<if test="admissionEndDate == ''">
+			bpOtherCompanyAdmissionEndDate = #{admissionEndDate},
+		</if>
 		bpBelongCustomerCode = #{customer}
 		WHERE
 		bpEmployeeNo = #{employeeNo}

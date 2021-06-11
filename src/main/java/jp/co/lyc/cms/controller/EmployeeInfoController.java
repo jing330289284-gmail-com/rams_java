@@ -319,6 +319,7 @@ public class EmployeeInfoController extends BaseController {
 	@ResponseBody
 	public void updatebpInfo(@RequestBody BpInfoModel bpInfoModel) throws Exception {
 		logger.info("GetEmployeeInfoController.getEmployeeByEmployeeNo:" + "updatebpInfo開始");
+		bpInfoModel.setUpdateUser(getSession().getAttribute("employeeName").toString());
 		employeeInfoService.updatebpInfo(bpInfoModel);
 		logger.info("GetEmployeeInfoController.getEmployeeByEmployeeNo:" + "updatebpInfo結束");
 	}

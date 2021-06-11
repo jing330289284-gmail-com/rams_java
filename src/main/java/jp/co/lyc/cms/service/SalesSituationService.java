@@ -135,8 +135,7 @@ public class SalesSituationService {
 	}
 
 	public int updateBPEMPInfo(SalesSituationModel model) {
-		if (model.getSalesProgressCode().equals("1") || model.getSalesProgressCode().equals("2")
-				|| model.getSalesProgressCode().equals("4") || model.getSalesProgressCode().equals("7")) {
+		if (model.getSalesProgressCode().equals("4") || model.getSalesProgressCode().equals("5")) {
 			model.setAdmissionEndDate("");
 		}
 		return salesSituationMapper.updateBPEMPInfo(model);

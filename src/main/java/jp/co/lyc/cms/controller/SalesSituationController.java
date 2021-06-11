@@ -771,9 +771,10 @@ public class SalesSituationController extends BaseController {
 		String errorsMessage = "";
 		if (model.getSalesProgressCode() != null && (model.getSalesProgressCode().equals("4")
 				|| model.getSalesProgressCode().equals("5")/* || model.getSalesProgressCode().equals("6") */)) {
-			if (model.getCustomerContractStatus() == null || model.getCustomerContractStatus().equals("")) {
-				errorsMessage += "契約区分 ";
-			}
+			/*
+			 * if (model.getCustomerContractStatus() == null ||
+			 * model.getCustomerContractStatus().equals("")) { errorsMessage += "契約区分 "; }
+			 */
 			if (model.getCustomer() == null || model.getCustomer().equals("")) {
 				errorsMessage += "確定客様 ";
 			}

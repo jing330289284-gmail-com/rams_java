@@ -262,7 +262,7 @@
 				"4")
 			</if>
 			<if test='kadou=="1"'>
-			1=1
+				1=1
 			</if>
 		</if>
 		<if test="kadou==null">
@@ -1135,17 +1135,26 @@
 	<!-- BP情報更新 -->
 	<update id="updatebpInfo"
 		parameterType="jp.co.lyc.cms.model.BpInfoModel">
+		INSERT INTO T011BpInfoSupplement
+		(bpEmployeeNo,bpUnitPrice,bpBelongCustomerCode,bpSalesProgressCode,bpOtherCompanyAdmissionEndDate,bpRemark,createTime,updateTime,updateUser)
+		VALUES
+		(#{bpEmployeeNo},#{bpUnitPrice},#{bpBelongCustomerCode},#{bpSalesProgressCode},#{bpOtherCompanyAdmissionEndDate},#{bpRemark},now(),now(),#{updateUser})
+
+		ON DUPLICATE KEY
+
 		UPDATE
-		T011BpInfoSupplement
-		SET
 		bpUnitPrice =
 		#{bpUnitPrice},
-		bpBelongCustomerCode = #{bpBelongCustomerCode},
-		bpSalesProgressCode = #{bpSalesProgressCode},
-		bpOtherCompanyAdmissionEndDate = #{bpOtherCompanyAdmissionEndDate},
-		bpRemark = #{bpRemark}
-		WHERE
-		bpEmployeeNo = #{bpEmployeeNo}
+		bpBelongCustomerCode =
+		#{bpBelongCustomerCode},
+		bpSalesProgressCode =
+		#{bpSalesProgressCode},
+		bpOtherCompanyAdmissionEndDate =
+		#{bpOtherCompanyAdmissionEndDate},
+		bpRemark = #{bpRemark},
+		createTime = now(),
+		updateTime = now(),
+		updateUser = #{updateUser};
 	</update>
 
 	<!-- 履歴書を削除 -->

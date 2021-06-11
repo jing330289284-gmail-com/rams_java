@@ -1,6 +1,6 @@
 package jp.co.lyc.cms.model;
 
-public class BpInfoModel  {
+public class BpInfoModel {
 
 	/**
 	 * 
@@ -22,12 +22,20 @@ public class BpInfoModel  {
 
 	public String updateUser;// 更新者
 
-	//public String createTime;// 反映年月
+	// public String createTime;// 反映年月
 
-	//public String updateTime;// 更新された反映年月
+	// public String updateTime;// 更新された反映年月
 
 	public String getBpEmployeeNo() {
 		return bpEmployeeNo;
+	}
+
+	public String getUpdateUser() {
+		return updateUser;
+	}
+
+	public void setUpdateUser(String updateUser) {
+		this.updateUser = updateUser;
 	}
 
 	public void setBpEmployeeNo(String bpEmployeeNo) {
