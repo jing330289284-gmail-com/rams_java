@@ -50,7 +50,8 @@
 		FROM
 		T001Employee
 		WHERE
-		employeeNo LIKE concat( '%', "LYC", '%' )
+		<!-- employeeNo LIKE concat( '%', "LYC", '%' ) -->
+		left(employeeNo,2) != "BP";
 	</select>
 
 	<!-- お客様名 -->

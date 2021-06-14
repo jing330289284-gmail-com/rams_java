@@ -26,14 +26,14 @@ public class WagesInfoValidation implements Validator{
 			if (methodName.equals("toroku")) {
 				if(UtilsCheckMethod.isNullOrEmpty(p.getEmployeeNo())) {
 					errors.rejectValue("employeeNo", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001","社員名"));
-				}else if(!p.getEmployeeNo().substring(0,3).equals("LYC")) {
+				}else if(p.getEmployeeNo().substring(0,2).equals("BP")) {
 					errors.rejectValue("employeeNo", "", StatusCodeToMsgMap.getErrMsgbyCode("MSG0012"));
 				}
 				if(UtilsCheckMethod.isNullOrEmpty(p.getSalary()) && UtilsCheckMethod.isNullOrEmpty(p.getWaitingCost())) {
 					errors.rejectValue("salary", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001","給料または非稼働費用"));
 				}
 				if(UtilsCheckMethod.isNullOrEmpty(p.getReflectYearAndMonth())) {
-					errors.rejectValue("reflectYearAndMonth", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001","反映年月"));
+					errors.rejectValue("reflectYearAndMonth", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001","開始年月"));
 				}
 				if(UtilsCheckMethod.isNullOrEmpty(p.getTotalAmount())) {
 					errors.rejectValue("totalAmount", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG003","入力した金額"));

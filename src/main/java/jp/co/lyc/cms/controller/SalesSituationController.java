@@ -336,6 +336,30 @@ public class SalesSituationController extends BaseController {
 		// 行番号付け
 		for (int i = 0; i < salesSituationListTemp.size(); i++) {
 			salesSituationListTemp.get(i).setRowNo(i + 1);
+
+			// 面談情報
+			SimpleDateFormat sdf = new SimpleDateFormat();// 格式化时间
+			sdf.applyPattern("yyyyMMdd");// a为am/pm的标记
+			Date date = new Date();// 获取当前时间
+			String time = sdf.format(date);
+			if (salesSituationListTemp.get(i).getInterviewDate1() != null
+					&& salesSituationListTemp.get(i).getInterviewDate1().length() > 8) {
+				if (Integer.parseInt(salesSituationListTemp.get(i).getInterviewDate1().substring(0, 8)) < Integer
+						.parseInt(time)) {
+					salesSituationListTemp.get(i).setInterviewDate1("");
+					salesSituationListTemp.get(i).setInterviewCustomer1("");
+					salesSituationListTemp.get(i).setStationCode1("");
+				}
+			}
+			if (salesSituationListTemp.get(i).getInterviewDate2() != null
+					&& salesSituationListTemp.get(i).getInterviewDate2().length() > 8) {
+				if (Integer.parseInt(salesSituationListTemp.get(i).getInterviewDate2().substring(0, 8)) < Integer
+						.parseInt(time)) {
+					salesSituationListTemp.get(i).setInterviewDate2("");
+					salesSituationListTemp.get(i).setInterviewCustomer2("");
+					salesSituationListTemp.get(i).setStationCode2("");
+				}
+			}
 		}
 		return salesSituationListTemp;
 	}

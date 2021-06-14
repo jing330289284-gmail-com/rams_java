@@ -75,8 +75,8 @@ public class WagesInfoController extends BaseController {
 			result.put("errorsMessage", "");
 			return result;
 		}
-		if (!wagesInfoMod.getEmployeeNo().substring(0, 3).equals("LYC")) {
-			result.put("errorsMessage", "本社社員（LYCXXX）を選択してください！");
+		if (wagesInfoMod.getEmployeeNo().substring(0, 2).equals("BP")) {
+			result.put("errorsMessage", "本社社員を選択してください！");
 			return result;
 		}
 		boolean kadouCheck = true;// true稼动，false非稼动
