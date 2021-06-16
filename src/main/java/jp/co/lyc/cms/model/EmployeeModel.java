@@ -103,6 +103,25 @@ public class EmployeeModel implements Serializable {
 
 	String bpfrom;// 協力所属
 
+	String residentCardInfoName;
+	String passportInfoName;
+
+	public String getResidentCardInfoName() {
+		return residentCardInfoName;
+	}
+
+	public void setResidentCardInfoName(String residentCardInfoName) {
+		this.residentCardInfoName = residentCardInfoName;
+	}
+
+	public String getPassportInfoName() {
+		return passportInfoName;
+	}
+
+	public void setPassportInfoName(String passportInfoName) {
+		this.passportInfoName = passportInfoName;
+	}
+
 	public String getBpfrom() {
 		return bpfrom;
 	}

@@ -27,7 +27,7 @@ public class ExpensesInfoValidation implements Validator{
 					errors.rejectValue("employeeNo", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001","社員名"));
 				}
 				if(UtilsCheckMethod.isNullOrEmpty(p.getExpensesReflectYearAndMonth())) {
-					errors.rejectValue("expensesReflectYearAndMonth", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001","反映年月"));
+					errors.rejectValue("expensesReflectYearAndMonth", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001","開始年月"));
 				}
 				if(!UtilsCheckMethod.isNullOrEmpty(p.getTransportationExpenses())) {
 					if(!UtilsCheckMethod.numberFormat(p.getTransportationExpenses())) {
@@ -49,9 +49,9 @@ public class ExpensesInfoValidation implements Validator{
 						errors.rejectValue("otherAllowanceAmount", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG007","他の手当の費用"));
 					}
 				}
-				if(!UtilsCheckMethod.isNullOrEmpty(p.getHousingAllowance())) {
-					if(!UtilsCheckMethod.numberFormat(p.getHousingAllowance())) {
-						errors.rejectValue("housingAllowance", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG007","住宅手当"));
+				if(!UtilsCheckMethod.isNullOrEmpty(p.getSpecialAllowance())) {
+					if(!UtilsCheckMethod.numberFormat(p.getSpecialAllowance())) {
+						errors.rejectValue("specialAllowance", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG007","特別手当"));
 					}
 				}
 			}

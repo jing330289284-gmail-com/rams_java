@@ -65,7 +65,8 @@
 		T006EmployeeSiteInfo
 		WHERE
 		employeeNo = #{employeeNo}
-		AND admissionEndDate IS NULL
+		AND  (admissionEndDate IS NULL
+        or admissionEndDate > now())
 	</select>
 	<!-- 保険検索 -->
 	<select id="hokenSearch" parameterType="String"

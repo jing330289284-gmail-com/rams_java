@@ -618,11 +618,19 @@ public class EmployeeInfoController extends BaseController {
 		String employeeName = emp.getEmployeeName();// 社員名
 		String picInfo = emp.getPicInfo();
 
+		String residentCardInfoName = emp.getResidentCardInfoName();
+		String passportInfoName = emp.getPassportInfoName();
+
 		if (stationCode != null) {
 			sendMap.put("stationCode", stationCode);
 		}
 		// 住所情報終了
-
+		if (passportInfoName != null) {
+			sendMap.put("passportInfoName", passportInfoName);
+		}
+		if (residentCardInfoName != null) {
+			sendMap.put("residentCardInfoName", residentCardInfoName);
+		}
 		if (employeeNo != null) {
 			sendMap.put("employeeNo", employeeNo);
 		}

@@ -38,8 +38,14 @@ public class WagesInfoModel implements Serializable{
 	String otherAllowanceAmount;
 	String leaderAllowanceAmount;
 	String housingStatus;
-	String housingAllowance;
+	String specialAllowance;
 	
+	public String getSpecialAllowance() {
+		return specialAllowance;
+	}
+	public void setSpecialAllowance(String specialAllowance) {
+		this.specialAllowance = specialAllowance;
+	}
 	public String getEmployeeFormName() {
 		return employeeFormName;
 	}
@@ -93,12 +99,6 @@ public class WagesInfoModel implements Serializable{
 	}
 	public void setLeaderAllowanceAmount(String leaderAllowanceAmount) {
 		this.leaderAllowanceAmount = leaderAllowanceAmount;
-	}
-	public String getHousingAllowance() {
-		return housingAllowance;
-	}
-	public void setHousingAllowance(String housingAllowance) {
-		this.housingAllowance = housingAllowance;
 	}
 	public String getOtherAllowanceAmount() {
 		return otherAllowanceAmount;

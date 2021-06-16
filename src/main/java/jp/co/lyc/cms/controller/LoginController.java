@@ -77,10 +77,11 @@ public class LoginController extends BaseController {
 		sendMap.put("employeeNo", loginModel.employeeNo);
 		sendMap.put("password", loginModel.password);
 		employeeModel = es.getEmployeeModel(sendMap);
-		if (!loginModel.getVerificationCode().equals(loginSession.getAttribute("verificationCode"))) {
-			errorsMessage += "入力した社員番号やパスワードや認証番号が間違いため、ログインできません";
-			return result;
-		}
+		/* (验证码部分 方便测试)
+		 * if (!loginModel.getVerificationCode().equals(loginSession.getAttribute(
+		 * "verificationCode"))) { errorsMessage +=
+		 * "入力した社員番号やパスワードや認証番号が間違いため、ログインできません"; return result; }
+		 */
 		resultMap.put("employeeModel", employeeModel);
 		if (employeeModel != null) {
 			if(employeeModel.getAuthorityCode().equals("0") || employeeModel.getAuthorityCode().equals("1")) {

@@ -840,6 +840,12 @@
 		<if test="passportInfo!= null">
 			passportInfo=#{passportInfo},
 		</if>
+		<if test="residentCardInfoName == null">
+			residentCardInfo=null,
+		</if>
+		<if test="passportInfoName == null">
+			passportInfo=null,
+		</if>
 		<if test="passportNo != null">
 			passportNo=#{passportNo},
 		</if>

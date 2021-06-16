@@ -33,9 +33,11 @@ public class LoginValidation implements Validator{
 				if(UtilsCheckMethod.isNullOrEmpty(p.password)) {
 					errors.rejectValue("password", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001","パスワード"));
 				}
-				if(UtilsCheckMethod.isNullOrEmpty(p.getVerificationCode())) {
-					errors.rejectValue("verificationCode", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001","認証番号"));
-				}
+				/*
+				 * if(UtilsCheckMethod.isNullOrEmpty(p.getVerificationCode())) {
+				 * errors.rejectValue("verificationCode", "",
+				 * StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001","認証番号")); }
+				 */
 			}
 			
 		}

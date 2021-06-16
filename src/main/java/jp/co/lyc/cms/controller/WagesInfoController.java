@@ -61,6 +61,7 @@ public class WagesInfoController extends BaseController {
 
 	@Autowired
 	SiteInfoMapper siteInfoMapper;
+
 	/**
 	 * 
 	 * @return
@@ -82,7 +83,7 @@ public class WagesInfoController extends BaseController {
 		boolean kadouCheck = true;// true稼动，false非稼动
 		boolean jigyosyaFlag = true;// true事业主，false其他
 		boolean jijutsuFlag = true;// true技术者，false非技术者
-		boolean hatsunyubaFlag = true;//true初入場または非技術者、false技術者かつ入場したことある
+		boolean hatsunyubaFlag = true;// true初入場または非技術者、false技術者かつ入場したことある
 		ArrayList<SiteModel> kadouList = wagesInfoMapper.kadouCheck(wagesInfoMod.getEmployeeNo());
 		if (kadouList.size() != 0) {
 			kadouCheck = false;
@@ -104,10 +105,10 @@ public class WagesInfoController extends BaseController {
 			kadouCheck = false;
 			jijutsuFlag = false;
 			nyusyaDate = b.getIntoCompanyYearAndMonth();
-		}else {
+		} else {
 			List<SiteModel> siteMod = new ArrayList<SiteModel>();
 			siteMod = siteInfoMapper.getSiteInfo(wagesInfoMod.getEmployeeNo());
-			if(siteMod.size() != 0) {
+			if (siteMod.size() != 0) {
 				hatsunyubaFlag = false;
 			}
 		}
@@ -117,7 +118,7 @@ public class WagesInfoController extends BaseController {
 		sendMap.put("employeeNo", wagesInfoMod.getEmployeeNo());
 		ArrayList<WagesInfoModel> wagesInfoList = wagesInfoMapper.getWagesInfo(sendMap);
 		ArrayList<ExpensesInfoModel> expensesInfoList = expensesInfoMapper.getExpensesInfo(sendMap);
-		ArrayList<ExpensesInfoModel> allExpensesInfoList = new ArrayList<ExpensesInfoModel>(); 
+		ArrayList<ExpensesInfoModel> allExpensesInfoList = new ArrayList<ExpensesInfoModel>();
 		WagesInfoModel a = wagesInfoMapper.getEmployeeForm(wagesInfoMod.getEmployeeNo());
 		if (!a.getEmployeeFormCode().equals("2")) {
 			// 個人事業主判断
@@ -135,17 +136,16 @@ public class WagesInfoController extends BaseController {
 				// 給料期間
 				if (i != wagesInfoList.size() - 1) {
 					String reflectYearAndMonth = wagesInfoList.get(i + 1).getReflectYearAndMonth();
-					int year = Integer.parseInt(reflectYearAndMonth.substring(0,4));
+					int year = Integer.parseInt(reflectYearAndMonth.substring(0, 4));
 					int month = Integer.parseInt(reflectYearAndMonth.substring(4));
 					String yearAndMonth = "";
 					month -= 1;
-					if(month == 0) {
+					if (month == 0) {
 						yearAndMonth = (year - 1) + "12";
-					}else {
-						yearAndMonth = year + "" + (month > 9 ? month : "0" + month );
+					} else {
+						yearAndMonth = year + "" + (month > 9 ? month : "0" + month);
 					}
-					wagesInfoList.get(i).setPeriod(wagesInfoList.get(i).getReflectYearAndMonth() + "~"
-							+ yearAndMonth);
+					wagesInfoList.get(i).setPeriod(wagesInfoList.get(i).getReflectYearAndMonth() + "~" + yearAndMonth);
 				} else {
 					wagesInfoList.get(i).setPeriod(wagesInfoList.get(i).getReflectYearAndMonth() + "~");
 				}
@@ -269,6 +269,7 @@ public class WagesInfoController extends BaseController {
 
 	/**
 	 * 全部の諸費用データ
+	 * 
 	 * @param expensesInfoList
 	 * @return
 	 */
@@ -280,17 +281,16 @@ public class WagesInfoController extends BaseController {
 			// 諸費用期間
 			if (j != expensesInfoList.size() - 1) {
 				String reflectYearAndMonth = expensesInfoList.get(j + 1).getExpensesReflectYearAndMonth();
-				int year = Integer.parseInt(reflectYearAndMonth.substring(0,4));
+				int year = Integer.parseInt(reflectYearAndMonth.substring(0, 4));
 				int month = Integer.parseInt(reflectYearAndMonth.substring(4));
 				String yearAndMonth = "";
 				month -= 1;
-				if(month == 0) {
+				if (month == 0) {
 					yearAndMonth = (year - 1) + "12";
-				}else {
-					yearAndMonth = year + "" + (month > 9 ? month : "0" + month );
+				} else {
+					yearAndMonth = year + "" + (month > 9 ? month : "0" + month);
 				}
-				e.setExpensesPeriod(e.getExpensesReflectYearAndMonth() + "~"
-						+ yearAndMonth);
+				e.setExpensesPeriod(e.getExpensesReflectYearAndMonth() + "~" + yearAndMonth);
 			} else {
 				e.setExpensesPeriod(e.getExpensesReflectYearAndMonth() + "~");
 			}
@@ -321,14 +321,14 @@ public class WagesInfoController extends BaseController {
 			if (i != wagesInfoModels.size() - 1) {
 				nextWagesDate = Integer.parseInt(wagesInfoModels.get(i + 1).getReflectYearAndMonth());
 				String reflectYearAndMonth = wagesInfoModels.get(i + 1).getReflectYearAndMonth();
-				int year = Integer.parseInt(reflectYearAndMonth.substring(0,4));
+				int year = Integer.parseInt(reflectYearAndMonth.substring(0, 4));
 				int month = Integer.parseInt(reflectYearAndMonth.substring(4));
 				String yearAndMonth = "";
 				month -= 1;
-				if(month == 0) {
+				if (month == 0) {
 					yearAndMonth = (year - 1) + "12";
-				}else {
-					yearAndMonth = year + "" + (month > 9 ? month : "0" + month );
+				} else {
+					yearAndMonth = year + "" + (month > 9 ? month : "0" + month);
 				}
 				w.setPeriod(w.getReflectYearAndMonth() + "~" + yearAndMonth);
 			} else {
@@ -340,17 +340,16 @@ public class WagesInfoController extends BaseController {
 				// 諸費用期間
 				if (j != expensesInfoModels.size() - 1) {
 					String reflectYearAndMonth = expensesInfoModels.get(j + 1).getExpensesReflectYearAndMonth();
-					int year = Integer.parseInt(reflectYearAndMonth.substring(0,4));
+					int year = Integer.parseInt(reflectYearAndMonth.substring(0, 4));
 					int month = Integer.parseInt(reflectYearAndMonth.substring(4));
 					String yearAndMonth = "";
 					month -= 1;
-					if(month == 0) {
+					if (month == 0) {
 						yearAndMonth = (year - 1) + "12";
-					}else {
-						yearAndMonth = year + "" + (month > 9 ? month : "0" + month );
+					} else {
+						yearAndMonth = year + "" + (month > 9 ? month : "0" + month);
 					}
-					e.setExpensesPeriod(e.getExpensesReflectYearAndMonth() + "~"
-							+ yearAndMonth);
+					e.setExpensesPeriod(e.getExpensesReflectYearAndMonth() + "~" + yearAndMonth);
 				} else {
 					e.setExpensesPeriod(e.getExpensesReflectYearAndMonth() + "~");
 				}
@@ -374,7 +373,7 @@ public class WagesInfoController extends BaseController {
 				monthNewData = expensesInfoModelsInWages.get(expensesInfoModelsInWages.size() - 1);
 				w.setTransportationExpenses(monthNewData.getTransportationExpenses());
 				w.setLeaderAllowanceAmount(monthNewData.getLeaderAllowanceAmount());
-				w.setHousingAllowance(monthNewData.getHousingAllowance());
+				w.setSpecialAllowance(monthNewData.getSpecialAllowance());
 				w.setOtherAllowanceName(monthNewData.getOtherAllowanceName());
 				w.setOtherAllowanceAmount(monthNewData.getOtherAllowanceAmount());
 			}
@@ -412,7 +411,7 @@ public class WagesInfoController extends BaseController {
 		HashMap<String, String> checkMap = new HashMap<String, String>();
 		checkMap.put("employeeNo", wagesInfoModel.getEmployeeNo());
 		ArrayList<WagesInfoModel> wagesInfoList = wagesInfoMapper.getWagesInfo(checkMap);
-		if(wagesInfoList.size() != 0) {
+		if (wagesInfoList.size() != 0) {
 			int lastEnd = Integer.parseInt(wagesInfoList.get(wagesInfoList.size() - 1).getReflectYearAndMonth());
 			int nowStart = Integer.parseInt(wagesInfoModel.getReflectYearAndMonth());
 			if (nowStart < lastEnd) {
@@ -478,6 +477,7 @@ public class WagesInfoController extends BaseController {
 
 	/**
 	 * 給料情報削除
+	 * 
 	 * @param deleteMod
 	 * @return
 	 * @throws CloneNotSupportedException
