@@ -373,7 +373,7 @@ public class WagesInfoController extends BaseController {
 				monthNewData = expensesInfoModelsInWages.get(expensesInfoModelsInWages.size() - 1);
 				w.setTransportationExpenses(monthNewData.getTransportationExpenses());
 				w.setLeaderAllowanceAmount(monthNewData.getLeaderAllowanceAmount());
-				w.setSpecialAllowance(monthNewData.getSpecialAllowance());
+				w.setIntroductionAllowance(monthNewData.getIntroductionAllowance());
 				w.setOtherAllowanceName(monthNewData.getOtherAllowanceName());
 				w.setOtherAllowanceAmount(monthNewData.getOtherAllowanceAmount());
 			}

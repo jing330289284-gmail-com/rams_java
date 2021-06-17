@@ -49,9 +49,9 @@ public class ExpensesInfoValidation implements Validator{
 						errors.rejectValue("otherAllowanceAmount", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG007","他の手当の費用"));
 					}
 				}
-				if(!UtilsCheckMethod.isNullOrEmpty(p.getSpecialAllowance())) {
-					if(!UtilsCheckMethod.numberFormat(p.getSpecialAllowance())) {
-						errors.rejectValue("specialAllowance", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG007","特別手当"));
+				if(!UtilsCheckMethod.isNullOrEmpty(p.getIntroductionAllowance())) {
+					if(!UtilsCheckMethod.numberFormat(p.getIntroductionAllowance())) {
+						errors.rejectValue("introductionAllowance", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG007","紹介費用"));
 					}
 				}
 			}

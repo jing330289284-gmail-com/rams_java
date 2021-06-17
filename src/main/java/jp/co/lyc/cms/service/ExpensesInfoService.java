@@ -92,7 +92,7 @@ public class ExpensesInfoService {
 		sendMap.put("otherAllowanceAmount", expensesInfoModel.getOtherAllowanceAmount());
 		sendMap.put("leaderAllowanceAmount", expensesInfoModel.getLeaderAllowanceAmount());
 		sendMap.put("totalExpenses", expensesInfoModel.getTotalExpenses());
-		sendMap.put("specialAllowance", expensesInfoModel.getSpecialAllowance());
+		sendMap.put("introductionAllowance", expensesInfoModel.getIntroductionAllowance());
 		sendMap.put("remark", expensesInfoModel.getRemark());
 		sendMap.put("updateUser", expensesInfoModel.getUpdateUser());
 		return sendMap;

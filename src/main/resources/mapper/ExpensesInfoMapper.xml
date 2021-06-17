@@ -11,7 +11,7 @@
 		otherAllowanceAmount,
 		leaderAllowanceAmount,
 		totalExpenses,
-		specialAllowance,
+		introductionAllowance,
 		remark,
 		transportationExpenses 
 	FROM
@@ -33,7 +33,7 @@
 		otherAllowanceAmount,
 		leaderAllowanceAmount,
 		totalExpenses,
-		specialAllowance,
+		introductionAllowance,
 		remark,
 		updateTime,
 		createTime,
@@ -47,7 +47,7 @@
 		#{otherAllowanceAmount},
 		#{leaderAllowanceAmount},
 		#{totalExpenses},
-		#{specialAllowance},
+		#{introductionAllowance},
 		#{remark},
 		NOW(),
 		NOW(),
@@ -76,8 +76,8 @@
 		<if test="totalExpenses != null">
 			totalExpenses = #{totalExpenses},
 		</if>	
-		<if test="specialAllowance != null">
-			specialAllowance = #{specialAllowance},
+		<if test="introductionAllowance != null">
+			introductionAllowance = #{introductionAllowance},
 		</if>			
 		<if test="remark != null">
 			remark = #{remark},

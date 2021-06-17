@@ -13,7 +13,7 @@ public class ExpensesInfoModel implements Serializable {
 	String otherAllowanceAmount;
 	String leaderAllowanceAmount;
 	String totalExpenses;
-	String specialAllowance;
+	String introductionAllowance;
 	String actionType;
 	String updateUser;
 	String remark;
@@ -26,12 +26,12 @@ public class ExpensesInfoModel implements Serializable {
 		this.remark = remark;
 	}
 
-	public String getSpecialAllowance() {
-		return specialAllowance;
+	public String getIntroductionAllowance() {
+		return introductionAllowance;
 	}
 
-	public void setSpecialAllowance(String specialAllowance) {
-		this.specialAllowance = specialAllowance;
+	public void setIntroductionAllowance(String introductionAllowance) {
+		this.introductionAllowance = introductionAllowance;
 	}
 
 	public String getTotalExpenses() {
