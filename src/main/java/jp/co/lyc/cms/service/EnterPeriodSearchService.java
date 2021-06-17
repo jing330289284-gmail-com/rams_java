@@ -151,6 +151,28 @@ public class EnterPeriodSearchService {
 		}
 		return epsList;
 	}
+	
+	/**
+	 * 区分は昇格の場合
+	 * 
+	 * @param sendMap
+	 * @return
+	 */
+	public ArrayList<String> getWagesInfo(String yearAndMonth) {
+		return enterPeriodSearchMapper.getWagesInfo(yearAndMonth);
+	}
+	
+	public ArrayList<String> getEmployeeSiteInfo(String yearAndMonth) {
+		return enterPeriodSearchMapper.getEmployeeSiteInfo(yearAndMonth);
+	}
+	
+	public ArrayList<String> getBonusMonthInfo(String yearAndMonth) {
+		return enterPeriodSearchMapper.getBonusMonthInfo(yearAndMonth);
+	}
+	
+	public ArrayList<EnterPeriodSearchModel> getenterPeriodByEmp(ArrayList<String> employeeList) {
+		return enterPeriodSearchMapper.getenterPeriodByEmp(employeeList);
+	}
 
 	/**
 	 * sendMapの作成

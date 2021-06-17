@@ -88,4 +88,72 @@ public class EnterPeriodSearchController extends BaseController {
 		logger.info("EnterPeriodSearchController.selectEnterPeriodData:" + "検索終了");
 		return result;
 	}
+
+	/**
+	 * 検索ボタン
+	 * 
+	 * @param enterPeriodSearchModel
+	 * @return
+	 */
+	@RequestMapping(value = "/selectEnterPeriodDataNew", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> selectEnterPeriodDataNew(@RequestBody EnterPeriodSearchModel enterPeriodSearchModel) {
+		errorsMessage = "";
+		logger.info("EnterPeriodSearchController.selectEnterPeriodData:" + "検索開始");
+		DataBinder binder = new DataBinder(enterPeriodSearchModel);
+		binder.setValidator(new EnterPeriodSearchValidation());
+		binder.validate();
+		BindingResult results = binder.getBindingResult();
+		Map<String, Object> result = new HashMap<>();
+		if (results.hasErrors()) {
+			results.getAllErrors().forEach(o -> {
+				FieldError error = (FieldError) o;
+				errorsMessage += error.getDefaultMessage();// エラーメッセージ
+			});
+			result.put("errorsMessage", errorsMessage);// エラーメッセージ
+			logger.info("EnterPeriodSearchController.selectEnterPeriodData:" + "検索終了");
+			return result;
+		}
+		ArrayList<String> employeeList = new ArrayList<String>();
+		ArrayList<EnterPeriodSearchModel> resultList = new ArrayList<EnterPeriodSearchModel>();
+
+		String yearAndMonth = Integer.parseInt(enterPeriodSearchModel.getYearAndMonth().substring(0, 4)) - 1
+				+ enterPeriodSearchModel.getYearAndMonth().substring(4, 6);
+		if (enterPeriodSearchModel.getEnterPeriodKbn().equals("0")) {
+			// 区分は昇格の場合
+			employeeList = enterPeriodSearchService.getWagesInfo(yearAndMonth);
+		} else if (enterPeriodSearchModel.getEnterPeriodKbn().equals("1")) {
+			// 区分は現場の場合
+			employeeList = enterPeriodSearchService.getEmployeeSiteInfo(yearAndMonth);
+		} else if (enterPeriodSearchModel.getEnterPeriodKbn().equals("2")) {
+			// 区分はボーナスの場合
+			employeeList = enterPeriodSearchService.getBonusMonthInfo(yearAndMonth);
+		}
+
+		if (enterPeriodSearchModel.getEmployeeNo() != null) {
+			for (int i = 0; i < employeeList.size(); i++) {
+				if (!enterPeriodSearchModel.getEmployeeNo().equals(employeeList.get(i))) {
+					employeeList.remove(i);
+					i--;
+				}
+			}
+		}
+
+		if (employeeList.size() > 0) {
+			resultList = enterPeriodSearchService.getenterPeriodByEmp(employeeList);
+		}
+
+		if (resultList.size() > 0) {
+			for (int i = 0; i < resultList.size(); i++) {
+				resultList.get(i).setRowNo(i + 1 + "");
+			}
+		} else {
+			errorsMessage += "今月データがないです";// エラーメッセージ
+			result.put("errorsMessage", errorsMessage);// エラーメッセージ
+		}
+
+		result.put("enterPeriodList", resultList);
+		logger.info("EnterPeriodSearchController.selectEnterPeriodData:" + "検索終了");
+		return result;
+	}
 }

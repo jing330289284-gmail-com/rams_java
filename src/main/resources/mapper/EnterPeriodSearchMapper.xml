@@ -3,7 +3,7 @@
 <mapper namespace="jp.co.lyc.cms.mapper.EnterPeriodSearchMapper">
 	<resultMap id="EnterPeriodSearchModel"
 		type="jp.co.lyc.cms.model.EnterPeriodSearchModel" />
-	<resultMap id="stringResult" type="String" />
+	<!-- <resultMap id="stringResult" type="String" /> -->
 	<!-- 結果を出ます -->
 	<select id="selectEnterPeriodData" parameterType="String"
 		resultMap="EnterPeriodSearchModel">
@@ -35,7 +35,8 @@
 		T005.scheduleOfBonusAmount
 		FROM
 		T005WagesInfo AS T005
-		LEFT JOIN ( SELECT T005r.employeeNo, MAX( T005r.reflectYearAndMonth ) AS
+		LEFT JOIN ( SELECT
+		T005r.employeeNo, MAX( T005r.reflectYearAndMonth ) AS
 		reflectYearAndMonth FROM T005WagesInfo AS T005r GROUP BY
 		T005r.employeeNo ) AS T005rs ON T005rs.employeeNo = T005.employeeNo
 		AND T005rs.reflectYearAndMonth = T005.reflectYearAndMonth
@@ -48,28 +49,37 @@
 		LEFT JOIN (
 		SELECT
 		T005befo.employeeNo,
-		MAX( T005befo.reflectYearAndMonth ) AS befoReflectYearAndMonth
+		MAX(
+		T005befo.reflectYearAndMonth ) AS befoReflectYearAndMonth
 		FROM
 		T005WagesInfo AS T005befo
-		LEFT JOIN ( SELECT T005t.employeeNo, MAX( T005t.reflectYearAndMonth ) AS
-		reflectYearAndMonth FROM T005WagesInfo AS T005t GROUP BY
-		T005t.employeeNo ) AS T005now ON T005befo.employeeNo =
+		LEFT JOIN ( SELECT T005t.employeeNo, MAX(
+		T005t.reflectYearAndMonth ) AS
+		reflectYearAndMonth FROM T005WagesInfo
+		AS T005t GROUP BY
+		T005t.employeeNo ) AS T005now ON T005befo.employeeNo
+		=
 		T005now.employeeNo
 		WHERE
-		T005befo.reflectYearAndMonth &lt; T005now.reflectYearAndMonth
+		T005befo.reflectYearAndMonth &lt;
+		T005now.reflectYearAndMonth
 		GROUP BY
 		T005befo.employeeNo
-		) AS T005before ON T005befoSa.employeeNo = T005before.employeeNo
+		) AS T005before
+		ON T005befoSa.employeeNo = T005before.employeeNo
 		WHERE
 		T005befoSa.reflectYearAndMonth = T005before.befoReflectYearAndMonth
 		GROUP BY
 		T005befoSa.employeeNo
-		) AS T005beforeSa ON T005.employeeNo = T005beforeSa.employeeNo
+		) AS T005beforeSa ON T005.employeeNo =
+		T005beforeSa.employeeNo
 		WHERE
-		T005.reflectYearAndMonth = T005rs.reflectYearAndMonth
+		T005.reflectYearAndMonth =
+		T005rs.reflectYearAndMonth
 		GROUP BY
 		T005.employeeNo
-		) AS T005data ON T005data.employeeNo = T001.employeeNo
+		) AS T005data ON
+		T005data.employeeNo = T001.employeeNo
 		LEFT JOIN (
 		SELECT
 		T006.employeeNo,
@@ -78,7 +88,8 @@
 		T006.admissionEndDate
 		FROM
 		T006EmployeeSiteInfo AS T006
-		LEFT JOIN ( SELECT T006r.employeeNo, MAX( T006r.admissionStartDate ) AS
+		LEFT JOIN (
+		SELECT T006r.employeeNo, MAX( T006r.admissionStartDate ) AS
 		admissionStartDate FROM T006EmployeeSiteInfo AS T006r GROUP BY
 		T006r.employeeNo ) AS T006rs ON T006rs.employeeNo = T006.employeeNo
 		AND T006rs.admissionStartDate = T006.admissionStartDate
@@ -110,13 +121,17 @@
 		SELECT
 		T001.employeeNo,
 		T006.admissionStartDate,
-		CAST( SUM( T006.nonSiteMonths ) AS CHAR ) AS nonSiteMonths
+		CAST( SUM(
+		T006.nonSiteMonths ) AS CHAR ) AS nonSiteMonths
 		FROM
-		T001Employee AS T001
+		T001Employee AS
+		T001
 		LEFT JOIN T006EmployeeSiteInfo AS T006 ON T001.employeeNo =
 		T006.employeeNo
-		LEFT JOIN ( SELECT T006s.employeeNo, T006s.admissionStartDate FROM
-		T006EmployeeSiteInfo AS T006s GROUP BY T006s.employeeNo ) AS T006date
+		LEFT JOIN ( SELECT T006s.employeeNo,
+		T006s.admissionStartDate FROM
+		T006EmployeeSiteInfo AS T006s GROUP BY
+		T006s.employeeNo ) AS T006date
 		ON T006date.employeeNo = T001.employeeNo
 		WHERE
 		T006date.admissionStartDate != ""
@@ -156,17 +171,21 @@
 		T001.employeeNo,
 		T006ade.admissionStartDate
 		FROM
-		T001Employee AS T001
+		T001Employee AS
+		T001
 		LEFT JOIN T006EmployeeSiteInfo AS T006 ON
-		T001.employeeNo = T006.employeeNo
+		T001.employeeNo =
+		T006.employeeNo
 		LEFT JOIN ( SELECT T006e.employeeNo,
 		T006e.admissionStartDate FROM T006EmployeeSiteInfo AS T006e WHERE
 		T006e.admissionEndDate IS NULL ) AS T006ade ON T006ade.employeeNo =
 		T001.employeeNo
 		WHERE
 		T006.admissionEndDate IS NULL
-		AND T001.employeeNo IN ( SELECT T006k.employeeNo FROM
-		T006EmployeeSiteInfo AS T006k WHERE T006k.admissionEndDate IS NULL
+		AND T001.employeeNo
+		IN ( SELECT T006k.employeeNo FROM
+		T006EmployeeSiteInfo AS T006k WHERE
+		T006k.admissionEndDate IS NULL
 		GROUP BY T006k.employeeNo )
 		<if test="employeeNo != null">
 			AND T001.employeeNo = #{employeeNo}
@@ -182,17 +201,149 @@
 		T005.nextBonusMonth
 		FROM
 		T001Employee AS T001
-		LEFT JOIN T005WagesInfo AS T005 ON T001.employeeNo
+		LEFT
+		JOIN T005WagesInfo AS T005 ON T001.employeeNo
 		= T005.employeeNo
-		LEFT JOIN ( SELECT T005k.employeeNo, MAX(
-		T005k.reflectYearAndMonth ) AS reflectYearAndMonth FROM T005WagesInfo
-		AS T005k GROUP BY T005k.employeeNo ) AS T005date ON T001.employeeNo =
+		LEFT
+		JOIN ( SELECT T005k.employeeNo, MAX(
+		T005k.reflectYearAndMonth ) AS
+		reflectYearAndMonth FROM T005WagesInfo
+		AS T005k GROUP BY
+		T005k.employeeNo ) AS T005date ON T001.employeeNo =
 		T005date.employeeNo
 		WHERE
-		T005.reflectYearAndMonth = T005date.reflectYearAndMonth
+		T005.reflectYearAndMonth =
+		T005date.reflectYearAndMonth
 		AND T005.nextBonusMonth != ''
 		<if test="employeeNo != null">
 			AND T001.employeeNo = #{employeeNo}
 		</if>
+	</select>
+
+	<!-- 最新の昇格を取得 -->
+	<select id="getWagesInfo" parameterType="String"
+		resultType="String">
+		SELECT T005.employeeNo
+		FROM T005WagesInfo as T005
+		inner Join
+		(SELECT
+		employeeNo,max(reflectYearAndMonth) as
+		reflectYearAndMonth
+		FROM
+		T005WagesInfo
+		GROUP BY employeeNo) as temp
+		on
+		T005.employeeNo =
+		temp.employeeNo
+		and T005.reflectYearAndMonth =
+		temp.reflectYearAndMonth
+		where T005.salary is not null
+		and T005.salary
+		!= ""
+		and T005.salary !=
+		"0"
+		and T005.reflectYearAndMonth &lt;
+		#{yearAndMonth};
+	</select>
+
+	<!-- 最新の現場を取得 -->
+	<select id="getEmployeeSiteInfo" parameterType="String"
+		resultType="String">
+		SELECT
+		T006.employeeNo
+		FROM T006EmployeeSiteInfo as
+		T006
+		inner
+		Join
+		(SELECT employeeNo,max(admissionStartDate) as
+		admissionStartDate
+		FROM
+		T006EmployeeSiteInfo
+		group by
+		employeeNo) as temp
+		on T006.employeeNo
+		= temp.employeeNo
+		and
+		T006.admissionStartDate = temp.admissionStartDate
+		where
+		T006.admissionEndDate is null
+		and left(T006.admissionStartDate,6)
+		&lt;
+		#{yearAndMonth};
+	</select>
+
+	<!-- 最新のボーナスを取得 -->
+	<select id="getBonusMonthInfo" parameterType="String"
+		resultType="String">
+		SELECT T005.employeeNo,T005.nextBonusMonth FROM
+		T005WagesInfo as T005
+		inner Join
+		(SELECT employeeNo,max(nextBonusMonth)
+		as nextBonusMonth
+		FROM T005WagesInfo
+		GROUP BY employeeNo) as temp
+		on
+		T005.employeeNo = temp.employeeNo
+		and T005.nextBonusMonth =
+		temp.nextBonusMonth
+		where T005.nextBonusMonth != ""
+		and
+		T005.nextBonusMonth
+		&lt;
+		#{yearAndMonth};
+	</select>
+
+	<!-- データを取得 -->
+	<select id="getenterPeriodByEmp" parameterType="String"
+		resultType="jp.co.lyc.cms.model.EnterPeriodSearchModel">
+		SELECT
+		T001.employeeNo,
+		CONCAT( T001.employeeFristName,
+		T001.employeeLastName ) as
+		employeeName,
+		T005.salary,
+		T005.insuranceFeeAmount,
+		T005.reflectYearAndMonth,
+		T005.scheduleOfBonusAmount,
+		T006.admissionStartDate,
+		T006.unitPrice
+		FROM
+		T005WagesInfo
+		as T005
+		inner Join
+		(SELECT
+		employeeNo,max(reflectYearAndMonth) as
+		reflectYearAndMonth
+		FROM
+		T005WagesInfo
+		GROUP BY employeeNo) as temp
+		on
+		T005.employeeNo =
+		temp.employeeNo
+		and T005.reflectYearAndMonth =
+		temp.reflectYearAndMonth
+		inner Join T001Employee as T001
+		on
+		T001.employeeNo = T005.employeeNo
+		left join
+		(SELECT
+		T006.employeeNo,T006.admissionStartDate,T006.unitPrice FROM
+		T006EmployeeSiteInfo as T006
+		inner Join
+		(SELECT
+		employeeNo,max(admissionStartDate) as admissionStartDate FROM
+		T006EmployeeSiteInfo
+		group by employeeNo) as temp
+		on T006.employeeNo =
+		temp.employeeNo
+		and T006.admissionStartDate = temp.admissionStartDate)
+		as T006
+		on T005.employeeNo = T006.employeeNo
+		where
+		T005.employeeNo in
+		<foreach item="item" collection="list" open="(" close=")"
+			separator=",">
+			#{item}
+		</foreach>
 	</select>
 </mapper>
