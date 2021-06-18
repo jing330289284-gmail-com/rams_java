@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import jp.co.lyc.cms.mapper.EnterPeriodSearchMapper;
 import jp.co.lyc.cms.model.EnterPeriodSearchModel;
+import jp.co.lyc.cms.model.SiteModel;
 import jp.co.lyc.cms.util.UtilsCheckMethod;
 import jp.co.lyc.cms.util.UtilsController;
 
@@ -151,27 +152,32 @@ public class EnterPeriodSearchService {
 		}
 		return epsList;
 	}
-	
+
 	/**
 	 * 区分は昇格の場合
+	 * @param selectedYearAndMonth 
 	 * 
 	 * @param sendMap
 	 * @return
 	 */
-	public ArrayList<String> getWagesInfo(String yearAndMonth) {
-		return enterPeriodSearchMapper.getWagesInfo(yearAndMonth);
+	public ArrayList<String> getWagesInfo(String yearAndMonth, String selectedYearAndMonth) {
+		return enterPeriodSearchMapper.getWagesInfo(yearAndMonth,selectedYearAndMonth);
 	}
-	
+
 	public ArrayList<String> getEmployeeSiteInfo(String yearAndMonth) {
 		return enterPeriodSearchMapper.getEmployeeSiteInfo(yearAndMonth);
 	}
-	
+
 	public ArrayList<String> getBonusMonthInfo(String yearAndMonth) {
 		return enterPeriodSearchMapper.getBonusMonthInfo(yearAndMonth);
 	}
-	
+
 	public ArrayList<EnterPeriodSearchModel> getenterPeriodByEmp(ArrayList<String> employeeList) {
 		return enterPeriodSearchMapper.getenterPeriodByEmp(employeeList);
+	}
+	
+	public ArrayList<SiteModel> getSiteInfoByEmp(ArrayList<String> employeeList, String yearAndMonth) {
+		return enterPeriodSearchMapper.getSiteInfoByEmp(employeeList,yearAndMonth);
 	}
 
 	/**

@@ -1,6 +1,9 @@
 package jp.co.lyc.cms.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import org.slf4j.Logger;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import jp.co.lyc.cms.common.BaseController;
 import jp.co.lyc.cms.mapper.EnterPeriodSearchMapper;
 import jp.co.lyc.cms.model.EnterPeriodSearchModel;
+import jp.co.lyc.cms.model.SiteModel;
 import jp.co.lyc.cms.service.EnterPeriodSearchService;
 import jp.co.lyc.cms.validation.EnterPeriodSearchValidation;
 
@@ -94,10 +98,12 @@ public class EnterPeriodSearchController extends BaseController {
 	 * 
 	 * @param enterPeriodSearchModel
 	 * @return
+	 * @throws ParseException
 	 */
 	@RequestMapping(value = "/selectEnterPeriodDataNew", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> selectEnterPeriodDataNew(@RequestBody EnterPeriodSearchModel enterPeriodSearchModel) {
+	public Map<String, Object> selectEnterPeriodDataNew(@RequestBody EnterPeriodSearchModel enterPeriodSearchModel)
+			throws ParseException {
 		errorsMessage = "";
 		logger.info("EnterPeriodSearchController.selectEnterPeriodData:" + "検索開始");
 		DataBinder binder = new DataBinder(enterPeriodSearchModel);
@@ -116,12 +122,14 @@ public class EnterPeriodSearchController extends BaseController {
 		}
 		ArrayList<String> employeeList = new ArrayList<String>();
 		ArrayList<EnterPeriodSearchModel> resultList = new ArrayList<EnterPeriodSearchModel>();
+		ArrayList<SiteModel> siteInfoList = new ArrayList<SiteModel>();
 
+		String selectedYearAndMonth = enterPeriodSearchModel.getYearAndMonth();
 		String yearAndMonth = Integer.parseInt(enterPeriodSearchModel.getYearAndMonth().substring(0, 4)) - 1
 				+ enterPeriodSearchModel.getYearAndMonth().substring(4, 6);
 		if (enterPeriodSearchModel.getEnterPeriodKbn().equals("0")) {
 			// 区分は昇格の場合
-			employeeList = enterPeriodSearchService.getWagesInfo(yearAndMonth);
+			employeeList = enterPeriodSearchService.getWagesInfo(yearAndMonth,selectedYearAndMonth);
 		} else if (enterPeriodSearchModel.getEnterPeriodKbn().equals("1")) {
 			// 区分は現場の場合
 			employeeList = enterPeriodSearchService.getEmployeeSiteInfo(yearAndMonth);
@@ -144,6 +152,68 @@ public class EnterPeriodSearchController extends BaseController {
 		}
 
 		if (resultList.size() > 0) {
+			// 非稼働取得
+			siteInfoList = enterPeriodSearchService.getSiteInfoByEmp(employeeList, yearAndMonth);
+			ArrayList<EnterPeriodSearchModel> periodsList = new ArrayList<EnterPeriodSearchModel>();
+
+			for (int i = 1; i < siteInfoList.size(); i++) {
+				if (siteInfoList.get(i).getEmployeeNo().equals(siteInfoList.get(i - 1).getEmployeeNo())) {
+					String endTime = siteInfoList.get(i - 1).getAdmissionEndDate();
+					String startTime = siteInfoList.get(i).getAdmissionStartDate();
+					if (endTime != null) {
+						int month = getMonthNum(endTime.substring(0, 6), startTime.substring(0, 6));
+						if (month >= 2) {
+							EnterPeriodSearchModel pl = new EnterPeriodSearchModel();
+							pl.setEmployeeNo(siteInfoList.get(i).getEmployeeNo());
+							pl.setNonSiteMonths(String.valueOf(month));
+							pl.setNonSitePeriod(endTime + "~" + startTime);
+							periodsList.add(pl);
+						}
+					}
+				} else {
+					if (periodsList.size() > 0) {
+						int month = 0;
+						for (int j = 0; j < periodsList.size(); j++) {
+							month += Integer.parseInt(periodsList.get(j).getNonSiteMonths());
+						}
+						for (int j = 0; j < resultList.size(); j++) {
+							if (resultList.get(j).getEmployeeNo().equals(periodsList.get(0).getEmployeeNo())) {
+								resultList.get(j).setNonSitePeriodsList(periodsList);
+								resultList.get(j).setNonSiteMonths(String.valueOf(month));
+								periodsList = new ArrayList<EnterPeriodSearchModel>();
+								break;
+							}
+						}
+					}
+				}
+			}
+			
+			if (periodsList.size() > 0) {
+				int month = 0;
+				for (int j = 0; j < periodsList.size(); j++) {
+					month += Integer.parseInt(periodsList.get(j).getNonSiteMonths());
+				}
+				for (int j = 0; j < resultList.size(); j++) {
+					if (resultList.get(j).getEmployeeNo().equals(periodsList.get(0).getEmployeeNo())) {
+						resultList.get(j).setNonSitePeriodsList(periodsList);
+						resultList.get(j).setNonSiteMonths(String.valueOf(month));
+						periodsList = new ArrayList<EnterPeriodSearchModel>();
+						break;
+					}
+				}
+			}
+
+			// 非稼働時間計算
+			for (int i = 0; i < resultList.size(); i++) {
+				if (resultList.get(i).getNonSiteMonths() != null) {
+					int month = getMonthNum(resultList.get(i).getReflectYearAndMonth(), yearAndMonth);
+					if (Integer.parseInt(resultList.get(i).getNonSiteMonths()) > month) {
+						resultList.remove(i);
+						i--;
+					}
+				}
+			}
+
 			for (int i = 0; i < resultList.size(); i++) {
 				resultList.get(i).setRowNo(i + 1 + "");
 			}
@@ -155,5 +225,20 @@ public class EnterPeriodSearchController extends BaseController {
 		result.put("enterPeriodList", resultList);
 		logger.info("EnterPeriodSearchController.selectEnterPeriodData:" + "検索終了");
 		return result;
+	}
+
+	public static int getMonthNum(String date1, String date2) throws java.text.ParseException {
+		int result = 0;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
+
+		Calendar c1 = Calendar.getInstance();
+		Calendar c2 = Calendar.getInstance();
+
+		c1.setTime(sdf.parse(date1));
+		c2.setTime(sdf.parse(date2));
+
+		result = c2.get(Calendar.MONTH) - c1.get(Calendar.MONTH);
+		int month = (c2.get(Calendar.YEAR) - c1.get(Calendar.YEAR)) * 12;
+		return result == 0 ? 1 : Math.abs(month + result);
 	}
 }

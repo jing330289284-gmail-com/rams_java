@@ -242,8 +242,11 @@
 		!= ""
 		and T005.salary !=
 		"0"
-		and T005.reflectYearAndMonth &lt;
-		#{yearAndMonth};
+		and T005.reflectYearAndMonth &lt;=
+		#{yearAndMonth}
+		and (T005.nextRaiseMonth = ""
+		or T005.nextRaiseMonth &lt;= #{selectedYearAndMonth})
+		;
 	</select>
 
 	<!-- 最新の現場を取得 -->
@@ -268,7 +271,7 @@
 		where
 		T006.admissionEndDate is null
 		and left(T006.admissionStartDate,6)
-		&lt;
+		&lt;=
 		#{yearAndMonth};
 	</select>
 
@@ -289,7 +292,7 @@
 		where T005.nextBonusMonth != ""
 		and
 		T005.nextBonusMonth
-		&lt;
+		&lt;=
 		#{yearAndMonth};
 	</select>
 
@@ -345,5 +348,20 @@
 			separator=",">
 			#{item}
 		</foreach>
+	</select>
+
+	<!-- データを取得 -->
+	<select id="getSiteInfoByEmp" parameterType="String"
+		resultType="jp.co.lyc.cms.model.SiteModel">
+		SELECT employeeNo,admissionStartDate,admissionEndDate FROM
+		T006EmployeeSiteInfo
+		where employeeNo in 
+		<foreach item="item" collection="employeeList" open="(" close=")"
+			separator=",">
+			#{item}
+		</foreach>
+		and (admissionEndDate is null
+		or left(admissionEndDate,6) &gt;= #{yearAndMonth})
+		;
 	</select>
 </mapper>
