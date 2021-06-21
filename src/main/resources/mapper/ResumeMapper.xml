@@ -7,9 +7,9 @@
   		SELECT 
 			CONCAT(IFNULL(t001.employeeFristName,''),IFNULL(upper(left(t002.alphabetName,1)),''))employeeName
 		FROM
-			rams.T001Employee t001
+			T001Employee t001
 		JOIN
-			rams.T002EmployeeDetail t002
+			T002EmployeeDetail t002
 		ON
 			t001.employeeNo=t002.employeeNo
 		WHERE

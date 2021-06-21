@@ -188,8 +188,8 @@ public class PersonalSalesSearchController {
 					if(UtilsCheckMethod.isNullOrEmpty(personModelList.get(i).getOtherAllowanceAmount())) {
 						personModelList.get(i).setOtherAllowanceAmount("0");
 					}
-					if(UtilsCheckMethod.isNullOrEmpty(personModelList.get(i).getHousingAllowance())) {
-						personModelList.get(i).setHousingAllowance("0");
+					if(UtilsCheckMethod.isNullOrEmpty(personModelList.get(i).getIntroductionAllowance())) {
+						personModelList.get(i).setIntroductionAllowance("0");
 					}
 					if(UtilsCheckMethod.isNullOrEmpty(personModelList.get(i).getDeductionsAndOvertimePay())) {
 						personModelList.get(i).setDeductionsAndOvertimePay("0");
@@ -218,7 +218,7 @@ public class PersonalSalesSearchController {
 								Integer.parseInt(personModelList.get(i).getBonusFee())+
 								Integer.parseInt(personModelList.get(i).getLeaderAllowanceAmount())+
 								Integer.parseInt(personModelList.get(i).getOtherAllowanceAmount())+
-								Integer.parseInt(personModelList.get(i).getHousingAllowance())));
+								Integer.parseInt(personModelList.get(i).getIntroductionAllowance())));
 					personModelList.get(i).setGrosProfits(grosProfits);
 				}
 				

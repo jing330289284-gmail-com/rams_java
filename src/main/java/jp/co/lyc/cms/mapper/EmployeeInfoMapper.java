@@ -34,7 +34,7 @@ public interface EmployeeInfoMapper {
 
 	public List<EmployeeInfoCsvModel> getEmployeesCSV(List<String> empList);
 
-	public List<String> getEmployeeWithAdmission(Map<String, Object> sendMap);
+	public List<String> getEmployeeWithAdmission();
 
 	public List<EmployeeModel> getEmployeesDevelopLanguage();
 

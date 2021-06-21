@@ -244,36 +244,11 @@
 		AS T015 ON
 		T015.employeeNo=T002.employeeNo
 		WHERE
-		<if test="kadou!=null">
-			<if test='kadou=="0"'>
-				T006.admissionStartDate != "" and T006.admissionStartDate
-				is not
-				null
-				and T006.admissionEndDate is null
-				and
-				if(T006.typteOfContractCode is null,1=1,T006.typteOfContractCode !=
-				"4")
-				or T006.admissionStartDate != "" and
-				T006.admissionStartDate is
-				not null
-				and T006.admissionEndDate &gt; #{nowDate}
-				and
-				if(T006.typteOfContractCode is null,1=1,T006.typteOfContractCode !=
-				"4")
-			</if>
-			<if test='kadou=="1"'>
-				1=1
-			</if>
-		</if>
-		<if test="kadou==null">
-			1=1
-		</if>
+		CONCAT(T001.employeeFristName,T001.employeeLastName) =
+		ifnull(#{employeeName},CONCAT(T001.employeeFristName,T001.employeeLastName))
 		<if test="authorityCode != 4">
 			and T001.authorityCode != 4
 		</if>
-		and CONCAT(T001.employeeFristName,T001.employeeLastName) =
-		ifnull(#{employeeName},CONCAT(T001.employeeFristName,T001.employeeLastName))
-
 		and
 		intoCompanyYearAndMonth between
 		ifnull(#{intoCompanyYearAndMonthFrom},intoCompanyYearAndMonth) and
@@ -1158,7 +1133,8 @@
 		bpOtherCompanyAdmissionEndDate =
 		#{bpOtherCompanyAdmissionEndDate},
 		bpRemark = #{bpRemark},
-		createTime = now(),
+		createTime =
+		now(),
 		updateTime = now(),
 		updateUser = #{updateUser};
 	</update>
@@ -1173,20 +1149,19 @@
 	</delete>
 
 	<!-- 現場あり社員番号を取得 -->
-	<select id="getEmployeeWithAdmission" parameterType="map"
-		resultMap="stringResult">
-		SELECT employeeNo FROM T006EmployeeSiteInfo
+	<select id="getEmployeeWithAdmission" resultMap="stringResult">
+		SELECT
+		employeeNo,admissionStartDate,admissionEndDate,typteOfContractCode
+		FROM newRams.T006EmployeeSiteInfo
 		where
-		admissionStartDate!="" and admissionStartDate is not null
+		((admissionStartDate &lt; now()
 		and
-		admissionEndDate is null
-		and if(typteOfContractCode is
+		admissionEndDate is null)
+		or (admissionStartDate &lt; now() and
+		admissionEndDate &gt; now()))
+		and
+		if(typteOfContractCode is
 		null,1=1,typteOfContractCode != "4")
-		or admissionStartDate != "" and
-		admissionStartDate is not null
-		and admissionEndDate &gt; #{nowDate}
-		and
-		if(typteOfContractCode is null,1=1,typteOfContractCode != "4")
 		GROUP BY
 		employeeNo;
 	</select>

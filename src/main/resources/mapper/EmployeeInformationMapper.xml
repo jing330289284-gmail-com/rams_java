@@ -20,6 +20,7 @@
 		on
 		T002.employeeNo = T001.employeeNo
 		where left(T002.employeeNo,2) != "BP"
+		and T002.employeeFormCode != "4"
 		order by
 		dealDistinctioCode,employeeNo
 		;

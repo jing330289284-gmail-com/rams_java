@@ -19,7 +19,7 @@
 		CONCAT(T001.employeeFristName,T001.employeeLastName)as employeeName,
 		M012.siteRoleName,
 		M013.stationName
-		FROM rams.T006EmployeeSiteInfo As T006
+		FROM T006EmployeeSiteInfo As T006
 		left join T018WorkTotalTime As T018 on T018.employeeNo =T006.employeeNo
 		and #{getYandM} =T018.attendanceYearAndMonth
 		left join T007CustomerInfo As T007 on T006.customerNo =T007.customerNo

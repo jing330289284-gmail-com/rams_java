@@ -270,6 +270,7 @@
 		T006.admissionStartDate = temp.admissionStartDate
 		where
 		T006.admissionEndDate is null
+		and (T006.typteOfContractCode is null or T006.typteOfContractCode != "4")
 		and left(T006.admissionStartDate,6)
 		&lt;=
 		#{yearAndMonth};
@@ -353,7 +354,7 @@
 	<!-- データを取得 -->
 	<select id="getSiteInfoByEmp" parameterType="String"
 		resultType="jp.co.lyc.cms.model.SiteModel">
-		SELECT employeeNo,admissionStartDate,admissionEndDate FROM
+		SELECT employeeNo,admissionStartDate,admissionEndDate,typteOfContractCode FROM
 		T006EmployeeSiteInfo
 		where employeeNo in 
 		<foreach item="item" collection="employeeList" open="(" close=")"

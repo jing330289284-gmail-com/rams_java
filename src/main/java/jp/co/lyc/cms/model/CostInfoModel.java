@@ -31,7 +31,7 @@ public class CostInfoModel implements Serializable {
 	public String reflectYearAndMonth;//反映年月
 	public String employeeFormCode;//社員形式
 	public String employeeFormName;//社員形式名前
-	public String housingAllowance;//住宅手当
+	public String introductionAllowance;//住宅手当
 	public String datePeriod;//時間段
 	public String housingStatus;//住宅ステータス
 	public String updatedReflectYearAndMonth;//更新された反映年月
@@ -208,11 +208,10 @@ public class CostInfoModel implements Serializable {
 	public void setEmployeeFormCode(String employeeFormCode) {
 		this.employeeFormCode = employeeFormCode;
 	}
-	public String getHousingAllowance() {
-		return housingAllowance;
+	public String getIntroductionAllowance() {
+		return introductionAllowance;
 	}
-	public void setHousingAllowance(String housingAllowance) {
-		this.housingAllowance = housingAllowance;
+	public void setIntroductionAllowance(String introductionAllowance) {
+		this.introductionAllowance = introductionAllowance;
 	}
-	
 }

@@ -55,38 +55,35 @@ public class EmployeeInfoService {
 	 * @return List
 	 */
 	public List<EmployeeModel> getEmployeeInfo(Map<String, Object> sendMap) {
-		List<EmployeeModel> employeeList = employeeInfoMapper.getEmployeesInfo(sendMap);
+		List<EmployeeModel> employeeListTemp = employeeInfoMapper.getEmployeesInfo(sendMap);
+		List<EmployeeModel> employeeList = new ArrayList<EmployeeModel>();
 
-		if (sendMap.get("employeeStatus") != null) {
-			if (sendMap.get("kadou") != null && sendMap.get("kadou").equals("0")) {
-				for (int i = 0; i < employeeList.size(); i++) {
-					if (sendMap.get("employeeStatus").equals("5")) {
-						if (employeeList.get(i).getEmployeeStatus().equals("1")
-								|| employeeList.get(i).getEmployeeStatus().equals("4")) {
-							employeeList.remove(i);
-							i--;
-						}
-					} else {
-						if (!sendMap.get("employeeStatus").equals(employeeList.get(i).getEmployeeStatus())) {
-							employeeList.remove(i);
-							i--;
+		if (sendMap.get("kadou") != null) {
+			List<String> employeeAdmissionList = employeeInfoMapper.getEmployeeWithAdmission();
+
+			if (sendMap.get("kadou").equals("0")) {
+				for (int i = 0; i < employeeListTemp.size(); i++) {
+					for (int j = 0; j < employeeAdmissionList.size(); j++) {
+						if (employeeListTemp.get(i).getEmployeeNo().equals(employeeAdmissionList.get(j))) {
+							employeeList.add(employeeListTemp.get(i));
+							break;
 						}
 					}
 				}
-			}
-		}
-
-		if (sendMap.get("kadou") != null && sendMap.get("kadou").equals("1")) {
-			List<String> employeeAdmissionList = employeeInfoMapper.getEmployeeWithAdmission(sendMap);
-			for (int i = 0; i < employeeList.size(); i++) {
-				for (int j = 0; j < employeeAdmissionList.size(); j++) {
-					if (employeeList.get(i).getEmployeeNo().equals(employeeAdmissionList.get(j))) {
-						employeeList.remove(i);
-						i--;
-						break;
+			} else {
+				for (int i = 0; i < employeeListTemp.size(); i++) {
+					for (int j = 0; j < employeeAdmissionList.size(); j++) {
+						if (employeeListTemp.get(i).getEmployeeNo().equals(employeeAdmissionList.get(j))) {
+							employeeListTemp.remove(i);
+							i--;
+							break;
+						}
 					}
 				}
+				employeeList = employeeListTemp;
 			}
+		}else {
+			employeeList = employeeListTemp;
 		}
 
 		if (sendMap.get("employeeStatus") != null && sendMap.get("employeeStatus").equals("1")) {
