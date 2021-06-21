@@ -1152,7 +1152,7 @@
 	<select id="getEmployeeWithAdmission" resultMap="stringResult">
 		SELECT
 		employeeNo,admissionStartDate,admissionEndDate,typteOfContractCode
-		FROM newRams.T006EmployeeSiteInfo
+		FROM T006EmployeeSiteInfo
 		where
 		((admissionStartDate &lt; now()
 		and
