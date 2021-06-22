@@ -29,16 +29,13 @@
 		T005.monthOfCompanyPay,
 		T005.nextRaiseMonth,
 		T005.totalAmount,
-		T005.employeeFormCode,
-		M005.employeeFormName,
+		T005.employeeStatus,
 		T005.remark
 		FROM
 		T005WagesInfo AS T005
-		LEFT JOIN M005EmployeeForm AS M005
-		ON
-		T005.employeeFormCode = M005.employeeFormCode
 		WHERE
-		T005.employeeNo = #{employeeNo}
+		T005.employeeNo =
+		#{employeeNo}
 		<if test="reflectYearAndMonth != null">
 			AND T005.reflectYearAndMonth = #{reflectYearAndMonth}
 		</if>
@@ -47,13 +44,15 @@
 		resultMap="wagesInfoModel">
 		SELECT
 		T002.employeeFormCode,
-		M005.employeeFormName
+		if(T002.employeeFormCode =
+		"",T002.employeeFormCode,M005.employeeFormName) as employeeFormName
 		FROM
 		T002EmployeeDetail AS T002
 		LEFT JOIN M005EmployeeForm AS M005 ON
-		T002.employeeNo = M005.employeeFormCode
+		T002.employeeFormCode = M005.employeeFormCode
 		WHERE
-		T002.employeeNo = #{employeeNo}
+		T002.employeeNo =
+		#{employeeNo}
 	</select>
 	<!-- 稼働判断 -->
 	<select id="kadouCheck" parameterType="String"
@@ -65,8 +64,9 @@
 		T006EmployeeSiteInfo
 		WHERE
 		employeeNo = #{employeeNo}
-		AND  (admissionEndDate IS NULL
-        or admissionEndDate > now())
+		AND (admissionEndDate IS NULL
+		or
+		admissionEndDate > now())
 	</select>
 	<!-- 保険検索 -->
 	<select id="hokenSearch" parameterType="String"
@@ -100,7 +100,7 @@
 		monthOfCompanyPay,
 		nextRaiseMonth,
 		totalAmount,
-		employeeFormCode,
+		employeeStatus,
 		remark,
 		updateTime,
 		createTime,
@@ -122,7 +122,7 @@
 		#{monthOfCompanyPay},
 		#{nextRaiseMonth},
 		#{totalAmount},
-		#{employeeFormCode},
+		#{employeeStatus},
 		#{remark},
 		NOW(),
 		NOW(),
@@ -176,8 +176,8 @@
 		<if test="totalAmount != null">
 			totalAmount = #{totalAmount},
 		</if>
-		<if test="employeeFormCode != null">
-			employeeFormCode = #{employeeFormCode},
+		<if test="employeeStatus != null">
+			employeeStatus = #{employeeStatus},
 		</if>
 		<if test="remark != null">
 			remark = #{remark},
@@ -185,7 +185,8 @@
 		updateTime = NOW(),
 		updateUser = #{updateUser}
 		WHERE
-		employeeNo = #{employeeNo}
+		employeeNo =
+		#{employeeNo}
 		AND reflectYearAndMonth = #{updatedReflectYearAndMonth}
 	</update>
 
@@ -196,7 +197,8 @@
 		nonSiteMonths
 		FROM
 		T006EmployeeSiteInfo
-		WHERE employeeNo = #{employeeNo}
+		WHERE employeeNo
+		= #{employeeNo}
 		AND nonSitePeriod != ''
 		AND nonSiteMonths != ''
 	</select>
@@ -209,4 +211,28 @@
 		AND reflectYearAndMonth =
 		#{reflectYearAndMonth}
 	</delete>
+
+	<!-- アップデート -->
+	<update id="updateEmployeeInfo" parameterType="String">
+		UPDATE ${table}
+		SET employeeNo = #{newEmployeeNo}
+		WHERE employeeNo = #{employeeNo}
+	</update>
+
+	<update id="updateT002EmployeeDetail" parameterType="String">
+		UPDATE
+		T002EmployeeDetail
+		SET employeeNo = #{newEmployeeNo}
+		WHERE
+		employeeNo =
+		#{employeeNo}
+	</update>
+
+	<update id="updateT004AccountInfo" parameterType="String">
+		UPDATE
+		T004AccountInfo
+		SET employeeOrCustomerNo = #{newEmployeeNo}
+		WHERE
+		employeeOrCustomerNo = #{employeeNo}
+	</update>
 </mapper>

@@ -165,8 +165,9 @@
 		SELECT
 		T005.employeeNo,
 		T005.reflectYearAndMonth,
-		T005.employeeFormCode,
-		M005.employeeFormName,
+		T005.employeeStatus as employeeFormCode,
+		if(T005.employeeStatus =
+		"",T005.employeeStatus,M005.employeeFormName) as employeeFormName,
 		T005.salary,
 		T005.waitingCost,
 		T005.socialInsuranceFlag,
@@ -176,9 +177,25 @@
 		T005.remark
 		FROM
 		T005WagesInfo AS T005
-		LEFT JOIN
-		M005EmployeeForm as M005 on
-		M005.employeeFormCode=T005.employeeFormCode
+		Left
+		Join
+		(SELECT
+		employeeFormCode,
+		Case
+		WHEN employeeFormCode = '0' THEN "社員"
+		WHEN employeeFormCode = '1' THEN "協力"
+		WHEN employeeFormCode = '2' THEN
+		"個人事業主"
+		WHEN employeeFormCode = '3' THEN "子会社社員"
+		WHEN employeeFormCode =
+		'4' THEN "協力依頼営業"
+		END
+		as employeeFormName
+		FROM
+		M005EmployeeForm)
+		as M005
+		on T005.employeeStatus =
+		M005.employeeFormCode
 	</select>
 
 	<select id="searchIntoRetirement" parameterType="map"
@@ -217,22 +234,39 @@
 		SELECT
 		T005.employeeNo,
 		T005.nextBonusMonth,
-		T005.employeeFormCode,
-		M005.employeeFormName,
+		T005.employeeStatus as employeeFormCode,
+		if(T005.employeeStatus =
+		"",T005.employeeStatus,M005.employeeFormName) as employeeFormName,
 		CONCAT(T001.employeeFristName,
 		T001.employeeLastName) as employeeName
 		FROM T005WagesInfo As T005
 		LEFT JOIN
 		T001Employee As T001 on
 		T005.employeeNo = T001.employeeNo
-		LEFT
-		JOIN
-		M005EmployeeForm As M005 on
-		T005.employeeFormCode =
+		Left Join
+		(SELECT
+		employeeFormCode,
+		Case
+		WHEN employeeFormCode = '0' THEN "社員"
+		WHEN employeeFormCode = '1'
+		THEN "協力"
+		WHEN employeeFormCode = '2' THEN "個人事業主"
+		WHEN employeeFormCode
+		= '3' THEN "子会社社員"
+		WHEN employeeFormCode = '4' THEN "協力依頼営業"
+		END
+		as
+		employeeFormName
+		FROM
+		M005EmployeeForm
+		) as M005
+		on
+		T005.employeeStatus =
 		M005.employeeFormCode
 		WHERE
 		nextBonusMonth
-		between #{startYandM} and
+		between
+		#{startYandM} and
 		#{endYandM}
 		and T001.employeeFristName is not
 		null
@@ -243,22 +277,39 @@
 		SELECT
 		T005.employeeNo,
 		T005.reflectYearAndMonth,
-		T005.employeeFormCode,
-		M005.employeeFormName,
+		T005.employeeStatus as employeeFormCode,
+		if(T005.employeeStatus =
+		"",T005.employeeStatus,M005.employeeFormName) as employeeFormName,
 		CONCAT(T001.employeeFristName,
 		T001.employeeLastName) as employeeName
 		FROM T005WagesInfo As T005
 		LEFT JOIN
 		T001Employee As T001 on
 		T005.employeeNo = T001.employeeNo
-		LEFT
-		JOIN
-		M005EmployeeForm As M005 on
-		T005.employeeFormCode =
+		Left Join
+		(SELECT
+		employeeFormCode,
+		Case
+		WHEN employeeFormCode = '0' THEN "社員"
+		WHEN employeeFormCode = '1'
+		THEN "協力"
+		WHEN employeeFormCode = '2' THEN "個人事業主"
+		WHEN employeeFormCode
+		= '3' THEN "子会社社員"
+		WHEN employeeFormCode = '4' THEN "協力依頼営業"
+		END
+		as
+		employeeFormName
+		FROM
+		M005EmployeeForm
+		) as M005
+		on
+		T005.employeeStatus =
 		M005.employeeFormCode
 		WHERE
 		reflectYearAndMonth
-		between #{startYandM} and
+		between
+		#{startYandM} and
 		#{endYandM}
 		and T001.employeeFristName is not
 		null

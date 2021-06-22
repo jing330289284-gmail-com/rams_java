@@ -6,6 +6,7 @@ import java.util.ArrayList;
 @SuppressWarnings("serial")
 public class WagesInfoModel implements Serializable {
 	String employeeNo;// 社員名
+	String newEmployeeNo;// 社員名
 	String period;// 給料期間
 	String reflectYearAndMonth;// 反映年月
 	String updatedReflectYearAndMonth;// 反映年月
@@ -22,6 +23,7 @@ public class WagesInfoModel implements Serializable {
 	String monthOfCompanyPay;// 会社月負担額
 	String nextRaiseMonth;// 次回昇給月
 	String totalAmount;// 総額
+	String employeeStatus;// 社員区分
 	String employeeFormCode;// 社員形式
 	String employeeFormName;// 社員形式コード
 	String remark;// 備考
@@ -39,6 +41,22 @@ public class WagesInfoModel implements Serializable {
 	String leaderAllowanceAmount;
 	String housingStatus;
 	String introductionAllowance;
+
+	public String getEmployeeStatus() {
+		return employeeStatus;
+	}
+
+	public void setEmployeeStatus(String employeeStatus) {
+		this.employeeStatus = employeeStatus;
+	}
+
+	public String getNewEmployeeNo() {
+		return newEmployeeNo;
+	}
+
+	public void setNewEmployeeNo(String newEmployeeNo) {
+		this.newEmployeeNo = newEmployeeNo;
+	}
 
 	public String getIntroductionAllowance() {
 		return introductionAllowance;

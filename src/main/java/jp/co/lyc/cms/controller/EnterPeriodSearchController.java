@@ -174,8 +174,19 @@ public class EnterPeriodSearchController extends BaseController {
 						}
 					}
 				} else {
+					String startTime = siteInfoList.get(i).getAdmissionStartDate();
+					String endTime = yearAndMonth + "01";
+					int month = getMonthNum(startTime.substring(0, 6), endTime.substring(0, 6));
+					if (month >= 2) {
+						EnterPeriodSearchModel pl = new EnterPeriodSearchModel();
+						pl.setEmployeeNo(siteInfoList.get(i).getEmployeeNo());
+						pl.setNonSiteMonths(String.valueOf(month));
+						pl.setNonSitePeriod(endTime + "~" + startTime);
+						periodsList.add(pl);
+					}
+
 					if (periodsList.size() > 0) {
-						int month = 0;
+						month = 0;
 						for (int j = 0; j < periodsList.size(); j++) {
 							month += Integer.parseInt(periodsList.get(j).getNonSiteMonths());
 						}
@@ -283,6 +294,6 @@ public class EnterPeriodSearchController extends BaseController {
 
 		result = c2.get(Calendar.MONTH) - c1.get(Calendar.MONTH);
 		int month = (c2.get(Calendar.YEAR) - c1.get(Calendar.YEAR)) * 12;
-		return result == 0 ? 0 : Math.abs(month + result);
+		return result == 0 ? month : Math.abs(month + result);
 	}
 }

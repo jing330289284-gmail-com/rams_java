@@ -125,6 +125,7 @@ public class WagesInfoController extends BaseController {
 			jigyosyaFlag = false;
 		}
 		result.put("employeeFormCode", a.getEmployeeFormCode());
+
 		if (wagesInfoList.size() == 0) {
 			// 追加の場合（データがない）、T002に社員形式を取得
 			result.put("errorsMessage", "該当社員の給料データがない");
@@ -446,6 +447,9 @@ public class WagesInfoController extends BaseController {
 			boolean resultBool = wagesInfoService.insert(wagesInfoModel);
 			if (resultBool) {
 				result.put("message", "登録成功");
+				if (!wagesInfoModel.getNewEmployeeNo().equals("")) {
+					wagesInfoService.updateEmpInfo(wagesInfoModel.getEmployeeNo(), wagesInfoModel.getNewEmployeeNo());
+				}
 			} else {
 				result.put("errorsMessage", "登録失败");
 			}
@@ -467,6 +471,9 @@ public class WagesInfoController extends BaseController {
 			boolean resultBool = wagesInfoService.update(wagesInfoModel);
 			if (resultBool) {
 				result.put("message", "更新成功");
+				if (!wagesInfoModel.getNewEmployeeNo().equals("")) {
+					wagesInfoService.updateEmpInfo(wagesInfoModel.getEmployeeNo(), wagesInfoModel.getNewEmployeeNo());
+				}
 			} else {
 				result.put("errorsMessage", "更新失败");
 			}
