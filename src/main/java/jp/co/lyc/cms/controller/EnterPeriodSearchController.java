@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import org.slf4j.Logger;
@@ -159,40 +160,28 @@ public class EnterPeriodSearchController extends BaseController {
 			siteInfoList = enterPeriodSearchService.getSiteInfoByEmp(employeeList, yearAndMonth);
 			ArrayList<EnterPeriodSearchModel> periodsList = new ArrayList<EnterPeriodSearchModel>();
 
-			for (int i = 0; i < siteInfoList.size(); i++) {
-				if (i == 0) {
-					String startTime = siteInfoList.get(i).getAdmissionStartDate();
-					String endTime = yearAndMonth + "01";
-					int month = getMonthNum(endTime.substring(0, 6), startTime.substring(0, 6));
-					if (month >= 2) {
-						EnterPeriodSearchModel pl = new EnterPeriodSearchModel();
-						pl.setEmployeeNo(siteInfoList.get(i).getEmployeeNo());
-						pl.setNonSiteMonths(String.valueOf(month));
-						pl.setNonSitePeriod(endTime + "~" + startTime);
-						periodsList.add(pl);
+			for (int i = 0; i < siteInfoList.size() - 1; i++) {
+				if (siteInfoList.get(i).getEmployeeNo().equals(siteInfoList.get(i + 1).getEmployeeNo())) {
+					if (siteInfoList.get(i).getAdmissionEndDate() != null
+							&& siteInfoList.get(i + 1).getAdmissionEndDate() != null) {
+						if (Integer.parseInt(siteInfoList.get(i + 1).getAdmissionEndDate()) < Integer
+								.parseInt(yearAndMonth + "01")) {
+							siteInfoList.remove(i);
+							i--;
+						}
 					}
+				}
+			}
 
-					if (periodsList.size() > 0) {
-						month = 0;
-						for (int j = 0; j < periodsList.size(); j++) {
-							month += Integer.parseInt(periodsList.get(j).getNonSiteMonths());
-						}
-						for (int j = 0; j < resultList.size(); j++) {
-							if (resultList.get(j).getEmployeeNo().equals(periodsList.get(0).getEmployeeNo())) {
-								resultList.get(j).setNonSitePeriodsList(periodsList);
-								resultList.get(j).setNonSiteMonths(String.valueOf(month));
-								periodsList = new ArrayList<EnterPeriodSearchModel>();
-								break;
-							}
-						}
-					}
-				} else {
+			if (siteInfoList.size() > 1) {
+				for (int i = 1; i < siteInfoList.size(); i++) {
 					if (siteInfoList.get(i).getEmployeeNo().equals(siteInfoList.get(i - 1).getEmployeeNo())) {
-						String endTime = siteInfoList.get(i - 1).getAdmissionEndDate();
-						String startTime = siteInfoList.get(i).getAdmissionStartDate();
-						if (endTime != null) {
-							int month = getMonthNum(endTime.substring(0, 6), startTime.substring(0, 6));
-							if (month >= 2) {
+						if (siteInfoList.get(i - 1).getAdmissionEndDate() != null) {
+							String endTime = addMonth(
+									siteInfoList.get(i - 1).getAdmissionEndDate().substring(0, 6) + "01");
+							String startTime = deleteMonth(siteInfoList.get(i).getAdmissionStartDate());
+							int month = getMonthNum(endTime.substring(0, 6), startTime.substring(0, 6)) + 1;
+							if (month > 0) {
 								EnterPeriodSearchModel pl = new EnterPeriodSearchModel();
 								pl.setEmployeeNo(siteInfoList.get(i).getEmployeeNo());
 								pl.setNonSiteMonths(String.valueOf(month));
@@ -224,41 +213,6 @@ public class EnterPeriodSearchController extends BaseController {
 								}
 							}
 						}
-					} else {
-						String startTime = siteInfoList.get(i).getAdmissionStartDate();
-						String endTime = yearAndMonth + "01";
-						int month = getMonthNum(endTime.substring(0, 6), startTime.substring(0, 6));
-						if (month >= 2) {
-							EnterPeriodSearchModel pl = new EnterPeriodSearchModel();
-							pl.setEmployeeNo(siteInfoList.get(i).getEmployeeNo());
-							pl.setNonSiteMonths(String.valueOf(month));
-							pl.setNonSitePeriod(endTime + "~" + startTime);
-							periodsList.add(pl);
-						}
-
-						if (periodsList.size() > 0) {
-							month = 0;
-							for (int j = 0; j < periodsList.size(); j++) {
-								month += Integer.parseInt(periodsList.get(j).getNonSiteMonths());
-							}
-							for (int j = 0; j < resultList.size(); j++) {
-								if (resultList.get(j).getEmployeeNo().equals(periodsList.get(0).getEmployeeNo())) {
-									ArrayList<EnterPeriodSearchModel> nonSitePeriodsList = resultList.get(j)
-											.getNonSitePeriodsList();
-									if (nonSitePeriodsList != null) {
-										for (int z = 0; z < periodsList.size(); z++) {
-											nonSitePeriodsList.add(periodsList.get(z));
-										}
-									} else {
-										nonSitePeriodsList = periodsList;
-									}
-									resultList.get(j).setNonSitePeriodsList(periodsList);
-									resultList.get(j).setNonSiteMonths(String.valueOf(month));
-									periodsList = new ArrayList<EnterPeriodSearchModel>();
-									break;
-								}
-							}
-						}
 					}
 				}
 			}
@@ -268,12 +222,14 @@ public class EnterPeriodSearchController extends BaseController {
 					if (resultList.get(i).getEmployeeNo().equals(siteInfoList.get(j).getEmployeeNo())) {
 						if (siteInfoList.get(j).getTypteOfContractCode() != null
 								&& siteInfoList.get(j).getTypteOfContractCode().equals("4")) {
-							String startTime = Integer.parseInt(siteInfoList.get(j).getAdmissionStartDate()) < Integer
-									.parseInt(yearAndMonth + "01") ? (yearAndMonth + "01")
-											: siteInfoList.get(j).getAdmissionStartDate();
-							String endTime = siteInfoList.get(j).getAdmissionEndDate() == null
-									? (selectedYearAndMonth + "01")
-									: siteInfoList.get(j).getAdmissionEndDate();
+							String startTime = /*
+												 * Integer.parseInt(siteInfoList.get(j).getAdmissionStartDate()) <
+												 * Integer .parseInt(yearAndMonth + "01") ? (yearAndMonth + "01") :
+												 */ siteInfoList.get(j).getAdmissionStartDate();
+							String endTime = /*
+												 * siteInfoList.get(j).getAdmissionEndDate() == null ?
+												 * (selectedYearAndMonth + "01") :
+												 */ siteInfoList.get(j).getAdmissionEndDate();
 							int month = getMonthNum(startTime.substring(0, 6), endTime.substring(0, 6)) + 1;
 							periodsList = resultList.get(i).getNonSitePeriodsList();
 							if (periodsList == null)
@@ -330,6 +286,12 @@ public class EnterPeriodSearchController extends BaseController {
 
 			for (int i = 0; i < resultList.size(); i++) {
 				resultList.get(i).setRowNo(i + 1 + "");
+				if (resultList.get(i).getEmployeeNo().substring(0, 2).equals("SP")
+						|| resultList.get(i).getEmployeeNo().substring(0, 2).equals("SC")
+						|| resultList.get(i).getEmployeeNo().substring(0, 2).equals("BP")) {
+					resultList.get(i).setEmployeeName(resultList.get(i).getEmployeeName() + "("
+							+ resultList.get(i).getEmployeeNo().substring(0, 2) + ")");
+				}
 			}
 		} else {
 			errorsMessage += "今月データがないです";// エラーメッセージ
@@ -354,5 +316,45 @@ public class EnterPeriodSearchController extends BaseController {
 		result = c2.get(Calendar.MONTH) - c1.get(Calendar.MONTH);
 		int month = (c2.get(Calendar.YEAR) - c1.get(Calendar.YEAR)) * 12;
 		return result == 0 ? month : (month + result);
+	}
+
+	/****
+	 * 传入具体日期 ，返回具体日期增加一个月的第一天
+	 * 
+	 * @param date 日期(2017-04-13)
+	 * @return 2017-05-13
+	 * @throws ParseException
+	 */
+	private String addMonth(String date) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		Date dt = sdf.parse(date);
+		Calendar rightNow = Calendar.getInstance();
+		rightNow.setTime(dt);
+		rightNow.add(Calendar.MONTH, 1);
+		Date dt1 = rightNow.getTime();
+		String reStr = sdf.format(dt1);
+		return reStr;
+	}
+
+	/****
+	 * 传入具体日期 ，返回具体日期减少一个月的最后一天
+	 * 
+	 * @param date 日期(2017-04-13)
+	 * @return 2017-05-13
+	 * @throws ParseException
+	 */
+	private String deleteMonth(String date) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		Date dt = sdf.parse(date);
+		Calendar rightNow = Calendar.getInstance();
+		rightNow.setTime(dt);
+		rightNow.add(Calendar.MONTH, -1);
+		// 得到一个月最后一天日期(31/30/29/28)
+		int MaxDay = rightNow.getActualMaximum(Calendar.DAY_OF_MONTH);
+		// 按你的要求设置时间
+		rightNow.set(rightNow.get(Calendar.YEAR), rightNow.get(Calendar.MONTH), MaxDay, 23, 59, 59);
+		Date dt1 = rightNow.getTime();
+		String reStr = sdf.format(dt1);
+		return reStr;
 	}
 }

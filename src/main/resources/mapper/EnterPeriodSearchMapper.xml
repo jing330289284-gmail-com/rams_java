@@ -363,8 +363,6 @@
 			separator=",">
 			#{item}
 		</foreach>
-		and (admissionEndDate is null
-		or left(admissionEndDate,6) &gt;= #{yearAndMonth})
 		;
 	</select>
 </mapper>
