@@ -159,24 +159,11 @@ public class EnterPeriodSearchController extends BaseController {
 			siteInfoList = enterPeriodSearchService.getSiteInfoByEmp(employeeList, yearAndMonth);
 			ArrayList<EnterPeriodSearchModel> periodsList = new ArrayList<EnterPeriodSearchModel>();
 
-			for (int i = 1; i < siteInfoList.size(); i++) {
-				if (siteInfoList.get(i).getEmployeeNo().equals(siteInfoList.get(i - 1).getEmployeeNo())) {
-					String endTime = siteInfoList.get(i - 1).getAdmissionEndDate();
-					String startTime = siteInfoList.get(i).getAdmissionStartDate();
-					if (endTime != null) {
-						int month = getMonthNum(endTime.substring(0, 6), startTime.substring(0, 6));
-						if (month >= 2) {
-							EnterPeriodSearchModel pl = new EnterPeriodSearchModel();
-							pl.setEmployeeNo(siteInfoList.get(i).getEmployeeNo());
-							pl.setNonSiteMonths(String.valueOf(month));
-							pl.setNonSitePeriod(endTime + "~" + startTime);
-							periodsList.add(pl);
-						}
-					}
-				} else {
+			for (int i = 0; i < siteInfoList.size(); i++) {
+				if (i == 0) {
 					String startTime = siteInfoList.get(i).getAdmissionStartDate();
 					String endTime = yearAndMonth + "01";
-					int month = getMonthNum(startTime.substring(0, 6), endTime.substring(0, 6));
+					int month = getMonthNum(endTime.substring(0, 6), startTime.substring(0, 6));
 					if (month >= 2) {
 						EnterPeriodSearchModel pl = new EnterPeriodSearchModel();
 						pl.setEmployeeNo(siteInfoList.get(i).getEmployeeNo());
@@ -199,20 +186,79 @@ public class EnterPeriodSearchController extends BaseController {
 							}
 						}
 					}
-				}
-			}
+				} else {
+					if (siteInfoList.get(i).getEmployeeNo().equals(siteInfoList.get(i - 1).getEmployeeNo())) {
+						String endTime = siteInfoList.get(i - 1).getAdmissionEndDate();
+						String startTime = siteInfoList.get(i).getAdmissionStartDate();
+						if (endTime != null) {
+							int month = getMonthNum(endTime.substring(0, 6), startTime.substring(0, 6));
+							if (month >= 2) {
+								EnterPeriodSearchModel pl = new EnterPeriodSearchModel();
+								pl.setEmployeeNo(siteInfoList.get(i).getEmployeeNo());
+								pl.setNonSiteMonths(String.valueOf(month));
+								pl.setNonSitePeriod(endTime + "~" + startTime);
+								periodsList.add(pl);
+							}
+						}
 
-			if (periodsList.size() > 0) {
-				int month = 0;
-				for (int j = 0; j < periodsList.size(); j++) {
-					month += Integer.parseInt(periodsList.get(j).getNonSiteMonths());
-				}
-				for (int j = 0; j < resultList.size(); j++) {
-					if (resultList.get(j).getEmployeeNo().equals(periodsList.get(0).getEmployeeNo())) {
-						resultList.get(j).setNonSitePeriodsList(periodsList);
-						resultList.get(j).setNonSiteMonths(String.valueOf(month));
-						periodsList = new ArrayList<EnterPeriodSearchModel>();
-						break;
+						if (periodsList.size() > 0) {
+							int month = 0;
+							for (int j = 0; j < periodsList.size(); j++) {
+								month += Integer.parseInt(periodsList.get(j).getNonSiteMonths());
+							}
+							for (int j = 0; j < resultList.size(); j++) {
+								if (resultList.get(j).getEmployeeNo().equals(periodsList.get(0).getEmployeeNo())) {
+									ArrayList<EnterPeriodSearchModel> nonSitePeriodsList = resultList.get(j)
+											.getNonSitePeriodsList();
+									if (nonSitePeriodsList != null) {
+										for (int z = 0; z < periodsList.size(); z++) {
+											nonSitePeriodsList.add(periodsList.get(z));
+										}
+									} else {
+										nonSitePeriodsList = periodsList;
+									}
+									resultList.get(j).setNonSitePeriodsList(nonSitePeriodsList);
+									resultList.get(j).setNonSiteMonths(String.valueOf(month));
+									periodsList = new ArrayList<EnterPeriodSearchModel>();
+									break;
+								}
+							}
+						}
+					} else {
+						String startTime = siteInfoList.get(i).getAdmissionStartDate();
+						String endTime = yearAndMonth + "01";
+						int month = getMonthNum(endTime.substring(0, 6), startTime.substring(0, 6));
+						if (month >= 2) {
+							EnterPeriodSearchModel pl = new EnterPeriodSearchModel();
+							pl.setEmployeeNo(siteInfoList.get(i).getEmployeeNo());
+							pl.setNonSiteMonths(String.valueOf(month));
+							pl.setNonSitePeriod(endTime + "~" + startTime);
+							periodsList.add(pl);
+						}
+
+						if (periodsList.size() > 0) {
+							month = 0;
+							for (int j = 0; j < periodsList.size(); j++) {
+								month += Integer.parseInt(periodsList.get(j).getNonSiteMonths());
+							}
+							for (int j = 0; j < resultList.size(); j++) {
+								if (resultList.get(j).getEmployeeNo().equals(periodsList.get(0).getEmployeeNo())) {
+									ArrayList<EnterPeriodSearchModel> nonSitePeriodsList = resultList.get(j)
+											.getNonSitePeriodsList();
+									if (nonSitePeriodsList != null) {
+										for (int z = 0; z < periodsList.size(); z++) {
+											nonSitePeriodsList.add(periodsList.get(z));
+										}
+									} else {
+										nonSitePeriodsList = periodsList;
+									}
+									resultList.get(j).setNonSitePeriodsList(periodsList);
+									resultList.get(j).setNonSiteMonths(String.valueOf(month));
+									periodsList = new ArrayList<EnterPeriodSearchModel>();
+									break;
+								}
+							}
+						}
 					}
 				}
 			}
@@ -243,6 +289,19 @@ public class EnterPeriodSearchController extends BaseController {
 											: resultList.get(i).getNonSiteMonths()) + month + "");
 						}
 					}
+				}
+			}
+
+			for (int i = 0; i < resultList.size(); i++) {
+				ArrayList<EnterPeriodSearchModel> tempList = resultList.get(i).getNonSitePeriodsList();
+				if (tempList == null) {
+					resultList.get(i).setNonSiteMonths(null);
+				} else {
+					int month = 0;
+					for (int j = 0; j < tempList.size(); j++) {
+						month += Integer.parseInt(tempList.get(j).getNonSiteMonths());
+					}
+					resultList.get(i).setNonSiteMonths(String.valueOf(month));
 				}
 			}
 
@@ -294,6 +353,6 @@ public class EnterPeriodSearchController extends BaseController {
 
 		result = c2.get(Calendar.MONTH) - c1.get(Calendar.MONTH);
 		int month = (c2.get(Calendar.YEAR) - c1.get(Calendar.YEAR)) * 12;
-		return result == 0 ? month : Math.abs(month + result);
+		return result == 0 ? month : (month + result);
 	}
 }

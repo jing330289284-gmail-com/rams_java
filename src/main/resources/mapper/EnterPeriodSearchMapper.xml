@@ -329,7 +329,7 @@
 		inner Join T001Employee as T001
 		on
 		T001.employeeNo = T005.employeeNo
-		left join
+		inner join
 		(SELECT
 		T006.employeeNo,T006.admissionStartDate,T006.unitPrice FROM
 		T006EmployeeSiteInfo as T006
@@ -340,7 +340,9 @@
 		group by employeeNo) as temp
 		on T006.employeeNo =
 		temp.employeeNo
-		and T006.admissionStartDate = temp.admissionStartDate)
+		and T006.admissionStartDate = temp.admissionStartDate
+		where admissionEndDate is null 
+        and (typteOfContractCode is null or typteOfContractCode != "4"))
 		as T006
 		on T005.employeeNo = T006.employeeNo
 		where

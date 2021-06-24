@@ -222,7 +222,11 @@
 	<update id="updateT002EmployeeDetail" parameterType="String">
 		UPDATE
 		T002EmployeeDetail
-		SET employeeNo = #{newEmployeeNo}
+		SET employeeNo = #{newEmployeeNo},
+		intoCompanyCode = "",
+		occupationCode = "",
+		employeeFormCode = "",
+		departmentCode = ""
 		WHERE
 		employeeNo =
 		#{employeeNo}
