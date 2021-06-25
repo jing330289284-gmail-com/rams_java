@@ -194,7 +194,8 @@
 		FROM
 		M005EmployeeForm)
 		as M005
-		on T005.employeeStatus =
+		on
+		T005.employeeStatus =
 		M005.employeeFormCode
 	</select>
 
@@ -202,31 +203,55 @@
 		resultMap="detailsInfo">
 		SELECT
 		T002.employeeNo,
-		T002.intoCompanyYearAndMonth,
-		T002.retirementYearAndMonth,
-		T002.employeeFormCode,
-		M005.employeeFormName,
+		left(T002.intoCompanyYearAndMonth,6) as
+		intoCompanyYearAndMonth,
+		left(T002.retirementYearAndMonth,6) as
+		retirementYearAndMonth,
+		<!-- if(T002.employeeFormCode = "" || T002.employeeFormCode is null,"",M005.employeeFormName) 
+			as employeeFormName, -->
+		M005.employeeFormName as employeeFormName,
 		CONCAT(T001.employeeFristName,
-		T001.employeeLastName) as employeeName
+		T001.employeeLastName)
+		as employeeName
 		FROM T002EmployeeDetail As T002
 		LEFT JOIN
-		T001Employee As T001 on
+		T001Employee As
+		T001 on
 		T002.employeeNo = T001.employeeNo
-		LEFT
-		JOIN
-		M005EmployeeForm As M005 on
-		T002.employeeFormCode =
+		Left
+		Join
+		(SELECT
+		employeeFormCode,
+		Case
+		WHEN employeeFormCode = '0' THEN "社員"
+		WHEN employeeFormCode = '1' THEN "協力"
+		WHEN employeeFormCode = '2' THEN
+		"個人事業主"
+		WHEN employeeFormCode = '3' THEN "子会社社員"
+		WHEN employeeFormCode =
+		'4' THEN "協力依頼営業"
+		END
+		as employeeFormName
+		FROM
+		M005EmployeeForm)
+		as M005
+		on
+		T002.employeeStatus =
 		M005.employeeFormCode
 		WHERE
-		T001.employeeFristName is not null
+		T001.employeeFristName
+		is not null
 		<if test="classification == 3">
-			AND intoCompanyYearAndMonth between #{startYandM} and
-			#{endYandM}
+			AND intoCompanyYearAndMonth between concat(#{startYandM},
+			"01") and
+			concat(#{endYandM}, "31")
 		</if>
 		<if test="classification == 4">
-			AND retirementYearAndMonth between #{startYandM} and
-			#{endYandM}
+			AND retirementYearAndMonth between concat(#{startYandM},
+			"01") and
+			concat(#{endYandM}, "31")
 		</if>
+		and left(T002.employeeNo,2) != "BP"
 	</select>
 
 	<select id="searchscheduleOfBonus" parameterType="map"

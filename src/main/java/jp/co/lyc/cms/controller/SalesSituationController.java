@@ -812,9 +812,8 @@ public class SalesSituationController extends BaseController {
 				return result;
 			} else {
 				String nextAdmission = salesSituationService.getEmpNextAdmission(model.getEmployeeNo());
-				if (nextAdmission != null
-						&& (Integer.parseInt(nextAdmission) > Integer.parseInt(model.getAdmissionEndDate()))) {
-					errorsMessage += "次の現場存在しています、データをチェックしてください。";
+				if (nextAdmission != null && nextAdmission.equals("0")) {
+					errorsMessage += "稼働中の現場存在しています、現場データをチェックしてください。";
 					result.put("errorsMessage", errorsMessage);
 					return result;
 				} else {
@@ -855,7 +854,8 @@ public class SalesSituationController extends BaseController {
 			// テーブルT011BpInfoSupplement項目を変更する
 			updateCount = salesSituationService.updateBPEMPInfo(model);
 
-			if (model.getEmployeeNo().substring(0, 3).equals("BPR") && model.getSalesProgressCode().equals("4")) {
+			if (model.getEmployeeNo().substring(0, 3).equals("BPR")
+					&& (model.getSalesProgressCode().equals("4") || model.getSalesProgressCode().equals("7"))) {
 				Map<String, String> sendMap = new HashMap<String, String>();
 				String newBpNo = utilsService.getNoBP(sendMap);
 				if (newBpNo != null) {

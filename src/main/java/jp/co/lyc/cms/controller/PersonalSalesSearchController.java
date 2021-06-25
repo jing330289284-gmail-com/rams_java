@@ -3,6 +3,7 @@ package jp.co.lyc.cms.controller;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -33,7 +34,7 @@ public class PersonalSalesSearchController {
 
 	@Autowired
 	PersonalSalesSearchService personalSalesSearchService;
-	
+
 	String errorsMessage = "";
 
 	@RequestMapping(value = "/searchEmpDetails", method = RequestMethod.POST)
@@ -60,178 +61,184 @@ public class PersonalSalesSearchController {
 			return resulterr;
 		} else {
 			List<PersonalSalesSearchModel> personModelList = new ArrayList<PersonalSalesSearchModel>();
-			Map<String, Object> sendMap = getDetailParam(empInfo);	
-				String startYandM = empInfo.getStartYearAndMonth();
-				String endYandM = empInfo.getEndYearAndMonth();
-				String fiscalYear = empInfo.getFiscalYear();
-				List<String> getYandM = new ArrayList<String>();
-				if (startYandM != "" && endYandM == "") {
-					empInfo.setEndYearAndMonth(sysTime);
-					endYandM = empInfo.getEndYearAndMonth();
-				}
-				if (startYandM == "" && endYandM != "") {
-					empInfo.setStartYearAndMonth("201901");
-					startYandM = empInfo.getStartYearAndMonth();
-				}
-				if (startYandM != "0" && startYandM != null && endYandM != "0" && endYandM != null
-						&&fiscalYear==""||fiscalYear==null) {
-					int startY = Integer.parseInt(startYandM.substring(0, 4));
-					int startM = Integer.parseInt(startYandM.substring(4, 6));
-					int endY = Integer.parseInt(endYandM.substring(0, 4));
-					int endM = Integer.parseInt(endYandM.substring(4, 6));
-					int count = 0;
-					for (int y = startY; y <= endY; y++) {
-						if (y == startY && y == endY) {
-							for (int m = startM; m <= endM; m++) {
-								String monthStr = Integer.toString(m);
-								if (m < 10) {
-									monthStr = "0" + Integer.toString(m);
-								}
-								getYandM.add(count, Integer.toString(startY) + monthStr);
-								count++;
+			Map<String, Object> sendMap = getDetailParam(empInfo);
+			String startYandM = empInfo.getStartYearAndMonth();
+			String endYandM = empInfo.getEndYearAndMonth();
+			String fiscalYear = empInfo.getFiscalYear();
+			List<String> getYandM = new ArrayList<String>();
+			if (startYandM != "" && endYandM == "") {
+				empInfo.setEndYearAndMonth(sysTime);
+				endYandM = empInfo.getEndYearAndMonth();
+			}
+			if (startYandM == "" && endYandM != "") {
+				empInfo.setStartYearAndMonth("201901");
+				startYandM = empInfo.getStartYearAndMonth();
+			}
+			if (startYandM != "0" && startYandM != null && endYandM != "0" && endYandM != null && fiscalYear == ""
+					|| fiscalYear == null) {
+				int startY = Integer.parseInt(startYandM.substring(0, 4));
+				int startM = Integer.parseInt(startYandM.substring(4, 6));
+				int endY = Integer.parseInt(endYandM.substring(0, 4));
+				int endM = Integer.parseInt(endYandM.substring(4, 6));
+				int count = 0;
+				for (int y = startY; y <= endY; y++) {
+					if (y == startY && y == endY) {
+						for (int m = startM; m <= endM; m++) {
+							String monthStr = Integer.toString(m);
+							if (m < 10) {
+								monthStr = "0" + Integer.toString(m);
 							}
-						} else if (y == startY) {
-							for (int m = startM; m <= 12; m++) {
-
-								String monthStr = Integer.toString(m);
-								if (m < 10) {
-									monthStr = "0" + Integer.toString(m);
-								}
-								getYandM.add(count, Integer.toString(startY) + monthStr);
-								count++;
-							}
-						} else if (y != startY && y != endY) {
-							for (int m = 1; m <= 12; m++) {
-
-								String monthStr = Integer.toString(m);
-								if (m < 10) {
-									monthStr = "0" + Integer.toString(m);
-								}
-								getYandM.add(count, Integer.toString(y) + monthStr);
-								count++;
-							}
-						} else if (y == endY) {
-							for (int m = 1; m <= endM; m++) {
-
-								String monthStr = Integer.toString(m);
-								if (m < 10) {
-									monthStr = "0" + Integer.toString(m);
-								}
-								getYandM.add(count, Integer.toString(endY) + monthStr);
-								count++;
-							}
+							getYandM.add(count, Integer.toString(startY) + monthStr);
+							count++;
 						}
+					} else if (y == startY) {
+						for (int m = startM; m <= 12; m++) {
 
-					}
-				} else {
-					int count = 0;
-					for (int m = 1; m <= 12; m++) {
-						String monthStr = Integer.toString(m);
-						if (m < 10) {
-							monthStr = "0" + Integer.toString(m);
-						}
-						getYandM.add(count, fiscalYear + monthStr);
-						count++;
-					}
-				}		
-				int workCount = 0;				
-				sendMap.put("getYandM", getYandM);
-				String grosProfits ="";
-				logger.info("PersonalSalesSearchController.searchEmpDetails:" + "検索開始");
-				personModelList = personalSalesSearchService.searchEmpDetails(sendMap);
-				logger.info("PersonalSalesSearchController.searchEmpDetails:" + "検索結束");
-				if(personModelList.size()==0) {
-					String noData = "";
-					noData="条件に該当する結果が存在しない";
-					resulterr.put("noData",noData);
-					return resulterr;
-				}
-				else{
-					List<PersonalSalesSearchModel> personModelListTwice = new ArrayList<PersonalSalesSearchModel>();
-					logger.info("PersonalSalesSearchController.searchEmpAllowance:" + "二回目検索開始");
-					personModelListTwice = personalSalesSearchService.searchEmpAllowance(sendMap);
-					logger.info("PersonalSalesSearchController.searchEmpAllowance:" + "二回目検索結束");
-					
-					for (int i = 0; i < personModelList.size(); i++) {
-						for(int m = 0; m < personModelListTwice.size(); m++) {
-							if(personModelList.get(i).getOnlyYandM().equals(personModelListTwice.get(m).getNextBonusMonth())) {
-								personModelList.get(i).setBonusFee(personModelListTwice.get(m).getScheduleOfBonusAmount());
+							String monthStr = Integer.toString(m);
+							if (m < 10) {
+								monthStr = "0" + Integer.toString(m);
 							}
+							getYandM.add(count, Integer.toString(startY) + monthStr);
+							count++;
+						}
+					} else if (y != startY && y != endY) {
+						for (int m = 1; m <= 12; m++) {
+
+							String monthStr = Integer.toString(m);
+							if (m < 10) {
+								monthStr = "0" + Integer.toString(m);
+							}
+							getYandM.add(count, Integer.toString(y) + monthStr);
+							count++;
+						}
+					} else if (y == endY) {
+						for (int m = 1; m <= endM; m++) {
+
+							String monthStr = Integer.toString(m);
+							if (m < 10) {
+								monthStr = "0" + Integer.toString(m);
+							}
+							getYandM.add(count, Integer.toString(endY) + monthStr);
+							count++;
 						}
 					}
+
+				}
+			} else {
+				int count = 0;
+				for (int m = 1; m <= 12; m++) {
+					String monthStr = Integer.toString(m);
+					if (m < 10) {
+						monthStr = "0" + Integer.toString(m);
+					}
+					getYandM.add(count, fiscalYear + monthStr);
+					count++;
+				}
+			}
+			int workCount = 0;
+			sendMap.put("getYandM", getYandM);
+			String grosProfits = "";
+			logger.info("PersonalSalesSearchController.searchEmpDetails:" + "検索開始");
+			personModelList = personalSalesSearchService.searchEmpDetails(sendMap);
+			logger.info("PersonalSalesSearchController.searchEmpDetails:" + "検索結束");
+			if (personModelList.size() == 0) {
+				String noData = "";
+				noData = "条件に該当する結果が存在しない";
+				resulterr.put("noData", noData);
+				return resulterr;
+			} else {
+				List<PersonalSalesSearchModel> personModelListTwice = new ArrayList<PersonalSalesSearchModel>();
+				logger.info("PersonalSalesSearchController.searchEmpAllowance:" + "二回目検索開始");
+				personModelListTwice = personalSalesSearchService.searchEmpAllowance(sendMap);
+				logger.info("PersonalSalesSearchController.searchEmpAllowance:" + "二回目検索結束");
+
+				for (int i = 0; i < personModelList.size(); i++) {
+					for (int m = 0; m < personModelListTwice.size(); m++) {
+						if (personModelList.get(i).getOnlyYandM()
+								.equals(personModelListTwice.get(m).getNextBonusMonth())) {
+							personModelList.get(i).setBonusFee(personModelListTwice.get(m).getScheduleOfBonusAmount());
+						}
+					}
+				}
 				for (int i = 0; i < personModelList.size(); i++) {
 
-					if(UtilsCheckMethod.isNullOrEmpty(personModelList.get(i).getUnitPrice())) {
+					if (UtilsCheckMethod.isNullOrEmpty(personModelList.get(i).getUnitPrice())) {
 						personModelList.get(i).setUnitPrice("0");
 					}
-					if( UtilsCheckMethod.isNullOrEmpty(personModelList.get(i).getSalary())) {
-						personModelList.get(i).setSalary("0");				
+					if (UtilsCheckMethod.isNullOrEmpty(personModelList.get(i).getSalary())) {
+						personModelList.get(i).setSalary("0");
 					}
-					if( personModelList.get(i).getSalary().equals("0")) {
-						personModelList.get(i).setSalary(personModelList.get(i).getWaitingCost());				
+					if (personModelList.get(i).getSalary().equals("0")) {
+						personModelList.get(i).setSalary(personModelList.get(i).getWaitingCost());
 					}
-					if(UtilsCheckMethod.isNullOrEmpty(personModelList.get(i).getTransportationExpenses())) {
+					if (UtilsCheckMethod.isNullOrEmpty(personModelList.get(i).getTransportationExpenses())) {
 						personModelList.get(i).setTransportationExpenses("0");
 					}
-					if(UtilsCheckMethod.isNullOrEmpty(personModelList.get(i).getWaitingCost())) {
+					if (UtilsCheckMethod.isNullOrEmpty(personModelList.get(i).getWaitingCost())) {
 						personModelList.get(i).setWaitingCost("0");
 					}
-					if(UtilsCheckMethod.isNullOrEmpty(personModelList.get(i).getInsuranceFeeAmount())) {
+					if (UtilsCheckMethod.isNullOrEmpty(personModelList.get(i).getInsuranceFeeAmount())) {
 						personModelList.get(i).setInsuranceFeeAmount("0");
 					}
-					if(UtilsCheckMethod.isNullOrEmpty(personModelList.get(i).getBonusFee())) {
-						personModelList.get(i).setBonusFee("0");;
+					if (UtilsCheckMethod.isNullOrEmpty(personModelList.get(i).getBonusFee())) {
+						personModelList.get(i).setBonusFee("0");
+						;
 					}
-					if(UtilsCheckMethod.isNullOrEmpty(personModelList.get(i).getLeaderAllowanceAmount())) {
+					if (UtilsCheckMethod.isNullOrEmpty(personModelList.get(i).getLeaderAllowanceAmount())) {
 						personModelList.get(i).setLeaderAllowanceAmount("0");
 					}
-					if(UtilsCheckMethod.isNullOrEmpty(personModelList.get(i).getOtherAllowanceAmount())) {
+					if (UtilsCheckMethod.isNullOrEmpty(personModelList.get(i).getOtherAllowanceAmount())) {
 						personModelList.get(i).setOtherAllowanceAmount("0");
 					}
-					if(UtilsCheckMethod.isNullOrEmpty(personModelList.get(i).getIntroductionAllowance())) {
+					if (UtilsCheckMethod.isNullOrEmpty(personModelList.get(i).getAllowanceAmount())) {
+						personModelList.get(i).setAllowanceAmount("0");
+					}
+					if (UtilsCheckMethod.isNullOrEmpty(personModelList.get(i).getIntroductionAllowance())) {
 						personModelList.get(i).setIntroductionAllowance("0");
 					}
-					if(UtilsCheckMethod.isNullOrEmpty(personModelList.get(i).getDeductionsAndOvertimePay())) {
+					if (UtilsCheckMethod.isNullOrEmpty(personModelList.get(i).getDeductionsAndOvertimePay())) {
 						personModelList.get(i).setDeductionsAndOvertimePay("0");
 					}
-					if(UtilsCheckMethod.isNullOrEmpty(personModelList.get(i).getDeductionsAndOvertimePayOfUnitPrice())) {
-						personModelList.get(i).setDeductionsAndOvertimePayOfUnitPrice("0");;
+					if (UtilsCheckMethod
+							.isNullOrEmpty(personModelList.get(i).getDeductionsAndOvertimePayOfUnitPrice())) {
+						personModelList.get(i).setDeductionsAndOvertimePayOfUnitPrice("0");
+						;
 					}
-					
-					
-					List<String> empNameList =new ArrayList<String>();
-					if(personModelList.get(i).getRelatedEmployees()!=null) {
-						
-						String[] empName =personModelList.get(i).getRelatedEmployees().split(",");
-						 empNameList = Arrays.asList(empName);
+
+					List<String> empNameList = new ArrayList<String>();
+					if (personModelList.get(i).getRelatedEmployees() != null) {
+
+						String[] empName = personModelList.get(i).getRelatedEmployees().split(",");
+						empNameList = Arrays.asList(empName);
 					}
 					personModelList.get(i).setEmpNameList(empNameList);
 					if (personModelList.get(i).getCustomerName() != null) {
 						workCount++;
 						personModelList.get(0).setWorkMonthCount(workCount);
 					}
-					grosProfits = String.valueOf(Integer.parseInt(personModelList.get(i).getUnitPrice())+
-						Integer.parseInt(personModelList.get(i).getDeductionsAndOvertimePayOfUnitPrice())-
-								(Integer.parseInt(personModelList.get(i).getSalary())+
-								Integer.parseInt(personModelList.get(i).getTransportationExpenses())+
-								Integer.parseInt(personModelList.get(i).getInsuranceFeeAmount())+
-								Integer.parseInt(personModelList.get(i).getBonusFee())+
-								Integer.parseInt(personModelList.get(i).getLeaderAllowanceAmount())+
-								Integer.parseInt(personModelList.get(i).getOtherAllowanceAmount())+
-								Integer.parseInt(personModelList.get(i).getIntroductionAllowance())));
+					grosProfits = String.valueOf(Integer.parseInt(personModelList.get(i).getUnitPrice())
+							+ Integer.parseInt(personModelList.get(i).getDeductionsAndOvertimePayOfUnitPrice())
+							- (Integer.parseInt(personModelList.get(i).getSalary())
+									+ Integer.parseInt(personModelList.get(i).getTransportationExpenses())
+									+ Integer.parseInt(personModelList.get(i).getInsuranceFeeAmount())
+									+ Integer.parseInt(personModelList.get(i).getBonusFee())
+									+ Integer.parseInt(personModelList.get(i).getLeaderAllowanceAmount())
+									+ Integer.parseInt(personModelList.get(i).getOtherAllowanceAmount())
+									+ Integer.parseInt(personModelList.get(i).getIntroductionAllowance())));
 					personModelList.get(i).setGrosProfits(grosProfits);
 				}
-				
+
 				Map<String, Object> resultdata = new HashMap<>();
 				resultdata.put("data", personModelList);
 				return resultdata;
-				}		
+			}
 		}
 	}
 
 	public Map<String, Object> getDetailParam(PersonalSalesSearchModel empInfo) {
 		Map<String, Object> sendMap = new HashMap<String, Object>();
-		String employeeName = empInfo.getEmployeeName().substring(empInfo.getEmployeeName().indexOf("(")+1,empInfo.getEmployeeName().indexOf(")"));
+		String employeeName = empInfo.getEmployeeName().substring(empInfo.getEmployeeName().indexOf("(") + 1,
+				empInfo.getEmployeeName().indexOf(")"));
 		String employeeNo = empInfo.getEmployeeNo();
 		String fiscalYear = empInfo.getFiscalYear();
 		String startYearAndMonth = empInfo.getStartYearAndMonth();
@@ -253,5 +260,5 @@ public class PersonalSalesSearchController {
 		}
 		return sendMap;
 	}
-	
+
 }

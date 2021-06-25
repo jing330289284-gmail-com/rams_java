@@ -486,6 +486,13 @@ public class SituationChangeController {
 					// 番号設置
 					reflectYearAndMonthList.get(i).setRowNo(i + 1);
 
+					// 名前設置
+					if (reflectYearAndMonthList.get(i).getEmployeeNo().substring(0, 2).equals("SP")
+							|| reflectYearAndMonthList.get(i).getEmployeeNo().substring(0, 2).equals("SC")) {
+						reflectYearAndMonthList.get(i).setEmployeeName(reflectYearAndMonthList.get(i).getEmployeeName()
+								+ "(" + reflectYearAndMonthList.get(i).getEmployeeNo().substring(0, 2) + ")");
+					}
+
 					// 区分設置
 					reflectYearAndMonthList.get(i).setStatus("給料変更");
 
@@ -579,6 +586,14 @@ public class SituationChangeController {
 					// 番号設置
 					scheduleOfBonusAmountList.get(i).setRowNo(i + 1);
 
+					// 名前設置
+					if (scheduleOfBonusAmountList.get(i).getEmployeeNo().substring(0, 2).equals("SP")
+							|| scheduleOfBonusAmountList.get(i).getEmployeeNo().substring(0, 2).equals("SC")) {
+						scheduleOfBonusAmountList.get(i)
+								.setEmployeeName(scheduleOfBonusAmountList.get(i).getEmployeeName() + "("
+										+ scheduleOfBonusAmountList.get(i).getEmployeeNo().substring(0, 2) + ")");
+					}
+
 					// 年月設置
 					scheduleOfBonusAmountList.get(i)
 							.setReflectYearAndMonth(scheduleOfBonusAmountList.get(i).getNextBonusMonth());
@@ -670,6 +685,13 @@ public class SituationChangeController {
 					// 番号設置
 					intoRetirementList.get(i).setRowNo(i + 1);
 
+					// 名前設置
+					if (intoRetirementList.get(i).getEmployeeNo().substring(0, 2).equals("SP")
+							|| intoRetirementList.get(i).getEmployeeNo().substring(0, 2).equals("SC")) {
+						intoRetirementList.get(i).setEmployeeName(intoRetirementList.get(i).getEmployeeName() + "("
+								+ intoRetirementList.get(i).getEmployeeNo().substring(0, 2) + ")");
+					}
+
 					// 年月設置
 					intoRetirementList.get(i)
 							.setReflectYearAndMonth(intoRetirementList.get(i).getIntoCompanyYearAndMonth());
@@ -723,6 +745,13 @@ public class SituationChangeController {
 				for (int i = 0; i < intoRetirementList.size(); i++) {
 					// 番号設置
 					intoRetirementList.get(i).setRowNo(i + 1);
+
+					// 名前設置
+					if (intoRetirementList.get(i).getEmployeeNo().substring(0, 2).equals("SP")
+							|| intoRetirementList.get(i).getEmployeeNo().substring(0, 2).equals("SC")) {
+						intoRetirementList.get(i).setEmployeeName(intoRetirementList.get(i).getEmployeeName() + "("
+								+ intoRetirementList.get(i).getEmployeeNo().substring(0, 2) + ")");
+					}
 
 					// 年月設置
 					intoRetirementList.get(i)

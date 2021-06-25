@@ -34,6 +34,10 @@ public class CustomerInfoValidation implements Validator {
 						errors.rejectValue("customerName", "",
 								StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001", "お客様名"));
 					}
+					if (UtilsCheckMethod.isNullOrEmpty(p.getCustomerAbbreviation())) {
+						errors.rejectValue("customerName", "",
+								StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001", "お客様略称"));
+					}
 					if (!UtilsCheckMethod.isNullOrEmpty(p.getPurchasingManagersMail())) {
 						if (!UtilsCheckMethod.checkMail(p.getPurchasingManagersMail())) {
 							errors.rejectValue("purchasingManagersMail", "",

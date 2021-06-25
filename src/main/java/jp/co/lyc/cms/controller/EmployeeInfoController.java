@@ -232,6 +232,16 @@ public class EmployeeInfoController extends BaseController {
 			resultMap.put("errorsMessage", errorsMessage);
 			return resultMap;
 		}
+		
+		if (resumeInfo1 != null && emp.getResumeName1().equals("")) {
+			resultMap.put("errorsMessage", "履歴書1名を入力してください。");
+			return resultMap;
+		}
+		
+		if (resumeInfo2 != null && emp.getResumeName2().equals("")) {
+			resultMap.put("errorsMessage", "履歴書2名を入力してください。");
+			return resultMap;
+		}
 
 		Map<String, Object> sendMap = getParam(emp);// パラメータ
 		boolean result = true;
@@ -444,6 +454,16 @@ public class EmployeeInfoController extends BaseController {
 				|| emp.getIntoCompanyYearAndMonth().equals("") || emp.getNationalityCode() == null
 				|| emp.getNationalityCode().equals("")) {
 			resultMap.put("errorsMessage", errorsMessage);
+			return resultMap;
+		}
+		
+		if (resumeInfo1 != null && emp.getResumeName1().equals("")) {
+			resultMap.put("errorsMessage", "履歴書1名を入力してください。");
+			return resultMap;
+		}
+		
+		if (resumeInfo2 != null && emp.getResumeName2().equals("")) {
+			resultMap.put("errorsMessage", "履歴書2名を入力してください。");
 			return resultMap;
 		}
 

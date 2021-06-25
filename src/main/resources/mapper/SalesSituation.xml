@@ -151,7 +151,10 @@
 		T006EmployeeSiteInfo.admissionStartDate,
 		T006EmployeeSiteInfo.admissionEndDate,
 		T006EmployeeSiteInfo.scheduledEndDate,
-		if(T019SalesSentence.unitPrice = "" or T019SalesSentence.unitPrice is null,T006EmployeeSiteInfo.unitPrice,T019SalesSentence.unitPrice) as unitPrice,
+		if(T019SalesSentence.unitPrice =
+		"" or T019SalesSentence.unitPrice is
+		null,T006EmployeeSiteInfo.unitPrice,T019SalesSentence.unitPrice) as
+		unitPrice,
 		ifnull(T006EmployeeSiteInfo.customerNo, '') AS customer,
 		T006EmployeeSiteInfo.customerNo as nowCustomer,
 		CONCAT(T001Employee.employeeFristName,T001Employee.employeeLastName)
@@ -163,7 +166,9 @@
 		T015ResumeManagement.resumeInfo2,
 		T015ResumeManagement.resumeName1,
 		T015ResumeManagement.resumeName2,
-		if(T002EmployeeDetail.yearsOfExperience = "",T002EmployeeDetail.graduationYearAndMonth,T002EmployeeDetail.yearsOfExperience) as intoCompanyYearAndMonth,
+		if(T002EmployeeDetail.yearsOfExperience =
+		"",T002EmployeeDetail.graduationYearAndMonth,T002EmployeeDetail.yearsOfExperience)
+		as intoCompanyYearAndMonth,
 		T002EmployeeDetail.developLanguage1,
 		T002EmployeeDetail.developLanguage2,
 		T002EmployeeDetail.developLanguage3,
@@ -235,7 +240,8 @@
 		T002EmployeeDetail.developLanguage3,
 		T002EmployeeDetail.developLanguage4,
 		T002EmployeeDetail.developLanguage5,
-		if(T002EmployeeDetail.yearsOfExperience="",T002EmployeeDetail.graduationYearAndMonth,T002EmployeeDetail.yearsOfExperience) as intoCompanyYearAndMonth,
+		if(T002EmployeeDetail.yearsOfExperience="",T002EmployeeDetail.graduationYearAndMonth,T002EmployeeDetail.yearsOfExperience)
+		as intoCompanyYearAndMonth,
 		CONCAT(T001Employee.employeeFristName,T001Employee.employeeLastName)
 		AS
 		employeeName,
@@ -245,16 +251,22 @@
 		T015ResumeManagement.resumeName1,
 		T015ResumeManagement.resumeName2,
 		M013Station.stationName AS nearestStation,
-		if(T019SalesSentence.unitPrice = "" or T019SalesSentence.unitPrice is null,T011BpInfoSupplement.bpUnitPrice,T019SalesSentence.unitPrice) as unitPrice
+		if(T019SalesSentence.unitPrice = "" or T019SalesSentence.unitPrice is
+		null,T011BpInfoSupplement.bpUnitPrice,T019SalesSentence.unitPrice) as
+		unitPrice
 		FROM T002EmployeeDetail as
 		T002EmployeeDetail
-		Left Join T019SalesSentence as T019SalesSentence
-		on
-		T002EmployeeDetail.employeeNo = T019SalesSentence.employeeNo
 		Left Join
-		T015ResumeManagement as T015ResumeManagement
+		T019SalesSentence as T019SalesSentence
 		on
-		T015ResumeManagement.employeeNo = T002EmployeeDetail.employeeNo
+		T002EmployeeDetail.employeeNo
+		= T019SalesSentence.employeeNo
+		Left Join
+		T015ResumeManagement as
+		T015ResumeManagement
+		on
+		T015ResumeManagement.employeeNo =
+		T002EmployeeDetail.employeeNo
 		LEFT JOIN
 		T003AddressInfo AS
 		T003AddressInfo
@@ -263,7 +275,8 @@
 		T003AddressInfo.employeeNo
 		LEFT JOIN
 		M013Station AS M013Station
-		on T003AddressInfo.stationCode =
+		on
+		T003AddressInfo.stationCode =
 		M013Station.stationCode
 		LEFT
 		JOIN
@@ -1575,10 +1588,21 @@
 
 	<select id="getEmpNextAdmission" parameterType="String"
 		resultType="String">
-		SELECT left(max(admissionStartDate),6) as
-		admissionStartDate FROM
-		T006EmployeeSiteInfo where employeeNo =
-		#{employeeNo};
+		SELECT case
+		when admissionEndDate is null then "0"
+		when
+		admissionEndDate is not null then "1"
+		end as admissionStartDate FROM
+		T006EmployeeSiteInfo as T006
+		inner join
+		(select
+		employeeNo,max(admissionStartDate) as admissionStartDate FROM
+		T006EmployeeSiteInfo
+		group by employeeNo) as temp
+		on T006.employeeNo =
+		temp.employeeNo
+		and T006.admissionStartDate = temp.admissionStartDate
+		where T006.employeeNo = #{employeeNo};
 	</select>
 
 	<insert id="insertEmpNextAdmission"

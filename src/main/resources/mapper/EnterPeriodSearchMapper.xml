@@ -282,14 +282,14 @@
 		SELECT T005.employeeNo,T005.nextBonusMonth FROM
 		T005WagesInfo as T005
 		inner Join
-		(SELECT employeeNo,max(nextBonusMonth)
-		as nextBonusMonth
+		(SELECT employeeNo,max(reflectYearAndMonth)
+		as reflectYearAndMonth
 		FROM T005WagesInfo
 		GROUP BY employeeNo) as temp
 		on
 		T005.employeeNo = temp.employeeNo
-		and T005.nextBonusMonth =
-		temp.nextBonusMonth
+		and T005.reflectYearAndMonth =
+		temp.reflectYearAndMonth
 		where T005.nextBonusMonth != ""
 		and
 		T005.nextBonusMonth
@@ -309,6 +309,7 @@
 		T005.insuranceFeeAmount,
 		T005.reflectYearAndMonth,
 		T005.scheduleOfBonusAmount,
+		T005.nextBonusMonth,
 		T006.admissionStartDate,
 		T006.unitPrice
 		FROM

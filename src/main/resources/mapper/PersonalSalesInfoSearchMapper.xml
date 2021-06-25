@@ -20,7 +20,7 @@
 		T006.dailyCalculationStatus,
 		T006.admissionEndDate,
 		M005.employeeFormName,
-		T007.customerName,
+		if(T007.customerAbbreviation is null || T007.customerAbbreviation = "",T007.customerName,T007.customerAbbreviation) as customerName,
 		CAST((T006.unitPrice*10000) As unsigned) As unitPrice,
 		CAST(T005.salary As unsigned) As salary,
 		CAST(B${getYandM}.transportationExpenses As unsigned) As transportationExpenses,
@@ -49,7 +49,7 @@
 		M005EmployeeForm As M005 ON T002.employeeFormCode = M005.employeeFormCode
 		LEFT JOIN 
 		T006EmployeeSiteInfo As T006 ON T005.employeeNo = T006.employeeNo	
-		AND #{getYandM} between left(admissionStartDate,6) and IFNULL(admissionEndDate,date_format(now(),'%Y%m'))
+		AND #{getYandM} between left(admissionStartDate,6) and IFNULL(admissionEndDate,#{getYandM}<!-- date_format(now(),'%Y%m') -->)
 			
 		LEFT JOIN
 		T018WorkTotalTime As T018 ON T001.employeeNo = T018.employeeNo 
