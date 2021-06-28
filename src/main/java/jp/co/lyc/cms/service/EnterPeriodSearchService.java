@@ -160,20 +160,24 @@ public class EnterPeriodSearchService {
 	 * @param sendMap
 	 * @return
 	 */
-	public ArrayList<String> getWagesInfo(String yearAndMonth, String selectedYearAndMonth) {
-		return enterPeriodSearchMapper.getWagesInfo(yearAndMonth,selectedYearAndMonth);
+	public ArrayList<String> getWagesInfo(String yearAndMonth, String bonusYearAndMonth) {
+		return enterPeriodSearchMapper.getWagesInfo(yearAndMonth,bonusYearAndMonth);
 	}
 
 	public ArrayList<String> getEmployeeSiteInfo(String yearAndMonth) {
 		return enterPeriodSearchMapper.getEmployeeSiteInfo(yearAndMonth);
 	}
 
-	public ArrayList<String> getBonusMonthInfo(String yearAndMonth) {
-		return enterPeriodSearchMapper.getBonusMonthInfo(yearAndMonth);
+	public ArrayList<String> getBonusMonthInfo(String bonusYearAndMonth) {
+		return enterPeriodSearchMapper.getBonusMonthInfo(bonusYearAndMonth);
 	}
 
 	public ArrayList<EnterPeriodSearchModel> getenterPeriodByEmp(ArrayList<String> employeeList) {
 		return enterPeriodSearchMapper.getenterPeriodByEmp(employeeList);
+	}
+
+	public ArrayList<EnterPeriodSearchModel> getSiteInfo(ArrayList<String> employeeList) {
+		return enterPeriodSearchMapper.getSiteInfo(employeeList);
 	}
 	
 	public ArrayList<SiteModel> getSiteInfoByEmp(ArrayList<String> employeeList, String yearAndMonth) {

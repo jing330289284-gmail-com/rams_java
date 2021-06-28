@@ -126,20 +126,25 @@ public class EnterPeriodSearchController extends BaseController {
 		ArrayList<SiteModel> siteInfoList = new ArrayList<SiteModel>();
 
 		String selectedYearAndMonth = enterPeriodSearchModel.getYearAndMonth();
-		String yearAndMonth = Integer.parseInt(enterPeriodSearchModel.getYearAndMonth().substring(0, 4)) - 1 + String
-				.format("%02d", (Integer.parseInt(enterPeriodSearchModel.getYearAndMonth().substring(4, 6)) + 1));
+		String yearAndMonth = Integer.parseInt(selectedYearAndMonth.substring(0, 4)) - 1
+				+ String.format("%02d", (Integer.parseInt(selectedYearAndMonth.substring(4, 6)) + 1));
 		if (Integer.parseInt(yearAndMonth.substring(4, 6)) > 12) {
 			yearAndMonth = (Integer.parseInt(yearAndMonth.substring(0, 4)) + 1) + "01";
 		}
+		String bonusYearAndMonth = Integer.parseInt(selectedYearAndMonth.substring(0, 4))
+				+ String.format("%02d", (Integer.parseInt(selectedYearAndMonth.substring(4, 6)) + 1));
+		if (Integer.parseInt(bonusYearAndMonth.substring(4, 6)) > 12) {
+			bonusYearAndMonth = (Integer.parseInt(bonusYearAndMonth.substring(0, 4)) + 1) + "01";
+		}
 		if (enterPeriodSearchModel.getEnterPeriodKbn().equals("0")) {
 			// 区分は昇格の場合
-			employeeList = enterPeriodSearchService.getWagesInfo(yearAndMonth, selectedYearAndMonth);
+			employeeList = enterPeriodSearchService.getWagesInfo(yearAndMonth, bonusYearAndMonth);
 		} else if (enterPeriodSearchModel.getEnterPeriodKbn().equals("1")) {
 			// 区分は現場の場合
 			employeeList = enterPeriodSearchService.getEmployeeSiteInfo(yearAndMonth);
 		} else if (enterPeriodSearchModel.getEnterPeriodKbn().equals("2")) {
 			// 区分はボーナスの場合
-			employeeList = enterPeriodSearchService.getBonusMonthInfo(yearAndMonth);
+			employeeList = enterPeriodSearchService.getBonusMonthInfo(bonusYearAndMonth);
 		}
 
 		if (enterPeriodSearchModel.getEmployeeNo() != null) {
@@ -152,19 +157,24 @@ public class EnterPeriodSearchController extends BaseController {
 		}
 
 		if (employeeList.size() > 0) {
-			resultList = enterPeriodSearchService.getenterPeriodByEmp(employeeList);
+			if (enterPeriodSearchModel.getEnterPeriodKbn().equals("1")) {
+				ArrayList<EnterPeriodSearchModel> tempList = enterPeriodSearchService.getSiteInfo(employeeList);
+				for (int i = 0; i < employeeList.size(); i++) {
+					for (int j = 0; j < tempList.size(); j++) {
+						if (employeeList.get(i).equals(tempList.get(j).getEmployeeNo())) {
+							resultList.add(tempList.get(j));
+							break;
+						}
+					}
+				}
+			} else {
+				resultList = enterPeriodSearchService.getenterPeriodByEmp(employeeList);
+			}
 		}
 
 		if (resultList.size() > 0) {
-			if (enterPeriodSearchModel.getEnterPeriodKbn().equals("2")) {
-				for (int i = 0; i < resultList.size(); i++) {
-					int month = 0;
-					month = getMonthNum(resultList.get(i).getNextBonusMonth(), yearAndMonth);
-					if (month > 0) {
-						resultList.get(i).setIsRed("true");
-					}
-				}
-			} else if (enterPeriodSearchModel.getEnterPeriodKbn().equals("1")) {
+			// 現場情報
+			if (enterPeriodSearchModel.getEnterPeriodKbn().equals("1")) {
 				for (int i = 0; i < resultList.size(); i++) {
 					int month = 0;
 					month = getMonthNum(resultList.get(i).getAdmissionStartDate().substring(0, 6), yearAndMonth);
@@ -172,7 +182,19 @@ public class EnterPeriodSearchController extends BaseController {
 						resultList.get(i).setIsRed("true");
 					}
 				}
-			} else {
+			}
+			// ボーナス
+			else if (enterPeriodSearchModel.getEnterPeriodKbn().equals("2")) {
+				for (int i = 0; i < resultList.size(); i++) {
+					int month = 0;
+					month = getMonthNum(resultList.get(i).getNextBonusMonth(), bonusYearAndMonth);
+					if (month > 0) {
+						resultList.get(i).setIsRed("true");
+					}
+				}
+			}
+			// 昇格期限
+			else {
 				// 非稼働取得
 				siteInfoList = enterPeriodSearchService.getSiteInfoByEmp(employeeList, yearAndMonth);
 				ArrayList<EnterPeriodSearchModel> periodsList = new ArrayList<EnterPeriodSearchModel>();
@@ -281,7 +303,12 @@ public class EnterPeriodSearchController extends BaseController {
 				// 非稼働時間計算
 				for (int i = 0; i < resultList.size(); i++) {
 					if (resultList.get(i).getNonSiteMonths() != null) {
-						int month = getMonthNum(resultList.get(i).getReflectYearAndMonth(), yearAndMonth);
+						int month = 0;
+						if (resultList.get(i).getNextRaiseMonth().equals("")) {
+							month = getMonthNum(resultList.get(i).getReflectYearAndMonth(), yearAndMonth);
+						} else {
+							month = getMonthNum(resultList.get(i).getNextRaiseMonth(), bonusYearAndMonth);
+						}
 						if (Integer.parseInt(resultList.get(i).getNonSiteMonths()) > month) {
 							resultList.remove(i);
 							i--;
@@ -290,8 +317,10 @@ public class EnterPeriodSearchController extends BaseController {
 						}
 					} else {
 						int month = 0;
-						if (enterPeriodSearchModel.getEnterPeriodKbn().equals("0")) {
+						if (resultList.get(i).getNextRaiseMonth().equals("")) {
 							month = getMonthNum(resultList.get(i).getReflectYearAndMonth(), yearAndMonth);
+						} else {
+							month = getMonthNum(resultList.get(i).getNextRaiseMonth(), bonusYearAndMonth);
 						}
 						if (month > 0) {
 							resultList.get(i).setIsRed("true");

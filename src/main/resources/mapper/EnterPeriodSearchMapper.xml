@@ -244,8 +244,10 @@
 		"0"
 		and T005.reflectYearAndMonth &lt;=
 		#{yearAndMonth}
-		and (T005.nextRaiseMonth = ""
-		or T005.nextRaiseMonth &lt;= #{selectedYearAndMonth})
+		and
+		(T005.nextRaiseMonth = ""
+		or T005.nextRaiseMonth &lt;=
+		#{bonusYearAndMonth})
 		;
 	</select>
 
@@ -270,8 +272,10 @@
 		T006.admissionStartDate = temp.admissionStartDate
 		where
 		T006.admissionEndDate is null
-		and (T006.typteOfContractCode is null or T006.typteOfContractCode != "4")
-		and left(T006.admissionStartDate,6)
+		and (T006.typteOfContractCode is
+		null or T006.typteOfContractCode != "4")
+		and
+		left(T006.admissionStartDate,6)
 		&lt;=
 		#{yearAndMonth};
 	</select>
@@ -282,19 +286,22 @@
 		SELECT T005.employeeNo,T005.nextBonusMonth FROM
 		T005WagesInfo as T005
 		inner Join
-		(SELECT employeeNo,max(reflectYearAndMonth)
+		(SELECT
+		employeeNo,max(reflectYearAndMonth)
 		as reflectYearAndMonth
-		FROM T005WagesInfo
+		FROM
+		T005WagesInfo
 		GROUP BY employeeNo) as temp
 		on
-		T005.employeeNo = temp.employeeNo
+		T005.employeeNo =
+		temp.employeeNo
 		and T005.reflectYearAndMonth =
 		temp.reflectYearAndMonth
 		where T005.nextBonusMonth != ""
 		and
 		T005.nextBonusMonth
 		&lt;=
-		#{yearAndMonth};
+		#{bonusYearAndMonth};
 	</select>
 
 	<!-- データを取得 -->
@@ -310,12 +317,14 @@
 		T005.reflectYearAndMonth,
 		T005.scheduleOfBonusAmount,
 		T005.nextBonusMonth,
+		T005.nextRaiseMonth,
 		T006.admissionStartDate,
 		T006.unitPrice
 		FROM
 		T005WagesInfo
 		as T005
-		inner Join
+		inner
+		Join
 		(SELECT
 		employeeNo,max(reflectYearAndMonth) as
 		reflectYearAndMonth
@@ -342,10 +351,12 @@
 		on T006.employeeNo =
 		temp.employeeNo
 		and T006.admissionStartDate = temp.admissionStartDate
-		where admissionEndDate is null 
-        and (typteOfContractCode is null or typteOfContractCode != "4"))
+		where admissionEndDate is null
+		and (typteOfContractCode is null or
+		typteOfContractCode != "4"))
 		as T006
-		on T005.employeeNo = T006.employeeNo
+		on T005.employeeNo =
+		T006.employeeNo
 		where
 		T005.employeeNo in
 		<foreach item="item" collection="list" open="(" close=")"
@@ -355,13 +366,61 @@
 	</select>
 
 	<!-- データを取得 -->
+	<select id="getSiteInfo" parameterType="String"
+		resultType="jp.co.lyc.cms.model.EnterPeriodSearchModel">
+		SELECT * FROM
+		(SELECT
+		T006.employeeNo,
+		CONCAT( T001.employeeFristName,
+		T001.employeeLastName ) as
+		employeeName,T006.admissionStartDate,T006.unitPrice,T005.reflectYearAndMonth,T005.salary,
+		T005.insuranceFeeAmount,
+		T005.scheduleOfBonusAmount,
+		T005.nextBonusMonth FROM T006EmployeeSiteInfo AS T006
+		inner Join T001Employee as T001
+		on
+		T001.employeeNo = T006.employeeNo
+		LEFT JOIN
+		T005WagesInfo AS T005
+		ON T005.employeeNo = T006.employeeNo
+		left
+		Join
+		(SELECT
+		employeeNo,max(reflectYearAndMonth) as
+		reflectYearAndMonth
+		FROM
+		T005WagesInfo
+		GROUP BY employeeNo) as temp
+		on
+		T005.employeeNo =
+		temp.employeeNo
+		and T005.reflectYearAndMonth =
+		temp.reflectYearAndMonth
+		where admissionEndDate is null
+		and left(T006.employeeNo,2) != "BP"
+		order by
+		employeeNo,reflectYearAndMonth
+		desc) as newTable
+		where
+		newTable.employeeNo in
+		<foreach item="item" collection="list" open="(" close=")"
+			separator=",">
+			#{item}
+		</foreach>
+		;
+	</select>
+
+
+	<!-- データを取得 -->
 	<select id="getSiteInfoByEmp" parameterType="String"
 		resultType="jp.co.lyc.cms.model.SiteModel">
-		SELECT employeeNo,admissionStartDate,admissionEndDate,typteOfContractCode FROM
+		SELECT
+		employeeNo,admissionStartDate,admissionEndDate,typteOfContractCode
+		FROM
 		T006EmployeeSiteInfo
-		where employeeNo in 
-		<foreach item="item" collection="employeeList" open="(" close=")"
-			separator=",">
+		where employeeNo in
+		<foreach item="item" collection="employeeList" open="("
+			close=")" separator=",">
 			#{item}
 		</foreach>
 		;

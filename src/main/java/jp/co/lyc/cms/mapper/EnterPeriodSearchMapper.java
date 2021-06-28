@@ -50,14 +50,16 @@ public interface EnterPeriodSearchMapper {
 	 */
 	public ArrayList<EnterPeriodSearchModel> selectScheduleOfBonusAmount(HashMap<String, String> sendMap);
 
-	public ArrayList<String> getWagesInfo(String yearAndMonth, String selectedYearAndMonth);
+	public ArrayList<String> getWagesInfo(String yearAndMonth, String bonusYearAndMonth);
 	
 	public ArrayList<String> getEmployeeSiteInfo(String yearAndMonth);
 	
-	public ArrayList<String> getBonusMonthInfo(String yearAndMonth);
+	public ArrayList<String> getBonusMonthInfo(String bonusYearAndMonth);
 
 	public ArrayList<EnterPeriodSearchModel> getenterPeriodByEmp(ArrayList<String> employeeList);
 
 	public ArrayList<SiteModel> getSiteInfoByEmp(ArrayList<String> employeeList, String yearAndMonth);
+
+	public ArrayList<EnterPeriodSearchModel> getSiteInfo(ArrayList<String> employeeList);
 
 }

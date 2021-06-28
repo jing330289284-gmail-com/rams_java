@@ -125,6 +125,7 @@ public class WagesInfoController extends BaseController {
 			jigyosyaFlag = false;
 		}
 		result.put("employeeFormCode", a.getEmployeeFormCode());
+		result.put("employeeFormName", a.getEmployeeFormName());
 
 		if (wagesInfoList.size() == 0) {
 			// 追加の場合（データがない）、T002に社員形式を取得

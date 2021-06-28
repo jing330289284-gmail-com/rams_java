@@ -30,9 +30,20 @@
 		T005.nextRaiseMonth,
 		T005.totalAmount,
 		T005.employeeStatus,
-		T005.remark
+		T005.remark,
+		if(T002.employeeFormCode = "" || T002.employeeFormCode is
+		null,"",M005.employeeFormName) AS employeeFormName
 		FROM
-		T005WagesInfo AS T005
+		T005WagesInfo AS
+		T005
+		Left Join
+		T002EmployeeDetail AS T002
+		ON T002.employeeNo =
+		T005.employeeNo
+		Left Join
+		M005EmployeeForm AS M005
+		ON
+		T002.employeeFormCode = M005.employeeFormCode
 		WHERE
 		T005.employeeNo =
 		#{employeeNo}
@@ -223,7 +234,8 @@
 		UPDATE
 		T002EmployeeDetail
 		SET employeeNo = #{newEmployeeNo},
-		intoCompanyCode = "",
+		intoCompanyCode =
+		"",
 		occupationCode = "",
 		employeeFormCode = "",
 		departmentCode = ""

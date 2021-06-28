@@ -13,6 +13,7 @@ public class EnterPeriodSearchModel {
 	String waitingCost;// 待機費
 	String insuranceFeeAmount;// 保険総額
 	String nextBonusMonth;// 次のボーナス月
+	String nextRaiseMonth;// 次の予定昇格月
 	String scheduleOfBonusAmount;// ボーナス予定額
 	String admissionStartDate;// 入場時間
 	String nonSitePeriod;// 待機期間
@@ -20,6 +21,14 @@ public class EnterPeriodSearchModel {
 	String nonSiteMonths;// 非稼働月数
 	ArrayList<EnterPeriodSearchModel> nonSitePeriodsList;
 	String isRed;
+
+	public String getNextRaiseMonth() {
+		return nextRaiseMonth;
+	}
+
+	public void setNextRaiseMonth(String nextRaiseMonth) {
+		this.nextRaiseMonth = nextRaiseMonth;
+	}
 
 	public String getIsRed() {
 		return isRed;
