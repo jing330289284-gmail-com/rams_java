@@ -44,6 +44,12 @@ public class CustomerInfoValidation implements Validator {
 									StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG007", "お客様メール"));
 						}
 					}
+					if (!UtilsCheckMethod.isNullOrEmpty(p.getCommonMail())) {
+						if (!UtilsCheckMethod.checkMail(p.getCommonMail())) {
+							errors.rejectValue("commonMail", "",
+									StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG007", "共通メール"));
+						}
+					}
 					if (!UtilsCheckMethod.isNullOrEmpty(p.getUrl())) {
 						if (!UtilsCheckMethod.checkUrl(p.getUrl())) {
 							errors.rejectValue("url", "",

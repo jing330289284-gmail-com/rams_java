@@ -128,6 +128,12 @@
 		<if test="listedCompanyFlag != null">
 			AND T007.listedCompanyFlag = #{listedCompanyFlag}
 		</if>
+		<if test="responseStatus != null">
+			AND T007.responseStatus = #{responseStatus}
+		</if>
+		<if test="contactDate != null">
+			AND T007.contactDate >= concat(#{contactDate},"00")
+		</if>
 		ORDER BY
 		T007.customerNo
 	</select>

@@ -267,7 +267,7 @@ public interface UtilsMapper {
 	 * 
 	 * @return
 	 */
-	public List<ModelClass> getPaymentsite();
+	public List<ModelClass> getPaymentSite();
 
 	/**
 	 * パスワード取得

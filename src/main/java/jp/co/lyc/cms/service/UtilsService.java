@@ -375,8 +375,8 @@ public class UtilsService {
 	 * 
 	 * @return
 	 */
-	public List<ModelClass> getPaymentsite() {
-		return utilsMapper.getPaymentsite();
+	public List<ModelClass> getPaymentSite() {
+		return utilsMapper.getPaymentSite();
 	}
 
 	/**

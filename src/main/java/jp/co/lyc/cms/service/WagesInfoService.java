@@ -150,6 +150,7 @@ public class WagesInfoService {
 		sendMap.put("employeeStatus", wagesInfoModel.getEmployeeStatus());
 		sendMap.put("remark", wagesInfoModel.getRemark());
 		sendMap.put("updateUser", wagesInfoModel.getUpdateUser());
+		sendMap.put("workingConditionStatus", wagesInfoModel.getWorkingCondition());
 		return sendMap;
 	}
 }

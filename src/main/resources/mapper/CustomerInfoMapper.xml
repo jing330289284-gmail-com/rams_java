@@ -19,7 +19,8 @@
 		WHEN
 		customerNo IS NULL THEN
 		'C000' ELSE MAX( customerNo )
-		END AS saibanCustomerNo
+		END AS
+		saibanCustomerNo
 		FROM
 		T007CustomerInfo
 	</select>
@@ -66,11 +67,16 @@
 		T007.businessStartDate,
 		T007.capitalStock,
 		T007.basicContract,
+		T007.commonMail,
+		T007.responseStatus as response,
+		T007.contactDate,
+		T007.salesStaff,
 		T007.remark,
 		T008.topCustomerName
 		FROM
 		T007CustomerInfo AS T007
-		LEFT JOIN T008TopCustomerInfo AS T008 ON T007.topCustomerNo =
+		LEFT JOIN
+		T008TopCustomerInfo AS T008 ON T007.topCustomerNo =
 		T008.topCustomerNo
 		WHERE
 		customerNo = #{customerNo}
@@ -98,6 +104,10 @@
 		customerDepartmentCode,
 		positionCode,
 		basicContract,
+		commonMail,
+		responseStatus,
+		contactDate,
+		salesStaff,
 		remark,
 		updateTime,
 		createTime,
@@ -123,6 +133,10 @@
 		#{customerDepartmentCode},
 		#{positionCode},
 		#{basicContract},
+		#{commonMail},
+		#{responseStatus},
+		#{contactDate},
+		#{salesStaff},
 		#{remark},
 		NOW(),
 		NOW(),
@@ -189,13 +203,26 @@
 		<if test="basicContract != null">
 			basicContract = #{basicContract},
 		</if>
+		<if test="commonMail != null">
+			commonMail = #{commonMail},
+		</if>
+		<if test="responseStatus != null">
+			responseStatus = #{responseStatus},
+		</if>
+		<if test="contactDate != null">
+			contactDate = #{contactDate},
+		</if>
+		<if test="salesStaff != null">
+			salesStaff = #{salesStaff},
+		</if>
 		<if test="remark != null">
 			remark = #{remark},
 		</if>
 		updateTime = NOW(),
 		updateUser = #{updateUser}
 		WHERE
-		customerNo = #{customerNo}
+		customerNo =
+		#{customerNo}
 	</update>
 	<!-- 部門検索 -->
 	<select id="selectCustomerDepartmentInfo"
@@ -215,22 +242,29 @@
 		T009.developLanguageCode2,
 		T009.stationCode,
 		M022.typeOfIndustryName,
-		M011a.developLanguageName AS developLanguageName1,
-		M011b.developLanguageName AS developLanguageName2,
+		M011a.developLanguageName AS
+		developLanguageName1,
+		M011b.developLanguageName AS
+		developLanguageName2,
 		M013.stationName,
 		T009.customerDepartmentMail
 		FROM
 		T009CustomerDepartmentInfo AS T009
-		LEFT JOIN M019Position AS M019 ON T009.positionCode = M019.positionCode
-		LEFT JOIN M018CustomerDepartment AS M018 ON
+		LEFT JOIN M019Position AS M019 ON
+		T009.positionCode = M019.positionCode
+		LEFT JOIN M018CustomerDepartment
+		AS M018 ON
 		T009.customerDepartmentCode = M018.customerDepartmentCode
 		LEFT JOIN M022TypeOfIndustry AS M022 ON T009.typeOfIndustryCode =
 		M022.typeOfIndustryCode
-		LEFT JOIN M011DevelopLanguage AS M011a ON T009.developLanguageCode1 =
+		LEFT JOIN M011DevelopLanguage AS M011a ON
+		T009.developLanguageCode1 =
 		M011a.developLanguageCode
-		LEFT JOIN M011DevelopLanguage AS M011b ON T009.developLanguageCode2 =
+		LEFT JOIN
+		M011DevelopLanguage AS M011b ON T009.developLanguageCode2 =
 		M011b.developLanguageCode
-		LEFT JOIN M013Station AS M013 ON T009.stationCode = M013.stationCode,
+		LEFT JOIN M013Station AS M013 ON
+		T009.stationCode = M013.stationCode,
 		( SELECT @rowNo := 0 ) AS rowNo
 		WHERE
 		T009.customerNo = #{customerNo}
@@ -307,7 +341,8 @@
 	<update id="updateCustomerDepartment" parameterType="String">
 		UPDATE T009CustomerDepartmentInfo
 		SET
-		customerDepartmentCode = #{customerDepartmentCode},
+		customerDepartmentCode =
+		#{customerDepartmentCode},
 		positionCode = #{positionCode},
 		<if test="positionCode != null">
 			positionCode = #{positionCode},
@@ -336,7 +371,8 @@
 		updateTime = NOW(),
 		updateUser = #{updateUser}
 		WHERE
-		customerNo = #{customerNo}
+		customerNo =
+		#{customerNo}
 		AND
 		customerDepartmentCode = #{beforeCDCode}
 		AND
@@ -352,6 +388,7 @@
 		AND
 		customerDepartmentCode = #{customerDepartmentCode}
 		AND
-		positionCode = #{positionCode}
+		positionCode =
+		#{positionCode}
 	</delete>
 </mapper>

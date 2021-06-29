@@ -30,6 +30,7 @@
 		T005.nextRaiseMonth,
 		T005.totalAmount,
 		T005.employeeStatus,
+		T005.workingConditionStatus as workingCondition,
 		T005.remark,
 		if(T002.employeeFormCode = "" || T002.employeeFormCode is
 		null,"",M005.employeeFormName) AS employeeFormName
@@ -112,6 +113,7 @@
 		nextRaiseMonth,
 		totalAmount,
 		employeeStatus,
+		workingConditionStatus,
 		remark,
 		updateTime,
 		createTime,
@@ -134,6 +136,7 @@
 		#{nextRaiseMonth},
 		#{totalAmount},
 		#{employeeStatus},
+		#{workingConditionStatus},
 		#{remark},
 		NOW(),
 		NOW(),
@@ -186,6 +189,9 @@
 		</if>
 		<if test="totalAmount != null">
 			totalAmount = #{totalAmount},
+		</if>
+		<if test="workingConditionStatus != null">
+			workingConditionStatus = #{workingConditionStatus},
 		</if>
 		<if test="employeeStatus != null">
 			employeeStatus = #{employeeStatus},

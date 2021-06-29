@@ -354,13 +354,14 @@
 	</select>
 
 	<!-- 支払サイト選択肢 -->
-	<select id="getPaymentsite"
+	<select id="getPaymentSite"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT
-		PaymentSiteCode CODE,
-		PaymentSiteName NAME
+		paymentSiteCode CODE,
+		paymentSiteName NAME
 		FROM
 		M020PaymentSite
+		order by paymentSiteName
 	</select>
 
 	<!-- パスワードの取得 -->

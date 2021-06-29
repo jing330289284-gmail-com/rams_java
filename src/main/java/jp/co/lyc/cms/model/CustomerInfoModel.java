@@ -56,6 +56,33 @@ public class CustomerInfoModel {
 	String positionCode;
 	String basicContract;
 	String response;
+	String commonMail;
+	String contactDate;
+	String salesStaff;
+
+	public String getCommonMail() {
+		return commonMail;
+	}
+
+	public void setCommonMail(String commonMail) {
+		this.commonMail = commonMail;
+	}
+
+	public String getContactDate() {
+		return contactDate;
+	}
+
+	public void setContactDate(String contactDate) {
+		this.contactDate = contactDate;
+	}
+
+	public String getSalesStaff() {
+		return salesStaff;
+	}
+
+	public void setSalesStaff(String salesStaff) {
+		this.salesStaff = salesStaff;
+	}
 
 	public String getResponse() {
 		return response;

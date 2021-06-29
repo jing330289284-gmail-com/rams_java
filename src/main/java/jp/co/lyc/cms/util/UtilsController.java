@@ -283,10 +283,10 @@ public class UtilsController {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/getPaymentsite", method = RequestMethod.POST)
+	@RequestMapping(value = "/getPaymentSite", method = RequestMethod.POST)
 	@ResponseBody
-	public List<ModelClass> getPaymentsite() {
-		List<ModelClass> list = utilsService.getPaymentsite();
+	public List<ModelClass> getPaymentSite() {
+		List<ModelClass> list = utilsService.getPaymentSite();
 		return list;
 	}
 
@@ -1577,6 +1577,21 @@ public class UtilsController {
 		Properties properties = getProperties();
 		String basicContractStatus = properties.getProperty("basicContractStatus");
 		List<ModelClass> list = getStatus(basicContractStatus);
+		return list;
+	}
+	
+	/**
+	 * 稼働ステータス取得
+	 * 
+	 * @return
+	 */
+
+	@RequestMapping(value = "/getWorkingConditionStatus", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getWorkingConditionStatus() {
+		Properties properties = getProperties();
+		String workingConditionStatus = properties.getProperty("workingConditionStatus");
+		List<ModelClass> list = getStatus(workingConditionStatus);
 		return list;
 	}
 

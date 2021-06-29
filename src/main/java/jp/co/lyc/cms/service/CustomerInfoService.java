@@ -162,19 +162,19 @@ public class CustomerInfoService {
 			}
 		} else if (checkMod != null && (customerInfoMod.getActionType().equals("update"))) {// 修正の場合
 			try {
-				if(customerInfoMod.getCustomerDepartmentList() == null) {
+				if (customerInfoMod.getCustomerDepartmentList() == null) {
 					customerInfoMapper.updateCustomerInfo(setSendMap(customerInfoMod));
 					if (customerInfoMod.getAccountInfo() != null) {
 						AccountInfoModel accountInfoModel = customerInfoMod.getAccountInfo();
 						accountInfoModel.setEmployeeOrCustomerNo(customerInfoMod.getCustomerNo());
 						accountInfoModel.setUpdateUser(customerInfoMod.getUpdateUser());
-						if(accountInfoMapper.selectAccountInfo(customerInfoMod.getCustomerNo()) == null) {
+						if (accountInfoMapper.selectAccountInfo(customerInfoMod.getCustomerNo()) == null) {
 							accountInfoMapper.insertAccount(accountInfoService.setSendMap(accountInfoModel));
-						}else {
+						} else {
 							accountInfoMapper.updateAccount(accountInfoService.setSendMap(accountInfoModel));
 						}
 					}
-				}else {
+				} else {
 					if (customerInfoMod.getCustomerDepartmentList().size() > 0) {
 						if (!checkCustomerDepartment(customerInfoMod.getCustomerDepartmentList())) {
 							return "5";
@@ -196,7 +196,7 @@ public class CustomerInfoService {
 							if (meisaiResult.equals("1")) {
 								logger.info("CustomerInfoController.onloadPage:" + "登録終了");
 								return "3";
-							}else if(meisaiResult.equals("2")) {
+							} else if (meisaiResult.equals("2")) {
 								logger.info("CustomerInfoController.onloadPage:" + "登録終了");
 								return "4";
 							}
@@ -226,7 +226,7 @@ public class CustomerInfoService {
 	public boolean checkCustomerDepartment(ArrayList<CustomerDepartmentInfoModel> initList) {
 		for (CustomerDepartmentInfoModel c : initList) {
 			int count = 0;
-			if(!UtilsCheckMethod.isNullOrEmpty(c.getPositionCode()) 
+			if (!UtilsCheckMethod.isNullOrEmpty(c.getPositionCode())
 					&& !UtilsCheckMethod.isNullOrEmpty(c.getCustomerDepartmentCode())) {
 				String position = c.getPositionCode();
 				String customerDepartmentCode = c.getCustomerDepartmentCode();
@@ -278,10 +278,10 @@ public class CustomerInfoService {
 		if (customerDepartmentInfoModel.getActionType().equals("update")) {
 			if (selectCustomerDepartmentInfo(sendMap).size() != 0) {
 				try {
-					if(!customerDepartmentInfoModel.getBeforeCDCode().equals(
-							customerDepartmentInfoModel.getCustomerDepartmentCode()) || 
-						!customerDepartmentInfoModel.getBeforePCode().equals(
-								customerDepartmentInfoModel.getPositionCode())) {
+					if (!customerDepartmentInfoModel.getBeforeCDCode()
+							.equals(customerDepartmentInfoModel.getCustomerDepartmentCode())
+							|| !customerDepartmentInfoModel.getBeforePCode()
+									.equals(customerDepartmentInfoModel.getPositionCode())) {
 						HashMap<String, String> checkMap = new HashMap<String, String>();
 						checkMap.put("customerNo", customerDepartmentInfoModel.getCustomerNo());
 						checkMap.put("customerDepartmentCode", customerDepartmentInfoModel.getCustomerDepartmentCode());
@@ -420,6 +420,10 @@ public class CustomerInfoService {
 		sendMap.put("updateUser", customerInfoMod.getUpdateUser());
 		sendMap.put("customerNo", customerInfoMod.getCustomerNo());
 		sendMap.put("basicContract", customerInfoMod.getBasicContract());
+		sendMap.put("responseStatus", customerInfoMod.getResponse());
+		sendMap.put("commonMail", customerInfoMod.getCommonMail());
+		sendMap.put("contactDate", customerInfoMod.getContactDate());
+		sendMap.put("salesStaff", customerInfoMod.getSalesStaff());
 		return sendMap;
 	}
 }

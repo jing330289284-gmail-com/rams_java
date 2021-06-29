@@ -41,6 +41,15 @@ public class WagesInfoModel implements Serializable {
 	String leaderAllowanceAmount;
 	String housingStatus;
 	String introductionAllowance;
+	String workingCondition;
+
+	public String getWorkingCondition() {
+		return workingCondition;
+	}
+
+	public void setWorkingCondition(String workingCondition) {
+		this.workingCondition = workingCondition;
+	}
 
 	public String getEmployeeStatus() {
 		return employeeStatus;

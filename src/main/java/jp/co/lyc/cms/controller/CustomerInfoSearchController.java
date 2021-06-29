@@ -63,19 +63,67 @@ public class CustomerInfoSearchController {
 		ArrayList<CustomerInfoModel> resultList = seach(customerInfoMod);
 		ArrayList<CustomerInfoModel> resiltArrayList = new ArrayList<CustomerInfoModel>();
 		if (resultList.size() > 0) {
-			resultList.forEach((customerMod) -> {
-				// 取引人月が前後ある
-				int rowNo = 1;
-				if (!UtilsCheckMethod.isNullOrEmpty(customerInfoMod.getTraderPersonFront())
-						&& !UtilsCheckMethod.isNullOrEmpty(customerInfoMod.getTraderPersonBack())) {
-					if ((Integer.parseInt(customerMod.getTraderPerson()) > Integer
-							.parseInt(customerInfoMod.getTraderPersonFront())
-							|| Integer.parseInt(customerMod.getTraderPerson()) == Integer
-									.parseInt(customerInfoMod.getTraderPersonFront()))
-							&& (Integer.parseInt(customerMod.getTraderPerson()) < Integer
-									.parseInt(customerInfoMod.getTraderPersonBack())
-									|| Integer.parseInt(customerMod.getTraderPerson()) == Integer
-											.parseInt(customerInfoMod.getTraderPersonBack()))) {
+			if (customerInfoMod.getResponse() == null || !customerInfoMod.getResponse().equals("2")) {
+				resultList.forEach((customerMod) -> {
+					// 取引人月が前後ある
+					int rowNo = 1;
+					if (!UtilsCheckMethod.isNullOrEmpty(customerInfoMod.getTraderPersonFront())
+							&& !UtilsCheckMethod.isNullOrEmpty(customerInfoMod.getTraderPersonBack())) {
+						if ((Integer.parseInt(customerMod.getTraderPerson()) > Integer
+								.parseInt(customerInfoMod.getTraderPersonFront())
+								|| Integer.parseInt(customerMod.getTraderPerson()) == Integer
+										.parseInt(customerInfoMod.getTraderPersonFront()))
+								&& (Integer.parseInt(customerMod.getTraderPerson()) < Integer
+										.parseInt(customerInfoMod.getTraderPersonBack())
+										|| Integer.parseInt(customerMod.getTraderPerson()) == Integer
+												.parseInt(customerInfoMod.getTraderPersonBack()))) {
+							// 取引区分は取引中
+							if (!customerInfoMod.getTransactionStatus().equals("0")) {
+								if (customerMod.getTransactionStatus().equals(customerInfoMod.getTransactionStatus())) {
+									resiltArrayList.add(customerMod);
+								}
+								// 取引区分は取引中
+							} else {
+								resiltArrayList.add(customerMod);
+							}
+						}
+						// 取引人月は前ある後ない
+					} else if (!UtilsCheckMethod.isNullOrEmpty(customerInfoMod.getTraderPersonFront())
+							&& UtilsCheckMethod.isNullOrEmpty(customerInfoMod.getTraderPersonBack())) {
+						if (Integer.parseInt(customerMod.getTraderPerson()) > Integer
+								.parseInt(customerInfoMod.getTraderPersonFront())
+								|| Integer.parseInt(customerMod.getTraderPerson()) == Integer
+										.parseInt(customerInfoMod.getTraderPersonFront())) {
+							// 取引区分は取引中
+							if (!customerInfoMod.getTransactionStatus().equals("0")) {
+								if (customerMod.getTransactionStatus().equals(customerInfoMod.getTransactionStatus())) {
+									resiltArrayList.add(customerMod);
+								}
+								// 取引区分は取引中
+							} else {
+								resiltArrayList.add(customerMod);
+							}
+						}
+						// 取引人月は前ない後ある
+					} else if (UtilsCheckMethod.isNullOrEmpty(customerInfoMod.getTraderPersonFront())
+							&& !UtilsCheckMethod.isNullOrEmpty(customerInfoMod.getTraderPersonBack())) {
+						if (Integer.parseInt(customerMod.getTraderPerson()) < Integer
+								.parseInt(customerInfoMod.getTraderPersonBack())
+								|| Integer.parseInt(customerMod.getTraderPerson()) == Integer
+										.parseInt(customerInfoMod.getTraderPersonBack())) {
+							// 取引区分は取引中
+							if (!customerInfoMod.getTransactionStatus().equals("0")) {
+								if (customerMod.getTransactionStatus().equals(customerInfoMod.getTransactionStatus())) {
+									resiltArrayList.add(customerMod);
+								}
+								// 取引区分は取引中
+							} else {
+								resiltArrayList.add(customerMod);
+							}
+						}
+						// 取引人月は入っていない
+					} else if (UtilsCheckMethod.isNullOrEmpty(customerInfoMod.getTraderPersonFront())
+							&& UtilsCheckMethod.isNullOrEmpty(customerInfoMod.getTraderPersonBack())) {
 						// 取引区分は取引中
 						if (!customerInfoMod.getTransactionStatus().equals("0")) {
 							if (customerMod.getTransactionStatus().equals(customerInfoMod.getTransactionStatus())) {
@@ -86,54 +134,11 @@ public class CustomerInfoSearchController {
 							resiltArrayList.add(customerMod);
 						}
 					}
-					// 取引人月は前ある後ない
-				} else if (!UtilsCheckMethod.isNullOrEmpty(customerInfoMod.getTraderPersonFront())
-						&& UtilsCheckMethod.isNullOrEmpty(customerInfoMod.getTraderPersonBack())) {
-					if (Integer.parseInt(customerMod.getTraderPerson()) > Integer
-							.parseInt(customerInfoMod.getTraderPersonFront())
-							|| Integer.parseInt(customerMod.getTraderPerson()) == Integer
-									.parseInt(customerInfoMod.getTraderPersonFront())) {
-						// 取引区分は取引中
-						if (!customerInfoMod.getTransactionStatus().equals("0")) {
-							if (customerMod.getTransactionStatus().equals(customerInfoMod.getTransactionStatus())) {
-								resiltArrayList.add(customerMod);
-							}
-							// 取引区分は取引中
-						} else {
-							resiltArrayList.add(customerMod);
-						}
-					}
-					// 取引人月は前ない後ある
-				} else if (UtilsCheckMethod.isNullOrEmpty(customerInfoMod.getTraderPersonFront())
-						&& !UtilsCheckMethod.isNullOrEmpty(customerInfoMod.getTraderPersonBack())) {
-					if (Integer.parseInt(customerMod.getTraderPerson()) < Integer
-							.parseInt(customerInfoMod.getTraderPersonBack())
-							|| Integer.parseInt(customerMod.getTraderPerson()) == Integer
-									.parseInt(customerInfoMod.getTraderPersonBack())) {
-						// 取引区分は取引中
-						if (!customerInfoMod.getTransactionStatus().equals("0")) {
-							if (customerMod.getTransactionStatus().equals(customerInfoMod.getTransactionStatus())) {
-								resiltArrayList.add(customerMod);
-							}
-							// 取引区分は取引中
-						} else {
-							resiltArrayList.add(customerMod);
-						}
-					}
-					// 取引人月は入っていない
-				} else if (UtilsCheckMethod.isNullOrEmpty(customerInfoMod.getTraderPersonFront())
-						&& UtilsCheckMethod.isNullOrEmpty(customerInfoMod.getTraderPersonBack())) {
-					// 取引区分は取引中
-					if (!customerInfoMod.getTransactionStatus().equals("0")) {
-						if (customerMod.getTransactionStatus().equals(customerInfoMod.getTransactionStatus())) {
-							resiltArrayList.add(customerMod);
-						}
-						// 取引区分は取引中
-					} else {
-						resiltArrayList.add(customerMod);
-					}
-				}
-			});
+				});
+			}
+			else {
+				resiltArrayList.addAll(resultList);
+			}
 		}
 		if (resiltArrayList.size() != 0) {
 			int rowNo = 1;
@@ -442,6 +447,12 @@ public class CustomerInfoSearchController {
 		}
 		if (!UtilsCheckMethod.isNullOrEmpty(customerInfoMod.getListedCompanyFlag())) {
 			sendMap.put("listedCompanyFlag", customerInfoMod.getListedCompanyFlag());
+		}
+		if (!UtilsCheckMethod.isNullOrEmpty(customerInfoMod.getResponse())) {
+			sendMap.put("responseStatus", customerInfoMod.getResponse());
+		}
+		if (!UtilsCheckMethod.isNullOrEmpty(customerInfoMod.getContactDate())) {
+			sendMap.put("contactDate", customerInfoMod.getContactDate());
 		}
 		logger.info("CustomerInfoController.onloadPage:" + "検索終了");
 		return customerInfoSearchService.SelectCustomerInfo(sendMap);
