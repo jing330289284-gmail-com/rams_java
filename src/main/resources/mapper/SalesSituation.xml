@@ -1555,17 +1555,21 @@
 
 	<update id="updateBPEMPInfo"
 		parameterType="jp.co.lyc.cms.model.SalesSituationModel">
+		INSERT INTO T011BpInfoSupplement
+		(bpEmployeeNo,bpUnitPrice,bpSalesProgressCode,bpOtherCompanyAdmissionEndDate,bpBelongCustomerCode,createTime,updateTime,updateUser)
+		VALUES
+		(#{employeeNo},#{price},#{salesProgressCode},#{admissionEndDate},#{customer},NOW(),NOW(),#{updateUser})
+		ON DUPLICATE KEY
 		UPDATE
-		T011BpInfoSupplement
-		SET
-		bpUnitPrice = #{unitPrice},
+		bpEmployeeNo = #{employeeNo},
+		bpUnitPrice = #{price},
 		bpSalesProgressCode = #{salesProgressCode},
 		<if test="admissionEndDate == ''">
 			bpOtherCompanyAdmissionEndDate = #{admissionEndDate},
 		</if>
-		bpBelongCustomerCode = #{customer}
-		WHERE
-		bpEmployeeNo = #{employeeNo}
+		bpBelongCustomerCode = #{customer},
+		updateTime= NOW(),
+		updateUser=#{updateUser}
 	</update>
 
 	<insert id="insertDataStatus"

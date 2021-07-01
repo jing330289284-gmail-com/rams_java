@@ -9,6 +9,7 @@ public class EmployeeModel implements Serializable {
 	 */
 	private static final long serialVersionUID = -2028159323401651353L;
 	int rowNo;
+	String newEmployeeNo;// 社員番号
 	String employeeNo;// 社員番号
 	String employeeFristName;// 社員氏
 	String employeeLastName;// 社員名
@@ -105,6 +106,14 @@ public class EmployeeModel implements Serializable {
 
 	String residentCardInfoName;
 	String passportInfoName;
+
+	public String getNewEmployeeNo() {
+		return newEmployeeNo;
+	}
+
+	public void setNewEmployeeNo(String newEmployeeNo) {
+		this.newEmployeeNo = newEmployeeNo;
+	}
 
 	public String getResidentCardInfoName() {
 		return residentCardInfoName;

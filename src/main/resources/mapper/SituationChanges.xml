@@ -295,6 +295,7 @@
 		#{endYandM}
 		and T001.employeeFristName is not
 		null
+		group by employeeNo,nextBonusMonth
 	</select>
 
 	<select id="getReflectYearAndMonth" parameterType="map"

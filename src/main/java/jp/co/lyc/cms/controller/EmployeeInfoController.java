@@ -35,6 +35,7 @@ import jp.co.lyc.cms.model.EmployeeInfoCsvModel;
 import jp.co.lyc.cms.model.EmployeeModel;
 import jp.co.lyc.cms.model.S3Model;
 import jp.co.lyc.cms.service.EmployeeInfoService;
+import jp.co.lyc.cms.service.WagesInfoService;
 import jp.co.lyc.cms.util.UtilsController;
 import jp.co.lyc.cms.validation.EmployeeInfoValidation;
 
@@ -46,6 +47,9 @@ public class EmployeeInfoController extends BaseController {
 
 	@Autowired
 	EmployeeInfoService employeeInfoService;
+	
+	@Autowired
+	WagesInfoService wagesInfoService;
 
 	@Autowired
 	UtilsController utilsController;
@@ -232,12 +236,12 @@ public class EmployeeInfoController extends BaseController {
 			resultMap.put("errorsMessage", errorsMessage);
 			return resultMap;
 		}
-		
+
 		if (resumeInfo1 != null && emp.getResumeName1().equals("")) {
 			resultMap.put("errorsMessage", "履歴書1名を入力してください。");
 			return resultMap;
 		}
-		
+
 		if (resumeInfo2 != null && emp.getResumeName2().equals("")) {
 			resultMap.put("errorsMessage", "履歴書2名を入力してください。");
 			return resultMap;
@@ -456,12 +460,12 @@ public class EmployeeInfoController extends BaseController {
 			resultMap.put("errorsMessage", errorsMessage);
 			return resultMap;
 		}
-		
+
 		if (resumeInfo1 != null && emp.getResumeName1().equals("")) {
 			resultMap.put("errorsMessage", "履歴書1名を入力してください。");
 			return resultMap;
 		}
-		
+
 		if (resumeInfo2 != null && emp.getResumeName2().equals("")) {
 			resultMap.put("errorsMessage", "履歴書2名を入力してください。");
 			return resultMap;
@@ -500,6 +504,9 @@ public class EmployeeInfoController extends BaseController {
 				s3Controller.uploadFile(s3Model);
 			}
 			result = employeeInfoService.updateEmployee(sendMap);
+			if (!emp.getNewEmployeeNo().equals(emp.getEmployeeNo())) {
+				wagesInfoService.updateEmpInfo(emp.getEmployeeNo(), emp.getNewEmployeeNo());
+			}
 		} catch (Exception e) {
 			resultMap.put("result", false);
 			return resultMap;
@@ -552,6 +559,7 @@ public class EmployeeInfoController extends BaseController {
 	public Map<String, Object> getParam(EmployeeModel emp) {
 		HttpSession loginSession = getSession();
 		Map<String, Object> sendMap = new HashMap<String, Object>();
+		String newEmployeeNo = emp.getNewEmployeeNo();// 社員番号
 		String employeeNo = emp.getEmployeeNo();// 社員番号
 		String employeeFristName = emp.getEmployeeFristName();// 社員氏
 		String employeeLastName = emp.getEmployeeLastName();// 社員名
@@ -652,6 +660,9 @@ public class EmployeeInfoController extends BaseController {
 		}
 		if (residentCardInfoName != null) {
 			sendMap.put("residentCardInfoName", residentCardInfoName);
+		}
+		if (newEmployeeNo != null) {
+			sendMap.put("newEmployeeNo", newEmployeeNo);
 		}
 		if (employeeNo != null) {
 			sendMap.put("employeeNo", employeeNo);

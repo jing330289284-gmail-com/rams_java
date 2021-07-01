@@ -81,11 +81,13 @@ public class SalesSituationController extends BaseController {
 	 * 
 	 * @param emp
 	 * @return List
+	 * @throws ParseException
 	 */
 
 	@RequestMapping(value = "/getSalesSituationNew", method = RequestMethod.POST)
 	@ResponseBody
-	public List<SalesSituationModel> getSalesSituationNew(@RequestBody SalesSituationModel model) {
+	public List<SalesSituationModel> getSalesSituationNew(@RequestBody SalesSituationModel model)
+			throws ParseException {
 		List<String> employeeNoList = new ArrayList<String>();
 		List<String> BpNoList = new ArrayList<String>();
 
@@ -211,6 +213,7 @@ public class SalesSituationController extends BaseController {
 			// T010
 			for (int j = 0; j < T010SalesSituationList.size(); j++) {
 				if (salesSituationList.get(i).getEmployeeNo().equals(T010SalesSituationList.get(j).getEmployeeNo())) {
+
 					salesSituationList.get(i)
 							.setSalesProgressCode(T010SalesSituationList.get(j).getSalesProgressCode());
 					salesSituationList.get(i).setSalesDateUpdate(T010SalesSituationList.get(j).getSalesYearAndMonth());
@@ -233,6 +236,7 @@ public class SalesSituationController extends BaseController {
 							.setSalesPriorityStatus(T010SalesSituationList.get(j).getSalesPriorityStatus());
 					salesSituationList.get(i).setCustomer(T010SalesSituationList.get(j).getConfirmCustomer());
 					salesSituationList.get(i).setPrice(T010SalesSituationList.get(j).getConfirmPrice());
+
 				}
 			}
 		}
@@ -358,6 +362,15 @@ public class SalesSituationController extends BaseController {
 					salesSituationListTemp.get(i).setInterviewDate2("");
 					salesSituationListTemp.get(i).setInterviewCustomer2("");
 					salesSituationListTemp.get(i).setStationCode2("");
+				}
+			}
+
+			// 現場予定終了 進捗->結果待ち
+			if (salesSituationListTemp.get(i).getAdmissionEndDate() == null
+					|| salesSituationListTemp.get(i).getAdmissionEndDate().equals("")) {
+				if (salesSituationListTemp.get(i).getSalesProgressCode() == null
+						|| salesSituationListTemp.get(i).getSalesProgressCode().equals("")) {
+					salesSituationListTemp.get(i).setSalesProgressCode("5");
 				}
 			}
 		}
@@ -794,7 +807,10 @@ public class SalesSituationController extends BaseController {
 		logger.info("changeDataStatus:" + "チェック開始");
 		String errorsMessage = "";
 		if (model.getSalesProgressCode() != null && (model.getSalesProgressCode().equals("4")
-				|| model.getSalesProgressCode().equals("5")/* || model.getSalesProgressCode().equals("6") */)) {
+		/*
+		 * || model.getSalesProgressCode().equals("5") ||
+		 * model.getSalesProgressCode().equals("6")
+		 */)) {
 			/*
 			 * if (model.getCustomerContractStatus() == null ||
 			 * model.getCustomerContractStatus().equals("")) { errorsMessage += "契約区分 "; }
@@ -852,7 +868,9 @@ public class SalesSituationController extends BaseController {
 			updateCount = salesSituationService.updateEMPInfo(model);
 
 			// テーブルT011BpInfoSupplement項目を変更する
-			updateCount = salesSituationService.updateBPEMPInfo(model);
+			if (model.getEmployeeNo().substring(0, 2).equals("BP")) {
+				updateCount = salesSituationService.updateBPEMPInfo(model);
+			}
 
 			if (model.getEmployeeNo().substring(0, 3).equals("BPR")
 					&& (model.getSalesProgressCode().equals("4") || model.getSalesProgressCode().equals("7"))) {
@@ -1075,5 +1093,20 @@ public class SalesSituationController extends BaseController {
 		FileOutputStream fos = new FileOutputStream(file);
 		fos.write(text.getBytes());
 		fos.close();
+	}
+
+	public static int getMonthNum(String date1, String date2) throws java.text.ParseException {
+		int result = 0;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
+
+		Calendar c1 = Calendar.getInstance();
+		Calendar c2 = Calendar.getInstance();
+
+		c1.setTime(sdf.parse(date1));
+		c2.setTime(sdf.parse(date2));
+
+		result = c2.get(Calendar.MONTH) - c1.get(Calendar.MONTH);
+		int month = (c2.get(Calendar.YEAR) - c1.get(Calendar.YEAR)) * 12;
+		return result == 0 ? month : (month + result);
 	}
 }

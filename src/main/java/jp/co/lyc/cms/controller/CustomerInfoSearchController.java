@@ -63,7 +63,7 @@ public class CustomerInfoSearchController {
 		ArrayList<CustomerInfoModel> resultList = seach(customerInfoMod);
 		ArrayList<CustomerInfoModel> resiltArrayList = new ArrayList<CustomerInfoModel>();
 		if (resultList.size() > 0) {
-			if (customerInfoMod.getResponse() == null || !customerInfoMod.getResponse().equals("2")) {
+			if (customerInfoMod.getResponse() == null || !customerInfoMod.getResponse().equals("1")) {
 				resultList.forEach((customerMod) -> {
 					// 取引人月が前後ある
 					int rowNo = 1;
