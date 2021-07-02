@@ -51,7 +51,8 @@ public class SalesSituationService {
 	}
 
 	public List<SalesSituationModel> getT010SalesSituation(String sysDate, String curDate, String salesDate) {
-		return salesSituationMapper.getT010SalesSituation(sysDate, curDate, salesDate);
+		List<String> employeeNoList = salesSituationMapper.getT010SalesSituation(sysDate, curDate, salesDate);
+		return salesSituationMapper.getT010SalesSituationByEmployeeNo(employeeNoList);
 	}
 
 	public List<SalesSituationModel> getT010SalesSituationBefore(String sysDate, String curDate, String salesDate) {

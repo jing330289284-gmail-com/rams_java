@@ -248,9 +248,7 @@ public class SalesSituationController extends BaseController {
 		// 優先順ソート
 		for (int i = 0; i < salesSituationList.size(); i++) {
 			if (salesSituationList.get(i).getSalesProgressCode() != null
-					&& !(salesSituationList.get(i).getSalesProgressCode().equals("4")
-							|| salesSituationList.get(i).getSalesProgressCode().equals("1")
-							|| salesSituationList.get(i).getSalesProgressCode().equals("2"))
+					&& !(salesSituationList.get(i).getSalesProgressCode().equals("1"))
 					&& (salesSituationList.get(i).getSalesPriorityStatus() != null
 							&& salesSituationList.get(i).getSalesPriorityStatus().equals("1"))) {
 				salesSituationListTemp.add(salesSituationList.get(i));
@@ -260,9 +258,7 @@ public class SalesSituationController extends BaseController {
 		}
 		for (int i = 0; i < salesSituationList.size(); i++) {
 			if (salesSituationList.get(i).getSalesProgressCode() != null
-					&& !(salesSituationList.get(i).getSalesProgressCode().equals("4")
-							|| salesSituationList.get(i).getSalesProgressCode().equals("1")
-							|| salesSituationList.get(i).getSalesProgressCode().equals("2"))
+					&& !(salesSituationList.get(i).getSalesProgressCode().equals("1"))
 					&& (salesSituationList.get(i).getSalesPriorityStatus() != null
 							&& salesSituationList.get(i).getSalesPriorityStatus().equals("2"))) {
 				salesSituationListTemp.add(salesSituationList.get(i));
@@ -307,11 +303,7 @@ public class SalesSituationController extends BaseController {
 
 					if (salesSituationListTemp.get(i).getEmployeeNo()
 							.equals(T011BpInfoSupplementList.get(j).getBpEmployeeNo())
-					/*
-					 * && Integer.parseInt(model.getSalesYearAndMonth()) > Integer
-					 * .parseInt(T011BpInfoSupplementList.get(j).getBpOtherCompanyAdmissionEndDate()
-					 * )
-					 */) {
+					) {
 
 						salesSituationListTemp.remove(i);
 						i--;
@@ -324,9 +316,7 @@ public class SalesSituationController extends BaseController {
 		// 進捗ソート
 		for (int i = 0; i < salesSituationListTemp.size(); i++) {
 			if (salesSituationListTemp.get(i).getSalesProgressCode() != null) {
-				if ((salesSituationListTemp.get(i).getSalesProgressCode().equals("4")
-						|| salesSituationListTemp.get(i).getSalesProgressCode().equals("1")
-						|| salesSituationListTemp.get(i).getSalesProgressCode().equals("2"))) {
+				if (salesSituationListTemp.get(i).getSalesProgressCode().equals("1")) {
 					salesProgressCodeListTemp.add(salesSituationListTemp.get(i));
 					salesSituationListTemp.remove(i);
 					i--;
@@ -370,7 +360,7 @@ public class SalesSituationController extends BaseController {
 					|| salesSituationListTemp.get(i).getAdmissionEndDate().equals("")) {
 				if (salesSituationListTemp.get(i).getSalesProgressCode() == null
 						|| salesSituationListTemp.get(i).getSalesProgressCode().equals("")) {
-					salesSituationListTemp.get(i).setSalesProgressCode("5");
+					salesSituationListTemp.get(i).setSalesProgressCode("2");
 				}
 			}
 		}
@@ -570,9 +560,7 @@ public class SalesSituationController extends BaseController {
 		// 進捗ソート
 		for (int i = 0; i < salesSituationListTemp.size(); i++) {
 			if (salesSituationListTemp.get(i).getSalesProgressCode() != null) {
-				if ((salesSituationListTemp.get(i).getSalesProgressCode().equals("4")
-						|| salesSituationListTemp.get(i).getSalesProgressCode().equals("1")
-						|| salesSituationListTemp.get(i).getSalesProgressCode().equals("2"))
+				if (salesSituationListTemp.get(i).getSalesProgressCode().equals("1")
 						&& !(salesSituationListTemp.get(i).getSalesPriorityStatus() != null
 								&& (salesSituationListTemp.get(i).getSalesPriorityStatus().equals("1")
 										|| salesSituationListTemp.get(i).getSalesPriorityStatus().equals("2")))) {
@@ -668,10 +656,11 @@ public class SalesSituationController extends BaseController {
 	 * 
 	 * @param emp
 	 * @return List
+	 * @throws Exception
 	 */
 	@RequestMapping(value = "/getPersonalSalesInfo", method = RequestMethod.POST)
 	@ResponseBody
-	public List<SalesSituationModel> getPersonalSalesInfo(@RequestBody SalesSituationModel model) {
+	public List<SalesSituationModel> getPersonalSalesInfo(@RequestBody SalesSituationModel model) throws Exception {
 
 		logger.info("getPersonalSalesInfo:" + "検索開始");
 		int count = salesSituationService.getCount(model.getEmployeeNo());
@@ -703,17 +692,7 @@ public class SalesSituationController extends BaseController {
 
 		if (salesSituationList.size() > 0) {
 			ArrayList<String> resumeInfoTemp = new ArrayList<String>();
-			/*
-			 * if (!(salesSituationList.get(0).getResumeInfo1() == null ||
-			 * salesSituationList.get(0).getResumeInfo1().equals(""))) {
-			 * resumeInfoTemp.add(salesSituationList.get(0).getResumeInfo1()
-			 * .split("/")[salesSituationList.get(0).getResumeInfo1().split("/").length -
-			 * 1]); } if (!(salesSituationList.get(0).getResumeInfo2() == null ||
-			 * salesSituationList.get(0).getResumeInfo2().equals(""))) {
-			 * resumeInfoTemp.add(salesSituationList.get(0).getResumeInfo2()
-			 * .split("/")[salesSituationList.get(0).getResumeInfo2().split("/").length -
-			 * 1]); }
-			 */
+
 			if (!(salesSituationList.get(0).getResumeName1() == null
 					|| salesSituationList.get(0).getResumeName1().equals(""))) {
 				resumeInfoTemp.add(salesSituationList.get(0).getResumeName1());
@@ -733,6 +712,12 @@ public class SalesSituationController extends BaseController {
 				if (tempYear < 0)
 					tempYear = 0;
 				salesSituationList.get(0).setYearsOfExperience(String.valueOf(tempYear));
+			}
+
+			if (salesSituationList.get(0).getAge().equals("")) {
+				if (salesSituationList.get(0).getBirthday() != null
+						&& !salesSituationList.get(0).getBirthday().equals(""))
+					salesSituationList.get(0).setAge(String.valueOf(getAge(salesSituationList.get(0).getBirthday())));
 			}
 		}
 
@@ -806,15 +791,7 @@ public class SalesSituationController extends BaseController {
 
 		logger.info("changeDataStatus:" + "チェック開始");
 		String errorsMessage = "";
-		if (model.getSalesProgressCode() != null && (model.getSalesProgressCode().equals("4")
-		/*
-		 * || model.getSalesProgressCode().equals("5") ||
-		 * model.getSalesProgressCode().equals("6")
-		 */)) {
-			/*
-			 * if (model.getCustomerContractStatus() == null ||
-			 * model.getCustomerContractStatus().equals("")) { errorsMessage += "契約区分 "; }
-			 */
+		if (model.getSalesProgressCode() != null && (model.getSalesProgressCode().equals("1"))) {
 			if (model.getCustomer() == null || model.getCustomer().equals("")) {
 				errorsMessage += "確定客様 ";
 			}
@@ -873,7 +850,7 @@ public class SalesSituationController extends BaseController {
 			}
 
 			if (model.getEmployeeNo().substring(0, 3).equals("BPR")
-					&& (model.getSalesProgressCode().equals("4") || model.getSalesProgressCode().equals("7"))) {
+					&& (model.getSalesProgressCode().equals("1") || model.getSalesProgressCode().equals("4"))) {
 				Map<String, String> sendMap = new HashMap<String, String>();
 				String newBpNo = utilsService.getNoBP(sendMap);
 				if (newBpNo != null) {
@@ -1108,5 +1085,25 @@ public class SalesSituationController extends BaseController {
 		result = c2.get(Calendar.MONTH) - c1.get(Calendar.MONTH);
 		int month = (c2.get(Calendar.YEAR) - c1.get(Calendar.YEAR)) * 12;
 		return result == 0 ? month : (month + result);
+	}
+
+	public static Integer getAge(String birthday) throws Exception {
+		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
+		Date birth = df.parse(birthday);
+		Calendar now = Calendar.getInstance();
+		Calendar born = Calendar.getInstance();
+
+		now.setTime(new Date());
+		born.setTime(birth);
+
+		if (born.after(now)) {
+			return 0;
+		}
+
+		int age = now.get(Calendar.YEAR) - born.get(Calendar.YEAR);
+		if (now.get(Calendar.DAY_OF_YEAR) < born.get(Calendar.DAY_OF_YEAR)) {
+			age -= 1;
+		}
+		return age;
 	}
 }

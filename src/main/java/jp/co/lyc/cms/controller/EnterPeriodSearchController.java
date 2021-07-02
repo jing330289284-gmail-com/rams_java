@@ -336,6 +336,12 @@ public class EnterPeriodSearchController extends BaseController {
 					resultList.get(i).setEmployeeName(resultList.get(i).getEmployeeName() + "("
 							+ resultList.get(i).getEmployeeNo().substring(0, 2) + ")");
 				}
+
+				if (resultList.get(i).getAdmissionStartDate() != null) {
+					int admissionMonth = getMonthNum(resultList.get(i).getAdmissionStartDate().substring(0, 6),
+							selectedYearAndMonth) + 1;
+					resultList.get(i).setAdmissionMonth(String.valueOf(admissionMonth));
+				}
 			}
 		} else {
 			errorsMessage += "今月データがないです";// エラーメッセージ

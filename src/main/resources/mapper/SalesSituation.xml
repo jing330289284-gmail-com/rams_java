@@ -96,7 +96,7 @@
 		=
 		#{salesDate}
 		and salesProgressCode in
-		("1","2","4")
+		("1")
 		order by
 		employeeNo
 		;
@@ -127,7 +127,7 @@
 		salesYearAndMonth
 		=
 		#{salesDate} and salesProgressCode in
-		("1","2","4")
+		("1")
 		order by
 		employeeNo
 		;
@@ -587,13 +587,51 @@
 		;
 	</select>
 
-	<select id="getT010SalesSituation" parameterType="String"
+	<select id="getT010SalesSituationByEmployeeNo" parameterType="String"
 		resultType="jp.co.lyc.cms.model.SalesSituationModel">
-		SELECT * FROM T010SalesSituation where salesYearAndMonth
-		&lt;=
-		#{salesDate}
-		and salesYearAndMonth &gt;
-		#{curDate}
+		SELECT * FROM T010SalesSituation
+		where employeeNo in
+		<foreach item="item" collection="list" open="(" close=")"
+			separator=",">
+			#{item}
+		</foreach>
+		;
+	</select>
+
+	<select id="getT010SalesSituation" parameterType="String"
+		resultType="String">
+		SELECT employeeNo FROM
+		(SELECT
+		T010.employeeNo,max(T010.salesYearAndMonth) as
+		salesYearAndMonth,left(T006.admissionStartDate,6) as
+		admissionStartDate,left(T006.admissionEndDate,6) as
+		admissionEndDate,T006.scheduledEndDate FROM T010SalesSituation
+		as T010
+		left join
+		(SELECT
+		T006.employeeNo,T006.admissionStartDate,T006.admissionEndDate,T006.scheduledEndDate
+		FROM T006EmployeeSiteInfo as T006
+		inner join
+		(SELECT
+		employeeNo,max(admissionStartDate) as admissionStartDate FROM
+		T006EmployeeSiteInfo
+		group by employeeNo) as temp
+		on
+		T006.employeeNo =
+		temp.employeeNo
+		and T006.admissionStartDate =
+		temp.admissionStartDate
+		)
+		as T006
+		on T006.employeeNo = T010.employeeNo
+		group by employeeNo) as
+		T010
+		where (salesYearAndMonth &lt;= #{salesDate} and
+		salesYearAndMonth
+		&gt; #{curDate} and
+		if(salesYearAndMonth &lt;=
+		#{sysDate},(ifnull(scheduledEndDate,admissionEndDate) !=
+		#{curDate}),1=1))
 		;
 	</select>
 
@@ -602,7 +640,7 @@
 		SELECT
 		bpEmployeeNo,bpSalesProgressCode,bpOtherCompanyAdmissionEndDate FROM
 		T011BpInfoSupplement
-		where bpSalesProgressCode = '7';
+		where bpSalesProgressCode = '4';
 	</select>
 
 	<select id="getSalesSituationModel" parameterType="String"
@@ -1367,6 +1405,7 @@
 		t019.developLanguageCode8 as developLanguage3,
 		t019.developLanguageCode9 as developLanguage4,
 		t019.developLanguageCode10 as developLanguage5,
+		t019.developLanguageCode11 as developLanguage6,
 		t019.unitPrice,
 		t019.remark,
 		t010.salesYearAndMonth,
@@ -1420,6 +1459,7 @@
 		developLanguageCode8,
 		developLanguageCode9,
 		developLanguageCode10,
+		developLanguageCode11,
 		unitPrice,
 		remark,
 		createTime,
@@ -1438,6 +1478,7 @@
 		#{developLanguageCode8},
 		#{developLanguageCode9},
 		#{developLanguageCode10},
+		#{developLanguageCode11},
 		#{unitPrice},
 		#{remark},
 		NOW(),
@@ -1455,6 +1496,7 @@
 		developLanguageCode8=#{developLanguageCode8},
 		developLanguageCode9=#{developLanguageCode9},
 		developLanguageCode10=#{developLanguageCode10},
+		developLanguageCode11=#{developLanguageCode11},
 		unitPrice=#{unitPrice},
 		theMonthOfStartWork=#{beginMonth},
 		remark=#{remark},
@@ -1562,7 +1604,8 @@
 		ON DUPLICATE KEY
 		UPDATE
 		bpEmployeeNo = #{employeeNo},
-		bpUnitPrice = #{price},
+		bpUnitPrice =
+		#{price},
 		bpSalesProgressCode = #{salesProgressCode},
 		<if test="admissionEndDate == ''">
 			bpOtherCompanyAdmissionEndDate = #{admissionEndDate},

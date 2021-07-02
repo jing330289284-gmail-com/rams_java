@@ -12,6 +12,7 @@ public class SalesContent implements Serializable {
 	 */
 	private static final long serialVersionUID = -2028159323401651353L;
 	String employeeNo;
+
 	public String getEmployeeNo() {
 		return employeeNo;
 	}
@@ -21,7 +22,7 @@ public class SalesContent implements Serializable {
 	}
 
 	String stationCode;
-	String age;  
+	String age;
 	String japaneaseConversationLevel;
 	String englishConversationLevel;
 	String yearsOfExperience;
@@ -30,17 +31,27 @@ public class SalesContent implements Serializable {
 	String developLanguageCode7;
 	String developLanguageCode8;
 	String developLanguageCode9;
-	String developLanguageCode10; 
+	String developLanguageCode10;
+	String developLanguageCode11;
 	String unitPrice;
 	String remark;
 	Date createTime;
 	Date updateTime;
 	String updateUser;
-	/* 営業送信のレビュー票NO.4とNO.5を指摘対応（2020/12/07　張棟）START*/
-	/* 営業状況*/
+	/* 営業送信のレビュー票NO.4とNO.5を指摘対応（2020/12/07 張棟）START */
+	/* 営業状況 */
 	String beginMonth;
-	
+
 	String tempDate;
+
+	public String getDevelopLanguageCode11() {
+		return developLanguageCode11;
+	}
+
+	public void setDevelopLanguageCode11(String developLanguageCode11) {
+		this.developLanguageCode11 = developLanguageCode11;
+	}
+
 	public String getTempDate() {
 		return tempDate;
 	}
@@ -49,9 +60,9 @@ public class SalesContent implements Serializable {
 		this.tempDate = tempDate;
 	}
 
-	/* 稼働開始*/
+	/* 稼働開始 */
 	String salesProgressCode;
-	
+
 	public String getBeginMonth() {
 		return beginMonth;
 	}
@@ -59,7 +70,7 @@ public class SalesContent implements Serializable {
 	public void setBeginMonth(String beginMonth) {
 		this.beginMonth = beginMonth;
 	}
-	
+
 	public String getSalesProgressCode() {
 		return salesProgressCode;
 	}
@@ -67,7 +78,8 @@ public class SalesContent implements Serializable {
 	public void setSalesProgressCode(String salesProgressCode) {
 		this.salesProgressCode = salesProgressCode;
 	}
-	/* 営業送信のレビュー票NO.4とNO.5を指摘対応（2020/12/07　張棟）END*/
+
+	/* 営業送信のレビュー票NO.4とNO.5を指摘対応（2020/12/07 張棟）END */
 	public String getStationCode() {
 		return stationCode;
 	}
@@ -199,5 +211,5 @@ public class SalesContent implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
+
 }

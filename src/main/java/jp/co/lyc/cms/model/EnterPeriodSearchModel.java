@@ -21,6 +21,15 @@ public class EnterPeriodSearchModel {
 	String nonSiteMonths;// 非稼働月数
 	ArrayList<EnterPeriodSearchModel> nonSitePeriodsList;
 	String isRed;
+	String admissionMonth;// 入場月数
+
+	public String getAdmissionMonth() {
+		return admissionMonth;
+	}
+
+	public void setAdmissionMonth(String admissionMonth) {
+		this.admissionMonth = admissionMonth;
+	}
 
 	public String getNextRaiseMonth() {
 		return nextRaiseMonth;

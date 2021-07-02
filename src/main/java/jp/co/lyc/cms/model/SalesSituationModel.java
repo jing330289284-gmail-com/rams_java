@@ -85,6 +85,7 @@ public class SalesSituationModel implements Serializable {
 	String developLanguage3;
 	String developLanguage4;
 	String developLanguage5;
+	String developLanguage6;
 
 	String confirmPrice;
 	String confirmCustomer;
@@ -93,6 +94,14 @@ public class SalesSituationModel implements Serializable {
 	ArrayList<String> resumeInfo1List;
 	ArrayList<String> resumeInfo2List;
 	String text;
+
+	public String getDevelopLanguage6() {
+		return developLanguage6;
+	}
+
+	public void setDevelopLanguage6(String developLanguage6) {
+		this.developLanguage6 = developLanguage6;
+	}
 
 	public String getIntoCompanyYearAndMonth() {
 		return intoCompanyYearAndMonth;

@@ -29,7 +29,7 @@ public interface SalesSituationMapper {
 
 	public void insertEmpNextAdmission(SalesSituationModel model);
 
-	public List<SalesSituationModel> getT010SalesSituation(String sysDate, String curDate, String salesDate);
+	public List<String> getT010SalesSituation(String sysDate, String curDate, String salesDate);
 
 	public int insertSalesSituation(SalesSituationModel model);
 
@@ -76,4 +76,6 @@ public interface SalesSituationMapper {
 	public void updateBPRSiteInfo(SalesSituationModel model);
 
 	public List<SalesSituationModel> getSiteRoleCode();
+
+	public List<SalesSituationModel> getT010SalesSituationByEmployeeNo(List<String> employeeNoList);
 }
