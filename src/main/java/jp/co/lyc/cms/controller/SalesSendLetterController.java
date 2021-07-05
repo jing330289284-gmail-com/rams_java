@@ -41,14 +41,45 @@ public class SalesSendLetterController extends BaseController {
 
 		logger.info("getCustomers:" + "検索開始");
 		List<SalesSendLetterModel> salesCustomersList = new ArrayList<SalesSendLetterModel>();
+		List<String> customersList = new ArrayList<String>();
+
 		try {
 			salesCustomersList = salesSendLetterService.getSalesCustomers();
+			customersList = salesSendLetterService.getBusinessCount();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		logger.info("getCustomers" + "検索結束");
 
 		for (int i = 0; i < salesCustomersList.size(); i++) {
+			int count = 0;
+			for (int j = 0; j < customersList.size(); j++) {
+				if (salesCustomersList.get(i).getCustomerNo().equals(customersList.get(j))) {
+					count++;
+				}
+			}
+			salesCustomersList.get(i).setBusinessCount(String.valueOf(count));
+
+			if ((salesCustomersList.get(i).getCommonMail() != null
+					&& !salesCustomersList.get(i).getCommonMail().equals(""))
+					|| (salesCustomersList.get(i).getPurchasingManagersMail() != null
+							&& !salesCustomersList.get(i).getPurchasingManagersMail().equals(""))) {
+				ArrayList<String> mailList = new ArrayList<String>();
+				if (salesCustomersList.get(i).getCommonMail() != null
+						&& !salesCustomersList.get(i).getCommonMail().equals(""))
+					mailList.add(salesCustomersList.get(i).getCommonMail());
+				if (salesCustomersList.get(i).getPurchasingManagersMail() != null
+						&& !salesCustomersList.get(i).getPurchasingManagersMail().equals(""))
+					mailList.add(salesCustomersList.get(i).getPurchasingManagersMail());
+				if (mailList.size() > 0)
+					salesCustomersList.get(i).setMailList(mailList);
+			}
+			
+			if (salesCustomersList.get(i).getCommonMail() != null
+					&& !salesCustomersList.get(i).getCommonMail().equals("")) {
+				salesCustomersList.get(i).setPurchasingManagersMail(salesCustomersList.get(i).getCommonMail());
+			}
+			
 			if (salesCustomersList.get(i).getLevelCode() != null) {
 				salesCustomersList.get(i).setCustomerName(salesCustomersList.get(i).getCustomerName() + " ("
 						+ salesCustomersList.get(i).getLevelCode() + ")");
@@ -239,9 +270,11 @@ public class SalesSendLetterController extends BaseController {
 		logger.info("getCustomers:" + "検索開始");
 		List<SalesSendLetterModel> salesCustomersList = new ArrayList<SalesSendLetterModel>();
 		SalesSendLetterModel salesSendLetter = new SalesSendLetterModel();
+		List<String> customersList = new ArrayList<String>();
 		try {
 			salesCustomersList = salesSendLetterService.getSalesCustomersByNos(model.getCtmNos());
 			salesSendLetter = salesSendLetterService.getMainChargeList(model.getStorageListName());
+			customersList = salesSendLetterService.getBusinessCount();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -270,6 +303,34 @@ public class SalesSendLetterController extends BaseController {
 		}
 
 		for (int i = 0; i < salesCustomersList.size(); i++) {
+			int count = 0;
+			for (int j = 0; j < customersList.size(); j++) {
+				if (salesCustomersList.get(i).getCustomerNo().equals(customersList.get(j))) {
+					count++;
+				}
+			}
+			salesCustomersList.get(i).setBusinessCount(String.valueOf(count));
+
+			if ((salesCustomersList.get(i).getCommonMail() != null
+					&& !salesCustomersList.get(i).getCommonMail().equals(""))
+					|| (salesCustomersList.get(i).getPurchasingManagersMail() != null
+							&& !salesCustomersList.get(i).getPurchasingManagersMail().equals(""))) {
+				ArrayList<String> mailList = new ArrayList<String>();
+				if (salesCustomersList.get(i).getCommonMail() != null
+						&& !salesCustomersList.get(i).getCommonMail().equals(""))
+					mailList.add(salesCustomersList.get(i).getCommonMail());
+				if (salesCustomersList.get(i).getPurchasingManagersMail() != null
+						&& !salesCustomersList.get(i).getPurchasingManagersMail().equals(""))
+					mailList.add(salesCustomersList.get(i).getPurchasingManagersMail());
+				if (mailList.size() > 0)
+					salesCustomersList.get(i).setMailList(mailList);
+			}
+			
+			if (salesCustomersList.get(i).getCommonMail() != null
+					&& !salesCustomersList.get(i).getCommonMail().equals("")) {
+				salesCustomersList.get(i).setPurchasingManagersMail(salesCustomersList.get(i).getCommonMail());
+			}
+			
 			if (salesCustomersList.get(i).getLevelCode() != null) {
 				salesCustomersList.get(i).setCustomerName(salesCustomersList.get(i).getCustomerName() + " ("
 						+ salesCustomersList.get(i).getLevelCode() + ")");

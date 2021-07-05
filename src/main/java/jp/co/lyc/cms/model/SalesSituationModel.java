@@ -75,6 +75,7 @@ public class SalesSituationModel implements Serializable {
 	String birthday;
 	String yearsOfExperience;
 	String projectPhase;
+	String projectPhaseName;
 	String japaneseLevelCode;
 	String englishLevelCode;
 	String age;
@@ -94,6 +95,14 @@ public class SalesSituationModel implements Serializable {
 	ArrayList<String> resumeInfo1List;
 	ArrayList<String> resumeInfo2List;
 	String text;
+
+	public String getProjectPhaseName() {
+		return projectPhaseName;
+	}
+
+	public void setProjectPhaseName(String projectPhaseName) {
+		this.projectPhaseName = projectPhaseName;
+	}
 
 	public String getDevelopLanguage6() {
 		return developLanguage6;

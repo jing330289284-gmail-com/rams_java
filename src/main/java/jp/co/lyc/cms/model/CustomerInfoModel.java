@@ -59,6 +59,15 @@ public class CustomerInfoModel {
 	String commonMail;
 	String contactDate;
 	String salesStaff;
+	String proposeClassificationCode;
+
+	public String getProposeClassificationCode() {
+		return proposeClassificationCode;
+	}
+
+	public void setProposeClassificationCode(String proposeClassificationCode) {
+		this.proposeClassificationCode = proposeClassificationCode;
+	}
 
 	public String getCommonMail() {
 		return commonMail;

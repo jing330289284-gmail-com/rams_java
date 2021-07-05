@@ -17,6 +17,7 @@ public interface SalesSendLetterMapper {
 	 */
 	
 	public List<SalesSendLetterModel> getSalesCustomers();
+	public List<String> getBusinessCount();
 	public List<SalesSendLetterModel> getSalesCustomerByNo(String customerNo);
 	public List<SalesSendLetterModel> getSalesPersons(String customerNo);
 	public int creatList(SalesSendLetterModel model);

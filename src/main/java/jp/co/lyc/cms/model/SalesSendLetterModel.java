@@ -29,7 +29,9 @@ public class SalesSendLetterModel {
 	String location;// 現場場所
 	String rowNo;// 行番号
 	String purchasingManagers;// 購買担当
+	String commonMail;
 	String purchasingManagersMail;// メール
+	ArrayList<String> mailList;// メールリスト
 	String customerAbbreviation;// お客様略称
 	String paymentsiteCode;// 支払サイト
 	ArrayList<String> locationList;// 同社の現場場所リスト
@@ -61,77 +63,124 @@ public class SalesSendLetterModel {
 	String customerList;
 	String mainChargeList;
 	String departmentCodeList;
+	String businessCount;
 
-	
+	public ArrayList<String> getMailList() {
+		return mailList;
+	}
+
+	public void setMailList(ArrayList<String> mailList) {
+		this.mailList = mailList;
+	}
+
+	public String getCommonMail() {
+		return commonMail;
+	}
+
+	public void setCommonMail(String commonMail) {
+		this.commonMail = commonMail;
+	}
+
+	public String getBusinessCount() {
+		return businessCount;
+	}
+
+	public void setBusinessCount(String businessCount) {
+		this.businessCount = businessCount;
+	}
+
 	public String getDepartmentCodeList() {
 		return departmentCodeList;
 	}
+
 	public void setDepartmentCodeList(String departmentCodeList) {
 		this.departmentCodeList = departmentCodeList;
 	}
+
 	public String getMainChargeList() {
 		return mainChargeList;
 	}
+
 	public void setMainChargeList(String mainChargeList) {
 		this.mainChargeList = mainChargeList;
 	}
+
 	public String[] getOldCtmNos() {
 		return oldCtmNos;
 	}
+
 	public void setOldCtmNos(String[] oldCtmNos) {
 		this.oldCtmNos = oldCtmNos;
 	}
+
 	public String[] getDeleteCtmNos() {
 		return deleteCtmNos;
 	}
+
 	public void setDeleteCtmNos(String[] deleteCtmNos) {
 		this.deleteCtmNos = deleteCtmNos;
 	}
+
 	public String getStorageListName() {
 		return storageListName;
 	}
+
 	public void setStorageListName(String storageListName) {
 		this.storageListName = storageListName;
 	}
+
 	public String getCustomerList() {
 		return customerList;
 	}
+
 	public void setCustomerList(String customerList) {
 		this.customerList = customerList;
 	}
+
 	public String[] getCtmNos() {
 		return ctmNos;
 	}
+
 	public void setCtmNos(String[] ctmNos) {
 		this.ctmNos = ctmNos;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getCode() {
 		return code;
 	}
+
 	public void setCode(String code) {
 		this.code = code;
 	}
+
 	public String getPurchasingManagers2() {
 		return purchasingManagers2;
 	}
+
 	public void setPurchasingManagers2(String purchasingManagers2) {
 		this.purchasingManagers2 = purchasingManagers2;
 	}
+
 	public String getPositionCode2() {
 		return positionCode2;
 	}
+
 	public void setPositionCode2(String positionCode2) {
 		this.positionCode2 = positionCode2;
 	}
+
 	public String getPurchasingManagersMail2() {
 		return purchasingManagersMail2;
 	}
+
 	public void setPurchasingManagersMail2(String purchasingManagersMail2) {
 		this.purchasingManagersMail2 = purchasingManagersMail2;
 	}
@@ -143,6 +192,7 @@ public class SalesSendLetterModel {
 	public void setSalesPersonsAppend(String salesPersonsAppend) {
 		this.salesPersonsAppend = salesPersonsAppend;
 	}
+
 	public int getRowId() {
 		return rowId;
 	}
@@ -150,7 +200,7 @@ public class SalesSendLetterModel {
 	public void setRowId(int rowId) {
 		this.rowId = rowId;
 	}
-	
+
 	public String getPositionName() {
 		return positionName;
 	}
@@ -198,6 +248,7 @@ public class SalesSendLetterModel {
 	public void setCustomerDepartmentMail(String customerDepartmentMail) {
 		this.customerDepartmentMail = customerDepartmentMail;
 	}
+
 	public String getStationName() {
 		return stationName;
 	}

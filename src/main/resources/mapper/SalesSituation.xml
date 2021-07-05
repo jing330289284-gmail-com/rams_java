@@ -587,7 +587,8 @@
 		;
 	</select>
 
-	<select id="getT010SalesSituationByEmployeeNo" parameterType="String"
+	<select id="getT010SalesSituationByEmployeeNo"
+		parameterType="String"
 		resultType="jp.co.lyc.cms.model.SalesSituationModel">
 		SELECT * FROM T010SalesSituation
 		where employeeNo in
@@ -1396,6 +1397,7 @@
 		t015.resumeName2,
 		t019.yearsOfExperience,
 		t019.projectPhaseCode as projectPhase,
+		M027.projectPhaseName as projectPhaseName,
 		t002.siteRoleCode,
 		M012.siteRoleName,
 
@@ -1430,6 +1432,8 @@
 		LEFT JOIN
 		T019SalesSentence t019 ON
 		t019.employeeNo = t001.employeeNo
+		LEFT JOIN
+		M027ProjectPhase M027 ON M027.projectPhaseCode = t019.projectPhaseCode
 		WHERE
 		t001.employeeNo =#{employeeNo}
 	</select>

@@ -13,23 +13,30 @@
 		T007.purchasingManagers,
 		T009.customerDepartmentCode,
 		T009.positionCode,
+		T007.commonMail,
 		T007.purchasingManagersMail,
-		M008.levelName as levelCode, 
-		'' AS monthCount,
+		M008.levelName as levelCode,
+		'' AS
+		monthCount,
 		'' AS
 		purchasingManagers2,
 		'' AS positionCode2,
-		'' AS purchasingManagersMail2
+		'' AS
+		purchasingManagersMail2
 		FROM
 		T007CustomerInfo AS T007
-		LEFT JOIN M008Level AS M008
+		LEFT JOIN M008Level
+		AS M008
 		on T007.levelCode != ""
 		and T007.levelCode = M008.levelCode
-		LEFT JOIN
+		LEFT
+		JOIN
 		T009CustomerDepartmentInfo AS
-		T009 ON T007.customerNo = T009.customerNo
+		T009 ON T007.customerNo =
+		T009.customerNo
 		AND T007.purchasingManagers =
-		T009.responsiblePerson, (SELECT
+		T009.responsiblePerson,
+		(SELECT
 		@rowNo:=-1)
 		AS rowId
 	</select>
@@ -106,7 +113,7 @@
 		NOW(),
 		#{updateUser})
 	</insert>
-	
+
 	<select id="getLists"
 		resultType="jp.co.lyc.cms.model.SalesSendLetterModel">
 		select StorageListName as
@@ -129,7 +136,8 @@
 		T021CustomerSendMailStorageList
 		set
 		customerList = "",
-		mainChargeList = "",
+		mainChargeList =
+		"",
 		departmentCodeList = "",
 		updateTime=now(),updateUser=#{updateUser}
 		where
@@ -142,18 +150,24 @@
 		update
 		T021CustomerSendMailStorageList
 		set
-		customerList = CONCAT(customerList, ',' , #{customerList}),
-		mainChargeList = CONCAT(mainChargeList,#{customerList},':;'),
-		departmentCodeList = CONCAT(departmentCodeList,#{customerList},':;')
-		where 
-		StorageListName = #{storageListName};
+		customerList = CONCAT(customerList,
+		',' , #{customerList}),
+		mainChargeList =
+		CONCAT(mainChargeList,#{customerList},':;'),
+		departmentCodeList =
+		CONCAT(departmentCodeList,#{customerList},':;')
+		where
+		StorageListName =
+		#{storageListName};
 	</update>
-	
-	<update id="customerSendMailStorageListUpdate" parameterType="String">
+
+	<update id="customerSendMailStorageListUpdate"
+		parameterType="String">
 		update
 		T021CustomerSendMailStorageList
 		set
-		mainChargeList = #{mainChargeList},
+		mainChargeList =
+		#{mainChargeList},
 		departmentCodeList = #{departmentCodeList}
 		where
 		StorageListName = #{storageListName};
@@ -165,7 +179,8 @@
 		set
 		customerList = #{customerList},
 		mainChargeList = #{mainChargeList},
-		departmentCodeList = #{departmentCodeList}
+		departmentCodeList =
+		#{departmentCodeList}
 		where StorageListName = #{storageListName};
 	</update>
 
@@ -173,6 +188,16 @@
 		resultType="String">
 		SELECT customerList FROM T021CustomerSendMailStorageList
 		where StorageListName = #{storageListName};
+	</select>
+
+	<select id="getBusinessCount" resultType="String">
+		SELECT customerNo FROM
+		T006EmployeeSiteInfo
+		where
+		admissionEndDate is null or admissionEndDate
+		&gt;= now()
+		group by
+		employeeNo;
 	</select>
 
 	<select id="getSalesCustomersByNos"
@@ -184,34 +209,41 @@
 		T007.purchasingManagers,
 		T009.customerDepartmentCode,
 		T009.positionCode,
+		T007.commonMail,
 		T007.purchasingManagersMail,
-		M008.levelName AS levelCode,
+		M008.levelName AS
+		levelCode,
 		'' AS
 		monthCount,
 		'' AS purchasingManagers2,
-		'' AS positionCode2,
+		'' AS
+		positionCode2,
 		'' AS
 		purchasingManagersMail2
 		FROM
 		T007CustomerInfo AS T007
 		LEFT JOIN M008Level AS M008
 		on T007.levelCode != ""
-		and T007.levelCode = M008.levelCode
+		and T007.levelCode =
+		M008.levelCode
 		LEFT JOIN
-		T009CustomerDepartmentInfo AS T009 ON T007.customerNo =
+		T009CustomerDepartmentInfo AS T009 ON
+		T007.customerNo =
 		T009.customerNo
-		AND T007.purchasingManagers = T009.responsiblePerson,
+		AND T007.purchasingManagers =
+		T009.responsiblePerson,
 		(SELECT
 		@rowNo:=-1)
 		AS rowId
 		WHERE
-		T007.customerNo IN
+		T007.customerNo
+		IN
 		<foreach collection="array" index="index" item="item" open="("
 			separator="," close=")">
 			#{item}
 		</foreach>
 	</select>
-	
+
 	<select id="getMainChargeList"
 		resultType="jp.co.lyc.cms.model.SalesSendLetterModel">
 		SELECT
@@ -219,9 +251,10 @@
 		departmentCodeList
 		FROM
 		T021CustomerSendMailStorageList
-		WHERE StorageListName = #{storageListName}
+		WHERE StorageListName =
+		#{storageListName}
 	</select>
-	
+
 	<delete id="deleteList" parameterType="String">
 		DELETE
 		FROM

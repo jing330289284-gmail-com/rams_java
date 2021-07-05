@@ -21,6 +21,10 @@ public class SalesSendLetterService {
 		return salesSendLetterMapper.getSalesCustomers();
 	};
 	
+	public List<String> getBusinessCount(){
+		return salesSendLetterMapper.getBusinessCount();
+	};
+	
 	public List<SalesSendLetterModel> getSalesCustomerByNo(String customerNo){
 		return salesSendLetterMapper.getSalesCustomerByNo(customerNo);
 	};

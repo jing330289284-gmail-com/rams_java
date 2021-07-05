@@ -424,6 +424,8 @@ public class CustomerInfoService {
 		sendMap.put("commonMail", customerInfoMod.getCommonMail());
 		sendMap.put("contactDate", customerInfoMod.getContactDate());
 		sendMap.put("salesStaff", customerInfoMod.getSalesStaff());
+		sendMap.put("proposeClassificationCode", customerInfoMod.getProposeClassificationCode());
+		
 		return sendMap;
 	}
 }
