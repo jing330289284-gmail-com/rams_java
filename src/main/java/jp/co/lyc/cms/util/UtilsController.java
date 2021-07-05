@@ -1480,13 +1480,25 @@ public class UtilsController {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/getframeWork", method = RequestMethod.POST)
+	@RequestMapping(value = "/getFrameWork", method = RequestMethod.POST)
 	@ResponseBody
-	public List<ModelClass> getframeWork() {
+	public List<ModelClass> getFrameWork() {
 		List<ModelClass> list = utilsService.getFramework();
 		return list;
 	}
 
+	/**
+	 * 提案区分取得
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getProposeClassification", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getProposeClassification() {
+		List<ModelClass> list = utilsService.getProposeClassification();
+		return list;
+	}
+	
 	/**
 	 * お客様担当者取得 取得
 	 * 

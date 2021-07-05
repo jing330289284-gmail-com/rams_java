@@ -43,10 +43,12 @@
 		SELECT
 		employeeNo CODE,
 		CONCAT( employeeFristName,
-		employeeLastName, '(', employeeNo, ')' ) NAME,
+		employeeLastName, '(',
+		employeeNo, ')' ) NAME,
 		CONCAT(
 		employeeFristName,
-		employeeLastName ) TEXT
+		employeeLastName )
+		TEXT
 		FROM
 		T001Employee
 		WHERE
@@ -618,6 +620,15 @@
 		SELECT frameWorkCode code,
 		frameWorkName name
 		FROM
-		M043frameWork;
+		M043FrameWork;
+	</select>
+
+	<!--提案区分取得 -->
+	<select id="getProposeClassification"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT proposeClassificationCode code,
+		proposeClassificationName name
+		FROM
+		M044ProposeClassification;
 	</select>
 </mapper>

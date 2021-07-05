@@ -457,4 +457,11 @@ public interface UtilsMapper {
 	 * @return
 	 */
 	public List<ModelClass> getFramework();
+	
+	/**
+	 * 提案区分取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getProposeClassification();
 }

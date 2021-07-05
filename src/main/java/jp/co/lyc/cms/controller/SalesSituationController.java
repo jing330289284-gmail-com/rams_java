@@ -302,8 +302,7 @@ public class SalesSituationController extends BaseController {
 				for (int j = 0; j < T011BpInfoSupplementList.size(); j++) {
 
 					if (salesSituationListTemp.get(i).getEmployeeNo()
-							.equals(T011BpInfoSupplementList.get(j).getBpEmployeeNo())
-					) {
+							.equals(T011BpInfoSupplementList.get(j).getBpEmployeeNo())) {
 
 						salesSituationListTemp.remove(i);
 						i--;
@@ -714,7 +713,7 @@ public class SalesSituationController extends BaseController {
 				salesSituationList.get(0).setYearsOfExperience(String.valueOf(tempYear));
 			}
 
-			if (salesSituationList.get(0).getAge().equals("")) {
+			if (salesSituationList.get(0).getAge() != null && salesSituationList.get(0).getAge().equals("")) {
 				if (salesSituationList.get(0).getBirthday() != null
 						&& !salesSituationList.get(0).getBirthday().equals(""))
 					salesSituationList.get(0).setAge(String.valueOf(getAge(salesSituationList.get(0).getBirthday())));

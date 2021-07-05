@@ -647,4 +647,13 @@ public class UtilsService {
 	public List<ModelClass> getFramework() {
 		return utilsMapper.getFramework();
 	}
+	
+	/**
+	 * 提案区分取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getProposeClassification() {
+		return utilsMapper.getProposeClassification();
+	}
 }
