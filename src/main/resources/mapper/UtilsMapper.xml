@@ -563,12 +563,17 @@
 		customerName NAME,
 		purchasingManagers
 		VALUE,
-		CONCAT(purchasingManagers,'(',customerName,' ',customerNo,')')
+		CONCAT(purchasingManagers,'(',if(customerAbbreviation is null ||
+		customerAbbreviation = "",
+		customerName,customerAbbreviation),
+		' ',
+		customerNo,')')
 		TEXT
 		FROM
 		T007CustomerInfo
 		WHERE
-		purchasingManagers is not null and
+		purchasingManagers is not
+		null and
 		purchasingManagers != "";
 	</select>
 
