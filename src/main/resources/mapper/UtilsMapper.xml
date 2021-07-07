@@ -636,4 +636,13 @@
 		FROM
 		M044ProposeClassification;
 	</select>
+	
+		<!--提案区分取得 -->
+	<select id="getInterviewClassification"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT interviewClassificationCode code,
+		interviewClassificationName name
+		FROM
+		M045InterviewClassification;
+	</select>
 </mapper>

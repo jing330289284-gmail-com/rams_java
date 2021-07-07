@@ -96,6 +96,61 @@ public class SalesSituationModel implements Serializable {
 	ArrayList<String> resumeInfo2List;
 	String text;
 
+	String interviewClassificationCode1;
+	String interviewClassificationCode2;
+	String interviewInfo1;
+	String interviewInfo2;
+	String interviewUrl1;
+	String interviewUrl2;
+
+	public String getInterviewClassificationCode1() {
+		return interviewClassificationCode1;
+	}
+
+	public void setInterviewClassificationCode1(String interviewClassificationCode1) {
+		this.interviewClassificationCode1 = interviewClassificationCode1;
+	}
+
+	public String getInterviewClassificationCode2() {
+		return interviewClassificationCode2;
+	}
+
+	public void setInterviewClassificationCode2(String interviewClassificationCode2) {
+		this.interviewClassificationCode2 = interviewClassificationCode2;
+	}
+
+	public String getInterviewInfo1() {
+		return interviewInfo1;
+	}
+
+	public void setInterviewInfo1(String interviewInfo1) {
+		this.interviewInfo1 = interviewInfo1;
+	}
+
+	public String getInterviewInfo2() {
+		return interviewInfo2;
+	}
+
+	public void setInterviewInfo2(String interviewInfo2) {
+		this.interviewInfo2 = interviewInfo2;
+	}
+
+	public String getInterviewUrl1() {
+		return interviewUrl1;
+	}
+
+	public void setInterviewUrl1(String interviewUrl1) {
+		this.interviewUrl1 = interviewUrl1;
+	}
+
+	public String getInterviewUrl2() {
+		return interviewUrl2;
+	}
+
+	public void setInterviewUrl2(String interviewUrl2) {
+		this.interviewUrl2 = interviewUrl2;
+	}
+
 	public String getProjectPhaseName() {
 		return projectPhaseName;
 	}

@@ -29,6 +29,8 @@ public interface SalesSituationMapper {
 
 	public void insertEmpNextAdmission(SalesSituationModel model);
 
+	public void updateEmpNextAdmission(SalesSituationModel model);
+
 	public List<String> getT010SalesSituation(String sysDate, String curDate, String salesDate);
 
 	public int insertSalesSituation(SalesSituationModel model);
@@ -78,4 +80,8 @@ public interface SalesSituationMapper {
 	public List<SalesSituationModel> getSiteRoleCode();
 
 	public List<SalesSituationModel> getT010SalesSituationByEmployeeNo(List<String> employeeNoList);
+
+	public List<SalesSituationModel> getInterviewLists(List<String> employeeNoList);
+
+	public int updateInterviewLists(SalesSituationModel model);
 }

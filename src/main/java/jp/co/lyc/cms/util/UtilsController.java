@@ -1500,6 +1500,18 @@ public class UtilsController {
 	}
 	
 	/**
+	 * 面談区分取得
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getInterviewClassification", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getInterviewClassification() {
+		List<ModelClass> list = utilsService.getInterviewClassification();
+		return list;
+	}
+	
+	/**
 	 * お客様担当者取得 取得
 	 * 
 	 * @return

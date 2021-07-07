@@ -656,4 +656,13 @@ public class UtilsService {
 	public List<ModelClass> getProposeClassification() {
 		return utilsMapper.getProposeClassification();
 	}
+	
+	/**
+	 * 面談区分取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getInterviewClassification() {
+		return utilsMapper.getInterviewClassification();
+	}
 }

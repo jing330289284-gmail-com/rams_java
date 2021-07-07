@@ -248,7 +248,8 @@ public class SalesSituationController extends BaseController {
 		// 優先順ソート
 		for (int i = 0; i < salesSituationList.size(); i++) {
 			if (salesSituationList.get(i).getSalesProgressCode() != null
-					&& !(salesSituationList.get(i).getSalesProgressCode().equals("1"))
+					&& !(salesSituationList.get(i).getSalesProgressCode().equals("1")
+							|| salesSituationList.get(i).getSalesProgressCode().equals("0"))
 					&& (salesSituationList.get(i).getSalesPriorityStatus() != null
 							&& salesSituationList.get(i).getSalesPriorityStatus().equals("1"))) {
 				salesSituationListTemp.add(salesSituationList.get(i));
@@ -258,7 +259,8 @@ public class SalesSituationController extends BaseController {
 		}
 		for (int i = 0; i < salesSituationList.size(); i++) {
 			if (salesSituationList.get(i).getSalesProgressCode() != null
-					&& !(salesSituationList.get(i).getSalesProgressCode().equals("1"))
+					&& !(salesSituationList.get(i).getSalesProgressCode().equals("1")
+							|| salesSituationList.get(i).getSalesProgressCode().equals("0"))
 					&& (salesSituationList.get(i).getSalesPriorityStatus() != null
 							&& salesSituationList.get(i).getSalesPriorityStatus().equals("2"))) {
 				salesSituationListTemp.add(salesSituationList.get(i));
@@ -315,7 +317,8 @@ public class SalesSituationController extends BaseController {
 		// 進捗ソート
 		for (int i = 0; i < salesSituationListTemp.size(); i++) {
 			if (salesSituationListTemp.get(i).getSalesProgressCode() != null) {
-				if (salesSituationListTemp.get(i).getSalesProgressCode().equals("1")) {
+				if (salesSituationListTemp.get(i).getSalesProgressCode().equals("1")
+						|| salesSituationListTemp.get(i).getSalesProgressCode().equals("0")) {
 					salesProgressCodeListTemp.add(salesSituationListTemp.get(i));
 					salesSituationListTemp.remove(i);
 					i--;
@@ -559,7 +562,8 @@ public class SalesSituationController extends BaseController {
 		// 進捗ソート
 		for (int i = 0; i < salesSituationListTemp.size(); i++) {
 			if (salesSituationListTemp.get(i).getSalesProgressCode() != null) {
-				if (salesSituationListTemp.get(i).getSalesProgressCode().equals("1")
+				if ((salesSituationListTemp.get(i).getSalesProgressCode().equals("1")
+						|| salesSituationListTemp.get(i).getSalesProgressCode().equals("0"))
 						&& !(salesSituationListTemp.get(i).getSalesPriorityStatus() != null
 								&& (salesSituationListTemp.get(i).getSalesPriorityStatus().equals("1")
 										|| salesSituationListTemp.get(i).getSalesPriorityStatus().equals("2")))) {
@@ -724,6 +728,42 @@ public class SalesSituationController extends BaseController {
 		return salesSituationList;
 	}
 
+	@RequestMapping(value = "/getInterviewLists", method = RequestMethod.POST)
+	@ResponseBody
+	public List<SalesSituationModel> getInterviewLists(@RequestBody List<String> employeeNoList) {
+		List<SalesSituationModel> interviewLists = new ArrayList<SalesSituationModel>();
+		List<SalesSituationModel> interviewListsTemp = salesSituationService.getInterviewLists(employeeNoList);
+
+		// ソート
+		for (int i = 0; i < employeeNoList.size(); i++) {
+			for (int j = 0; j < interviewListsTemp.size(); j++) {
+				if (employeeNoList.get(i).equals(interviewListsTemp.get(j).getEmployeeNo())) {
+					interviewLists.add(interviewListsTemp.get(j));
+					break;
+				}
+			}
+		}
+
+		return interviewLists;
+	}
+	
+	@RequestMapping(value = "/updateInterviewLists", method = RequestMethod.POST)
+	@ResponseBody
+	public int updateInterviewLists(@RequestBody SalesSituationModel model) {
+		model.setUpdateUser(getSession().getAttribute("employeeName").toString());
+		String salesDate = getSalesDate(model.getSalesYearAndMonth()).trim().toString();
+		model.setSalesYearAndMonth(salesDate);
+		logger.info("updateInterviewLists:" + "検索開始");
+		int index = 0;
+		try {
+			index = salesSituationService.updateInterviewLists(model);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		logger.info("updateInterviewLists" + "検索結束");
+		return index;
+	}
+
 	/**
 	 * データを取得
 	 * 
@@ -790,7 +830,8 @@ public class SalesSituationController extends BaseController {
 
 		logger.info("changeDataStatus:" + "チェック開始");
 		String errorsMessage = "";
-		if (model.getSalesProgressCode() != null && (model.getSalesProgressCode().equals("1"))) {
+		if (model.getSalesProgressCode() != null
+				&& (model.getSalesProgressCode().equals("1") || model.getSalesProgressCode().equals("0"))) {
 			if (model.getCustomer() == null || model.getCustomer().equals("")) {
 				errorsMessage += "確定客様 ";
 			}
@@ -803,13 +844,17 @@ public class SalesSituationController extends BaseController {
 				result.put("errorsMessage", errorsMessage);
 				return result;
 			} else {
-				String nextAdmission = salesSituationService.getEmpNextAdmission(model.getEmployeeNo());
-				if (nextAdmission != null && nextAdmission.equals("0")) {
-					errorsMessage += "稼働中の現場存在しています、現場データをチェックしてください。";
-					result.put("errorsMessage", errorsMessage);
-					return result;
-				} else {
-					salesSituationService.insertEmpNextAdmission(model);
+				if (model.getSalesProgressCode().equals("1")) {
+					String nextAdmission = salesSituationService.getEmpNextAdmission(model.getEmployeeNo());
+					if (nextAdmission != null && nextAdmission.equals("0")) {
+						errorsMessage += "稼働中の現場存在しています、現場データをチェックしてください。";
+						result.put("errorsMessage", errorsMessage);
+						return result;
+					} else {
+						salesSituationService.insertEmpNextAdmission(model);
+					}
+				} else if (model.getSalesProgressCode().equals("0")) {
+					salesSituationService.updateEmpNextAdmission(model);
 				}
 			}
 		}

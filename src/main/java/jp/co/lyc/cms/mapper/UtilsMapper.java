@@ -464,4 +464,11 @@ public interface UtilsMapper {
 	 * @return
 	 */
 	public List<ModelClass> getProposeClassification();
+	
+	/**
+	 * 面談区分取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getInterviewClassification();
 }

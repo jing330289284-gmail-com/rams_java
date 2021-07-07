@@ -24,6 +24,14 @@ public class SalesSituationService {
 		return salesSituationMapper.getEmpNextAdmission(employeeNo);
 	}
 
+	public List<SalesSituationModel> getInterviewLists(List<String> employeeNoList) {
+		return salesSituationMapper.getInterviewLists(employeeNoList);
+	}
+
+	public void updateEmpNextAdmission(SalesSituationModel model) throws ParseException {
+		salesSituationMapper.updateEmpNextAdmission(model);
+	}
+
 	public void insertEmpNextAdmission(SalesSituationModel model) throws ParseException {
 		model.setAdmissionStartDate(/* subMonth( */model.getAdmissionEndDate()/* ) */ + "01");
 		salesSituationMapper.insertEmpNextAdmission(model);
@@ -134,9 +142,14 @@ public class SalesSituationService {
 	public int updateEMPInfo(SalesSituationModel model) {
 		return salesSituationMapper.updateEMPInfo(model);
 	}
+	
+	public int updateInterviewLists(SalesSituationModel model) {
+		return salesSituationMapper.updateInterviewLists(model);
+	}
 
 	public int updateBPEMPInfo(SalesSituationModel model) {
-		if (model.getSalesProgressCode().equals("4") || model.getSalesProgressCode().equals("5") || model.getSalesProgressCode().equals("7")) {
+		if (model.getSalesProgressCode().equals("4") || model.getSalesProgressCode().equals("5")
+				|| model.getSalesProgressCode().equals("7")) {
 			model.setAdmissionEndDate("");
 		}
 		return salesSituationMapper.updateBPEMPInfo(model);
