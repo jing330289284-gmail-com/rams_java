@@ -1740,7 +1740,7 @@
 		VALUES
 		(#{employeeNo},#{salesYearAndMonth},
 		#{interviewClassificationCode1},#{interviewDate1},#{stationCode1},#{interviewCustomer1},#{interviewInfo1},#{interviewUrl1},
-		#{interviewClassificationCode1},#{interviewDate1},#{stationCode1},#{interviewCustomer1},#{interviewInfo1},#{interviewUrl1},
+		#{interviewClassificationCode2},#{interviewDate2},#{stationCode2},#{interviewCustomer2},#{interviewInfo2},#{interviewUrl2},
 		now(),now(),#{updateUser})
 		ON DUPLICATE KEY
 		UPDATE
@@ -1764,22 +1764,22 @@
 		<if test="interviewUrl1 != '' and interviewUrl1 != null ">
 			interviewUrl1 = #{interviewUrl1},
 		</if>
-		<if	test="interviewClassificationCode2 != '' and interviewClassificationCode2 != null ">
+		<if	test="interviewClassificationCode2 != null ">
 			interviewClassificationCode2 = #{interviewClassificationCode2},
 		</if>
-		<if test="interviewDate2 != '' and interviewDate2 != null ">
+		<if test="interviewDate2 != null ">
 			interviewDate2 = #{interviewDate2},
 		</if>
-		<if test="stationCode2 != '' and stationCode2 != null ">
+		<if test="stationCode2 != null ">
 			stationCode2 = #{stationCode2},
 		</if>
-		<if test="interviewCustomer2 != '' and interviewCustomer2 != null ">
+		<if test="interviewCustomer2 != null ">
 			interviewCustomer2 = #{interviewCustomer2},
 		</if>
-		<if test="interviewInfo2 != '' and interviewInfo2 != null ">
+		<if test="interviewInfo2 != null ">
 			interviewInfo2 = #{interviewInfo2},
 		</if>
-		<if test="interviewUrl2 != '' and interviewUrl2 != null ">
+		<if test="interviewUrl2 != null ">
 			interviewUrl2 = #{interviewUrl2},
 		</if>
 		updateTime= NOW(),

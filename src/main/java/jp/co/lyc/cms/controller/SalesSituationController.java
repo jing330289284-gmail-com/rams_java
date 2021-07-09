@@ -26,6 +26,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.collections.ListUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.math.IntRange;
 import org.apache.commons.lang3.ArrayUtils;
 import org.castor.core.util.StringUtil;
 import org.slf4j.Logger;
@@ -738,30 +739,116 @@ public class SalesSituationController extends BaseController {
 		for (int i = 0; i < employeeNoList.size(); i++) {
 			for (int j = 0; j < interviewListsTemp.size(); j++) {
 				if (employeeNoList.get(i).equals(interviewListsTemp.get(j).getEmployeeNo())) {
+					if (interviewListsTemp.get(j).getEmployeeNo().substring(0, 2).equals("SC")
+							|| interviewListsTemp.get(j).getEmployeeNo().substring(0, 2).equals("SP")
+							|| interviewListsTemp.get(j).getEmployeeNo().substring(0, 2).equals("BP")) {
+						if (interviewListsTemp.get(j).getEmployeeNo().substring(0, 3).equals("BPR"))
+							interviewListsTemp.get(j).setEmployeeName(interviewListsTemp.get(j).getEmployeeName() + "("
+									+ interviewListsTemp.get(j).getEmployeeNo().substring(0, 3) + ")");
+						else
+							interviewListsTemp.get(j).setEmployeeName(interviewListsTemp.get(j).getEmployeeName() + "("
+									+ interviewListsTemp.get(j).getEmployeeNo().substring(0, 2) + ")");
+					}
+
 					interviewLists.add(interviewListsTemp.get(j));
 					break;
 				}
 			}
 		}
 
+		for (int i = 0; i < interviewLists.size(); i++) {
+			if (!(interviewLists.get(i).getInterviewDate1() == null
+					|| interviewLists.get(i).getInterviewDate1().equals(""))
+					&& !(interviewLists.get(i).getInterviewDate2() == null
+							|| interviewLists.get(i).getInterviewDate2().equals(""))) {
+				if (Long.parseLong(interviewLists.get(i).getInterviewDate1()) > Long
+						.parseLong(interviewLists.get(i).getInterviewDate2())) {
+					SalesSituationModel temp = new SalesSituationModel();
+					temp.setInterviewClassificationCode1(interviewLists.get(i).getInterviewClassificationCode1());
+					temp.setInterviewDate1(interviewLists.get(i).getInterviewDate1());
+					temp.setStationCode1(interviewLists.get(i).getStationCode1());
+					temp.setInterviewCustomer1(interviewLists.get(i).getInterviewCustomer1());
+					temp.setInterviewInfo1(interviewLists.get(i).getInterviewInfo1());
+					temp.setInterviewUrl1(interviewLists.get(i).getInterviewUrl1());
+
+					interviewLists.get(i)
+							.setInterviewClassificationCode1(interviewLists.get(i).getInterviewClassificationCode2());
+					interviewLists.get(i).setInterviewDate1(interviewLists.get(i).getInterviewDate2());
+					interviewLists.get(i).setStationCode1(interviewLists.get(i).getStationCode2());
+					interviewLists.get(i).setInterviewCustomer1(interviewLists.get(i).getInterviewCustomer2());
+					interviewLists.get(i).setInterviewInfo1(interviewLists.get(i).getInterviewInfo2());
+					interviewLists.get(i).setInterviewUrl1(interviewLists.get(i).getInterviewUrl2());
+
+					interviewLists.get(i).setInterviewClassificationCode2(temp.getInterviewClassificationCode1());
+					interviewLists.get(i).setInterviewDate2(temp.getInterviewDate1());
+					interviewLists.get(i).setStationCode2(temp.getStationCode1());
+					interviewLists.get(i).setInterviewCustomer2(temp.getInterviewCustomer1());
+					interviewLists.get(i).setInterviewInfo2(temp.getInterviewInfo1());
+					interviewLists.get(i).setInterviewUrl2(temp.getInterviewUrl1());
+				}
+			}
+		}
+
+		Date date = new Date();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmm");
+		String now = dateFormat.format(date);
+		for (int i = 0; i < interviewLists.size(); i++) {
+			if (!(interviewLists.get(i).getInterviewDate1() == null
+					|| interviewLists.get(i).getInterviewDate1().equals(""))) {
+				if (Long.parseLong(now) > Long.parseLong(interviewLists.get(i).getInterviewDate1())) {
+
+					interviewLists.get(i)
+							.setInterviewClassificationCode1(interviewLists.get(i).getInterviewClassificationCode2());
+					interviewLists.get(i).setInterviewDate1(interviewLists.get(i).getInterviewDate2());
+					interviewLists.get(i).setStationCode1(interviewLists.get(i).getStationCode2());
+					interviewLists.get(i).setInterviewCustomer1(interviewLists.get(i).getInterviewCustomer2());
+					interviewLists.get(i).setInterviewInfo1(interviewLists.get(i).getInterviewInfo2());
+					interviewLists.get(i).setInterviewUrl1(interviewLists.get(i).getInterviewUrl2());
+
+					interviewLists.get(i).setInterviewClassificationCode2(null);
+					interviewLists.get(i).setInterviewDate2(null);
+					interviewLists.get(i).setStationCode2(null);
+					interviewLists.get(i).setInterviewCustomer2(null);
+					interviewLists.get(i).setInterviewInfo2(null);
+					interviewLists.get(i).setInterviewUrl2(null);
+
+					i--;
+				}
+			}
+		}
+
 		return interviewLists;
 	}
-	
+
 	@RequestMapping(value = "/updateInterviewLists", method = RequestMethod.POST)
 	@ResponseBody
-	public int updateInterviewLists(@RequestBody SalesSituationModel model) {
+	public Map<String, Object> updateInterviewLists(@RequestBody SalesSituationModel model) {
+		Map<String, Object> result = new HashMap<>();
+		String errorsMessage = "";
+		if ((model.getInterviewDate1() == null || model.getInterviewDate1().equals(""))
+				&& (model.getInterviewDate2() == null || model.getInterviewDate2().equals(""))) {
+			errorsMessage += "日付 ";
+		}
+		if ((model.getInterviewCustomer1() == null || model.getInterviewCustomer1().equals(""))
+				&& (model.getInterviewCustomer2() == null || model.getInterviewCustomer2().equals(""))) {
+			errorsMessage += "お客様 ";
+		}
+		if (!errorsMessage.equals("")) {
+			errorsMessage += "を入力してください。";
+			result.put("errorsMessage", errorsMessage);
+			return result;
+		}
 		model.setUpdateUser(getSession().getAttribute("employeeName").toString());
 		String salesDate = getSalesDate(model.getSalesYearAndMonth()).trim().toString();
 		model.setSalesYearAndMonth(salesDate);
-		logger.info("updateInterviewLists:" + "検索開始");
-		int index = 0;
+		logger.info("updateInterviewLists:" + "更新開始");
 		try {
-			index = salesSituationService.updateInterviewLists(model);
+			salesSituationService.updateInterviewLists(model);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		logger.info("updateInterviewLists" + "検索結束");
-		return index;
+		logger.info("updateInterviewLists" + "更新結束");
+		return result;
 	}
 
 	/**
@@ -856,6 +943,17 @@ public class SalesSituationController extends BaseController {
 				} else if (model.getSalesProgressCode().equals("0")) {
 					salesSituationService.updateEmpNextAdmission(model);
 				}
+			}
+		}
+
+		if (model.getSalesProgressCode() != null && (model.getSalesProgressCode().equals("2"))) {
+			if (model.getCustomer() == null || model.getCustomer().equals("")) {
+				errorsMessage += "確定客様 ";
+			}
+			if (!errorsMessage.equals("")) {
+				errorsMessage += "を入力してください。";
+				result.put("errorsMessage", errorsMessage);
+				return result;
 			}
 		}
 
