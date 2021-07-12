@@ -74,16 +74,27 @@ public class SalesSendLetterController extends BaseController {
 				if (mailList.size() > 0)
 					salesCustomersList.get(i).setMailList(mailList);
 			}
-			
+
 			if (salesCustomersList.get(i).getCommonMail() != null
 					&& !salesCustomersList.get(i).getCommonMail().equals("")) {
 				salesCustomersList.get(i).setPurchasingManagersMail(salesCustomersList.get(i).getCommonMail());
 			}
-			
+
 			if (salesCustomersList.get(i).getLevelCode() != null) {
 				salesCustomersList.get(i).setCustomerName(salesCustomersList.get(i).getCustomerName() + " ("
 						+ salesCustomersList.get(i).getLevelCode() + ")");
 			}
+		}
+
+		for (int i = 0; i < salesCustomersList.size(); i++) {
+			if (salesCustomersList.get(i).getMailList() == null) {
+				salesCustomersList.remove(i);
+				i--;
+			}
+		}
+		
+		for (int i = 0; i < salesCustomersList.size(); i++) {
+			salesCustomersList.get(i).setRowId(i);
 		}
 
 		return salesCustomersList;
@@ -325,16 +336,27 @@ public class SalesSendLetterController extends BaseController {
 				if (mailList.size() > 0)
 					salesCustomersList.get(i).setMailList(mailList);
 			}
-			
+
 			if (salesCustomersList.get(i).getCommonMail() != null
 					&& !salesCustomersList.get(i).getCommonMail().equals("")) {
 				salesCustomersList.get(i).setPurchasingManagersMail(salesCustomersList.get(i).getCommonMail());
 			}
-			
+
 			if (salesCustomersList.get(i).getLevelCode() != null) {
 				salesCustomersList.get(i).setCustomerName(salesCustomersList.get(i).getCustomerName() + " ("
 						+ salesCustomersList.get(i).getLevelCode() + ")");
 			}
+		}
+
+		for (int i = 0; i < salesCustomersList.size(); i++) {
+			if (salesCustomersList.get(i).getMailList() == null) {
+				salesCustomersList.remove(i);
+				i--;
+			}
+		}
+
+		for (int i = 0; i < salesCustomersList.size(); i++) {
+			salesCustomersList.get(i).setRowId(i);
 		}
 
 		return salesCustomersList;

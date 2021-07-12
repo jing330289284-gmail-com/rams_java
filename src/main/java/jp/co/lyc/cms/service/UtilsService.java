@@ -324,6 +324,15 @@ public class UtilsService {
 	public List<ModelClass> getCustomerName() {
 		return utilsMapper.getCustomerName();
 	}
+	
+	/**
+	 * お客様名
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getCustomerNameWithMail() {
+		return utilsMapper.getCustomerNameWithMail();
+	}
 
 	/**
 	 * お客様性質
@@ -583,6 +592,15 @@ public class UtilsService {
 	 */
 	public List<ModelClass> getPurchasingManagers() {
 		return utilsMapper.getPurchasingManagers();
+	}
+	
+	/**
+	 * お客様担当者取得 取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getPurchasingManagersWithMail() {
+		return utilsMapper.getPurchasingManagersWithMail();
 	}
 
 	/**

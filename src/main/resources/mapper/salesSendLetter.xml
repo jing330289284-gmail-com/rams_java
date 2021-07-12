@@ -12,9 +12,10 @@
 		T007.customerName,
 		T007.purchasingManagers,
 		T009.customerDepartmentCode,
-		T009.positionCode,
+		T007.positionCode,
 		T007.commonMail,
 		T007.purchasingManagersMail,
+		T007.proposeClassificationCode,
 		M008.levelName as levelCode,
 		'' AS
 		monthCount,
@@ -49,8 +50,9 @@
 		T007.customerName,
 		T007.purchasingManagers,
 		T009.customerDepartmentCode,
-		T009.positionCode,
+		T007.positionCode,
 		T007.purchasingManagersMail,
+		T007.proposeClassificationCode,
 		T007.levelCode,
 		'' AS
 		monthCount,
@@ -208,9 +210,10 @@
 		T007.customerName,
 		T007.purchasingManagers,
 		T009.customerDepartmentCode,
-		T009.positionCode,
+		T007.positionCode,
 		T007.commonMail,
 		T007.purchasingManagersMail,
+		T007.proposeClassificationCode,
 		M008.levelName AS
 		levelCode,
 		'' AS

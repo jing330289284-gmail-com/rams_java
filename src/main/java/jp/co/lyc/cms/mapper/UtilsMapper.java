@@ -167,6 +167,13 @@ public interface UtilsMapper {
 	 * 
 	 */
 	public List<ModelClass> getCustomerName();
+	
+	/**
+	 * お客様名
+	 * 
+	 * 
+	 */
+	public List<ModelClass> getCustomerNameWithMail();
 
 	/**
 	 * 資格を取得
@@ -408,6 +415,13 @@ public interface UtilsMapper {
 	 * @return
 	 */
 	public List<ModelClass> getPurchasingManagers();
+	
+	/**
+	 * お客様担当者取得 取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getPurchasingManagersWithMail();
 
 	/**
 	 * 契約形態 取得

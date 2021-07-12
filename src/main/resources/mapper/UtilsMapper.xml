@@ -67,6 +67,20 @@
 		FROM
 		T007CustomerInfo
 	</select>
+	
+		<!-- お客様名 -->
+	<select id="getCustomerNameWithMail"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT
+		customerNo CODE,
+		CONCAT( customerName, '(',
+		customerNo, ')' ) NAME,
+		customerName TEXT
+		FROM
+		T007CustomerInfo
+		where (purchasingManagersMail != null or purchasingManagersMail != "")
+		or (commonMail != null or commonMail != "")
+	</select>
 
 	<!-- お客様略称 -->
 	<select id="getCustomerAbbreviation"
@@ -575,6 +589,31 @@
 		purchasingManagers is not
 		null and
 		purchasingManagers != "";
+	</select>
+	
+		<!-- お客様担当者取得 取得 -->
+	<select id="getPurchasingManagersWithMail"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT
+		customerNo CODE,
+		customerName NAME,
+		purchasingManagers
+		VALUE,
+		CONCAT(purchasingManagers,'(',if(customerAbbreviation is null ||
+		customerAbbreviation = "",
+		customerName,customerAbbreviation),
+		' ',
+		customerNo,')')
+		TEXT
+		FROM
+		T007CustomerInfo
+		WHERE
+		purchasingManagers is not
+		null and
+		purchasingManagers != ""
+		and ((purchasingManagersMail != null or purchasingManagersMail != "")
+		or (commonMail != null or commonMail != ""))
+		;
 	</select>
 
 	<!-- 契約形態取得 -->

@@ -829,6 +829,18 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getCustomerName();
 		return list;
 	}
+	
+	/**
+	 * お客様名
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getCustomerNameWithMail", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getCustomerNameWithMail() {
+		List<ModelClass> list = utilsService.getCustomerNameWithMail();
+		return list;
+	}
 
 	/**
 	 * 条件を取得
@@ -1522,7 +1534,19 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getPurchasingManagers();
 		return list;
 	}
-
+	
+	/**
+	 * お客様担当者取得 取得
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getPurchasingManagersWithMail", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getPurchasingManagersWithMail() {
+		List<ModelClass> list = utilsService.getPurchasingManagersWithMail();
+		return list;
+	}
+	
 	/**
 	 * 契約形態取得
 	 * 

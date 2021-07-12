@@ -64,6 +64,15 @@ public class SalesSendLetterModel {
 	String mainChargeList;
 	String departmentCodeList;
 	String businessCount;
+	String proposeClassificationCode;
+
+	public String getProposeClassificationCode() {
+		return proposeClassificationCode;
+	}
+
+	public void setProposeClassificationCode(String proposeClassificationCode) {
+		this.proposeClassificationCode = proposeClassificationCode;
+	}
 
 	public ArrayList<String> getMailList() {
 		return mailList;
