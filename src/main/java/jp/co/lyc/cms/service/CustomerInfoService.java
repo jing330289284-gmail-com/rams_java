@@ -227,12 +227,15 @@ public class CustomerInfoService {
 		for (CustomerDepartmentInfoModel c : initList) {
 			int count = 0;
 			if (!UtilsCheckMethod.isNullOrEmpty(c.getPositionCode())
-					&& !UtilsCheckMethod.isNullOrEmpty(c.getCustomerDepartmentCode())) {
+					&& !UtilsCheckMethod.isNullOrEmpty(c.getCustomerDepartmentCode())
+					&& !UtilsCheckMethod.isNullOrEmpty(c.getResponsiblePerson())) {
 				String position = c.getPositionCode();
 				String customerDepartmentCode = c.getCustomerDepartmentCode();
+				String responsiblePerson = c.getResponsiblePerson();
 				for (CustomerDepartmentInfoModel d : initList) {
 					if (position.equals(d.getPositionCode())
-							&& customerDepartmentCode.equals(d.getCustomerDepartmentCode())) {
+							&& customerDepartmentCode.equals(d.getCustomerDepartmentCode())
+							&& responsiblePerson.equals(d.getResponsiblePerson())) {
 						count++;
 					}
 				}
@@ -289,7 +292,12 @@ public class CustomerInfoService {
 						ArrayList<CustomerDepartmentInfoModel> checkList = customerInfoMapper
 								.selectCustomerDepartmentInfo(checkMap);
 						if (checkList.size() > 0) {
-							return "2";
+							for (int i = 0; i < checkList.size(); i++) {
+								if (checkList.get(i).getResponsiblePerson()
+										.equals(customerDepartmentInfoModel.getResponsiblePerson())) {
+									return "2";
+								}
+							}
 						}
 					}
 					resultCode = (updateCustomerDepartment(sendMap) ? "0" : "1");
@@ -425,7 +433,7 @@ public class CustomerInfoService {
 		sendMap.put("contactDate", customerInfoMod.getContactDate());
 		sendMap.put("salesStaff", customerInfoMod.getSalesStaff());
 		sendMap.put("proposeClassificationCode", customerInfoMod.getProposeClassificationCode());
-		
+
 		return sendMap;
 	}
 }

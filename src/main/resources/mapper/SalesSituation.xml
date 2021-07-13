@@ -1435,6 +1435,8 @@
 		t019.developLanguageCode11 as developLanguage6,
 		t019.unitPrice,
 		t019.remark,
+		t010.remark1,
+		t010.remark2,
 		t010.salesYearAndMonth,
 		t010.salesProgressCode,
 		t019.theMonthOfStartWork
@@ -1443,13 +1445,16 @@
 		LEFT JOIN
 		T002EmployeeDetail t002 ON t001.employeeNo = t002.employeeNo
 		LEFT JOIN
-		T015ResumeManagement t015 ON t015.employeeNo = t002.employeeNo
+		T015ResumeManagement t015 ON t015.employeeNo =
+		t002.employeeNo
 		LEFT
 		JOIN
-		M012SiteRole M012 ON M012.siteRoleCode = t002.siteRoleCode
+		M012SiteRole M012 ON M012.siteRoleCode =
+		t002.siteRoleCode
 		LEFT
 		JOIN
-		M003Nationality m003 ON t002.nationalityCode =
+		M003Nationality m003 ON t002.nationalityCode
+		=
 		m003.nationalityCode
 		LEFT JOIN
 		T010SalesSituation t010 ON
@@ -1744,44 +1749,20 @@
 		now(),now(),#{updateUser})
 		ON DUPLICATE KEY
 		UPDATE
-		<if
-			test="interviewClassificationCode1 != '' and interviewClassificationCode1 != null ">
-			interviewClassificationCode1 = #{interviewClassificationCode1},
-		</if>
-		<if test="interviewDate1 != '' and interviewDate1 != null ">
-			interviewDate1 = #{interviewDate1},
-		</if>
-		<if test="stationCode1 != '' and stationCode1 != null ">
-			stationCode1 = #{stationCode1},
-		</if>
-		<if test="interviewCustomer1 != '' and interviewCustomer1 != null ">
-			interviewCustomer1 = #{interviewCustomer1},
-		</if>
-		<if test="interviewInfo1 != '' and interviewInfo1 != null ">
-			interviewInfo1 =
-			#{interviewInfo1},
-		</if>
-		<if test="interviewUrl1 != '' and interviewUrl1 != null ">
-			interviewUrl1 = #{interviewUrl1},
-		</if>
-		<if	test="interviewClassificationCode2 != null ">
-			interviewClassificationCode2 = #{interviewClassificationCode2},
-		</if>
-		<if test="interviewDate2 != null ">
-			interviewDate2 = #{interviewDate2},
-		</if>
-		<if test="stationCode2 != null ">
-			stationCode2 = #{stationCode2},
-		</if>
-		<if test="interviewCustomer2 != null ">
-			interviewCustomer2 = #{interviewCustomer2},
-		</if>
-		<if test="interviewInfo2 != null ">
-			interviewInfo2 = #{interviewInfo2},
-		</if>
-		<if test="interviewUrl2 != null ">
-			interviewUrl2 = #{interviewUrl2},
-		</if>
+		interviewClassificationCode1 = #{interviewClassificationCode1},
+		interviewDate1 = #{interviewDate1},
+		stationCode1 = #{stationCode1},
+		interviewCustomer1 = #{interviewCustomer1},
+		interviewInfo1 =
+		#{interviewInfo1},
+		interviewUrl1 = #{interviewUrl1},
+		interviewClassificationCode2 =
+		#{interviewClassificationCode2},
+		interviewDate2 = #{interviewDate2},
+		stationCode2 = #{stationCode2},
+		interviewCustomer2 = #{interviewCustomer2},
+		interviewInfo2 = #{interviewInfo2},
+		interviewUrl2 = #{interviewUrl2},
 		updateTime= NOW(),
 		updateUser=#{updateUser}
 	</update>

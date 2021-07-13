@@ -725,6 +725,20 @@ public class SalesSituationController extends BaseController {
 			}
 		}
 
+		salesSituationList.get(0)
+				.setSalesProgressCode(salesSituationList.get(salesSituationList.size() - 1).getSalesProgressCode());
+
+		if (salesSituationList.get(salesSituationList.size() - 1).getRemark() == null
+				|| salesSituationList.get(salesSituationList.size() - 1).getRemark().equals(" ")) {
+			salesSituationList.get(0)
+					.setRemark((salesSituationList.get(salesSituationList.size() - 1).getRemark1() == null ? ""
+							: salesSituationList.get(salesSituationList.size() - 1).getRemark1())
+							+ (salesSituationList.get(salesSituationList.size() - 1).getRemark2() == null ? ""
+									: salesSituationList.get(salesSituationList.size() - 1).getRemark2()));
+		} else {
+			salesSituationList.get(0).setRemark(salesSituationList.get(salesSituationList.size() - 1).getRemark());
+		}
+
 		logger.info("updateSalesSituation" + "検索結束");
 		return salesSituationList;
 	}
@@ -753,6 +767,26 @@ public class SalesSituationController extends BaseController {
 					interviewLists.add(interviewListsTemp.get(j));
 					break;
 				}
+			}
+		}
+
+		for (int i = 0; i < interviewLists.size(); i++) {
+			if (interviewLists.get(i).getInterviewDate1() == null
+					|| interviewLists.get(i).getInterviewDate1().equals("")) {
+				interviewLists.get(i)
+						.setInterviewClassificationCode1(interviewLists.get(i).getInterviewClassificationCode2());
+				interviewLists.get(i).setInterviewDate1(interviewLists.get(i).getInterviewDate2());
+				interviewLists.get(i).setStationCode1(interviewLists.get(i).getStationCode2());
+				interviewLists.get(i).setInterviewCustomer1(interviewLists.get(i).getInterviewCustomer2());
+				interviewLists.get(i).setInterviewInfo1(interviewLists.get(i).getInterviewInfo2());
+				interviewLists.get(i).setInterviewUrl1(interviewLists.get(i).getInterviewUrl2());
+
+				interviewLists.get(i).setInterviewClassificationCode2(null);
+				interviewLists.get(i).setInterviewDate2(null);
+				interviewLists.get(i).setStationCode2(null);
+				interviewLists.get(i).setInterviewCustomer2(null);
+				interviewLists.get(i).setInterviewInfo2(null);
+				interviewLists.get(i).setInterviewUrl2(null);
 			}
 		}
 
@@ -820,19 +854,43 @@ public class SalesSituationController extends BaseController {
 		return interviewLists;
 	}
 
+	@RequestMapping(value = "/deleteInterviewLists", method = RequestMethod.POST)
+	@ResponseBody
+	public void deleteInterviewLists(@RequestBody SalesSituationModel model) {
+		logger.info("deleteInterviewLists:" + "削除開始");
+		model.setUpdateUser(getSession().getAttribute("employeeName").toString());
+		String salesDate = getSalesDate(model.getSalesYearAndMonth()).trim().toString();
+		model.setSalesYearAndMonth(salesDate);
+		try {
+			salesSituationService.updateInterviewLists(model);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		logger.info("deleteInterviewLists" + "削除結束");
+	}
+
 	@RequestMapping(value = "/updateInterviewLists", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> updateInterviewLists(@RequestBody SalesSituationModel model) {
 		Map<String, Object> result = new HashMap<>();
 		String errorsMessage = "";
-		if ((model.getInterviewDate1() == null || model.getInterviewDate1().equals(""))
-				&& (model.getInterviewDate2() == null || model.getInterviewDate2().equals(""))) {
-			errorsMessage += "日付 ";
+		if (!model.getInterviewClassificationCode1().equals("")) {
+			if (model.getInterviewDate1() == null || model.getInterviewDate1().equals("")) {
+				errorsMessage += "日付 ";
+			}
+			if (model.getInterviewCustomer1() == null || model.getInterviewCustomer1().equals("")) {
+				errorsMessage += "お客様 ";
+			}
 		}
-		if ((model.getInterviewCustomer1() == null || model.getInterviewCustomer1().equals(""))
-				&& (model.getInterviewCustomer2() == null || model.getInterviewCustomer2().equals(""))) {
-			errorsMessage += "お客様 ";
+		if (!model.getInterviewClassificationCode2().equals("")) {
+			if (model.getInterviewDate2() == null || model.getInterviewDate2().equals("")) {
+				errorsMessage += "日付 ";
+			}
+			if (model.getInterviewCustomer2() == null || model.getInterviewCustomer2().equals("")) {
+				errorsMessage += "お客様 ";
+			}
 		}
+
 		if (!errorsMessage.equals("")) {
 			errorsMessage += "を入力してください。";
 			result.put("errorsMessage", errorsMessage);

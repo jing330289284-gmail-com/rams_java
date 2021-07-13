@@ -102,6 +102,15 @@ public class SalesSituationModel implements Serializable {
 	String interviewInfo2;
 	String interviewUrl1;
 	String interviewUrl2;
+	String interviewInfoNum;
+
+	public String getInterviewInfoNum() {
+		return interviewInfoNum;
+	}
+
+	public void setInterviewInfoNum(String interviewInfoNum) {
+		this.interviewInfoNum = interviewInfoNum;
+	}
 
 	public String getInterviewClassificationCode1() {
 		return interviewClassificationCode1;

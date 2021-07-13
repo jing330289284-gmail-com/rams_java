@@ -142,7 +142,7 @@ public class SalesSituationService {
 	public int updateEMPInfo(SalesSituationModel model) {
 		return salesSituationMapper.updateEMPInfo(model);
 	}
-	
+
 	public int updateInterviewLists(SalesSituationModel model) {
 		return salesSituationMapper.updateInterviewLists(model);
 	}
