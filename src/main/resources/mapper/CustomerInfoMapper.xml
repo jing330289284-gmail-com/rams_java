@@ -383,6 +383,8 @@
 		customerDepartmentCode = #{beforeCDCode}
 		AND
 		positionCode = #{beforePCode}
+		AND
+		responsiblePerson = #{responsiblePerson}
 	</update>
 	<!-- 部門削除 -->
 	<delete id="customerDepartmentdelete" parameterType="String">
