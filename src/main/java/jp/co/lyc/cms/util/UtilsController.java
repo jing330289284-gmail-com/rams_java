@@ -829,7 +829,7 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getCustomerName();
 		return list;
 	}
-	
+
 	/**
 	 * お客様名
 	 * 
@@ -1313,15 +1313,18 @@ public class UtilsController {
 			MimeBodyPart contentPart = new MimeBodyPart();
 			contentPart.setContent(emailMod.getMailConfirmContont(), "text/html;charset=UTF-8");
 			multipart.addBodyPart(contentPart);
-			// 添加附件
-			MimeBodyPart filePart = new MimeBodyPart();
-			// DataSource source = new FileDataSource(emailMod.getResumePath());
-			DataSource source = new FileDataSource("C:\\file\\履歴書\\新建文本文档.txt");
-			// 添加附件的内容
-			filePart.setDataHandler(new DataHandler(source));
-			// 添加附件的标题
-			filePart.setFileName(MimeUtility.encodeText(emailMod.getResumeName()));
-			multipart.addBodyPart(filePart);
+
+			for (int i = 0; i < emailMod.getPaths().length; i++) {
+				// 添加附件
+				MimeBodyPart filePart = new MimeBodyPart();
+				DataSource source = new FileDataSource(emailMod.getPaths()[i]);
+				//DataSource source = new FileDataSource("C:\\file\\履歴書\\LYC168_営業文章\\営業EE_aaa.xls");
+				// 添加附件的内容
+				filePart.setDataHandler(new DataHandler(source));
+				// 添加附件的标题
+				filePart.setFileName(MimeUtility.encodeText(emailMod.getNames()[i]));
+				multipart.addBodyPart(filePart);
+			}
 			// multipart.addBodyPart(filePart);
 			multipart.setSubType("mixed");
 			// 将multipart对象放到message中
@@ -1510,7 +1513,7 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getProposeClassification();
 		return list;
 	}
-	
+
 	/**
 	 * 面談区分取得
 	 * 
@@ -1522,7 +1525,7 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getInterviewClassification();
 		return list;
 	}
-	
+
 	/**
 	 * お客様担当者取得 取得
 	 * 
@@ -1534,7 +1537,7 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getPurchasingManagers();
 		return list;
 	}
-	
+
 	/**
 	 * お客様担当者取得 取得
 	 * 
@@ -1546,7 +1549,7 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getPurchasingManagersWithMail();
 		return list;
 	}
-	
+
 	/**
 	 * 契約形態取得
 	 * 
@@ -1627,7 +1630,7 @@ public class UtilsController {
 		List<ModelClass> list = getStatus(basicContractStatus);
 		return list;
 	}
-	
+
 	/**
 	 * 稼働ステータス取得
 	 * 

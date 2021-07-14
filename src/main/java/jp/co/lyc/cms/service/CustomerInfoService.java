@@ -262,6 +262,7 @@ public class CustomerInfoService {
 		if (customerDepartmentInfoModel.getActionType().equals("update")) {
 			sendMap.put("beforeCDCode", customerDepartmentInfoModel.getBeforeCDCode());
 			sendMap.put("beforePCode", customerDepartmentInfoModel.getBeforePCode());
+			sendMap.put("beforeResponsiblePerson", customerDepartmentInfoModel.getBeforeResponsiblePerson());
 			sendMap.put("positionCode", customerDepartmentInfoModel.getPositionCode());
 			sendMap.put("customerDepartmentCode", customerDepartmentInfoModel.getCustomerDepartmentCode());
 		} else {

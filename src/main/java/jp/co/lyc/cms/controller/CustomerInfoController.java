@@ -163,6 +163,7 @@ public class CustomerInfoController extends BaseController {
 		sendMap.put("customerNo", customerDepartmentInfoModel.getCustomerNo());
 		sendMap.put("customerDepartmentCode", customerDepartmentInfoModel.getCustomerDepartmentCode());
 		sendMap.put("positionCode", customerDepartmentInfoModel.getPositionCode());
+		sendMap.put("responsiblePerson", customerDepartmentInfoModel.getResponsiblePerson());
 		logger.info("BankInfoController.toroku:" + "部門削除終了");
 		return customerInfoSer.customerDepartmentdelete(sendMap);
 	}

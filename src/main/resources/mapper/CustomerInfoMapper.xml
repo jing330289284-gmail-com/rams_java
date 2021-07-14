@@ -242,6 +242,8 @@
 		T009.positionCode AS beforePCode,
 		M019.positionName,
 		T009.responsiblePerson,
+		T009.responsiblePerson as
+		beforeResponsiblePerson,
 		T009.typeOfIndustryCode,
 		T009.topCustomerCode,
 		T009.developLanguageCode1,
@@ -384,7 +386,8 @@
 		AND
 		positionCode = #{beforePCode}
 		AND
-		responsiblePerson = #{responsiblePerson}
+		responsiblePerson =
+		#{beforeResponsiblePerson}
 	</update>
 	<!-- 部門削除 -->
 	<delete id="customerDepartmentdelete" parameterType="String">
@@ -398,5 +401,7 @@
 		AND
 		positionCode =
 		#{positionCode}
+		AND
+		responsiblePerson = #{responsiblePerson}
 	</delete>
 </mapper>
