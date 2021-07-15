@@ -264,10 +264,15 @@
 		ifnull(#{intoCompanyCode},intoCompanyCode)
 		and
 		<if test="employeeName == null ">
-			if(#{employeeFormCode} is
-			null,T002.employeeFormCode !=
-			"4",T002.employeeFormCode =
-			#{employeeFormCode})
+			<if test="employeeFormCode == null ">
+			(T002.employeeFormCode != "4" or T002.retirementYearAndMonth &gt; now())
+			</if>
+			<if test="employeeFormCode != null ">
+				if(#{employeeFormCode} = "4",
+				T002.employeeFormCode = #{employeeFormCode} and T002.retirementYearAndMonth &lt;= now(),
+				T002.employeeFormCode = #{employeeFormCode}
+				)
+			</if>
 		</if>
 		<if test="employeeName != null ">
 			T002.employeeFormCode =

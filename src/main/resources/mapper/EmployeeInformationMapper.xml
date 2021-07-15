@@ -20,7 +20,7 @@
 		on
 		T002.employeeNo = T001.employeeNo
 		where left(T002.employeeNo,2) != "BP"
-		and T002.employeeFormCode != "4"
+		and (T002.employeeFormCode != "4" or T002.retirementYearAndMonth &gt; now())
 		order by
 		dealDistinctioCode,employeeNo
 		;

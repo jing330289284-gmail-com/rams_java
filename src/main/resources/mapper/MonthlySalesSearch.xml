@@ -58,7 +58,7 @@
 		WHERE 1=1
 		
 		<if test="employeeClassification != null">
-			AND employeeStatus = #{employeeClassification}
+			AND T002.employeeStatus = #{employeeClassification}
 		</if>
 		<if test="employeeForms != null">
 			AND T002.employeeFormCode = #{employeeForms}
