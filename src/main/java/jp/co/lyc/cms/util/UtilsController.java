@@ -882,6 +882,40 @@ public class UtilsController {
 	}
 
 	/**
+	 * 稼働中社員氏名を取得する
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getWorkingEmployeeNo", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getWorkingEmployeeNo() {
+		List<ModelClass> list = utilsService.getWorkingEmployeeNo();
+		return list;
+	}
+
+	/**
+	 * 稼働中社員氏名を取得する
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getNotWorkingEmployeeNo", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getNotWorkingEmployeeNo() {
+		List<ModelClass> list = utilsService.getEmployeeName();
+		List<ModelClass> working = utilsService.getWorkingEmployeeNo();
+		for (int i = 0; i < list.size(); i++) {
+			for (int j = 0; j < working.size(); j++) {
+				if (list.get(i).getCode().equals(working.get(j).getCode())) {
+					list.remove(i);
+					i--;
+					break;
+				}
+			}
+		}
+		return list;
+	}
+
+	/**
 	 * パスワードリセット
 	 * 
 	 * @param emp
@@ -1318,7 +1352,8 @@ public class UtilsController {
 				// 添加附件
 				MimeBodyPart filePart = new MimeBodyPart();
 				DataSource source = new FileDataSource(emailMod.getPaths()[i]);
-				//DataSource source = new FileDataSource("C:\\file\\履歴書\\LYC168_営業文章\\営業EE_aaa.xls");
+				// DataSource source = new
+				// FileDataSource("C:\\file\\履歴書\\LYC168_営業文章\\営業EE_aaa.xls");
 				// 添加附件的内容
 				filePart.setDataHandler(new DataHandler(source));
 				// 添加附件的标题

@@ -37,6 +37,25 @@
 		left(employeeNo,2)="BP",left(employeeNo,2)="SC",left(employeeNo,2)="SP",employeeNo
 	</select>
 
+	<!-- 社員名 -->
+	<select id="getWorkingEmployeeNo"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT T001.employeeNo code
+		,CONCAT(T001.employeeFristName,T001.employeeLastName,'(',T001.employeeNo,')')
+		name,
+		CONCAT( T001.employeeFristName,
+		T001.employeeLastName ) TEXT
+		FROM
+		T001Employee as T001
+		Left Join
+		T006EmployeeSiteInfo as T006
+		on T006.employeeNo = T001.employeeNo
+		where (T006.admissionEndDate is null or T006.admissionEndDate > now())
+		group by T001.employeeNo
+		order by
+		left(T001.employeeNo,2)="BP",left(T001.employeeNo,2)="SC",left(T001.employeeNo,2)="SP",T001.employeeNo
+	</select>
+
 	<!-- 本社社員名 -->
 	<select id="getEmployeeNameNoBP"
 		resultType="jp.co.lyc.cms.model.ModelClass">
@@ -67,8 +86,8 @@
 		FROM
 		T007CustomerInfo
 	</select>
-	
-		<!-- お客様名 -->
+
+	<!-- お客様名 -->
 	<select id="getCustomerNameWithMail"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT
@@ -78,8 +97,10 @@
 		customerName TEXT
 		FROM
 		T007CustomerInfo
-		where (purchasingManagersMail != null or purchasingManagersMail != "")
-		or (commonMail != null or commonMail != "")
+		where
+		(purchasingManagersMail != null or purchasingManagersMail != "")
+		or
+		(commonMail != null or commonMail != "")
 	</select>
 
 	<!-- お客様略称 -->
@@ -590,8 +611,8 @@
 		null and
 		purchasingManagers != "";
 	</select>
-	
-		<!-- お客様担当者取得 取得 -->
+
+	<!-- お客様担当者取得 取得 -->
 	<select id="getPurchasingManagersWithMail"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT
@@ -611,8 +632,10 @@
 		purchasingManagers is not
 		null and
 		purchasingManagers != ""
-		and ((purchasingManagersMail != null or purchasingManagersMail != "")
-		or (commonMail != null or commonMail != ""))
+		and ((purchasingManagersMail != null
+		or purchasingManagersMail != "")
+		or (commonMail != null or commonMail
+		!= ""))
 		;
 	</select>
 
@@ -675,8 +698,8 @@
 		FROM
 		M044ProposeClassification;
 	</select>
-	
-		<!--提案区分取得 -->
+
+	<!--提案区分取得 -->
 	<select id="getInterviewClassification"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT interviewClassificationCode code,

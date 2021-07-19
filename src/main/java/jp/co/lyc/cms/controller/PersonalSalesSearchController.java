@@ -216,16 +216,23 @@ public class PersonalSalesSearchController {
 						workCount++;
 						personModelList.get(0).setWorkMonthCount(workCount);
 					}
-					grosProfits = String.valueOf(Integer.parseInt(personModelList.get(i).getUnitPrice())
-							+ Integer.parseInt(personModelList.get(i).getDeductionsAndOvertimePayOfUnitPrice())
-							- (Integer.parseInt(personModelList.get(i).getSalary())
-									+ Integer.parseInt(personModelList.get(i).getTransportationExpenses())
-									+ Integer.parseInt(personModelList.get(i).getInsuranceFeeAmount())
-									+ Integer.parseInt(personModelList.get(i).getBonusFee())
-									+ Integer.parseInt(personModelList.get(i).getLeaderAllowanceAmount())
-									+ Integer.parseInt(personModelList.get(i).getOtherAllowanceAmount())
-									+ Integer.parseInt(personModelList.get(i).getIntroductionAllowance())));
+					grosProfits = String.valueOf(Integer.parseInt(isNull(personModelList.get(i).getUnitPrice()))
+							+ Integer.parseInt(isNull(personModelList.get(i).getDeductionsAndOvertimePayOfUnitPrice()))
+							- (Integer.parseInt(isNull(personModelList.get(i).getSalary()))
+									+ Integer.parseInt(isNull(personModelList.get(i).getTransportationExpenses()))
+									+ Integer.parseInt(isNull(personModelList.get(i).getInsuranceFeeAmount()))
+									+ Integer.parseInt(isNull(personModelList.get(i).getBonusFee()))
+									+ Integer.parseInt(isNull(personModelList.get(i).getLeaderAllowanceAmount()))
+									+ Integer.parseInt(isNull(personModelList.get(i).getOtherAllowanceAmount()))
+									+ Integer.parseInt(isNull(personModelList.get(i).getIntroductionAllowance()))));
 					personModelList.get(i).setGrosProfits(grosProfits);
+				}
+
+				for (int i = 0; i < personModelList.size(); i++) {
+					if (personModelList.get(i).getSalary() == null || personModelList.get(i).getSalary().equals("")) {
+						personModelList.remove(i);
+						i--;
+					}
 				}
 
 				Map<String, Object> resultdata = new HashMap<>();
@@ -233,6 +240,13 @@ public class PersonalSalesSearchController {
 				return resultdata;
 			}
 		}
+	}
+
+	public String isNull(String num) {
+		if (num == null || num.equals(""))
+			return "0";
+		else
+			return num;
 	}
 
 	public Map<String, Object> getDetailParam(PersonalSalesSearchModel empInfo) {

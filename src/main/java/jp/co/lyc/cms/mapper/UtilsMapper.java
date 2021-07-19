@@ -153,6 +153,13 @@ public interface UtilsMapper {
 	 * 
 	 */
 	public List<ModelClass> getEmployeeName();
+	
+	/**
+	 * 稼働中社員氏名を取得する
+	 * 
+	 * 
+	 */
+	public List<ModelClass> getWorkingEmployeeNo();
 
 	/**
 	 * 本社社員氏名を取得する

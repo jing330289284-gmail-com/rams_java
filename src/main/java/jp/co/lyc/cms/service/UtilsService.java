@@ -306,6 +306,15 @@ public class UtilsService {
 	public List<ModelClass> getEmployeeName() {
 		return utilsMapper.getEmployeeName();
 	}
+	
+	/**
+	 * 稼働中社員氏名取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getWorkingEmployeeNo() {
+		return utilsMapper.getWorkingEmployeeNo();
+	}
 
 	/**
 	 * 本社社員氏名取得

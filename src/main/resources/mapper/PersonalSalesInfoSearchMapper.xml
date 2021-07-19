@@ -1,81 +1,125 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="jp.co.lyc.cms.mapper.PersonalSalesSearchMapper">
+<mapper
+	namespace="jp.co.lyc.cms.mapper.PersonalSalesSearchMapper">
 	<resultMap id="detailsInfo"
 		type="jp.co.lyc.cms.model.PersonalSalesSearchModel" />
 
-		<!-- 個人売上 -->
+	<!-- 個人売上 -->
 	<select id="getEmployeeSalesInfo" parameterType="map"
 		resultMap="detailsInfo">
-		
+
 		<foreach item="getYandM" collection="getYandM" index="index">
-		<if test="index != 0">
-                    union
-                </if>
-		SELECT * FROM (
-		SELECT distinct
-		#{getYandM} As onlyYandM,
-		T005.reflectYearAndMonth,
-		T006.admissionStartDate,
-		T006.dailyCalculationStatus,
-		T006.admissionEndDate,
-		M005.employeeFormName,
-		if(T007.customerAbbreviation is null || T007.customerAbbreviation = "",T007.customerName,T007.customerAbbreviation) as customerName,
-		CAST((T006.unitPrice*10000) As unsigned) As unitPrice,
-		CAST(T005.salary As unsigned) As salary,
-		CAST(B${getYandM}.transportationExpenses As unsigned) As transportationExpenses,
-		T005.SocialInsuranceFlag,
-		CAST(T005.insuranceFeeAmount As unsigned) As insuranceFeeAmount,
-		T005.bonusFlag,
-		T005.waitingCost,
-		CAST(T005.scheduleOfBonusAmount As unsigned) As scheduleOfBonusAmount,
-		T005.nextBonusMonth,
-		(CAST(B${getYandM}.leaderAllowanceAmount As unsigned)+CAST(B${getYandM}.otherAllowanceAmount As unsigned)+CAST(B${getYandM}.introductionAllowance As unsigned)+CAST(B${getYandM}.transportationExpenses As unsigned) )As allowanceAmount,	
-		T018.DeductionsAndOvertimePay,
-		T018.DeductionsAndOvertimePayOfUnitPrice ,		
-		B${getYandM}.otherAllowanceName,
-		B${getYandM}.otherAllowanceAmount,
-		B${getYandM}.introductionAllowance,
-		B${getYandM}.leaderAllowanceAmount,
-		T006.relatedEmployees
-		FROM
-		T001Employee As T001
-		Left JOIN 
-		T005WagesInfo As T005 ON T001.employeeNo = T005.employeeNo
-		AND reflectYearAndMonth &lt;= #{getYandM}
-		LEFT JOIN 
-		T002EmployeeDetail As T002 ON T001.employeeNo = T002.employeeNo
-		LEFT JOIN 
-		M005EmployeeForm As M005 ON T002.employeeFormCode = M005.employeeFormCode
-		LEFT JOIN 
-		T006EmployeeSiteInfo As T006 ON T005.employeeNo = T006.employeeNo	
-		AND #{getYandM} between left(admissionStartDate,6) and IFNULL(admissionEndDate,#{getYandM}<!-- date_format(now(),'%Y%m') -->)
-			
-		LEFT JOIN
-		T018WorkTotalTime As T018 ON T001.employeeNo = T018.employeeNo 
-		AND #{getYandM} =T018.attendanceYearAndMonth
-		LEFT JOIN 
-		T007CustomerInfo As T007 ON T006.customerNo  =T007.customerNo
-		LEFT JOIN
-		(SELECT * FROM T013ExpensesInfo WHERE employeeNo = #{employeeName} and ExpensesreflectYearAndMonth &lt;= #{getYandM} ORDER BY ABS(#{getYandM} - ExpensesreflectYearAndMonth) ASC
-		limit 1) As B${getYandM} ON B${getYandM}.employeeNo = T001.employeeNo
-		WHERE
-		T005.employeeNo=#{employeeName}
-		ORDER BY ABS(#{getYandM} - reflectYearAndMonth) ASC
-		limit 1 ) As A${getYandM}
-		</foreach>	
-		</select>
-		
-	
-		<select id="getEmpAllowance" parameterType="map"
+			<if test="index != 0">
+				union
+			</if>
+			SELECT * FROM (
+			SELECT distinct
+			#{getYandM} As onlyYandM,
+			T005.reflectYearAndMonth,
+			T006.admissionStartDate,
+			T006.dailyCalculationStatus,
+			T006.admissionEndDate,
+			M005.employeeFormName,
+			if(T007.customerAbbreviation is null ||
+			T007.customerAbbreviation =
+			"",T007.customerName,T007.customerAbbreviation) as customerName,
+			CAST((T006.unitPrice*10000) As unsigned) As unitPrice,
+			if(T005.salary
+			is not null,CAST(T005.salary As unsigned),CAST(T011.bpUnitPrice*10000
+			As unsigned)) As salary,
+			T011.bpBelongCustomerCode as
+			bpBelongCustomer,
+			CAST(B${getYandM}.transportationExpenses As
+			unsigned) As
+			transportationExpenses,
+			T005.SocialInsuranceFlag,
+			CAST(T005.insuranceFeeAmount As unsigned) As insuranceFeeAmount,
+			T005.bonusFlag,
+			T005.waitingCost,
+			CAST(T005.scheduleOfBonusAmount As
+			unsigned) As scheduleOfBonusAmount,
+			T005.nextBonusMonth,
+			(CAST(B${getYandM}.leaderAllowanceAmount As
+			unsigned)+CAST(B${getYandM}.otherAllowanceAmount As
+			unsigned)+CAST(B${getYandM}.introductionAllowance As
+			unsigned)+CAST(B${getYandM}.transportationExpenses As unsigned) )As
+			allowanceAmount,
+			T018.DeductionsAndOvertimePay,
+			T018.DeductionsAndOvertimePayOfUnitPrice ,
+			B${getYandM}.otherAllowanceName,
+			B${getYandM}.otherAllowanceAmount,
+			B${getYandM}.introductionAllowance,
+			B${getYandM}.leaderAllowanceAmount,
+			T006.relatedEmployees
+			FROM
+			T001Employee As T001
+			Left JOIN
+			T005WagesInfo As T005 ON T001.employeeNo
+			= T005.employeeNo
+			AND reflectYearAndMonth &lt;= #{getYandM}
+			LEFT JOIN
+			T002EmployeeDetail As T002 ON T001.employeeNo = T002.employeeNo
+			LEFT
+			JOIN
+			(SELECT
+			employeeFormCode,
+			Case
+			WHEN employeeFormCode = '0' THEN "社員"
+			WHEN employeeFormCode = '1' THEN "協力"
+			WHEN employeeFormCode = '2' THEN
+			"個人事業主"
+			WHEN employeeFormCode = '3' THEN "子会社社員"
+			WHEN employeeFormCode =
+			'4' THEN "協力依頼営業"
+			END
+			as employeeFormName
+			FROM
+			M005EmployeeForm) As M005 ON T005.employeeStatus =
+			M005.employeeFormCode
+			LEFT JOIN
+			T006EmployeeSiteInfo As T006 ON
+			T001.employeeNo = T006.employeeNo
+			AND
+			#{getYandM} between
+			left(admissionStartDate,6) and
+			IFNULL(admissionEndDate,#{getYandM}<!-- date_format(now(),'%Y%m') -->)
+
+			LEFT JOIN
+			T018WorkTotalTime As T018 ON T001.employeeNo =
+			T018.employeeNo
+			AND #{getYandM} =T018.attendanceYearAndMonth
+			LEFT JOIN
+			T007CustomerInfo As T007 ON T006.customerNo =T007.customerNo
+			left join
+			T011BpInfoSupplement as T011
+			on T001.employeeNo = T011.bpEmployeeNo
+			LEFT JOIN
+			(SELECT * FROM T013ExpensesInfo WHERE employeeNo =
+			#{employeeName} and
+			ExpensesreflectYearAndMonth &lt;= #{getYandM}
+			ORDER BY
+			ABS(#{getYandM} - ExpensesreflectYearAndMonth) ASC
+			limit 1) As
+			B${getYandM} ON B${getYandM}.employeeNo = T001.employeeNo
+			WHERE
+			T001.employeeNo=#{employeeName}
+			ORDER BY ABS(#{getYandM} -
+			reflectYearAndMonth) ASC
+			limit 1 ) As A${getYandM}
+		</foreach>
+	</select>
+
+
+	<select id="getEmpAllowance" parameterType="map"
 		resultMap="detailsInfo">
-			SELECT
-				employeeNo,
-				nextBonusMonth,
-				scheduleOfBonusAmount 
-			FROM 
-				T005WagesInfo 
-			WHERE 
-				employeeNo =#{employeeName}
-		</select>
+		SELECT
+		employeeNo,
+		nextBonusMonth,
+		scheduleOfBonusAmount
+		FROM
+		T005WagesInfo
+		WHERE
+		employeeNo =#{employeeName}
+	</select>
 </mapper>

@@ -42,6 +42,15 @@ public class PersonalSalesSearchModel implements Serializable {
 	String waitingCost;
 	String nextBonusMonth;
 	String bonusFee;
+	String bpBelongCustomer;
+
+	public String getBpBelongCustomer() {
+		return bpBelongCustomer;
+	}
+
+	public void setBpBelongCustomer(String bpBelongCustomer) {
+		this.bpBelongCustomer = bpBelongCustomer;
+	}
 
 	public String getEmployeeName() {
 		return employeeName;
