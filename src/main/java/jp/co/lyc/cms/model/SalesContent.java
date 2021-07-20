@@ -34,6 +34,7 @@ public class SalesContent implements Serializable {
 	String developLanguageCode10;
 	String developLanguageCode11;
 	String unitPrice;
+	String employeeStatus;
 	String remark;
 	Date createTime;
 	Date updateTime;
@@ -43,6 +44,14 @@ public class SalesContent implements Serializable {
 	String beginMonth;
 
 	String tempDate;
+
+	public String getEmployeeStatus() {
+		return employeeStatus;
+	}
+
+	public void setEmployeeStatus(String employeeStatus) {
+		this.employeeStatus = employeeStatus;
+	}
 
 	public String getDevelopLanguageCode11() {
 		return developLanguageCode11;

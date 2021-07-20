@@ -16,6 +16,7 @@
 			SELECT * FROM (
 			SELECT distinct
 			#{getYandM} As onlyYandM,
+			T001.employeeNo,
 			T005.reflectYearAndMonth,
 			T006.admissionStartDate,
 			T006.dailyCalculationStatus,

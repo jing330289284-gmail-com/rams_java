@@ -21,7 +21,7 @@
 		T022.successRate,
 		M033.successRateName,
 		T022.customerNo,
-		T007.customerName,
+		if(T007.customerAbbreviation is null || T007.customerAbbreviation = "",T007.customerName,T007.customerAbbreviation) as customerName,
 		T022.personInCharge,
 		T022.mail,
 		T022.phoneNo,

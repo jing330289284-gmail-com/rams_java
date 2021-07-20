@@ -232,9 +232,24 @@ public class PersonalSalesSearchController {
 					if (personModelList.get(i).getSalary() == null || personModelList.get(i).getSalary().equals("")) {
 						personModelList.remove(i);
 						i--;
+						continue;
+					}
+					if (personModelList.get(i).getEmployeeNo().substring(0, 2).equals("BP")) {
+						if (personModelList.get(i).getCustomerName() == null
+								|| personModelList.get(i).getCustomerName().equals("")) {
+							personModelList.remove(i);
+							i--;
+							continue;
+						}
 					}
 				}
 
+				if (personModelList.size() == 0) {
+					String noData = "";
+					noData = "条件に該当する結果が存在しない";
+					resulterr.put("noData", noData);
+					return resulterr;
+				}
 				Map<String, Object> resultdata = new HashMap<>();
 				resultdata.put("data", personModelList);
 				return resultdata;

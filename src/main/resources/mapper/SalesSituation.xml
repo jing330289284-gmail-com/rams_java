@@ -1294,7 +1294,7 @@
 		t002.genderStatus,
 		CONCAT(m003.nationalityName,
 		'籍') AS nationalityName,
-		t002.employeeStatus,
+		t002.employeeStatus as employeeStatus,
 		t002.birthday,
 		"" as age,
 		t003.stationCode AS
@@ -1408,7 +1408,7 @@
 		t002.genderStatus,
 		CONCAT(m003.nationalityName,
 		'籍') AS nationalityName,
-		t002.employeeStatus,
+		if(t019.employeeStatusCode is null || t019.employeeStatusCode="",t002.employeeStatus,t019.employeeStatusCode) as employeeStatus,
 		t019.age,
 		t019.stationCode
 		AS 'nearestStation',
@@ -1497,6 +1497,7 @@
 		developLanguageCode10,
 		developLanguageCode11,
 		unitPrice,
+		employeeStatusCode,
 		remark,
 		createTime,
 		updateTime,
@@ -1516,6 +1517,7 @@
 		#{developLanguageCode10},
 		#{developLanguageCode11},
 		#{unitPrice},
+		#{employeeStatus},
 		#{remark},
 		NOW(),
 		NOW(),
@@ -1535,6 +1537,7 @@
 		developLanguageCode11=#{developLanguageCode11},
 		unitPrice=#{unitPrice},
 		theMonthOfStartWork=#{beginMonth},
+		employeeStatusCode=#{employeeStatus},
 		remark=#{remark},
 		updateTime=NOW(),
 		updateUser=#{updateUser}
