@@ -14,8 +14,14 @@ public class MonthlySalesSearchService {
 
 	@Autowired
 	MonthlySalesSearchMapper MonthlySalesSearchMapper;
+
 	public List<MonthlySalesSearchModel> searchMonthlySales(Map<String, Object> sendMap) {
 		List<MonthlySalesSearchModel> monthlySalesList = MonthlySalesSearchMapper.getMonthlySalesInfo(sendMap);
+		return monthlySalesList;
+	}
+
+	public List<MonthlySalesSearchModel> searchBpMonthlySales(Map<String, Object> sendMap) {
+		List<MonthlySalesSearchModel> monthlySalesList = MonthlySalesSearchMapper.getBpMonthlySalesInfo(sendMap);
 		return monthlySalesList;
 	}
 }

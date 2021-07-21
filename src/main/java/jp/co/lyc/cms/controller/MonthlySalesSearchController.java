@@ -29,10 +29,10 @@ import jp.co.lyc.cms.validation.MonthlySalesSearchValidation;
 @RequestMapping(value = "/monthlySales")
 public class MonthlySalesSearchController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
-	String errorsMessage="";
+	String errorsMessage = "";
 	@Autowired
 	MonthlySalesSearchService MonthlySalesSearchService;
-	
+
 	@RequestMapping(value = "/searchMonthlySales", method = RequestMethod.POST)
 
 	@ResponseBody
@@ -56,104 +56,124 @@ public class MonthlySalesSearchController {
 
 			resulterr.put("errorsMessage", errorsMessage);// エラーメッセージ
 			return resulterr;
-		}
-		else {
-		List<String> getYandM = new ArrayList<String>();
-		String startYandM = monthlyInfo.getStartYandM();
-		String endYandM = monthlyInfo.getEndYandM();
-		if (startYandM != "" && endYandM == "") {
-			endYandM = sysTime;
-		}
-		if (startYandM == "" && endYandM != "") {
-			
-			startYandM ="201901";
-		}
-		
-		if (startYandM != "0" && startYandM != null && endYandM != "0" && endYandM != null) {
-			int startY = Integer.parseInt(startYandM.substring(0, 4));
-			int startM = Integer.parseInt(startYandM.substring(4, 6));
-			int endY = Integer.parseInt(endYandM.substring(0, 4));
-			int endM = Integer.parseInt(endYandM.substring(4, 6));
-			int count = 0;
-			for (int y = startY; y <= endY; y++) {
-				if (y == startY && y == endY) {
-					for (int m = startM; m <= endM; m++) {
-						String monthStr = Integer.toString(m);
-						if (m < 10) {
-							monthStr = "0" + Integer.toString(m);
-						}
-						getYandM.add(count, Integer.toString(startY) + monthStr);
-						count++;
-					}
-				} else if (y == startY) {
-					for (int m = startM; m <= 12; m++) {
+		} else {
+			List<String> getYandM = new ArrayList<String>();
+			String startYandM = monthlyInfo.getStartYandM();
+			String endYandM = monthlyInfo.getEndYandM();
+			if (startYandM != "" && endYandM == "") {
+				endYandM = sysTime;
+			}
+			if (startYandM == "" && endYandM != "") {
 
-						String monthStr = Integer.toString(m);
-						if (m < 10) {
-							monthStr = "0" + Integer.toString(m);
-						}
-						getYandM.add(count, Integer.toString(startY) + monthStr);
-						count++;
-					}
-				} else if (y != startY && y != endY) {
-					for (int m = 1; m <= 12; m++) {
+				startYandM = "201901";
+			}
 
-						String monthStr = Integer.toString(m);
-						if (m < 10) {
-							monthStr = "0" + Integer.toString(m);
+			if (startYandM != "0" && startYandM != null && endYandM != "0" && endYandM != null) {
+				int startY = Integer.parseInt(startYandM.substring(0, 4));
+				int startM = Integer.parseInt(startYandM.substring(4, 6));
+				int endY = Integer.parseInt(endYandM.substring(0, 4));
+				int endM = Integer.parseInt(endYandM.substring(4, 6));
+				int count = 0;
+				for (int y = startY; y <= endY; y++) {
+					if (y == startY && y == endY) {
+						for (int m = startM; m <= endM; m++) {
+							String monthStr = Integer.toString(m);
+							if (m < 10) {
+								monthStr = "0" + Integer.toString(m);
+							}
+							getYandM.add(count, Integer.toString(startY) + monthStr);
+							count++;
 						}
-						getYandM.add(count, Integer.toString(y) + monthStr);
-						count++;
-					}
-				} else if (y == endY) {
-					for (int m = 1; m <= endM; m++) {
+					} else if (y == startY) {
+						for (int m = startM; m <= 12; m++) {
 
-						String monthStr = Integer.toString(m);
-						if (m < 10) {
-							monthStr = "0" + Integer.toString(m);
+							String monthStr = Integer.toString(m);
+							if (m < 10) {
+								monthStr = "0" + Integer.toString(m);
+							}
+							getYandM.add(count, Integer.toString(startY) + monthStr);
+							count++;
 						}
-						getYandM.add(count, Integer.toString(endY) + monthStr);
-						count++;
+					} else if (y != startY && y != endY) {
+						for (int m = 1; m <= 12; m++) {
+
+							String monthStr = Integer.toString(m);
+							if (m < 10) {
+								monthStr = "0" + Integer.toString(m);
+							}
+							getYandM.add(count, Integer.toString(y) + monthStr);
+							count++;
+						}
+					} else if (y == endY) {
+						for (int m = 1; m <= endM; m++) {
+
+							String monthStr = Integer.toString(m);
+							if (m < 10) {
+								monthStr = "0" + Integer.toString(m);
+							}
+							getYandM.add(count, Integer.toString(endY) + monthStr);
+							count++;
+						}
+					}
+
+				}
+			}
+			Map<String, Object> sendMap = getDetailParam(monthlyInfo);
+			sendMap.put("getYandM", getYandM);
+
+			MonthlySalesModelList = MonthlySalesSearchService.searchMonthlySales(sendMap);
+			logger.info("MonthlySalesSearchController.searchMonthlySales:" + "検索結束");
+			for (int i = 0; i < MonthlySalesModelList.size(); i++) {
+				if (UtilsCheckMethod.isNullOrEmpty(MonthlySalesModelList.get(i).getEmployeeName())) {
+					MonthlySalesModelList.get(i).setEmployeeName("");
+				}
+				if (UtilsCheckMethod.isNullOrEmpty(monthlyInfo.getEmployeeClassification())) {
+					monthlyInfo.setEmployeeClassification("");
+				}
+				if (!monthlyInfo.getEmployeeClassification().equals("1")) {
+					if (!UtilsCheckMethod.isNullOrEmpty(MonthlySalesModelList.get(i).getEmployeeNo())) {
+						if (MonthlySalesModelList.get(i).getEmployeeNo().substring(0, 2).equals("BP")) {
+							MonthlySalesModelList.get(i)
+									.setEmployeeName(MonthlySalesModelList.get(i).getEmployeeName() + "(BP)");
+						}
 					}
 				}
+			}
 
+			for (int i = 0; i < MonthlySalesModelList.size(); i++) {
+				if (MonthlySalesModelList.get(i).getEmployeeName() == null
+						|| MonthlySalesModelList.get(i).getEmployeeName().equals("")) {
+					MonthlySalesModelList.remove(i);
+					i--;
+				}
 			}
-		}
-		Map<String, Object> sendMap = getDetailParam(monthlyInfo);
-		sendMap.put("getYandM", getYandM);
-		
-		MonthlySalesModelList =MonthlySalesSearchService.searchMonthlySales(sendMap);
-		logger.info("MonthlySalesSearchController.searchMonthlySales:" + "検索結束");
-		for(int i =0; i<MonthlySalesModelList.size();i++) {
-			if(UtilsCheckMethod.isNullOrEmpty(MonthlySalesModelList.get(i).getEmployeeName())) {
-				MonthlySalesModelList.get(i).setEmployeeName("");
+
+			if (monthlyInfo.getEmployeeClassification().equals("")
+					|| monthlyInfo.getEmployeeClassification().equals("1")) {
+				List<MonthlySalesSearchModel> bpMonthlySalesModelList = new ArrayList<MonthlySalesSearchModel>();
+				bpMonthlySalesModelList = MonthlySalesSearchService.searchBpMonthlySales(sendMap);
+				for (int i = 0; i < bpMonthlySalesModelList.size(); i++) {
+					MonthlySalesModelList.add(bpMonthlySalesModelList.get(i));
+				}
 			}
-			if(UtilsCheckMethod.isNullOrEmpty(monthlyInfo.getEmployeeClassification())) {
-				monthlyInfo.setEmployeeClassification("");
+
+			for (int i = 0; i < MonthlySalesModelList.size(); i++) {
+				MonthlySalesModelList.get(i).setRowNo(String.valueOf(i + 1));
 			}
-			if(!monthlyInfo.getEmployeeClassification().equals("1")) {
-			if(!UtilsCheckMethod.isNullOrEmpty(MonthlySalesModelList.get(i).getEmployeeNo())) {
-				if(MonthlySalesModelList.get(i).getEmployeeNo().substring(0,2).equals("BP")) {
-					MonthlySalesModelList.get(i).setEmployeeName(MonthlySalesModelList.get(i).getEmployeeName()+"(BP)");
-				}								
-			}
-		}
-			
-		}
-		
-		if(MonthlySalesModelList.size()==0) {
-			String noData = "";
-			noData="条件に該当する結果が存在しない";
-			resulterr.put("noData",noData);
-			return resulterr;
-		}else {
-			Map<String, Object> resultdata = new HashMap<>();
-			resultdata.put("data", MonthlySalesModelList);
-			return resultdata;
+
+			if (MonthlySalesModelList.size() == 0) {
+				String noData = "";
+				noData = "条件に該当する結果が存在しない";
+				resulterr.put("noData", noData);
+				return resulterr;
+			} else {
+				Map<String, Object> resultdata = new HashMap<>();
+				resultdata.put("data", MonthlySalesModelList);
+				return resultdata;
 			}
 		}
 	}
-	
+
 	public Map<String, Object> getDetailParam(MonthlySalesSearchModel monthlyInfo) {
 		Map<String, Object> sendMap = new HashMap<String, Object>();
 		String employeeClassification = monthlyInfo.getEmployeeClassification();
@@ -185,7 +205,7 @@ public class MonthlySalesSearchController {
 		}
 		if (utilPriceback != null && utilPriceback.length() != 0) {
 			sendMap.put("utilPriceback", utilPriceback);
-		}	
+		}
 		if (salaryfront != null && salaryfront.length() != 0) {
 			sendMap.put("salaryFront", salaryfront);
 		}

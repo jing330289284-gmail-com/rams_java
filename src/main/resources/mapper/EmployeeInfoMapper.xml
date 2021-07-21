@@ -1122,9 +1122,9 @@
 	<update id="updatebpInfo"
 		parameterType="jp.co.lyc.cms.model.BpInfoModel">
 		INSERT INTO T011BpInfoSupplement
-		(bpEmployeeNo,bpUnitPrice,bpBelongCustomerCode,bpSalesProgressCode,bpOtherCompanyAdmissionEndDate,bpRemark,createTime,updateTime,updateUser)
+		(bpEmployeeNo,unitPriceStartMonth,bpUnitPrice,bpBelongCustomerCode,bpSalesProgressCode,bpOtherCompanyAdmissionEndDate,bpRemark,createTime,updateTime,updateUser)
 		VALUES
-		(#{bpEmployeeNo},#{bpUnitPrice},#{bpBelongCustomerCode},#{bpSalesProgressCode},#{bpOtherCompanyAdmissionEndDate},#{bpRemark},now(),now(),#{updateUser})
+		(#{bpEmployeeNo},#{unitPriceStartMonth},#{bpUnitPrice},#{bpBelongCustomerCode},#{bpSalesProgressCode},#{bpOtherCompanyAdmissionEndDate},#{bpRemark},now(),now(),#{updateUser})
 
 		ON DUPLICATE KEY
 

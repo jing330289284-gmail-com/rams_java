@@ -1233,7 +1233,7 @@ public class UtilsController {
 			// 创建一个信息
 			Message message = new MimeMessage(session);
 			// 设定发送方
-			message.setFrom(new InternetAddress("yibugo@lyc.co.jp"));
+			message.setFrom(new InternetAddress(emailMod.getMailFrom()));
 			// 设置主题内容
 			message.setSubject(emailMod.getMailTitle());
 			// message.setContent(emailMod.getContext(), "text/html;charset=utf-8");
@@ -1327,7 +1327,7 @@ public class UtilsController {
 			// 创建一个信息
 			Message message = new MimeMessage(session);
 			// 设定发送方
-			message.setFrom(new InternetAddress("yibugo@lyc.co.jp"));
+			message.setFrom(new InternetAddress(emailMod.getMailFrom()));
 			// 设置主题内容
 			message.setSubject(emailMod.getMailTitle());
 			// message.setContent(emailMod.getContext(), "text/html;charset=utf-8");

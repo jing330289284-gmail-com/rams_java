@@ -18,6 +18,8 @@ public class BpInfoModel {
 
 	public String bpRemark;// 備考
 
+	public String unitPriceStartMonth;// 単価開始年月
+
 	public String bpOtherCompanyAdmissionEndDate;// 所属現場終年月
 
 	public String updateUser;// 更新者
@@ -28,6 +30,14 @@ public class BpInfoModel {
 
 	public String getBpEmployeeNo() {
 		return bpEmployeeNo;
+	}
+
+	public String getUnitPriceStartMonth() {
+		return unitPriceStartMonth;
+	}
+
+	public void setUnitPriceStartMonth(String unitPriceStartMonth) {
+		this.unitPriceStartMonth = unitPriceStartMonth;
 	}
 
 	public String getUpdateUser() {

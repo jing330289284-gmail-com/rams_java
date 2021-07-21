@@ -6,7 +6,11 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import jp.co.lyc.cms.model.MonthlySalesSearchModel;
+
 @Mapper
 public interface MonthlySalesSearchMapper {
 	public List<MonthlySalesSearchModel> getMonthlySalesInfo(Map<String, Object> sendMap);
+
+	public List<MonthlySalesSearchModel> getBpMonthlySalesInfo(Map<String, Object> sendMap);
+
 }

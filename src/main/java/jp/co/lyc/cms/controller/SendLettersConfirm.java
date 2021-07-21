@@ -4,6 +4,7 @@ import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -157,8 +158,16 @@ public class SendLettersConfirm extends BaseController {
 
 	@RequestMapping(value = "/sendMailWithFile", method = RequestMethod.POST)
 	@ResponseBody
-	public void sendMailWithFile(@RequestBody EmailModel emailModel) {
-
+	public Map<String, Object> sendMailWithFile(@RequestBody EmailModel emailModel) {
+		String errorsMessage = "";
+		Map<String, Object> resulterr = new HashMap<>();
+		if(emailModel.getMailFrom()==null||emailModel.getMailFrom().equals("")) {
+			errorsMessage = "登録者メールアドレス入力されてない、確認してください。";
+					
+			resulterr.put("errorsMessage", errorsMessage);// エラーメッセージ
+			return resulterr;
+		}
+		
 		logger.info("sendMailWithFile:" + "送信開始");
 
 		// EmailModel emailModel = new EmailModel();
@@ -174,9 +183,13 @@ public class SendLettersConfirm extends BaseController {
 			else
 				utils.sendMailWithFile(emailModel);
 		} catch (Exception e) {
+			errorsMessage = "送信エラー発生しました。";
 			
+			resulterr.put("errorsMessage", errorsMessage);// エラーメッセージ
+			return resulterr;
 		}
 		logger.info("sendMailWithFile" + "送信結束");
+		return resulterr;
 	}
 
 	// 要員追加機能の新規 20201216 張棟 START
