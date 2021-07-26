@@ -35,6 +35,7 @@
 		T011.bpBelongCustomerCode
 		WHERE
 		T011.bpEmployeeNo = a.employeeNo
+		and T011.unitPriceStartMonth = ""
 		) AS
 		employeeFrom
 		FROM
@@ -59,7 +60,9 @@
 		g.employeeNo AND a.employeeNo
 		!= ''
 		LEFT JOIN T011BpInfoSupplement h ON
-		a.employeeNo = h.bpEmployeeNo AND
+		a.employeeNo = h.bpEmployeeNo
+		and h.unitPriceStartMonth = ""
+		AND
 		a.employeeNo != ''
 		WHERE
 		1 =1

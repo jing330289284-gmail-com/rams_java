@@ -43,6 +43,61 @@ public class WagesInfoModel implements Serializable {
 	String introductionAllowance;
 	String workingCondition;
 
+	String bonusNo;// ボーナスフラグ
+	String fristTimeBonusAmount;
+	String secondTimeBonusAmount;
+	String fristBonusMonth;
+	String secondBonusMonth;
+	String bonusSum;
+
+	public String getBonusSum() {
+		return bonusSum;
+	}
+
+	public void setBonusSum(String bonusSum) {
+		this.bonusSum = bonusSum;
+	}
+
+	public String getBonusNo() {
+		return bonusNo;
+	}
+
+	public void setBonusNo(String bonusNo) {
+		this.bonusNo = bonusNo;
+	}
+
+	public String getFristTimeBonusAmount() {
+		return fristTimeBonusAmount;
+	}
+
+	public void setFristTimeBonusAmount(String fristTimeBonusAmount) {
+		this.fristTimeBonusAmount = fristTimeBonusAmount;
+	}
+
+	public String getSecondTimeBonusAmount() {
+		return secondTimeBonusAmount;
+	}
+
+	public void setSecondTimeBonusAmount(String secondTimeBonusAmount) {
+		this.secondTimeBonusAmount = secondTimeBonusAmount;
+	}
+
+	public String getFristBonusMonth() {
+		return fristBonusMonth;
+	}
+
+	public void setFristBonusMonth(String fristBonusMonth) {
+		this.fristBonusMonth = fristBonusMonth;
+	}
+
+	public String getSecondBonusMonth() {
+		return secondBonusMonth;
+	}
+
+	public void setSecondBonusMonth(String secondBonusMonth) {
+		this.secondBonusMonth = secondBonusMonth;
+	}
+
 	public String getWorkingCondition() {
 		return workingCondition;
 	}

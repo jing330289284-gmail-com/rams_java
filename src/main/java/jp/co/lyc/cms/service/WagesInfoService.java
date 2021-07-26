@@ -143,6 +143,7 @@ public class WagesInfoService {
 		sendMap.put("lastTimeBonusAmount", wagesInfoModel.getLastTimeBonusAmount());
 		sendMap.put("scheduleOfBonusAmount", wagesInfoModel.getScheduleOfBonusAmount());
 		sendMap.put("bonusFlag", wagesInfoModel.getBonusFlag());
+		sendMap.put("bonusNo", wagesInfoModel.getBonusNo());
 		sendMap.put("nextBonusMonth", wagesInfoModel.getNextBonusMonth());
 		sendMap.put("monthOfCompanyPay", wagesInfoModel.getMonthOfCompanyPay());
 		sendMap.put("nextRaiseMonth", wagesInfoModel.getNextRaiseMonth());
@@ -151,6 +152,10 @@ public class WagesInfoService {
 		sendMap.put("remark", wagesInfoModel.getRemark());
 		sendMap.put("updateUser", wagesInfoModel.getUpdateUser());
 		sendMap.put("workingConditionStatus", wagesInfoModel.getWorkingCondition());
+		sendMap.put("fristTimeBonusAmount", wagesInfoModel.getFristTimeBonusAmount());
+		sendMap.put("secondTimeBonusAmount", wagesInfoModel.getSecondTimeBonusAmount());
+		sendMap.put("fristBonusMonth", wagesInfoModel.getFristBonusMonth());
+		sendMap.put("secondBonusMonth", wagesInfoModel.getSecondBonusMonth());
 		return sendMap;
 	}
 }

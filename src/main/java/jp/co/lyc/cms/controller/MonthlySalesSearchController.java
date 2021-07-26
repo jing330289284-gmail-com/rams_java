@@ -118,6 +118,11 @@ public class MonthlySalesSearchController {
 
 				}
 			}
+			
+			if (UtilsCheckMethod.isNullOrEmpty(monthlyInfo.getEmployeeClassification())) {
+				monthlyInfo.setEmployeeClassification("");
+			}
+			
 			Map<String, Object> sendMap = getDetailParam(monthlyInfo);
 			sendMap.put("getYandM", getYandM);
 
@@ -127,9 +132,7 @@ public class MonthlySalesSearchController {
 				if (UtilsCheckMethod.isNullOrEmpty(MonthlySalesModelList.get(i).getEmployeeName())) {
 					MonthlySalesModelList.get(i).setEmployeeName("");
 				}
-				if (UtilsCheckMethod.isNullOrEmpty(monthlyInfo.getEmployeeClassification())) {
-					monthlyInfo.setEmployeeClassification("");
-				}
+
 				if (!monthlyInfo.getEmployeeClassification().equals("1")) {
 					if (!UtilsCheckMethod.isNullOrEmpty(MonthlySalesModelList.get(i).getEmployeeNo())) {
 						if (MonthlySalesModelList.get(i).getEmployeeNo().substring(0, 2).equals("BP")) {

@@ -45,16 +45,17 @@ public class WagesInfoValidation implements Validator{
 						errors.rejectValue("insuranceFeeAmount", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG005","社会保険"));
 					}
 				}
-				if(p.getBonusFlag().equals("1")) {
-					if(!UtilsCheckMethod.isNullOrEmpty(p.getScheduleOfBonusAmount()) && 
-							UtilsCheckMethod.isNullOrEmpty(p.getNextBonusMonth())) {
-						errors.rejectValue("nextBonusMonth", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001","次のボーナス月"));
-					}
-					if(UtilsCheckMethod.isNullOrEmpty(p.getScheduleOfBonusAmount()) && 
-							!UtilsCheckMethod.isNullOrEmpty(p.getNextBonusMonth())) {
-						errors.rejectValue("scheduleOfBonusAmount", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001","ボーナス予定額"));
-					}
-				}
+				/*
+				 * if(p.getBonusFlag().equals("1")) {
+				 * if(!UtilsCheckMethod.isNullOrEmpty(p.getScheduleOfBonusAmount()) &&
+				 * UtilsCheckMethod.isNullOrEmpty(p.getNextBonusMonth())) {
+				 * errors.rejectValue("nextBonusMonth", "",
+				 * StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001","次のボーナス月")); }
+				 * if(UtilsCheckMethod.isNullOrEmpty(p.getScheduleOfBonusAmount()) &&
+				 * !UtilsCheckMethod.isNullOrEmpty(p.getNextBonusMonth())) {
+				 * errors.rejectValue("scheduleOfBonusAmount", "",
+				 * StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001","ボーナス予定額")); } }
+				 */
 			}else if(methodName.equals("delete")) {
 				if(UtilsCheckMethod.isNullOrEmpty(p.getEmployeeNo())) {
 					errors.rejectValue("employeeNo", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001","社員名"));

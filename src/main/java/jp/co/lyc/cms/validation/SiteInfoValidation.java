@@ -37,7 +37,7 @@ public class SiteInfoValidation implements Validator {
 			errors.rejectValue("unitPrice", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001", "単価"));
 		}
 		// 现场状态终了以及单金调整时退场年月不能为空
-		if (!p.getWorkState().equals("0")) {
+		if (!p.getWorkState().equals("0") && !p.getWorkState().equals("3") ) {
 			if (UtilsCheckMethod.isNullOrEmpty(p.getAdmissionEndDate())) {
 				errors.rejectValue("unitPrice", "", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001", "退場年月日"));
 			}

@@ -22,10 +22,12 @@
 		T005.welfarePensionAmount,
 		T005.healthInsuranceAmount,
 		T005.insuranceFeeAmount,
-		T005.lastTimeBonusAmount,
-		T005.scheduleOfBonusAmount,
-		T005.bonusFlag,
-		T005.nextBonusMonth,
+		T005.fristTimeBonusAmount,
+		T005.secondTimeBonusAmount,
+		T005.fristTimeBonusAmount + T005.secondTimeBonusAmount as bonusSum,
+		T005.bonusNo,
+		T005.fristBonusMonth,
+		T005.secondBonusMonth,
 		T005.monthOfCompanyPay,
 		T005.nextRaiseMonth,
 		T005.totalAmount,
@@ -105,10 +107,11 @@
 		welfarePensionAmount,
 		healthInsuranceAmount,
 		insuranceFeeAmount,
-		lastTimeBonusAmount,
-		scheduleOfBonusAmount,
-		bonusFlag,
-		nextBonusMonth,
+		fristTimeBonusAmount,
+		secondTimeBonusAmount,
+		bonusNo,
+		fristBonusMonth,
+		secondBonusMonth,
 		monthOfCompanyPay,
 		nextRaiseMonth,
 		totalAmount,
@@ -128,10 +131,11 @@
 		#{welfarePensionAmount},
 		#{healthInsuranceAmount},
 		#{insuranceFeeAmount},
-		#{lastTimeBonusAmount},
-		#{scheduleOfBonusAmount},
-		#{bonusFlag},
-		#{nextBonusMonth},
+		#{fristTimeBonusAmount},
+		#{secondTimeBonusAmount},
+		#{bonusNo},
+		#{fristBonusMonth},
+		#{secondBonusMonth},
 		#{monthOfCompanyPay},
 		#{nextRaiseMonth},
 		#{totalAmount},
@@ -169,17 +173,20 @@
 		<if test="insuranceFeeAmount != null">
 			insuranceFeeAmount = #{insuranceFeeAmount},
 		</if>
-		<if test="lastTimeBonusAmount != null">
-			lastTimeBonusAmount = #{lastTimeBonusAmount},
+		<if test="fristTimeBonusAmount != null">
+			fristTimeBonusAmount = #{fristTimeBonusAmount},
 		</if>
-		<if test="scheduleOfBonusAmount != null">
-			scheduleOfBonusAmount = #{scheduleOfBonusAmount},
+		<if test="secondTimeBonusAmount != null">
+			secondTimeBonusAmount = #{secondTimeBonusAmount},
 		</if>
-		<if test="bonusFlag != null">
-			bonusFlag = #{bonusFlag},
+		<if test="bonusNo != null">
+			bonusNo = #{bonusNo},
 		</if>
-		<if test="nextBonusMonth != null">
-			nextBonusMonth = #{nextBonusMonth},
+		<if test="fristBonusMonth != null">
+			fristBonusMonth = #{fristBonusMonth},
+		</if>
+		<if test="secondBonusMonth != null">
+			secondBonusMonth = #{secondBonusMonth},
 		</if>
 		<if test="monthOfCompanyPay != null">
 			monthOfCompanyPay = #{monthOfCompanyPay},
