@@ -221,7 +221,7 @@ public class PersonalSalesSearchController {
 							- (Integer.parseInt(isNull(personModelList.get(i).getSalary()))
 									+ Integer.parseInt(isNull(personModelList.get(i).getTransportationExpenses()))
 									+ Integer.parseInt(isNull(personModelList.get(i).getInsuranceFeeAmount()))
-									+ Integer.parseInt(isNull(personModelList.get(i).getBonusFee()))
+									+ Integer.parseInt(isNull(personModelList.get(i).getBonusFee()).replace(".0", ""))
 									+ Integer.parseInt(isNull(personModelList.get(i).getLeaderAllowanceAmount()))
 									+ Integer.parseInt(isNull(personModelList.get(i).getOtherAllowanceAmount()))
 									+ Integer.parseInt(isNull(personModelList.get(i).getIntroductionAllowance()))));

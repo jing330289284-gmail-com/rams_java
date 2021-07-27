@@ -60,6 +60,14 @@ public class MonthlySalesSearchController {
 			List<String> getYandM = new ArrayList<String>();
 			String startYandM = monthlyInfo.getStartYandM();
 			String endYandM = monthlyInfo.getEndYandM();
+			if (monthlyInfo.getFiscalYear() == null || monthlyInfo.getFiscalYear().equals("")) {
+				startYandM = monthlyInfo.getStartYandM();
+				endYandM = monthlyInfo.getEndYandM();
+			} else {
+				startYandM = monthlyInfo.getFiscalYear() + "01";
+				endYandM = monthlyInfo.getFiscalYear() + "12";
+			}
+
 			if (startYandM != "" && endYandM == "") {
 				endYandM = sysTime;
 			}
@@ -118,11 +126,11 @@ public class MonthlySalesSearchController {
 
 				}
 			}
-			
+
 			if (UtilsCheckMethod.isNullOrEmpty(monthlyInfo.getEmployeeClassification())) {
 				monthlyInfo.setEmployeeClassification("");
 			}
-			
+
 			Map<String, Object> sendMap = getDetailParam(monthlyInfo);
 			sendMap.put("getYandM", getYandM);
 

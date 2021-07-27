@@ -15,10 +15,10 @@
 		T002.employeeFormCode,
 		T005.salary,
 		T005.socialInsuranceFlag,
-		T005.nextBonusMonth,
+		T005.fristBonusMonth as nextBonusMonth,
 		CAST(T005.insuranceFeeAmount As unsigned) As insuranceFeeAmount,
-		CAST(T005.scheduleOfBonusAmount As unsigned) As scheduleOfBonusAmount,
-		CAST(T005.lastTimeBonusAmount As unsigned) As lastTimeBonusAmount,
+		CAST(T005.fristTimeBonusAmount + T005.secondTimeBonusAmount As unsigned) As scheduleOfBonusAmount,
+		CAST(T005.fristTimeBonusAmount As unsigned) As lastTimeBonusAmount,
 		T005.remark,
 		T002.intoCompanyYearAndMonth,
 		T002.retirementYearAndMonth
@@ -58,10 +58,10 @@
 			employeeName,
 			M005f.employeeFormName,
 			T005f.salary,
-			T005f.nextBonusMonth,
+			T005f.fristBonusMonth as nextBonusMonth,
 			T005f.socialInsuranceFlag,
 			CAST(T005f.insuranceFeeAmount As unsigned) As insuranceFeeAmount,
-			CAST(T005f.scheduleOfBonusAmount As unsigned) As
+			CAST(T005f.fristTimeBonusAmount + T005f.secondTimeBonusAmount As unsigned) As
 			scheduleOfBonusAmount,
 			T005f.remark
 			FROM
@@ -100,7 +100,7 @@
 		T005.salary,
 		T005.socialInsuranceFlag,
 		CAST(T005.insuranceFeeAmount As unsigned) As insuranceFeeAmount,
-		CAST(T005.scheduleOfBonusAmount As unsigned) As scheduleOfBonusAmount,
+		CAST(T005.fristTimeBonusAmount + T005.secondTimeBonusAmount As unsigned) As scheduleOfBonusAmount,
 		T005.remark
 		FROM
 		T002EmployeeDetail As T002
@@ -139,11 +139,11 @@
 		M005.employeeFormName,
 		T002.employeeFormCode,
 		T005.salary,
-		T005.lastTimeBonusAmount,
+		T005.fristTimeBonusAmount as lastTimeBonusAmount,
 		T005.socialInsuranceFlag,
-		T005.nextBonusMonth As reflectYearAndMonth,
+		T005.fristBonusMonth As reflectYearAndMonth,
 		CAST(T005.insuranceFeeAmount As unsigned) As insuranceFeeAmount,
-		CAST(T005.scheduleOfBonusAmount As unsigned) As scheduleOfBonusAmount,
+		CAST(T005.fristTimeBonusAmount + T005.secondTimeBonusAmount As unsigned) As scheduleOfBonusAmount,
 		T005.remark
 		FROM T001Employee As T001
 		LEFT JOIN
@@ -156,7 +156,7 @@
 		M005EmployeeForm as M005 on
 		M005.employeeFormCode=T002.employeeFormCode
 		WHERE
-		nextBonusMonth between
+		fristBonusMonth between
 		#{startYandM} and #{endYandM}
 	</select>
 
@@ -171,9 +171,9 @@
 		T005.salary,
 		T005.waitingCost,
 		T005.socialInsuranceFlag,
-		T005.nextBonusMonth,
-		T005.lastTimeBonusAmount,
-		T005.scheduleOfBonusAmount,
+		T005.fristBonusMonth as nextBonusMonth,
+		T005.fristTimeBonusAmount as lastTimeBonusAmount,
+		T005.fristTimeBonusAmount + T005.secondTimeBonusAmount as scheduleOfBonusAmount,
 		T005.remark
 		FROM
 		T005WagesInfo AS T005
@@ -258,7 +258,7 @@
 		resultMap="detailsInfo">
 		SELECT
 		T005.employeeNo,
-		T005.nextBonusMonth,
+		T005.fristBonusMonth as nextBonusMonth,
 		T005.employeeStatus as employeeFormCode,
 		if(T005.employeeStatus =
 		"",T005.employeeStatus,M005.employeeFormName) as employeeFormName,
@@ -289,13 +289,13 @@
 		T005.employeeStatus =
 		M005.employeeFormCode
 		WHERE
-		nextBonusMonth
+		fristBonusMonth
 		between
 		#{startYandM} and
 		#{endYandM}
 		and T001.employeeFristName is not
 		null
-		group by employeeNo,nextBonusMonth
+		group by employeeNo,fristBonusMonth
 	</select>
 
 	<select id="getReflectYearAndMonth" parameterType="map"

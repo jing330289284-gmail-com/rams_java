@@ -31,8 +31,8 @@ public class MonthlySalesSearchValidation  implements Validator{
 //				if(UtilsCheckMethod.isNullOrEmpty(psm.getNowYandM())){
 //					errors.rejectValue("nowYandM","年月",StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001","年月"));
 //				}
-				if(UtilsCheckMethod.isNullOrEmpty(psm.getStartYandM())&&UtilsCheckMethod.isNullOrEmpty(psm.getEndYandM())){
-					errors.rejectValue("startYandM", "年月", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001","年月"));
+				if(UtilsCheckMethod.isNullOrEmpty(psm.getStartYandM())&&UtilsCheckMethod.isNullOrEmpty(psm.getEndYandM())&&UtilsCheckMethod.isNullOrEmpty(psm.getFiscalYear())){
+					errors.rejectValue("startYandM", "年度および年月", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG001","年度および年月"));
 				}
 				if(!UtilsCheckMethod.isNullOrEmpty(psm.getStartYandM())&&UtilsCheckMethod.isNullOrEmpty(psm.getEndYandM())&& Integer.parseInt(psm.getStartYandM())-Integer.parseInt(sysTime)>0){
 					errors.rejectValue("startYandM", "年月範囲", StatusCodeToMsgMap.getErrMsgbyCodeReplace("MSG009","年月範囲"));

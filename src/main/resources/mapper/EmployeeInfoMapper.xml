@@ -336,7 +336,7 @@
 		AS immigrationStartTime,
 		if(T002.intoCompanyYearAndMonth is null or
 		T002.intoCompanyYearAndMonth =
-		"","",concat(LEFT(T002.intoCompanyYearAndMonth,4),"/",RIGHT(T002.intoCompanyYearAndMonth,2)))
+		"","",concat(LEFT(T002.intoCompanyYearAndMonth,4),"/",RIGHT(LEFT(T002.intoCompanyYearAndMonth,6),2)))
 		AS intoCompanyYearAndMonth,if(T002.stayPeriod is null or
 		T002.stayPeriod =
 		"","",concat(LEFT(T002.stayPeriod,4),"/",LEFT(RIGHT(T002.stayPeriod,4),2),"/",RIGHT(T002.stayPeriod,2)))

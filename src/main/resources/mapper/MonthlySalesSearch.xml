@@ -28,14 +28,14 @@
 			unitPrice,
 			CAST(T005.salary As unsigned) As salary,
 			CAST((ifnull(T013.transportationExpenses,0) +
-			ifnull(T005.scheduleOfBonusAmount,0) +
+			ifnull(T005.fristTimeBonusAmount + T005.secondTimeBonusAmount,0) +
 			ifnull(T005.insuranceFeeAmount,0)+ifnull(T013.otherAllowanceAmount,0)
 			+ ifnull(T013.leaderAllowanceAmount,0) +
 			ifnull(T013.introductionAllowance,0)) As unsigned) As otherFee,
 			CAST(T005.waitingCost As unsigned) As waitingCost,
 			ifnull(T006.unitPrice*10000,0) - (ifnull(T005.salary,0) +
 			ifnull(T013.transportationExpenses,0) +
-			ifnull(T005.scheduleOfBonusAmount,0) +
+			ifnull(T005.fristTimeBonusAmount + T005.secondTimeBonusAmount,0) +
 			ifnull(T005.insuranceFeeAmount,0)
 			+ifnull(T013.otherAllowanceAmount,0) +
 			ifnull(T013.leaderAllowanceAmount,0) +
@@ -70,26 +70,7 @@
 			T013.expensesReflectYearAndMonth
 			left join T002EmployeeDetail as T002
 			ON A.employeeNo =T002.employeeNo
-			left join (SELECT
-			employeeFormCode,
-			Case
-			WHEN employeeFormCode = '0'
-			THEN "社員"
-			WHEN employeeFormCode = '1'
-			THEN "協力"
-			WHEN employeeFormCode =
-			'2' THEN
-			"個人事業主"
-			WHEN employeeFormCode
-			= '3' THEN "子会社社員"
-			WHEN
-			employeeFormCode =
-			'4' THEN "協力依頼営業"
-			END
-			as
-			employeeFormName
-			FROM
-			M005EmployeeForm) as M005 ON
+			left join M005EmployeeForm as M005 ON
 			T005.employeeStatus=M005.employeeFormCode
 			left join M014Occupation as
 			M014 ON T002.occupationCode =
@@ -158,7 +139,7 @@
 				test="grossProfitFront != null &amp;&amp; grossProfitBack != null">
 				AND (T006.unitPrice*10000 - (T005.salary +
 				(T013.transportationExpenses
-				+ T005.scheduleOfBonusAmount +
+				+ T005.fristTimeBonusAmount + T005.secondTimeBonusAmount +
 				T005.insuranceFeeAmount
 				+T013.otherAllowanceAmount +
 				T013.leaderAllowanceAmount +
@@ -171,7 +152,7 @@
 				test="grossProfitFront != null &amp;&amp; grossProfitBack == null">
 				AND (T006.unitPrice*10000 - (T005.salary +
 				(T013.transportationExpenses
-				+ T005.scheduleOfBonusAmount +
+				+ T005.fristTimeBonusAmount + T005.secondTimeBonusAmount +
 				T005.insuranceFeeAmount
 				+T013.otherAllowanceAmount +
 				T013.leaderAllowanceAmount +
@@ -183,7 +164,7 @@
 				test="grossProfitFront== null &amp;&amp; grossProfitBack != null">
 				AND (T006.unitPrice*10000 - (T005.salary +
 				(T013.transportationExpenses
-				+ T005.scheduleOfBonusAmount +
+				+ T005.fristTimeBonusAmount + T005.secondTimeBonusAmount +
 				T005.insuranceFeeAmount
 				+T013.otherAllowanceAmount +
 				T013.leaderAllowanceAmount +
@@ -210,10 +191,13 @@ M014.occupationName,
 left(T006.admissionStartDate,6) as admissionStartDate,
 left(T006.admissionEndDate,6) as admissionEndDate,
 T006.unitPrice*10000 as unitPrice,
-T011.bpUnitPrice*10000 as salary
+T011.bpUnitPrice*10000 as salary,
+T007.customerName as bpBelongCustomer
 FROM T006EmployeeSiteInfo as T006
 left Join T011BpInfoSupplement as T011
 on T011.bpEmployeeNo = T006.employeeNo
+left Join T007CustomerInfo as T007
+on T011.bpBelongCustomerCode = T007.customerNo
 left join
 T001Employee as T001 ON T006.employeeNo = T001.employeeNo
 left join
