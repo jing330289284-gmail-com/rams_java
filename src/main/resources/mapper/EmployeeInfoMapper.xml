@@ -265,11 +265,13 @@
 		and
 		<if test="employeeName == null ">
 			<if test="employeeFormCode == null ">
-			(T002.employeeFormCode != "4" or T002.retirementYearAndMonth &gt; now())
+				(T002.employeeFormCode != "4" or
+				T002.retirementYearAndMonth &gt; now())
 			</if>
 			<if test="employeeFormCode != null ">
 				if(#{employeeFormCode} = "4",
-				T002.employeeFormCode = #{employeeFormCode} and T002.retirementYearAndMonth &lt;= now(),
+				T002.employeeFormCode =
+				#{employeeFormCode} and T002.retirementYearAndMonth &lt;= now(),
 				T002.employeeFormCode = #{employeeFormCode}
 				)
 			</if>
@@ -1143,6 +1145,38 @@
 		updateTime = now(),
 		updateUser = #{updateUser};
 	</update>
+
+	<!-- BP情報更新 -->
+	<update id="updatebpInfoAll"
+		parameterType="jp.co.lyc.cms.model.BpInfoModel">
+		UPDATE T011BpInfoSupplement
+		SET
+		bpBelongCustomerCode =
+		#{bpBelongCustomerCode},
+		bpSalesProgressCode =
+		#{bpSalesProgressCode},
+		bpOtherCompanyAdmissionEndDate =
+		#{bpOtherCompanyAdmissionEndDate},
+		createTime =
+		now(),
+		updateTime = now(),
+		updateUser = #{updateUser}
+		WHERE
+		bpEmployeeNo = #{bpEmployeeNo}
+		;
+	</update>
+
+	<!-- bp情報を削除 -->
+	<delete id="deletebpInfo" parameterType="String">
+		DELETE
+		FROM
+		T011BpInfoSupplement
+		WHERE
+		bpEmployeeNo = #{bpEmployeeNo}
+		and
+		unitPriceStartMonth = #{unitPriceStartMonth}
+		;
+	</delete>
 
 	<!-- 履歴書を削除 -->
 	<delete id="deleteResumeManagement" parameterType="String">

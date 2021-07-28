@@ -84,7 +84,7 @@ public interface EmployeeInfoMapper {
 	 * 
 	 */
 	public void deleteEmployeeSalesSituation(Map<String, Object> sendMap);
-	
+
 	/**
 	 * BP情報を削除
 	 * 
@@ -165,4 +165,18 @@ public interface EmployeeInfoMapper {
 	 * @param sendMap
 	 */
 	public void updatebpInfo(BpInfoModel bpInfoModel);
+
+	/**
+	 * BP情報更新
+	 * 
+	 * @param sendMap
+	 */
+	public void updatebpInfoAll(BpInfoModel bpInfoModel);
+
+	/**
+	 * BP情報削除
+	 * 
+	 * @param sendMap
+	 */
+	public void deletebpInfo(String bpEmployeeNo, String unitPriceStartMonth);
 }

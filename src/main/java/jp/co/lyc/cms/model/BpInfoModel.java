@@ -5,8 +5,11 @@ public class BpInfoModel {
 	/**
 	 * 
 	 */
+	public String rowNo;
 
 	public String bpEmployeeNo;// 社員番号
+
+	public String oldUnitPriceStartMonth;// 社員番号
 
 	public String actionType;// 処理区分
 
@@ -24,9 +27,21 @@ public class BpInfoModel {
 
 	public String updateUser;// 更新者
 
-	// public String createTime;// 反映年月
+	public String getOldUnitPriceStartMonth() {
+		return oldUnitPriceStartMonth;
+	}
 
-	// public String updateTime;// 更新された反映年月
+	public void setOldUnitPriceStartMonth(String oldUnitPriceStartMonth) {
+		this.oldUnitPriceStartMonth = oldUnitPriceStartMonth;
+	}
+
+	public String getRowNo() {
+		return rowNo;
+	}
+
+	public void setRowNo(String rowNo) {
+		this.rowNo = rowNo;
+	}
 
 	public String getBpEmployeeNo() {
 		return bpEmployeeNo;

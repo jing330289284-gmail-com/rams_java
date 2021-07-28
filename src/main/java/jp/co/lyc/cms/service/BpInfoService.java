@@ -1,5 +1,6 @@
 package jp.co.lyc.cms.service;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ public class BpInfoService {
 		return bpInfoModel;
 	}
 
-	
-	
+	public List<BpInfoModel> getBpInfoList(Map<String, Object> sendMap) {
+		return bpInfoMapper.getBpInfoList(sendMap);
+	}
 }

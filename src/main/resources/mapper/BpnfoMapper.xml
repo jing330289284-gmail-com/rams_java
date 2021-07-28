@@ -1,54 +1,70 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="jp.co.lyc.cms.mapper.BpInfoMapper">
-    <resultMap id="bpInfoModel" type="jp.co.lyc.cms.model.BpInfoModel"/>
-    <resultMap id="MapResult" type="map"/>
-    <!-- 諸費用検索 -->
-    <select id="getBpInfo" parameterType="String" resultMap="bpInfoModel">
-        SELECT
-			T011.bpEmployeeNo,
-			max(T011.unitPriceStartMonth) as unitPriceStartMonth,
-			T011.bpUnitPrice,
-			T011.bpBelongCustomerCode,
-			T011.bpSalesProgressCode,
-			T011.bpOtherCompanyAdmissionEndDate,
-			T011.bpRemark,
-			T011.createTime,
-			T011.updateTime,
-			T011.updateUser
+	<resultMap id="bpInfoModel"
+		type="jp.co.lyc.cms.model.BpInfoModel" />
+	<resultMap id="MapResult" type="map" />
+	<!-- 諸費用検索 -->
+	<select id="getBpInfo" parameterType="String"
+		resultMap="bpInfoModel">
+		SELECT
+		T011.bpEmployeeNo,
+		max(T011.unitPriceStartMonth) as
+		unitPriceStartMonth,
+		T011.bpUnitPrice,
+		T011.bpBelongCustomerCode,
+		T011.bpSalesProgressCode,
+		T011.bpOtherCompanyAdmissionEndDate,
+		T011.bpRemark,
+		T011.createTime,
+		T011.updateTime,
+		T011.updateUser
 		FROM
-			T011BpInfoSupplement AS T011
+		T011BpInfoSupplement AS T011
 		WHERE
-			bpEmployeeNo = #{bpEmployeeNo}
-    </select>
-      <!-- 諸費用情報インサート -->
+		bpEmployeeNo = #{bpEmployeeNo}
+	</select>
+
+	<select id="getBpInfoList" parameterType="String"
+		resultMap="bpInfoModel">
+		SELECT
+		*
+		FROM
+		T011BpInfoSupplement
+		WHERE
+		bpEmployeeNo =
+		#{bpEmployeeNo}
+	</select>
+
+	<!-- 諸費用情報インサート -->
 	<insert id="insertBp" parameterType="String">
-		INSERT INTO T011BpInfoSupplement(
-			bpEmployeeNo,
-			bpUnitPrice,
-			bpBelongCustomerCode,
-			bpSalesProgressCode,
-			bpOtherCompanyAdmissionEndDate,
-			bpRemark,
-			createTime,
-			updateTime,
-			updateUser
-		)  
+		INSERT INTO
+		T011BpInfoSupplement(
+		bpEmployeeNo,
+		bpUnitPrice,
+		bpBelongCustomerCode,
+		bpSalesProgressCode,
+		bpOtherCompanyAdmissionEndDate,
+		bpRemark,
+		createTime,
+		updateTime,
+		updateUser
+		)
 		VALUE(
-			#{bpEmployeeNo},
-			#{bpUnitPrice},
-			#{bpBelongCustomerCode},
-			#{bpSalesProgressCode},
-			#{bpOtherCompanyAdmissionEndDate},
-			#{bpRemark},
-			NOW(),
-			NOW(),
-			#{updateUser})
-    </insert>
-    <!--   諸p費用情報アップデート -->
-    <update id="updateBp" parameterType="String">
+		#{bpEmployeeNo},
+		#{bpUnitPrice},
+		#{bpBelongCustomerCode},
+		#{bpSalesProgressCode},
+		#{bpOtherCompanyAdmissionEndDate},
+		#{bpRemark},
+		NOW(),
+		NOW(),
+		#{updateUser})
+	</insert>
+	<!-- 諸p費用情報アップデート -->
+	<update id="updateBp" parameterType="String">
 		UPDATE T011BpInfoSupplement
-		SET 
+		SET
 		<if test="bpEmployeeNo != null">
 			bpEmployeeNo = #{bpEmployeeNo},
 		</if>
@@ -62,19 +78,21 @@
 			bpSalesProgressCode = #{bpSalesProgressCode},
 		</if>
 		<if test="bpOtherCompanyAdmissionEndDate != null">
-			bpOtherCompanyAdmissionEndDate = #{bpOtherCompanyAdmissionEndDate},
+			bpOtherCompanyAdmissionEndDate =
+			#{bpOtherCompanyAdmissionEndDate},
 		</if>
 		<if test="bpRemark != null">
 			bpRemark = #{bpRemark},
 		</if>
 		updateTime = NOW(),
 		updateUser = #{updateUser}
-		WHERE 
-			bpEmployeeNo = #{bpEmployeeNo}
-    </update>
-    
-    
-    <!--　　Pbを削除 -->
+		WHERE
+		bpEmployeeNo =
+		#{bpEmployeeNo}
+	</update>
+
+
+	<!-- Pbを削除 -->
 	<delete id="deleteBpInfo" parameterType="String">
 		DELETE
 		FROM

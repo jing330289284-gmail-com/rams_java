@@ -43,13 +43,24 @@
 			monthlyGrosProfits
 
 			from (
-			select employeeNo,
+			<!-- select employeeNo,
 			max(reflectYearAndMonth),salary , reflectYearAndMonth
 			from
 			T005WagesInfo
-			where reflectYearAndMonth &lt;=#{getYandM}
+			where reflectYearAndMonth &lt;= #{getYandM}
 			group by
-			employeeNo
+			employeeNo -->
+			select T005.employeeNo,T005.reflectYearAndMonth,T005.salary FROM T005WagesInfo as T005
+			inner join (
+			select employeeNo,
+			max(reflectYearAndMonth) as reflectYearAndMonth
+			from
+			T005WagesInfo
+			where reflectYearAndMonth &lt;= #{getYandM}
+			group by
+			employeeNo) as temp
+			on temp.employeeNo = T005.employeeNo
+			and temp.reflectYearAndMonth = T005.reflectYearAndMonth
 			) as A
 			left join T005WagesInfo As T005 on
 			A.employeeNo =
@@ -190,8 +201,9 @@ M005.employeeFormName,
 M014.occupationName,
 left(T006.admissionStartDate,6) as admissionStartDate,
 left(T006.admissionEndDate,6) as admissionEndDate,
-T006.unitPrice*10000 as unitPrice,
-T011.bpUnitPrice*10000 as salary,
+CAST((T006.unitPrice*10000) As unsigned) as unitPrice,
+CAST((T011.bpUnitPrice*10000) As unsigned) as salary,
+T006.unitPrice*10000 - T011.bpUnitPrice*10000 as monthlyGrosProfits,
 T007.customerName as bpBelongCustomer
 FROM T006EmployeeSiteInfo as T006
 left Join T011BpInfoSupplement as T011
@@ -245,30 +257,30 @@ or (#{getYandM} &gt;= admissionStartDate and admissionEndDate is null)
 			</if>
 
 			<if test="salaryFront != null &amp;&amp; salaryBack != null">
-				AND salary between ${salaryFront}*10000 and
+				AND T011.bpUnitPrice*10000 between ${salaryFront}*10000 and
 				${salaryBack}*10000
 			</if>
 			<if test="salaryFront != null &amp;&amp; salaryBack == null">
-				AND salary &gt;= ${salaryFront}*10000
+				AND T011.bpUnitPrice*10000 &gt;= ${salaryFront}*10000
 			</if>
 			<if test="salaryFront == null &amp;&amp; salaryBack != null">
-				AND salary &lt;= ${salaryBack}*10000
+				AND T011.bpUnitPrice*10000 &lt;= ${salaryBack}*10000
 			</if>
 
 			<if
 				test="grossProfitFront != null &amp;&amp; grossProfitBack != null">
-				AND T006.unitPrice*10000 - salary
+				AND T006.unitPrice*10000 - T011.bpUnitPrice*10000
 				between
 				${grossProfitFront}*10000 and ${grossProfitBack}*10000
 			</if>
 			<if
 				test="grossProfitFront != null &amp;&amp; grossProfitBack == null">
-				AND T006.unitPrice*10000 - salary &gt;=
+				AND T006.unitPrice*10000 - T011.bpUnitPrice*10000 &gt;=
 				${grossProfitFront}*10000
 			</if>
 			<if
 				test="grossProfitFront== null &amp;&amp; grossProfitBack != null">
-				AND T006.unitPrice*10000 - salary &lt;=
+				AND T006.unitPrice*10000 - T011.bpUnitPrice*10000 &lt;=
 				${grossProfitBack}*10000
 			</if>
 		</foreach>

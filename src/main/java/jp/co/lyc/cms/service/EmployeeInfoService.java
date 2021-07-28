@@ -82,7 +82,7 @@ public class EmployeeInfoService {
 				}
 				employeeList = employeeListTemp;
 			}
-		}else {
+		} else {
 			employeeList = employeeListTemp;
 		}
 
@@ -397,6 +397,10 @@ public class EmployeeInfoService {
 	 */
 	public void updatebpInfo(BpInfoModel bpInfoModel) {
 		employeeInfoMapper.updatebpInfo(bpInfoModel);
+		if (bpInfoModel.getOldUnitPriceStartMonth() != null
+				&& !bpInfoModel.getOldUnitPriceStartMonth().equals(bpInfoModel.getUnitPriceStartMonth())) {
+			employeeInfoMapper.deletebpInfo(bpInfoModel.getBpEmployeeNo(), bpInfoModel.getOldUnitPriceStartMonth());
+		}
+		employeeInfoMapper.updatebpInfoAll(bpInfoModel);
 	}
-
 }

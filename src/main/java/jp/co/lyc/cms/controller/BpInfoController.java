@@ -1,6 +1,8 @@
 package jp.co.lyc.cms.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -25,7 +27,6 @@ public class BpInfoController extends BaseController {
 	@Autowired
 	BpInfoService bpInfoService;
 
-
 	/**
 	 * データを取得
 	 * 
@@ -35,19 +36,24 @@ public class BpInfoController extends BaseController {
 
 	@RequestMapping(value = "/getBpInfo", method = RequestMethod.POST)
 	@ResponseBody
-	public BpInfoModel   getBpInfo(@RequestParam(value = "bpEmployeeNo", required = false) String bpEmployeeNo) {
+	public Map<String, Object> getBpInfo(@RequestParam(value = "bpEmployeeNo", required = false) String bpEmployeeNo) {
 		logger.info("BpInfoController.getBpInfo:" + "検索開始");
 		Map<String, Object> resultMap = new HashMap<>();// 戻す
 		Map<String, Object> sendMap = new HashMap<String, Object>();
 
 		sendMap.put("bpEmployeeNo", bpEmployeeNo);
-		BpInfoModel model;
+		BpInfoModel model = new BpInfoModel();
 		model = bpInfoService.getBpInfo(sendMap);
-		resultMap.put("data", model);
+		resultMap.put("model", model);
+		List<BpInfoModel> bpInfoList = new ArrayList<BpInfoModel>();
+		bpInfoList = bpInfoService.getBpInfoList(sendMap);
+		for (int i = 0; i < bpInfoList.size(); i++) {
+			bpInfoList.get(i).setRowNo(String.valueOf(i + 1));
+		}
+		resultMap.put("bpInfoList", bpInfoList);
 		logger.info("BpInfoController.getBpInfo:" + "検索結束");
-		return model;
+		return resultMap;
 	}
-
 
 	/**
 	 * 条件を取得
