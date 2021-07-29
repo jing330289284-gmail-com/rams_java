@@ -403,4 +403,13 @@ public class EmployeeInfoService {
 		}
 		employeeInfoMapper.updatebpInfoAll(bpInfoModel);
 	}
+
+	/**
+	 * BP情報削除
+	 * 
+	 * @param sendMap
+	 */
+	public void deletebpInfo(BpInfoModel bpInfoModel) {
+		employeeInfoMapper.deletebpInfo(bpInfoModel.getBpEmployeeNo(), bpInfoModel.getOldUnitPriceStartMonth());
+	}
 }

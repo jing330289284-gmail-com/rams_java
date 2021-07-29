@@ -28,7 +28,7 @@
 			unitPrice,
 			CAST(T005.salary As unsigned) As salary,
 			CAST((ifnull(T013.transportationExpenses,0) +
-			ifnull(T005.fristTimeBonusAmount + T005.secondTimeBonusAmount,0) +
+			ifnull(if(T005.fristBonusMonth = #{getYandM},T005.fristTimeBonusAmount,0) + if(T005.secondBonusMonth = #{getYandM},T005.secondTimeBonusAmount,0),0) +
 			ifnull(T005.insuranceFeeAmount,0)+ifnull(T013.otherAllowanceAmount,0)
 			+ ifnull(T013.leaderAllowanceAmount,0) +
 			ifnull(T013.introductionAllowance,0)) As unsigned) As otherFee,

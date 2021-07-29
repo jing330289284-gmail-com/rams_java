@@ -92,7 +92,7 @@ public class SalesSendLetterController extends BaseController {
 				i--;
 			}
 		}
-		
+
 		for (int i = 0; i < salesCustomersList.size(); i++) {
 			salesCustomersList.get(i).setRowId(i);
 		}
@@ -290,7 +290,7 @@ public class SalesSendLetterController extends BaseController {
 			e.printStackTrace();
 		}
 		logger.info("getCustomers" + "検索結束");
-		if (model.getStorageListName() != "" && model.getStorageListName() != null) {
+		if (model.getStorageListName() != "" && model.getStorageListName() != null && salesSendLetter != null) {
 			String[] selectedRowKeys = salesSendLetter.getMainChargeList().split(";");
 			String[] selectedRowNames = salesSendLetter.getDepartmentCodeList().split(";");
 

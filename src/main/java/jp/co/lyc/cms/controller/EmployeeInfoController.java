@@ -337,6 +337,20 @@ public class EmployeeInfoController extends BaseController {
 		employeeInfoService.updatebpInfo(bpInfoModel);
 		logger.info("GetEmployeeInfoController.getEmployeeByEmployeeNo:" + "updatebpInfo結束");
 	}
+	
+	/**
+	 * BP情報delete
+	 * 
+	 * @param bpInfo
+	 * @return
+	 */
+	@RequestMapping(value = "/deletebpInfo", method = RequestMethod.POST)
+	@ResponseBody
+	public void deletebpInfo(@RequestBody BpInfoModel bpInfoModel) throws Exception {
+		logger.info("GetEmployeeInfoController.getEmployeeByEmployeeNo:" + "deletebpInfo開始");
+		employeeInfoService.deletebpInfo(bpInfoModel);
+		logger.info("GetEmployeeInfoController.getEmployeeByEmployeeNo:" + "deletebpInfo結束");
+	}
 
 	/**
 	 * 社員情報csv出力

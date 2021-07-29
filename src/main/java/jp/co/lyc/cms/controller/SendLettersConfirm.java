@@ -1,11 +1,17 @@
 package jp.co.lyc.cms.controller;
 
+import java.io.PrintWriter;
+import java.net.URL;
+import java.net.URLConnection;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.w3c.dom.Document;
 
 import jp.co.lyc.cms.common.BaseController;
 import jp.co.lyc.cms.model.AllEmployName;
@@ -161,13 +168,13 @@ public class SendLettersConfirm extends BaseController {
 	public Map<String, Object> sendMailWithFile(@RequestBody EmailModel emailModel) {
 		String errorsMessage = "";
 		Map<String, Object> resulterr = new HashMap<>();
-		if(emailModel.getMailFrom()==null||emailModel.getMailFrom().equals("")) {
+		if (emailModel.getMailFrom() == null || emailModel.getMailFrom().equals("")) {
 			errorsMessage = "登録者メールアドレス入力されてない、確認してください。";
-					
+
 			resulterr.put("errorsMessage", errorsMessage);// エラーメッセージ
 			return resulterr;
 		}
-		
+
 		logger.info("sendMailWithFile:" + "送信開始");
 
 		// EmailModel emailModel = new EmailModel();
@@ -177,14 +184,23 @@ public class SendLettersConfirm extends BaseController {
 		emailModel.setPassword("Lyc2020-0908-");
 		// emailModel.setFromAddress(model.getMailFrom());
 		emailModel.setContextType("text/html;charset=utf-8");
+		for (int i = 0; i < emailModel.getPaths().length; i++) {
+			if (emailModel.getPaths()[i].equals(" ")) {
+				errorsMessage = "添付ファイルが存在していない。";
+
+				resulterr.put("errorsMessage", errorsMessage);// エラーメッセージ
+				return resulterr;
+			}
+		}
 		try {
+			//checkEmail(emailModel.getSelectedmail());
 			if (emailModel.getPaths() == null || emailModel.getPaths().length == 0)
 				utils.EmailSend(emailModel);
 			else
 				utils.sendMailWithFile(emailModel);
 		} catch (Exception e) {
 			errorsMessage = "送信エラー発生しました。";
-			
+
 			resulterr.put("errorsMessage", errorsMessage);// エラーメッセージ
 			return resulterr;
 		}
@@ -207,4 +223,31 @@ public class SendLettersConfirm extends BaseController {
 	}
 	// 要員追加機能の新規 20201216 張棟 END
 
+	public static boolean checkEmail(String email) {
+		String soapRequestData = "" + "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
+				+ "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://www.w3.org/2003/05/soap-envelope\">"
+				+ "  <soap:Body>" + "   <IsValidEmail xmlns=\"http://www.webservicex.net\">" + "    <Email>" + email
+				+ "</Email>" + "   </IsValidEmail>" + "  </soap:Body>" + "</soap:Envelope>";
+
+		try {
+			URL u = new URL("http://www.webservicex.net/ValidateEmail.asmx?op=IsValidEmail");
+			URLConnection uc = u.openConnection();
+			uc.setDoOutput(true);
+			uc.setRequestProperty("Content-Type", "application/soap+xml; charset=utf-8");
+			PrintWriter pw = new PrintWriter(uc.getOutputStream());
+			pw.println(soapRequestData);
+			pw.close();
+
+			DocumentBuilderFactory bf = DocumentBuilderFactory.newInstance();
+			DocumentBuilder db = bf.newDocumentBuilder();
+			Document document = db.parse(uc.getInputStream());
+
+			String res = document.getElementsByTagName("IsValidEmailResult").item(0).getTextContent();
+
+			return Boolean.parseBoolean(res);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 }
