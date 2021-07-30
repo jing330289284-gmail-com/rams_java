@@ -34,7 +34,7 @@
 		T005.employeeStatus,
 		T005.workingConditionStatus as workingCondition,
 		T005.remark,
-		if(T002.employeeFormCode = "" || T002.employeeFormCode is
+		if(T005.employeeStatus = "" || T005.employeeStatus is
 		null,"",M005.employeeFormName) AS employeeFormName
 		FROM
 		T005WagesInfo AS
@@ -46,7 +46,7 @@
 		Left Join
 		M005EmployeeForm AS M005
 		ON
-		T002.employeeFormCode = M005.employeeFormCode
+		T005.employeeStatus = M005.employeeFormCode
 		WHERE
 		T005.employeeNo =
 		#{employeeNo}

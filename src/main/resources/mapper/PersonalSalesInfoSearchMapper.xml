@@ -21,7 +21,8 @@
 			T006.admissionStartDate,
 			T006.dailyCalculationStatus,
 			T006.admissionEndDate,
-			M005.employeeFormName,
+			if(T005.employeeStatus =
+			"",T005.employeeStatus,M005.employeeFormName) as employeeFormName,
 			if(T007.customerAbbreviation is null ||
 			T007.customerAbbreviation =
 			"",T007.customerName,T007.customerAbbreviation) as customerName,

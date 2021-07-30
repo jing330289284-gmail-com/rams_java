@@ -179,20 +179,7 @@
 		T005WagesInfo AS T005
 		Left
 		Join
-		(SELECT
-		employeeFormCode,
-		Case
-		WHEN employeeFormCode = '0' THEN "社員"
-		WHEN employeeFormCode = '1' THEN "協力"
-		WHEN employeeFormCode = '2' THEN
-		"個人事業主"
-		WHEN employeeFormCode = '3' THEN "子会社社員"
-		WHEN employeeFormCode =
-		'4' THEN "協力依頼営業"
-		END
-		as employeeFormName
-		FROM
-		M005EmployeeForm)
+		M005EmployeeForm
 		as M005
 		on
 		T005.employeeStatus =
@@ -220,20 +207,7 @@
 		T002.employeeNo = T001.employeeNo
 		Left
 		Join
-		(SELECT
-		employeeFormCode,
-		Case
-		WHEN employeeFormCode = '0' THEN "社員"
-		WHEN employeeFormCode = '1' THEN "協力"
-		WHEN employeeFormCode = '2' THEN
-		"個人事業主"
-		WHEN employeeFormCode = '3' THEN "子会社社員"
-		WHEN employeeFormCode =
-		'4' THEN "協力依頼営業"
-		END
-		as employeeFormName
-		FROM
-		M005EmployeeForm)
+		M005EmployeeForm
 		as M005
 		on
 		T002.employeeStatus =
@@ -269,22 +243,8 @@
 		T001Employee As T001 on
 		T005.employeeNo = T001.employeeNo
 		Left Join
-		(SELECT
-		employeeFormCode,
-		Case
-		WHEN employeeFormCode = '0' THEN "社員"
-		WHEN employeeFormCode = '1'
-		THEN "協力"
-		WHEN employeeFormCode = '2' THEN "個人事業主"
-		WHEN employeeFormCode
-		= '3' THEN "子会社社員"
-		WHEN employeeFormCode = '4' THEN "協力依頼営業"
-		END
-		as
-		employeeFormName
-		FROM
 		M005EmployeeForm
-		) as M005
+		as M005
 		on
 		T005.employeeStatus =
 		M005.employeeFormCode
@@ -313,22 +273,8 @@
 		T001Employee As T001 on
 		T005.employeeNo = T001.employeeNo
 		Left Join
-		(SELECT
-		employeeFormCode,
-		Case
-		WHEN employeeFormCode = '0' THEN "社員"
-		WHEN employeeFormCode = '1'
-		THEN "協力"
-		WHEN employeeFormCode = '2' THEN "個人事業主"
-		WHEN employeeFormCode
-		= '3' THEN "子会社社員"
-		WHEN employeeFormCode = '4' THEN "協力依頼営業"
-		END
-		as
-		employeeFormName
-		FROM
 		M005EmployeeForm
-		) as M005
+		as M005
 		on
 		T005.employeeStatus =
 		M005.employeeFormCode
