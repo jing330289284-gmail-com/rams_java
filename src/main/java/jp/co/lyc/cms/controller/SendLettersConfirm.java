@@ -184,16 +184,18 @@ public class SendLettersConfirm extends BaseController {
 		emailModel.setPassword("Lyc2020-0908-");
 		// emailModel.setFromAddress(model.getMailFrom());
 		emailModel.setContextType("text/html;charset=utf-8");
-		for (int i = 0; i < emailModel.getPaths().length; i++) {
-			if (emailModel.getPaths()[i].equals(" ")) {
-				errorsMessage = "添付ファイルが存在していない。";
+		if (emailModel.getPaths() != null) {
+			for (int i = 0; i < emailModel.getPaths().length; i++) {
+				if (emailModel.getPaths()[i].equals(" ")) {
+					errorsMessage = "添付ファイルが存在していない。";
 
-				resulterr.put("errorsMessage", errorsMessage);// エラーメッセージ
-				return resulterr;
+					resulterr.put("errorsMessage", errorsMessage);// エラーメッセージ
+					return resulterr;
+				}
 			}
 		}
 		try {
-			//checkEmail(emailModel.getSelectedmail());
+			// checkEmail(emailModel.getSelectedmail());
 			if (emailModel.getPaths() == null || emailModel.getPaths().length == 0)
 				utils.EmailSend(emailModel);
 			else
