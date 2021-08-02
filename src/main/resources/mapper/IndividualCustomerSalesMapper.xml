@@ -21,15 +21,25 @@
 			T006.unitPrice,
 			M012.siteRoleName,
 			T018.DeductionsAndOvertimePay,
+			T011.bpUnitPrice,
 			M013.stationName
 			from
 			T001Employee as T001
 			left join
 			T006EmployeeSiteInfo as T006 on T001.employeeNo=T006.employeeNo
+			left join
+			(SELECT T011.* FROM T011BpInfoSupplement as T011
+			inner join (
+			select bpEmployeeNo,max(unitPriceStartMonth) as unitPriceStartMonth from T011BpInfoSupplement
+			where unitPriceStartMonth &lt;= #{getYandM}
+			group by bpEmployeeNo
+			) as temp
+			on T011.bpEmployeeNo = temp.bpEmployeeNo
+			and T011.unitPriceStartMonth = temp.unitPriceStartMonth) as T011 on T001.employeeNo=T011.bpEmployeeNo
 			left
 			join T002EmployeeDetail as T002 on
 			T002.employeeNo=T001.employeeNo
-			left join M012SiteRole as M012 on M012.siteRoleCode=T006.siteRoleCode
+			left join M012SiteRole as M012 on M012.siteRoleCode=if(T006.siteRoleCode is null || T006.siteRoleCode = "",if(T002.siteRoleCode="",null,T002.siteRoleCode),T006.siteRoleCode)
 			left join M013Station as M013 on T006.stationCode =M013.stationCode
 			left join T018WorkTotalTime as T018 on T018.employeeNo=
 			T002.employeeNo and #{getYandM} =T018.attendanceYearAndMonth

@@ -26,7 +26,7 @@
 			if(T007.customerAbbreviation is null ||
 			T007.customerAbbreviation =
 			"",T007.customerName,T007.customerAbbreviation) as customerName,
-			CAST((T006.unitPrice*10000) As unsigned) As unitPrice,
+			if(T002.employeeStatus = "2",CAST((T006.unitPrice*10000*(1+T012.taxRate)) As unsigned),CAST((T006.unitPrice*10000) As unsigned)) As unitPrice,
 			if(T005.salary
 			is not null,CAST(T005.salary As unsigned),CAST(T011.bpUnitPrice*10000
 			As unsigned)) As salary,
@@ -61,6 +61,8 @@
 			AND reflectYearAndMonth &lt;= #{getYandM}
 			LEFT JOIN
 			T002EmployeeDetail As T002 ON T001.employeeNo = T002.employeeNo
+			LEFT JOIN
+			T012Passwordreset As T012 ON T012.passwordResetId = "systemSet"
 			LEFT
 			JOIN
 			M005EmployeeForm As M005 ON T005.employeeStatus =

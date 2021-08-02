@@ -103,7 +103,8 @@
 		companyName,
 		companyLogo,
 		backgroundColor,
-		empNoHead
+		empNoHead,
+		taxRate
 		FROM T012Passwordreset
 		Where passwordResetId = "systemSet";
 	</select>
@@ -116,7 +117,8 @@
 		companyName = #{companyName},
 		companyLogo = #{companyLogo},
 		backgroundColor = #{backgroundColor},
-		empNoHead = #{empNoHead}
+		empNoHead = #{empNoHead},
+		taxRate = #{taxRate}
 		where passwordResetId = "systemSet";
 	</update>
 	

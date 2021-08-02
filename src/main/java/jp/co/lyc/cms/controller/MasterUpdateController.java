@@ -106,6 +106,7 @@ public class MasterUpdateController extends BaseController {
 		sendMap.put("companyLogo", companySystemSetModel.getCompanyLogo().toString());
 		sendMap.put("backgroundColor", companySystemSetModel.getBackgroundColor().toString());
 		sendMap.put("empNoHead", companySystemSetModel.getEmpNoHead().toString());
+		sendMap.put("taxRate", companySystemSetModel.getTaxRate().toString());
 		String employeeNo = (String) getSession().getAttribute("employeeNo");
 		String newEmployeeNo = companySystemSetModel.getEmpNoHead().toString()
 				+ employeeNo.substring(employeeNo.length() - 3, employeeNo.length());

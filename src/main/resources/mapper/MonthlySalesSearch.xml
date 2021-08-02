@@ -24,7 +24,7 @@
 			T018.deductionsAndOvertimePayOfUnitPrice ,
 			T006.admissionStartDate,
 			T006.admissionEndDate,
-			CAST((T006.unitPrice*10000) As unsigned) As
+			if(T002.employeeStatus = "2",CAST((T006.unitPrice*10000*(1 + T012.taxRate)) As unsigned),CAST((T006.unitPrice*10000) As unsigned)) As
 			unitPrice,
 			CAST(T005.salary As unsigned) As salary,
 			CAST((ifnull(T013.transportationExpenses,0) +
@@ -35,9 +35,9 @@
 			+ ifnull(T013.leaderAllowanceAmount,0) +
 			ifnull(T013.introductionAllowance,0)) As unsigned) As otherFee,
 			CAST(T005.waitingCost As unsigned) As waitingCost,
-			ifnull(T006.unitPrice*10000,0) - (ifnull(T005.salary,0) +
+			ifnull(if(T002.employeeStatus = "2",T006.unitPrice*10000*(1 + T012.taxRate),T006.unitPrice*10000),0) - (ifnull(T005.salary,0) +
 			ifnull(T013.transportationExpenses,0) +
-			ifnull(T005.fristTimeBonusAmount + T005.secondTimeBonusAmount,0) +
+			ifnull(if(#{getYandM} = T005.fristBonusMonth,T005.fristTimeBonusAmount,0) + if(#{getYandM} = T005.secondBonusMonth,T005.secondTimeBonusAmount,0),0) +
 			ifnull(T005.insuranceFeeAmount,0)
 			+ifnull(T013.otherAllowanceAmount,0) +
 			ifnull(T013.leaderAllowanceAmount,0) +
@@ -96,6 +96,8 @@
 			left join
 			T001Employee as T001 ON A.employeeNo = T001.employeeNo
 			left join
+			T012Passwordreset as T012 ON T012.passwordResetId = "systemSet"
+			left join
 			T018WorkTotalTime as T018 ON T002.employeeNo =T018.employeeNo
 			AND
 			#{getYandM} = T018.attendanceYearAndMonth
@@ -103,7 +105,7 @@
 			T006EmployeeSiteInfo as T006 ON A.employeeNo = T006.employeeNo
 			AND
 			#{getYandM} between left(admissionStartDate,6) and
-			IFNULL(admissionEndDate,date_format(now(),'%Y%m')),
+			IFNULL(admissionEndDate,"999999"<!-- date_format(now(),'%Y%m') -->),
 			(SELECT @rowNo :=
 			0 ) AS rowNo
 

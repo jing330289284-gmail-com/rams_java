@@ -57,6 +57,8 @@ public interface SalesSituationMapper {
 
 	public int updateEMPInfo(SalesSituationModel model);
 
+	public int updateBPAllEMPInfo(SalesSituationModel model);
+
 	public int updateBPEMPInfo(SalesSituationModel model);
 
 	public List<BpInfoModel> getT011BpInfoSupplement();

@@ -1408,7 +1408,9 @@
 		t002.genderStatus,
 		CONCAT(m003.nationalityName,
 		'籍') AS nationalityName,
-		if(t019.employeeStatusCode is null || t019.employeeStatusCode="",t002.employeeStatus,t019.employeeStatusCode) as employeeStatus,
+		if(t019.employeeStatusCode is null ||
+		t019.employeeStatusCode="",t002.employeeStatus,t019.employeeStatusCode)
+		as employeeStatus,
 		t019.age,
 		t019.stationCode
 		AS 'nearestStation',
@@ -1522,7 +1524,8 @@
 		NOW(),
 		NOW(),
 		#{updateUser})
-		ON DUPLICATE KEY UPDATE
+		ON DUPLICATE KEY
+		UPDATE
 		stationCode=#{stationCode},
 		age=#{age},
 		japaneaseConversationLevel=#{japaneaseConversationLevel},
@@ -1634,18 +1637,29 @@
 		LEFT(admissionEndDate, 6) = #{admissionEndDate}
 	</update>
 
+	<update id="updateBPAllEMPInfo"
+		parameterType="jp.co.lyc.cms.model.SalesSituationModel">
+		UPDATE
+		T011BpInfoSupplement
+		SET
+		bpSalesProgressCode = #{salesProgressCode},
+		bpOtherCompanyAdmissionEndDate = #{admissionEndDate}
+		WHERE
+		bpEmployeeNo = #{employeeNo}
+	</update>
+
 	<update id="updateBPEMPInfo"
 		parameterType="jp.co.lyc.cms.model.SalesSituationModel">
 		INSERT INTO T011BpInfoSupplement
-		(bpEmployeeNo,bpUnitPrice,bpSalesProgressCode,bpOtherCompanyAdmissionEndDate,bpBelongCustomerCode,createTime,updateTime,updateUser)
+		(bpEmployeeNo,unitPriceStartMonth,bpUnitPrice,bpSalesProgressCode,bpOtherCompanyAdmissionEndDate,bpBelongCustomerCode,createTime,updateTime,updateUser)
 		VALUES
-		(#{employeeNo},#{price},#{salesProgressCode},#{admissionEndDate},#{customer},NOW(),NOW(),#{updateUser})
+		(#{employeeNo},#{admissionEndDate},#{price},#{salesProgressCode},#{admissionEndDate},#{customer},NOW(),NOW(),#{updateUser})
 		ON DUPLICATE KEY
 		UPDATE
-		bpEmployeeNo = #{employeeNo},
 		bpUnitPrice =
 		#{price},
-		bpSalesProgressCode = #{salesProgressCode},
+		bpSalesProgressCode =
+		#{salesProgressCode},
 		<if test="admissionEndDate == ''">
 			bpOtherCompanyAdmissionEndDate = #{admissionEndDate},
 		</if>
@@ -1764,7 +1778,8 @@
 		interviewDate2 = #{interviewDate2},
 		stationCode2 = #{stationCode2},
 		interviewCustomer2 = #{interviewCustomer2},
-		interviewInfo2 = #{interviewInfo2},
+		interviewInfo2 =
+		#{interviewInfo2},
 		interviewUrl2 = #{interviewUrl2},
 		updateTime= NOW(),
 		updateUser=#{updateUser}

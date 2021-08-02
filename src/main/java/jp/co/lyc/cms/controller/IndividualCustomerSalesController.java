@@ -244,6 +244,15 @@ public class IndividualCustomerSalesController {
 									+ Integer.parseInt(CustomerSalesModelListTwice.get(m).getTotalAmount());
 						}
 					}
+					for (int m = 0; m < CustomerSalesModelList.size(); m++) {
+						if (CustomerSalesModelList.get(m).getBpUnitPrice() != null
+								&& !CustomerSalesModelList.get(m).getBpUnitPrice().equals("")) {
+							if (CustomerSalesModelList.get(m).getYearAndMonth().equals(getYandM.get(p))) {
+								costTotal = costTotal
+										+ Integer.parseInt(CustomerSalesModelList.get(m).getBpUnitPrice()) * 10000;
+							}
+						}
+					}
 					for (int s = 0; s < cusModelLi.size(); s++) {
 						if (cusModelLi.get(s).getYearAndMonth().equals(getYandM.get(p))) {
 							cusModelLi.get(s).setTotalAmount(String.valueOf(costTotal));
@@ -265,7 +274,18 @@ public class IndividualCustomerSalesController {
 					for (int b = 0; b < CustomerSalesModelList.size(); b++) {
 						CustomerEmployeeDetail customerEmpDe = new CustomerEmployeeDetail();
 						if (CustomerSalesModelList.get(b).getYearAndMonth().equals(getYandM.get(a))) {
-							customerEmpDe.setEmployeeName(CustomerSalesModelList.get(b).getEmployeeName());
+							customerEmpDe.setEmployeeNo(CustomerSalesModelList.get(b).getEmployeeNo());
+							String employeeName = CustomerSalesModelList.get(b).getEmployeeName();
+							if (CustomerSalesModelList.get(b).getEmployeeNo().substring(0, 3).equals("BPR")) {
+								employeeName = employeeName + "("
+										+ CustomerSalesModelList.get(b).getEmployeeNo().substring(0, 3) + ")";
+							} else if (CustomerSalesModelList.get(b).getEmployeeNo().substring(0, 2).equals("BP")
+									|| CustomerSalesModelList.get(b).getEmployeeNo().substring(0, 2).equals("SC")
+									|| CustomerSalesModelList.get(b).getEmployeeNo().substring(0, 2).equals("SP")) {
+								employeeName = employeeName + "("
+										+ CustomerSalesModelList.get(b).getEmployeeNo().substring(0, 2) + ")";
+							}
+							customerEmpDe.setEmployeeName(employeeName);
 							customerEmpDe.setSiteRoleName(CustomerSalesModelList.get(b).getSiteRoleName());
 							customerEmpDe.setStationName(CustomerSalesModelList.get(b).getStationName());
 							customerEmpDe.setUnitPrice(CustomerSalesModelList.get(b).getUnitPrice());
@@ -303,6 +323,11 @@ public class IndividualCustomerSalesController {
 				cusModelLi.get(0).setTotaluPrice(totaluPrice * 10000);
 				cusModelLi.get(0).setOverTimeOrExpectFee(overTimeOrExpectFee);
 				cusModelLi.get(0).setTotalgrossProfit(totalgrossProfit);
+
+				List<String> bpNoList = new ArrayList<String>();
+				for (int i = 0; i < cusModelLi.size(); i++) {
+					bpNoList.add(cusModelLi.get(i).getEmployeeNo());
+				}
 
 				resultdata.put("data", cusModelLi);
 				return resultdata;

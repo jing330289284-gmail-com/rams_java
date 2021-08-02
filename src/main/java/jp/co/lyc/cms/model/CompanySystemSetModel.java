@@ -10,6 +10,15 @@ public class CompanySystemSetModel implements Serializable {
 	String companyLogo;// logo
 	String backgroundColor;// 背景色
 	String empNoHead;// 社員番号の頭
+	String taxRate;// 税率
+
+	public String getTaxRate() {
+		return taxRate;
+	}
+
+	public void setTaxRate(String taxRate) {
+		this.taxRate = taxRate;
+	}
 
 	public String getCompanyName() {
 		return companyName;
