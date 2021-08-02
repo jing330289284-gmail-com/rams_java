@@ -2,7 +2,7 @@ package jp.co.lyc.cms.model;
 
 import java.io.Serializable;
 
-public class CustomerEmployeeDetail implements Serializable{
+public class CustomerEmployeeDetail implements Serializable {
 
 	/**
 	 * 
@@ -13,35 +13,58 @@ public class CustomerEmployeeDetail implements Serializable{
 	String unitPrice;
 	String stationName;
 	String employeeNo;
+	String cost;
+
+	public String getCost() {
+		return cost;
+	}
+
+	public void setCost(String cost) {
+		this.cost = cost;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	public String getEmployeeName() {
 		return employeeName;
 	}
+
 	public void setEmployeeName(String employeeName) {
 		this.employeeName = employeeName;
 	}
+
 	public String getSiteRoleName() {
 		return siteRoleName;
 	}
+
 	public void setSiteRoleName(String siteRoleName) {
 		this.siteRoleName = siteRoleName;
 	}
+
 	public String getUnitPrice() {
 		return unitPrice;
 	}
+
 	public void setUnitPrice(String unitPrice) {
 		this.unitPrice = unitPrice;
 	}
+
 	public String getStationName() {
 		return stationName;
 	}
+
 	public void setStationName(String stationName) {
 		this.stationName = stationName;
 	}
+
 	public String getEmployeeNo() {
 		return employeeNo;
 	}
+
 	public void setEmployeeNo(String employeeNo) {
 		this.employeeNo = employeeNo;
 	}
-	
+
 }

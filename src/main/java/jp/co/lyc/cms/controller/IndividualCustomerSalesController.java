@@ -289,12 +289,36 @@ public class IndividualCustomerSalesController {
 							customerEmpDe.setSiteRoleName(CustomerSalesModelList.get(b).getSiteRoleName());
 							customerEmpDe.setStationName(CustomerSalesModelList.get(b).getStationName());
 							customerEmpDe.setUnitPrice(CustomerSalesModelList.get(b).getUnitPrice());
+							if (CustomerSalesModelList.get(b).getBpUnitPrice() != null
+									&& !CustomerSalesModelList.get(b).getBpUnitPrice().equals("")) {
+								customerEmpDe.setCost(String.valueOf(
+										Integer.parseInt(CustomerSalesModelList.get(b).getBpUnitPrice()) * 10000));
+							}
+							for (int i = 0; i < CustomerSalesModelListTwice.size(); i++) {
+								if (CustomerSalesModelListTwice.get(i).getEmployeeNo()
+										.equals(CustomerSalesModelList.get(b).getEmployeeNo())) {
+									if (CustomerSalesModelListTwice.get(i).getYearAndMonth().equals(getYandM.get(a))) {
+										customerEmpDe.setCost(CustomerSalesModelListTwice.get(i).getTotalAmount());
+									}
+								}
+							}
 							customerEmpDetail.add(customerEmpDe);
+						}
+					}
+					List<CustomerEmployeeDetail> customerEmpDetailTemp = new ArrayList<CustomerEmployeeDetail>();
+					for (int i = 0; i < customerEmpDetail.size(); i++) {
+						if (!customerEmpDetail.get(i).getEmployeeNo().substring(0, 2).equals("BP")) {
+							customerEmpDetailTemp.add(customerEmpDetail.get(i));
+						}
+					}
+					for (int i = 0; i < customerEmpDetail.size(); i++) {
+						if (customerEmpDetail.get(i).getEmployeeNo().substring(0, 2).equals("BP")) {
+							customerEmpDetailTemp.add(customerEmpDetail.get(i));
 						}
 					}
 					for (int c = 0; c < cusModelLi.size(); c++) {
 						if (cusModelLi.get(c).getYearAndMonth().equals((getYandM.get(a)))) {
-							cusModelLi.get(c).setEmpDetail(customerEmpDetail);
+							cusModelLi.get(c).setEmpDetail(customerEmpDetailTemp);
 						}
 					}
 
