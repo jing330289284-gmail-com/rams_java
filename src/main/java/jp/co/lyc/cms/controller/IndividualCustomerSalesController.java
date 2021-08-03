@@ -291,14 +291,17 @@ public class IndividualCustomerSalesController {
 							customerEmpDe.setUnitPrice(CustomerSalesModelList.get(b).getUnitPrice());
 							if (CustomerSalesModelList.get(b).getBpUnitPrice() != null
 									&& !CustomerSalesModelList.get(b).getBpUnitPrice().equals("")) {
-								customerEmpDe.setCost(String.valueOf(
-										Integer.parseInt(CustomerSalesModelList.get(b).getBpUnitPrice()) * 10000));
+								customerEmpDe.setCost(String
+										.valueOf(Integer.parseInt(CustomerSalesModelList.get(b).getBpUnitPrice())));
 							}
 							for (int i = 0; i < CustomerSalesModelListTwice.size(); i++) {
 								if (CustomerSalesModelListTwice.get(i).getEmployeeNo()
 										.equals(CustomerSalesModelList.get(b).getEmployeeNo())) {
 									if (CustomerSalesModelListTwice.get(i).getYearAndMonth().equals(getYandM.get(a))) {
-										customerEmpDe.setCost(CustomerSalesModelListTwice.get(i).getTotalAmount());
+										if (CustomerSalesModelListTwice.get(i).getTotalAmount() != null
+												|| !CustomerSalesModelListTwice.get(i).getTotalAmount().equals(""))
+											customerEmpDe.setCost(CustomerSalesModelListTwice.get(i).getTotalAmount()
+													.substring(0, 2));
 									}
 								}
 							}

@@ -56,6 +56,9 @@
 			between left(admissionStartDate,6) and
 			IFNULL(admissionEndDate,date_format(now(),'%Y%m')) and
 			T006.customerNo = #{customerName}
+			and (T002.retirementYearAndMonth = ""
+			or LEFT(T002.retirementYearAndMonth,6) &gt;= #{getYandM}
+			)
 			)As A${getYandM}
 		</foreach>
 	</select>

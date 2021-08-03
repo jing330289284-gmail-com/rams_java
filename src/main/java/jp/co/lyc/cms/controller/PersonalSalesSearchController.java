@@ -154,8 +154,9 @@ public class PersonalSalesSearchController {
 
 				for (int i = 0; i < personModelList.size(); i++) {
 					for (int m = 0; m < personModelListTwice.size(); m++) {
-						if (personModelList.get(i).getOnlyYandM()
-								.equals(personModelListTwice.get(m).getNextBonusMonth())) {
+						if (personModelList.get(i).getEmployeeNo().equals(personModelListTwice.get(m).getEmployeeNo())
+								&& personModelList.get(i).getOnlyYandM()
+										.equals(personModelListTwice.get(m).getNextBonusMonth())) {
 							personModelList.get(i).setBonusFee(personModelListTwice.get(m).getScheduleOfBonusAmount());
 						}
 					}

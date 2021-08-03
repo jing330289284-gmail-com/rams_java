@@ -109,7 +109,9 @@
 			(SELECT @rowNo :=
 			0 ) AS rowNo
 
-			WHERE 1=1
+			WHERE (T002.retirementYearAndMonth = ""
+			or LEFT(T002.retirementYearAndMonth,6) &gt;= #{getYandM}
+			)
 
 			<if test="employeeClassification != null">
 				AND T002.employeeStatus = #{employeeClassification}
@@ -123,12 +125,15 @@
 			<if test="kadou == 0">
 				AND (#{getYandM} between left(admissionStartDate,6) and
 				left(admissionEndDate,6)
-				or #{getYandM} &gt;=
+				or (#{getYandM} &gt;=
 				left(admissionStartDate,6)
-				AND admissionEndDate is null)
+				AND admissionEndDate is null
+				AND workState != "3"
+				))
 			</if>
 			<if test="kadou == 1">
 				AND admissionStartDate is null
+				or workState = "3"
 			</if>
 			<if test="utilPricefront != null &amp;&amp; utilPriceback != null">
 				AND CAST((T006.unitPrice*10000) As unsigned) between

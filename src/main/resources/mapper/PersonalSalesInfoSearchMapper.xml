@@ -38,8 +38,7 @@
 			T005.SocialInsuranceFlag,
 			CAST(T005.insuranceFeeAmount As unsigned) As insuranceFeeAmount,
 			T005.waitingCost,
-			CAST(T005.fristTimeBonusAmount + T005.secondTimeBonusAmount As
-			unsigned) As scheduleOfBonusAmount,
+			if(#{getYandM} = T005.fristBonusMonth,T005.fristTimeBonusAmount,if(#{getYandM} = T005.secondBonusMonth,T005.secondTimeBonusAmount,"")) As scheduleOfBonusAmount,
 			T005.fristBonusMonth as nextBonusMonth,
 			(CAST(B${getYandM}.leaderAllowanceAmount As
 			unsigned)+CAST(B${getYandM}.otherAllowanceAmount As
@@ -56,9 +55,14 @@
 			FROM
 			T001Employee As T001
 			Left JOIN
-			T005WagesInfo As T005 ON T001.employeeNo
+			(select T005.* from T005WagesInfo as T005
+			inner join 
+			(select employeeNo,max(reflectYearAndMonth) as reflectYearAndMonth from T005WagesInfo
+			group by employeeNo) as temp
+			on temp.employeeNo = T005.employeeNo
+			and temp.reflectYearAndMonth = T005.reflectYearAndMonth
+			) As T005 ON T001.employeeNo
 			= T005.employeeNo
-			AND reflectYearAndMonth &lt;= #{getYandM}
 			LEFT JOIN
 			T002EmployeeDetail As T002 ON T001.employeeNo = T002.employeeNo
 			LEFT JOIN
@@ -94,6 +98,9 @@
 			B${getYandM} ON B${getYandM}.employeeNo = T001.employeeNo
 			WHERE
 			T001.employeeNo=#{employeeName}
+			and (T002.retirementYearAndMonth = ""
+			or LEFT(T002.retirementYearAndMonth,6) &gt;= #{getYandM}
+			)
 			ORDER BY ABS(#{getYandM} -
 			reflectYearAndMonth) ASC
 			limit 1 ) As A${getYandM}
@@ -106,7 +113,18 @@
 		SELECT
 		employeeNo,
 		fristBonusMonth as nextBonusMonth,
-		fristTimeBonusAmount + secondTimeBonusAmount as scheduleOfBonusAmount
+		fristTimeBonusAmount as scheduleOfBonusAmount
+		FROM
+		T005WagesInfo
+		WHERE
+		employeeNo =#{employeeName}
+		
+		union
+		
+		SELECT
+		employeeNo,
+		secondBonusMonth as nextBonusMonth,
+		secondTimeBonusAmount as scheduleOfBonusAmount
 		FROM
 		T005WagesInfo
 		WHERE

@@ -41,8 +41,13 @@ public class WagesInfoService {
 			wagesInfoMapper.insert(sendMap);
 			Map<String, Object> employeeDetailMap = new HashMap<String, Object>();
 			employeeDetailMap.put("employeeNo", wagesInfoModel.getEmployeeNo());
-			employeeDetailMap.put("employeeFormCode", wagesInfoModel.getEmployeeFormCode());
+			employeeDetailMap.put("employeeFormCode", wagesInfoModel.getEmployeeStatus());
 			employeeDetailMap.put("updateUser", wagesInfoModel.getUpdateUser());
+			if (wagesInfoModel.getEmployeeStatus() != null && wagesInfoModel.getEmployeeStatus().equals("2")) {
+				employeeDetailMap.put("socialInsuranceDate", wagesInfoModel.getReflectYearAndMonth() + "01");
+			} else if (wagesInfoModel.getEmployeeStatus() != null) {
+				employeeDetailMap.put("socialInsuranceDate", "");
+			}
 			employeeInfoMapper.updateEmployeeInfoDetail(employeeDetailMap);
 			return true;
 		} catch (Exception e) {
@@ -66,8 +71,13 @@ public class WagesInfoService {
 			wagesInfoMapper.update(sendMap);
 			Map<String, Object> employeeDetailMap = new HashMap<String, Object>();
 			employeeDetailMap.put("employeeNo", wagesInfoModel.getEmployeeNo());
-			employeeDetailMap.put("employeeFormCode", wagesInfoModel.getEmployeeFormCode());
+			employeeDetailMap.put("employeeFormCode", wagesInfoModel.getEmployeeStatus());
 			employeeDetailMap.put("updateUser", wagesInfoModel.getUpdateUser());
+			if (wagesInfoModel.getEmployeeStatus() != null && wagesInfoModel.getEmployeeStatus().equals("2")) {
+				employeeDetailMap.put("socialInsuranceDate", wagesInfoModel.getReflectYearAndMonth() + "01");
+			} else if (wagesInfoModel.getEmployeeStatus() != null) {
+				employeeDetailMap.put("socialInsuranceDate", "");
+			}
 			employeeInfoMapper.updateEmployeeInfoDetail(employeeDetailMap);
 			return true;
 		} catch (Exception e) {

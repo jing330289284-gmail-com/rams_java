@@ -413,13 +413,53 @@ public class WagesInfoController extends BaseController {
 		HashMap<String, String> checkMap = new HashMap<String, String>();
 		checkMap.put("employeeNo", wagesInfoModel.getEmployeeNo());
 		ArrayList<WagesInfoModel> wagesInfoList = wagesInfoMapper.getWagesInfo(checkMap);
-		if (wagesInfoList.size() != 0) {
-			int lastEnd = Integer.parseInt(wagesInfoList.get(wagesInfoList.size() - 1).getReflectYearAndMonth());
-			int nowStart = Integer.parseInt(wagesInfoModel.getReflectYearAndMonth());
-			if (nowStart < lastEnd) {
-				errorsMessage += "新規給料情報の反映年月は既存データ以降にしてください";
-				result.put("errorsMessage", errorsMessage);// エラーメッセージ
-				return result;
+		if (wagesInfoModel.getActionType().equals("update")) {
+			if (wagesInfoList.size() > 1) {
+				int lastEnd = Integer.parseInt(wagesInfoList.get(wagesInfoList.size() - 1).getReflectYearAndMonth());
+				int nowStart = Integer.parseInt(wagesInfoModel.getReflectYearAndMonth());
+				if (nowStart < lastEnd) {
+					errorsMessage += "新規給料情報の反映年月は既存データ以降にしてください";
+					result.put("errorsMessage", errorsMessage);// エラーメッセージ
+					return result;
+				}
+
+				int fristBonusMonth = Integer
+						.parseInt((wagesInfoList.get(wagesInfoList.size() - 2).getFristBonusMonth() == null
+								|| wagesInfoList.get(wagesInfoList.size() - 2).getFristBonusMonth().equals("") ? "0"
+										: wagesInfoList.get(wagesInfoList.size() - 2).getFristBonusMonth()));
+				int secondBonusMonth = Integer
+						.parseInt((wagesInfoList.get(wagesInfoList.size() - 2).getSecondBonusMonth() == null
+								|| wagesInfoList.get(wagesInfoList.size() - 2).getSecondBonusMonth().equals("") ? "0"
+										: wagesInfoList.get(wagesInfoList.size() - 2).getSecondBonusMonth()));
+				if (nowStart < fristBonusMonth || nowStart < secondBonusMonth) {
+					errorsMessage += "新規給料情報の反映年月は既存データボーナス支払月以降にしてください";
+					result.put("errorsMessage", errorsMessage);// エラーメッセージ
+					return result;
+				}
+			}
+		} else {
+			if (wagesInfoList.size() != 0) {
+				int lastEnd = Integer.parseInt(wagesInfoList.get(wagesInfoList.size() - 1).getReflectYearAndMonth());
+				int nowStart = Integer.parseInt(wagesInfoModel.getReflectYearAndMonth());
+				if (nowStart < lastEnd) {
+					errorsMessage += "新規給料情報の反映年月は既存データ以降にしてください";
+					result.put("errorsMessage", errorsMessage);// エラーメッセージ
+					return result;
+				}
+
+				int fristBonusMonth = Integer
+						.parseInt((wagesInfoList.get(wagesInfoList.size() - 1).getFristBonusMonth() == null
+								|| wagesInfoList.get(wagesInfoList.size() - 1).getFristBonusMonth().equals("") ? "0"
+										: wagesInfoList.get(wagesInfoList.size() - 1).getFristBonusMonth()));
+				int secondBonusMonth = Integer
+						.parseInt((wagesInfoList.get(wagesInfoList.size() - 1).getSecondBonusMonth() == null
+								|| wagesInfoList.get(wagesInfoList.size() - 1).getSecondBonusMonth().equals("") ? "0"
+										: wagesInfoList.get(wagesInfoList.size() - 1).getSecondBonusMonth()));
+				if (nowStart < fristBonusMonth || nowStart < secondBonusMonth) {
+					errorsMessage += "新規給料情報の反映年月は既存データボーナス支払月以降にしてください";
+					result.put("errorsMessage", errorsMessage);// エラーメッセージ
+					return result;
+				}
 			}
 		}
 		// 非稼働の場合、保険は前件の保険を使う
