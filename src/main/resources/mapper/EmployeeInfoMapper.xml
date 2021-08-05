@@ -266,12 +266,15 @@
 		<if test="employeeName == null ">
 			<if test="employeeFormCode == null ">
 				(T002.employeeFormCode != "4" or
+				T002.retirementResonClassification = "2" or
 				T002.retirementYearAndMonth &gt; now())
 			</if>
 			<if test="employeeFormCode != null ">
 				if(#{employeeFormCode} = "4",
 				T002.employeeFormCode =
-				#{employeeFormCode} and T002.retirementYearAndMonth &lt;= now(),
+				#{employeeFormCode} and T002.retirementYearAndMonth &lt;= now()
+				and T002.retirementResonClassification != "2"
+				,
 				T002.employeeFormCode = #{employeeFormCode}
 				)
 			</if>

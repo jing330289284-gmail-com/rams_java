@@ -24,7 +24,7 @@
 			T018.deductionsAndOvertimePayOfUnitPrice ,
 			T006.admissionStartDate,
 			T006.admissionEndDate,
-			if(T002.employeeStatus = "2",CAST((T006.unitPrice*10000*(1 + T012.taxRate)) As unsigned),CAST((T006.unitPrice*10000) As unsigned)) As
+			if(T002.employeeStatus = "2",CAST((T006.unitPrice*(1 + T012.taxRate)) As unsigned),CAST((T006.unitPrice) As unsigned)) As
 			unitPrice,
 			CAST(T005.salary As unsigned) As salary,
 			CAST((ifnull(T013.transportationExpenses,0) +
@@ -35,7 +35,7 @@
 			+ ifnull(T013.leaderAllowanceAmount,0) +
 			ifnull(T013.introductionAllowance,0)) As unsigned) As otherFee,
 			CAST(T005.waitingCost As unsigned) As waitingCost,
-			ifnull(if(T002.employeeStatus = "2",T006.unitPrice*10000*(1 + T012.taxRate),T006.unitPrice*10000),0) - (ifnull(T005.salary,0) +
+			ifnull(if(T002.employeeStatus = "2",T006.unitPrice*(1 + T012.taxRate),T006.unitPrice),0) - (ifnull(T005.salary,0) +
 			ifnull(T013.transportationExpenses,0) +
 			ifnull(if(#{getYandM} = T005.fristBonusMonth,T005.fristTimeBonusAmount,0) + if(#{getYandM} = T005.secondBonusMonth,T005.secondTimeBonusAmount,0),0) +
 			ifnull(T005.insuranceFeeAmount,0)
@@ -136,16 +136,16 @@
 				or workState = "3"
 			</if>
 			<if test="utilPricefront != null &amp;&amp; utilPriceback != null">
-				AND CAST((T006.unitPrice*10000) As unsigned) between
+				AND CAST((T006.unitPrice) As unsigned) between
 				CAST((#{utilPricefront}*10000) As unsigned) and CAST((
 				#{utilPriceback}*10000) As unsigned)
 			</if>
 			<if test="utilPricefront != null &amp;&amp; utilPriceback == null">
-				AND CAST((T006.unitPrice*10000) As unsigned) &gt;=
+				AND CAST((T006.unitPrice) As unsigned) &gt;=
 				#{utilPricefront}*10000
 			</if>
 			<if test="utilPricefront== null &amp;&amp; utilPriceback != null">
-				AND CAST((T006.unitPrice*10000) As unsigned) &lt;=
+				AND CAST((T006.unitPrice) As unsigned) &lt;=
 				#{utilPriceback}*10000
 			</if>
 
@@ -162,43 +162,37 @@
 
 			<if
 				test="grossProfitFront != null &amp;&amp; grossProfitBack != null">
-				AND (T006.unitPrice*10000 - (T005.salary +
-				(T013.transportationExpenses
-				+ T005.fristTimeBonusAmount +
-				T005.secondTimeBonusAmount +
-				T005.insuranceFeeAmount
-				+T013.otherAllowanceAmount +
-				T013.leaderAllowanceAmount +
-				T013.introductionAllowance) +
-				T005.waitingCost))
+				AND (ifnull(if(T002.employeeStatus = "2",T006.unitPrice*(1 + T012.taxRate),T006.unitPrice),0) - (ifnull(T005.salary,0) +
+				ifnull(T013.transportationExpenses,0) +
+				ifnull(if(#{getYandM} = T005.fristBonusMonth,T005.fristTimeBonusAmount,0) + if(#{getYandM} = T005.secondBonusMonth,T005.secondTimeBonusAmount,0),0) +
+				ifnull(T005.insuranceFeeAmount,0)
+				+ifnull(T013.otherAllowanceAmount,0) +
+				ifnull(T013.leaderAllowanceAmount,0) +
+				ifnull(T013.introductionAllowance,0) + ifnull(T005.waitingCost,0)))
 				between
 				${grossProfitFront}*10000 and
 				${grossProfitBack}*10000
 			</if>
 			<if
 				test="grossProfitFront != null &amp;&amp; grossProfitBack == null">
-				AND (T006.unitPrice*10000 - (T005.salary +
-				(T013.transportationExpenses
-				+ T005.fristTimeBonusAmount +
-				T005.secondTimeBonusAmount +
-				T005.insuranceFeeAmount
-				+T013.otherAllowanceAmount +
-				T013.leaderAllowanceAmount +
-				T013.introductionAllowance) +
-				T005.waitingCost)) &gt;=
+				AND (ifnull(if(T002.employeeStatus = "2",T006.unitPrice*(1 + T012.taxRate),T006.unitPrice),0) - (ifnull(T005.salary,0) +
+				ifnull(T013.transportationExpenses,0) +
+				ifnull(if(#{getYandM} = T005.fristBonusMonth,T005.fristTimeBonusAmount,0) + if(#{getYandM} = T005.secondBonusMonth,T005.secondTimeBonusAmount,0),0) +
+				ifnull(T005.insuranceFeeAmount,0)
+				+ifnull(T013.otherAllowanceAmount,0) +
+				ifnull(T013.leaderAllowanceAmount,0) +
+				ifnull(T013.introductionAllowance,0) + ifnull(T005.waitingCost,0))) &gt;=
 				${grossProfitFront}*10000
 			</if>
 			<if
 				test="grossProfitFront== null &amp;&amp; grossProfitBack != null">
-				AND (T006.unitPrice*10000 - (T005.salary +
-				(T013.transportationExpenses
-				+ T005.fristTimeBonusAmount +
-				T005.secondTimeBonusAmount +
-				T005.insuranceFeeAmount
-				+T013.otherAllowanceAmount +
-				T013.leaderAllowanceAmount +
-				T013.introductionAllowance) +
-				T005.waitingCost)) &lt;=
+				AND (ifnull(if(T002.employeeStatus = "2",T006.unitPrice*(1 + T012.taxRate),T006.unitPrice),0) - (ifnull(T005.salary,0) +
+				ifnull(T013.transportationExpenses,0) +
+				ifnull(if(#{getYandM} = T005.fristBonusMonth,T005.fristTimeBonusAmount,0) + if(#{getYandM} = T005.secondBonusMonth,T005.secondTimeBonusAmount,0),0) +
+				ifnull(T005.insuranceFeeAmount,0)
+				+ifnull(T013.otherAllowanceAmount,0) +
+				ifnull(T013.leaderAllowanceAmount,0) +
+				ifnull(T013.introductionAllowance,0) + ifnull(T005.waitingCost,0))) &lt;=
 				${grossProfitBack}*10000
 			</if>
 		</foreach>
@@ -219,9 +213,9 @@
 			M014.occupationName,
 			left(T006.admissionStartDate,6) as admissionStartDate,
 			left(T006.admissionEndDate,6) as admissionEndDate,
-			CAST((T006.unitPrice*10000) As unsigned) as unitPrice,
+			CAST((T006.unitPrice) As unsigned) as unitPrice,
 			CAST((T011.bpUnitPrice*10000) As unsigned) as salary,
-			ifnull(T006.unitPrice,0)*10000 - ifnull(T011.bpUnitPrice,0)*10000 as monthlyGrosProfits,
+			ifnull(T006.unitPrice,0) - ifnull(T011.bpUnitPrice,0)*10000 as monthlyGrosProfits,
 			T007.customerName as bpBelongCustomer
 			FROM T006EmployeeSiteInfo as T006
 			left Join (select T011.* FROM T011BpInfoSupplement as T011
@@ -273,16 +267,16 @@
 				AND admissionStartDate is null
 			</if>
 			<if test="utilPricefront != null &amp;&amp; utilPriceback != null">
-				AND CAST((T006.unitPrice*10000) As unsigned) between
+				AND CAST((T006.unitPrice) As unsigned) between
 				CAST((#{utilPricefront}*10000) As unsigned) and CAST((
 				#{utilPriceback}*10000) As unsigned)
 			</if>
 			<if test="utilPricefront != null &amp;&amp; utilPriceback == null">
-				AND CAST((T006.unitPrice*10000) As unsigned) &gt;=
+				AND CAST((T006.unitPrice) As unsigned) &gt;=
 				#{utilPricefront}*10000
 			</if>
 			<if test="utilPricefront== null &amp;&amp; utilPriceback != null">
-				AND CAST((T006.unitPrice*10000) As unsigned) &lt;=
+				AND CAST((T006.unitPrice) As unsigned) &lt;=
 				#{utilPriceback}*10000
 			</if>
 
@@ -300,18 +294,18 @@
 
 			<if
 				test="grossProfitFront != null &amp;&amp; grossProfitBack != null">
-				AND T006.unitPrice*10000 - T011.bpUnitPrice*10000
+				AND T006.unitPrice - T011.bpUnitPrice*10000
 				between
 				${grossProfitFront}*10000 and ${grossProfitBack}*10000
 			</if>
 			<if
 				test="grossProfitFront != null &amp;&amp; grossProfitBack == null">
-				AND T006.unitPrice*10000 - T011.bpUnitPrice*10000 &gt;=
+				AND T006.unitPrice - T011.bpUnitPrice*10000 &gt;=
 				${grossProfitFront}*10000
 			</if>
 			<if
 				test="grossProfitFront== null &amp;&amp; grossProfitBack != null">
-				AND T006.unitPrice*10000 - T011.bpUnitPrice*10000 &lt;=
+				AND T006.unitPrice - T011.bpUnitPrice*10000 &lt;=
 				${grossProfitBack}*10000
 			</if>
 		</foreach>

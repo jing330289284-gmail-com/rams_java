@@ -300,8 +300,13 @@ public class IndividualCustomerSalesController {
 									if (CustomerSalesModelListTwice.get(i).getYearAndMonth().equals(getYandM.get(a))) {
 										if (CustomerSalesModelListTwice.get(i).getTotalAmount() != null
 												|| !CustomerSalesModelListTwice.get(i).getTotalAmount().equals(""))
-											customerEmpDe.setCost(CustomerSalesModelListTwice.get(i).getTotalAmount()
-													.substring(0, 2));
+											if (CustomerSalesModelListTwice.get(i).getTotalAmount().length() >= 2) {
+												customerEmpDe.setCost(CustomerSalesModelListTwice.get(i)
+														.getTotalAmount().substring(0, 2));
+											} else {
+												customerEmpDe
+														.setCost(CustomerSalesModelListTwice.get(i).getTotalAmount());
+											}
 									}
 								}
 							}
