@@ -101,6 +101,7 @@
 			T001.employeeNo=#{employeeName}
 			and (T002.retirementYearAndMonth = ""
 			or LEFT(T002.retirementYearAndMonth,6) &gt;= #{getYandM}
+			or retirementResonClassification = "2"
 			)
 			ORDER BY ABS(#{getYandM} -
 			reflectYearAndMonth) ASC

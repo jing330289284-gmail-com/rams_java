@@ -59,8 +59,8 @@ public class CustomerSalesListController {
 		logger.info("IndividualCustomerSalesController.searchCustomerSales:" + "検索結束");
 		List<CustomerSalesListModel> lastMonthData = new ArrayList<CustomerSalesListModel>();
 		List<CustomerSalesListModel> MonthData = new ArrayList<CustomerSalesListModel>();
-		
-		//検索結果を整理する（検索月と検索月先月データ）
+
+		// 検索結果を整理する（検索月と検索月先月データ）
 		for (int i = 0; i < CustomerSalesListModel.size(); i++) {
 			if (CustomerSalesListModel.get(i).getYearAndMonth().equals(getYandM.get(0))) {
 				lastMonthData.add(CustomerSalesListModel.get(i));
@@ -74,7 +74,7 @@ public class CustomerSalesListController {
 		for (int j = 0; j < MonthData.size(); j++) {
 			getCompanyNo.add(MonthData.get(j).getCustomerNo());
 		}
-		//重複テータ削除する
+		// 重複テータ削除する
 		List uniqueGetCompanyNo = getCompanyNo.stream().distinct().collect(Collectors.toList());
 
 		String averUnitPr;
@@ -108,7 +108,9 @@ public class CustomerSalesListController {
 					customerEmpDe.setEmployeeName(MonthData.get(n).getEmployeeName());
 					customerEmpDe.setSiteRoleName(MonthData.get(n).getSiteRoleName());
 					customerEmpDe.setStationName(MonthData.get(n).getStationName());
-					customerEmpDe.setUnitPrice(MonthData.get(n).getUnitPrice());
+					double unitPrice = Double.parseDouble(MonthData.get(n).getUnitPrice()) / 10000.0;
+					DecimalFormat up = new DecimalFormat("#.#");
+					customerEmpDe.setUnitPrice(up.format(unitPrice));
 					customerEmpDetail.add(customerEmpDe);
 				}
 			}
@@ -121,7 +123,7 @@ public class CustomerSalesListController {
 			cusSalesListM.setEmpDetail(customerEmpDetail);
 			cusSalesListM.setTotalUnitPrice(String.valueOf(totalUnitPrice));
 			cusSalesListM.setCountPeo(countpeo);
-			averageUnitPrice = totalUnitPriceCal * 10000 / countpeoCal;
+			averageUnitPrice = totalUnitPriceCal / countpeoCal;
 			averUnitPr = decimalFormat.format(averageUnitPrice);
 			cusSalesListM.setAverUnitPrice(averUnitPr);
 			resultData.add(cusSalesListM);
@@ -189,7 +191,7 @@ public class CustomerSalesListController {
 						resultData.get(x).setTotalAmount(
 								String.valueOf(Integer.parseInt(resultData.get(x).getTotalAmount()) + totalAmount));
 					}
-					String grossProfit = String.valueOf(Integer.parseInt(resultData.get(x).getTotalUnitPrice()) * 10000
+					String grossProfit = String.valueOf(Integer.parseInt(resultData.get(x).getTotalUnitPrice())
 							- Integer.parseInt(resultData.get(x).getTotalAmount()));
 					resultData.get(x).setGrossProfit(grossProfit);
 				}
@@ -218,9 +220,9 @@ public class CustomerSalesListController {
 			totalgrossProfit = totalgrossProfit + Integer.parseInt(resultData.get(a).getGrossProfit());
 
 		}
-		totalSales = unitPTotal * 10000 + (totalOverTimeFee + totalExpectFee);
+		totalSales = unitPTotal + (totalOverTimeFee + totalExpectFee);
 		resultData.get(0).setCalPeoCount(calPeoCount);
-		resultData.get(0).setUnitPTotal(unitPTotal * 10000);
+		resultData.get(0).setUnitPTotal(unitPTotal);
 		resultData.get(0).setTotalgrossProfit(totalgrossProfit);
 		resultData.get(0).setTotalSales(totalSales);
 		for (int b = 0; b < resultData.size(); b++) {

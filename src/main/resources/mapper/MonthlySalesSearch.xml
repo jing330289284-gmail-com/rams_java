@@ -111,6 +111,7 @@
 
 			WHERE (T002.retirementYearAndMonth = ""
 			or LEFT(T002.retirementYearAndMonth,6) &gt;= #{getYandM}
+			or retirementResonClassification = "2"
 			)
 
 			<if test="employeeClassification != null">

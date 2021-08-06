@@ -258,8 +258,8 @@ public class IndividualCustomerSalesController {
 							cusModelLi.get(s).setTotalAmount(String.valueOf(costTotal));
 						}
 					}
-					cusModelLi.get(p).setGrossProfit(
-							String.valueOf(Integer.parseInt(cusModelLi.get(p).getTotalUnitPrice()) * 10000
+					cusModelLi.get(p)
+							.setGrossProfit(String.valueOf(Integer.parseInt(cusModelLi.get(p).getTotalUnitPrice())
 									- Integer.parseInt(cusModelLi.get(p).getTotalAmount())));
 				}
 				for (int d = cusModelLi.size() - 1; d >= 0; d--) {
@@ -288,7 +288,10 @@ public class IndividualCustomerSalesController {
 							customerEmpDe.setEmployeeName(employeeName);
 							customerEmpDe.setSiteRoleName(CustomerSalesModelList.get(b).getSiteRoleName());
 							customerEmpDe.setStationName(CustomerSalesModelList.get(b).getStationName());
-							customerEmpDe.setUnitPrice(CustomerSalesModelList.get(b).getUnitPrice());
+							double unitPrice = Double.parseDouble(CustomerSalesModelList.get(b).getUnitPrice())
+									/ 10000.0;
+							DecimalFormat up = new DecimalFormat("#.#");
+							customerEmpDe.setUnitPrice(up.format(unitPrice));
 							if (CustomerSalesModelList.get(b).getBpUnitPrice() != null
 									&& !CustomerSalesModelList.get(b).getBpUnitPrice().equals("")) {
 								customerEmpDe.setCost(String
@@ -345,14 +348,13 @@ public class IndividualCustomerSalesController {
 					}
 					totalworkPeoSum = totalworkPeoSum + Integer.parseInt(cusModelLi.get(c).getWorkPeoSum());
 					totaluPrice = totaluPrice + Integer.parseInt(cusModelLi.get(c).getTotalUnitPrice());
-					overTimeOrExpectFee = overTimeOrExpectFee
-							+ Integer.parseInt(cusModelLi.get(c).getTotalUnitPrice()) * 10000
+					overTimeOrExpectFee = overTimeOrExpectFee + Integer.parseInt(cusModelLi.get(c).getTotalUnitPrice())
 							+ Integer.parseInt(cusModelLi.get(c).getOverTimeFee())
 							- Integer.parseInt(cusModelLi.get(c).getExpectFee());
 					totalgrossProfit = totalgrossProfit + Integer.parseInt(cusModelLi.get(c).getGrossProfit());
 				}
 				cusModelLi.get(0).setTotalworkPeoSum(totalworkPeoSum);
-				cusModelLi.get(0).setTotaluPrice(totaluPrice * 10000);
+				cusModelLi.get(0).setTotaluPrice(totaluPrice);
 				cusModelLi.get(0).setOverTimeOrExpectFee(overTimeOrExpectFee);
 				cusModelLi.get(0).setTotalgrossProfit(totalgrossProfit);
 

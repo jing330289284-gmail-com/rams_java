@@ -48,7 +48,13 @@
 		FROM
 		T001Employee as T001
 		Left Join
-		T006EmployeeSiteInfo as T006
+		(select T006.* from T006EmployeeSiteInfo as T006
+		inner join (select employeeNo,max(admissionStartDate) as admissionStartDate from T006EmployeeSiteInfo
+		group by employeeNo
+		) as temp 
+		on T006.employeeNo = temp.employeeNo
+		and T006.admissionStartDate = temp.admissionStartDate
+		) as T006
 		on T006.employeeNo = T001.employeeNo
 		where ((T006.admissionEndDate is null or T006.admissionEndDate > now()) and T006.workState != "3")
 		group by T001.employeeNo
