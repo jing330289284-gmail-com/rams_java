@@ -26,7 +26,7 @@
 			if(T007.customerAbbreviation is null ||
 			T007.customerAbbreviation =
 			"",T007.customerName,T007.customerAbbreviation) as customerName,
-			if(T002.employeeStatus = "2",CAST((T006.unitPrice*(1+T012.taxRate)) As unsigned),CAST((T006.unitPrice) As unsigned)) As unitPrice,
+			if(T005.employeeStatus = "5",CAST((T006.unitPrice*(1+T012.taxRate)) As unsigned),CAST((T006.unitPrice) As unsigned)) As unitPrice,
 			if(T005.salary
 			is not null,CAST(T005.salary As unsigned),CAST(T011.bpUnitPrice*10000
 			As unsigned)) As salary,
