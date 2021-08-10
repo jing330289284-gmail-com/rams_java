@@ -11,12 +11,13 @@
 				union all
 			</if>
 		SELECT #{getYandM} as yearAndMonth,
-		T007.customerName,
+		if(T007.customerAbbreviation is null || T007.customerAbbreviation = "",T007.customerName,T007.customerAbbreviation) as customerName,
 		T006.customerNo,
 		T006.unitPrice,
 		T018.DeductionsAndOvertimePay,
 		T006.employeeNo,
 		CONCAT(T001.employeeFristName,T001.employeeLastName)as employeeName,
+		T011.bpUnitPrice,
 		M012.siteRoleName,
 		M013.stationName
 		FROM T006EmployeeSiteInfo As T006
@@ -24,6 +25,15 @@
 		and #{getYandM} =T018.attendanceYearAndMonth
 		left join T007CustomerInfo As T007 on T006.customerNo =T007.customerNo
 		left join T001Employee As T001 on T006.employeeNo=T001.employeeNo
+		left join
+			(SELECT T011.* FROM T011BpInfoSupplement as T011
+			inner join (
+			select bpEmployeeNo,max(unitPriceStartMonth) as unitPriceStartMonth from T011BpInfoSupplement
+			where unitPriceStartMonth &lt;= #{getYandM}
+			group by bpEmployeeNo
+			) as temp
+			on T011.bpEmployeeNo = temp.bpEmployeeNo
+			and T011.unitPriceStartMonth = temp.unitPriceStartMonth) as T011 on T006.employeeNo=T011.bpEmployeeNo
 		left join M012SiteRole As M012 on M012.siteRoleCode=T006.siteRoleCode
 		left join M013Station as M013 on T006.stationCode =M013.stationCode
 		WHERE #{getYandM} between left(admissionStartDate,6) and

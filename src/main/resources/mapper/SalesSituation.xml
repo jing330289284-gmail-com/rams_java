@@ -87,6 +87,7 @@
 		#{salesYearAndMonth}
 		and
 		T002.employeeFormCode != "4"
+		and T002.occupationCode != "1"
 
 		union
 		SELECT

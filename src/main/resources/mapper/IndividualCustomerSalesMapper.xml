@@ -18,7 +18,7 @@
 			A.maxP As maxUnitPrice,
 			A.minP As minUnitPrice,
 			CONCAT(T001.employeeFristName,T001.employeeLastName)as employeeName,
-			T006.unitPrice,
+			if(T005.employeeStatus = "5",CAST((T006.unitPrice*(1+T012.taxRate)) As unsigned),CAST((T006.unitPrice) As unsigned)) As unitPrice,
 			M012.siteRoleName,
 			T018.DeductionsAndOvertimePay,
 			T011.bpUnitPrice,
@@ -43,6 +43,18 @@
 			left join M013Station as M013 on T006.stationCode =M013.stationCode
 			left join T018WorkTotalTime as T018 on T018.employeeNo=
 			T002.employeeNo and #{getYandM} =T018.attendanceYearAndMonth
+			Left JOIN
+			(select T005.* from T005WagesInfo as T005
+			inner join 
+			(select employeeNo,max(reflectYearAndMonth) as reflectYearAndMonth from T005WagesInfo
+			where reflectYearAndMonth &lt;= #{getYandM}
+			group by employeeNo) as temp
+			on temp.employeeNo = T005.employeeNo
+			and temp.reflectYearAndMonth = T005.reflectYearAndMonth
+			) As T005 ON T001.employeeNo
+			= T005.employeeNo
+			LEFT JOIN
+			T012Passwordreset As T012 ON T012.passwordResetId = "systemSet"
 			left join
 			(select MAX(unitPrice + 0) as maxP,MIN(unitPrice + 0) as minP
 			from
@@ -93,6 +105,7 @@
 			</if>
 			select * from(select ${tempList.yearAndMonth} as
 			yearAndMonth,
+			employeeNo,
 			totalExpenses
 			from T013ExpensesInfo
 			where employeeNo =#{tempList.empNo}

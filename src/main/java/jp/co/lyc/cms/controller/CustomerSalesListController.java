@@ -80,7 +80,19 @@ public class CustomerSalesListController {
 		String averUnitPr;
 		DecimalFormat decimalFormat = new DecimalFormat(".0");
 		List<CustomerSalesListModel> resultData = new ArrayList<CustomerSalesListModel>();
-
+		List<Map> tempList = new ArrayList<Map>();
+		for (int k = 0; k < MonthData.size(); k++) {
+			Map<String, Object> tempMap = new HashMap<String, Object>();
+			tempMap.put("empNo", MonthData.get(k).getEmployeeNo());
+			tempMap.put("yearAndMonth", MonthData.get(k).getYearAndMonth());
+			tempMap.put("customerNo", MonthData.get(k).getCustomerNo());
+			tempList.add(tempMap);
+		}
+		sendMap.put("tempList", tempList);
+		List<CustomerSalesListModel> CustomerSalesListModelTwice = new ArrayList<CustomerSalesListModel>();
+		logger.info("IndividualCustomerSalesController.CustomerSalesListModelTwice:" + "二回目検索開始");
+		CustomerSalesListModelTwice = CustomerSalesListService.searchCustomerSalesListTwice(sendMap);
+		logger.info("IndividualCustomerSalesController.CustomerSalesListModelTwice:" + "二回目検索結束");
 		for (int k = 0; k < uniqueGetCompanyNo.size(); k++) {
 			int totalUnitPrice = 0;
 			float totalUnitPriceCal = 0;
@@ -103,14 +115,51 @@ public class CustomerSalesListController {
 					countpeo++;
 					countpeoCal++;
 					cusSalesListM.setEmployeeNo(MonthData.get(n).getEmployeeNo());
+					String employeeName = MonthData.get(n).getEmployeeName();
+					if (MonthData.get(n).getEmployeeNo().substring(0, 3).equals("BPR")) {
+						employeeName = employeeName + "(" + MonthData.get(n).getEmployeeNo().substring(0, 3) + ")";
+					} else if (MonthData.get(n).getEmployeeNo().substring(0, 2).equals("BP")
+							|| MonthData.get(n).getEmployeeNo().substring(0, 2).equals("SC")
+							|| MonthData.get(n).getEmployeeNo().substring(0, 2).equals("SP")) {
+						employeeName = employeeName + "(" + MonthData.get(n).getEmployeeNo().substring(0, 2) + ")";
+					}
 					cusSalesListM.setCustomerName(MonthData.get(n).getCustomerName());
 					cusSalesListM.setCustomerNo(MonthData.get(n).getCustomerNo());
-					customerEmpDe.setEmployeeName(MonthData.get(n).getEmployeeName());
+					customerEmpDe.setEmployeeNo(MonthData.get(n).getEmployeeNo());
+					customerEmpDe.setEmployeeName(employeeName);
 					customerEmpDe.setSiteRoleName(MonthData.get(n).getSiteRoleName());
 					customerEmpDe.setStationName(MonthData.get(n).getStationName());
 					double unitPrice = Double.parseDouble(MonthData.get(n).getUnitPrice()) / 10000.0;
 					DecimalFormat up = new DecimalFormat("#.#");
 					customerEmpDe.setUnitPrice(up.format(unitPrice));
+					if (MonthData.get(n).getEmployeeNo().substring(0, 2).equals("BP")) {
+						for (int i = 0; i < CustomerSalesListModel.size(); i++) {
+							if (CustomerSalesListModel.get(i).getEmployeeNo()
+									.equals(MonthData.get(n).getEmployeeNo())) {
+								customerEmpDe.setCost(CustomerSalesListModel.get(i).getBpUnitPrice());
+							}
+						}
+					} else {
+						for (int i = 0; i < CustomerSalesListModel.size(); i++) {
+							if (CustomerSalesListModel.get(i).getEmployeeNo()
+									.equals(MonthData.get(n).getEmployeeNo())) {
+								double totalCost = 0;
+								for (int j = 0; j < CustomerSalesListModelTwice.size(); j++) {
+									if (CustomerSalesListModel.get(i).getCustomerNo()
+											.equals(CustomerSalesListModelTwice.get(j).getCustomerNo())) {
+										if (CustomerSalesListModel.get(i).getEmployeeNo()
+												.equals(CustomerSalesListModelTwice.get(j).getEmployeeNo())) {
+											totalCost += Double
+													.parseDouble(CustomerSalesListModelTwice.get(j).getTotalAmount());
+										}
+									}
+								}
+								totalCost = totalCost / 10000.0;
+								DecimalFormat cost = new DecimalFormat("#.#");
+								customerEmpDe.setCost(cost.format(totalCost));
+							}
+						}
+					}
 					customerEmpDetail.add(customerEmpDe);
 				}
 			}
@@ -120,7 +169,18 @@ public class CustomerSalesListController {
 			if (DeductionsAndOvertimePay > 0) {
 				cusSalesListM.setOverTimeFee(String.valueOf(DeductionsAndOvertimePay));
 			}
-			cusSalesListM.setEmpDetail(customerEmpDetail);
+			List<CustomerEmployeeDetail> customerEmpDetailTemp = new ArrayList<CustomerEmployeeDetail>();
+			for (int i = 0; i < customerEmpDetail.size(); i++) {
+				if (!customerEmpDetail.get(i).getEmployeeNo().substring(0, 2).equals("BP")) {
+					customerEmpDetailTemp.add(customerEmpDetail.get(i));
+				}
+			}
+			for (int i = 0; i < customerEmpDetail.size(); i++) {
+				if (customerEmpDetail.get(i).getEmployeeNo().substring(0, 2).equals("BP")) {
+					customerEmpDetailTemp.add(customerEmpDetail.get(i));
+				}
+			}
+			cusSalesListM.setEmpDetail(customerEmpDetailTemp);
 			cusSalesListM.setTotalUnitPrice(String.valueOf(totalUnitPrice));
 			cusSalesListM.setCountPeo(countpeo);
 			averageUnitPrice = totalUnitPriceCal / countpeoCal;
@@ -142,20 +202,6 @@ public class CustomerSalesListController {
 			resultData.get(j).setLastMonthCountPeo(lastmonthPeoCal);
 		}
 
-		List<Map> tempList = new ArrayList<Map>();
-		for (int k = 0; k < MonthData.size(); k++) {
-			Map<String, Object> tempMap = new HashMap<String, Object>();
-			tempMap.put("empNo", MonthData.get(k).getEmployeeNo());
-			tempMap.put("yearAndMonth", MonthData.get(k).getYearAndMonth());
-			tempMap.put("customerNo", MonthData.get(k).getCustomerNo());
-			tempList.add(tempMap);
-		}
-		sendMap.put("tempList", tempList);
-		List<CustomerSalesListModel> CustomerSalesListModelTwice = new ArrayList<CustomerSalesListModel>();
-		logger.info("IndividualCustomerSalesController.CustomerSalesListModelTwice:" + "二回目検索開始");
-		CustomerSalesListModelTwice = CustomerSalesListService.searchCustomerSalesListTwice(sendMap);
-		logger.info("IndividualCustomerSalesController.CustomerSalesListModelTwice:" + "二回目検索結束");
-
 		for (int k = 0; k < uniqueGetCompanyNo.size(); k++) {
 			int totalAmount = 0;
 			for (int s = 0; s < CustomerSalesListModelTwice.size(); s++) {
@@ -163,8 +209,19 @@ public class CustomerSalesListController {
 					CustomerSalesListModelTwice.get(s).setTotalAmount("0");
 				}
 				if (uniqueGetCompanyNo.get(k).equals(CustomerSalesListModelTwice.get(s).getCustomerNo())) {
-					totalAmount = totalAmount + Integer.parseInt(CustomerSalesListModelTwice.get(s).getTotalAmount());
+					totalAmount += Integer.parseInt(CustomerSalesListModelTwice.get(s).getTotalAmount());
 				}
+				/*
+				 * for (int i = 0; i < CustomerSalesListModel.size(); i++) { if
+				 * (uniqueGetCompanyNo.get(k).equals(CustomerSalesListModel.get(i).getCustomerNo
+				 * ())) { if
+				 * (uniqueGetCompanyNo.get(k).equals(CustomerSalesListModelTwice.get(s).
+				 * getCustomerNo())) { totalAmount +=
+				 * (CustomerSalesListModel.get(i).getBpUnitPrice() == null ||
+				 * CustomerSalesListModel.get(i).getBpUnitPrice().equals("") ? 0 :
+				 * Integer.parseInt(CustomerSalesListModel.get(i).getBpUnitPrice()) * 10000); }
+				 * } }
+				 */
 				for (int x = 0; x < resultData.size(); x++) {
 					if (resultData.get(x).getCustomerNo().equals(uniqueGetCompanyNo.get(k))) {
 						resultData.get(x).setTotalAmount(String.valueOf(totalAmount));

@@ -217,15 +217,17 @@ public class IndividualCustomerSalesController {
 					for (int n = 0; n < CustomerSalesModelListThird.size(); n++) {
 						int totalAm = 0;
 						for (int m = 0; m < CustomerSalesModelListTwice.size(); m++) {
-							if (CustomerSalesModelListThird.get(n).getYearAndMonth()
-									.equals(CustomerSalesModelListTwice.get(m).getYearAndMonth())) {
-								if (CustomerSalesModelListThird.get(n).getTotalExpenses() == null
-										|| CustomerSalesModelListThird.get(n).getTotalExpenses().equals("")) {
-									CustomerSalesModelListThird.get(n).setTotalExpenses("0");
+							if(CustomerSalesModelListThird.get(n).getEmployeeNo().equals(CustomerSalesModelListTwice.get(m).getEmployeeNo())) {
+								if (CustomerSalesModelListThird.get(n).getYearAndMonth()
+										.equals(CustomerSalesModelListTwice.get(m).getYearAndMonth())) {
+									if (CustomerSalesModelListThird.get(n).getTotalExpenses() == null
+											|| CustomerSalesModelListThird.get(n).getTotalExpenses().equals("")) {
+										CustomerSalesModelListThird.get(n).setTotalExpenses("0");
+									}
+									totalAm = Integer.parseInt(CustomerSalesModelListTwice.get(m).getTotalAmount())
+											+ Integer.parseInt(CustomerSalesModelListThird.get(n).getTotalExpenses());
+									CustomerSalesModelListTwice.get(m).setTotalAmount(String.valueOf(totalAm));
 								}
-								totalAm = Integer.parseInt(CustomerSalesModelListTwice.get(m).getTotalAmount())
-										+ Integer.parseInt(CustomerSalesModelListThird.get(n).getTotalExpenses());
-								CustomerSalesModelListTwice.get(m).setTotalAmount(String.valueOf(totalAm));
 							}
 						}
 					}

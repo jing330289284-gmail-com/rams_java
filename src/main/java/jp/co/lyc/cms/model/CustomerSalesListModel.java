@@ -4,13 +4,14 @@ import java.io.Serializable;
 import java.util.List;
 
 public class CustomerSalesListModel implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 	String rowNo;
 	String yearAndMonth;
 	String customerName;
 	String customerNo;
 	String unitPrice;
+	String bpUnitPrice;
 	String DeductionsAndOvertimePay;
 	String employeeNo;
 	String employeeName;
@@ -29,6 +30,19 @@ public class CustomerSalesListModel implements Serializable {
 	int unitPTotal;
 	int totalSales;
 	int totalgrossProfit;
+
+	public String getBpUnitPrice() {
+		return bpUnitPrice;
+	}
+
+	public void setBpUnitPrice(String bpUnitPrice) {
+		this.bpUnitPrice = bpUnitPrice;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	public String getYearAndMonth() {
 		return yearAndMonth;
 	}
@@ -108,10 +122,6 @@ public class CustomerSalesListModel implements Serializable {
 	public void setTotalUnitPrice(String totalUnitPrice) {
 		this.totalUnitPrice = totalUnitPrice;
 	}
-
-
-
-
 
 	public String getAverUnitPrice() {
 		return averUnitPrice;
@@ -216,8 +226,5 @@ public class CustomerSalesListModel implements Serializable {
 	public void setTotalgrossProfit(int totalgrossProfit) {
 		this.totalgrossProfit = totalgrossProfit;
 	}
-
-
-	
 
 }

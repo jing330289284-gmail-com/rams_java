@@ -16,7 +16,7 @@
 			#{getYandM}
 			As yearAndMonth,
 			T002.employeeNo,
-			if(T002.employeeFormCode is null || T002.employeeFormCode = "","",M005.employeeFormName) as employeeFormName,
+			if(T005.employeeStatus is null || T005.employeeStatus = "","",M005.employeeFormName) as employeeFormName,
 			CONCAT(T001.employeeFristName,T001.employeeLastName)as employeeName,
 			T002.employeeStatus,
 			M014.occupationName,
@@ -89,7 +89,7 @@
 			ON A.employeeNo =T002.employeeNo
 			left
 			join M005EmployeeForm as M005 ON
-			T002.employeeFormCode=M005.employeeFormCode
+			T005.employeeStatus=M005.employeeFormCode
 			left join M014Occupation as
 			M014 ON T002.occupationCode =
 			M014.occupationCode
@@ -124,17 +124,17 @@
 				AND T002.occupationCode = #{employeeOccupation}
 			</if>
 			<if test="kadou == 0">
-				AND (#{getYandM} between left(admissionStartDate,6) and
-				left(admissionEndDate,6)
+				AND ((#{getYandM} between left(admissionStartDate,6) and
+				left(admissionEndDate,6) AND systemName != "休暇")
 				or (#{getYandM} &gt;=
 				left(admissionStartDate,6)
 				AND admissionEndDate is null
-				AND workState != "3"
+				AND (systemName is null or systemName != "休暇")
 				))
 			</if>
 			<if test="kadou == 1">
 				AND admissionStartDate is null
-				or workState = "3"
+				or systemName = "休暇"
 			</if>
 			<if test="utilPricefront != null &amp;&amp; utilPriceback != null">
 				AND CAST((T006.unitPrice) As unsigned) between
