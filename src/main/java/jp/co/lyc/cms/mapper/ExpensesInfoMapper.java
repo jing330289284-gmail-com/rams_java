@@ -34,4 +34,11 @@ public interface ExpensesInfoMapper {
 	 * @param customerNo
 	 */
 	public void delete(HashMap<String, String> sendMap);
+
+	/**
+	 * 諸費用データ取得
+	 * @param sendMap
+	 * @return
+	 */
+	public ArrayList<ExpensesInfoModel> getExpensesInfoModels(HashMap<String, String> sendMap);
 }

@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="jp.co.lyc.cms.mapper.ExpensesInfoMapper">
-<resultMap type="jp.co.lyc.cms.model.ExpensesInfoModel" id="expensesInfoModel"></resultMap>
+	<resultMap type="jp.co.lyc.cms.model.ExpensesInfoModel"
+		id="expensesInfoModel"></resultMap>
 
-<!-- 諸費用データ取得 -->
-<select id="getExpensesInfo" parameterType="String" resultMap="expensesInfoModel">
-	SELECT
+	<!-- 諸費用データ取得 -->
+	<select id="getExpensesInfo" parameterType="String"
+		resultMap="expensesInfoModel">
+		SELECT
 		expensesReflectYearAndMonth,
 		otherAllowanceName,
 		otherAllowanceAmount,
@@ -13,19 +15,67 @@
 		totalExpenses,
 		introductionAllowance,
 		remark,
-		transportationExpenses 
-	FROM
-		T013ExpensesInfo 
-	WHERE
+		transportationExpenses
+		FROM
+		T013ExpensesInfo
+		WHERE
 		employeeNo = #{employeeNo}
 		<if test="expensesReflectYearAndMonth != null">
-				AND expensesReflectYearAndMonth = #{expensesReflectYearAndMonth}
+			AND expensesReflectYearAndMonth =
+			#{expensesReflectYearAndMonth}
 		</if>
-</select>
+	</select>
 
-<!-- インサート -->
-<insert id="insert" parameterType="String">
-	INSERT INTO T013ExpensesInfo(
+	<!-- 諸費用データ取得 -->
+	<select id="getExpensesInfoModels" parameterType="String"
+		resultMap="expensesInfoModel">
+		<if test="start != null">
+			<if test="end != null">
+				SELECT
+				employeeNo,expensesReflectYearAndMonth,transportationExpenses,otherAllowanceName,otherAllowanceAmount,leaderAllowanceAmount,introductionAllowance,totalExpenses,remark
+				FROM T013ExpensesInfo
+				where employeeNo = #{employeeNo}
+				and
+				expensesReflectYearAndMonth between #{start} and #{end}
+
+				union
+
+				SELECT
+				T013.employeeNo,T013.expensesReflectYearAndMonth,T013.transportationExpenses,T013.otherAllowanceName,
+				T013.otherAllowanceAmount,T013.leaderAllowanceAmount,T013.introductionAllowance,T013.totalExpenses,T013.remark
+				FROM T013ExpensesInfo as T013
+				inner join
+				(SELECT
+				employeeNo,min(expensesReflectYearAndMonth) as
+				expensesReflectYearAndMonth FROM T013ExpensesInfo
+				where
+				expensesReflectYearAndMonth &gt; #{end}
+				group by employeeNo
+				) as temp
+				on T013.employeeNo = temp.employeeNo
+				and
+				T013.expensesReflectYearAndMonth = temp.expensesReflectYearAndMonth
+				where T013.employeeNo = #{employeeNo}
+				;
+			</if>
+			<if test="end == null">
+				SELECT * FROM T013ExpensesInfo
+				where employeeNo =
+				#{employeeNo}
+				and expensesReflectYearAndMonth &gt; #{start}
+			</if>
+		</if>
+		<if test="start == null">
+			SELECT * FROM T013ExpensesInfo
+			where employeeNo =
+			#{employeeNo}
+		</if>
+
+	</select>
+
+	<!-- インサート -->
+	<insert id="insert" parameterType="String">
+		INSERT INTO T013ExpensesInfo(
 		employeeNo,
 		expensesReflectYearAndMonth,
 		transportationExpenses,
@@ -38,8 +88,8 @@
 		updateTime,
 		createTime,
 		updateUser
-	)
-	VALUES(
+		)
+		VALUES(
 		#{employeeNo},
 		#{expensesReflectYearAndMonth},
 		#{transportationExpenses},
@@ -52,43 +102,46 @@
 		NOW(),
 		NOW(),
 		#{updateUser}
-	)
-</insert>
-<!-- アップデート -->
-<update id="update" parameterType="String">
-	UPDATE T013ExpensesInfo 
-		SET 
+		)
+	</insert>
+	<!-- アップデート -->
+	<update id="update" parameterType="String">
+		UPDATE T013ExpensesInfo
+		SET
 		<if test="expensesReflectYearAndMonth != null">
-			expensesReflectYearAndMonth = #{expensesReflectYearAndMonth},
+			expensesReflectYearAndMonth =
+			#{expensesReflectYearAndMonth},
 		</if>
 		<if test="transportationExpenses != null">
 			transportationExpenses = #{transportationExpenses},
 		</if>
 		<if test="otherAllowanceName != null">
 			otherAllowanceName = #{otherAllowanceName},
-		</if>	
+		</if>
 		<if test="otherAllowanceAmount != null">
 			otherAllowanceAmount = #{otherAllowanceAmount},
-		</if>		
+		</if>
 		<if test="leaderAllowanceAmount != null">
 			leaderAllowanceAmount = #{leaderAllowanceAmount},
-		</if>		
+		</if>
 		<if test="totalExpenses != null">
 			totalExpenses = #{totalExpenses},
-		</if>	
+		</if>
 		<if test="introductionAllowance != null">
 			introductionAllowance = #{introductionAllowance},
-		</if>			
+		</if>
 		<if test="remark != null">
 			remark = #{remark},
-		</if>	
+		</if>
 		updateTime = NOW(),
 		updateUser = #{updateUser}
-		WHERE 
-			employeeNo = #{employeeNo}
+		WHERE
+		employeeNo =
+		#{employeeNo}
 		AND
-			expensesReflectYearAndMonth = #{updateExpensesReflectYearAndMonth}
-</update>
+		expensesReflectYearAndMonth =
+		#{updateExpensesReflectYearAndMonth}
+	</update>
 	<delete id="delete" parameterType="String">
 		DELETE
 		FROM

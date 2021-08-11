@@ -143,7 +143,7 @@ public class SiteInfoService {
 			sendMap.put("workState", siteModel.getWorkState());
 		}
 		if (siteModel.getDailyCalculationStatus() != null && siteModel.getDailyCalculationStatus().length() != 0) {
-			sendMap.put("dailyCalculationStatus", "0");
+			sendMap.put("dailyCalculationStatus", siteModel.getDailyCalculationStatus());
 		} else {
 			sendMap.put("dailyCalculationStatus", "1");
 		}

@@ -254,6 +254,23 @@ public class CustomerSalesListController {
 				}
 			}
 		}
+		
+		for (int i = 0; i < resultData.size(); i++) {
+			int totalAmount = resultData.get(i).getTotalAmount() == null
+					|| resultData.get(i).getTotalAmount().equals("") ? 0
+							: Integer.parseInt(resultData.get(i).getTotalAmount());
+			for (int j = 0; j < resultData.get(i).getEmpDetail().size(); j++) {
+				List<CustomerEmployeeDetail> temp = resultData.get(i).getEmpDetail();
+				if (temp.get(j).getEmployeeNo().substring(0, 2).equals("BP")) {
+					totalAmount += temp.get(j).getCost() == null || temp.get(j).getCost().equals("") ? 0
+							: (Integer.parseInt(temp.get(j).getCost()) * 10000);
+				}
+			}
+			resultData.get(i).setTotalAmount(String.valueOf(totalAmount));
+			resultData.get(i).setGrossProfit(
+					String.valueOf(Integer.parseInt(resultData.get(i).getTotalUnitPrice()) - totalAmount));
+		}
+		
 		int calPeoCount = 0;
 		int unitPTotal = 0;
 		int totalOverTimeFee = 0;
