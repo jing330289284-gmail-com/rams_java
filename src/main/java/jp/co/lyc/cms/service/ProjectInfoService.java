@@ -108,6 +108,7 @@ public class ProjectInfoService {
 		sendMap.put("siteLocation", projectInfoModel.getSiteLocation());
 		sendMap.put("requiredItem1", projectInfoModel.getRequiredItem1());
 		sendMap.put("requiredItem2", projectInfoModel.getRequiredItem2());
+		sendMap.put("salesStaff", projectInfoModel.getSalesStaff());
 		sendMap.put("remark", projectInfoModel.getRemark());
 		sendMap.put("recruitmentNumbers", projectInfoModel.getRecruitmentNumbers());
 		sendMap.put("updateUser", projectInfoModel.getUpdateUser());

@@ -11,6 +11,7 @@
 		CONCAT( ( @rowNo := @rowNo + 1 ) ) AS rowNo,
 		T022.projectNo,
 		T022.projectName,
+		T022.salesStaff,
 		T022.nationalityCode,
 		M003.nationalityName,
 		T022.admissionPeriod,
