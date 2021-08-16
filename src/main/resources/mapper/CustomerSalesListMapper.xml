@@ -34,7 +34,9 @@
 			) as temp
 			on T011.bpEmployeeNo = temp.bpEmployeeNo
 			and T011.unitPriceStartMonth = temp.unitPriceStartMonth) as T011 on T006.employeeNo=T011.bpEmployeeNo
-		left join M012SiteRole As M012 on M012.siteRoleCode=T006.siteRoleCode
+			join T002EmployeeDetail as T002 on
+			T002.employeeNo=T006.employeeNo
+		left join M012SiteRole As M012 on M012.siteRoleCode=if(T006.siteRoleCode is null || T006.siteRoleCode = "",if(T002.siteRoleCode="",null,T002.siteRoleCode),T006.siteRoleCode)
 		left join M013Station as M013 on T006.stationCode =M013.stationCode
 		WHERE #{getYandM} between left(admissionStartDate,6) and
 		IFNULL(admissionEndDate,date_format(now(),'%Y%m'))
@@ -74,7 +76,8 @@
 			</if>
 			select * from(select ${tempList.yearAndMonth} as
 			yearAndMonth,
-			T013.totalExpenses,
+			T013.employeeNo,
+			T013.totalExpenses as totalAmount,
 			T006.customerNo
 			from T013ExpensesInfo As T013
 			 left join T006EmployeeSiteInfo As T006 on T006.employeeNo =T013.employeeNo and #{tempList.yearAndMonth} between left(admissionStartDate,6) and IFNULL(admissionEndDate,date_format(now(),'%Y%m'))

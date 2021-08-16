@@ -399,6 +399,15 @@ public class CustomerInfoService {
 		}
 		return result;
 	}
+	
+	/**
+	 * お客様名前チェック
+	 * 
+	 * @return
+	 */
+	public String checkCustomerName(String customerName) {
+		return 	customerInfoMapper.checkCustomerName(customerName);
+	}
 
 	/**
 	 * 插入数据

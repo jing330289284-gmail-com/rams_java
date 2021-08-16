@@ -114,6 +114,12 @@ public class CustomerInfoController extends BaseController {
 			result.put("errorsMessage", errorsMessage);// エラーメッセージ
 			return result;
 		}
+		String customerNameNum = customerInfoSer.checkCustomerName(customerInfoMod.getCustomerName());
+		if (Integer.parseInt(customerNameNum) > 0) {
+			errorsMessage = "お客様名存在しています、チェックしてください。";// エラーメッセージ
+			result.put("errorsMessage", errorsMessage);// エラーメッセージ
+			return result;
+		}
 		HttpSession session = getSession();
 		customerInfoMod.setUpdateUser((String) session.getAttribute("employeeNo"));
 		String resultString = customerInfoSer.CustomerInfoToDB(customerInfoMod);

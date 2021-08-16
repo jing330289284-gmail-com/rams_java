@@ -570,7 +570,8 @@
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT
 		customerList CODE,
-		StorageListName NAME
+		StorageListName NAME,
+		proposeClassificationCode TEXT
 		FROM
 		T021CustomerSendMailStorageList
 		WHERE

@@ -93,6 +93,12 @@ public class CustomerSalesListController {
 		logger.info("IndividualCustomerSalesController.CustomerSalesListModelTwice:" + "二回目検索開始");
 		CustomerSalesListModelTwice = CustomerSalesListService.searchCustomerSalesListTwice(sendMap);
 		logger.info("IndividualCustomerSalesController.CustomerSalesListModelTwice:" + "二回目検索結束");
+
+		List<CustomerSalesListModel> CustomerSalesListModelThird = new ArrayList<CustomerSalesListModel>();
+		logger.info("IndividualCustomerSalesController.CustomerSalesListModelThird:" + "三回目検索開始");
+		CustomerSalesListModelThird = CustomerSalesListService.searchCustomerSalesListThird(sendMap);
+		logger.info("IndividualCustomerSalesController.CustomerSalesListModelThird:" + "三回目検索結束");
+
 		for (int k = 0; k < uniqueGetCompanyNo.size(); k++) {
 			int totalUnitPrice = 0;
 			float totalUnitPriceCal = 0;
@@ -154,8 +160,21 @@ public class CustomerSalesListController {
 										}
 									}
 								}
+								for (int j = 0; j < CustomerSalesListModelThird.size(); j++) {
+									if (CustomerSalesListModel.get(i).getCustomerNo()
+											.equals(CustomerSalesListModelThird.get(j).getCustomerNo())) {
+										if (CustomerSalesListModel.get(i).getEmployeeNo()
+												.equals(CustomerSalesListModelThird.get(j).getEmployeeNo())) {
+											totalCost += (CustomerSalesListModelThird.get(j).getTotalAmount() == null
+													|| CustomerSalesListModelThird.get(j).getTotalAmount().equals("")
+															? 0
+															: Double.parseDouble(CustomerSalesListModelThird.get(j)
+																	.getTotalAmount()));
+										}
+									}
+								}
 								totalCost = totalCost / 10000.0;
-								DecimalFormat cost = new DecimalFormat("#.#");
+								DecimalFormat cost = new DecimalFormat("#");
 								customerEmpDe.setCost(cost.format(totalCost));
 							}
 						}
@@ -229,32 +248,37 @@ public class CustomerSalesListController {
 				}
 			}
 		}
-		List<CustomerSalesListModel> CustomerSalesListModelThird = new ArrayList<CustomerSalesListModel>();
-		logger.info("IndividualCustomerSalesController.CustomerSalesListModelThird:" + "三回目検索開始");
-		CustomerSalesListModelThird = CustomerSalesListService.searchCustomerSalesListThird(sendMap);
-		logger.info("IndividualCustomerSalesController.CustomerSalesListModelThird:" + "三回目検索結束");
 
-		for (int k = 0; k < uniqueGetCompanyNo.size(); k++) {
-			int totalAmount = 0;
-			for (int s = 0; s < CustomerSalesListModelThird.size(); s++) {
-				if (UtilsCheckMethod.isNullOrEmpty(CustomerSalesListModelThird.get(s).getTotalAmount())) {
-					CustomerSalesListModelThird.get(s).setTotalAmount("0");
-				}
-				if (uniqueGetCompanyNo.get(k).equals(CustomerSalesListModelThird.get(s).getCustomerNo())) {
-					totalAmount = totalAmount + Integer.parseInt(CustomerSalesListModelThird.get(s).getTotalAmount());
-				}
-				for (int x = 0; x < resultData.size(); x++) {
-					if (resultData.get(x).getCustomerNo().equals(uniqueGetCompanyNo.get(k))) {
-						resultData.get(x).setTotalAmount(
-								String.valueOf(Integer.parseInt(resultData.get(x).getTotalAmount()) + totalAmount));
-					}
-					String grossProfit = String.valueOf(Integer.parseInt(resultData.get(x).getTotalUnitPrice())
-							- Integer.parseInt(resultData.get(x).getTotalAmount()));
-					resultData.get(x).setGrossProfit(grossProfit);
+		/*
+		 * for (int k = 0; k < uniqueGetCompanyNo.size(); k++) { int totalAmount = 0;
+		 * for (int s = 0; s < CustomerSalesListModelThird.size(); s++) { if
+		 * (UtilsCheckMethod.isNullOrEmpty(CustomerSalesListModelThird.get(s).
+		 * getTotalAmount())) { CustomerSalesListModelThird.get(s).setTotalAmount("0");
+		 * } if (uniqueGetCompanyNo.get(k).equals(CustomerSalesListModelThird.get(s).
+		 * getCustomerNo())) { totalAmount = totalAmount +
+		 * Integer.parseInt(CustomerSalesListModelThird.get(s).getTotalAmount()); } for
+		 * (int x = 0; x < resultData.size(); x++) { if
+		 * (resultData.get(x).getCustomerNo().equals(uniqueGetCompanyNo.get(k))) {
+		 * resultData.get(x).setTotalAmount(
+		 * String.valueOf(Integer.parseInt(resultData.get(x).getTotalAmount()) +
+		 * totalAmount)); } String grossProfit =
+		 * String.valueOf(Integer.parseInt(resultData.get(x).getTotalUnitPrice()) -
+		 * Integer.parseInt(resultData.get(x).getTotalAmount()));
+		 * resultData.get(x).setGrossProfit(grossProfit); } } }
+		 */
+
+		for (int i = 0; i < resultData.size(); i++) {
+			int totleAmount = Integer.parseInt(resultData.get(i).getTotalAmount());
+			for (int j = 0; j < CustomerSalesListModelThird.size(); j++) {
+				if (CustomerSalesListModelThird.get(j).getCustomerNo().equals(resultData.get(i).getCustomerNo())) {
+					totleAmount += (CustomerSalesListModelThird.get(j).getTotalAmount() == null
+							|| CustomerSalesListModelThird.get(j).getTotalAmount().equals("") ? 0
+									: Integer.parseInt(CustomerSalesListModelThird.get(j).getTotalAmount()));
 				}
 			}
+			resultData.get(i).setTotalAmount(String.valueOf(totleAmount));
 		}
-		
+
 		for (int i = 0; i < resultData.size(); i++) {
 			int totalAmount = resultData.get(i).getTotalAmount() == null
 					|| resultData.get(i).getTotalAmount().equals("") ? 0
@@ -270,7 +294,7 @@ public class CustomerSalesListController {
 			resultData.get(i).setGrossProfit(
 					String.valueOf(Integer.parseInt(resultData.get(i).getTotalUnitPrice()) - totalAmount));
 		}
-		
+
 		int calPeoCount = 0;
 		int unitPTotal = 0;
 		int totalOverTimeFee = 0;

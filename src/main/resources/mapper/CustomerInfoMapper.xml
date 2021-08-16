@@ -404,4 +404,14 @@
 		AND
 		responsiblePerson = #{responsiblePerson}
 	</delete>
+	<!-- お客様名前チェック -->
+	<select id="checkCustomerName"  resultMap="customerNoSaiBan" parameterType="String">
+		SELECT
+		count(customerNo)
+		FROM
+		T007CustomerInfo
+		WHERE
+		customerName =
+		#{customerName}
+	</select>
 </mapper>
