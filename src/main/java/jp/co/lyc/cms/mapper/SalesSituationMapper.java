@@ -81,7 +81,7 @@ public interface SalesSituationMapper {
 
 	public List<SalesSituationModel> getSiteRoleCode();
 
-	public List<SalesSituationModel> getT010SalesSituationByEmployeeNo(List<String> employeeNoList);
+	public List<SalesSituationModel> getT010SalesSituationByEmployeeNo(List<String> employeeNoList,String salesDate);
 
 	public List<SalesSituationModel> getInterviewLists(List<String> employeeNoList);
 

@@ -306,8 +306,10 @@ public class IndividualCustomerSalesController {
 										if (CustomerSalesModelListTwice.get(i).getTotalAmount() != null
 												|| !CustomerSalesModelListTwice.get(i).getTotalAmount().equals(""))
 											if (CustomerSalesModelListTwice.get(i).getTotalAmount().length() >= 2) {
-												customerEmpDe.setCost(CustomerSalesModelListTwice.get(i)
-														.getTotalAmount().substring(0, 2));
+												double cost = Double.parseDouble(CustomerSalesModelListTwice.get(i)
+														.getTotalAmount()) / 10000.0;
+												DecimalFormat costFormat = new DecimalFormat("#.#");
+												customerEmpDe.setCost(costFormat.format(cost));
 											} else {
 												customerEmpDe
 														.setCost(CustomerSalesModelListTwice.get(i).getTotalAmount());

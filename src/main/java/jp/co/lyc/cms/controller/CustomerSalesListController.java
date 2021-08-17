@@ -174,7 +174,7 @@ public class CustomerSalesListController {
 									}
 								}
 								totalCost = totalCost / 10000.0;
-								DecimalFormat cost = new DecimalFormat("#");
+								DecimalFormat cost = new DecimalFormat("#.#");
 								customerEmpDe.setCost(cost.format(totalCost));
 							}
 						}

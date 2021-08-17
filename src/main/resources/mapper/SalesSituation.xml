@@ -87,16 +87,19 @@
 		#{salesYearAndMonth}
 		and
 		T002.employeeFormCode != "4"
-		and T002.occupationCode != "1"
+		and
+		T002.occupationCode != "1"
 
 		union
 		SELECT
-		employeeNo FROM T010SalesSituation
+		employeeNo FROM
+		T010SalesSituation
 		where
 		salesYearAndMonth
 		=
 		#{salesDate}
-		and salesProgressCode in
+		and
+		salesProgressCode in
 		("0","1")
 		order by
 		employeeNo
@@ -592,10 +595,22 @@
 	<select id="getT010SalesSituationByEmployeeNo"
 		parameterType="String"
 		resultType="jp.co.lyc.cms.model.SalesSituationModel">
-		SELECT * FROM T010SalesSituation
-		where employeeNo in
-		<foreach item="item" collection="list" open="(" close=")"
-			separator=",">
+		SELECT * FROM T010SalesSituation as T010
+		inner join (
+		SELECT
+		employeeNo,max(salesYearAndMonth) as salesYearAndMonth FROM
+		T010SalesSituation
+		where salesYearAndMonth &lt;= #{salesDate}
+		group by
+		employeeNo
+		) as temp
+		on T010.employeeNo = temp.employeeNo
+		and
+		T010.salesYearAndMonth = temp.salesYearAndMonth
+		where T010.employeeNo
+		in
+		<foreach item="item" collection="employeeNoList" open="("
+			close=")" separator=",">
 			#{item}
 		</foreach>
 		;
@@ -632,7 +647,17 @@
 		T010.employeeNo,max(T010.salesYearAndMonth) as
 		salesYearAndMonth,left(T006.admissionStartDate,6) as
 		admissionStartDate,left(T006.admissionEndDate,6) as
-		admissionEndDate,T006.scheduledEndDate FROM T010SalesSituation
+		admissionEndDate,T006.scheduledEndDate FROM (SELECT
+		T010.employeeNo,T010.salesYearAndMonth FROM T010SalesSituation
+		as T010
+		inner join (
+		SELECT employeeNo,max(salesYearAndMonth) as salesYearAndMonth FROM
+		T010SalesSituation
+		where salesYearAndMonth &lt;= #{salesDate}
+		group by employeeNo
+		) as temp
+		on T010.employeeNo = temp.employeeNo
+		and T010.salesYearAndMonth = temp.salesYearAndMonth)
 		as T010
 		left join
 		(SELECT
@@ -653,12 +678,12 @@
 		on T006.employeeNo = T010.employeeNo
 		group by employeeNo) as
 		T010
-		where (salesYearAndMonth &lt;= #{salesDate} and
+		<!-- where (salesYearAndMonth &lt;= #{salesDate} and
 		salesYearAndMonth
 		&gt; #{curDate} and
 		if(salesYearAndMonth &lt;=
 		#{sysDate},(ifnull(scheduledEndDate,admissionEndDate) !=
-		#{curDate}),1=1))
+		#{curDate}),1=1)) -->
 		;
 	</select>
 
@@ -1643,8 +1668,10 @@
 		UPDATE
 		T011BpInfoSupplement
 		SET
-		bpSalesProgressCode = #{salesProgressCode},
-		bpOtherCompanyAdmissionEndDate = #{admissionEndDate}
+		bpSalesProgressCode =
+		#{salesProgressCode},
+		bpOtherCompanyAdmissionEndDate =
+		#{admissionEndDate}
 		WHERE
 		bpEmployeeNo = #{employeeNo}
 	</update>

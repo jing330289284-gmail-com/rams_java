@@ -6,6 +6,7 @@ public class CustomerInfoModel {
 
 	String customerNo;// お客様番号
 	String customerName;// お客様名
+	String oldCustomerName;// お客様名
 	String stationCode;// 本社場所コード
 	String stationName;// 本社場所名前
 	String establishmentDate;// 設立年月
@@ -60,6 +61,14 @@ public class CustomerInfoModel {
 	String contactDate;
 	String salesStaff;
 	String proposeClassificationCode;
+
+	public String getOldCustomerName() {
+		return oldCustomerName;
+	}
+
+	public void setOldCustomerName(String oldCustomerName) {
+		this.oldCustomerName = oldCustomerName;
+	}
 
 	public String getProposeClassificationCode() {
 		return proposeClassificationCode;
