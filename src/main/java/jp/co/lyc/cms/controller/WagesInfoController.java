@@ -470,9 +470,9 @@ public class WagesInfoController extends BaseController {
 		if (relatedEmployees.size() == 0 && b.getOccupationCode().equals("3")) {
 			ArrayList<WagesInfoModel> hokenList = wagesInfoMapper.hokenSearch(wagesInfoModel.getEmployeeNo());
 			if (hokenList.size() != 0) {
-				wagesInfoModel.setWelfarePensionAmount(hokenList.get(hokenList.size() - 1).getWelfarePensionAmount());
-				wagesInfoModel.setHealthInsuranceAmount(hokenList.get(hokenList.size() - 1).getHealthInsuranceAmount());
-				wagesInfoModel.setInsuranceFeeAmount(hokenList.get(hokenList.size() - 1).getInsuranceFeeAmount());
+				//wagesInfoModel.setWelfarePensionAmount(hokenList.get(hokenList.size() - 1).getWelfarePensionAmount());
+				//wagesInfoModel.setHealthInsuranceAmount(hokenList.get(hokenList.size() - 1).getHealthInsuranceAmount());
+				//wagesInfoModel.setInsuranceFeeAmount(hokenList.get(hokenList.size() - 1).getInsuranceFeeAmount());
 			}
 		}
 		wagesInfoModel.setUpdateUser((String) getSession().getAttribute("employeeName"));

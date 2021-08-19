@@ -20,4 +20,10 @@ public interface ProjectInfoSearchMapper {
 	 * @param projectNo
 	 */
 	public void delete(String projectNo);
+	
+	/**
+	 * 案件情報の終了フラグ修正
+	 * @param projectNo
+	 */
+	public void endFlagChange(String projectNo);
 }

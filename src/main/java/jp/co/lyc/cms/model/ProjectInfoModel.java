@@ -55,6 +55,15 @@ public class ProjectInfoModel {
 	String siteLocationName;
 	String admissionPeriodReset;
 	String salesStaff;
+	String endFlag;
+
+	public String getEndFlag() {
+		return endFlag;
+	}
+
+	public void setEndFlag(String endFlag) {
+		this.endFlag = endFlag;
+	}
 
 	public String getSalesStaff() {
 		return salesStaff;

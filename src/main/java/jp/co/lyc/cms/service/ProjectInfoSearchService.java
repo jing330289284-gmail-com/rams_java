@@ -17,48 +17,51 @@ import jp.co.lyc.cms.util.UtilsCheckMethod;
 public class ProjectInfoSearchService {
 
 	@Autowired
-	ProjectInfoSearchMapper projectInfoSearchMapper; 
+	ProjectInfoSearchMapper projectInfoSearchMapper;
 	@Autowired
 	ProjectInfoService projectInfoService;
-	
+
 	/**
 	 * 案件情報取得
+	 * 
 	 * @param projectInfoModel
 	 * @return
 	 */
 	public ArrayList<ProjectInfoModel> getProjectInfo(ProjectInfoModel projectInfoModel) {
 		ArrayList<ProjectInfoModel> resultList = new ArrayList<ProjectInfoModel>();
-		if(projectInfoModel.getTheSelectProjectperiodStatus().equals("1")) {
-			//選択期間は未来日の場合
+		if (projectInfoModel.getTheSelectProjectperiodStatus().equals("1")) {
+			// 選択期間は未来日の場合
 			Calendar cal = Calendar.getInstance();
 			String yearAndMonth = Integer.toString(cal.get(Calendar.YEAR));
 			int month = cal.get(Calendar.MONTH) + 1;
 			yearAndMonth += month > 10 ? month : "0" + month;
 			projectInfoModel.setYearAndMonth(yearAndMonth);
 			resultList = projectInfoSearchMapper.searchProjectInfo(getSearchMap(projectInfoModel));
-		}else {
+		} else {
 			resultList = projectInfoSearchMapper.searchProjectInfo(getSearchMap(projectInfoModel));
 		}
 		resultList = resetRowNo(resultList);
 		return resultList;
 	}
-	
+
 	/**
 	 * rowNo のリセット
+	 * 
 	 * @param projectInfoModel
 	 * @return
 	 */
 	public ArrayList<ProjectInfoModel> resetRowNo(ArrayList<ProjectInfoModel> projectInfoModelList) {
 		int rowNo = 1;
-		for(ProjectInfoModel projectInfoModel : projectInfoModelList) {
+		for (ProjectInfoModel projectInfoModel : projectInfoModelList) {
 			projectInfoModel.setRowNo(Integer.toString(rowNo));
-			rowNo ++;
+			rowNo++;
 		}
 		return projectInfoModelList;
 	}
-	
+
 	/**
 	 * 案件情報の削除
+	 * 
 	 * @param projectInfoModel
 	 */
 	@Transactional(rollbackFor = Exception.class)
@@ -73,9 +76,28 @@ public class ProjectInfoSearchService {
 			return false;
 		}
 	}
-	
+
+	/**
+	 * 案件情報の終了フラグ修正
+	 * 
+	 * @param projectInfoModel
+	 */
+	@Transactional(rollbackFor = Exception.class)
+	public boolean endFlagChange(ProjectInfoModel projectInfoModel) {
+		try {
+			projectInfoSearchMapper.endFlagChange(projectInfoModel.getProjectNo());
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			e.printStackTrace();
+			return false;
+		}
+	}
+
 	/**
 	 * 検索のマップを作成
+	 * 
 	 * @param projectInfoModel
 	 * @return
 	 */

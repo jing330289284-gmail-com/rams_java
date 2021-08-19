@@ -62,6 +62,7 @@
 			left join M013Station as M013 on T006.stationCode =M013.stationCode
 			WHERE #{getYandM} between left(admissionStartDate,6) and
 			IFNULL(admissionEndDate,date_format(now(),'%Y%m'))
+			and (T006.systemName is null or T006.systemName != "休暇")
 		</foreach>
 	</select>
 
@@ -73,7 +74,7 @@
 			</if>
 			select * from (select ${tempList.yearAndMonth} as
 			yearAndMonth,T005.employeeNo,
-			T005.totalAmount,
+			CAST((T005.totalAmount + if(#{tempList.yearAndMonth} = fristBonusMonth,fristTimeBonusAmount,0) + if(#{tempList.yearAndMonth} = secondBonusMonth,secondTimeBonusAmount,0)) As unsigned) as totalAmount,
 			T006.customerNo
 			from
 			T005WagesInfo As

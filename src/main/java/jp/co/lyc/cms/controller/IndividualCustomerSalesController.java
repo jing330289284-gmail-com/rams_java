@@ -217,7 +217,8 @@ public class IndividualCustomerSalesController {
 					for (int n = 0; n < CustomerSalesModelListThird.size(); n++) {
 						int totalAm = 0;
 						for (int m = 0; m < CustomerSalesModelListTwice.size(); m++) {
-							if(CustomerSalesModelListThird.get(n).getEmployeeNo().equals(CustomerSalesModelListTwice.get(m).getEmployeeNo())) {
+							if (CustomerSalesModelListThird.get(n).getEmployeeNo()
+									.equals(CustomerSalesModelListTwice.get(m).getEmployeeNo())) {
 								if (CustomerSalesModelListThird.get(n).getYearAndMonth()
 										.equals(CustomerSalesModelListTwice.get(m).getYearAndMonth())) {
 									if (CustomerSalesModelListThird.get(n).getTotalExpenses() == null
@@ -306,8 +307,8 @@ public class IndividualCustomerSalesController {
 										if (CustomerSalesModelListTwice.get(i).getTotalAmount() != null
 												|| !CustomerSalesModelListTwice.get(i).getTotalAmount().equals(""))
 											if (CustomerSalesModelListTwice.get(i).getTotalAmount().length() >= 2) {
-												double cost = Double.parseDouble(CustomerSalesModelListTwice.get(i)
-														.getTotalAmount()) / 10000.0;
+												double cost = Double.parseDouble(
+														CustomerSalesModelListTwice.get(i).getTotalAmount()) / 10000.0;
 												DecimalFormat costFormat = new DecimalFormat("#.#");
 												customerEmpDe.setCost(costFormat.format(cost));
 											} else {
@@ -357,10 +358,12 @@ public class IndividualCustomerSalesController {
 							- Integer.parseInt(cusModelLi.get(c).getExpectFee());
 					totalgrossProfit = totalgrossProfit + Integer.parseInt(cusModelLi.get(c).getGrossProfit());
 				}
-				cusModelLi.get(0).setTotalworkPeoSum(totalworkPeoSum);
-				cusModelLi.get(0).setTotaluPrice(totaluPrice);
-				cusModelLi.get(0).setOverTimeOrExpectFee(overTimeOrExpectFee);
-				cusModelLi.get(0).setTotalgrossProfit(totalgrossProfit);
+				if (cusModelLi.size() > 0) {
+					cusModelLi.get(0).setTotalworkPeoSum(totalworkPeoSum);
+					cusModelLi.get(0).setTotaluPrice(totaluPrice);
+					cusModelLi.get(0).setOverTimeOrExpectFee(overTimeOrExpectFee);
+					cusModelLi.get(0).setTotalgrossProfit(totalgrossProfit);
+				}
 
 				List<String> bpNoList = new ArrayList<String>();
 				for (int i = 0; i < cusModelLi.size(); i++) {

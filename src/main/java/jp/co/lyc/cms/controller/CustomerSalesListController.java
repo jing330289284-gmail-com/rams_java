@@ -90,14 +90,16 @@ public class CustomerSalesListController {
 		}
 		sendMap.put("tempList", tempList);
 		List<CustomerSalesListModel> CustomerSalesListModelTwice = new ArrayList<CustomerSalesListModel>();
-		logger.info("IndividualCustomerSalesController.CustomerSalesListModelTwice:" + "二回目検索開始");
-		CustomerSalesListModelTwice = CustomerSalesListService.searchCustomerSalesListTwice(sendMap);
-		logger.info("IndividualCustomerSalesController.CustomerSalesListModelTwice:" + "二回目検索結束");
-
 		List<CustomerSalesListModel> CustomerSalesListModelThird = new ArrayList<CustomerSalesListModel>();
-		logger.info("IndividualCustomerSalesController.CustomerSalesListModelThird:" + "三回目検索開始");
-		CustomerSalesListModelThird = CustomerSalesListService.searchCustomerSalesListThird(sendMap);
-		logger.info("IndividualCustomerSalesController.CustomerSalesListModelThird:" + "三回目検索結束");
+
+		if (tempList.size() > 0) {
+			logger.info("IndividualCustomerSalesController.CustomerSalesListModelTwice:" + "二回目検索開始");
+			CustomerSalesListModelTwice = CustomerSalesListService.searchCustomerSalesListTwice(sendMap);
+			logger.info("IndividualCustomerSalesController.CustomerSalesListModelTwice:" + "二回目検索結束");
+			logger.info("IndividualCustomerSalesController.CustomerSalesListModelThird:" + "三回目検索開始");
+			CustomerSalesListModelThird = CustomerSalesListService.searchCustomerSalesListThird(sendMap);
+			logger.info("IndividualCustomerSalesController.CustomerSalesListModelThird:" + "三回目検索結束");
+		}
 
 		for (int k = 0; k < uniqueGetCompanyNo.size(); k++) {
 			int totalUnitPrice = 0;
@@ -319,10 +321,13 @@ public class CustomerSalesListController {
 
 		}
 		totalSales = unitPTotal + (totalOverTimeFee + totalExpectFee);
-		resultData.get(0).setCalPeoCount(calPeoCount);
-		resultData.get(0).setUnitPTotal(unitPTotal);
-		resultData.get(0).setTotalgrossProfit(totalgrossProfit);
-		resultData.get(0).setTotalSales(totalSales);
+		if (resultData.size() > 0) {
+			resultData.get(0).setCalPeoCount(calPeoCount);
+			resultData.get(0).setUnitPTotal(unitPTotal);
+			resultData.get(0).setTotalgrossProfit(totalgrossProfit);
+			resultData.get(0).setTotalSales(totalSales);
+		}
+
 		for (int b = 0; b < resultData.size(); b++) {
 			resultData.get(b).setTotalSales(totalSales);
 		}

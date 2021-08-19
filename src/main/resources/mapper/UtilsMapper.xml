@@ -452,8 +452,8 @@
 	<select id="getJapaneaseConversationLevel"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT
-		japaneaseConversationName name,
-		japaneaseConversationLevel code
+		japaneaseConversationLevelName name,
+		japaneaseConversationLevelCode code
 		FROM
 		M025JapaneaseConversationLevel
 	</select>
@@ -461,8 +461,8 @@
 	<select id="getEnglishConversationLevel"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT
-		englishConversationName name,
-		englishConversationLevel code
+		englishConversationLevelName name,
+		englishConversationLevelCode code
 		FROM
 		M026EnglishConversationLevel
 	</select>

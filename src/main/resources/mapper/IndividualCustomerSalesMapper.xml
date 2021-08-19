@@ -83,7 +83,7 @@
 			</if>
 			select * from (select ${tempList.yearAndMonth} as
 			yearAndMonth,T005.employeeNo,
-			T005.totalAmount
+			CAST((T005.totalAmount + if(#{tempList.yearAndMonth} = fristBonusMonth,fristTimeBonusAmount,0) + if(#{tempList.yearAndMonth} = secondBonusMonth,secondTimeBonusAmount,0)) As unsigned) as totalAmount
 			from
 			T005WagesInfo As
 			T005

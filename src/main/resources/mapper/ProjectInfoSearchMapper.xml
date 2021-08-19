@@ -11,37 +11,43 @@
 		CONCAT( ( @rowNo := @rowNo + 1 ) ) AS rowNo,
 		T022.projectNo,
 		T022.projectName,
+		T022.endFlag,
 		T022.salesStaff,
 		T022.nationalityCode,
 		M003.nationalityName,
 		T022.admissionPeriod,
 		M039.admissionMonthName,
-		CONCAT(T022.admissionPeriod,'(',M039.admissionMonthName,')') AS admissionPeriodReset,
+		CONCAT(T022.admissionPeriod,'(',M039.admissionMonthName,')') AS
+		admissionPeriodReset,
 		T022.projectType,
 		M037.projectTypeName,
 		T022.successRate,
 		M033.successRateName,
 		T022.customerNo,
-		if(T007.customerAbbreviation is null || T007.customerAbbreviation = "",T007.customerName,T007.customerAbbreviation) as customerName,
+		if(T007.customerAbbreviation is null || T007.customerAbbreviation =
+		"",T007.customerName,T007.customerAbbreviation) as customerName,
 		T022.personInCharge,
 		T022.mail,
 		T022.phoneNo,
 		T022.keyWordOfLanagurue1,
 		M011a.developLanguageName AS keyWordOfLanagurueName1,
 		T022.keyWordOfLanagurue2,
-		M011b.developLanguageName AS keyWordOfLanagurueName2,
+		M011b.developLanguageName AS
+		keyWordOfLanagurueName2,
 		T022.keyWordOfLanagurue3,
 		M011c.developLanguageName AS keyWordOfLanagurueName3,
 		T022.projectInfoDetail,
 		T022.japaneaseConversationLevel,
-		M025.japaneaseConversationName,
+		M025.japaneaseConversationLevelName,
 		T022.unitPriceRangeLowest,
 		T022.unitPriceRangeHighest,
 		T022.ageClassificationCode,
 		T022.projectPhaseStart,
-		M027s.projectPhaseName AS projectPhaseNameStart,
+		M027s.projectPhaseName AS
+		projectPhaseNameStart,
 		T022.projectPhaseEnd,
-		M027e.projectPhaseName AS projectPhaseNameEnd,
+		M027e.projectPhaseName AS
+		projectPhaseNameEnd,
 		T022.payOffRangeLowest,
 		T022.payOffRangeHighest,
 		T022.workStartPeriod,
@@ -49,59 +55,82 @@
 
 		WHEN M036.projectPeriodName IS NULL THEN
 		T022.workStartPeriod ELSE M036.projectPeriodName
-		END AS projectPeriodName,
+		END AS
+		projectPeriodName,
 		T022.experienceYear,
 		T022.noOfInterviewCode,
 		M035.noOfInterviewName,
 		T022.siteLocation,
-		M013.stationName AS siteLocationName,
+		M013.stationName AS
+		siteLocationName,
 		T022.requiredItem1,
 		T022.requiredItem2,
 		T022.recruitmentNumbers,
 		T022.remark
 		FROM
 		T022ProjectInfo AS T022
-		LEFT JOIN M033SuccessRate AS M033 ON T022.successRate =
+		LEFT
+		JOIN M033SuccessRate AS M033 ON T022.successRate =
 		M033.successRateCode
 		AND T022.successRate != ""
-		LEFT JOIN M039AdmissionMonth AS M039 ON T022.admissionMonthCode =
+		LEFT JOIN
+		M039AdmissionMonth AS M039 ON T022.admissionMonthCode =
 		M039.admissionMonthCode
 		AND T022.admissionMonthCode != ""
-		LEFT JOIN M037ProjectType AS M037 ON
+		LEFT JOIN
+		M037ProjectType AS M037 ON
 		T022.projectType = M037.projectTypeCode
-		AND T022.projectType != ""
-		LEFT JOIN M025JapaneaseConversationLevel AS M025 ON
-		T022.japaneaseConversationLevel = M025.japaneaseConversationLevel
-		AND T022.japaneaseConversationLevel != ""
+		AND
+		T022.projectType != ""
+		LEFT JOIN M025JapaneaseConversationLevel AS M025
+		ON
+		T022.japaneaseConversationLevel =
+		M025.japaneaseConversationLevelCode
+		AND T022.japaneaseConversationLevel
+		!= ""
 		LEFT JOIN M027ProjectPhase AS M027s ON T022.projectPhaseStart =
 		M027s.projectPhaseCode
 		AND T022.projectPhaseStart != ""
-		LEFT JOIN M027ProjectPhase AS M027e ON T022.projectPhaseEnd =
+		LEFT JOIN
+		M027ProjectPhase AS M027e ON T022.projectPhaseEnd =
 		M027e.projectPhaseCode
 		AND T022.projectPhaseEnd != ""
-		LEFT JOIN T007CustomerInfo AS T007 ON T022.customerNo = T007.customerNo
-		AND T022.customerNo != ""
-		LEFT JOIN M011DevelopLanguage AS M011a ON T022.keyWordOfLanagurue1 =
+		LEFT JOIN
+		T007CustomerInfo AS T007 ON T022.customerNo = T007.customerNo
+		AND
+		T022.customerNo != ""
+		LEFT JOIN M011DevelopLanguage AS M011a ON
+		T022.keyWordOfLanagurue1 =
 		M011a.developLanguageCode
-		AND T022.keyWordOfLanagurue1 != ""
-		LEFT JOIN M011DevelopLanguage AS M011b ON T022.keyWordOfLanagurue2 =
+		AND
+		T022.keyWordOfLanagurue1 != ""
+		LEFT JOIN M011DevelopLanguage AS M011b
+		ON T022.keyWordOfLanagurue2 =
 		M011b.developLanguageCode
-		AND T022.keyWordOfLanagurue2 != ""
-		LEFT JOIN M011DevelopLanguage AS M011c ON T022.keyWordOfLanagurue3 =
+		AND
+		T022.keyWordOfLanagurue2 != ""
+		LEFT JOIN M011DevelopLanguage AS M011c
+		ON T022.keyWordOfLanagurue3 =
 		M011c.developLanguageCode
-		AND T022.keyWordOfLanagurue3 != ""
-		LEFT JOIN M013Station AS M013 ON T022.siteLocation = M013.stationCode
+		AND
+		T022.keyWordOfLanagurue3 != ""
+		LEFT JOIN M013Station AS M013 ON
+		T022.siteLocation = M013.stationCode
 		AND T022.siteLocation != ""
-		LEFT JOIN M003Nationality AS M003 ON T022.nationalityCode =
+		LEFT
+		JOIN M003Nationality AS M003 ON T022.nationalityCode =
 		M003.nationalityCode
 		AND T022.nationalityCode != ""
-		LEFT JOIN M035NoOfInterview AS M035 ON T022.noOfInterviewCode =
+		LEFT JOIN
+		M035NoOfInterview AS M035 ON T022.noOfInterviewCode =
 		M035.noOfInterviewCode
 		AND T022.noOfInterviewCode != ""
-		LEFT JOIN M036ProjectPeriod AS M036 ON T022.workStartPeriod =
+		LEFT JOIN
+		M036ProjectPeriod AS M036 ON T022.workStartPeriod =
 		M036.projectPeriodCode
 		AND LENGTH( T022.workStartPeriod ) &lt; 2
-		AND T022.workStartPeriod != "",
+		AND
+		T022.workStartPeriod != "",
 		(
 		SELECT @rowNo := 0 ) AS rowNo
 		WHERE
@@ -160,7 +189,7 @@
 			AND T022.successRate = #{successRate}
 		</if>
 		ORDER BY
-		T022.projectNo
+		T022.projectNo desc
 	</select>
 	<delete id="delete" parameterType="String">
 		DELETE
@@ -169,4 +198,12 @@
 		WHERE
 		projectNo = #{projectNo}
 	</delete>
+
+	<update id="endFlagChange" parameterType="String">
+		UPDATE T022ProjectInfo 
+		SET
+		endFlag = if(endFlag = null,"0",if(endFlag = "0","1","0"))
+		where 
+		projectNo = #{projectNo}
+	</update>
 </mapper>

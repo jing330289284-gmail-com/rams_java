@@ -101,4 +101,24 @@ public class ProjectInfoSearchController {
 		}
 		return result;
 	}
+	
+	/**
+	 * 案件情報の終了フラグ修正
+	 * @param projectInfoModel
+	 * @return
+	 */
+	@RequestMapping(value = "/endFlagChange", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> endFlagChange(@RequestBody ProjectInfoModel projectInfoModel) {
+		logger.info("projectInfoSearchController.delete:" + "初期化開始");
+		Map<String, Object> result = new HashMap<String, Object>();
+		boolean res = projectInfoSearchService.endFlagChange(projectInfoModel);
+		if(res) {
+			result.put("message", "修正成功");
+		}else {
+			result.put("errorsMessage", "修正失敗");
+		}
+		return result;
+	}
+	
 }
