@@ -174,21 +174,24 @@ public class IndividualCustomerSalesController {
 
 					for (int j = 0; j < CustomerSalesModelList.size(); j++) {
 						if (getYandM.get(i).equals(CustomerSalesModelList.get(j).getYearAndMonth())) {
-							if (UtilsCheckMethod
-									.isNullOrEmpty(CustomerSalesModelList.get(j).getDeductionsAndOvertimePay())) {
-								CustomerSalesModelList.get(j).setDeductionsAndOvertimePay("0");
+							if (!CustomerSalesModelList.get(j).getUnitPrice().equals("0")) {
+
+								if (UtilsCheckMethod
+										.isNullOrEmpty(CustomerSalesModelList.get(j).getDeductionsAndOvertimePay())) {
+									CustomerSalesModelList.get(j).setDeductionsAndOvertimePay("0");
+								}
+								calUnitPrice = calculateUintP
+										+ Integer.parseInt(CustomerSalesModelList.get(j).getUnitPrice());
+								calculateUintP = calculateUintP
+										+ Integer.parseInt(CustomerSalesModelList.get(j).getUnitPrice());
+								overTimeFee = overTimeFee
+										+ Integer.parseInt(CustomerSalesModelList.get(j).getDeductionsAndOvertimePay());
+								count++;
+								countNum++;
+								peoNum++;
+								indiviCusModel.setMaxUnitPrice(CustomerSalesModelList.get(j).getMaxUnitPrice());
+								indiviCusModel.setMinUnitPrice(CustomerSalesModelList.get(j).getMinUnitPrice());
 							}
-							calUnitPrice = calculateUintP
-									+ Integer.parseInt(CustomerSalesModelList.get(j).getUnitPrice());
-							calculateUintP = calculateUintP
-									+ Integer.parseInt(CustomerSalesModelList.get(j).getUnitPrice());
-							overTimeFee = overTimeFee
-									+ Integer.parseInt(CustomerSalesModelList.get(j).getDeductionsAndOvertimePay());
-							count++;
-							countNum++;
-							peoNum++;
-							indiviCusModel.setMaxUnitPrice(CustomerSalesModelList.get(j).getMaxUnitPrice());
-							indiviCusModel.setMinUnitPrice(CustomerSalesModelList.get(j).getMinUnitPrice());
 						}
 					}
 					float averUnitPrice;
@@ -275,50 +278,55 @@ public class IndividualCustomerSalesController {
 				for (int a = 0; a < getYandM.size(); a++) {
 					List<CustomerEmployeeDetail> customerEmpDetail = new ArrayList<CustomerEmployeeDetail>();
 					for (int b = 0; b < CustomerSalesModelList.size(); b++) {
-						CustomerEmployeeDetail customerEmpDe = new CustomerEmployeeDetail();
-						if (CustomerSalesModelList.get(b).getYearAndMonth().equals(getYandM.get(a))) {
-							customerEmpDe.setEmployeeNo(CustomerSalesModelList.get(b).getEmployeeNo());
-							String employeeName = CustomerSalesModelList.get(b).getEmployeeName();
-							if (CustomerSalesModelList.get(b).getEmployeeNo().substring(0, 3).equals("BPR")) {
-								employeeName = employeeName + "("
-										+ CustomerSalesModelList.get(b).getEmployeeNo().substring(0, 3) + ")";
-							} else if (CustomerSalesModelList.get(b).getEmployeeNo().substring(0, 2).equals("BP")
-									|| CustomerSalesModelList.get(b).getEmployeeNo().substring(0, 2).equals("SC")
-									|| CustomerSalesModelList.get(b).getEmployeeNo().substring(0, 2).equals("SP")) {
-								employeeName = employeeName + "("
-										+ CustomerSalesModelList.get(b).getEmployeeNo().substring(0, 2) + ")";
-							}
-							customerEmpDe.setEmployeeName(employeeName);
-							customerEmpDe.setSiteRoleName(CustomerSalesModelList.get(b).getSiteRoleName());
-							customerEmpDe.setStationName(CustomerSalesModelList.get(b).getStationName());
+						if (!CustomerSalesModelList.get(b).getUnitPrice().equals("0")) {
+							CustomerEmployeeDetail customerEmpDe = new CustomerEmployeeDetail();
 							double unitPrice = Double.parseDouble(CustomerSalesModelList.get(b).getUnitPrice())
 									/ 10000.0;
 							DecimalFormat up = new DecimalFormat("#.#");
 							customerEmpDe.setUnitPrice(up.format(unitPrice));
-							if (CustomerSalesModelList.get(b).getBpUnitPrice() != null
-									&& !CustomerSalesModelList.get(b).getBpUnitPrice().equals("")) {
-								customerEmpDe.setCost(String
-										.valueOf(Integer.parseInt(CustomerSalesModelList.get(b).getBpUnitPrice())));
-							}
-							for (int i = 0; i < CustomerSalesModelListTwice.size(); i++) {
-								if (CustomerSalesModelListTwice.get(i).getEmployeeNo()
-										.equals(CustomerSalesModelList.get(b).getEmployeeNo())) {
-									if (CustomerSalesModelListTwice.get(i).getYearAndMonth().equals(getYandM.get(a))) {
-										if (CustomerSalesModelListTwice.get(i).getTotalAmount() != null
-												|| !CustomerSalesModelListTwice.get(i).getTotalAmount().equals(""))
-											if (CustomerSalesModelListTwice.get(i).getTotalAmount().length() >= 2) {
-												double cost = Double.parseDouble(
-														CustomerSalesModelListTwice.get(i).getTotalAmount()) / 10000.0;
-												DecimalFormat costFormat = new DecimalFormat("#.#");
-												customerEmpDe.setCost(costFormat.format(cost));
-											} else {
-												customerEmpDe
-														.setCost(CustomerSalesModelListTwice.get(i).getTotalAmount());
-											}
+							if (CustomerSalesModelList.get(b).getYearAndMonth().equals(getYandM.get(a))) {
+								customerEmpDe.setEmployeeNo(CustomerSalesModelList.get(b).getEmployeeNo());
+								String employeeName = CustomerSalesModelList.get(b).getEmployeeName();
+								if (CustomerSalesModelList.get(b).getEmployeeNo().substring(0, 3).equals("BPR")) {
+									employeeName = employeeName + "("
+											+ CustomerSalesModelList.get(b).getEmployeeNo().substring(0, 3) + ")";
+								} else if (CustomerSalesModelList.get(b).getEmployeeNo().substring(0, 2).equals("BP")
+										|| CustomerSalesModelList.get(b).getEmployeeNo().substring(0, 2).equals("SC")
+										|| CustomerSalesModelList.get(b).getEmployeeNo().substring(0, 2).equals("SP")) {
+									employeeName = employeeName + "("
+											+ CustomerSalesModelList.get(b).getEmployeeNo().substring(0, 2) + ")";
+								}
+								customerEmpDe.setEmployeeName(employeeName);
+								customerEmpDe.setSiteRoleName(CustomerSalesModelList.get(b).getSiteRoleName());
+								customerEmpDe.setStationName(CustomerSalesModelList.get(b).getStationName());
+
+								if (CustomerSalesModelList.get(b).getBpUnitPrice() != null
+										&& !CustomerSalesModelList.get(b).getBpUnitPrice().equals("")) {
+									customerEmpDe.setCost(String
+											.valueOf(Integer.parseInt(CustomerSalesModelList.get(b).getBpUnitPrice())));
+								}
+								for (int i = 0; i < CustomerSalesModelListTwice.size(); i++) {
+									if (CustomerSalesModelListTwice.get(i).getEmployeeNo()
+											.equals(CustomerSalesModelList.get(b).getEmployeeNo())) {
+										if (CustomerSalesModelListTwice.get(i).getYearAndMonth()
+												.equals(getYandM.get(a))) {
+											if (CustomerSalesModelListTwice.get(i).getTotalAmount() != null
+													|| !CustomerSalesModelListTwice.get(i).getTotalAmount().equals(""))
+												if (CustomerSalesModelListTwice.get(i).getTotalAmount().length() >= 2) {
+													double cost = Double.parseDouble(
+															CustomerSalesModelListTwice.get(i).getTotalAmount())
+															/ 10000.0;
+													DecimalFormat costFormat = new DecimalFormat("#.#");
+													customerEmpDe.setCost(costFormat.format(cost));
+												} else {
+													customerEmpDe.setCost(
+															CustomerSalesModelListTwice.get(i).getTotalAmount());
+												}
+										}
 									}
 								}
+								customerEmpDetail.add(customerEmpDe);
 							}
-							customerEmpDetail.add(customerEmpDe);
 						}
 					}
 					List<CustomerEmployeeDetail> customerEmpDetailTemp = new ArrayList<CustomerEmployeeDetail>();

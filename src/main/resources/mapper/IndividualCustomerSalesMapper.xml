@@ -62,7 +62,9 @@
 			where #{getYandM} between
 			left(admissionStartDate,6) and
 			IFNULL(admissionEndDate,date_format(now(),'%Y%m')) and
-			T006.customerNo = #{customerName} )as A
+			T006.customerNo = #{customerName}
+			and T006.unitPrice != "0"
+			)as A
 			on 1=1
 			where #{getYandM}
 			between left(admissionStartDate,6) and

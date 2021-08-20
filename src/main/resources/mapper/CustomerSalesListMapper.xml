@@ -63,6 +63,9 @@
 			WHERE #{getYandM} between left(admissionStartDate,6) and
 			IFNULL(admissionEndDate,date_format(now(),'%Y%m'))
 			and (T006.systemName is null or T006.systemName != "休暇")
+			and (T002.retirementYearAndMonth = ""
+			or LEFT(T002.retirementYearAndMonth,6) &gt;= #{getYandM}
+			)
 		</foreach>
 	</select>
 
