@@ -224,7 +224,7 @@
 			select bpEmployeeNo,
 			max(unitPriceStartMonth) as unitPriceStartMonth
 			from
-			T011BpInfoSupplement
+			T011BpInfoSupplements
 			where unitPriceStartMonth &lt;= #{getYandM}
 			group by
 			bpEmployeeNo) as temp

@@ -7,7 +7,7 @@
 		type="java.lang.String" />
 	<select id="saiban" resultMap="String" parameterType="String">
 	SELECT
-		projectNo 
+		max(projectNo) as projectNo 
 	FROM
 		T022ProjectInfo 
 	WHERE

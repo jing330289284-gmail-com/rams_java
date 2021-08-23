@@ -72,6 +72,7 @@
 			T006.customerNo = #{customerName}
 			and (T002.retirementYearAndMonth = ""
 			or LEFT(T002.retirementYearAndMonth,6) &gt;= #{getYandM}
+			or T002.retirementResonClassification = "2"
 			)
 			)As A${getYandM}
 		</foreach>

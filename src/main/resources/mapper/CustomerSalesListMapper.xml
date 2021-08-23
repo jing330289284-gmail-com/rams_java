@@ -65,6 +65,7 @@
 			and (T006.systemName is null or T006.systemName != "休暇")
 			and (T002.retirementYearAndMonth = ""
 			or LEFT(T002.retirementYearAndMonth,6) &gt;= #{getYandM}
+			or T002.retirementResonClassification = "2"
 			)
 		</foreach>
 	</select>

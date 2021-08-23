@@ -26,19 +26,20 @@ import jp.co.lyc.cms.validation.WagesInfoValidation;
 
 @Controller
 @RequestMapping(value = "/projectInfo")
-public class ProjectInfoController extends BaseController{
-	
+public class ProjectInfoController extends BaseController {
+
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
-	
+
 	@Autowired
 	ProjectInfoMapper projectInfoMapper;
 	@Autowired
 	ProjectInfoService projectInfoService;
-	
+
 	String errorsMessage = "";
-	
+
 	/**
 	 * 画面初期化
+	 * 
 	 * @param projectInfoModel
 	 * @return
 	 */
@@ -47,18 +48,19 @@ public class ProjectInfoController extends BaseController{
 	public Map<String, Object> init(@RequestBody ProjectInfoModel projectInfoModel) {
 		logger.info("ProjectInfoController.init:" + "初期化開始");
 		Map<String, Object> result = new HashMap<String, Object>();
-		if(projectInfoModel.getActionType().equals("insert")) {
+		if (projectInfoModel.getActionType().equals("insert")) {
 			result.put("projectNo", saiban());
-		}else {
+		} else {
 			HashMap<String, String> sendMap = new HashMap<String, String>();
 			sendMap.put("projectNo", projectInfoModel.getProjectNo());
 			result.put("resultList", projectInfoMapper.getProjectInfo(sendMap));
 		}
 		return result;
 	}
-	
+
 	/**
 	 * 責任者の取得
+	 * 
 	 * @param customerNo
 	 * @return
 	 */
@@ -84,9 +86,10 @@ public class ProjectInfoController extends BaseController{
 		result.put("personInChargeDrop", projectInfoService.getPersonInCharge(projectInfoModel.getCustomerNo()));
 		return result;
 	}
-	
+
 	/**
 	 * 登録ボタン
+	 * 
 	 * @param customerNo
 	 * @return
 	 */
@@ -109,24 +112,26 @@ public class ProjectInfoController extends BaseController{
 			logger.info("projectInfoSearchController.onloadPage:" + "登録終了");
 			return result;
 		}
-		projectInfoModel.setUpdateUser((String)getSession().getAttribute("employeeName"));
+		projectInfoModel.setUpdateUser((String) getSession().getAttribute("employeeName"));
 		HashMap<String, String> sendMap = projectInfoService.getSendMap(projectInfoModel);
 		boolean resultBoolean = true;
-		if(projectInfoModel.getActionType().equals("insert")) {
+		if (projectInfoModel.getActionType().equals("insert")) {
 			resultBoolean = projectInfoService.insert(sendMap);
-		}else {
+		} else {
 			resultBoolean = projectInfoService.update(sendMap);
 		}
-		if(resultBoolean) {
+		if (resultBoolean) {
 			result.put("message", "处理成功");
 			return result;
-		}else {
+		} else {
 			result.put("errorsMessage", "处理失敗");
 			return result;
 		}
 	}
+
 	/**
 	 * 採番
+	 * 
 	 * @return
 	 */
 	public String saiban() {
@@ -136,12 +141,10 @@ public class ProjectInfoController extends BaseController{
 		yearAndMonth += month > 10 ? month : "0" + month;
 		ArrayList<String> saibanList = projectInfoMapper.saiban(yearAndMonth);
 		String saiban = "";
-		if(saibanList.size() == 0) {
+		if (saibanList.size() == 0) {
 			saiban = yearAndMonth + "01";
-		}else if(saibanList.size() < 9) {
-			saiban = yearAndMonth + "0" + Integer.toString(saibanList.size() + 1);
-		}else if(saibanList.size() > 9) {
-			saiban = yearAndMonth + Integer.toString(saibanList.size() + 1);
+		} else {
+			saiban = Integer.toString(Integer.parseInt(saibanList.get(0)) + 1);
 		}
 		return saiban;
 	}
