@@ -1229,7 +1229,7 @@ public class UtilsController {
 			// 创建获取连接
 			Transport transport = session.getTransport();
 			// 进行连接
-			transport.connect("mail@lyc.co.jp", "Lyc2020-0908-");
+			transport.connect("mail@lyc.co.jp", "MjViOWNmOT8a9-09");
 			// 创建一个信息
 			Message message = new MimeMessage(session);
 			// 设定发送方

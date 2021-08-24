@@ -198,7 +198,7 @@
 		resultMap="EnterPeriodSearchModel">
 		SELECT
 		T001.employeeNo,
-		T005.fristBonusMonth as nextBonusMonth
+		if(T005.secondBonusMonth > T005.fristBonusMonth,T005.secondBonusMonth,T005.fristBonusMonth) as nextBonusMonth
 		FROM
 		T001Employee AS T001
 		LEFT
@@ -284,7 +284,7 @@
 	<select id="getBonusMonthInfo" parameterType="String"
 		resultType="String">
 		SELECT T005.employeeNo,
-		T005.fristBonusMonth as nextBonusMonth FROM
+		if(T005.secondBonusMonth > T005.fristBonusMonth,T005.secondBonusMonth,T005.fristBonusMonth) as nextBonusMonth FROM
 		T005WagesInfo as T005
 		inner Join
 		(SELECT
@@ -300,7 +300,7 @@
 		temp.reflectYearAndMonth
 		where T005.fristBonusMonth != ""
 		and
-		T005.fristBonusMonth
+		if(T005.secondBonusMonth > T005.fristBonusMonth,T005.secondBonusMonth,T005.fristBonusMonth)
 		&lt;=
 		#{bonusYearAndMonth};
 	</select>
@@ -317,7 +317,7 @@
 		T005.insuranceFeeAmount,
 		T005.reflectYearAndMonth,
 		T005.fristTimeBonusAmount + T005.secondTimeBonusAmount as scheduleOfBonusAmount,
-		T005.fristBonusMonth as nextBonusMonth,
+		if(T005.secondBonusMonth > T005.fristBonusMonth,T005.secondBonusMonth,T005.fristBonusMonth) as nextBonusMonth,
 		T005.nextRaiseMonth,
 		T006.admissionStartDate,
 		T006.unitPrice
@@ -378,7 +378,7 @@
 		employeeName,T006.admissionStartDate,T006.unitPrice,T005.reflectYearAndMonth,T005.salary,
 		T005.insuranceFeeAmount,
 		T005.fristTimeBonusAmount + T005.secondTimeBonusAmount as scheduleOfBonusAmount,
-		T005.fristBonusMonth as nextBonusMonth FROM T006EmployeeSiteInfo AS T006
+		if(T005.secondBonusMonth > T005.fristBonusMonth,T005.secondBonusMonth,T005.fristBonusMonth) as nextBonusMonth FROM T006EmployeeSiteInfo AS T006
 		inner Join T001Employee as T001
 		on
 		T001.employeeNo = T006.employeeNo
