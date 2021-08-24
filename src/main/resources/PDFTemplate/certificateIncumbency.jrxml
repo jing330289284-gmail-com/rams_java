@@ -46,7 +46,7 @@
 		<band height="723" splitType="Stretch">
 			<image>
 				<reportElement x="380" y="570" width="140" height="140" uuid="222cdb71-2152-477e-b942-8b22f6b3db45"/>
-				<imageExpression><![CDATA["C:/Users/wangy/OneDrive/Desktop/LYC印鑑.png"]]></imageExpression>
+				<imageExpression><![CDATA["C:/file/stamp/LYC印鑑.png"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="60" y="20" width="150" height="50" uuid="c5bb9141-a1ca-477f-ba20-4ee88af48e87"/>
