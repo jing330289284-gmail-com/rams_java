@@ -42,7 +42,7 @@ public class CertificatePrintingController extends BaseController {
 		File nowFile = new File(".").getAbsoluteFile();
 		File inputFile = new File(nowFile.getParentFile(),
 				"src/main/resources/PDFTemplate/certificateIncumbency.jrxml");
-		File outputFile = new File(UtilsController.DOWNLOAD_PATH_BASE + "dutyReport/", "test" + ".pdf");
+		File outputFile = new File(UtilsController.DOWNLOAD_PATH_BASE + "certificate/", "証明書" + ".pdf");
 		outputFile.getParentFile().mkdirs();
 		try {
 			Map<String, Object> parameters = new HashMap<String, Object>();
@@ -53,12 +53,12 @@ public class CertificatePrintingController extends BaseController {
 			parameters.put("postcode", certificatePrintingModel.getPostcode());
 			parameters.put("firstHalfAddress", certificatePrintingModel.getFirstHalfAddress());
 			parameters.put("lastHalfAddress", certificatePrintingModel.getLastHalfAddress());
-			parameters.put("birthday", certificatePrintingModel.getBirthday());
-			parameters.put("intoCompanyYearAndMonth", certificatePrintingModel.getIntoCompanyYearAndMonth());
-			parameters.put("nowYearAndMonth", certificatePrintingModel.getNowYearAndMonth());
+			parameters.put("birthday", dateChange(certificatePrintingModel.getBirthday()));
+			parameters.put("intoCompanyYearAndMonth", dateChange(certificatePrintingModel.getIntoCompanyYearAndMonth()));
+			parameters.put("nowYearAndMonth", dateChange(certificatePrintingModel.getNowYearAndMonth()));
 			parameters.put("workingTime", certificatePrintingModel.getWorkingTime());
-			parameters.put("lastDayofYearAndMonth", certificatePrintingModel.getLastDayofYearAndMonth());
-			parameters.put("retirementYearAndMonth", certificatePrintingModel.getRetirementYearAndMonth());
+			parameters.put("lastDayofYearAndMonth", dateChange(certificatePrintingModel.getLastDayofYearAndMonth()));
+			parameters.put("retirementYearAndMonth", dateChange(certificatePrintingModel.getRetirementYearAndMonth()));
 			parameters.put("occupationCode", certificatePrintingModel.getOccupationCode());
 			parameters.put("remark", certificatePrintingModel.getRemark());
 
@@ -70,5 +70,13 @@ public class CertificatePrintingController extends BaseController {
 		}
 		logger.info("DutyRegistrationController.downloadPDF:" + "終了");
 		return outputFile.getAbsolutePath();
+	}
+
+	private String dateChange(String date) {
+		if (date == null || date.length() < 8) {
+			return "";
+		} else {
+			return date.substring(0, 4) + "年" + date.substring(4, 6) + "月" + date.substring(6, 8) + "日";
+		}
 	}
 }

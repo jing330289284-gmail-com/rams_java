@@ -12,7 +12,7 @@ public class CertificatePrintingModel {
 	String certificate; // 証明書種類
 	String employeeName; // 社員名前
 	String employeeNo; // 社員番号
-	Date birthday; // 誕生日
+	String birthday; // 誕生日
 	String address; // 住所
 	String postcode; // 郵便番号
 	String firstHalfAddress; // 前半住所
@@ -49,14 +49,6 @@ public class CertificatePrintingModel {
 		this.employeeNo = employeeNo;
 	}
 
-	public Date getBirthday() {
-		return birthday;
-	}
-
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
-	}
-
 	public String getAddress() {
 		return address;
 	}
@@ -89,44 +81,12 @@ public class CertificatePrintingModel {
 		this.lastHalfAddress = lastHalfAddress;
 	}
 
-	public String getIntoCompanyYearAndMonth() {
-		return intoCompanyYearAndMonth;
-	}
-
-	public void setIntoCompanyYearAndMonth(String intoCompanyYearAndMonth) {
-		this.intoCompanyYearAndMonth = intoCompanyYearAndMonth;
-	}
-
-	public String getNowYearAndMonth() {
-		return nowYearAndMonth;
-	}
-
-	public void setNowYearAndMonth(String nowYearAndMonth) {
-		this.nowYearAndMonth = nowYearAndMonth;
-	}
-
 	public String getWorkingTime() {
 		return workingTime;
 	}
 
 	public void setWorkingTime(String workingTime) {
 		this.workingTime = workingTime;
-	}
-
-	public String getLastDayofYearAndMonth() {
-		return lastDayofYearAndMonth;
-	}
-
-	public void setLastDayofYearAndMonth(String lastDayofYearAndMonth) {
-		this.lastDayofYearAndMonth = lastDayofYearAndMonth;
-	}
-
-	public String getRetirementYearAndMonth() {
-		return retirementYearAndMonth;
-	}
-
-	public void setRetirementYearAndMonth(String retirementYearAndMonth) {
-		this.retirementYearAndMonth = retirementYearAndMonth;
 	}
 
 	public String getOccupationCode() {
@@ -143,6 +103,46 @@ public class CertificatePrintingModel {
 
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+	public String getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
+	}
+
+	public String getIntoCompanyYearAndMonth() {
+		return intoCompanyYearAndMonth;
+	}
+
+	public void setIntoCompanyYearAndMonth(String intoCompanyYearAndMonth) {
+		this.intoCompanyYearAndMonth = intoCompanyYearAndMonth;
+	}
+
+	public String getNowYearAndMonth() {
+		return nowYearAndMonth;
+	}
+
+	public void setNowYearAndMonth(String nowYearAndMonth) {
+		this.nowYearAndMonth = nowYearAndMonth;
+	}
+
+	public String getLastDayofYearAndMonth() {
+		return lastDayofYearAndMonth;
+	}
+
+	public void setLastDayofYearAndMonth(String lastDayofYearAndMonth) {
+		this.lastDayofYearAndMonth = lastDayofYearAndMonth;
+	}
+
+	public String getRetirementYearAndMonth() {
+		return retirementYearAndMonth;
+	}
+
+	public void setRetirementYearAndMonth(String retirementYearAndMonth) {
+		this.retirementYearAndMonth = retirementYearAndMonth;
 	}
 
 	public static long getSerialversionuid() {
