@@ -50,6 +50,9 @@ public class CertificatePrintingController extends BaseController {
 			parameters.put("certificate", certificatePrintingModel.getCertificate());
 			parameters.put("employeeName", certificatePrintingModel.getEmployeeName());
 			parameters.put("address", certificatePrintingModel.getAddress());
+			parameters.put("postcode", certificatePrintingModel.getPostcode());
+			parameters.put("firstHalfAddress", certificatePrintingModel.getFirstHalfAddress());
+			parameters.put("lastHalfAddress", certificatePrintingModel.getLastHalfAddress());
 			parameters.put("birthday", certificatePrintingModel.getBirthday());
 			parameters.put("intoCompanyYearAndMonth", certificatePrintingModel.getIntoCompanyYearAndMonth());
 			parameters.put("nowYearAndMonth", certificatePrintingModel.getNowYearAndMonth());

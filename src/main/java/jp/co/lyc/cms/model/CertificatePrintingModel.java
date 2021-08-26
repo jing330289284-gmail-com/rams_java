@@ -1,5 +1,7 @@
 package jp.co.lyc.cms.model;
 
+import java.util.Date;
+
 public class CertificatePrintingModel {
 
 	/**
@@ -10,8 +12,11 @@ public class CertificatePrintingModel {
 	String certificate; // 証明書種類
 	String employeeName; // 社員名前
 	String employeeNo; // 社員番号
-	String birthday; // 誕生日
+	Date birthday; // 誕生日
 	String address; // 住所
+	String postcode; // 郵便番号
+	String firstHalfAddress; // 前半住所
+	String lastHalfAddress; // 後半住所
 	String intoCompanyYearAndMonth; // 入社年月
 	String nowYearAndMonth; // 在職年月まで
 	String workingTime; // 勤務時間
@@ -44,11 +49,11 @@ public class CertificatePrintingModel {
 		this.employeeNo = employeeNo;
 	}
 
-	public String getBirthday() {
+	public Date getBirthday() {
 		return birthday;
 	}
 
-	public void setBirthday(String birthday) {
+	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
 
@@ -58,6 +63,30 @@ public class CertificatePrintingModel {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public String getPostcode() {
+		return postcode;
+	}
+
+	public void setPostcode(String postcode) {
+		this.postcode = postcode;
+	}
+
+	public String getFirstHalfAddress() {
+		return firstHalfAddress;
+	}
+
+	public void setFirstHalfAddress(String firstHalfAddress) {
+		this.firstHalfAddress = firstHalfAddress;
+	}
+
+	public String getLastHalfAddress() {
+		return lastHalfAddress;
+	}
+
+	public void setLastHalfAddress(String lastHalfAddress) {
+		this.lastHalfAddress = lastHalfAddress;
 	}
 
 	public String getIntoCompanyYearAndMonth() {
