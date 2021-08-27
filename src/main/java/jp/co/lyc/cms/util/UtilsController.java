@@ -1229,7 +1229,10 @@ public class UtilsController {
 			// 创建获取连接
 			Transport transport = session.getTransport();
 			// 进行连接
-			transport.connect("mail@lyc.co.jp", "MjViOWNmOT8a9-09");
+			String name = "test@lyc.co.jp";
+			String pass = "TTAA13134wewe-2323";
+			transport.connect(name, pass);
+
 			// 创建一个信息
 			Message message = new MimeMessage(session);
 			// 设定发送方
@@ -1323,7 +1326,10 @@ public class UtilsController {
 			// 创建获取连接
 			Transport transport = session.getTransport();
 			// 进行连接
-			transport.connect("mail@lyc.co.jp", "Lyc2020-0908-");
+			//transport.connect("mail@lyc.co.jp", "AAA123LYY-CCCaa");
+			String name = "test@lyc.co.jp";
+			String pass = "TTAA13134wewe-2323";
+			transport.connect(name, pass);
 			// 创建一个信息
 			Message message = new MimeMessage(session);
 			// 设定发送方
