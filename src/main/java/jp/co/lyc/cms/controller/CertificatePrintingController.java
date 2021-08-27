@@ -41,7 +41,9 @@ public class CertificatePrintingController extends BaseController {
 		logger.info("DutyRegistrationController.downloadPDF:" + "開始");
 		File nowFile = new File(".").getAbsoluteFile();
 		File inputFile = new File(nowFile.getParentFile(),
-				"src/main/resources/PDFTemplate/certificateIncumbency.jrxml");
+				(certificatePrintingModel.getStamp().equals("0")
+						? "src/main/resources/PDFTemplate/certificateIncumbencyStamp.jrxml"
+						: "src/main/resources/PDFTemplate/certificateIncumbencyNoStamp.jrxml"));
 		File outputFile = new File(UtilsController.DOWNLOAD_PATH_BASE + "certificate/", "証明書" + ".pdf");
 		outputFile.getParentFile().mkdirs();
 		try {
@@ -49,12 +51,14 @@ public class CertificatePrintingController extends BaseController {
 
 			parameters.put("certificate", certificatePrintingModel.getCertificate());
 			parameters.put("employeeName", certificatePrintingModel.getEmployeeName());
+			parameters.put("furigana", certificatePrintingModel.getFurigana());
 			parameters.put("address", certificatePrintingModel.getAddress());
 			parameters.put("postcode", certificatePrintingModel.getPostcode());
 			parameters.put("firstHalfAddress", certificatePrintingModel.getFirstHalfAddress());
 			parameters.put("lastHalfAddress", certificatePrintingModel.getLastHalfAddress());
 			parameters.put("birthday", dateChange(certificatePrintingModel.getBirthday()));
-			parameters.put("intoCompanyYearAndMonth", dateChange(certificatePrintingModel.getIntoCompanyYearAndMonth()));
+			parameters.put("intoCompanyYearAndMonth",
+					dateChange(certificatePrintingModel.getIntoCompanyYearAndMonth()));
 			parameters.put("nowYearAndMonth", dateChange(certificatePrintingModel.getNowYearAndMonth()));
 			parameters.put("workingTime", certificatePrintingModel.getWorkingTime());
 			parameters.put("lastDayofYearAndMonth", dateChange(certificatePrintingModel.getLastDayofYearAndMonth()));

@@ -528,6 +528,8 @@ public class EmployeeInfoController extends BaseController {
 		resultMap.put("result", result);
 		resultMap.put("residentCardInfo", sendMap.get("residentCardInfo"));
 		resultMap.put("passportInfo", sendMap.get("passportInfo"));
+		resultMap.put("resumeInfo1", sendMap.get("resumeInfo1"));
+		resultMap.put("resumeInfo2", sendMap.get("resumeInfo2"));
 		logger.info("GetEmployeeInfoController.updateEmployee:" + "修正結束");
 		return resultMap;
 	}

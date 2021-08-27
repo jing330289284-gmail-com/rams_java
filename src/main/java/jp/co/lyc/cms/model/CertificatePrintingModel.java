@@ -12,6 +12,7 @@ public class CertificatePrintingModel {
 	String certificate; // 証明書種類
 	String employeeName; // 社員名前
 	String employeeNo; // 社員番号
+	String furigana; // フリガナ
 	String birthday; // 誕生日
 	String address; // 住所
 	String postcode; // 郵便番号
@@ -24,6 +25,23 @@ public class CertificatePrintingModel {
 	String retirementYearAndMonth; // 退職年月
 	String occupationCode; // 役職
 	String remark; // 備考
+	String stamp; // 印鑑
+
+	public String getFurigana() {
+		return furigana;
+	}
+
+	public void setFurigana(String furigana) {
+		this.furigana = furigana;
+	}
+
+	public String getStamp() {
+		return stamp;
+	}
+
+	public void setStamp(String stamp) {
+		this.stamp = stamp;
+	}
 
 	public String getCertificate() {
 		return certificate;
