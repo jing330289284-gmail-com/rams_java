@@ -17,6 +17,8 @@ public class IndividualCustomerSalesModel implements Serializable {
 	String unitPrice;
 	String DeductionsAndOvertimePay;
 	String employeeName;
+	String admissionStartDate;
+	String dailyCalculationStatus;
 	String siteRoleName;
 	String yearAndMonth;
 	String maxUnitPrice;
@@ -37,6 +39,22 @@ public class IndividualCustomerSalesModel implements Serializable {
 	int totaluPrice;
 	int overTimeOrExpectFee;
 	int totalgrossProfit;
+
+	public String getAdmissionStartDate() {
+		return admissionStartDate;
+	}
+
+	public void setAdmissionStartDate(String admissionStartDate) {
+		this.admissionStartDate = admissionStartDate;
+	}
+
+	public String getDailyCalculationStatus() {
+		return dailyCalculationStatus;
+	}
+
+	public void setDailyCalculationStatus(String dailyCalculationStatus) {
+		this.dailyCalculationStatus = dailyCalculationStatus;
+	}
 
 	public String getBpUnitPrice() {
 		return bpUnitPrice;

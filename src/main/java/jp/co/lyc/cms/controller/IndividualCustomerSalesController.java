@@ -2,6 +2,7 @@ package jp.co.lyc.cms.controller;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -26,6 +27,7 @@ import jp.co.lyc.cms.model.CustomerEmployeeDetail;
 import jp.co.lyc.cms.model.IndividualCustomerSalesModel;
 import jp.co.lyc.cms.service.IndividualCustomerSalesService;
 import jp.co.lyc.cms.util.UtilsCheckMethod;
+import jp.co.lyc.cms.util.UtilsController;
 import jp.co.lyc.cms.validation.IndividualCustomerSalesValidation;
 
 @Controller
@@ -40,7 +42,7 @@ public class IndividualCustomerSalesController {
 
 	@ResponseBody
 	public Map<String, Object> searchCustomerSales(@RequestBody IndividualCustomerSalesModel customerSalesInfo)
-			throws IOException {
+			throws IOException, NumberFormatException, ParseException {
 		errorsMessage = "";
 		DataBinder binder = new DataBinder(customerSalesInfo);
 		binder.setValidator(new IndividualCustomerSalesValidation());
@@ -279,6 +281,48 @@ public class IndividualCustomerSalesController {
 					List<CustomerEmployeeDetail> customerEmpDetail = new ArrayList<CustomerEmployeeDetail>();
 					for (int b = 0; b < CustomerSalesModelList.size(); b++) {
 						if (!CustomerSalesModelList.get(b).getUnitPrice().equals("0")) {
+
+							if (getYandM.get(a).equals(CustomerSalesModelList.get(b).getYearAndMonth())) {
+								// 日割り判断
+								if (CustomerSalesModelList.get(b).getDailyCalculationStatus() != null
+										&& CustomerSalesModelList.get(b).getDailyCalculationStatus().equals("0")) {
+									// 入場月判断
+									if (CustomerSalesModelList.get(b).getAdmissionStartDate() != null
+											&& CustomerSalesModelList.get(b).getAdmissionStartDate().substring(0, 6)
+													.equals(CustomerSalesModelList.get(b).getYearAndMonth())) {
+										// 日割り計算
+										SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+										String workMonth = CustomerSalesModelList.get(b).getAdmissionStartDate()
+												.substring(0, 6);
+										Date startDate = sdf.parse(workMonth + "00");
+										Date endDate = sdf.parse(workMonth + "31");
+										Calendar calendarStart = Calendar.getInstance();
+										Calendar calendarEnd = Calendar.getInstance();
+										calendarStart.setTime(startDate);
+										calendarEnd.setTime(endDate);
+										int monthAlldays = countDays(calendarStart, calendarEnd);
+
+										startDate = sdf.parse(String.valueOf(
+												Integer.parseInt(CustomerSalesModelList.get(b).getAdmissionStartDate())
+														- 1));
+										endDate = sdf.parse(workMonth + "31");
+										calendarStart = Calendar.getInstance();
+										calendarEnd = Calendar.getInstance();
+										calendarStart.setTime(startDate);
+										calendarEnd.setTime(endDate);
+										int workdays = countDays(calendarStart, calendarEnd);
+										double percent = (double) workdays / (double) monthAlldays;
+										int unitprice = (int) (Double
+												.parseDouble(CustomerSalesModelList.get(b).getUnitPrice()) * percent);
+
+										CustomerSalesModelList.get(b).setUnitPrice(String.valueOf(unitprice));
+
+									} else {
+										CustomerSalesModelList.get(b).setDailyCalculationStatus("1");
+									}
+								}
+							}
+
 							CustomerEmployeeDetail customerEmpDe = new CustomerEmployeeDetail();
 							double unitPrice = Double.parseDouble(CustomerSalesModelList.get(b).getUnitPrice())
 									/ 10000.0;
@@ -368,7 +412,7 @@ public class IndividualCustomerSalesController {
 				}
 				if (cusModelLi.size() > 0) {
 					cusModelLi.get(0).setTotalworkPeoSum(totalworkPeoSum);
-					cusModelLi.get(0).setTotaluPrice(totaluPrice);
+					cusModelLi.get(0).setTotaluPrice(overTimeOrExpectFee / totalworkPeoSum);
 					cusModelLi.get(0).setOverTimeOrExpectFee(overTimeOrExpectFee);
 					cusModelLi.get(0).setTotalgrossProfit(totalgrossProfit);
 				}
@@ -415,5 +459,39 @@ public class IndividualCustomerSalesController {
 		}
 
 		return sendMap;
+	}
+
+	/**
+	 * 指定した2つの日付の間の営業日数をカウントします。 カウントを開始する日付当日は含まれません。 開始日付より終了日付が過去の場合は負数を返します。
+	 * 
+	 * @param from 開始日付
+	 * @param to   終了日付
+	 * @return 営業日数
+	 */
+	public int countDays(Calendar from, Calendar to) {
+		int count = 0;
+		Calendar cal1 = (Calendar) from.clone();
+		Calendar cal2 = (Calendar) to.clone();
+		int step = from.compareTo(to) <= 0 ? 1 : -1;
+
+		if (isSameDate(cal1, cal2))
+			return 0;
+
+		do {
+			cal1.add(Calendar.DAY_OF_YEAR, step);
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+			String cal = formatter.format(cal1.getTime());
+			if (!UtilsController.isHoliday(cal)) {
+				count++;
+			}
+		} while (!isSameDate(cal1, cal2));
+
+		return count * step;
+	}
+
+	private static boolean isSameDate(Calendar cal1, Calendar cal2) {
+		return cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR)
+				&& cal1.get(Calendar.MONTH) == cal2.get(Calendar.MONTH)
+				&& cal1.get(Calendar.DAY_OF_MONTH) == cal2.get(Calendar.DAY_OF_MONTH);
 	}
 }

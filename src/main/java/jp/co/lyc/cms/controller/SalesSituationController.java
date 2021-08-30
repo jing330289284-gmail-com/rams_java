@@ -214,30 +214,69 @@ public class SalesSituationController extends BaseController {
 			// T010
 			for (int j = 0; j < T010SalesSituationList.size(); j++) {
 				if (salesSituationList.get(i).getEmployeeNo().equals(T010SalesSituationList.get(j).getEmployeeNo())) {
-
-					salesSituationList.get(i)
-							.setSalesProgressCode(T010SalesSituationList.get(j).getSalesProgressCode());
-					salesSituationList.get(i).setSalesDateUpdate(T010SalesSituationList.get(j).getSalesYearAndMonth());
-					salesSituationList.get(i).setInterviewDate1(T010SalesSituationList.get(j).getInterviewDate1());
-					salesSituationList.get(i).setStationCode1(T010SalesSituationList.get(j).getStationCode1());
-					salesSituationList.get(i)
-							.setInterviewCustomer1(T010SalesSituationList.get(j).getInterviewCustomer1());
-					salesSituationList.get(i).setInterviewDate2(T010SalesSituationList.get(j).getInterviewDate2());
-					salesSituationList.get(i).setStationCode2(T010SalesSituationList.get(j).getStationCode2());
-					salesSituationList.get(i)
-							.setInterviewCustomer2(T010SalesSituationList.get(j).getInterviewCustomer2());
-					salesSituationList.get(i).setHopeLowestPrice(T010SalesSituationList.get(j).getHopeLowestPrice());
-					salesSituationList.get(i).setHopeHighestPrice(T010SalesSituationList.get(j).getHopeHighestPrice());
-					salesSituationList.get(i)
-							.setCustomerContractStatus(T010SalesSituationList.get(j).getCustomerContractStatus());
-					salesSituationList.get(i).setRemark1(T010SalesSituationList.get(j).getRemark1());
-					salesSituationList.get(i).setRemark2(T010SalesSituationList.get(j).getRemark2());
-					salesSituationList.get(i).setSalesStaff(T010SalesSituationList.get(j).getSalesStaff());
-					salesSituationList.get(i)
-							.setSalesPriorityStatus(T010SalesSituationList.get(j).getSalesPriorityStatus());
-					salesSituationList.get(i).setCustomer(T010SalesSituationList.get(j).getConfirmCustomer());
-					salesSituationList.get(i).setPrice(T010SalesSituationList.get(j).getConfirmPrice());
-
+					// 現在の日付を取得
+					Date date = new Date();
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
+					String curDate = sdf.format(date);
+					if (Integer.parseInt(model.getSalesYearAndMonth()) <= Integer.parseInt(curDate)) {
+						salesSituationList.get(i)
+								.setSalesProgressCode(T010SalesSituationList.get(j).getSalesProgressCode());
+						salesSituationList.get(i)
+								.setSalesDateUpdate(T010SalesSituationList.get(j).getSalesYearAndMonth());
+						salesSituationList.get(i).setInterviewDate1(T010SalesSituationList.get(j).getInterviewDate1());
+						salesSituationList.get(i).setStationCode1(T010SalesSituationList.get(j).getStationCode1());
+						salesSituationList.get(i)
+								.setInterviewCustomer1(T010SalesSituationList.get(j).getInterviewCustomer1());
+						salesSituationList.get(i).setInterviewDate2(T010SalesSituationList.get(j).getInterviewDate2());
+						salesSituationList.get(i).setStationCode2(T010SalesSituationList.get(j).getStationCode2());
+						salesSituationList.get(i)
+								.setInterviewCustomer2(T010SalesSituationList.get(j).getInterviewCustomer2());
+						salesSituationList.get(i)
+								.setHopeLowestPrice(T010SalesSituationList.get(j).getHopeLowestPrice());
+						salesSituationList.get(i)
+								.setHopeHighestPrice(T010SalesSituationList.get(j).getHopeHighestPrice());
+						salesSituationList.get(i)
+								.setCustomerContractStatus(T010SalesSituationList.get(j).getCustomerContractStatus());
+						salesSituationList.get(i).setRemark1(T010SalesSituationList.get(j).getRemark1());
+						salesSituationList.get(i).setRemark2(T010SalesSituationList.get(j).getRemark2());
+						salesSituationList.get(i).setSalesStaff(T010SalesSituationList.get(j).getSalesStaff());
+						salesSituationList.get(i)
+								.setSalesPriorityStatus(T010SalesSituationList.get(j).getSalesPriorityStatus());
+						salesSituationList.get(i).setCustomer(T010SalesSituationList.get(j).getConfirmCustomer());
+						salesSituationList.get(i).setPrice(T010SalesSituationList.get(j).getConfirmPrice());
+					} else {
+						if (!(salesSituationList.get(i).getAdmissionEndDate() != null && Integer
+								.parseInt(salesSituationList.get(i).getAdmissionEndDate().substring(0, 6)) >= Integer
+										.parseInt(T010SalesSituationList.get(j).getSalesYearAndMonth()))) {
+							salesSituationList.get(i)
+									.setSalesProgressCode(T010SalesSituationList.get(j).getSalesProgressCode());
+							salesSituationList.get(i)
+									.setSalesDateUpdate(T010SalesSituationList.get(j).getSalesYearAndMonth());
+							salesSituationList.get(i)
+									.setInterviewDate1(T010SalesSituationList.get(j).getInterviewDate1());
+							salesSituationList.get(i).setStationCode1(T010SalesSituationList.get(j).getStationCode1());
+							salesSituationList.get(i)
+									.setInterviewCustomer1(T010SalesSituationList.get(j).getInterviewCustomer1());
+							salesSituationList.get(i)
+									.setInterviewDate2(T010SalesSituationList.get(j).getInterviewDate2());
+							salesSituationList.get(i).setStationCode2(T010SalesSituationList.get(j).getStationCode2());
+							salesSituationList.get(i)
+									.setInterviewCustomer2(T010SalesSituationList.get(j).getInterviewCustomer2());
+							salesSituationList.get(i)
+									.setHopeLowestPrice(T010SalesSituationList.get(j).getHopeLowestPrice());
+							salesSituationList.get(i)
+									.setHopeHighestPrice(T010SalesSituationList.get(j).getHopeHighestPrice());
+							salesSituationList.get(i).setCustomerContractStatus(
+									T010SalesSituationList.get(j).getCustomerContractStatus());
+							salesSituationList.get(i).setRemark1(T010SalesSituationList.get(j).getRemark1());
+							salesSituationList.get(i).setRemark2(T010SalesSituationList.get(j).getRemark2());
+							salesSituationList.get(i).setSalesStaff(T010SalesSituationList.get(j).getSalesStaff());
+							salesSituationList.get(i)
+									.setSalesPriorityStatus(T010SalesSituationList.get(j).getSalesPriorityStatus());
+							salesSituationList.get(i).setCustomer(T010SalesSituationList.get(j).getConfirmCustomer());
+							salesSituationList.get(i).setPrice(T010SalesSituationList.get(j).getConfirmPrice());
+						}
+					}
 				}
 			}
 		}

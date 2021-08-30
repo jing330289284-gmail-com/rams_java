@@ -670,7 +670,7 @@
 	<select id="getEmployeeNameByOccupationName"
 		resultType="jp.co.lyc.cms.model.ModelClass">
 		SELECT T002EmployeeDetail.employeeNo
-		code,CONCAT(T001Employee.employeeFristName,T001Employee.employeeLastName,'(',T002EmployeeDetail.employeeNo,')')
+		code,CONCAT(T001Employee.employeeFristName,T001Employee.employeeLastName)
 		name,
 		CONCAT( T001Employee.employeeFristName,
 		T001Employee.employeeLastName ) TEXT

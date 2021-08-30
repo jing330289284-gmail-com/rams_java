@@ -122,6 +122,8 @@
 		and
 		bpOtherCompanyAdmissionEndDate &lt;
 		#{salesYearAndMonth}
+		group by
+		bpEmployeeNo
 	</select>
 
 	<select id="getEmployeeNoListBefore" parameterType="String"
@@ -292,7 +294,13 @@
 		=
 		T001Employee.employeeNo
 		LEFT JOIN
-		T011BpInfoSupplement
+		(SELECT T011.* from T011BpInfoSupplement as T011
+		inner join (SELECT bpEmployeeNo,max(unitPriceStartMonth) as unitPriceStartMonth from T011BpInfoSupplement
+		group by bpEmployeeNo
+		) as temp
+		on T011.bpEmployeeNo = temp.bpEmployeeNo
+		and T011.unitPriceStartMonth = temp.unitPriceStartMonth
+		)
 		AS
 		T011BpInfoSupplement
 		on

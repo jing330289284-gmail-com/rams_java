@@ -12,6 +12,8 @@ public class MonthlySalesSearchModel implements Serializable {
 	String employeeClassification;
 	String employeeForms;
 	String employeeOccupation;
+	String admissionStartDate;
+	String dailyCalculationStatus;
 	String kadou;
 	String utilPricefront;
 	String utilPriceback;
@@ -38,6 +40,22 @@ public class MonthlySalesSearchModel implements Serializable {
 	String DeductionsAndOvertimePayOfUnitPrice;
 	String fiscalYear;
 	String bpBelongCustomer;
+
+	public String getAdmissionStartDate() {
+		return admissionStartDate;
+	}
+
+	public void setAdmissionStartDate(String admissionStartDate) {
+		this.admissionStartDate = admissionStartDate;
+	}
+
+	public String getDailyCalculationStatus() {
+		return dailyCalculationStatus;
+	}
+
+	public void setDailyCalculationStatus(String dailyCalculationStatus) {
+		this.dailyCalculationStatus = dailyCalculationStatus;
+	}
 
 	public String getBpBelongCustomer() {
 		return bpBelongCustomer;

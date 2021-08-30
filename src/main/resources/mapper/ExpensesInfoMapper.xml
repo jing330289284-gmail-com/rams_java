@@ -62,7 +62,7 @@
 				SELECT * FROM T013ExpensesInfo
 				where employeeNo =
 				#{employeeNo}
-				and expensesReflectYearAndMonth &gt; #{start}
+				and expensesReflectYearAndMonth &gt;= #{start}
 			</if>
 		</if>
 		<if test="start == null">

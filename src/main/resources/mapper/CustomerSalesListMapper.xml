@@ -14,6 +14,8 @@
 			if(T007.customerAbbreviation is null || T007.customerAbbreviation =
 			"",T007.customerName,T007.customerAbbreviation) as customerName,
 			T006.customerNo,
+			T006.admissionStartDate,
+			T006.dailyCalculationStatus,
 			if(T005.employeeStatus = "5",CAST((T006.unitPrice*(1+T012.taxRate)) As
 			unsigned),CAST((T006.unitPrice) As unsigned)) As unitPrice,
 			T018.DeductionsAndOvertimePay,

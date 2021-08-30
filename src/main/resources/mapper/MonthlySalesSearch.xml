@@ -24,6 +24,7 @@
 			T018.deductionsAndOvertimePayOfUnitPrice ,
 			T006.admissionStartDate,
 			T006.admissionEndDate,
+			T006.dailyCalculationStatus,
 			if(T002.employeeStatus = "2",CAST((T006.unitPrice*(1 + T012.taxRate)) As unsigned),CAST((T006.unitPrice) As unsigned)) As
 			unitPrice,
 			CAST(T005.salary As unsigned) As salary,

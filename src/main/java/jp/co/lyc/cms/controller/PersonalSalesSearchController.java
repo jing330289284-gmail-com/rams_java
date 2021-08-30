@@ -1,5 +1,6 @@
 package jp.co.lyc.cms.controller;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,6 +26,7 @@ import jp.co.lyc.cms.model.PersonalSalesSearchModel;
 import jp.co.lyc.cms.service.PersonalSalesSearchService;
 import jp.co.lyc.cms.validation.PersonalSalesValidation;
 import jp.co.lyc.cms.util.UtilsCheckMethod;
+import jp.co.lyc.cms.util.UtilsController;
 
 @Controller
 @RequestMapping(value = "/personalSales")
@@ -40,7 +42,7 @@ public class PersonalSalesSearchController {
 	@RequestMapping(value = "/searchEmpDetails", method = RequestMethod.POST)
 
 	@ResponseBody
-	public Map<String, Object> searchEmpDetails(@RequestBody PersonalSalesSearchModel empInfo) {
+	public Map<String, Object> searchEmpDetails(@RequestBody PersonalSalesSearchModel empInfo) throws ParseException {
 
 		Date day = new Date();
 		SimpleDateFormat df = new SimpleDateFormat("yyyyMM");
@@ -147,6 +149,50 @@ public class PersonalSalesSearchController {
 				resulterr.put("noData", noData);
 				return resulterr;
 			} else {
+				// 日割り計算
+				for (int i = 0; i < personModelList.size(); i++) {
+					// 日割り判断
+					if (personModelList.get(i).getDailyCalculationStatus() != null
+							&& personModelList.get(i).getDailyCalculationStatus().equals("0")) {
+						// 入場月判断
+						if (personModelList.get(i).getAdmissionStartDate() != null
+								&& personModelList.get(i).getAdmissionStartDate().substring(0, 6)
+										.equals(personModelList.get(i).getOnlyYandM())) {
+							// 日割り計算
+							SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+							String workMonth = personModelList.get(i).getAdmissionStartDate().substring(0, 6);
+							Date startDate = sdf.parse(workMonth + "00");
+							Date endDate = sdf.parse(workMonth + "31");
+							Calendar calendarStart = Calendar.getInstance();
+							Calendar calendarEnd = Calendar.getInstance();
+							calendarStart.setTime(startDate);
+							calendarEnd.setTime(endDate);
+							int monthAlldays = countDays(calendarStart, calendarEnd);
+
+							startDate = sdf.parse(String
+									.valueOf(Integer.parseInt(personModelList.get(i).getAdmissionStartDate()) - 1));
+							endDate = sdf.parse(workMonth + "31");
+							calendarStart = Calendar.getInstance();
+							calendarEnd = Calendar.getInstance();
+							calendarStart.setTime(startDate);
+							calendarEnd.setTime(endDate);
+							int workdays = countDays(calendarStart, calendarEnd);
+							double percent = (double) workdays / (double) monthAlldays;
+							int unitprice = (int) (Double.parseDouble(personModelList.get(i).getUnitPrice()) * percent);
+							int cost = personModelList.get(i).getWaitingCost() == null
+									|| personModelList.get(i).getWaitingCost().equals("")
+											? (int) (Double.parseDouble(personModelList.get(i).getSalary()) * percent)
+											: (int) (Double.parseDouble(personModelList.get(i).getWaitingCost())
+													* percent);
+							personModelList.get(i).setUnitPrice(String.valueOf(unitprice));
+							personModelList.get(i).setWaitingCost(String.valueOf(cost));
+							personModelList.get(i).setSalary(String.valueOf(cost));
+						} else {
+							personModelList.get(i).setDailyCalculationStatus("1");
+						}
+					}
+				}
+
 				List<PersonalSalesSearchModel> personModelListTwice = new ArrayList<PersonalSalesSearchModel>();
 				logger.info("PersonalSalesSearchController.searchEmpAllowance:" + "二回目検索開始");
 				personModelListTwice = personalSalesSearchService.searchEmpAllowance(sendMap);
@@ -291,4 +337,37 @@ public class PersonalSalesSearchController {
 		return sendMap;
 	}
 
+	/**
+	 * 指定した2つの日付の間の営業日数をカウントします。 カウントを開始する日付当日は含まれません。 開始日付より終了日付が過去の場合は負数を返します。
+	 * 
+	 * @param from 開始日付
+	 * @param to   終了日付
+	 * @return 営業日数
+	 */
+	public int countDays(Calendar from, Calendar to) {
+		int count = 0;
+		Calendar cal1 = (Calendar) from.clone();
+		Calendar cal2 = (Calendar) to.clone();
+		int step = from.compareTo(to) <= 0 ? 1 : -1;
+
+		if (isSameDate(cal1, cal2))
+			return 0;
+
+		do {
+			cal1.add(Calendar.DAY_OF_YEAR, step);
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+			String cal = formatter.format(cal1.getTime());
+			if (!UtilsController.isHoliday(cal)) {
+				count++;
+			}
+		} while (!isSameDate(cal1, cal2));
+
+		return count * step;
+	}
+
+	private static boolean isSameDate(Calendar cal1, Calendar cal2) {
+		return cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR)
+				&& cal1.get(Calendar.MONTH) == cal2.get(Calendar.MONTH)
+				&& cal1.get(Calendar.DAY_OF_MONTH) == cal2.get(Calendar.DAY_OF_MONTH);
+	}
 }

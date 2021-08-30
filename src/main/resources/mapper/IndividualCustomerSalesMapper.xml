@@ -18,6 +18,8 @@
 			A.maxP As maxUnitPrice,
 			A.minP As minUnitPrice,
 			CONCAT(T001.employeeFristName,T001.employeeLastName)as employeeName,
+			T006.admissionStartDate,
+			T006.dailyCalculationStatus,
 			if(T005.employeeStatus = "5",CAST((T006.unitPrice*(1+T012.taxRate)) As unsigned),CAST((T006.unitPrice) As unsigned)) As unitPrice,
 			M012.siteRoleName,
 			T018.DeductionsAndOvertimePay,

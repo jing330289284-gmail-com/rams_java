@@ -94,6 +94,12 @@ public class SendLettersConfirm extends BaseController {
 			} else {
 				sendLettersConfirmModelList.get(j).setResumeInfoName("");
 			}
+
+			if (sendLettersConfirmModelList.get(j).getUnitPrice() != null
+					&& !sendLettersConfirmModelList.get(j).getUnitPrice().equals("")) {
+				sendLettersConfirmModelList.get(j).setUnitPrice(
+						String.valueOf(Integer.parseInt(sendLettersConfirmModelList.get(j).getUnitPrice()) / 10000));
+			}
 		}
 		logger.info("getSalesEmps" + "検索結束");
 		return sendLettersConfirmModelList;
@@ -104,6 +110,8 @@ public class SendLettersConfirm extends BaseController {
 	public void updateSalesSentence(@RequestBody SendLettersConfirmModel model) {
 
 		logger.info("updateSalesSentence:" + "更新開始");
+		if (model.getUnitPrice() != null && !model.getUnitPrice().equals(""))
+			model.setUnitPrice(String.valueOf(Integer.parseInt(model.getUnitPrice()) * 10000));
 		model.setUpdateUser(getSession().getAttribute("employeeName").toString());
 		sendLettersConfirmService.updateSalesSentence(model);
 		logger.info("updateSalesSentence" + "更新結束");

@@ -15,6 +15,8 @@ public class CustomerSalesListModel implements Serializable {
 	String DeductionsAndOvertimePay;
 	String employeeNo;
 	String employeeName;
+	String admissionStartDate;
+	String dailyCalculationStatus;
 	String siteRoleName;
 	String stationName;
 	String totalUnitPrice;
@@ -30,6 +32,22 @@ public class CustomerSalesListModel implements Serializable {
 	int unitPTotal;
 	int totalSales;
 	int totalgrossProfit;
+
+	public String getAdmissionStartDate() {
+		return admissionStartDate;
+	}
+
+	public void setAdmissionStartDate(String admissionStartDate) {
+		this.admissionStartDate = admissionStartDate;
+	}
+
+	public String getDailyCalculationStatus() {
+		return dailyCalculationStatus;
+	}
+
+	public void setDailyCalculationStatus(String dailyCalculationStatus) {
+		this.dailyCalculationStatus = dailyCalculationStatus;
+	}
 
 	public String getBpUnitPrice() {
 		return bpUnitPrice;
