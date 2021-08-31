@@ -321,8 +321,8 @@ public class SalesProfitController extends BaseController {
 						formatter.parseDateTime(workDateEnd.substring(0, 4) + "-" + workDateEnd.substring(4, 6)))
 						.getMonths() + 1;
 				siteList.get(i)
-						.setProfit(Integer.toString(Integer.parseInt(siteList.get(i).getUnitPrice()) * 10000 * months));
-				profitAll += Integer.parseInt(siteList.get(i).getUnitPrice()) * months * 10000;
+						.setProfit(Integer.toString(Integer.parseInt(siteList.get(i).getUnitPrice()) * months));
+				profitAll += Integer.parseInt(siteList.get(i).getUnitPrice()) * months;
 				String startYandM = workDateStart;
 				String endYandM = workDateEnd;
 				List<String> getYandM = new ArrayList<String>();
@@ -431,7 +431,7 @@ public class SalesProfitController extends BaseController {
 					siteList.get(i)
 							.setSiteRoleName(formatString((float) Integer.parseInt(siteList.get(i).getSiteRoleName())));
 				siteList.get(i)
-						.setUnitPrice(formatString((float) Integer.parseInt(siteList.get(i).getUnitPrice()) * 10000));
+						.setUnitPrice(formatString((float) Integer.parseInt(siteList.get(i).getUnitPrice())));
 				siteList.get(i).setProfit(formatString((float) Integer.parseInt(siteList.get(i).getProfit())));
 				siteList.get(i).setSalary(formatString((float) Integer.parseInt(siteList.get(i).getSalary())));
 
@@ -512,8 +512,8 @@ public class SalesProfitController extends BaseController {
 						formatter.parseDateTime(workDateEnd.substring(0, 4) + "-" + workDateEnd.substring(4, 6)))
 						.getMonths() + 1;
 				siteList.get(i)
-						.setProfit(Integer.toString(Integer.parseInt(siteList.get(i).getUnitPrice()) * 10000 * months));
-				profitAll += Integer.parseInt(siteList.get(i).getUnitPrice()) * months * 10000;
+						.setProfit(Integer.toString(Integer.parseInt(siteList.get(i).getUnitPrice()) * months));
+				profitAll += Integer.parseInt(siteList.get(i).getUnitPrice()) * months;
 				String startYandM = workDateStart;
 				String endYandM = workDateEnd;
 				List<String> getYandM = new ArrayList<String>();
@@ -622,7 +622,7 @@ public class SalesProfitController extends BaseController {
 					siteList.get(i)
 							.setSiteRoleName(formatString((float) Integer.parseInt(siteList.get(i).getSiteRoleName())));
 				siteList.get(i)
-						.setUnitPrice(formatString((float) Integer.parseInt(siteList.get(i).getUnitPrice()) * 10000));
+						.setUnitPrice(formatString((float) Integer.parseInt(siteList.get(i).getUnitPrice())));
 				siteList.get(i).setProfit(formatString((float) Integer.parseInt(siteList.get(i).getProfit())));
 				siteList.get(i).setSalary(formatString((float) Integer.parseInt(siteList.get(i).getSalary())));
 

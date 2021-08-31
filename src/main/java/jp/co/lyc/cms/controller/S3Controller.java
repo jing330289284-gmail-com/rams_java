@@ -71,8 +71,9 @@ public class S3Controller extends BaseController {
 	public void uploadFile(@RequestBody S3Model model) {
 		setKey();
 		AmazonS3 s3 = new AmazonS3Client(new BasicAWSCredentials(AWS_ACCESS_KEY, AWS_SECRET_KEY));
+		String key = model.getFileKey().replaceAll("\\+","\\%2B");
 		try {
-			s3.putObject(BUCKET_NAME, model.getFileKey(), new File(model.getFilePath()));
+			s3.putObject(BUCKET_NAME, key, new File(model.getFilePath()));
 		} catch (AmazonS3Exception e) {
 			System.err.print(e.getErrorMessage());
 		}
@@ -83,8 +84,9 @@ public class S3Controller extends BaseController {
 	public void deleteFile(@RequestBody S3Model model) {
 		setKey();
 		AmazonS3 s3 = new AmazonS3Client(new BasicAWSCredentials(AWS_ACCESS_KEY, AWS_SECRET_KEY));
+		String key = model.getFileKey().replaceAll("\\+","\\%2B");
 		try {
-			s3.deleteObject(BUCKET_NAME, model.getFileKey());
+			s3.deleteObject(BUCKET_NAME, key);
 		} catch (AmazonS3Exception e) {
 			System.err.print(e.getErrorMessage());
 		}
@@ -119,8 +121,8 @@ public class S3Controller extends BaseController {
 		} else {
 			System.out.println("文件夹已存在");
 		}
-
-		amazonS3Downloading(s3, BUCKET_NAME, model.getFileKey(), model.getDownLoadPath());
+		String key = model.getFileKey().replaceAll("\\+","\\%2B");
+		amazonS3Downloading(s3, BUCKET_NAME, key, model.getDownLoadPath());
 	}
 
 	public static void amazonS3Downloading(AmazonS3 s3Client, String bucketName, String key, String targetFilePath) {

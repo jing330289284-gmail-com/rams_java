@@ -95,8 +95,10 @@
 		and employeeStatus =
 		ifnull(#{intoCompanyCode},employeeStatus)
 		and
-		T010SalesSituation.salesStaff =
-		ifnull(#{eigyou},T010SalesSituation.salesStaff)
+		if(#{eigyou} is null,1=1,(T010SalesSituation.salesYearAndMonth between left(T006EmployeeSiteInfo.admissionStartDate,6) - 1 and left(T006EmployeeSiteInfo.admissionEndDate,6) - 1
+		and
+		T010SalesSituation.salesStaff is not null
+		and T010SalesSituation.salesStaff = #{eigyou}))
 		ORDER BY
 		T006EmployeeSiteInfo.admissionStartDate
 	</select>
