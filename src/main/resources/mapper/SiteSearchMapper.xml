@@ -139,7 +139,8 @@
 			</if>
 		</if>
 		<if test="scheduledEndDate != null and scheduledEndDate!= ''">
-			AND a.scheduledEndDate &lt;= #{scheduledEndDate}
+			AND (a.scheduledEndDate &lt;= #{scheduledEndDate}
+			OR LEFT(a.admissionEndDate,6) &lt;= #{scheduledEndDate})
 		</if>
 		<if test="typteOfContractCode!= null and typteOfContractCode!= ''">
 			AND a.typteOfContractCode = #{typteOfContractCode}

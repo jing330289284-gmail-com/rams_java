@@ -141,7 +141,7 @@ public class ProjectInfoController extends BaseController {
 		yearAndMonth += month > 10 ? month : "0" + month;
 		ArrayList<String> saibanList = projectInfoMapper.saiban(yearAndMonth);
 		String saiban = "";
-		if (saibanList.size() == 0) {
+		if (saibanList.size() == 0 || saibanList.get(0) == null) {
 			saiban = yearAndMonth + "01";
 		} else {
 			saiban = Integer.toString(Integer.parseInt(saibanList.get(0)) + 1);
