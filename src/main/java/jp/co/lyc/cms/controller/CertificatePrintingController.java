@@ -59,7 +59,7 @@ public class CertificatePrintingController extends BaseController {
 			parameters.put("birthday", dateChange(certificatePrintingModel.getBirthday()));
 			parameters.put("intoCompanyYearAndMonth",
 					dateChange(certificatePrintingModel.getIntoCompanyYearAndMonth()));
-			parameters.put("nowYearAndMonth", dateChange(certificatePrintingModel.getNowYearAndMonth()));
+			parameters.put("nowYearAndMonth", "現在に至る"/* dateChange(certificatePrintingModel.getNowYearAndMonth()) */);
 			parameters.put("workingTime", certificatePrintingModel.getWorkingTime());
 			parameters.put("lastDayofYearAndMonth", dateChange(certificatePrintingModel.getLastDayofYearAndMonth()));
 			parameters.put("retirementYearAndMonth", dateChange(certificatePrintingModel.getRetirementYearAndMonth()));

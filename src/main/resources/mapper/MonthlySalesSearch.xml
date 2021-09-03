@@ -126,16 +126,18 @@
 			</if>
 			<if test="kadou == 0">
 				AND ((#{getYandM} between left(admissionStartDate,6) and
-				left(admissionEndDate,6) AND systemName != "休暇")
+				left(admissionEndDate,6) AND (systemName is null or systemName != "休暇") AND (T006.typteOfContractCode is null or T006.typteOfContractCode != "4"))
 				or (#{getYandM} &gt;=
 				left(admissionStartDate,6)
 				AND admissionEndDate is null
 				AND (systemName is null or systemName != "休暇")
+				AND (T006.typteOfContractCode is null or T006.typteOfContractCode != "4")
 				))
 			</if>
 			<if test="kadou == 1">
 				AND admissionStartDate is null
 				or systemName = "休暇"
+				or T006.typteOfContractCode = "4"
 			</if>
 			<if test="utilPricefront != null &amp;&amp; utilPriceback != null">
 				AND CAST((T006.unitPrice) As unsigned) between
@@ -260,13 +262,16 @@
 			</if>
 			<if test="kadou == 0">
 				AND (#{getYandM} between left(admissionStartDate,6) and
-				left(admissionEndDate,6)
+				left(admissionEndDate,6) AND (systemName is null or systemName != "休暇") AND (T006.typteOfContractCode is null or T006.typteOfContractCode != "4")
 				or #{getYandM} &gt;=
 				left(admissionStartDate,6)
-				AND admissionEndDate is null)
+				AND (systemName is null or systemName != "休暇")
+				AND (T006.typteOfContractCode is null or T006.typteOfContractCode != "4"))
 			</if>
 			<if test="kadou == 1">
 				AND admissionStartDate is null
+				or systemName = "休暇"
+				or T006.typteOfContractCode = "4"
 			</if>
 			<if test="utilPricefront != null &amp;&amp; utilPriceback != null">
 				AND CAST((T006.unitPrice) As unsigned) between

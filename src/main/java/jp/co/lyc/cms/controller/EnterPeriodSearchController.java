@@ -189,7 +189,9 @@ public class EnterPeriodSearchController extends BaseController {
 					int month = 0;
 					month = getMonthNum(resultList.get(i).getNextBonusMonth(), bonusYearAndMonth);
 					if (month > 0) {
-						resultList.get(i).setIsRed("true");
+						// resultList.get(i).setIsRed("true");
+						resultList.remove(i);
+						i--;
 					}
 				}
 			}

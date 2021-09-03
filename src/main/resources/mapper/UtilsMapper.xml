@@ -48,15 +48,21 @@
 		FROM
 		T001Employee as T001
 		Left Join
-		(select T006.* from T006EmployeeSiteInfo as T006
-		inner join (select employeeNo,max(admissionStartDate) as admissionStartDate from T006EmployeeSiteInfo
+		(select T006.* from T006EmployeeSiteInfo
+		as T006
+		inner join (select employeeNo,max(admissionStartDate) as
+		admissionStartDate from T006EmployeeSiteInfo
 		group by employeeNo
-		) as temp 
+		) as
+		temp
 		on T006.employeeNo = temp.employeeNo
-		and T006.admissionStartDate = temp.admissionStartDate
+		and T006.admissionStartDate =
+		temp.admissionStartDate
 		) as T006
 		on T006.employeeNo = T001.employeeNo
-		where ((T006.admissionEndDate is null or T006.admissionEndDate > now()) and T006.workState != "3")
+		where ((T006.admissionEndDate is null or T006.admissionEndDate >
+		now()) and (T006.systemName is null or T006.systemName != "休暇" ) and
+		(T006.typteOfContractCode is null or T006.typteOfContractCode != "4"))
 		group by T001.employeeNo
 		order by
 		left(T001.employeeNo,2)="BP",left(T001.employeeNo,2)="SC",left(T001.employeeNo,2)="SP",T001.employeeNo

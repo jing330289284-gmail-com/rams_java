@@ -64,6 +64,14 @@
 		and h.unitPriceStartMonth = ""
 		AND
 		a.employeeNo != ''
+		<if test="dataAcquisitionPeriod!= null and dataAcquisitionPeriod!= ''">
+			inner join
+			(SELECT employeeNo,max(admissionStartDate) as admissionStartDate from T006EmployeeSiteInfo
+			group by employeeNo
+			) as temp
+			on a.employeeNo = temp.employeeNo
+			and a.admissionStartDate = temp.admissionStartDate
+		</if>
 		WHERE
 		1 =1
 		<if test="employeeNo!= null and employeeNo!= ''">
@@ -122,10 +130,6 @@
 		</if>
 		<if test="admissionEndDate!= null and admissionEndDate!= ''">
 			AND a.admissionEndDate &lt;= #{admissionEndDate}
-		</if>
-		<if
-			test="dataAcquisitionPeriod!= null and dataAcquisitionPeriod!= ''">
-			AND a.admissionEndDate IS NULL
 		</if>
 		<if test="employeeStatus!= null and employeeStatus!= ''">
 			AND d.employeeStatus = #{employeeStatus}

@@ -170,7 +170,7 @@
 
 	<select id="getCustomerName" parameterType="string"
 		resultType="jp.co.lyc.cms.model.SalesEmployeeModel">
-		SELECT customerNo,customerName FROM T007CustomerInfo;
+		SELECT customerNo,if(customerAbbreviation is null or customerAbbreviation = "",customerName,customerAbbreviation) as customerName FROM T007CustomerInfo;
 	</select>
 
 	<select id="getEmployeeNoSalary" parameterType="string"

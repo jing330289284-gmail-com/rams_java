@@ -147,7 +147,7 @@ public class SalesProfitController extends BaseController {
 					}
 				}
 			}
-			
+
 			// 特別计算ポイント
 			if (siteList.get(i).getStartTime() != null) {
 				if (siteList.get(i).getEndTime() == null) {
@@ -291,6 +291,14 @@ public class SalesProfitController extends BaseController {
 				String employeeName = (siteList.get(i).getEmployeeFristName() == null ? ""
 						: siteList.get(i).getEmployeeFristName())
 						+ (siteList.get(i).getEmployeeLastName() == null ? "" : siteList.get(i).getEmployeeLastName());
+				if (siteList.get(i).getEmployeeNo().substring(0, 2).equals("SP"))
+					employeeName+="(SP)";
+				else if (siteList.get(i).getEmployeeNo().substring(0, 2).equals("SC"))
+					employeeName+="(SC)";
+				else if (siteList.get(i).getEmployeeNo().substring(0, 3).equals("BPR"))
+					employeeName+="(BPR)";
+				else if (siteList.get(i).getEmployeeNo().substring(0, 2).equals("BP"))
+					employeeName+="(BP)";
 				siteList.get(i).setEmployeeName(employeeName);
 
 				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMM");
@@ -320,8 +328,7 @@ public class SalesProfitController extends BaseController {
 						formatter.parseDateTime(workDateStart.substring(0, 4) + "-" + workDateStart.substring(4, 6)),
 						formatter.parseDateTime(workDateEnd.substring(0, 4) + "-" + workDateEnd.substring(4, 6)))
 						.getMonths() + 1;
-				siteList.get(i)
-						.setProfit(Integer.toString(Integer.parseInt(siteList.get(i).getUnitPrice()) * months));
+				siteList.get(i).setProfit(Integer.toString(Integer.parseInt(siteList.get(i).getUnitPrice()) * months));
 				profitAll += Integer.parseInt(siteList.get(i).getUnitPrice()) * months;
 				String startYandM = workDateStart;
 				String endYandM = workDateEnd;
@@ -430,8 +437,7 @@ public class SalesProfitController extends BaseController {
 				if (siteList.get(i).getSiteRoleName() != null)
 					siteList.get(i)
 							.setSiteRoleName(formatString((float) Integer.parseInt(siteList.get(i).getSiteRoleName())));
-				siteList.get(i)
-						.setUnitPrice(formatString((float) Integer.parseInt(siteList.get(i).getUnitPrice())));
+				siteList.get(i).setUnitPrice(formatString((float) Integer.parseInt(siteList.get(i).getUnitPrice())));
 				siteList.get(i).setProfit(formatString((float) Integer.parseInt(siteList.get(i).getProfit())));
 				siteList.get(i).setSalary(formatString((float) Integer.parseInt(siteList.get(i).getSalary())));
 
@@ -511,8 +517,7 @@ public class SalesProfitController extends BaseController {
 						formatter.parseDateTime(workDateStart.substring(0, 4) + "-" + workDateStart.substring(4, 6)),
 						formatter.parseDateTime(workDateEnd.substring(0, 4) + "-" + workDateEnd.substring(4, 6)))
 						.getMonths() + 1;
-				siteList.get(i)
-						.setProfit(Integer.toString(Integer.parseInt(siteList.get(i).getUnitPrice()) * months));
+				siteList.get(i).setProfit(Integer.toString(Integer.parseInt(siteList.get(i).getUnitPrice()) * months));
 				profitAll += Integer.parseInt(siteList.get(i).getUnitPrice()) * months;
 				String startYandM = workDateStart;
 				String endYandM = workDateEnd;
@@ -621,8 +626,7 @@ public class SalesProfitController extends BaseController {
 				if (siteList.get(i).getSiteRoleName() != null)
 					siteList.get(i)
 							.setSiteRoleName(formatString((float) Integer.parseInt(siteList.get(i).getSiteRoleName())));
-				siteList.get(i)
-						.setUnitPrice(formatString((float) Integer.parseInt(siteList.get(i).getUnitPrice())));
+				siteList.get(i).setUnitPrice(formatString((float) Integer.parseInt(siteList.get(i).getUnitPrice())));
 				siteList.get(i).setProfit(formatString((float) Integer.parseInt(siteList.get(i).getProfit())));
 				siteList.get(i).setSalary(formatString((float) Integer.parseInt(siteList.get(i).getSalary())));
 
