@@ -90,7 +90,7 @@ public class CustomerSalesListController {
 					int unitprice = (int) (Double.parseDouble(CustomerSalesListModel.get(i).getUnitPrice()) * percent);
 
 					CustomerSalesListModel.get(i).setUnitPrice(String.valueOf(unitprice));
-
+					CustomerSalesListModel.get(i).setPercent(percent);
 				} else {
 					CustomerSalesListModel.get(i).setDailyCalculationStatus("1");
 				}
@@ -190,7 +190,12 @@ public class CustomerSalesListController {
 											}
 										}
 									}
-									totalCost = totalCost / 10000.0;
+									if (CustomerSalesListModel.get(i).getDailyCalculationStatus() != null
+											&& CustomerSalesListModel.get(i).getDailyCalculationStatus().equals("0")) {
+										totalCost = totalCost * CustomerSalesListModel.get(i).getPercent() / 10000.0;
+									} else {
+										totalCost = totalCost / 10000.0;
+									}
 									DecimalFormat cost = new DecimalFormat("#.#");
 									customerEmpDe.setCost(cost.format(totalCost));
 								}

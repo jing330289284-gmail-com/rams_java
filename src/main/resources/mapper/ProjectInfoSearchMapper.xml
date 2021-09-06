@@ -17,7 +17,7 @@
 		M003.nationalityName,
 		T022.admissionPeriod,
 		M039.admissionMonthName,
-		CONCAT(T022.admissionPeriod,'(',M039.admissionMonthName,')') AS
+		CONCAT(T022.admissionPeriod,if(T022.admissionMonthCode is null || T022.admissionMonthCode = "","",CONCAT('(',M039.admissionMonthName,')'))) AS
 		admissionPeriodReset,
 		T022.projectType,
 		M037.projectTypeName,
@@ -38,7 +38,7 @@
 		M011c.developLanguageName AS keyWordOfLanagurueName3,
 		T022.projectInfoDetail,
 		T022.japaneaseConversationLevel,
-		M025.japaneaseConversationLevelName,
+		if(T022.japaneaseConversationLevel is null || T022.japaneaseConversationLevel = "","",M025.japaneaseConversationLevelName) as japaneaseConversationName,
 		T022.unitPriceRangeLowest,
 		T022.unitPriceRangeHighest,
 		T022.ageClassificationCode,
@@ -86,8 +86,6 @@
 		ON
 		T022.japaneaseConversationLevel =
 		M025.japaneaseConversationLevelCode
-		AND T022.japaneaseConversationLevel
-		!= ""
 		LEFT JOIN M027ProjectPhase AS M027s ON T022.projectPhaseStart =
 		M027s.projectPhaseCode
 		AND T022.projectPhaseStart != ""

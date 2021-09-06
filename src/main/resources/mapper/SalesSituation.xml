@@ -162,6 +162,7 @@
 		"" or T019SalesSentence.unitPrice is
 		null,T006EmployeeSiteInfo.unitPrice,T019SalesSentence.unitPrice) as
 		unitPrice,
+		T011.bpUnitPrice,
 		ifnull(T006EmployeeSiteInfo.customerNo, '') AS customer,
 		T006EmployeeSiteInfo.customerNo as nowCustomer,
 		CONCAT(T001Employee.employeeFristName,T001Employee.employeeLastName)
@@ -199,6 +200,15 @@
 		T006EmployeeSiteInfo.employeeNo
 		=
 		T001Employee.employeeNo
+		LEFT JOIN 
+		(SELECT T011.* FROM T011BpInfoSupplement as T011
+		inner join 
+		(SELECT bpEmployeeNo,max(unitPriceStartMonth) as unitPriceStartMonth FROM T011BpInfoSupplement
+		group by bpEmployeeNo) as temp
+		on T011.bpEmployeeNo = temp.bpEmployeeNo
+		and T011.unitPriceStartMonth = temp.unitPriceStartMonth)
+		AS T011
+		on T011.bpEmployeeNo = T006EmployeeSiteInfo.employeeNo
 		LEFT JOIN
 		T003AddressInfo AS
 		T003AddressInfo
@@ -260,7 +270,8 @@
 		M013Station.stationName AS nearestStation,
 		if(T019SalesSentence.unitPrice = "" or T019SalesSentence.unitPrice is
 		null,T011BpInfoSupplement.bpUnitPrice,T019SalesSentence.unitPrice) as
-		unitPrice
+		unitPrice,
+		T011BpInfoSupplement.bpUnitPrice
 		FROM T002EmployeeDetail as
 		T002EmployeeDetail
 		Left Join
@@ -1335,6 +1346,12 @@
 		'nearestStation',
 		t002.japaneseLevelCode,
 		t002.englishLevelCode,
+		t002.developLanguage1,
+		t002.developLanguage2,
+		t002.developLanguage3,
+		t002.developLanguage4,
+		t002.frameWork1,
+		t002.frameWork2,
 		"" as
 		japaneaseConversationLevel,
 		"" as

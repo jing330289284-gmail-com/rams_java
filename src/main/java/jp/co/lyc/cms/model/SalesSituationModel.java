@@ -87,6 +87,8 @@ public class SalesSituationModel implements Serializable {
 	String developLanguage4;
 	String developLanguage5;
 	String developLanguage6;
+	String frameWork1;
+	String frameWork2;
 
 	String confirmPrice;
 	String confirmCustomer;
@@ -103,6 +105,32 @@ public class SalesSituationModel implements Serializable {
 	String interviewUrl1;
 	String interviewUrl2;
 	String interviewInfoNum;
+
+	String bpUnitPrice;
+
+	public String getBpUnitPrice() {
+		return bpUnitPrice;
+	}
+
+	public void setBpUnitPrice(String bpUnitPrice) {
+		this.bpUnitPrice = bpUnitPrice;
+	}
+
+	public String getFrameWork1() {
+		return frameWork1;
+	}
+
+	public void setFrameWork1(String frameWork1) {
+		this.frameWork1 = frameWork1;
+	}
+
+	public String getFrameWork2() {
+		return frameWork2;
+	}
+
+	public void setFrameWork2(String frameWork2) {
+		this.frameWork2 = frameWork2;
+	}
 
 	public String getInterviewInfoNum() {
 		return interviewInfoNum;

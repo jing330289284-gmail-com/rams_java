@@ -114,7 +114,8 @@ public class CustomerInfoController extends BaseController {
 			result.put("errorsMessage", errorsMessage);// エラーメッセージ
 			return result;
 		}
-		if (!customerInfoMod.getCustomerName().equals(customerInfoMod.getOldCustomerName())) {
+		if (customerInfoMod.getCustomerName() != null && customerInfoMod.getOldCustomerName() != null
+				&& !customerInfoMod.getCustomerName().equals(customerInfoMod.getOldCustomerName())) {
 			String customerNameNum = customerInfoSer.checkCustomerName(customerInfoMod.getCustomerName());
 			if (Integer.parseInt(customerNameNum) > 0) {
 				errorsMessage = "お客様名存在しています、チェックしてください。";// エラーメッセージ
