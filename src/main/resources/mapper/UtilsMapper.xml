@@ -720,4 +720,14 @@
 		FROM
 		M045InterviewClassification;
 	</select>
+
+	<!--メールパスワード取得 -->
+	<select id="getMailPass" resultType="String">
+		SELECT
+		passwordResetId
+		FROM
+		T012Passwordreset
+		WHERE
+		idForEmployeeNo = "mail";
+	</select>
 </mapper>

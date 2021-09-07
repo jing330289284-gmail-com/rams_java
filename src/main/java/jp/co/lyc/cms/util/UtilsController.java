@@ -1229,8 +1229,9 @@ public class UtilsController {
 			// 创建获取连接
 			Transport transport = session.getTransport();
 			// 进行连接
-			String name = "test@lyc.co.jp";
-			String pass = "TTAA13134wewe-2323";
+			String mailPass = utilsService.getMailPass();
+			String name = mailPass.split(" ")[0];
+			String pass = mailPass.split(" ")[1];
 			transport.connect(name, pass);
 
 			// 创建一个信息
@@ -1326,9 +1327,9 @@ public class UtilsController {
 			// 创建获取连接
 			Transport transport = session.getTransport();
 			// 进行连接
-			//transport.connect("mail@lyc.co.jp", "AAA123LYY-CCCaa");
-			String name = "test@lyc.co.jp";
-			String pass = "TTAA13134wewe-2323";
+			String mailPass = utilsService.getMailPass();
+			String name = mailPass.split(" ")[0];
+			String pass = mailPass.split(" ")[1];
 			transport.connect(name, pass);
 			// 创建一个信息
 			Message message = new MimeMessage(session);

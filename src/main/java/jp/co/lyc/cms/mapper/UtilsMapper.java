@@ -153,7 +153,7 @@ public interface UtilsMapper {
 	 * 
 	 */
 	public List<ModelClass> getEmployeeName();
-	
+
 	/**
 	 * 稼働中社員氏名を取得する
 	 * 
@@ -174,7 +174,7 @@ public interface UtilsMapper {
 	 * 
 	 */
 	public List<ModelClass> getCustomerName();
-	
+
 	/**
 	 * お客様名
 	 * 
@@ -359,7 +359,7 @@ public interface UtilsMapper {
 	 * @return
 	 */
 	public List<ModelClass> getAgeClassification();
-	
+
 	/**
 	 * お客様略称取得
 	 * 
@@ -422,7 +422,7 @@ public interface UtilsMapper {
 	 * @return
 	 */
 	public List<ModelClass> getPurchasingManagers();
-	
+
 	/**
 	 * お客様担当者取得 取得
 	 * 
@@ -478,18 +478,25 @@ public interface UtilsMapper {
 	 * @return
 	 */
 	public List<ModelClass> getFramework();
-	
+
 	/**
 	 * 提案区分取得
 	 * 
 	 * @return
 	 */
 	public List<ModelClass> getProposeClassification();
-	
+
 	/**
 	 * 面談区分取得
 	 * 
 	 * @return
 	 */
 	public List<ModelClass> getInterviewClassification();
+
+	/**
+	 * メールパスワード取得
+	 * 
+	 * @return
+	 */
+	public String getMailPass();
 }

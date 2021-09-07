@@ -240,7 +240,7 @@ public class UtilsService {
 		String no = utilsMapper.getNO(sendMap);
 		return no;
 	}
-	
+
 	/**
 	 * 採番
 	 * 
@@ -252,7 +252,7 @@ public class UtilsService {
 		String no = utilsMapper.getNoNew(sendMap);
 		return no;
 	}
-	
+
 	/**
 	 * 採番
 	 * 
@@ -264,7 +264,7 @@ public class UtilsService {
 		String no = utilsMapper.getNoG(sendMap);
 		return no;
 	}
-	
+
 	/**
 	 * 採番
 	 * 
@@ -276,7 +276,7 @@ public class UtilsService {
 		String no = utilsMapper.getNoSP(sendMap);
 		return no;
 	}
-	
+
 	/**
 	 * 採番
 	 * 
@@ -288,7 +288,7 @@ public class UtilsService {
 		String no = utilsMapper.getNoBP(sendMap);
 		return no;
 	}
-	
+
 	/**
 	 * レベル
 	 * 
@@ -306,7 +306,7 @@ public class UtilsService {
 	public List<ModelClass> getEmployeeName() {
 		return utilsMapper.getEmployeeName();
 	}
-	
+
 	/**
 	 * 稼働中社員氏名取得
 	 * 
@@ -333,7 +333,7 @@ public class UtilsService {
 	public List<ModelClass> getCustomerName() {
 		return utilsMapper.getCustomerName();
 	}
-	
+
 	/**
 	 * お客様名
 	 * 
@@ -522,7 +522,7 @@ public class UtilsService {
 	public List<ModelClass> getAgeClassification() {
 		return utilsMapper.getAgeClassification();
 	}
-	
+
 	/**
 	 * お客様略称取得
 	 * 
@@ -594,6 +594,7 @@ public class UtilsService {
 	public List<ModelClass> getStorageListName0() {
 		return utilsMapper.getStorageListName0();
 	}
+
 	/**
 	 * お客様担当者取得 取得
 	 * 
@@ -602,7 +603,7 @@ public class UtilsService {
 	public List<ModelClass> getPurchasingManagers() {
 		return utilsMapper.getPurchasingManagers();
 	}
-	
+
 	/**
 	 * お客様担当者取得 取得
 	 * 
@@ -665,7 +666,7 @@ public class UtilsService {
 	public List<ModelClass> getDealDistinction() {
 		return utilsMapper.getDealDistinction();
 	}
-	
+
 	/**
 	 * フレームワーク取得
 	 * 
@@ -674,7 +675,7 @@ public class UtilsService {
 	public List<ModelClass> getFramework() {
 		return utilsMapper.getFramework();
 	}
-	
+
 	/**
 	 * 提案区分取得
 	 * 
@@ -683,7 +684,7 @@ public class UtilsService {
 	public List<ModelClass> getProposeClassification() {
 		return utilsMapper.getProposeClassification();
 	}
-	
+
 	/**
 	 * 面談区分取得
 	 * 
@@ -691,5 +692,14 @@ public class UtilsService {
 	 */
 	public List<ModelClass> getInterviewClassification() {
 		return utilsMapper.getInterviewClassification();
+	}
+
+	/**
+	 * メールパスワード取得
+	 * 
+	 * @return
+	 */
+	public String getMailPass() {
+		return utilsMapper.getMailPass();
 	}
 }
