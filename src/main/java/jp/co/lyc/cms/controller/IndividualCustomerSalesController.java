@@ -346,8 +346,16 @@ public class IndividualCustomerSalesController {
 
 								if (CustomerSalesModelList.get(b).getBpUnitPrice() != null
 										&& !CustomerSalesModelList.get(b).getBpUnitPrice().equals("")) {
-									customerEmpDe.setCost(String
-											.valueOf(Integer.parseInt(CustomerSalesModelList.get(b).getBpUnitPrice())));
+									if (CustomerSalesModelList.get(b).getDailyCalculationStatus() != null
+											&& CustomerSalesModelList.get(b).getDailyCalculationStatus().equals("0")) {
+										Double cost = Double.parseDouble(CustomerSalesModelList.get(b).getBpUnitPrice())
+												* CustomerSalesModelList.get(b).getPercent();
+										DecimalFormat costFormat = new DecimalFormat("#.#");
+										customerEmpDe.setCost(costFormat.format(cost));
+									} else {
+										customerEmpDe.setCost(String.valueOf(
+												Integer.parseInt(CustomerSalesModelList.get(b).getBpUnitPrice())));
+									}
 								}
 								for (int i = 0; i < CustomerSalesModelListTwice.size(); i++) {
 									if (CustomerSalesModelListTwice.get(i).getEmployeeNo()

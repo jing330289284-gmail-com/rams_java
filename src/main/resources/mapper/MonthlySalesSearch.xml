@@ -215,10 +215,11 @@
 			T002.employeeStatus,
 			if(T002.employeeFormCode is null || T002.employeeFormCode = "","",M005.employeeFormName) as employeeFormName,
 			M014.occupationName,
-			left(T006.admissionStartDate,6) as admissionStartDate,
+			T006.admissionStartDate as admissionStartDate,
 			left(T006.admissionEndDate,6) as admissionEndDate,
 			CAST((T006.unitPrice) As unsigned) as unitPrice,
 			CAST((T011.bpUnitPrice*10000) As unsigned) as salary,
+			T006.dailyCalculationStatus,
 			ifnull(T006.unitPrice,0) - ifnull(T011.bpUnitPrice,0)*10000 as monthlyGrosProfits,
 			T007.customerName as bpBelongCustomer
 			FROM T006EmployeeSiteInfo as T006

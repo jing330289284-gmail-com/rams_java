@@ -158,7 +158,16 @@ public class CustomerSalesListController {
 							for (int i = 0; i < CustomerSalesListModel.size(); i++) {
 								if (CustomerSalesListModel.get(i).getEmployeeNo()
 										.equals(MonthData.get(n).getEmployeeNo())) {
-									customerEmpDe.setCost(CustomerSalesListModel.get(i).getBpUnitPrice());
+									if (CustomerSalesListModel.get(i).getDailyCalculationStatus() != null
+											&& CustomerSalesListModel.get(i).getDailyCalculationStatus().equals("0")) {
+										Double totalCost = Double
+												.parseDouble(CustomerSalesListModel.get(i).getBpUnitPrice())
+												* CustomerSalesListModel.get(i).getPercent();
+										DecimalFormat cost = new DecimalFormat("#.#");
+										customerEmpDe.setCost(cost.format(totalCost));
+									} else {
+										customerEmpDe.setCost(CustomerSalesListModel.get(i).getBpUnitPrice());
+									}
 								}
 							}
 						} else {
@@ -344,7 +353,7 @@ public class CustomerSalesListController {
 				List<CustomerEmployeeDetail> temp = resultData.get(i).getEmpDetail();
 				if (temp.get(j).getEmployeeNo().substring(0, 2).equals("BP")) {
 					totalAmount += temp.get(j).getCost() == null || temp.get(j).getCost().equals("") ? 0
-							: (Integer.parseInt(temp.get(j).getCost()) * 10000);
+							: (Float.parseFloat(temp.get(j).getCost()) * 10000);
 				}
 			}
 			resultData.get(i).setTotalAmount(String.valueOf(totalAmount));

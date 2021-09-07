@@ -218,6 +218,43 @@ public class MonthlySalesSearchController {
 				List<MonthlySalesSearchModel> bpMonthlySalesModelList = new ArrayList<MonthlySalesSearchModel>();
 				bpMonthlySalesModelList = MonthlySalesSearchService.searchBpMonthlySales(sendMap);
 				for (int i = 0; i < bpMonthlySalesModelList.size(); i++) {
+					// 日割り判断
+					if (bpMonthlySalesModelList.get(i).getDailyCalculationStatus() != null
+							&& bpMonthlySalesModelList.get(i).getDailyCalculationStatus().equals("0")) {
+						// 入場月判断
+						if (bpMonthlySalesModelList.get(i).getAdmissionStartDate() != null
+								&& bpMonthlySalesModelList.get(i).getAdmissionStartDate().substring(0, 6)
+										.equals(bpMonthlySalesModelList.get(i).getYearAndMonth())) {
+							// 日割り計算
+							SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+							String workMonth = bpMonthlySalesModelList.get(i).getAdmissionStartDate().substring(0, 6);
+							Date startDate = sdf.parse(workMonth + "00");
+							Date endDate = sdf.parse(workMonth + "31");
+							Calendar calendarStart = Calendar.getInstance();
+							Calendar calendarEnd = Calendar.getInstance();
+							calendarStart.setTime(startDate);
+							calendarEnd.setTime(endDate);
+							int monthAlldays = countDays(calendarStart, calendarEnd);
+
+							startDate = sdf.parse(String.valueOf(
+									Integer.parseInt(bpMonthlySalesModelList.get(i).getAdmissionStartDate()) - 1));
+							endDate = sdf.parse(workMonth + "31");
+							calendarStart = Calendar.getInstance();
+							calendarEnd = Calendar.getInstance();
+							calendarStart.setTime(startDate);
+							calendarEnd.setTime(endDate);
+							int workdays = countDays(calendarStart, calendarEnd);
+							double percent = (double) workdays / (double) monthAlldays;
+
+							int unitprice = (int) (Double.parseDouble(bpMonthlySalesModelList.get(i).getUnitPrice())
+									* percent);
+							int cost = (int) (Double.parseDouble(bpMonthlySalesModelList.get(i).getSalary()) * percent);
+							bpMonthlySalesModelList.get(i).setUnitPrice(String.valueOf(unitprice));
+							bpMonthlySalesModelList.get(i).setSalary(String.valueOf(cost));
+						} else {
+							bpMonthlySalesModelList.get(i).setDailyCalculationStatus("1");
+						}
+					}
 					MonthlySalesModelList.add(bpMonthlySalesModelList.get(i));
 				}
 			}
@@ -242,6 +279,7 @@ public class MonthlySalesSearchController {
 				return resultdata;
 			}
 		}
+
 	}
 
 	public Map<String, Object> getDetailParam(MonthlySalesSearchModel monthlyInfo) {
