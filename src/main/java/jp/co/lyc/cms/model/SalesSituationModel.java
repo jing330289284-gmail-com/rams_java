@@ -107,6 +107,15 @@ public class SalesSituationModel implements Serializable {
 	String interviewInfoNum;
 
 	String bpUnitPrice;
+	String bpOtherCompanyAdmissionEndDate;
+
+	public String getBpOtherCompanyAdmissionEndDate() {
+		return bpOtherCompanyAdmissionEndDate;
+	}
+
+	public void setBpOtherCompanyAdmissionEndDate(String bpOtherCompanyAdmissionEndDate) {
+		this.bpOtherCompanyAdmissionEndDate = bpOtherCompanyAdmissionEndDate;
+	}
 
 	public String getBpUnitPrice() {
 		return bpUnitPrice;

@@ -271,6 +271,7 @@
 		if(T019SalesSentence.unitPrice = "" or T019SalesSentence.unitPrice is
 		null,T011BpInfoSupplement.bpUnitPrice,T019SalesSentence.unitPrice) as
 		unitPrice,
+		T011BpInfoSupplement.bpOtherCompanyAdmissionEndDate,
 		T011BpInfoSupplement.bpUnitPrice
 		FROM T002EmployeeDetail as
 		T002EmployeeDetail
@@ -1363,6 +1364,7 @@
 		t015.resumeInfo2,
 		t015.resumeName1,
 		t015.resumeName2,
+		t011.bpOtherCompanyAdmissionEndDate,
 		CONCAT_WS(',',
 
 		IF(ISNULL(t002.developLanguage1) or
@@ -1443,6 +1445,8 @@
 		JOIN
 		T010SalesSituation t010 ON
 		t001.employeeNo = t010.employeeNo
+		LEFT JOIN T011BpInfoSupplement t011
+		ON t001.employeeNo = t011.bpEmployeeNo
 		WHERE
 		t001.employeeNo =#{employeeNo}
 	</select>
@@ -1492,7 +1496,8 @@
 		t010.remark2,
 		t010.salesYearAndMonth,
 		t010.salesProgressCode,
-		t019.theMonthOfStartWork
+		t019.theMonthOfStartWork,
+		t011.bpOtherCompanyAdmissionEndDate
 		FROM
 		T001Employee t001
 		LEFT JOIN
@@ -1518,6 +1523,8 @@
 		LEFT JOIN
 		M027ProjectPhase M027 ON
 		M027.projectPhaseCode = t019.projectPhaseCode
+		LEFT JOIN T011BpInfoSupplement t011
+		ON t001.employeeNo = t011.bpEmployeeNo
 		WHERE
 		t001.employeeNo
 		=#{employeeNo}
