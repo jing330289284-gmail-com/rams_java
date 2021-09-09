@@ -105,13 +105,16 @@
 		ON
 		T006EmployeeSiteInfo.employeeNo=T011BpInfoSupplement.bpEmployeeNo
 		where
-		T006EmployeeSiteInfo.admissionEndDate <![CDATA[ > ]]>
+		T006EmployeeSiteInfo.admissionStartDate <![CDATA[ > ]]>
 		#{startDate}
 		AND
-		T006EmployeeSiteInfo.admissionEndDate  <![CDATA[ < ]]>
+		(T006EmployeeSiteInfo.admissionEndDate  <![CDATA[ < ]]>
 		#{endDate}
-		<!-- or isnull(admissionEndDate) -->
-		and employeeStatus =
+		OR
+		T006EmployeeSiteInfo.admissionEndDate is null
+		)
+		and
+		employeeStatus =
 		ifnull(#{intoCompanyCode},employeeStatus)
 		ORDER BY
 		T006EmployeeSiteInfo.admissionStartDate
@@ -170,7 +173,9 @@
 
 	<select id="getCustomerName" parameterType="string"
 		resultType="jp.co.lyc.cms.model.SalesEmployeeModel">
-		SELECT customerNo,if(customerAbbreviation is null or customerAbbreviation = "",customerName,customerAbbreviation) as customerName FROM T007CustomerInfo;
+		SELECT customerNo,if(customerAbbreviation is null or
+		customerAbbreviation = "",customerName,customerAbbreviation) as
+		customerName FROM T007CustomerInfo;
 	</select>
 
 	<select id="getEmployeeNoSalary" parameterType="string"
