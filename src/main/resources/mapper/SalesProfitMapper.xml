@@ -100,7 +100,8 @@
 		and
 		T010SalesSituation.salesYearAndMonth =
 		left(T006EmployeeSiteInfo.admissionStartDate,6)
-		LEFT JOIN
+		LEFT
+		JOIN
 		T011BpInfoSupplement
 		ON
 		T006EmployeeSiteInfo.employeeNo=T011BpInfoSupplement.bpEmployeeNo
@@ -108,10 +109,12 @@
 		T006EmployeeSiteInfo.admissionStartDate <![CDATA[ > ]]>
 		#{startDate}
 		AND
-		(T006EmployeeSiteInfo.admissionEndDate  <![CDATA[ < ]]>
+		(T006EmployeeSiteInfo.admissionStartDate  <![CDATA[ < ]]>
 		#{endDate}
 		OR
-		T006EmployeeSiteInfo.admissionEndDate is null
+		(T006EmployeeSiteInfo.admissionStartDate <![CDATA[ < ]]>
+		#{endDate}
+		and T006EmployeeSiteInfo.admissionEndDate is null)
 		)
 		and
 		employeeStatus =

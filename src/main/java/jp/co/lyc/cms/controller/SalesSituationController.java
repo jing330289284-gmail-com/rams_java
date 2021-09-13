@@ -626,13 +626,15 @@ public class SalesSituationController extends BaseController {
 
 	// 社員営業され日付
 	private String getSalesDate(String getSalesYearAndMonth) {
-		String salesDate = "";
-//		if(getSalesYearAndMonth.substring(4) == DECEMBER) {
-		if (DECEMBER.equals(getSalesYearAndMonth.substring(4))) {
-			salesDate = String.valueOf(Integer.valueOf(getSalesYearAndMonth.substring(0, 4)) + 1) + JANUARY;
-		} else {
-			salesDate = String.valueOf(Integer.valueOf(getSalesYearAndMonth) + 1);
-		}
+		String salesDate = getSalesYearAndMonth;
+
+		// 仕様変更
+		/*
+		 * if (DECEMBER.equals(getSalesYearAndMonth.substring(4))) { salesDate =
+		 * String.valueOf(Integer.valueOf(getSalesYearAndMonth.substring(0, 4)) + 1) +
+		 * JANUARY; } else { salesDate =
+		 * String.valueOf(Integer.valueOf(getSalesYearAndMonth) + 1); }
+		 */
 		return salesDate;
 	}
 
@@ -1065,11 +1067,13 @@ public class SalesSituationController extends BaseController {
 
 			// 社員営業され日付
 			String salesDate = getSalesDate(model.getAdmissionEndDate());
-			if (DECEMBER.equals(model.getAdmissionEndDate().substring(4, 6))) {
-				salesDate = String.valueOf(Integer.valueOf(model.getAdmissionEndDate().substring(0, 4)) + 1) + JANUARY;
-			} else {
-				salesDate = String.valueOf(Integer.valueOf(model.getAdmissionEndDate().substring(0, 6)) + 1);
-			}
+			/*
+			 * if (DECEMBER.equals(model.getAdmissionEndDate().substring(4, 6))) { salesDate
+			 * = String.valueOf(Integer.valueOf(model.getAdmissionEndDate().substring(0, 4))
+			 * + 1) + JANUARY; } else { salesDate =
+			 * String.valueOf(Integer.valueOf(model.getAdmissionEndDate().substring(0, 6)) +
+			 * 1); }
+			 */
 
 			model.setSalesYearAndMonth(salesDate);
 
