@@ -285,20 +285,18 @@ public class SalesProfitController extends BaseController {
 				 */
 				yearAndMonth = yearAndMonth.substring(0, 4) + "/" + yearAndMonth.substring(4, 6);
 				siteList.get(i).setYearAndMonth(yearAndMonth);
-				siteList.get(i).setCustomerName(
-						siteList.get(i).getCustomerAbbreviation() == null ? siteList.get(i).getCustomerName()
-								: siteList.get(i).getCustomerAbbreviation());
+				siteList.get(i)
+						.setCustomerName(siteList.get(i).getCustomerAbbreviation() == null
+								|| siteList.get(i).getCustomerAbbreviation().equals("")
+										? siteList.get(i).getCustomerName()
+										: siteList.get(i).getCustomerAbbreviation());
 				String employeeName = (siteList.get(i).getEmployeeFristName() == null ? ""
 						: siteList.get(i).getEmployeeFristName())
 						+ (siteList.get(i).getEmployeeLastName() == null ? "" : siteList.get(i).getEmployeeLastName());
 				if (siteList.get(i).getEmployeeNo().substring(0, 2).equals("SP"))
-					employeeName+="(SP)";
+					employeeName += "(SP)";
 				else if (siteList.get(i).getEmployeeNo().substring(0, 2).equals("SC"))
-					employeeName+="(SC)";
-				else if (siteList.get(i).getEmployeeNo().substring(0, 3).equals("BPR"))
-					employeeName+="(BPR)";
-				else if (siteList.get(i).getEmployeeNo().substring(0, 2).equals("BP"))
-					employeeName+="(BP)";
+					employeeName += "(SC)";
 				siteList.get(i).setEmployeeName(employeeName);
 
 				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMM");
@@ -316,10 +314,17 @@ public class SalesProfitController extends BaseController {
 
 				if (workDateEnd.equals(""))
 					siteList.get(i)
-							.setWorkDate(workDateStart.substring(0, 4) + "/" + workDateStart.substring(4, 6) + " ~ ");
+							.setWorkDate(siteList.get(i).getAdmissionStartDate().substring(0, 4) + "/"
+									+ siteList.get(i).getAdmissionStartDate().substring(4, 6) + "/"
+									+ siteList.get(i).getAdmissionStartDate().substring(6, 8) + " ~ ");
 				else
-					siteList.get(i).setWorkDate(workDateStart.substring(0, 4) + "/" + workDateStart.substring(4, 6)
-							+ " ~ " + workDateEnd.substring(0, 4) + "/" + workDateEnd.substring(4, 6));
+					siteList.get(i)
+							.setWorkDate(siteList.get(i).getAdmissionStartDate().substring(0, 4) + "/"
+									+ siteList.get(i).getAdmissionStartDate().substring(4, 6) + "/"
+									+ siteList.get(i).getAdmissionStartDate().substring(6, 8) + " ~ "
+									+ siteList.get(i).getAdmissionEndDate().substring(0, 4) + "/"
+									+ siteList.get(i).getAdmissionEndDate().substring(4, 6) + "/"
+									+ siteList.get(i).getAdmissionEndDate().substring(6, 8));
 
 				if (workDateEnd.equals(""))
 					workDateEnd = endTime;
@@ -329,6 +334,7 @@ public class SalesProfitController extends BaseController {
 						formatter.parseDateTime(workDateEnd.substring(0, 4) + "-" + workDateEnd.substring(4, 6)))
 						.getMonths() + 1;
 				siteList.get(i).setProfit(Integer.toString(Integer.parseInt(siteList.get(i).getUnitPrice()) * months));
+				siteList.get(i).setMonth(months);
 				profitAll += Integer.parseInt(siteList.get(i).getUnitPrice()) * months;
 				String startYandM = workDateStart;
 				String endYandM = workDateEnd;

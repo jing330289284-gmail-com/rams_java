@@ -27,6 +27,7 @@ public class SalesInfoModel {
 	String yearAndMonth; // 年月
 	String workDate; // 入場期間
 	String profit; // 売上
+	int month; // 月数
 	String siteRoleName; // 粗利
 	String bpBelongCustomerCode; // 所属会社
 	String profitAll; // 売上合計
@@ -48,6 +49,14 @@ public class SalesInfoModel {
 	String salesProgressCode;
 	Date startDate;// 現場開始時間
 	Date endDate;// 現場終了時間
+
+	public int getMonth() {
+		return month;
+	}
+
+	public void setMonth(int month) {
+		this.month = month;
+	}
 
 	public String getPointAll() {
 		return pointAll;

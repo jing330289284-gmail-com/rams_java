@@ -98,8 +98,16 @@
 		ON
 		T006EmployeeSiteInfo.employeeNo=T010SalesSituation.employeeNo
 		and
-		T010SalesSituation.salesYearAndMonth =
+		(
+		(T010SalesSituation.salesYearAndMonth =
 		left(T006EmployeeSiteInfo.admissionStartDate,6)
+		and T010SalesSituation.confirmCustomer = T006EmployeeSiteInfo.customerNo
+		)
+		OR
+		(T010SalesSituation.salesYearAndMonth - 1 =
+		left(T006EmployeeSiteInfo.admissionStartDate,6))
+		and T010SalesSituation.confirmCustomer = T006EmployeeSiteInfo.customerNo
+		)
 		LEFT
 		JOIN
 		T011BpInfoSupplement
