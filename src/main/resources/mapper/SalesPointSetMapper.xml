@@ -8,15 +8,14 @@
 		<if test="newMember != null">
 			and intoCompanyCode = #{newMember}
 		</if>
-		and customerContractStatus = #{customerContract} and levelCode =
-		#{level} and salesProgressCode = #{salesPuttern};
+		and customerContractStatus = #{customerContract} and bpGrossProfit = #{bpGrossProfit};
 	</select>
 
 	<insert id="salesPointInsert" parameterType="map">
 		insert into
 		T014SalesPointInfo(id,employeeStatus,intoCompanyCode,customerContractStatus,levelCode,
-		salesProgressCode,specialPointConditionCode,salesPoint,specialsalesPoint,remark,updateTime,createTime,updateUser)
-		values(#{no},#{employee},#{newMember},#{customerContract},#{level},#{salesPuttern},
+		bpGrossProfit,specialPointConditionCode,salesPoint,specialsalesPoint,remark,updateTime,createTime,updateUser)
+		values(#{no},#{employee},#{newMember},#{customerContract},#{level},#{bpGrossProfit},
 		#{specialPoint},#{point},#{specialPointNo},#{remark},now(),now(),#{updateUser})
 	</insert>
 
@@ -25,7 +24,7 @@
 		T014SalesPointInfo
 		set
 		employeeStatus=#{employee},intoCompanyCode=#{newMember},customerContractStatus=#{customerContract},
-		levelCode=#{level},salesProgressCode=#{salesPuttern},specialPointConditionCode=#{specialPoint},
+		levelCode=#{level},bpGrossProfit=#{bpGrossProfit},specialPointConditionCode=#{specialPoint},
 		salesPoint=#{point},specialsalesPoint=#{specialPointNo},remark=#{remark},updateTime=now(),updateUser=#{updateUser}
 		where id=#{no}
 	</update>
@@ -48,7 +47,7 @@
 		SELECT id as no,employeeStatus as employee,intoCompanyCode as
 		newMember,customerContractStatus as customerContract,
 		levelCode as
-		level,salesProgressCode as salesPuttern,specialPointConditionCode
+		level,bpGrossProfit as bpGrossProfit,specialPointConditionCode
 		as
 		specialPoint,salesPoint as point,specialsalesPoint as
 		specialPointNo,remark FROM

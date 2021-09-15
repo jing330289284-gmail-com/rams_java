@@ -38,6 +38,16 @@ public class UtilsService {
 	}
 
 	/**
+	 * BP粗利
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getBpGrossProfit() {
+		List<ModelClass> list = utilsMapper.getBpGrossProfit();
+		return list;
+	}
+
+	/**
 	 * 国籍を取得
 	 * 
 	 * @return

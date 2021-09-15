@@ -32,6 +32,13 @@ public interface UtilsMapper {
 	public List<ModelClass> getSpecialPoint();
 
 	/**
+	 * BP粗利
+	 * 
+	 * 
+	 */
+	public List<ModelClass> getBpGrossProfit();
+
+	/**
 	 * お客様を取得
 	 * 
 	 * 

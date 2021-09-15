@@ -25,6 +25,16 @@
 		M023SpecialPointCondition;
 	</select>
 
+	<!-- BP粗利 -->
+	<select id="getBpGrossProfit"
+		resultType="jp.co.lyc.cms.model.ModelClass">
+		SELECT bpGrossProfitCode
+		code,bpGrossProfitName name,bpGrossProfitCode
+		value,bpGrossProfitName text FROM
+		M046BpGrossProfit;
+	</select>
+
+
 	<!-- 社員名 -->
 	<select id="getEmployeeName"
 		resultType="jp.co.lyc.cms.model.ModelClass">

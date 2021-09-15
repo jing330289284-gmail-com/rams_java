@@ -11,7 +11,7 @@ public class SalesPointModel {
 	String intoCompanyCode; // 新人区分
 	String customerContractStatus; // 契約区分
 	String levelCode; // お客様レベル
-	String salesProgressCode; // 営業結果パタンー
+	String bpGrossProfit; // 営業結果パタンー
 	String salesPoint; // ポイント
 	String specialPointConditionCode; // 特別ポイント条件
 	String specialsalesPoint; // 特別ポイント
@@ -48,12 +48,12 @@ public class SalesPointModel {
 		this.levelCode = levelCode;
 	}
 
-	public String getSalesProgressCode() {
-		return salesProgressCode;
+	public String getBpGrossProfit() {
+		return bpGrossProfit;
 	}
 
-	public void setSalesProgressCode(String salesProgressCode) {
-		this.salesProgressCode = salesProgressCode;
+	public void setBpGrossProfit(String bpGrossProfit) {
+		this.bpGrossProfit = bpGrossProfit;
 	}
 
 	public String getSalesPoint() {

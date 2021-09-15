@@ -128,6 +128,18 @@ public class UtilsController {
 	}
 
 	/**
+	 * BP粗利
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getBpGrossProfit", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getBpGrossProfit() {
+		List<ModelClass> list = utilsService.getBpGrossProfit();
+		return list;
+	}
+
+	/**
 	 * 契約区分
 	 * 
 	 * @return

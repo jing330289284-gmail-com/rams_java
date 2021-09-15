@@ -39,6 +39,47 @@ public class SalesProfitController extends BaseController {
 
 	String errorsMessage = "";
 
+	@RequestMapping(value = "/getPointInfoNew", method = RequestMethod.POST)
+	@ResponseBody
+	public List<SalesInfoModel> getPointInfoNew(@RequestBody SalesProfitModel salesProfitModel) throws ParseException {
+
+		if (salesProfitModel.getEmployeeName() == null) {
+			return new ArrayList<SalesInfoModel>();
+		}
+
+		List<SalesInfoModel> siteList = salesProfitService.getSalesInfo(salesProfitModel);
+		List<SalesEmployeeModel> customerName = salesProfitService.getCustomerName();
+
+		for (int i = 0; i < siteList.size(); i++) {
+			// 氏名
+			if (siteList.get(i).getEmployeeNo().substring(0, 2).equals("BP")) {
+				String bpCustomerName = "";
+				for (int j = 0; j < customerName.size(); j++) {
+					if (siteList.get(i).getBpBelongCustomerCode() != null
+							&& siteList.get(i).getBpBelongCustomerCode().equals(customerName.get(j).getCustomerNo())) {
+						bpCustomerName = "(" + customerName.get(j).getCustomerName() + ")";
+						break;
+					}
+				}
+				siteList.get(i).setEmployeeName(siteList.get(i).getEmployeeFristName()
+						+ siteList.get(i).getEmployeeLastName() + bpCustomerName);
+			} else {
+				siteList.get(i).setEmployeeName(
+						siteList.get(i).getEmployeeFristName() + siteList.get(i).getEmployeeLastName());
+			}
+
+			// 年月
+			siteList.get(i).setYearAndMonth(siteList.get(i).getAdmissionStartDate().substring(0, 4) + "/"
+					+ siteList.get(i).getAdmissionStartDate().substring(4, 6));
+
+			// 番号
+			siteList.get(i).setRowNo(String.valueOf(i + 1));
+		}
+
+		logger.info("SalesProfitController.getSalesPointInfo:" + "検索結束");
+		return siteList;
+	}
+
 	@RequestMapping(value = "/getPointInfo", method = RequestMethod.POST)
 	@ResponseBody
 	public List<SalesInfoModel> getPointInfo(@RequestBody SalesProfitModel salesProfitModel) throws ParseException {
@@ -135,14 +176,13 @@ public class SalesProfitController extends BaseController {
 						&& pointInfoList.get(j).getCustomerContractStatus() != null
 						&& siteList.get(i).getLevelCode() != null && pointInfoList.get(j).getLevelCode() != null
 						&& siteList.get(i).getSalesProgressCode() != null
-						&& pointInfoList.get(j).getSalesProgressCode() != null) {
+						&& pointInfoList.get(j).getBpGrossProfit() != null) {
 					if (siteList.get(i).getEmployeeStatus().equals(pointInfoList.get(j).getEmployeeStatus())
 							&& siteList.get(i).getIntoCompanyCode().equals(pointInfoList.get(j).getIntoCompanyCode())
 							&& siteList.get(i).getCustomerContractStatus()
 									.equals(pointInfoList.get(j).getCustomerContractStatus())
 							&& siteList.get(i).getLevelCode().equals(pointInfoList.get(j).getLevelCode())
-							&& siteList.get(i).getSalesProgressCode()
-									.equals(pointInfoList.get(j).getSalesProgressCode())) {
+							&& siteList.get(i).getSalesProgressCode().equals(pointInfoList.get(j).getBpGrossProfit())) {
 						siteList.get(i).setPoint(pointInfoList.get(j).getSalesPoint());
 					}
 				}
@@ -224,13 +264,13 @@ public class SalesProfitController extends BaseController {
 			}
 
 			// 设置契約区分
-			if (siteList.get(i).getCustomerContractStatus().equals("0")) {
-				siteList.get(i).setCustomerContractStatus("即存");
-			} else if (siteList.get(i).getCustomerContractStatus().equals("1")) {
-				siteList.get(i).setCustomerContractStatus("新规");
-			} else {
-				siteList.get(i).setCustomerContractStatus("");
-			}
+			/*
+			 * if (siteList.get(i).getCustomerContractStatus().equals("0")) {
+			 * siteList.get(i).setCustomerContractStatus("即存"); } else if
+			 * (siteList.get(i).getCustomerContractStatus().equals("1")) {
+			 * siteList.get(i).setCustomerContractStatus("新规"); } else {
+			 * siteList.get(i).setCustomerContractStatus(""); }
+			 */
 
 			// 合计ポイント
 			if (siteList.get(i).getPoint() != null) {

@@ -11,7 +11,7 @@ public class SalesPointSetModel {
 	String newMember;// 新人区分
 	String customerContract;// 契約区分
 	String level;// お客様レベル
-	String salesPuttern;// 営業結果パターン
+	String bpGrossProfit;// BP粗利
 	String specialPoint;// 特別ポイント条件
 	String point;// ポイント
 	String specialPointNo; // 特別ポイント
@@ -65,12 +65,12 @@ public class SalesPointSetModel {
 		this.level = level;
 	}
 
-	public String getSalesPuttern() {
-		return salesPuttern;
+	public String getBpGrossProfit() {
+		return bpGrossProfit;
 	}
 
-	public void setSalesPuttern(String salesPuttern) {
-		this.salesPuttern = salesPuttern;
+	public void setBpGrossProfit(String bpGrossProfit) {
+		this.bpGrossProfit = bpGrossProfit;
 	}
 
 	public String getSpecialPoint() {

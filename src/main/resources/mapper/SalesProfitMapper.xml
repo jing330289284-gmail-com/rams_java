@@ -108,11 +108,20 @@
 		left(T006EmployeeSiteInfo.admissionStartDate,6))
 		and T010SalesSituation.confirmCustomer = T006EmployeeSiteInfo.customerNo
 		)
-		LEFT
-		JOIN
-		T011BpInfoSupplement
+		LEFT JOIN
+		(SELECT T011.*,temp.admissionStartDate FROM T011BpInfoSupplement as T011
+		inner join (select bpEmployeeNo,max(unitPriceStartMonth) as unitPriceStartMonth,admissionStartDate from T011BpInfoSupplement as T011
+		left join T006EmployeeSiteInfo as T006
+		on T011.bpEmployeeNo = T006.employeeNo
+		and T011.unitPriceStartMonth &lt;= left(T006.admissionStartDate,6)
+		where admissionStartDate is not null
+		group by bpEmployeeNo,admissionStartDate) as temp
+		on T011.bpEmployeeNo = temp.bpEmployeeNo
+		and T011.unitPriceStartMonth = temp.unitPriceStartMonth)
+		AS T011BpInfoSupplement
 		ON
 		T006EmployeeSiteInfo.employeeNo=T011BpInfoSupplement.bpEmployeeNo
+		and T006EmployeeSiteInfo.admissionStartDate=T011BpInfoSupplement.admissionStartDate
 		where
 		T006EmployeeSiteInfo.admissionStartDate <![CDATA[ > ]]>
 		#{startDate}
@@ -174,12 +183,12 @@
 		T010SalesSituation.employeeNo =
 		T001Employee.employeeNo
 		Where
-		salesYearAndMonth
+		T010SalesSituation.salesYearAndMonth
 		between
-		ifnull(#{startDate},salesYearAndMonth) and
-		ifnull(#{endDate},salesYearAndMonth)
+		ifnull(#{startDate},T010SalesSituation.salesYearAndMonth) and
+		ifnull(#{endDate},T010SalesSituation.salesYearAndMonth)
 		order by
-		salesYearAndMonth,employeeNo
+		T010SalesSituation.salesYearAndMonth,T010SalesSituation.employeeNo
 	</select>
 
 	<select id="getCustomerName" parameterType="string"

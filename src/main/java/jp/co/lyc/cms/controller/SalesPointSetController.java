@@ -161,7 +161,7 @@ public class SalesPointSetController extends BaseController {
 		String newMember = salesPointSetModel.getNewMember();
 		String customerContract = salesPointSetModel.getCustomerContract();
 		String level = salesPointSetModel.getLevel();
-		String salesPuttern = salesPointSetModel.getSalesPuttern();
+		String bpGrossProfit = salesPointSetModel.getBpGrossProfit();
 		String specialPoint = salesPointSetModel.getSpecialPoint();
 		String point = salesPointSetModel.getPoint();
 		String specialPointNo = salesPointSetModel.getSpecialPointNo();
@@ -182,8 +182,8 @@ public class SalesPointSetController extends BaseController {
 		if (level != null && level.length() != 0) {
 			sendMap.put("level", level);
 		}
-		if (salesPuttern != null && salesPuttern.length() != 0) {
-			sendMap.put("salesPuttern", salesPuttern);
+		if (bpGrossProfit != null && bpGrossProfit.length() != 0) {
+			sendMap.put("bpGrossProfit", bpGrossProfit);
 		}
 		if (specialPoint != null && specialPoint.length() != 0) {
 			sendMap.put("specialPoint", specialPoint);
