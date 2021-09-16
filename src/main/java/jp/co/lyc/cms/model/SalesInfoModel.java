@@ -49,6 +49,24 @@ public class SalesInfoModel {
 	String salesProgressCode;
 	Date startDate;// 現場開始時間
 	Date endDate;// 現場終了時間
+	String bpGrossProfit; // BP粗利
+	String workState; // 現場状態
+
+	public String getWorkState() {
+		return workState;
+	}
+
+	public void setWorkState(String workState) {
+		this.workState = workState;
+	}
+
+	public String getBpGrossProfit() {
+		return bpGrossProfit;
+	}
+
+	public void setBpGrossProfit(String bpGrossProfit) {
+		this.bpGrossProfit = bpGrossProfit;
+	}
 
 	public int getMonth() {
 		return month;

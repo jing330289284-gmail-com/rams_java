@@ -24,6 +24,7 @@ import jp.co.lyc.cms.model.SalesPointModel;
 import jp.co.lyc.cms.model.SalesProfitModel;
 import jp.co.lyc.cms.service.SalesProfitService;
 
+import org.apache.ibatis.io.ResolverUtil.IsA;
 import org.joda.time.Months;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -43,14 +44,48 @@ public class SalesProfitController extends BaseController {
 	@ResponseBody
 	public List<SalesInfoModel> getPointInfoNew(@RequestBody SalesProfitModel salesProfitModel) throws ParseException {
 
-		if (salesProfitModel.getEmployeeName() == null) {
+		if (salesProfitModel.getEmployeeName() == null || salesProfitModel.getStartDate() == null
+				|| salesProfitModel.getEndDate() == null) {
 			return new ArrayList<SalesInfoModel>();
 		}
 
 		List<SalesInfoModel> siteList = salesProfitService.getSalesInfo(salesProfitModel);
+
+		if (siteList.size() == 0) {
+			return new ArrayList<SalesInfoModel>();
+		}
+
+		List<String> employeeNoList = new ArrayList<String>();
+		for (int i = 0; i < siteList.size(); i++) {
+			if (!siteList.get(i).getEmployeeNo().substring(0, 2).equals("BP"))
+				employeeNoList.add(siteList.get(i).getEmployeeNo());
+		}
+
+		List<SalesInfoModel> salesInfo = employeeNoList.size() > 0
+				? salesProfitService.getSalesInfoByemployeeNoList(employeeNoList)
+				: new ArrayList<SalesInfoModel>();
 		List<SalesEmployeeModel> customerName = salesProfitService.getCustomerName();
 
 		for (int i = 0; i < siteList.size(); i++) {
+			// 稼働月数計算
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMM");
+			String startDate = siteList.get(i).getAdmissionStartDate();
+			String endDate = siteList.get(i).getAdmissionEndDate() == null
+					? dateFormat.format(salesProfitModel.getEndDate()).toString()
+					: siteList.get(i).getAdmissionEndDate();
+
+			DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM");
+			int months = Months
+					.monthsBetween(formatter.parseDateTime(startDate.substring(0, 4) + "-" + startDate.substring(4, 6)),
+							formatter.parseDateTime(endDate.substring(0, 4) + "-" + endDate.substring(4, 6)))
+					.getMonths() + 1;
+			siteList.get(i).setMonth(months);
+			if (months >= 12 && siteList.get(i).getWorkState() != null && siteList.get(i).getWorkState().equals("2")) {
+				siteList.get(i).setSpecialsalesPointCondition("2");
+			} else if (months >= 6) {
+				siteList.get(i).setSpecialsalesPointCondition("0");
+			}
+
 			// 氏名
 			if (siteList.get(i).getEmployeeNo().substring(0, 2).equals("BP")) {
 				String bpCustomerName = "";
@@ -63,9 +98,40 @@ public class SalesProfitController extends BaseController {
 				}
 				siteList.get(i).setEmployeeName(siteList.get(i).getEmployeeFristName()
 						+ siteList.get(i).getEmployeeLastName() + bpCustomerName);
+
+				siteList.get(i).setProfit(Integer.toString(Integer.parseInt(siteList.get(i).getUnitPrice()) * months));
+				int bpSalary = 0;
+				if (siteList.get(i).getBpUnitPrice() != null && !siteList.get(i).getBpUnitPrice().equals(""))
+					bpSalary = Integer.parseInt(siteList.get(i).getBpUnitPrice()) * 10000 * months;
+				int bpGrossProfit = Integer.parseInt(siteList.get(i).getProfit()) - bpSalary;
+				if (bpGrossProfit < 60000) {
+					// BP粗利 5万以下
+					siteList.get(i).setBpGrossProfit("0");
+				} else if (bpGrossProfit < 80000) {
+					// BP粗利 6万-7万
+					siteList.get(i).setBpGrossProfit("1");
+				} else if (bpGrossProfit < 100000) {
+					// BP粗利 8万-9万
+					siteList.get(i).setBpGrossProfit("2");
+				} else {
+					// BP粗利 10万以上
+					siteList.get(i).setBpGrossProfit("3");
+				}
 			} else {
-				siteList.get(i).setEmployeeName(
-						siteList.get(i).getEmployeeFristName() + siteList.get(i).getEmployeeLastName());
+				String employeeName = siteList.get(i).getEmployeeFristName() + siteList.get(i).getEmployeeLastName();
+				for (int j = 0; j < salesInfo.size(); j++) {
+					if (siteList.get(i).getEmployeeNo().equals(salesInfo.get(j).getEmployeeNo()) && siteList.get(i)
+							.getAdmissionStartDate().equals(salesInfo.get(j).getAdmissionStartDate())) {
+						employeeName += "(新人)";
+						siteList.get(i).setIntoCompanyCode("0");
+						break;
+					}
+				}
+				siteList.get(i).setEmployeeName(employeeName);
+				siteList.get(i).setEmployeeStatus("0");
+				if (siteList.get(i).getIntoCompanyCode() == null) {
+					siteList.get(i).setIntoCompanyCode("1");
+				}
 			}
 
 			// 年月
@@ -74,6 +140,36 @@ public class SalesProfitController extends BaseController {
 
 			// 番号
 			siteList.get(i).setRowNo(String.valueOf(i + 1));
+		}
+
+		List<SalesPointModel> pointInfoList = salesProfitService.getSalesPointInfo();
+		for (int i = 0; i < siteList.size(); i++) {
+			for (int j = 0; j < pointInfoList.size(); j++) {
+				// 社員ポイント計算
+				if (siteList.get(i).getEmployeeStatus().equals("0")) {
+					if (siteList.get(i).getEmployeeStatus().equals(pointInfoList.get(j).getEmployeeStatus())
+							&& siteList.get(i).getIntoCompanyCode().equals(pointInfoList.get(j).getIntoCompanyCode())) {
+						siteList.get(i).setPoint(pointInfoList.get(j).getSalesPoint());
+						if (siteList.get(i).getSpecialsalesPointCondition() != null
+								&& siteList.get(i).getSpecialsalesPointCondition()
+										.equals(pointInfoList.get(j).getSpecialPointConditionCode())) {
+							siteList.get(i).setSpecialsalesPoint(pointInfoList.get(j).getSpecialsalesPoint());
+						}
+					}
+				}
+				// BPポイント計算
+				else {
+					if (siteList.get(i).getEmployeeStatus().equals(pointInfoList.get(j).getEmployeeStatus())
+							&& siteList.get(i).getBpGrossProfit().equals(pointInfoList.get(j).getBpGrossProfit())) {
+						siteList.get(i).setPoint(pointInfoList.get(j).getSalesPoint());
+						if (siteList.get(i).getSpecialsalesPointCondition() != null
+								&& siteList.get(i).getSpecialsalesPointCondition()
+										.equals(pointInfoList.get(j).getSpecialPointConditionCode())) {
+							siteList.get(i).setSpecialsalesPoint(pointInfoList.get(j).getSpecialsalesPoint());
+						}
+					}
+				}
+			}
 		}
 
 		logger.info("SalesProfitController.getSalesPointInfo:" + "検索結束");
@@ -452,7 +548,7 @@ public class SalesProfitController extends BaseController {
 				String employeeStatus = "";
 				int bpSalary = 0;
 				if (!(siteList.get(i).getEmployeeStatus() == null)) {
-					if (siteList.get(i).getEmployeeStatus().equals("0")) {
+					if (!siteList.get(i).getEmployeeStatus().equals("1")) {
 						employeeStatus = "社員";
 						siteRoleNameAll += Integer.parseInt(siteList.get(i).getProfit()) - salary;
 						siteList.get(i).setSiteRoleName(

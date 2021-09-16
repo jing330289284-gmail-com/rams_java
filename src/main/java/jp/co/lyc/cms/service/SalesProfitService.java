@@ -63,4 +63,8 @@ public class SalesProfitService {
 	public List<SalesPointModel> getSalesPointInfo() {
 		return salesProfitMapper.getSalesPointInfo();
 	}
+
+	public List<SalesInfoModel> getSalesInfoByemployeeNoList(List<String> employeeNoList) {
+		return salesProfitMapper.getSalesInfoByemployeeNoList(employeeNoList);
+	}
 }

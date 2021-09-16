@@ -478,6 +478,7 @@
 		birthplace,
 		intoCompanyCode,
 		intoCompanyYearAndMonth,
+		introducer,
 		employeeStatus,
 		retirementYearAndMonth,
 		retirementResonClassification,
@@ -537,6 +538,7 @@
 		#{birthplace},
 		#{intoCompanyCode},
 		#{intoCompanyYearAndMonth},
+		#{introducer},
 		#{employeeStatus},
 		#{retirementYearAndMonth},
 		#{retirementResonClassification},
@@ -709,6 +711,9 @@
 		</if>
 		<if test="intoCompanyYearAndMonth!=  null">
 			intoCompanyYearAndMonth =#{intoCompanyYearAndMonth},
+		</if>
+		<if test="introducer!=  null">
+			introducer =#{introducer},
 		</if>
 		<if test="employeeStatus!=  null">
 			employeeStatus =#{employeeStatus},
@@ -895,6 +900,7 @@
 		T002.birthplace,
 		T002.intoCompanyCode,
 		T002.intoCompanyYearAndMonth,
+		T002.introducer,
 		T002.employeeStatus,
 		T002.retirementYearAndMonth,
 		T002.retirementResonClassification,

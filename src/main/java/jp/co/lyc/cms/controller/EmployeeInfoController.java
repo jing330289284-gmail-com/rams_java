@@ -47,7 +47,7 @@ public class EmployeeInfoController extends BaseController {
 
 	@Autowired
 	EmployeeInfoService employeeInfoService;
-	
+
 	@Autowired
 	WagesInfoService wagesInfoService;
 
@@ -337,7 +337,7 @@ public class EmployeeInfoController extends BaseController {
 		employeeInfoService.updatebpInfo(bpInfoModel);
 		logger.info("GetEmployeeInfoController.getEmployeeByEmployeeNo:" + "updatebpInfo結束");
 	}
-	
+
 	/**
 	 * BP情報delete
 	 * 
@@ -597,6 +597,7 @@ public class EmployeeInfoController extends BaseController {
 		String graduationUniversity = emp.getGraduationUniversity();// 卒業学校
 		String major = emp.getMajor();// 専門
 		String graduationYearAndMonth = emp.getGraduationYearAndMonth();// 卒業年月
+		String introducer = emp.getIntroducer();// 紹介者
 
 		// 入社年月
 		String intoCompanyYearAndMonth = null;
@@ -854,6 +855,9 @@ public class EmployeeInfoController extends BaseController {
 		}
 		if (frameWork2 != null) {
 			sendMap.put("frameWork2", frameWork2);
+		}
+		if (introducer != null) {
+			sendMap.put("introducer", introducer);
 		}
 		if (kadou != null) {
 			sendMap.put("kadou", kadou);

@@ -51,6 +51,7 @@
 		resultType="jp.co.lyc.cms.model.SalesInfoModel">
 		SELECT
 		T006EmployeeSiteInfo.employeeNo,
+		T006EmployeeSiteInfo.workState,
 		T001Employee.employeeFristName,
 		T001Employee.employeeLastName,
 		T002EmployeeDetail.employeeStatus,
@@ -101,27 +102,38 @@
 		(
 		(T010SalesSituation.salesYearAndMonth =
 		left(T006EmployeeSiteInfo.admissionStartDate,6)
-		and T010SalesSituation.confirmCustomer = T006EmployeeSiteInfo.customerNo
+		and
+		T010SalesSituation.confirmCustomer = T006EmployeeSiteInfo.customerNo
 		)
 		OR
 		(T010SalesSituation.salesYearAndMonth - 1 =
 		left(T006EmployeeSiteInfo.admissionStartDate,6))
-		and T010SalesSituation.confirmCustomer = T006EmployeeSiteInfo.customerNo
+		and
+		T010SalesSituation.confirmCustomer = T006EmployeeSiteInfo.customerNo
 		)
 		LEFT JOIN
-		(SELECT T011.*,temp.admissionStartDate FROM T011BpInfoSupplement as T011
-		inner join (select bpEmployeeNo,max(unitPriceStartMonth) as unitPriceStartMonth,admissionStartDate from T011BpInfoSupplement as T011
+		(SELECT T011.*,temp.admissionStartDate FROM
+		T011BpInfoSupplement as T011
+		inner join (select
+		bpEmployeeNo,max(unitPriceStartMonth) as
+		unitPriceStartMonth,admissionStartDate from T011BpInfoSupplement as
+		T011
 		left join T006EmployeeSiteInfo as T006
-		on T011.bpEmployeeNo = T006.employeeNo
-		and T011.unitPriceStartMonth &lt;= left(T006.admissionStartDate,6)
+		on T011.bpEmployeeNo =
+		T006.employeeNo
+		and T011.unitPriceStartMonth &lt;=
+		left(T006.admissionStartDate,6)
 		where admissionStartDate is not null
 		group by bpEmployeeNo,admissionStartDate) as temp
-		on T011.bpEmployeeNo = temp.bpEmployeeNo
-		and T011.unitPriceStartMonth = temp.unitPriceStartMonth)
+		on T011.bpEmployeeNo
+		= temp.bpEmployeeNo
+		and T011.unitPriceStartMonth =
+		temp.unitPriceStartMonth)
 		AS T011BpInfoSupplement
 		ON
 		T006EmployeeSiteInfo.employeeNo=T011BpInfoSupplement.bpEmployeeNo
-		and T006EmployeeSiteInfo.admissionStartDate=T011BpInfoSupplement.admissionStartDate
+		and
+		T006EmployeeSiteInfo.admissionStartDate=T011BpInfoSupplement.admissionStartDate
 		where
 		T006EmployeeSiteInfo.admissionStartDate <![CDATA[ > ]]>
 		#{startDate}
@@ -226,5 +238,26 @@
 	<select id="getSalesPointInfo" parameterType="string"
 		resultType="jp.co.lyc.cms.model.SalesPointModel">
 		SELECT * FROM T014SalesPointInfo;
+	</select>
+
+	<select id="getSalesInfoByemployeeNoList" parameterType="String"
+		resultType="jp.co.lyc.cms.model.SalesInfoModel">
+		SELECT T006.employeeNo,T006.admissionStartDate FROM
+		T006EmployeeSiteInfo as T006
+		left join T002EmployeeDetail as T002
+		on
+		T006.employeeNo = T002.employeeNo
+		where T002.intoCompanyCode = "0"
+		and
+		(T006.systemName is null or T006.systemName != "休暇")
+		and
+		(T006.typteOfContractCode is null or T006.typteOfContractCode != "4")
+		and T006.employeeNo in
+		<foreach item="item" collection="list" open="(" close=")"
+			separator=",">
+			#{item}
+		</foreach>
+		group by T006.employeeNo
+		;
 	</select>
 </mapper>

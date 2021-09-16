@@ -107,6 +107,16 @@ public class EmployeeModel implements Serializable {
 	String residentCardInfoName;
 	String passportInfoName;
 
+	String introducer;
+
+	public String getIntroducer() {
+		return introducer;
+	}
+
+	public void setIntroducer(String introducer) {
+		this.introducer = introducer;
+	}
+
 	public String getNewEmployeeNo() {
 		return newEmployeeNo;
 	}

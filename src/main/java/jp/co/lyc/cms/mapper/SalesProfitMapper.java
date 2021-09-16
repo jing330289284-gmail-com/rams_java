@@ -28,4 +28,6 @@ public interface SalesProfitMapper {
 	public List<SalesEmployeeModel> getEmployeeSiteInfo();
 
 	public List<SalesPointModel> getSalesPointInfo();
+
+	public List<SalesInfoModel> getSalesInfoByemployeeNoList(List<String> employeeNoList);
 }
