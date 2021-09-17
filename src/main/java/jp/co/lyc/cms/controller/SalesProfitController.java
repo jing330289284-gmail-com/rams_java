@@ -80,11 +80,6 @@ public class SalesProfitController extends BaseController {
 							formatter.parseDateTime(endDate.substring(0, 4) + "-" + endDate.substring(4, 6)))
 					.getMonths() + 1;
 			siteList.get(i).setMonth(months);
-			if (months >= 12 && siteList.get(i).getWorkState() != null && siteList.get(i).getWorkState().equals("2")) {
-				siteList.get(i).setSpecialsalesPointCondition("2");
-			} else if (months >= 6) {
-				siteList.get(i).setSpecialsalesPointCondition("0");
-			}
 
 			// 氏名
 			if (siteList.get(i).getEmployeeNo().substring(0, 2).equals("BP")) {
@@ -96,6 +91,8 @@ public class SalesProfitController extends BaseController {
 						break;
 					}
 				}
+				if (bpCustomerName.equals(""))
+					bpCustomerName += "(BP)";
 				siteList.get(i).setEmployeeName(siteList.get(i).getEmployeeFristName()
 						+ siteList.get(i).getEmployeeLastName() + bpCustomerName);
 
@@ -119,19 +116,40 @@ public class SalesProfitController extends BaseController {
 				}
 			} else {
 				String employeeName = siteList.get(i).getEmployeeFristName() + siteList.get(i).getEmployeeLastName();
+				if (siteList.get(i).getEmployeeNo().substring(0, 2).equals("SP"))
+					employeeName += "(SP)";
+				else if (siteList.get(i).getEmployeeNo().substring(0, 2).equals("SC"))
+					employeeName += "(SC)";
+				// 新人判断
 				for (int j = 0; j < salesInfo.size(); j++) {
 					if (siteList.get(i).getEmployeeNo().equals(salesInfo.get(j).getEmployeeNo()) && siteList.get(i)
 							.getAdmissionStartDate().equals(salesInfo.get(j).getAdmissionStartDate())) {
-						employeeName += "(新人)";
-						siteList.get(i).setIntoCompanyCode("0");
+						if (salesInfo.get(j).getIntoCompanyCode() != null
+								&& salesInfo.get(j).getIntoCompanyCode().equals("0")) {
+							employeeName += "(新人)";
+							siteList.get(i).setIntoCompanyCode("0");
+						}
+						siteList.get(i).setFirstAdmission(true);
 						break;
 					}
 				}
 				siteList.get(i).setEmployeeName(employeeName);
 				siteList.get(i).setEmployeeStatus("0");
+
+				// 新人じゃない場合、経験者をつける
 				if (siteList.get(i).getIntoCompanyCode() == null) {
 					siteList.get(i).setIntoCompanyCode("1");
 				}
+			}
+
+			// 特別ポイント計算
+			if (months == 12 && siteList.get(i).getWorkState() != null && siteList.get(i).getWorkState().equals("2")) {
+				siteList.get(i).setSpecialsalesPointCondition("2");
+			} else if (months == 6) {
+				siteList.get(i).setSpecialsalesPointCondition("0");
+			} else if (siteList.get(i).isFirstAdmission() && months == 3 && (siteList.get(i).getIntroducer() != null
+					&& siteList.get(i).getIntroducer().equals(salesProfitModel.getEmployeeName()))) {
+				siteList.get(i).setSpecialsalesPointCondition("1");
 			}
 
 			// 年月
@@ -219,14 +237,16 @@ public class SalesProfitController extends BaseController {
 			siteList.get(i).setEmployeeStatusName(employeeStatus);
 
 			// 设置所属会社
-			if (!(siteList.get(i).getBpBelongCustomerCode() == null)) {
+			if (!(siteList.get(i).getBpBelongCustomerCode() == null
+					|| siteList.get(i).getBpBelongCustomerCode().equals(""))) {
 				for (int z = 0; z < customerName.size(); z++) {
 					if (siteList.get(i).getBpBelongCustomerCode().equals(customerName.get(z).getCustomerNo())) {
 						siteList.get(i).setEmployeeFrom(customerName.get(z).getCustomerName());
 					}
 				}
-			} else
-				siteList.get(i).setEmployeeFrom("");
+			}
+			if (siteList.get(i).getEmployeeFrom() == null)
+				siteList.get(i).setEmployeeFrom("BP");
 
 			// 设置お客様
 			for (int j = 0; j < employeeSiteInfo.size(); j++) {
@@ -567,15 +587,17 @@ public class SalesProfitController extends BaseController {
 						employeeStatus = "";
 				}
 				siteList.get(i).setEmployeeStatus(employeeStatus);
-				if (!(siteList.get(i).getBpBelongCustomerCode() == null)) {
+				if (!(siteList.get(i).getBpBelongCustomerCode() == null
+						|| siteList.get(i).getBpBelongCustomerCode().equals(""))) {
 					for (int z = 0; z < customerName.size(); z++) {
 						if (siteList.get(i).getBpBelongCustomerCode().equals(customerName.get(z).getCustomerNo())) {
 							siteList.get(i).setEmployeeFrom(customerName.get(z).getCustomerName());
 						}
 					}
 
-				} else
-					siteList.get(i).setEmployeeFrom("");
+				}
+				if (siteList.get(i).getEmployeeFrom() == null)
+					siteList.get(i).setEmployeeFrom("BP");
 				if (siteList.get(i).getSiteRoleName() != null)
 					siteList.get(i)
 							.setSiteRoleName(formatString((float) Integer.parseInt(siteList.get(i).getSiteRoleName())));
@@ -756,15 +778,17 @@ public class SalesProfitController extends BaseController {
 						employeeStatus = "";
 				}
 				siteList.get(i).setEmployeeStatus(employeeStatus);
-				if (!(siteList.get(i).getBpBelongCustomerCode() == null)) {
+				if (!(siteList.get(i).getBpBelongCustomerCode() == null
+						|| siteList.get(i).getBpBelongCustomerCode().equals(""))) {
 					for (int z = 0; z < customerName.size(); z++) {
 						if (siteList.get(i).getBpBelongCustomerCode().equals(customerName.get(z).getCustomerNo())) {
 							siteList.get(i).setEmployeeFrom(customerName.get(z).getCustomerName());
 						}
 					}
 
-				} else
-					siteList.get(i).setEmployeeFrom("");
+				}
+				if (siteList.get(i).getEmployeeFrom() == null)
+					siteList.get(i).setEmployeeFrom("BP");
 				if (siteList.get(i).getSiteRoleName() != null)
 					siteList.get(i)
 							.setSiteRoleName(formatString((float) Integer.parseInt(siteList.get(i).getSiteRoleName())));

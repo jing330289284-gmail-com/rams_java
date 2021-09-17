@@ -55,6 +55,7 @@
 		T001Employee.employeeFristName,
 		T001Employee.employeeLastName,
 		T002EmployeeDetail.employeeStatus,
+		T002EmployeeDetail.introducer,
 		T006EmployeeSiteInfo.admissionStartDate,
 		T006EmployeeSiteInfo.admissionEndDate,
 		T006EmployeeSiteInfo.unitPrice,
@@ -242,14 +243,12 @@
 
 	<select id="getSalesInfoByemployeeNoList" parameterType="String"
 		resultType="jp.co.lyc.cms.model.SalesInfoModel">
-		SELECT T006.employeeNo,T006.admissionStartDate FROM
+		SELECT T006.employeeNo,T006.admissionStartDate,T002.intoCompanyCode FROM
 		T006EmployeeSiteInfo as T006
 		left join T002EmployeeDetail as T002
 		on
 		T006.employeeNo = T002.employeeNo
-		where T002.intoCompanyCode = "0"
-		and
-		(T006.systemName is null or T006.systemName != "休暇")
+		where (T006.systemName is null or T006.systemName != "休暇")
 		and
 		(T006.typteOfContractCode is null or T006.typteOfContractCode != "4")
 		and T006.employeeNo in

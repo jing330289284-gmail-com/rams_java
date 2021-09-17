@@ -514,6 +514,15 @@ public class UtilsService {
 	public List<ModelClass> getSituationChange() {
 		return utilsMapper.getSituationChange();
 	}
+	
+	/**
+	 * 非稼働理由取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getNonSiteClassification() {
+		return utilsMapper.getNonSiteClassification();
+	}
 
 	/**
 	 * 確率取得

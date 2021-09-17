@@ -1471,6 +1471,18 @@ public class UtilsController {
 		List<ModelClass> list = utilsService.getSituationChange();
 		return list;
 	}
+	
+	/**
+	 * 非稼働理由取得
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/getNonSiteClassification", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ModelClass> getNonSiteClassification() {
+		List<ModelClass> list = utilsService.getNonSiteClassification();
+		return list;
+	}
 
 	/**
 	 * 確率取得

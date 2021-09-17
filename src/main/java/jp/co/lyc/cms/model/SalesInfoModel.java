@@ -51,6 +51,24 @@ public class SalesInfoModel {
 	Date endDate;// 現場終了時間
 	String bpGrossProfit; // BP粗利
 	String workState; // 現場状態
+	boolean firstAdmission; // 初めての現場
+	String introducer; // 紹介者
+
+	public String getIntroducer() {
+		return introducer;
+	}
+
+	public void setIntroducer(String introducer) {
+		this.introducer = introducer;
+	}
+
+	public boolean isFirstAdmission() {
+		return firstAdmission;
+	}
+
+	public void setFirstAdmission(boolean firstAdmission) {
+		this.firstAdmission = firstAdmission;
+	}
 
 	public String getWorkState() {
 		return workState;

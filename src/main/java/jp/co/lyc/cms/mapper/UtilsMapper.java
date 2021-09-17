@@ -354,6 +354,13 @@ public interface UtilsMapper {
 	public List<ModelClass> getSituationChange();
 
 	/**
+	 * 非稼働理由取得
+	 * 
+	 * @return
+	 */
+	public List<ModelClass> getNonSiteClassification();
+	
+	/**
 	 * 確率取得
 	 * 
 	 * @return
