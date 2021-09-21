@@ -19,7 +19,8 @@
 		END AS salary,
 		T005data.insuranceFeeAmount,
 		T005data.reflectYearAndMonth,
-		T005data.fristTimeBonusAmount + T005data.secondTimeBonusAmount as scheduleOfBonusAmount,
+		T005data.fristTimeBonusAmount +
+		T005data.secondTimeBonusAmount as scheduleOfBonusAmount,
 		T006data.admissionStartDate,
 		T006data.unitPrice,
 		T006data.admissionEndDate
@@ -32,7 +33,8 @@
 		T005beforeSa.befoSalary,
 		T005.insuranceFeeAmount,
 		T005.reflectYearAndMonth,
-		T005.fristTimeBonusAmount + T005.secondTimeBonusAmount as scheduleOfBonusAmount
+		T005.fristTimeBonusAmount + T005.secondTimeBonusAmount as
+		scheduleOfBonusAmount
 		FROM
 		T005WagesInfo AS T005
 		LEFT JOIN ( SELECT
@@ -198,18 +200,24 @@
 		resultMap="EnterPeriodSearchModel">
 		SELECT
 		T001.employeeNo,
-		if(T005.secondBonusMonth > T005.fristBonusMonth,T005.secondBonusMonth,T005.fristBonusMonth) as nextBonusMonth
+		if(T005.secondBonusMonth >
+		T005.fristBonusMonth,T005.secondBonusMonth,T005.fristBonusMonth) as
+		nextBonusMonth
 		FROM
 		T001Employee AS T001
 		LEFT
-		JOIN T005WagesInfo AS T005 ON T001.employeeNo
+		JOIN T005WagesInfo AS T005
+		ON T001.employeeNo
 		= T005.employeeNo
 		LEFT
-		JOIN ( SELECT T005k.employeeNo, MAX(
+		JOIN ( SELECT T005k.employeeNo,
+		MAX(
 		T005k.reflectYearAndMonth ) AS
-		reflectYearAndMonth FROM T005WagesInfo
+		reflectYearAndMonth FROM
+		T005WagesInfo
 		AS T005k GROUP BY
-		T005k.employeeNo ) AS T005date ON T001.employeeNo =
+		T005k.employeeNo ) AS T005date ON
+		T001.employeeNo =
 		T005date.employeeNo
 		WHERE
 		T005.reflectYearAndMonth =
@@ -251,6 +259,26 @@
 		;
 	</select>
 
+	<!-- 最新の昇格を取得 -->
+	<select id="getWagesInfoNew" parameterType="String"
+		resultType="String">
+		SELECT T005.employeeNo FROM T005WagesInfo as T005
+		inner join
+		(
+		SELECT employeeNo,max(reflectYearAndMonth) as reflectYearAndMonth
+		FROM
+		T005WagesInfo
+		group by employeeNo
+		) as temp
+		on T005.employeeNo =
+		temp.employeeNo
+		and T005.reflectYearAndMonth = temp.reflectYearAndMonth
+		where T005.reflectYearAndMonth &lt;= #{yearAndMonth}
+		and waitingCost =
+		""
+		;
+	</select>
+
 	<!-- 最新の現場を取得 -->
 	<select id="getEmployeeSiteInfo" parameterType="String"
 		resultType="String">
@@ -284,7 +312,9 @@
 	<select id="getBonusMonthInfo" parameterType="String"
 		resultType="String">
 		SELECT T005.employeeNo,
-		if(T005.secondBonusMonth > T005.fristBonusMonth,T005.secondBonusMonth,T005.fristBonusMonth) as nextBonusMonth FROM
+		if(T005.secondBonusMonth >
+		T005.fristBonusMonth,T005.secondBonusMonth,T005.fristBonusMonth) as
+		nextBonusMonth FROM
 		T005WagesInfo as T005
 		inner Join
 		(SELECT
@@ -300,7 +330,8 @@
 		temp.reflectYearAndMonth
 		where T005.fristBonusMonth != ""
 		and
-		if(T005.secondBonusMonth > T005.fristBonusMonth,T005.secondBonusMonth,T005.fristBonusMonth)
+		if(T005.secondBonusMonth >
+		T005.fristBonusMonth,T005.secondBonusMonth,T005.fristBonusMonth)
 		&lt;=
 		#{bonusYearAndMonth};
 	</select>
@@ -316,8 +347,11 @@
 		T005.salary,
 		T005.insuranceFeeAmount,
 		T005.reflectYearAndMonth,
-		T005.fristTimeBonusAmount + T005.secondTimeBonusAmount as scheduleOfBonusAmount,
-		if(T005.secondBonusMonth > T005.fristBonusMonth,T005.secondBonusMonth,T005.fristBonusMonth) as nextBonusMonth,
+		T005.fristTimeBonusAmount + T005.secondTimeBonusAmount as
+		scheduleOfBonusAmount,
+		if(T005.secondBonusMonth >
+		T005.fristBonusMonth,T005.secondBonusMonth,T005.fristBonusMonth) as
+		nextBonusMonth,
 		T005.nextRaiseMonth,
 		T006.admissionStartDate,
 		T006.unitPrice
@@ -342,7 +376,8 @@
 		T001.employeeNo = T005.employeeNo
 		inner join
 		(SELECT
-		T006.employeeNo,T006.admissionStartDate,T006.unitPrice,T006.workState FROM
+		T006.employeeNo,T006.admissionStartDate,T006.unitPrice,T006.workState
+		FROM
 		T006EmployeeSiteInfo as T006
 		inner Join
 		(SELECT
@@ -377,9 +412,13 @@
 		T001.employeeLastName ) as
 		employeeName,T006.admissionStartDate,T006.unitPrice,T005.reflectYearAndMonth,T005.salary,
 		T005.insuranceFeeAmount,
-		T005.fristTimeBonusAmount + T005.secondTimeBonusAmount as scheduleOfBonusAmount,
-		if(T005.secondBonusMonth > T005.fristBonusMonth,T005.secondBonusMonth,T005.fristBonusMonth) as nextBonusMonth FROM T006EmployeeSiteInfo AS T006
-		inner Join T001Employee as T001
+		T005.fristTimeBonusAmount +
+		T005.secondTimeBonusAmount as scheduleOfBonusAmount,
+		if(T005.secondBonusMonth >
+		T005.fristBonusMonth,T005.secondBonusMonth,T005.fristBonusMonth) as
+		nextBonusMonth FROM T006EmployeeSiteInfo AS T006
+		inner Join
+		T001Employee as T001
 		on
 		T001.employeeNo = T006.employeeNo
 		LEFT JOIN
@@ -412,10 +451,9 @@
 		;
 	</select>
 
-
 	<!-- データを取得 -->
 	<select id="getSiteInfoByEmp" parameterType="String"
-		resultType="jp.co.lyc.cms.model.SiteModel">
+		resultType="jp.co.lyc.cms.model.EnterPeriodSearchModel">
 		SELECT
 		employeeNo,admissionStartDate,admissionEndDate,typteOfContractCode
 		FROM
@@ -425,6 +463,44 @@
 			close=")" separator=",">
 			#{item}
 		</foreach>
+		;
+	</select>
+
+	<!-- データを取得 -->
+	<select id="getWagesInfoByEmp" parameterType="String"
+		resultType="jp.co.lyc.cms.model.EnterPeriodSearchModel">
+		SELECT T005.employeeNo, CONCAT( T001.employeeFristName,
+		T001.employeeLastName ) as
+		employeeName,T005.reflectYearAndMonth,T005.salary,T005.waitingCost,T005.insuranceFeeAmount,T006.admissionStartDate,
+		T006.unitPrice FROM T005WagesInfo as T005
+		left join
+		T001Employee as T001
+		on T005.employeeNo = T001.employeeNo
+		left
+		join
+		(SELECT
+		T006.employeeNo,T006.admissionStartDate,T006.unitPrice,T006.workState
+		FROM
+		T006EmployeeSiteInfo as T006
+		inner Join
+		(SELECT
+		employeeNo,max(admissionStartDate) as admissionStartDate FROM
+		T006EmployeeSiteInfo
+		group by employeeNo) as temp
+		on
+		T006.employeeNo =
+		temp.employeeNo
+		and T006.admissionStartDate =
+		temp.admissionStartDate)
+		as T006
+		on T005.employeeNo =
+		T006.employeeNo
+		where T005.employeeNo in
+		<foreach item="item" collection="list" open="(" close=")"
+			separator=",">
+			#{item}
+		</foreach>
+		order by employeeNo,reflectYearAndMonth desc
 		;
 	</select>
 </mapper>

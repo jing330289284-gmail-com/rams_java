@@ -155,13 +155,18 @@ public class EnterPeriodSearchService {
 
 	/**
 	 * 区分は昇格の場合
-	 * @param selectedYearAndMonth 
+	 * 
+	 * @param selectedYearAndMonth
 	 * 
 	 * @param sendMap
 	 * @return
 	 */
 	public ArrayList<String> getWagesInfo(String yearAndMonth, String bonusYearAndMonth) {
-		return enterPeriodSearchMapper.getWagesInfo(yearAndMonth,bonusYearAndMonth);
+		return enterPeriodSearchMapper.getWagesInfo(yearAndMonth, bonusYearAndMonth);
+	}
+
+	public ArrayList<String> getWagesInfoNew(String yearAndMonth) {
+		return enterPeriodSearchMapper.getWagesInfoNew(yearAndMonth);
 	}
 
 	public ArrayList<String> getEmployeeSiteInfo(String yearAndMonth) {
@@ -179,9 +184,13 @@ public class EnterPeriodSearchService {
 	public ArrayList<EnterPeriodSearchModel> getSiteInfo(ArrayList<String> employeeList) {
 		return enterPeriodSearchMapper.getSiteInfo(employeeList);
 	}
-	
+
 	public ArrayList<SiteModel> getSiteInfoByEmp(ArrayList<String> employeeList, String yearAndMonth) {
-		return enterPeriodSearchMapper.getSiteInfoByEmp(employeeList,yearAndMonth);
+		return enterPeriodSearchMapper.getSiteInfoByEmp(employeeList, yearAndMonth);
+	}
+
+	public ArrayList<EnterPeriodSearchModel> getWagesInfoByEmp(ArrayList<String> employeeList) {
+		return enterPeriodSearchMapper.getWagesInfoByEmp(employeeList);
 	}
 
 	/**

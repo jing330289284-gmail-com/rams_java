@@ -63,7 +63,7 @@
 			"",if(T002.siteRoleCode="",null,T002.siteRoleCode),T006.siteRoleCode)
 			left join M013Station as M013 on T006.stationCode =M013.stationCode
 			WHERE #{getYandM} between left(admissionStartDate,6) and
-			IFNULL(admissionEndDate,date_format(now(),'%Y%m'))
+			IFNULL(admissionEndDate,#{getYandM})
 			and (T006.systemName is null or T006.systemName != "休暇")
 			and (T002.retirementYearAndMonth = ""
 			or LEFT(T002.retirementYearAndMonth,6) &gt;= #{getYandM}
@@ -88,7 +88,7 @@
 			left join T006EmployeeSiteInfo As T006 on T006.employeeNo
 			=T005.employeeNo and #{tempList.yearAndMonth} between
 			left(admissionStartDate,6) and
-			IFNULL(admissionEndDate,date_format(now(),'%Y%m'))
+			IFNULL(admissionEndDate,#{tempList.yearAndMonth})
 			WHERE
 			T005.employeeNo=
 			#{tempList.empNo}
@@ -116,7 +116,7 @@
 			left join T006EmployeeSiteInfo As T006 on T006.employeeNo
 			=T013.employeeNo and #{tempList.yearAndMonth} between
 			left(admissionStartDate,6) and
-			IFNULL(admissionEndDate,date_format(now(),'%Y%m'))
+			IFNULL(admissionEndDate,#{tempList.yearAndMonth})
 			where
 			T013.employeeNo =#{tempList.empNo}
 			and expensesReflectYearAndMonth

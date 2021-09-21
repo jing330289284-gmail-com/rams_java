@@ -196,7 +196,7 @@
 		retirementYearAndMonth,
 		<!-- if(T002.employeeFormCode = "" || T002.employeeFormCode is null,"",M005.employeeFormName) 
 			as employeeFormName, -->
-		M005.employeeFormName as employeeFormName,
+		if(T002.employeeFormCode is null or T002.employeeFormCode = "","",M005.employeeFormName) as employeeFormName,
 		CONCAT(T001.employeeFristName,
 		T001.employeeLastName)
 		as employeeName
@@ -210,7 +210,7 @@
 		M005EmployeeForm
 		as M005
 		on
-		T002.employeeStatus =
+		T002.employeeFormCode =
 		M005.employeeFormCode
 		WHERE
 		T001.employeeFristName

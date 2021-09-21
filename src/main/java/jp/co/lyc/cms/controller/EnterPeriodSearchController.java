@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.DataBinder;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -123,7 +124,8 @@ public class EnterPeriodSearchController extends BaseController {
 		}
 		ArrayList<String> employeeList = new ArrayList<String>();
 		ArrayList<EnterPeriodSearchModel> resultList = new ArrayList<EnterPeriodSearchModel>();
-		ArrayList<SiteModel> siteInfoList = new ArrayList<SiteModel>();
+		// ArrayList<SiteModel> siteInfoList = new ArrayList<SiteModel>();
+		ArrayList<EnterPeriodSearchModel> wagesInfoList = new ArrayList<EnterPeriodSearchModel>();
 
 		String selectedYearAndMonth = enterPeriodSearchModel.getYearAndMonth();
 		String yearAndMonth = Integer.parseInt(selectedYearAndMonth.substring(0, 4)) - 1
@@ -138,7 +140,9 @@ public class EnterPeriodSearchController extends BaseController {
 		}
 		if (enterPeriodSearchModel.getEnterPeriodKbn().equals("0")) {
 			// 区分は昇格の場合
-			employeeList = enterPeriodSearchService.getWagesInfo(yearAndMonth, bonusYearAndMonth);
+			// employeeList = enterPeriodSearchService.getWagesInfo(yearAndMonth,
+			// bonusYearAndMonth);
+			employeeList = enterPeriodSearchService.getWagesInfoNew(enterPeriodSearchModel.getYearAndMonth());
 		} else if (enterPeriodSearchModel.getEnterPeriodKbn().equals("1")) {
 			// 区分は現場の場合
 			employeeList = enterPeriodSearchService.getEmployeeSiteInfo(yearAndMonth);
@@ -197,139 +201,166 @@ public class EnterPeriodSearchController extends BaseController {
 			}
 			// 昇格期限
 			else {
-				// 非稼働取得
-				siteInfoList = enterPeriodSearchService.getSiteInfoByEmp(employeeList, yearAndMonth);
-				ArrayList<EnterPeriodSearchModel> periodsList = new ArrayList<EnterPeriodSearchModel>();
-
-				for (int i = 0; i < siteInfoList.size() - 1; i++) {
-					if (siteInfoList.get(i).getEmployeeNo().equals(siteInfoList.get(i + 1).getEmployeeNo())) {
-						if (siteInfoList.get(i).getAdmissionEndDate() != null
-								&& siteInfoList.get(i + 1).getAdmissionEndDate() != null) {
-							if (Integer.parseInt(siteInfoList.get(i + 1).getAdmissionEndDate()) < Integer
-									.parseInt(yearAndMonth + "01")) {
-								siteInfoList.remove(i);
-								i--;
-							}
-						}
+				resultList = new ArrayList<EnterPeriodSearchModel>();
+				wagesInfoList = enterPeriodSearchService.getWagesInfoByEmp(employeeList);
+				for (int i = 0; i < wagesInfoList.size(); i++) {
+					if (wagesInfoList.get(i).getEmployeeName() == null
+							|| wagesInfoList.get(i).getEmployeeName().equals("")) {
+						wagesInfoList.remove(i);
+						i--;
 					}
 				}
+				for (int i = 0; i < employeeList.size(); i++) {
+					EnterPeriodSearchModel tempEnterPeriodSearch = new EnterPeriodSearchModel();
+					int months = 0;
+					ArrayList<EnterPeriodSearchModel> periodsList = new ArrayList<EnterPeriodSearchModel>();
+					for (int j = 0; j < wagesInfoList.size(); j++) {
+						// 社員番号
+						if (employeeList.get(i).equals(wagesInfoList.get(j).getEmployeeNo())) {
+							// 社員給料
+							if (tempEnterPeriodSearch.getSalary() == null) {
+								tempEnterPeriodSearch.setEmployeeNo(wagesInfoList.get(j).getEmployeeNo());
+								tempEnterPeriodSearch.setEmployeeName(wagesInfoList.get(j).getEmployeeName());
+								tempEnterPeriodSearch.setSalary(wagesInfoList.get(j).getSalary());
+								tempEnterPeriodSearch
+										.setInsuranceFeeAmount(wagesInfoList.get(j).getInsuranceFeeAmount());
+								tempEnterPeriodSearch
+										.setReflectYearAndMonth(wagesInfoList.get(j).getReflectYearAndMonth());
+								tempEnterPeriodSearch
+										.setAdmissionStartDate(wagesInfoList.get(j).getAdmissionStartDate());
+								tempEnterPeriodSearch.setUnitPrice(wagesInfoList.get(j).getUnitPrice());
 
-				if (siteInfoList.size() > 1) {
-					for (int i = 1; i < siteInfoList.size(); i++) {
-						if (siteInfoList.get(i).getEmployeeNo().equals(siteInfoList.get(i - 1).getEmployeeNo())) {
-							if (siteInfoList.get(i - 1).getAdmissionEndDate() != null) {
-								String endTime = addMonth(
-										siteInfoList.get(i - 1).getAdmissionEndDate().substring(0, 6) + "01");
-								String startTime = deleteMonth(siteInfoList.get(i).getAdmissionStartDate());
-								int month = getMonthNum(endTime.substring(0, 6), startTime.substring(0, 6)) + 1;
-								if (month > 0) {
-									EnterPeriodSearchModel pl = new EnterPeriodSearchModel();
-									pl.setEmployeeNo(siteInfoList.get(i).getEmployeeNo());
-									pl.setNonSiteMonths(String.valueOf(month));
-									pl.setNonSitePeriod(endTime + "~" + startTime);
-									periodsList.add(pl);
-								}
+								months = getMonthNum(wagesInfoList.get(j).getReflectYearAndMonth(),
+										selectedYearAndMonth) + 1;
 							}
-
-							if (periodsList.size() > 0) {
-								int month = 0;
-								for (int j = 0; j < periodsList.size(); j++) {
-									month += Integer.parseInt(periodsList.get(j).getNonSiteMonths());
-								}
-								for (int j = 0; j < resultList.size(); j++) {
-									if (resultList.get(j).getEmployeeNo().equals(periodsList.get(0).getEmployeeNo())) {
-										ArrayList<EnterPeriodSearchModel> nonSitePeriodsList = resultList.get(j)
-												.getNonSitePeriodsList();
-										if (nonSitePeriodsList != null) {
-											for (int z = 0; z < periodsList.size(); z++) {
-												nonSitePeriodsList.add(periodsList.get(z));
-											}
-										} else {
-											nonSitePeriodsList = periodsList;
-										}
-										resultList.get(j).setNonSitePeriodsList(nonSitePeriodsList);
-										resultList.get(j).setNonSiteMonths(String.valueOf(month));
-										periodsList = new ArrayList<EnterPeriodSearchModel>();
+							if (j >= 2) {
+								if (wagesInfoList.get(j).getSalary().equals("")
+										|| (tempEnterPeriodSearch.getSalary().equals(wagesInfoList.get(j).getSalary())
+												&& !wagesInfoList.get(j - 1).getWaitingCost().equals(""))) {
+									if (tempEnterPeriodSearch.getSalary().equals(wagesInfoList.get(j).getSalary())
+											&& !wagesInfoList.get(j - 1).getWaitingCost().equals("")) {
+										EnterPeriodSearchModel pl = new EnterPeriodSearchModel();
+										String startMonth = wagesInfoList.get(j - 1).getReflectYearAndMonth();
+										String endMonth = String.valueOf(
+												Integer.parseInt(wagesInfoList.get(j - 2).getReflectYearAndMonth()) - 1)
+												.substring(4, 6).equals("00")
+														? String.valueOf(Integer.parseInt(wagesInfoList.get(j - 2)
+																.getReflectYearAndMonth().substring(0, 4)) - 1) + "12"
+														: String.valueOf(Integer.parseInt(
+																wagesInfoList.get(j - 2).getReflectYearAndMonth()) - 1);
+										pl.setNonSiteMonths(String.valueOf(getMonthNum(startMonth, endMonth) + 1));
+										pl.setNonSitePeriod(startMonth + "~" + endMonth);
+										periodsList.add(pl);
+										tempEnterPeriodSearch.setNonSitePeriodsList(periodsList);
+										months += getMonthNum(wagesInfoList.get(j).getReflectYearAndMonth(),
+												wagesInfoList.get(j - 1).getReflectYearAndMonth());
+									}
+								} else {
+									if (tempEnterPeriodSearch.getEmployeeNo()
+											.equals(wagesInfoList.get(j - 1).getEmployeeNo())) {
 										break;
 									}
 								}
 							}
-						}
-					}
-				}
-
-				for (int i = 0; i < resultList.size(); i++) {
-					for (int j = 0; j < siteInfoList.size(); j++) {
-						if (resultList.get(i).getEmployeeNo().equals(siteInfoList.get(j).getEmployeeNo())) {
-							if (siteInfoList.get(j).getTypteOfContractCode() != null
-									&& siteInfoList.get(j).getTypteOfContractCode().equals("4")) {
-								String startTime = /*
-													 * Integer.parseInt(siteInfoList.get(j).getAdmissionStartDate()) <
-													 * Integer .parseInt(yearAndMonth + "01") ? (yearAndMonth + "01") :
-													 */ siteInfoList.get(j).getAdmissionStartDate();
-								String endTime = /*
-													 * siteInfoList.get(j).getAdmissionEndDate() == null ?
-													 * (selectedYearAndMonth + "01") :
-													 */ siteInfoList.get(j).getAdmissionEndDate();
-								int month = getMonthNum(startTime.substring(0, 6), endTime.substring(0, 6)) + 1;
-								periodsList = resultList.get(i).getNonSitePeriodsList();
-								if (periodsList == null)
-									periodsList = new ArrayList<EnterPeriodSearchModel>();
-								EnterPeriodSearchModel pl = new EnterPeriodSearchModel();
-								pl.setEmployeeNo(siteInfoList.get(i).getEmployeeNo());
-								pl.setNonSiteMonths(String.valueOf(month));
-								pl.setNonSitePeriod(startTime + "~" + endTime);
-								periodsList.add(pl);
-								resultList.get(i).setNonSitePeriodsList(periodsList);
-								resultList.get(i).setNonSiteMonths(
-										Integer.parseInt(resultList.get(i).getNonSiteMonths() == null ? "0"
-												: resultList.get(i).getNonSiteMonths()) + month + "");
+							if (months >= 12) {
+								if (months > 12) {
+									tempEnterPeriodSearch.setIsRed("true");
+								} else {
+									tempEnterPeriodSearch.setIsRed("");
+								}
+								break;
 							}
 						}
 					}
-				}
-
-				for (int i = 0; i < resultList.size(); i++) {
-					ArrayList<EnterPeriodSearchModel> tempList = resultList.get(i).getNonSitePeriodsList();
-					if (tempList == null) {
-						resultList.get(i).setNonSiteMonths(null);
-					} else {
-						int month = 0;
-						for (int j = 0; j < tempList.size(); j++) {
-							month += Integer.parseInt(tempList.get(j).getNonSiteMonths());
-						}
-						resultList.get(i).setNonSiteMonths(String.valueOf(month));
-					}
-				}
-
-				// 非稼働時間計算
-				for (int i = 0; i < resultList.size(); i++) {
-					if (resultList.get(i).getNonSiteMonths() != null) {
-						int month = 0;
-						if (resultList.get(i).getNextRaiseMonth().equals("")) {
-							month = getMonthNum(resultList.get(i).getReflectYearAndMonth(), yearAndMonth);
-						} else {
-							month = getMonthNum(resultList.get(i).getNextRaiseMonth(), bonusYearAndMonth);
-						}
-						if (Integer.parseInt(resultList.get(i).getNonSiteMonths()) > month) {
-							resultList.remove(i);
-							i--;
-						} else if (Integer.parseInt(resultList.get(i).getNonSiteMonths()) < month) {
-							resultList.get(i).setIsRed("true");
-						}
-					} else {
-						int month = 0;
-						if (resultList.get(i).getNextRaiseMonth().equals("")) {
-							month = getMonthNum(resultList.get(i).getReflectYearAndMonth(), yearAndMonth);
-						} else {
-							month = getMonthNum(resultList.get(i).getNextRaiseMonth(), bonusYearAndMonth);
-						}
-						if (month > 0) {
-							resultList.get(i).setIsRed("true");
-						}
+					if (months >= 12) {
+						resultList.add(tempEnterPeriodSearch);
 					}
 				}
 			}
+			/*
+			 * else { // 非稼働取得 siteInfoList =
+			 * enterPeriodSearchService.getSiteInfoByEmp(employeeList, yearAndMonth);
+			 * ArrayList<EnterPeriodSearchModel> periodsList = new
+			 * ArrayList<EnterPeriodSearchModel>();
+			 * 
+			 * for (int i = 0; i < siteInfoList.size() - 1; i++) { if
+			 * (siteInfoList.get(i).getEmployeeNo().equals(siteInfoList.get(i +
+			 * 1).getEmployeeNo())) { if (siteInfoList.get(i).getAdmissionEndDate() != null
+			 * && siteInfoList.get(i + 1).getAdmissionEndDate() != null) { if
+			 * (Integer.parseInt(siteInfoList.get(i + 1).getAdmissionEndDate()) < Integer
+			 * .parseInt(yearAndMonth + "01")) { siteInfoList.remove(i); i--; } } } }
+			 * 
+			 * if (siteInfoList.size() > 1) { for (int i = 1; i < siteInfoList.size(); i++)
+			 * { if (siteInfoList.get(i).getEmployeeNo().equals(siteInfoList.get(i -
+			 * 1).getEmployeeNo())) { if (siteInfoList.get(i - 1).getAdmissionEndDate() !=
+			 * null) { String endTime = addMonth( siteInfoList.get(i -
+			 * 1).getAdmissionEndDate().substring(0, 6) + "01"); String startTime =
+			 * deleteMonth(siteInfoList.get(i).getAdmissionStartDate()); int month =
+			 * getMonthNum(endTime.substring(0, 6), startTime.substring(0, 6)) + 1; if
+			 * (month > 0) { EnterPeriodSearchModel pl = new EnterPeriodSearchModel();
+			 * pl.setEmployeeNo(siteInfoList.get(i).getEmployeeNo());
+			 * pl.setNonSiteMonths(String.valueOf(month)); pl.setNonSitePeriod(endTime + "~"
+			 * + startTime); periodsList.add(pl); } }
+			 * 
+			 * if (periodsList.size() > 0) { int month = 0; for (int j = 0; j <
+			 * periodsList.size(); j++) { month +=
+			 * Integer.parseInt(periodsList.get(j).getNonSiteMonths()); } for (int j = 0; j
+			 * < resultList.size(); j++) { if
+			 * (resultList.get(j).getEmployeeNo().equals(periodsList.get(0).getEmployeeNo())
+			 * ) { ArrayList<EnterPeriodSearchModel> nonSitePeriodsList = resultList.get(j)
+			 * .getNonSitePeriodsList(); if (nonSitePeriodsList != null) { for (int z = 0; z
+			 * < periodsList.size(); z++) { nonSitePeriodsList.add(periodsList.get(z)); } }
+			 * else { nonSitePeriodsList = periodsList; }
+			 * resultList.get(j).setNonSitePeriodsList(nonSitePeriodsList);
+			 * resultList.get(j).setNonSiteMonths(String.valueOf(month)); periodsList = new
+			 * ArrayList<EnterPeriodSearchModel>(); break; } } } } } }
+			 * 
+			 * for (int i = 0; i < resultList.size(); i++) { for (int j = 0; j <
+			 * siteInfoList.size(); j++) { if
+			 * (resultList.get(i).getEmployeeNo().equals(siteInfoList.get(j).getEmployeeNo()
+			 * )) { if (siteInfoList.get(j).getTypteOfContractCode() != null &&
+			 * siteInfoList.get(j).getTypteOfContractCode().equals("4")) { String startTime
+			 * = Integer.parseInt(siteInfoList.get(j).getAdmissionStartDate()) < Integer
+			 * .parseInt(yearAndMonth + "01") ? (yearAndMonth + "01") :
+			 * siteInfoList.get(j).getAdmissionStartDate(); String endTime =
+			 * siteInfoList.get(j).getAdmissionEndDate() == null ? (selectedYearAndMonth +
+			 * "01") : siteInfoList.get(j).getAdmissionEndDate(); int month =
+			 * getMonthNum(startTime.substring(0, 6), endTime.substring(0, 6)) + 1;
+			 * periodsList = resultList.get(i).getNonSitePeriodsList(); if (periodsList ==
+			 * null) periodsList = new ArrayList<EnterPeriodSearchModel>();
+			 * EnterPeriodSearchModel pl = new EnterPeriodSearchModel();
+			 * pl.setEmployeeNo(siteInfoList.get(i).getEmployeeNo());
+			 * pl.setNonSiteMonths(String.valueOf(month)); pl.setNonSitePeriod(startTime +
+			 * "~" + endTime); periodsList.add(pl);
+			 * resultList.get(i).setNonSitePeriodsList(periodsList);
+			 * resultList.get(i).setNonSiteMonths(
+			 * Integer.parseInt(resultList.get(i).getNonSiteMonths() == null ? "0" :
+			 * resultList.get(i).getNonSiteMonths()) + month + ""); } } } }
+			 * 
+			 * for (int i = 0; i < resultList.size(); i++) {
+			 * ArrayList<EnterPeriodSearchModel> tempList =
+			 * resultList.get(i).getNonSitePeriodsList(); if (tempList == null) {
+			 * resultList.get(i).setNonSiteMonths(null); } else { int month = 0; for (int j
+			 * = 0; j < tempList.size(); j++) { month +=
+			 * Integer.parseInt(tempList.get(j).getNonSiteMonths()); }
+			 * resultList.get(i).setNonSiteMonths(String.valueOf(month)); } }
+			 * 
+			 * // 非稼働時間計算 for (int i = 0; i < resultList.size(); i++) { if
+			 * (resultList.get(i).getNonSiteMonths() != null) { int month = 0; if
+			 * (resultList.get(i).getNextRaiseMonth().equals("")) { month =
+			 * getMonthNum(resultList.get(i).getReflectYearAndMonth(), yearAndMonth); } else
+			 * { month = getMonthNum(resultList.get(i).getNextRaiseMonth(),
+			 * bonusYearAndMonth); } if
+			 * (Integer.parseInt(resultList.get(i).getNonSiteMonths()) > month) {
+			 * resultList.remove(i); i--; } else if
+			 * (Integer.parseInt(resultList.get(i).getNonSiteMonths()) < month) {
+			 * resultList.get(i).setIsRed("true"); } } else { int month = 0; if
+			 * (resultList.get(i).getNextRaiseMonth().equals("")) { month =
+			 * getMonthNum(resultList.get(i).getReflectYearAndMonth(), yearAndMonth); } else
+			 * { month = getMonthNum(resultList.get(i).getNextRaiseMonth(),
+			 * bonusYearAndMonth); } if (month > 0) { resultList.get(i).setIsRed("true"); }
+			 * } } }
+			 */
 			for (int i = 0; i < resultList.size(); i++) {
 				resultList.get(i).setRowNo(i + 1 + "");
 				if (resultList.get(i).getEmployeeNo().substring(0, 2).equals("SP")
