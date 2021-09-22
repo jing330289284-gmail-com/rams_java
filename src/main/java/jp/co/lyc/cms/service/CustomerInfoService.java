@@ -408,6 +408,10 @@ public class CustomerInfoService {
 	public String checkCustomerName(String customerName) {
 		return 	customerInfoMapper.checkCustomerName(customerName);
 	}
+	
+	public void updateCustomerNo(String selectedCustomer) {
+		customerInfoMapper.updateCustomerNo(selectedCustomer);
+	}
 
 	/**
 	 * 插入数据

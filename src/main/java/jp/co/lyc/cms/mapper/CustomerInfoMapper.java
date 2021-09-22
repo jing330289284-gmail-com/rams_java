@@ -95,11 +95,13 @@ public interface CustomerInfoMapper {
 	 * @return
 	 */
 	public void customerDepartmentdelete(HashMap<String, String> sendMap);
-	
+
 	/**
 	 * お客様名前チェック
 	 * 
 	 * @return
 	 */
 	public String checkCustomerName(String customerName);
+
+	public void updateCustomerNo(String selectedCustomer);
 }

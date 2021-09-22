@@ -1,6 +1,8 @@
 package jp.co.lyc.cms.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -44,6 +46,15 @@ public class SalesSendLetterController extends BaseController {
 		List<String> customersList = new ArrayList<String>();
 
 		try {
+			Date date = new Date();// 此时date为当前的时间
+			SimpleDateFormat dateFormat = new SimpleDateFormat("YYYYMM");// 设置当前时间的格式，为年-月-日
+			String nowMonth = dateFormat.format(date);
+			String sendLetterMonth = salesSendLetterService.getSendLetterMonth();
+
+			if (!nowMonth.equals(sendLetterMonth)) {
+				salesSendLetterService.updateCustomers(nowMonth);
+			}
+
 			salesCustomersList = salesSendLetterService.getSalesCustomers();
 			customersList = salesSendLetterService.getBusinessCount();
 		} catch (Exception e) {

@@ -66,6 +66,25 @@ public class SalesSendLetterModel {
 	String businessCount;
 	String proposeClassificationCode;
 
+	String sendLetterMonth;
+	String sendLetterCount;
+
+	public String getSendLetterMonth() {
+		return sendLetterMonth;
+	}
+
+	public void setSendLetterMonth(String sendLetterMonth) {
+		this.sendLetterMonth = sendLetterMonth;
+	}
+
+	public String getSendLetterCount() {
+		return sendLetterCount;
+	}
+
+	public void setSendLetterCount(String sendLetterCount) {
+		this.sendLetterCount = sendLetterCount;
+	}
+
 	public String getProposeClassificationCode() {
 		return proposeClassificationCode;
 	}

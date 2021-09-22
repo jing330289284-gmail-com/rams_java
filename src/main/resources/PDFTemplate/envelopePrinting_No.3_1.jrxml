@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.10.0.final using JasperReports Library version 6.10.0-unknown  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="envelopePrinting_No.3" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="75003133-7a22-4ef1-bffc-d5fc9785dd3c">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="employeeName" class="java.lang.String"/>
+	<parameter name="postcode" class="java.lang.String"/>
+	<parameter name="firstHalfAddress" class="java.lang.String"/>
+	<parameter name="lastHalfAddress" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="685" splitType="Stretch">
+			<textField>
+				<reportElement x="50" y="250" width="500" height="30" uuid="f323fd58-764b-4021-9f90-fb62b6072f33"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="楷体" size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{postcode}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="280" width="470" height="30" uuid="2e90a852-0a3c-448e-ac1e-bd6e27092a58"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="楷体" size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{firstHalfAddress} + " " + $P{lastHalfAddress}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="-20" y="350" width="594" height="30" uuid="dfdf1cb7-bada-490b-8999-cecaf4cfbd7f"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="楷体" size="22"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{employeeName} + "　様"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="117" splitType="Stretch"/>
+	</pageFooter>
+</jasperReport>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.10.0.final using JasperReports Library version 6.10.0-unknown  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="envelopePrinting_No.3" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="75003133-7a22-4ef1-bffc-d5fc9785dd3c">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="employeeName" class="java.lang.String"/>
+	<parameter name="postcode" class="java.lang.String"/>
+	<parameter name="firstHalfAddress" class="java.lang.String"/>
+	<parameter name="lastHalfAddress" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="685" splitType="Stretch">
+			<textField>
+				<reportElement x="50" y="250" width="500" height="30" uuid="f323fd58-764b-4021-9f90-fb62b6072f33"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="楷体" size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{postcode}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="280" width="470" height="30" uuid="2e90a852-0a3c-448e-ac1e-bd6e27092a58"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="楷体" size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{firstHalfAddress} + " " + $P{lastHalfAddress}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="-20" y="350" width="594" height="30" uuid="dfdf1cb7-bada-490b-8999-cecaf4cfbd7f"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="楷体" size="22"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{employeeName} + "　様"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="117" splitType="Stretch">
+			<staticText>
+				<reportElement x="-20" y="86" width="594" height="14" uuid="a1b11ef0-1122-4a9d-81dc-44c3302aeb12"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="楷体" size="10"/>
+				</textElement>
+				<text><![CDATA[〒101-0032 東京都千代田区岩本町3-3-3サザンビル3階]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-20" y="63" width="594" height="23" uuid="eca04584-c7eb-473c-8d92-2566d9f36633"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="楷体" size="14"/>
+				</textElement>
+				<text><![CDATA[LYC株式会社]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-20" y="100" width="594" height="17" uuid="570176ee-a61f-4af7-b9a5-4090a5dc69a7"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="楷体" size="10"/>
+				</textElement>
+				<text><![CDATA[TEL:03-6908-5796 FAX:03-6908-5741]]></text>
+			</staticText>
+			<image>
+				<reportElement x="200" y="59" width="30" height="27" uuid="27d4dc77-6c80-45c4-9d11-92b044bc85b7"/>
+				<imageExpression><![CDATA["C:/file/stamp/LYC.png"]]></imageExpression>
+			</image>
+		</band>
+	</pageFooter>
+</jasperReport>

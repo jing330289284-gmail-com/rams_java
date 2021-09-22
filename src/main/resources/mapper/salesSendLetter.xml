@@ -16,6 +16,8 @@
 		T007.commonMail,
 		T007.purchasingManagersMail,
 		T007.proposeClassificationCode,
+		T007.sendLetterMonth,
+		T007.sendLetterCount,
 		M008.levelName as levelCode,
 		'' AS
 		monthCount,
@@ -56,16 +58,19 @@
 		T007.levelCode,
 		'' AS
 		monthCount,
-		'' AS purchasingManagers2,
+		'' AS
+		purchasingManagers2,
 		'' AS positionCode2,
 		'' AS
 		purchasingManagersMail2
 		FROM
 		T007CustomerInfo AS T007
 		LEFT JOIN
-		T009CustomerDepartmentInfo AS T009 ON T007.customerNo =
+		T009CustomerDepartmentInfo AS
+		T009 ON T007.customerNo =
 		T009.customerNo
-		AND T007.purchasingManagers = T009.responsiblePerson
+		AND T007.purchasingManagers =
+		T009.responsiblePerson
 		WHERE T007.customerNo = #{customerNo};
 	</select>
 
@@ -227,11 +232,13 @@
 		purchasingManagersMail2
 		FROM
 		T007CustomerInfo AS T007
-		LEFT JOIN M008Level AS M008
+		LEFT JOIN M008Level
+		AS M008
 		on T007.levelCode != ""
 		and T007.levelCode =
 		M008.levelCode
-		LEFT JOIN
+		LEFT
+		JOIN
 		T009CustomerDepartmentInfo AS T009 ON
 		T007.customerNo =
 		T009.customerNo
@@ -268,4 +275,20 @@
 		StorageListName=#{storageListName} and
 		transmissionClassificationCode=1
 	</delete>
+
+	<select id="getSendLetterMonth" resultType="String">
+		SELECT
+		sendLetterMonth
+		FROM
+		T007CustomerInfo
+		limit 1
+	</select>
+
+	<update id="updateCustomers" parameterType="String">
+		update
+		T007CustomerInfo
+		set
+		sendLetterMonth = #{nowMonth},
+		sendLetterCount = 0;
+	</update>
 </mapper>

@@ -405,7 +405,8 @@
 		responsiblePerson = #{responsiblePerson}
 	</delete>
 	<!-- お客様名前チェック -->
-	<select id="checkCustomerName"  resultMap="customerNoSaiBan" parameterType="String">
+	<select id="checkCustomerName" resultMap="customerNoSaiBan"
+		parameterType="String">
 		SELECT
 		count(customerNo)
 		FROM
@@ -414,4 +415,13 @@
 		customerName =
 		#{customerName}
 	</select>
+
+	<update id="updateCustomerNo" parameterType="String">
+		UPDATE
+		T007CustomerInfo
+		SET sendLetterCount = ifnull(sendLetterCount,0) + 1
+		WHERE
+		customerNo = #{selectedCustomer}
+	</update>
+
 </mapper>

@@ -29,6 +29,8 @@ import jp.co.lyc.cms.model.EmailModel;
 import jp.co.lyc.cms.model.EmployeeModel;
 import jp.co.lyc.cms.model.SalesSituationModel;
 import jp.co.lyc.cms.model.SendLettersConfirmModel;
+import jp.co.lyc.cms.service.CustomerInfoService;
+import jp.co.lyc.cms.service.CustomerTopInsertService;
 import jp.co.lyc.cms.service.SendLettersConfirmService;
 import jp.co.lyc.cms.util.UtilsCheckMethod;
 import jp.co.lyc.cms.util.UtilsController;
@@ -44,6 +46,9 @@ public class SendLettersConfirm extends BaseController {
 
 	@Autowired
 	UtilsController utils;
+
+	@Autowired
+	CustomerInfoService customerInfoService;
 
 	/**
 	 * データを取得
@@ -214,6 +219,8 @@ public class SendLettersConfirm extends BaseController {
 			resulterr.put("errorsMessage", errorsMessage);// エラーメッセージ
 			return resulterr;
 		}
+
+		customerInfoService.updateCustomerNo(emailModel.getSelectedCustomer());
 		logger.info("sendMailWithFile" + "送信結束");
 		return resulterr;
 	}

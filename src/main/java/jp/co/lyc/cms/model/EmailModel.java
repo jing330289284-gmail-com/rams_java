@@ -23,6 +23,8 @@ public class EmailModel {
 	private String mailConfirmContont;
 	// メールTO
 	private String selectedmail;
+	// メールTOお客様番号
+	private String selectedCustomer;
 	// メールCC
 	private String[] selectedMailCC;
 	// メールFROM
@@ -162,6 +164,14 @@ public class EmailModel {
 
 	public String getContextType() {
 		return contextType;
+	}
+
+	public String getSelectedCustomer() {
+		return selectedCustomer;
+	}
+
+	public void setSelectedCustomer(String selectedCustomer) {
+		this.selectedCustomer = selectedCustomer;
 	}
 
 	public void setContextType(String contextType) {

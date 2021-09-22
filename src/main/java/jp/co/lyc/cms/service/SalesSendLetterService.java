@@ -81,4 +81,12 @@ public class SalesSendLetterService {
 			String departmentCodeList) {
 		salesSendLetterMapper.customerSendMailStorageListUpdate(storageListName,mainChargeList,departmentCodeList);
 	}
+
+	public String getSendLetterMonth() {
+		return salesSendLetterMapper.getSendLetterMonth();
+	}
+
+	public void updateCustomers(String nowMonth) {
+		salesSendLetterMapper.updateCustomers(nowMonth);
+	}
 }
