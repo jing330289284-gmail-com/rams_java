@@ -273,9 +273,14 @@
 		on T005.employeeNo =
 		temp.employeeNo
 		and T005.reflectYearAndMonth = temp.reflectYearAndMonth
+		left join T002EmployeeDetail as T002
+		on T005.employeeNo =
+		T002.employeeNo
 		where T005.reflectYearAndMonth &lt;= #{yearAndMonth}
 		and waitingCost =
 		""
+		and (T002.employeeFormCode != "4" or
+		T002.retirementResonClassification = "2")
 		;
 	</select>
 
@@ -471,7 +476,7 @@
 		resultType="jp.co.lyc.cms.model.EnterPeriodSearchModel">
 		SELECT T005.employeeNo, CONCAT( T001.employeeFristName,
 		T001.employeeLastName ) as
-		employeeName,T005.reflectYearAndMonth,T005.salary,T005.waitingCost,T005.insuranceFeeAmount,T006.admissionStartDate,
+		employeeName,T005.reflectYearAndMonth,T005.salary,T005.waitingCost,T005.insuranceFeeAmount,T005.nextRaiseMonth,T006.admissionStartDate,
 		T006.unitPrice FROM T005WagesInfo as T005
 		left join
 		T001Employee as T001

@@ -22,9 +22,10 @@ public class DutyManagementController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	DutyManagementService dutyManagementService;
-	
+
 	/**
 	 * 登録ボタン
+	 * 
 	 * @param topCustomerMod
 	 * @return
 	 */
@@ -34,23 +35,34 @@ public class DutyManagementController {
 		logger.info("DutyManagementController.selectDutyManagement:" + "検索開始");
 		logger.info(dutyManagementModel.toString());
 		List<DutyManagementModel> checkMod = dutyManagementService.selectDutyManagement(dutyManagementModel);
+		for (int i = 0; i < checkMod.size(); i++) {
+			if (checkMod.get(i).getDeductionsAndOvertimePay() != null) {
+				checkMod.get(i)
+						.setDeductionsAndOvertimePay(checkMod.get(i).getDeductionsAndOvertimePay().replace(".0", ""));
+			}
+			if (checkMod.get(i).getDeductionsAndOvertimePayOfUnitPrice() != null) {
+				checkMod.get(i).setDeductionsAndOvertimePayOfUnitPrice(
+						checkMod.get(i).getDeductionsAndOvertimePayOfUnitPrice().replace(".0", ""));
+			}
+		}
 		logger.info("DutyManagementController.selectDutyManagement:" + "検索終了");
 		return checkMod;
 	}
 
 	/**
 	 * アップデート
+	 * 
 	 * @param topCustomerMod
 	 * @return
 	 */
 	@RequestMapping(value = "/updateDutyManagement", method = RequestMethod.POST)
 	@ResponseBody
-	public boolean updateDutyManagement(@RequestBody HashMap<String, String> dutyManagementModel){
+	public boolean updateDutyManagement(@RequestBody HashMap<String, String> dutyManagementModel) {
 		logger.info("DutyManagementController.updateDutyManagement:" + "アップデート開始");
 		boolean result = false;
 		HashMap<String, String> sendMap = dutyManagementModel;
-		result  = dutyManagementService.updateDutyManagement(sendMap);
+		result = dutyManagementService.updateDutyManagement(sendMap);
 		logger.info("DutyManagementController.updateDutyManagement:" + "アップデート終了");
-		return result;	
+		return result;
 	}
 }

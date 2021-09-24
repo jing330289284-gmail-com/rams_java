@@ -219,6 +219,11 @@ public class EnterPeriodSearchController extends BaseController {
 						if (employeeList.get(i).equals(wagesInfoList.get(j).getEmployeeNo())) {
 							// 社員給料
 							if (tempEnterPeriodSearch.getSalary() == null) {
+								if (!wagesInfoList.get(j).getNextRaiseMonth().equals("")
+										&& Integer.parseInt(wagesInfoList.get(j).getNextRaiseMonth()) > Integer
+												.parseInt(enterPeriodSearchModel.getYearAndMonth())) {
+									break;
+								}
 								tempEnterPeriodSearch.setEmployeeNo(wagesInfoList.get(j).getEmployeeNo());
 								tempEnterPeriodSearch.setEmployeeName(wagesInfoList.get(j).getEmployeeName());
 								tempEnterPeriodSearch.setSalary(wagesInfoList.get(j).getSalary());
@@ -230,35 +235,44 @@ public class EnterPeriodSearchController extends BaseController {
 										.setAdmissionStartDate(wagesInfoList.get(j).getAdmissionStartDate());
 								tempEnterPeriodSearch.setUnitPrice(wagesInfoList.get(j).getUnitPrice());
 
-								months = getMonthNum(wagesInfoList.get(j).getReflectYearAndMonth(),
-										selectedYearAndMonth) + 1;
+								months = wagesInfoList.get(j).getNextRaiseMonth().equals("")
+										? getMonthNum(wagesInfoList.get(j).getReflectYearAndMonth(),
+												selectedYearAndMonth) + 1
+										: getMonthNum(wagesInfoList.get(j).getNextRaiseMonth(), selectedYearAndMonth)
+												+ 12;
 							}
-							if (j >= 2) {
-								if (wagesInfoList.get(j).getSalary().equals("")
-										|| (tempEnterPeriodSearch.getSalary().equals(wagesInfoList.get(j).getSalary())
-												&& !wagesInfoList.get(j - 1).getWaitingCost().equals(""))) {
-									if (tempEnterPeriodSearch.getSalary().equals(wagesInfoList.get(j).getSalary())
-											&& !wagesInfoList.get(j - 1).getWaitingCost().equals("")) {
-										EnterPeriodSearchModel pl = new EnterPeriodSearchModel();
-										String startMonth = wagesInfoList.get(j - 1).getReflectYearAndMonth();
-										String endMonth = String.valueOf(
-												Integer.parseInt(wagesInfoList.get(j - 2).getReflectYearAndMonth()) - 1)
-												.substring(4, 6).equals("00")
-														? String.valueOf(Integer.parseInt(wagesInfoList.get(j - 2)
-																.getReflectYearAndMonth().substring(0, 4)) - 1) + "12"
-														: String.valueOf(Integer.parseInt(
-																wagesInfoList.get(j - 2).getReflectYearAndMonth()) - 1);
-										pl.setNonSiteMonths(String.valueOf(getMonthNum(startMonth, endMonth) + 1));
-										pl.setNonSitePeriod(startMonth + "~" + endMonth);
-										periodsList.add(pl);
-										tempEnterPeriodSearch.setNonSitePeriodsList(periodsList);
-										months += getMonthNum(wagesInfoList.get(j).getReflectYearAndMonth(),
-												wagesInfoList.get(j - 1).getReflectYearAndMonth());
-									}
-								} else {
-									if (tempEnterPeriodSearch.getEmployeeNo()
-											.equals(wagesInfoList.get(j - 1).getEmployeeNo())) {
-										break;
+							if (wagesInfoList.get(j).getNextRaiseMonth().equals("")) {
+								if (j >= 2) {
+									if (wagesInfoList.get(j).getSalary().equals("") || (tempEnterPeriodSearch
+											.getSalary().equals(wagesInfoList.get(j).getSalary())
+											&& !wagesInfoList.get(j - 1).getWaitingCost().equals(""))) {
+										if (tempEnterPeriodSearch.getSalary().equals(wagesInfoList.get(j).getSalary())
+												&& !wagesInfoList.get(j - 1).getWaitingCost().equals("")) {
+											EnterPeriodSearchModel pl = new EnterPeriodSearchModel();
+											String startMonth = wagesInfoList.get(j - 1).getReflectYearAndMonth();
+											String endMonth = String
+													.valueOf(Integer.parseInt(
+															wagesInfoList.get(j - 2).getReflectYearAndMonth()) - 1)
+													.substring(4, 6).equals("00")
+															? String.valueOf(Integer
+																	.parseInt(wagesInfoList.get(j - 2)
+																			.getReflectYearAndMonth().substring(0, 4))
+																	- 1) + "12"
+															: String.valueOf(Integer.parseInt(
+																	wagesInfoList.get(j - 2).getReflectYearAndMonth())
+																	- 1);
+											pl.setNonSiteMonths(String.valueOf(getMonthNum(startMonth, endMonth) + 1));
+											pl.setNonSitePeriod(startMonth + "~" + endMonth);
+											periodsList.add(pl);
+											tempEnterPeriodSearch.setNonSitePeriodsList(periodsList);
+											months += getMonthNum(wagesInfoList.get(j).getReflectYearAndMonth(),
+													wagesInfoList.get(j - 1).getReflectYearAndMonth());
+										}
+									} else {
+										if (tempEnterPeriodSearch.getEmployeeNo()
+												.equals(wagesInfoList.get(j - 1).getEmployeeNo())) {
+											break;
+										}
 									}
 								}
 							}

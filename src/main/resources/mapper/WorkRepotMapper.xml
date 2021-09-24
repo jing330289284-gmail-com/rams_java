@@ -15,12 +15,12 @@
 		updateUser)
 	SELECT 
 		#{employeeNo},
-		DATE_FORMAT(now(),'%Y%m'),
+		DATE_FORMAT(date_add(now(), interval 9 hour),'%Y%m'),
 		0,
 		0,
 		0,
-		now(),
-		now(),
+		date_add(now(), interval 9 hour),
+		date_add(now(), interval 9 hour),
 		#{employeeName}
 	FROM DUAL
 	WHERE NOT EXISTS
@@ -29,7 +29,7 @@
 	FROM
 		T018WorkTotalTime
 	WHERE
-		attendanceYearAndMonth=DATE_FORMAT(now(),'%Y%m') AND
+		attendanceYearAndMonth=DATE_FORMAT(date_add(now(), interval 9 hour),'%Y%m') AND
 		employeeNo = #{employeeNo})
     </insert>
     <select id="selectWorkRepot" resultMap="WorkRepot" parameterType="String">
@@ -52,7 +52,7 @@
 	<update id="updateWorkRepot" parameterType="String">
 		UPDATE T018WorkTotalTime
 		SET 
-			updateTime= now(),
+			updateTime= date_add(now(), interval 9 hour),
 			sumWorkTime = #{sumWorkTime},
 			approvalStatus = 1
 		WHERE 
@@ -63,7 +63,7 @@
    	UPDATE T018WorkTotalTime
 		SET 
 			workingTimeReport= #{workingTimeReport},
-			updateTime= now()
+			updateTime= date_add(now(), interval 9 hour)
 		WHERE 
 			employeeNo = #{employeeNo}
 			and attendanceYearAndMonth = #{attendanceYearAndMonth}
