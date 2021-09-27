@@ -37,6 +37,7 @@
 			attendanceYearAndMonth,
 			CONVERT (workingTimeReport USING utf8)workingTimeReport,
 			sumWorkTime,
+			approvalStatus,
 			updateUser,
 			updateTime,
 			approvalStatus
@@ -53,8 +54,7 @@
 		UPDATE T018WorkTotalTime
 		SET 
 			updateTime= date_add(now(), interval 9 hour),
-			sumWorkTime = #{sumWorkTime},
-			approvalStatus = 1
+			sumWorkTime = #{sumWorkTime}
 		WHERE 
 			employeeNo = #{employeeNo}
 			and attendanceYearAndMonth = #{attendanceYearAndMonth}

@@ -10,7 +10,7 @@
 		t001.employeeNo,
 		concat_ws("
 		",t001.employeeFristName,t001.employeeLastName) as employeeName,
-		t007.customerName,
+		if(t007.customerAbbreviation is null or t007.customerAbbreviation = "",t007.customerName,t007.customerAbbreviation) as customerName,
 		m013.stationName,
 		concat_ws("-",t006.payOffRange1,t006.payOffRange2) as payOffRange,
 		T018.sumWorkTime workTime,
@@ -18,7 +18,7 @@
 		if(T018.DeductionsAndOvertimePayOfUnitPrice is null or T018.DeductionsAndOvertimePayOfUnitPrice = "",if(T018.sumWorkTime>t006.payOffRange2,t006.unitPrice/t006.payOffRange2*(T018.sumWorkTime-t006.payOffRange2),if(t006.payOffRange1>T018.sumWorkTime,t006.unitPrice/t006.payOffRange1*(T018.sumWorkTime-t006.payOffRange1),0)),T018.DeductionsAndOvertimePayOfUnitPrice)deductionsAndOvertimePayOfUnitPrice,
 		<!-- FORMAT(if(T018.sumWorkTime>t006.payOffRange2,t006.unitPrice/t006.payOffRange2*(T018.sumWorkTime-t006.payOffRange2),if(t006.payOffRange1>T018.sumWorkTime,t006.unitPrice/t006.payOffRange1*(T018.sumWorkTime-t006.payOffRange1),0)),0)deductionsAndOvertimePayOfUnitPrice, -->
 		if(T016.employeeWorkTimeHaveData=1,'0',if(T018.attendanceRegisterFlag=1,'1','2'))checkSection,
-		T016.updateTime,
+		T018.updateTime,
 		if(T018.approvalStatus=1,"1","0")approvalStatus
 		FROM
 		T001Employee as t001
@@ -27,7 +27,7 @@
 		employeeNo,max(reflectYearAndMonth),salary FROM T005WagesInfo where
 		reflectYearAndMonth&lt;=#{yearAndMonth} group by
 		T005WagesInfo.employeeNo)t005 on t001.employeeNo=t005.employeeNo
-		left
+		inner
 		join
 		(SELECT
 		T006.employeeNo,unitPrice,T006.admissionStartDate,payOffRange1,payOffRange2,customerNo,stationCode
@@ -37,7 +37,10 @@
 		employeeNo,max(admissionStartDate) as admissionStartDate FROM
 		T006EmployeeSiteInfo
 		where
-		admissionStartDate&lt;=concat(#{yearAndMonth},"99")
+		admissionStartDate &lt;= concat(#{yearAndMonth},"99")
+		and (admissionEndDate is null or admissionEndDate &gt;= concat(#{yearAndMonth},"00"))
+		and (systemName != "休暇" or systemName is null)
+		and (typteOfContractCode != "4" or typteOfContractCode is null)
 		group by employeeNo
 		) as temp
 		on T006.employeeNo = temp.employeeNo
@@ -64,7 +67,9 @@
 		,(SELECT @rowNo:=0) AS
 		rowNo
 		WHERE
-		T018.attendanceYearAndMonth = #{yearAndMonth}
+		(T018.attendanceYearAndMonth = #{yearAndMonth}
+		or T018.attendanceYearAndMonth is null)
+		and left(t001.employeeNo,2) != "BP"
 		<if test="approvalStatus == 0">
 		</if>
 		<if test="approvalStatus == 1">
@@ -79,15 +84,16 @@
 		<if test="approvalStatus == 4">
 			and T016.employeeWorkTimeHaveData=1
 		</if>
+		order by T018.attendanceYearAndMonth desc,t001.employeeNo
 	</select>
 	<update id="updateDutyManagement" parameterType="String">
 		UPDATE
 		T018WorkTotalTime
 		SET
-		<if test="approvalStatus == 0">
+		<if test="approvalStatus == 2">
 			approvalStatus = approvalStatus,
 		</if>
-		<if test="approvalStatus == 1">
+		<if test="approvalStatus != 2">
 			approvalStatus = #{approvalStatus},
 		</if>
 		deductionsAndOvertimePayOfUnitPrice=#{deductionsAndOvertimePayOfUnitPrice},
